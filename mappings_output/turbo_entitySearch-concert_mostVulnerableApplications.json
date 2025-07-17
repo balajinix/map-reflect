@@ -1,0 +1,33 @@
+{
+    "name": "turbo_entitySearch",
+    "properties": {
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.id",
+                "justification": "turbo_entitySearch.turbo_Action.actionID and concert_mostVulnerableApplications.concert_IDNamePair.id are related."
+            }
+        ],
+        "turbo_Action.uuid": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.id",
+                "justification": "turbo_entitySearch.turbo_Action.uuid and concert_mostVulnerableApplications.concert_IDNamePair.id are related."
+            }
+        ],
+        "turbo_Action.actionImpactID": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.id",
+                "justification": "turbo_entitySearch.turbo_Action.actionImpactID and concert_mostVulnerableApplications.concert_IDNamePair.id are related."
+            }
+        ],
+        "turbo_Action.displayName": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.name",
+                "justification": "turbo_entitySearch.turbo_Action.displayName and concert_mostVulnerableApplications.concert_IDNamePair.name are related."
+            }
+        ]
+    }
+}

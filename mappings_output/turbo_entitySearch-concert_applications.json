@@ -1,0 +1,33 @@
+{
+    "name": "turbo_entitySearch",
+    "properties": {
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.vulnerabilities.severity",
+                "justification": "Minor severity in turbo_entitySearch is related to the severity level in concert_applications."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.vulnerabilities.severity",
+                "justification": "Critical severity in turbo_entitySearch is related to the severity level in concert_applications."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.vulnerabilities.severity",
+                "justification": "Major severity in turbo_entitySearch is related to the severity level in concert_applications."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.NORMAL": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.vulnerabilities.severity",
+                "justification": "Normal severity in turbo_entitySearch is related to the severity level in concert_applications."
+            }
+        ]
+    }
+}

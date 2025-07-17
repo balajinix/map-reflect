@@ -1,0 +1,53 @@
+{
+    "name": "concert_cveHighlights",
+    "properties": {
+        "concert_CvesInfo.priority_1": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to high-severity issues, with priority_1 referring to the count of high-priority issues and MAJOR referring to the severity breakdown."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to high-severity issues, with priority_1 referring to the count of high-priority issues and CRITICAL referring to the severity breakdown."
+            }
+        ],
+        "concert_VulnerabilitiesCveHighlightSummary.cves.priority_1": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to high-severity issues, with priority_1 referring to the count of high-priority issues in the CVE statistics and MAJOR referring to the severity breakdown."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to high-severity issues, with priority_1 referring to the count of high-priority issues in the CVE statistics and CRITICAL referring to the severity breakdown."
+            }
+        ],
+        "concert_CvesInfo.total_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "total_findings refers to the total count of findings, which may include minor issues, and MINOR refers to the severity breakdown."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "total_findings refers to the total count of findings, which may include normal issues, and NORMAL refers to the severity breakdown."
+            }
+        ],
+        "concert_VulnerabilitiesCveHighlightSummary.cves.total_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "total_findings refers to the total count of findings in the CVE statistics, which may include minor issues, and MINOR refers to the severity breakdown."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "total_findings refers to the total count of findings in the CVE statistics, which may include normal issues, and NORMAL refers to the severity breakdown."
+            }
+        ]
+    }
+}

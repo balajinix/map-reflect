@@ -1,0 +1,99 @@
+{
+    "name": "concert_application",
+    "properties": {
+        "concert_Release.id": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.className",
+                "justification": "Fields concert_Release.id, concert_BuildArtifact.associations.applications.id, from Schema concert_application and Fields turbo_StatsEntry.className, from Schema turbo_entityActionStats are related. For instance id could serve as a unique identifier for a release, similar to the uuid field in turbo_StatsEntry."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.uuid",
+                "justification": "id could serve as a unique identifier for a release, similar to the uuid field in turbo_StatsEntry."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.className",
+                "justification": "Fields concert_Release.id, concert_BuildArtifact.associations.applications.id, from Schema concert_application and Fields turbo_Statistics.statistics.className, from Schema turbo_entityActionStats are related. For instance id could serve as a unique identifier for a release, similar to the uuid field in turbo_StatsEntry."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.uuid",
+                "justification": "id could serve as a unique identifier for a release, similar to the uuid field in turbo_Statistics.statistics."
+            }
+        ],
+        "concert_BuildArtifact.associations.applications.id": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.className",
+                "justification": "Both fields are related to identification, with id potentially identifying an application and className identifying a type of statistic."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.className",
+                "justification": "Both fields are related to identification, with id potentially identifying an application and className identifying a type of statistic."
+            }
+        ],
+        "concert_Release.version": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "Fields concert_Release.version, concert_BuildArtifact.associations.applications.version, from Schema concert_application and Fields turbo_StatsEntry.displayName, from Schema turbo_entityActionStats are related. For instance version could be related to the displayName of a statistic, as both describe attributes of an entity."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "Fields concert_BuildArtifact.associations.applications.version, concert_Release.version, from Schema concert_application and Fields turbo_Statistics.statistics.displayName, from Schema turbo_entityActionStats are related. For instance version could be related to the displayName of a statistic, as both describe attributes of an entity."
+            }
+        ],
+        "concert_BuildArtifact.associations.applications.version": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "version could be related to the displayName of a statistic, as both describe attributes of an entity."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "version could be related to the displayName of a statistic, as both describe attributes of an entity."
+            }
+        ],
+        "concert_Application.associations.releases.id": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.name",
+                "justification": "concert_application.concert_Application.associations.releases.id and turbo_entityActionStats.turbo_StatsEntry.name are related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.name",
+                "justification": "concert_application.concert_Application.associations.releases.id and turbo_entityActionStats.turbo_Statistics.statistics.name are related."
+            }
+        ],
+        "concert_Application.associations.releases.version": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "version could refer to the number of releases of an application, linking it to the numRelatedEntities field in turbo_StatsEntry."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "version could refer to the number of releases of an application, linking it to the numRelatedEntities field in turbo_Statistics.statistics."
+            }
+        ],
+        "concert_BuildArtifactAssociations.applications.id": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "id could refer to the number of applications associated with a build artifact, linking it to the numRelatedEntities field in turbo_StatsEntry."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "id could refer to the number of applications associated with a build artifact, linking it to the numRelatedEntities field in turbo_Statistics.statistics."
+            }
+        ]
+    }
+}

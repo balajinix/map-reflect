@@ -1,0 +1,63 @@
+{
+    "name": "concert_application",
+    "properties": {
+        "concert_ApplicationReleaseProperties.revenue": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.costPrice",
+                "justification": "revenue and costPrice are conceptually related as they both pertain to financial aspects of an entity or application."
+            }
+        ],
+        "concert_Application.properties.revenue": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.costPrice",
+                "justification": "revenue and costPrice are financial metrics that can be related in the context of application or entity management."
+            }
+        ],
+        "concert_Application.vulnerabilities.severity": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields relate to the severity of vulnerabilities, with MAJOR being a specific level of severity."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields relate to the severity of vulnerabilities, with MINOR being a specific level of severity."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields relate to the severity of vulnerabilities, with CRITICAL being a specific level of severity."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Both fields relate to the severity of vulnerabilities, with NORMAL being a specific level of severity."
+            }
+        ],
+        "concert_Vulnerability.severity": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields relate to the severity of vulnerabilities, with MINOR being a specific level of severity."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields relate to the severity of vulnerabilities, with MAJOR being a specific level of severity."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields relate to the severity of vulnerabilities, with CRITICAL being a specific level of severity."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Both fields relate to the severity of vulnerabilities, with NORMAL being a specific level of severity."
+            }
+        ]
+    }
+}

@@ -1,0 +1,110 @@
+{
+    "name": "turbo_marketActionsFiltered",
+    "properties": {
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.id",
+                "justification": "Both fields represent unique identifiers for items within their systems."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.assessment_id",
+                "justification": "Both fields represent unique identifiers for specific items within their respective systems."
+            }
+        ],
+        "turbo_Action.actionState": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.status",
+                "justification": "Both fields describe the current status of an item or action."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.assessment_status",
+                "justification": "Both fields describe the current state or status of an item or action within their systems."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.is_archived",
+                "justification": "Both fields could relate to the state or status of an item, including whether it's archived."
+            }
+        ],
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.rule_name",
+                "justification": "Both fields provide names for rules or actions."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.wasc_id",
+                "justification": "Both fields could be used to identify or classify specific items or actions within their systems."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.cwe_id",
+                "justification": "Both fields could be used to identify or classify specific items or actions within their systems."
+            }
+        ],
+        "turbo_Action.prioritizedAutomationOpportunities": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.exposure_object_attr2",
+                "justification": "turbo_marketActionsFiltered.turbo_Action.prioritizedAutomationOpportunities and concert_exposure.concert_Exposures.exposure_object_attr2 are related."
+            }
+        ],
+        "turbo_Action.relatedSettingsPolicies": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.exposure_object_attr3",
+                "justification": "turbo_marketActionsFiltered.turbo_Action.relatedSettingsPolicies and concert_exposure.concert_Exposures.exposure_object_attr3 are related."
+            }
+        ],
+        "turbo_Action.uuid": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.exposure_object_id",
+                "justification": "Both fields represent unique identifiers for objects within their respective systems."
+            }
+        ],
+        "turbo_Action.externalActionUrl": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.exposure_path",
+                "justification": "turbo_marketActionsFiltered.turbo_Action.externalActionUrl and concert_exposure.concert_Exposures.exposure_path are related."
+            }
+        ],
+        "turbo_Action.actionType": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.scan_type",
+                "justification": "turbo_marketActionsFiltered.turbo_Action.actionType and concert_exposure.concert_Exposures.scan_type are related."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.exposure_type",
+                "justification": "turbo_marketActionsFiltered.turbo_Action.actionType and concert_exposure.concert_Exposures.exposure_type are related."
+            }
+        ],
+        "turbo_Action.importance": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.priority",
+                "justification": "Both fields relate to the priority or importance of an item or action."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.severity",
+                "justification": "Both fields relate to the severity or importance of an item or action."
+            }
+        ],
+        "turbo_Action.details": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.solution",
+                "justification": "Both fields provide information about solutions or details of an item or action."
+            }
+        ]
+    }
+}

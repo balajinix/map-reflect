@@ -1,0 +1,24 @@
+{
+    "name": "concert_mostCommonExposureRules",
+    "properties": {
+        "concert_MostCommonExposureRule.rule_name": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.externalActionName",
+                "justification": "Both fields refer to the name of an action or rule, establishing a direct relationship."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields describe a specific rule or action, making them conceptually related."
+            }
+        ],
+        "concert_MostCommonExposureRule.priority": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.importance",
+                "justification": "Priority and importance are related concepts, as both describe the significance or urgency of an action or rule."
+            }
+        ]
+    }
+}

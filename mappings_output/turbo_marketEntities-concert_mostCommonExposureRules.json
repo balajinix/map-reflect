@@ -1,0 +1,77 @@
+{
+    "name": "turbo_marketEntities",
+    "properties": {
+        "turbo_Action.executionCharacteristics.disruptiveness": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRules.exposure_rules.frequency",
+                "justification": "Disruptiveness and frequency of exposure rules are conceptually linked in evaluating the effects of actions."
+            },
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.frequency",
+                "justification": "Disruptiveness and frequency are related in assessing the impact of actions or events."
+            }
+        ],
+        "turbo_Action.executionCharacteristics.reversibility": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRules.exposure_rules.frequency",
+                "justification": "Reversibility and frequency of exposure rules are conceptually related in assessing the manageability of actions."
+            },
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.frequency",
+                "justification": "Reversibility and frequency are related in the context of managing and mitigating the effects of actions."
+            }
+        ],
+        "turbo_Action.importance": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.priority",
+                "justification": "Importance and priority are conceptually related as they both denote the level of significance or urgency of an action or rule."
+            },
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRules.exposure_rules.priority",
+                "justification": "Importance and priority of exposure rules are related in evaluating the significance of actions or rules."
+            }
+        ],
+        "turbo_Action.risk.importance": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRules.exposure_rules.priority",
+                "justification": "Risk importance and priority of exposure rules are conceptually related in evaluating the significance of actions or rules."
+            },
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.priority",
+                "justification": "Risk importance and priority are related in assessing the potential impact of actions."
+            }
+        ],
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.rule_name",
+                "justification": "External action name and rule name are related as identifiers of specific actions or rules."
+            },
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRules.exposure_rules.rule_name",
+                "justification": "External action name and rule name of exposure rules are conceptually related in identifying actions or rules."
+            }
+        ],
+        "turbo_Action.displayName": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.rule_name",
+                "justification": "Display name and rule name are conceptually related as they both serve to identify or describe actions or rules."
+            },
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRules.exposure_rules.rule_name",
+                "justification": "Fields concert_MostCommonExposureRules.exposure_rules.rule_name, from Schema concert_mostCommonExposureRules and Fields turbo_Action.externalActionName, turbo_Action.displayName, from Schema turbo_marketEntities are related. For instance Display name and rule name are conceptually related as they both serve to identify or describe actions or rules."
+            }
+        ]
+    }
+}

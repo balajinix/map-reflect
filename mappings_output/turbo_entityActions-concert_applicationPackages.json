@@ -1,0 +1,124 @@
+{
+    "name": "turbo_entityActions",
+    "properties": {
+        "turbo_Action.actionType": [
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageRecommendation.action",
+                "justification": "Action type and action to perform are conceptually related as they both describe the nature of an action."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsCollection.packages.recommendation.action",
+                "justification": "Action type and action to perform are conceptually related as they both describe the nature of an action."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsSummary.recommendation.action",
+                "justification": "Action type and action to perform are conceptually related as they both describe the nature of an action."
+            }
+        ],
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageRecommendation.action",
+                "justification": "External action name and action to perform are related as they both refer to the name or type of action being taken."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsCollection.packages.recommendation.action",
+                "justification": "External action name and action to perform are related as they both refer to the name or type of action being taken."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsSummary.recommendation.action",
+                "justification": "External action name and action to perform are related as they both refer to the name or type of action being taken."
+            }
+        ],
+        "turbo_Action.createTime": [
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageRecommendation.created_date",
+                "justification": "Create time and recommendation created date are related as they both refer to the time an action or recommendation was created."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsSummary.recommendation.created_date",
+                "justification": "Create time and recommendation created date are related as they both refer to the time an action or recommendation was created."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsCollection.packages.recommendation.created_date",
+                "justification": "Create time and recommendation created date are related as they both refer to the time an action or recommendation was created."
+            }
+        ],
+        "turbo_Action.details": [
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageRecommendation.description",
+                "justification": "Action details and recommendation description are related as they both provide information about the nature or purpose of an action or recommendation."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsSummary.recommendation.description",
+                "justification": "Action details and recommendation description are related as they both provide information about the nature or purpose of an action or recommendation."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsCollection.packages.recommendation.description",
+                "justification": "Action details and recommendation description are related as they both provide information about the nature or purpose of an action or recommendation."
+            }
+        ],
+        "turbo_Action.policy": [
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageRecommendation.recommendation",
+                "justification": "Policy and recommendation for action are related as they both guide or dictate the course of action to be taken."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsSummary.recommendation.recommendation",
+                "justification": "Policy and recommendation for action are related as they both guide or dictate the course of action to be taken."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsCollection.packages.recommendation.recommendation",
+                "justification": "Policy and recommendation for action are related as they both guide or dictate the course of action to be taken."
+            }
+        ],
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageRecommendation.recommendation_id",
+                "justification": "Action ID and recommendation ID are related as they both serve as identifiers for specific actions or recommendations."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsSummary.recommendation.recommendation_id",
+                "justification": "Action ID and recommendation ID are related as they both serve as identifiers for specific actions or recommendations."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsCollection.packages.recommendation.recommendation_id",
+                "justification": "Action ID and recommendation ID are related as they both serve as identifiers for specific actions or recommendations."
+            }
+        ],
+        "turbo_Action.risk.severity": [
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageRecommendation.risk_type",
+                "justification": "Risk severity and risk type are related as they both describe the level or nature of risk associated with an action or recommendation."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsSummary.recommendation.risk_type",
+                "justification": "Risk severity and risk type are related as they both describe the level or nature of risk associated with an action or recommendation."
+            },
+            {
+                "mapTable": "concert_applicationPackages",
+                "mapProperty": "concert_PackageDetailsCollection.packages.recommendation.risk_type",
+                "justification": "Risk severity and risk type are related as they both describe the level or nature of risk associated with an action or recommendation."
+            }
+        ]
+    }
+}

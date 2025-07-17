@@ -1,0 +1,69 @@
+{
+    "name": "turbo_entity",
+    "properties": {
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.priority_1_findings",
+                "justification": "Critical severity can be considered as priority 1 findings, making them conceptually related."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.priority_1_findings",
+                "justification": "Critical severity can be considered as priority 1 findings, making them conceptually related."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.priority_2_findings",
+                "justification": "Major severity can be considered as priority 2 findings, making them conceptually related."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.priority_2_findings",
+                "justification": "Major severity can be considered as priority 2 findings, making them conceptually related."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.priority_3_findings",
+                "justification": "Minor severity can be considered as priority 3 findings, making them conceptually related."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.priority_3_findings",
+                "justification": "Minor severity can be considered as priority 3 findings, making them conceptually related."
+            }
+        ],
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.id",
+                "justification": "Both fields represent unique identifiers."
+            }
+        ],
+        "turbo_Action.actionImpactID": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.id",
+                "justification": "Both fields are related to identifiers, with actionImpactID being a specific type of ID."
+            }
+        ],
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.name",
+                "justification": "Both fields are related to names, with externalActionName being a name used in external contexts."
+            }
+        ],
+        "turbo_Action.displayName": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.name",
+                "justification": "Both fields are related to names or identifiers, with displayName being a specific type of name."
+            }
+        ]
+    }
+}

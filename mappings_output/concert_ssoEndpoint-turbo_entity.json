@@ -1,0 +1,12 @@
+{
+    "name": "concert_ssoEndpoint",
+    "properties": {
+        "concert_SuccessResponse.message": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields are related to providing information or messages."
+            }
+        ]
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "concert_mostVulnerableApplications",
+    "properties": {
+        "concert_MostVulnerableApplicationCollection.applications.priority_1_findings": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Priority findings can be related to total hits as both represent quantities of results."
+            }
+        ],
+        "concert_MostVulnerableApplicationCollection.applications.priority_2_findings": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Priority findings can be related to total hits as both represent quantities of results."
+            }
+        ],
+        "concert_MostVulnerableApplicationCollection.applications.priority_3_findings": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Priority findings can be related to total hits as both represent quantities of results."
+            }
+        ]
+    }
+}

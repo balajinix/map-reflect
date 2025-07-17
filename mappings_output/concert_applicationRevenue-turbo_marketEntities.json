@@ -1,0 +1,12 @@
+{
+    "name": "concert_applicationRevenue",
+    "properties": {
+        "concert_ApplicationReleaseProperties.revenue": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.template.price",
+                "justification": "Both fields are related to financial or pricing information, making them conceptually related."
+            }
+        ]
+    }
+}

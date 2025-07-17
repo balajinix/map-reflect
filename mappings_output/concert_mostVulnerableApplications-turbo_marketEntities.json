@@ -1,0 +1,47 @@
+{
+    "name": "concert_mostVulnerableApplications",
+    "properties": {
+        "concert_MostVulnerableApplicationCollection.applications.priority_1_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to critical severity findings."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_1_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to critical severity findings."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_2_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to major severity findings."
+            }
+        ],
+        "concert_MostVulnerableApplicationCollection.applications.priority_2_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to major severity findings."
+            }
+        ],
+        "concert_MostVulnerableApplicationCollection.applications.priority_3_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields are related to minor severity findings."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_3_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields are related to minor severity findings."
+            }
+        ]
+    }
+}

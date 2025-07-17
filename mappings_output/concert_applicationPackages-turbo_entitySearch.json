@@ -1,0 +1,86 @@
+{
+    "name": "concert_applicationPackages",
+    "properties": {
+        "concert_PackageRecommendation.recommendation_id": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields seem to represent unique identifiers for actions or recommendations, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageRecommendation.created_date": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "Both fields represent creation or start times for actions or recommendations, making them related."
+            }
+        ],
+        "concert_PackageRecommendation.description": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields provide descriptive information about actions or recommendations, linking them conceptually."
+            }
+        ],
+        "concert_PackageDetailsCollection.packages.recommendation.action": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.actionType",
+                "justification": "Both fields seem to describe the type or nature of an action, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageDetailsSummary.recommendation.action": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.actionType",
+                "justification": "Both fields seem to describe the type or nature of an action, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageRecommendation.action": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Action.actionType",
+                "justification": "Both fields seem to describe the type or nature of an action, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageDetailsSummary.vulnerability_count": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "MINOR severity issues in summaries, while less critical, still contribute to the overall vulnerability count, showing the comprehensive approach to security assessments."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "MAJOR severity issues in package summaries can also be related to vulnerability counts, indicating a significant security concern."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Summary vulnerability counts can be linked to CRITICAL severity levels, reflecting the critical nature of high vulnerability counts in package summaries."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "NORMAL severity levels in package summaries can be associated with vulnerability counts, highlighting the importance of considering all severity levels in security evaluations."
+            }
+        ],
+        "concert_PackageDetailsCollection.packages.vulnerability_count": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Similarly, vulnerability counts can reflect MAJOR severity issues, as both are concerned with the presence and impact of vulnerabilities."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Vulnerability counts can be directly related to CRITICAL severity levels, as high vulnerability counts often indicate critical security issues."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "NORMAL severity levels can also be associated with vulnerability counts, as the presence of any vulnerabilities, regardless of severity, is a security concern."
+            }
+        ]
+    }
+}

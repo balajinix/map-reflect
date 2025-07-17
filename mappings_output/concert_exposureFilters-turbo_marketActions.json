@@ -1,0 +1,58 @@
+{
+    "name": "concert_exposureFilters",
+    "properties": {
+        "concert_ExposureFilters.status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.value",
+                "justification": "status and value both relate to the state or condition of something, potentially an exposure."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "status could be described by the displayName, linking the two."
+            }
+        ],
+        "concert_ExposureFilters.exposure_type": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.type",
+                "justification": "exposure_type and type both relate to categorizing or filtering based on certain criteria."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "exposure_type could be described by the displayName, linking the two."
+            }
+        ],
+        "concert_ExposureFilters.scan_type": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.type",
+                "justification": "scan_type and type both relate to categorizing or filtering based on certain criteria."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "scan_type could be described by the displayName, linking the two."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.relatedEntity.displayName",
+                "justification": "scan_type might relate to the displayName of an entity, describing its scan type."
+            }
+        ],
+        "concert_ExposureFilters.severity": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.value",
+                "justification": "severity and value both relate to the level or degree of something, potentially an exposure."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "severity could be described by the displayName, linking the two."
+            }
+        ]
+    }
+}

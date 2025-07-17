@@ -1,0 +1,53 @@
+{
+    "name": "concert_login",
+    "properties": {
+        "concert_TokenDetails.instance_id": [
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "instance_id and actionID are both unique identifiers, thus they are conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.uuid",
+                "justification": "instance_id and uuid are both unique identifiers, thus they are conceptually related."
+            }
+        ],
+        "concert_TokenDetails.expiry": [
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.updateTime",
+                "justification": "expiry and updateTime both deal with time-related attributes, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.clearTime",
+                "justification": "expiry and clearTime both refer to time-related attributes, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "expiry and createTime both deal with time attributes, thus they are related."
+            }
+        ],
+        "concert_TokenDetails.display_name": [
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.displayName",
+                "justification": "display_name and displayName both refer to names or identifiers for display purposes, thus they are related."
+            },
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "display_name and details both provide descriptive information, making them conceptually related."
+            }
+        ],
+        "concert_TokenDetails.username": [
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.externalActionName",
+                "justification": "username and externalActionName both can be considered as identifiers or names, thus they are conceptually related."
+            }
+        ]
+    }
+}

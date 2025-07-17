@@ -1,0 +1,93 @@
+{
+    "name": "turbo_marketEntities",
+    "properties": {
+        "turbo_Entity.severityBreakdown.NORMAL": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score and severity breakdown are related as they both describe the level of vulnerability or risk."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs and severity breakdown are related as they both describe the level of vulnerability."
+            }
+        ]
+    }
+}

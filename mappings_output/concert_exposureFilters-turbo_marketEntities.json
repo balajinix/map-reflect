@@ -1,0 +1,87 @@
+{
+    "name": "concert_exposureFilters",
+    "properties": {
+        "concert_ExposureFilters.status": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.type",
+                "justification": "status relates to the type of filter, making it related to type."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "status could be described by displayName, making them related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.relatedEntity.displayName",
+                "justification": "status could be described by displayName, linking it to relatedEntity's displayName."
+            }
+        ],
+        "concert_ExposureFilters.exposure_type": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.type",
+                "justification": "exposure_type relates to the type of filter, making it related to type."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "exposure_type could be described by displayName, making them related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.relatedEntity.displayName",
+                "justification": "exposure_type could be described by displayName, linking it to relatedEntity's displayName."
+            }
+        ],
+        "concert_ExposureFilters.scan_type": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.type",
+                "justification": "scan_type relates to the type of filter, making it related to type."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "scan_type could be described by displayName, making them related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.relatedEntity.displayName",
+                "justification": "scan_type could be described by displayName, linking it to relatedEntity's displayName."
+            }
+        ],
+        "concert_ExposureFilters.severity": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.type",
+                "justification": "severity relates to the type of filter, making it related to type."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "severity could be described by displayName, making them related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.relatedEntity.displayName",
+                "justification": "severity could be described by displayName, linking it to relatedEntity's displayName."
+            }
+        ],
+        "concert_ExposureFilters.has_solution": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.value",
+                "justification": "has_solution might be indicated by the value, linking it to filters.value."
+            }
+        ],
+        "concert_ExposureFilters.has_open_ticket": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.stats.filters.value",
+                "justification": "has_open_ticket could be represented by the value, making them related."
+            }
+        ]
+    }
+}

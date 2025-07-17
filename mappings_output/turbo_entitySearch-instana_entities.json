@@ -1,0 +1,33 @@
+{
+    "name": "turbo_entitySearch",
+    "properties": {
+        "turbo_VirtualDisksEntry.stats.numRelatedEntities": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both fields represent counts, with numRelatedEntities being the number of providers or consumers for a statistic and totalHits being the total number of results."
+            }
+        ],
+        "turbo_StatsEntry.numRelatedEntities": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both fields represent counts, with numRelatedEntities being the number of providers or consumers for a statistic and totalHits being the total number of results."
+            }
+        ],
+        "turbo_Statistics.statistics.numRelatedEntities": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both fields represent counts, with numRelatedEntities being the number of providers or consumers for a statistic and totalHits being the total number of results."
+            }
+        ],
+        "turbo_Entity.stats.statistics.numRelatedEntities": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both fields represent counts, with numRelatedEntities being the number of providers or consumers for a statistic and totalHits being the total number of results."
+            }
+        ]
+    }
+}

@@ -1,0 +1,75 @@
+{
+    "name": "concert__convertApplicationName",
+    "properties": {
+        "concert_ApplicationCollection.applications.associations.source_repos.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_ApplicationCollection.applications.associations.source_repos.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_Application.associations.environments.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_Application.associations.environments.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_ApplicationCollection.applications.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_ApplicationCollection.applications.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_ApplicationCollection.applications.associations.environments.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_ApplicationCollection.applications.associations.environments.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_ApplicationCollection.applications.associations.build_artifacts.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_ApplicationCollection.applications.associations.build_artifacts.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_ApplicationAssociationsInfo.build_artifacts.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_ApplicationAssociationsInfo.build_artifacts.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_ApplicationAssociationsInfo.environments.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_ApplicationAssociationsInfo.environments.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_ApplicationAssociationsInfo.source_repos.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_ApplicationAssociationsInfo.source_repos.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_Application.associations.source_repos.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_Application.associations.source_repos.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ],
+        "concert_Application.associations.build_artifacts.tags.name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "concert__convertApplicationName.concert_Application.associations.build_artifacts.tags.name and turbo_marketEntities.turbo_Entity.tags are related."
+            }
+        ]
+    }
+}

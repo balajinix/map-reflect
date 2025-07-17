@@ -1,0 +1,38 @@
+{
+    "name": "concert_login",
+    "properties": {
+        "concert_TokenDetails.instance_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "instance_id and actionID are unique identifiers, thus conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.reservedInstance",
+                "justification": "instance_id and reservedInstance can be related in the context of resource or instance management."
+            }
+        ],
+        "concert_TokenDetails.token": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "token and actionImpactID are both identifiers, making them related in the context of unique identification."
+            }
+        ],
+        "concert_TokenDetails.display_name": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.displayName",
+                "justification": "concert_login.concert_TokenDetails.display_name and turbo_marketActions.turbo_Action.displayName are related."
+            }
+        ],
+        "concert_TokenDetails.roles": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.policy",
+                "justification": "concert_login.concert_TokenDetails.roles and turbo_marketActions.turbo_Action.policy are related."
+            }
+        ]
+    }
+}

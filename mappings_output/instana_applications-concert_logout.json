@@ -1,0 +1,19 @@
+{
+    "name": "instana_applications",
+    "properties": {
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields represent unique identifiers for an action or event."
+            }
+        ],
+        "turbo_Action.actionImpactID": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields represent unique identifiers for an action or event, with actionImpactID persisting across restarts."
+            }
+        ]
+    }
+}

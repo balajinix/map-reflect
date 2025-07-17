@@ -1,0 +1,33 @@
+{
+    "name": "concert_applicationsSummary",
+    "properties": {
+        "concert_AppComponentCount.images": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both represent counts, images is a count of images and totalHits is a count of results."
+            }
+        ],
+        "concert_AppComponentCount.source_repos": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both represent counts, source_repos is a count of repositories and totalHits is a count of results."
+            }
+        ],
+        "concert_AppComponentCount.environments": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both represent counts, environments is a count of environments and totalHits is a count of results."
+            }
+        ],
+        "concert_AppComponentCount.libraries": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both represent counts, libraries is a count of libraries and totalHits is a count of results."
+            }
+        ]
+    }
+}

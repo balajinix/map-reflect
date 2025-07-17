@@ -1,0 +1,54 @@
+{
+    "name": "concert_vulnerabilitiesAssessmentSummary",
+    "properties": {
+        "concert_VulnerabilitiesAssessmentSummary.in_progress": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "concert_vulnerabilitiesAssessmentSummary.concert_VulnerabilitiesAssessmentSummary.in_progress and instana_entities.instana__entities_200_response.totalHits are related."
+            }
+        ],
+        "concert_VulnerabilitiesAssessmentSummary.closed": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "concert_vulnerabilitiesAssessmentSummary.concert_VulnerabilitiesAssessmentSummary.closed and instana_entities.instana__entities_200_response.totalHits are related."
+            }
+        ],
+        "concert_VulnerabilitiesAssessmentSummary.exception_approved": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "concert_vulnerabilitiesAssessmentSummary.concert_VulnerabilitiesAssessmentSummary.exception_approved and instana_entities.instana__entities_200_response.totalHits are related."
+            }
+        ],
+        "concert_VulnerabilitiesAssessmentSummary.fix_in_progress": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "concert_vulnerabilitiesAssessmentSummary.concert_VulnerabilitiesAssessmentSummary.fix_in_progress and instana_entities.instana__entities_200_response.totalHits are related."
+            }
+        ],
+        "concert_VulnerabilitiesAssessmentSummary.un_assessed": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "concert_vulnerabilitiesAssessmentSummary.concert_VulnerabilitiesAssessmentSummary.un_assessed and instana_entities.instana__entities_200_response.totalHits are related."
+            }
+        ],
+        "concert_VulnerabilitiesAssessmentSummary.false_positive": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "concert_vulnerabilitiesAssessmentSummary.concert_VulnerabilitiesAssessmentSummary.false_positive and instana_entities.instana__entities_200_response.totalHits are related."
+            }
+        ],
+        "concert_VulnerabilitiesAssessmentSummary.exception_requested": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "concert_vulnerabilitiesAssessmentSummary.concert_VulnerabilitiesAssessmentSummary.exception_requested and instana_entities.instana__entities_200_response.totalHits are related."
+            }
+        ]
+    }
+}

@@ -1,0 +1,243 @@
+{
+    "name": "concert__convertApplicationName",
+    "properties": {
+        "concert_Application.vulnerabilities.findings.issues.issue_link.assignees": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields could represent additional information or assignees related to actions or issues."
+            }
+        ],
+        "concert_Application.vulnerabilities.findings.issues.issue_link.has_issue_updated": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the state or status of an issue or action, including whether it has been updated."
+            }
+        ],
+        "concert_Application.vulnerabilities.findings.issues.issue_link.issue_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for issues or actions."
+            }
+        ],
+        "concert_Application.vulnerabilities.findings.issues.issue_link.system_status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the status of an issue or action within a system."
+            }
+        ],
+        "concert_Vulnerability.findings.issues.issue_link.assignees": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields could represent additional information or assignees related to actions or issues."
+            }
+        ],
+        "concert_Vulnerability.findings.issues.issue_link.has_issue_updated": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the state or status of an issue or action, including whether it has been updated."
+            }
+        ],
+        "concert_Vulnerability.findings.issues.issue_link.issue_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for issues or actions."
+            }
+        ],
+        "concert_Vulnerability.findings.issues.issue_link.system_status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the status of an issue or action within a system."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.comment": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields represent descriptive information about an action or issue."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for actions or issues."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.id_type": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "Both fields could represent types or categories of actions or issues."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.issue_link.assignees": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields could represent additional information or assignees related to actions or issues."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.issue_link.has_issue_updated": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the state or status of an issue or action, including whether it has been updated."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.issue_link.issue_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for issues or actions."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.issue_link.system_status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the status of an issue or action within a system."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.opened_on": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "Both fields represent timestamps related to the creation or opening of an action or issue."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.issues.status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the current state or status of an action or issue."
+            }
+        ],
+        "concert_Issue.comment": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields represent descriptive information about an action or issue."
+            }
+        ],
+        "concert_Issue.id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for actions or issues."
+            }
+        ],
+        "concert_Issue.id_type": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "Both fields could represent types or categories of actions or issues."
+            }
+        ],
+        "concert_Issue.issue_link.assignees": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields could represent additional information or assignees related to actions or issues."
+            }
+        ],
+        "concert_Issue.issue_link.has_issue_updated": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the state or status of an issue or action, including whether it has been updated."
+            }
+        ],
+        "concert_Issue.issue_link.issue_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for issues or actions."
+            }
+        ],
+        "concert_Issue.issue_link.system_status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the status of an issue or action within a system."
+            }
+        ],
+        "concert_Issue.opened_on": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "Both fields represent timestamps related to the creation or opening of an action or issue."
+            }
+        ],
+        "concert_Issue.status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the current state or status of an action or issue."
+            }
+        ],
+        "concert_ApplicationCollection.applications.vulnerabilities.findings.issues.issue_link.assignees": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields could represent additional information or assignees related to actions or issues."
+            }
+        ],
+        "concert_ApplicationCollection.applications.vulnerabilities.findings.issues.issue_link.has_issue_updated": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the state or status of an issue or action, including whether it has been updated."
+            }
+        ],
+        "concert_ApplicationCollection.applications.vulnerabilities.findings.issues.issue_link.issue_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for issues or actions."
+            }
+        ],
+        "concert_ApplicationCollection.applications.vulnerabilities.findings.issues.issue_link.system_status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the status of an issue or action within a system."
+            }
+        ],
+        "concert_IssueLink.assignees": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields could represent additional information or assignees related to actions or issues."
+            }
+        ],
+        "concert_IssueLink.has_issue_updated": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the state or status of an issue or action, including whether it has been updated."
+            }
+        ],
+        "concert_IssueLink.issue_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Both fields represent unique identifiers for issues or actions."
+            }
+        ],
+        "concert_IssueLink.system_status": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionState",
+                "justification": "Both fields represent the status of an issue or action within a system."
+            }
+        ]
+    }
+}

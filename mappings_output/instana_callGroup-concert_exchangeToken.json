@@ -1,0 +1,19 @@
+{
+    "name": "instana_callGroup",
+    "properties": {
+        "instana_callGroup_200_response.items.name": [
+            {
+                "mapTable": "concert_exchangeToken",
+                "mapProperty": "concert_SuccessResponse.message",
+                "justification": "Both fields contain a name or message, thus they are conceptually related."
+            }
+        ],
+        "instana_callGroup_200_response.totalHits": [
+            {
+                "mapTable": "concert_exchangeToken",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Message code and total hits are both numerical values that can represent a count or code, making them conceptually related."
+            }
+        ]
+    }
+}

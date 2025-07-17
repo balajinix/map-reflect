@@ -1,0 +1,19 @@
+{
+    "name": "instana_callGroup",
+    "properties": {
+        "instana_callGroup_200_response.items.name": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message",
+                "justification": "Both fields contain a name, which could be a label or identifier, making them conceptually related."
+            }
+        ],
+        "instana_callGroup_200_response.totalHits": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Total hits and message code are both numerical values that could represent a count or status, linking them conceptually."
+            }
+        ]
+    }
+}

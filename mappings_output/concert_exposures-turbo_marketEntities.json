@@ -1,0 +1,67 @@
+{
+    "name": "concert_exposures",
+    "properties": {
+        "concert_Exposures.severity": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "concert_exposures.concert_Exposures.severity and turbo_marketEntities.turbo_Entity.severityBreakdown.MINOR are related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "concert_exposures.concert_Exposures.severity and turbo_marketEntities.turbo_Entity.severityBreakdown.MAJOR are related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "concert_exposures.concert_Exposures.severity and turbo_marketEntities.turbo_Entity.severityBreakdown.NORMAL are related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "concert_exposures.concert_Exposures.severity and turbo_marketEntities.turbo_Entity.severityBreakdown.CRITICAL are related."
+            }
+        ],
+        "concert_Exposures.rule_name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.template.displayName",
+                "justification": "concert_exposures.concert_Exposures.rule_name and turbo_marketEntities.turbo_Entity.template.displayName are related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.template.className",
+                "justification": "concert_exposures.concert_Exposures.rule_name and turbo_marketEntities.turbo_Entity.template.className are related."
+            }
+        ],
+        "concert_Exposures.created_on": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.template.discovered",
+                "justification": "concert_exposures.concert_Exposures.created_on and turbo_marketEntities.turbo_Entity.template.discovered are related."
+            }
+        ],
+        "concert_Exposures.status": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.template.enableMatch",
+                "justification": "concert_exposures.concert_Exposures.status and turbo_marketEntities.turbo_Entity.template.enableMatch are related."
+            }
+        ],
+        "concert_Exposures.score": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.template.price",
+                "justification": "concert_exposures.concert_Exposures.score and turbo_marketEntities.turbo_Entity.template.price are related."
+            }
+        ],
+        "concert_Exposures.id": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.template.uuid",
+                "justification": "concert_exposures.concert_Exposures.id and turbo_marketEntities.turbo_Entity.template.uuid are related."
+            }
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "concert_authorize",
+    "properties": {
+        "concert_TokenDetails.display_name": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.providers.displayName",
+                "justification": "Both fields refer to a display name, which is a common attribute for providers and tokens."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.connectedEntities.displayName",
+                "justification": "Both fields refer to a display name, which is a common attribute for entities and tokens."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.connectedEntities.discoveredBy.displayName",
+                "justification": "Both fields refer to a display name, which is a common attribute for entities and tokens."
+            }
+        ]
+    }
+}

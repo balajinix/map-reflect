@@ -1,0 +1,53 @@
+{
+    "name": "instana_entities",
+    "properties": {
+        "instana_mutation_entities_items_items.tags": [
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ApplicationSbomsCollection.sboms.tags",
+                "justification": "Both fields represent tags, which could be related in the context of sboms and entities."
+            },
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ConcertDefSbom.tags",
+                "justification": "Both fields represent tags, which could be related in the context of sboms and entities."
+            }
+        ],
+        "instana__entities_200_response.items.tags": [
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ApplicationSbomsCollection.sboms.tags",
+                "justification": "Both fields represent tags, which could be related in the context of sboms and entities."
+            },
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ConcertDefSbom.tags",
+                "justification": "Both fields represent tags, which could be related in the context of sboms and entities."
+            }
+        ],
+        "instana_mutation_entities_items_items.time": [
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ApplicationSbomsCollection.sboms.timestamp",
+                "justification": "Both fields represent time-related attributes, which could be related in the context of sboms and entities."
+            },
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ConcertDefSbom.timestamp",
+                "justification": "Both fields represent time-related attributes, which could be related in the context of sboms and entities."
+            }
+        ],
+        "instana__entities_200_response.items.time": [
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ApplicationSbomsCollection.sboms.timestamp",
+                "justification": "Both fields represent time-related attributes, which could be related in the context of sboms and entities."
+            },
+            {
+                "mapTable": "concert_applicationSboms",
+                "mapProperty": "concert_ConcertDefSbom.timestamp",
+                "justification": "Both fields represent time-related attributes, which could be related in the context of sboms and entities."
+            }
+        ]
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "name": "instana_topology",
+    "properties": {
+        "instana__topology_200_response.nodes.label": [
+            {
+                "mapTable": "concert_login",
+                "mapProperty": "concert_TokenDetails.display_name",
+                "justification": "label and display_name both refer to names or identifiers for entities or users."
+            }
+        ],
+        "instana__topology_200_response.nodes.id": [
+            {
+                "mapTable": "concert_login",
+                "mapProperty": "concert_TokenDetails.instance_id",
+                "justification": "id and instance_id both refer to unique identifiers for entities or instances."
+            }
+        ],
+        "instana__topology_200_response.nodes.plugin": [
+            {
+                "mapTable": "concert_login",
+                "mapProperty": "concert_TokenDetails.roles",
+                "justification": "plugin and roles both refer to categories or types of entities or users."
+            }
+        ],
+        "instana__topology_200_response.nodes.entityId.host": [
+            {
+                "mapTable": "concert_login",
+                "mapProperty": "concert_TokenDetails.username",
+                "justification": "host and username both refer to identifiers for users or entities."
+            }
+        ]
+    }
+}

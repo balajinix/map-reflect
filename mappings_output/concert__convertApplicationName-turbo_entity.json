@@ -1,0 +1,33 @@
+{
+    "name": "concert__convertApplicationName",
+    "properties": {
+        "concert_ApplicationCollection.applications.associations.source_repos.tags.name": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "Both fields refer to tags, which are metadata defined in name/value pairs, making them conceptually related."
+            }
+        ],
+        "concert_ApplicationCollection.applications.tags.name": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "Both fields refer to tags, which are metadata defined in name/value pairs, making them conceptually related."
+            }
+        ],
+        "concert_ApplicationCollection.applications.associations.environments.tags.name": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "Both fields refer to tags, which are metadata defined in name/value pairs, making them conceptually related."
+            }
+        ],
+        "concert_ApplicationCollection.applications.associations.build_artifacts.tags.name": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "Both fields refer to tags, which are metadata defined in name/value pairs, making them conceptually related."
+            }
+        ]
+    }
+}

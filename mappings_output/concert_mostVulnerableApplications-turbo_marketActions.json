@@ -1,0 +1,34 @@
+{
+    "name": "concert_mostVulnerableApplications",
+    "properties": {
+        "concert_IDNamePair.id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "ID and actionID both represent unique identifiers, thus they are conceptually related."
+            }
+        ],
+        "concert_IDNamePair.name": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.displayName",
+                "justification": "Name and displayName both refer to the name or label of an entity, thus they are related."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.externalActionName",
+                "justification": "Name and externalActionName both refer to names or labels of entities, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Name and details both provide descriptive information about entities, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.risk.description",
+                "justification": "Name and risk description both provide descriptive information about entities, making them conceptually related."
+            }
+        ]
+    }
+}

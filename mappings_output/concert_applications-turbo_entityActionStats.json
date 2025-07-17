@@ -1,0 +1,84 @@
+{
+    "name": "concert_applications",
+    "properties": {
+        "concert_Release.id": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.className",
+                "justification": "Both 'id' and 'className' serve as unique identifiers."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.uuid",
+                "justification": "The 'id' field in 'concert_Release' could be related to 'uuid' in 'turbo_StatsEntry' as both are unique identifiers."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.className",
+                "justification": "Similarly, 'id' in 'concert_Release' could be conceptually related to 'className' in 'turbo_Statistics.statistics'."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.uuid",
+                "justification": "The 'id' field in 'concert_Release' could also be related to 'uuid' in 'turbo_Statistics.statistics' due to their role as unique identifiers."
+            }
+        ],
+        "concert_ApplicationCollection.applications.associations.releases.id": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.name",
+                "justification": "Both 'id' and 'name' could serve as identifiers."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.name",
+                "justification": "The 'id' field in 'concert_ApplicationCollection.applications.associations.releases' could be related to 'name' in 'turbo_Statistics.statistics'."
+            }
+        ],
+        "concert_BuildArtifactAssociations.applications.id": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "The concept of 'id' in 'concert_BuildArtifactAssociations.applications' could be related to 'numRelatedEntities' as both represent counts of related items."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Similarly, 'id' in 'concert_BuildArtifactAssociations.applications' could be conceptually related to 'numRelatedEntities' in 'turbo_Statistics.statistics'."
+            }
+        ],
+        "concert_Release.version": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "The 'version' field could be conceptually related to 'displayName' as both provide descriptive information."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "Similarly, 'version' in 'concert_Release' could be related to 'displayName' in 'turbo_Statistics.statistics'."
+            }
+        ],
+        "concert_ApplicationAssociationsInfo.releases.version": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "The 'version' field could be conceptually related to 'displayName' as both provide descriptive information, with 'version' describing a release and 'displayName' describing a statistic."
+            }
+        ],
+        "concert_Application.associations.releases.version": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "The 'version' field could be conceptually related to 'displayName' as both provide descriptive information."
+            }
+        ],
+        "concert_ApplicationCollection.applications.associations.releases.version": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "The 'version' field could be conceptually related to 'displayName' as both provide descriptive information."
+            }
+        ]
+    }
+}

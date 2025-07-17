@@ -1,0 +1,33 @@
+{
+    "name": "turbo_entitySearchFiltered",
+    "properties": {
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_vulnerabilitiesSummary",
+                "mapProperty": "concert_VulnerabilitiesSummary.critical",
+                "justification": "Critical severity in both schemas refers to the highest level of vulnerability, making them directly related."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_vulnerabilitiesSummary",
+                "mapProperty": "concert_VulnerabilitiesSummary.high",
+                "justification": "Major severity is conceptually related to high severity, as both denote significant vulnerabilities."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_vulnerabilitiesSummary",
+                "mapProperty": "concert_VulnerabilitiesSummary.low",
+                "justification": "Minor severity is analogous to low severity, indicating a relationship between the two."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.NORMAL": [
+            {
+                "mapTable": "concert_vulnerabilitiesSummary",
+                "mapProperty": "concert_VulnerabilitiesSummary.medium",
+                "justification": "Normal severity can be considered equivalent to medium severity, as both represent a moderate level of vulnerability."
+            }
+        ]
+    }
+}

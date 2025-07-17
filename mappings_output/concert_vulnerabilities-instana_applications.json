@@ -1,0 +1,56 @@
+{
+    "name": "concert_vulnerabilities",
+    "properties": {
+        "concert_VulnerabilityAssociationComponent.assessment_custom_details.comments": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.providers.displayName",
+                "justification": "Both fields contain descriptive information about entities, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.connectedEntities.displayName",
+                "justification": "Both fields contain descriptive information about entities, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.connectedEntities.discoveredBy.displayName",
+                "justification": "Both fields contain descriptive information about entities, making them conceptually related."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.assessment_custom_details.effort": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.providers.uuid",
+                "justification": "Both fields contain unique identifiers or assessment details, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.connectedEntities.uuid",
+                "justification": "Both fields contain unique identifiers or assessment details, making them conceptually related."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.assessment_custom_details.complexity": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields contain assessment or severity information, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields contain assessment or severity information, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields contain assessment or severity information, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Both fields contain assessment or severity information, making them conceptually related."
+            }
+        ]
+    }
+}

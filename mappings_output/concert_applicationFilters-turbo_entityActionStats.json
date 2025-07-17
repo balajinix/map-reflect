@@ -1,0 +1,117 @@
+{
+    "name": "concert_applicationFilters",
+    "properties": {
+        "concert_FilterInfo.key": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.className",
+                "justification": "Both 'key' and 'className' can represent identifiers, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.className",
+                "justification": "Both 'key' and 'className' represent identifiers, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.uuid",
+                "justification": "Both 'key' and 'uuid' represent unique identifiers, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.uuid",
+                "justification": "Both 'key' and 'uuid' are unique identifiers, linking them conceptually."
+            }
+        ],
+        "concert_FilterInfo.value": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "Both 'value' and 'displayName' represent names or descriptions, linking them conceptually."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "Both 'value' and 'displayName' represent names or descriptions, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.name",
+                "justification": "Both 'value' and 'name' can represent a name or identifier, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.name",
+                "justification": "Both 'value' and 'name' represent names or identifiers, making them conceptually related."
+            }
+        ],
+        "concert_FiltersValues.filter_values.value": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "Both 'value' and 'displayName' represent names or descriptions, linking them conceptually."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "Both 'value' and 'displayName' represent names or descriptions, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.name",
+                "justification": "Both 'value' and 'name' can represent a name or identifier, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.name",
+                "justification": "Both 'value' and 'name' represent names or identifiers, making them conceptually related."
+            }
+        ],
+        "concert_ApplicationFilters.application_filters.filter_values.value": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "Both 'value' and 'displayName' represent names or descriptions, linking them conceptually."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "Both 'value' and 'displayName' represent names or descriptions, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.name",
+                "justification": "Both 'value' and 'name' can represent a name or identifier, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.name",
+                "justification": "Both 'value' and 'name' represent names or identifiers, making them conceptually related."
+            }
+        ],
+        "concert_FiltersValues.filter_values.key": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.uuid",
+                "justification": "Both 'key' and 'uuid' are unique identifiers, linking them conceptually."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.uuid",
+                "justification": "Both 'key' and 'uuid' represent unique identifiers, making them conceptually related."
+            }
+        ],
+        "concert_ApplicationFilters.application_filters.filter_values.key": [
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_Statistics.statistics.uuid",
+                "justification": "Both 'key' and 'uuid' are unique identifiers, linking them conceptually."
+            },
+            {
+                "mapTable": "turbo_entityActionStats",
+                "mapProperty": "turbo_StatsEntry.uuid",
+                "justification": "Both 'key' and 'uuid' represent unique identifiers, making them conceptually related."
+            }
+        ]
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "name": "concert_mostVulnerableApplications",
+    "properties": {
+        "concert_MostVulnerableApplicationCollection.applications.priority_1_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Priority 1 findings correspond to the most severe or critical level of findings, similar to CRITICAL severity."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_1_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Priority 1 findings are equivalent to CRITICAL severity, indicating the most severe level of findings."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_2_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Priority 2 findings are conceptually related to MAJOR severity, representing a significant but less critical level of concern."
+            }
+        ],
+        "concert_MostVulnerableApplicationCollection.applications.priority_2_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Priority 2 findings can be related to MAJOR severity, as both represent a significant but not critical level of concern."
+            }
+        ],
+        "concert_MostVulnerableApplicationCollection.applications.priority_3_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Priority 3 findings correspond to the least severe level of findings, similar to MINOR severity."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_3_findings": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Priority 3 findings correspond to MINOR severity, indicating the least severe level of findings."
+            }
+        ]
+    }
+}

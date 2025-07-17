@@ -1,0 +1,19 @@
+{
+    "name": "turbo_entitySearchFiltered",
+    "properties": {
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_ssoEndpoint",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields contain identifiers for actions or responses, with actionID being an identifier for an action and message_code being a code for a message."
+            }
+        ],
+        "turbo_Action.actionImpactID": [
+            {
+                "mapTable": "concert_ssoEndpoint",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields contain identifiers for actions or responses, with actionImpactID being an identifier for the impact of an action and message_code being a code for a message."
+            }
+        ]
+    }
+}

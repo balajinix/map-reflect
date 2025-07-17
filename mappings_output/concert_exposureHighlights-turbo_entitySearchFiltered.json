@@ -1,0 +1,43 @@
+{
+    "name": "concert_exposureHighlights",
+    "properties": {
+        "concert_VulnerabilitiesExposureHighlightSummary.exposures.priority_1": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Priority 1 issues can also include major severity, as both are high priority."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Priority 1 issues are typically critical, making them related to critical severity."
+            }
+        ],
+        "concert_ExposuresInfo.priority_1": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Priority 1 issues can also include major severity, as both are high priority."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Priority 1 issues are typically critical, making them related to critical severity."
+            }
+        ],
+        "concert_ExposuresInfo.with_open_tickets": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Issues with open tickets might be of normal severity, as they are being addressed."
+            }
+        ],
+        "concert_VulnerabilitiesExposureHighlightSummary.exposures.with_open_tickets": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Issues with open tickets might be of normal severity, as they are being addressed."
+            }
+        ]
+    }
+}

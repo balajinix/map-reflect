@@ -1,0 +1,85 @@
+{
+    "name": "concert_mostVulnerableApplications",
+    "properties": {
+        "concert_MostVulnerableApplication.name": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.name",
+                "justification": "Both fields refer to names, which could be of applications or entities, making them related."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.className",
+                "justification": "Fields concert_MostVulnerableApplication.name, from Schema concert_mostVulnerableApplications and Fields turbo_StatsEntry.className, from Schema turbo_entityStats are related. For instance Both fields refer to names, which could be of applications or entities, making them related."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "Fields concert_MostVulnerableApplication.name, from Schema concert_mostVulnerableApplications and Fields turbo_StatsEntry.displayName, from Schema turbo_entityStats are related. For instance Both fields refer to names, which could be of applications or entities, making them related."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.className",
+                "justification": "Fields concert_MostVulnerableApplication.name, from Schema concert_mostVulnerableApplications and Fields turbo_Statistics.statistics.className, from Schema turbo_entityStats are related. For instance Both fields refer to names, which could be of applications or entities, making them related."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.name",
+                "justification": "Fields concert_MostVulnerableApplication.name, from Schema concert_mostVulnerableApplications and Fields turbo_Statistics.statistics.name, from Schema turbo_entityStats are related. For instance Both fields refer to names, which could be of applications or entities, making them related."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "Fields concert_MostVulnerableApplication.name, from Schema concert_mostVulnerableApplications and Fields turbo_Statistics.statistics.displayName, from Schema turbo_entityStats are related. For instance Both fields refer to names, which could be of applications or entities, making them related."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_3_findings": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "The count of priority 3 findings could also reflect the number of related entities, indicating aspects of an entity's or application's state."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Fields concert_MostVulnerableApplication.priority_1_findings, concert_MostVulnerableApplication.priority_2_findings, concert_MostVulnerableApplication.priority_3_findings, from Schema concert_mostVulnerableApplications and Fields turbo_Statistics.statistics.numRelatedEntities, from Schema turbo_entityStats are related. For instance The count of priority 3 findings could also reflect the number of related entities, indicating aspects of an entity's or application's state."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_1_findings": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "The count of priority 1 findings could be related to the number of related entities, as both indicate levels of interaction or impact."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Fields concert_MostVulnerableApplication.priority_1_findings, concert_MostVulnerableApplication.priority_2_findings, concert_MostVulnerableApplication.priority_3_findings, from Schema concert_mostVulnerableApplications and Fields turbo_Statistics.statistics.numRelatedEntities, from Schema turbo_entityStats are related. For instance The count of priority 1 findings could be related to the number of related entities, as both indicate levels of interaction or impact."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_2_findings": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "Similar to priority 1 findings, the count of priority 2 findings could also be related to the number of related entities."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Fields concert_MostVulnerableApplication.priority_1_findings, concert_MostVulnerableApplication.priority_2_findings, concert_MostVulnerableApplication.priority_3_findings, from Schema concert_mostVulnerableApplications and Fields turbo_Statistics.statistics.numRelatedEntities, from Schema turbo_entityStats are related. For instance Similar to priority 1 findings, the count of priority 2 findings could also be related to the number of related entities."
+            }
+        ],
+        "concert_MostVulnerableApplication.id": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.uuid",
+                "justification": "Both fields refer to identifiers, potentially of applications or entities, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.uuid",
+                "justification": "Fields concert_MostVulnerableApplication.id, from Schema concert_mostVulnerableApplications and Fields turbo_Statistics.statistics.uuid, from Schema turbo_entityStats are related. For instance Both fields refer to identifiers, potentially of applications or entities, making them conceptually related."
+            }
+        ]
+    }
+}

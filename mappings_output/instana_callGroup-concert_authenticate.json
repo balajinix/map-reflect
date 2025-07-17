@@ -1,0 +1,57 @@
+{
+    "name": "instana_callGroup",
+    "properties": {
+        "instana_callGroup_200_response.items.name": [
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.display_name",
+                "justification": "Name and display_name both refer to identifiers or names, which could be for users or groups, indicating a conceptual relationship."
+            },
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.username",
+                "justification": "Name and username could both serve as identifiers, although they might refer to different aspects, they share a conceptual link."
+            }
+        ],
+        "instana_callGroup_200_response.adjustedTimeframe.to": [
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.expiry",
+                "justification": "Timeframe end (to) and expiry both deal with time-related attributes, making them conceptually related."
+            }
+        ],
+        "instana_callGroup_adjustedTimeframe.to": [
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.expiry",
+                "justification": "Adjusted timeframe end (to) and expiry are related through their time-based nature."
+            }
+        ],
+        "instana_callGroup_200_response.items.cursor": [
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.instance_id",
+                "justification": "instana_callGroup.instana_callGroup_200_response.items.cursor and concert_authenticate.concert_TokenDetails.instance_id are related."
+            },
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.token",
+                "justification": "instana_callGroup.instana_callGroup_200_response.items.cursor and concert_authenticate.concert_TokenDetails.token are related."
+            }
+        ],
+        "instana_callGroup_200_response.canLoadMore": [
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.is_authenticated",
+                "justification": "instana_callGroup.instana_callGroup_200_response.canLoadMore and concert_authenticate.concert_TokenDetails.is_authenticated are related."
+            }
+        ],
+        "instana_callGroup_200_response.items.metrics": [
+            {
+                "mapTable": "concert_authenticate",
+                "mapProperty": "concert_TokenDetails.roles",
+                "justification": "instana_callGroup.instana_callGroup_200_response.items.metrics and concert_authenticate.concert_TokenDetails.roles are related."
+            }
+        ]
+    }
+}

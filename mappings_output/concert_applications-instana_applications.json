@@ -1,0 +1,59 @@
+{
+    "name": "concert_applications",
+    "properties": {
+        "concert_TagsPrototype.color": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "Both fields refer to tags, with color being a specific attribute of a tag."
+            }
+        ],
+        "concert_TagsPrototype.name": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "Both fields refer to tags, with name being a specific attribute of a tag."
+            }
+        ],
+        "concert_TagsPrototype.description": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.tags",
+                "justification": "Both fields refer to tags, with description being a specific attribute of a tag."
+            }
+        ],
+        "concert_BuildArtifact.name": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.template.displayName",
+                "justification": "Name and display name both refer to how an entity is identified or presented."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.template.className",
+                "justification": "Name and class name both refer to identifying or categorizing entities."
+            }
+        ],
+        "concert_BuildArtifact.last_updated_on": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.template.discovered",
+                "justification": "Last updated on and discovered could both relate to the timing of when an entity or artifact was modified or found."
+            }
+        ],
+        "concert_BuildArtifact.version": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.template.price",
+                "justification": "Version and price could be related in the context of different versions of a product or service having different prices."
+            }
+        ],
+        "concert_BuildArtifact.id": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.template.uuid",
+                "justification": "ID and UUID both serve as unique identifiers for entities or artifacts."
+            }
+        ]
+    }
+}
