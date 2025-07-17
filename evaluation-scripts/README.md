@@ -8,7 +8,7 @@ This directory contains scripts to **evaluate the quality of API field mappings*
 ---
 
 ## 📁 Files Overview
-
+```
 evaluation-scripts/
 ├── .env                        # Environment variables 
 ├── api_lookup.json             # Enriched API metadata (used in all evaluations)
@@ -20,7 +20,7 @@ evaluation-scripts/
 ├── llm_eval_batch.py           # Batch mapping evaluation using LLM
 ├── llm_eval_batch.sh           # Bash wrapper for llm_eval_batch.py
 └── README.md                 
-
+```
 
 ---
 

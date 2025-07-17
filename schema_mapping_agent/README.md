@@ -1,4 +1,4 @@
-# Schema Mapping Agent – A2A Compatible
+# Schema Mapping Agent 
 
 A2A-compatible LangGraph agent that maps between GraphQL schemas using natural language, with integrated output storage via MCP tools (Neo4j and Wiki).
 
@@ -14,10 +14,10 @@ WATSONX_PROJECT_ID=your_project_id
 
 
 ### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-📁 Directory Structure
+```pip install -r requirements.txt```
 
+📁 Directory Structure
+```
 gnn_schema_mapping/
 ├── app/
 │   ├── __main__.py
@@ -29,23 +29,18 @@ gnn_schema_mapping/
 │   ├── test_agent.py            # Test A2A connection to MCP tools
 │   └── utils/                   # Utility functions
 ...
-
+```
 
 ## Running the Agent
 Step-by-Step:
 
-Start MCP Tool Server
-```bash
-python app/mcp_server.py   # Loads neo4j_tool and wiki_tool on port 3001
+Start MCP Tool Server: ```python app/mcp_server.py```   # Loads neo4j_tool and wiki_tool on port 3001
 
-Start Agent
-```bash
-python app/agent.py        # LangGraph agent available on port 8001
 
-Testing
-Run test with A2A tool call:
-bash
-```python app/test_agent.py
+Start Agent: ```python app/agent.py```      # LangGraph agent available on port 8001
+
+
+Testing: Run test with A2A tool call: ```python app/test_agent.py```
 
 
 ## API Endpoints

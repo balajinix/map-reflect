@@ -11,7 +11,7 @@ The goal is to:
 ---
 
 ## 📁 Folder Structure
-
+```
 docs_info/
 ├── concert_api_docs/
 │   ├── get_page_links.py
@@ -29,7 +29,7 @@ docs_info/
 ├── final_populate_lookup.py
 ├── .env
 └── README.md  <-- You are here!
-
+```
 
 ---
 

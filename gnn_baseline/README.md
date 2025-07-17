@@ -5,14 +5,14 @@ This project trains a Graph Neural Network (GNN) to evaluate the correctness of 
 ---
 
 ## 📁 Structure
-
+```
 gnn_baseline/
 ├── gnn_results/      # Stores outputs like loss plots, predictions
 ├── api_lookup.json   # Field metadata (used for node features)
 ├── graph_data.pkl    # Serialized NetworkX graph
 ├── populate_nx.py    # Builds graph from mappings
 └── train_gnn.py      # Trains and evaluates GNN
-
+```
 ---
 
 ## 🔄 Flow
