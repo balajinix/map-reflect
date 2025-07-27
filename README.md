@@ -18,9 +18,9 @@ Code for evaluating different schema mapping methods for the AAAI paper "Map-Ref
 
 ## Models
 
-1. **Granite** - IBM's foundation model
-2. **Llama** - Meta's open-source model
-3. **Qwen** - Alibaba's multilingual model
+1. **Granite**
+2. **Llama**
+3. **Qwen**
 
 ---
 
