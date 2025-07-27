@@ -18,13 +18,6 @@ from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 import logging
 
-# MINIMAL Agent Analytics - Just like the calculator example
-from agent_analytics.instrumentation import agent_analytics_sdk
-agent_analytics_sdk.initialize_logging(
-    logs_dir_path="./logs/analytics",
-    log_filename="schema_mapping_agent"
-)
-
 load_dotenv()
 logger = logging.getLogger("solis_ai_api")
 

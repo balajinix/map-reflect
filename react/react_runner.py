@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
+import numpy as np
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -322,19 +323,35 @@ class ReActEvaluationRunner:
         
         return final_result
     
-    def save_results(self, results: Dict[str, Any], dataset: str, model: str):
-        """Save results to JSON file."""
+    def save_results(self, results: dict, dataset: str, model: str):
+        """Save results to JSON file with NumPy-safe serialization."""
         output_file = self.results_dir / f"{dataset}_{model}.json"
-        
+
+        def convert_numpy_types(obj):
+            """Recursively convert NumPy types to native Python types."""
+            if isinstance(obj, np.generic):
+                return obj.item()  # np.float32 -> float, np.int64 -> int
+            elif isinstance(obj, dict):
+                return {k: convert_numpy_types(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [convert_numpy_types(v) for v in obj]
+            elif isinstance(obj, tuple):
+                return tuple(convert_numpy_types(v) for v in obj)
+            return obj
+
         try:
+            # Convert before writing to JSON
+            serializable_results = convert_numpy_types(results)
+
             with open(output_file, 'w') as f:
-                json.dump(results, f, indent=2)
-            
+                json.dump(serializable_results, f, indent=2)
+
             logger.info(f"💾 Results saved to {output_file}")
-            
+
         except Exception as e:
             logger.error(f"❌ Failed to save results to {output_file}: {e}")
-    
+
+
     def print_evaluation_summary(self, results: Dict[str, Any]):
         """Print a summary of the evaluation results."""
         metadata = results.get("metadata", {})
