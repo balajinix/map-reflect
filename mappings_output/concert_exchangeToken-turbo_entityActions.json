@@ -1,0 +1,12 @@
+{
+    "name": "concert_exchangeToken",
+    "properties": {
+        "concert_SuccessResponse.message": [
+            {
+                "mapTable": "turbo_entityActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Both fields are related to providing information or messages."
+            }
+        ]
+    }
+}

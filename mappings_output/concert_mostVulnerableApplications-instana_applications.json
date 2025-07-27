@@ -1,0 +1,67 @@
+{
+    "name": "concert_mostVulnerableApplications",
+    "properties": {
+        "concert_IDNamePair.id": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_ServiceEndpoint.id",
+                "justification": "Both fields represent unique identifiers for endpoints, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_ApplicationService.id",
+                "justification": "Both fields represent unique identifiers for services or applications, making them related."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_ApplicationService.endpoints.id",
+                "justification": "Both fields represent unique identifiers, making them conceptually related."
+            }
+        ],
+        "concert_IDNamePair.name": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_ServiceEndpoint.label",
+                "justification": "Both fields represent names or labels for endpoints, establishing a direct relationship."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_ApplicationService.label",
+                "justification": "Both fields represent names or labels for services or applications, establishing a relationship."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_ApplicationService.endpoints.label",
+                "justification": "Both fields represent names or labels, establishing a direct relationship."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_1_findings": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to the severity of issues, with priority_1_findings representing the count of high-priority issues and CRITICAL representing a high severity level."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_2_findings": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to the severity of issues, with priority_2_findings representing the count of medium-priority issues and MAJOR representing a medium-high severity level."
+            }
+        ],
+        "concert_MostVulnerableApplication.priority_3_findings": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields are related to the severity of issues, with priority_3_findings representing the count of low-priority issues and MINOR representing a low severity level."
+            }
+        ],
+        "concert_MostVulnerableApplicationCollection.most_total_findings.id": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_callGroup_200_response.totalHits",
+                "justification": "Both fields are related to the total count of items, with most_total_findings.id representing the ID of the application with the most total findings and totalHits representing the total number of items that match a given filter."
+            }
+        ]
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "name": "instana_callGroup",
+    "properties": {
+        "instana_callGroup_200_response.items.name": [
+            {
+                "mapTable": "concert_refreshToken",
+                "mapProperty": "concert_TokenDetails.display_name",
+                "justification": "Name and display name both refer to identifiers or labels for users or groups, establishing a relationship."
+            },
+            {
+                "mapTable": "concert_refreshToken",
+                "mapProperty": "concert_TokenDetails.username",
+                "justification": "Fields concert_TokenDetails.username, from Schema concert_refreshToken and Fields instana_callGroup_200_response.items.name, from Schema instana_callGroup are related. For instance Name and display name both refer to identifiers or labels for users or groups, establishing a relationship."
+            }
+        ],
+        "instana_callGroup_200_response.adjustedTimeframe.to": [
+            {
+                "mapTable": "concert_refreshToken",
+                "mapProperty": "concert_TokenDetails.expiry",
+                "justification": "Timeframe end (to) and expiry both deal with time limits or boundaries, linking them conceptually."
+            }
+        ],
+        "instana_callGroup_adjustedTimeframe.to": [
+            {
+                "mapTable": "concert_refreshToken",
+                "mapProperty": "concert_TokenDetails.expiry",
+                "justification": "Adjusted timeframe end (to) and expiry are both time-related attributes, making them conceptually linked."
+            }
+        ],
+        "instana_callGroup_200_response.items.cursor": [
+            {
+                "mapTable": "concert_refreshToken",
+                "mapProperty": "concert_TokenDetails.instance_id",
+                "justification": "instana_callGroup.instana_callGroup_200_response.items.cursor and concert_refreshToken.concert_TokenDetails.instance_id are related."
+            }
+        ],
+        "instana_callGroup_200_response.items.metrics": [
+            {
+                "mapTable": "concert_refreshToken",
+                "mapProperty": "concert_TokenDetails.roles",
+                "justification": "instana_callGroup.instana_callGroup_200_response.items.metrics and concert_refreshToken.concert_TokenDetails.roles are related."
+            }
+        ]
+    }
+}

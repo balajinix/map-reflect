@@ -1,0 +1,48 @@
+{
+    "name": "concert_applicationPackages",
+    "properties": {
+        "concert_PackageRecommendation.recommendation_id": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Recommendation_id and actionID both seem to be unique identifiers for actions or recommendations, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "Recommendation_id could also be related to actionImpactID as both might serve as identifiers for actions or their impacts."
+            }
+        ],
+        "concert_PackageRecommendation.created_date": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "Created_date and createTime both refer to the timestamp when an action or recommendation was created, linking them directly."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.updateTime",
+                "justification": "Created_date could also relate to the last update time of an action or recommendation, thus it is conceptually related to updateTime."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.clearTime",
+                "justification": "Created_date and clearTime could both be timestamps associated with actions or recommendations, making them related."
+            }
+        ],
+        "concert_PackageRecommendation.description": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Description and details both provide additional information about an action or recommendation, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageRecommendation.action": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.externalActionName",
+                "justification": "Action and externalActionName both refer to the type or name of an action, making them conceptually related."
+            }
+        ]
+    }
+}

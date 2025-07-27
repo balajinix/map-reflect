@@ -1,0 +1,97 @@
+{
+    "name": "instana_applications",
+    "properties": {
+        "turbo_Entity.discoveredBy.displayName": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.name",
+                "justification": "Both fields refer to a name or identifier, making them conceptually related."
+            }
+        ],
+        "turbo_Entity.discoveredBy.uuid": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_IDNamePair.id",
+                "justification": "Both fields refer to a unique identifier, making them conceptually related."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.id",
+                "justification": "Critical severity breakdown and application ID are conceptually related as they both describe attributes of an application."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.most_priority_1_findings.id",
+                "justification": "Critical severity breakdown and application ID with most priority 1 findings are conceptually related as they both describe high-priority issues."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.priority_1_findings",
+                "justification": "Critical severity breakdown and priority 1 findings are conceptually related as they both indicate high-priority issues."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.priority_1_findings",
+                "justification": "Critical severity breakdown and priority 1 findings are conceptually related as they both indicate high-priority issues."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.most_priority_1_findings.name",
+                "justification": "Critical severity breakdown and application name with most priority 1 findings are conceptually related as they both describe high-priority issues."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.name",
+                "justification": "Critical severity breakdown and application name are conceptually related as they both describe attributes of an application."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.id",
+                "justification": "Critical severity breakdown and application ID are conceptually related as they both describe attributes of an application."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.name",
+                "justification": "Critical severity breakdown and application name are conceptually related as they both describe attributes of an application."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.priority_2_findings",
+                "justification": "Major severity breakdown and priority 2 findings are conceptually related as they both indicate medium-priority issues."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.priority_2_findings",
+                "justification": "Major severity breakdown and priority 2 findings are conceptually related as they both indicate medium-priority issues."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplication.priority_3_findings",
+                "justification": "Minor severity breakdown and priority 3 findings are conceptually related as they both indicate low-priority issues."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.applications.priority_3_findings",
+                "justification": "Minor severity breakdown and priority 3 findings are conceptually related as they both indicate low-priority issues."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.NORMAL": [
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.most_total_findings.id",
+                "justification": "Normal severity breakdown and application ID with most total findings are conceptually related as they both describe general application attributes."
+            },
+            {
+                "mapTable": "concert_mostVulnerableApplications",
+                "mapProperty": "concert_MostVulnerableApplicationCollection.most_total_findings.name",
+                "justification": "Normal severity breakdown and application name with most total findings are conceptually related as they both describe general application attributes."
+            }
+        ]
+    }
+}

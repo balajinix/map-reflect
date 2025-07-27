@@ -1,0 +1,73 @@
+{
+    "name": "turbo_entitySearchFiltered",
+    "properties": {
+        "turbo_Entity.severityBreakdown.NORMAL": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Normal severity breakdown can be related to the number of CVEs, as normal issues could have CVEs, though typically fewer than critical or major ones."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Major severity breakdown can be related to the risk score, as major issues also contribute to the risk score, though less than critical ones."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Major severity breakdown can be related to the number of CVEs, as major issues may also have CVEs associated with them."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Major severity breakdown can be related to the number of CVEs in top vulnerable applications, as major issues may also have CVEs associated with them."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.impacted_public_api",
+                "justification": "Major severity breakdown can be related to impacted public APIs, as major issues may also impact public APIs."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Critical severity breakdown can be related to the risk score, as critical issues contribute significantly to the risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Critical severity breakdown can be related to the risk score of top vulnerable applications, as critical issues contribute significantly to the risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Critical severity breakdown can be related to the number of CVEs, as critical issues often have CVEs associated with them."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.impacted_public_api",
+                "justification": "Critical severity breakdown can be related to impacted public APIs, as critical issues often impact public APIs."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Critical severity breakdown can be related to the number of CVEs in top vulnerable applications, as critical issues often have CVEs associated with them."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.impacted_public_api",
+                "justification": "Critical severity breakdown can be related to impacted public APIs in top vulnerable applications, as critical issues often impact public APIs."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Minor severity breakdown can be related to the number of CVEs, as minor issues might have fewer but still relevant CVEs."
+            }
+        ]
+    }
+}

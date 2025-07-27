@@ -1,0 +1,19 @@
+{
+    "name": "instana_entities",
+    "properties": {
+        "instana_mutation_entities_items_items.time": [
+            {
+                "mapTable": "concert_apiKey",
+                "mapProperty": "concert_ApiKeyDate.created_on",
+                "justification": "instana_mutation_entities_items_items.time, representing epoch time in milliseconds, is conceptually related to concert_ApiKeyDate.created_on, which is a creation date, as both are time attributes."
+            }
+        ],
+        "instana__entities_200_response.items.time": [
+            {
+                "mapTable": "concert_apiKey",
+                "mapProperty": "concert_ApiKeyDate.created_on",
+                "justification": "instana__entities_200_response.items.time and concert_ApiKeyDate.created_on are related as they both represent time attributes, albeit in different contexts."
+            }
+        ]
+    }
+}

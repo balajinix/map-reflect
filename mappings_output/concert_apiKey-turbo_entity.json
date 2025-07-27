@@ -1,0 +1,37 @@
+{
+    "name": "concert_apiKey",
+    "properties": {
+        "concert_ApiKeyDate.created_on": [
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "created_on and createTime are both time-related attributes that indicate when an entity was created."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Action.updateTime",
+                "justification": "created_on and updateTime are both time-related attributes that can be used to track updates or changes."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Action.clearTime",
+                "justification": "created_on and clearTime are both time-related attributes that can be used to track events or updates."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "created_on and actionID are both unique identifiers for their respective entities."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "created_on and actionImpactID are both identifiers that can be used to track changes or updates."
+            },
+            {
+                "mapTable": "turbo_entity",
+                "mapProperty": "turbo_Action.uuid",
+                "justification": "created_on and uuid are both unique identifiers for their respective entities."
+            }
+        ]
+    }
+}

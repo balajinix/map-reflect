@@ -1,0 +1,12 @@
+{
+    "name": "concert_applicationRevenue",
+    "properties": {
+        "concert_ApplicationReleaseProperties.revenue": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.template.price",
+                "justification": "Both fields represent a form of financial or cost metric, making them conceptually related."
+            }
+        ]
+    }
+}

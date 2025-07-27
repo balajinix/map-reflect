@@ -1,0 +1,149 @@
+{
+    "name": "concert_exposure",
+    "properties": {
+        "concert_Exposures.rule_name": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.className",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to className in turbo_Statistics.statistics as both concern names or identifiers for entities or rules."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.className",
+                "justification": "Rule name and class name both represent names or identifiers for entities or rules, making them conceptually related."
+            }
+        ],
+        "concert_Exposures.description": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.displayName",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is conceptually linked to displayName in turbo_Statistics.statistics as both provide descriptive names or information."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.displayName",
+                "justification": "Description and displayName both provide descriptive information about an entity, making them related."
+            }
+        ],
+        "concert_Exposures.count": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.histUtilizations",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to histUtilizations in turbo_Statistics.statistics as both concern counts or utilizations."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.histUtilizations",
+                "justification": "Count and histUtilizations both represent some form of count or utilization, making them conceptually related."
+            }
+        ],
+        "concert_Exposures.exposure_object_id": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.name",
+                "justification": "Exposure object ID and name both represent identifiers for entities or objects, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.name",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to name in turbo_Statistics.statistics as both represent identifiers or names for entities."
+            }
+        ],
+        "concert_Exposures.associations.environments": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Similar to the mappings with access points and applications, this field is related to numRelatedEntities in both turbo_StatsEntry and turbo_Statistics.statistics."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "Environments are a type of related entity, making this field conceptually linked to numRelatedEntities."
+            }
+        ],
+        "concert_Exposures.associations.source_repos": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "Source repositories are a form of related entity, linking this field to numRelatedEntities."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Similar to the mappings with other types of associations, this field is conceptually related to numRelatedEntities in both turbo_StatsEntry and turbo_Statistics.statistics."
+            }
+        ],
+        "concert_Exposures.associations.applications": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Similar to the mapping with access points, this field is conceptually related to numRelatedEntities in both turbo_StatsEntry and turbo_Statistics.statistics."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "Applications are another form of related entity, linking this field to numRelatedEntities."
+            }
+        ],
+        "concert_Exposures.associations.access_points": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.numRelatedEntities",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to turbo_Statistics.statistics.numRelatedEntities as both concern related entities or associations."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.numRelatedEntities",
+                "justification": "Access points are a type of related entity, making this field conceptually linked to numRelatedEntities."
+            }
+        ],
+        "concert_Exposures.exposure_type": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.relatedEntityType",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to relatedEntityType in turbo_Statistics.statistics as both concern the type or classification of entities or exposures."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.relatedEntityType",
+                "justification": "Exposure type and related entity type both describe the nature or classification of an entity or exposure, making them conceptually related."
+            }
+        ],
+        "concert_Exposures.id": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.uuid",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to UUID in turbo_Statistics.statistics as both represent unique identifiers."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.uuid",
+                "justification": "ID and UUID both represent unique identifiers for entities or exposures, making them conceptually related."
+            }
+        ],
+        "concert_Exposures.score": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.value",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to value in turbo_Statistics.statistics as both concern values or scores associated with entities or exposures."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.value",
+                "justification": "Score and value both represent a measure or score associated with an entity or exposure, making them conceptually related."
+            }
+        ],
+        "concert_Exposures.severity": [
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_Statistics.statistics.units",
+                "justification": "Similar to the mapping with turbo_StatsEntry, this field is related to units in turbo_Statistics.statistics as both concern measures or classifications of impact or level."
+            },
+            {
+                "mapTable": "turbo_entityStats",
+                "mapProperty": "turbo_StatsEntry.units",
+                "justification": "Severity and units both provide a measure or classification of an entity's impact or level, making them conceptually related."
+            }
+        ]
+    }
+}

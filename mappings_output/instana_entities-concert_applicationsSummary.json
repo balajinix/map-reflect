@@ -1,0 +1,27 @@
+{
+    "name": "instana_entities",
+    "properties": {
+        "instana__entities_200_response.totalHits": [
+            {
+                "mapTable": "concert_applicationsSummary",
+                "mapProperty": "concert_AppComponentCount.source_repos",
+                "justification": "totalHits and source_repos are both counts, making them conceptually related as quantities."
+            },
+            {
+                "mapTable": "concert_applicationsSummary",
+                "mapProperty": "concert_AppComponentCount.environments",
+                "justification": "totalHits and environments are both counts, thus conceptually related as quantities."
+            },
+            {
+                "mapTable": "concert_applicationsSummary",
+                "mapProperty": "concert_AppComponentCount.libraries",
+                "justification": "totalHits and libraries are both counts, thus conceptually related as quantities."
+            },
+            {
+                "mapTable": "concert_applicationsSummary",
+                "mapProperty": "concert_AppComponentCount.images",
+                "justification": "totalHits and images are both counts, making them conceptually related as quantities."
+            }
+        ]
+    }
+}

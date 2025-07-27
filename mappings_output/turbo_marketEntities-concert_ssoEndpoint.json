@@ -1,0 +1,33 @@
+{
+    "name": "turbo_marketEntities",
+    "properties": {
+        "turbo_Action.risk.description": [
+            {
+                "mapTable": "concert_ssoEndpoint",
+                "mapProperty": "concert_SuccessResponse.message",
+                "justification": "Both fields are related to providing descriptive information about an action or risk."
+            }
+        ],
+        "turbo_Action.details": [
+            {
+                "mapTable": "concert_ssoEndpoint",
+                "mapProperty": "concert_SuccessResponse.message",
+                "justification": "Both fields are related to providing information or messages about an action or response."
+            }
+        ],
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_ssoEndpoint",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields are related to identifying or coding a specific action or response."
+            }
+        ],
+        "turbo_Action.actionImpactID": [
+            {
+                "mapTable": "concert_ssoEndpoint",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields are related to identifying or coding the impact of a specific action."
+            }
+        ]
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "name": "concert_refreshToken",
+    "properties": {
+        "concert_TokenDetails.instance_id": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "instance_id and actionID both serve as unique identifiers, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.marketID",
+                "justification": "instance_id and marketID both serve as identifiers for specific entities or instances."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.uuid",
+                "justification": "instance_id and uuid both serve as unique identifiers, linking them conceptually."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "instance_id and actionImpactID both serve as identifiers, linking them conceptually."
+            }
+        ],
+        "concert_TokenDetails.expiry": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.updateTime",
+                "justification": "expiry and updateTime both deal with time-based attributes, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.clearTime",
+                "justification": "expiry and clearTime both relate to time-based attributes, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "expiry and createTime both deal with time attributes, establishing a conceptual link."
+            }
+        ],
+        "concert_TokenDetails.display_name": [
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.displayName",
+                "justification": "display_name and displayName both refer to names or identifiers for display purposes."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.externalActionName",
+                "justification": "display_name and externalActionName both relate to names or identifiers, establishing a conceptual link."
+            },
+            {
+                "mapTable": "turbo_marketActions",
+                "mapProperty": "turbo_Action.details",
+                "justification": "display_name and details both provide descriptive information about entities or actions."
+            }
+        ]
+    }
+}

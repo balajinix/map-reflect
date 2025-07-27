@@ -1,0 +1,143 @@
+{
+    "name": "concert_exposureFilters",
+    "properties": {
+        "concert_ExposureFilters.severity": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.filters.value",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'value' representing a value of a filter."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.values.avg",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'avg' representing an average value."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.values.max",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'max' representing a maximum value."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.values.totalMax",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'totalMax' representing a maximum total value."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.reserved.avg",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'avg' representing an average reserved capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.values.min",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'min' representing a minimum value."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.reserved.max",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'max' representing a maximum reserved capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.values.total",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'total' representing a total value."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.reserved.totalMax",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'totalMax' representing a maximum total reserved capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.capacity.avg",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'avg' representing an average capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.values.totalMin",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'totalMin' representing a minimum total value."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.reserved.total",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'total' representing a total reserved capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.capacity.totalMax",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'totalMax' representing a maximum total capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.capacity.max",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'max' representing a maximum capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.reserved.min",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'min' representing a minimum reserved capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.capacity.min",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'min' representing a minimum capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.reserved.totalMin",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'totalMin' representing a minimum total reserved capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.capacity.totalMin",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'totalMin' representing a minimum total capacity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.capacity.total",
+                "justification": "Both fields are related to the concept of measurement or quantification, with 'severity' representing a level of severity and 'total' representing a total capacity."
+            }
+        ],
+        "concert_ExposureFilters.exposure_type": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.filters.type",
+                "justification": "Both fields are related to the concept of categorization or classification, with 'exposure_type' representing a type of exposure and 'type' representing a type of filter."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.relatedEntity.className",
+                "justification": "Both fields are related to the concept of categorization or classification, with 'exposure_type' representing a type of exposure and 'className' representing a class of a related entity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.commoditySource.capacityCommoditySource",
+                "justification": "Both fields are related to the concept of categorization or classification, with 'exposure_type' representing a type of exposure and 'capacityCommoditySource' representing a source of capacity."
+            }
+        ],
+        "concert_ExposureFilters.scan_type": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.commoditySource.capacitySourceIndex",
+                "justification": "Both fields are related to the concept of categorization or classification, with 'scan_type' representing a type of scan and 'capacitySourceIndex' representing an index of capacity sources."
+            }
+        ],
+        "concert_ExposureFilters.status": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.filters.displayName",
+                "justification": "Both fields are related to the concept of identification or naming, with 'status' representing a status of an exposure filter and 'displayName' representing a name of a filter."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.relatedEntity.displayName",
+                "justification": "Both fields are related to the concept of identification or naming, with 'status' representing a status of an exposure filter and 'displayName' representing a name of a related entity."
+            },
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.stats.relatedEntity.uuid",
+                "justification": "Both fields are related to the concept of identification or naming, with 'status' representing a status of an exposure filter and 'uuid' representing a unique identifier of a related entity."
+            }
+        ]
+    }
+}

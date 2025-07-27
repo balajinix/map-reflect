@@ -1,0 +1,213 @@
+{
+    "name": "instana_applications",
+    "properties": {
+        "turbo_Entity.severityBreakdown.NORMAL": [
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.risk_score",
+                "justification": "Severity breakdown can be related to risk score as both are used to assess the risk of vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.risk_score",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.risk_score, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.highest_risk",
+                "justification": "Fields concert_CvesPublicAccessPoints.highest_risk, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.most_impact",
+                "justification": "Fields concert_CvesPublicAccessPoints.most_impact, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.priority",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.priority, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.priority",
+                "justification": "Severity breakdown can be related to priority classification as both are used to classify vulnerabilities based on their severity."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.impacted_public_access_points",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.impacted_public_access_points, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.impacted_public_access_points",
+                "justification": "Severity breakdown can be related to impacted public access points as both are used to assess the impact of vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.cve",
+                "justification": "Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.cve",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.cve, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.risk_score",
+                "justification": "Severity breakdown can be related to risk score as both are used to assess the risk of vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.risk_score",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.risk_score, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.highest_risk",
+                "justification": "Fields concert_CvesPublicAccessPoints.highest_risk, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.most_impact",
+                "justification": "Fields concert_CvesPublicAccessPoints.most_impact, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.priority",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.priority, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.priority",
+                "justification": "Severity breakdown can be related to priority classification as both are used to classify vulnerabilities based on their severity."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.impacted_public_access_points",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.impacted_public_access_points, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.cve",
+                "justification": "Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.impacted_public_access_points",
+                "justification": "Severity breakdown can be related to impacted public access points as both are used to assess the impact of vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.cve",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.cve, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.risk_score",
+                "justification": "Severity breakdown can be related to risk score as both are used to assess the risk of vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.highest_risk",
+                "justification": "Fields concert_CvesPublicAccessPoints.highest_risk, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.risk_score",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.risk_score, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.priority",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.priority, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.most_impact",
+                "justification": "Fields concert_CvesPublicAccessPoints.most_impact, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.priority",
+                "justification": "Severity breakdown can be related to priority classification as both are used to classify vulnerabilities based on their severity."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.impacted_public_access_points",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.impacted_public_access_points, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.cve",
+                "justification": "Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.cve",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.cve, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.impacted_public_access_points",
+                "justification": "Severity breakdown can be related to impacted public access points as both are used to assess the impact of vulnerabilities."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.highest_risk",
+                "justification": "Fields concert_CvesPublicAccessPoints.highest_risk, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.risk_score",
+                "justification": "Severity breakdown can be related to risk score as both are used to assess the risk of vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.most_impact",
+                "justification": "Fields concert_CvesPublicAccessPoints.most_impact, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.priority",
+                "justification": "Severity breakdown can be related to priority classification as both are used to classify vulnerabilities based on their severity."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.risk_score",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.risk_score, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.priority",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.priority, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.cve",
+                "justification": "Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.impacted_public_access_points",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.impacted_public_access_points, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_Cves.impacted_public_access_points",
+                "justification": "Severity breakdown can be related to impacted public access points as both are used to assess the impact of vulnerabilities."
+            },
+            {
+                "mapTable": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+                "mapProperty": "concert_CvesPublicAccessPoints.cves.cve",
+                "justification": "Fields concert_CvesPublicAccessPoints.cves.cve, from Schema concert_vulnerabilitiesAffectingPublicAccessPoints and Fields turbo_Entity.severityBreakdown.NORMAL, turbo_Entity.severityBreakdown.CRITICAL, turbo_Entity.severityBreakdown.MINOR, turbo_Entity.severityBreakdown.MAJOR, from Schema instana_applications are related. For instance Severity breakdown can be related to CVE identifier as both are used to identify and classify vulnerabilities."
+            }
+        ]
+    }
+}

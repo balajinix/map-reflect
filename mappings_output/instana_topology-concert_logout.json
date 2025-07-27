@@ -1,0 +1,12 @@
+{
+    "name": "instana_topology",
+    "properties": {
+        "instana__query_topology_edges_items.relation": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields seem to represent some form of identifier or code related to an event or entity."
+            }
+        ]
+    }
+}

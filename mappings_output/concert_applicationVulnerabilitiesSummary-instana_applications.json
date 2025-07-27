@@ -1,0 +1,26 @@
+{
+    "name": "concert_applicationVulnerabilitiesSummary",
+    "properties": {
+        "concert_VulnerabilitiesSummary.critical": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields represent counts of critical severity issues."
+            }
+        ],
+        "concert_VulnerabilitiesSummary.high": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "High severity issues can be conceptually related to MAJOR severity, as both indicate significant problems."
+            }
+        ],
+        "concert_VulnerabilitiesSummary.low": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Low severity vulnerabilities can be related to MINOR severity issues, as both represent less critical problems."
+            }
+        ]
+    }
+}

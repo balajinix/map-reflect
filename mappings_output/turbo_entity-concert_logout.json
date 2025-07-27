@@ -1,0 +1,40 @@
+{
+    "name": "turbo_entity",
+    "properties": {
+        "turbo_Action.details": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message",
+                "justification": "Both fields are related to providing information or messages about an action or event."
+            }
+        ],
+        "turbo_Action.risk.description": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message",
+                "justification": "Both fields are related to providing descriptive information about an action or risk."
+            }
+        ],
+        "turbo_Action.displayName": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message",
+                "justification": "Both fields could be related to providing a human-readable description or message."
+            }
+        ],
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields could be related to identifying or coding a specific action or message."
+            }
+        ],
+        "turbo_Action.actionImpactID": [
+            {
+                "mapTable": "concert_logout",
+                "mapProperty": "concert_SuccessResponse.message_code",
+                "justification": "Both fields are related to providing a unique identifier for an action or its impact."
+            }
+        ]
+    }
+}

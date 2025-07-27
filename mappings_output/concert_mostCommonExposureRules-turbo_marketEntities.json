@@ -1,0 +1,56 @@
+{
+    "name": "concert_mostCommonExposureRules",
+    "properties": {
+        "concert_MostCommonExposureRule.rule_name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.externalActionName",
+                "justification": "rule_name and externalActionName both serve as identifiers or names for rules and actions."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.displayName",
+                "justification": "rule_name and displayName both serve as names or identifiers for rules and actions."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "rule_name and actionID both serve as identifiers for rules and actions."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.details",
+                "justification": "rule_name and details both provide descriptive information about rules and actions."
+            }
+        ],
+        "concert_MostCommonExposureRule.priority": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.importance",
+                "justification": "priority and importance both relate to the significance or impact of rules and actions."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "priority and actionImpactID both relate to the impact or importance of rules and actions."
+            }
+        ],
+        "concert_MostCommonExposureRule.frequency": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "frequency and createTime both relate to time-based attributes of rules and actions."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.clearTime",
+                "justification": "frequency and clearTime both relate to time-based attributes of rules and actions."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Action.updateTime",
+                "justification": "frequency and updateTime both relate to time-based attributes of rules and actions."
+            }
+        ]
+    }
+}

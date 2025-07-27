@@ -1,0 +1,22 @@
+{
+    "name": "turbo_entityStats",
+    "properties": {
+        "turbo_StatsEntry.numRelatedEntities": [
+            {
+                "mapTable": "instana_callGroup",
+                "mapProperty": "instana_callGroup_200_response.totalRetainedItemCount",
+                "justification": "Both fields are related to the concept of quantity, with numRelatedEntities referring to the count of related entities for a statistic and totalRetainedItemCount referring to the number of retained items (considering batching and sampling)."
+            },
+            {
+                "mapTable": "instana_callGroup",
+                "mapProperty": "instana_callGroup_200_response.totalRepresentedItemCount",
+                "justification": "Both fields deal with quantities, where numRelatedEntities refers to the count of related entities for a statistic and totalRepresentedItemCount refers to the number of items represented by a row in the data (considering batching)."
+            },
+            {
+                "mapTable": "instana_callGroup",
+                "mapProperty": "instana_callGroup_200_response.totalHits",
+                "justification": "Both fields are related to the concept of quantity or count, with numRelatedEntities referring to the number of providers or consumers for a statistic and totalHits referring to the total number of items matching a filter."
+            }
+        ]
+    }
+}

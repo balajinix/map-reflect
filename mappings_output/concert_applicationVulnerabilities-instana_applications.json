@@ -1,0 +1,53 @@
+{
+    "name": "concert_applicationVulnerabilities",
+    "properties": {
+        "concert_VulnerabilityAssociationComponent.assessment_custom_details.comments": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.providers.displayName",
+                "justification": "Both fields are related to providing additional information or comments about an entity or assessment."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.connectedEntities.discoveredBy.displayName",
+                "justification": "Both fields are related to providing additional information or comments about an entity or assessment."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.assessment_custom_details.complexity": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.providers.uuid",
+                "justification": "Both fields are related to providing specific details about an entity or assessment, with uuid providing a unique identifier and complexity providing a measure of assessment difficulty."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.assessment_custom_details.effort": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to assessing the severity or impact of an issue, with MAJOR indicating a significant level of severity and effort indicating the amount of work required to address an issue."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields are related to assessing the severity or impact of an issue, with MINOR indicating a low level of severity and effort indicating the amount of work required to address an issue."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to assessing the severity or impact of an issue, with CRITICAL indicating a high level of severity and effort indicating the amount of work required to address an issue."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Both fields are related to assessing the severity or impact of an issue, with NORMAL indicating a standard level of severity and effort indicating the amount of work required to address an issue."
+            }
+        ],
+        "concert_VulnerabilityAssociationComponent.assessment_custom_details.guidance": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "instana_callGroup_200_response.totalHits",
+                "justification": "Both fields are related to providing information about the scope or impact of an issue, with totalHits indicating the number of items affected and guidance indicating the information provided to address an issue."
+            }
+        ]
+    }
+}

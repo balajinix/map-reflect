@@ -1,0 +1,65 @@
+{
+    "name": "concert_applicationPackages",
+    "properties": {
+        "concert_PackageRecommendation.recommendation_id": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "Recommendation ID and action ID both represent unique identifiers for actions or recommendations, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageRecommendation.created_date": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Action.createTime",
+                "justification": "Created date and create time both refer to the initiation time of an action or recommendation, making them related."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Action.updateTime",
+                "justification": "Created date and update time both relate to time attributes of actions or recommendations, making them conceptually linked."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Action.clearTime",
+                "justification": "Created date and clear time both relate to time attributes of actions or recommendations, thus they are conceptually linked."
+            }
+        ],
+        "concert_PackageRecommendation.description": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Action.details",
+                "justification": "Description and details both provide additional information about an action or recommendation, making them conceptually related."
+            }
+        ],
+        "concert_PackageRecommendation.action": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Action.actionType",
+                "justification": "Action and action type both describe the nature of an action, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageDetailsCollection.packages.vulnerability_count": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to the severity or criticality of entities or packages, with vulnerability_count indicating the number of vulnerabilities and MAJOR indicating medium-high severity."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to the severity or criticality of entities or packages, with vulnerability_count indicating the number of vulnerabilities and CRITICAL indicating high severity."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields are related to the severity or criticality of entities or packages, with vulnerability_count indicating the number of vulnerabilities and MINOR indicating low severity."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Both fields are related to the severity or criticality of entities or packages, with vulnerability_count indicating the number of vulnerabilities and NORMAL indicating no or low severity."
+            }
+        ]
+    }
+}

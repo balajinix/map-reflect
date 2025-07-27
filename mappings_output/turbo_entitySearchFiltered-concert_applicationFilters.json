@@ -1,0 +1,33 @@
+{
+    "name": "turbo_entitySearchFiltered",
+    "properties": {
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.key",
+                "justification": "Both fields represent unique identifiers."
+            }
+        ],
+        "turbo_Action.uuid": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.key",
+                "justification": "Both fields represent unique identifiers."
+            }
+        ],
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.value",
+                "justification": "Both fields could represent a name or identifier for an entity or action."
+            }
+        ],
+        "turbo_Action.displayName": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.value",
+                "justification": "Both fields could represent a name or identifier for an entity or action."
+            }
+        ]
+    }
+}

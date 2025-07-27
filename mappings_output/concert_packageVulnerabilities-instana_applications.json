@@ -1,0 +1,49 @@
+{
+    "name": "concert_packageVulnerabilities",
+    "properties": {
+        "concert_PackageVulnerability.risk_score": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Risk scores and major severity breakdowns are conceptually linked through their quantification of issue severity."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Risk scores and minor severity breakdowns are related as they both deal with the assessment of issue impact."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Risk scores and critical severity breakdowns are related as they both assess the severity of issues."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Risk scores and normal severity breakdowns are conceptually linked through their assessment of lower-severity issues."
+            }
+        ],
+        "concert_PackageVulnerabilityCollection.package_vulnerabilities.risk_score": [
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Risk scores in package vulnerabilities and major severity breakdowns are related as they both quantify the impact of issues."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Risk scores in package vulnerabilities and critical severity breakdowns are conceptually related through their assessment of issue severity."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Risk scores in package vulnerabilities and minor severity breakdowns are conceptually linked through their assessment of issue severity."
+            },
+            {
+                "mapTable": "instana_applications",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Risk scores in package vulnerabilities and normal severity breakdowns are related as they both deal with the assessment of lower-severity issues."
+            }
+        ]
+    }
+}

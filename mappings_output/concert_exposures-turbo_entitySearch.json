@@ -1,0 +1,53 @@
+{
+    "name": "concert_exposures",
+    "properties": {
+        "concert_Exposures.severity": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "Both fields relate to the severity of an issue or exposure, with severity being a general term and MINOR being a specific level."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields relate to the severity of an issue or exposure, with severity being a general term and MAJOR being a specific level."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Both fields relate to the severity of an issue or exposure, with severity being a general term and NORMAL being a specific level."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields relate to the severity of an issue or exposure, with severity being a general term and CRITICAL being a specific level."
+            }
+        ],
+        "concert_Exposures.rule_name": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.template.displayName",
+                "justification": "Both fields relate to the naming or display name of rules or templates."
+            },
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.template.className",
+                "justification": "Both fields could relate to the naming or classification of rules or templates."
+            }
+        ],
+        "concert_Exposures.created_on": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.template.discovered",
+                "justification": "Created_on and discovered both relate to the time an exposure or entity was first identified."
+            }
+        ],
+        "concert_Exposures.rule_id": [
+            {
+                "mapTable": "turbo_entitySearch",
+                "mapProperty": "turbo_Entity.template.uuid",
+                "justification": "Both fields relate to unique identifiers for rules or templates."
+            }
+        ]
+    }
+}

@@ -1,0 +1,58 @@
+{
+    "name": "instana_callGroup",
+    "properties": {
+        "instana_callGroup_200_response.adjustedTimeframe.to": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.last_updated_on",
+                "justification": "adjustedTimeframe.to and last_updated_on both pertain to time, with the former being the end of a timeframe and the latter the application's last update time."
+            },
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.created_on",
+                "justification": "Both fields represent time-related attributes, with adjustedTimeframe.to being the end of a timeframe and created_on being the application creation time."
+            }
+        ],
+        "instana_callGroup_adjustedTimeframe.to": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.last_updated_on",
+                "justification": "adjustedTimeframe.to and last_updated_on are both time attributes, with adjustedTimeframe.to being the end of a timeframe and last_updated_on the last update time of the application."
+            },
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.created_on",
+                "justification": "Both are time-related, with adjustedTimeframe.to representing the end of a timeframe and created_on the application creation time."
+            }
+        ],
+        "instana_callGroup_adjustedTimeframe.windowSize": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.revenue_per_hour",
+                "justification": "windowSize and revenue_per_hour relate to quantitative analysis over time, making them potentially correlated in certain analyses."
+            },
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.properties.revenue",
+                "justification": "Similar to the previous, windowSize and revenue can be analyzed together for insights into financial metrics and time-related analysis."
+            },
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_ApplicationCollection.applications.properties.revenue",
+                "justification": "windowSize, as a time metric, can be used in conjunction with revenue for analyzing financial trends over time."
+            }
+        ],
+        "instana_callGroup_200_response.adjustedTimeframe.windowSize": [
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_Application.revenue_per_hour",
+                "justification": "windowSize and revenue_per_hour can be related in the context of analyzing financial metrics over time."
+            },
+            {
+                "mapTable": "concert_applications",
+                "mapProperty": "concert_ApplicationCollection.applications.properties.revenue",
+                "justification": "windowSize, as a measure of time, can be correlated with revenue for financial analysis over specific periods."
+            }
+        ]
+    }
+}

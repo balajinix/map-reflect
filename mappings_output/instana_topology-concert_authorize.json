@@ -1,0 +1,33 @@
+{
+    "name": "instana_topology",
+    "properties": {
+        "instana__topology_200_response.nodes.label": [
+            {
+                "mapTable": "concert_authorize",
+                "mapProperty": "concert_TokenDetails.display_name",
+                "justification": "Label and display_name both serve as identifiers or names for entities or users within their respective schemas."
+            }
+        ],
+        "instana__topology_200_response.nodes.entityId.steadyId": [
+            {
+                "mapTable": "concert_authorize",
+                "mapProperty": "concert_TokenDetails.instance_id",
+                "justification": "SteadyId and instance_id both serve as unique identifiers for different entities across the two schemas."
+            }
+        ],
+        "instana__topology_200_response.nodes.plugin": [
+            {
+                "mapTable": "concert_authorize",
+                "mapProperty": "concert_TokenDetails.roles",
+                "justification": "Plugin names could be analogous to user roles, as both define specific functionalities or permissions within their respective systems."
+            }
+        ],
+        "instana__query_topology_nodes_items.entityId.host": [
+            {
+                "mapTable": "concert_authorize",
+                "mapProperty": "concert_TokenDetails.username",
+                "justification": "Host identifier could be related to the username, representing a form of identity or source."
+            }
+        ]
+    }
+}

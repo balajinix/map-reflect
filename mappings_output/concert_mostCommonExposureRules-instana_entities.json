@@ -1,0 +1,53 @@
+{
+    "name": "concert_mostCommonExposureRules",
+    "properties": {
+        "concert_MostCommonExposureRules.exposure_rules.rule_name": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.label",
+                "justification": "Both fields seem to represent a name or identifier for an item or rule, establishing a conceptual link."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.label",
+                "justification": "Both fields represent a name or identifier for an item or rule, making them conceptually related."
+            }
+        ],
+        "concert_MostCommonExposureRule.rule_name": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.label",
+                "justification": "Both fields seem to represent a name or identifier for an item or rule, establishing a conceptual link."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.label",
+                "justification": "Both fields represent a name or identifier for an item or rule, making them conceptually related."
+            }
+        ],
+        "concert_MostCommonExposureRule.frequency": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.time",
+                "justification": "Frequency and time are related to the occurrence or measurement of events, establishing a conceptual link."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.time",
+                "justification": "Frequency and time are related to the occurrence or measurement of events, making them conceptually linked."
+            }
+        ],
+        "concert_MostCommonExposureRules.exposure_rules.frequency": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.time",
+                "justification": "Frequency and time are related to the occurrence or measurement of events, establishing a conceptual link."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.time",
+                "justification": "Frequency and time are related to the occurrence or measurement of events, making them conceptually linked."
+            }
+        ]
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "name": "concert_packageVulnerabilities",
+    "properties": {
+        "concert_PackageVulnerability.package_name": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.label",
+                "justification": "Both fields seem to represent a name or identifier for an entity or package, thus they are conceptually related."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.label",
+                "justification": "Both fields seem to represent a name or identifier for an entity or package, thus they are conceptually related."
+            }
+        ],
+        "concert_PackageVulnerability.fixed_version": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.time",
+                "justification": "Version and time can be related in the context of updates or snapshots, indicating when a version was fixed or updated."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.time",
+                "justification": "Version and time can be related in the context of updates or snapshots, indicating when a version was fixed or updated."
+            }
+        ],
+        "concert_PackageVulnerabilityCollection.package_vulnerabilities.fixed_version": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.time",
+                "justification": "Version and time can be related in the context of updates or snapshots, indicating when a version was fixed or updated."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.time",
+                "justification": "Version and time can be related in the context of updates or snapshots, indicating when a version was fixed or updated."
+            }
+        ]
+    }
+}

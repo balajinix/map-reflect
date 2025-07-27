@@ -1,0 +1,53 @@
+{
+    "name": "concert_cveHighlights",
+    "properties": {
+        "concert_CvesInfo.priority_1": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to high severity issues, with priority_1 referring to high-priority issues in concert_cveHighlights and MAJOR referring to the severity level in turbo_marketEntities."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to high severity issues, with priority_1 referring to high-priority issues in concert_cveHighlights and CRITICAL referring to the severity level in turbo_marketEntities."
+            }
+        ],
+        "concert_VulnerabilitiesCveHighlightSummary.cves.priority_1": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Both fields are related to high severity issues, with priority_1 referring to high-priority issues in concert_cveHighlights and MAJOR referring to the severity level in turbo_marketEntities."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Both fields are related to high severity issues, with priority_1 referring to high-priority issues in concert_cveHighlights and CRITICAL referring to the severity level in turbo_marketEntities."
+            }
+        ],
+        "concert_VulnerabilitiesCveHighlightSummary.cves.total_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "MINOR severity issues in turbo_marketEntities can be related to the total findings in concert_cveHighlights, as both deal with the quantity of issues."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "NORMAL severity issues in turbo_marketEntities can be related to the total findings in concert_cveHighlights, as both deal with the quantity of issues."
+            }
+        ],
+        "concert_CvesInfo.total_findings": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "MINOR severity issues in turbo_marketEntities can be related to the total findings in concert_cveHighlights, as both deal with the quantity of issues."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "NORMAL severity issues in turbo_marketEntities can be related to the total findings in concert_cveHighlights, as both deal with the quantity of issues."
+            }
+        ]
+    }
+}

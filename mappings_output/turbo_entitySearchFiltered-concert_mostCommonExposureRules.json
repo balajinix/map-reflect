@@ -1,0 +1,26 @@
+{
+    "name": "turbo_entitySearchFiltered",
+    "properties": {
+        "turbo_Action.importance": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.priority",
+                "justification": "Importance in actions and priority in exposure rules are related, indicating levels of significance or urgency."
+            }
+        ],
+        "turbo_Action.policy": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.rule_name",
+                "justification": "Policy in actions and rule name in exposure rules are related, as policies can dictate rules or guidelines."
+            }
+        ],
+        "turbo_Action.risk.importance": [
+            {
+                "mapTable": "concert_mostCommonExposureRules",
+                "mapProperty": "concert_MostCommonExposureRule.frequency",
+                "justification": "Importance of risk and frequency of exposure are conceptually related, both dealing with significance or occurrence rates."
+            }
+        ]
+    }
+}

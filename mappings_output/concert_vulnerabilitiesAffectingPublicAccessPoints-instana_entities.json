@@ -1,0 +1,29 @@
+{
+    "name": "concert_vulnerabilitiesAffectingPublicAccessPoints",
+    "properties": {
+        "concert_Cves.cve": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.label",
+                "justification": "Both fields represent identifiers, with cve being a specific identifier for vulnerabilities and label being a general identifier."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.label",
+                "justification": "Both fields represent identifiers, with cve being a specific identifier for vulnerabilities and label being a general identifier."
+            }
+        ],
+        "concert_CvesPublicAccessPoints.cves.priority": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.time",
+                "justification": "Priority and time are related in the sense that priority can be time-sensitive, with higher priority items needing attention sooner."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.time",
+                "justification": "Priority and time are related in the sense that priority can be time-sensitive, with higher priority items needing attention sooner."
+            }
+        ]
+    }
+}

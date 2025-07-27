@@ -1,0 +1,41 @@
+{
+    "name": "concert_cveFilters",
+    "properties": {
+        "concert_CVEFilters.application.application_id": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.label",
+                "justification": "This mapping is based on the potential for both fields to serve as unique identifiers for entities or applications."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.label",
+                "justification": "The reasoning is the same; both 'application_id' and 'label' could be identifiers."
+            }
+        ],
+        "concert_CVEFilters.application.release_version": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.snapshotId",
+                "justification": "Similar reasoning applies; 'release_version' and 'snapshotId' could both relate to versioning or change tracking."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.snapshotId",
+                "justification": "The relationship could be due to both fields being related to versioning or tracking changes in entities or applications."
+            }
+        ],
+        "concert_CVEFilters.scan_type": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_items_items.time",
+                "justification": "Similar to the previous mapping, 'scan_type' and 'time' could be related in the context of scan scheduling or timing."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.items.time",
+                "justification": "The potential relationship between 'scan_type' and 'time' could be in the scheduling or timing of scans."
+            }
+        ]
+    }
+}

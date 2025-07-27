@@ -1,0 +1,53 @@
+{
+    "name": "concert_cveHighlights",
+    "properties": {
+        "concert_CvesInfo.priority_1": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "priority_1 count can also include MAJOR severity issues, as they are considered high-priority."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "priority_1 count refers to high-priority issues, which can be related to CRITICAL severity breakdown."
+            }
+        ],
+        "concert_VulnerabilitiesCveHighlightSummary.cves.priority_1": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "priority_1 count in the CVE statistics can also include MAJOR severity issues, as they are considered high-priority."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "priority_1 count in the CVE statistics refers to high-priority issues, which can be related to CRITICAL severity breakdown."
+            }
+        ],
+        "concert_VulnerabilitiesCveHighlightSummary.cves.total_findings": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "total_findings in the CVE statistics include MINOR severity issues, establishing a relationship."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "total_findings in the CVE statistics also include NORMAL severity issues, establishing a relationship."
+            }
+        ],
+        "concert_CvesInfo.total_findings": [
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "total_findings include MINOR severity issues, establishing a relationship."
+            },
+            {
+                "mapTable": "turbo_entitySearchFiltered",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "total_findings also include NORMAL severity issues, establishing a relationship."
+            }
+        ]
+    }
+}

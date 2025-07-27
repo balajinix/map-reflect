@@ -1,0 +1,109 @@
+{
+    "name": "instana_entities",
+    "properties": {
+        "instana_mutation_entities_items_items.label": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.comment",
+                "justification": "Both fields are related to descriptive information about an entity or issue."
+            }
+        ],
+        "instana__entities_200_response.items.label": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.comment",
+                "justification": "Both fields are related to descriptive information about an entity or issue."
+            }
+        ],
+        "instana__entities_200_response.items.time": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.last_updated_on",
+                "justification": "Both fields are related to time-based information, with last_updated_on being a specific timestamp and time being an epoch time."
+            },
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.fixed_on",
+                "justification": "Both fields are related to time-based information, with fixed_on being a specific timestamp and time being an epoch time."
+            },
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.opened_on",
+                "justification": "Both fields are related to time-based information, with opened_on being a specific timestamp and time being an epoch time."
+            }
+        ],
+        "instana_mutation_entities_items_items.time": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.last_updated_on",
+                "justification": "Both fields are related to time-based information, with last_updated_on being a specific timestamp and time being an epoch time."
+            },
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.fixed_on",
+                "justification": "Both fields are related to time-based information, with fixed_on being a specific timestamp and time being an epoch time."
+            },
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.opened_on",
+                "justification": "Both fields are related to time-based information, with opened_on being a specific timestamp and time being an epoch time."
+            }
+        ],
+        "instana__entities_200_response.items.snapshotId": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.id",
+                "justification": "Both fields are related to unique identifiers for entities or issues."
+            }
+        ],
+        "instana_mutation_entities_items_items.snapshotId": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.id",
+                "justification": "Both fields are related to unique identifiers for entities or issues."
+            }
+        ],
+        "instana__entities_200_response.items.plugin": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.id_type",
+                "justification": "Both fields are related to categorization or typing of entities or issues."
+            }
+        ],
+        "instana_mutation_entities_items_items.plugin": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.id_type",
+                "justification": "Both fields are related to categorization or typing of entities or issues."
+            }
+        ],
+        "instana_mutation_entities_items_items.tags": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.last_updated_by",
+                "justification": "Both fields are related to metadata about entities or issues, such as who updated them or what they are tagged with."
+            }
+        ],
+        "instana__entities_200_response.items.tags": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.last_updated_by",
+                "justification": "Both fields are related to metadata about entities or issues, such as who updated them or what they are tagged with."
+            }
+        ],
+        "instana_mutation_entities_items_items.metrics": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.status",
+                "justification": "Both fields are related to the state or performance of entities or issues."
+            }
+        ],
+        "instana__entities_200_response.items.metrics": [
+            {
+                "mapTable": "concert_applicationVulnerabilities",
+                "mapProperty": "concert_Issue.status",
+                "justification": "Both fields are related to the state or performance of entities or issues."
+            }
+        ]
+    }
+}

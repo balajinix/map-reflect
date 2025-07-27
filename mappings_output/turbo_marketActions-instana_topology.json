@@ -1,0 +1,61 @@
+{
+    "name": "turbo_marketActions",
+    "properties": {
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__query_topology_nodes_items.plugin",
+                "justification": "External action name and plugin name both refer to names or identifiers of specific plugins or actions, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__query_topology_nodes_items.entityId.pluginId",
+                "justification": "External action name and plugin name both refer to identifiers or names of specific actions or plugins, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__topology_200_response.nodes.entityId.pluginId",
+                "justification": "External action name and plugin name both refer to identifiers or names of specific actions or plugins, making them conceptually related."
+            },
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__topology_200_response.nodes.plugin",
+                "justification": "External action name and plugin name both refer to names or identifiers of specific plugins or actions, making them conceptually related."
+            }
+        ],
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__query_topology_nodes_items.id",
+                "justification": "ActionID and GraphNode ID both serve as identifiers, albeit in different contexts, making them conceptually related as unique identifiers."
+            },
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__topology_200_response.nodes.id",
+                "justification": "ActionID and GraphNode ID both serve as identifiers, albeit in different contexts, making them conceptually related as unique identifiers."
+            },
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__topology_200_response.nodes.entityId.steadyId",
+                "justification": "Fields instana__topology_200_response.nodes.entityId.steadyId, from Schema instana_topology and Fields turbo_Action.actionID, from Schema turbo_marketActions are related. For instance ActionID and GraphNode ID both serve as identifiers, albeit in different contexts, making them conceptually related as unique identifiers."
+            },
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__query_topology_nodes_items.entityId.steadyId",
+                "justification": "Fields instana__query_topology_nodes_items.entityId.steadyId, from Schema instana_topology and Fields turbo_Action.actionID, from Schema turbo_marketActions are related. For instance ActionID and GraphNode ID both serve as identifiers, albeit in different contexts, making them conceptually related as unique identifiers."
+            }
+        ],
+        "turbo_Action.displayName": [
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__query_topology_nodes_items.label",
+                "justification": "turbo_marketActions.turbo_Action.displayName and instana_topology.instana__query_topology_nodes_items.label are related."
+            },
+            {
+                "mapTable": "instana_topology",
+                "mapProperty": "instana__topology_200_response.nodes.label",
+                "justification": "turbo_marketActions.turbo_Action.displayName and instana_topology.instana__topology_200_response.nodes.label are related."
+            }
+        ]
+    }
+}

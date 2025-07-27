@@ -1,0 +1,17 @@
+{
+    "name": "concert_authenticate",
+    "properties": {
+        "concert_TokenDetails.expiry": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.adjustedTimeframe.to",
+                "justification": "Expiry time can be considered as a form of end of timeframe, thus related to the end of a timeframe in Unix epoch time in milliseconds."
+            },
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana_mutation_entities_adjustedTimeframe.to",
+                "justification": "Expiry time can be considered as a form of end of timeframe, thus related to the end of a timeframe in Unix epoch time in milliseconds."
+            }
+        ]
+    }
+}

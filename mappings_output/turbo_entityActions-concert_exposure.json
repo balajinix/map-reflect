@@ -1,0 +1,124 @@
+{
+    "name": "turbo_entityActions",
+    "properties": {
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.wasc_id",
+                "justification": "Both fields serve as unique identifiers for specific entities or actions within their respective systems."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.id",
+                "justification": "Both fields serve as unique identifiers for entities or actions within their systems."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.assessment_id",
+                "justification": "Both fields represent unique identifiers for entities or actions within their systems."
+            }
+        ],
+        "turbo_Action.actionState": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.status",
+                "justification": "Both fields describe the current state or status of an exposure or action."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.assessment_status",
+                "justification": "Both fields describe the status or state of an assessment or action, indicating their current position or outcome."
+            }
+        ],
+        "turbo_Action.prioritizedAutomationOpportunities": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.count",
+                "justification": "turbo_entityActions.turbo_Action.prioritizedAutomationOpportunities and concert_exposure.concert_Exposures.count are related."
+            }
+        ],
+        "turbo_Action.createTime": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.created_on",
+                "justification": "Both fields represent timestamps for when an entity or action was created."
+            }
+        ],
+        "turbo_Action.details": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.other_info",
+                "justification": "Both fields provide additional or supplementary information about an exposure or action."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.description",
+                "justification": "Both fields provide descriptive information about an exposure or action, offering more context about what they entail."
+            }
+        ],
+        "turbo_Action.actionType": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.scan_type",
+                "justification": "Both fields categorize the type of scan or action being performed or described."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.exposure_type",
+                "justification": "Both fields categorize the type of exposure or action being described."
+            }
+        ],
+        "turbo_Action.importance": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.priority",
+                "justification": "Both fields relate to the level of importance or priority assigned to an exposure or action."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.severity",
+                "justification": "Both fields relate to the level of severity or importance of an exposure or action, indicating their potential impact."
+            }
+        ],
+        "turbo_Action.policy": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.rule_id",
+                "justification": "Both fields reference a set of rules or policies governing an exposure or action."
+            },
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.solution",
+                "justification": "Both fields provide information or guidance on how to address or resolve an exposure or action."
+            }
+        ],
+        "turbo_Action.currentValue": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.score",
+                "justification": "turbo_entityActions.turbo_Action.currentValue and concert_exposure.concert_Exposures.score are related."
+            }
+        ],
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.tool_names",
+                "justification": "Both fields reference external tools or actions, serving as identifiers or descriptors."
+            }
+        ],
+        "turbo_Action.valueUnits": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.tool_version",
+                "justification": "turbo_entityActions.turbo_Action.valueUnits and concert_exposure.concert_Exposures.tool_version are related."
+            }
+        ],
+        "turbo_Action.uuid": [
+            {
+                "mapTable": "concert_exposure",
+                "mapProperty": "concert_Exposures.exposure_object_id",
+                "justification": "Both fields represent unique identifiers for objects or entities within their respective systems."
+            }
+        ]
+    }
+}

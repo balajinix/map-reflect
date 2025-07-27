@@ -1,0 +1,93 @@
+{
+    "name": "turbo_entity",
+    "properties": {
+        "turbo_Entity.severityBreakdown.CRITICAL": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.NORMAL": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MAJOR": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            }
+        ],
+        "turbo_Entity.severityBreakdown.MINOR": [
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.risk_score",
+                "justification": "Risk score can be related to the severity breakdown, as higher severity vulnerabilities contribute to a higher risk score."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            },
+            {
+                "mapTable": "concert_vulnerableApplications",
+                "mapProperty": "concert_VulnerableApplicationsCollection.vulnerable_applications.cves",
+                "justification": "Number of CVEs can be related to the severity breakdown of vulnerabilities, as both deal with vulnerability metrics."
+            }
+        ]
+    }
+}

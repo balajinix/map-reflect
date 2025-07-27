@@ -1,0 +1,57 @@
+{
+    "name": "concert_exposureHighlights",
+    "properties": {
+        "concert_VulnerabilitiesExposureHighlightSummary.exposures.priority_1": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Priority 1 exposures can also be related to MAJOR severity issues in turbo_marketEntities, indicating significant risk or priority."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Priority 1 exposures are likely to correspond to CRITICAL severity issues in turbo_marketEntities, as both signify high risk or impact."
+            }
+        ],
+        "concert_ExposuresInfo.priority_1": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MAJOR",
+                "justification": "Priority 1 exposures can also be related to MAJOR severity issues in turbo_marketEntities, given that both signify significant priority or risk."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.CRITICAL",
+                "justification": "Priority 1 exposures are likely to be of CRITICAL severity in turbo_marketEntities, as both indicate high levels of risk or impact."
+            }
+        ],
+        "concert_VulnerabilitiesExposureHighlightSummary.exposures.with_solutions": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "concert_exposureHighlights.concert_VulnerabilitiesExposureHighlightSummary.exposures.with_solutions and turbo_marketEntities.turbo_Entity.severityBreakdown.MINOR are related."
+            }
+        ],
+        "concert_ExposuresInfo.with_solutions": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.MINOR",
+                "justification": "concert_exposureHighlights.concert_ExposuresInfo.with_solutions and turbo_marketEntities.turbo_Entity.severityBreakdown.MINOR are related."
+            }
+        ],
+        "concert_VulnerabilitiesExposureHighlightSummary.exposures.total_unique": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Fields concert_VulnerabilitiesExposureHighlightSummary.exposures.total_unique, concert_ExposuresInfo.total_unique, from Schema concert_exposureHighlights and Fields turbo_Entity.severityBreakdown.NORMAL, from Schema turbo_marketEntities are related. For instance Similar to the previous mapping, total impacted environments can also include those with NORMAL severity issues, reflecting a comprehensive impact assessment."
+            }
+        ],
+        "concert_ExposuresInfo.total_unique": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.severityBreakdown.NORMAL",
+                "justification": "Fields concert_VulnerabilitiesExposureHighlightSummary.exposures.total_unique, concert_ExposuresInfo.total_unique, from Schema concert_exposureHighlights and Fields turbo_Entity.severityBreakdown.NORMAL, from Schema turbo_marketEntities are related. For instance Similar to the previous mapping, total impacted environments can also include those with NORMAL severity issues, reflecting a comprehensive impact assessment."
+            }
+        ]
+    }
+}

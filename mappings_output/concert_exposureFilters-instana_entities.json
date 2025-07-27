@@ -1,0 +1,19 @@
+{
+    "name": "concert_exposureFilters",
+    "properties": {
+        "concert_ExposureFilters.status": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Status and total hits are related as they both provide information about the state or quantity of entities or results."
+            }
+        ],
+        "concert_ExposureFilters.severity": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Severity and total hits are both measures that can be used to evaluate or quantify aspects of entities or results."
+            }
+        ]
+    }
+}

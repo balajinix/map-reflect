@@ -1,0 +1,61 @@
+{
+    "name": "concert_authenticate",
+    "properties": {
+        "concert_TokenDetails.display_name": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.providers.displayName",
+                "justification": "Both fields refer to a form of identifier or name, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.connectedEntities.displayName",
+                "justification": "Both fields refer to a form of identifier or name, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.providers.className",
+                "justification": "Both fields refer to a form of identifier or name, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.connectedEntities.className",
+                "justification": "Both fields refer to a form of identifier or name, making them conceptually related."
+            }
+        ],
+        "concert_TokenDetails.username": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.providers.displayName",
+                "justification": "Both fields refer to a form of identifier or name, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.connectedEntities.displayName",
+                "justification": "Both fields refer to a form of identifier or name, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.connectedEntities.discoveredBy.displayName",
+                "justification": "Both fields refer to a form of identifier or name, making them conceptually related."
+            }
+        ],
+        "concert_TokenDetails.instance_id": [
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.connectedEntities.uuid",
+                "justification": "Both fields refer to a unique identifier, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.connectedEntities.discoveredBy.uuid",
+                "justification": "Both fields refer to a unique identifier, making them conceptually related."
+            },
+            {
+                "mapTable": "turbo_marketEntities",
+                "mapProperty": "turbo_Entity.providers.uuid",
+                "justification": "Both fields refer to a unique identifier, making them conceptually related."
+            }
+        ]
+    }
+}

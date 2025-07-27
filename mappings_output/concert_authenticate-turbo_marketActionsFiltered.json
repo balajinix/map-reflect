@@ -1,0 +1,40 @@
+{
+    "name": "concert_authenticate",
+    "properties": {
+        "concert_TokenDetails.instance_id": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.actionID",
+                "justification": "instance_id and actionID are unique identifiers, making them conceptually related."
+            }
+        ],
+        "concert_TokenDetails.token": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.actionImpactID",
+                "justification": "token and actionImpactID are both identifiers, thus they are related."
+            }
+        ],
+        "concert_TokenDetails.display_name": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.displayName",
+                "justification": "display_name and displayName both serve as identifiers or labels."
+            }
+        ],
+        "concert_TokenDetails.username": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.externalActionName",
+                "justification": "username and externalActionName can both refer to identifiers or names for users or actions."
+            }
+        ],
+        "concert_TokenDetails.roles": [
+            {
+                "mapTable": "turbo_marketActionsFiltered",
+                "mapProperty": "turbo_Action.policy",
+                "justification": "roles and policy are related to access control and permissions."
+            }
+        ]
+    }
+}

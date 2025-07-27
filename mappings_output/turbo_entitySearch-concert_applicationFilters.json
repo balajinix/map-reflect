@@ -1,0 +1,33 @@
+{
+    "name": "turbo_entitySearch",
+    "properties": {
+        "turbo_Action.actionID": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.key",
+                "justification": "turbo_entitySearch.turbo_Action.actionID and concert_applicationFilters.concert_FilterInfo.key are related."
+            }
+        ],
+        "turbo_Action.uuid": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.key",
+                "justification": "turbo_entitySearch.turbo_Action.uuid and concert_applicationFilters.concert_FilterInfo.key are related."
+            }
+        ],
+        "turbo_Action.externalActionName": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.value",
+                "justification": "turbo_entitySearch.turbo_Action.externalActionName and concert_applicationFilters.concert_FilterInfo.value are related."
+            }
+        ],
+        "turbo_Action.displayName": [
+            {
+                "mapTable": "concert_applicationFilters",
+                "mapProperty": "concert_FilterInfo.value",
+                "justification": "turbo_entitySearch.turbo_Action.displayName and concert_applicationFilters.concert_FilterInfo.value are related."
+            }
+        ]
+    }
+}

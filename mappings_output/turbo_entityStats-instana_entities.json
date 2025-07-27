@@ -1,0 +1,19 @@
+{
+    "name": "turbo_entityStats",
+    "properties": {
+        "turbo_StatsEntry.numRelatedEntities": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both fields are related to quantities or counts, with numRelatedEntities counting related entities and totalHits counting total results."
+            }
+        ],
+        "turbo_Statistics.statistics.numRelatedEntities": [
+            {
+                "mapTable": "instana_entities",
+                "mapProperty": "instana__entities_200_response.totalHits",
+                "justification": "Both fields represent counts, with numRelatedEntities counting related entities and totalHits counting total results."
+            }
+        ]
+    }
+}
