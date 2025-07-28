@@ -5,49 +5,31 @@
 
 set -e  # Exit on any error
 
-# Default values
-DATASETS="ITOps"
-MODELS="llama"
-VERBOSE=""
-QUICK=""
+echo "🚀 Starting ReAct Schema Mapping Evaluation"
+echo "============================================"
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+# Check if we're in the react directory
+if [ ! -f "react_runner.py" ]; then
+    echo "❌ Error: react_runner.py not found. Please run this script from the react/ directory."
+    echo "Usage: cd react && ./run_react.sh"
+    exit 1
+fi
 
-# Function to print colored output
-print_status() {
-    echo -e "${GREEN}[INFO]${NC} $1"
-}
+# Check if shared dataset loader exists (one level up)
+if [ ! -f "../data/dataset_loader.py" ]; then
+    echo "❌ Error: shared dataset loader not found at ../data/dataset_loader.py"
+    exit 1
+fi
 
-print_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
-}
+# Create data directory if it doesn't exist (one level up)
+mkdir -p ../data
 
-print_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
-}
-
-# Function to show usage
-usage() {
-    echo "Usage: $0 [OPTIONS]"
-    echo ""
-    echo "Options:"
-    echo "  --datasets DATASETS    Comma-separated list of datasets (default: ITOps)"
-    echo "                        Available: ITOps, NL2GQL, GraphQLRestBench"
-    echo "  --models MODELS        Comma-separated list of models (default: llama)"
-    echo "                        Available: granite, llama, qwen"
-    echo "  --verbose             Enable verbose output"
-    echo "  --quick               Run quick test with minimal data"
-    echo "  --help                Show this help message"
-    echo ""
-    echo "Examples:"
-    echo "  $0                                          # Run with defaults"
-    echo "  $0 --datasets ITOps,NL2GQL --models llama  # Multiple datasets"
-    echo "  $0 --verbose --quick                       # Quick verbose run"
-}
+# Default parameters
+DATASETS="ITOps,NL2GQL,GraphQLRestBench"
+MODELS="granite,llama,qwen"
+SCHEMA_DIR="../data/graphql"
+QUICK=false
+VERBOSE=false
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -60,70 +42,109 @@ while [[ $# -gt 0 ]]; do
             MODELS="$2"
             shift 2
             ;;
-        --verbose)
-            VERBOSE="--verbose"
-            shift
+        --schema-dir)
+            SCHEMA_DIR="$2"
+            shift 2
             ;;
         --quick)
-            QUICK="--quick"
+            QUICK=true
+            shift
+            ;;
+        --verbose)
+            VERBOSE=true
             shift
             ;;
         --help)
-            usage
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  --datasets DATASETS    Comma-separated list of datasets (default: ITOps,NL2GQL,GraphQLRestBench)"
+            echo "  --models MODELS        Comma-separated list of models (default: granite,llama,qwen)"
+            echo "  --schema-dir DIR       Directory containing GraphQL schemas (default: ../../data/graphql)"
+            echo "  --quick               Quick evaluation with minimal samples"
+            echo "  --verbose             Enable verbose logging"
+            echo "  --help                Show this help message"
+            echo ""
+            echo "Examples:"
+            echo "  $0 --quick                           # Quick evaluation"
+            echo "  $0 --datasets ITOps --models llama   # Specific dataset and model"
+            echo "  $0 --verbose                         # Enable debug logging"
             exit 0
             ;;
         *)
-            print_error "Unknown option: $1"
-            usage
+            echo "❌ Unknown option: $1"
+            echo "Use --help for usage information"
             exit 1
             ;;
     esac
 done
 
-# Check if we're in the correct directory
-if [[ ! -f "react_runner.py" ]]; then
-    print_error "react_runner.py not found. Please run this script from the react/ directory."
-    exit 1
-fi
-
-# Check if virtual environment is activated (optional check)
-if [[ -z "$VIRTUAL_ENV" && -z "$CONDA_DEFAULT_ENV" ]]; then
-    print_warning "No virtual environment detected. Make sure dependencies are installed."
-fi
-
-# Create results directory if it doesn't exist
-mkdir -p results
-
-print_status "Starting ReAct Schema Mapping Evaluation"
-print_status "Datasets: $DATASETS"
-print_status "Models: $MODELS"
-print_status "Verbose: $([ -n "$VERBOSE" ] && echo "enabled" || echo "disabled")"
-print_status "Quick mode: $([ -n "$QUICK" ] && echo "enabled" || echo "disabled")"
-
-# Build the command
-CMD="python react_runner.py --datasets $DATASETS --models $MODELS"
-if [[ -n "$VERBOSE" ]]; then
-    CMD="$CMD $VERBOSE"
-fi
-if [[ -n "$QUICK" ]]; then
-    CMD="$CMD $QUICK"
-fi
-
-print_status "Executing: $CMD"
+# Display configuration
+echo "📋 Configuration:"
+echo "   Datasets: $DATASETS"
+echo "   Models: $MODELS"
+echo "   Schema directory: $SCHEMA_DIR"
+echo "   Quick mode: $QUICK"
+echo "   Verbose: $VERBOSE"
 echo ""
 
-# Run the command
-if eval $CMD; then
-    print_status "ReAct evaluation completed successfully!"
-    print_status "Results saved in results/ directory"
-    
-    # Show results summary if available
-    if [[ -d "results" && -n "$(ls -A results 2>/dev/null)" ]]; then
-        echo ""
-        print_status "Generated result files:"
-        ls -la results/
-    fi
-else
-    print_error "ReAct evaluation failed with exit code $?"
+# Check if virtual environment is activated
+if [ -z "$VIRTUAL_ENV" ]; then
+    echo "⚠️  Warning: No virtual environment detected. Consider activating one."
+fi
+
+# Check if the ReAct agent files exist
+if [ ! -d "app" ]; then
+    echo "❌ Error: app directory not found in react directory"
+    echo "Make sure the ReAct agent implementation is available"
     exit 1
 fi
+
+# Check schema directory
+if [ ! -d "$SCHEMA_DIR" ]; then
+    echo "⚠️  Warning: Schema directory $SCHEMA_DIR not found"
+    echo "ReAct evaluation will continue but may use mock schemas"
+fi
+
+# Build command line arguments
+ARGS=""
+
+# Convert comma-separated lists to space-separated for Python argparse
+DATASET_ARGS=$(echo $DATASETS | tr ',' ' ')
+MODEL_ARGS=$(echo $MODELS | tr ',' ' ')
+
+ARGS="$ARGS --datasets $DATASET_ARGS"
+ARGS="$ARGS --models $MODEL_ARGS"
+ARGS="$ARGS --schema-dir $SCHEMA_DIR"
+
+if [ "$QUICK" = true ]; then
+    ARGS="$ARGS --quick"
+fi
+
+if [ "$VERBOSE" = true ]; then
+    ARGS="$ARGS --verbose"
+fi
+
+echo "🔧 Running ReAct evaluation with args: $ARGS"
+echo ""
+
+# Run the ReAct evaluation
+python3 react_runner.py $ARGS
+
+# Check if results were generated
+if [ -d "results" ]; then
+    echo ""
+    echo "✅ ReAct evaluation completed successfully!"
+    echo "📁 Results saved in: ./results/"
+    echo ""
+    echo "📊 Generated files:"
+    ls -la results/ | grep ".json"
+else
+    echo ""
+    echo "❌ No results directory found. Check for errors above."
+    exit 1
+fi
+
+echo ""
+echo "🎉 ReAct Schema Mapping Evaluation Complete!"
+echo "============================================"

@@ -22,6 +22,9 @@ logger = logging.getLogger(__name__)
 # Add the app directory to Python path
 sys.path.insert(0, str(Path(__file__).parent / "app"))
 
+# Add the data directory to Python path for shared components
+sys.path.insert(0, str(Path(__file__).parent.parent / "data"))
+
 try:
     from agent import GraphQLSchemaMappingAgent
     from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
@@ -29,6 +32,14 @@ try:
 except ImportError as e:
     logger.error(f"❌ Failed to import ReAct agent: {e}")
     logger.error("Make sure you're running this from the react directory and have installed dependencies")
+    sys.exit(1)
+
+try:
+    from dataset_loader import DatasetLoader
+    logger.info("✅ Successfully imported shared DatasetLoader")
+except ImportError as e:
+    logger.error(f"❌ Failed to import shared DatasetLoader: {e}")
+    logger.error("Make sure the data/dataset_loader.py file exists")
     sys.exit(1)
 
 
@@ -42,6 +53,10 @@ class ReActEvaluationRunner:
         
         # Model configuration for different LLMs
         self.model_config = model_config or self._get_default_model_config()
+        
+        # Initialize the shared dataset loader
+        data_dir = Path(__file__).parent.parent / "data"
+        self.dataset_loader = DatasetLoader(str(data_dir))
         
         # Initialize the ReAct agent
         try:
@@ -60,96 +75,8 @@ class ReActEvaluationRunner:
         }
     
     def load_evaluation_utterances(self, dataset: str) -> List[Dict[str, Any]]:
-        """Load evaluation utterances for a specific dataset."""
-        # TODO: Replace with actual dataset loading
-        # For now, create representative utterances for each dataset
-        
-        utterances = []
-        
-        if dataset == "ITOps":
-            utterances = [
-                {
-                    "sample_id": "itops_001",
-                    "utterance": "map turbo application metrics to instana application performance data",
-                    "expected_source": "turbo",
-                    "expected_target": "instana"
-                },
-                {
-                    "sample_id": "itops_002", 
-                    "utterance": "map concert vulnerability data to turbo security entities",
-                    "expected_source": "concert",
-                    "expected_target": "turbo"
-                },
-                {
-                    "sample_id": "itops_003",
-                    "utterance": "map instana infrastructure topology to turbo market entities",
-                    "expected_source": "instana",
-                    "expected_target": "turbo"
-                },
-                {
-                    "sample_id": "itops_004",
-                    "utterance": "map turbo virtual disk statistics to instana infrastructure metrics",
-                    "expected_source": "turbo", 
-                    "expected_target": "instana"
-                },
-                {
-                    "sample_id": "itops_005",
-                    "utterance": "map concert security findings to turbo application entities",
-                    "expected_source": "concert",
-                    "expected_target": "turbo"
-                }
-            ]
-            
-        elif dataset == "NL2GQL":
-            utterances = [
-                {
-                    "sample_id": "nl2gql_001",
-                    "utterance": "map user profile information to account details schema",
-                    "expected_source": "user",
-                    "expected_target": "account"
-                },
-                {
-                    "sample_id": "nl2gql_002",
-                    "utterance": "map customer data to user profile structure",
-                    "expected_source": "customer",
-                    "expected_target": "user"
-                },
-                {
-                    "sample_id": "nl2gql_003",
-                    "utterance": "map account information to customer profile schema",
-                    "expected_source": "account",
-                    "expected_target": "customer"
-                }
-            ]
-            
-        elif dataset == "GraphQLRestBench":
-            utterances = [
-                {
-                    "sample_id": "graphqlrest_001",
-                    "utterance": "map REST product catalog to GraphQL item schema",
-                    "expected_source": "product",
-                    "expected_target": "item"
-                },
-                {
-                    "sample_id": "graphqlrest_002", 
-                    "utterance": "map GraphQL order data to REST purchase information",
-                    "expected_source": "order",
-                    "expected_target": "purchase"
-                },
-                {
-                    "sample_id": "graphqlrest_003",
-                    "utterance": "map REST category structure to GraphQL classification schema",
-                    "expected_source": "category",
-                    "expected_target": "classification"
-                }
-            ]
-        
-        else:
-            logger.error(f"Unknown dataset: {dataset}")
-            return []
-        
-        logger.info(f"Loaded {len(utterances)} evaluation utterances for {dataset}")
-        return utterances
+        """Load evaluation utterances for a specific dataset using shared loader."""
+        return self.dataset_loader.load_evaluation_utterances(dataset)
     
     def run_single_evaluation(self, utterance: str, sample_id: str, model: str) -> Dict[str, Any]:
         """Run ReAct agent on a single utterance and return standardized result."""
@@ -257,7 +184,7 @@ class ReActEvaluationRunner:
         """Run evaluation for a specific dataset and model combination."""
         logger.info(f"🚀 Starting ReAct evaluation for {dataset} with {model}")
         
-        # Load evaluation utterances
+        # Load evaluation utterances using shared loader
         utterances = self.load_evaluation_utterances(dataset)
         if not utterances:
             logger.error(f"No utterances found for dataset {dataset}")
@@ -283,6 +210,7 @@ class ReActEvaluationRunner:
             result["expected_source"] = utterance_data.get("expected_source", "")
             result["expected_target"] = utterance_data.get("expected_target", "")
             result["original_utterance"] = utterance_data["utterance"]
+            result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
             
             results.append(result)
             

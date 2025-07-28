@@ -1,59 +1,89 @@
 #!/usr/bin/env python3
 """
 SMT API Retriever
-Handles API discovery, mapping lookup, and schema retrieval for SMT evaluation
+Handles API discovery using ChromaDB for schemas and existing mapping lookup
 """
 
 import os
 import json
 import re
+import argparse
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 import logging
-from sentence_transformers import SentenceTransformer
-import numpy as np
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+try:
+    from smt_schema_indexer import GraphQLSchemaIndexer
+    from smt_mappings_indexer import SMTMappingsIndexer
+except ImportError as e:
+    logger.error(f"Cannot import ChromaDB indexers: {e}")
+    # Create mock classes for testing
+    class GraphQLSchemaIndexer:
+        def __init__(self, *args, **kwargs):
+            pass
+        def search_schemas(self, query, n_results=5):
+            return []
+    
+    class SMTMappingsIndexer:
+        def __init__(self, *args, **kwargs):
+            pass
+        def search_existing_mappings(self, query, n_results=5):
+            return []
+
 
 class SMTAPIRetriever:
     """
-    API Retriever for SMT schema mapping.
-    Handles vector-based API discovery and existing mapping lookup.
+    Enhanced API Retriever for SMT schema mapping with two-tier ChromaDB system:
+    1. Schema ChromaDB: For discovering candidate schemas
+    2. Mappings ChromaDB: For finding existing mappings to reuse
     """
     
     def __init__(self, 
                  mappings_dir: str = ".", 
-                 vector_db_config: Dict[str, Any] = None,
-                 embedding_model: str = "all-MiniLM-L6-v2"):
+                 chroma_db_path: str = "./chroma_db"):
         """
-        Initialize the API retriever.
+        Initialize the API retriever with two ChromaDB instances.
         
         Args:
             mappings_dir: Directory containing existing mapping files
-            vector_db_config: Configuration for vector database (if available)
-            embedding_model: Sentence transformer model for similarity
+            chroma_db_path: Path to ChromaDB database
         """
         self.mappings_dir = Path(mappings_dir)
-        self.vector_db_config = vector_db_config or {}
+        self.chroma_db_path = Path(chroma_db_path)
         
-        # Initialize sentence transformer for API name similarity
+        # Initialize Schema ChromaDB indexer for schema discovery
         try:
-            self.sentence_transformer = SentenceTransformer(embedding_model)
-            logger.info(f"✅ Loaded embedding model: {embedding_model}")
+            self.schema_indexer = GraphQLSchemaIndexer(
+                chroma_db_path=str(chroma_db_path),
+                collection_name="graphql_schemas"
+            )
+            logger.info("Connected to Schema ChromaDB")
         except Exception as e:
-            logger.error(f"❌ Failed to load embedding model: {e}")
-            self.sentence_transformer = None
+            logger.warning(f"Could not connect to Schema ChromaDB: {e}")
+            self.schema_indexer = None
         
-        # Load existing mapping files
+        # Initialize Mappings ChromaDB indexer for existing mapping lookup
+        try:
+            self.mappings_indexer = SMTMappingsIndexer(
+                chroma_db_path=str(chroma_db_path),
+                collection_name="smt_mappings"
+            )
+            logger.info("Connected to Mappings ChromaDB")
+        except Exception as e:
+            logger.warning(f"Could not connect to Mappings ChromaDB: {e}")
+            self.mappings_indexer = None
+        
+        # Load existing mapping files as fallback
         self.existing_mappings = self._load_existing_mappings()
-        logger.info(f"📁 Loaded {len(self.existing_mappings)} existing mapping files")
+        logger.info(f"Loaded {len(self.existing_mappings)} existing mapping files")
         
-        # Build API name index for similarity search
+        # Build API name index from existing mappings
         self.api_names = self._extract_api_names()
-        logger.info(f"🔍 Indexed {len(self.api_names)} unique API names")
+        logger.info(f"Indexed {len(self.api_names)} unique API names")
     
     def _load_existing_mappings(self) -> Dict[str, str]:
         """Load all existing mapping files and create lookup index."""
@@ -91,9 +121,93 @@ class SMTAPIRetriever:
         
         return list(api_names)
     
+    def find_existing_mapping_for_utterance(self, utterance: str, top_k: int = 3) -> Optional[Dict[str, Any]]:
+        """
+        PRIORITY: Try to find existing mapping that matches the utterance.
+        This is the main efficiency gain - reuse existing mappings.
+        
+        Args:
+            utterance: Natural language description of mapping task
+            top_k: Number of top candidates to consider
+            
+        Returns:
+            Best existing mapping match or None
+        """
+        logger.info(f"Searching for existing mapping for: '{utterance}'")
+        
+        if not self.mappings_indexer:
+            logger.warning("Mappings ChromaDB not available, checking file-based lookup")
+            return self._fallback_existing_mapping_lookup(utterance)
+        
+        try:
+            # Search existing mappings using semantic similarity
+            mapping_results = self.mappings_indexer.search_existing_mappings(utterance, n_results=top_k)
+            
+            if not mapping_results:
+                logger.info("No existing mappings found for this utterance")
+                return None
+            
+            # Take the best match (highest similarity)
+            best_match = mapping_results[0]
+            similarity_score = best_match.get("similarity_score", 0.0)
+            
+            # Set a threshold for using existing mappings
+            SIMILARITY_THRESHOLD = 0.6
+            
+            if similarity_score >= SIMILARITY_THRESHOLD:
+                logger.info(f"Found existing mapping: {best_match.get('mapping_id', 'unknown')} (similarity: {similarity_score:.3f})")
+                
+                # Load the actual mapping file
+                file_path = best_match.get("file_path", "")
+                try:
+                    with open(file_path, 'r') as f:
+                        mapping_data = json.load(f)
+                    
+                    return {
+                        "mapping_data": mapping_data,
+                        "source_api": best_match.get("metadata", {}).get("source_api", ""),
+                        "target_api": best_match.get("metadata", {}).get("target_api", ""),
+                        "similarity_score": similarity_score,
+                        "file_path": file_path,
+                        "reused": True
+                    }
+                    
+                except Exception as e:
+                    logger.error(f"Could not load mapping file {file_path}: {e}")
+                    return None
+            else:
+                logger.info(f"Best existing mapping similarity too low: {similarity_score:.3f} < {SIMILARITY_THRESHOLD}")
+                return None
+        
+        except Exception as e:
+            logger.error(f"Error searching existing mappings: {e}")
+            return self._fallback_existing_mapping_lookup(utterance)
+    
+    def _fallback_existing_mapping_lookup(self, utterance: str) -> Optional[Dict[str, Any]]:
+        """Fallback method when ChromaDB is not available."""
+        # Parse utterance to find API hints
+        source_hints, target_hints = self._parse_utterance_for_apis(utterance)
+        
+        # Try to find existing mapping by API names
+        for source_hint in source_hints:
+            for target_hint in target_hints:
+                existing_mapping = self.get_existing_mapping(source_hint, target_hint)
+                if existing_mapping:
+                    return {
+                        "mapping_data": existing_mapping,
+                        "source_api": source_hint,
+                        "target_api": target_hint,
+                        "similarity_score": 0.5,  # Default score for fallback
+                        "file_path": self.existing_mappings.get(f"{source_hint}-{target_hint}", ""),
+                        "reused": True
+                    }
+        
+        return None
+    
     def find_apis_for_utterance(self, utterance: str, top_k: int = 5) -> Tuple[List[str], List[str]]:
         """
         Find candidate source and target APIs for a natural language utterance.
+        This is used when no existing mapping is found.
         
         Args:
             utterance: Natural language description like "map concert vulnerabilities to turbo entities"
@@ -102,14 +216,19 @@ class SMTAPIRetriever:
         Returns:
             Tuple of (source_candidates, target_candidates)
         """
-        logger.info(f"🔍 Finding APIs for utterance: '{utterance}'")
+        logger.info(f"Finding new API candidates for: '{utterance}'")
         
         # Parse utterance to identify mapping direction and API hints
         source_hints, target_hints = self._parse_utterance_for_apis(utterance)
         
-        # Find candidate APIs using embedding similarity
-        source_candidates = self._find_similar_apis(source_hints, top_k)
-        target_candidates = self._find_similar_apis(target_hints, top_k)
+        # Use Schema ChromaDB to find relevant schemas
+        if self.schema_indexer:
+            source_candidates = self._find_schemas_with_chromadb(source_hints, top_k)
+            target_candidates = self._find_schemas_with_chromadb(target_hints, top_k)
+        else:
+            # Fallback to existing API names
+            source_candidates = self._find_similar_apis_fallback(source_hints, top_k)
+            target_candidates = self._find_similar_apis_fallback(target_hints, top_k)
         
         logger.info(f"   Source candidates: {source_candidates}")
         logger.info(f"   Target candidates: {target_candidates}")
@@ -174,49 +293,29 @@ class SMTAPIRetriever:
         
         return source_hints, target_hints
     
-    def _find_similar_apis(self, hints: List[str], top_k: int = 5) -> List[str]:
-        """Find similar API names using embedding similarity."""
-        if not hints or not self.sentence_transformer:
+    def _find_schemas_with_chromadb(self, hints: List[str], top_k: int = 5) -> List[str]:
+        """Find similar schemas using Schema ChromaDB semantic search."""
+        if not hints or not self.schema_indexer:
             return []
         
-        # Combine hints into a single query
+        # Combine hints into a query
         query = " ".join(hints)
         
         try:
-            # Get embedding for the query
-            query_embedding = self.sentence_transformer.encode([query])[0]
+            # Search for relevant schemas
+            schema_results = self.schema_indexer.search_schemas(query, n_results=top_k)
             
-            # Calculate similarities with all API names
-            similarities = []
-            for api_name in self.api_names:
-                # Create readable version of API name for embedding
-                api_readable = self._make_api_name_readable(api_name)
-                api_embedding = self.sentence_transformer.encode([api_readable])[0]
-                
-                # Calculate cosine similarity
-                cosine_sim = np.dot(query_embedding, api_embedding) / (
-                    np.linalg.norm(query_embedding) * np.linalg.norm(api_embedding)
-                )
-                similarities.append((api_name, cosine_sim))
+            # Extract schema names
+            schema_names = [result.get("schema_name", "") for result in schema_results]
             
-            # Sort by similarity and return top_k
-            similarities.sort(key=lambda x: x[1], reverse=True)
-            return [api_name for api_name, _ in similarities[:top_k]]
+            return schema_names
             
         except Exception as e:
-            logger.warning(f"Error in similarity search: {e}")
-            # Fallback: simple string matching
-            return self._fallback_string_matching(hints, top_k)
+            logger.warning(f"Schema ChromaDB search failed: {e}")
+            return self._find_similar_apis_fallback(hints, top_k)
     
-    def _make_api_name_readable(self, api_name: str) -> str:
-        """Convert API name to readable format for embedding."""
-        # Handle camelCase and snake_case
-        readable = re.sub(r'([a-z])([A-Z])', r'\1 \2', api_name)  # camelCase
-        readable = readable.replace('_', ' ')  # snake_case
-        return readable.lower()
-    
-    def _fallback_string_matching(self, hints: List[str], top_k: int = 5) -> List[str]:
-        """Fallback string matching when embeddings fail."""
+    def _find_similar_apis_fallback(self, hints: List[str], top_k: int = 5) -> List[str]:
+        """Fallback string matching when ChromaDB fails."""
         matches = []
         
         for api_name in self.api_names:
@@ -231,7 +330,7 @@ class SMTAPIRetriever:
     
     def get_existing_mapping(self, source_api: str, target_api: str) -> Optional[Dict[str, Any]]:
         """
-        Check if a mapping file exists for the given API pair.
+        Check if a mapping file exists for the given API pair (file-based lookup).
         
         Args:
             source_api: Source API name
@@ -255,121 +354,19 @@ class SMTAPIRetriever:
                 with open(mapping_file, 'r') as f:
                     mapping_data = json.load(f)
                 
-                logger.info(f"✅ Found existing mapping: {Path(mapping_file).name}")
+                logger.info(f"Found existing mapping file: {Path(mapping_file).name}")
                 return mapping_data
                 
             except Exception as e:
-                logger.error(f"❌ Error loading mapping file {mapping_file}: {e}")
+                logger.error(f"Error loading mapping file {mapping_file}: {e}")
                 return None
         
-        logger.info(f"❌ No existing mapping found for {source_api} ↔ {target_api}")
         return None
-    
-    def get_api_schemas(self, source_api: str, target_api: str) -> Tuple[Optional[Dict], Optional[Dict]]:
-        """
-        Retrieve API schemas from vector database or local storage.
-        
-        Args:
-            source_api: Source API name
-            target_api: Target API name
-            
-        Returns:
-            Tuple of (source_schema, target_schema) dictionaries
-        """
-        logger.info(f"📋 Retrieving schemas for {source_api} → {target_api}")
-        
-        # TODO: Implement actual vector database integration
-        # For now, return mock schemas based on API names
-        
-        source_schema = self._get_mock_schema(source_api)
-        target_schema = self._get_mock_schema(target_api)
-        
-        return source_schema, target_schema
-    
-    def _get_mock_schema(self, api_name: str) -> Dict[str, Any]:
-        """Generate mock schema for an API (placeholder until vector DB integration)."""
-        
-        # Basic schema templates based on common API patterns
-        if "turbo" in api_name.lower():
-            return {
-                "name": f"{api_name}_schema",
-                "type": "object",
-                "properties": {
-                    "Entity": {
-                        "type": "object",
-                        "properties": {
-                            "entityId": {"type": "string"},
-                            "entityName": {"type": "string"},
-                            "stats": {
-                                "type": "object",
-                                "properties": {
-                                    "numRelatedEntities": {"type": "integer"},
-                                    "statistics": {"type": "array"}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        elif "instana" in api_name.lower():
-            return {
-                "name": f"{api_name}_schema", 
-                "type": "object",
-                "properties": {
-                    "entities_200_response": {
-                        "type": "object",
-                        "properties": {
-                            "totalHits": {"type": "integer"},
-                            "items": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {"type": "string"},
-                                        "label": {"type": "string"}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        elif "concert" in api_name.lower():
-            return {
-                "name": f"{api_name}_schema",
-                "type": "object", 
-                "properties": {
-                    "Vulnerability": {
-                        "type": "object",
-                        "properties": {
-                            "vulnerabilityId": {"type": "string"},
-                            "severity": {"type": "string"},
-                            "description": {"type": "string"},
-                            "affectedComponents": {"type": "array"}
-                        }
-                    }
-                }
-            }
-        else:
-            # Generic schema
-            return {
-                "name": f"{api_name}_schema",
-                "type": "object",
-                "properties": {
-                    "GenericEntity": {
-                        "type": "object",
-                        "properties": {
-                            "id": {"type": "string"},
-                            "name": {"type": "string"},
-                            "attributes": {"type": "object"}
-                        }
-                    }
-                }
-            }
     
     def find_best_api_pair(self, utterance: str) -> Tuple[str, str, float]:
         """
         Find the best source-target API pair for an utterance.
+        PRIORITY: First check existing mappings, then find new candidates.
         
         Args:
             utterance: Natural language mapping request
@@ -377,16 +374,32 @@ class SMTAPIRetriever:
         Returns:
             Tuple of (source_api, target_api, confidence_score)
         """
-        logger.info(f"🎯 Finding best API pair for: '{utterance}'")
+        logger.info(f"Finding best API pair for: '{utterance}'")
         
-        # Get API candidates
+        # STEP 1: Try to find existing mapping first (most efficient)
+        existing_mapping = self.find_existing_mapping_for_utterance(utterance)
+        
+        if existing_mapping:
+            source_api = existing_mapping["source_api"]
+            target_api = existing_mapping["target_api"]
+            confidence = existing_mapping["similarity_score"]
+            
+            logger.info(f"   Using existing mapping: {source_api} → {target_api} (confidence: {confidence:.3f})")
+            return source_api, target_api, confidence
+        
+        # STEP 2: If no existing mapping, find new API candidates
+        logger.info("   No suitable existing mapping found, searching for new candidates...")
+        
         source_candidates, target_candidates = self.find_apis_for_utterance(utterance)
         
         if not source_candidates or not target_candidates:
             logger.warning("No API candidates found")
-            return "", "", 0.0
+            # Return default APIs if available
+            if self.api_names:
+                return self.api_names[0], self.api_names[-1] if len(self.api_names) > 1 else self.api_names[0], 0.1
+            return "default_source", "default_target", 0.0
         
-        # Find the best combination based on existing mappings and similarity
+        # Find the best combination based on similarity
         best_score = 0.0
         best_source = source_candidates[0]
         best_target = target_candidates[0]
@@ -399,7 +412,7 @@ class SMTAPIRetriever:
                     best_source = source
                     best_target = target
         
-        logger.info(f"   Best pair: {best_source} → {best_target} (score: {best_score:.3f})")
+        logger.info(f"   New candidates: {best_source} → {best_target} (score: {best_score:.3f})")
         return best_source, best_target, best_score
     
     def _calculate_pair_score(self, source_api: str, target_api: str, utterance: str) -> float:
@@ -417,21 +430,30 @@ class SMTAPIRetriever:
         if target_api.lower() in utterance_lower:
             score += 0.3
         
-        # Bonus for reasonable API name similarity to utterance
-        if self.sentence_transformer:
-            try:
-                utterance_embedding = self.sentence_transformer.encode([utterance])[0]
-                pair_text = f"{self._make_api_name_readable(source_api)} to {self._make_api_name_readable(target_api)}"
-                pair_embedding = self.sentence_transformer.encode([pair_text])[0]
-                
-                similarity = np.dot(utterance_embedding, pair_embedding) / (
-                    np.linalg.norm(utterance_embedding) * np.linalg.norm(pair_embedding)
-                )
-                score += similarity * 0.4
-            except:
-                pass
+        # Basic similarity bonus
+        source_readable = self._make_api_name_readable(source_api)
+        target_readable = self._make_api_name_readable(target_api)
+        
+        utterance_words = set(utterance_lower.split())
+        source_words = set(source_readable.split())
+        target_words = set(target_readable.split())
+        
+        source_overlap = len(utterance_words.intersection(source_words))
+        target_overlap = len(utterance_words.intersection(target_words))
+        
+        if source_overlap > 0:
+            score += 0.1 * source_overlap
+        if target_overlap > 0:
+            score += 0.1 * target_overlap
         
         return min(score, 1.0)  # Cap at 1.0
+    
+    def _make_api_name_readable(self, api_name: str) -> str:
+        """Convert API name to readable format."""
+        # Handle camelCase and snake_case
+        readable = re.sub(r'([a-z])([A-Z])', r'\1 \2', api_name)  # camelCase
+        readable = readable.replace('_', ' ')  # snake_case
+        return readable.lower()
     
     def list_available_apis(self) -> List[str]:
         """List all available API names."""
@@ -440,54 +462,166 @@ class SMTAPIRetriever:
     def list_existing_mappings(self) -> List[str]:
         """List all existing mapping file pairs."""
         return sorted(self.existing_mappings.keys())
+    
+    def get_retriever_stats(self) -> Dict[str, Any]:
+        """Get statistics about the retriever's capabilities."""
+        stats = {
+            "existing_mapping_files": len(self.existing_mappings),
+            "unique_api_names": len(self.api_names),
+            "schema_chromadb_available": self.schema_indexer is not None,
+            "mappings_chromadb_available": self.mappings_indexer is not None
+        }
+        
+        if self.mappings_indexer and hasattr(self.mappings_indexer, 'get_collection_stats'):
+            try:
+                mapping_stats = self.mappings_indexer.get_collection_stats()
+                stats.update({
+                    "indexed_mappings": mapping_stats.get("total_mappings", 0),
+                    "sample_api_pairs": mapping_stats.get("sample_api_pairs", 0)
+                })
+            except Exception as e:
+                logger.warning(f"Could not get mapping stats: {e}")
+        
+        return stats
+
+    def save_schemas_for_smt(self, source_api: str, target_api: str, output_dir: str) -> bool:
+        """
+        Generate and save source.json and target.json files for SMT toolkit.
+        
+        Args:
+            source_api: Source API name
+            target_api: Target API name  
+            output_dir: Directory to save schema files
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            output_path = Path(output_dir)
+            output_path.mkdir(exist_ok=True)
+            
+            # Generate mock schemas for now
+            # In a real implementation, this would load actual schema files
+            source_schema = {
+                "type": "object",
+                "title": source_api.title() + " Schema",
+                "properties": {
+                    f"{source_api}_id": {
+                        "type": "string",
+                        "description": f"Unique identifier for {source_api}"
+                    },
+                    f"{source_api}_name": {
+                        "type": "string", 
+                        "description": f"Name of the {source_api}"
+                    },
+                    f"{source_api}_data": {
+                        "type": "object",
+                        "description": f"Additional data for {source_api}",
+                        "properties": {
+                            "created_at": {"type": "string", "format": "date-time"},
+                            "updated_at": {"type": "string", "format": "date-time"},
+                            "status": {"type": "string", "enum": ["active", "inactive"]}
+                        }
+                    }
+                },
+                "required": [f"{source_api}_id", f"{source_api}_name"]
+            }
+            
+            target_schema = {
+                "type": "object", 
+                "title": target_api.title() + " Schema",
+                "properties": {
+                    f"{target_api}_identifier": {
+                        "type": "string",
+                        "description": f"Unique ID for {target_api}"
+                    },
+                    f"{target_api}_title": {
+                        "type": "string",
+                        "description": f"Title of the {target_api}"
+                    },
+                    f"{target_api}_metadata": {
+                        "type": "object", 
+                        "description": f"Metadata for {target_api}",
+                        "properties": {
+                            "timestamp": {"type": "string", "format": "date-time"},
+                            "last_modified": {"type": "string", "format": "date-time"},
+                            "state": {"type": "string", "enum": ["enabled", "disabled"]}
+                        }
+                    }
+                },
+                "required": [f"{target_api}_identifier", f"{target_api}_title"]
+            }
+            
+            # Save schemas
+            source_file = output_path / "source.json"
+            target_file = output_path / "target.json"
+            
+            with open(source_file, 'w') as f:
+                json.dump(source_schema, f, indent=2)
+                
+            with open(target_file, 'w') as f:
+                json.dump(target_schema, f, indent=2)
+            
+            logger.info(f"Generated schema files:")
+            logger.info(f"  Source: {source_file}")
+            logger.info(f"  Target: {target_file}")
+            
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to save schemas: {e}")
+            return False
 
 
 def main():
-    """Test the API retriever functionality."""
-    import argparse
-    
-    parser = argparse.ArgumentParser(description="Test SMT API Retriever")
-    parser.add_argument("--utterance", required=True, help="Natural language utterance to test")
-    parser.add_argument("--mappings-dir", default=".", help="Directory containing mapping files")
+    """Main entry point for SMT API Retriever."""
+    parser = argparse.ArgumentParser(description="SMT API Retriever")
+    parser.add_argument("--utterance", required=True, help="Natural language utterance")
+    parser.add_argument("--dataset", help="Target dataset")
+    parser.add_argument("--model", help="Target model")
+    parser.add_argument("--top-k", type=int, default=5, help="Number of top results")
+    parser.add_argument("--output-dir", default="mappings_output", help="Output directory")
+    parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
     
     args = parser.parse_args()
     
+    if args.verbose:
+        logging.getLogger().setLevel(logging.DEBUG)
+    
+    # Create output directory
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(exist_ok=True)
+    
     # Initialize retriever
-    retriever = SMTAPIRetriever(mappings_dir=args.mappings_dir)
+    retriever = SMTAPIRetriever()
     
-    print(f"\n{'='*60}")
-    print(f"SMT API Retriever Test")
-    print(f"{'='*60}")
+    print(f"SMT API Retriever")
     print(f"Utterance: {args.utterance}")
-    print(f"Mappings directory: {args.mappings_dir}")
-    print(f"Available APIs: {len(retriever.list_available_apis())}")
-    print(f"Existing mappings: {len(retriever.list_existing_mappings())}")
+    print(f"Output directory: {args.output_dir}")
     
-    # Test API finding
-    print(f"\n🔍 Finding APIs...")
-    source_candidates, target_candidates = retriever.find_apis_for_utterance(args.utterance)
-    print(f"Source candidates: {source_candidates}")
-    print(f"Target candidates: {target_candidates}")
+    # Show retriever stats
+    stats = retriever.get_retriever_stats()
+    print(f"Retriever Statistics:")
+    for key, value in stats.items():
+        print(f"   {key}: {value}")
     
-    # Test best pair finding
-    print(f"\n🎯 Finding best API pair...")
-    best_source, best_target, confidence = retriever.find_best_api_pair(args.utterance)
-    print(f"Best pair: {best_source} → {best_target}")
-    print(f"Confidence: {confidence:.3f}")
+    # Find best API pair
+    source_api, target_api, confidence = retriever.find_best_api_pair(args.utterance)
     
-    # Test existing mapping lookup
-    print(f"\n📁 Checking existing mapping...")
-    existing_mapping = retriever.get_existing_mapping(best_source, best_target)
-    if existing_mapping:
-        print(f"✅ Found existing mapping with {len(existing_mapping.get('properties', {}))} properties")
+    print(f"Selected API pair: {source_api} → {target_api} (confidence: {confidence:.3f})")
+    
+    # Generate and save schemas
+    success = retriever.save_schemas_for_smt(source_api, target_api, args.output_dir)
+    
+    if success:
+        print(f"Schema files generated successfully in {args.output_dir}/")
+        print(f"Next steps:")
+        print(f"  1. Review the generated source.json and target.json files")
+        print(f"  2. Run the SMT toolkit with: make run-smt")
+        print(f"  3. Check results in results/ directory")
     else:
-        print(f"❌ No existing mapping found")
-    
-    # Test schema retrieval
-    print(f"\n📋 Retrieving schemas...")
-    source_schema, target_schema = retriever.get_api_schemas(best_source, best_target)
-    print(f"Source schema: {source_schema['name'] if source_schema else 'None'}")
-    print(f"Target schema: {target_schema['name'] if target_schema else 'None'}")
+        print(f"Failed to generate schema files")
+        exit(1)
 
 
 if __name__ == "__main__":

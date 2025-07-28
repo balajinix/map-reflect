@@ -26,7 +26,7 @@ except ImportError as e:
     exit(1)
 
 
-class SMTMappingIndexer:
+class SMTMappingsIndexer:
     """
     Indexes SMT mapping files into ChromaDB for efficient semantic search.
     """
@@ -330,6 +330,50 @@ class SMTMappingIndexer:
         
         return indexed_count
     
+    
+    def search_existing_mappings(self, query: str, n_results: int = 5) -> List[Dict[str, Any]]:
+        """
+        Search for existing mappings using semantic similarity.
+        This is the method expected by smt_api_retriever.py
+        
+        Args:
+            query: Natural language query describing the mapping task
+            n_results: Number of results to return
+            
+        Returns:
+            List of mapping matches in the format expected by api_retriever
+        """
+        try:
+            results = self.collection.query(
+                query_texts=[query],
+                n_results=n_results
+            )
+            
+            # Convert to format expected by api_retriever
+            matches = []
+            
+            if results and 'documents' in results and results['documents']:
+                for i in range(len(results['documents'][0])):
+                    doc = results['documents'][0][i]
+                    metadata = results['metadatas'][0][i] if 'metadatas' in results else {}
+                    distance = results['distances'][0][i] if 'distances' in results else 0.0
+                    
+                    match = {
+                        "mapping_id": metadata.get("filename", f"mapping_{i}"),
+                        "description": doc,
+                        "metadata": metadata,
+                        "similarity_score": 1.0 - distance,  # Convert distance to similarity
+                        "file_path": metadata.get("file_path", "")
+                    }
+                    matches.append(match)
+            
+            return matches
+            
+        except Exception as e:
+            logger.error(f"❌ Error searching existing mappings: {e}")
+            return []
+    
+    # this is not used anymore - TODO: delete
     def search_mappings(self, query: str, n_results: int = 5) -> List[Dict[str, Any]]:
         """
         Search for relevant mappings using semantic similarity.
@@ -456,7 +500,7 @@ def main():
     logger.info(f"Collection name: {args.collection_name}")
     
     # Initialize indexer
-    indexer = SMTMappingIndexer(
+    indexer = SMTMappingsIndexer(
         chroma_db_path=args.chroma_db_path,
         collection_name=args.collection_name
     )
