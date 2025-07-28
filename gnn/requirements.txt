@@ -1,0 +1,25 @@
+# GNN Schema Mapping Requirements
+# Install with: pip install -r requirements_gnn.txt
+
+# Core dependencies
+torch>=1.9.0
+torch-geometric>=2.0.0
+networkx>=2.6
+sentence-transformers>=2.2.0
+scikit-learn>=1.0.0
+numpy>=1.21.0
+matplotlib>=3.5.0
+tqdm>=4.62.0
+
+# ChromaDB for schema indexing (shared with SMT)
+chromadb>=0.4.0
+
+# Optional: CUDA support (uncomment if you have CUDA-capable GPU)
+# torch-geometric-temporal
+# torch-scatter
+# torch-sparse
+# torch-cluster
+
+# Development/testing
+pytest>=6.0.0
+jupyter>=1.0.0

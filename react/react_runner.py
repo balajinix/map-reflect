@@ -254,17 +254,21 @@ class ReActEvaluationRunner:
     def save_results(self, results: dict, dataset: str, model: str):
         """Save results to JSON file with NumPy-safe serialization."""
         output_file = self.results_dir / f"{dataset}_{model}.json"
-
+ 
         def convert_numpy_types(obj):
-            """Recursively convert NumPy types to native Python types."""
-            if isinstance(obj, np.generic):
-                return obj.item()  # np.float32 -> float, np.int64 -> int
-            elif isinstance(obj, dict):
-                return {k: convert_numpy_types(v) for k, v in obj.items()}
-            elif isinstance(obj, list):
-                return [convert_numpy_types(v) for v in obj]
-            elif isinstance(obj, tuple):
-                return tuple(convert_numpy_types(v) for v in obj)
+            """Convert NumPy types to Python native types for JSON serialization"""
+            try:
+                import numpy as np
+                if isinstance(obj, (np.float32, np.float64)):
+                    return float(obj)
+                elif isinstance(obj, (np.int32, np.int64)):
+                    return int(obj)
+                elif isinstance(obj, dict):
+                    return {k: convert_numpy_types(v) for k, v in obj.items()}
+                elif isinstance(obj, list):
+                    return [convert_numpy_types(v) for v in obj]
+            except ImportError:
+                pass
             return obj
 
         try:

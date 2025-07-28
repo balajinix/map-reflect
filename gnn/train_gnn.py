@@ -1,21 +1,71 @@
+#!/usr/bin/env python3
+"""
+Updated GNN Training Script with Safe Model Saving
+This version uses the new gnn_model.py module to avoid pickle import issues
+"""
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_geometric.nn import GCNConv, SAGEConv, GATConv
-from torch_geometric.utils import from_networkx, negative_sampling
-from torch_geometric.transforms import RandomLinkSplit
-import networkx as nx
 import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
 import json
 import os
-from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-import os
 import random
-import numpy as np
-import torch
+
+# Import the new model definition
+try:
+    from gnn_model import MappingKGGNN, save_model_safely
+    print("✅ Successfully imported GNN model from gnn_model.py")
+except ImportError as e:
+    print(f"❌ Error importing GNN model: {e}")
+    print("Please ensure gnn_model.py is in the current directory")
+    exit(1)
+
+try:
+    from torch_geometric.utils import negative_sampling
+    TORCH_GEOMETRIC_AVAILABLE = True
+except ImportError:
+    print("⚠️  PyTorch Geometric not available, using fallback methods")
+    TORCH_GEOMETRIC_AVAILABLE = False
+    
+    def negative_sampling(edge_index, num_nodes, num_neg_samples):
+        """Fallback negative sampling without torch_geometric"""
+        import torch
+        
+        # Simple random negative sampling
+        all_edges = set()
+        for i in range(edge_index.size(1)):
+            src, tgt = edge_index[0, i].item(), edge_index[1, i].item()
+            all_edges.add((src, tgt))
+            all_edges.add((tgt, src))  # Also add reverse
+        
+        neg_edges = []
+        attempts = 0
+        max_attempts = num_neg_samples * 10
+        
+        while len(neg_edges) < num_neg_samples and attempts < max_attempts:
+            src = torch.randint(0, num_nodes, (1,)).item()
+            tgt = torch.randint(0, num_nodes, (1,)).item()
+            
+            if src != tgt and (src, tgt) not in all_edges:
+                neg_edges.append([src, tgt])
+            
+            attempts += 1
+        
+        if len(neg_edges) == 0:
+            # Fallback: create some random edges
+            neg_edges = [[0, 1], [1, 2]] if num_nodes > 2 else [[0, 0]]
+        
+        # Pad with random edges if we don't have enough
+        while len(neg_edges) < num_neg_samples:
+            src = torch.randint(0, num_nodes, (1,)).item()
+            tgt = torch.randint(0, num_nodes, (1,)).item()
+            neg_edges.append([src, tgt])
+        
+        return torch.tensor(neg_edges[:num_neg_samples]).t()
 
 def set_seed(seed=42):
     random.seed(seed)
@@ -25,73 +75,6 @@ def set_seed(seed=42):
     os.environ["PYTHONHASHSEED"] = str(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
-
-set_seed(57)
-output_dir = "gnn_results"
-os.makedirs(output_dir, exist_ok=True)
-
-# GNN Classes for mapping graph
-class MappingKGGNN(nn.Module):
-    """
-    GNN model for link prediction on mapping knowledge graphs
-    """
-    def __init__(self, input_dim, hidden_dim, output_dim, num_layers=2, 
-                 gnn_type='GCN', dropout=0.2, heads=1):
-        super(MappingKGGNN, self).__init__()
-        
-        self.num_layers = num_layers
-        self.dropout = dropout
-        self.gnn_type = gnn_type
-        
-        # Create GNN layers
-        self.convs = nn.ModuleList()
-        
-        if gnn_type == 'GCN':
-            self.convs.append(GCNConv(input_dim, hidden_dim))
-            for _ in range(num_layers - 2):
-                self.convs.append(GCNConv(hidden_dim, hidden_dim))
-            self.convs.append(GCNConv(hidden_dim, output_dim))
-            
-        elif gnn_type == 'SAGE':
-            self.convs.append(SAGEConv(input_dim, hidden_dim))
-            for _ in range(num_layers - 2):
-                self.convs.append(SAGEConv(hidden_dim, hidden_dim))
-            self.convs.append(SAGEConv(hidden_dim, output_dim))
-            
-        elif gnn_type == 'GAT':
-            self.convs.append(GATConv(input_dim, hidden_dim, heads=heads, dropout=dropout))
-            for _ in range(num_layers - 2):
-                self.convs.append(GATConv(hidden_dim * heads, hidden_dim, heads=heads, dropout=dropout))
-            self.convs.append(GATConv(hidden_dim * heads, output_dim, heads=1, dropout=dropout))
-        
-        # Link prediction head
-        self.link_predictor = nn.Sequential(
-            nn.Linear(2 * output_dim, hidden_dim),
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_dim, 1)
-        )
-        
-    def forward(self, x, edge_index):
-        # Apply GNN layers
-        for i, conv in enumerate(self.convs[:-1]):
-            x = conv(x, edge_index)
-            x = F.relu(x)
-            x = F.dropout(x, p=self.dropout, training=self.training)
-        
-        # Final layer
-        x = self.convs[-1](x, edge_index)
-        return x
-    
-    def predict_links(self, x, edge_index, query_edges):
-        """Predict links for given edge pairs"""
-        node_embeddings = self.forward(x, edge_index)
-        
-        source_embeddings = node_embeddings[query_edges[0]]
-        target_embeddings = node_embeddings[query_edges[1]]
-        
-        edge_embeddings = torch.cat([source_embeddings, target_embeddings], dim=-1)
-        return torch.sigmoid(self.link_predictor(edge_embeddings))
 
 def train_mapping_model(model, data, num_epochs=100, lr=0.01, seed=42):
     """Train the GNN model for mapping graph"""
@@ -109,19 +92,30 @@ def train_mapping_model(model, data, num_epochs=100, lr=0.01, seed=42):
     for epoch in tqdm(range(num_epochs), desc="Training"):
         optimizer.zero_grad()
         
+        # Check if we have training edges
+        if not hasattr(data, 'train_pos_edge_index') or data.train_pos_edge_index.size(1) == 0:
+            print("Warning: No training edges available")
+            break
+        
         # Positive edges
         pos_edges = data.train_pos_edge_index
-        pos_pred = model.predict_links(data.x, data.train_pos_edge_index, pos_edges)
+        pos_pred = model.predict_links(data.x, pos_edges, pos_edges)
         pos_labels = torch.ones(pos_edges.size(1), 1)
         
         # Negative edges - set seed for consistent negative sampling
         torch.manual_seed(seed + epoch)  # Different seed per epoch but deterministic
-        neg_edges = negative_sampling(
-            edge_index=data.train_pos_edge_index,
-            num_nodes=data.num_nodes,
-            num_neg_samples=pos_edges.size(1)
-        )
-        neg_pred = model.predict_links(data.x, data.train_pos_edge_index, neg_edges)
+        try:
+            neg_edges = negative_sampling(
+                edge_index=pos_edges,
+                num_nodes=data.num_nodes,
+                num_neg_samples=pos_edges.size(1)
+            )
+        except Exception as e:
+            print(f"Warning: Error in negative sampling: {e}")
+            # Create simple negative edges as fallback
+            neg_edges = torch.tensor([[0, 1], [1, 0]], dtype=torch.long).t()
+        
+        neg_pred = model.predict_links(data.x, pos_edges, neg_edges)
         neg_labels = torch.zeros(neg_edges.size(1), 1)
         
         # Combine predictions
@@ -185,7 +179,8 @@ def predict_new_mapping_links(model, data, node_list, graph, top_k=20):
     """Predict new field mappings"""
     print("Predicting new field mappings...")
     
-    if data.train_pos_edge_index.size(1) == 0:
+    if not hasattr(data, 'train_pos_edge_index') or data.train_pos_edge_index.size(1) == 0:
+        print("No training data available for predictions")
         return []
     
     model.eval()
@@ -252,8 +247,12 @@ def run_mapping_gnn_pipeline(graph_data_file, seed=42):
     
     # Load the prepared data
     import pickle
-    with open(graph_data_file, 'rb') as f:
-        saved_data = pickle.load(f)
+    try:
+        with open(graph_data_file, 'rb') as f:
+            saved_data = pickle.load(f)
+    except Exception as e:
+        print(f"Error loading graph data: {e}")
+        return None, None, None, None, None
     
     data = saved_data['data']
     node_list = saved_data['node_list']
@@ -277,6 +276,7 @@ def run_mapping_gnn_pipeline(graph_data_file, seed=42):
     )
     
     print(f"GNN model initialized with {sum(p.numel() for p in gnn_model.parameters())} parameters")
+    print(f"Model info: {gnn_model.get_model_info()}")
     
     # Train model
     train_losses = train_mapping_model(gnn_model, data, num_epochs=100, lr=0.01, seed=seed)
@@ -292,34 +292,82 @@ def run_mapping_gnn_pipeline(graph_data_file, seed=42):
         print(f"{i:2d}. {src_field} <-> {tgt_field} (confidence: {prob:.4f})")
     
     # Plot training loss
-    plt.figure(figsize=(10, 5))
-    plt.plot(train_losses)
-    plt.title('Mapping GNN Training Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "training_loss.png"), dpi=300)
-    plt.show()
+    if train_losses:
+        plt.figure(figsize=(10, 5))
+        plt.plot(train_losses)
+        plt.title('Mapping GNN Training Loss')
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        plt.tight_layout()
+        
+        # Create output directory
+        output_dir = "gnn_results"
+        os.makedirs(output_dir, exist_ok=True)
+        
+        plt.savefig(os.path.join(output_dir, "training_loss.png"), dpi=300)
+        print(f"Training loss plot saved to {output_dir}/training_loss.png")
+        
+        # Only show plot if in interactive environment
+        try:
+            if hasattr(plt, 'show'):
+                plt.show()
+        except:
+            pass
+        
+        plt.close()
 
     return gnn_model, data, node_list, predictions, graph
 
 # Usage example
 if __name__ == "__main__":
-    SEED = 57 #47 51 57 best
+    SEED = 57  # 47 51 57 best
     set_seed(SEED)
     
-    # Run complete pipeline with preprocessed data
-    gnn_model, data, node_list, predictions, graph = run_mapping_gnn_pipeline(
-        'graph_data.pkl', seed=SEED
-    )
+    output_dir = "gnn_results"
+    os.makedirs(output_dir, exist_ok=True)
     
-    # Save results
-    import pickle
-    with open(os.path.join(output_dir, 'mapping_gnn_results.pkl'), 'wb') as f:
-        pickle.dump({
-            'model': gnn_model,
-            'graph': graph,
+    # Check if graph data exists
+    if not os.path.exists('graph_data.pkl'):
+        print("❌ Error: graph_data.pkl not found")
+        print("Please run: python populate_nx.py")
+        exit(1)
+    
+    # Run complete pipeline with preprocessed data
+    try:
+        gnn_model, data, node_list, predictions, graph = run_mapping_gnn_pipeline(
+            'graph_data.pkl', seed=SEED
+        )
+        
+        if gnn_model is None:
+            print("❌ Error: Training failed")
+            exit(1)
+        
+        # Save results using the new safe method
+        print("\nSaving model using safe method...")
+        
+        # Save with new safe method
+        save_model_safely(gnn_model, os.path.join(output_dir, 'mapping_gnn_results.pkl'))
+        
+        # Also save additional results
+        results_data = {
             'predictions': predictions,
-            'node_list': node_list
-        }, f)
-    print(f"\nResults saved to '{output_dir}/mapping_gnn_results.pkl'")
+            'node_list': node_list,
+            'graph': graph,
+            'model_info': gnn_model.get_model_info(),
+            'seed': SEED
+        }
+        
+        import pickle
+        with open(os.path.join(output_dir, 'additional_results.pkl'), 'wb') as f:
+            pickle.dump(results_data, f)
+        
+        print(f"✅ Results saved to '{output_dir}/'")
+        print(f"   - mapping_gnn_results.pkl (model)")
+        print(f"   - additional_results.pkl (results)")
+        print(f"   - training_loss.png (plot)")
+        
+    except Exception as e:
+        print(f"❌ Error during training: {e}")
+        import traceback
+        traceback.print_exc()
+        exit(1)

@@ -23,8 +23,9 @@ fi
 # Default parameters
 MODE=""
 DATASETS="ITOps,NL2GQL,GraphQLRestBench"
-METHODS="SMT,ReAct"  # Default to these two main methods
-MODELS="granite,llama,qwen"
+METHODS="SMT,ReAct"
+#MODELS="granite,llama,qwen"
+MODELS="mistral"
 OUTPUT_DIR="./results"
 GENERATE_LATEX=false
 CLEAN=false

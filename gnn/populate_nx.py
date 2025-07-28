@@ -379,7 +379,7 @@ if __name__ == "__main__":
     SEED = 52
     set_seed(SEED)
     
-    mapping_dir = "../mappings_output"    # add your path to the mapping_output folder where all mappings are stored
+    mapping_dir = "../data/mappings_output"
     api_lookup_file = "api_lookup.json"
     
     # Build mapping graph
