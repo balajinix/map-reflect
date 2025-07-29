@@ -15,7 +15,7 @@ import logging
 from datetime import datetime
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Add the data directory to Python path for shared components
@@ -103,7 +103,7 @@ class GNNEvaluationRunner:
             missing_files.append(str(self.api_lookup_file))
         
         if missing_files:
-            logger.warning("⚠️  Missing GNN files:")
+            logger.warning("⚠Missing GNN files:")
             for file in missing_files:
                 logger.warning(f"   - {file}")
             logger.warning("Some GNN functionality may not work properly")
@@ -113,7 +113,7 @@ class GNNEvaluationRunner:
         
         # Check ChromaDB setup (optional)
         if not self.chroma_db_path.exists():
-            logger.warning(f"⚠️  ChromaDB directory not found: {self.chroma_db_path}")
+            logger.warning(f"⚠ChromaDB directory not found: {self.chroma_db_path}")
             logger.warning("Schema discovery will use fallback methods")
     
     def load_evaluation_utterances(self, dataset: str) -> List[Dict[str, Any]]:

@@ -14,15 +14,15 @@ import re
 from datetime import datetime
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 try:
     import chromadb
     from chromadb.config import Settings
-    logger.info("✅ ChromaDB imported successfully")
+    logger.info("ChromaDB imported successfully")
 except ImportError as e:
-    logger.error("❌ ChromaDB not found. Install with: pip install chromadb")
+    logger.error("ChromaDB not found. Install with: pip install chromadb")
     exit(1)
 
 
@@ -53,13 +53,13 @@ class SMTMappingsIndexer:
         # Get or create collection
         try:
             self.collection = self.client.get_collection(name=collection_name)
-            logger.info(f"✅ Using existing collection: {collection_name}")
+            logger.info(f"Using existing collection: {collection_name}")
         except Exception:
             self.collection = self.client.create_collection(
                 name=collection_name,
                 metadata={"description": "SMT schema mapping files"}
             )
-            logger.info(f"✅ Created new collection: {collection_name}")
+            logger.info(f"Created new collection: {collection_name}")
     
     def parse_mapping_file(self, file_path: Path) -> Dict[str, Any]:
         """
@@ -119,7 +119,7 @@ class SMTMappingsIndexer:
             return parsed_mapping
             
         except Exception as e:
-            logger.error(f"❌ Error parsing {file_path}: {e}")
+            logger.error(f"Error parsing {file_path}: {e}")
             return {}
     
     def _create_searchable_content(self, 
@@ -245,7 +245,7 @@ class SMTMappingsIndexer:
         mappings_path = Path(mappings_dir)
         
         if not mappings_path.exists():
-            logger.error(f"❌ Mappings directory not found: {mappings_path}")
+            logger.error(f"Mappings directory not found: {mappings_path}")
             return 0
         
         # Find all JSON mapping files
@@ -253,12 +253,12 @@ class SMTMappingsIndexer:
         logger.info(f"📁 Found {len(mapping_files)} mapping files in {mappings_path}")
         
         if not mapping_files:
-            logger.warning("⚠️  No mapping files found (expected format: source-target.json)")
+            logger.warning("No mapping files found (expected format: source-target.json)")
             return 0
         
         # Clear collection if force reindex
         if force_reindex:
-            logger.info("🗑️  Force reindex: clearing existing collection")
+            logger.info("🗑Force reindex: clearing existing collection")
             self.client.delete_collection(self.collection_name)
             self.collection = self.client.create_collection(
                 name=self.collection_name,
@@ -270,7 +270,7 @@ class SMTMappingsIndexer:
         try:
             existing_data = self.collection.get()
             existing_ids = set(existing_data.get("ids", []))
-            logger.info(f"📋 Found {len(existing_ids)} existing documents in collection")
+            logger.info(f"Found {len(existing_ids)} existing documents in collection")
         except Exception as e:
             logger.warning(f"Could not check existing documents: {e}")
         
@@ -292,7 +292,7 @@ class SMTMappingsIndexer:
                 parsed_mapping = self.parse_mapping_file(mapping_file)
                 
                 if not parsed_mapping:
-                    logger.warning(f"⚠️  Skipping empty/invalid file: {mapping_file}")
+                    logger.warning(f"Skipping empty/invalid file: {mapping_file}")
                     continue
                 
                 # Prepare document for ChromaDB
@@ -320,10 +320,10 @@ class SMTMappingsIndexer:
                     logger.info(f"   Indexed {indexed_count}/{len(mapping_files)} files...")
                 
             except Exception as e:
-                logger.error(f"❌ Error indexing {mapping_file}: {e}")
+                logger.error(f"Error indexing {mapping_file}: {e}")
                 continue
         
-        logger.info(f"✅ Indexing complete:")
+        logger.info(f"Indexing complete:")
         logger.info(f"   Indexed: {indexed_count} files")
         logger.info(f"   Skipped: {skipped_count} files (already indexed)")
         logger.info(f"   Total in collection: {len(existing_ids) + indexed_count}")
@@ -370,7 +370,7 @@ class SMTMappingsIndexer:
             return matches
             
         except Exception as e:
-            logger.error(f"❌ Error searching existing mappings: {e}")
+            logger.error(f"Error searching existing mappings: {e}")
             return []
     
     # this is not used anymore - TODO: delete
@@ -405,7 +405,7 @@ class SMTMappingsIndexer:
             return matches
             
         except Exception as e:
-            logger.error(f"❌ Error searching mappings: {e}")
+            logger.error(f"Error searching mappings: {e}")
             return []
     
     def get_mapping_by_apis(self, source_api: str, target_api: str) -> Optional[Dict[str, Any]]:
@@ -441,7 +441,7 @@ class SMTMappingsIndexer:
             return None
             
         except Exception as e:
-            logger.error(f"❌ Error getting mapping by APIs: {e}")
+            logger.error(f"Error getting mapping by APIs: {e}")
             return None
     
     def get_collection_stats(self) -> Dict[str, Any]:
@@ -475,7 +475,7 @@ class SMTMappingsIndexer:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error getting collection stats: {e}")
+            logger.error(f"Error getting collection stats: {e}")
             return {}
 
 
@@ -530,7 +530,7 @@ def main():
             print(f"   Target API: {result['metadata'].get('target_api', 'N/A')}")
             print(f"   Mappings: {result['metadata'].get('num_mappings', 0)}")
     
-    print(f"\n✅ Indexing completed successfully!")
+    print(f"\nIndexing completed successfully!")
     print(f"   Indexed {indexed_count} files")
     print(f"   ChromaDB collection: {args.collection_name}")
     print(f"   Database location: {args.chroma_db_path}")

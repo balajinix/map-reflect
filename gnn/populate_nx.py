@@ -9,6 +9,7 @@ import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
 import json
 import os
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 import matplotlib.pyplot as plt

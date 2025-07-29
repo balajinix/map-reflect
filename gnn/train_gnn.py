@@ -28,7 +28,7 @@ try:
     from torch_geometric.utils import negative_sampling
     TORCH_GEOMETRIC_AVAILABLE = True
 except ImportError:
-    print("⚠️  PyTorch Geometric not available, using fallback methods")
+    print("⚠PyTorch Geometric not available, using fallback methods")
     TORCH_GEOMETRIC_AVAILABLE = False
     
     def negative_sampling(edge_index, num_nodes, num_neg_samples):

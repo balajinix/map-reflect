@@ -15,15 +15,15 @@ import re
 from datetime import datetime
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 try:
     import chromadb
     from chromadb.config import Settings
-    logger.info("✅ ChromaDB imported successfully")
+    logger.info("ChromaDB imported successfully")
 except ImportError as e:
-    logger.error("❌ ChromaDB not found. Install with: pip install chromadb")
+    logger.error("ChromaDB not found. Install with: pip install chromadb")
     exit(1)
 
 
@@ -54,13 +54,13 @@ class GraphQLSchemaIndexer:
         # Get or create collection
         try:
             self.collection = self.client.get_collection(name=collection_name)
-            logger.info(f"✅ Using existing collection: {collection_name}")
+            logger.info(f"Using existing collection: {collection_name}")
         except Exception:
             self.collection = self.client.create_collection(
                 name=collection_name,
                 metadata={"description": "GraphQL schemas for schema mapping"}
             )
-            logger.info(f"✅ Created new collection: {collection_name}")
+            logger.info(f"Created new collection: {collection_name}")
     
     def parse_graphql_schema(self, file_path: Path) -> Dict[str, Any]:
         """
@@ -101,7 +101,7 @@ class GraphQLSchemaIndexer:
             return parsed_schema
             
         except Exception as e:
-            logger.error(f"❌ Error parsing {file_path}: {e}")
+            logger.error(f"Error parsing {file_path}: {e}")
             return {}
     
     def _extract_graphql_types(self, content: str) -> List[str]:
@@ -270,7 +270,7 @@ class GraphQLSchemaIndexer:
         schema_path = Path(schema_dir)
         
         if not schema_path.exists():
-            logger.error(f"❌ Schema directory not found: {schema_path}")
+            logger.error(f"Schema directory not found: {schema_path}")
             return 0
         
         # Find GraphQL schema files
@@ -278,15 +278,15 @@ class GraphQLSchemaIndexer:
         for ext in ['*.graphql', '*.gql', '*.schema']:
             schema_files.extend(schema_path.rglob(ext))
         
-        logger.info(f"📁 Found {len(schema_files)} GraphQL schema files in {schema_path}")
+        logger.info(f"Found {len(schema_files)} GraphQL schema files in {schema_path}")
         
         if not schema_files:
-            logger.warning("⚠️  No GraphQL schema files found (.graphql, .gql, .schema)")
+            logger.warning("No GraphQL schema files found (.graphql, .gql, .schema)")
             return 0
         
         # Clear collection if force reindex
         if force_reindex:
-            logger.info("🗑️  Force reindex: clearing existing collection")
+            logger.info("Force reindex: clearing existing collection")
             self.client.delete_collection(self.collection_name)
             self.collection = self.client.create_collection(
                 name=self.collection_name,
@@ -298,7 +298,7 @@ class GraphQLSchemaIndexer:
         try:
             existing_data = self.collection.get()
             existing_ids = set(existing_data.get("ids", []))
-            logger.info(f"📋 Found {len(existing_ids)} existing schemas in collection")
+            logger.info(f"Found {len(existing_ids)} existing schemas in collection")
         except Exception as e:
             logger.warning(f"Could not check existing documents: {e}")
         
@@ -320,7 +320,7 @@ class GraphQLSchemaIndexer:
                 parsed_schema = self.parse_graphql_schema(schema_file)
                 
                 if not parsed_schema:
-                    logger.warning(f"⚠️  Skipping empty/invalid schema: {schema_file}")
+                    logger.warning(f"Skipping empty/invalid schema: {schema_file}")
                     continue
                 
                 # Prepare document for ChromaDB
@@ -347,10 +347,10 @@ class GraphQLSchemaIndexer:
                     logger.info(f"   Indexed {indexed_count}/{len(schema_files)} schemas...")
                 
             except Exception as e:
-                logger.error(f"❌ Error indexing {schema_file}: {e}")
+                logger.error(f"Error indexing {schema_file}: {e}")
                 continue
         
-        logger.info(f"✅ Indexing complete:")
+        logger.info(f"Indexing complete:")
         logger.info(f"   Indexed: {indexed_count} schemas")
         logger.info(f"   Skipped: {skipped_count} schemas (already indexed)")
         logger.info(f"   Total in collection: {len(existing_ids) + indexed_count}")
@@ -388,7 +388,7 @@ class GraphQLSchemaIndexer:
             return matches
             
         except Exception as e:
-            logger.error(f"❌ Error searching schemas: {e}")
+            logger.error(f"Error searching schemas: {e}")
             return []
 
 
@@ -436,7 +436,7 @@ def main():
             print(f"   Types: {result['metadata'].get('num_types', 0)}")
             print(f"   Fields: {result['metadata'].get('num_fields', 0)}")
     
-    print(f"\n✅ Indexing completed successfully!")
+    print(f"\nIndexing completed successfully!")
     print(f"   Indexed {indexed_count} GraphQL schemas")
     print(f"   ChromaDB collection: {args.collection_name}")
     print(f"   Database location: {args.chroma_db_path}")

@@ -15,7 +15,7 @@ import logging
 from datetime import datetime
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Add the data directory to Python path for shared components
@@ -26,24 +26,24 @@ try:
     from smt_api_retriever import SMTAPIRetriever
     from smt_schema_indexer import GraphQLSchemaIndexer
 except ImportError as e:
-    logger.error(f"❌ Cannot import SMT components: {e}")
+    logger.error(f"Cannot import SMT components: {e}")
     sys.exit(1)
 
 # Import shared dataset loader
 try:
     from dataset_loader import DatasetLoader
-    logger.info("✅ Successfully imported shared DatasetLoader")
+    logger.info("Successfully imported shared DatasetLoader")
 except ImportError as e:
-    logger.error(f"❌ Failed to import shared DatasetLoader: {e}")
+    logger.error(f"Failed to import shared DatasetLoader: {e}")
     logger.error("Make sure the data/dataset_loader.py file exists")
     sys.exit(1)
 
 # Import SMT toolkit
 try:
     from toolkit.solve import solve
-    logger.info("✅ SMT toolkit imported successfully")
+    logger.info("SMT toolkit imported successfully")
 except ImportError as e:
-    logger.warning(f"⚠️  SMT toolkit not found: {e}")
+    logger.warning(f"SMT toolkit not found: {e}")
     logger.warning("Will use fallback mapping generation")
 
 
@@ -85,7 +85,7 @@ class SMTEvaluationRunner:
         )
         self.schema_indexer = GraphQLSchemaIndexer(chroma_db_path=str(self.chroma_db_path))
         
-        logger.info(f"✅ SMT runner initialized")
+        logger.info(f"SMT runner initialized")
         logger.info(f"   Mappings directory: {self.mappings_dir}")
         logger.info(f"   ChromaDB path: {self.chroma_db_path}")
         logger.info(f"   Schema directory: {self.schema_dir}")
@@ -93,7 +93,7 @@ class SMTEvaluationRunner:
     def _verify_chromadb_setup(self):
         """Verify that ChromaDB has been properly set up."""
         if not self.chroma_db_path.exists():
-            logger.warning(f"⚠️  ChromaDB directory not found: {self.chroma_db_path}")
+            logger.warning(f"ChromaDB directory not found: {self.chroma_db_path}")
             logger.warning("Continuing with limited functionality")
             return
         
@@ -110,11 +110,11 @@ class SMTEvaluationRunner:
             collections = [c.name for c in client.list_collections()]
             
             if "graphql_schemas" not in collections:
-                logger.warning("⚠️  'graphql_schemas' collection not found")
+                logger.warning("'graphql_schemas' collection not found")
                 logger.warning("Schema-based API selection may not work optimally")
             
             if "smt_mappings" not in collections:
-                logger.warning("⚠️  'smt_mappings' collection not found")
+                logger.warning("'smt_mappings' collection not found")
                 logger.warning("Existing mapping reuse will not be available")
             
             # Show collection stats
@@ -124,7 +124,7 @@ class SMTEvaluationRunner:
                 logger.info(f"   📦 {collection_name}: {count} documents")
                 
         except Exception as e:
-            logger.warning(f"⚠️  ChromaDB verification failed: {e}")
+            logger.warning(f"ChromaDB verification failed: {e}")
             logger.warning("Continuing with limited functionality")
     
     def load_evaluation_utterances(self, dataset: str) -> List[Dict[str, Any]]:
@@ -161,7 +161,7 @@ class SMTEvaluationRunner:
             
             execution_time = time.time() - start_time
             
-            logger.info(f"✅ SMT completed for {sample_id} in {execution_time:.2f}s")
+            logger.info(f"SMT completed for {sample_id} in {execution_time:.2f}s")
             logger.info(f"   Mappings found: {len(predicted_mapping)}")
             
             return {
@@ -180,13 +180,13 @@ class SMTEvaluationRunner:
             
         except Exception as e:
             execution_time = time.time() - start_time
-            logger.error(f"❌ SMT failed for {sample_id}: {e}")
+            logger.error(f"SMT failed for {sample_id}: {e}")
             
             return self._create_error_result(sample_id, str(e), start_time)
     
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
-        logger.info(f"🚀 Starting SMT evaluation for {dataset} with {model}")
+        logger.info(f"Starting SMT evaluation for {dataset} with {model}")
         
         # Load evaluation utterances using shared loader
         utterances = self.load_evaluation_utterances(dataset)
@@ -230,7 +230,7 @@ class SMTEvaluationRunner:
         successful_results = [r for r in results if r["success"]]
         overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
         
-        logger.info(f"✅ SMT evaluation completed for {dataset}")
+        logger.info(f"SMT evaluation completed for {dataset}")
         logger.info(f"   Total utterances: {len(utterances)}")
         logger.info(f"   Successful: {len(successful_results)}")
         logger.info(f"   Overall accuracy: {overall_accuracy:.3f}")
@@ -259,24 +259,24 @@ class SMTEvaluationRunner:
         """Get existing mapping or create new one using SMT toolkit."""
         
         # PRIORITY: Check for existing mapping using the enhanced retriever
-        logger.info(f"🔍 Checking for existing mapping: {source_api} → {target_api}")
+        logger.info(f"Checking for existing mapping: {source_api} → {target_api}")
         
         # First try the two-tier ChromaDB system
         existing_mapping_result = self.api_retriever.find_existing_mapping_for_utterance(utterance)
         
         if existing_mapping_result and existing_mapping_result.get("reused"):
-            logger.info(f"✅ Using existing mapping from ChromaDB (similarity: {existing_mapping_result['similarity_score']:.3f})")
+            logger.info(f"Using existing mapping from ChromaDB (similarity: {existing_mapping_result['similarity_score']:.3f})")
             return existing_mapping_result["mapping_data"]
         
         # Fallback: Check file-based lookup
         existing_mapping = self.api_retriever.get_existing_mapping(source_api, target_api)
         
         if existing_mapping:
-            logger.info(f"✅ Using existing mapping file for {source_api} → {target_api}")
+            logger.info(f"Using existing mapping file for {source_api} → {target_api}")
             return existing_mapping
         
         # Need to create new mapping using SMT toolkit
-        logger.info(f"🔧 Creating new mapping using SMT toolkit for {source_api} → {target_api}")
+        logger.info(f"Creating new mapping using SMT toolkit for {source_api} → {target_api}")
         
         # Get schemas from schema indexer
         source_schemas = self.schema_indexer.search_schemas(f"{source_api} schema", n_results=1)
@@ -294,7 +294,7 @@ class SMTEvaluationRunner:
         try:
             # Run SMT toolkit if available
             if 'solve' in globals():
-                logger.info("🚀 Running SMT toolkit...")
+                logger.info("Running SMT toolkit...")
                 smt_result = solve(
                     source_schema_dict=source_schema_dict,
                     target_schema_dict=target_schema_dict,
@@ -313,7 +313,7 @@ class SMTEvaluationRunner:
             return smt_result
             
         except Exception as e:
-            logger.error(f"❌ SMT toolkit failed: {e}")
+            logger.error(f"SMT toolkit failed: {e}")
             # Try fallback mapping
             return self._create_fallback_mapping(source_api, target_api)
     
@@ -396,7 +396,7 @@ class SMTEvaluationRunner:
     
     def setup_chromadb_indices(self, force_reindex: bool = False):
         """Setup both ChromaDB indices (schemas and mappings)."""
-        logger.info("🔍 Setting up ChromaDB indices...")
+        logger.info("Setting up ChromaDB indices...")
         
         # Index GraphQL schemas
         if self.schema_indexer:
@@ -408,11 +408,11 @@ class SMTEvaluationRunner:
                         str(self.schema_dir), 
                         force_reindex=force_reindex
                     )
-                    logger.info(f"✅ Indexed {indexed_schemas} schemas")
+                    logger.info(f"Indexed {indexed_schemas} schemas")
                 else:
-                    logger.info("✅ Schema index already exists")
+                    logger.info("Schema index already exists")
             except Exception as e:
-                logger.error(f"❌ Schema indexing failed: {e}")
+                logger.error(f"Schema indexing failed: {e}")
         
         # Index existing mappings
         if hasattr(self.api_retriever, 'mappings_indexer') and self.api_retriever.mappings_indexer:
@@ -424,13 +424,13 @@ class SMTEvaluationRunner:
                         str(self.mappings_dir),
                         force_reindex=force_reindex
                     )
-                    logger.info(f"✅ Indexed {indexed_mappings} mappings")
+                    logger.info(f"Indexed {indexed_mappings} mappings")
                 else:
-                    logger.info("✅ Mappings index already exists")
+                    logger.info("Mappings index already exists")
             except Exception as e:
-                logger.error(f"❌ Mappings indexing failed: {e}")
+                logger.error(f"Mappings indexing failed: {e}")
         
-        logger.info("✅ ChromaDB setup complete")
+        logger.info("ChromaDB setup complete")
     
     def _prepare_schema_for_smt(self, schema_match: Dict[str, Any]) -> Dict[str, Any]:
         """Prepare schema for SMT toolkit input format."""
@@ -550,7 +550,7 @@ class SMTEvaluationRunner:
             logger.info(f"💾 Results saved to {output_file}")
             
         except Exception as e:
-            logger.error(f"❌ Failed to save results to {output_file}: {e}")
+            logger.error(f"Failed to save results to {output_file}: {e}")
     
     def print_evaluation_summary(self, results: Dict[str, Any]):
         """Print a summary of the evaluation results."""
@@ -647,7 +647,7 @@ def main():
             else:
                 logger.error(f"No results generated for {dataset} + {model}")
     
-    logger.info(f"\n🎉 SMT evaluation completed!")
+    logger.info(f"\nSMT evaluation completed!")
     logger.info(f"Results saved in: {runner.results_dir}")
 
 

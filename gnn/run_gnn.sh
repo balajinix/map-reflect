@@ -5,19 +5,19 @@
 
 set -e  # Exit on any error
 
-echo "🚀 Starting GNN Schema Mapping Evaluation"
+echo "Starting GNN Schema Mapping Evaluation"
 echo "=========================================="
 
 # Check if we're in the gnn directory
 if [ ! -f "gnn_runner.py" ]; then
-    echo "❌ Error: gnn_runner.py not found. Please run this script from the gnn/ directory."
+    echo "Error: gnn_runner.py not found. Please run this script from the gnn/ directory."
     echo "Usage: cd gnn && ./run_gnn.sh"
     exit 1
 fi
 
 # Check if shared dataset loader exists (one level up)
 if [ ! -f "../data/dataset_loader.py" ]; then
-    echo "❌ Error: shared dataset loader not found at ../data/dataset_loader.py"
+    echo "Error: shared dataset loader not found at ../data/dataset_loader.py"
     exit 1
 fi
 
@@ -101,7 +101,7 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         *)
-            echo "❌ Unknown option: $1"
+            echo "Unknown option: $1"
             echo "Use --help for usage information"
             exit 1
             ;;
@@ -109,7 +109,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Display configuration
-echo "📋 Configuration:"
+echo "Configuration:"
 echo "   Datasets: $DATASETS"
 echo "   Models: $MODELS"
 echo "   GNN model: $GNN_MODEL_PATH"
@@ -123,70 +123,70 @@ echo ""
 
 # Check if virtual environment is activated
 if [ -z "$VIRTUAL_ENV" ]; then
-    echo "⚠️  Warning: No virtual environment detected. Consider activating one."
+    echo "Warning: No virtual environment detected. Consider activating one."
 fi
 
 # Check for GNN components
-echo "🔍 Checking GNN prerequisites..."
+echo "Checking GNN prerequisites..."
 
 # Check GNN model file
 if [ ! -f "$GNN_MODEL_PATH" ]; then
-    echo "❌ Error: GNN model not found at $GNN_MODEL_PATH"
+    echo "Error: GNN model not found at $GNN_MODEL_PATH"
     echo "Please run the GNN training pipeline first:"
     echo "  1. python populate_nx.py"
     echo "  2. python train_gnn.py"
     exit 1
 else
-    echo "✅ GNN model found: $GNN_MODEL_PATH"
+    echo "GNN model found: $GNN_MODEL_PATH"
 fi
 
 # Check graph data file
 if [ ! -f "$GRAPH_DATA_PATH" ]; then
-    echo "❌ Error: Graph data not found at $GRAPH_DATA_PATH"
+    echo "Error: Graph data not found at $GRAPH_DATA_PATH"
     echo "Please run: python populate_nx.py"
     exit 1
 else
-    echo "✅ Graph data found: $GRAPH_DATA_PATH"
+    echo "Graph data found: $GRAPH_DATA_PATH"
 fi
 
 # Check API lookup file
 if [ ! -f "$API_LOOKUP_FILE" ]; then
-    echo "❌ Error: API lookup file not found at $API_LOOKUP_FILE"
+    echo "Error: API lookup file not found at $API_LOOKUP_FILE"
     echo "Please create the API lookup file with field descriptions"
     exit 1
 else
-    echo "✅ API lookup file found: $API_LOOKUP_FILE"
+    echo "API lookup file found: $API_LOOKUP_FILE"
 fi
 
 # Check for GNN component files
 if [ ! -f "gnn_api_retriever.py" ]; then
-    echo "❌ Error: gnn_api_retriever.py not found"
+    echo "Error: gnn_api_retriever.py not found"
     exit 1
 else
-    echo "✅ GNN API retriever found"
+    echo "GNN API retriever found"
 fi
 
 # Check schema directory (optional)
 if [ ! -d "$SCHEMA_DIR" ]; then
-    echo "⚠️  Warning: Schema directory $SCHEMA_DIR not found"
+    echo "Warning: Schema directory $SCHEMA_DIR not found"
     echo "GNN evaluation will continue but schema discovery may be limited"
 else
-    echo "✅ Schema directory found: $SCHEMA_DIR"
+    echo "Schema directory found: $SCHEMA_DIR"
 fi
 
 # Check ChromaDB directory (optional)
 if [ ! -d "$CHROMA_DB_PATH" ]; then
-    echo "⚠️  Warning: ChromaDB directory $CHROMA_DB_PATH not found"
+    echo "Warning: ChromaDB directory $CHROMA_DB_PATH not found"
     echo "GNN will create it or use limited functionality"
 else
-    echo "✅ ChromaDB directory found: $CHROMA_DB_PATH"
+    echo "ChromaDB directory found: $CHROMA_DB_PATH"
 fi
 
 # Create necessary directories
 mkdir -p results
 
 echo ""
-echo "🔧 All prerequisites satisfied. Starting GNN evaluation..."
+echo "All prerequisites satisfied. Starting GNN evaluation..."
 
 # Build command line arguments
 ARGS=""
@@ -207,7 +207,7 @@ if [ "$VERBOSE" = true ]; then
     ARGS="$ARGS --verbose"
 fi
 
-echo "🚀 Running GNN evaluation with args: $ARGS"
+echo "Running GNN evaluation with args: $ARGS"
 echo ""
 
 # Run the GNN evaluation
@@ -216,32 +216,32 @@ python3 gnn_runner.py $ARGS
 # Check if results were generated
 if [ -d "results" ]; then
     echo ""
-    echo "✅ GNN evaluation completed successfully!"
-    echo "📁 Results saved in: ./results/"
+    echo "GNN evaluation completed successfully!"
+    echo "Results saved in: ./results/"
     echo ""
-    echo "📊 Generated files:"
+    echo "Generated files:"
     ls -la results/ | grep ".json"
     
     # Show GNN-specific info
     if [ -f "$GNN_MODEL_PATH" ]; then
         echo ""
-        echo "🧠 GNN Model used: $GNN_MODEL_PATH"
+        echo "GNN Model used: $GNN_MODEL_PATH"
     fi
     
     if [ -f "$GRAPH_DATA_PATH" ]; then
-        echo "📊 Graph data: $GRAPH_DATA_PATH"
+        echo "Graph data: $GRAPH_DATA_PATH"
     fi
 else
     echo ""
-    echo "❌ No results directory found. Check for errors above."
+    echo "No results directory found. Check for errors above."
     exit 1
 fi
 
 echo ""
-echo "🎉 GNN Schema Mapping Evaluation Complete!"
+echo "GNN Schema Mapping Evaluation Complete!"
 echo "=========================================="
 echo ""
-echo "📝 Summary:"
+echo "Summary:"
 echo "   Method: Graph Neural Network (GNN)"
 echo "   Approach: Semantic similarity + field joinability analysis"
 echo "   Key advantage: Learns from existing mappings to predict new ones"

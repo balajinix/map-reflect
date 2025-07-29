@@ -4,6 +4,7 @@ import requests
 import re
 import numpy as np
 from typing import Dict, Any, List, Optional, TypedDict, Annotated
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 from sentence_transformers import SentenceTransformer
 from utils.watsonx_utils import get_wxai_response
 from utils.schema_indexer import build_schema_index

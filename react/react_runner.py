@@ -16,7 +16,7 @@ from datetime import datetime
 import numpy as np
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Add the app directory to Python path
@@ -28,17 +28,17 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "data"))
 try:
     from agent import GraphQLSchemaMappingAgent
     from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
-    logger.info("✅ Successfully imported ReAct agent")
+    logger.info("Successfully imported ReAct agent")
 except ImportError as e:
-    logger.error(f"❌ Failed to import ReAct agent: {e}")
+    logger.error(f"Failed to import ReAct agent: {e}")
     logger.error("Make sure you're running this from the react directory and have installed dependencies")
     sys.exit(1)
 
 try:
     from dataset_loader import DatasetLoader
-    logger.info("✅ Successfully imported shared DatasetLoader")
+    logger.info("Successfully imported shared DatasetLoader")
 except ImportError as e:
-    logger.error(f"❌ Failed to import shared DatasetLoader: {e}")
+    logger.error(f"Failed to import shared DatasetLoader: {e}")
     logger.error("Make sure the data/dataset_loader.py file exists")
     sys.exit(1)
 
@@ -61,9 +61,9 @@ class ReActEvaluationRunner:
         # Initialize the ReAct agent
         try:
             self.agent = GraphQLSchemaMappingAgent(base_schema_dir=str(self.schema_dir))
-            logger.info(f"✅ ReAct agent initialized with schema dir: {self.schema_dir}")
+            logger.info(f"ReAct agent initialized with schema dir: {self.schema_dir}")
         except Exception as e:
-            logger.error(f"❌ Failed to initialize ReAct agent: {e}")
+            logger.error(f"Failed to initialize ReAct agent: {e}")
             raise
     
     def _get_default_model_config(self) -> Dict[str, str]:
@@ -104,7 +104,7 @@ class ReActEvaluationRunner:
             # Calculate accuracy (placeholder - would need ground truth)
             accuracy = self._calculate_accuracy_placeholder(predicted_mapping, sample_id)
             
-            logger.info(f"✅ ReAct agent completed for {sample_id} in {execution_time:.2f}s")
+            logger.info(f"ReAct agent completed for {sample_id} in {execution_time:.2f}s")
             logger.info(f"   Source schema: {agent_result.get('source_schema', 'N/A')}")
             logger.info(f"   Target schema: {agent_result.get('target_schema', 'N/A')}")
             logger.info(f"   Mappings found: {len(predicted_mapping)}")
@@ -125,7 +125,7 @@ class ReActEvaluationRunner:
             
         except Exception as e:
             execution_time = time.time() - start_time
-            logger.error(f"❌ ReAct agent failed for {sample_id}: {e}")
+            logger.error(f"ReAct agent failed for {sample_id}: {e}")
             
             return {
                 "sample_id": sample_id,
@@ -182,7 +182,7 @@ class ReActEvaluationRunner:
     
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
-        logger.info(f"🚀 Starting ReAct evaluation for {dataset} with {model}")
+        logger.info(f"Starting ReAct evaluation for {dataset} with {model}")
         
         # Load evaluation utterances using shared loader
         utterances = self.load_evaluation_utterances(dataset)
@@ -226,7 +226,7 @@ class ReActEvaluationRunner:
         successful_results = [r for r in results if r["success"]]
         overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
         
-        logger.info(f"✅ ReAct evaluation completed for {dataset}")
+        logger.info(f"ReAct evaluation completed for {dataset}")
         logger.info(f"   Total utterances: {len(utterances)}")
         logger.info(f"   Successful: {len(successful_results)}")
         logger.info(f"   Overall accuracy: {overall_accuracy:.3f}")
@@ -281,7 +281,7 @@ class ReActEvaluationRunner:
             logger.info(f"💾 Results saved to {output_file}")
 
         except Exception as e:
-            logger.error(f"❌ Failed to save results to {output_file}: {e}")
+            logger.error(f"Failed to save results to {output_file}: {e}")
 
 
     def print_evaluation_summary(self, results: Dict[str, Any]):
@@ -366,7 +366,7 @@ def main():
             else:
                 logger.error(f"No results generated for {dataset} + {model}")
     
-    logger.info(f"\n🎉 ReAct evaluation completed!")
+    logger.info(f"\nReAct evaluation completed!")
     logger.info(f"Results saved in: {runner.results_dir}")
 
 

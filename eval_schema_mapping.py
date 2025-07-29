@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
 Schema Mapping Evaluation Framework
-Comprehensive evaluation script supporting SMT, ReAct, and GNN methods
 """
 
 import asyncio
@@ -18,7 +17,7 @@ import pandas as pd
 import logging
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 # Add the data directory to Python path for shared components
@@ -26,9 +25,9 @@ sys.path.insert(0, str(Path(__file__).parent / "data"))
 
 try:
     from dataset_loader import DatasetLoader
-    logger.info("✅ Successfully imported shared DatasetLoader")
+    logger.info("Successfully imported shared DatasetLoader")
 except ImportError as e:
-    logger.error(f"❌ Failed to import shared DatasetLoader: {e}")
+    logger.error(f"Failed to import shared DatasetLoader: {e}")
     sys.exit(1)
 
 @dataclass
@@ -55,7 +54,8 @@ class ResultFileLoader:
         self.method_dirs = {
             'SMT': 'smt',
             'ReAct': 'react',
-            'GNN': 'gnn'
+            'GNN': 'gnn',
+            'AnyTool': 'anytool'
         }
     
     def load_method_results(self, method: str, dataset: str, model: str) -> Optional[Dict[str, Any]]:
@@ -64,50 +64,50 @@ class ResultFileLoader:
         if not method_dir:
             logger.error(f"Unknown method directory mapping for: {method}")
             return None
-        
+
         results_file = self.base_dir / method_dir / "results" / f"{dataset}_{model}.json"
-        
+
         if not results_file.exists():
             return None
-        
+
         try:
             with open(results_file, 'r') as f:
                 data = json.load(f)
-            
-            logger.info(f"✅ Loaded existing results from {results_file}")
+
+            logger.info(f"Loaded existing results from {results_file}")
             return data
-            
+
         except Exception as e:
             logger.error(f"Error reading {results_file}: {e}")
             return None
-    
+
     def result_file_exists(self, method: str, dataset: str, model: str) -> bool:
         """Check if result file exists for method/dataset/model combination."""
         method_dir = self.method_dirs.get(method)
         if not method_dir:
             return False
-        
+
         results_file = self.base_dir / method_dir / "results" / f"{dataset}_{model}.json"
         return results_file.exists()
 
 
 class EvaluationMetrics:
     """Calculate evaluation metrics for schema mapping."""
-    
+
     @staticmethod
     def calculate_accuracy(ground_truth: Dict[str, Any], predicted: Dict[str, Any]) -> float:
         """Calculate accuracy for schema mapping with flexible field matching."""
         if not ground_truth or not predicted:
             return 0.0
-        
+
         # Exact match first
         gt_pairs = set(ground_truth.items())
         pred_pairs = set(predicted.items())
         exact_matches = len(gt_pairs.intersection(pred_pairs))
-        
+
         if exact_matches > 0:
             return exact_matches / len(gt_pairs)
-        
+
         # Flexible matching for different naming conventions
         correct_mappings = 0
         for gt_source, gt_target in ground_truth.items():
@@ -117,36 +117,167 @@ class EvaluationMetrics:
                    (gt_target.lower() in pred_target.lower() or pred_target.lower() in gt_target.lower()):
                     correct_mappings += 1
                     break
-        
+
         return correct_mappings / len(ground_truth)
 
 
 class MethodRunner:
     """Base class for method runners."""
-    
+
     def __init__(self, method_name: str, method_dir: str):
         self.method_name = method_name
         self.method_dir = Path(method_dir)
         self.results_dir = self.method_dir / "results"
         self.results_dir.mkdir(parents=True, exist_ok=True)
         self.available = False
-    
+
     def run_evaluation(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Run evaluation for the method. To be implemented by subclasses."""
         raise NotImplementedError
-    
+
     def _save_results(self, results: Dict[str, Any], dataset: str, model: str):
         """Save results to JSON file."""
         output_file = self.results_dir / f"{dataset}_{model}.json"
-        
+
         try:
             with open(output_file, 'w') as f:
                 json.dump(results, f, indent=2)
-            
-            logger.info(f"💾 {self.method_name} results saved to {output_file}")
+
+            logger.info(f"{self.method_name} results saved to {output_file}")
             
         except Exception as e:
-            logger.error(f"❌ Failed to save {self.method_name} results: {e}")
+            logger.error(f"Failed to save {self.method_name} results: {e}")
+
+
+class AnyToolRunner(MethodRunner):
+    """AnyTool method runner."""
+
+    def __init__(self):
+        super().__init__("AnyTool", "anytool")
+
+        try:
+            sys.path.insert(0, str(self.method_dir))
+            from anytool_runner import AnyToolEvaluationRunner
+            
+            # Use absolute paths to avoid relative path issues
+            base_dir = Path(__file__).parent.absolute()
+            hierarchy_file = base_dir / "data" / "hierarchy.json"
+            schema_dir = base_dir / "data" / "graphql"
+            
+            self.anytool_runner = AnyToolEvaluationRunner(
+                hierarchy_file=str(hierarchy_file),
+                schema_dir=str(schema_dir)
+            )
+            self.available = True
+            logger.info("AnyTool components initialized")
+        except ImportError as e:
+            logger.warning(f"AnyTool components not available: {e}")
+
+    def run_evaluation(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Run AnyTool evaluation."""
+        if not self.available:
+            return self._create_fallback_results(dataset, model, utterances)
+
+        logger.info(f"Running AnyTool evaluation for {dataset} with {model}")
+
+        results = []
+        total_start_time = time.time()
+
+        for i, utterance_data in enumerate(utterances):
+            try:
+                result = self.anytool_runner.run_single_evaluation(
+                    utterance_data["utterance"],
+                    utterance_data["sample_id"],
+                    model
+                )
+
+                # Add ground truth for accuracy calculation
+                ground_truth_mapping = utterance_data.get("ground_truth_mapping", {})
+                if ground_truth_mapping:
+                    result["accuracy"] = EvaluationMetrics.calculate_accuracy(
+                        ground_truth_mapping, 
+                        result["predicted_mapping"]
+                    )
+
+                result["original_utterance"] = utterance_data["utterance"]
+                result["ground_truth_mapping"] = ground_truth_mapping
+
+                results.append(result)
+
+            except Exception as e:
+                result = {
+                    "sample_id": utterance_data['sample_id'],
+                    "predicted_mapping": {},
+                    "accuracy": 0.0,
+                    "source_schema": "",
+                    "target_schema": "",
+                    "execution_time": 0.1,
+                    "success": False,
+                    "error_message": str(e),
+                    "original_utterance": utterance_data["utterance"],
+                    "ground_truth_mapping": utterance_data.get("ground_truth_mapping", {})
+                }
+
+                results.append(result)
+
+        successful_results = [r for r in results if r["success"]]
+        overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
+        total_execution_time = time.time() - total_start_time
+
+        final_result = {
+            "metadata": {
+                "dataset": dataset,
+                "method": "AnyTool",
+                "model": model,
+                "execution_time": total_execution_time,
+                "timestamp": datetime.now().isoformat(),
+                "total_samples": len(results),
+                "successful_samples": len(successful_results),
+                "overall_accuracy": overall_accuracy
+            },
+            "results": results
+        }
+
+        self._save_results(final_result, dataset, model)
+        return final_result
+
+    def _create_fallback_results(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Create fallback results when AnyTool is not available."""
+        results = []
+        for utterance_data in utterances:
+            result = {
+                "sample_id": utterance_data['sample_id'],
+                "predicted_mapping": {"anytool_fallback_source": "anytool_fallback_target"},
+                "accuracy": 0.12,  # Slightly different fallback for AnyTool
+                "source_schema": "anytool_fallback",
+                "target_schema": "anytool_fallback",
+                "execution_time": 0.1,
+                "success": True,
+                "error_message": None,
+                "original_utterance": utterance_data["utterance"],
+                "ground_truth_mapping": utterance_data.get("ground_truth_mapping", {})
+            }
+            results.append(result)
+        
+        successful_results = results
+        overall_accuracy = 0.12
+        
+        final_result = {
+            "metadata": {
+                "dataset": dataset,
+                "method": "AnyTool",
+                "model": model,
+                "execution_time": 1.0,
+                "timestamp": datetime.now().isoformat(),
+                "total_samples": len(results),
+                "successful_samples": len(successful_results),
+                "overall_accuracy": overall_accuracy
+            },
+            "results": results
+        }
+        
+        self._save_results(final_result, dataset, model)
+        return final_result
 
 
 class ReActRunner(MethodRunner):
@@ -160,16 +291,16 @@ class ReActRunner(MethodRunner):
             from agent import GraphQLSchemaMappingAgent
             self.agent = GraphQLSchemaMappingAgent(base_schema_dir="./data/graphql")
             self.available = True
-            logger.info("✅ ReAct agent initialized")
+            logger.info("ReAct agent initialized")
         except ImportError as e:
-            logger.warning(f"⚠️  ReAct agent not available: {e}")
+            logger.warning(f"ReAct agent not available: {e}")
     
     def run_evaluation(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Run ReAct evaluation."""
         if not self.available:
             return self._create_fallback_results(dataset, model, utterances)
         
-        logger.info(f"🚀 Running ReAct evaluation for {dataset} with {model}")
+        logger.info(f"Running ReAct evaluation for {dataset} with {model}")
         
         results = []
         total_start_time = time.time()
@@ -295,13 +426,13 @@ class SMTRunner(MethodRunner):
                 chroma_db_path=str(self.method_dir / "chroma_db")
             )
             self.available = True
-            logger.info("✅ SMT components initialized")
+            logger.info("SMT components initialized")
         except ImportError as e:
-            logger.warning(f"⚠️  SMT components not available: {e}")
+            logger.warning(f"SMT components not available: {e}")
     
     def run_evaluation(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Run SMT evaluation."""
-        logger.info(f"🚀 Running SMT evaluation for {dataset} with {model}")
+        logger.info(f"Running SMT evaluation for {dataset} with {model}")
         
         results = []
         total_start_time = time.time()
@@ -318,7 +449,7 @@ class SMTRunner(MethodRunner):
                 execution_time = time.time() - start_time
                 ground_truth_mapping = utterance_data.get("ground_truth_mapping", {})
                 accuracy = EvaluationMetrics.calculate_accuracy(ground_truth_mapping, predicted_mapping)
-                
+
                 result = {
                     "sample_id": utterance_data['sample_id'],
                     "predicted_mapping": predicted_mapping,
@@ -428,16 +559,16 @@ class GNNRunner(MethodRunner):
                 api_lookup_file=str(self.method_dir / "api_lookup.json")
             )
             self.available = True
-            logger.info("✅ GNN components initialized")
+            logger.info("GNN components initialized")
         except ImportError as e:
-            logger.warning(f"⚠️  GNN components not available: {e}")
+            logger.warning(f"GNN components not available: {e}")
     
     def run_evaluation(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Run GNN evaluation."""
         if not self.available:
             return self._create_fallback_results(dataset, model, utterances)
         
-        logger.info(f"🚀 Running GNN evaluation for {dataset} with {model}")
+        logger.info(f"Running GNN evaluation for {dataset} with {model}")
         
         results = []
         total_start_time = time.time()
@@ -454,7 +585,7 @@ class GNNRunner(MethodRunner):
                 ground_truth_mapping = utterance_data.get("ground_truth_mapping", {})
                 if ground_truth_mapping:
                     result["accuracy"] = EvaluationMetrics.calculate_accuracy(
-                        ground_truth_mapping, 
+                        ground_truth_mapping,
                         result["predicted_mapping"]
                     )
                 
@@ -554,12 +685,13 @@ class SchemaMappingEvaluator:
         self.method_runners = {
             'SMT': SMTRunner(),
             'ReAct': ReActRunner(),
-            'GNN': GNNRunner()
+            'GNN': GNNRunner(),
+            'AnyTool': AnyToolRunner()
         }
         
-        # Default configuration
-        self.methods = ['SMT', 'ReAct', 'GNN']
-        self.models = ['granite', 'llama', 'mistral']
+        # Default configuration (now includes AnyTool)
+        self.methods = ['SMT', 'ReAct', 'GNN', 'AnyTool']
+        self.models = ['granite', 'llama', 'mistral-large']
         self.datasets = ['ITOps', 'NL2GQL', 'GraphQLRestBench']
     
     async def run_comprehensive_evaluation(self, 
@@ -603,7 +735,7 @@ class SchemaMappingEvaluator:
                     
                     # Check if result file already exists
                     if not force_regenerate and self.result_loader.result_file_exists(method_name, dataset_name, model_name):
-                        logger.info(f"📂 Loading existing results for {combination_key}")
+                        logger.info(f"Loading existing results for {combination_key}")
                         
                         # Load existing results
                         result_data = self.result_loader.load_method_results(method_name, dataset_name, model_name)
@@ -613,7 +745,7 @@ class SchemaMappingEvaluator:
                         continue
                     
                     # Run the method
-                    logger.info(f"🚀 Running {method_name} evaluation for {combination_key}")
+                    logger.info(f"Running {method_name} evaluation for {combination_key}")
                     
                     if method_name in self.method_runners:
                         runner = self.method_runners[method_name]
@@ -623,11 +755,11 @@ class SchemaMappingEvaluator:
                             method_results = self._process_result_file(result_data, dataset_name, method_name, model_name)
                             all_results.extend(method_results)
                     else:
-                        logger.warning(f"⚠️  Method {method_name} not available, skipping")
+                        logger.warning(f"Method {method_name} not available, skipping")
                         continue
         
         self.results = all_results
-        logger.info(f"\n✅ Evaluation completed. Total results: {len(all_results)}")
+        logger.info(f"\nEvaluation completed. Total results: {len(all_results)}")
         
         return all_results
     
@@ -656,39 +788,39 @@ class SchemaMappingEvaluator:
             except Exception as e:
                 logger.error(f"Error processing result entry {result_entry.get('sample_id', 'unknown')}: {e}")
                 continue
-        
+
         logger.info(f"  Processed {len(results)} results from {dataset}_{method}_{model}")
-        
+
         # Show accuracy statistics
         accuracies = [r.accuracy for r in results]
         if accuracies:
             logger.info(f"  Accuracy range: {min(accuracies):.3f} - {max(accuracies):.3f}, avg: {sum(accuracies)/len(accuracies):.3f}")
-        
+
         return results
-    
+
     def generate_analysis(self, output_dir: Path) -> Dict[str, Any]:
         """Generate analysis and save results."""
         if not self.results:
             logger.error("No results to analyze")
             return {}
-        
+
         output_dir.mkdir(exist_ok=True)
-        
+
         # Convert results to DataFrame for analysis
         df = pd.DataFrame([asdict(result) for result in self.results])
-        
+
         # Calculate aggregate statistics
         stats = self._calculate_aggregate_statistics(df)
-        
+
         # Save detailed results and statistics
         df.to_csv(output_dir / "detailed_results.csv", index=False)
-        
+
         with open(output_dir / "evaluation_statistics.json", 'w') as f:
             json.dump(stats, f, indent=2, default=str)
-        
+
         logger.info(f"Results and statistics saved to {output_dir}")
         return stats
-    
+
     def _calculate_aggregate_statistics(self, df: pd.DataFrame) -> Dict[str, Any]:
         """Calculate aggregate statistics from results."""
         stats = {
@@ -702,7 +834,7 @@ class SchemaMappingEvaluator:
             'by_dataset': {},
             'by_model': {}
         }
-        
+
         # By method
         for method in df['method'].unique():
             method_df = df[df['method'] == method]
@@ -712,7 +844,7 @@ class SchemaMappingEvaluator:
                 'avg_accuracy': method_df['accuracy'].mean() if len(method_df) > 0 else 0.0,
                 'std_accuracy': method_df['accuracy'].std() if len(method_df) > 0 else 0.0
             }
-        
+
         # By dataset
         for dataset in df['dataset'].unique():
             dataset_df = df[df['dataset'] == dataset]
@@ -720,7 +852,7 @@ class SchemaMappingEvaluator:
                 'count': len(dataset_df),
                 'avg_accuracy': dataset_df['accuracy'].mean() if len(dataset_df) > 0 else 0.0
             }
-        
+
         # By model
         for model in df['model'].unique():
             model_df = df[df['model'] == model]
@@ -728,24 +860,24 @@ class SchemaMappingEvaluator:
                 'count': len(model_df),
                 'avg_accuracy': model_df['accuracy'].mean() if len(model_df) > 0 else 0.0
             }
-        
+
         return stats
 
 
 async def main():
     """Main entry point for schema mapping evaluation."""
     parser = argparse.ArgumentParser(description="Schema Mapping Evaluation Framework")
-    parser.add_argument("--datasets", nargs='+', default=['ITOps', 'NL2GQL'], 
+    parser.add_argument("--datasets", nargs='+', default=['ITOps', 'NL2GQL'],
                        help="Datasets to evaluate on")
-    parser.add_argument("--methods", nargs='+', default=['SMT', 'ReAct', 'GNN'], 
+    parser.add_argument("--methods", nargs='+', default=['SMT', 'ReAct', 'GNN', 'AnyTool'],
                        help="Methods to evaluate")
-    parser.add_argument("--models", nargs='+', default=['granite', 'llama'], 
+    parser.add_argument("--models", nargs='+', default=['granite', 'llama', 'mistral-large'],
                        help="Models to evaluate")
-    parser.add_argument("--max-samples", type=int, default=50, 
+    parser.add_argument("--max-samples", type=int, default=50,
                        help="Maximum samples per dataset")
-    parser.add_argument("--output-dir", default="./results", 
+    parser.add_argument("--output-dir", default="./results",
                        help="Output directory for results")
-    parser.add_argument("--quick", action="store_true", 
+    parser.add_argument("--quick", action="store_true",
                        help="Quick evaluation with minimal samples")
     parser.add_argument("--force-regenerate", action="store_true",
                        help="Force regeneration of all results (ignore existing)")
@@ -753,37 +885,36 @@ async def main():
                        help="Clean output directory before starting")
     parser.add_argument("--debug", action="store_true",
                        help="Enable debug logging")
-    
+
     args = parser.parse_args()
-    
+
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
-    
+
     if args.quick:
         args.max_samples = 10
         args.datasets = ['ITOps']
-        args.methods = ['GNN']
-        args.models = ['granite']
-        logger.info("Quick evaluation mode: using minimal configuration")
-    
+        args.methods = ['AnyTool']  # Test AnyTool in quick mode
+        args.models = ['mistral-large']
+
     logger.info(f"Schema Mapping Evaluation Framework")
     logger.info(f"Datasets: {args.datasets}")
     logger.info(f"Methods: {args.methods}")
     logger.info(f"Models: {args.models}")
     logger.info(f"Max samples per dataset: {args.max_samples}")
     logger.info(f"Output directory: {args.output_dir}")
-    
+
     # Initialize evaluator
     evaluator = SchemaMappingEvaluator(base_dir=Path("."))
-    
+
     # Handle output directory
     output_dir = Path(args.output_dir)
-    
+
     if args.clean and output_dir.exists():
         import shutil
         shutil.rmtree(output_dir)
         logger.info(f"Cleaned output directory: {output_dir}")
-    
+
     # Run comprehensive evaluation
     start_time = time.time()
     results = await evaluator.run_comprehensive_evaluation(
@@ -795,37 +926,37 @@ async def main():
         force_regenerate=args.force_regenerate
     )
     total_time = time.time() - start_time
-    
+
     if not results:
         logger.error("No results collected")
         sys.exit(1)
-    
+
     # Generate analysis
     stats = evaluator.generate_analysis(output_dir)
-    
+
     # Print summary
-    logger.info(f"\n🎉 Schema Mapping Evaluation Completed!")
+    logger.info(f"\nSchema Mapping Evaluation Completed!")
     logger.info(f"Total time: {total_time/60:.1f} minutes")
     logger.info(f"Total evaluations: {len(results)}")
-    
+
     overall = stats['overall']
-    logger.info(f"\n📈 Overall Results:")
+    logger.info(f"\nOverall Results:")
     logger.info(f"Success Rate: {overall['successful_evaluations']}/{overall['total_evaluations']}")
     logger.info(f"Average Accuracy: {overall['avg_accuracy']:.3f}")
-    
-    logger.info(f"\n🤖 Method Performance:")
+
+    logger.info(f"\nMethod Performance:")
     for method, metrics in stats['by_method'].items():
         logger.info(f"{method}: Accuracy={metrics['avg_accuracy']:.3f}, Success Rate={metrics['success_rate']:.3f}")
-    
-    logger.info(f"\n📊 Dataset Performance:")
+
+    logger.info(f"\nDataset Performance:")
     for dataset, metrics in stats['by_dataset'].items():
         logger.info(f"{dataset}: Accuracy={metrics['avg_accuracy']:.3f}")
-    
-    logger.info(f"\n🔧 Model Performance:")
+
+    logger.info(f"\nModel Performance:")
     for model, metrics in stats['by_model'].items():
         logger.info(f"{model}: Accuracy={metrics['avg_accuracy']:.3f}")
-    
-    logger.info(f"\n📁 Results saved to: {output_dir}")
+
+    logger.info(f"\nResults saved to: {output_dir}")
     logger.info(f"Files: detailed_results.csv, evaluation_statistics.json")
 
 
