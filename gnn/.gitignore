@@ -2,3 +2,4 @@ venv
 gitignore
 chroma_db
 .venv
+gnn_results/additional_results.pkl

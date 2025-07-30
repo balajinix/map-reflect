@@ -25,9 +25,9 @@ class ToolConverter:
 
 # Load hierarchy data (with error handling)
 
-with open("anytool/hierarchy.json") as f:
-    hierarchy = json.load(f)
-
+#with open("../data/hierarchy.json") as f:
+#    hierarchy = json.load(f)
+hierarchy = {}
 
 # Tool functions
 def get_properties_for_type(product, graphql_type):

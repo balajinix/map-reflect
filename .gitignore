@@ -3,3 +3,4 @@ data
 results
 .venv
 .env
+nohup.out

@@ -20,15 +20,6 @@ import logging
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Add the data directory to Python path for shared components
-sys.path.insert(0, str(Path(__file__).parent / "data"))
-
-try:
-    from dataset_loader import DatasetLoader
-    logger.info("Successfully imported shared DatasetLoader")
-except ImportError as e:
-    logger.error(f"Failed to import shared DatasetLoader: {e}")
-    sys.exit(1)
 
 @dataclass
 class EvaluationResult:
@@ -124,9 +115,10 @@ class EvaluationMetrics:
 class MethodRunner:
     """Base class for method runners."""
 
-    def __init__(self, method_name: str, method_dir: str):
+    def __init__(self, method_name: str, method_dir: str, data_dir: str = "data"):
         self.method_name = method_name
         self.method_dir = Path(method_dir)
+        self.data_dir = Path(data_dir)
         self.results_dir = self.method_dir / "results"
         self.results_dir.mkdir(parents=True, exist_ok=True)
         self.available = False
@@ -152,21 +144,22 @@ class MethodRunner:
 class AnyToolRunner(MethodRunner):
     """AnyTool method runner."""
 
-    def __init__(self):
-        super().__init__("AnyTool", "anytool")
+    def __init__(self, data_dir: str = "data"):
+        super().__init__("AnyTool", "anytool", data_dir)
 
         try:
+            # Add anytool directory to Python path
             sys.path.insert(0, str(self.method_dir))
             from anytool_runner import AnyToolEvaluationRunner
             
             # Use absolute paths to avoid relative path issues
-            base_dir = Path(__file__).parent.absolute()
-            hierarchy_file = base_dir / "data" / "hierarchy.json"
-            schema_dir = base_dir / "data" / "graphql"
+            hierarchy_file = self.data_dir / "hierarchy.json"
+            schema_dir = self.data_dir / "graphql"
             
             self.anytool_runner = AnyToolEvaluationRunner(
                 hierarchy_file=str(hierarchy_file),
-                schema_dir=str(schema_dir)
+                data_dir=str(self.data_dir),
+                schema_dir=str(schema_dir) if schema_dir.exists() else None
             )
             self.available = True
             logger.info("AnyTool components initialized")
@@ -188,7 +181,8 @@ class AnyToolRunner(MethodRunner):
                 result = self.anytool_runner.run_single_evaluation(
                     utterance_data["utterance"],
                     utterance_data["sample_id"],
-                    model
+                    model,
+                    dataset
                 )
 
                 # Add ground truth for accuracy calculation
@@ -283,13 +277,13 @@ class AnyToolRunner(MethodRunner):
 class ReActRunner(MethodRunner):
     """ReAct method runner."""
     
-    def __init__(self):
-        super().__init__("ReAct", "react")
+    def __init__(self, data_dir: str = "data"):
+        super().__init__("ReAct", "react", data_dir)
         
         try:
             sys.path.insert(0, str(self.method_dir / "app"))
             from agent import GraphQLSchemaMappingAgent
-            self.agent = GraphQLSchemaMappingAgent(base_schema_dir="./data/graphql")
+            self.agent = GraphQLSchemaMappingAgent(base_schema_dir=str(self.data_dir / "graphql"))
             self.available = True
             logger.info("ReAct agent initialized")
         except ImportError as e:
@@ -415,8 +409,8 @@ class ReActRunner(MethodRunner):
 class SMTRunner(MethodRunner):
     """SMT method runner."""
     
-    def __init__(self):
-        super().__init__("SMT", "smt")
+    def __init__(self, data_dir: str = "data"):
+        super().__init__("SMT", "smt", data_dir)
         
         try:
             sys.path.insert(0, str(self.method_dir))
@@ -546,8 +540,8 @@ class SMTRunner(MethodRunner):
 class GNNRunner(MethodRunner):
     """GNN method runner."""
     
-    def __init__(self):
-        super().__init__("GNN", "gnn")
+    def __init__(self, data_dir: str = "data"):
+        super().__init__("GNN", "gnn", data_dir)
         
         try:
             sys.path.insert(0, str(self.method_dir))
@@ -673,20 +667,31 @@ class GNNRunner(MethodRunner):
 class SchemaMappingEvaluator:
     """Main evaluation framework for schema mapping experiments."""
     
-    def __init__(self, base_dir: Path = Path(".")):
-        # Initialize shared dataset loader
-        data_dir = Path(__file__).parent / "data"
-        self.dataset_loader = DatasetLoader(str(data_dir))
+    def __init__(self, base_dir: Path = Path("."), data_dir: str = "data"):
+        # Initialize shared dataset loader with configurable data directory
+        self.data_dir = Path(data_dir)
+        
+        # Add data directory to Python path for shared components
+        if str(self.data_dir) not in sys.path:
+            sys.path.insert(0, str(self.data_dir))
+        
+        try:
+            from dataset_loader import DatasetLoader
+            self.dataset_loader = DatasetLoader(str(self.data_dir))
+            logger.info(f"Successfully imported shared DatasetLoader from {self.data_dir}")
+        except ImportError as e:
+            logger.error(f"Failed to import shared DatasetLoader from {self.data_dir}: {e}")
+            raise
         
         self.result_loader = ResultFileLoader(base_dir)
         self.results: List[EvaluationResult] = []
         
-        # Initialize method runners
+        # Initialize method runners with data directory
         self.method_runners = {
-            'SMT': SMTRunner(),
-            'ReAct': ReActRunner(),
-            'GNN': GNNRunner(),
-            'AnyTool': AnyToolRunner()
+            'SMT': SMTRunner(str(self.data_dir)),
+            'ReAct': ReActRunner(str(self.data_dir)),
+            'GNN': GNNRunner(str(self.data_dir)),
+            'AnyTool': AnyToolRunner(str(self.data_dir))
         }
         
         # Default configuration (now includes AnyTool)
@@ -711,13 +716,14 @@ class SchemaMappingEvaluator:
         logger.info(f"Datasets: {datasets}")
         logger.info(f"Methods: {methods}")
         logger.info(f"Models: {models}")
+        logger.info(f"Data directory: {self.data_dir}")
         
         all_results = []
         
         # Process each combination
         for dataset_name in datasets:
             # Load utterances for this dataset
-            utterances = self.dataset_loader.load_evaluation_utterances(dataset_name)
+            utterances = self.dataset_loader.load_evaluation_utterances(dataset_name, max_samples=max_samples_per_dataset)
             if not utterances:
                 logger.warning(f"No utterances found for dataset {dataset_name}")
                 continue
@@ -838,9 +844,11 @@ class SchemaMappingEvaluator:
         # By method
         for method in df['method'].unique():
             method_df = df[df['method'] == method]
+            successful_method = method_df['success'].sum()
+            
             stats['by_method'][method] = {
                 'count': len(method_df),
-                'success_rate': len(method_df[method_df['success'] == True]) / len(method_df) if len(method_df) > 0 else 0.0,
+                'success_rate': successful_method / len(method_df) if len(method_df) > 0 else 0.0,
                 'avg_accuracy': method_df['accuracy'].mean() if len(method_df) > 0 else 0.0,
                 'std_accuracy': method_df['accuracy'].std() if len(method_df) > 0 else 0.0
             }
@@ -848,16 +856,22 @@ class SchemaMappingEvaluator:
         # By dataset
         for dataset in df['dataset'].unique():
             dataset_df = df[df['dataset'] == dataset]
+            successful_dataset = dataset_df['success'].sum()
+            
             stats['by_dataset'][dataset] = {
                 'count': len(dataset_df),
+                'success_rate': successful_dataset / len(dataset_df) if len(dataset_df) > 0 else 0.0,
                 'avg_accuracy': dataset_df['accuracy'].mean() if len(dataset_df) > 0 else 0.0
             }
 
         # By model
         for model in df['model'].unique():
             model_df = df[df['model'] == model]
+            successful_model = model_df['success'].sum()
+            
             stats['by_model'][model] = {
                 'count': len(model_df),
+                'success_rate': successful_model / len(model_df) if len(model_df) > 0 else 0.0,
                 'avg_accuracy': model_df['accuracy'].mean() if len(model_df) > 0 else 0.0
             }
 
@@ -877,6 +891,8 @@ async def main():
                        help="Maximum samples per dataset")
     parser.add_argument("--output-dir", default="./results",
                        help="Output directory for results")
+    parser.add_argument("--data-dir", default="data",
+                       help="Directory containing shared data components (default: data)")
     parser.add_argument("--quick", action="store_true",
                        help="Quick evaluation with minimal samples")
     parser.add_argument("--force-regenerate", action="store_true",
@@ -903,9 +919,10 @@ async def main():
     logger.info(f"Models: {args.models}")
     logger.info(f"Max samples per dataset: {args.max_samples}")
     logger.info(f"Output directory: {args.output_dir}")
+    logger.info(f"Data directory: {args.data_dir}")
 
-    # Initialize evaluator
-    evaluator = SchemaMappingEvaluator(base_dir=Path("."))
+    # Initialize evaluator with configurable data directory
+    evaluator = SchemaMappingEvaluator(base_dir=Path("."), data_dir=args.data_dir)
 
     # Handle output directory
     output_dir = Path(args.output_dir)
