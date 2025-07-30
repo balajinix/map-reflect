@@ -544,14 +544,17 @@ class GNNRunner(MethodRunner):
     
     def __init__(self, data_dir: str = "data"):
         super().__init__("GNN", "gnn", data_dir)
-        
+
         try:
             sys.path.insert(0, str(self.method_dir))
             from gnn_runner import GNNEvaluationRunner
+            # BALAJI - TODO
             self.gnn_runner = GNNEvaluationRunner(
+                dataset = "itops",
                 gnn_model_path=str(self.method_dir / "gnn_results" / "mapping_gnn_results.pkl"),
                 graph_data_path=str(self.method_dir / "graph_data.pkl"),
                 chroma_db_path=CENTRALIZED_CHROMA_DB_PATH,
+                collection_name = str("itops_graphql_schemas"),
                 api_lookup_file=str(self.method_dir / "api_lookup.json")
             )
             self.available = True

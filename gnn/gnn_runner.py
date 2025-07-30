@@ -452,8 +452,8 @@ def main():
         logger.info("Quick evaluation mode enabled")
     
     logger.info(f"GNN Schema Mapping Evaluation")
-    logger.info(f"Dataset: {dataset}")
-    logger.info(f"Model: {model}")
+    logger.info(f"Dataset: {args.dataset}")
+    logger.info(f"Model: {args.model}")
     logger.info(f"GNN model: {args.gnn_model_path}")
     logger.info(f"Graph data: {args.graph_data_path}")
     logger.info(f"Schema directory: {args.schema_dir}")
@@ -479,20 +479,20 @@ def main():
     
     # Run evaluation for each dataset/model combination
     logger.info(f"\n{'='*80}")
-    logger.info(f"Evaluating {dataset} with {model}")
+    logger.info(f"Evaluating {args.dataset} with {args.model}")
     logger.info(f"{'='*80}")
     
     # Run evaluation
-    results = runner.run_evaluation(dataset, model)
+    results = runner.run_evaluation(args.dataset, args.model)
     
     if results:
         # Print summary
         runner.print_evaluation_summary(results)
         
         # Save results
-        runner.save_results(results, dataset, model)
+        runner.save_results(results, args.dataset, args.model)
     else:
-        logger.error(f"No results generated for {dataset} + {model}")
+        logger.error(f"No results generated for {args.dataset} + {args.model}")
     
     logger.info(f"\nGNN evaluation completed!")
     logger.info(f"Results saved in: {runner.results_dir}")
