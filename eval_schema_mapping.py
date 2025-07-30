@@ -16,7 +16,8 @@ from dataclasses import dataclass, asdict
 import pandas as pd
 import logging
 
-# Configure logging
+CENTRALIZED_CHROMA_DB_PATH = "./data/chroma_db"
+
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -46,7 +47,8 @@ class ResultFileLoader:
             'SMT': 'smt',
             'ReAct': 'react',
             'GNN': 'gnn',
-            'AnyTool': 'anytool'
+            'AnyTool': 'anytool',
+            'MapReflect': 'map_reflect'
         }
     
     def load_method_results(self, method: str, dataset: str, model: str) -> Optional[Dict[str, Any]]:
@@ -417,7 +419,7 @@ class SMTRunner(MethodRunner):
             from smt_api_retriever import SMTAPIRetriever
             self.api_retriever = SMTAPIRetriever(
                 mappings_dir=str(self.method_dir / "mappings_output"),
-                chroma_db_path=str(self.method_dir / "chroma_db")
+                chroma_db_path=CENTRALIZED_CHROMA_DB_PATH
             )
             self.available = True
             logger.info("SMT components initialized")
@@ -549,7 +551,7 @@ class GNNRunner(MethodRunner):
             self.gnn_runner = GNNEvaluationRunner(
                 gnn_model_path=str(self.method_dir / "gnn_results" / "mapping_gnn_results.pkl"),
                 graph_data_path=str(self.method_dir / "graph_data.pkl"),
-                chroma_db_path=str(self.method_dir / "chroma_db"),
+                chroma_db_path=CENTRALIZED_CHROMA_DB_PATH,
                 api_lookup_file=str(self.method_dir / "api_lookup.json")
             )
             self.available = True
@@ -663,18 +665,150 @@ class GNNRunner(MethodRunner):
         self._save_results(final_result, dataset, model)
         return final_result
 
+class MapReflectRunner(MethodRunner):
+    """MapReflect method runner."""
+
+    def __init__(self, data_dir: str = "data"):
+        super().__init__("MapReflect", "map_reflect", data_dir)
+
+        try:
+            # Add map_reflect directory to Python path
+            sys.path.insert(0, str(self.method_dir))
+            from map_reflect_runner import MapReflectEvaluationRunner
+
+            # Use centralized ChromaDB path
+            api_lookup_file = self.method_dir / "api_lookup.json"
+            schema_dir = self.data_dir / "graphql"
+
+            self.mapreflect_runner = MapReflectEvaluationRunner(
+                property_lookup_file=str(api_lookup_file),
+                data_dir=str(self.data_dir),
+                schema_dir=str(schema_dir) if schema_dir.exists() else None,
+                chroma_db_path=CENTRALIZED_CHROMA_DB_PATH
+            )
+            self.available = True
+            logger.info("MapReflect components initialized")
+        except ImportError as e:
+            logger.warning(f"MapReflect components not available: {e}")
+
+    def run_evaluation(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Run MapReflect evaluation."""
+        if not self.available:
+            return self._create_unavailable_results(dataset, model, utterances)
+
+        logger.info(f"Running MapReflect evaluation for {dataset} with {model} ({len(utterances)} samples)")
+
+        results = []
+        total_start_time = time.time()
+
+        for i, utterance_data in enumerate(utterances):
+            try:
+                result = self.mapreflect_runner.run_single_evaluation(
+                    utterance_data["utterance"],
+                    utterance_data["sample_id"],
+                    model,
+                    dataset
+                )
+
+                # Add ground truth for accuracy calculation
+                ground_truth_mapping = utterance_data.get("ground_truth_mapping", {})
+                if ground_truth_mapping:
+                    result["accuracy"] = EvaluationMetrics.calculate_accuracy(
+                        ground_truth_mapping,
+                        result["predicted_mapping"]
+                    )
+
+                result["original_utterance"] = utterance_data["utterance"]
+                result["ground_truth_mapping"] = ground_truth_mapping
+
+                results.append(result)
+
+            except Exception as e:
+                result = {
+                    "sample_id": utterance_data['sample_id'],
+                    "predicted_mapping": {},
+                    "accuracy": 0.0,
+                    "source_schema": "",
+                    "target_schema": "",
+                    "execution_time": 0.1,
+                    "success": False,
+                    "error_message": str(e),
+                    "original_utterance": utterance_data["utterance"],
+                    "ground_truth_mapping": utterance_data.get("ground_truth_mapping", {})
+                }
+
+                results.append(result)
+
+        successful_results = [r for r in results if r["success"]]
+        overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
+        total_execution_time = time.time() - total_start_time
+
+        final_result = {
+            "metadata": {
+                "dataset": dataset,
+                "method": "MapReflect",
+                "model": model,
+                "execution_time": total_execution_time,
+                "timestamp": datetime.now().isoformat(),
+                "total_samples": len(results),
+                "successful_samples": len(successful_results),
+                "overall_accuracy": overall_accuracy
+            },
+            "results": results
+        }
+
+        self._save_results(final_result, dataset, model)
+        return final_result
+
+    def _create_unavailable_results(self, dataset: str, model: str, utterances: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Create results when MapReflect is not available."""
+        logger.error(f"MapReflect components not available for {dataset}_{model}")
+
+        results = []
+        for utterance_data in utterances:
+            result = {
+                "sample_id": utterance_data['sample_id'],
+                "predicted_mapping": {},
+                "accuracy": 0.0,
+                "source_schema": "",
+                "target_schema": "",
+                "execution_time": 0.0,
+                "success": False,
+                "error_message": "MapReflect components not available",
+                "original_utterance": utterance_data["utterance"],
+                "ground_truth_mapping": utterance_data.get("ground_truth_mapping", {})
+            }
+            results.append(result)
+
+        final_result = {
+            "metadata": {
+                "dataset": dataset,
+                "method": "MapReflect",
+                "model": model,
+                "execution_time": 0.0,
+                "timestamp": datetime.now().isoformat(),
+                "total_samples": len(results),
+                "successful_samples": 0,
+                "overall_accuracy": 0.0
+            },
+            "results": results
+        }
+
+        self._save_results(final_result, dataset, model)
+        return final_result
+
 
 class SchemaMappingEvaluator:
     """Main evaluation framework for schema mapping experiments."""
-    
+
     def __init__(self, base_dir: Path = Path("."), data_dir: str = "data"):
         # Initialize shared dataset loader with configurable data directory
         self.data_dir = Path(data_dir)
-        
+
         # Add data directory to Python path for shared components
         if str(self.data_dir) not in sys.path:
             sys.path.insert(0, str(self.data_dir))
-        
+
         try:
             from dataset_loader import DatasetLoader
             self.dataset_loader = DatasetLoader(str(self.data_dir))
@@ -682,24 +816,25 @@ class SchemaMappingEvaluator:
         except ImportError as e:
             logger.error(f"Failed to import shared DatasetLoader from {self.data_dir}: {e}")
             raise
-        
+
         self.result_loader = ResultFileLoader(base_dir)
         self.results: List[EvaluationResult] = []
-        
+
         # Initialize method runners with data directory
         self.method_runners = {
             'SMT': SMTRunner(str(self.data_dir)),
             'ReAct': ReActRunner(str(self.data_dir)),
             'GNN': GNNRunner(str(self.data_dir)),
-            'AnyTool': AnyToolRunner(str(self.data_dir))
+            'AnyTool': AnyToolRunner(str(self.data_dir)),
+            'MapReflect': MapReflectRunner(str(self.data_dir))
         }
-        
+
         # Default configuration (now includes AnyTool)
-        self.methods = ['SMT', 'ReAct', 'GNN', 'AnyTool']
+        self.methods = ['SMT', 'ReAct', 'GNN', 'AnyTool', 'MapReflect']
         self.models = ['granite', 'llama', 'mistral-large']
         self.datasets = ['ITOps', 'NL2GQL', 'GraphQLRestBench']
-    
-    async def run_comprehensive_evaluation(self, 
+
+    async def run_comprehensive_evaluation(self,
                                          datasets: List[str] = None,
                                          methods: List[str] = None,
                                          models: List[str] = None,
@@ -707,19 +842,19 @@ class SchemaMappingEvaluator:
                                          output_dir: Path = None,
                                          force_regenerate: bool = False) -> List[EvaluationResult]:
         """Run comprehensive evaluation using embedded method runners."""
-        
+
         datasets = datasets or self.datasets
         methods = methods or self.methods
         models = models or self.models
-        
+
         logger.info(f"Starting comprehensive evaluation")
         logger.info(f"Datasets: {datasets}")
         logger.info(f"Methods: {methods}")
         logger.info(f"Models: {models}")
         logger.info(f"Data directory: {self.data_dir}")
-        
+
         all_results = []
-        
+
         # Process each combination
         for dataset_name in datasets:
             # Load utterances for this dataset
@@ -727,52 +862,52 @@ class SchemaMappingEvaluator:
             if not utterances:
                 logger.warning(f"No utterances found for dataset {dataset_name}")
                 continue
-            
+
             # Limit samples if specified
             if max_samples_per_dataset and len(utterances) > max_samples_per_dataset:
                 utterances = utterances[:max_samples_per_dataset]
                 logger.info(f"Limited to {max_samples_per_dataset} samples for {dataset_name}")
-            
+
             logger.info(f"Loaded {len(utterances)} utterances for {dataset_name}")
-            
+
             for method_name in methods:
                 for model_name in models:
                     combination_key = f"{dataset_name}_{method_name}_{model_name}"
-                    
+
                     # Check if result file already exists
                     if not force_regenerate and self.result_loader.result_file_exists(method_name, dataset_name, model_name):
                         logger.info(f"Loading existing results for {combination_key}")
-                        
+
                         # Load existing results
                         result_data = self.result_loader.load_method_results(method_name, dataset_name, model_name)
                         if result_data:
                             method_results = self._process_result_file(result_data, dataset_name, method_name, model_name)
                             all_results.extend(method_results)
                         continue
-                    
+
                     # Run the method
                     logger.info(f"Running {method_name} evaluation for {combination_key}")
-                    
+
                     if method_name in self.method_runners:
                         runner = self.method_runners[method_name]
                         result_data = runner.run_evaluation(dataset_name, model_name, utterances)
-                        
+
                         if result_data:
                             method_results = self._process_result_file(result_data, dataset_name, method_name, model_name)
                             all_results.extend(method_results)
                     else:
                         logger.warning(f"Method {method_name} not available, skipping")
                         continue
-        
+
         self.results = all_results
         logger.info(f"\nEvaluation completed. Total results: {len(all_results)}")
-        
+
         return all_results
-    
+
     def _process_result_file(self, result_data: Dict[str, Any], dataset: str, method: str, model: str) -> List[EvaluationResult]:
         """Process a result file and convert to EvaluationResult objects."""
         results = []
-        
+
         for result_entry in result_data['results']:
             try:
                 result = EvaluationResult(
@@ -788,9 +923,9 @@ class SchemaMappingEvaluator:
                     success=result_entry.get('success', True),
                     error_message=result_entry.get('error_message')
                 )
-                
+
                 results.append(result)
-                
+
             except Exception as e:
                 logger.error(f"Error processing result entry {result_entry.get('sample_id', 'unknown')}: {e}")
                 continue
@@ -845,7 +980,7 @@ class SchemaMappingEvaluator:
         for method in df['method'].unique():
             method_df = df[df['method'] == method]
             successful_method = method_df['success'].sum()
-            
+
             stats['by_method'][method] = {
                 'count': len(method_df),
                 'success_rate': successful_method / len(method_df) if len(method_df) > 0 else 0.0,
@@ -857,7 +992,7 @@ class SchemaMappingEvaluator:
         for dataset in df['dataset'].unique():
             dataset_df = df[df['dataset'] == dataset]
             successful_dataset = dataset_df['success'].sum()
-            
+
             stats['by_dataset'][dataset] = {
                 'count': len(dataset_df),
                 'success_rate': successful_dataset / len(dataset_df) if len(dataset_df) > 0 else 0.0,
@@ -868,7 +1003,7 @@ class SchemaMappingEvaluator:
         for model in df['model'].unique():
             model_df = df[df['model'] == model]
             successful_model = model_df['success'].sum()
-            
+
             stats['by_model'][model] = {
                 'count': len(model_df),
                 'success_rate': successful_model / len(model_df) if len(model_df) > 0 else 0.0,
@@ -883,7 +1018,7 @@ async def main():
     parser = argparse.ArgumentParser(description="Schema Mapping Evaluation Framework")
     parser.add_argument("--datasets", nargs='+', default=['ITOps', 'NL2GQL'],
                        help="Datasets to evaluate on")
-    parser.add_argument("--methods", nargs='+', default=['SMT', 'ReAct', 'GNN', 'AnyTool'],
+    parser.add_argument("--methods", nargs='+', default=['SMT', 'ReAct', 'GNN', 'AnyTool','MapReflect'],
                        help="Methods to evaluate")
     parser.add_argument("--models", nargs='+', default=['granite', 'llama', 'mistral-large'],
                        help="Models to evaluate")

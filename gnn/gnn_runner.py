@@ -26,15 +26,15 @@ try:
     from gnn_api_retriever import GNNAPIRetriever
     from gnn_schema_indexer import GraphQLSchemaIndexer
 except ImportError as e:
-    logger.error(f"❌ Cannot import GNN components: {e}")
+    logger.error(f"Cannot import GNN components: {e}")
     sys.exit(1)
 
 # Import shared dataset loader
 try:
     from dataset_loader import DatasetLoader
-    logger.info("✅ Successfully imported shared DatasetLoader")
+    logger.info("Successfully imported shared DatasetLoader")
 except ImportError as e:
-    logger.error(f"❌ Failed to import shared DatasetLoader: {e}")
+    logger.error(f"Failed to import shared DatasetLoader: {e}")
     logger.error("Make sure the data/dataset_loader.py file exists")
     sys.exit(1)
 
@@ -43,11 +43,13 @@ class GNNEvaluationRunner:
     """Runner class for GNN schema mapping evaluation."""
     
     def __init__(self, 
-                 gnn_model_path: str = "./gnn_results/mapping_gnn_results.pkl",
-                 graph_data_path: str = "./graph_data.pkl",
-                 chroma_db_path: str = "./chroma_db", 
-                 schema_dir: str = "../data/graphql",
-                 api_lookup_file: str = "./api_lookup.json"):
+                 dataset: str = None,
+                 gnn_model_path: str = None,
+                 graph_data_path: str = None,
+                 chroma_db_path: str = "../data/chroma_db", 
+                 collection_name: str = None,
+                 schema_dir: str = None,
+                 api_lookup_file: str = None):
         """
         Initialize the GNN evaluation runner.
         
@@ -58,12 +60,35 @@ class GNNEvaluationRunner:
             schema_dir: Directory containing GraphQL schemas
             api_lookup_file: Path to API lookup file
         """
-        self.gnn_model_path = Path(gnn_model_path)
-        self.graph_data_path = Path(graph_data_path)
         self.chroma_db_path = Path(chroma_db_path)
-        self.schema_dir = Path(schema_dir)
-        self.api_lookup_file = Path(api_lookup_file)
         self.results_dir = Path("results")
+
+        # Set dataset-specific paths if not provided
+        if gnn_model_path is None:
+            self.gnn_model_path = Path(f"../data/{dataset.lower()}_mapping_gnn_results.pkl")
+        else:
+            self.gnn_model_path = Path(gnn_model_path)
+
+        if graph_data_path is None:
+            self.graph_data_path = Path(f"../data/{dataset.lower()}_graph_data.pkl")
+        else:
+            self.graph_data_path = Path(graph_data_path)
+
+        if api_lookup_file is None:
+            self.api_lookup_file = Path(f"../data/{dataset.lower()}_api_lookup.json")
+        else:
+            self.api_lookup_file = Path(api_lookup_file)
+
+        if schema_dir is None:
+            self.schema_dir = Path(f"../data/{dataset.lower()}_graphql")
+        else:
+            self.schema_dir = Path(schema_dir)
+
+        if collection_name is None:
+            self.collection_name = Path(f"{dataset.lower()}_graphql_schemas")
+        else:
+            self.collection_name = Path(collection_name)
+        
         
         # Create directories
         self.results_dir.mkdir(exist_ok=True)
@@ -80,13 +105,15 @@ class GNNEvaluationRunner:
             gnn_model_path=str(self.gnn_model_path),
             graph_data_path=str(self.graph_data_path),
             chroma_db_path=str(self.chroma_db_path),
+            collection_name=str(self.collection_name),
             api_lookup_file=str(self.api_lookup_file)
         )
         
-        logger.info(f"✅ GNN runner initialized")
+        logger.info(f"GNN runner initialized")
         logger.info(f"   GNN model: {self.gnn_model_path}")
         logger.info(f"   Graph data: {self.graph_data_path}")
         logger.info(f"   ChromaDB path: {self.chroma_db_path}")
+        logger.info(f"   Collection Name: {self.collection_name}")
         logger.info(f"   Schema directory: {self.schema_dir}")
     
     def _verify_gnn_setup(self):
@@ -103,17 +130,17 @@ class GNNEvaluationRunner:
             missing_files.append(str(self.api_lookup_file))
         
         if missing_files:
-            logger.warning("⚠Missing GNN files:")
+            logger.warning("Missing GNN files:")
             for file in missing_files:
                 logger.warning(f"   - {file}")
             logger.warning("Some GNN functionality may not work properly")
             logger.warning("Run the GNN training pipeline first to generate these files")
         else:
-            logger.info("✅ All GNN files found")
+            logger.info("All GNN files found")
         
         # Check ChromaDB setup (optional)
         if not self.chroma_db_path.exists():
-            logger.warning(f"⚠ChromaDB directory not found: {self.chroma_db_path}")
+            logger.warning(f"ChromaDB directory not found: {self.chroma_db_path}")
             logger.warning("Schema discovery will use fallback methods")
     
     def load_evaluation_utterances(self, dataset: str) -> List[Dict[str, Any]]:
@@ -152,7 +179,7 @@ class GNNEvaluationRunner:
             
             execution_time = time.time() - start_time
             
-            logger.info(f"✅ GNN completed for {sample_id} in {execution_time:.2f}s")
+            logger.info(f"GNN completed for {sample_id} in {execution_time:.2f}s")
             logger.info(f"   Field mappings found: {len(predicted_mapping)}")
             
             return {
@@ -172,13 +199,13 @@ class GNNEvaluationRunner:
             
         except Exception as e:
             execution_time = time.time() - start_time
-            logger.error(f"❌ GNN failed for {sample_id}: {e}")
+            logger.error(f"GNN failed for {sample_id}: {e}")
             
             return self._create_error_result(sample_id, str(e), start_time)
     
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
-        logger.info(f"🚀 Starting GNN evaluation for {dataset} with {model}")
+        logger.info(f"Starting GNN evaluation for {dataset} with {model}")
         
         # Load evaluation utterances using shared loader
         utterances = self.load_evaluation_utterances(dataset)
@@ -222,7 +249,7 @@ class GNNEvaluationRunner:
         successful_results = [r for r in results if r["success"]]
         overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
         
-        logger.info(f"✅ GNN evaluation completed for {dataset}")
+        logger.info(f"GNN evaluation completed for {dataset}")
         logger.info(f"   Total utterances: {len(utterances)}")
         logger.info(f"   Successful: {len(successful_results)}")
         logger.info(f"   Overall accuracy: {overall_accuracy:.3f}")
@@ -330,7 +357,7 @@ class GNNEvaluationRunner:
             logger.info(f"💾 Results saved to {output_file}")
             
         except Exception as e:
-            logger.error(f"❌ Failed to save results to {output_file}: {e}")
+            logger.error(f"Failed to save results to {output_file}: {e}")
     
     def print_evaluation_summary(self, results: Dict[str, Any]):
         """Print a summary of the evaluation results."""
@@ -358,7 +385,7 @@ class GNNEvaluationRunner:
     
     def setup_chromadb_indices(self, force_reindex: bool = False):
         """Setup ChromaDB indices for schemas."""
-        logger.info("🔍 Setting up ChromaDB indices...")
+        logger.info("Setting up ChromaDB indices...")
         
         # Index GraphQL schemas (reuse from SMT)
         if hasattr(self.api_retriever, 'schema_indexer') and self.api_retriever.schema_indexer:
@@ -370,13 +397,13 @@ class GNNEvaluationRunner:
                         str(self.schema_dir), 
                         force_reindex=force_reindex
                     )
-                    logger.info(f"✅ Indexed {indexed_schemas} schemas")
+                    logger.info(f"Indexed {indexed_schemas} schemas")
                 else:
-                    logger.info("✅ Schema index already exists")
+                    logger.info("Schema index already exists")
             except Exception as e:
-                logger.error(f"❌ Schema indexing failed: {e}")
+                logger.error(f"Schema indexing failed: {e}")
         
-        logger.info("✅ ChromaDB setup complete")
+        logger.info("ChromaDB setup complete")
     
     def get_gnn_stats(self) -> Dict[str, Any]:
         """Get statistics about the GNN components."""
@@ -395,19 +422,21 @@ class GNNEvaluationRunner:
 def main():
     """Main entry point for GNN evaluation."""
     parser = argparse.ArgumentParser(description="GNN Schema Mapping Evaluation")
-    parser.add_argument("--datasets", default="ITOps",
-                       help="Comma-separated list of datasets (default: ITOps)")
-    parser.add_argument("--models", default="llama", 
-                       help="Comma-separated list of models (default: llama)")
-    parser.add_argument("--gnn-model-path", default="./gnn_results/mapping_gnn_results.pkl",
+    parser.add_argument("--dataset", default="ITOps",
+                       help="default: ITOps")
+    parser.add_argument("--model", default="llama", 
+                       help="default: llama")
+    parser.add_argument("--gnn-model-path", default=None,
                        help="Path to trained GNN model")
-    parser.add_argument("--graph-data-path", default="./graph_data.pkl",
+    parser.add_argument("--graph-data-path", default=None,
                        help="Path to graph data")
-    parser.add_argument("--schema-dir", default="../data/graphql",
+    parser.add_argument("--schema-dir", default=None,
                        help="Directory containing GraphQL schemas")
-    parser.add_argument("--chroma-db-path", default="./chroma_db",
+    parser.add_argument("--chroma-db-path", default="../data/chroma_db",
                        help="Path to ChromaDB database")
-    parser.add_argument("--api-lookup-file", default="./api_lookup.json",
+    parser.add_argument("--collection_name", default=None,
+                       help="ChromaDB collection")
+    parser.add_argument("--api-lookup-file", default=None,
                        help="Path to API lookup file")
     parser.add_argument("--quick", action="store_true",
                        help="Quick evaluation with minimal samples")
@@ -419,58 +448,53 @@ def main():
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
     
-    # Parse datasets and models from comma-separated strings
-    datasets = [d.strip() for d in args.datasets.split(',')]
-    models = [m.strip() for m in args.models.split(',')]
-    
-    if args.quick:
-        datasets = ['ITOps']
         models = ['llama']
         logger.info("Quick evaluation mode enabled")
     
     logger.info(f"GNN Schema Mapping Evaluation")
-    logger.info(f"Datasets: {datasets}")
-    logger.info(f"Models: {models}")
+    logger.info(f"Dataset: {dataset}")
+    logger.info(f"Model: {model}")
     logger.info(f"GNN model: {args.gnn_model_path}")
     logger.info(f"Graph data: {args.graph_data_path}")
     logger.info(f"Schema directory: {args.schema_dir}")
     logger.info(f"ChromaDB path: {args.chroma_db_path}")
+    logger.info(f"Collection Name : {args.collection_name}")
     
     # Initialize runner
     runner = GNNEvaluationRunner(
+        dataset = args.dataset,
         gnn_model_path=args.gnn_model_path,
         graph_data_path=args.graph_data_path,
         chroma_db_path=args.chroma_db_path,
+        collection_name=args.collection_name,
         schema_dir=args.schema_dir,
         api_lookup_file=args.api_lookup_file
     )
     
     # Show GNN stats
     stats = runner.get_gnn_stats()
-    logger.info("📊 GNN Statistics:")
+    logger.info("GNN Statistics:")
     for key, value in stats.items():
         logger.info(f"   {key}: {value}")
     
     # Run evaluation for each dataset/model combination
-    for dataset in datasets:
-        for model in models:
-            logger.info(f"\n{'='*80}")
-            logger.info(f"Evaluating {dataset} with {model}")
-            logger.info(f"{'='*80}")
-            
-            # Run evaluation
-            results = runner.run_evaluation(dataset, model)
-            
-            if results:
-                # Print summary
-                runner.print_evaluation_summary(results)
-                
-                # Save results
-                runner.save_results(results, dataset, model)
-            else:
-                logger.error(f"No results generated for {dataset} + {model}")
+    logger.info(f"\n{'='*80}")
+    logger.info(f"Evaluating {dataset} with {model}")
+    logger.info(f"{'='*80}")
     
-    logger.info(f"\n🎉 GNN evaluation completed!")
+    # Run evaluation
+    results = runner.run_evaluation(dataset, model)
+    
+    if results:
+        # Print summary
+        runner.print_evaluation_summary(results)
+        
+        # Save results
+        runner.save_results(results, dataset, model)
+    else:
+        logger.error(f"No results generated for {dataset} + {model}")
+    
+    logger.info(f"\nGNN evaluation completed!")
     logger.info(f"Results saved in: {runner.results_dir}")
 
 

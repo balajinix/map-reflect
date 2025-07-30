@@ -5,19 +5,19 @@
 
 set -e  # Exit on any error
 
-echo "🚀 Starting ReAct Schema Mapping Evaluation"
+echo "Starting ReAct Schema Mapping Evaluation"
 echo "============================================"
 
 # Check if we're in the react directory
 if [ ! -f "react_runner.py" ]; then
-    echo "❌ Error: react_runner.py not found. Please run this script from the react/ directory."
+    echo "Error: react_runner.py not found. Please run this script from the react/ directory."
     echo "Usage: cd react && ./run_react.sh"
     exit 1
 fi
 
 # Check if shared dataset loader exists (one level up)
 if [ ! -f "../data/dataset_loader.py" ]; then
-    echo "❌ Error: shared dataset loader not found at ../data/dataset_loader.py"
+    echo "Error: shared dataset loader not found at ../data/dataset_loader.py"
     exit 1
 fi
 
@@ -72,7 +72,7 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         *)
-            echo "❌ Unknown option: $1"
+            echo "Unknown option: $1"
             echo "Use --help for usage information"
             exit 1
             ;;
@@ -80,7 +80,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Display configuration
-echo "📋 Configuration:"
+echo "Configuration:"
 echo "   Datasets: $DATASETS"
 echo "   Models: $MODELS"
 echo "   Schema directory: $SCHEMA_DIR"
@@ -90,19 +90,19 @@ echo ""
 
 # Check if virtual environment is activated
 if [ -z "$VIRTUAL_ENV" ]; then
-    echo "⚠️  Warning: No virtual environment detected. Consider activating one."
+    echo "Warning: No virtual environment detected. Consider activating one."
 fi
 
 # Check if the ReAct agent files exist
 if [ ! -d "app" ]; then
-    echo "❌ Error: app directory not found in react directory"
+    echo "Error: app directory not found in react directory"
     echo "Make sure the ReAct agent implementation is available"
     exit 1
 fi
 
 # Check schema directory
 if [ ! -d "$SCHEMA_DIR" ]; then
-    echo "⚠️  Warning: Schema directory $SCHEMA_DIR not found"
+    echo "Warning: Schema directory $SCHEMA_DIR not found"
     echo "ReAct evaluation will continue but may use mock schemas"
 fi
 
@@ -125,7 +125,7 @@ if [ "$VERBOSE" = true ]; then
     ARGS="$ARGS --verbose"
 fi
 
-echo "🔧 Running ReAct evaluation with args: $ARGS"
+echo "Running ReAct evaluation with args: $ARGS"
 echo ""
 
 # Run the ReAct evaluation
@@ -134,17 +134,17 @@ python3 react_runner.py $ARGS
 # Check if results were generated
 if [ -d "results" ]; then
     echo ""
-    echo "✅ ReAct evaluation completed successfully!"
-    echo "📁 Results saved in: ./results/"
+    echo "ReAct evaluation completed successfully!"
+    echo "Results saved in: ./results/"
     echo ""
-    echo "📊 Generated files:"
+    echo "Generated files:"
     ls -la results/ | grep ".json"
 else
     echo ""
-    echo "❌ No results directory found. Check for errors above."
+    echo "No results directory found. Check for errors above."
     exit 1
 fi
 
 echo ""
-echo "🎉 ReAct Schema Mapping Evaluation Complete!"
+echo "ReAct Schema Mapping Evaluation Complete!"
 echo "============================================"

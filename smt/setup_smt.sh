@@ -7,9 +7,9 @@
 set -e  # Exit on any error
 
 # Default values
-SCHEMA_DIR="./data/graphql"
-MAPPINGS_DIR="./mappings_output"
-CHROMA_DB_PATH="./chroma_db"
+SCHEMA_DIR="../data/graphql"
+MAPPINGS_DIR="../data/mappings_output"
+CHROMA_DB_PATH="../data/chroma_db"
 FORCE_REINDEX=""
 VERBOSE=""
 
@@ -45,8 +45,8 @@ usage() {
     echo ""
     echo "Options:"
     echo "  --schema-dir DIR       GraphQL schema directory (default: ../data/graphql)"
-    echo "  --mappings-dir DIR     Existing mappings directory (default: ./mappings_output)"
-    echo "  --chroma-db-path DIR   ChromaDB storage path (default: ./chroma_db)"
+    echo "  --mappings-dir DIR     Existing mappings directory (default: ../data/mappings_output)"
+    echo "  --chroma-db-path DIR   ChromaDB storage path (default: ../data/chroma_db)"
     echo "  --force-reindex        Force recreation of all indices"
     echo "  --verbose              Enable verbose output"
     echo "  --help                 Show this help message"
@@ -97,7 +97,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo "============================================================"
-echo "🔧 SMT ChromaDB Setup - One-time Index Creation"
+echo "SMT ChromaDB Setup - One-time Index Creation"
 echo "============================================================"
 
 print_status "Configuration:"
@@ -116,12 +116,12 @@ fi
 # Check for required dependencies
 print_step "1. Checking dependencies"
 
-python -c "import chromadb; print('✅ ChromaDB available')" 2>/dev/null || {
+python -c "import chromadb; print('ChromaDB available')" 2>/dev/null || {
     print_error "ChromaDB not found. Please install with: pip install chromadb"
     exit 1
 }
 
-python -c "from sentence_transformers import SentenceTransformer; print('✅ SentenceTransformers available')" 2>/dev/null || {
+python -c "from sentence_transformers import SentenceTransformer; print('SentenceTransformers available')" 2>/dev/null || {
     print_error "SentenceTransformers not found. Please install with: pip install sentence-transformers"
     exit 1
 }
@@ -218,7 +218,7 @@ fi
 print_step "4. Indexing GraphQL schemas"
 
 if [[ "$SCHEMA_INDEX_EXISTS" == "true" ]] && [[ -z "$FORCE_REINDEX" ]]; then
-    print_status "✅ Schema index already exists (use --force-reindex to rebuild)"
+    print_status "Schema index already exists (use --force-reindex to rebuild)"
 else
     print_status "Creating GraphQL schema index..."
     print_status "  Source: $SCHEMA_DIR ($SCHEMA_FILES files)"
@@ -233,9 +233,9 @@ else
         $VERBOSE
     
     if [[ $? -eq 0 ]]; then
-        print_status "✅ GraphQL schema indexing completed"
+        print_status "GraphQL schema indexing completed"
     else
-        print_error "❌ GraphQL schema indexing failed"
+        print_error "GraphQL schema indexing failed"
         exit 1
     fi
 fi
@@ -244,7 +244,7 @@ fi
 print_step "5. Indexing existing mappings"
 
 if [[ "$MAPPINGS_INDEX_EXISTS" == "true" ]] && [[ -z "$FORCE_REINDEX" ]]; then
-    print_status "✅ Mappings index already exists (use --force-reindex to rebuild)"
+    print_status "Mappings index already exists (use --force-reindex to rebuild)"
 else
     if [[ $MAPPING_FILES -gt 0 ]]; then
         print_status "Creating existing mappings index..."
@@ -260,13 +260,13 @@ else
             $VERBOSE
         
         if [[ $? -eq 0 ]]; then
-            print_status "✅ Existing mappings indexing completed"
+            print_status "Existing mappings indexing completed"
         else
-            print_error "❌ Existing mappings indexing failed"
+            print_error "Existing mappings indexing failed"
             exit 1
         fi
     else
-        print_warning "⚠️  No existing mappings to index"
+        print_warning "⚠No existing mappings to index"
         print_status "Creating empty mappings collection for future use..."
         
         python -c "
@@ -276,12 +276,12 @@ from chromadb.config import Settings
 client = chromadb.PersistentClient(path='$CHROMA_DB_PATH', settings=Settings(anonymized_telemetry=False))
 try:
     collection = client.create_collection('smt_mappings', metadata={'description': 'SMT mappings for reuse'})
-    print('✅ Empty mappings collection created')
+    print('Empty mappings collection created')
 except Exception as e:
     if 'already exists' in str(e):
-        print('✅ Mappings collection already exists')
+        print('Mappings collection already exists')
     else:
-        print(f'❌ Error: {e}')
+        print(f'Error: {e}')
 "
     fi
 fi
@@ -298,7 +298,7 @@ try:
     client = chromadb.PersistentClient(path='$CHROMA_DB_PATH', settings=Settings(anonymized_telemetry=False))
     collections = client.list_collections()
     
-    print('📊 ChromaDB Collections:')
+    print('ChromaDB Collections:')
     total_docs = 0
     
     for collection in collections:
@@ -310,7 +310,7 @@ try:
     
     # Test queries
     print('')
-    print('🔍 Testing search functionality:')
+    print('Testing search functionality:')
     
     # Test schema search
     try:
@@ -318,7 +318,7 @@ try:
         schema_results = schema_collection.query(query_texts=['turbo entity'], n_results=2)
         print(f'  Schema search test: Found {len(schema_results[\"ids\"][0])} results')
     except Exception as e:
-        print(f'  Schema search test: ❌ {e}')
+        print(f'  Schema search test: {e}')
     
     # Test mappings search
     try:
@@ -326,13 +326,13 @@ try:
         mapping_results = mappings_collection.query(query_texts=['map concert to turbo'], n_results=2)
         print(f'  Mappings search test: Found {len(mapping_results[\"ids\"][0])} results')
     except Exception as e:
-        print(f'  Mappings search test: ❌ {e}')
+        print(f'  Mappings search test: {e}')
         
 except Exception as e:
-    print(f'❌ Verification failed: {e}')
+    print(f'Verification failed: {e}')
     exit(1)
 " || {
-    print_error "❌ Setup verification failed"
+    print_error "Setup verification failed"
     exit 1
 }
 
@@ -341,30 +341,30 @@ echo "$(date): SMT ChromaDB setup completed successfully" > "$CHROMA_DB_PATH/.se
 
 echo ""
 echo "============================================================"
-print_status "🎉 SMT ChromaDB Setup Completed Successfully!"
+print_status "SMT ChromaDB Setup Completed Successfully!"
 echo "============================================================"
 
-print_status "✅ Two ChromaDB collections created:"
-print_status "  📋 graphql_schemas  - For schema discovery"
-print_status "  🗂️  smt_mappings     - For existing mapping reuse"
+print_status "Two ChromaDB collections created:"
+print_status "  graphql_schemas  - For schema discovery"
+print_status "  smt_mappings     - For existing mapping reuse"
 
 echo ""
-print_status "📁 Files created:"
+print_status "Files created:"
 print_status "  $CHROMA_DB_PATH/               - ChromaDB database"
 print_status "  $CHROMA_DB_PATH/.setup_complete - Setup completion marker"
 
 echo ""
-print_status "🚀 Next steps:"
+print_status "Next steps:"
 echo "  1. Run SMT evaluation: ./run_smt.sh --quick"
 echo "  2. The system will now use existing indices for fast retrieval"
 echo "  3. Re-run this setup only when you add new schemas or mappings"
 
 echo ""
-print_status "💡 Maintenance:"
+print_status "Maintenance:"
 echo "  - To rebuild indices: $0 --force-reindex"
 echo "  - To add new mappings: copy files to $MAPPINGS_DIR and re-run setup"
 echo "  - To add new schemas: copy files to $SCHEMA_DIR and re-run setup"
 
 echo ""
-print_status "🔍 Test the setup:"
+print_status "Test the setup:"
 echo "  ./run_smt.sh --quick --verbose"

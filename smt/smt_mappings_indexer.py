@@ -32,7 +32,7 @@ class SMTMappingsIndexer:
     """
     
     def __init__(self, 
-                 chroma_db_path: str = "./chroma_db",
+                 chroma_db_path: str = "../data/chroma_db",
                  collection_name: str = "smt_mappings"):
         """
         Initialize the ChromaDB indexer.
@@ -250,7 +250,7 @@ class SMTMappingsIndexer:
         
         # Find all JSON mapping files
         mapping_files = list(mappings_path.glob("*-*.json"))
-        logger.info(f"📁 Found {len(mapping_files)} mapping files in {mappings_path}")
+        logger.info(f"Found {len(mapping_files)} mapping files in {mappings_path}")
         
         if not mapping_files:
             logger.warning("No mapping files found (expected format: source-target.json)")
@@ -483,7 +483,7 @@ def main():
     """Main entry point for the ChromaDB indexer."""
     parser = argparse.ArgumentParser(description="Index SMT mapping files into ChromaDB")
     parser.add_argument("--mappings-dir", required=True, help="Directory containing SMT mapping files")
-    parser.add_argument("--chroma-db-path", default="./chroma_db", help="Path to store ChromaDB data")
+    parser.add_argument("--chroma-db-path", default="../data/chroma_db", help="Path to store ChromaDB data")
     parser.add_argument("--collection-name", default="smt_mappings", help="ChromaDB collection name")
     parser.add_argument("--force-reindex", action="store_true", help="Force reindex (clear existing)")
     parser.add_argument("--test-query", help="Test query to search after indexing")
@@ -513,13 +513,13 @@ def main():
     
     # Show collection statistics
     stats = indexer.get_collection_stats()
-    print(f"\n📊 Collection Statistics:")
+    print(f"\nCollection Statistics:")
     for key, value in stats.items():
         print(f"   {key}: {value}")
     
     # Test search if query provided
     if args.test_query:
-        print(f"\n🔍 Testing search with query: '{args.test_query}'")
+        print(f"\nTesting search with query: '{args.test_query}'")
         results = indexer.search_mappings(args.test_query, n_results=3)
         
         for i, result in enumerate(results, 1):

@@ -51,8 +51,8 @@ class SMTEvaluationRunner:
     """Runner class for SMT schema mapping evaluation."""
     
     def __init__(self, 
-                 mappings_dir: str = "./mappings_output",
-                 chroma_db_path: str = "./chroma_db", 
+                 mappings_dir: str = "../data/mappings_output",
+                 chroma_db_path: str = "../data/chroma_db", 
                  schema_dir: str = "../data/graphql"):
         """
         Initialize the SMT evaluation runner.
@@ -583,11 +583,11 @@ def main():
                        help="Comma-separated list of datasets (default: ITOps)")
     parser.add_argument("--models", default="llama", 
                        help="Comma-separated list of models (default: llama)")
-    parser.add_argument("--mappings-dir", default="./mappings_output",
+    parser.add_argument("--mappings-dir", default="../data/mappings_output",
                        help="Directory containing cached mapping results")
     parser.add_argument("--schema-dir", default="../data/graphql",
                        help="Directory containing GraphQL schemas")
-    parser.add_argument("--chroma-db-path", default="./chroma_db",
+    parser.add_argument("--chroma-db-path", default="../data/chroma_db",
                        help="Path to ChromaDB database (should be pre-indexed)")
     parser.add_argument("--quick", action="store_true",
                        help="Quick evaluation with minimal samples")

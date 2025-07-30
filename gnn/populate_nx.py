@@ -9,11 +9,11 @@ import numpy as np
 from sklearn.metrics import roc_auc_score, average_precision_score
 import json
 import os
+import argparse
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-import os
 import random
 import numpy as np
 import torch
@@ -376,29 +376,67 @@ def create_train_test_split_mapping(data, test_ratio=0.2, val_ratio=0.1, seed=42
     
     return data
 
-if __name__ == "__main__":
-    SEED = 52
-    set_seed(SEED)
+def parse_arguments():
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(description='Populate NetworkX graph for GNN training')
     
-    mapping_dir = "../data/mappings_output"
-    api_lookup_file = "api_lookup.json"
+    parser.add_argument('--dataset', type=str, default='itops',
+                       help='Dataset name for output files (default: itops)')
+    parser.add_argument('--mappings-dir', type=str, default='../data/mappings_output',
+                       help='Directory containing mapping files (default: ../data/mappings_output)')
+    parser.add_argument('--api-lookup-file', type=str, default='../data/itops_api_lookup.json',
+                       help='Path to API lookup file (default: ../data/itops_api_lookup.json)')
+    parser.add_argument('--output-dir', type=str, default='../data',
+                       help='Output directory for generated files (default: ../data)')
+    parser.add_argument('--seed', type=int, default=52,
+                       help='Random seed for reproducibility (default: 52)')
+    
+    return parser.parse_args()
+
+if __name__ == "__main__":
+    args = parse_arguments()
+    
+    # Set seed based on argument
+    set_seed(args.seed)
+    
+    # Create output filename based on dataset
+    output_file = os.path.join(args.output_dir, f'{args.dataset}_graph_data.pkl')
+    
+    print(f"Configuration:")
+    print(f"  Dataset: {args.dataset}")
+    print(f"  Mappings directory: {args.mappings_dir}")
+    print(f"  API lookup file: {args.api_lookup_file}")
+    print(f"  Output directory: {args.output_dir}")
+    print(f"  Output file: {output_file}")
+    print(f"  Seed: {args.seed}")
+    print()
     
     # Build mapping graph
-    graph, builder = populate_mapping_graph(mapping_dir, api_lookup_file)
+    graph, builder = populate_mapping_graph(args.mappings_dir, args.api_lookup_file)
     test_graph_queries(graph)
     
     # Prepare data for GNN
     model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
     data, node_list, type_to_idx = prepare_mapping_graph_data(graph, model)
-    data = create_train_test_split_mapping(data, seed=SEED)
+    data = create_train_test_split_mapping(data, seed=args.seed)
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(args.output_dir, exist_ok=True)
     
     # Save everything needed for training
     import pickle
-    with open('graph_data.pkl', 'wb') as f:
+    with open(output_file, 'wb') as f:
         pickle.dump({
             'data': data,
             'node_list': node_list,
             'type_to_idx': type_to_idx,
-            'graph': graph
+            'graph': graph,
+            'dataset': args.dataset,
+            'config': {
+                'mappings_dir': args.mappings_dir,
+                'api_lookup_file': args.api_lookup_file,
+                'output_dir': args.output_dir,
+                'seed': args.seed
+            }
         }, f)
-    print("Graph data saved to 'graph_data.pkl'")
+    print(f"Graph data saved to '{output_file}'")

@@ -47,10 +47,11 @@ class GNNAPIRetriever:
     """
     
     def __init__(self, 
-                 gnn_model_path: str = "./gnn_results/mapping_gnn_results.pkl",
-                 graph_data_path: str = "./graph_data.pkl",
-                 chroma_db_path: str = "./chroma_db",
-                 api_lookup_file: str = "./api_lookup.json"):
+                 gnn_model_path: str = None,
+                 graph_data_path: str = None,
+                 chroma_db_path: str = None,
+                 collection_name: str = None,
+                 api_lookup_file: str = None):
         """
         Initialize the GNN API retriever.
         
@@ -69,7 +70,7 @@ class GNNAPIRetriever:
         try:
             self.schema_indexer = GraphQLSchemaIndexer(
                 chroma_db_path=str(chroma_db_path),
-                collection_name="graphql_schemas"
+                collection_name=str(collection_name)
             )
             logger.info("Connected to Schema ChromaDB")
         except Exception as e:

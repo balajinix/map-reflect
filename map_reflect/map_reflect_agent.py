@@ -12,7 +12,9 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 
 load_dotenv()
-logger = logging.getLogger("solis_ai_api")
+
+# Set up logger for this module
+logger = logging.getLogger(__name__)
 
 # Define the state structure
 class MappingState(TypedDict):
@@ -25,8 +27,8 @@ class MappingState(TypedDict):
     reflection_feedback: str
     graph: nx.Graph
     chroma_collection: Any
-    source_context: str  # Added missing field
-    destination_context: str  # Added missing field
+    source_context: str
+    destination_context: str
 
 @dataclass
 class PropertyMapping:
@@ -36,7 +38,7 @@ class PropertyMapping:
     confidence_score: float = 0.0
 
 class MapReflectAgent:
-    def __init__(self, property_lookup_file: str, rebuild_index=False, model: str = "watsonx/mistralai/mistral-large"):
+    def __init__(self, property_lookup_file: str, rebuild_index=False, model: str = "watsonx/mistralai/mistral-large", dataset: str = None):
         """
         Initialize MapReflect agent.
         
@@ -44,17 +46,24 @@ class MapReflectAgent:
             property_lookup_file: Path to the property lookup JSON file
             rebuild_index: Whether to rebuild the ChromaDB index
             model: Model to use for LLM calls
+            dataset: Dataset name for ChromaDB directory isolation
         """
-        # Initialize ChromaDB
-        persist_directory = "chroma_dir"
+        persist_directory = "../data/chroma_db"
+        
         self.chroma_client = chromadb.PersistentClient(path=persist_directory)
         self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         self.rebuild_index = rebuild_index
-        self.model = model  # Store model for LLM calls
+        self.model = model
+        self.dataset = dataset
+        
+        logger.info(f"Initialized MapReflect agent for dataset: {dataset or 'default'}")
+        logger.info(f"ChromaDB directory: {persist_directory}")
         
         # Load property data
         with open(property_lookup_file, 'r') as f:
             self.property_data = json.load(f)
+        
+        logger.info(f"Loaded {len(self.property_data)} properties from {property_lookup_file}")
         
         # Initialize the graph
         self.graph = self._build_graph()
@@ -79,7 +88,7 @@ class MapReflectAgent:
         workflow = StateGraph(MappingState)
         if self.rebuild_index:
             workflow.add_node("initialize_index", self._initialize_index)
-        workflow.add_node("extract_contexts", self._extract_contexts)  # Added new node
+        workflow.add_node("extract_contexts", self._extract_contexts)
         workflow.add_node("create_graph", self._create_property_graph)
         workflow.add_node("select_source_properties", self._select_source_properties)
         workflow.add_node("select_destination_properties", self._select_destination_properties)
@@ -91,7 +100,7 @@ class MapReflectAgent:
             workflow.add_edge("initialize_index", "extract_contexts")
             workflow.set_entry_point("initialize_index")
         else:
-            workflow.set_entry_point("extract_contexts")  # Updated entry point
+            workflow.set_entry_point("extract_contexts")
         
         workflow.add_edge("extract_contexts", "create_graph")
         workflow.add_edge("create_graph", "select_source_properties")
@@ -112,6 +121,7 @@ class MapReflectAgent:
     def _extract_contexts(self, state: MappingState) -> MappingState:
         """Use LLM to extract both source and destination contexts from user utterance."""
         user_utterance = state["user_utterance"]
+        logger.info("Extracting source and destination contexts from utterance")
 
         prompt = f"""
         Analyze the following user request and extract the source context and destination context.
@@ -140,20 +150,24 @@ class MapReflectAgent:
             contexts = json.loads(response)
             state["source_context"] = contexts.get("source_context", user_utterance)
             state["destination_context"] = contexts.get("destination_context", user_utterance)
+            logger.info(f"Extracted contexts - Source: '{state['source_context']}', Destination: '{state['destination_context']}'")
         except json.JSONDecodeError:
             # Fallback if LLM fails to return valid JSON
+            logger.warning("Failed to parse context extraction JSON, using fallback")
             state["source_context"] = user_utterance
             state["destination_context"] = user_utterance
 
         return state
     
     def _create_property_graph(self, state: MappingState) -> MappingState:
-        print("\nCreating property graph..")
+        logger.info("Creating property graph")
         G = nx.Graph()
         for prop_key, prop_data in state["property_data"].items():
             G.add_node(prop_key, **prop_data)
         
         properties = list(state["property_data"].keys())
+        edge_count = 0
+        
         for i, prop1 in enumerate(properties):
             for prop2 in properties[i+1:]:
                 data1 = state["property_data"][prop1]
@@ -172,16 +186,20 @@ class MapReflectAgent:
                 
                 if weight > 0.1:
                     G.add_edge(prop1, prop2, weight=weight)
+                    edge_count += 1
         
         state["graph"] = G
+        logger.info(f"Created property graph with {len(properties)} nodes and {edge_count} edges")
         return state
     
     def _select_source_properties(self, state: MappingState) -> MappingState:
-        print("\nSelecting source properties with neighbors..")
+        logger.info("Selecting source properties with neighbors")
 
         if state["chroma_collection"] is None:
             try:
-                collection = self.chroma_client.get_collection(name="property_index")
+                collection_name = f"property_index_{self.dataset.lower()}" if self.dataset else "property_index"
+                collection = self.chroma_client.get_collection(name=collection_name)
+                logger.info(f"Retrieved existing collection: {collection_name}")
             except:
                 collection = self._create_collection_from_state(state)
             state["chroma_collection"] = collection
@@ -208,14 +226,19 @@ class MapReflectAgent:
         combined_results = list(base_results | neighbors)
 
         state["source_properties"] = combined_results
-        print("Selected source properties:", state["source_properties"])
+        logger.info(f"Selected {len(combined_results)} source properties")
+        logger.debug(f"Source properties: {combined_results}")
         return state
 
     def _create_collection_from_state(self, state: MappingState):
-        print("\nCreating collection..")
+        logger.info("Creating ChromaDB collection")
         """Helper method to create ChromaDB collection from current state"""
+        
+        # Use dataset-specific collection name
+        collection_name = f"property_index_{self.dataset.lower()}" if self.dataset else "property_index"
+        
         collection = self.chroma_client.get_or_create_collection(
-            name="property_index",
+            name=collection_name,
             embedding_function=None
         )
         try:
@@ -228,7 +251,8 @@ class MapReflectAgent:
         metadatas = []
         embeddings = []
 
-        for prop_key, prop_data in tqdm(state["property_data"].items()):
+        logger.info("Building embeddings for property collection")
+        for prop_key, prop_data in tqdm(state["property_data"].items(), desc="Building embeddings", disable=logger.level > logging.INFO):
             ids.append(prop_key)
             doc_text = f"{prop_data['product_name']} {prop_data['type_name']} {prop_data['field_name']} {prop_data['description']}"
             documents.append(doc_text)
@@ -246,10 +270,11 @@ class MapReflectAgent:
             embeddings=embeddings
         )
         
+        logger.info(f"Created collection '{collection_name}' with {len(ids)} properties")
         return collection
     
     def _select_destination_properties(self, state: MappingState) -> MappingState:
-        print("\nSelecting destination properties with neighbors..")
+        logger.info("Selecting destination properties with neighbors")
 
         collection = state["chroma_collection"]
         destination_context = state["destination_context"]
@@ -271,17 +296,23 @@ class MapReflectAgent:
         neighbors = set(list(neighbors)[:5])
         combined_results = list(base_results | neighbors)
 
-        # state["destination_properties"] = combined_results
+        # Filter out source properties from destination properties
         state["destination_properties"] = [x for x in combined_results if x not in state["source_properties"]]
-        print("Selected destination properties:", state["destination_properties"])
+        logger.info(f"Selected {len(state['destination_properties'])} destination properties")
+        logger.debug(f"Destination properties: {state['destination_properties']}")
         return state
 
     
     def _find_mappings(self, state: MappingState) -> MappingState:
-        print("\nFinding mappings..")
+        logger.info("Finding mappings between source and destination properties")
         source_props = state["source_properties"]
         dest_props = state["destination_properties"]
         property_data = state["property_data"]
+
+        if not source_props or not dest_props:
+            logger.warning(f"Insufficient properties for mapping - Source: {len(source_props)}, Destination: {len(dest_props)}")
+            state["candidate_mappings"] = {}
+            return state
 
         # Build a single prompt containing all source/destination pairs
         prompt = "Evaluate the following possible property mappings.\n"
@@ -321,12 +352,16 @@ class MapReflectAgent:
             {"role": "user", "content": prompt}
         ]
 
+        logger.debug("Calling LLM for mapping evaluation")
         response = self.call_llm(messages)
         response = response.replace("```json","").replace("```","").strip()
+        
         try:
             parsed_results = json.loads(response)
+            logger.info(f"Successfully parsed {len(parsed_results)} mapping candidates")
         except json.JSONDecodeError:
-            print("LLM response not valid JSON, fallback: ", response)
+            logger.warning("LLM response not valid JSON, using fallback")
+            logger.debug(f"Invalid JSON response: {response}")
             parsed_results = []
 
         candidate_mappings = defaultdict(list)
@@ -339,14 +374,22 @@ class MapReflectAgent:
                 })
 
         state["candidate_mappings"] = dict(candidate_mappings)
-        print(f"Candidate mappings: {state['candidate_mappings']}")
+        logger.info(f"Found {len(candidate_mappings)} candidate mappings")
+        logger.debug(f"Candidate mappings: {dict(candidate_mappings)}")
         return state
 
     
     def _reflect_and_prune(self, state: MappingState) -> MappingState:
-        print("\nPerforming self-reflection..")
+        logger.info("Performing self-reflection on candidate mappings")
         candidate_mappings = state["candidate_mappings"]
         property_data = state["property_data"]
+        
+        if not candidate_mappings:
+            logger.info("No candidate mappings to reflect upon")
+            state["final_mappings"] = {}
+            state["reflection_feedback"] = "No candidate mappings were generated"
+            return state
+        
         reflection_prompt = self._create_reflection_prompt(candidate_mappings, property_data)
         
         messages = [
@@ -355,14 +398,16 @@ class MapReflectAgent:
         ]
         
         reflection_feedback = self.call_llm(messages)
-        print(f"Reflection Feedback: {reflection_feedback}")
+        logger.debug(f"Reflection feedback: {reflection_feedback}")
         final_mappings = self._prune_mappings_based_on_reflection(candidate_mappings, reflection_feedback)
         
         state["final_mappings"] = final_mappings
         state["reflection_feedback"] = reflection_feedback
+        logger.info(f"Final mappings after reflection: {len(final_mappings)} source properties mapped")
         return state
     
     def _format_output(self, state: MappingState) -> MappingState:
+        logger.info("Formatting output")
         return state
     
 
@@ -384,7 +429,7 @@ class MapReflectAgent:
         self, candidate_mappings: Dict[str, List[Dict]], reflection_feedback: str
     ) -> Dict:
         """Use LLM with reflection feedback to prune mappings."""
-        print("\nPruning..")
+        logger.info("Pruning mappings based on reflection feedback")
 
         prompt = f"""
         You previously provided the following reflection feedback on candidate mappings:
@@ -425,8 +470,10 @@ class MapReflectAgent:
 
         try:
             final_mappings = json.loads(response)
+            logger.info("Successfully parsed final mappings from reflection")
         except json.JSONDecodeError:
-            print("⚠️ Warning: LLM response not valid JSON. Falling back to reflection heuristics.")
+            logger.warning("LLM response not valid JSON. Falling back to confidence-based pruning")
+            logger.debug(f"Invalid pruning response: {response}")
             # fallback: drop low-confidence mappings
             final_mappings = {
                 k: [
@@ -439,6 +486,8 @@ class MapReflectAgent:
         return final_mappings
 
     def run(self, user_utterance: str) -> Dict[str, Any]:
+        logger.info(f"Starting MapReflect run for utterance: '{user_utterance}'")
+        
         initial_state = MappingState(
             user_utterance=user_utterance,
             property_data=self.property_data,
@@ -449,20 +498,28 @@ class MapReflectAgent:
             reflection_feedback="",
             graph=nx.Graph(),
             chroma_collection=None,
-            source_context="",  # Initialize empty contexts
-            destination_context=""  # Initialize empty contexts
+            source_context="",
+            destination_context=""
         )
+        
         final_state = self.graph.invoke(initial_state)
-        return {
+        
+        result = {
             "mappings": final_state["final_mappings"],
             "source_properties": final_state["source_properties"],
             "destination_properties": final_state["destination_properties"],
             "reflection_feedback": final_state["reflection_feedback"]
         }
+        
+        logger.info(f"MapReflect run completed - Found {len(result['mappings'])} final mappings")
+        return result
 
 # Example usage
 def main():
-    agent = MapReflectAgent(property_lookup_file="api_lookup.json")
+    # Set up logging for testing
+    logging.basicConfig(level=logging.WARNING)
+    
+    agent = MapReflectAgent(property_lookup_file="../data/itops_api_lookup.json", dataset="test")
     user_input = "map concert vulnerabilities to turbo entities"
     result = agent.run(user_input)
     

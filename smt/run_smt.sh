@@ -29,7 +29,7 @@ DATASETS="ITOps"
 MODELS="llama"
 MAPPINGS_DIR="./mappings_output"
 SCHEMA_DIR="../data/graphql"
-CHROMA_DB_PATH="./chroma_db"
+CHROMA_DB_PATH="../data/chroma_db"
 QUICK=false
 VERBOSE=false
 
@@ -72,7 +72,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --models MODELS          Comma-separated list of models (default: llama)"
             echo "  --mappings-dir DIR       Directory for cached mapping results (default: ./mappings_output)"
             echo "  --schema-dir DIR         Directory containing GraphQL schemas (default: ../../data/graphql)"
-            echo "  --chroma-db-path PATH    Path to ChromaDB database (default: ./chroma_db)"
+            echo "  --chroma-db-path PATH    Path to ChromaDB database (default: ../data/chroma_db)"
             echo "  --quick                  Quick evaluation with minimal samples"
             echo "  --verbose                Enable verbose logging"
             echo "  --help                   Show this help message"
@@ -104,28 +104,31 @@ echo ""
 
 # Check if virtual environment is activated
 if [ -z "$VIRTUAL_ENV" ]; then
-    echo "⚠️  Warning: No virtual environment detected. Consider activating one."
+    echo "Warning: No virtual environment detected. Consider activating one."
 fi
 
 # Check for SMT components
 if [ ! -f "smt_api_retriever.py" ]; then
-    echo "⚠️  Warning: smt_api_retriever.py not found. SMT functionality may be limited."
+    echo "Warning: smt_api_retriever.py not found. SMT functionality may be limited."
 fi
 
 if [ ! -f "smt_schema_indexer.py" ]; then
-    echo "⚠️  Warning: smt_schema_indexer.py not found. Schema indexing may not work."
+    echo "Warning: smt_schema_indexer.py not found. Schema indexing may not work."
 fi
 
 # Check schema directory
 if [ ! -d "$SCHEMA_DIR" ]; then
-    echo "⚠️  Warning: Schema directory $SCHEMA_DIR not found"
+    echo "Warning: Schema directory $SCHEMA_DIR not found"
     echo "SMT evaluation will continue but may use mock schemas"
 fi
 
 # Check ChromaDB directory
 if [ ! -d "$CHROMA_DB_PATH" ]; then
-    echo "⚠️  Warning: ChromaDB directory $CHROMA_DB_PATH not found"
+    echo "Warning: ChromaDB directory $CHROMA_DB_PATH not found"
     echo "SMT will create it or use limited functionality"
+    # Create the centralized ChromaDB directory
+    mkdir -p "$CHROMA_DB_PATH"
+    echo "Created centralized ChromaDB directory: $CHROMA_DB_PATH"
 fi
 
 # Create necessary directories

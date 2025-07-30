@@ -590,6 +590,9 @@ def main():
                        help="Directory containing shared data components (dataset_loader.py, etc.)")
     parser.add_argument("--schema-dir", type=str, default=None,
                        help="Directory containing GraphQL schemas (optional)")
+
+    parser.add_argument("--samples", type=str, default=None,
+                       help="Number of samples (optional)")
     
     # MapReflect specific options
     parser.add_argument("--rebuild-index", action="store_true",

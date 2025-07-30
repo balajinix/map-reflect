@@ -46,7 +46,7 @@ except ImportError as e:
 class ReActEvaluationRunner:
     """Runner class for ReAct agent evaluation."""
     
-    def __init__(self, schema_dir: str = "./data/graphql", model_config: Dict[str, str] = None):
+    def __init__(self, schema_dir: str = "../data/graphql", model_config: Dict[str, str] = None):
         self.schema_dir = Path(schema_dir)
         self.results_dir = Path("results")
         self.results_dir.mkdir(exist_ok=True)
@@ -315,7 +315,7 @@ def main():
                        help="Datasets to evaluate on")
     parser.add_argument("--models", nargs='+', default=['granite', 'llama', 'qwen'],
                        help="Models to evaluate")
-    parser.add_argument("--schema-dir", default="./data/graphql",
+    parser.add_argument("--schema-dir", default="../data/graphql",
                        help="Directory containing GraphQL schemas")
     parser.add_argument("--quick", action="store_true",
                        help="Quick evaluation with minimal samples")

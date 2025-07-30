@@ -70,7 +70,7 @@ while [[ $# -gt 0 ]]; do
             echo "Options:"
             echo "  --datasets DATASETS          Comma-separated list of datasets (default: ITOps)"
             echo "  --models MODELS              Comma-separated list of models (default: watsonx/mistralai/mistral-large)"
-            echo "  --property-lookup-file FILE  Path to property lookup JSON file (default: ./api_lookup.json)"
+            echo "  --property-lookup-file FILE  Path to property lookup JSON file (default: ../data/itops_api_lookup.json)"
             echo "  --data-dir DIR               Directory containing shared data components (default: ../data)"
             echo "  --schema-dir DIR             Directory containing GraphQL schemas (default: ../data/graphql)"
             echo "  --rebuild-index              Rebuild the ChromaDB index from scratch"
@@ -176,7 +176,7 @@ else
 fi
 
 # Check for ChromaDB directory (will be created if doesn't exist)
-if [ -d "chroma_dir" ]; then
+if [ -d "../data/chroma_db" ]; then
     if [ "$REBUILD_INDEX" = true ]; then
         echo "ChromaDB index exists and will be rebuilt"
     else
@@ -188,7 +188,6 @@ fi
 
 # Create necessary directories
 mkdir -p results
-mkdir -p chroma_dir
 
 # Build command line arguments for Python script
 ARGS=""

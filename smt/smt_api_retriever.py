@@ -44,7 +44,7 @@ class SMTAPIRetriever:
     
     def __init__(self, 
                  mappings_dir: str = ".", 
-                 chroma_db_path: str = "./chroma_db"):
+                 chroma_db_path: str = "../data/chroma_db"):
         """
         Initialize the API retriever with two ChromaDB instances.
         

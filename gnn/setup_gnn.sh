@@ -16,20 +16,30 @@ if [ ! -f "populate_nx.py" ] || [ ! -f "train_gnn.py" ]; then
 fi
 
 # Default parameters
+DATASET="itops"
 MAPPINGS_DIR="../data/mappings_output"
-API_LOOKUP_FILE="./api_lookup.json"
+API_LOOKUP_FILE="../data/itops_api_lookup.json"
+OUTPUT_DIR="../data"
 FORCE_RETRAIN=false
 VERBOSE=false
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
+        --dataset)
+            DATASET="$2"
+            shift 2
+            ;;
         --mappings-dir)
             MAPPINGS_DIR="$2"
             shift 2
             ;;
         --api-lookup-file)
             API_LOOKUP_FILE="$2"
+            shift 2
+            ;;
+        --output-dir)
+            OUTPUT_DIR="$2"
             shift 2
             ;;
         --force-retrain)
@@ -44,8 +54,10 @@ while [[ $# -gt 0 ]]; do
             echo "Usage: $0 [OPTIONS]"
             echo ""
             echo "Options:"
+            echo "  --dataset NAME           Dataset name for output files (default: itops)"
             echo "  --mappings-dir DIR       Directory containing mapping files (default: ../data/mappings_output)"
-            echo "  --api-lookup-file PATH   Path to API lookup file (default: ./api_lookup.json)"
+            echo "  --api-lookup-file PATH   Path to API lookup file (default: ../data/itops_api_lookup.json)"
+            echo "  --output-dir DIR         Output directory for generated files (default: ../data)"
             echo "  --force-retrain          Force retrain GNN model even if it exists"
             echo "  --verbose                Enable verbose logging"
             echo "  --help                   Show this help message"
@@ -66,10 +78,19 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# Create derived filenames based on dataset
+GRAPH_DATA_FILE="${OUTPUT_DIR}/${DATASET}_graph_data.pkl"
+GNN_RESULTS_DIR="${OUTPUT_DIR}/gnn_results"
+GNN_MODEL_FILE="${GNN_RESULTS_DIR}/${DATASET}_mapping_gnn_results.pkl"
+
 # Display configuration
 echo "Configuration:"
+echo "   Dataset: $DATASET"
 echo "   Mappings directory: $MAPPINGS_DIR"
 echo "   API lookup file: $API_LOOKUP_FILE"
+echo "   Output directory: $OUTPUT_DIR"
+echo "   Graph data file: $GRAPH_DATA_FILE"
+echo "   GNN model file: $GNN_MODEL_FILE"
 echo "   Force retrain: $FORCE_RETRAIN"
 echo "   Verbose: $VERBOSE"
 echo ""
@@ -83,7 +104,7 @@ echo ""
 echo "Step 0: Checking dependencies..."
 
 # Check Python dependencies
-echo "📦 Checking Python packages..."
+echo "Checking Python packages..."
 
 # Function to check if a Python package is installed
 check_python_package() {
@@ -125,7 +146,7 @@ if [ -n "$missing_packages" ]; then
     echo ""
     echo "Missing required packages:$missing_packages"
     echo ""
-    echo "📦 Installing missing packages..."
+    echo "Installing missing packages..."
     
     if [ -f "requirements_gnn.txt" ]; then
         echo "Using requirements_gnn.txt..."
@@ -139,7 +160,7 @@ if [ -n "$missing_packages" ]; then
     fi
     
     echo ""
-    echo "🔄 Re-checking dependencies..."
+    echo "Re-checking dependencies..."
     
     # Re-check core packages
     all_good=true
@@ -154,7 +175,7 @@ if [ -n "$missing_packages" ]; then
         echo "Some packages still missing. Please install manually:"
         echo "   pip install torch torch-geometric networkx sentence-transformers scikit-learn"
         echo ""
-        echo "ℹNote: GNN will use fallback methods if torch-geometric is not available"
+        echo "Note: GNN will use fallback methods if torch-geometric is not available"
         echo "   You can continue with reduced functionality"
         
         read -p "Continue anyway? (y/N): " -n 1 -r
@@ -195,60 +216,6 @@ echo "Step 2: Checking API lookup file..."
 
 if [ ! -f "$API_LOOKUP_FILE" ]; then
     echo "API lookup file not found. Creating a sample one..."
-    
-    # Create a basic API lookup file
-    cat > "$API_LOOKUP_FILE" << 'EOF'
-{
-  "vulnerabilities.id": {
-    "description": "Unique identifier for security vulnerabilities",
-    "product_name": "concert",
-    "type": "string"
-  },
-  "vulnerabilities.severity": {
-    "description": "Severity level of the vulnerability (low, medium, high, critical)",
-    "product_name": "concert",
-    "type": "string"
-  },
-  "vulnerabilities.title": {
-    "description": "Title or name of the vulnerability",
-    "product_name": "concert",
-    "type": "string"
-  },
-  "entities.entityId": {
-    "description": "Unique identifier for infrastructure entities",
-    "product_name": "turbo",
-    "type": "string"
-  },
-  "entities.entityName": {
-    "description": "Name of the infrastructure entity",
-    "product_name": "turbo",
-    "type": "string"
-  },
-  "entities.entityType": {
-    "description": "Type of the infrastructure entity (VM, storage, network, etc.)",
-    "product_name": "turbo",
-    "type": "string"
-  },
-  "topology.nodeId": {
-    "description": "Unique identifier for topology nodes",
-    "product_name": "instana",
-    "type": "string"
-  },
-  "topology.nodeName": {
-    "description": "Name of the topology node",
-    "product_name": "instana",
-    "type": "string"
-  },
-  "topology.nodeType": {
-    "description": "Type of the topology node (service, host, container, etc.)",
-    "product_name": "instana",
-    "type": "string"
-  }
-}
-EOF
-    
-    echo "Created sample API lookup file: $API_LOOKUP_FILE"
-    echo "   You may want to customize this file with your actual API descriptions"
 else
     echo "API lookup file found: $API_LOOKUP_FILE"
 fi
@@ -259,24 +226,38 @@ if ! python3 -c "import json; json.load(open('$API_LOOKUP_FILE'))" 2>/dev/null; 
     exit 1
 fi
 
+# Create output directory if it doesn't exist
+if [ ! -d "$OUTPUT_DIR" ]; then
+    echo "Creating output directory: $OUTPUT_DIR"
+    mkdir -p "$OUTPUT_DIR"
+fi
+
+# Create GNN results directory if it doesn't exist
+if [ ! -d "$GNN_RESULTS_DIR" ]; then
+    echo "Creating GNN results directory: $GNN_RESULTS_DIR"
+    mkdir -p "$GNN_RESULTS_DIR"
+fi
+
 echo ""
 echo "Step 3: Building mapping graph..."
 
 # Check if graph data already exists
-if [ -f "graph_data.pkl" ] && [ "$FORCE_RETRAIN" = false ]; then
-    echo "Graph data already exists (graph_data.pkl)"
+if [ -f "$GRAPH_DATA_FILE" ] && [ "$FORCE_RETRAIN" = false ]; then
+    echo "Graph data already exists ($GRAPH_DATA_FILE)"
     echo "   Use --force-retrain to rebuild"
 else
     echo "Running graph population (populate_nx.py)..."
     
+    POPULATE_CMD="python3 populate_nx.py --dataset $DATASET --mappings-dir $MAPPINGS_DIR --api-lookup-file $API_LOOKUP_FILE --output-dir $OUTPUT_DIR"
+    
     if [ "$VERBOSE" = true ]; then
-        python3 populate_nx.py
+        $POPULATE_CMD
     else
-        python3 populate_nx.py > /dev/null 2>&1
+        $POPULATE_CMD > /dev/null 2>&1
     fi
     
-    if [ -f "graph_data.pkl" ]; then
-        echo "Graph data created successfully (graph_data.pkl)"
+    if [ -f "$GRAPH_DATA_FILE" ]; then
+        echo "Graph data created successfully ($GRAPH_DATA_FILE)"
     else
         echo "Error: Failed to create graph data"
         exit 1
@@ -289,7 +270,7 @@ echo "Step 4: Training GNN model..."
 # Check if GNN model already exists and is loadable
 model_needs_training=false
 
-if [ -d "gnn_results" ] && [ -f "gnn_results/mapping_gnn_results.pkl" ] && [ "$FORCE_RETRAIN" = false ]; then
+if [ -f "$GNN_MODEL_FILE" ] && [ "$FORCE_RETRAIN" = false ]; then
     echo "Checking existing GNN model..."
     
     # Test if the model can be loaded properly
@@ -299,7 +280,7 @@ import sys
 sys.path.append('.')
 try:
     from gnn_model import load_model_safely
-    model = load_model_safely('gnn_results/mapping_gnn_results.pkl')
+    model = load_model_safely('$GNN_MODEL_FILE')
     if model is not None:
         print('Model loads successfully')
         exit(0)
@@ -321,7 +302,7 @@ fi
 
 if [ "$model_needs_training" = true ] || [ "$FORCE_RETRAIN" = true ]; then
     if [ "$FORCE_RETRAIN" = true ]; then
-        echo "🔄 Force retraining GNN model..."
+        echo "Force retraining GNN model..."
     else
         echo "Training GNN model (train_gnn.py)..."
     fi
@@ -329,18 +310,20 @@ if [ "$model_needs_training" = true ] || [ "$FORCE_RETRAIN" = true ]; then
     echo "   This may take a few minutes..."
     
     # Remove old model if it exists and has issues
-    if [ -f "gnn_results/mapping_gnn_results.pkl" ] && [ "$model_needs_training" = true ]; then
+    if [ -f "$GNN_MODEL_FILE" ] && [ "$model_needs_training" = true ]; then
         echo "   Removing incompatible model file..."
-        rm -f "gnn_results/mapping_gnn_results.pkl"
+        rm -f "$GNN_MODEL_FILE"
     fi
+    
+    TRAIN_CMD="python3 train_gnn.py --dataset $DATASET --output-dir $OUTPUT_DIR"
     
     if [ "$VERBOSE" = true ]; then
-        python3 train_gnn.py
+        $TRAIN_CMD
     else
-        python3 train_gnn.py > /dev/null 2>&1
+        $TRAIN_CMD > /dev/null 2>&1
     fi
     
-    if [ -f "gnn_results/mapping_gnn_results.pkl" ]; then
+    if [ -f "$GNN_MODEL_FILE" ]; then
         echo "GNN model trained successfully"
         
         # Verify the new model can be loaded
@@ -348,7 +331,7 @@ if [ "$model_needs_training" = true ] || [ "$FORCE_RETRAIN" = true ]; then
 import sys
 sys.path.append('.')
 from gnn_model import load_model_safely
-model = load_model_safely('gnn_results/mapping_gnn_results.pkl')
+model = load_model_safely('$GNN_MODEL_FILE')
 print('New model verified successfully')
 " 2>/dev/null; then
             echo "New model verified and loadable"
@@ -364,90 +347,8 @@ fi
 echo ""
 echo "Step 5: Verifying setup..."
 
-# Create a comprehensive verification
-python3 << 'EOF'
-import os
-import json
-import pickle
-import sys
-
-def check_file(path, description):
-    if os.path.exists(path):
-        print(f"{description}: {path}")
-        return True
-    else:
-        print(f"{description}: {path} (missing)")
-        return False
-
-def check_pickle_file(path, description):
-    try:
-        with open(path, 'rb') as f:
-            data = pickle.load(f)
-        print(f"{description}: {path} (loadable)")
-        return True
-    except Exception as e:
-        print(f"{description}: {path} (error: {e})")
-        return False
-
-def check_api_lookup(path):
-    try:
-        with open(path, 'r') as f:
-            data = json.load(f)
-        
-        num_fields = len(data)
-        products = set(meta.get('product_name', 'unknown') for meta in data.values())
-        
-        print(f"API lookup file: {path}")
-        print(f"   Fields: {num_fields}")
-        print(f"   Products: {', '.join(sorted(products))}")
-        return True
-    except Exception as e:
-        print(f"API lookup file: {path} (error: {e})")
-        return False
-
-print("GNN Setup Verification")
-print("=" * 40)
-
-all_good = True
-
-# Check required files
-all_good &= check_file("populate_nx.py", "Graph builder script")
-all_good &= check_file("train_gnn.py", "GNN training script")
-all_good &= check_file("gnn_api_retriever.py", "GNN API retriever")
-all_good &= check_file("gnn_runner.py", "GNN evaluation runner")
-
-# Check generated files
-all_good &= check_pickle_file("graph_data.pkl", "Graph data")
-all_good &= check_pickle_file("gnn_results/mapping_gnn_results.pkl", "GNN model")
-
-# Check API lookup
-all_good &= check_api_lookup(os.environ.get('API_LOOKUP_FILE', './api_lookup.json'))
-
-# Check mappings directory
-mappings_dir = os.environ.get('MAPPINGS_DIR', '../data/mappings_output')
-if os.path.exists(mappings_dir):
-    mapping_files = [f for f in os.listdir(mappings_dir) if f.endswith('.json')]
-    print(f"Mappings directory: {mappings_dir} ({len(mapping_files)} files)")
-else:
-    print(f"Mappings directory: {mappings_dir} (missing)")
-    all_good = False
-
-print("\n" + "=" * 40)
-if all_good:
-    print("GNN setup verification PASSED")
-    print("Ready to run GNN evaluations!")
-else:
-    print("GNN setup verification FAILED")
-    print("Please fix the issues above before proceeding")
-    sys.exit(1)
-EOF
-
-# Set environment variables for the verification script
-export API_LOOKUP_FILE="$API_LOOKUP_FILE"
-export MAPPINGS_DIR="$MAPPINGS_DIR"
-
-# Run the verification
-if python3 -c "
+# Run verification with parameters
+python3 -c "
 import os
 import json
 import pickle
@@ -495,12 +396,10 @@ all_good = True
 # Check required files
 all_good &= check_file('populate_nx.py', 'Graph builder script')
 all_good &= check_file('train_gnn.py', 'GNN training script')
-all_good &= check_file('gnn_api_retriever.py', 'GNN API retriever')
-all_good &= check_file('gnn_runner.py', 'GNN evaluation runner')
 
 # Check generated files
-all_good &= check_pickle_file('graph_data.pkl', 'Graph data')
-all_good &= check_pickle_file('gnn_results/mapping_gnn_results.pkl', 'GNN model')
+all_good &= check_pickle_file('$GRAPH_DATA_FILE', 'Graph data')
+all_good &= check_pickle_file('$GNN_MODEL_FILE', 'GNN model')
 
 # Check API lookup
 all_good &= check_api_lookup('$API_LOOKUP_FILE')
@@ -522,26 +421,32 @@ else:
     print('GNN setup verification FAILED')
     print('Please fix the issues above before proceeding')
     sys.exit(1)
-"; then
+"
+
+if [ $? -eq 0 ]; then
     echo ""
     echo "GNN Setup Complete!"
     echo "====================="
     echo ""
     echo "Next Steps:"
-    echo "   1. Run GNN evaluation: ./run_gnn.sh"
+    echo "   1. Run GNN evaluation: ./run_gnn.sh --dataset $DATASET"
     echo "   2. Compare with other methods (SMT, React)"
     echo "   3. Check results in results/ directory"
     echo ""
     echo "Usage Examples:"
-    echo "   ./run_gnn.sh --quick                    # Quick test"
-    echo "   ./run_gnn.sh --datasets ITOps --verbose # Full evaluation with logging"
-    echo "   ./run_gnn.sh --help                     # Show all options"
+    echo "   ./run_gnn.sh --dataset $DATASET --quick                    # Quick test"
+    echo "   ./run_gnn.sh --dataset $DATASET --verbose                  # Full evaluation with logging"
+    echo "   ./run_gnn.sh --help                                        # Show all options"
     echo ""
     echo "GNN Method Summary:"
     echo "   • Uses Graph Neural Networks for field joinability prediction"
     echo "   • Learns from existing mapping patterns"
     echo "   • Combines semantic similarity with learned connectivity patterns"
     echo "   • Provides confidence scores for field mappings"
+    echo ""
+    echo "Generated Files:"
+    echo "   • Graph data: $GRAPH_DATA_FILE"
+    echo "   • GNN model: $GNN_MODEL_FILE"
 else
     echo ""
     echo "Setup verification failed. Please check the errors above."

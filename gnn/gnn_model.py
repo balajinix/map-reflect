@@ -48,6 +48,9 @@ class MappingKGGNN(nn.Module):
                  gnn_type='GCN', dropout=0.2, heads=1):
         super(MappingKGGNN, self).__init__()
         
+        self.input_dim = input_dim
+        self.hidden_dim = hidden_dim
+        self.output_dim = output_dim
         self.num_layers = num_layers
         self.dropout = dropout
         self.gnn_type = gnn_type
@@ -123,27 +126,15 @@ class MappingKGGNN(nn.Module):
     def get_model_info(self):
         """Get information about the model configuration"""
         return {
-            "input_dim": self.convs[0].in_channels if hasattr(self.convs[0], 'in_channels') else "unknown",
-            "hidden_dim": "varies",
-            "output_dim": self.convs[-1].out_channels if hasattr(self.convs[-1], 'out_channels') else "unknown",
+            "input_dim": self.input_dim,
+            "hidden_dim": self.hidden_dim,
+            "output_dim": self.output_dim,
             "num_layers": self.num_layers,
             "gnn_type": self.gnn_type,
             "dropout": self.dropout,
             "torch_geometric_available": self.torch_geometric_available,
             "parameters": sum(p.numel() for p in self.parameters())
         }
-
-
-def create_mock_gnn_model(input_dim=128, hidden_dim=64, output_dim=32):
-    """Create a mock GNN model for testing when torch_geometric is not available"""
-    return MappingKGGNN(
-        input_dim=input_dim,
-        hidden_dim=hidden_dim,
-        output_dim=output_dim,
-        num_layers=2,
-        gnn_type='GCN',
-        dropout=0.2
-    )
 
 
 def save_model_safely(model, file_path):
@@ -154,9 +145,9 @@ def save_model_safely(model, file_path):
     model_data = {
         'model_state_dict': model.state_dict(),
         'model_config': {
-            'input_dim': getattr(model.convs[0], 'in_channels', 128),
-            'hidden_dim': 64,  # Default assumption
-            'output_dim': getattr(model.convs[-1], 'out_channels', 32),
+            'input_dim': model.input_dim,
+            'hidden_dim': model.hidden_dim,  # Fixed: use actual hidden_dim instead of hardcoded 64
+            'output_dim': model.output_dim,
             'num_layers': model.num_layers,
             'gnn_type': model.gnn_type,
             'dropout': model.dropout
@@ -261,14 +252,13 @@ def load_model_safely(file_path):
                 else:
                     return data
                 
-                print("✅ Successfully loaded model with corrected architecture")
+                print("Successfully loaded model with corrected architecture")
                 return model
                 
             except Exception as e2:
                 print(f"Failed to load with corrected architecture: {e2}")
         
-        print("Creating mock model for testing...")
-        return create_mock_gnn_model(input_dim=387, hidden_dim=128, output_dim=64)
+        return None  # Return None instead of creating mock model
 
 
 if __name__ == "__main__":
@@ -276,8 +266,16 @@ if __name__ == "__main__":
     print("Testing GNN Model...")
     print(f"PyTorch Geometric available: {TORCH_GEOMETRIC_AVAILABLE}")
     
-    # Create test model
-    model = create_mock_gnn_model()
+    # Create test model with realistic dimensions
+    model = MappingKGGNN(
+        input_dim=387,
+        hidden_dim=128, 
+        output_dim=64,
+        num_layers=3,
+        gnn_type='SAGE',
+        dropout=0.2
+    )
+    
     info = model.get_model_info()
     
     print("Model Info:")
@@ -285,7 +283,7 @@ if __name__ == "__main__":
         print(f"  {key}: {value}")
     
     # Test forward pass
-    x = torch.randn(10, 128)  # 10 nodes, 128 features
+    x = torch.randn(10, 387)  # 10 nodes, 387 features (matching training)
     edge_index = torch.tensor([[0, 1, 2], [1, 2, 0]], dtype=torch.long)  # 3 edges
     
     try:

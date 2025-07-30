@@ -33,7 +33,7 @@ class GraphQLSchemaIndexer:
     """
     
     def __init__(self, 
-                 chroma_db_path: str = "./chroma_db",
+                 chroma_db_path: str = "../data/chroma_db",
                  collection_name: str = "graphql_schemas"):
         """
         Initialize the GraphQL schema indexer.
@@ -396,7 +396,7 @@ def main():
     """Main entry point for the GraphQL schema indexer."""
     parser = argparse.ArgumentParser(description="Index GraphQL schemas into ChromaDB")
     parser.add_argument("--schema-dir", required=True, help="Directory containing GraphQL schema files")
-    parser.add_argument("--chroma-db-path", default="./chroma_db", help="Path to store ChromaDB data")
+    parser.add_argument("--chroma-db-path", default="../data/chroma_db", help="Path to store ChromaDB data")
     parser.add_argument("--collection-name", default="graphql_schemas", help="ChromaDB collection name")
     parser.add_argument("--force-reindex", action="store_true", help="Force reindex (clear existing)")
     parser.add_argument("--test-query", help="Test query to search after indexing")
@@ -426,7 +426,7 @@ def main():
     
     # Test search if query provided
     if args.test_query:
-        print(f"\n🔍 Testing search with query: '{args.test_query}'")
+        print(f"\nTesting search with query: '{args.test_query}'")
         results = indexer.search_schemas(args.test_query, n_results=3)
         
         for i, result in enumerate(results, 1):

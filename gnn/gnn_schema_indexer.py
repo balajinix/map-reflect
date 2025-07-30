@@ -33,8 +33,8 @@ class GraphQLSchemaIndexer:
     """
     
     def __init__(self, 
-                 chroma_db_path: str = "./chroma_db",
-                 collection_name: str = "graphql_schemas"):
+                 chroma_db_path: str = None,
+                 collection_name: str = None):
         """
         Initialize the GraphQL schema indexer.
         
@@ -396,8 +396,8 @@ def main():
     """Main entry point for the GraphQL schema indexer."""
     parser = argparse.ArgumentParser(description="Index GraphQL schemas into ChromaDB")
     parser.add_argument("--schema-dir", required=True, help="Directory containing GraphQL schema files")
-    parser.add_argument("--chroma-db-path", default="./chroma_db", help="Path to store ChromaDB data")
-    parser.add_argument("--collection-name", default="graphql_schemas", help="ChromaDB collection name")
+    parser.add_argument("--chroma-db-path", default=None, help="Path to store ChromaDB data")
+    parser.add_argument("--collection-name", default=None, help="ChromaDB collection name")
     parser.add_argument("--force-reindex", action="store_true", help="Force reindex (clear existing)")
     parser.add_argument("--test-query", help="Test query to search after indexing")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
