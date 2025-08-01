@@ -45,10 +45,15 @@ class SMTMappingsIndexer:
         self.collection_name = collection_name
         
         # Initialize ChromaDB client
-        self.client = chromadb.PersistentClient(
-            path=str(self.chroma_db_path),
-            settings=Settings(anonymized_telemetry=False)
-        )
+        #self.client = chromadb.PersistentClient(
+        #    path=str(self.chroma_db_path),
+        #    settings=Settings(anonymized_telemetry=False)
+        #)
+        self.client = None
+        try:
+            self.client = chromadb.PersistentClient(path=str(self.chroma_db_path))
+        except Exception as e:
+            logger.warning(f"PersistentClient failed: {e}")
         
         # Get or create collection
         try:

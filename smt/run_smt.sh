@@ -13,6 +13,7 @@ TIMEOUT="6000"
 VERBOSE=false
 QUICK=false
 FORCE_REGENERATE=false
+MAX_WORKERS=""
 
 # Get script directory and data directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -58,6 +59,8 @@ usage() {
     echo "  --quick                Quick evaluation mode (limited samples)"
     echo "  --force-regenerate     Force regeneration of all results"
     echo "  --verbose              Enable verbose logging"
+    echo "  --max-workers N        Number of parallel workers (default: auto-detect)"
+    echo ""
     echo "  --help                 Show this help message"
     echo ""
     echo "Data Requirements:"
@@ -66,10 +69,11 @@ usage() {
     echo "  - ChromaDB indices: ../data/chroma_db/"
     echo ""
     echo "Examples:"
-    echo "  $0                                    # Run with defaults"
-    echo "  $0 --dataset ITOps --verbose         # ITOps with verbose output"
-    echo "  $0 --quick --samples 10              # Quick test with 10 samples"
-    echo "  $0 --dataset NL2GQL --model granite  # NL2GQL with granite model"
+    echo "  $0                                    # Run with defaults (8 threads)"
+    echo "  $0 --max-workers 4                   # Use 4 threads"
+    echo "  $0 --quick --max-workers 8           # Quick test with 8 threads"
+    echo "  $0 --dataset ITOps --verbose         # Debug mode with verbose output"
+    echo "  $0 --samples 50 --verbose            # Process only 50 samples with detailed output"
 }
 
 # Parse command line arguments
@@ -89,6 +93,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --timeout)
             TIMEOUT="$2"
+            shift 2
+            ;;
+        --max-workers)
+            MAX_WORKERS="$2"
             shift 2
             ;;
         --quick)
@@ -123,6 +131,11 @@ echo "============================================================"
 # Convert dataset to lowercase for file paths
 DATASET_LOWER=$(echo "$DATASET" | tr '[:upper:]' '[:lower:]')
 
+# Auto-detect max workers if not specified
+if [[ -z "$MAX_WORKERS" ]]; then
+    MAX_WORKERS=$(python -c "import os; print(min(os.cpu_count(), 8))")
+fi
+
 print_status "Configuration:"
 print_status "  Dataset: $DATASET"
 print_status "  Model: $MODEL"
@@ -135,6 +148,7 @@ print_status "  Timeout: ${TIMEOUT}s ($(($TIMEOUT / 60)) minutes)"
 print_status "  Quick mode: $QUICK"
 print_status "  Force regenerate: $FORCE_REGENERATE"
 print_status "  Verbose: $VERBOSE"
+print_status "  Max workers: $MAX_WORKERS"
 
 # Check if we're in the correct directory
 if [[ ! -f "smt_runner.py" ]]; then
@@ -177,6 +191,16 @@ python -c "import chromadb; print('ChromaDB available')" 2>/dev/null || {
 
 python -c "from sentence_transformers import SentenceTransformer; print('SentenceTransformers available')" 2>/dev/null || {
     print_error "SentenceTransformers not found. Please install with: pip install sentence-transformers"
+    exit 1
+}
+
+python -c "import concurrent.futures; print('Concurrent.futures available')" 2>/dev/null || {
+    print_error "Concurrent.futures not available"
+    exit 1
+}
+
+python -c "import threading; print('Threading available')" 2>/dev/null || {
+    print_error "Threading not available"
     exit 1
 }
 
@@ -227,6 +251,15 @@ print_status "Found $SCHEMA_FILES GraphQL schema files"
 DATASET_SAMPLES=$(wc -l < "$DATASET_FILE")
 print_status "Found $DATASET_SAMPLES samples in dataset"
 
+# Performance estimation
+ESTIMATED_TIME_SEQUENTIAL=$((DATASET_SAMPLES * 5))  # Assume 5 seconds per sample
+ESTIMATED_TIME_PARALLEL=$((ESTIMATED_TIME_SEQUENTIAL / MAX_WORKERS))
+
+print_status "Performance estimates:"
+print_status "  Sequential time: ~$(($ESTIMATED_TIME_SEQUENTIAL / 60))m"
+print_status "  Threaded time ($MAX_WORKERS workers): ~$(($ESTIMATED_TIME_PARALLEL / 60))m"
+print_status "  Expected speedup: ${MAX_WORKERS}x"
+
 # Validate ChromaDB
 if [[ ! -d "$CHROMA_DB_PATH" ]]; then
     print_error "ChromaDB path not found: $CHROMA_DB_PATH"
@@ -274,12 +307,14 @@ print_step "4. Checking existing results"
 RESULTS_DIR="results"
 mkdir -p "$RESULTS_DIR"
 
-RESULT_PATTERN="${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_smt_results*.json"
+RESULT_PATTERN="${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.json*"
 EXISTING_RESULTS=$(ls ${RESULT_PATTERN} 2>/dev/null | wc -l)
 
 if [[ $EXISTING_RESULTS -gt 0 && "$FORCE_REGENERATE" != "true" ]]; then
-    print_warning "Found $EXISTING_RESULTS existing result files matching pattern: $RESULT_PATTERN"
+    print_warning "Found $EXISTING_RESULTS existing result files matching pattern"
     print_warning "Use --force-regenerate to overwrite existing results"
+    print_status "Existing files:"
+    ls -la ${RESULT_PATTERN} 2>/dev/null | head -5
 fi
 
 # Build SMT arguments
@@ -290,6 +325,7 @@ SMT_ARGS="$SMT_ARGS --mappings-dir $DATA_DIR/mappings_output"
 SMT_ARGS="$SMT_ARGS --schema-dir $GRAPHQL_DIR"
 SMT_ARGS="$SMT_ARGS --chroma-db-path $CHROMA_DB_PATH"
 SMT_ARGS="$SMT_ARGS --collection-name $COLLECTION_NAME"
+SMT_ARGS="$SMT_ARGS --max-workers $MAX_WORKERS"
 
 if [[ -n "$SAMPLES" ]]; then
     SMT_ARGS="$SMT_ARGS --samples $SAMPLES"
@@ -300,13 +336,26 @@ if [[ "$VERBOSE" == "true" ]]; then
 fi
 
 if [[ "$FORCE_REGENERATE" == "true" ]]; then
-    SMT_ARGS="$SMT_ARGS --force-regenerate"
+    print_status "Removing existing results..."
+    rm -f ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.json*
 fi
 
 print_status "SMT arguments: $SMT_ARGS"
 
+# Performance warning for large datasets
+if [[ $DATASET_SAMPLES -gt 1000 ]]; then
+    print_warning "Large dataset ($DATASET_SAMPLES samples)"
+    print_warning "This may take $(($DATASET_SAMPLES * 5 / 60 / MAX_WORKERS)) minutes with $MAX_WORKERS workers"
+fi
+
+# Memory warning for many workers
+if [[ $MAX_WORKERS -gt 8 ]]; then
+    print_warning "Using $MAX_WORKERS workers may consume significant memory"
+    print_warning "Consider reducing --max-workers if you encounter memory issues"
+fi
+
 # Run SMT evaluation with timeout
-print_step "6. Running SMT evaluation"
+print_step "6. Running SMT evaluation (threaded mode)"
 
 START_TIME=$(date +%s)
 
@@ -314,7 +363,16 @@ print_status "Starting SMT evaluation..."
 print_status "  Dataset: $DATASET ($DATASET_SAMPLES samples)"
 print_status "  GraphQL schemas: $SCHEMA_FILES files"
 print_status "  Model: $MODEL"
+print_status "  Threading: $MAX_WORKERS workers"
 print_status "  Timeout: ${TIMEOUT}s"
+
+# Show progress indicator for long-running tasks
+if [[ $DATASET_SAMPLES -gt 100 ]]; then
+    print_status "This may take a while. Progress will be shown every 10 completions..."
+    if [[ "$VERBOSE" != "true" ]]; then
+        print_status "Use --verbose for detailed progress information"
+    fi
+fi
 
 if timeout "$TIMEOUT" python3 smt_runner.py $SMT_ARGS; then
     END_TIME=$(date +%s)
@@ -323,43 +381,76 @@ if timeout "$TIMEOUT" python3 smt_runner.py $SMT_ARGS; then
     print_status "SMT evaluation completed successfully!"
     print_status "Execution time: ${DURATION}s ($(($DURATION / 60))m $(($DURATION % 60))s)"
     
+    # Calculate actual performance
+    if [[ $DURATION -gt 0 ]]; then
+        SAMPLES_PER_SECOND=$((DATASET_SAMPLES / DURATION))
+        print_status "Performance: ${SAMPLES_PER_SECOND} samples/second"
+        
+        ESTIMATED_SEQUENTIAL_TIME=$((DATASET_SAMPLES * 5))
+        if [[ $ESTIMATED_SEQUENTIAL_TIME -gt 0 ]]; then
+            ACTUAL_SPEEDUP=$((ESTIMATED_SEQUENTIAL_TIME / DURATION))
+            print_status "Estimated speedup: ${ACTUAL_SPEEDUP}x"
+        fi
+    fi
+    
     # Display results summary
     print_step "7. Results summary"
     
-    NEW_RESULTS=$(ls ${RESULT_PATTERN} 2>/dev/null | wc -l)
-    print_status "Result files: $NEW_RESULTS"
+    # Look for both JSONL and JSON files
+    NEW_JSONL_RESULTS=$(ls ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.jsonl 2>/dev/null | wc -l)
+    NEW_JSON_RESULTS=$(ls ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.json 2>/dev/null | wc -l)
+    NEW_METADATA=$(ls ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*metadata*.json 2>/dev/null | wc -l)
     
-    if [[ $NEW_RESULTS -gt 0 ]]; then
-        print_status "Generated files:"
-        ls -la ${RESULT_PATTERN} 2>/dev/null || true
+    print_status "Generated files:"
+    print_status "  Results (JSONL): $NEW_JSONL_RESULTS"
+    print_status "  Results (JSON): $NEW_JSON_RESULTS"
+    print_status "  Metadata: $NEW_METADATA"
+    
+    if [[ $NEW_JSONL_RESULTS -gt 0 || $NEW_JSON_RESULTS -gt 0 ]]; then
+        print_status "File listing:"
+        ls -la ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.json* 2>/dev/null | head -5
+        ls -la ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*metadata*.json 2>/dev/null | head -3
         
         # Try to extract basic statistics from the most recent result file
         LATEST_RESULT=$(ls -t ${RESULT_PATTERN} 2>/dev/null | head -1)
         if [[ -n "$LATEST_RESULT" && -f "$LATEST_RESULT" ]]; then
             print_status "Latest result file: $LATEST_RESULT"
             
-            # Extract basic statistics
             python -c "
 import json
 import sys
 
 try:
-    with open('$LATEST_RESULT', 'r') as f:
-        data = json.load(f)
+    with open('$LATEST_METADATA', 'r') as f:
+        metadata = json.load(f)
     
-    if isinstance(data, list):
-        total = len(data)
-        successful = sum(1 for item in data if item.get('success', False))
-        print(f'   Total evaluations: {total}')
-        print(f'   Successful mappings: {successful}')
-        if total > 0:
-            print(f'   Success rate: {successful/total:.3f}')
-    else:
-        print(f'   Result format: {type(data).__name__}')
+    print(f'   Total samples: {metadata.get(\"total_samples\", 0)}')
+    print(f'   Completed: {metadata.get(\"completed_samples\", 0)}')
+    print(f'   Successful: {metadata.get(\"successful_samples\", 0)}')
+    print(f'   Failed: {metadata.get(\"failed_samples\", 0)}')
+    print(f'   Overall accuracy: {metadata.get(\"overall_accuracy\", 0.0):.3f}')
+    print(f'   Method: {metadata.get(\"method\", \"unknown\")}')
+    print(f'   Workers used: {metadata.get(\"max_workers\", \"unknown\")}')
+    print(f'   Status: {metadata.get(\"status\", \"unknown\")}')
+    
+    if 'execution_time' in metadata:
+        exec_time = metadata['execution_time']
+        print(f'   Execution time: {exec_time:.2f}s')
+        
+        total_samples = metadata.get('total_samples', 0)
+        if exec_time > 0 and total_samples > 0:
+            print(f'   Speed: {total_samples/exec_time:.1f} samples/sec')
         
 except Exception as e:
-    print(f'   Could not parse results: {e}')
+    print(f'   Could not parse metadata: {e}')
 "
+        fi
+        
+        # Count actual results in JSONL file
+        LATEST_JSONL=$(ls -t ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.jsonl 2>/dev/null | head -1)
+        if [[ -n "$LATEST_JSONL" && -f "$LATEST_JSONL" ]]; then
+            ACTUAL_RESULTS=$(wc -l < "$LATEST_JSONL")
+            print_status "Actual results written: $ACTUAL_RESULTS lines in JSONL"
         fi
     fi
     
@@ -370,9 +461,29 @@ else
     
     if [[ $EXIT_CODE -eq 124 ]]; then
         print_error "SMT evaluation TIMED OUT after ${TIMEOUT}s"
-        print_error "Consider increasing timeout with --timeout <seconds>"
+        print_error "Consider:"
+        print_error "  - Increasing timeout with --timeout <seconds>"
+        print_error "  - Reducing workers: --max-workers 4"
+        print_error "  - Reducing samples: --samples <number>"
+        print_error "  - Running in quick mode: --quick"
     else
         print_error "SMT evaluation FAILED after ${DURATION}s (exit code: $EXIT_CODE)"
+        print_error "Consider:"
+        print_error "  - Using --verbose for detailed error information"
+        print_error "  - Reducing workers: --max-workers 1 (for debugging)"
+        print_error "  - Checking that the dataset file format is correct"
+        print_error "  - Verifying ChromaDB collection exists"
+    fi
+    
+    # Show any partial results
+    PARTIAL_RESULTS=$(ls ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.jsonl 2>/dev/null | wc -l)
+    if [[ $PARTIAL_RESULTS -gt 0 ]]; then
+        print_warning "Found $PARTIAL_RESULTS partial result files"
+        LATEST_PARTIAL=$(ls -t ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.jsonl 2>/dev/null | head -1)
+        if [[ -n "$LATEST_PARTIAL" ]]; then
+            PARTIAL_COUNT=$(wc -l < "$LATEST_PARTIAL")
+            print_warning "Partial results: $PARTIAL_COUNT lines in $LATEST_PARTIAL"
+        fi
     fi
     
     exit $EXIT_CODE
@@ -383,10 +494,23 @@ echo "============================================================"
 print_status "SMT Evaluation Completed Successfully!"
 echo "============================================================"
 
+print_status "Performance summary:"
+print_status "  Workers used: $MAX_WORKERS"
+print_status "  Total time: ${DURATION}s"
+print_status "  Samples processed: $DATASET_SAMPLES"
+
+print_status "Generated output files:"
+echo "  - Incremental results: ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.jsonl"
+echo "  - Final results: ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*smt_results*.json"
+echo "  - Progress tracking: ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*progress*.json"
+echo "  - Metadata: ${RESULTS_DIR}/${DATASET_LOWER}_${MODEL}_*metadata*.json"
+
 print_status "Next steps:"
 echo "  1. Review results in: $RESULTS_DIR/"
 echo "  2. Run comparative evaluation: ../run_evaluation.sh --methods SMT --dataset $DATASET"
-echo "  3. Add more datasets: $0 --dataset NL2GQL"
+echo "  3. For debugging issues:"
+echo "     - $0 --verbose --max-workers 1    # Single-threaded with detailed output"
+echo "     - $0 --quick --verbose             # Quick test with detailed output"
 
 echo ""
 print_status "Dataset-specific files used:"
@@ -398,3 +522,23 @@ if [[ "$QUICK" == "true" ]]; then
     echo ""
     print_status "Quick mode completed. For full evaluation, run without --quick"
 fi
+
+echo ""
+print_status "Performance recommendations for your dataset size ($DATASET_SAMPLES samples):"
+if [[ $DATASET_SAMPLES -lt 50 ]]; then
+    echo "  Recommended: --max-workers 1 (small dataset, debugging easier)"
+elif [[ $DATASET_SAMPLES -lt 200 ]]; then
+    echo "  Recommended: --max-workers 4 (balanced performance)"
+elif [[ $DATASET_SAMPLES -lt 500 ]]; then
+    echo "  Recommended: --max-workers 8 (good parallelization)"
+else
+    echo "  Recommended: --max-workers 8 (maximum reasonable for large dataset)"
+    echo "               Consider --quick for testing first"
+fi
+
+echo ""
+print_status "Troubleshooting tips:"
+echo "  - If hanging: try --max-workers 1 --verbose"
+echo "  - If memory issues: reduce --max-workers"
+echo "  - If timeout: increase --timeout or use --quick"
+echo "  - For testing: use --quick --samples 10"
