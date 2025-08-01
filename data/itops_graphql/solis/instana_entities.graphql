@@ -1,0 +1,325 @@
+scalar instana_BigInt
+
+input instana_tagFilterExpressionElement_Input {
+  """
+  -- Fields for if type=TAG_FILTER case --
+  Required by JSON schema if type=TAG_FILTER,
+  but optional overall in GraphQL because we can't
+  conditionally require them in the schema itself.
+  """
+  entity: instana_groupbyTagEntity
+  name: String
+  operator: instana_tagOperator_Input
+  key: String
+  value: JSON
+  """
+  -- Fields for if type=EXPRESSION case --
+  Array of nested tagFilterExpressionElement_Input for recursion.
+  """
+  elements: [instana_tagFilterExpressionElement_Input!]
+  logicalOperator: instana_LogicalOperator
+  """
+  The discriminator used to decide whether this object
+  represents a TAG_FILTER or EXPRESSION.
+  """
+  type: instana_tagFilterElementType_Input!
+}
+
+input instana_entities_request_Input {
+  metrics: [instana_mutationInput_entities_input_metrics_items_Input]
+  missingPlaceholder: String
+  order: instana_mutationInput_entities_input_order_Input
+  pagination: instana_mutationInput_entities_input_pagination_Input!
+  tagFilterExpression: instana_tagFilterExpressionElement_Input!
+  tags: [String]
+  timeFrame: instana_mutationInput_entities_input_timeFrame_Input!
+  "Type of entities"
+  type: String
+}
+
+input instana_mutationInput_entities_input_metrics_items_Input {
+  metric: String!
+  regex: Boolean
+  "When true, metric must be present with values"
+  required: Boolean
+  aggregation: instana_mutationInput_entities_input_metrics_items_aggregation!
+  crossSeriesAggregation: instana_mutationInput_entities_input_metrics_items_crossSeriesAggregation
+  """
+  * If granularity is not specified an aggregated value for the selected timeframe is returned.
+     * If granularity is specified data points are returned with the specified granularity
+      * The granularity should not be greater than the `windowSize` (important: `windowSize` is expressed in milliseconds)
+      * The granularity should not be set too small relative to the `windowSize` to avoid creating an excessively large number of data points (max 600)
+  """
+  granularity: instana_BigInt
+}
+
+enum instana_mutationInput_entities_input_metrics_items_aggregation {
+  ""
+  P99_9
+  ""
+  P99_99
+  ""
+  INCREASE
+  ""
+  P50
+  ""
+  P90
+  ""
+  PER_SECOND
+  ""
+  SUM
+  ""
+  DISTINCT_COUNT
+  ""
+  P75
+  ""
+  SUM_POSITIVE
+  ""
+  P25
+  ""
+  P98
+  ""
+  MEAN
+  ""
+  MAX
+  ""
+  MIN
+  ""
+  P95
+  ""
+  P99
+}
+
+enum instana_mutationInput_entities_input_metrics_items_crossSeriesAggregation {
+  ""
+  P75
+  ""
+  P95
+  ""
+  MAX
+  ""
+  P98
+  ""
+  P99
+  ""
+  P99_9
+  ""
+  DISTINCT_COUNT
+  ""
+  PER_SECOND
+  ""
+  SUM
+  ""
+  P50
+  ""
+  SUM_POSITIVE
+  ""
+  MEAN
+  ""
+  MIN
+  ""
+  P25
+  ""
+  P99_99
+  ""
+  INCREASE
+  ""
+  P90
+}
+
+input instana_mutationInput_entities_input_order_Input {
+  "If the granularity is set to `1` you can use the metric name eg. `latency.p95` to order by that value."
+  by: String!
+  "Language code used for sorting. Ignored for infrastructure queries."
+  collation: String
+  direction: instana_queryInput_getCallGroup_input_order_direction!
+}
+
+enum instana_queryInput_getCallGroup_input_order_direction {
+  ""
+  ASC
+  ""
+  DESC
+}
+
+input instana_mutationInput_entities_input_pagination_Input {
+  "number of values to return"
+  retrievalSize: Int
+  cursor: JSON
+}
+
+input instana_mutationInput_entities_input_timeFrame_Input {
+  "end of timeframe expressed as the Unix epoch time in milliseconds. Eg: `ISO 8601` standard time `2024-06-27T05:05:55.615Z` can be represented as `1719464755615` in Unix epoch time in milliseconds."
+  to: instana_BigInt
+  "windowSize in milliseconds"
+  windowSize: instana_BigInt
+}
+
+type instana__entities_200_response {
+  adjustedTimeframe: instana_mutation_entities_adjustedTimeframe
+  canLoadMore: Boolean
+  items: [instana_mutation_entities_items_items]!
+  next: JSON
+  "represents the total number of results"
+  totalHits: instana_BigInt
+}
+
+type instana_mutation_entities_adjustedTimeframe {
+  "end of timeframe expressed as the Unix epoch time in milliseconds. Eg: `ISO 8601` standard time `2024-06-27T05:05:55.615Z` can be represented as `1719464755615` in Unix epoch time in milliseconds."
+  to: instana_BigInt!
+  "windowSize in milliseconds"
+  windowSize: instana_BigInt
+}
+
+type instana_mutation_entities_items_items {
+  entityHealthInfo: instana_mutation_entities_items_items_entityHealthInfo
+  label: String
+  metrics: JSON
+  plugin: String
+  snapshotId: String
+  tags: JSON
+  "Epoch time in milliseconds if the snapshot is offline. Set to 9223372036854775807 if the snapshot is online."
+  time: instana_BigInt
+}
+
+type instana_mutation_entities_items_items_entityHealthInfo {
+  maxSeverity: instana_NonNegativeFloat
+  openIssues: [instana_mutation_entities_items_items_entityHealthInfo_openIssues_items]!
+}
+
+scalar instana_NonNegativeFloat
+
+type instana_mutation_entities_items_items_entityHealthInfo_openIssues_items {
+  end: instana_BigInt
+  endpointServiceId: instana_mutation_manuallyCloseEvent_endpointServiceId
+  entityId: instana_mutation_manuallyCloseEvent_entityId!
+  entityType: instana_mutation_manuallyCloseEvent_entityType
+  id: instana_mutation_manuallyCloseEvent_id!
+  metadata: JSON
+  metricAccessId: instana_mutation_manuallyCloseEvent_metricAccessId
+  plugin: instana_mutation_manuallyCloseEvent_plugin!
+  problem: instana_mutation_manuallyCloseEvent_problem
+  rca: JSON
+  start: instana_BigInt
+  state: instana_mutation_manuallyCloseEvent_state!
+  type: instana_mutation_manuallyCloseEvent_type!
+}
+
+scalar instana_mutation_manuallyCloseEvent_endpointServiceId
+
+scalar instana_mutation_manuallyCloseEvent_entityId
+
+enum instana_mutation_manuallyCloseEvent_entityType {
+  ""
+  App20
+  ""
+  Service20
+  ""
+  Endpoint20
+  ""
+  Website
+  ""
+  Synthetic
+  ""
+  MobileApp
+  ""
+  Log
+  ""
+  Entity10
+}
+
+scalar instana_mutation_manuallyCloseEvent_id
+
+scalar instana_mutation_manuallyCloseEvent_metricAccessId
+
+scalar instana_mutation_manuallyCloseEvent_plugin
+
+type instana_mutation_manuallyCloseEvent_problem {
+  fixSuggestion: instana_mutation_manuallyCloseEvent_problem_fixSuggestion
+  id: instana_mutation_manuallyCloseEvent_problem_id!
+  problemText: instana_mutation_manuallyCloseEvent_problem_problemText
+  severity: Int
+}
+
+scalar instana_mutation_manuallyCloseEvent_problem_fixSuggestion
+
+scalar instana_mutation_manuallyCloseEvent_problem_id
+
+scalar instana_mutation_manuallyCloseEvent_problem_problemText
+
+scalar instana_mutation_manuallyCloseEvent_state
+
+scalar instana_mutation_manuallyCloseEvent_type
+
+enum instana_groupbyTagEntity {
+  ""
+  DESTINATION
+  ""
+  SOURCE
+  ""
+  NOT_APPLICABLE
+}
+
+enum instana_tagOperator_Input {
+  ""
+  GREATER_THAN
+  ""
+  NOT_STARTS_WITH
+  ""
+  NOT_ENDS_WITH
+  ""
+  EQUALS
+  ""
+  LESS_THAN
+  ""
+  NOT_EMPTY
+  ""
+  NOT_EQUAL
+  ""
+  STARTS_WITH
+  ""
+  GREATER_OR_EQUAL_THAN
+  ""
+  NOT_BLANK
+  ""
+  IS_BLANK
+  ""
+  ENDS_WITH
+  ""
+  NOT_CONTAIN
+  ""
+  LESS_OR_EQUAL_THAN
+  ""
+  CONTAINS
+  ""
+  IS_EMPTY
+}
+
+enum instana_LogicalOperator {
+  ""
+  OR
+  ""
+  AND
+}
+
+enum instana_tagFilterElementType_Input {
+  ""
+  EXPRESSION
+  ""
+  TAG_FILTER
+}
+
+type Query {
+  instana_entities(
+    input: instana_entities_request_Input
+  ): instana__entities_200_response
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

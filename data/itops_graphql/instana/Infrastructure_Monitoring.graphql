@@ -1,0 +1,169 @@
+type GetEntities {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  environmentType: String
+  discoveredBy: String
+  vendorIds: String
+  priceIndex: String
+  state: String
+  severity: String
+  unplacementDetails: String
+  placedOn: String
+  notPlacedOn: String
+  unplacedExplanation: String
+  costPrice: String
+  severityBreakdown: String
+  remoteId: String
+  realtimeMarketReference: String
+  providers: [Provider!]!
+  consumers: [Consumer!]!
+  template: Template
+  numRelatedVMs: String
+  connectedEntities: [ConnectedEntity!]!
+  aspects: String
+  tags: String
+  onDemandRateBefore: String
+  onDemandRateAfter: String
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Provider {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type Consumer {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type Template {
+  # Define fields for Template type here
+}
+
+type ConnectedEntity {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type GetEntityGroups {
+  # Define fields for GetEntityGroups type here
+}
+
+type GetAvailablePlugins {
+  # Define fields for GetAvailablePlugins type here
+}
+
+type GetAvailableMetrics {
+  # Define fields for GetAvailableMetrics type here
+}
+
+type GetInfrastructureCatalogMetrics {
+  # Define fields for GetInfrastructureCatalogMetrics type here
+}
+
+type GetAvailablePayloadKeysByPluginId {
+  # Define fields for GetAvailablePayloadKeysByPluginId type here
+}
+
+type GetInfrastructureCatalogPlugins {
+  # Define fields for GetInfrastructureCatalogPlugins type here
+}
+
+type GetInfrastructureCatalogPluginsWithCustomMetrics {
+  # Define fields for GetInfrastructureCatalogPluginsWithCustomMetrics type here
+}
+
+type GetInfrastructureCatalogSearchFields {
+  # Define fields for GetInfrastructureCatalogSearchFields type here
+}
+
+type GetTagCatalogAll {
+  # Define fields for GetTagCatalogAll type here
+}
+
+type GetTagCatalog {
+  # Define fields for GetTagCatalog type here
+}
+
+type GetRelatedHosts {
+  # Define fields for GetRelatedHosts type here
+}
+
+type GetInfrastructureMetrics {
+  # Define fields for GetInfrastructureMetrics type here
+}
+
+type GetMonitoringState {
+  # Define fields for GetMonitoringState type here
+}
+
+type GetPluginPayload {
+  # Define fields for GetPluginPayload type here
+}
+
+type Getsnapshots {
+  # Define fields for Getsnapshots type here
+}
+
+type Postsnapshots {
+  # Define fields for Postsnapshots type here
+}
+
+type Getsnapshot {
+  # Define fields for Getsnapshot type here
+}
+
+type Softwareversions {
+  # Define fields for Softwareversions type here
+}
+
+type GetTopology {
+  # Define fields for GetTopology type here
+}
+
+# This GraphQL schema defines types for the given tables in the Infrastructure Monitoring domain. Each type corresponds to a table, and fields are defined based on the provided columns. Note that for some types (e.g., Template, Provider, Consumer, ConnectedEntity), the actual fields are not defined in this schema, as they would depend on the specific requirements and relationships in the application.
+
+type Query {
+  getEntities: GetEntities
+  getEntityGroups: GetEntityGroups
+  getAvailablePlugins: GetAvailablePlugins
+  getAvailableMetrics: GetAvailableMetrics
+  getInfrastructureCatalogMetrics(plugin: String, filter: String): GetInfrastructureCatalogMetrics
+  getAvailablePayloadKeysByPluginId: GetAvailablePayloadKeysByPluginId
+  getInfrastructureCatalogPlugins: GetInfrastructureCatalogPlugins
+  getInfrastructureCatalogPluginsWithCustomMetrics: GetInfrastructureCatalogPluginsWithCustomMetrics
+  getInfrastructureCatalogSearchFields: GetInfrastructureCatalogSearchFields
+  getTagCatalogAll: GetTagCatalogAll
+  getTagCatalog: GetTagCatalog
+  getRelatedHosts: GetRelatedHosts
+  getInfrastructureMetrics(offline: Boolean, size: Int, to: String): GetInfrastructureMetrics
+  getMonitoringState: GetMonitoringState
+  getPluginPayload: GetPluginPayload
+  getSnapshots(size: Int, offline: Boolean, to: String): Getsnapshots
+  postSnapshots: Postsnapshots
+  getSnapshot: Getsnapshot
+  softwareVersions: Softwareversions
+  getTopology: GetTopology
+}
+
+# This GraphQL query block defines fields that map to the provided REST endpoints. Each field corresponds to a specific REST endpoint, and the types of the fields are based on the schema definitions. Note that some fields, such as `getInfrastructureCatalogMetrics`, `getAvailablePayloadKeysByPluginId`, `getInfrastructureCatalogPlugins`, `getInfrastructureCatalogPluginsWithCustomMetrics`, `getTagCatalogAll`, `getTagCatalog`, `getRelatedHosts`, `getInfrastructureMetrics`, `getMonitoringState`, `getPluginPayload`, `getSnapshots`, `postSnapshots`, `getSnapshot`, `softwareVersions`, and `getTopology`, have optional parameters that are represented as arguments in the GraphQL query fields.

@@ -1,0 +1,25 @@
+type concert_VulnerabilitiesSummary {
+  "Count of critical severity vulnerabilities"
+  critical: Int
+  "Count of high severity vulnerabilities"
+  high: Int
+  "Count of low severity vulnerabilities"
+  low: Int
+  "Count of medium severity vulnerabilities"
+  medium: Int
+}
+
+type Query {
+  concert_vulnerabilitiesSummary(
+    token: Secret
+  ): concert_VulnerabilitiesSummary
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

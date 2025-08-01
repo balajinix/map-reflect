@@ -1,0 +1,93 @@
+# Here are the GraphQL type definitions for the provided tables:
+
+# """
+# Represents a client in the OAuth2 system.
+# """
+type Client {
+  """The ID of the client"""
+  clientId: String!
+
+  """The name of the client"""
+  clientName: String!
+
+  """The OAuth2 grants that the client can perform in order to acquire a token"""
+  grantTypes: String
+
+  """The authentication methods that the client supports when acquiring a token"""
+  clientAuthenticationMethods: String
+
+  """The scopes that the client can request when acquiring a token"""
+  scopes: String
+
+  """The audience that the client can request when acquiring a token"""
+  audience: String
+
+  """Creation timestamp"""
+  createdAt: String
+
+  """The token settings for the client"""
+  tokenSettings: String
+
+  """The client secret"""
+  clientSecret: String
+}
+
+# """
+# Input type for creating a new client in the OAuth2 system.
+# """
+# input CreateClientInput {
+#   clientName: String!
+#   clientId: String!
+#   grantTypes: String
+#   clientAuthenticationMethods: String
+#   scopes: String
+#   audience: String
+#   createdAt: String
+#   tokenSettings: String
+#   clientSecret: String
+# }
+
+# """
+# Mutation for creating a new client in the OAuth2 system.
+# """
+type Mutation {
+  """
+  Creates a new client in the OAuth2 system.
+  """
+  createClient(input: CreateClientInput!): Client
+}
+
+# """
+# Mutation for deleting a client in the OAuth2 system.
+# """
+type Mutation {
+  """
+  Deletes a client from the OAuth2 system.
+  """
+  deleteClient(clientId: String!): Boolean
+}
+
+# Note: The `DeleteClient` table doesn't have any columns, so I've omitted the corresponding GraphQL type definition for it. Also, the `Mutation` for deleting a client returns a boolean to indicate whether the deletion was successful or not.
+
+# Here is the GraphQL type definition for the queries based on the provided REST endpoints:
+
+# """
+# Queries for OAuth2 clients.
+# """
+type Query {
+  """
+  Fetches a list of OAuth2 clients.
+  """
+  listClients: [Client] @rest(table_name: "Listclients")
+
+  """
+  Creates a new OAuth2 client.
+  """
+  createClient(name: String!, clientId: String!, grantTypes: String, clientAuthenticationMethods: String, scopes: String, audience: String, createdAt: String, tokenSettings: String, clientSecret: String): Client @rest(table_name: "Createclient")
+}
+
+# Please note that the `createClient` function in the `Query` type is using the `CreateClientInput` input type from the schema. The `name`, `clientId`, `grantTypes`, `clientAuthenticationMethods`, `scopes`, `audience`, `createdAt`, `tokenSettings`, and `clientSecret` arguments correspond to the columns in the `Createclient` REST endpoint.
+
+# The `listClients` function is using the `@rest` directive to map directly to the `Listclients` REST endpoint. Since the schema already has a `Client` type that matches the columns in the `Listclients` endpoint, no additional mapping is needed.
+
+# The `Deleteclient` REST endpoint is not included in the `Query` type because it is a mutation, not a query. Mutations are used to modify data, while queries are used to retrieve data. In GraphQL, mutations are typically defined in a separate `Mutation` type.

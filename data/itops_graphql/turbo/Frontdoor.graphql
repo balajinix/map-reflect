@@ -1,0 +1,29 @@
+type GetFrontdoorIdp {
+  links(rel: String, href: String, hreflang: String, media: String, title: String, type: String, deprecation: String, profile: String, name: String): [Link]
+  uuid: String
+  displayName: String!
+  className: String
+  isFrontdoorEnabled: String
+}
+
+type Link {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Query {
+  getFrontdoorIdp(uuid: String): GetFrontdoorIdp
+    @rest(
+      method: "GET",
+      path: "table_name=Getfrontdooridp&columns=links.rel,links.href,links.hreflang,links.media,links.title,links.type,links.deprecation,links.profile,links.name,uuid,displayName,className,isFrontdoorEnabled"
+    )
+}
+
+# This GraphQL query type `Query` includes a single field `getFrontdoorIdp` that maps to the provided REST endpoint. The field takes a single argument `uuid`, which corresponds to the `uuid` column in the REST endpoint. The `@rest` directive is used to specify the HTTP method and path for the REST call. The `columns` parameter in the `@rest` directive is a comma-separated list of column names to include in the response, which matches the columns in the provided REST endpoint.

@@ -1,0 +1,1117 @@
+type Customer_event_notes {
+  customer_event_id: ID
+  customer_event_note_id: ID!
+  customer_events: Customer_events
+    @materializer(
+      query: "customer_eventsUsingCustomer_event_notes_customer_event_id_fkey"
+    )
+  date_moved_in: DateTime
+  property_id: ID
+  resident_id: ID
+  service_type_code: String
+}
+
+type Customer_events {
+  customer_event_id: ID!
+  customer_event_notes: [Customer_event_notes]
+    @materializer(
+      query: "customer_event_notesUsingCustomer_event_notes_customer_event_id_fkey"
+    )
+  customer_id: ID
+  customers: Customers
+    @materializer(query: "customersUsingCustomer_events_customer_id_fkey")
+  date_moved_in: DateTime
+  property_id: ID
+  resident_id: ID
+  residents: Residents
+    @materializer(
+      query: "residentsUsingCustomer_events_resident_id_property_id_date_moved_in_fkey"
+    )
+  thing_id: ID
+  things: Things
+    @materializer(query: "thingsUsingCustomer_events_thing_id_fkey")
+}
+
+type Customers {
+  customer_details: String
+  customer_events: [Customer_events]
+    @materializer(query: "customer_eventsUsingCustomer_events_customer_id_fkey")
+  customer_id: ID!
+}
+
+type Organizations {
+  organization_details: String
+  organization_id: ID!
+  parent_organization_id: ID
+  services: [Services]
+    @materializer(query: "servicesUsingServices_organization_id_fkey")
+  things: [Things]
+    @materializer(query: "thingsUsingThings_organization_id_fkey")
+}
+
+type Properties {
+  other_details: String
+  property_address: String
+  property_id: ID!
+  property_type_code: String
+  residents: [Residents]
+    @materializer(query: "residentsUsingResidents_property_id_fkey")
+}
+
+type Residents {
+  customer_events: [Customer_events]
+    @materializer(
+      query: "customer_eventsUsingCustomer_events_resident_id_property_id_date_moved_in_fkey"
+    )
+  date_moved_in: DateTime!
+  date_moved_out: DateTime
+  other_details: String
+  properties: Properties
+    @materializer(query: "propertiesUsingResidents_property_id_fkey")
+  property_id: ID!
+  resident_id: ID!
+  residents_services: [Residents_services]
+    @materializer(
+      query: "residents_servicesUsingResidents_services_resident_id_property_id_date_moved_in_fkey"
+    )
+}
+
+type Residents_services {
+  date_moved_in: DateTime
+  date_provided: DateTime
+  date_requested: DateTime
+  other_details: String
+  property_id: ID
+  resident_id: ID!
+  residents: Residents
+    @materializer(
+      query: "residentsUsingResidents_services_resident_id_property_id_date_moved_in_fkey"
+    )
+  service_id: ID!
+  services: Services
+    @materializer(query: "servicesUsingResidents_services_service_id_fkey")
+}
+
+type Services {
+  organization_id: ID
+  organizations: Organizations
+    @materializer(query: "organizationsUsingServices_organization_id_fkey")
+  residents_services: [Residents_services]
+    @materializer(
+      query: "residents_servicesUsingResidents_services_service_id_fkey"
+    )
+  service_details: String
+  service_id: ID!
+  service_type_code: String
+}
+
+type Things {
+  customer_events: [Customer_events]
+    @materializer(query: "customer_eventsUsingCustomer_events_thing_id_fkey")
+  organization_id: ID
+  organizations: Organizations
+    @materializer(query: "organizationsUsingThings_organization_id_fkey")
+  service_details: String
+  service_type_code: String
+  thing_id: ID!
+  timed_locations_of_things: [Timed_locations_of_things]
+    @materializer(query: "timed_locations_of_things")
+  timed_status_of_things: [Timed_status_of_things]
+    @materializer(query: "timed_status_of_things")
+  type_of_thing_code: String
+}
+
+type Timed_locations_of_things {
+  date_and_time: DateTime
+  location_code: String
+  thing_id: ID
+  things: Things
+    @materializer(query: "thingsUsingTimed_locations_of_things_thing_id_fkey")
+}
+
+type Timed_status_of_things {
+  date_and_date: DateTime
+  status_of_thing_code: String
+  thing_id: ID
+  things: Things
+    @materializer(query: "thingsUsingTimed_status_of_things_thing_id_fkey")
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Customer_event_notes' "
+  customer_event_notes(customer_event_note_id: ID!): Customer_event_notes
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_event_notes"
+      configuration: "postgresql_config"
+    )
+  customer_event_notesList: [Customer_event_notes]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_event_notes"
+      configuration: "postgresql_config"
+    )
+  customer_event_notesPaginatedList(
+    first: Int
+    after: Int
+  ): [Customer_event_notes]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_event_id", "customer_event_note_id", "date_moved_in", "property_id", "resident_id", "service_type_code" FROM "customer_event_notes" ORDER BY "customer_event_note_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  customer_event_notesUsingCustomer_event_notes_customer_event_id_fkey(
+    customer_event_id: ID!
+  ): [Customer_event_notes]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_event_id", "customer_event_note_id", "date_moved_in", "property_id", "resident_id", "service_type_code" FROM "customer_event_notes" WHERE "customer_event_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Customer_events' "
+  customer_events(customer_event_id: ID!): Customer_events
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_events"
+      configuration: "postgresql_config"
+    )
+  customer_eventsList: [Customer_events]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_events"
+      configuration: "postgresql_config"
+    )
+  customer_eventsPaginatedList(first: Int, after: Int): [Customer_events]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_event_id", "customer_id", "date_moved_in", "property_id", "resident_id", "thing_id" FROM "customer_events" ORDER BY "customer_event_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  customer_eventsUsingCustomer_event_notes_customer_event_id_fkey(
+    customer_event_id: ID!
+  ): Customer_events
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_event_id", "customer_id", "date_moved_in", "property_id", "resident_id", "thing_id" FROM "customer_events" WHERE "customer_event_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  customer_eventsUsingCustomer_events_customer_id_fkey(
+    customer_id: ID!
+  ): [Customer_events]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_event_id", "customer_id", "date_moved_in", "property_id", "resident_id", "thing_id" FROM "customer_events" WHERE "customer_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  customer_eventsUsingCustomer_events_resident_id_property_id_date_moved_in_fkey(
+    resident_id: ID!
+    property_id: ID!
+    date_moved_in: DateTime!
+  ): [Customer_events]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_event_id", "customer_id", "date_moved_in", "property_id", "resident_id", "thing_id" FROM "customer_events" WHERE "resident_id" = $1 AND "property_id" = $2 AND "date_moved_in" = $3
+      """
+      configuration: "postgresql_config"
+    )
+  customer_eventsUsingCustomer_events_thing_id_fkey(
+    thing_id: ID!
+  ): [Customer_events]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_event_id", "customer_id", "date_moved_in", "property_id", "resident_id", "thing_id" FROM "customer_events" WHERE "thing_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Customers' "
+  customers(customer_id: ID!): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      configuration: "postgresql_config"
+    )
+  customersList: [Customers]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      configuration: "postgresql_config"
+    )
+  customersPaginatedList(first: Int, after: Int): [Customers]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_details", "customer_id" FROM "customers" ORDER BY "customer_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  customersUsingCustomer_events_customer_id_fkey(customer_id: ID!): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_details", "customer_id" FROM "customers" WHERE "customer_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Organizations' "
+  organizations(organization_id: ID!): Organizations
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "organizations"
+      configuration: "postgresql_config"
+    )
+  organizationsList: [Organizations]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "organizations"
+      configuration: "postgresql_config"
+    )
+  organizationsPaginatedList(first: Int, after: Int): [Organizations]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_details", "organization_id", "parent_organization_id" FROM "organizations" ORDER BY "organization_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  organizationsUsingServices_organization_id_fkey(
+    organization_id: ID!
+  ): Organizations
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_details", "organization_id", "parent_organization_id" FROM "organizations" WHERE "organization_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  organizationsUsingThings_organization_id_fkey(
+    organization_id: ID!
+  ): Organizations
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_details", "organization_id", "parent_organization_id" FROM "organizations" WHERE "organization_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Properties' "
+  properties(property_id: ID!): Properties
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "properties"
+      configuration: "postgresql_config"
+    )
+  propertiesList: [Properties]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "properties"
+      configuration: "postgresql_config"
+    )
+  propertiesPaginatedList(first: Int, after: Int): [Properties]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "other_details", "property_address", "property_id", "property_type_code" FROM "properties" ORDER BY "property_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  propertiesUsingResidents_property_id_fkey(property_id: ID!): Properties
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "other_details", "property_address", "property_id", "property_type_code" FROM "properties" WHERE "property_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Residents' "
+  residents(
+    resident_id: ID!
+    property_id: ID!
+    date_moved_in: DateTime!
+  ): Residents
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents"
+      configuration: "postgresql_config"
+    )
+  residentsList: [Residents]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents"
+      configuration: "postgresql_config"
+    )
+  residentsPaginatedList(first: Int, after: Int): [Residents]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_moved_in", "date_moved_out", "other_details", "property_id", "resident_id" FROM "residents" ORDER BY "resident_id", "property_id", "date_moved_in" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  residentsUsingCustomer_events_resident_id_property_id_date_moved_in_fkey(
+    resident_id: ID!
+    property_id: ID!
+    date_moved_in: DateTime!
+  ): Residents
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_moved_in", "date_moved_out", "other_details", "property_id", "resident_id" FROM "residents" WHERE "resident_id" = $1 AND "property_id" = $2 AND "date_moved_in" = $3
+      """
+      configuration: "postgresql_config"
+    )
+  residentsUsingResidents_property_id_fkey(property_id: ID!): [Residents]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_moved_in", "date_moved_out", "other_details", "property_id", "resident_id" FROM "residents" WHERE "property_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  residentsUsingResidents_services_resident_id_property_id_date_moved_in_fkey(
+    resident_id: ID!
+    property_id: ID!
+    date_moved_in: DateTime!
+  ): Residents
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_moved_in", "date_moved_out", "other_details", "property_id", "resident_id" FROM "residents" WHERE "resident_id" = $1 AND "property_id" = $2 AND "date_moved_in" = $3
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Residents_services' "
+  residents_services(resident_id: ID!, service_id: ID!): Residents_services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents_services"
+      configuration: "postgresql_config"
+    )
+  residents_servicesList: [Residents_services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents_services"
+      configuration: "postgresql_config"
+    )
+  residents_servicesPaginatedList(first: Int, after: Int): [Residents_services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_moved_in", "date_provided", "date_requested", "other_details", "property_id", "resident_id", "service_id" FROM "residents_services" ORDER BY "resident_id", "service_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  residents_servicesUsingResidents_services_resident_id_property_id_date_moved_in_fkey(
+    resident_id: ID!
+    property_id: ID!
+    date_moved_in: DateTime!
+  ): [Residents_services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_moved_in", "date_provided", "date_requested", "other_details", "property_id", "resident_id", "service_id" FROM "residents_services" WHERE "resident_id" = $1 AND "property_id" = $2 AND "date_moved_in" = $3
+      """
+      configuration: "postgresql_config"
+    )
+  residents_servicesUsingResidents_services_service_id_fkey(
+    service_id: ID!
+  ): [Residents_services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_moved_in", "date_provided", "date_requested", "other_details", "property_id", "resident_id", "service_id" FROM "residents_services" WHERE "service_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Services' "
+  services(service_id: ID!): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      configuration: "postgresql_config"
+    )
+  servicesList: [Services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      configuration: "postgresql_config"
+    )
+  servicesPaginatedList(first: Int, after: Int): [Services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_id", "service_type_code" FROM "services" ORDER BY "service_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  servicesUsingResidents_services_service_id_fkey(service_id: ID!): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_id", "service_type_code" FROM "services" WHERE "service_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  servicesUsingServices_organization_id_fkey(organization_id: ID!): [Services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_id", "service_type_code" FROM "services" WHERE "organization_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Things' "
+  things(thing_id: ID!): Things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "things"
+      configuration: "postgresql_config"
+    )
+  thingsList: [Things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "things"
+      configuration: "postgresql_config"
+    )
+  thingsPaginatedList(first: Int, after: Int): [Things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_type_code", "thing_id", "type_of_thing_code" FROM "things" ORDER BY "thing_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  thingsUsingCustomer_events_thing_id_fkey(thing_id: ID!): Things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_type_code", "thing_id", "type_of_thing_code" FROM "things" WHERE "thing_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  thingsUsingThings_organization_id_fkey(organization_id: ID!): [Things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_type_code", "thing_id", "type_of_thing_code" FROM "things" WHERE "organization_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  thingsUsingTimed_locations_of_things_thing_id_fkey(thing_id: ID!): Things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_type_code", "thing_id", "type_of_thing_code" FROM "things" WHERE "thing_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  thingsUsingTimed_status_of_things_thing_id_fkey(thing_id: ID!): Things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "organization_id", "service_details", "service_type_code", "thing_id", "type_of_thing_code" FROM "things" WHERE "thing_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Timed_locations_of_things' "
+  timed_locations_of_things(thing_id: ID!): [Timed_locations_of_things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_and_time", "location_code", "thing_id" FROM "timed_locations_of_things" WHERE "thing_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  timed_locations_of_thingsList: [Timed_locations_of_things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "timed_locations_of_things"
+      configuration: "postgresql_config"
+    )
+  timed_locations_of_thingsPaginatedList(
+    first: Int
+    after: Int
+  ): [Timed_locations_of_things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_and_time", "location_code", "thing_id" FROM "timed_locations_of_things" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  timed_locations_of_thingsUsingidx_18148_sqlite_autoindex_timed_locations_of_things_1(
+    thing_id: ID!
+    date_and_time: DateTime!
+    location_code: String!
+  ): Timed_locations_of_things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_and_time", "location_code", "thing_id" FROM "timed_locations_of_things" WHERE "thing_id" = $1 AND "date_and_time" = $2 AND "location_code" = $3
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Timed_status_of_things' "
+  timed_status_of_things(thing_id: ID!): [Timed_status_of_things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_and_date", "status_of_thing_code", "thing_id" FROM "timed_status_of_things" WHERE "thing_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  timed_status_of_thingsList: [Timed_status_of_things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "timed_status_of_things"
+      configuration: "postgresql_config"
+    )
+  timed_status_of_thingsPaginatedList(
+    first: Int
+    after: Int
+  ): [Timed_status_of_things]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_and_date", "status_of_thing_code", "thing_id" FROM "timed_status_of_things" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  timed_status_of_thingsUsingidx_18143_sqlite_autoindex_timed_status_of_things_1(
+    thing_id: ID!
+    date_and_date: DateTime!
+    status_of_thing_code: String!
+  ): Timed_status_of_things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date_and_date", "status_of_thing_code", "thing_id" FROM "timed_status_of_things" WHERE "thing_id" = $1 AND "date_and_date" = $2 AND "status_of_thing_code" = $3
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Customer_event_notes' "
+  deleteCustomer_event_notes(customer_event_note_id: ID!): Customer_event_notes
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_event_notes"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCustomer_event_notes(
+    customer_event_id: ID
+    date_moved_in: DateTime
+    property_id: ID
+    resident_id: ID
+    service_type_code: String
+    customer_event_note_id: ID!
+  ): Customer_event_notes
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_event_notes"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCustomer_event_notes(
+    customer_event_note_id: ID!
+    customer_event_id: ID
+    date_moved_in: DateTime
+    property_id: ID
+    resident_id: ID
+    service_type_code: String
+  ): Customer_event_notes
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "customer_event_notes" SET
+        "customer_event_id" = COALESCE($2, "customer_event_id"),
+        "date_moved_in" = COALESCE($3, "date_moved_in"),
+        "property_id" = COALESCE($4, "property_id"),
+        "resident_id" = COALESCE($5, "resident_id"),
+        "service_type_code" = COALESCE($6, "service_type_code")
+      WHERE
+        "customer_event_note_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Customer_events' "
+  deleteCustomer_events(customer_event_id: ID!): Customer_events
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_events"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCustomer_events(
+    customer_id: ID
+    customer_event_id: ID!
+    date_moved_in: DateTime
+    property_id: ID
+    resident_id: ID
+    thing_id: ID
+  ): Customer_events
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_events"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCustomer_events(
+    customer_event_id: ID!
+    customer_id: ID
+    date_moved_in: DateTime
+    property_id: ID
+    resident_id: ID
+    thing_id: ID
+  ): Customer_events
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "customer_events" SET
+        "customer_id" = COALESCE($2, "customer_id"),
+        "date_moved_in" = COALESCE($3, "date_moved_in"),
+        "property_id" = COALESCE($4, "property_id"),
+        "resident_id" = COALESCE($5, "resident_id"),
+        "thing_id" = COALESCE($6, "thing_id")
+      WHERE
+        "customer_event_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Customers' "
+  deleteCustomers(customer_id: ID!): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCustomers(customer_details: String, customer_id: ID!): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCustomers(customer_id: ID!, customer_details: String): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "customers" SET
+        "customer_details" = COALESCE($2, "customer_details")
+      WHERE
+        "customer_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Organizations' "
+  deleteOrganizations(organization_id: ID!): Organizations
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "organizations"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertOrganizations(
+    organization_details: String
+    parent_organization_id: ID
+    organization_id: ID!
+  ): Organizations
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "organizations"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateOrganizations(
+    organization_id: ID!
+    organization_details: String
+    parent_organization_id: ID
+  ): Organizations
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "organizations" SET
+        "organization_details" = COALESCE($2, "organization_details"),
+        "parent_organization_id" = COALESCE($3, "parent_organization_id")
+      WHERE
+        "organization_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Properties' "
+  deleteProperties(property_id: ID!): Properties
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "properties"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertProperties(
+    other_details: String
+    property_address: String
+    property_type_code: String
+    property_id: ID!
+  ): Properties
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "properties"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateProperties(
+    property_id: ID!
+    other_details: String
+    property_address: String
+    property_type_code: String
+  ): Properties
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "properties" SET
+        "other_details" = COALESCE($2, "other_details"),
+        "property_address" = COALESCE($3, "property_address"),
+        "property_type_code" = COALESCE($4, "property_type_code")
+      WHERE
+        "property_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Residents' "
+  deleteResidents(
+    resident_id: ID!
+    property_id: ID!
+    date_moved_in: DateTime!
+  ): Residents
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertResidents(
+    other_details: String
+    date_moved_out: DateTime
+    date_moved_in: DateTime!
+    property_id: ID!
+    resident_id: ID!
+  ): Residents
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateResidents(
+    date_moved_in: DateTime!
+    property_id: ID!
+    resident_id: ID!
+    date_moved_out: DateTime
+    other_details: String
+  ): Residents
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "residents" SET
+        "date_moved_out" = COALESCE($4, "date_moved_out"),
+        "other_details" = COALESCE($5, "other_details")
+      WHERE
+        "date_moved_in" = $1 AND
+        "property_id" = $2 AND
+        "resident_id" = $3
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Residents_services' "
+  deleteResidents_services(
+    resident_id: ID!
+    service_id: ID!
+  ): Residents_services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents_services"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertResidents_services(
+    other_details: String
+    date_moved_in: DateTime
+    date_provided: DateTime
+    property_id: ID
+    service_id: ID!
+    date_requested: DateTime
+    resident_id: ID!
+  ): Residents_services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "residents_services"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateResidents_services(
+    resident_id: ID!
+    service_id: ID!
+    date_moved_in: DateTime
+    date_provided: DateTime
+    date_requested: DateTime
+    other_details: String
+    property_id: ID
+  ): Residents_services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "residents_services" SET
+        "date_moved_in" = COALESCE($3, "date_moved_in"),
+        "date_provided" = COALESCE($4, "date_provided"),
+        "date_requested" = COALESCE($5, "date_requested"),
+        "other_details" = COALESCE($6, "other_details"),
+        "property_id" = COALESCE($7, "property_id")
+      WHERE
+        "resident_id" = $1 AND
+        "service_id" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Services' "
+  deleteServices(service_id: ID!): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertServices(
+    service_details: String
+    service_type_code: String
+    organization_id: ID
+    service_id: ID!
+  ): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateServices(
+    service_id: ID!
+    organization_id: ID
+    service_details: String
+    service_type_code: String
+  ): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "services" SET
+        "organization_id" = COALESCE($2, "organization_id"),
+        "service_details" = COALESCE($3, "service_details"),
+        "service_type_code" = COALESCE($4, "service_type_code")
+      WHERE
+        "service_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Things' "
+  deleteThings(thing_id: ID!): Things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "things"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertThings(
+    type_of_thing_code: String
+    thing_id: ID!
+    service_type_code: String
+    organization_id: ID
+    service_details: String
+  ): Things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "things"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateThings(
+    thing_id: ID!
+    organization_id: ID
+    service_details: String
+    service_type_code: String
+    type_of_thing_code: String
+  ): Things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "things" SET
+        "organization_id" = COALESCE($2, "organization_id"),
+        "service_details" = COALESCE($3, "service_details"),
+        "service_type_code" = COALESCE($4, "service_type_code"),
+        "type_of_thing_code" = COALESCE($5, "type_of_thing_code")
+      WHERE
+        "thing_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Timed_locations_of_things' "
+  deleteTimed_locations_of_things(
+    location_code: String!
+    date_and_time: DateTime!
+    thing_id: ID!
+  ): Timed_locations_of_things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "timed_locations_of_things"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTimed_locations_of_things(
+    location_code: String
+    date_and_time: DateTime
+    thing_id: ID
+  ): Timed_locations_of_things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "timed_locations_of_things"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Timed_status_of_things' "
+  deleteTimed_status_of_things(
+    status_of_thing_code: String!
+    date_and_date: DateTime!
+    thing_id: ID!
+  ): Timed_status_of_things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "timed_status_of_things"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTimed_status_of_things(
+    status_of_thing_code: String
+    date_and_date: DateTime
+    thing_id: ID
+  ): Timed_status_of_things
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "timed_status_of_things"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

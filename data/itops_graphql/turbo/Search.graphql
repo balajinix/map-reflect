@@ -1,0 +1,113 @@
+type GetSearchResults {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type GetMembersBasedOnCriteria {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type GetObjectByUUID {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Query {
+  getSearchResults(filter: [SearchFilterInput!]!): [GetSearchResults!]! @rest(
+    table_name: "Getsearchresults",
+    description: "Get a filtered list of objects (entities, groups, or business units) by various search criteria.",
+    columns: [
+      "links.rel",
+      "links.href",
+      "links.hreflang",
+      "links.media",
+      "links.title",
+      "links.type",
+      "links.deprecation",
+      "links.profile",
+      "links.name",
+      "uuid",
+      "displayName",
+      "className"
+    ]
+  )
+
+  getMembersBasedOnCriteria(filter: [MemberFilterInput!]!): [GetMembersBasedOnCriteria!]! @rest(
+    table_name: "Getmembersbasedoncriteria",
+    description: "Get members based on filter",
+    columns: [
+      "links.rel",
+      "links.href",
+      "links.hreflang",
+      "links.media",
+      "links.title",
+      "links.type",
+      "links.deprecation",
+      "links.profile",
+      "links.name",
+      "uuid",
+      "displayName",
+      "className"
+    ]
+  )
+
+  getObjectByUUID(uuid: String!): [GetObjectByUUID!]! @rest(
+    table_name: "Getobjectbyuuid",
+    description: "Get an object (an entity, group, or business unit) by Uuid",
+    columns: [
+      "links.rel",
+      "links.href",
+      "links.hreflang",
+      "links.media",
+      "links.title",
+      "links.type",
+      "links.deprecation",
+      "links.profile",
+      "links.name",
+      "uuid",
+      "displayName",
+      "className"
+    ]
+  )
+}
+
+# In the above GraphQL schema, I've defined a `Query` type with three fields: `getSearchResults`, `getMembersBasedOnCriteria`, and `getObjectByUUID`. Each field corresponds to one of the REST endpoints you provided.
+
+# - `getSearchResults` takes an input object `filter` of type `[SearchFilterInput!]!` and returns an array of `GetSearchResults`.
+# - `getMembersBasedOnCriteria` takes an input object `filter` of type `[MemberFilterInput!]!` and returns an array of `GetMembersBasedOnCriteria`.
+# - `getObjectByUUID` takes a `uuid` of type `String!` and returns an array of `GetObjectByUUID`.
+
+# Please note that `SearchFilterInput` and `MemberFilterInput` are assumed to be custom input types that you'll need to define based on your specific filtering requirements. These input types should contain fields that correspond to the filtering criteria for each respective endpoint.
+
+# The `@rest` directive is used to map the GraphQL query fields to the corresponding REST endpoints. The `table_name` argument specifies the REST endpoint table name, and the `columns` argument specifies the columns to be returned.

@@ -1,0 +1,26 @@
+type concert_SuccessResponse {
+  "Message"
+  message: String
+  "Message code"
+  message_code: String
+}
+
+type Query {
+  concert_exchangeToken(
+    code: String
+    domain: String
+    grant_id: String
+    instance_id: String!
+    scope_collection_type: String
+    scope_id: String
+  ): concert_SuccessResponse
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

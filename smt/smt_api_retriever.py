@@ -43,25 +43,40 @@ class SMTAPIRetriever:
     """
     
     def __init__(self, 
-                 mappings_dir: str = ".", 
-                 chroma_db_path: str = "../data/chroma_db"):
+                 dataset: str = None,
+                 mappings_dir: str = None, 
+                 chroma_db_path: str = "../data/chroma_db",
+                 collection_name:  str= None):
         """
         Initialize the API retriever with two ChromaDB instances.
         
         Args:
+            dataset: Dataset name for collection naming
             mappings_dir: Directory containing existing mapping files
             chroma_db_path: Path to ChromaDB database
+            collection_name: Explicit collection name for schemas
         """
-        self.mappings_dir = Path(mappings_dir)
+        self.mappings_dir = Path(mappings_dir) if mappings_dir else Path("../data/mappings_output")
         self.chroma_db_path = Path(chroma_db_path)
+        self.collection_name = collection_name
+        self.dataset = dataset
+
+        # Determine collection names
+        if collection_name:
+            schema_collection_name = collection_name
+        else:
+            schema_collection_name = f"{dataset.lower()}_graphql_schemas" if dataset else "graphql_schemas"
+
+        # For mappings, use shared collection (not dataset-specific for now)
+        mappings_collection_name = "smt_mappings"
         
         # Initialize Schema ChromaDB indexer for schema discovery
         try:
             self.schema_indexer = GraphQLSchemaIndexer(
                 chroma_db_path=str(chroma_db_path),
-                collection_name="graphql_schemas"
+                collection_name=schema_collection_name
             )
-            logger.info("Connected to Schema ChromaDB")
+            logger.info(f"Connected to Schema ChromaDB collection: {schema_collection_name}")
         except Exception as e:
             logger.warning(f"Could not connect to Schema ChromaDB: {e}")
             self.schema_indexer = None
@@ -70,9 +85,9 @@ class SMTAPIRetriever:
         try:
             self.mappings_indexer = SMTMappingsIndexer(
                 chroma_db_path=str(chroma_db_path),
-                collection_name="smt_mappings"
+                collection_name=mappings_collection_name
             )
-            logger.info("Connected to Mappings ChromaDB")
+            logger.info(f"Connected to Mappings ChromaDB collection: {mappings_collection_name}")
         except Exception as e:
             logger.warning(f"Could not connect to Mappings ChromaDB: {e}")
             self.mappings_indexer = None
@@ -84,6 +99,13 @@ class SMTAPIRetriever:
         # Build API name index from existing mappings
         self.api_names = self._extract_api_names()
         logger.info(f"Indexed {len(self.api_names)} unique API names")
+    
+    def update_schema_collection(self, collection_name: str):
+        """Update the schema collection name for dataset-specific indexing."""
+        self.collection_name = collection_name
+        if self.schema_indexer:
+            self.schema_indexer.collection_name = collection_name
+            logger.info(f"Updated schema collection to: {collection_name}")
     
     def _load_existing_mappings(self) -> Dict[str, str]:
         """Load all existing mapping files and create lookup index."""
@@ -469,7 +491,9 @@ class SMTAPIRetriever:
             "existing_mapping_files": len(self.existing_mappings),
             "unique_api_names": len(self.api_names),
             "schema_chromadb_available": self.schema_indexer is not None,
-            "mappings_chromadb_available": self.mappings_indexer is not None
+            "mappings_chromadb_available": self.mappings_indexer is not None,
+            "schema_collection_name": self.collection_name,
+            "dataset": self.dataset
         }
         
         if self.mappings_indexer and hasattr(self.mappings_indexer, 'get_collection_stats'):
@@ -579,6 +603,9 @@ def main():
     parser.add_argument("--utterance", required=True, help="Natural language utterance")
     parser.add_argument("--dataset", help="Target dataset")
     parser.add_argument("--model", help="Target model")
+    parser.add_argument("--collection-name", help="ChromaDB schema collection name")
+    parser.add_argument("--chroma-db-path", default="../data/chroma_db", help="ChromaDB database path")
+    parser.add_argument("--mappings-dir", default="../data/mappings_output", help="Mappings directory")
     parser.add_argument("--top-k", type=int, default=5, help="Number of top results")
     parser.add_argument("--output-dir", default="mappings_output", help="Output directory")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output")
@@ -592,29 +619,43 @@ def main():
     output_dir = Path(args.output_dir)
     output_dir.mkdir(exist_ok=True)
     
+    # Determine collection name
+    if args.collection_name:
+        collection_name = args.collection_name
+    elif args.dataset:
+        collection_name = f"{args.dataset.lower()}_graphql_schemas"
+    
     # Initialize retriever
-    retriever = SMTAPIRetriever()
+    retriever = SMTAPIRetriever(
+        dataset=args.dataset,
+        mappings_dir=args.mappings_dir,
+        chroma_db_path=args.chroma_db_path,
+        collection_name=collection_name
+    )
     
     print(f"SMT API Retriever")
     print(f"Utterance: {args.utterance}")
+    print(f"Dataset: {args.dataset}")
+    print(f"Schema Collection: {collection_name}")
+    print(f"ChromaDB Path: {args.chroma_db_path}")
     print(f"Output directory: {args.output_dir}")
     
     # Show retriever stats
     stats = retriever.get_retriever_stats()
-    print(f"Retriever Statistics:")
+    print(f"\nRetriever Statistics:")
     for key, value in stats.items():
         print(f"   {key}: {value}")
     
     # Find best API pair
     source_api, target_api, confidence = retriever.find_best_api_pair(args.utterance)
     
-    print(f"Selected API pair: {source_api} → {target_api} (confidence: {confidence:.3f})")
+    print(f"\nSelected API pair: {source_api} → {target_api} (confidence: {confidence:.3f})")
     
     # Generate and save schemas
     success = retriever.save_schemas_for_smt(source_api, target_api, args.output_dir)
     
     if success:
-        print(f"Schema files generated successfully in {args.output_dir}/")
+        print(f"\nSchema files generated successfully in {args.output_dir}/")
         print(f"Next steps:")
         print(f"  1. Review the generated source.json and target.json files")
         print(f"  2. Run the SMT toolkit with: make run-smt")

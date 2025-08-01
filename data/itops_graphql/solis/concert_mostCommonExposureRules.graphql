@@ -1,0 +1,28 @@
+type concert_MostCommonExposureRule {
+  "Frequency of occurrence"
+  frequency: Int
+  "Priority"
+  priority: String
+  "Rule name"
+  rule_name: String
+}
+
+type concert_MostCommonExposureRules {
+  "Most common exposure rules"
+  exposure_rules: [concert_MostCommonExposureRule]
+}
+
+type Query {
+  concert_mostCommonExposureRules(
+    token: Secret
+  ): concert_MostCommonExposureRules
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

@@ -1,0 +1,211 @@
+type Getusers {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  username: String
+  password: String
+  roles: [Role]
+  loginProvider: String
+  type: String
+  scope: Scope
+  atdScope: AtdScope
+  features: String
+  authToken: String
+  showSharedUserSC: String
+}
+
+type Createuser {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  username: String
+  password: String
+  roles: [Role]
+  loginProvider: String
+  type: String
+  scope: Scope
+  atdScope: AtdScope
+  features: String
+  authToken: String
+  showSharedUserSC: String
+}
+
+type Getuser {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  username: String
+  password: String
+  roles: [Role]
+  loginProvider: String
+  type: String
+  scope: Scope
+  atdScope: AtdScope
+  features: String
+  authToken: String
+  showSharedUserSC: String
+}
+
+type Edituser {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  username: String
+  password: String
+  roles: [Role]
+  loginProvider: String
+  type: String
+  scope: Scope
+  atdScope: AtdScope
+  features: String
+  authToken: String
+  showSharedUserSC: String
+}
+
+type Deleteuser {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  username: String
+  password: String
+  roles: [Role]
+  loginProvider: String
+  type: String
+  scope: Scope
+  atdScope: AtdScope
+  features: String
+  authToken: String
+  showSharedUserSC: String
+}
+
+type Changeuserpassword {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  username: String
+  password: String
+  roles: [Role]
+  loginProvider: String
+  type: String
+  scope: Scope
+  atdScope: AtdScope
+  features: String
+  authToken: String
+  showSharedUserSC: String
+}
+
+type Getpreferencepropertiesbyuser {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type Setpreferenceproperty {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type Deletepreferenceproperty {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Role {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  name: String
+}
+
+type Scope {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  membersCount: String
+  entitiesCount: String
+  costPrice: String
+  groupType: String
+  severity: String
+  state: String
+  environmentType: String
+  scope: String
+  isStatic: String
+  logicalOperator: String
+  criteriaList: String
+  memberUuidList: String
+  realtimeMarketReference: String
+  stats: String
+  temporary: String
+  activeEntitiesCount: String
+  cloudType: String
+  source: String
+  memberTypes: String
+  entityTypes: String
+  aspects: String
+  vendorIds: String
+  groupOrigin: String
+  targetType: String
+  groupClassName: String
+  atdScope: AtdScope
+}
+
+type AtdScope {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type Query {
+  # Get a list of Users
+  getUsers(uuid: String, displayName: String, className: String, username: String, password: String, roles: [String], loginProvider: String, type: String, scope: String, atdScope: String, features: String, authToken: String, showSharedUserSC: String): [Getusers]
+
+  # Create a new User
+  createUser(uuid: String, displayName: String, className: String, username: String, password: String, roles: [Role], loginProvider: String, type: String, scope: Scope, atdScope: AtdScope, features: String, authToken: String, showSharedUserSC: String): Createuser
+
+  # Get a User by Uuid
+  getUser(uuid: String): Getuser
+
+  # Edit an existing User
+  editUser(uuid: String, displayName: String, className: String, username: String, password: String, roles: [Role], loginProvider: String, type: String, scope: Scope, atdScope: AtdScope, features: String, authToken: String, showSharedUserSC: String): Edituser
+
+  # Delete user by uuid
+  deleteUser(uuid: String): Deleteuser
+
+  # Change password for an existing User
+  changeUserPassword(uuid: String, password: String): Changeuserpassword
+
+  # Get user preference properties by user Uuid
+  getUserPreferenceProperties(uuid: String): [Getpreferencepropertiesbyuser]
+
+  # PUT a user preference property by user Uuid
+  setPreferenceProperty(uuid: String, displayName: String, className: String): Setpreferenceproperty
+
+  # DELETE a user preference property by user Uuid
+  deletePreferenceProperty(uuid: String): Deletepreferenceproperty
+}

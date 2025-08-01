@@ -1,0 +1,34 @@
+type concert_TokenDetails {
+  "Display name"
+  display_name: String
+  "Token expiry time"
+  expiry: Int
+  "Unique ID of your Concert instance"
+  instance_id: String
+  "Return true if user is authenticated"
+  is_authenticated: Boolean!
+  "Quickstart value"
+  quickstart: Boolean!
+  "User roles"
+  roles: [String]!
+  "JWT token"
+  token: String
+  "Username"
+  username: String
+}
+
+type Query {
+  concert_login(
+    password: String
+    username: String
+  ): concert_TokenDetails
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

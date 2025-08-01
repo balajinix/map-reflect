@@ -1,0 +1,32 @@
+type concert_VulnerableApplications {
+  "Application ID"
+  application_id: String
+  "Cost information"
+  cost: String
+  "Number of CVEs"
+  cves: Int
+  "Number of impacted public APIs"
+  impacted_public_api: Int
+  "Risk score"
+  risk_score: Float
+}
+
+type concert_VulnerableApplicationsCollection {
+  "Top vulnerable applications"
+  vulnerable_applications: [concert_VulnerableApplications]
+}
+
+type Query {
+  concert_vulnerableApplications(
+    token: Secret
+  ): concert_VulnerableApplicationsCollection
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

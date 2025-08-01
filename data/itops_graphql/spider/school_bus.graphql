@@ -1,0 +1,244 @@
+type Driver {
+  age: Int
+  driver_id: Int
+  home_city: String
+  name: String
+  party: String
+  school_bus: [School_bus]
+    @materializer(query: "school_busUsingSchool_bus_driver_id_fkey")
+}
+
+type School {
+  grade: String
+  location: String
+  school: String
+  school_bus: [School_bus] @materializer(query: "school_bus")
+  school_id: Int
+  type: String
+}
+
+type School_bus {
+  driver: Driver @materializer(query: "driver")
+  driver_id: Int
+  if_full_time: Boolean
+  school: School @materializer(query: "school")
+  school_id: Int
+  years_working: Int
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Driver' "
+  driver(driver_id: Int!): Driver
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "driver_id", "home_city", "name", "party" FROM "driver" WHERE "driver_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  driverList: [Driver]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "driver"
+      configuration: "postgresql_config"
+    )
+  driverPaginatedList(first: Int, after: Int): [Driver]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "driver_id", "home_city", "name", "party" FROM "driver" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  driverUsingidx_22738_sqlite_autoindex_driver_1(driver_id: Int!): Driver
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "driver_id", "home_city", "name", "party" FROM "driver" WHERE "driver_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'School' "
+  school(school_id: Int!): School
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "grade", "location", "school", "school_id", "type" FROM "school" WHERE "school_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  schoolList: [School]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "school"
+      configuration: "postgresql_config"
+    )
+  schoolPaginatedList(first: Int, after: Int): [School]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "grade", "location", "school", "school_id", "type" FROM "school" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  schoolUsingidx_22743_sqlite_autoindex_school_1(school_id: Int!): School
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "grade", "location", "school", "school_id", "type" FROM "school" WHERE "school_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'School_bus' "
+  school_bus(school_id: Int!): [School_bus]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "driver_id", "if_full_time", "school_id", "years_working" FROM "school_bus" WHERE "school_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  school_busList: [School_bus]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "school_bus"
+      configuration: "postgresql_config"
+    )
+  school_busPaginatedList(first: Int, after: Int): [School_bus]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "driver_id", "if_full_time", "school_id", "years_working" FROM "school_bus" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  school_busUsingSchool_bus_driver_id_fkey(driver_id: Int!): [School_bus]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "driver_id", "if_full_time", "school_id", "years_working" FROM "school_bus" WHERE "driver_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  school_busUsingidx_22748_sqlite_autoindex_school_bus_1(
+    school_id: Int!
+    driver_id: Int!
+  ): School_bus
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "driver_id", "if_full_time", "school_id", "years_working" FROM "school_bus" WHERE "school_id" = $1 AND "driver_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Driver' "
+  deleteDriver(
+    name: String!
+    driver_id: Int!
+    home_city: String!
+    age: Int!
+    party: String!
+  ): Driver
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "driver"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertDriver(
+    name: String
+    driver_id: Int
+    home_city: String
+    age: Int
+    party: String
+  ): Driver
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "driver"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'School' "
+  deleteSchool(
+    school: String!
+    location: String!
+    school_id: Int!
+    grade: String!
+    type: String!
+  ): School
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "school"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSchool(
+    school: String
+    location: String
+    school_id: Int
+    grade: String
+    type: String
+  ): School
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "school"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'School_bus' "
+  deleteSchool_bus(
+    if_full_time: Boolean!
+    years_working: Int!
+    driver_id: Int!
+    school_id: Int!
+  ): School_bus
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "school_bus"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSchool_bus(
+    if_full_time: Boolean
+    years_working: Int
+    driver_id: Int
+    school_id: Int
+  ): School_bus
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "school_bus"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

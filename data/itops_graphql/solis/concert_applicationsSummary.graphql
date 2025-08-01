@@ -1,0 +1,26 @@
+type concert_AppComponentCount {
+  "Count of environments"
+  environments: Int
+  "Count of images"
+  images: Int
+  "Count of libraries"
+  libraries: Int
+  "Count of repositories"
+  source_repos: Int
+}
+
+type Query {
+  concert_applicationsSummary(
+    application_id: String!
+    token: Secret
+  ): concert_AppComponentCount
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

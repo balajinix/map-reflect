@@ -1,0 +1,238 @@
+type Department {
+  budget_in_billions: Float
+  creation: String
+  department_id: Int
+  management: [Management] @materializer(query: "management")
+  name: String
+  num_employees: Float
+  ranking: Int
+}
+
+type Head {
+  age: Float
+  born_state: String
+  head_id: Int
+  management: [Management]
+    @materializer(query: "managementUsingManagement_head_id_fkey")
+  name: String
+}
+
+type Management {
+  department: Department @materializer(query: "department")
+  department_id: Int
+  head: Head @materializer(query: "head")
+  head_id: Int
+  temporary_acting: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Department' "
+  department(department_id: Int!): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "budget_in_billions", "creation", "department_id", "name", "num_employees", "ranking" FROM "department" WHERE "department_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  departmentList: [Department]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "department"
+      configuration: "postgresql_config"
+    )
+  departmentPaginatedList(first: Int, after: Int): [Department]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "budget_in_billions", "creation", "department_id", "name", "num_employees", "ranking" FROM "department" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  departmentUsingidx_17589_sqlite_autoindex_department_1(
+    department_id: Int!
+  ): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "budget_in_billions", "creation", "department_id", "name", "num_employees", "ranking" FROM "department" WHERE "department_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Head' "
+  head(head_id: Int!): Head
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "born_state", "head_id", "name" FROM "head" WHERE "head_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  headList: [Head]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "head"
+      configuration: "postgresql_config"
+    )
+  headPaginatedList(first: Int, after: Int): [Head]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "born_state", "head_id", "name" FROM "head" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  headUsingidx_17594_sqlite_autoindex_head_1(head_id: Int!): Head
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "born_state", "head_id", "name" FROM "head" WHERE "head_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Management' "
+  management(department_id: Int!): [Management]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "department_id", "head_id", "temporary_acting" FROM "management" WHERE "department_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  managementList: [Management]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "management"
+      configuration: "postgresql_config"
+    )
+  managementPaginatedList(first: Int, after: Int): [Management]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "department_id", "head_id", "temporary_acting" FROM "management" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  managementUsingManagement_head_id_fkey(head_id: Int!): [Management]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "department_id", "head_id", "temporary_acting" FROM "management" WHERE "head_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  managementUsingidx_17599_sqlite_autoindex_management_1(
+    department_id: Int!
+    head_id: Int!
+  ): Management
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "department_id", "head_id", "temporary_acting" FROM "management" WHERE "department_id" = $1 AND "head_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Department' "
+  deleteDepartment(
+    ranking: Int!
+    name: String!
+    department_id: Int!
+    creation: String!
+    num_employees: Float!
+    budget_in_billions: Float!
+  ): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "department"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertDepartment(
+    ranking: Int
+    name: String
+    department_id: Int
+    creation: String
+    num_employees: Float
+    budget_in_billions: Float
+  ): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "department"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Head' "
+  deleteHead(
+    age: Float!
+    born_state: String!
+    name: String!
+    head_id: Int!
+  ): Head
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "head"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertHead(age: Float, born_state: String, name: String, head_id: Int): Head
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "head"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Management' "
+  deleteManagement(
+    temporary_acting: String!
+    head_id: Int!
+    department_id: Int!
+  ): Management
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "management"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertManagement(
+    temporary_acting: String
+    head_id: Int
+    department_id: Int
+  ): Management
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "management"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

@@ -1,0 +1,111 @@
+type wxo_AdditionalProperties {
+  wxa_message: wxo_WxaMessage
+}
+
+type wxo_WxaMessage {
+  output: wxo_WXAOutput
+}
+
+type wxo_WXAOutput {
+  generic: [wxo_GenericEntry]
+}
+
+type wxo_GenericEntry {
+  response_type: String
+  text: String
+}
+
+type wxo_Message {
+  additional_properties: wxo_AdditionalProperties
+  assistant: wxo_Assistant
+  content: [wxo_ContentEntry]
+  context: JSON
+  created_by: String
+  created_by_username: String
+  created_on: DateTime
+  document_ids: JSON
+  id: String
+  mentions: JSON
+  parent_message_id: ID
+  role: String
+  step_history: JSON
+  tenant_id: ID
+  thread_id: ID
+  updated_at: DateTime
+}
+
+type wxo_Data {
+  assistant: wxo_Assistant
+  delta: String
+  last_error: String
+  message: wxo_Message
+  message_id: ID
+  run_id: String
+  thread_id: String
+}
+
+type wxo_Assistant {
+  is_default: Boolean
+}
+
+type wxo_Result {
+  data: wxo_Data
+  next_run_id: String
+  """
+  - route_complete
+  - route_confirm
+  - nba_selection
+  - message_created
+  - form_submission
+  - route_error
+  - nba_selection_error
+  """
+  type: String
+}
+
+type wxo_AssistantRun {
+  assistant_id: ID
+  cancelled_at: DateTime
+  completed_at: DateTime
+  created_at: DateTime
+  failed_at: DateTime
+  guardrails: JSON
+  id: ID
+  last_error: String
+  llm_params: JSON
+  result: wxo_Result
+  started_at: DateTime
+  status: String
+  tenant_id: ID
+  thread_id: ID!
+  usage: wxo_Usage
+}
+
+type wxo_Usage {
+  model_name: String
+  token_usage: wxo_TokenUsage
+}
+
+type wxo_TokenUsage {
+  completion_tokens: Int
+  prompt_tokens: Int
+  total_tokens: Int
+}
+
+type wxo_ContentEntry {
+  response_type: String
+  text: String
+}
+
+type Query {
+  wxo_chatRun(run_id: ID): wxo_AssistantRun
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

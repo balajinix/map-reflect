@@ -1,0 +1,124 @@
+type GetCpuListConnection {
+  """
+  A list of CPUs
+  """
+  edges: [GetCpuEdge]
+  """
+  A list of CPU edges that may be ahead of the given list.
+  """
+  pageInfo: PageInfo!
+  """
+  The total count of items in the collection.
+  """
+  totalCount: Int!
+}
+
+type GetCpuEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: GetCpu!
+  """
+  The cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+type GetCpu {
+  """
+  A list of links related to the CPU.
+  """
+  links: [Link!]!
+  """
+  The UUID of the CPU.
+  """
+  uuid: String!
+  """
+  A user readable name of the API object.
+  Cannot be blank.
+  The UTF-8 encoding must be at most 255 bytes.
+  """
+  displayName: String!
+  """
+  The class name of the CPU.
+  """
+  className: String
+  """
+  Number of Cores
+  """
+  numCores: String
+  """
+  Speed
+  """
+  speed: String
+  """
+  Scaling Factor
+  """
+  scalingFactor: String
+  """
+  The model name of the CPU.
+  """
+  modelName: String
+}
+
+type Link {
+  """
+  The relation of the link.
+  """
+  rel: String!
+  """
+  The href of the link.
+  """
+  href: String!
+  """
+  The hreflang of the link.
+  """
+  hreflang: String
+  """
+  The media type of the link.
+  """
+  media: String
+  """
+  The title of the link.
+  """
+  title: String
+  """
+  Indicates if the link is deprecated.
+  """
+  deprecation: String
+  """
+  The profile of the link.
+  """
+  profile: String
+  """
+  The name of the link.
+  """
+  name: String
+}
+
+type Query {
+  getCpuList(
+    @rest(
+      table: "Getcpulist",
+      description: "Get Cpu List for Host Template Creation",
+      columns: [
+        { column_name: "links.rel", description: "" },
+        { column_name: "links.href", description: "" },
+        { column_name: "links.hreflang", description: "" },
+        { column_name: "links.media", description: "" },
+        { column_name: "links.title", description: "" },
+        { column_name: "links.type", description: "" },
+        { column_name: "links.deprecation", description: "" },
+        { column_name: "links.profile", description: "" },
+        { column_name: "links.name", description: "" },
+        { column_name: "uuid", description: "" },
+        { column_name: "displayName", description: "A user readable name of the api object.\nCannot be blank.\nThe UTF-8 encoding must be at most 255 bytes." },
+        { column_name: "className", description: "" },
+        { column_name: "numCores", description: "Number of Cores" },
+        { column_name: "speed", description: "Speed" },
+        { column_name: "scalingFactor", description: "Scaling Factor" },
+        { column_name: "modelName", description: "" }
+      ]
+    ) : GetCpuListConnection
+  )
+}

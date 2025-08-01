@@ -1,0 +1,46 @@
+enum concert_FilterValueType {
+  ""
+  boolean
+  ""
+  string
+  ""
+  object
+}
+
+type concert_FiltersValues {
+  "Key should be list API parameter name"
+  filter_key: String!
+  "Possible values of filter"
+  filter_values: [concert_FilterInfo!]!
+  "Label be translated string which is shown in UI"
+  label: String!
+  "Type of filter values"
+  type: concert_FilterValueType!
+}
+
+type concert_ApplicationFilters {
+  "Filters applicable to applications"
+  application_filters: [concert_FiltersValues!]
+}
+
+type concert_FilterInfo {
+  "UUID"
+  key: String!
+  "Name"
+  value: String!
+}
+
+type Query {
+  concert_applicationFilters(
+    token: Secret
+  ): concert_ApplicationFilters
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

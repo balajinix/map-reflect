@@ -1,0 +1,418 @@
+type District {
+  city_area: Float
+  city_population: Float
+  district_id: Int
+  district_name: String
+  headquartered_city: String
+  store_district: [Store_district]
+    @materializer(query: "store_districtUsingStore_district_district_id_fkey")
+}
+
+type Product {
+  dimensions: String
+  dpi: Float
+  interface: String
+  max_page_size: String
+  pages_per_minute_color: Float
+  product: String
+  product_id: Int!
+  store_product: [Store_product] @materializer(query: "store_product")
+}
+
+type Store {
+  area_size: Float
+  number_of_product_category: Float
+  ranking: Int
+  store_district: Store_district @materializer(query: "store_district")
+  store_id: Int
+  store_name: String
+  store_product: [Store_product]
+    @materializer(query: "store_productUsingStore_product_store_id_fkey")
+  type: String
+}
+
+type Store_district {
+  district: District @materializer(query: "district")
+  district_id: Int
+  store: Store @materializer(query: "store")
+  store_id: Int
+}
+
+type Store_product {
+  product: Product
+    @materializer(query: "productUsingStore_product_product_id_fkey")
+  product_id: Int
+  store: Store @materializer(query: "storeUsingStore_product_store_id_fkey")
+  store_id: Int
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'District' "
+  district(district_id: Int!): District
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "city_area", "city_population", "district_id", "district_name", "headquartered_city" FROM "district" WHERE "district_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  districtList: [District]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "district"
+      configuration: "postgresql_config"
+    )
+  districtPaginatedList(first: Int, after: Int): [District]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "city_area", "city_population", "district_id", "district_name", "headquartered_city" FROM "district" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  districtUsingidx_17701_sqlite_autoindex_district_1(
+    district_id: Int!
+  ): District
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "city_area", "city_population", "district_id", "district_name", "headquartered_city" FROM "district" WHERE "district_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Product' "
+  product(product_id: Int!): Product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "product"
+      configuration: "postgresql_config"
+    )
+  productList: [Product]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "product"
+      configuration: "postgresql_config"
+    )
+  productPaginatedList(first: Int, after: Int): [Product]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dimensions", "dpi", "interface", "max_page_size", "pages_per_minute_color", "product", "product_id" FROM "product" ORDER BY "product_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  productUsingStore_product_product_id_fkey(product_id: Int!): Product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dimensions", "dpi", "interface", "max_page_size", "pages_per_minute_color", "product", "product_id" FROM "product" WHERE "product_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Store' "
+  store(store_id: Int!): Store
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "area_size", "number_of_product_category", "ranking", "store_id", "store_name", "type" FROM "store" WHERE "store_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  storeList: [Store]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store"
+      configuration: "postgresql_config"
+    )
+  storePaginatedList(first: Int, after: Int): [Store]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "area_size", "number_of_product_category", "ranking", "store_id", "store_name", "type" FROM "store" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  storeUsingStore_product_store_id_fkey(store_id: Int!): Store
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "area_size", "number_of_product_category", "ranking", "store_id", "store_name", "type" FROM "store" WHERE "store_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  storeUsingidx_17696_sqlite_autoindex_store_1(store_id: Int!): Store
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "area_size", "number_of_product_category", "ranking", "store_id", "store_name", "type" FROM "store" WHERE "store_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Store_district' "
+  store_district(store_id: Int!): Store_district
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "district_id", "store_id" FROM "store_district" WHERE "store_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  store_districtList: [Store_district]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store_district"
+      configuration: "postgresql_config"
+    )
+  store_districtPaginatedList(first: Int, after: Int): [Store_district]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "district_id", "store_id" FROM "store_district" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  store_districtUsingStore_district_district_id_fkey(
+    district_id: Int!
+  ): [Store_district]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "district_id", "store_id" FROM "store_district" WHERE "district_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  store_districtUsingidx_17709_sqlite_autoindex_store_district_1(
+    store_id: Int!
+  ): Store_district
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "district_id", "store_id" FROM "store_district" WHERE "store_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Store_product' "
+  store_product(product_id: Int!): [Store_product]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "product_id", "store_id" FROM "store_product" WHERE "product_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  store_productList: [Store_product]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store_product"
+      configuration: "postgresql_config"
+    )
+  store_productPaginatedList(first: Int, after: Int): [Store_product]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "product_id", "store_id" FROM "store_product" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  store_productUsingStore_product_store_id_fkey(
+    store_id: Int!
+  ): [Store_product]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "product_id", "store_id" FROM "store_product" WHERE "store_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  store_productUsingidx_17706_sqlite_autoindex_store_product_1(
+    store_id: Int!
+    product_id: Int!
+  ): Store_product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "product_id", "store_id" FROM "store_product" WHERE "store_id" = $1 AND "product_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'District' "
+  deleteDistrict(
+    city_population: Float!
+    city_area: Float!
+    district_id: Int!
+    district_name: String!
+    headquartered_city: String!
+  ): District
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "district"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertDistrict(
+    city_population: Float
+    city_area: Float
+    district_id: Int
+    district_name: String
+    headquartered_city: String
+  ): District
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "district"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Product' "
+  deleteProduct(product_id: Int!): Product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "product"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertProduct(
+    dpi: Float
+    interface: String
+    pages_per_minute_color: Float
+    dimensions: String
+    product: String
+    max_page_size: String
+    product_id: Int!
+  ): Product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "product"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateProduct(
+    product_id: Int!
+    dimensions: String
+    dpi: Float
+    interface: String
+    max_page_size: String
+    pages_per_minute_color: Float
+    product: String
+  ): Product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "product" SET
+        "dimensions" = COALESCE($2, "dimensions"),
+        "dpi" = COALESCE($3, "dpi"),
+        "interface" = COALESCE($4, "interface"),
+        "max_page_size" = COALESCE($5, "max_page_size"),
+        "pages_per_minute_color" = COALESCE($6, "pages_per_minute_color"),
+        "product" = COALESCE($7, "product")
+      WHERE
+        "product_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Store' "
+  deleteStore(
+    ranking: Int!
+    area_size: Float!
+    store_name: String!
+    store_id: Int!
+    number_of_product_category: Float!
+    type: String!
+  ): Store
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertStore(
+    ranking: Int
+    area_size: Float
+    store_name: String
+    store_id: Int
+    number_of_product_category: Float
+    type: String
+  ): Store
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Store_district' "
+  deleteStore_district(district_id: Int!, store_id: Int!): Store_district
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store_district"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertStore_district(district_id: Int, store_id: Int): Store_district
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store_district"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Store_product' "
+  deleteStore_product(product_id: Int!, store_id: Int!): Store_product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store_product"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertStore_product(product_id: Int, store_id: Int): Store_product
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "store_product"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

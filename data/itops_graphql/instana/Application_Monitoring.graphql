@@ -1,0 +1,245 @@
+type Getcorrelatedtraces {
+  # Define fields here
+}
+
+type Getcallgroup {
+  # Define fields here
+}
+
+type Gettracegroups {
+  # Define fields here
+}
+
+type Gettraces {
+  # Define fields here
+}
+
+type Gettrace {
+  # Define fields here
+}
+
+type Getapplications {
+  # Define fields here
+}
+
+type Getapplicationservices {
+  # Define fields here
+}
+
+type Getapplicationendpoints {
+  # Define fields here
+}
+
+type Getapplicationtagcatalog {
+  # Define fields here
+}
+
+type Getapplicationcatalogmetrics {
+  # Define fields here
+}
+
+type Getapplicationtags {
+  # Define fields here
+}
+
+type Getapplicationmetrics {
+  # Define fields here
+}
+
+type Getendpointsmetrics {
+  # Define fields here
+}
+
+type Getservicesmetrics {
+  # Define fields here
+}
+
+type Getservices {
+  # Define fields here
+}
+
+type Getapplicationconfigs {
+  # Define fields here
+}
+
+type Addapplicationconfig {
+  # Define fields here
+}
+
+type Deleteapplicationconfig {
+  # Define fields here
+}
+
+type Getapplicationconfig {
+  # Define fields here
+}
+
+type Putapplicationconfig {
+  # Define fields here
+}
+
+type Getendpointconfigs {
+  # Define fields here
+}
+
+type Createendpointconfig {
+  # Define fields here
+}
+
+type Deleteendpointconfig {
+  # Define fields here
+}
+
+type Getendpointconfig {
+  # Define fields here
+}
+
+type Updateendpointconfig {
+  # Define fields here
+}
+
+type Gethttpendpointconfigs {
+  # Define fields here
+}
+
+type Createhttpendpointconfig {
+  # Define fields here
+}
+
+type Deletehttpendpointconfig {
+  # Define fields here
+}
+
+type Gethttpendpointconfig {
+  # Define fields here
+}
+
+type Updatehttpendpointconfig {
+  # Define fields here
+}
+
+type Getallmanualserviceconfigs {
+  # Define fields here
+}
+
+type Addmanualserviceconfig {
+  # Define fields here
+}
+
+type Replaceallmanualserviceconfigs {
+  # Define fields here
+}
+
+type Deletemanualserviceconfig {
+  # Define fields here
+}
+
+type Updatemanualserviceconfig {
+  # Define fields here
+}
+
+type Getserviceconfigs {
+  # Define fields here
+}
+
+type Addserviceconfig {
+  # Define fields here
+}
+
+type Replaceall {
+  # Define fields here
+}
+
+type Orderserviceconfig {
+  # Define fields here
+}
+
+type Deleteserviceconfig {
+  # Define fields here
+}
+
+type Getserviceconfig {
+  # Define fields here
+}
+
+type Putserviceconfig {
+  # Define fields here
+}
+
+type Deletesubtraceconfig {
+  # Define fields here
+}
+
+type Getservicesmap {
+  # Define fields here
+}
+
+type Gettracedownload {
+  # Define fields here
+}
+
+type Getcalldetails {
+  # Define fields here
+}
+
+type Getapplicationdatametricsv2 {
+  # Define fields here
+}
+
+# Please note that the actual fields for each type should be defined based on the specific data structure of the application monitoring system. The provided types are just a template for the GraphQL schema.
+
+type Query {
+  Getcorrelatedtraces: [correlatedTrace]
+  Getcallgroup: [callGroup]
+  Gettracegroups: [traceGroup]
+  Gettraces: [trace]
+  Gettrace(id: ID!): Trace
+  Getapplications: [application]
+  Getapplicationservices: [applicationService]
+  Getapplicationendpoints: [applicationEndpoint]
+  Getapplicationtagcatalog: [tag]
+  Getapplicationcatalogmetrics: [metricDefinition]
+  Getapplicationtags: [applicationTag]
+  Getapplicationmetrics(applicationId: ID!, metrics: [String]!, aggregation: String, timeRange: TimeRange): applicationMetrics
+  Getendpointsmetrics(endpointId: ID!, metrics: [String]!, aggregation: String, timeRange: TimeRange): endpointMetrics
+  Getservicesmetrics(serviceId: ID!, metrics: [String]!, aggregation: String, timeRange: TimeRange): serviceMetrics
+  Getservices: [service]
+  Getapplicationconfigs: [applicationConfig]
+  Addapplicationconfig(applicationConfig: applicationConfigInput): applicationConfig
+  Deleteapplicationconfig(id: ID!): deleteResponse
+  Getapplicationconfig(id: ID!): applicationConfig
+  Putapplicationconfig(id: ID!, applicationConfig: applicationConfigInput): applicationConfig
+  Getendpointconfigs: [endpointConfig]
+  Createendpointconfig(endpointConfig: endpointConfigInput): endpointConfig
+  Deleteendpointconfig(id: ID!): deleteResponse
+  Getendpointconfig(id: ID!): endpointConfig
+  Updateendpointconfig(id: ID!, endpointConfig: endpointConfigInput): endpointConfig
+  Gethttpendpointconfigs: [httpEndpointConfig]
+  Createhttpendpointconfig(httpEndpointConfig: httpEndpointConfigInput): httpEndpointConfig
+  Deletehttpendpointconfig(id: ID!): deleteResponse
+  Gethttpendpointconfig(id: ID!): httpEndpointConfig
+  Updatehttpendpointconfig(id: ID!, httpEndpointConfig: httpEndpointConfigInput): httpEndpointConfig
+  Getallmanualserviceconfigs: [manualServiceConfig]
+  Addmanualserviceconfig(manualServiceConfig: manualServiceConfigInput): manualServiceConfig
+  Replaceallmanualserviceconfigs(manualServiceConfig: manualServiceConfigInput): replaceResponse
+  Deletemanualserviceconfig(id: ID!): deleteResponse
+  Updatemanualserviceconfig(id: ID!, manualServiceConfig: manualServiceConfigInput): manualServiceConfig
+  Getserviceconfigs: [serviceConfig]
+  Addserviceconfig(serviceConfig: serviceConfigInput): serviceConfig
+  Replaceall(serviceConfig: serviceConfigInput): replaceResponse
+  Orderserviceconfig(id: ID!): serviceConfig
+  Deleteserviceconfig(id: ID!): deleteResponse
+  Getserviceconfig(id: ID!): serviceConfig
+  Putserviceconfig(id: ID!, serviceConfig: serviceConfigInput): serviceConfig
+  Deletesubtraceconfig(id: ID!): deleteResponse
+  Getservicesmap: serviceTopology
+  Gettracedownload(traceId: ID!): traceDetail
+  Getcalldetails(traceId: ID!, callId: ID!): callDetail
+  Getapplicationdatametricsv2(applicationId: ID!, serviceId: ID!, endpointId: ID!, metrics: [String]!, aggregation: String, timeRange: TimeRange): applicationDataMetrics
+}
+
+# Please note that the actual types for each field (e.g., `correlatedTrace`, `callGroup`, `traceGroup`, etc.) should be defined based on the specific data structure of the application monitoring system. The provided types are just a template for the GraphQL schema.
+
+# Also, the `TimeRange` type is assumed to be defined elsewhere in the schema and represents a time range for filtering data.
+
+# The `@rest` directive is not applicable in GraphQL schema definition. It's used in some GraphQL clients to instruct the client to use a REST API instead of a GraphQL API for a specific query. The schema definition itself doesn't enforce this behavior.

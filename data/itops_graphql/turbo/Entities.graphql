@@ -1,0 +1,894 @@
+type GetEntities {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  discoveredBy: String
+  vendorIds: String
+  priceIndex: String
+  state: String
+  severity: String
+  unplacementDetails: String
+  placedOn: String
+  notPlacedOn: String
+  unplacedExplanation: String
+  costPrice: String
+  severityBreakdown: String
+  remoteId: String
+  realtimeMarketReference: String
+  providers: [GetProviders]
+  consumers: [GetConsumers]
+  template: String
+  numRelatedVMs: String
+  connectedEntities: [GetConnectedEntities]
+  aspects: String
+  tags: String
+  onDemandRateBefore: String
+  onDemandRateAfter: String
+}
+
+type GetEntityByUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  discoveredBy: String
+  vendorIds: String
+  priceIndex: String
+  state: String
+  severity: String
+  unplacementDetails: String
+  placedOn: String
+  notPlacedOn: String
+  unplacedExplanation: String
+  costPrice: String
+  severityBreakdown: String
+  remoteId: String
+  realtimeMarketReference: String
+  providers: [GetProviders]
+  consumers: [GetConsumers]
+  template: String
+  numRelatedVMs: String
+  connectedEntities: [GetConnectedEntities]
+  aspects: String
+  tags: String
+  onDemandRateBefore: String
+  onDemandRateAfter: String
+}
+
+type GetCurrentActionsByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [GetStats]
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [GetVirtualDisks]
+  policy: String
+  relatedSettingsPolicies: [GetRelatedSettingsPolicies]
+  actionSchedule: String
+  compoundActions: String
+  reservedInstance: String
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: String
+  executionCharacteristics: String
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetActionsByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [GetStats]
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [GetVirtualDisks]
+  policy: String
+  relatedSettingsPolicies: [GetRelatedSettingsPolicies]
+  actionSchedule: String
+  compoundActions: String
+  reservedInstance: String
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: String
+  executionCharacteristics: String
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetEntityActionsStateChangesByUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  state: String
+  stateChangeTime: String
+}
+
+type GetActionCountStatsByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [GetStatistics]
+  epoch: String
+}
+
+type GetActionStatsResourceImpactByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [GetStatistics]
+  epoch: String
+}
+
+type GetActionByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [GetStats]
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [GetVirtualDisks]
+  policy: String
+  relatedSettingsPolicies: [GetRelatedSettingsPolicies]
+  actionSchedule: String
+  compoundActions: String
+  reservedInstance: String
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: String
+  executionCharacteristics: String
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetAspectsByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  aspects: [GetAspect]
+}
+
+type GetAspectByEntityUuid {
+  sli: String
+  type: String
+}
+
+type GetConstraintsByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  relation: String
+  entityType: String
+  relatedEntities: [GetRelatedEntities]
+  placementOptions: GetPlacementOptions
+}
+
+type GetRelatedEntities {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  discoveredBy: String
+  vendorIds: String
+  priceIndex: String
+  state: String
+  severity: String
+  unplacementDetails: String
+  placedOn: String
+  notPlacedOn: String
+  unplacedExplanation: String
+  costPrice: String
+  severityBreakdown: String
+  remoteId: String
+  realtimeMarketReference: String
+  providers: [GetProviders]
+  consumers: [GetConsumers]
+  template: String
+  numRelatedVMs: String
+  connectedEntities: [GetConnectedEntities]
+  aspects: String
+  tags: String
+  onDemandRateBefore: String
+  onDemandRateAfter: String
+}
+
+type GetPlacementOptions {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  constraintType: String
+  scope: String
+  target: String
+  numPotentialEntities: String
+  key: String
+  currentEntities: String
+}
+
+type GetPotentialEntitiesByEntity {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  discoveredBy: String
+  vendorIds: String
+  priceIndex: String
+  state: String
+  severity: String
+  unplacementDetails: String
+  placedOn: String
+  notPlacedOn: String
+  unplacedExplanation: String
+  costPrice: String
+  severityBreakdown: String
+  remoteId: String
+  realtimeMarketReference: String
+  providers: [GetProviders]
+  consumers: [GetConsumers]
+  template: String
+  numRelatedVMs: String
+  connectedEntities: [GetConnectedEntities]
+  aspects: String
+  tags: String
+  onDemandRateBefore: String
+  onDemandRateAfter: String
+}
+
+type GetEntityCloudCostStats {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [GetStatistics]
+  epoch: String
+}
+
+type UpdateCustomCostByEntityUuid {
+  value: String
+  hairCutRatio: String
+  costType: String
+  costUnit: String
+}
+
+type CreateCustomCostByEntityUuid {
+  value: String
+  hairCutRatio: String
+  costType: String
+  costUnit: String
+}
+
+type DeleteCustomCostByEntityUuid {
+  uuid: String
+}
+
+type GetGroupsByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type GetPoliciesByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  type: String
+  name: String
+  enabled: Boolean
+  capacity: String
+  commodityType: String
+  mergeType: String
+  consumerGroup: String
+  providerGroup: String
+  mergeGroups: [GetMergeGroups]
+}
+
+type GetMergeGroups {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type GetSettingsByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  category: String
+  settings: [GetSettings]
+}
+
+type GetSettingsManagerByEntity {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  value: String
+  valueDisplayName: String
+  defaultValue: String
+  categories: String
+  valueType: String
+  valueObjectType: String
+  options: [GetOptions]
+  min: String
+  max: String
+  entityType: String
+  range: String
+  scope: String
+  activeSettingsPolicies: [GetActiveSettingsPolicies]
+  sourceGroupName: String
+  sourceGroupUuid: String
+}
+
+type GetSettings {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  value: String
+  valueDisplayName: String
+  defaultValue: String
+  categories: String
+  valueType: String
+  valueObjectType: String
+  options: [GetOptions]
+  min: String
+  max: String
+  entityType: String
+  range: String
+  scope: String
+  activeSettingsPolicies: [GetActiveSettingsPolicies]
+  sourceGroupName: String
+  sourceGroupUuid: String
+}
+
+type GetActiveSettingsPolicies {
+  settingsPolicy: String
+  value: String
+  numEntities: String
+}
+
+type GetSettingByEntity {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  value: String
+  valueDisplayName: String
+  defaultValue: String
+  categories: String
+  valueType: String
+  valueObjectType: String
+  options: [GetOptions]
+  min: String
+  max: String
+  entityType: String
+  range: String
+  scope: String
+  activeSettingsPolicies: [GetActiveSettingsPolicies]
+  sourceGroupName: String
+  sourceGroupUuid: String
+}
+
+type GetSettingPoliciesByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  entityType: String
+  scopes: [GetScopes]
+  settingsManagers: [GetSettingsManagerByEntity]
+  schedule: String
+  disabled: Boolean
+  note: String
+  readOnly: Boolean
+  default: String
+}
+
+type GetScopes {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  membersCount: String
+  entitiesCount: String
+  costPrice: String
+  groupType: String
+  severity: String
+  state: String
+  environmentType: String
+  scope: String
+  isStatic: Boolean
+  logicalOperator: String
+  criteriaList: String
+  memberUuidList: String
+  realtimeMarketReference: String
+  stats: String
+  temporary: Boolean
+  activeEntitiesCount: String
+  cloudType: String
+  source: String
+  memberTypes: String
+  entityTypes: String
+  aspects: String
+  vendorIds: String
+  groupOrigin: String
+  targetType: String
+  groupClassName: String
+}
+
+type GetEntityStatsByUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [GetStatistics]
+  epoch: String
+}
+
+type GetEntityStatsByEntityQuery {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [GetStatistics]
+  epoch: String
+}
+
+type GetSupplyChainByEntityUuid {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  seMap: String
+}
+
+type GetTagsByEntityUuid {
+  key: String
+  values: String
+}
+
+type CreateTagsByEntityUuid {
+  key: String
+  values: String
+}
+
+type DeleteTagsByEntityUuid {
+  uuid: String
+}
+
+type GetParkableEntities {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  accountOID: String
+  accountName: String
+  provider: String
+  state: String
+  parkable: String
+  entityType: String
+  regionOID: String
+  regionName: String
+  instanceType: String
+  cost: String
+  tags: [GetTagsByEntityUuid]
+  schedules: [GetSchedules]
+  groups: [GetGroupsByEntityUuid]
+  restrictions: [GetRestrictions]
+}
+
+type GetParkableEntitiesStats {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [GetStatistics]
+  epoch: String
+}
+
+type GetParkableEntity {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  accountOID: String
+  accountName: String
+  provider: String
+  state: String
+  parkable: String
+  entityType: String
+  regionOID: String
+  regionName: String
+  instanceType: String
+  cost: String
+  tags: [GetTagsByEntityUuid]
+  schedules: [GetSchedules]
+  groups: [GetGroupsByEntityUuid]
+  restrictions: [GetRestrictions]
+  virtualMachineSpecDetails: String
+}
+
+type GetEntitiesByTagKey {
+  links: Links
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  discoveredBy: String
+  vendorIds: String
+  priceIndex: String
+  state: String
+  severity: String
+  unplacementDetails: String
+  placedOn: String
+  notPlacedOn: String
+  unplacedExplanation: String
+  costPrice: String
+  severityBreakdown: String
+  remoteId: String
+  realtimeMarketReference: String
+  providers: [GetProviders]
+  consumers: [GetConsumers]
+  template: String
+  numRelatedVMs: String
+  connectedEntities: [GetConnectedEntities]
+  aspects: String
+  tags: String
+  onDemandRateBefore: String
+  onDemandRateAfter: String
+}
+
+type GetSchedules {
+  displayName: String
+  uuid: String
+  pauseEnforcementUntil: String
+  attachedBy: String
+}
+
+type GetRestrictions {
+  restrictionType: String
+  controlledBy: String
+  schedulePausedUntil: String
+  cloudServiceName: String
+  customInstanceType: String
+}
+
+type Query {
+  getEntities(uuid: String): GetEntities
+  getEntityByUuid(uuid: String): GetEntityByUuid
+  getCurrentActionsByEntityUuid(uuid: String): GetCurrentActionsByEntityUuid
+  getActionsByEntityUuid(uuid: String): GetActionsByEntityUuid
+  getEntityActionsStateChangesByUuid(uuid: String): GetEntityActionsStateChangesByUuid
+  getActionCountStatsByEntityUuid(uuid: String): GetActionCountStatsByEntityUuid
+  getActionStatsResourceImpactByEntityUuid(uuid: String): GetActionStatsResourceImpactByEntityUuid
+  getActionByEntityUuid(uuid: String): GetActionByEntityUuid
+  getAspectsByEntityUuid(uuid: String): GetAspectsByEntityUuid
+  getAspectByEntityUuid(uuid: String): GetAspectByEntityUuid
+  getConstraintsByEntityUuid(uuid: String): GetConstraintsByEntityUuid
+  getRelatedEntities(uuid: String): GetRelatedEntities
+  getPotentialEntitiesByEntity(uuid: String): GetPotentialEntitiesByEntity
+  getEntityCloudCostStats(uuid: String): GetEntityCloudCostStats
+  updateCustomCostByEntityUuid(uuid: String, input: UpdateCustomCostByEntityUuid): GetCustomCostsByUuid
+  createCustomCostByEntityUuid(uuid: String, input: CreateCustomCostByEntityUuid): GetCustomCostsByUuid
+  deleteCustomCostByEntityUuid(uuid: String): DeleteCustomCostByEntityUuid
+  getGroupsByEntityUuid(uuid: String): GetGroupsByEntityUuid
+  getPoliciesByEntityUuid(uuid: String): GetPoliciesByEntityUuid
+  getMergeGroups(uuid: String): GetMergeGroups
+  getSettingsByEntityUuid(uuid: String): GetSettingsByEntityUuid
+  getSettingsManagerByEntity(uuid: String): GetSettingsManagerByEntity
+  getSettings(uuid: String): GetSettings
+  getActiveSettingsPolicies(uuid: String): GetActiveSettingsPolicies
+  getSettingByEntity(uuid: String): GetSettingByEntity
+  getSettingPoliciesByEntityUuid(uuid: String): GetSettingPoliciesByEntityUuid
+  getScopes(uuid: String): GetScopes
+  getEntityStatsByUuid(uuid: String): GetEntityStatsByUuid
+  getEntityStatsByEntityQuery(uuid: String): GetEntityStatsByEntityQuery
+  getSupplyChainByEntityUuid(uuid: String): GetSupplyChainByEntityUuid
+  getTagsByEntityUuid(uuid: String): GetTagsByEntityUuid
+  createTagsByEntityUuid(uuid: String, input: CreateTagsByEntityUuid): GetTagsByEntityUuid
+  deleteTagsByEntityUuid(uuid: String): DeleteTagsByEntityUuid
+  getParkableEntities(uuid: String): GetParkableEntities
+  getParkableEntitiesStats(uuid: String): GetParkableEntitiesStats
+  getParkableEntity(uuid: String): GetParkableEntity
+  getEntitiesByTagKey(tagKey: String): GetEntitiesByTagKey
+}

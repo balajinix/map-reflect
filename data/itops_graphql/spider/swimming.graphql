@@ -1,0 +1,329 @@
+type Event {
+  id: Int
+  name: String
+  record: [Record] @materializer(query: "recordUsingRecord_event_id_fkey")
+  stadium: Stadium @materializer(query: "stadium")
+  stadium_id: Int
+  year: String
+}
+
+type Record {
+  event: Event @materializer(query: "event")
+  event_id: Int
+  id: Int
+  result: String
+  swimmer: Swimmer @materializer(query: "swimmer")
+  swimmer_id: Int
+}
+
+type Stadium {
+  capacity: Int
+  city: String
+  country: String
+  event: [Event] @materializer(query: "eventUsingEvent_stadium_id_fkey")
+  id: Int
+  name: String
+  opening_year: Int
+}
+
+type Swimmer {
+  id: Int
+  meter_100: Float
+  meter_200: String
+  meter_300: String
+  meter_400: String
+  meter_500: String
+  meter_600: String
+  meter_700: String
+  name: String
+  nationality: String
+  record: [Record] @materializer(query: "record")
+  time: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Event' "
+  event(event_id: Int!): Event
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "id", "name", "stadium_id", "year" FROM "event" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  eventList: [Event]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "event"
+      configuration: "postgresql_config"
+    )
+  eventPaginatedList(first: Int, after: Int): [Event]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "id", "name", "stadium_id", "year" FROM "event" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  eventUsingEvent_stadium_id_fkey(id: Int!): [Event]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "id", "name", "stadium_id", "year" FROM "event" WHERE "stadium_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  eventUsingidx_22127_sqlite_autoindex_event_1(id: Int!): Event
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "id", "name", "stadium_id", "year" FROM "event" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Record' "
+  record(id: Int!): [Record]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "event_id", "id", "result", "swimmer_id" FROM "record" WHERE "swimmer_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  recordList: [Record]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "record"
+      configuration: "postgresql_config"
+    )
+  recordPaginatedList(first: Int, after: Int): [Record]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "event_id", "id", "result", "swimmer_id" FROM "record" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  recordUsingRecord_event_id_fkey(id: Int!): [Record]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "event_id", "id", "result", "swimmer_id" FROM "record" WHERE "event_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  recordUsingidx_22132_sqlite_autoindex_record_1(
+    swimmer_id: Int!
+    event_id: Int!
+  ): Record
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "event_id", "id", "result", "swimmer_id" FROM "record" WHERE "swimmer_id" = $1 AND "event_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Stadium' "
+  stadium(stadium_id: Int!): Stadium
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "capacity", "city", "country", "id", "name", "opening_year" FROM "stadium" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  stadiumList: [Stadium]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "stadium"
+      configuration: "postgresql_config"
+    )
+  stadiumPaginatedList(first: Int, after: Int): [Stadium]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "capacity", "city", "country", "id", "name", "opening_year" FROM "stadium" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  stadiumUsingidx_22122_sqlite_autoindex_stadium_1(id: Int!): Stadium
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "capacity", "city", "country", "id", "name", "opening_year" FROM "stadium" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Swimmer' "
+  swimmer(swimmer_id: Int!): Swimmer
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "id", "meter_100", "meter_200", "meter_300", "meter_400", "meter_500", "meter_600", "meter_700", "name", "nationality", "time" FROM "swimmer" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  swimmerList: [Swimmer]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "swimmer"
+      configuration: "postgresql_config"
+    )
+  swimmerPaginatedList(first: Int, after: Int): [Swimmer]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "id", "meter_100", "meter_200", "meter_300", "meter_400", "meter_500", "meter_600", "meter_700", "name", "nationality", "time" FROM "swimmer" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  swimmerUsingidx_22117_sqlite_autoindex_swimmer_1(id: Int!): Swimmer
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "id", "meter_100", "meter_200", "meter_300", "meter_400", "meter_500", "meter_600", "meter_700", "name", "nationality", "time" FROM "swimmer" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Event' "
+  deleteEvent(year: String!, stadium_id: Int!, name: String!, id: Int!): Event
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "event"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertEvent(year: String, stadium_id: Int, name: String, id: Int): Event
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "event"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Record' "
+  deleteRecord(
+    event_id: Int!
+    swimmer_id: Int!
+    result: String!
+    id: Int!
+  ): Record
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "record"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertRecord(event_id: Int, swimmer_id: Int, result: String, id: Int): Record
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "record"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Stadium' "
+  deleteStadium(
+    city: String!
+    name: String!
+    opening_year: Int!
+    country: String!
+    id: Int!
+    capacity: Int!
+  ): Stadium
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "stadium"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertStadium(
+    city: String
+    name: String
+    opening_year: Int
+    country: String
+    id: Int
+    capacity: Int
+  ): Stadium
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "stadium"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Swimmer' "
+  deleteSwimmer(
+    name: String!
+    meter_200: String!
+    meter_100: Float!
+    meter_700: String!
+    id: Int!
+    meter_400: String!
+    nationality: String!
+    time: String!
+    meter_300: String!
+    meter_600: String!
+    meter_500: String!
+  ): Swimmer
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "swimmer"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSwimmer(
+    name: String
+    meter_200: String
+    meter_100: Float
+    meter_700: String
+    id: Int
+    meter_400: String
+    nationality: String
+    time: String
+    meter_300: String
+    meter_600: String
+    meter_500: String
+  ): Swimmer
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "swimmer"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

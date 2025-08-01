@@ -53,7 +53,9 @@ class SMTEvaluationRunner:
     def __init__(self, 
                  mappings_dir: str = "../data/mappings_output",
                  chroma_db_path: str = "../data/chroma_db", 
-                 schema_dir: str = "../data/graphql"):
+                 schema_dir: str = "../data/graphql",
+                 dataset: str = None,
+                 collection_name: str = None):
         """
         Initialize the SMT evaluation runner.
         
@@ -61,11 +63,14 @@ class SMTEvaluationRunner:
             mappings_dir: Directory containing cached mapping results
             chroma_db_path: Path to ChromaDB database (should be pre-indexed)
             schema_dir: Directory containing GraphQL schemas
+            dataset: Dataset name for reference
+            collection_name: Explicit ChromaDB collection name to use
         """
         self.mappings_dir = Path(mappings_dir)
         self.chroma_db_path = Path(chroma_db_path)
         self.schema_dir = Path(schema_dir)
         self.results_dir = Path("results")
+        self.dataset = dataset
         
         # Create directories
         self.mappings_dir.mkdir(exist_ok=True)
@@ -78,14 +83,27 @@ class SMTEvaluationRunner:
         # Check if ChromaDB has been set up
         self._verify_chromadb_setup()
         
+        # Use provided collection name or determine from dataset
+        if collection_name:
+            self.collection_name = collection_name
+        elif dataset:
+            self.collection_name = f"{dataset.lower()}_graphql_schemas"
+        
         # Initialize components (assuming ChromaDB is pre-indexed)
         self.api_retriever = SMTAPIRetriever(
             mappings_dir=str(self.mappings_dir),
-            chroma_db_path=str(self.chroma_db_path)
+            chroma_db_path=str(self.chroma_db_path),
+            collection_name=self.collection_name
         )
-        self.schema_indexer = GraphQLSchemaIndexer(chroma_db_path=str(self.chroma_db_path))
+        
+        self.schema_indexer = GraphQLSchemaIndexer(
+            chroma_db_path=str(self.chroma_db_path),
+            collection_name=self.collection_name
+        )
         
         logger.info(f"SMT runner initialized")
+        logger.info(f"   Dataset: {self.dataset}")
+        logger.info(f"   Schema collection: {self.collection_name}")
         logger.info(f"   Mappings directory: {self.mappings_dir}")
         logger.info(f"   ChromaDB path: {self.chroma_db_path}")
         logger.info(f"   Schema directory: {self.schema_dir}")
@@ -109,8 +127,18 @@ class SMTEvaluationRunner:
             
             collections = [c.name for c in client.list_collections()]
             
-            if "graphql_schemas" not in collections:
-                logger.warning("'graphql_schemas' collection not found")
+            # Check for dataset-specific collection
+            if self.dataset:
+                expected_collection = f"{self.dataset.lower()}_graphql_schemas"
+                if expected_collection not in collections:
+                    logger.warning(f"Dataset-specific collection '{expected_collection}' not found")
+                    logger.warning("Run setup_smt.sh to create dataset-specific indices")
+                else:
+                    logger.info(f"Found dataset-specific collection: {expected_collection}")
+            
+            # Check for generic collection as fallback
+            if "graphql_schemas" not in collections and not any(c.endswith("_graphql_schemas") for c in collections):
+                logger.warning("No GraphQL schema collections found")
                 logger.warning("Schema-based API selection may not work optimally")
             
             if "smt_mappings" not in collections:
@@ -121,7 +149,7 @@ class SMTEvaluationRunner:
             for collection_name in collections:
                 collection = client.get_collection(collection_name)
                 count = collection.count()
-                logger.info(f"   📦 {collection_name}: {count} documents")
+                logger.info(f"   {collection_name}: {count} documents")
                 
         except Exception as e:
             logger.warning(f"ChromaDB verification failed: {e}")
@@ -129,7 +157,7 @@ class SMTEvaluationRunner:
     
     def load_evaluation_utterances(self, dataset: str) -> List[Dict[str, Any]]:
         """Load evaluation utterances for a specific dataset using shared loader."""
-        return self.dataset_loader.load_evaluation_utterances(dataset)
+        return self.dataset_loader.load_evaluation_utterances(dataset, max_samples=None)
     
     def run_single_evaluation(self, utterance: str, sample_id: str, model: str) -> Dict[str, Any]:
         """Run SMT evaluation on a single utterance."""
@@ -184,9 +212,29 @@ class SMTEvaluationRunner:
             
             return self._create_error_result(sample_id, str(e), start_time)
     
-    def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
+    def run_evaluation(self, dataset: str, model: str, collection_name: str = None) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
         logger.info(f"Starting SMT evaluation for {dataset} with {model}")
+        
+        # Update dataset for this evaluation
+        self.dataset = dataset
+        
+        # Update collection name if provided
+        if collection_name:
+            self.collection_name = collection_name
+            # Update API retriever to use specified collection
+            if hasattr(self.api_retriever, 'update_schema_collection'):
+                self.api_retriever.update_schema_collection(collection_name)
+            # Update schema indexer
+            self.schema_indexer.collection_name = collection_name
+            logger.info(f"Updated to use collection: {collection_name}")
+        else:
+            # Update API retriever to use dataset-specific collection
+            dataset_collection = f"{dataset.lower()}_graphql_schemas"
+            if hasattr(self.api_retriever, 'update_schema_collection'):
+                self.api_retriever.update_schema_collection(dataset_collection)
+            self.schema_indexer.collection_name = dataset_collection
+            self.collection_name = dataset_collection
         
         # Load evaluation utterances using shared loader
         utterances = self.load_evaluation_utterances(dataset)
@@ -248,7 +296,8 @@ class SMTEvaluationRunner:
                 "successful_samples": len(successful_results),
                 "overall_accuracy": overall_accuracy,
                 "toolkit_version": "schema-mapping-toolkit",
-                "mappings_dir": str(self.mappings_dir)
+                "mappings_dir": str(self.mappings_dir),
+                "schema_collection": self.collection_name
             },
             "results": results
         }
@@ -394,25 +443,40 @@ class SMTEvaluationRunner:
         except Exception as e:
             logger.warning(f"Could not index new mapping: {e}")
     
-    def setup_chromadb_indices(self, force_reindex: bool = False):
-        """Setup both ChromaDB indices (schemas and mappings)."""
-        logger.info("Setting up ChromaDB indices...")
+    def setup_chromadb_indices(self, datasets: List[str], force_reindex: bool = False):
+        """Setup ChromaDB indices for specified datasets."""
+        logger.info(f"Setting up ChromaDB indices for datasets: {datasets}")
         
-        # Index GraphQL schemas
-        if self.schema_indexer:
-            try:
-                schema_files = list(self.schema_dir.rglob("*.graphql")) + list(self.schema_dir.rglob("*.gql"))
-                if schema_files or force_reindex:
-                    logger.info(f"Indexing {len(schema_files)} GraphQL schemas...")
-                    indexed_schemas = self.schema_indexer.index_graphql_schemas(
-                        str(self.schema_dir), 
-                        force_reindex=force_reindex
+        for dataset in datasets:
+            dataset_lower = dataset.lower()
+            dataset_schema_dir = self.schema_dir.parent / f"{dataset_lower}_graphql"
+            collection_name = f"{dataset_lower}_graphql_schemas"
+            
+            logger.info(f"Processing {dataset} dataset...")
+            
+            # Index GraphQL schemas for this dataset
+            if dataset_schema_dir.exists():
+                try:
+                    schema_indexer = GraphQLSchemaIndexer(
+                        chroma_db_path=str(self.chroma_db_path),
+                        collection_name=collection_name
                     )
-                    logger.info(f"Indexed {indexed_schemas} schemas")
-                else:
-                    logger.info("Schema index already exists")
-            except Exception as e:
-                logger.error(f"Schema indexing failed: {e}")
+                    
+                    schema_files = list(dataset_schema_dir.rglob("*.graphql")) + list(dataset_schema_dir.rglob("*.gql"))
+                    logger.info(f"  Found {len(schema_files)} GraphQL schemas in {dataset_schema_dir}")
+                    
+                    if schema_files or force_reindex:
+                        indexed_schemas = schema_indexer.index_graphql_schemas(
+                            str(dataset_schema_dir), 
+                            force_reindex=force_reindex
+                        )
+                        logger.info(f"  Indexed {indexed_schemas} schemas for {dataset}")
+                    else:
+                        logger.info(f"  Schema index already exists for {dataset}")
+                except Exception as e:
+                    logger.error(f"  Schema indexing failed for {dataset}: {e}")
+            else:
+                logger.warning(f"  Schema directory not found: {dataset_schema_dir}")
         
         # Index existing mappings
         if hasattr(self.api_retriever, 'mappings_indexer') and self.api_retriever.mappings_indexer:
@@ -522,7 +586,8 @@ class SMTEvaluationRunner:
     
     def save_results(self, results: Dict[str, Any], dataset: str, model: str):
         """Save results to JSON file."""
-        output_file = self.results_dir / f"{dataset}_{model}.json"
+        # Generate filename with timestamp
+        output_file = self.results_dir / f"{dataset.lower()}_{model}_smt_results.json"
         
         def convert_numpy_types(obj):
             """Convert NumPy types to Python native types for JSON serialization"""
@@ -562,6 +627,7 @@ class SMTEvaluationRunner:
         print(f"{'='*60}")
         print(f"Dataset: {metadata.get('dataset', 'N/A')}")
         print(f"Model: {metadata.get('model', 'N/A')}")
+        print(f"Schema Collection: {metadata.get('schema_collection', 'N/A')}")
         print(f"Total Samples: {metadata.get('total_samples', 0)}")
         print(f"Successful: {metadata.get('successful_samples', 0)}")
         print(f"Overall Accuracy: {metadata.get('overall_accuracy', 0.0):.3f}")
@@ -589,6 +655,8 @@ def main():
                        help="Directory containing GraphQL schemas")
     parser.add_argument("--chroma-db-path", default="../data/chroma_db",
                        help="Path to ChromaDB database (should be pre-indexed)")
+    parser.add_argument("--collection-name", 
+                       help="Explicit ChromaDB collection name to use for schemas")
     parser.add_argument("--quick", action="store_true",
                        help="Quick evaluation with minimal samples")
     parser.add_argument("--verbose", action="store_true",
@@ -597,15 +665,16 @@ def main():
     args = parser.parse_args()
     
     if args.verbose:
-        logging.getLogger().setLevel(logging.DEBUG)
+        logging.getLogger().setLevel(logging.INFO)
+        logger.setLevel(logging.INFO)
     
     # Parse datasets and models from comma-separated strings
     datasets = [d.strip() for d in args.datasets.split(',')]
     models = [m.strip() for m in args.models.split(',')]
     
     if args.quick:
-        datasets = ['ITOps']
-        models = ['llama']
+        datasets = datasets[:1]  # Take first dataset only
+        models = models[:1]      # Take first model only
         logger.info("Quick evaluation mode enabled")
     
     logger.info(f"SMT Schema Mapping Evaluation")
@@ -614,19 +683,16 @@ def main():
     logger.info(f"Schema directory: {args.schema_dir}")
     logger.info(f"Mappings directory: {args.mappings_dir}")
     logger.info(f"ChromaDB path: {args.chroma_db_path}")
+    if args.collection_name:
+        logger.info(f"Schema collection: {args.collection_name}")
+    else:
+        logger.info(f"Schema collection: auto-determined per dataset")
     
     # Check if schema directory exists
     schema_dir = Path(args.schema_dir)
     if not schema_dir.exists():
         logger.warning(f"Schema directory not found: {schema_dir}")
         logger.warning("Continuing with mock schemas")
-    
-    # Initialize runner (this will verify ChromaDB setup)
-    runner = SMTEvaluationRunner(
-        mappings_dir=args.mappings_dir,
-        chroma_db_path=args.chroma_db_path,
-        schema_dir=args.schema_dir
-    )
     
     # Run evaluation for each dataset/model combination
     for dataset in datasets:
@@ -635,8 +701,17 @@ def main():
             logger.info(f"Evaluating {dataset} with {model}")
             logger.info(f"{'='*80}")
             
+            # Initialize runner for this dataset
+            runner = SMTEvaluationRunner(
+                mappings_dir=args.mappings_dir,
+                chroma_db_path=args.chroma_db_path,
+                schema_dir=args.schema_dir,
+                dataset=dataset,
+                collection_name=args.collection_name
+            )
+            
             # Run evaluation
-            results = runner.run_evaluation(dataset, model)
+            results = runner.run_evaluation(dataset, model, args.collection_name)
             
             if results:
                 # Print summary
@@ -648,7 +723,8 @@ def main():
                 logger.error(f"No results generated for {dataset} + {model}")
     
     logger.info(f"\nSMT evaluation completed!")
-    logger.info(f"Results saved in: {runner.results_dir}")
+    results_dir = Path("results")
+    logger.info(f"Results saved in: {results_dir}")
 
 
 if __name__ == "__main__":

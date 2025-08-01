@@ -1,0 +1,51 @@
+# """
+# Type representing the logging levels configuration
+# """
+type GetLoggingLevels {
+  """
+  A map from component name to logging level, component could be Discovery,
+  Monitoring, Presentation, Abstraction, Analysis, Extension; logging levels
+  could be INFO, WARN, DEBUG, TRACE
+  """
+  componentLoggingLevel: String!
+}
+
+# """
+# Type representing the input for setting logging levels
+# """
+# input SetLoggingLevelForGivenComponent {
+#   """
+#   A map from component name to logging level, component could be Discovery,
+#   Monitoring, Presentation, Abstraction, Analysis, Extension; logging levels
+#   could be INFO, WARN, DEBUG, TRACE
+#   """
+#   componentLoggingLevel: String!
+# }
+
+# """
+# Mutation type for setting logging levels for a given component
+# """
+type Mutation {
+  """
+  Sets the logging level for a given component.
+  """
+  setLoggingLevelForGivenComponent(input: SetLoggingLevelForGivenComponent!): GetLoggingLevels!
+}
+
+type Query {
+  # Query to get the logging levels of all components
+  getLoggingLevels: String @rest(tableName: "Getlogginglevels", columnNames: ["componentLoggingLevel"])
+
+  # Mutation to set the logging level for a given component
+  setLoggingLevelForGivenComponent(input: SetLoggingLevelForGivenComponent!): GetLoggingLevels @rest(
+    tableName: "Setlogginglevelforgivencomponent",
+    columnNames: ["componentLoggingLevel"],
+    method: "mutation"
+  )
+}
+
+# In this solution, the `Query` type is defined with two fields:
+
+# 1. `getLoggingLevels`: This field maps to the 'Getlogginglevels' REST endpoint, which retrieves the logging levels for all components. The `@rest` directive is used to specify the table name and the column name.
+
+# 2. `setLoggingLevelForGivenComponent`: This field represents a mutation to set the logging level for a given component. It maps to the 'Setlogginglevelforgivencomponent' REST endpoint. The `@rest` directive is used to specify the table name, column name, and mutation method. The input argument `input` is required and is of type `SetLoggingLevelForGivenComponent`. The return type is `GetLoggingLevels`.

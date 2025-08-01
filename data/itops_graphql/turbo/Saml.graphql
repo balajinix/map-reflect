@@ -1,0 +1,50 @@
+type Getsamlidp {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  idpURL: String!
+  isSAMLOnly: Boolean
+  isSingleLogoutEnabled: Boolean
+}
+
+type Link {
+  rel: String!
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+# Here is the GraphQL type Query block with fields that map to the provided REST endpoints:
+
+type Query {
+  getsamlidp(id: String!): Getsamlidp
+    @rest(
+      table: "Getsamlidp",
+      description: "Get IDP information",
+      columns: [
+        { column_name: "links.rel", column_type: "String" },
+        { column_name: "links.href", column_type: "String" },
+        { column_name: "links.hreflang", column_type: "String" },
+        { column_name: "links.media", column_type: "String" },
+        { column_name: "links.title", column_type: "String" },
+        { column_name: "links.type", column_type: "String" },
+        { column_name: "links.deprecation", column_type: "String" },
+        { column_name: "links.profile", column_type: "String" },
+        { column_name: "links.name", column_type: "String" },
+        { column_name: "uuid", column_type: "String" },
+        { column_name: "displayName", column_type: "String" },
+        { column_name: "className", column_type: "String" },
+        { column_name: "idpURL", column_type: "String" },
+        { column_name: "isSAMLOnly", column_type: "String" },
+        { column_name: "isSingleLogoutEnabled", column_type: "String" }
+      ]
+    )
+}
+
+# This query block defines a single field `getsamlidp` that takes an `id` argument. The field returns a `Getsamlidp` object, and it maps to the "Getsamlidp" table with the provided columns. The `@rest` directive is used to map the GraphQL fields to the corresponding REST endpoint columns.

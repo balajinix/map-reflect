@@ -1,0 +1,628 @@
+type Albums {
+  aid: ID!
+  label: String
+  title: String
+  tracklists: [Tracklists]
+    @materializer(query: "tracklistsUsingTracklists_albumid_fkey")
+  type: String
+  year: ID
+}
+
+type Band {
+  firstname: String
+  id: ID!
+  instruments: [Instruments] @materializer(query: "instruments")
+  lastname: String
+  performance: [Performance]
+    @materializer(query: "performanceUsingPerformance_bandmate_fkey")
+  vocals: [Vocals] @materializer(query: "vocalsUsingVocals_bandmate_fkey")
+}
+
+type Instruments {
+  band: Band @materializer(query: "bandUsingInstruments_bandmateid_fkey")
+  bandmateid: ID
+  instrument: String
+  songid: ID
+  songs: Songs @materializer(query: "songsUsingInstruments_songid_fkey")
+}
+
+type Performance {
+  band: Band @materializer(query: "bandUsingPerformance_bandmate_fkey")
+  bandmate: ID!
+  songid: ID!
+  songs: Songs @materializer(query: "songsUsingPerformance_songid_fkey")
+  stageposition: String
+}
+
+type Songs {
+  instruments: [Instruments]
+    @materializer(query: "instrumentsUsingInstruments_songid_fkey")
+  performance: [Performance]
+    @materializer(query: "performanceUsingPerformance_songid_fkey")
+  songid: ID!
+  title: String
+  tracklists: [Tracklists]
+    @materializer(query: "tracklistsUsingTracklists_songid_fkey")
+  vocals: [Vocals] @materializer(query: "vocalsUsingVocals_songid_fkey")
+}
+
+type Tracklists {
+  albumid: ID!
+  albums: Albums @materializer(query: "albumsUsingTracklists_albumid_fkey")
+  position: ID!
+  songid: ID
+  songs: Songs @materializer(query: "songsUsingTracklists_songid_fkey")
+}
+
+type Vocals {
+  band: Band @materializer(query: "bandUsingVocals_bandmate_fkey")
+  bandmate: ID!
+  songid: ID!
+  songs: Songs @materializer(query: "songsUsingVocals_songid_fkey")
+  type: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Albums' "
+  albums(aid: ID!): Albums
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "albums"
+      configuration: "postgresql_config"
+    )
+  albumsList: [Albums]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "albums"
+      configuration: "postgresql_config"
+    )
+  albumsPaginatedList(first: Int, after: Int): [Albums]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "aid", "label", "title", "type", "year" FROM "albums" ORDER BY "aid" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  albumsUsingTracklists_albumid_fkey(albumid: ID!): Albums
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "aid", "label", "title", "type", "year" FROM "albums" WHERE "aid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Band' "
+  band(id: ID!): Band
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "band"
+      configuration: "postgresql_config"
+    )
+  bandList: [Band]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "band"
+      configuration: "postgresql_config"
+    )
+  bandPaginatedList(first: Int, after: Int): [Band]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "firstname", "id", "lastname" FROM "band" ORDER BY "id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  bandUsingInstruments_bandmateid_fkey(bandmateid: ID!): Band
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "firstname", "id", "lastname" FROM "band" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  bandUsingPerformance_bandmate_fkey(bandmate: ID!): Band
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "firstname", "id", "lastname" FROM "band" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  bandUsingVocals_bandmate_fkey(bandmate: ID!): Band
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "firstname", "id", "lastname" FROM "band" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Instruments' "
+  instruments(id: ID!): [Instruments]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmateid", "instrument", "songid" FROM "instruments" WHERE "bandmateid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  instrumentsList: [Instruments]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "instruments"
+      configuration: "postgresql_config"
+    )
+  instrumentsPaginatedList(first: Int, after: Int): [Instruments]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmateid", "instrument", "songid" FROM "instruments" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  instrumentsUsingInstruments_songid_fkey(songid: ID!): [Instruments]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmateid", "instrument", "songid" FROM "instruments" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  instrumentsUsingidx_21971_sqlite_autoindex_instruments_1(
+    songid: ID!
+    bandmateid: ID!
+    instrument: String!
+  ): Instruments
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmateid", "instrument", "songid" FROM "instruments" WHERE "songid" = $1 AND "bandmateid" = $2 AND "instrument" = $3
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Performance' "
+  performance(songid: ID!, bandmate: ID!): Performance
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "performance"
+      configuration: "postgresql_config"
+    )
+  performanceList: [Performance]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "performance"
+      configuration: "postgresql_config"
+    )
+  performancePaginatedList(first: Int, after: Int): [Performance]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmate", "songid", "stageposition" FROM "performance" ORDER BY "songid", "bandmate" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  performanceUsingPerformance_bandmate_fkey(id: ID!): [Performance]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmate", "songid", "stageposition" FROM "performance" WHERE "bandmate" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  performanceUsingPerformance_songid_fkey(songid: ID!): [Performance]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmate", "songid", "stageposition" FROM "performance" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Songs' "
+  songs(songid: ID!): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "songs"
+      configuration: "postgresql_config"
+    )
+  songsList: [Songs]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "songs"
+      configuration: "postgresql_config"
+    )
+  songsPaginatedList(first: Int, after: Int): [Songs]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "songid", "title" FROM "songs" ORDER BY "songid" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  songsUsingInstruments_songid_fkey(songid: ID!): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "songid", "title" FROM "songs" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  songsUsingPerformance_songid_fkey(songid: ID!): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "songid", "title" FROM "songs" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  songsUsingTracklists_songid_fkey(songid: ID!): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "songid", "title" FROM "songs" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  songsUsingVocals_songid_fkey(songid: ID!): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "songid", "title" FROM "songs" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Tracklists' "
+  tracklists(albumid: ID!, position: ID!): Tracklists
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "tracklists"
+      configuration: "postgresql_config"
+    )
+  tracklistsList: [Tracklists]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "tracklists"
+      configuration: "postgresql_config"
+    )
+  tracklistsPaginatedList(first: Int, after: Int): [Tracklists]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "albumid", "position", "songid" FROM "tracklists" ORDER BY "albumid", "position" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  tracklistsUsingTracklists_albumid_fkey(aid: ID!): [Tracklists]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "albumid", "position", "songid" FROM "tracklists" WHERE "albumid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  tracklistsUsingTracklists_songid_fkey(songid: ID!): [Tracklists]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "albumid", "position", "songid" FROM "tracklists" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Vocals' "
+  vocals(songid: ID!, bandmate: ID!): Vocals
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "vocals"
+      configuration: "postgresql_config"
+    )
+  vocalsList: [Vocals]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "vocals"
+      configuration: "postgresql_config"
+    )
+  vocalsPaginatedList(first: Int, after: Int): [Vocals]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmate", "songid", "type" FROM "vocals" ORDER BY "songid", "bandmate" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  vocalsUsingVocals_bandmate_fkey(id: ID!): [Vocals]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmate", "songid", "type" FROM "vocals" WHERE "bandmate" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  vocalsUsingVocals_songid_fkey(songid: ID!): [Vocals]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "bandmate", "songid", "type" FROM "vocals" WHERE "songid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Albums' "
+  deleteAlbums(aid: ID!): Albums
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "albums"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertAlbums(
+    aid: ID!
+    label: String
+    year: ID
+    title: String
+    type: String
+  ): Albums
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "albums"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateAlbums(
+    aid: ID!
+    label: String
+    title: String
+    type: String
+    year: ID
+  ): Albums
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "albums" SET
+        "label" = COALESCE($2, "label"),
+        "title" = COALESCE($3, "title"),
+        "type" = COALESCE($4, "type"),
+        "year" = COALESCE($5, "year")
+      WHERE
+        "aid" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Band' "
+  deleteBand(id: ID!): Band
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "band"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertBand(lastname: String, firstname: String, id: ID!): Band
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "band"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateBand(id: ID!, firstname: String, lastname: String): Band
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "band" SET
+        "firstname" = COALESCE($2, "firstname"),
+        "lastname" = COALESCE($3, "lastname")
+      WHERE
+        "id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Instruments' "
+  deleteInstruments(
+    instrument: String!
+    bandmateid: ID!
+    songid: ID!
+  ): Instruments
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "instruments"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertInstruments(
+    instrument: String
+    bandmateid: ID
+    songid: ID
+  ): Instruments
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "instruments"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Performance' "
+  deletePerformance(songid: ID!, bandmate: ID!): Performance
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "performance"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPerformance(
+    stageposition: String
+    bandmate: ID!
+    songid: ID!
+  ): Performance
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "performance"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updatePerformance(
+    bandmate: ID!
+    songid: ID!
+    stageposition: String
+  ): Performance
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "performance" SET
+        "stageposition" = COALESCE($3, "stageposition")
+      WHERE
+        "bandmate" = $1 AND
+        "songid" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Songs' "
+  deleteSongs(songid: ID!): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "songs"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSongs(title: String, songid: ID!): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "songs"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateSongs(songid: ID!, title: String): Songs
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "songs" SET
+        "title" = COALESCE($2, "title")
+      WHERE
+        "songid" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Tracklists' "
+  deleteTracklists(albumid: ID!, position: ID!): Tracklists
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "tracklists"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTracklists(songid: ID, position: ID!, albumid: ID!): Tracklists
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "tracklists"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateTracklists(albumid: ID!, position: ID!, songid: ID): Tracklists
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "tracklists" SET
+        "songid" = COALESCE($3, "songid")
+      WHERE
+        "albumid" = $1 AND
+        "position" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Vocals' "
+  deleteVocals(songid: ID!, bandmate: ID!): Vocals
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "vocals"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertVocals(type: String, bandmate: ID!, songid: ID!): Vocals
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "vocals"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateVocals(bandmate: ID!, songid: ID!, type: String): Vocals
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "vocals" SET
+        "type" = COALESCE($3, "type")
+      WHERE
+        "bandmate" = $1 AND
+        "songid" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}
+

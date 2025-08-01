@@ -1,0 +1,174 @@
+type Country {
+  area: Int
+  country_id: Int
+  languages: String
+  name: String
+  population: Int
+  roller_coaster: [Roller_coaster] @materializer(query: "roller_coaster")
+}
+
+type Roller_coaster {
+  country: Country @materializer(query: "country")
+  country_id: Int
+  height: Float
+  length: Float
+  name: String
+  opened: String
+  park: String
+  roller_coaster_id: Int
+  speed: String
+  status: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Country' "
+  country(country_id: Int!): Country
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "area", "country_id", "languages", "name", "population" FROM "country" WHERE "country_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  countryList: [Country]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "country"
+      configuration: "postgresql_config"
+    )
+  countryPaginatedList(first: Int, after: Int): [Country]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "area", "country_id", "languages", "name", "population" FROM "country" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  countryUsingidx_21023_sqlite_autoindex_country_1(country_id: Int!): Country
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "area", "country_id", "languages", "name", "population" FROM "country" WHERE "country_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Roller_coaster' "
+  roller_coaster(country_id: Int!): [Roller_coaster]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "country_id", "height", "length", "name", "opened", "park", "roller_coaster_id", "speed", "status" FROM "roller_coaster" WHERE "country_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  roller_coasterList: [Roller_coaster]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "roller_coaster"
+      configuration: "postgresql_config"
+    )
+  roller_coasterPaginatedList(first: Int, after: Int): [Roller_coaster]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "country_id", "height", "length", "name", "opened", "park", "roller_coaster_id", "speed", "status" FROM "roller_coaster" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  roller_coasterUsingidx_21018_sqlite_autoindex_roller_coaster_1(
+    roller_coaster_id: Int!
+  ): Roller_coaster
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "country_id", "height", "length", "name", "opened", "park", "roller_coaster_id", "speed", "status" FROM "roller_coaster" WHERE "roller_coaster_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Country' "
+  deleteCountry(
+    population: Int!
+    languages: String!
+    country_id: Int!
+    area: Int!
+    name: String!
+  ): Country
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "country"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCountry(
+    population: Int
+    languages: String
+    country_id: Int
+    area: Int
+    name: String
+  ): Country
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "country"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Roller_coaster' "
+  deleteRoller_coaster(
+    name: String!
+    height: Float!
+    opened: String!
+    status: String!
+    park: String!
+    length: Float!
+    roller_coaster_id: Int!
+    country_id: Int!
+    speed: String!
+  ): Roller_coaster
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "roller_coaster"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertRoller_coaster(
+    name: String
+    height: Float
+    opened: String
+    status: String
+    park: String
+    length: Float
+    roller_coaster_id: Int
+    country_id: Int
+    speed: String
+  ): Roller_coaster
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "roller_coaster"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

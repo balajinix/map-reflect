@@ -1,0 +1,200 @@
+type GetSettingsSpecs {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  settings: [Settings]
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Settings {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  value: String
+  valueDisplayName: String
+  defaultValue: String
+  categories: String
+  valueType: String
+  valueObjectType: String
+  options: String
+  min: String
+  max: String
+  entityType: String
+  range: String
+  scope: String
+  activeSettingsPolicies: String
+  sourceGroupName: String
+  sourceGroupUuid: String
+}
+
+type GetProbes {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: [PatchedTarget]
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: String
+}
+
+type PatchedTarget {
+  probeType: String
+  patchedFields: String
+}
+
+type InputField {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Query {
+  getSettingSpecs(links: [String], uuid: String, displayName: String, className: String, category: String): GetSettingsSpecs
+  getProbes(links: [String], uuid: String, displayName: String, className: String, category: String, isProbeRegistered: String, uiCategory: String, identifyingFields: String, inputFields: [InputField], lastValidated: String, status: String, derivedTargets: String, patchedTargets: [PatchedTarget], parentTargets: String, type: String, subType: String, readonly: String, healthSummary: String): GetProbes
+}
+
+type InputField {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type GetSettingsSpecs {
+  links: [Links]
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  settings: [Settings]
+}
+
+type Settings {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  value: String
+  valueDisplayName: String
+  defaultValue: String
+  categories: String
+  valueType: String
+  valueObjectType: String
+  options: String
+  min: String
+  max: String
+  entityType: String
+  range: String
+  scope: String
+  activeSettingsPolicies: String
+  sourceGroupName: String
+  sourceGroupUuid: String
+}
+
+type GetProbes {
+  links: [Links]
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: [PatchedTarget]
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: String
+}
+
+type PatchedTarget {
+  probeType: String
+  patchedFields: String
+}
+
+# This GraphQL schema defines a `Query` type with two fields, `getSettingSpecs` and `getProbes`, which map to the provided REST endpoints. Each field accepts various parameters based on the fields in the respective REST endpoints. The `InputField` and `Links` types are also defined to match the nested structures in the REST responses.

@@ -1,0 +1,41 @@
+type apptio_Clusters {
+  result: apptio_Result
+}
+
+type apptio_Result {
+  clusters: [apptio_ClustersEntry]
+  meta: apptio_ResultMeta
+}
+
+type apptio_ClustersEntry {
+  firstSeen: DateTime
+  id: String
+  lastSeen: DateTime
+  name: String
+  nodes: [apptio_NodesEntry]
+  provisionedAt: DateTime
+}
+
+type apptio_NodesEntry {
+  resourceIdentifier: String
+  vendor: String
+}
+
+type apptio_ResultMeta {
+  firstSeenDate: DateTime
+  orgHasData: Boolean
+  orgHasProvisioned: Boolean
+}
+
+type Query {
+  apptio_clusters(end: String, pretty: String, start: String): apptio_Clusters
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

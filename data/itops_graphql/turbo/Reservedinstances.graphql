@@ -1,0 +1,182 @@
+type Getreservedinstances {
+  links: Links
+  uuid: String!
+  displayName: String!
+  className: String
+  template: String
+  platform: String
+  type: String!
+  location: String
+  accountId: String
+  accountDisplayName: String
+  targetId: String
+  masterAccountId: String
+  term: String
+  payment: String
+  onDemandPrice: String
+  costPrice: String
+  coupons: String
+  totalCoupons: String
+  expDate: String
+  instanceCount: String
+  tenancy: String
+  upFrontCost: String
+  actualHourlyCost: String
+  effectiveHourlyCost: String
+  isExpired: String
+  expDateEpochTime: String
+  cloudType: String
+  scopeType: String
+  appliedScopes: String
+  orderID: String
+  trueID: String
+  coveredEntityCount: String
+  undiscoveredAccountsCoveredCount: String
+  sizeFlexible: String
+  toBuy: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Getreservedinstanceswithfilter {
+  links: Links
+  uuid: String!
+  displayName: String!
+  className: String
+  template: String
+  platform: String
+  type: String!
+  location: String
+  accountId: String
+  accountDisplayName: String
+  targetId: String
+  masterAccountId: String
+  term: String
+  payment: String
+  onDemandPrice: String
+  costPrice: String
+  coupons: String
+  totalCoupons: String
+  expDate: String
+  instanceCount: String
+  tenancy: String
+  upFrontCost: String
+  actualHourlyCost: String
+  effectiveHourlyCost: String
+  isExpired: String
+  expDateEpochTime: String
+  cloudType: String
+  scopeType: String
+  appliedScopes: String
+  orderID: String
+  trueID: String
+  coveredEntityCount: String
+  undiscoveredAccountsCoveredCount: String
+  sizeFlexible: String
+  toBuy: String
+}
+
+type Getworkflowbyreservedinstanceuuid {
+  links: Links
+  uuid: String!
+  displayName: String!
+  className: String
+  template: String
+  platform: String
+  type: String!
+  location: String
+  accountId: String
+  accountDisplayName: String
+  targetId: String
+  masterAccountId: String
+  term: String
+  payment: String
+  onDemandPrice: String
+  costPrice: String
+  coupons: String
+  totalCoupons: String
+  expDate: String
+  instanceCount: String
+  tenancy: String
+  upFrontCost: String
+  actualHourlyCost: String
+  effectiveHourlyCost: String
+  isExpired: String
+  expDateEpochTime: String
+  cloudType: String
+  scopeType: String
+  appliedScopes: String
+  orderID: String
+  trueID: String
+  coveredEntityCount: String
+  undiscoveredAccountsCoveredCount: String
+  sizeFlexible: String
+  toBuy: String
+}
+
+type Getentitiescoveredbyreservedinstance {
+  links: Links
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Query {
+  getReservedInstances: [Getreservedinstances] @rest(
+    method: "GET",
+    path: "/table_name=Getreservedinstances",
+    queryKeys: ["filter1", "filter2", "filter3"], # Add your query keys here
+    responseType: "Getreservedinstances",
+    responseModel: "Getreservedinstances"
+  )
+
+  getReservedInstancesWithFilter: [Getreservedinstanceswithfilter] @rest(
+    method: "GET",
+    path: "/table_name=Getreservedinstanceswithfilter",
+    queryKeys: ["filter1", "filter2", "filter3"], # Add your query keys here
+    responseType: "Getreservedinstanceswithfilter",
+    responseModel: "Getreservedinstanceswithfilter"
+  )
+
+  getWorkflowByReservedInstanceUUID: Getworkflowbyreservedinstanceuuid @rest(
+    method: "GET",
+    path: "/table_name=Getworkflowbyreservedinstanceuuid",
+    queryKeys: ["uuid"],
+    responseType: "Getworkflowbyreservedinstanceuuid",
+    responseModel: "Getworkflowbyreservedinstanceuuid"
+  )
+
+  getEntitiesCoveredByReservedInstance: [Getentitiescoveredbyreservedinstance] @rest(
+    method: "GET",
+    path: "/table_name=Getentitiescoveredbyreservedinstance",
+    queryKeys: ["reservedInstanceUuid"],
+    responseType: "Getentitiescoveredbyreservedinstance",
+    responseModel: "Getentitiescoveredbyreservedinstance"
+  )
+}
+
+# Replace `"filter1"`, `"filter2"`, and `"filter3"` with the actual query keys you want to use for filtering in the `getReservedInstancesWithFilter` query.
+
+# This `type Query` block defines four fields, each corresponding to one of the given REST endpoints. The `@rest` directive is used to map each field to its respective REST endpoint, specifying the HTTP method, path, query keys, and response type. The `responseModel` is used to map the response from the REST call to the GraphQL schema type.

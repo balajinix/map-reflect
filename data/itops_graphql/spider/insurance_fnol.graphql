@@ -1,0 +1,651 @@
+type Available_policies {
+  customer_phone: String
+  customers_policies: [Customers_policies]
+    @materializer(
+      query: "customers_policiesUsingCustomers_policies_policy_id_fkey"
+    )
+  policy_id: ID!
+  policy_type_code: String
+}
+
+type Claims {
+  claim_id: ID!
+  effective_date: Date
+  first_notification_of_loss: First_notification_of_loss
+    @materializer(query: "first_notification_of_lossUsingClaims_fnol_id_fkey")
+  fnol_id: ID
+  settlements: [Settlements]
+    @materializer(query: "settlementsUsingSettlements_claim_id_fkey")
+}
+
+type Customers {
+  customer_id: ID!
+  customer_name: String
+  customers_policies: [Customers_policies]
+    @materializer(
+      query: "customers_policiesUsingCustomers_policies_customer_id_fkey"
+    )
+}
+
+type Customers_policies {
+  available_policies: Available_policies
+    @materializer(
+      query: "available_policiesUsingCustomers_policies_policy_id_fkey"
+    )
+  customer_id: ID!
+  customers: Customers
+    @materializer(query: "customersUsingCustomers_policies_customer_id_fkey")
+  date_closed: Date
+  date_opened: Date
+  first_notification_of_loss: [First_notification_of_loss]
+    @materializer(
+      query: "first_notification_of_lossUsingFirst_notification_of_loss_customer_id_policy_id_fkey"
+    )
+  policy_id: ID!
+}
+
+type First_notification_of_loss {
+  claims: [Claims] @materializer(query: "claimsUsingClaims_fnol_id_fkey")
+  customer_id: ID
+  customers_policies: Customers_policies
+    @materializer(
+      query: "customers_policiesUsingFirst_notification_of_loss_customer_id_policy_id_fkey"
+    )
+  fnol_id: ID!
+  policy_id: ID
+  service_id: ID
+  services: Services
+    @materializer(
+      query: "servicesUsingFirst_notification_of_loss_service_id_fkey"
+    )
+}
+
+type Services {
+  first_notification_of_loss: [First_notification_of_loss]
+    @materializer(
+      query: "first_notification_of_lossUsingFirst_notification_of_loss_service_id_fkey"
+    )
+  service_id: ID!
+  service_name: String
+}
+
+type Settlements {
+  claim_id: ID
+  claims: Claims @materializer(query: "claimsUsingSettlements_claim_id_fkey")
+  effective_date: Date
+  settlement_amount: Float
+  settlement_id: ID!
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Available_policies' "
+  available_policies(policy_id: ID!): Available_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "available_policies"
+      configuration: "postgresql_config"
+    )
+  available_policiesList: [Available_policies]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "available_policies"
+      configuration: "postgresql_config"
+    )
+  available_policiesPaginatedList(first: Int, after: Int): [Available_policies]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_phone", "policy_id", "policy_type_code" FROM "available_policies" ORDER BY "policy_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  available_policiesUsingCustomers_policies_policy_id_fkey(
+    policy_id: ID!
+  ): Available_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_phone", "policy_id", "policy_type_code" FROM "available_policies" WHERE "policy_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Claims' "
+  claims(claim_id: ID!): Claims
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "claims"
+      configuration: "postgresql_config"
+    )
+  claimsList: [Claims]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "claims"
+      configuration: "postgresql_config"
+    )
+  claimsPaginatedList(first: Int, after: Int): [Claims]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "claim_id", "effective_date", "fnol_id" FROM "claims" ORDER BY "claim_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  claimsUsingClaims_fnol_id_fkey(fnol_id: ID!): [Claims]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "claim_id", "effective_date", "fnol_id" FROM "claims" WHERE "fnol_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  claimsUsingSettlements_claim_id_fkey(claim_id: ID!): Claims
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "claim_id", "effective_date", "fnol_id" FROM "claims" WHERE "claim_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Customers' "
+  customers(customer_id: ID!): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      configuration: "postgresql_config"
+    )
+  customersList: [Customers]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      configuration: "postgresql_config"
+    )
+  customersPaginatedList(first: Int, after: Int): [Customers]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "customer_name" FROM "customers" ORDER BY "customer_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  customersUsingCustomers_policies_customer_id_fkey(
+    customer_id: ID!
+  ): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "customer_name" FROM "customers" WHERE "customer_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Customers_policies' "
+  customers_policies(customer_id: ID!, policy_id: ID!): Customers_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers_policies"
+      configuration: "postgresql_config"
+    )
+  customers_policiesList: [Customers_policies]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers_policies"
+      configuration: "postgresql_config"
+    )
+  customers_policiesPaginatedList(first: Int, after: Int): [Customers_policies]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "date_closed", "date_opened", "policy_id" FROM "customers_policies" ORDER BY "customer_id", "policy_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  customers_policiesUsingCustomers_policies_customer_id_fkey(
+    customer_id: ID!
+  ): [Customers_policies]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "date_closed", "date_opened", "policy_id" FROM "customers_policies" WHERE "customer_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  customers_policiesUsingCustomers_policies_policy_id_fkey(
+    policy_id: ID!
+  ): [Customers_policies]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "date_closed", "date_opened", "policy_id" FROM "customers_policies" WHERE "policy_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  customers_policiesUsingFirst_notification_of_loss_customer_id_policy_id_fkey(
+    customer_id: ID!
+    policy_id: ID!
+  ): Customers_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "date_closed", "date_opened", "policy_id" FROM "customers_policies" WHERE "customer_id" = $1 AND "policy_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'First_notification_of_loss' "
+  first_notification_of_loss(fnol_id: ID!): First_notification_of_loss
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "first_notification_of_loss"
+      configuration: "postgresql_config"
+    )
+  first_notification_of_lossList: [First_notification_of_loss]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "first_notification_of_loss"
+      configuration: "postgresql_config"
+    )
+  first_notification_of_lossPaginatedList(
+    first: Int
+    after: Int
+  ): [First_notification_of_loss]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "fnol_id", "policy_id", "service_id" FROM "first_notification_of_loss" ORDER BY "fnol_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  first_notification_of_lossUsingClaims_fnol_id_fkey(
+    fnol_id: ID!
+  ): First_notification_of_loss
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "fnol_id", "policy_id", "service_id" FROM "first_notification_of_loss" WHERE "fnol_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  first_notification_of_lossUsingFirst_notification_of_loss_customer_id_policy_id_fkey(
+    customer_id: ID!
+    policy_id: ID!
+  ): [First_notification_of_loss]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "fnol_id", "policy_id", "service_id" FROM "first_notification_of_loss" WHERE "customer_id" = $1 AND "policy_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+  first_notification_of_lossUsingFirst_notification_of_loss_service_id_fkey(
+    service_id: ID!
+  ): [First_notification_of_loss]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "customer_id", "fnol_id", "policy_id", "service_id" FROM "first_notification_of_loss" WHERE "service_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Services' "
+  services(service_id: ID!): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      configuration: "postgresql_config"
+    )
+  servicesList: [Services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      configuration: "postgresql_config"
+    )
+  servicesPaginatedList(first: Int, after: Int): [Services]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "service_id", "service_name" FROM "services" ORDER BY "service_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  servicesUsingFirst_notification_of_loss_service_id_fkey(
+    service_id: ID!
+  ): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "service_id", "service_name" FROM "services" WHERE "service_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Settlements' "
+  settlements(settlement_id: ID!): Settlements
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "settlements"
+      configuration: "postgresql_config"
+    )
+  settlementsList: [Settlements]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "settlements"
+      configuration: "postgresql_config"
+    )
+  settlementsPaginatedList(first: Int, after: Int): [Settlements]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "claim_id", "effective_date", "settlement_amount", "settlement_id" FROM "settlements" ORDER BY "settlement_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  settlementsUsingSettlements_claim_id_fkey(claim_id: ID!): [Settlements]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "claim_id", "effective_date", "settlement_amount", "settlement_id" FROM "settlements" WHERE "claim_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Available_policies' "
+  deleteAvailable_policies(policy_id: ID!): Available_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "available_policies"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertAvailable_policies(
+    customer_phone: String
+    policy_type_code: String
+    policy_id: ID!
+  ): Available_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "available_policies"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateAvailable_policies(
+    policy_id: ID!
+    customer_phone: String
+    policy_type_code: String
+  ): Available_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "available_policies" SET
+        "customer_phone" = COALESCE($2, "customer_phone"),
+        "policy_type_code" = COALESCE($3, "policy_type_code")
+      WHERE
+        "policy_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Claims' "
+  deleteClaims(claim_id: ID!): Claims
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "claims"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertClaims(effective_date: Date, fnol_id: ID, claim_id: ID!): Claims
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "claims"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateClaims(claim_id: ID!, effective_date: Date, fnol_id: ID): Claims
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "claims" SET
+        "effective_date" = COALESCE($2, "effective_date"),
+        "fnol_id" = COALESCE($3, "fnol_id")
+      WHERE
+        "claim_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Customers' "
+  deleteCustomers(customer_id: ID!): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCustomers(customer_name: String, customer_id: ID!): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCustomers(customer_id: ID!, customer_name: String): Customers
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "customers" SET
+        "customer_name" = COALESCE($2, "customer_name")
+      WHERE
+        "customer_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Customers_policies' "
+  deleteCustomers_policies(
+    customer_id: ID!
+    policy_id: ID!
+  ): Customers_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers_policies"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCustomers_policies(
+    date_closed: Date
+    date_opened: Date
+    policy_id: ID!
+    customer_id: ID!
+  ): Customers_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customers_policies"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCustomers_policies(
+    customer_id: ID!
+    policy_id: ID!
+    date_closed: Date
+    date_opened: Date
+  ): Customers_policies
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "customers_policies" SET
+        "date_closed" = COALESCE($3, "date_closed"),
+        "date_opened" = COALESCE($4, "date_opened")
+      WHERE
+        "customer_id" = $1 AND
+        "policy_id" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'First_notification_of_loss' "
+  deleteFirst_notification_of_loss(fnol_id: ID!): First_notification_of_loss
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "first_notification_of_loss"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertFirst_notification_of_loss(
+    service_id: ID
+    policy_id: ID
+    customer_id: ID
+    fnol_id: ID!
+  ): First_notification_of_loss
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "first_notification_of_loss"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateFirst_notification_of_loss(
+    fnol_id: ID!
+    customer_id: ID
+    policy_id: ID
+    service_id: ID
+  ): First_notification_of_loss
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "first_notification_of_loss" SET
+        "customer_id" = COALESCE($2, "customer_id"),
+        "policy_id" = COALESCE($3, "policy_id"),
+        "service_id" = COALESCE($4, "service_id")
+      WHERE
+        "fnol_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Services' "
+  deleteServices(service_id: ID!): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertServices(service_name: String, service_id: ID!): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "services"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateServices(service_id: ID!, service_name: String): Services
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "services" SET
+        "service_name" = COALESCE($2, "service_name")
+      WHERE
+        "service_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Settlements' "
+  deleteSettlements(settlement_id: ID!): Settlements
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "settlements"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSettlements(
+    settlement_amount: Float
+    effective_date: Date
+    claim_id: ID
+    settlement_id: ID!
+  ): Settlements
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "settlements"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateSettlements(
+    settlement_id: ID!
+    claim_id: ID
+    effective_date: Date
+    settlement_amount: Float
+  ): Settlements
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "settlements" SET
+        "claim_id" = COALESCE($2, "claim_id"),
+        "effective_date" = COALESCE($3, "effective_date"),
+        "settlement_amount" = COALESCE($4, "settlement_amount")
+      WHERE
+        "settlement_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}
+

@@ -1,0 +1,220 @@
+type Market {
+  district: String
+  market_id: Int
+  num_of_employees: Int
+  num_of_shops: Float
+  phone_market: [Phone_market] @materializer(query: "phone_market")
+  ranking: Int
+}
+
+type Phone {
+  carrier: String
+  memory_in_g: Int
+  name: String
+  phone_id: Int
+  price: Float
+}
+
+type Phone_market {
+  market: Market @materializer(query: "market")
+  market_id: Int
+  num_of_stock: Int
+  phone_id: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Market' "
+  market(market_id: Int!): Market
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "district", "market_id", "num_of_employees", "num_of_shops", "ranking" FROM "market" WHERE "market_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  marketList: [Market]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "market"
+      configuration: "postgresql_config"
+    )
+  marketPaginatedList(first: Int, after: Int): [Market]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "district", "market_id", "num_of_employees", "num_of_shops", "ranking" FROM "market" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  marketUsingidx_22861_sqlite_autoindex_market_1(market_id: Int!): Market
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "district", "market_id", "num_of_employees", "num_of_shops", "ranking" FROM "market" WHERE "market_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Phone' "
+  phoneList: [Phone]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "phone"
+      configuration: "postgresql_config"
+    )
+  phonePaginatedList(first: Int, after: Int): [Phone]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "carrier", "memory_in_g", "name", "phone_id", "price" FROM "phone" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  phoneUsingidx_22856_sqlite_autoindex_phone_1(phone_id: Int!): Phone
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "carrier", "memory_in_g", "name", "phone_id", "price" FROM "phone" WHERE "phone_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Phone_market' "
+  phone_market(market_id: Int!): [Phone_market]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "market_id", "num_of_stock", "phone_id" FROM "phone_market" WHERE "market_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  phone_marketList: [Phone_market]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "phone_market"
+      configuration: "postgresql_config"
+    )
+  phone_marketPaginatedList(first: Int, after: Int): [Phone_market]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "market_id", "num_of_stock", "phone_id" FROM "phone_market" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  phone_marketUsingidx_22866_sqlite_autoindex_phone_market_1(
+    market_id: Int!
+    phone_id: String!
+  ): Phone_market
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "market_id", "num_of_stock", "phone_id" FROM "phone_market" WHERE "market_id" = $1 AND "phone_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Market' "
+  deleteMarket(
+    ranking: Int!
+    market_id: Int!
+    num_of_employees: Int!
+    district: String!
+    num_of_shops: Float!
+  ): Market
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "market"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertMarket(
+    ranking: Int
+    market_id: Int
+    num_of_employees: Int
+    district: String
+    num_of_shops: Float
+  ): Market
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "market"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Phone' "
+  deletePhone(
+    name: String!
+    carrier: String!
+    price: Float!
+    memory_in_g: Int!
+    phone_id: Int!
+  ): Phone
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "phone"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPhone(
+    name: String
+    carrier: String
+    price: Float
+    memory_in_g: Int
+    phone_id: Int
+  ): Phone
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "phone"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Phone_market' "
+  deletePhone_market(
+    num_of_stock: Int!
+    phone_id: String!
+    market_id: Int!
+  ): Phone_market
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "phone_market"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPhone_market(
+    num_of_stock: Int
+    phone_id: String
+    market_id: Int
+  ): Phone_market
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "phone_market"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

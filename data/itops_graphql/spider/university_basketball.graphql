@@ -1,0 +1,194 @@
+type Basketball_match {
+  acc_home: String
+  acc_percent: String
+  acc_regular_season: String
+  acc_road: String
+  all_games: String
+  all_games_percent: Int
+  all_home: String
+  all_neutral: String
+  all_road: String
+  school_id: Int
+  team_id: Int
+  team_name: String
+  university: University @materializer(query: "university")
+}
+
+type University {
+  affiliation: String
+  basketball_match: [Basketball_match] @materializer(query: "basketball_match")
+  enrollment: Float
+  founded: Float
+  location: String
+  nickname: String
+  primary_conference: String
+  school: String
+  school_id: Int
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Basketball_match' "
+  basketball_match(school_id: Int!): [Basketball_match]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "acc_home", "acc_percent", "acc_regular_season", "acc_road", "all_games", "all_games_percent", "all_home", "all_neutral", "all_road", "school_id", "team_id", "team_name" FROM "basketball_match" WHERE "school_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  basketball_matchList: [Basketball_match]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "basketball_match"
+      configuration: "postgresql_config"
+    )
+  basketball_matchPaginatedList(first: Int, after: Int): [Basketball_match]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "acc_home", "acc_percent", "acc_regular_season", "acc_road", "all_games", "all_games_percent", "all_home", "all_neutral", "all_road", "school_id", "team_id", "team_name" FROM "basketball_match" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  basketball_matchUsingidx_24023_sqlite_autoindex_basketball_match_1(
+    team_id: Int!
+  ): Basketball_match
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "acc_home", "acc_percent", "acc_regular_season", "acc_road", "all_games", "all_games_percent", "all_home", "all_neutral", "all_road", "school_id", "team_id", "team_name" FROM "basketball_match" WHERE "team_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'University' "
+  university(school_id: Int!): University
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "affiliation", "enrollment", "founded", "location", "nickname", "primary_conference", "school", "school_id" FROM "university" WHERE "school_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  universityList: [University]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "university"
+      configuration: "postgresql_config"
+    )
+  universityPaginatedList(first: Int, after: Int): [University]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "affiliation", "enrollment", "founded", "location", "nickname", "primary_conference", "school", "school_id" FROM "university" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  universityUsingidx_24028_sqlite_autoindex_university_1(
+    school_id: Int!
+  ): University
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "affiliation", "enrollment", "founded", "location", "nickname", "primary_conference", "school", "school_id" FROM "university" WHERE "school_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Basketball_match' "
+  deleteBasketball_match(
+    all_road: String!
+    acc_percent: String!
+    all_home: String!
+    team_id: Int!
+    school_id: Int!
+    all_games: String!
+    all_neutral: String!
+    team_name: String!
+    acc_road: String!
+    all_games_percent: Int!
+    acc_home: String!
+    acc_regular_season: String!
+  ): Basketball_match
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "basketball_match"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertBasketball_match(
+    all_road: String
+    acc_percent: String
+    all_home: String
+    team_id: Int
+    school_id: Int
+    all_games: String
+    all_neutral: String
+    team_name: String
+    acc_road: String
+    all_games_percent: Int
+    acc_home: String
+    acc_regular_season: String
+  ): Basketball_match
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "basketball_match"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'University' "
+  deleteUniversity(
+    school: String!
+    affiliation: String!
+    founded: Float!
+    school_id: Int!
+    primary_conference: String!
+    nickname: String!
+    enrollment: Float!
+    location: String!
+  ): University
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "university"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertUniversity(
+    school: String
+    affiliation: String
+    founded: Float
+    school_id: Int
+    primary_conference: String
+    nickname: String
+    enrollment: Float
+    location: String
+  ): University
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "university"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

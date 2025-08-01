@@ -1,0 +1,165 @@
+type People {
+  birth_date: String
+  height: Float
+  name: String
+  nationality: String
+  people_id: Int
+  poker_player: [Poker_player] @materializer(query: "poker_player")
+}
+
+type Poker_player {
+  best_finish: Float
+  earnings: Float
+  final_table_made: Float
+  money_rank: Float
+  people: People @materializer(query: "people")
+  people_id: Int
+  poker_player_id: Int
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'People' "
+  people(people_id: Int!): People
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "birth_date", "height", "name", "nationality", "people_id" FROM "people" WHERE "people_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  peopleList: [People]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "people"
+      configuration: "postgresql_config"
+    )
+  peoplePaginatedList(first: Int, after: Int): [People]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "birth_date", "height", "name", "nationality", "people_id" FROM "people" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  peopleUsingidx_21475_sqlite_autoindex_people_1(people_id: Int!): People
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "birth_date", "height", "name", "nationality", "people_id" FROM "people" WHERE "people_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Poker_player' "
+  poker_player(people_id: Int!): [Poker_player]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "best_finish", "earnings", "final_table_made", "money_rank", "people_id", "poker_player_id" FROM "poker_player" WHERE "people_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  poker_playerList: [Poker_player]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "poker_player"
+      configuration: "postgresql_config"
+    )
+  poker_playerPaginatedList(first: Int, after: Int): [Poker_player]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "best_finish", "earnings", "final_table_made", "money_rank", "people_id", "poker_player_id" FROM "poker_player" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  poker_playerUsingidx_21472_sqlite_autoindex_poker_player_1(
+    poker_player_id: Int!
+  ): Poker_player
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "best_finish", "earnings", "final_table_made", "money_rank", "people_id", "poker_player_id" FROM "poker_player" WHERE "poker_player_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'People' "
+  deletePeople(
+    name: String!
+    height: Float!
+    nationality: String!
+    people_id: Int!
+    birth_date: String!
+  ): People
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "people"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPeople(
+    name: String
+    height: Float
+    nationality: String
+    people_id: Int
+    birth_date: String
+  ): People
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "people"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Poker_player' "
+  deletePoker_player(
+    final_table_made: Float!
+    earnings: Float!
+    best_finish: Float!
+    money_rank: Float!
+    people_id: Int!
+    poker_player_id: Int!
+  ): Poker_player
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "poker_player"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPoker_player(
+    final_table_made: Float
+    earnings: Float
+    best_finish: Float
+    money_rank: Float
+    people_id: Int
+    poker_player_id: Int
+  ): Poker_player
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "poker_player"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

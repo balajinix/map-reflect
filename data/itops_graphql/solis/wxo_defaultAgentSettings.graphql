@@ -1,0 +1,150 @@
+type wxo_BaseLlm {
+  guardrails: wxo_Guardrails
+  model_name: String
+  model_params: wxo_ModelParams
+  system_prompt: String
+}
+
+type wxo_Guardrails {
+  hap: wxo_Hap
+  pii: wxo_Pii
+}
+
+type wxo_Hap {
+  input: wxo_Input
+  output: wxo_Output
+}
+
+type wxo_Input {
+  enabled: Boolean
+  threshold: Float
+}
+
+type wxo_Output {
+  enabled: Boolean
+  threshold: Float
+}
+
+type wxo_Pii {
+  input: wxo_Input1
+  mask: wxo_Mask
+  output: wxo_Output1
+}
+
+type wxo_Input1 {
+  enabled: Boolean
+  threshold: Float
+}
+
+type wxo_Mask {
+  remove_entity_value: Boolean
+}
+
+type wxo_Output1 {
+  enabled: Boolean
+  threshold: Float
+}
+
+type wxo_ModelParams {
+  decoding_method: String
+  max_new_tokens: Int
+  min_new_tokens: Int
+  random_seed: Int
+  temperature: Float
+}
+
+type wxo_ModelSettings {
+  base_llm: wxo_BaseLlm
+  embeddings: wxo_Embeddings
+  is_base_llm_enabled: Boolean
+}
+
+type wxo_DefaultAgentSettings {
+  model_settings: wxo_ModelSettings
+  router_settings: wxo_RouterSettings
+  slot_filling_settings: wxo_SlotFillingSettings
+  user_settings: wxo_UserSettings
+}
+
+type wxo_RouterSettings {
+  model_name: String
+  model_params: wxo_ModelParams1
+  router_config: wxo_RouterConfig
+  router_type: String
+  routing_prompt: String
+}
+
+type wxo_ModelParams1 {
+  decoding_method: String
+  max_new_tokens: Int
+  min_new_tokens: Int
+  random_seed: Int
+  repetition_penalty: Int
+  return_options: wxo_ReturnOptions
+  temperature: Float
+  top_k: Int
+  top_p: Int
+}
+
+type wxo_ReturnOptions {
+  generated_tokens: Boolean
+  input_text: Boolean
+  input_tokens: Boolean
+  token_logprobs: Boolean
+  token_ranks: Boolean
+  top_n_tokens: Int
+}
+
+type wxo_RouterConfig {
+  confidence_method: String
+  confidence_threshold: Float
+  continue_journey_on_none: Boolean
+}
+
+type wxo_SlotFillingSettings {
+  model_name: String
+  model_params: wxo_ModelParams2
+  slot_filler_type: String
+}
+
+type wxo_ModelParams2 {
+  decoding_method: String
+  max_new_tokens: Int
+  min_new_tokens: Int
+  random_seed: Int
+  repetition_penalty: Int
+  return_options: wxo_ReturnOptions1
+  temperature: Float
+  top_k: Int
+  top_p: Int
+}
+
+type wxo_ReturnOptions1 {
+  generated_tokens: Boolean
+  input_text: Boolean
+  input_tokens: Boolean
+  token_logprobs: Boolean
+  token_ranks: Boolean
+  top_n_tokens: Int
+}
+
+type wxo_UserSettings {
+  confirm_routing: Boolean
+}
+
+type wxo_Embeddings {
+  model_name: String
+}
+
+type Query {
+  wxo_defaultAgentSettings: wxo_DefaultAgentSettings
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

@@ -1,0 +1,71 @@
+type AdjustedTimeframe {
+  to: Int!
+  windowSize: Int!
+}
+
+type Service {
+  entityType: String!
+  id: String!
+  label: String!
+  snapshotIds: [String!]!
+  technologies: [String!]!
+  types: [String!]!
+}
+
+type ServiceMetrics {
+  metrics: [JSON!]!
+  items: [Service!]!
+  page: Int!
+  pageSize: Int!
+  totalHits: Int!
+}
+
+type ServiceTopology {
+  connections: [Connection!]!
+  services: [Service!]!
+}
+
+type Connection {
+  calls: Int!
+  errorRate: Float!
+  from: String!
+  latency: Float!
+  to: String!
+}
+
+type EntityHealthInfo {
+  maxSeverity: Int!
+  openIssues: [OpenIssue!]!
+  plugin: String!
+  problem: Problem!
+  rca: JSON!
+  state: String!
+  type: String!
+}
+
+type OpenIssue {
+  end: Int!
+  endpointServiceId: String!
+  entityId: String!
+  entityType: String!
+  id: String!
+  metadata: JSON!
+  metricAccessId: String!
+  start: Int!
+}
+
+type Entity {
+  entityHealthInfo: EntityHealthInfo!
+  label: String!
+  metrics: JSON!
+  plugin: String!
+  snapshotId: String!
+  tags: JSON!
+  time: Int!
+}
+
+type Query {
+  getServicesMetrics(adjustedTimeframe: AdjustedTimeframe!): ServiceMetrics!
+  getServicesMap: ServiceTopology!
+  getEntities(adjustedTimeframe: AdjustedTimeframe!): [Entity!]!
+}

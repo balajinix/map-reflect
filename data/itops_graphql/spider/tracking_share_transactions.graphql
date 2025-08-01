@@ -1,0 +1,545 @@
+type Investors {
+  investor_details: String
+  investor_id: ID!
+  lots: [Lots] @materializer(query: "lotsUsingLots_investor_id_fkey")
+  transactions: [Transactions]
+    @materializer(query: "transactionsUsingTransactions_investor_id_fkey")
+}
+
+type Lots {
+  investor_id: ID
+  investors: Investors
+    @materializer(query: "investorsUsingLots_investor_id_fkey")
+  lot_details: String
+  lot_id: ID!
+  transactions: [Transactions]
+    @materializer(query: "transactionsViaTransactions_lots")
+}
+
+type Purchases {
+  purchase_details: String
+  purchase_transaction_id: ID
+  transactions: Transactions
+    @materializer(
+      query: "transactionsUsingPurchases_purchase_transaction_id_fkey"
+    )
+}
+
+type Ref_transaction_types {
+  transaction_type_code: String!
+  transaction_type_description: String
+  transactions: [Transactions]
+    @materializer(
+      query: "transactionsUsingTransactions_transaction_type_code_fkey"
+    )
+}
+
+type Sales {
+  sales_details: String
+  sales_transaction_id: ID!
+  transactions: Transactions
+    @materializer(query: "transactionsUsingSales_sales_transaction_id_fkey")
+}
+
+type Transactions {
+  amount_of_transaction: Float
+  date_of_transaction: DateTime
+  investor_id: ID
+  investors: Investors
+    @materializer(query: "investorsUsingTransactions_investor_id_fkey")
+  lots: [Lots] @materializer(query: "lotsViaTransactions_lots")
+  other_details: String
+  purchases: [Purchases] @materializer(query: "purchases")
+  ref_transaction_types: Ref_transaction_types
+    @materializer(
+      query: "ref_transaction_typesUsingTransactions_transaction_type_code_fkey"
+    )
+  sales: Sales @materializer(query: "salesUsingSales_sales_transaction_id_fkey")
+  share_count: String
+  transaction_id: ID!
+  transaction_type_code: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Investors' "
+  investors(investor_id: ID!): Investors
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "investors"
+      configuration: "postgresql_config"
+    )
+  investorsList: [Investors]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "investors"
+      configuration: "postgresql_config"
+    )
+  investorsPaginatedList(first: Int, after: Int): [Investors]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "investor_details", "investor_id" FROM "investors" ORDER BY "investor_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  investorsUsingLots_investor_id_fkey(investor_id: ID!): Investors
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "investor_details", "investor_id" FROM "investors" WHERE "investor_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  investorsUsingTransactions_investor_id_fkey(investor_id: ID!): Investors
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "investor_details", "investor_id" FROM "investors" WHERE "investor_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Lots' "
+  lots(lot_id: ID!): Lots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "lots"
+      configuration: "postgresql_config"
+    )
+  lotsList: [Lots]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "lots"
+      configuration: "postgresql_config"
+    )
+  lotsPaginatedList(first: Int, after: Int): [Lots]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "investor_id", "lot_details", "lot_id" FROM "lots" ORDER BY "lot_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  lotsUsingLots_investor_id_fkey(investor_id: ID!): [Lots]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "investor_id", "lot_details", "lot_id" FROM "lots" WHERE "investor_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  transactionsViaTransactions_lots(lot_id: ID!): [Transactions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT T."amount_of_transaction", T."date_of_transaction", T."investor_id", T."other_details", T."share_count", T."transaction_id", T."transaction_type_code"
+        FROM "transactions" T, "transactions_lots" V
+        WHERE
+          V."lot_id" = $1 AND
+          V."transaction_id" = T."transaction_id"
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Purchases' "
+  purchases(transaction_id: ID!): [Purchases]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "purchase_details", "purchase_transaction_id" FROM "purchases" WHERE "purchase_transaction_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  purchasesList: [Purchases]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "purchases"
+      configuration: "postgresql_config"
+    )
+  purchasesPaginatedList(first: Int, after: Int): [Purchases]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "purchase_details", "purchase_transaction_id" FROM "purchases" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Ref_transaction_types' "
+  ref_transaction_types(transaction_type_code: String!): Ref_transaction_types
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "ref_transaction_types"
+      configuration: "postgresql_config"
+    )
+  ref_transaction_typesList: [Ref_transaction_types]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "ref_transaction_types"
+      configuration: "postgresql_config"
+    )
+  ref_transaction_typesPaginatedList(
+    first: Int
+    after: Int
+  ): [Ref_transaction_types]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "transaction_type_code", "transaction_type_description" FROM "ref_transaction_types" ORDER BY "transaction_type_code" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  ref_transaction_typesUsingTransactions_transaction_type_code_fkey(
+    transaction_type_code: String!
+  ): Ref_transaction_types
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "transaction_type_code", "transaction_type_description" FROM "ref_transaction_types" WHERE "transaction_type_code" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Sales' "
+  sales(sales_transaction_id: ID!): Sales
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "sales"
+      configuration: "postgresql_config"
+    )
+  salesList: [Sales]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "sales"
+      configuration: "postgresql_config"
+    )
+  salesPaginatedList(first: Int, after: Int): [Sales]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "sales_details", "sales_transaction_id" FROM "sales" ORDER BY "sales_transaction_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  salesUsingSales_sales_transaction_id_fkey(transaction_id: ID!): Sales
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "sales_details", "sales_transaction_id" FROM "sales" WHERE "sales_transaction_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Transactions' "
+  lotsViaTransactions_lots(transaction_id: ID!): [Lots]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT T."investor_id", T."lot_details", T."lot_id"
+        FROM "lots" T, "transactions_lots" V
+        WHERE
+          V."transaction_id" = $1 AND
+          V."lot_id" = T."lot_id"
+      """
+      configuration: "postgresql_config"
+    )
+  transactions(transaction_id: ID!): Transactions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "transactions"
+      configuration: "postgresql_config"
+    )
+  transactionsList: [Transactions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "transactions"
+      configuration: "postgresql_config"
+    )
+  transactionsPaginatedList(first: Int, after: Int): [Transactions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "amount_of_transaction", "date_of_transaction", "investor_id", "other_details", "share_count", "transaction_id", "transaction_type_code" FROM "transactions" ORDER BY "transaction_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  transactionsUsingPurchases_purchase_transaction_id_fkey(
+    purchase_transaction_id: ID!
+  ): Transactions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "amount_of_transaction", "date_of_transaction", "investor_id", "other_details", "share_count", "transaction_id", "transaction_type_code" FROM "transactions" WHERE "transaction_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  transactionsUsingSales_sales_transaction_id_fkey(
+    sales_transaction_id: ID!
+  ): Transactions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "amount_of_transaction", "date_of_transaction", "investor_id", "other_details", "share_count", "transaction_id", "transaction_type_code" FROM "transactions" WHERE "transaction_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  transactionsUsingTransactions_investor_id_fkey(
+    investor_id: ID!
+  ): [Transactions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "amount_of_transaction", "date_of_transaction", "investor_id", "other_details", "share_count", "transaction_id", "transaction_type_code" FROM "transactions" WHERE "investor_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  transactionsUsingTransactions_transaction_type_code_fkey(
+    transaction_type_code: String!
+  ): [Transactions]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "amount_of_transaction", "date_of_transaction", "investor_id", "other_details", "share_count", "transaction_id", "transaction_type_code" FROM "transactions" WHERE "transaction_type_code" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Investors' "
+  deleteInvestors(investor_id: ID!): Investors
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "investors"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertInvestors(investor_details: String, investor_id: ID!): Investors
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "investors"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateInvestors(investor_id: ID!, investor_details: String): Investors
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "investors" SET
+        "investor_details" = COALESCE($2, "investor_details")
+      WHERE
+        "investor_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Lots' "
+  deleteLots(lot_id: ID!): Lots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "lots"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertLots(lot_details: String, investor_id: ID, lot_id: ID!): Lots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "lots"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateLots(lot_id: ID!, investor_id: ID, lot_details: String): Lots
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "lots" SET
+        "investor_id" = COALESCE($2, "investor_id"),
+        "lot_details" = COALESCE($3, "lot_details")
+      WHERE
+        "lot_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Purchases' "
+  deletePurchases(
+    purchase_details: String!
+    purchase_transaction_id: ID!
+  ): Purchases
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "purchases"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPurchases(
+    purchase_details: String
+    purchase_transaction_id: ID
+  ): Purchases
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "purchases"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Ref_transaction_types' "
+  deleteRef_transaction_types(
+    transaction_type_code: String!
+  ): Ref_transaction_types
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "ref_transaction_types"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertRef_transaction_types(
+    transaction_type_description: String
+    transaction_type_code: String!
+  ): Ref_transaction_types
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "ref_transaction_types"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateRef_transaction_types(
+    transaction_type_code: String!
+    transaction_type_description: String
+  ): Ref_transaction_types
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "ref_transaction_types" SET
+        "transaction_type_description" = COALESCE($2, "transaction_type_description")
+      WHERE
+        "transaction_type_code" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Sales' "
+  deleteSales(sales_transaction_id: ID!): Sales
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "sales"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSales(sales_details: String, sales_transaction_id: ID!): Sales
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "sales"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateSales(sales_transaction_id: ID!, sales_details: String): Sales
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "sales" SET
+        "sales_details" = COALESCE($2, "sales_details")
+      WHERE
+        "sales_transaction_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Transactions' "
+  deleteTransactions(transaction_id: ID!): Transactions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "transactions"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTransactions(
+    amount_of_transaction: Float
+    other_details: String
+    investor_id: ID
+    share_count: String
+    transaction_id: ID!
+    date_of_transaction: DateTime
+    transaction_type_code: String
+  ): Transactions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "transactions"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateTransactions(
+    transaction_id: ID!
+    amount_of_transaction: Float
+    date_of_transaction: DateTime
+    investor_id: ID
+    other_details: String
+    share_count: String
+    transaction_type_code: String
+  ): Transactions
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "transactions" SET
+        "amount_of_transaction" = COALESCE($2, "amount_of_transaction"),
+        "date_of_transaction" = COALESCE($3, "date_of_transaction"),
+        "investor_id" = COALESCE($4, "investor_id"),
+        "other_details" = COALESCE($5, "other_details"),
+        "share_count" = COALESCE($6, "share_count"),
+        "transaction_type_code" = COALESCE($7, "transaction_type_code")
+      WHERE
+        "transaction_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}
+

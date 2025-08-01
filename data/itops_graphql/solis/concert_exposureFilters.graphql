@@ -1,0 +1,31 @@
+type concert_ExposureFilters {
+  "Exposure type filters"
+  exposure_type: [String]
+  "Open ticket filters"
+  has_open_ticket: [Boolean]
+  "Solution availability filters"
+  has_solution: [Boolean]
+  "Public access point impact filters"
+  impacts_public_access_point: [Boolean]
+  "Scan type filters"
+  scan_type: [String]
+  "Severity filters"
+  severity: [String]
+  "Status filters"
+  status: [String]
+}
+
+type Query {
+  concert_exposureFilters(
+    token: Secret
+  ): concert_ExposureFilters
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

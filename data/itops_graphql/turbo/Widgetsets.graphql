@@ -1,0 +1,136 @@
+type GetWidgetsetList {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  scope: String
+  startPeriod: String
+  endPeriod: String
+  widgets: [Widget!]!
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Widget {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  type: String
+  scope: String
+  startPeriod: String
+  endPeriod: String
+  row: String
+  column: String
+  sizeRows: String
+  sizeColumns: String
+  widgetsetId: String
+  widgetElements: String
+  widgetSource: String
+}
+
+type CreateWidgetset {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  scope: String
+  startPeriod: String
+  endPeriod: String
+  widgets: [Widget!]!
+}
+
+type UpdateWidgetset {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  scope: String
+  startPeriod: String
+  endPeriod: String
+  widgets: [Widget!]!
+}
+
+type DeleteWidgetset {
+  uuid: String!
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Widget {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  type: String
+  scope: String
+  startPeriod: String
+  endPeriod: String
+  row: String
+  column: String
+  sizeRows: String
+  sizeColumns: String
+  widgetsetId: String
+  widgetElements: String
+  widgetSource: String
+}
+
+type Query {
+  getWidgetsetList(where: WidgetsetWhereInput, orderBy: WidgetsetOrderByInput, skip: Int, after: String, before: String, last: Int): [GetWidgetsetList!]! @rest(
+    table: "Getwidgetsetlist",
+    keyField: "uuid",
+    whereArgument: "where",
+    orderByArgument: "orderBy",
+    skipArgument: "skip",
+    afterArgument: "after",
+    beforeArgument: "before",
+    lastArgument: "last"
+  )
+
+  createWidgetset(input: CreateWidgetsetInput!): CreateWidgetset! @rest(
+    table: "Createwidgetset",
+    keyField: "uuid",
+    inputArgument: "input"
+  )
+
+  getWidgetset(where: WidgetsetWhereUniqueInput): Widgetset @rest(
+    table: "Getwidgetset",
+    keyField: "uuid",
+    whereArgument: "where"
+  )
+
+  updateWidgetset(where: WidgetsetWhereUniqueInput, input: UpdateWidgetsetInput!): Widgetset @rest(
+    table: "Updatewidgetset",
+    keyField: "uuid",
+    whereArgument: "where",
+    inputArgument: "input"
+  )
+
+  deleteWidgetset(where: WidgetsetWhereUniqueInput): DeleteWidgetset @rest(
+    table: "Deletewidgetset",
+    keyField: "uuid",
+    whereArgument: "where"
+  )
+}
+
+# This GraphQL Query type includes fields that map to the provided REST endpoints. The `@rest` directive is used to indicate that these fields should be translated into REST calls. The `where`, `orderBy`, `skip`, `after`, `before`, and `last` arguments are used to support pagination and filtering for the `getWidgetsetList` query. The `input` argument is used for the `createWidgetset`, `updateWidgetset` queries, and the `where` argument is used for the `getWidgetset`, `deleteWidgetset` queries.

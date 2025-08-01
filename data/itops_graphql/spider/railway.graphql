@@ -1,0 +1,339 @@
+type Manager {
+  age: Int
+  country: String
+  level: Int
+  manager_id: Int
+  name: String
+  railway_manage: [Railway_manage]
+    @materializer(query: "railway_manageUsingRailway_manage_manager_id_fkey")
+  working_year_starts: String
+}
+
+type Railway {
+  builder: String
+  built: String
+  location: String
+  objectnumber: String
+  railway: String
+  railway_id: Int
+  railway_manage: [Railway_manage] @materializer(query: "railway_manage")
+  train: [Train] @materializer(query: "train")
+  wheels: String
+}
+
+type Railway_manage {
+  from_year: String
+  manager: Manager @materializer(query: "manager")
+  manager_id: Int
+  railway: Railway
+    @materializer(query: "railwayUsingRailway_manage_railway_id_fkey")
+  railway_id: Int
+}
+
+type Train {
+  arrival: String
+  from: String
+  name: String
+  railway: Railway @materializer(query: "railway")
+  railway_id: Int
+  train_id: Int
+  train_num: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Manager' "
+  manager(manager_id: Int!): Manager
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "country", "level", "manager_id", "name", "working_year_starts" FROM "manager" WHERE "manager_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  managerList: [Manager]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "manager"
+      configuration: "postgresql_config"
+    )
+  managerPaginatedList(first: Int, after: Int): [Manager]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "country", "level", "manager_id", "name", "working_year_starts" FROM "manager" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  managerUsingidx_19632_sqlite_autoindex_manager_1(manager_id: Int!): Manager
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "country", "level", "manager_id", "name", "working_year_starts" FROM "manager" WHERE "manager_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Railway' "
+  railway(railway_id: Int!): Railway
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "builder", "built", "location", "objectnumber", "railway", "railway_id", "wheels" FROM "railway" WHERE "railway_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  railwayList: [Railway]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "railway"
+      configuration: "postgresql_config"
+    )
+  railwayPaginatedList(first: Int, after: Int): [Railway]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "builder", "built", "location", "objectnumber", "railway", "railway_id", "wheels" FROM "railway" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  railwayUsingRailway_manage_railway_id_fkey(railway_id: Int!): Railway
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "builder", "built", "location", "objectnumber", "railway", "railway_id", "wheels" FROM "railway" WHERE "railway_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  railwayUsingidx_19622_sqlite_autoindex_railway_1(railway_id: Int!): Railway
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "builder", "built", "location", "objectnumber", "railway", "railway_id", "wheels" FROM "railway" WHERE "railway_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Railway_manage' "
+  railway_manage(railway_id: Int!): [Railway_manage]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "from_year", "manager_id", "railway_id" FROM "railway_manage" WHERE "railway_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  railway_manageList: [Railway_manage]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "railway_manage"
+      configuration: "postgresql_config"
+    )
+  railway_managePaginatedList(first: Int, after: Int): [Railway_manage]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "from_year", "manager_id", "railway_id" FROM "railway_manage" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  railway_manageUsingRailway_manage_manager_id_fkey(
+    manager_id: Int!
+  ): [Railway_manage]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "from_year", "manager_id", "railway_id" FROM "railway_manage" WHERE "manager_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  railway_manageUsingidx_19637_sqlite_autoindex_railway_manage_1(
+    railway_id: Int!
+    manager_id: Int!
+  ): Railway_manage
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "from_year", "manager_id", "railway_id" FROM "railway_manage" WHERE "railway_id" = $1 AND "manager_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Train' "
+  train(railway_id: Int!): [Train]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "arrival", "from", "name", "railway_id", "train_id", "train_num" FROM "train" WHERE "railway_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  trainList: [Train]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "train"
+      configuration: "postgresql_config"
+    )
+  trainPaginatedList(first: Int, after: Int): [Train]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "arrival", "from", "name", "railway_id", "train_id", "train_num" FROM "train" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  trainUsingidx_19627_sqlite_autoindex_train_1(train_id: Int!): Train
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "arrival", "from", "name", "railway_id", "train_id", "train_num" FROM "train" WHERE "train_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Manager' "
+  deleteManager(
+    country: String!
+    age: Int!
+    working_year_starts: String!
+    level: Int!
+    name: String!
+    manager_id: Int!
+  ): Manager
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "manager"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertManager(
+    country: String
+    age: Int
+    working_year_starts: String
+    level: Int
+    name: String
+    manager_id: Int
+  ): Manager
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "manager"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Railway' "
+  deleteRailway(
+    railway_id: Int!
+    railway: String!
+    builder: String!
+    wheels: String!
+    objectnumber: String!
+    built: String!
+    location: String!
+  ): Railway
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "railway"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertRailway(
+    railway_id: Int
+    railway: String
+    builder: String
+    wheels: String
+    objectnumber: String
+    built: String
+    location: String
+  ): Railway
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "railway"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Railway_manage' "
+  deleteRailway_manage(
+    from_year: String!
+    manager_id: Int!
+    railway_id: Int!
+  ): Railway_manage
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "railway_manage"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertRailway_manage(
+    from_year: String
+    manager_id: Int
+    railway_id: Int
+  ): Railway_manage
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "railway_manage"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Train' "
+  deleteTrain(
+    name: String!
+    railway_id: Int!
+    train_id: Int!
+    from: String!
+    train_num: String!
+    arrival: String!
+  ): Train
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "train"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTrain(
+    name: String
+    railway_id: Int
+    train_id: Int
+    from: String
+    train_num: String
+    arrival: String
+  ): Train
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "train"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

@@ -1,0 +1,231 @@
+type Accounts {
+  checking: Checking @materializer(query: "checkingUsingChecking_custid_fkey")
+  custid: ID!
+  name: String
+  savings: Savings @materializer(query: "savingsUsingSavings_custid_fkey")
+}
+
+type Checking {
+  accounts: Accounts @materializer(query: "accountsUsingChecking_custid_fkey")
+  balance: Float
+  custid: ID!
+}
+
+type Savings {
+  accounts: Accounts @materializer(query: "accountsUsingSavings_custid_fkey")
+  balance: Float
+  custid: ID!
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Accounts' "
+  accounts(custid: ID!): Accounts
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "accounts"
+      configuration: "postgresql_config"
+    )
+  accountsList: [Accounts]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "accounts"
+      configuration: "postgresql_config"
+    )
+  accountsPaginatedList(first: Int, after: Int): [Accounts]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "custid", "name" FROM "accounts" ORDER BY "custid" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  accountsUsingChecking_custid_fkey(custid: ID!): Accounts
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "custid", "name" FROM "accounts" WHERE "custid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  accountsUsingSavings_custid_fkey(custid: ID!): Accounts
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "custid", "name" FROM "accounts" WHERE "custid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Checking' "
+  checking(custid: ID!): Checking
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "checking"
+      configuration: "postgresql_config"
+    )
+  checkingList: [Checking]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "checking"
+      configuration: "postgresql_config"
+    )
+  checkingPaginatedList(first: Int, after: Int): [Checking]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "balance", "custid" FROM "checking" ORDER BY "custid" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  checkingUsingChecking_custid_fkey(custid: ID!): Checking
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "balance", "custid" FROM "checking" WHERE "custid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Savings' "
+  savings(custid: ID!): Savings
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "savings"
+      configuration: "postgresql_config"
+    )
+  savingsList: [Savings]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "savings"
+      configuration: "postgresql_config"
+    )
+  savingsPaginatedList(first: Int, after: Int): [Savings]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "balance", "custid" FROM "savings" ORDER BY "custid" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  savingsUsingSavings_custid_fkey(custid: ID!): Savings
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "balance", "custid" FROM "savings" WHERE "custid" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Accounts' "
+  deleteAccounts(custid: ID!): Accounts
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "accounts"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertAccounts(name: String, custid: ID!): Accounts
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "accounts"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateAccounts(custid: ID!, name: String): Accounts
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "accounts" SET
+        "name" = COALESCE($2, "name")
+      WHERE
+        "custid" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Checking' "
+  deleteChecking(custid: ID!): Checking
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "checking"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertChecking(balance: Float, custid: ID!): Checking
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "checking"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateChecking(custid: ID!, balance: Float): Checking
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "checking" SET
+        "balance" = COALESCE($2, "balance")
+      WHERE
+        "custid" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Savings' "
+  deleteSavings(custid: ID!): Savings
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "savings"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSavings(balance: Float, custid: ID!): Savings
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "savings"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateSavings(custid: ID!, balance: Float): Savings
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "savings" SET
+        "balance" = COALESCE($2, "balance")
+      WHERE
+        "custid" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}
+

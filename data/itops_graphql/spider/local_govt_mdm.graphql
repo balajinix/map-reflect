@@ -1,0 +1,735 @@
+type Benefits_overpayments {
+  cmi_cross_ref_id: ID
+  cmi_cross_references: Cmi_cross_references
+    @materializer(
+      query: "cmi_cross_referencesUsingBenefits_overpayments_cmi_cross_ref_id_fkey"
+    )
+  council_tax_id: ID!
+}
+
+type Business_rates {
+  business_rates_id: ID!
+  cmi_cross_ref_id: ID
+  cmi_cross_references: Cmi_cross_references
+    @materializer(
+      query: "cmi_cross_referencesUsingBusiness_rates_cmi_cross_ref_id_fkey"
+    )
+}
+
+type Cmi_cross_references {
+  benefits_overpayments: [Benefits_overpayments]
+    @materializer(
+      query: "benefits_overpaymentsUsingBenefits_overpayments_cmi_cross_ref_id_fkey"
+    )
+  business_rates: [Business_rates]
+    @materializer(
+      query: "business_ratesUsingBusiness_rates_cmi_cross_ref_id_fkey"
+    )
+  cmi_cross_ref_id: ID!
+  council_tax: [Council_tax]
+    @materializer(query: "council_taxUsingCouncil_tax_cmi_cross_ref_id_fkey")
+  customer_master_index: Customer_master_index
+    @materializer(
+      query: "customer_master_indexUsingCmi_cross_references_master_customer_id_fkey"
+    )
+  electoral_register: [Electoral_register]
+    @materializer(
+      query: "electoral_registerUsingElectoral_register_cmi_cross_ref_id_fkey"
+    )
+  master_customer_id: ID
+  parking_fines: [Parking_fines]
+    @materializer(
+      query: "parking_finesUsingParking_fines_cmi_cross_ref_id_fkey"
+    )
+  rent_arrears: [Rent_arrears]
+    @materializer(query: "rent_arrearsUsingRent_arrears_cmi_cross_ref_id_fkey")
+  source_system_code: String
+}
+
+type Council_tax {
+  cmi_cross_ref_id: ID
+  cmi_cross_references: Cmi_cross_references
+    @materializer(
+      query: "cmi_cross_referencesUsingCouncil_tax_cmi_cross_ref_id_fkey"
+    )
+  council_tax_id: ID!
+}
+
+type Customer_master_index {
+  cmi_cross_references: [Cmi_cross_references]
+    @materializer(
+      query: "cmi_cross_referencesUsingCmi_cross_references_master_customer_id_fkey"
+    )
+  cmi_details: String
+  master_customer_id: ID!
+}
+
+type Electoral_register {
+  cmi_cross_ref_id: ID
+  cmi_cross_references: Cmi_cross_references
+    @materializer(
+      query: "cmi_cross_referencesUsingElectoral_register_cmi_cross_ref_id_fkey"
+    )
+  electoral_register_id: ID!
+}
+
+type Parking_fines {
+  cmi_cross_ref_id: ID
+  cmi_cross_references: Cmi_cross_references
+    @materializer(
+      query: "cmi_cross_referencesUsingParking_fines_cmi_cross_ref_id_fkey"
+    )
+  council_tax_id: ID!
+}
+
+type Rent_arrears {
+  cmi_cross_ref_id: ID
+  cmi_cross_references: Cmi_cross_references
+    @materializer(
+      query: "cmi_cross_referencesUsingRent_arrears_cmi_cross_ref_id_fkey"
+    )
+  council_tax_id: ID!
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Benefits_overpayments' "
+  benefits_overpayments(council_tax_id: ID!): Benefits_overpayments
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "benefits_overpayments"
+      configuration: "postgresql_config"
+    )
+  benefits_overpaymentsList: [Benefits_overpayments]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "benefits_overpayments"
+      configuration: "postgresql_config"
+    )
+  benefits_overpaymentsPaginatedList(
+    first: Int
+    after: Int
+  ): [Benefits_overpayments]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "benefits_overpayments" ORDER BY "council_tax_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  benefits_overpaymentsUsingBenefits_overpayments_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): [Benefits_overpayments]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "benefits_overpayments" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Business_rates' "
+  business_rates(business_rates_id: ID!): Business_rates
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "business_rates"
+      configuration: "postgresql_config"
+    )
+  business_ratesList: [Business_rates]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "business_rates"
+      configuration: "postgresql_config"
+    )
+  business_ratesPaginatedList(first: Int, after: Int): [Business_rates]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "business_rates_id", "cmi_cross_ref_id" FROM "business_rates" ORDER BY "business_rates_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  business_ratesUsingBusiness_rates_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): [Business_rates]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "business_rates_id", "cmi_cross_ref_id" FROM "business_rates" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Cmi_cross_references' "
+  cmi_cross_references(cmi_cross_ref_id: ID!): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cmi_cross_references"
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesList: [Cmi_cross_references]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cmi_cross_references"
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesPaginatedList(
+    first: Int
+    after: Int
+  ): [Cmi_cross_references]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" ORDER BY "cmi_cross_ref_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesUsingBenefits_overpayments_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesUsingBusiness_rates_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesUsingCmi_cross_references_master_customer_id_fkey(
+    master_customer_id: ID!
+  ): [Cmi_cross_references]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" WHERE "master_customer_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesUsingCouncil_tax_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesUsingElectoral_register_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesUsingParking_fines_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  cmi_cross_referencesUsingRent_arrears_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "master_customer_id", "source_system_code" FROM "cmi_cross_references" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Council_tax' "
+  council_tax(council_tax_id: ID!): Council_tax
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "council_tax"
+      configuration: "postgresql_config"
+    )
+  council_taxList: [Council_tax]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "council_tax"
+      configuration: "postgresql_config"
+    )
+  council_taxPaginatedList(first: Int, after: Int): [Council_tax]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "council_tax" ORDER BY "council_tax_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  council_taxUsingCouncil_tax_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): [Council_tax]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "council_tax" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Customer_master_index' "
+  customer_master_index(master_customer_id: ID!): Customer_master_index
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_master_index"
+      configuration: "postgresql_config"
+    )
+  customer_master_indexList: [Customer_master_index]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_master_index"
+      configuration: "postgresql_config"
+    )
+  customer_master_indexPaginatedList(
+    first: Int
+    after: Int
+  ): [Customer_master_index]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_details", "master_customer_id" FROM "customer_master_index" ORDER BY "master_customer_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  customer_master_indexUsingCmi_cross_references_master_customer_id_fkey(
+    master_customer_id: ID!
+  ): Customer_master_index
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_details", "master_customer_id" FROM "customer_master_index" WHERE "master_customer_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Electoral_register' "
+  electoral_register(electoral_register_id: ID!): Electoral_register
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "electoral_register"
+      configuration: "postgresql_config"
+    )
+  electoral_registerList: [Electoral_register]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "electoral_register"
+      configuration: "postgresql_config"
+    )
+  electoral_registerPaginatedList(first: Int, after: Int): [Electoral_register]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "electoral_register_id" FROM "electoral_register" ORDER BY "electoral_register_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  electoral_registerUsingElectoral_register_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): [Electoral_register]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "electoral_register_id" FROM "electoral_register" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Parking_fines' "
+  parking_fines(council_tax_id: ID!): Parking_fines
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "parking_fines"
+      configuration: "postgresql_config"
+    )
+  parking_finesList: [Parking_fines]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "parking_fines"
+      configuration: "postgresql_config"
+    )
+  parking_finesPaginatedList(first: Int, after: Int): [Parking_fines]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "parking_fines" ORDER BY "council_tax_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  parking_finesUsingParking_fines_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): [Parking_fines]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "parking_fines" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Rent_arrears' "
+  rent_arrears(council_tax_id: ID!): Rent_arrears
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "rent_arrears"
+      configuration: "postgresql_config"
+    )
+  rent_arrearsList: [Rent_arrears]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "rent_arrears"
+      configuration: "postgresql_config"
+    )
+  rent_arrearsPaginatedList(first: Int, after: Int): [Rent_arrears]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "rent_arrears" ORDER BY "council_tax_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  rent_arrearsUsingRent_arrears_cmi_cross_ref_id_fkey(
+    cmi_cross_ref_id: ID!
+  ): [Rent_arrears]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "cmi_cross_ref_id", "council_tax_id" FROM "rent_arrears" WHERE "cmi_cross_ref_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Benefits_overpayments' "
+  deleteBenefits_overpayments(council_tax_id: ID!): Benefits_overpayments
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "benefits_overpayments"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertBenefits_overpayments(
+    cmi_cross_ref_id: ID
+    council_tax_id: ID!
+  ): Benefits_overpayments
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "benefits_overpayments"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateBenefits_overpayments(
+    council_tax_id: ID!
+    cmi_cross_ref_id: ID
+  ): Benefits_overpayments
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "benefits_overpayments" SET
+        "cmi_cross_ref_id" = COALESCE($2, "cmi_cross_ref_id")
+      WHERE
+        "council_tax_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Business_rates' "
+  deleteBusiness_rates(business_rates_id: ID!): Business_rates
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "business_rates"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertBusiness_rates(
+    cmi_cross_ref_id: ID
+    business_rates_id: ID!
+  ): Business_rates
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "business_rates"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateBusiness_rates(
+    business_rates_id: ID!
+    cmi_cross_ref_id: ID
+  ): Business_rates
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "business_rates" SET
+        "cmi_cross_ref_id" = COALESCE($2, "cmi_cross_ref_id")
+      WHERE
+        "business_rates_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Cmi_cross_references' "
+  deleteCmi_cross_references(cmi_cross_ref_id: ID!): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cmi_cross_references"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCmi_cross_references(
+    source_system_code: String
+    master_customer_id: ID
+    cmi_cross_ref_id: ID!
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "cmi_cross_references"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCmi_cross_references(
+    cmi_cross_ref_id: ID!
+    master_customer_id: ID
+    source_system_code: String
+  ): Cmi_cross_references
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "cmi_cross_references" SET
+        "master_customer_id" = COALESCE($2, "master_customer_id"),
+        "source_system_code" = COALESCE($3, "source_system_code")
+      WHERE
+        "cmi_cross_ref_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Council_tax' "
+  deleteCouncil_tax(council_tax_id: ID!): Council_tax
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "council_tax"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCouncil_tax(cmi_cross_ref_id: ID, council_tax_id: ID!): Council_tax
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "council_tax"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCouncil_tax(council_tax_id: ID!, cmi_cross_ref_id: ID): Council_tax
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "council_tax" SET
+        "cmi_cross_ref_id" = COALESCE($2, "cmi_cross_ref_id")
+      WHERE
+        "council_tax_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Customer_master_index' "
+  deleteCustomer_master_index(master_customer_id: ID!): Customer_master_index
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_master_index"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCustomer_master_index(
+    cmi_details: String
+    master_customer_id: ID!
+  ): Customer_master_index
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "customer_master_index"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCustomer_master_index(
+    master_customer_id: ID!
+    cmi_details: String
+  ): Customer_master_index
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "customer_master_index" SET
+        "cmi_details" = COALESCE($2, "cmi_details")
+      WHERE
+        "master_customer_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Electoral_register' "
+  deleteElectoral_register(electoral_register_id: ID!): Electoral_register
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "electoral_register"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertElectoral_register(
+    cmi_cross_ref_id: ID
+    electoral_register_id: ID!
+  ): Electoral_register
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "electoral_register"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateElectoral_register(
+    electoral_register_id: ID!
+    cmi_cross_ref_id: ID
+  ): Electoral_register
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "electoral_register" SET
+        "cmi_cross_ref_id" = COALESCE($2, "cmi_cross_ref_id")
+      WHERE
+        "electoral_register_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Parking_fines' "
+  deleteParking_fines(council_tax_id: ID!): Parking_fines
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "parking_fines"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertParking_fines(cmi_cross_ref_id: ID, council_tax_id: ID!): Parking_fines
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "parking_fines"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateParking_fines(council_tax_id: ID!, cmi_cross_ref_id: ID): Parking_fines
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "parking_fines" SET
+        "cmi_cross_ref_id" = COALESCE($2, "cmi_cross_ref_id")
+      WHERE
+        "council_tax_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Rent_arrears' "
+  deleteRent_arrears(council_tax_id: ID!): Rent_arrears
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "rent_arrears"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertRent_arrears(cmi_cross_ref_id: ID, council_tax_id: ID!): Rent_arrears
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "rent_arrears"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateRent_arrears(council_tax_id: ID!, cmi_cross_ref_id: ID): Rent_arrears
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "rent_arrears" SET
+        "cmi_cross_ref_id" = COALESCE($2, "cmi_cross_ref_id")
+      WHERE
+        "council_tax_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}
+

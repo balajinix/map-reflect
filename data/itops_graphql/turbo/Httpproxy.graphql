@@ -1,0 +1,239 @@
+type Getproxyinfo {
+  """
+  The relation of the link.
+  """
+  links: [Link!]!
+
+  """
+  The URL of the link.
+  """
+  linksHref: [String!]!
+
+  """
+  The language of the link.
+  """
+  linksHreflang: [String!]!
+
+  """
+  The media type of the link.
+  """
+  linksMedia: [String!]!
+
+  """
+  The title of the link.
+  """
+  linksTitle: [String!]!
+
+  """
+  The type of the link.
+  """
+  linksType: [String!]!
+
+  """
+  Indicates if the link is deprecated.
+  """
+  linksDeprecation: [String!]!
+
+  """
+  The profile of the link.
+  """
+  linksProfile: [String!]!
+
+  """
+  The name of the link.
+  """
+  linksName: [String!]!
+
+  """
+  The UUID of the object.
+  """
+  uuid: String!
+
+  """
+  A user readable name of the API object.
+  """
+  displayName: String!
+
+  """
+  The class name of the API object.
+  """
+  className: String
+
+  """
+  Whether proxy is enabled or not.
+  """
+  isProxyEnabled: Boolean!
+
+  """
+  The proxy host.
+  """
+  proxyHost: String!
+
+  """
+  The proxy port number.
+  """
+  proxyPortNumber: String!
+
+  """
+  The proxy username.
+  """
+  userName: String
+
+  """
+  The proxy password.
+  """
+  password: String
+
+  """
+  Whether proxy is secure: SSL is used to connect to the proxy host. Defaults for 'false'.
+  """
+  isProxySecure: Boolean
+}
+
+type Setproxyconfig {
+  """
+  The relation of the link.
+  """
+  links: [Link!]!
+
+  """
+  The URL of the link.
+  """
+  linksHref: [String!]!
+
+  """
+  The language of the link.
+  """
+  linksHreflang: [String!]!
+
+  """
+  The media type of the link.
+  """
+  linksMedia: [String!]!
+
+  """
+  The title of the link.
+  """
+  linksTitle: [String!]!
+
+  """
+  The type of the link.
+  """
+  linksType: [String!]!
+
+  """
+  Indicates if the link is deprecated.
+  """
+  linksDeprecation: [String!]!
+
+  """
+  The profile of the link.
+  """
+  linksProfile: [String!]!
+
+  """
+  The name of the link.
+  """
+  linksName: [String!]!
+
+  """
+  The UUID of the object.
+  """
+  uuid: String!
+
+  """
+  A user readable name of the API object.
+  """
+  displayName: String!
+
+  """
+  The class name of the API object.
+  """
+  className: String
+
+  """
+  Whether proxy is enabled or not.
+  """
+  isProxyEnabled: Boolean!
+
+  """
+  The proxy host.
+  """
+  proxyHost: String!
+
+  """
+  The proxy port number.
+  """
+  proxyPortNumber: String!
+
+  """
+  The proxy username.
+  """
+  userName: String
+
+  """
+  The proxy password.
+  """
+  password: String
+
+  """
+  Whether proxy is secure: SSL is used to connect to the proxy host. Defaults for 'false'.
+  """
+  isProxySecure: Boolean
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Query {
+  getProxyInfo(uuid: String!): Getproxyinfo
+  setProxyConfig(uuid: String!, input: SetproxyconfigInput!): Setproxyconfig
+}
+
+# input SetproxyconfigInput {
+#   links: [LinkInput!]!
+#   uuid: String!
+#   displayName: String!
+#   className: String
+#   isProxyEnabled: Boolean
+#   proxyHost: String
+#   proxyPortNumber: String
+#   userName: String
+#   password: String
+#   isProxySecure: Boolean
+# }
+
+# input LinkInput {
+#   rel: String!
+#   href: String!
+#   hreflang: String
+#   media: String
+#   title: String
+#   type: String
+#   deprecation: String
+#   profile: String
+#   name: String
+# }
+
+# Explanation:
+
+# 1. The `Query` type includes two fields, `getProxyInfo` and `setProxyConfig`, which map to the 'Getproxyinfo' and 'Setproxyconfig' REST endpoints respectively.
+
+# 2. The `getProxyInfo` field takes a single argument `uuid`, which corresponds to the 'uuid' field in the schema.
+
+# 3. The `setProxyConfig` field takes two arguments: `uuid` and `input`. The `uuid` argument corresponds to the 'uuid' field in the schema. The `input` argument is an object of type `SetproxyconfigInput`, which is defined next.
+
+# 4. The `SetproxyconfigInput` input type includes fields that map to the fields in the 'Setproxyconfig' schema, including nested `LinkInput` for the 'links' field.
+
+# 5. The `LinkInput` input type includes fields that map to the fields in the 'Link' schema.
+
+# This setup allows you to query for proxy information using the `getProxyInfo` field and to update proxy configuration using the `setProxyConfig` field, providing a clear mapping between the GraphQL schema and the REST endpoints.

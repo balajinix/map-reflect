@@ -22,9 +22,9 @@ DATA_DIR="$PROJECT_ROOT/data"
 
 DATASETS="ITOps"
 MODELS="mistral-large"
-HIERARCHY_FILE="$DATA_DIR/hierarchy.json"
+HIERARCHY_FILE="$DATA_DIR/itops_hierarchy.json"
 DATA_DIR_ARG="$DATA_DIR"
-SCHEMA_DIR="$DATA_DIR/graphql"
+SCHEMA_DIR="$DATA_DIR/itops_graphql"
 QUICK=false
 VERBOSE=false
 

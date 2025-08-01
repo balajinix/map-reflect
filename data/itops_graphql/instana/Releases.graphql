@@ -1,0 +1,128 @@
+# """
+# Type representing a release
+# """
+type Release {
+  """
+  The unique identifier for the release
+  """
+  id: ID!
+
+  """
+  The title of the release
+  """
+  title: String!
+
+  """
+  The description of the release
+  """
+  description: String
+
+  """
+  The release date
+  """
+  releaseDate: String
+
+  """
+  The list of associated posts
+  """
+  posts: [Post]
+
+  """
+  The deletion status of the release
+  """
+  deletionStatus: String
+
+  """
+  Fetch all releases
+  """
+  getAllReleases: [Release]
+
+  """
+  Post a new release
+  """
+  putRelease: Release
+
+  """
+  Get details of a specific release
+  """
+  getRelease: Release
+
+  """
+  Delete a release
+  """
+  deleteRelease: Boolean
+}
+
+# """
+# Type representing a post associated with a release
+# """
+type Post {
+  """
+  The unique identifier for the post
+  """
+  id: ID!
+
+  """
+  The title of the post
+  """
+  title: String!
+
+  """
+  The content of the post
+  """
+  content: String
+
+  """
+  The release the post belongs to
+  """
+  release: Release
+}
+
+# This GraphQL type definition includes a `Release` type with fields for the release's unique identifier, title, description, release date, associated posts, deletion status, and methods for fetching all releases, posting a new release, getting details of a specific release, and deleting a release. The `Post` type represents posts associated with a release, including their unique identifier, title, content, and the release they belong to.
+
+# Here is the GraphQL query type based on the provided schema and REST endpoints:
+
+type Query {
+  # Fetch all releases
+  getAllReleases(
+    @rest(table_name: "Getallreleases", method: "GET")
+    releaseId: ID,
+    name: String,
+    start: Int,
+    from: Int,
+    to: Int,
+    maxResults: Int
+  ): [Release]
+
+  # Post a new release
+  putRelease(
+    @rest(table_name: "Postrelease", method: "POST")
+    release: ReleaseInput!
+  ): Release
+
+  # Get details of a specific release
+  getRelease(
+    @rest(table_name: "Getrelease", method: "GET")
+    releaseId: ID!
+  ): Release
+
+  # Delete a release
+  deleteRelease(
+    @rest(table_name: "Deleterelease", method: "DELETE")
+    releaseId: ID!
+  ): Boolean
+}
+
+# input ReleaseInput {
+#   title: String!
+#   description: String
+#   releaseDate: String
+#   posts: [PostInput!]
+# }
+
+# input PostInput {
+#   title: String!
+#   content: String
+# }
+
+# This query type includes fields for fetching all releases, posting a new release, getting details of a specific release, and deleting a release. The `@rest` directive is used to map these GraphQL fields to the corresponding REST endpoints. Note that the `ReleaseInput` and `PostInput` scalar types are defined to accommodate the input parameters for creating and updating releases.

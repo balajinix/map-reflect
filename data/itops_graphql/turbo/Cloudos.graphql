@@ -1,0 +1,28 @@
+# """
+# Type representing the result of Getlistofsupportedoses query
+# """
+type Getlistofsupportedoses {
+  """
+  List of supported operating systems
+  """
+  supportedOses: [String!]!
+}
+
+# """
+# The root query type for Cloudos GraphQL API
+# """
+type Query {
+  """
+  Retrieves the list of supported operating systems
+  """
+  getSupportedOses: Getlistofsupportedoses!
+}
+
+type Query {
+  """
+  Retrieves the list of supported operating systems
+  """
+  getSupportedOses: Getlistofsupportedoses! @rest(table: "Getlistofsupportedoses")
+}
+
+# This GraphQL query will map to the provided REST endpoint to retrieve the list of supported operating systems. The `@rest` directive is used to specify the REST table name corresponding to the `Getlistofsupportedoses` type.

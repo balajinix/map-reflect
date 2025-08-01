@@ -1,0 +1,79 @@
+# """
+# Action Execution Types
+# """
+type GetActionExecution {
+  """
+  Action Execution ID
+  """
+  id: String!
+
+  """
+  List of action IDs
+  """
+  actionIds: [String!]!
+
+  """
+  List of skipped actions with their respective reasons
+  """
+  skippedActions: [SkippedAction!]!
+
+  """
+  Time when actions were accepted (in ISO8601 format - YYYY-MM-DDTHH:MM:SS)
+  """
+  acceptTime: String!
+}
+
+type CreateActionExecution {
+  """
+  Action Execution ID
+  """
+  id: String!
+
+  """
+  List of action IDs
+  """
+  actionIds: [String!]!
+
+  """
+  List of skipped actions with their respective reasons
+  """
+  skippedActions: [SkippedAction!]!
+
+  """
+  Time when actions were accepted (in ISO8601 format - YYYY-MM-DDTHH:MM:SS)
+  """
+  acceptTime: String!
+}
+
+type SkippedAction {
+  """
+  Action ID
+  """
+  actionId: String!
+
+  """
+  Reason why action was skipped
+  """
+  reason: String!
+}
+
+type Query {
+  getActionExecutions: [GetActionExecution!]! @rest(table_name: "Getactionexecutions")
+  createActionExecution(actionIds: [String!]!, skippedActions: [SkippedActionInput!]!, acceptTime: String!): CreateActionExecution! @rest(table_name: "Createactionexecution")
+  getActionExecution(id: String!): GetActionExecution @rest(table_name: "Getactionexecution")
+}
+
+# input SkippedActionInput {
+#   actionId: String!
+#   reason: String!
+# }
+
+# Explanation:
+
+# 1. `getActionExecutions`: This query corresponds to the 'Get an Action Execution' endpoint. It returns a list of `GetActionExecution` objects.
+
+# 2. `createActionExecution`: This query corresponds to the 'Create a new Action Execution' endpoint. It takes three arguments: `actionIds` (a list of strings representing action IDs), `skippedActions` (a list of `SkippedActionInput` objects, each containing an action ID and reason for skipping), and `acceptTime` (a string representing the time actions were accepted in ISO8601 format). It returns a single `CreateActionExecution` object.
+
+# 3. `getActionExecution`: This query corresponds to the 'Get an Action Execution' endpoint, but this time it takes an `id` argument to fetch a single `GetActionExecution` object.
+
+# Note: In GraphQL, input types are defined using the `input` keyword. In this case, `SkippedActionInput` is an input type with `actionId` and `reason` fields.

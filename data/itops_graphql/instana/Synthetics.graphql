@@ -1,0 +1,261 @@
+# """
+# Root query type for Synthetics domain
+# """
+type Query {
+  """
+  Fetches a list of synthetic tag catalog entries
+  """
+  getsynthetictagcatalog: [GetSyntheticTagCatalog!]!
+
+  """
+  Fetches metrics results
+  """
+  getmetricsresult(id: ID!): GetMetricsResult
+
+  """
+  Fetches synthetic results
+  """
+  getsyntheticresult(id: ID!): GetSyntheticResult
+
+  """
+  Fetches a list of synthetic results
+  """
+  getsyntheticresultlist: [GetSyntheticResultList!]!
+
+  """
+  Fetches a list of location summaries
+  """
+  getlocationsummarylist: [GetLocationSummaryList!]!
+
+  """
+  Fetches a list of test summaries
+  """
+  gettestsummarylist: [GetTestSummaryList!]!
+
+  """
+  Fetches synthetic result metadata
+  """
+  getsyntheticresultmetadata(id: ID!): GetSyntheticResultMetadata
+
+  """
+  Fetches synthetic result detail data
+  """
+  getsyntheticresultdetaildata(id: ID!): GetSyntheticResultDetailData
+
+  """
+  Fetches synthetic result detail data file
+  """
+  getsyntheticresultdetaildatafile(id: ID!): GetSyntheticResultDetailDataFile
+
+  """
+  Fetches synthetic credential names
+  """
+  getsyntheticcredentialnames: [GetSyntheticCredentialNames!]!
+
+  """
+  Fetches synthetic data centers
+  """
+  getsyntheticdatacenters: [GetSyntheticDatacenter!]!
+
+  """
+  Fetches a synthetic data center
+  """
+  getsyntheticdatacenter(id: ID!): GetSyntheticDatacenter
+
+  """
+  Fetches synthetic locations
+  """
+  getsyntheticlocations: [GetSyntheticLocation!]!
+
+  """
+  Fetches a synthetic location
+  """
+  getsyntheticlocation(id: ID!): GetSyntheticLocation
+
+  """
+  Fetches synthetic tests
+  """
+  getsynthetictests: [GetSyntheticTest!]!
+
+  """
+  Fetches a synthetic test
+  """
+  getsynthetictest(id: ID!): GetSyntheticTest
+}
+
+# """
+# Mutation type for Synthetics domain
+# """
+type Mutation {
+  """
+  Creates a synthetic credential
+  """
+  createsyntheticcredential(input: CreateSyntheticCredentialInput!): CreateSyntheticCredential
+
+  """
+  Fetches synthetic credential associations
+  """
+  getsyntheticcredentialassociations(id: ID!): GetSyntheticCredentialAssociations
+
+  """
+  Fetches one synthetic credential association
+  """
+  getonesyntheticcredentialassociations(id: ID!): GetOneSyntheticCredentialAssociations
+
+  """
+  Deletes a synthetic credential
+  """
+  deletesyntheticcredential(id: ID!): DeleteSyntheticCredential
+
+  """
+  Patches a synthetic credential
+  """
+  patchsyntheticcredential(id: ID!, input: PatchSyntheticCredentialInput!): PatchSyntheticCredential
+
+  """
+  Updates a synthetic credential
+  """
+  updatesyntheticcredential(id: ID!, input: UpdateSyntheticCredentialInput!): UpdateSyntheticCredential
+
+  """
+  Deletes a synthetic location
+  """
+  deletesyntheticlocation(id: ID!): DeleteSyntheticLocation
+
+  """
+  Creates a synthetic test
+  """
+  createsynthetictest(input: CreateSyntheticTestInput!): CreateSyntheticTest
+
+  """
+  Deletes a synthetic test
+  """
+  deletesynthetictest(id: ID!): DeleteSyntheticTest
+
+  """
+  Patches a synthetic test
+  """
+  patchsynthetictest(id: ID!, input: PatchSyntheticTestInput!): PatchSyntheticTest
+
+  """
+  Updates a synthetic test
+  """
+  updatesynthetictest(id: ID!, input: UpdateSyntheticTestInput!): UpdateSyntheticTest
+}
+
+# """
+# Input type for creating a synthetic credential
+# """
+# input CreateSyntheticCredentialInput {
+#   name: String!
+#   description: String
+#   tags: [String!]
+# }
+
+# """
+# Input type for patching a synthetic credential
+# """
+# input PatchSyntheticCredentialInput {
+#   name: String
+#   description: String
+#   tags: [String!]
+# }
+
+# """
+# Input type for updating a synthetic credential
+# """
+# input UpdateSyntheticCredentialInput {
+#   name: String
+#   description: String
+#   tags: [String!]
+# }
+
+# """
+# Input type for creating a synthetic test
+# """
+# input CreateSyntheticTestInput {
+#   name: String!
+#   description: String
+#   tags: [String!]
+#   script: String!
+#   locations: [ID!]
+#   datacenters: [ID!]
+# }
+
+# """
+# Input type for patching a synthetic test
+# """
+# input PatchSyntheticTestInput {
+#   name: String
+#   description: String
+#   tags: [String!]
+#   script: String
+#   locations: [ID!]
+#   datacenters: [ID!]
+# }
+
+# """
+# Input type for updating a synthetic test
+# """
+# input UpdateSyntheticTestInput {
+#   name: String
+#   description: String
+#   tags: [String!]
+#   script: String
+#   locations: [ID!]
+#   datacenters: [ID!]
+# }
+
+# Here is the GraphQL Query type block based on the provided REST endpoints:
+
+type Query {
+  # Fetches a list of synthetic tag catalog entries
+  getsynthetictagcatalog: [GetSyntheticTagCatalog!]! @rest(table_name: "Getsynthetictagcatalog", table_description: "Get synthetic tag catalog")
+
+  # Fetches Synthetic metrics
+  getmetricsresult(id: ID!): GetMetricsResult @rest(table_name: "Getmetricsresult", table_description: "Get Synthetic metrics")
+
+  # Fetches Synthetic test playback results
+  getsyntheticresult(id: ID!): GetSyntheticResult @rest(table_name: "Getsyntheticresult", table_description: "Get Synthetic test playback results")
+
+  # Fetches a list of Synthetic test playback results
+  getsyntheticresultlist: [GetSyntheticResultList!]! @rest(table_name: "Getsyntheticresultlist", table_description: "Get a list of Synthetic test playback results")
+
+  # Fetches a list of Synthetic locations with last run test on each location data
+  getlocationsummarylist: [GetLocationSummaryList!]! @rest(table_name: "Getlocationsummarylist", table_description: "Get a list of Synthetic locations with last run test on each location data")
+
+  # Fetches a list of Synthetic tests with success rate and average response time data
+  gettestsummarylist: [GetTestSummaryList!]! @rest(table_name: "Gettestsummarylist", table_description: "Get a list of Synthetic tests with success rate and average response time data")
+
+  # Fetches Synthetic test playback detail result description(metadata)
+  getsyntheticresultmetadata(id: ID!): GetSyntheticResultMetadata @rest(table_name: "Getsyntheticresultmetadata", table_description: "Get Synthetic test playback detail result description(metadata)")
+
+  # Fetches Synthetic test playback result detail data
+  getsyntheticresultdetaildata(id: ID!): GetSyntheticResultDetailData @rest(table_name: "Getsyntheticresultdetaildata", table_description: "Get Synthetic test playback result detail data")
+
+  # Downloads the synthetic test playback result detail data file
+  getsyntheticresultdetaildatafile(id: ID!): GetSyntheticResultDetailDataFile @rest(table_name: "Getsyntheticresultdetaildatafile", table_description: "Download the synthetic test playback result detail data file")
+
+  # All Synthetic Credential Names
+  getsyntheticcredentialnames: [GetSyntheticCredentialNames!]! @rest(table_name: "Getsyntheticcredentialnames", table_description: "All Synthetic Credential Names")
+
+  # All Synthetic datacenters
+  getsyntheticdatacenters: [GetSyntheticDatacenter!]! @rest(table_name: "Getsyntheticdatacenters", table_description: "All Synthetic datacenters")
+
+  # Synthetic datacenter
+  getsyntheticdatacenter(id: ID!): GetSyntheticDatacenter @rest(table_name: "Getsyntheticdatacenter", table_description: "Synthetic datacenter")
+
+  # All Synthetic locations
+  getsyntheticlocations: [GetSyntheticLocation!]! @rest(table_name: "Getsyntheticlocations", table_description: "This endpoint retrieves Synthetic Locations.")
+
+  # Synthetic location
+  getsyntheticlocation(id: ID!): GetSyntheticLocation @rest(table_name: "Getsyntheticlocation", table_description: "Synthetic location")
+
+  # All Synthetic tests
+  getsynthetictests: [GetSyntheticTest!]! @rest(table_name: "Getsynthetictests", table_description: "This endpoint retrieves Synthetic Tests.")
+
+  # Synthetic test
+  getsynthetictest(id: ID!): GetSyntheticTest @rest(table_name: "Getsynthetictest", table_description: "A Synthetic test")
+}
+
+# This GraphQL Query type includes fields that map to the provided REST endpoints, each decorated with `@rest` directive to specify the corresponding table name and description.

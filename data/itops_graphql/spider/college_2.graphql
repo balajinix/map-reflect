@@ -1,0 +1,1014 @@
+type Advisor {
+  i_id: String
+  instructor: Instructor @materializer(query: "instructor")
+  s_id: String
+  student: Student @materializer(query: "student")
+}
+
+type Classroom {
+  building: String!
+  capacity: Float
+  room_number: String!
+  section: [Section]
+    @materializer(query: "sectionUsingSection_building_room_number_fkey")
+}
+
+type Course {
+  courseUsingPrereq_course_id_fkey: [Course]
+    @materializer(query: "courseUsingPrereq_course_id_fkey")
+  courseUsingPrereq_prereq_id_fkey: [Course]
+    @materializer(query: "courseUsingPrereq_prereq_id_fkey")
+  course_id: String!
+  credits: Float
+  department: Department
+    @materializer(query: "departmentUsingCourse_dept_name_fkey")
+  dept_name: String
+  section: [Section] @materializer(query: "sectionUsingSection_course_id_fkey")
+  title: String
+}
+
+type Department {
+  budget: Float
+  building: String
+  course: [Course] @materializer(query: "courseUsingCourse_dept_name_fkey")
+  dept_name: String!
+  instructor: [Instructor]
+    @materializer(query: "instructorUsingInstructor_dept_name_fkey")
+  student: [Student] @materializer(query: "studentUsingStudent_dept_name_fkey")
+}
+
+type Instructor {
+  advisor: [Advisor] @materializer(query: "advisorUsingAdvisor_i_id_fkey")
+  department: Department
+    @materializer(query: "departmentUsingInstructor_dept_name_fkey")
+  dept_name: String
+  id: String
+  name: String
+  salary: Float
+  teaches: [Teaches] @materializer(query: "teaches")
+}
+
+type Section {
+  building: String
+  classroom: Classroom
+    @materializer(query: "classroomUsingSection_building_room_number_fkey")
+  course: Course @materializer(query: "courseUsingSection_course_id_fkey")
+  course_id: String!
+  room_number: String
+  sec_id: String!
+  semester: String!
+  takes: [Takes]
+    @materializer(query: "takesUsingTakes_course_id_sec_id_semester_year_fkey")
+  teaches: [Teaches]
+    @materializer(
+      query: "teachesUsingTeaches_course_id_sec_id_semester_year_fkey"
+    )
+  time_slot_id: String
+  year: Float!
+}
+
+type Student {
+  advisor: Advisor @materializer(query: "advisor")
+  department: Department
+    @materializer(query: "departmentUsingStudent_dept_name_fkey")
+  dept_name: String
+  id: String
+  name: String
+  takes: [Takes] @materializer(query: "takes")
+  tot_cred: Float
+}
+
+type Takes {
+  course_id: String
+  grade: String
+  id: String
+  sec_id: String
+  section: Section
+    @materializer(
+      query: "sectionUsingTakes_course_id_sec_id_semester_year_fkey"
+    )
+  semester: String
+  student: Student @materializer(query: "studentUsingTakes_id_fkey")
+  year: Float
+}
+
+type Teaches {
+  course_id: String
+  id: String
+  instructor: Instructor @materializer(query: "instructorUsingTeaches_id_fkey")
+  sec_id: String
+  section: Section
+    @materializer(
+      query: "sectionUsingTeaches_course_id_sec_id_semester_year_fkey"
+    )
+  semester: String
+  year: Float
+}
+
+type Time_slot {
+  day: String!
+  end_hr: Float
+  end_min: Float
+  start_hr: Float!
+  start_min: Float!
+  time_slot_id: String!
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Advisor' "
+  advisor(id: String!): Advisor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "i_id", "s_id" FROM "advisor" WHERE "s_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  advisorList: [Advisor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "advisor"
+      configuration: "postgresql_config"
+    )
+  advisorPaginatedList(first: Int, after: Int): [Advisor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "i_id", "s_id" FROM "advisor" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  advisorUsingAdvisor_i_id_fkey(id: String!): [Advisor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "i_id", "s_id" FROM "advisor" WHERE "i_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  advisorUsingidx_19242_sqlite_autoindex_advisor_1(s_id: String!): Advisor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "i_id", "s_id" FROM "advisor" WHERE "s_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Classroom' "
+  classroom(building: String!, room_number: String!): Classroom
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "classroom"
+      configuration: "postgresql_config"
+    )
+  classroomList: [Classroom]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "classroom"
+      configuration: "postgresql_config"
+    )
+  classroomPaginatedList(first: Int, after: Int): [Classroom]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "building", "capacity", "room_number" FROM "classroom" ORDER BY "building", "room_number" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  classroomUsingSection_building_room_number_fkey(
+    building: String!
+    room_number: String!
+  ): Classroom
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "building", "capacity", "room_number" FROM "classroom" WHERE "building" = $1 AND "room_number" = $2
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Course' "
+  course(course_id: String!): Course
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "course"
+      configuration: "postgresql_config"
+    )
+  courseList: [Course]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "course"
+      configuration: "postgresql_config"
+    )
+  coursePaginatedList(first: Int, after: Int): [Course]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "credits", "dept_name", "title" FROM "course" ORDER BY "course_id" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  courseUsingCourse_dept_name_fkey(dept_name: String!): [Course]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "credits", "dept_name", "title" FROM "course" WHERE "dept_name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  courseUsingPrereq_course_id_fkey(course_id: String!): [Course]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT T."course_id", T."credits", T."dept_name", T."title"
+        FROM "course" T, "prereq" V
+        WHERE
+          V."course_id" = $1 AND
+          V."prereq_id" = T."course_id"
+      """
+      configuration: "postgresql_config"
+    )
+  courseUsingPrereq_prereq_id_fkey(course_id: String!): [Course]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT T."course_id", T."credits", T."dept_name", T."title"
+        FROM "course" T, "prereq" V
+        WHERE
+          V."prereq_id" = $1 AND
+          V."course_id" = T."course_id"
+      """
+      configuration: "postgresql_config"
+    )
+  courseUsingSection_course_id_fkey(course_id: String!): Course
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "credits", "dept_name", "title" FROM "course" WHERE "course_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Department' "
+  department(dept_name: String!): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "department"
+      configuration: "postgresql_config"
+    )
+  departmentList: [Department]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "department"
+      configuration: "postgresql_config"
+    )
+  departmentPaginatedList(first: Int, after: Int): [Department]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "budget", "building", "dept_name" FROM "department" ORDER BY "dept_name" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  departmentUsingCourse_dept_name_fkey(dept_name: String!): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "budget", "building", "dept_name" FROM "department" WHERE "dept_name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  departmentUsingInstructor_dept_name_fkey(dept_name: String!): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "budget", "building", "dept_name" FROM "department" WHERE "dept_name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  departmentUsingStudent_dept_name_fkey(dept_name: String!): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "budget", "building", "dept_name" FROM "department" WHERE "dept_name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Instructor' "
+  instructor(i_id: String!): Instructor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "salary" FROM "instructor" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  instructorList: [Instructor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "instructor"
+      configuration: "postgresql_config"
+    )
+  instructorPaginatedList(first: Int, after: Int): [Instructor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "salary" FROM "instructor" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  instructorUsingInstructor_dept_name_fkey(dept_name: String!): [Instructor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "salary" FROM "instructor" WHERE "dept_name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  instructorUsingTeaches_id_fkey(id: String!): Instructor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "salary" FROM "instructor" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  instructorUsingidx_19217_sqlite_autoindex_instructor_1(
+    id: String!
+  ): Instructor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "salary" FROM "instructor" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Section' "
+  section(
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): Section
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "section"
+      configuration: "postgresql_config"
+    )
+  sectionList: [Section]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "section"
+      configuration: "postgresql_config"
+    )
+  sectionPaginatedList(first: Int, after: Int): [Section]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "building", "course_id", "room_number", "sec_id", "semester", "time_slot_id", "year" FROM "section" ORDER BY "course_id", "sec_id", "semester", "year" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  sectionUsingSection_building_room_number_fkey(
+    building: String!
+    room_number: String!
+  ): [Section]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "building", "course_id", "room_number", "sec_id", "semester", "time_slot_id", "year" FROM "section" WHERE "building" = $1 AND "room_number" = $2
+      """
+      configuration: "postgresql_config"
+    )
+  sectionUsingSection_course_id_fkey(course_id: String!): [Section]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "building", "course_id", "room_number", "sec_id", "semester", "time_slot_id", "year" FROM "section" WHERE "course_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  sectionUsingTakes_course_id_sec_id_semester_year_fkey(
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): Section
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "building", "course_id", "room_number", "sec_id", "semester", "time_slot_id", "year" FROM "section" WHERE "course_id" = $1 AND "sec_id" = $2 AND "semester" = $3 AND "year" = $4
+      """
+      configuration: "postgresql_config"
+    )
+  sectionUsingTeaches_course_id_sec_id_semester_year_fkey(
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): Section
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "building", "course_id", "room_number", "sec_id", "semester", "time_slot_id", "year" FROM "section" WHERE "course_id" = $1 AND "sec_id" = $2 AND "semester" = $3 AND "year" = $4
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Student' "
+  student(s_id: String!): Student
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "tot_cred" FROM "student" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  studentList: [Student]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "student"
+      configuration: "postgresql_config"
+    )
+  studentPaginatedList(first: Int, after: Int): [Student]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "tot_cred" FROM "student" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  studentUsingStudent_dept_name_fkey(dept_name: String!): [Student]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "tot_cred" FROM "student" WHERE "dept_name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  studentUsingTakes_id_fkey(id: String!): Student
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "tot_cred" FROM "student" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  studentUsingidx_19232_sqlite_autoindex_student_1(id: String!): Student
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "dept_name", "id", "name", "tot_cred" FROM "student" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Takes' "
+  takes(id: String!): [Takes]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "grade", "id", "sec_id", "semester", "year" FROM "takes" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  takesList: [Takes]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "takes"
+      configuration: "postgresql_config"
+    )
+  takesPaginatedList(first: Int, after: Int): [Takes]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "grade", "id", "sec_id", "semester", "year" FROM "takes" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  takesUsingTakes_course_id_sec_id_semester_year_fkey(
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): [Takes]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "grade", "id", "sec_id", "semester", "year" FROM "takes" WHERE "course_id" = $1 AND "sec_id" = $2 AND "semester" = $3 AND "year" = $4
+      """
+      configuration: "postgresql_config"
+    )
+  takesUsingidx_19237_sqlite_autoindex_takes_1(
+    id: String!
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): Takes
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "grade", "id", "sec_id", "semester", "year" FROM "takes" WHERE "id" = $1 AND "course_id" = $2 AND "sec_id" = $3 AND "semester" = $4 AND "year" = $5
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Teaches' "
+  teaches(id: String!): [Teaches]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "id", "sec_id", "semester", "year" FROM "teaches" WHERE "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  teachesList: [Teaches]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "teaches"
+      configuration: "postgresql_config"
+    )
+  teachesPaginatedList(first: Int, after: Int): [Teaches]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "id", "sec_id", "semester", "year" FROM "teaches" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  teachesUsingTeaches_course_id_sec_id_semester_year_fkey(
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): [Teaches]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "id", "sec_id", "semester", "year" FROM "teaches" WHERE "course_id" = $1 AND "sec_id" = $2 AND "semester" = $3 AND "year" = $4
+      """
+      configuration: "postgresql_config"
+    )
+  teachesUsingidx_19227_sqlite_autoindex_teaches_1(
+    id: String!
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): Teaches
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "course_id", "id", "sec_id", "semester", "year" FROM "teaches" WHERE "id" = $1 AND "course_id" = $2 AND "sec_id" = $3 AND "semester" = $4 AND "year" = $5
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Time_slot' "
+  time_slot(
+    time_slot_id: String!
+    day: String!
+    start_hr: Float!
+    start_min: Float!
+  ): Time_slot
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "time_slot"
+      configuration: "postgresql_config"
+    )
+  time_slotList: [Time_slot]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "time_slot"
+      configuration: "postgresql_config"
+    )
+  time_slotPaginatedList(first: Int, after: Int): [Time_slot]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "day", "end_hr", "end_min", "start_hr", "start_min", "time_slot_id" FROM "time_slot" ORDER BY "time_slot_id", "day", "start_hr", "start_min" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Advisor' "
+  deleteAdvisor(i_id: String!, s_id: String!): Advisor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "advisor"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertAdvisor(i_id: String, s_id: String): Advisor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "advisor"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Classroom' "
+  deleteClassroom(building: String!, room_number: String!): Classroom
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "classroom"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertClassroom(
+    capacity: Float
+    room_number: String!
+    building: String!
+  ): Classroom
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "classroom"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateClassroom(
+    building: String!
+    room_number: String!
+    capacity: Float
+  ): Classroom
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "classroom" SET
+        "capacity" = COALESCE($3, "capacity")
+      WHERE
+        "building" = $1 AND
+        "room_number" = $2
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Course' "
+  deleteCourse(course_id: String!): Course
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "course"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertCourse(
+    credits: Float
+    dept_name: String
+    title: String
+    course_id: String!
+  ): Course
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "course"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateCourse(
+    course_id: String!
+    credits: Float
+    dept_name: String
+    title: String
+  ): Course
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "course" SET
+        "credits" = COALESCE($2, "credits"),
+        "dept_name" = COALESCE($3, "dept_name"),
+        "title" = COALESCE($4, "title")
+      WHERE
+        "course_id" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Department' "
+  deleteDepartment(dept_name: String!): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "department"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertDepartment(
+    budget: Float
+    building: String
+    dept_name: String!
+  ): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "department"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateDepartment(
+    dept_name: String!
+    budget: Float
+    building: String
+  ): Department
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "department" SET
+        "budget" = COALESCE($2, "budget"),
+        "building" = COALESCE($3, "building")
+      WHERE
+        "dept_name" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Instructor' "
+  deleteInstructor(
+    salary: Float!
+    dept_name: String!
+    name: String!
+    id: String!
+  ): Instructor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "instructor"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertInstructor(
+    salary: Float
+    dept_name: String
+    name: String
+    id: String
+  ): Instructor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "instructor"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Section' "
+  deleteSection(
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+  ): Section
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "section"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertSection(
+    semester: String!
+    room_number: String
+    year: Float!
+    sec_id: String!
+    building: String
+    course_id: String!
+    time_slot_id: String
+  ): Section
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "section"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateSection(
+    course_id: String!
+    sec_id: String!
+    semester: String!
+    year: Float!
+    building: String
+    room_number: String
+    time_slot_id: String
+  ): Section
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "section" SET
+        "building" = COALESCE($5, "building"),
+        "room_number" = COALESCE($6, "room_number"),
+        "time_slot_id" = COALESCE($7, "time_slot_id")
+      WHERE
+        "course_id" = $1 AND
+        "sec_id" = $2 AND
+        "semester" = $3 AND
+        "year" = $4
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Student' "
+  deleteStudent(
+    tot_cred: Float!
+    dept_name: String!
+    name: String!
+    id: String!
+  ): Student
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "student"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertStudent(
+    tot_cred: Float
+    dept_name: String
+    name: String
+    id: String
+  ): Student
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "student"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Takes' "
+  deleteTakes(
+    semester: String!
+    year: Float!
+    sec_id: String!
+    id: String!
+    grade: String!
+    course_id: String!
+  ): Takes
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "takes"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTakes(
+    semester: String
+    year: Float
+    sec_id: String
+    id: String
+    grade: String
+    course_id: String
+  ): Takes
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "takes"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Teaches' "
+  deleteTeaches(
+    semester: String!
+    year: Float!
+    sec_id: String!
+    id: String!
+    course_id: String!
+  ): Teaches
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "teaches"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTeaches(
+    semester: String
+    year: Float
+    sec_id: String
+    id: String
+    course_id: String
+  ): Teaches
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "teaches"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Time_slot' "
+  deleteTime_slot(
+    time_slot_id: String!
+    day: String!
+    start_hr: Float!
+    start_min: Float!
+  ): Time_slot
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "time_slot"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertTime_slot(
+    end_hr: Float
+    start_min: Float!
+    end_min: Float
+    start_hr: Float!
+    day: String!
+    time_slot_id: String!
+  ): Time_slot
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "time_slot"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updateTime_slot(
+    day: String!
+    start_hr: Float!
+    start_min: Float!
+    time_slot_id: String!
+    end_hr: Float
+    end_min: Float
+  ): Time_slot
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "time_slot" SET
+        "end_hr" = COALESCE($5, "end_hr"),
+        "end_min" = COALESCE($6, "end_min")
+      WHERE
+        "day" = $1 AND
+        "start_hr" = $2 AND
+        "start_min" = $3 AND
+        "time_slot_id" = $4
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+}
+

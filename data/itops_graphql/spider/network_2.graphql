@@ -1,0 +1,175 @@
+type Person {
+  age: ID
+  city: String
+  gender: String
+  job: String
+  name: String!
+  personfriendUsingPersonfriend_friend_fkey: [Personfriend]
+    @materializer(query: "personfriendUsingPersonfriend_friend_fkey")
+  personfriendUsingPersonfriend_name_fkey: [Personfriend]
+    @materializer(query: "personfriendUsingPersonfriend_name_fkey")
+}
+
+type Personfriend {
+  friend: String
+  name: String
+  personUsingPersonfriend_friend_fkey: Person
+    @materializer(query: "personUsingPersonfriend_friend_fkey")
+  personUsingPersonfriend_name_fkey: Person
+    @materializer(query: "personUsingPersonfriend_name_fkey")
+  year: ID
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Person' "
+  person(name: String!): Person
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "person"
+      configuration: "postgresql_config"
+    )
+  personList: [Person]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "person"
+      configuration: "postgresql_config"
+    )
+  personPaginatedList(first: Int, after: Int): [Person]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "city", "gender", "job", "name" FROM "person" ORDER BY "name" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  personUsingPersonfriend_friend_fkey(friend: String!): Person
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "city", "gender", "job", "name" FROM "person" WHERE "name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  personUsingPersonfriend_name_fkey(name: String!): Person
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "city", "gender", "job", "name" FROM "person" WHERE "name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Personfriend' "
+  personfriendList: [Personfriend]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "personfriend"
+      configuration: "postgresql_config"
+    )
+  personfriendPaginatedList(first: Int, after: Int): [Personfriend]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "friend", "name", "year" FROM "personfriend" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  personfriendUsingPersonfriend_friend_fkey(name: String!): [Personfriend]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "friend", "name", "year" FROM "personfriend" WHERE "friend" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  personfriendUsingPersonfriend_name_fkey(name: String!): [Personfriend]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "friend", "name", "year" FROM "personfriend" WHERE "name" = $1
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Person' "
+  deletePerson(name: String!): Person
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "person"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPerson(
+    city: String
+    name: String!
+    job: String
+    age: ID
+    gender: String
+  ): Person
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "person"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  updatePerson(
+    name: String!
+    age: ID
+    city: String
+    gender: String
+    job: String
+  ): Person
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      UPDATE "person" SET
+        "age" = COALESCE($2, "age"),
+        "city" = COALESCE($3, "city"),
+        "gender" = COALESCE($4, "gender"),
+        "job" = COALESCE($5, "job")
+      WHERE
+        "name" = $1
+      RETURNING *
+      """
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Personfriend' "
+  deletePersonfriend(year: ID!, friend: String!, name: String!): Personfriend
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "personfriend"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertPersonfriend(year: ID, friend: String, name: String): Personfriend
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "personfriend"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+

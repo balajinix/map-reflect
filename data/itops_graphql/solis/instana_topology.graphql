@@ -1,0 +1,69 @@
+enum instana__query_topology_edges_items_relation {
+  ""
+  to
+  ""
+  of
+  ""
+  to20
+  ""
+  is
+  ""
+  dummy
+  ""
+  in
+  ""
+  describes
+  ""
+  parent
+  ""
+  connected
+  ""
+  of20
+}
+
+type instana__query_topology_edges_items {
+  "ID of the outgoing GraphEdge."
+  destination: String
+  relation: instana__query_topology_edges_items_relation
+  "ID of the incoming GraphEdge."
+  source: String
+}
+
+type instana__topology_200_response {
+  edges: [instana__query_topology_edges_items]
+  nodes: [instana__query_topology_nodes_items]
+}
+
+type instana__query_topology_nodes_items {
+  data: JSON
+  entityId: instana__query_topology_nodes_items_entityId
+  "GraphNode ID."
+  id: String
+  "Label of the entity"
+  label: String
+  "Name of the plugin"
+  plugin: String
+}
+
+type instana__query_topology_nodes_items_entityId {
+  host: String!
+  "Plugin name"
+  pluginId: String!
+  "Steady identifier for the entity."
+  steadyId: String!
+}
+
+type Query {
+  instana_topology(
+    includeData: Boolean
+  ): instana__topology_200_response
+    @graphql(
+      endpoint: "https://watzen.us-east-a.ibm.stepzen.net/solis-dal/federated-all/graphql"
+      headers: [
+        {
+          name: "authorization"
+          value: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NDM2MDcyMzMsImV4cCI6MTc1MTQ5MTIzM30.8ltkpyvXktHBFf5zVuslZ1s0WH1znqluUnOEmRdV1Xs"
+        }
+      ]
+    )
+}

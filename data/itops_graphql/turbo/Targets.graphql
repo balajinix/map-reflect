@@ -1,0 +1,624 @@
+type AddClassictarget {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: PatchTargets
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: HealthSummary
+}
+
+type AddClassictargetInputField {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String!
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type AddClassictargetLinks {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type PatchTargets {
+  probeType: String
+  patchedFields: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type HealthSummary {
+  timeOfLastSuccessfulDiscovery: String
+  healthState: String
+}
+
+type Gettargets {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: PatchTargets
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: HealthSummary
+}
+
+type GettargetsInputField {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String!
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type Gettarget {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: PatchTargets
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: HealthSummary
+}
+
+type GettargetInputField {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String!
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type Edittarget {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: PatchTargets
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: HealthSummary
+}
+
+type EdittargetInputField {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String!
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type Executeontarget {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: PatchTargets
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: HealthSummary
+}
+
+type ExecuteontargetInputField {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String!
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type Deletetarget {
+  links: Links
+  uuid: String
+}
+
+type Getcurrentactionsbytargetuuid {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [Stats]
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [VirtualDisk]
+  policy: String
+  relatedSettingsPolicies: [RelatedSettingsPolicies]
+  actionSchedule: ActionSchedule
+  compoundActions: String
+  reservedInstance: ReservedInstance
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: ExecutionStatus
+  executionCharacteristics: ExecutionCharacteristics
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetcurrentactionsbytargetuuidStats {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String
+  capacity: String
+  reserved: String
+  relatedEntityType: String
+  filters: String
+  relatedEntity: String
+  numRelatedEntities: String
+  units: String
+  values: String
+  value: String
+  commoditySource: String
+  histUtilizations: String
+}
+
+type GetcurrentactionsbytargetuuidVirtualDisk {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  tier: String
+  actions: String
+  stats: String
+  attachedVirtualMachine: String
+  provider: String
+  dataCenter: String
+  environmentType: String
+  lastModified: String
+  businessAccount: String
+  resourceGroup: String
+  creationTime: String
+  skuName: String
+  snapshotId: String
+  encryption: String
+  attachmentState: String
+  diskRole: String
+  name: String
+  ephemeral: String
+  lastAttachedVm: String
+  numDaysUnattached: String
+  hourlyBilledOps: String
+  creationTimeStamp: String
+  attachedVMStorageCompatibility: String
+  storageUsageType: String
+  resourceId: String
+  redundancyType: String
+}
+
+type GetcurrentactionsbytargetuuidRelatedSettingsPolicies {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetcurrentactionsbytargetuuidActionSchedule {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetcurrentactionsbytargetuuidReservedInstance {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetcurrentactionsbytargetuuidExecutionStatus {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  progress: String
+}
+
+type GetcurrentactionsbytargetuuidExecutionCharacteristics {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetcurrentactionsbytargetuuidEntityCharacteristics {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type Getactionsbytargetuuid {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [Stats]
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [VirtualDisk]
+  policy: String
+  relatedSettingsPolicies: [RelatedSettingsPolicies]
+  actionSchedule: ActionSchedule
+  compoundActions: String
+  reservedInstance: ReservedInstance
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: ExecutionStatus
+  executionCharacteristics: ExecutionCharacteristics
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetactionsbytargetuuidStats {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  name: String
+  capacity: String
+  reserved: String
+  relatedEntityType: String
+  filters: String
+  relatedEntity: String
+  numRelatedEntities: String
+  units: String
+  values: String
+  value: String
+  commoditySource: String
+  histUtilizations: String
+}
+
+type GetactionsbytargetuuidVirtualDisk {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  tier: String
+  actions: String
+  stats: String
+  attachedVirtualMachine: String
+  provider: String
+  dataCenter: String
+  environmentType: String
+  lastModified: String
+  businessAccount: String
+  resourceGroup: String
+  creationTime: String
+  skuName: String
+  snapshotId: String
+  encryption: String
+  attachmentState: String
+  diskRole: String
+  name: String
+  ephemeral: String
+  lastAttachedVm: String
+  numDaysUnattached: String
+  hourlyBilledOps: String
+  creationTimeStamp: String
+  attachedVMStorageCompatibility: String
+  storageUsageType: String
+  resourceId: String
+  redundancyType: String
+}
+
+type GetactionsbytargetuuidRelatedSettingsPolicies {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetactionsbytargetuuidActionSchedule {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetactionsbytargetuuidReservedInstance {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetactionsbytargetuuidExecutionStatus {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  progress: String
+}
+
+type GetactionsbytargetuuidExecutionCharacteristics {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetactionsbytargetuuidEntityCharacteristics {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type Getentitiesbytargetuuid {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  environmentType: String
+  discoveredBy: String
+  vendorIds: String
+  priceIndex: String
+  state: String
+  severity: String
+  unplacementDetails: UnplacementDetails
+  realtimeMarketReference: String
+  providers: [Provider]
+  consumers: [Consumer]
+  template: String
+  numRelatedVMs: String
+  connectedEntities: [ConnectedEntity]
+  aspects: String
+  tags: String
+  onDemandRateBefore: String
+  onDemandRateAfter: String
+}
+
+type GetentitiesbytargetuuidUnplacementDetails {
+  placedOn: String
+  reasons: String
+}
+
+type GetentitiesbytargetuuidProvider {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetentitiesbytargetuuidConsumer {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type GetentitiesbytargetuuidConnectedEntity {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+}
+
+type Gettargethealth {
+  errorText: String
+  healthCategory: String
+  healthClassDiscriminator: String
+  uuid: String
+  targetName: String
+  rollupState: String
+  timeOfFirstFailure: String
+  targetErrorDetails: TargetErrorDetails
+  targetStatusSubcategory: String
+  healthState: String
+}
+
+type TargetErrorDetails {
+  targetErrorDetailsClass: String
+}
+
+type Query {
+  AddClassictarget(id: ID!): AddClassictarget
+  Gettargets: [Gettargets]
+  Addtarget(id: ID!): Addtarget
+  Gettarget(id: ID!): Gettarget
+  Edittarget(id: ID!): Edittarget
+  Executeontarget(id: ID!): Executeontarget
+  Deletetarget(id: ID!): Deletetarget
+  Getcurrentactionsbytargetuuid(id: ID!): Getcurrentactionsbytargetuuid
+  Getactionsbytargetuuid(id: ID!): Getactionsbytargetuuid
+  Getentitiesbytargetuuid(id: ID!): Getentitiesbytargetuuid
+  Gettargethealth(id: ID!): Gettargethealth
+}
+
+# Explanation:
+
+# The `type Query` block includes fields that correspond to the provided REST endpoints. Each field is named after the `table_name` from the REST endpoint description and accepts an `id` argument, which is expected to be a unique identifier for the target. The return types for each field match the corresponding GraphQL type from the schema.
+
+# This query structure allows you to fetch data from the REST endpoints using GraphQL queries. For example, to fetch a specific `AddClassictarget` object, you can use the `AddClassictarget(id: ID!)` field and provide the desired target's unique identifier as the `id` argument. Similarly, you can use the other fields to fetch different types of target-related data.

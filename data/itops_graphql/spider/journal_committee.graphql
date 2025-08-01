@@ -1,0 +1,229 @@
+type Editor {
+  age: Float
+  editor_id: Int
+  journal_committee: [Journal_committee]
+    @materializer(
+      query: "journal_committeeUsingJournal_committee_editor_id_fkey"
+    )
+  name: String
+}
+
+type Journal {
+  date: String
+  journal_committee: [Journal_committee]
+    @materializer(query: "journal_committee")
+  journal_id: Int
+  sales: Int
+  theme: String
+}
+
+type Journal_committee {
+  editor: Editor @materializer(query: "editor")
+  editor_id: Int
+  journal: Journal @materializer(query: "journal")
+  journal_id: Int
+  work_type: String
+}
+
+"""
+The following queries are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Query {
+  " Queries for type 'Editor' "
+  editor(editor_id: Int!): Editor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "editor_id", "name" FROM "editor" WHERE "editor_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  editorList: [Editor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "editor"
+      configuration: "postgresql_config"
+    )
+  editorPaginatedList(first: Int, after: Int): [Editor]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "editor_id", "name" FROM "editor" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  editorUsingidx_21045_sqlite_autoindex_editor_1(editor_id: Int!): Editor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "age", "editor_id", "name" FROM "editor" WHERE "editor_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Journal' "
+  journal(journal_id: Int!): Journal
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date", "journal_id", "sales", "theme" FROM "journal" WHERE "journal_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  journalList: [Journal]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "journal"
+      configuration: "postgresql_config"
+    )
+  journalPaginatedList(first: Int, after: Int): [Journal]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date", "journal_id", "sales", "theme" FROM "journal" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  journalUsingidx_21040_sqlite_autoindex_journal_1(journal_id: Int!): Journal
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "date", "journal_id", "sales", "theme" FROM "journal" WHERE "journal_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  " Queries for type 'Journal_committee' "
+  journal_committee(journal_id: Int!): [Journal_committee]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "editor_id", "journal_id", "work_type" FROM "journal_committee" WHERE "journal_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  journal_committeeList: [Journal_committee]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "journal_committee"
+      configuration: "postgresql_config"
+    )
+  journal_committeePaginatedList(first: Int, after: Int): [Journal_committee]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "editor_id", "journal_id", "work_type" FROM "journal_committee" LIMIT $1 OFFSET $2
+      """
+      configuration: "postgresql_config"
+    )
+  journal_committeeUsingJournal_committee_editor_id_fkey(
+    editor_id: Int!
+  ): [Journal_committee]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "editor_id", "journal_id", "work_type" FROM "journal_committee" WHERE "editor_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  journal_committeeUsingidx_21050_sqlite_autoindex_journal_committee_1(
+    editor_id: Int!
+    journal_id: Int!
+  ): Journal_committee
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT "editor_id", "journal_id", "work_type" FROM "journal_committee" WHERE "editor_id" = $1 AND "journal_id" = $2
+      """
+      configuration: "postgresql_config"
+    )
+}
+
+"""
+The following mutations are just a set of examples of how to access your schema.
+Feel free to modify them or aggregate more.
+"""
+type Mutation {
+  " Mutations for type 'Editor' "
+  deleteEditor(age: Float!, name: String!, editor_id: Int!): Editor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "editor"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertEditor(age: Float, name: String, editor_id: Int): Editor
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "editor"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Journal' "
+  deleteJournal(
+    sales: Int!
+    theme: String!
+    date: String!
+    journal_id: Int!
+  ): Journal
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "journal"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertJournal(
+    sales: Int
+    theme: String
+    date: String
+    journal_id: Int
+  ): Journal
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "journal"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  " Mutations for type 'Journal_committee' "
+  deleteJournal_committee(
+    work_type: String!
+    journal_id: Int!
+    editor_id: Int!
+  ): Journal_committee
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "journal_committee"
+      dml: DELETE
+      configuration: "postgresql_config"
+    )
+  insertJournal_committee(
+    work_type: String
+    journal_id: Int
+    editor_id: Int
+  ): Journal_committee
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      table: "journal_committee"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+}
+
