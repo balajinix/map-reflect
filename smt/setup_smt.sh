@@ -8,8 +8,8 @@ set -e  # Exit on any error
 
 # Default values
 DATASETS="ITOps"  # Default to ITOps, but can specify multiple datasets
-MAPPINGS_DIR="../data/mappings_output"
-CHROMA_DB_PATH="../data/chroma_db"
+MAPPINGS_DIR="./mappings_output"
+CHROMA_DB_PATH="./chroma_db"
 FORCE_REINDEX=""
 VERBOSE=""
 ALL_DATASETS=false
@@ -51,8 +51,8 @@ usage() {
     echo "  --datasets DATASETS    Comma-separated list of datasets (default: ITOps)"
     echo "                         Available: ITOps, NL2GQL, GraphQLRestBench"
     echo "  --all-datasets         Setup indices for all available datasets"
-    echo "  --mappings-dir DIR     Existing mappings directory (default: ../data/mappings_output)"
-    echo "  --chroma-db-path DIR   ChromaDB storage path (default: ../data/chroma_db)"
+    echo "  --mappings-dir DIR     Existing mappings directory (default: ./mappings_output)"
+    echo "  --chroma-db-path DIR   ChromaDB storage path (default: ./chroma_db)"
     echo "  --force-reindex        Force recreation of all indices"
     echo "  --verbose              Enable verbose output"
     echo "  --help                 Show this help message"
@@ -135,6 +135,7 @@ print_status "  Verbose: $([ -n "$VERBOSE" ] && echo "enabled" || echo "disabled
 # Check if we're in the correct directory
 if [[ ! -f "smt_schema_indexer.py" ]] || [[ ! -f "smt_mappings_indexer.py" ]]; then
     print_error "Required indexer scripts not found. Please run this script from the smt/ directory."
+    print_error "Expected files: smt_schema_indexer.py, smt_mappings_indexer.py"
     exit 1
 fi
 
@@ -159,6 +160,12 @@ python -c "import chromadb; print('ChromaDB available')" 2>/dev/null || {
 
 python -c "from sentence_transformers import SentenceTransformer; print('SentenceTransformers available')" 2>/dev/null || {
     print_error "SentenceTransformers not found. Please install with: pip install sentence-transformers"
+    exit 1
+}
+
+# Check for other common dependencies
+python -c "import json; print('JSON available')" 2>/dev/null || {
+    print_error "JSON module not available"
     exit 1
 }
 
@@ -240,6 +247,7 @@ fi
 print_step "4. Setting up directories"
 mkdir -p "$CHROMA_DB_PATH"
 mkdir -p results
+mkdir -p logs  # Added logs directory
 print_status "Created/verified directories"
 
 # Check existing collections for each dataset
@@ -259,18 +267,34 @@ if [[ -f "$CHROMA_DB_PATH/chroma.sqlite3" ]] && [[ -z "$FORCE_REINDEX" ]]; then
         python -c "
 import chromadb
 from chromadb.config import Settings
+import sys
+
 try:
-    client = chromadb.PersistentClient(path='$CHROMA_DB_PATH', settings=Settings(anonymized_telemetry=False))
+    client = chromadb.PersistentClient(
+        path='$CHROMA_DB_PATH', 
+        settings=Settings(
+            anonymized_telemetry=False,
+            allow_reset=True,
+            is_persistent=True
+        )
+    )
     collections = [c.name for c in client.list_collections()]
     
     if '$collection_name' in collections:
-        collection = client.get_collection('$collection_name')
-        count = collection.count()
-        print(f'SCHEMA_EXISTS_{dataset}:{count}')
+        try:
+            collection = client.get_collection('$collection_name')
+            count = collection.count()
+            print(f'SCHEMA_EXISTS_${dataset}:{count}')
+        except Exception as e:
+            print(f'ERROR_COUNT_{dataset}:{e}')
+            print(f'SCHEMA_EXISTS_${dataset}:0')
+    else:
+        print(f'SCHEMA_NOT_EXISTS_{dataset}')
         
 except Exception as e:
-    print(f'ERROR_{dataset}:{e}')
-" > /tmp/chromadb_check_${dataset}.txt 2>/dev/null
+    print(f'ERROR_DB_{dataset}:{e}')
+    sys.exit(1)
+" > /tmp/chromadb_check_${dataset}.txt 2>&1
 
         if grep -q "SCHEMA_EXISTS_${dataset}:" /tmp/chromadb_check_${dataset}.txt; then
             count=$(grep "SCHEMA_EXISTS_${dataset}:" /tmp/chromadb_check_${dataset}.txt | cut -d: -f2)
@@ -279,6 +303,10 @@ except Exception as e:
             SCHEMA_COUNTS["$dataset"]=$count
         else
             SCHEMA_INDEX_EXISTS["$dataset"]=false
+            if grep -q "ERROR_" /tmp/chromadb_check_${dataset}.txt; then
+                print_warning "ChromaDB check failed for $dataset - will recreate"
+                cat /tmp/chromadb_check_${dataset}.txt
+            fi
         fi
         
         rm -f /tmp/chromadb_check_${dataset}.txt
@@ -289,27 +317,49 @@ except Exception as e:
     python -c "
 import chromadb
 from chromadb.config import Settings
+import sys
+
 try:
-    client = chromadb.PersistentClient(path='$CHROMA_DB_PATH', settings=Settings(anonymized_telemetry=False))
+    client = chromadb.PersistentClient(
+        path='$CHROMA_DB_PATH', 
+        settings=Settings(
+            anonymized_telemetry=False,
+            allow_reset=True,
+            is_persistent=True
+        )
+    )
     collections = [c.name for c in client.list_collections()]
     
     if 'smt_mappings' in collections:
-        mappings_collection = client.get_collection('smt_mappings')
-        mappings_count = mappings_collection.count()
-        print(f'MAPPINGS_EXISTS:{mappings_count}')
+        try:
+            mappings_collection = client.get_collection('smt_mappings')
+            mappings_count = mappings_collection.count()
+            print(f'MAPPINGS_EXISTS:{mappings_count}')
+        except Exception as e:
+            print(f'ERROR_MAPPINGS_COUNT:{e}')
+            print(f'MAPPINGS_EXISTS:0')
+    else:
+        print(f'MAPPINGS_NOT_EXISTS')
         
 except Exception as e:
-    print(f'ERROR:{e}')
-" > /tmp/chromadb_check_mappings.txt 2>/dev/null
+    print(f'ERROR_MAPPINGS_DB:{e}')
+    sys.exit(1)
+" > /tmp/chromadb_check_mappings.txt 2>&1
 
     if grep -q "MAPPINGS_EXISTS:" /tmp/chromadb_check_mappings.txt; then
         MAPPINGS_COUNT=$(grep "MAPPINGS_EXISTS:" /tmp/chromadb_check_mappings.txt | cut -d: -f2)
         print_status "Existing mappings index found: $MAPPINGS_COUNT documents"
         MAPPINGS_INDEX_EXISTS=true
+    else
+        if grep -q "ERROR_" /tmp/chromadb_check_mappings.txt; then
+            print_warning "ChromaDB mappings check failed - will recreate"
+            cat /tmp/chromadb_check_mappings.txt
+        fi
     fi
     
     rm -f /tmp/chromadb_check_mappings.txt
 else
+    print_status "No existing ChromaDB found or force reindex requested"
     for dataset in "${DATASET_ARRAY[@]}"; do
         SCHEMA_INDEX_EXISTS["$dataset"]=false
     done
@@ -335,18 +385,44 @@ for dataset in "${DATASET_ARRAY[@]}"; do
         print_status "    Source: $schema_dir ($schema_files files)"
         print_status "    Target: $CHROMA_DB_PATH/$collection_name collection"
         
+        # Add debug output for indexing
+        if [[ -n "$VERBOSE" ]]; then
+            print_status "  Running schema indexer with verbose output..."
+        fi
+        
         python smt_schema_indexer.py \
             --schema-dir "$schema_dir" \
             --chroma-db-path "$CHROMA_DB_PATH" \
             --collection-name "$collection_name" \
             $FORCE_REINDEX \
             --test-query "turbo entity schema" \
-            $VERBOSE
+            $VERBOSE 2>&1 | tee "logs/${dataset}_schema_indexing.log"
         
-        if [[ $? -eq 0 ]]; then
+        INDEXER_EXIT_CODE=${PIPESTATUS[0]}
+        
+        if [[ $INDEXER_EXIT_CODE -eq 0 ]]; then
             print_status "  $dataset GraphQL schema indexing completed"
+            
+            # Verify the index was created successfully
+            python -c "
+import chromadb
+from chromadb.config import Settings
+
+try:
+    client = chromadb.PersistentClient(
+        path='$CHROMA_DB_PATH', 
+        settings=Settings(anonymized_telemetry=False)
+    )
+    collection = client.get_collection('$collection_name')
+    count = collection.count()
+    print(f'Verified: {count} documents indexed for $dataset')
+except Exception as e:
+    print(f'Verification failed for $dataset: {e}')
+    exit(1)
+"
         else
-            print_error "  $dataset GraphQL schema indexing failed"
+            print_error "  $dataset GraphQL schema indexing failed (exit code: $INDEXER_EXIT_CODE)"
+            print_error "  Check logs/${dataset}_schema_indexing.log for details"
             exit 1
         fi
     fi
@@ -356,7 +432,8 @@ done
 print_step "7. Indexing existing mappings (shared)"
 
 if [[ "$MAPPINGS_INDEX_EXISTS" == "true" ]] && [[ -z "$FORCE_REINDEX" ]]; then
-    print_status "Mappings index already exists (use --force-reindex to rebuild)"
+    print_status "Mappings index already exists ($MAPPINGS_COUNT documents)"
+    print_status "Use --force-reindex to rebuild"
 else
     if [[ $MAPPING_FILES -gt 0 ]]; then
         print_status "Creating existing mappings index..."
@@ -369,12 +446,15 @@ else
             --collection-name "smt_mappings" \
             $FORCE_REINDEX \
             --test-query "map concert vulnerabilities to turbo entities" \
-            $VERBOSE
+            $VERBOSE 2>&1 | tee "logs/mappings_indexing.log"
         
-        if [[ $? -eq 0 ]]; then
+        MAPPINGS_EXIT_CODE=${PIPESTATUS[0]}
+        
+        if [[ $MAPPINGS_EXIT_CODE -eq 0 ]]; then
             print_status "Existing mappings indexing completed"
         else
-            print_error "Existing mappings indexing failed"
+            print_error "Existing mappings indexing failed (exit code: $MAPPINGS_EXIT_CODE)"
+            print_error "Check logs/mappings_indexing.log for details"
             exit 1
         fi
     else
@@ -385,21 +465,88 @@ else
 import chromadb
 from chromadb.config import Settings
 
-client = chromadb.PersistentClient(path='$CHROMA_DB_PATH', settings=Settings(anonymized_telemetry=False))
 try:
-    collection = client.create_collection('smt_mappings', metadata={'description': 'SMT mappings for reuse'})
-    print('Empty mappings collection created')
-except Exception as e:
-    if 'already exists' in str(e):
+    client = chromadb.PersistentClient(
+        path='$CHROMA_DB_PATH', 
+        settings=Settings(
+            anonymized_telemetry=False,
+            allow_reset=True
+        )
+    )
+    
+    # Try to get existing collection first
+    try:
+        collection = client.get_collection('smt_mappings')
         print('Mappings collection already exists')
-    else:
-        print(f'Error: {e}')
-"
+    except:
+        # Create new collection if it doesn't exist
+        collection = client.create_collection(
+            'smt_mappings', 
+            metadata={'description': 'SMT mappings for reuse', 'created': 'setup_script'}
+        )
+        print('Empty mappings collection created successfully')
+        
+except Exception as e:
+    print(f'Error creating mappings collection: {e}')
+    exit(1)
+" 2>&1 | tee "logs/mappings_collection_creation.log"
+
+        if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+            print_error "Failed to create mappings collection"
+            exit 1
+        fi
     fi
 fi
 
-# Create setup completion marker
-echo "$(date): SMT ChromaDB setup completed successfully for datasets: $DATASETS" > "$CHROMA_DB_PATH/.setup_complete"
+# Create setup completion marker with detailed info
+print_step "8. Creating setup completion marker"
+
+cat > "$CHROMA_DB_PATH/.setup_complete" << EOF
+Setup completed: $(date)
+Datasets: $DATASETS
+Collections created:
+$(for dataset in "${DATASET_ARRAY[@]}"; do
+    dataset_lower=$(echo "$dataset" | tr '[:upper:]' '[:lower:]')
+    echo "  - ${dataset_lower}_graphql_schemas"
+done)
+  - smt_mappings
+ChromaDB path: $CHROMA_DB_PATH
+Mappings path: $MAPPINGS_DIR
+Force reindex: $([ -n "$FORCE_REINDEX" ] && echo "yes" || echo "no")
+EOF
+
+# Final verification step
+print_step "9. Final verification"
+
+python -c "
+import chromadb
+from chromadb.config import Settings
+
+try:
+    client = chromadb.PersistentClient(
+        path='$CHROMA_DB_PATH', 
+        settings=Settings(anonymized_telemetry=False)
+    )
+    
+    collections = client.list_collections()
+    print(f'Total collections created: {len(collections)}')
+    
+    for collection in collections:
+        try:
+            count = collection.count()
+            print(f'  - {collection.name}: {count} documents')
+        except Exception as e:
+            print(f'  - {collection.name}: ERROR ({e})')
+            
+except Exception as e:
+    print(f'Final verification failed: {e}')
+    exit(1)
+" 2>&1 | tee "logs/final_verification.log"
+
+if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    print_error "Final verification failed"
+    exit 1
+fi
 
 echo ""
 echo "============================================================"
@@ -417,6 +564,7 @@ echo ""
 print_status "Files created:"
 print_status "  $CHROMA_DB_PATH/               - ChromaDB database"
 print_status "  $CHROMA_DB_PATH/.setup_complete - Setup completion marker"
+print_status "  logs/                          - Setup and indexing logs"
 
 echo ""
 print_status "Dataset-specific collections created:"

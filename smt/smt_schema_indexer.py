@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Quick Fix for SMT GraphQL Schema Indexer
-Minimal changes to existing indexer for better candidate quality
+SMT GraphQL Schema Indexer
 """
 
 import os
@@ -12,6 +11,7 @@ from typing import Dict, List, Any, Optional
 import logging
 import re
 from datetime import datetime
+import hashlib
 
 # Configure logging
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,23 +28,34 @@ except ImportError as e:
 
 class GraphQLSchemaIndexer:
     """
-    IMPROVED GraphQL Schema Indexer with better semantic content.
-    Drop-in replacement for the original with enhanced indexing.
+    GraphQL Schema Indexer for semantic search.
+    Focuses on schema structure, types, fields, and comments.
     """
     
     def __init__(self, 
-                 chroma_db_path: str = "../data/chroma_db",
+                 chroma_db_path: str = "./chroma_db",
                  collection_name: str = "graphql_schemas"):
         """Initialize the GraphQL schema indexer."""
         self.chroma_db_path = Path(chroma_db_path)
         self.collection_name = collection_name
         
+        # Ensure directory exists
+        self.chroma_db_path.mkdir(parents=True, exist_ok=True)
+        
         # Initialize ChromaDB client
-        self.client = None
         try:
-            self.client = chromadb.PersistentClient(path=str(self.chroma_db_path))
+            self.client = chromadb.PersistentClient(
+                path=str(self.chroma_db_path),
+                settings=Settings(
+                    anonymized_telemetry=False,
+                    allow_reset=True,
+                    is_persistent=True
+                )
+            )
+            logger.info(f"ChromaDB client initialized at {self.chroma_db_path}")
         except Exception as e:
-            logger.warning(f"PersistentClient failed: {e}")
+            logger.error(f"Failed to initialize ChromaDB client: {e}")
+            raise
 
         # Get or create collection
         try:
@@ -53,57 +64,51 @@ class GraphQLSchemaIndexer:
         except Exception:
             self.collection = self.client.create_collection(
                 name=collection_name,
-                metadata={"description": "Enhanced GraphQL schemas for schema mapping"}
+                metadata={
+                    "description": "GraphQL schemas for semantic search",
+                    "created": datetime.now().isoformat()
+                }
             )
             logger.info(f"Created new collection: {collection_name}")
         
-        # Initialize domain knowledge for better indexing
-        self._init_domain_knowledge()
-    
-    def _init_domain_knowledge(self):
-        """Initialize domain-specific knowledge."""
+        # Simple domain mappings for context
         self.domain_mappings = {
-            "turbo": ["performance", "optimization", "virtual", "entity", "market", "statistics"],
-            "instana": ["monitoring", "application", "performance", "infrastructure", "topology"],
-            "concert": ["security", "vulnerability", "scanning", "applications", "compliance"],
-            "apptio": ["cost", "financial", "cloud", "billing", "optimization"]
-        }
-        
-        self.business_contexts = {
-            "entity": "business data management",
-            "application": "application lifecycle management", 
-            "topology": "infrastructure mapping",
-            "vulnerability": "security assessment",
-            "group": "resource categorization",
-            "metric": "performance monitoring"
+            "turbo": ["performance", "optimization", "virtual", "entity"],
+            "instana": ["monitoring", "application", "performance", "infrastructure"],
+            "concert": ["security", "vulnerability", "scanning", "compliance"],
         }
     
     def parse_graphql_schema(self, file_path: Path) -> Dict[str, Any]:
-        """Enhanced GraphQL schema parsing."""
+        """Parse GraphQL schema and extract structure."""
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path, 'r', encoding='utf-8') as f:
                 schema_content = f.read()
             
             schema_name = file_path.stem
             
-            # Enhanced parsing
-            types = self._extract_graphql_types(schema_content)
-            fields = self._extract_all_fields(schema_content)
+            # Extract schema components
+            types = self._extract_types(schema_content)
+            fields = self._extract_fields(schema_content)
+            comments = self._extract_comments(schema_content)
             
-            # Create enhanced searchable content
-            searchable_content = self._create_enhanced_searchable_content(
-                schema_name, types, fields, schema_content
+            # Create searchable content
+            searchable_content = self._create_searchable_content(
+                schema_name, types, fields, comments, schema_content
             )
+            
+            # Generate content hash for change detection
+            content_hash = hashlib.md5(schema_content.encode()).hexdigest()
             
             parsed_schema = {
                 "file_path": str(file_path),
                 "schema_name": schema_name,
                 "types": types,
                 "fields": fields,
+                "comments": comments,
                 "searchable_content": searchable_content,
-                "raw_content": schema_content[:2000],
+                "content_hash": content_hash,
                 "file_size": file_path.stat().st_size,
-                "domain_context": self._analyze_domain_context(schema_name, schema_content)
+                "domain": self._detect_domain(schema_name, schema_content)
             }
             
             return parsed_schema
@@ -112,103 +117,189 @@ class GraphQLSchemaIndexer:
             logger.error(f"Error parsing {file_path}: {e}")
             return {}
     
-    def _extract_graphql_types(self, content: str) -> List[str]:
-        """Extract GraphQL type names from schema content."""
+    def _extract_types(self, content: str) -> List[Dict[str, Any]]:
+        """Extract GraphQL types from schema content."""
         types = []
         
         type_patterns = [
-            r'type\s+(\w+)',
-            r'interface\s+(\w+)',
-            r'enum\s+(\w+)',
-            r'input\s+(\w+)',
-            r'scalar\s+(\w+)'
+            (r'type\s+(\w+)\s*(?:implements\s+[\w\s,&]+)?\s*\{([^}]+)\}', 'type'),
+            (r'interface\s+(\w+)\s*\{([^}]+)\}', 'interface'),
+            (r'enum\s+(\w+)\s*\{([^}]+)\}', 'enum'),
+            (r'input\s+(\w+)\s*\{([^}]+)\}', 'input'),
+            (r'scalar\s+(\w+)', 'scalar'),
+            (r'union\s+(\w+)\s*=\s*([^\n]+)', 'union')
         ]
         
-        for pattern in type_patterns:
-            matches = re.findall(pattern, content, re.IGNORECASE)
-            types.extend(matches)
+        for pattern, type_kind in type_patterns:
+            matches = re.finditer(pattern, content, re.IGNORECASE | re.DOTALL)
+            for match in matches:
+                type_name = match.group(1)
+                type_body = match.group(2) if len(match.groups()) > 1 else ""
+                
+                type_info = {
+                    "name": type_name,
+                    "kind": type_kind,
+                    "readable_name": self._make_readable(type_name)
+                }
+                
+                # Extract fields for complex types
+                if type_kind in ['type', 'interface', 'input']:
+                    type_info["fields"] = self._parse_type_fields(type_body)
+                elif type_kind == 'enum':
+                    type_info["values"] = self._parse_enum_values(type_body)
+                
+                types.append(type_info)
         
-        return list(set(types))
+        return types
     
-    def _extract_all_fields(self, content: str) -> List[str]:
-        """Extract all field names from GraphQL schema."""
+    def _parse_type_fields(self, type_body: str) -> List[Dict[str, str]]:
+        """Parse fields within a type definition."""
         fields = []
-        field_pattern = r'^\s*(\w+)(?:\([^)]*\))?\s*:\s*'
         
-        lines = content.split('\n')
-        in_type_definition = False
+        # Field pattern: fieldName(args): Type
+        field_pattern = r'^\s*(\w+)(?:\([^)]*\))?\s*:\s*(.+?)(?:\s*@[^\n]*)?$'
         
-        for line in lines:
+        for line in type_body.split('\n'):
             line = line.strip()
-            
-            if re.match(r'(type|interface|input)\s+\w+', line, re.IGNORECASE):
-                in_type_definition = True
+            if not line or line.startswith('#'):
                 continue
-            
-            if line == '}':
-                in_type_definition = False
-                continue
-            
-            if in_type_definition:
-                match = re.match(field_pattern, line)
-                if match:
-                    field_name = match.group(1)
-                    if field_name not in ['query', 'mutation', 'subscription', 'schema']:
-                        fields.append(field_name)
+                
+            match = re.match(field_pattern, line)
+            if match:
+                field_name = match.group(1)
+                field_type = match.group(2).strip()
+                
+                fields.append({
+                    "name": field_name,
+                    "type": field_type,
+                    "readable_name": self._make_readable(field_name)
+                })
         
-        return list(set(fields))
+        return fields
     
-    def _create_enhanced_searchable_content(self, 
-                                          schema_name: str, 
-                                          types: List[str], 
-                                          fields: List[str],
-                                          raw_content: str) -> str:
-        """Create enhanced searchable content with better semantic information."""
+    def _parse_enum_values(self, enum_body: str) -> List[str]:
+        """Parse enum values."""
+        values = []
+        for line in enum_body.split('\n'):
+            line = line.strip()
+            if line and not line.startswith('#'):
+                # Extract enum value (first word)
+                value = line.split()[0]
+                if value:
+                    values.append(value)
+        return values
+    
+    def _extract_fields(self, content: str) -> List[Dict[str, str]]:
+        """Extract all fields from schema."""
+        all_fields = []
+        
+        # Extract from all type definitions
+        type_matches = re.finditer(
+            r'(?:type|interface|input)\s+(\w+)\s*(?:implements\s+[\w\s,&]+)?\s*\{([^}]+)\}',
+            content, re.IGNORECASE | re.DOTALL
+        )
+        
+        for match in type_matches:
+            type_name = match.group(1)
+            type_body = match.group(2)
+            
+            fields = self._parse_type_fields(type_body)
+            for field in fields:
+                field["parent_type"] = type_name
+                all_fields.append(field)
+        
+        return all_fields
+    
+    def _extract_comments(self, content: str) -> List[str]:
+        """Extract comments from GraphQL schema."""
+        comments = []
+        
+        # Single line comments
+        comment_pattern = r'#\s*(.+)'
+        for match in re.finditer(comment_pattern, content):
+            comment_text = match.group(1).strip()
+            if comment_text:
+                comments.append(comment_text)
+        
+        # Multi-line string literals (often used as descriptions)
+        description_pattern = r'"""([^"]+)"""'
+        for match in re.finditer(description_pattern, content, re.DOTALL):
+            description = match.group(1).strip()
+            if description:
+                comments.append(description)
+        
+        return comments
+    
+    def _create_searchable_content(self, schema_name: str, types: List[Dict], 
+                                 fields: List[Dict], comments: List[str], 
+                                 raw_content: str) -> str:
+        """Create searchable content from schema components."""
         content_parts = []
         
-        # Enhanced schema name processing
+        # Schema name
         readable_name = self._make_readable(schema_name)
         content_parts.append(f"Schema: {readable_name}")
+        content_parts.append(f"Schema Name: {schema_name}")
         
-        # Add business context based on schema name
-        business_context = self._get_business_context(schema_name)
-        if business_context:
-            content_parts.append(f"Business Context: {business_context}")
+        # Domain context
+        domain = self._detect_domain(schema_name, raw_content)
+        if domain != "general":
+            content_parts.append(f"Domain: {domain}")
         
-        # Enhanced type processing
+        # Types
         if types:
-            # Filter out generic types and focus on business-relevant ones
-            business_types = self._filter_business_relevant_types(types)
-            if business_types:
-                readable_types = [self._make_readable(t) for t in business_types]
-                content_parts.append(f"Business Types: {', '.join(readable_types)}")
-            
-            # Add all types but with lower priority
-            all_readable_types = [self._make_readable(t) for t in types]
-            content_parts.append(f"All Types: {', '.join(all_readable_types)}")
+            type_names = []
+            for type_info in types:
+                type_names.append(f"{type_info['readable_name']} ({type_info['kind']})")
+            content_parts.append(f"Types: {', '.join(type_names)}")
         
-        # Enhanced field processing
         if fields:
-            # Prioritize important fields
-            important_fields = self._filter_important_fields(fields)
-            if important_fields:
-                readable_fields = [self._make_readable(f) for f in important_fields]
-                content_parts.append(f"Key Fields: {', '.join(readable_fields)}")
+            field_descriptions = []
+            for field in fields[:20]:  # Limit to first 20 fields
+                field_desc = f"{field['readable_name']} in {self._make_readable(field['parent_type'])}"
+                field_descriptions.append(field_desc)
+            content_parts.append(f"Fields: {', '.join(field_descriptions)}")
         
-        # Add domain-specific keywords
-        domain_keywords = self._extract_enhanced_domain_keywords(schema_name, raw_content)
-        if domain_keywords:
-            content_parts.append(f"Domain Keywords: {', '.join(domain_keywords)}")
+        # Comments and descriptions
+        if comments:
+            all_comments = ' '.join(comments[:10])  # Limit to first 10 comments
+            content_parts.append(f"Documentation: {all_comments}")
         
-        # Add functionality description
-        functionality = self._generate_enhanced_functionality_description(schema_name, types, fields)
-        content_parts.append(f"Functionality: {functionality}")
+        # Query and Mutation operations
+        query_ops = self._extract_operations(raw_content, "Query")
+        if query_ops:
+            content_parts.append(f"Query Operations: {', '.join(query_ops)}")
         
-        # Add use case scenarios
-        use_cases = self._generate_use_cases(schema_name, types)
-        content_parts.append(f"Use Cases: {use_cases}")
+        mutation_ops = self._extract_operations(raw_content, "Mutation")
+        if mutation_ops:
+            content_parts.append(f"Mutation Operations: {', '.join(mutation_ops)}")
         
         return "\n".join(content_parts)
+    
+    def _extract_operations(self, content: str, operation_type: str) -> List[str]:
+        """Extract operations from Query or Mutation types."""
+        operations = []
+        
+        pattern = rf'type\s+{operation_type}\s*\{{([^}}]+)\}}'
+        match = re.search(pattern, content, re.IGNORECASE | re.DOTALL)
+        
+        if match:
+            operations_body = match.group(1)
+            
+            # Parse individual operations
+            operation_pattern = r'^\s*(\w+)(?:\([^)]*\))?\s*:\s*(.+?)(?:\s*@[^\n]*)?$'
+            
+            for line in operations_body.split('\n'):
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                
+                op_match = re.match(operation_pattern, line)
+                if op_match:
+                    op_name = op_match.group(1)
+                    operations.append(self._make_readable(op_name))
+        
+        return operations
     
     def _make_readable(self, text: str) -> str:
         """Convert technical names to readable format."""
@@ -222,151 +313,29 @@ class GraphQLSchemaIndexer:
         readable = readable.replace('_', ' ').replace('-', ' ')
         
         # Clean up multiple spaces
-        readable = re.sub(r'\s+', ' ', readable).strip()
+        readable = re.sub(r'\s+', ' ', readable).strip().lower()
         
-        return readable.lower()
+        return readable
     
-    def _analyze_domain_context(self, schema_name: str, content: str) -> Dict[str, Any]:
-        """Analyze domain context for better matching."""
+    def _detect_domain(self, schema_name: str, content: str) -> str:
+        """Detect domain from schema name and content."""
         schema_lower = schema_name.lower()
         content_lower = content.lower()
         
-        detected_domains = []
-        confidence_scores = {}
-        
+        # Check domain mappings
         for domain, keywords in self.domain_mappings.items():
-            score = 0
             if domain in schema_lower:
-                score += 0.8
+                return domain
             
+            # Check for domain keywords in content
             keyword_matches = sum(1 for keyword in keywords if keyword in content_lower)
-            score += (keyword_matches / len(keywords)) * 0.5
-            
-            if score > 0.3:
-                detected_domains.append(domain)
-                confidence_scores[domain] = score
+            if keyword_matches >= 2:
+                return domain
         
-        primary_domain = max(confidence_scores.items(), key=lambda x: x[1])[0] if confidence_scores else "general"
-        
-        return {
-            "primary_domain": primary_domain,
-            "detected_domains": detected_domains,
-            "confidence_scores": confidence_scores
-        }
-    
-    def _get_business_context(self, schema_name: str) -> str:
-        """Get business context from schema name."""
-        schema_lower = schema_name.lower()
-        
-        for concept, context in self.business_contexts.items():
-            if concept in schema_lower:
-                return context
-        
-        # Check for domain-specific contexts
-        for domain, keywords in self.domain_mappings.items():
-            if domain in schema_lower:
-                if domain == "turbo":
-                    return "infrastructure performance optimization"
-                elif domain == "instana":
-                    return "application performance monitoring"
-                elif domain == "concert":
-                    return "security vulnerability management"
-                elif domain == "apptio":
-                    return "cloud cost management"
-        
-        return "data management operations"
-    
-    def _filter_business_relevant_types(self, types: List[str]) -> List[str]:
-        """Filter types that are most relevant for business operations."""
-        relevant_keywords = [
-            'entity', 'application', 'user', 'group', 'policy', 'alert', 
-            'metric', 'event', 'topology', 'vulnerability', 'config', 'service'
-        ]
-        
-        business_types = []
-        for type_name in types:
-            type_lower = type_name.lower()
-            if any(keyword in type_lower for keyword in relevant_keywords):
-                business_types.append(type_name)
-        
-        return business_types[:10]  # Limit to top 10
-    
-    def _filter_important_fields(self, fields: List[str]) -> List[str]:
-        """Filter fields that are most important for matching."""
-        important_keywords = [
-            'id', 'name', 'type', 'status', 'description', 'tags', 
-            'properties', 'config', 'data', 'info', 'details'
-        ]
-        
-        important_fields = []
-        for field_name in fields:
-            field_lower = field_name.lower()
-            if any(keyword in field_lower for keyword in important_keywords):
-                important_fields.append(field_name)
-        
-        return important_fields[:15]  # Limit to top 15
-    
-    def _extract_enhanced_domain_keywords(self, schema_name: str, content: str) -> List[str]:
-        """Extract enhanced domain-specific keywords."""
-        keywords = set()
-        schema_lower = schema_name.lower()
-        content_lower = content.lower()
-        
-        # Add domain-specific keywords
-        for domain, domain_keywords in self.domain_mappings.items():
-            if domain in schema_lower:
-                keywords.update(domain_keywords[:4])  # Top 4 keywords
-        
-        # Add generic technical keywords if they appear in content
-        technical_keywords = [
-            "api", "service", "endpoint", "query", "data", "entity", 
-            "object", "management", "monitoring", "performance"
-        ]
-        
-        for keyword in technical_keywords:
-            if keyword in content_lower:
-                keywords.add(keyword)
-        
-        return list(keywords)[:8]  # Limit to 8 keywords
-    
-    def _generate_enhanced_functionality_description(self, schema_name: str, types: List[str], fields: List[str]) -> str:
-        """Generate enhanced functionality description."""
-        schema_lower = schema_name.lower()
-        all_text = f"{schema_name} {' '.join(types)}".lower()
-        
-        if "vulnerability" in all_text or "security" in all_text:
-            return "security vulnerability assessment and risk management"
-        elif "topology" in all_text or "infrastructure" in all_text:
-            return "infrastructure topology mapping and monitoring" 
-        elif "application" in all_text:
-            return "application performance monitoring and management"
-        elif "entity" in all_text or "entities" in all_text:
-            return "business entity data management and operations"
-        elif "group" in all_text:
-            return "resource grouping and categorization"
-        elif "metric" in all_text or "stats" in all_text:
-            return "performance metrics and statistical analysis"
-        else:
-            return f"data operations and management for {self._make_readable(schema_name)}"
-    
-    def _generate_use_cases(self, schema_name: str, types: List[str]) -> str:
-        """Generate likely use cases."""
-        schema_lower = schema_name.lower()
-        types_text = ' '.join(types).lower()
-        
-        if "vulnerability" in schema_lower or "security" in types_text:
-            return "vulnerability scanning, security assessment, compliance reporting"
-        elif "topology" in schema_lower or "infrastructure" in types_text:
-            return "infrastructure monitoring, dependency mapping, topology analysis"
-        elif "application" in schema_lower or "app" in types_text:
-            return "application monitoring, performance tracking, service management"
-        elif "entity" in schema_lower or "entities" in types_text:
-            return "data retrieval, entity management, business operations"
-        else:
-            return f"data querying, information retrieval, {schema_lower} operations"
+        return "general"
     
     def index_graphql_schemas(self, schema_dir: str, force_reindex: bool = False) -> int:
-        """Index GraphQL schemas with enhanced content."""
+        """Index GraphQL schemas."""
         schema_path = Path(schema_dir)
         
         if not schema_path.exists():
@@ -393,86 +362,110 @@ class GraphQLSchemaIndexer:
                 pass
             self.collection = self.client.create_collection(
                 name=self.collection_name,
-                metadata={"description": "Enhanced GraphQL schemas for schema mapping"}
+                metadata={
+                    "description": "GraphQL schemas for semantic search",
+                    "created": datetime.now().isoformat()
+                }
             )
         
         # Check existing documents
-        existing_ids = set()
+        existing_data = {}
         try:
-            existing_data = self.collection.get()
-            existing_ids = set(existing_data.get("ids", []))
-            logger.info(f"Found {len(existing_ids)} existing schemas in collection")
+            existing_results = self.collection.get()
+            existing_data = {
+                doc_id: metadata.get("content_hash", "")
+                for doc_id, metadata in zip(
+                    existing_results.get("ids", []),
+                    existing_results.get("metadatas", [])
+                )
+            }
+            logger.info(f"Found {len(existing_data)} existing schemas in collection")
         except Exception as e:
             logger.warning(f"Could not check existing documents: {e}")
         
         # Process each schema file
         indexed_count = 0
         skipped_count = 0
+        updated_count = 0
         
         for schema_file in schema_files:
             try:
                 doc_id = schema_file.stem
                 
-                if not force_reindex and doc_id in existing_ids:
-                    skipped_count += 1
-                    continue
-                
-                # Parse with enhanced analysis
+                # Parse schema
                 parsed_schema = self.parse_graphql_schema(schema_file)
                 
                 if not parsed_schema:
                     logger.warning(f"Skipping empty/invalid schema: {schema_file}")
                     continue
                 
-                # Enhanced metadata
+                # Check if update needed
+                current_hash = parsed_schema["content_hash"]
+                existing_hash = existing_data.get(doc_id, "")
+                
+                if not force_reindex and doc_id in existing_data and current_hash == existing_hash:
+                    skipped_count += 1
+                    continue
+                
+                # Prepare metadata
                 metadata = {
                     "schema_name": parsed_schema["schema_name"],
                     "file_path": parsed_schema["file_path"],
+                    "content_hash": current_hash,
                     "num_types": len(parsed_schema["types"]),
                     "num_fields": len(parsed_schema["fields"]),
+                    "num_comments": len(parsed_schema["comments"]),
                     "file_size": parsed_schema["file_size"],
-                    "indexed_at": datetime.now().isoformat(),
-                    "primary_domain": parsed_schema["domain_context"]["primary_domain"],
-                    "domain_confidence": parsed_schema["domain_context"]["confidence_scores"].get(
-                        parsed_schema["domain_context"]["primary_domain"], 0.0
-                    )
+                    "domain": parsed_schema["domain"],
+                    "indexed_at": datetime.now().isoformat()
                 }
                 
-                # Add to ChromaDB with enhanced content
-                self.collection.add(
-                    documents=[parsed_schema["searchable_content"]],
-                    metadatas=[metadata],
-                    ids=[doc_id]
-                )
+                # Add or update in ChromaDB
+                if doc_id in existing_data:
+                    # Update existing
+                    self.collection.update(
+                        documents=[parsed_schema["searchable_content"]],
+                        metadatas=[metadata],
+                        ids=[doc_id]
+                    )
+                    updated_count += 1
+                else:
+                    # Add new
+                    self.collection.add(
+                        documents=[parsed_schema["searchable_content"]],
+                        metadatas=[metadata],
+                        ids=[doc_id]
+                    )
+                    indexed_count += 1
                 
-                indexed_count += 1
-                
-                if indexed_count % 10 == 0:
-                    logger.info(f"   Indexed {indexed_count}/{len(schema_files)} schemas...")
+                if (indexed_count + updated_count) % 10 == 0:
+                    logger.info(f"   Processed {indexed_count + updated_count}/{len(schema_files)} schemas...")
                 
             except Exception as e:
-                logger.error(f"Error indexing {schema_file}: {e}")
+                logger.error(f"Error processing {schema_file}: {e}")
                 continue
         
-        logger.info(f"Enhanced indexing complete:")
-        logger.info(f"   Indexed: {indexed_count} schemas")
-        logger.info(f"   Skipped: {skipped_count} schemas (already indexed)")
-        logger.info(f"   Total in collection: {len(existing_ids) + indexed_count}")
+        total_processed = indexed_count + updated_count
+        logger.info(f"Indexing complete:")
+        logger.info(f"   New schemas indexed: {indexed_count}")
+        logger.info(f"   Schemas updated: {updated_count}")
+        logger.info(f"   Skipped (unchanged): {skipped_count}")
+        logger.info(f"   Total in collection: {len(existing_data) + indexed_count}")
         
-        return indexed_count
+        return total_processed
     
     def search_schemas(self, query: str, n_results: int = 5) -> List[Dict[str, Any]]:
-        """Enhanced schema search with better query processing."""
+        """Search schemas with the given query."""
         try:
-            # Enhance query with domain-specific terms
+            # Simple query enhancement
             enhanced_query = self._enhance_query(query)
             
             results = self.collection.query(
                 query_texts=[enhanced_query],
-                n_results=n_results * 2  # Get more results to filter
+                n_results=n_results
             )
             
-            # Process and filter results
+            # Process results
             matches = []
             for i in range(len(results.get("ids", [[]])[0])):
                 similarity_score = 1 - results["distances"][0][i]
@@ -489,43 +482,30 @@ class GraphQLSchemaIndexer:
                 }
                 matches.append(match)
             
-            # Sort by similarity and return top results
-            matches.sort(key=lambda x: x["similarity_score"], reverse=True)
-            return matches[:n_results]
+            return matches
             
         except Exception as e:
             logger.error(f"Error searching schemas: {e}")
             return []
     
     def _enhance_query(self, query: str) -> str:
-        """Enhance query with domain-specific terms."""
+        """Simple query enhancement with domain keywords."""
         query_lower = query.lower()
         enhanced_terms = [query]
         
-        # Add domain expansions
-        if "turbo" in query_lower:
-            enhanced_terms.extend(["performance", "optimization", "virtual", "entity"])
-        if "instana" in query_lower:
-            enhanced_terms.extend(["monitoring", "application", "performance", "infrastructure"])
-        if "concert" in query_lower:
-            enhanced_terms.extend(["security", "vulnerability", "scanning", "applications"])
+        # Add domain-specific terms if detected
+        for domain, keywords in self.domain_mappings.items():
+            if domain in query_lower:
+                enhanced_terms.extend(keywords[:3])  # Add top 3 keywords
         
-        # Add concept expansions
-        if "entity" in query_lower:
-            enhanced_terms.extend(["business", "data", "object", "resource"])
-        if "application" in query_lower:
-            enhanced_terms.extend(["service", "system", "software", "app"])
-        if "group" in query_lower:
-            enhanced_terms.extend(["collection", "category", "cluster"])
-        
-        return " ".join(enhanced_terms[:10])  # Limit to avoid over-expansion
+        return " ".join(enhanced_terms)
 
 
 def main():
-    """Main entry point for the enhanced schema indexer."""
-    parser = argparse.ArgumentParser(description="Enhanced GraphQL Schema Indexer")
+    """Main entry point for the schema indexer."""
+    parser = argparse.ArgumentParser(description="GraphQL Schema Indexer")
     parser.add_argument("--schema-dir", required=True, help="Directory containing GraphQL schema files")
-    parser.add_argument("--chroma-db-path", default="../data/chroma_db", help="Path to store ChromaDB data")
+    parser.add_argument("--chroma-db-path", default="./chroma_db", help="Path to store ChromaDB data")
     parser.add_argument("--collection-name", default="graphql_schemas", help="ChromaDB collection name")
     parser.add_argument("--force-reindex", action="store_true", help="Force reindex (clear existing)")
     parser.add_argument("--test-query", help="Test query to search after indexing")
@@ -536,38 +516,38 @@ def main():
     if args.verbose:
         logging.getLogger().setLevel(logging.INFO)
     
-    logger.info(f"Enhanced GraphQL Schema ChromaDB Indexer")
+    logger.info(f"GraphQL Schema ChromaDB Indexer")
     logger.info(f"Schema directory: {args.schema_dir}")
     logger.info(f"ChromaDB path: {args.chroma_db_path}")
     logger.info(f"Collection name: {args.collection_name}")
     
-    # Initialize enhanced indexer
+    # Initialize indexer
     indexer = GraphQLSchemaIndexer(
         chroma_db_path=args.chroma_db_path,
         collection_name=args.collection_name
     )
     
     # Index schema files
-    indexed_count = indexer.index_graphql_schemas(
+    processed_count = indexer.index_graphql_schemas(
         schema_dir=args.schema_dir,
         force_reindex=args.force_reindex
     )
     
     # Test search if query provided
     if args.test_query:
-        print(f"\nTesting enhanced search with query: '{args.test_query}'")
+        print(f"\nTesting search with query: '{args.test_query}'")
         results = indexer.search_schemas(args.test_query, n_results=5)
         
         for i, result in enumerate(results, 1):
             print(f"\n   Result {i}:")
             print(f"   Schema: {result['schema_name']}")
             print(f"   Similarity: {result['similarity_score']:.3f}")
-            print(f"   Domain: {result['metadata'].get('primary_domain', 'unknown')}")
+            print(f"   Domain: {result['metadata'].get('domain', 'unknown')}")
             print(f"   Types: {result['metadata'].get('num_types', 0)}")
             print(f"   Fields: {result['metadata'].get('num_fields', 0)}")
     
-    print(f"\nEnhanced indexing completed successfully!")
-    print(f"   Indexed {indexed_count} GraphQL schemas")
+    print(f"\nIndexing completed successfully!")
+    print(f"   Processed {processed_count} GraphQL schemas")
     print(f"   ChromaDB collection: {args.collection_name}")
     print(f"   Database location: {args.chroma_db_path}")
 

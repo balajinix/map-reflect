@@ -34,20 +34,23 @@ class ResultCollector:
     def __init__(self, base_dir: Path = Path(".")):
         self.base_dir = Path(base_dir)
         self.method_dirs = {
-            'SMT': 'smt/results',
-            'ReAct': 'react/results', 
-            'GNN': 'gnn/results',
-            'AnyTool': 'anytool/results',
-            'MapReflect': 'map_reflect/results'
+            'smt': 'smt/results',
+            'react': 'react/results', 
+            'gnn': 'gnn/results',
+            'anytool': 'anytool/results',
+            'mapreflect': 'mapreflect/results'
         }
     
     def get_result_file_path(self, method: str, dataset: str, model: str) -> Optional[Path]:
         """Get the path to a result file for method/dataset/model combination."""
-        method_dir = self.method_dirs.get(method)
+        method_dir = self.method_dirs.get(method.lower())
         if not method_dir:
             return None
         
         possible_names = [
+            f"{dataset}_{model}.jsonl",
+            f"{dataset.lower()}_{model}.jsonl",
+            f"{dataset.upper()}_{model}.jsonl",
             f"{dataset}_{model}.json",           # ITOps_granite.json
             f"{dataset.lower()}_{model}.json",   # itops_granite.json
             f"{dataset.upper()}_{model}.json",   # ITOPS_granite.json
@@ -60,11 +63,31 @@ class ResultCollector:
         
         return None
     
-    def load_result_file(self, file_path: Path) -> Optional[Dict[str, Any]]:
-        """Load a single result file."""
+    def load_result_file(self, file_path: Path) -> Optional[List[Dict[str, Any]]]:
+        """Load a result file - supports both JSONL and JSON formats."""
         try:
-            with open(file_path, 'r') as f:
-                return json.load(f)
+            if file_path.suffix == '.jsonl':
+                # Load JSONL file (one JSON object per line)
+                results = []
+                with open(file_path, 'r') as f:
+                    for line in f:
+                        line = line.strip()
+                        if line:  # Skip empty lines
+                            results.append(json.loads(line))
+                return results
+            else:
+                # Load JSON file (legacy format)
+                with open(file_path, 'r') as f:
+                    data = json.load(f)
+                    # If it's a dict with 'results' key, extract the results list
+                    if isinstance(data, dict) and 'results' in data:
+                        return data['results']
+                    # If it's already a list, return as-is
+                    elif isinstance(data, list):
+                        return data
+                    # If it's a single object, wrap in list
+                    else:
+                        return [data]
         except Exception as e:
             print(f"Error loading {file_path}: {e}")
             return None
@@ -79,14 +102,14 @@ class ResultCollector:
                     result_file = self.get_result_file_path(method, dataset, model)
                     
                     if not result_file:
-                        print(f"Missing result file: {method}/{dataset}/{model}")
+                        method_dir = self.method_dirs.get(method.lower(), f"{method.lower()}/results/")
+                        print(f"Missing result file: {method_dir}/{dataset}_{model}.jsonl")
                         continue
                     
                     result_data = self.load_result_file(result_file)
                     if not result_data:
                         continue
                     
-                    # Process individual results from the file
                     method_results = self._process_result_data(result_data, dataset, method, model)
                     all_results.extend(method_results)
                     
@@ -94,11 +117,11 @@ class ResultCollector:
         
         return all_results
     
-    def _process_result_data(self, result_data: Dict[str, Any], dataset: str, method: str, model: str) -> List[EvaluationResult]:
-        """Convert raw result data to EvaluationResult objects."""
+    def _process_result_data(self, result_data: List[Dict[str, Any]], dataset: str, method: str, model: str) -> List[EvaluationResult]:
+        """Convert raw result data from JSONL or JSON to EvaluationResult objects."""
         results = []
         
-        for result_entry in result_data.get('results', []):
+        for result_entry in result_data:
             try:
                 # Calculate accuracy if not provided
                 accuracy = result_entry.get('accuracy')
@@ -168,114 +191,8 @@ class EvaluationAnalyzer:
             return {}
         
         stats = {
-            'overall': self._calculate_overall_stats(),
-            'by_method': self._calculate_method_stats(),
-            'by_dataset': self._calculate_dataset_stats(),
-            'by_model': self._calculate_model_stats(),
-            'combinations': self._calculate_combination_stats(),
-            'by_dataset_model': self._calculate_dataset_model_stats()
+            'combinations': self._calculate_combination_stats()
         }
-        
-    def _calculate_dataset_model_stats(self) -> Dict[str, Dict[str, Any]]:
-        """Calculate statistics for each dataset-model combination."""
-        stats = {}
-        
-        for dataset in self.df['dataset'].unique():
-            for model in self.df['model'].unique():
-                combination_df = self.df[(self.df['dataset'] == dataset) & (self.df['model'] == model)]
-                if len(combination_df) == 0:
-                    continue
-                    
-                combination_key = f"{dataset}_{model}"
-                successful = len(combination_df[combination_df['success'] == True])
-                
-                # Calculate method-specific stats for this dataset-model combination
-                method_stats = {}
-                for method in combination_df['method'].unique():
-                    method_df = combination_df[combination_df['method'] == method]
-                    method_successful = len(method_df[method_df['success'] == True])
-                    
-                    method_stats[method] = {
-                        'count': len(method_df),
-                        'success_rate': method_successful / len(method_df) if len(method_df) > 0 else 0.0,
-                        'avg_accuracy': method_df['accuracy'].mean() if len(method_df) > 0 else 0.0,
-                        'std_accuracy': method_df['accuracy'].std() if len(method_df) > 0 else 0.0
-                    }
-                
-                stats[combination_key] = {
-                    'dataset': dataset,
-                    'model': model,
-                    'total_count': len(combination_df),
-                    'total_success_rate': successful / len(combination_df) if len(combination_df) > 0 else 0.0,
-                    'overall_avg_accuracy': combination_df['accuracy'].mean() if len(combination_df) > 0 else 0.0,
-                    'methods': method_stats
-                }
-        
-        return stats
-    
-    def _calculate_overall_stats(self) -> Dict[str, Any]:
-        """Calculate overall statistics."""
-        total = len(self.df)
-        successful = len(self.df[self.df['success'] == True])
-        
-        return {
-            'total_evaluations': total,
-            'successful_evaluations': successful,
-            'success_rate': successful / total if total > 0 else 0.0,
-            'avg_accuracy': self.df['accuracy'].mean() if total > 0 else 0.0,
-            'std_accuracy': self.df['accuracy'].std() if total > 0 else 0.0,
-            'avg_execution_time': self.df['execution_time'].mean() if total > 0 else 0.0
-        }
-    
-    def _calculate_method_stats(self) -> Dict[str, Dict[str, Any]]:
-        """Calculate statistics by method."""
-        stats = {}
-        
-        for method in self.df['method'].unique():
-            method_df = self.df[self.df['method'] == method]
-            successful = len(method_df[method_df['success'] == True])
-            
-            stats[method] = {
-                'count': len(method_df),
-                'success_rate': successful / len(method_df) if len(method_df) > 0 else 0.0,
-                'avg_accuracy': method_df['accuracy'].mean() if len(method_df) > 0 else 0.0,
-                'std_accuracy': method_df['accuracy'].std() if len(method_df) > 0 else 0.0,
-                'avg_execution_time': method_df['execution_time'].mean() if len(method_df) > 0 else 0.0
-            }
-        
-        return stats
-    
-    def _calculate_dataset_stats(self) -> Dict[str, Dict[str, Any]]:
-        """Calculate statistics by dataset."""
-        stats = {}
-        
-        for dataset in self.df['dataset'].unique():
-            dataset_df = self.df[self.df['dataset'] == dataset]
-            successful = len(dataset_df[dataset_df['success'] == True])
-            
-            stats[dataset] = {
-                'count': len(dataset_df),
-                'success_rate': successful / len(dataset_df) if len(dataset_df) > 0 else 0.0,
-                'avg_accuracy': dataset_df['accuracy'].mean() if len(dataset_df) > 0 else 0.0,
-                'std_accuracy': dataset_df['accuracy'].std() if len(dataset_df) > 0 else 0.0
-            }
-        
-        return stats
-    
-    def _calculate_model_stats(self) -> Dict[str, Dict[str, Any]]:
-        """Calculate statistics by model."""
-        stats = {}
-        
-        for model in self.df['model'].unique():
-            model_df = self.df[self.df['model'] == model]
-            successful = len(model_df[model_df['success'] == True])
-            
-            stats[model] = {
-                'count': len(model_df),
-                'success_rate': successful / len(model_df) if len(model_df) > 0 else 0.0,
-                'avg_accuracy': model_df['accuracy'].mean() if len(model_df) > 0 else 0.0,
-                'std_accuracy': model_df['accuracy'].std() if len(model_df) > 0 else 0.0
-            }
         
         return stats
     
@@ -308,82 +225,124 @@ class EvaluationAnalyzer:
         return stats
     
     def save_results(self, output_dir: Path):
-        """Save results and statistics to files."""
+        """Save results in LaTeX format only."""
         output_dir.mkdir(exist_ok=True)
-        
-        # Save detailed results
-        self.df.to_csv(output_dir / "detailed_results.csv", index=False)
         
         # Generate and save statistics
         stats = self.generate_statistics()
         if stats:
-            with open(output_dir / "evaluation_statistics.json", 'w') as f:
-                json.dump(stats, f, indent=2, default=str)
+            # Print detailed results first
+            self._print_detailed_results(stats)
             
-            # Generate and save dataset-specific LaTeX tables
-            self._generate_dataset_latex_tables(output_dir, stats)
+            # Generate and print LaTeX tables
+            latex_content = self._generate_latex_tables(stats)
+            print("\n" + "="*80)
+            print("LATEX TABLES")
+            print("="*80)
+            print(latex_content)
+            print("="*80)
             
-            print(f"Results saved to {output_dir}")
-            print(f"  - detailed_results.csv: {len(self.df)} individual results")
-            print(f"  - evaluation_statistics.json: aggregated statistics")
-            print(f"  - dataset_tables.tex: LaTeX tables for publication")
+            # Save LaTeX to file
+            with open(output_dir / "results_tables.tex", 'w') as f:
+                f.write(latex_content)
+            
+            print(f"\nLaTeX tables saved to: {output_dir}/results_tables.tex")
         else:
-            print(f"Warning: No statistics generated")
-            print(f"Results saved to {output_dir}")
-            print(f"  - detailed_results.csv: {len(self.df)} individual results")
+            print("Warning: No statistics generated")
     
-    def _generate_dataset_latex_tables(self, output_dir: Path, stats: Dict[str, Any]):
-        """Generate dataset-specific LaTeX tables."""
+    def _print_detailed_results(self, stats: Dict[str, Any]):
+        """Print detailed results by dataset and model."""
+        print("\nDetailed Results by Dataset and Model:")
+        print("=" * 50)
         
-        if not stats or not isinstance(stats, dict):
-            print("Warning: Invalid statistics data, cannot generate LaTeX tables")
+        combinations = stats.get('combinations', {})
+        if not combinations:
+            print("No combination data available")
             return
         
-        datasets = list(self.df['dataset'].unique())
-        methods = ['SMT', 'ReAct', 'GNN', 'AnyTool', 'MapReflect']
-        models = list(self.df['model'].unique())
+        # Group by dataset and model
+        dataset_model_combos = {}
+        for combo_key, combo_data in combinations.items():
+            dataset = combo_data['dataset']
+            model = combo_data['model']
+            method = combo_data['method']
+            
+            dm_key = f"{dataset}_{model}"
+            if dm_key not in dataset_model_combos:
+                dataset_model_combos[dm_key] = {
+                    'dataset': dataset,
+                    'model': model,
+                    'methods': {},
+                    'total_count': 0,
+                    'total_accuracy_sum': 0.0
+                }
+            
+            dataset_model_combos[dm_key]['methods'][method] = combo_data
+            dataset_model_combos[dm_key]['total_count'] += combo_data['count']
+            dataset_model_combos[dm_key]['total_accuracy_sum'] += combo_data['avg_accuracy'] * combo_data['count']
+        
+        # Print results grouped by dataset-model
+        for dm_key in sorted(dataset_model_combos.keys()):
+            combo = dataset_model_combos[dm_key]
+            dataset = combo['dataset']
+            model = combo['model']
+            total_count = combo['total_count']
+            overall_accuracy = combo['total_accuracy_sum'] / total_count if total_count > 0 else 0.0
+            
+            print(f"\n{dataset} - {model}:")
+            print(f"  Total: {total_count} results, Overall Accuracy: {overall_accuracy:.3f}")
+            
+            # Print method results
+            for method in ['smt', 'react', 'gnn', 'anytool', 'mapreflect']:
+                if method in combo['methods']:
+                    method_data = combo['methods'][method]
+                    count = method_data['count']
+                    accuracy = method_data['avg_accuracy']
+                    success_rate = method_data['success_rate']
+                    print(f"    {method:12}: {int(count):3d} results, Accuracy={accuracy:.3f}, Success={success_rate:.1%}")
+                else:
+                    print(f"    {method:12}: No results")
+    
+    def _generate_latex_tables(self, stats: Dict[str, Any]) -> str:
+        """Generate comprehensive LaTeX tables for all results."""
+        
+        if not stats or 'combinations' not in stats:
+            return "% No data available for LaTeX tables"
+        
+        combinations = stats['combinations']
+        datasets = sorted(self.df['dataset'].unique())
+        methods = ['smt', 'react', 'gnn', 'anytool', 'mapreflect']
+        models = sorted(self.df['model'].unique())
         
         latex_content = []
-        latex_content.append("% Generated Dataset-Specific LaTeX Tables")
-        latex_content.append("% " + "=" * 60)
+        latex_content.append("% Schema Mapping Evaluation Results")
+        latex_content.append("% Generated automatically")
         latex_content.append("")
         
-        # Generate separate table for each dataset
+        # Generate accuracy table for each dataset
         for dataset in datasets:
-            latex_content.append(f"% {dataset} Dataset Results")
-            table_content = self._generate_single_dataset_table(dataset, methods, models, stats)
+            latex_content.append(f"% {dataset.upper()} Dataset - Accuracy Results")
+            table_content = self._generate_accuracy_table(dataset, methods, models, combinations)
             if table_content:
                 latex_content.append(table_content)
                 latex_content.append("")
         
-        # Generate combined latency table
-        latex_content.append("% Combined Latency Results")
-        latency_table = self._generate_combined_latency_table(datasets, methods, models, stats)
-        if latency_table:
-            latex_content.append(latency_table)
+        # Generate execution time table
+        latex_content.append("% Execution Time Results (seconds)")
+        time_table = self._generate_time_table(datasets, methods, models, combinations)
+        if time_table:
+            latex_content.append(time_table)
         
-        # Save to file
-        try:
-            with open(output_dir / "dataset_tables.tex", 'w') as f:
-                f.write("\n".join(latex_content))
-            print(f"LaTeX tables generated successfully")
-        except Exception as e:
-            print(f"Error generating LaTeX tables: {e}")
+        return "\n".join(latex_content)
     
-    def _generate_single_dataset_table(self, dataset: str, methods: List[str], models: List[str], stats: Dict[str, Any]) -> str:
-        """Generate table for a specific dataset."""
-        
-        if not stats or 'combinations' not in stats:
-            print(f"Warning: No combinations data available for {dataset}")
-            return ""
-        
-        combinations = stats['combinations']
+    def _generate_accuracy_table(self, dataset: str, methods: List[str], models: List[str], combinations: Dict[str, Any]) -> str:
+        """Generate accuracy table for a specific dataset."""
         
         latex = []
         latex.append("\\begin{table}[htbp]")
         latex.append("\\centering")
-        latex.append(f"\\caption{{{dataset} Dataset Results by Model}}")
-        latex.append(f"\\label{{tab:{dataset.lower()}_results}}")
+        latex.append(f"\\caption{{Accuracy Results for {dataset.upper()} Dataset}}")
+        latex.append(f"\\label{{tab:{dataset.lower()}_accuracy}}")
         
         # Column specification: method name + one column per model
         col_spec = "l" + "r" * len(models)
@@ -397,11 +356,7 @@ class EvaluationAnalyzer:
         
         # Data rows
         for method in methods:
-            row = []
-            if method == "MapReflect":
-                row.append(f"\\textbf{{{method}}}")
-            else:
-                row.append(method)
+            row = [method.upper()]
             
             # Add accuracy for each model
             for model in models:
@@ -409,11 +364,11 @@ class EvaluationAnalyzer:
                 
                 if combination_key in combinations:
                     accuracy = combinations[combination_key].get('avg_accuracy', 0.0)
-                    accuracy_str = f"{accuracy:.3f}"
-                    if method == "MapReflect":
-                        row.append(f"\\textbf{{{accuracy_str}}}")
+                    count = combinations[combination_key].get('count', 0)
+                    if count > 0:
+                        row.append(f"{accuracy:.3f}")
                     else:
-                        row.append(accuracy_str)
+                        row.append("--")
                 else:
                     row.append("--")
             
@@ -425,20 +380,14 @@ class EvaluationAnalyzer:
         
         return "\n".join(latex)
     
-    def _generate_combined_latency_table(self, datasets: List[str], methods: List[str], models: List[str], stats: Dict[str, Any]) -> str:
-        """Generate combined latency table for all datasets."""
-        
-        if not stats or 'combinations' not in stats:
-            print("Warning: No combinations data available for latency table")
-            return ""
-        
-        combinations = stats['combinations']
+    def _generate_time_table(self, datasets: List[str], methods: List[str], models: List[str], combinations: Dict[str, Any]) -> str:
+        """Generate execution time table for all datasets."""
         
         latex = []
         latex.append("\\begin{table}[htbp]")
         latex.append("\\centering")
-        latex.append("\\caption{Execution Latency Results by Dataset and Model (seconds)}")
-        latex.append("\\label{tab:latency_results}")
+        latex.append("\\caption{Execution Time Results by Dataset and Model (seconds)}")
+        latex.append("\\label{tab:execution_times}")
         
         col_spec = "l" + "r" * len(models)
         latex.append(f"\\begin{{tabular}}{{{col_spec}}}")
@@ -446,7 +395,7 @@ class EvaluationAnalyzer:
         
         for i, dataset in enumerate(datasets):
             # Dataset header
-            latex.append(f"\\multicolumn{{{len(models) + 1}}}{{c}}{{\\textbf{{{dataset} Dataset}}}} \\\\")
+            latex.append(f"\\multicolumn{{{len(models) + 1}}}{{c}}{{\\textbf{{{dataset.upper()} Dataset}}}} \\\\")
             latex.append("\\midrule")
             
             # Column headers
@@ -456,28 +405,19 @@ class EvaluationAnalyzer:
             
             # Method rows
             for method in methods:
-                row = []
-                if method == "MapReflect":
-                    row.append(f"\\textbf{{{method}}}")
-                else:
-                    row.append(method)
+                row = [method.upper()]
                 
                 # Add latency for each model
                 for model in models:
                     combination_key = f"{method}_{dataset}_{model}"
                     
                     if combination_key in combinations:
-                        latency = combinations[combination_key].get('avg_execution_time', 0.0)
-                        if latency > 0:
-                            if method == "MapReflect":
-                                row.append(f"\\textbf{{{latency:.1f}}}")
-                            else:
-                                row.append(f"{latency:.1f}")
+                        time_val = combinations[combination_key].get('avg_execution_time', 0.0)
+                        count = combinations[combination_key].get('count', 0)
+                        if count > 0 and time_val > 0:
+                            row.append(f"{time_val:.1f}")
                         else:
-                            if method == "MapReflect":
-                                row.append("\\textbf{TBA}")
-                            else:
-                                row.append("TBA")
+                            row.append("--")
                     else:
                         row.append("--")
                 
@@ -531,59 +471,6 @@ def main():
     # Generate analysis
     analyzer = EvaluationAnalyzer(results)
     analyzer.save_results(Path(args.output_dir))
-    
-    # Print summary
-    stats = analyzer.generate_statistics()
-    
-    if stats is None:
-        print("No stats from analyzer!")
-        sys.exit(1)
-
-    print("\nSummary Statistics:")
-    print("=" * 20)
-    
-    overall = stats.get('overall', {})
-    print(f"Total evaluations: {overall.get('total_evaluations', 0)}")
-    print(f"Successful evaluations: {overall.get('successful_evaluations', 0)}")
-    print(f"Overall success rate: {overall.get('success_rate', 0.0):.3f}")
-    print(f"Average accuracy: {overall.get('avg_accuracy', 0.0):.3f}")
-    
-    print(f"\nMethod Performance:")
-    for method, metrics in stats.get('by_method', {}).items():
-        acc = metrics.get('avg_accuracy', 0.0)
-        sr = metrics.get('success_rate', 0.0)
-        count = metrics.get('count', 0)
-        print(f"  {method}: {count} results, Accuracy={acc:.3f}, Success Rate={sr:.3f}")
-    
-    print(f"\nDataset Performance:")
-    for dataset, metrics in stats.get('by_dataset', {}).items():
-        acc = metrics.get('avg_accuracy', 0.0)
-        count = metrics.get('count', 0)
-        print(f"  {dataset}: {count} results, Accuracy={acc:.3f}")
-    
-    print(f"\nModel Performance:")
-    for model, metrics in stats.get('by_model', {}).items():
-        acc = metrics.get('avg_accuracy', 0.0)
-        count = metrics.get('count', 0)
-        print(f"  {model}: {count} results, Accuracy={acc:.3f}")
-    
-    # New detailed breakdown by dataset-model combinations
-    print(f"\nDetailed Results by Dataset and Model:")
-    print("=" * 50)
-    
-    by_dataset_model = stats.get('by_dataset_model', {})
-    for combination_key, combination_data in by_dataset_model.items():
-        dataset = combination_data['dataset']
-        model = combination_data['model']
-        print(f"\n{dataset} - {model}:")
-        print(f"  Total: {combination_data['total_count']} results, Overall Accuracy: {combination_data['overall_avg_accuracy']:.3f}")
-        
-        methods = combination_data['methods']
-        for method, method_stats in methods.items():
-            count = method_stats['count']
-            acc = method_stats['avg_accuracy']
-            sr = method_stats['success_rate']
-            print(f"    {method:12}: {count:3d} results, Accuracy={acc:.3f}, Success={sr:.1%}")
 
 
 if __name__ == "__main__":

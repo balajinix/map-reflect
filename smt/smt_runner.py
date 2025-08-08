@@ -74,43 +74,18 @@ class SMTRunner:
         
         # Thread-safe counters
         self.write_lock = threading.Lock()
-        self.progress_lock = threading.Lock()
         
         logger.info(f"SMT runner initialized with {self.max_workers} workers")
         logger.info(f"Collection name: {self.collection_name}")
     
-    def create_output_files(self, dataset: str, model: str) -> Dict[str, Path]:
-        """Create output files for incremental writing."""
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    def create_results_file(self, dataset: str, model: str) -> Path:
+        """Create results file for incremental writing."""
+        results_file = self.results_dir / f"{dataset.lower()}_{model}.jsonl"
         
-        files = {
-            "results": self.results_dir / f"{dataset.lower()}_{model}_smt_results.jsonl",
-            "progress": self.results_dir / f"{dataset.lower()}_{model}_progress.json",
-            "metadata": self.results_dir / f"{dataset.lower()}_{model}_metadata.json"
-        }
+        # Clear the file if it exists
+        results_file.write_text("")
         
-        # Initialize files
-        for file_path in files.values():
-            file_path.touch()
-        
-        # Write initial metadata
-        initial_metadata = {
-            "dataset": dataset,
-            "model": model,
-            "start_time": datetime.now().isoformat(),
-            "status": "running",
-            "total_samples": 0,
-            "completed_samples": 0,
-            "successful_samples": 0,
-            "failed_samples": 0,
-            "max_workers": self.max_workers,
-            "collection_name": self.collection_name
-        }
-        
-        with open(files["metadata"], 'w') as f:
-            json.dump(initial_metadata, f, indent=2)
-        
-        return files
+        return results_file
     
     def write_result_incremental(self, result: Dict[str, Any], results_file: Path):
         """Write a single result to file immediately (thread-safe)."""
@@ -121,44 +96,6 @@ class SMTRunner:
                     f.flush()
             except Exception as e:
                 logger.error(f"Failed to write result: {e}")
-    
-    def update_progress(self, progress_file: Path, metadata_file: Path, 
-                      completed: int, successful: int, total: int):
-        """Update progress files (thread-safe)."""
-        with self.progress_lock:
-            try:
-                # Update progress
-                progress_data = {
-                    "completed": completed,
-                    "successful": successful,
-                    "failed": completed - successful,
-                    "total": total,
-                    "percentage": (completed / total * 100) if total > 0 else 0,
-                    "last_updated": datetime.now().isoformat()
-                }
-                
-                with open(progress_file, 'w') as f:
-                    json.dump(progress_data, f, indent=2)
-                
-                # Update metadata
-                try:
-                    with open(metadata_file, 'r') as f:
-                        metadata = json.load(f)
-                except:
-                    metadata = {}
-                
-                metadata.update({
-                    "completed_samples": completed,
-                    "successful_samples": successful,
-                    "failed_samples": completed - successful,
-                    "last_updated": datetime.now().isoformat()
-                })
-                
-                with open(metadata_file, 'w') as f:
-                    json.dump(metadata, f, indent=2)
-                    
-            except Exception as e:
-                logger.error(f"Failed to update progress: {e}")
     
     def create_worker_components(self) -> Dict[str, Any]:
         """Create fresh component instances for each worker (thread-safe)."""
@@ -308,23 +245,13 @@ class SMTRunner:
             logger.error(f"Failed to load utterances: {e}")
             return {"error": f"Failed to load utterances: {e}"}
         
-        # Create output files
-        output_files = self.create_output_files(dataset, model)
+        # Create results file
+        results_file = self.create_results_file(dataset, model)
         
         # Progress tracking
         completed_count = 0
         successful_count = 0
         total_count = len(utterances)
-        
-        # Update initial metadata
-        try:
-            with open(output_files["metadata"], 'r') as f:
-                metadata = json.load(f)
-            metadata["total_samples"] = total_count
-            with open(output_files["metadata"], 'w') as f:
-                json.dump(metadata, f, indent=2)
-        except Exception as e:
-            logger.error(f"Failed to update initial metadata: {e}")
         
         total_start_time = time.time()
         
@@ -344,7 +271,7 @@ class SMTRunner:
                     result = future.result()
                     
                     # Write result immediately
-                    self.write_result_incremental(result, output_files["results"])
+                    self.write_result_incremental(result, results_file)
                     
                     # Update counters
                     completed_count += 1
@@ -354,13 +281,6 @@ class SMTRunner:
                     # Log progress every 10 completions
                     if completed_count % 10 == 0:
                         logger.info(f"Progress: {completed_count}/{total_count} completed ({successful_count} successful)")
-                        self.update_progress(
-                            output_files["progress"], 
-                            output_files["metadata"],
-                            completed_count, 
-                            successful_count, 
-                            total_count
-                        )
                     
                 except Exception as e:
                     sample_data = future_to_sample[future]
@@ -372,21 +292,12 @@ class SMTRunner:
                         sample_id, f"Task execution failed: {e}", 
                         time.time(), sample_data
                     )
-                    self.write_result_incremental(error_result, output_files["results"])
+                    self.write_result_incremental(error_result, results_file)
                     completed_count += 1
         
         total_execution_time = time.time() - total_start_time
         
-        # Final progress update
-        self.update_progress(
-            output_files["progress"], 
-            output_files["metadata"],
-            completed_count, 
-            successful_count, 
-            total_count
-        )
-        
-        # Final metadata update
+        # Create final summary
         final_metadata = {
             "dataset": dataset,
             "method": "SMT_Threaded",
@@ -402,21 +313,14 @@ class SMTRunner:
             "max_workers": self.max_workers,
             "schema_collection": self.collection_name,
             "status": "completed",
-            "output_files": {
-                "results": str(output_files["results"]),
-                "progress": str(output_files["progress"]),
-                "metadata": str(output_files["metadata"])
-            }
+            "results_file": str(results_file)
         }
-        
-        with open(output_files["metadata"], 'w') as f:
-            json.dump(final_metadata, f, indent=2)
         
         logger.info(f"Evaluation completed for {dataset}")
         logger.info(f"Total samples: {total_count}, Successful: {successful_count}, Failed: {completed_count - successful_count}")
         logger.info(f"Overall accuracy: {final_metadata['overall_accuracy']:.3f}")
         logger.info(f"Execution time: {total_execution_time:.2f}s")
-        logger.info(f"Results written to: {output_files['results']}")
+        logger.info(f"Results written to: {results_file}")
         
         return final_metadata
     
@@ -687,9 +591,7 @@ def main():
                     print(f"Time: {metadata['execution_time']:.2f}s")
                     if metadata['execution_time'] > 0:
                         print(f"Speed: {metadata['total_samples']/metadata['execution_time']:.1f} samples/sec")
-                    print(f"\nOutput files:")
-                    for file_type, file_path in metadata['output_files'].items():
-                        print(f"  {file_type}: {file_path}")
+                    print(f"Results written to: {metadata['results_file']}")
                 else:
                     logger.error(f"Evaluation failed for {dataset} + {model}: {metadata}")
                     

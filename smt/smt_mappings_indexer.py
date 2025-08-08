@@ -12,6 +12,7 @@ from typing import Dict, List, Any, Optional
 import logging
 import re
 from datetime import datetime
+import hashlib
 
 # Configure logging
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,11 +29,11 @@ except ImportError as e:
 
 class SMTMappingsIndexer:
     """
-    Indexes SMT mapping files into ChromaDB for efficient semantic search.
+    Indexes SMT mapping files into ChromaDB for efficient semantic search and reuse.
     """
     
     def __init__(self, 
-                 chroma_db_path: str = "../data/chroma_db",
+                 chroma_db_path: str = "./chroma_db",
                  collection_name: str = "smt_mappings"):
         """
         Initialize the ChromaDB indexer.
@@ -44,16 +45,23 @@ class SMTMappingsIndexer:
         self.chroma_db_path = Path(chroma_db_path)
         self.collection_name = collection_name
         
+        # Ensure directory exists
+        self.chroma_db_path.mkdir(parents=True, exist_ok=True)
+        
         # Initialize ChromaDB client
-        #self.client = chromadb.PersistentClient(
-        #    path=str(self.chroma_db_path),
-        #    settings=Settings(anonymized_telemetry=False)
-        #)
-        self.client = None
         try:
-            self.client = chromadb.PersistentClient(path=str(self.chroma_db_path))
+            self.client = chromadb.PersistentClient(
+                path=str(self.chroma_db_path),
+                settings=Settings(
+                    anonymized_telemetry=False,
+                    allow_reset=True,
+                    is_persistent=True
+                )
+            )
+            logger.info(f"ChromaDB client initialized at {self.chroma_db_path}")
         except Exception as e:
-            logger.warning(f"PersistentClient failed: {e}")
+            logger.error(f"Failed to initialize ChromaDB client: {e}")
+            raise
         
         # Get or create collection
         try:
@@ -62,7 +70,10 @@ class SMTMappingsIndexer:
         except Exception:
             self.collection = self.client.create_collection(
                 name=collection_name,
-                metadata={"description": "SMT schema mapping files"}
+                metadata={
+                    "description": "SMT schema mapping files for reuse",
+                    "created": datetime.now().isoformat()
+                }
             )
             logger.info(f"Created new collection: {collection_name}")
     
@@ -77,7 +88,7 @@ class SMTMappingsIndexer:
             Dictionary with parsed mapping information
         """
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path, 'r', encoding='utf-8') as f:
                 mapping_data = json.load(f)
             
             # Extract source and target API names from filename
@@ -109,6 +120,9 @@ class SMTMappingsIndexer:
                                 "justification": mapping.get("justification", "")
                             })
             
+            # Generate content hash for change detection
+            content_hash = hashlib.md5(json.dumps(mapping_data, sort_keys=True).encode()).hexdigest()
+            
             parsed_mapping = {
                 "file_path": str(file_path),
                 "filename": filename,
@@ -118,6 +132,7 @@ class SMTMappingsIndexer:
                 "num_mappings": len(field_mappings),
                 "searchable_content": searchable_content,
                 "field_mappings": field_mappings,
+                "content_hash": content_hash,
                 "raw_data": mapping_data
             }
             
@@ -145,29 +160,25 @@ class SMTMappingsIndexer:
         content_parts.append(f"Mapping: {self._make_readable(mapping_name)}")
         
         # Add field mapping descriptions
-        content_parts.append("Field mappings:")
-        
+        field_descriptions = []
         for source_field, mappings in properties.items():
             if mappings and isinstance(mappings, list):
-                # Make source field readable
                 readable_source = self._make_readable(source_field)
-                content_parts.append(f"- {readable_source}")
                 
                 for mapping in mappings:
                     if isinstance(mapping, dict):
                         target_field = mapping.get("mapProperty", "")
                         justification = mapping.get("justification", "")
                         
-                        readable_target = self._make_readable(target_field)
-                        content_parts.append(f"  maps to {readable_target}")
-                        
-                        if justification:
-                            content_parts.append(f"  reason: {justification}")
+                        if target_field:
+                            readable_target = self._make_readable(target_field)
+                            field_desc = f"{readable_source} maps to {readable_target}"
+                            if justification:
+                                field_desc += f" ({justification})"
+                            field_descriptions.append(field_desc)
         
-        # Add domain-specific keywords
-        domain_keywords = self._extract_domain_keywords(source_api, target_api, properties)
-        if domain_keywords:
-            content_parts.append(f"Keywords: {' '.join(domain_keywords)}")
+        if field_descriptions:
+            content_parts.append(f"Field Mappings: {'; '.join(field_descriptions[:10])}")  # Limit to 10
         
         return "\n".join(content_parts)
     
@@ -179,74 +190,16 @@ class SMTMappingsIndexer:
         # Handle camelCase and PascalCase
         readable = re.sub(r'([a-z])([A-Z])', r'\1 \2', text)
         
-        # Handle snake_case and kebab-case
-        readable = readable.replace('_', ' ').replace('-', ' ')
-        
-        # Handle dots (field separators)
-        readable = readable.replace('.', ' ')
+        # Handle snake_case, kebab-case, and dots
+        readable = readable.replace('_', ' ').replace('-', ' ').replace('.', ' ')
         
         # Clean up multiple spaces
-        readable = re.sub(r'\s+', ' ', readable).strip()
+        readable = re.sub(r'\s+', ' ', readable).strip().lower()
         
-        return readable.lower()
-    
-    def _extract_domain_keywords(self, 
-                                source_api: str, 
-                                target_api: str, 
-                                properties: Dict[str, Any]) -> List[str]:
-        """Extract domain-specific keywords for better search."""
-        keywords = set()
-        
-        # Add API-specific keywords
-        api_keywords = {
-            "turbo": ["performance", "optimization", "virtual", "disk", "storage", "entity", "market"],
-            "instana": ["monitoring", "infrastructure", "application", "performance", "apm", "observability"],
-            "concert": ["security", "vulnerability", "scanning", "assessment", "compliance", "risk"]
-        }
-        
-        for api in [source_api, target_api]:
-            api_lower = api.lower()
-            for keyword_api, keywords_list in api_keywords.items():
-                if keyword_api in api_lower:
-                    keywords.update(keywords_list)
-        
-        # Extract keywords from field names
-        all_text = " ".join([
-            source_api, target_api,
-            " ".join(properties.keys()),
-            " ".join([
-                mapping.get("mapProperty", "") + " " + mapping.get("justification", "")
-                for mappings in properties.values() 
-                if isinstance(mappings, list)
-                for mapping in mappings
-                if isinstance(mapping, dict)
-            ])
-        ])
-        
-        # Common technical keywords
-        tech_keywords = [
-            "stats", "statistics", "metrics", "entities", "data", "information",
-            "response", "request", "api", "endpoint", "service", "application",
-            "count", "total", "hits", "results", "related", "num", "number"
-        ]
-        
-        for keyword in tech_keywords:
-            if keyword in all_text.lower():
-                keywords.add(keyword)
-        
-        return list(keywords)
+        return readable
     
     def index_mapping_files(self, mappings_dir: str, force_reindex: bool = False) -> int:
-        """
-        Index all mapping files in the specified directory.
-        
-        Args:
-            mappings_dir: Directory containing SMT mapping files
-            force_reindex: Whether to clear and recreate the index
-            
-        Returns:
-            Number of files successfully indexed
-        """
+        """Index all mapping files in the specified directory."""
         mappings_path = Path(mappings_dir)
         
         if not mappings_path.exists():
@@ -263,35 +216,42 @@ class SMTMappingsIndexer:
         
         # Clear collection if force reindex
         if force_reindex:
-            logger.info("🗑Force reindex: clearing existing collection")
-            self.client.delete_collection(self.collection_name)
+            logger.info("Force reindex: clearing existing collection")
+            try:
+                self.client.delete_collection(self.collection_name)
+            except:
+                pass
             self.collection = self.client.create_collection(
                 name=self.collection_name,
-                metadata={"description": "SMT schema mapping files"}
+                metadata={
+                    "description": "SMT schema mapping files for reuse",
+                    "created": datetime.now().isoformat()
+                }
             )
         
-        # Check existing documents to avoid duplicates
-        existing_ids = set()
+        # Check existing documents
+        existing_data = {}
         try:
-            existing_data = self.collection.get()
-            existing_ids = set(existing_data.get("ids", []))
-            logger.info(f"Found {len(existing_ids)} existing documents in collection")
+            existing_results = self.collection.get()
+            existing_data = {
+                doc_id: metadata.get("content_hash", "")
+                for doc_id, metadata in zip(
+                    existing_results.get("ids", []),
+                    existing_results.get("metadatas", [])
+                )
+            }
+            logger.info(f"Found {len(existing_data)} existing mappings in collection")
         except Exception as e:
             logger.warning(f"Could not check existing documents: {e}")
         
         # Process each mapping file
         indexed_count = 0
         skipped_count = 0
+        updated_count = 0
         
         for mapping_file in mapping_files:
             try:
-                # Create document ID from filename
                 doc_id = mapping_file.stem
-                
-                # Skip if already indexed (unless force reindex)
-                if not force_reindex and doc_id in existing_ids:
-                    skipped_count += 1
-                    continue
                 
                 # Parse mapping file
                 parsed_mapping = self.parse_mapping_file(mapping_file)
@@ -300,8 +260,15 @@ class SMTMappingsIndexer:
                     logger.warning(f"Skipping empty/invalid file: {mapping_file}")
                     continue
                 
-                # Prepare document for ChromaDB
-                document_text = parsed_mapping["searchable_content"]
+                # Check if update needed
+                current_hash = parsed_mapping["content_hash"]
+                existing_hash = existing_data.get(doc_id, "")
+                
+                if not force_reindex and doc_id in existing_data and current_hash == existing_hash:
+                    skipped_count += 1
+                    continue
+                
+                # Prepare metadata
                 metadata = {
                     "filename": parsed_mapping["filename"],
                     "source_api": parsed_mapping["source_api"],
@@ -309,44 +276,48 @@ class SMTMappingsIndexer:
                     "mapping_name": parsed_mapping["mapping_name"],
                     "num_mappings": parsed_mapping["num_mappings"],
                     "file_path": parsed_mapping["file_path"],
+                    "content_hash": current_hash,
                     "indexed_at": datetime.now().isoformat()
                 }
                 
-                # Add to ChromaDB
-                self.collection.add(
-                    documents=[document_text],
-                    metadatas=[metadata],
-                    ids=[doc_id]
-                )
+                # Add or update in ChromaDB
+                if doc_id in existing_data:
+                    # Update existing
+                    self.collection.update(
+                        documents=[parsed_mapping["searchable_content"]],
+                        metadatas=[metadata],
+                        ids=[doc_id]
+                    )
+                    updated_count += 1
+                else:
+                    # Add new
+                    self.collection.add(
+                        documents=[parsed_mapping["searchable_content"]],
+                        metadatas=[metadata],
+                        ids=[doc_id]
+                    )
+                    indexed_count += 1
                 
-                indexed_count += 1
-                
-                if indexed_count % 50 == 0:
-                    logger.info(f"   Indexed {indexed_count}/{len(mapping_files)} files...")
+                if (indexed_count + updated_count) % 50 == 0:
+                    logger.info(f"   Processed {indexed_count + updated_count}/{len(mapping_files)} files...")
                 
             except Exception as e:
-                logger.error(f"Error indexing {mapping_file}: {e}")
+                logger.error(f"Error processing {mapping_file}: {e}")
                 continue
         
+        total_processed = indexed_count + updated_count
         logger.info(f"Indexing complete:")
-        logger.info(f"   Indexed: {indexed_count} files")
-        logger.info(f"   Skipped: {skipped_count} files (already indexed)")
-        logger.info(f"   Total in collection: {len(existing_ids) + indexed_count}")
+        logger.info(f"   New mappings indexed: {indexed_count}")
+        logger.info(f"   Mappings updated: {updated_count}")
+        logger.info(f"   Skipped (unchanged): {skipped_count}")
+        logger.info(f"   Total in collection: {len(existing_data) + indexed_count}")
         
-        return indexed_count
-    
+        return total_processed
     
     def search_existing_mappings(self, query: str, n_results: int = 5) -> List[Dict[str, Any]]:
         """
         Search for existing mappings using semantic similarity.
-        This is the method expected by smt_api_retriever.py
-        
-        Args:
-            query: Natural language query describing the mapping task
-            n_results: Number of results to return
-            
-        Returns:
-            List of mapping matches in the format expected by api_retriever
+        This is the main method expected by the API retriever.
         """
         try:
             results = self.collection.query(
@@ -354,21 +325,31 @@ class SMTMappingsIndexer:
                 n_results=n_results
             )
             
-            # Convert to format expected by api_retriever
+            # Convert to expected format
             matches = []
             
             if results and 'documents' in results and results['documents']:
                 for i in range(len(results['documents'][0])):
+                    doc_id = results['ids'][0][i]
                     doc = results['documents'][0][i]
                     metadata = results['metadatas'][0][i] if 'metadatas' in results else {}
                     distance = results['distances'][0][i] if 'distances' in results else 0.0
                     
+                    similarity_score = 1.0 - distance
+                    
+                    # Apply minimum threshold
+                    if similarity_score < 0.2:
+                        continue
+                    
                     match = {
-                        "mapping_id": metadata.get("filename", f"mapping_{i}"),
+                        "mapping_id": doc_id,
                         "description": doc,
                         "metadata": metadata,
-                        "similarity_score": 1.0 - distance,  # Convert distance to similarity
-                        "file_path": metadata.get("file_path", "")
+                        "similarity_score": similarity_score,
+                        "file_path": metadata.get("file_path", ""),
+                        "source_api": metadata.get("source_api", ""),
+                        "target_api": metadata.get("target_api", ""),
+                        "num_mappings": metadata.get("num_mappings", 0)
                     }
                     matches.append(match)
             
@@ -376,41 +357,6 @@ class SMTMappingsIndexer:
             
         except Exception as e:
             logger.error(f"Error searching existing mappings: {e}")
-            return []
-    
-    # this is not used anymore - TODO: delete
-    def search_mappings(self, query: str, n_results: int = 5) -> List[Dict[str, Any]]:
-        """
-        Search for relevant mappings using semantic similarity.
-        
-        Args:
-            query: Natural language query
-            n_results: Number of results to return
-            
-        Returns:
-            List of matching mapping information
-        """
-        try:
-            results = self.collection.query(
-                query_texts=[query],
-                n_results=n_results
-            )
-            
-            # Process results
-            matches = []
-            for i in range(len(results.get("ids", [[]])[0])):
-                match = {
-                    "id": results["ids"][0][i],
-                    "distance": results["distances"][0][i],
-                    "metadata": results["metadatas"][0][i],
-                    "document": results["documents"][0][i]
-                }
-                matches.append(match)
-            
-            return matches
-            
-        except Exception as e:
-            logger.error(f"Error searching mappings: {e}")
             return []
     
     def get_mapping_by_apis(self, source_api: str, target_api: str) -> Optional[Dict[str, Any]]:
@@ -433,12 +379,16 @@ class SMTMappingsIndexer:
             
             for doc_id in possible_ids:
                 try:
-                    result = self.collection.get(ids=[doc_id])
+                    result = self.collection.get(
+                        ids=[doc_id],
+                        include=["documents", "metadatas"]
+                    )
                     if result.get("ids") and len(result["ids"]) > 0:
                         return {
-                            "id": result["ids"][0],
+                            "mapping_id": result["ids"][0],
                             "metadata": result["metadatas"][0],
-                            "document": result["documents"][0]
+                            "description": result["documents"][0],
+                            "file_path": result["metadatas"][0].get("file_path", "")
                         }
                 except:
                     continue
@@ -452,16 +402,21 @@ class SMTMappingsIndexer:
     def get_collection_stats(self) -> Dict[str, Any]:
         """Get statistics about the ChromaDB collection."""
         try:
-            count = self.collection.count()
+            all_data = self.collection.get(include=["metadatas"])
             
-            # Get sample of metadata to analyze
-            sample_data = self.collection.get(limit=10)
+            if not all_data["ids"]:
+                return {"total_mappings": 0}
             
+            metadatas = all_data["metadatas"]
+            
+            # Calculate statistics
+            total_mappings = len(metadatas)
             api_pairs = set()
             source_apis = set()
             target_apis = set()
+            total_field_mappings = 0
             
-            for metadata in sample_data.get("metadatas", []):
+            for metadata in metadatas:
                 source_api = metadata.get("source_api", "")
                 target_api = metadata.get("target_api", "")
                 
@@ -469,26 +424,30 @@ class SMTMappingsIndexer:
                     api_pairs.add(f"{source_api}-{target_api}")
                     source_apis.add(source_api)
                     target_apis.add(target_api)
+                
+                total_field_mappings += metadata.get("num_mappings", 0)
             
             return {
-                "total_mappings": count,
-                "sample_api_pairs": len(api_pairs),
-                "sample_source_apis": len(source_apis),
-                "sample_target_apis": len(target_apis),
+                "total_mappings": total_mappings,
+                "total_field_mappings": total_field_mappings,
+                "unique_api_pairs": len(api_pairs),
+                "unique_source_apis": len(source_apis),
+                "unique_target_apis": len(target_apis),
+                "avg_fields_per_mapping": total_field_mappings / total_mappings if total_mappings > 0 else 0,
                 "collection_name": self.collection_name,
                 "db_path": str(self.chroma_db_path)
             }
             
         except Exception as e:
             logger.error(f"Error getting collection stats: {e}")
-            return {}
+            return {"error": str(e)}
 
 
 def main():
-    """Main entry point for the ChromaDB indexer."""
-    parser = argparse.ArgumentParser(description="Index SMT mapping files into ChromaDB")
+    """Main entry point for the mappings indexer."""
+    parser = argparse.ArgumentParser(description="SMT Mappings Indexer")
     parser.add_argument("--mappings-dir", required=True, help="Directory containing SMT mapping files")
-    parser.add_argument("--chroma-db-path", default="../data/chroma_db", help="Path to store ChromaDB data")
+    parser.add_argument("--chroma-db-path", default="./chroma_db", help="Path to store ChromaDB data")
     parser.add_argument("--collection-name", default="smt_mappings", help="ChromaDB collection name")
     parser.add_argument("--force-reindex", action="store_true", help="Force reindex (clear existing)")
     parser.add_argument("--test-query", help="Test query to search after indexing")
@@ -499,7 +458,7 @@ def main():
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
     
-    logger.info(f"SMT ChromaDB Indexer")
+    logger.info(f"SMT Mappings ChromaDB Indexer")
     logger.info(f"Mappings directory: {args.mappings_dir}")
     logger.info(f"ChromaDB path: {args.chroma_db_path}")
     logger.info(f"Collection name: {args.collection_name}")
@@ -511,7 +470,7 @@ def main():
     )
     
     # Index mapping files
-    indexed_count = indexer.index_mapping_files(
+    processed_count = indexer.index_mapping_files(
         mappings_dir=args.mappings_dir,
         force_reindex=args.force_reindex
     )
@@ -525,18 +484,18 @@ def main():
     # Test search if query provided
     if args.test_query:
         print(f"\nTesting search with query: '{args.test_query}'")
-        results = indexer.search_mappings(args.test_query, n_results=3)
+        results = indexer.search_existing_mappings(args.test_query, n_results=3)
         
         for i, result in enumerate(results, 1):
             print(f"\n   Result {i}:")
-            print(f"   ID: {result['id']}")
-            print(f"   Distance: {result['distance']:.3f}")
-            print(f"   Source API: {result['metadata'].get('source_api', 'N/A')}")
-            print(f"   Target API: {result['metadata'].get('target_api', 'N/A')}")
-            print(f"   Mappings: {result['metadata'].get('num_mappings', 0)}")
+            print(f"   Mapping ID: {result['mapping_id']}")
+            print(f"   Similarity: {result['similarity_score']:.3f}")
+            print(f"   Source API: {result['source_api']}")
+            print(f"   Target API: {result['target_api']}")
+            print(f"   Field Mappings: {result['num_mappings']}")
     
     print(f"\nIndexing completed successfully!")
-    print(f"   Indexed {indexed_count} files")
+    print(f"   Processed {processed_count} mapping files")
     print(f"   ChromaDB collection: {args.collection_name}")
     print(f"   Database location: {args.chroma_db_path}")
 
