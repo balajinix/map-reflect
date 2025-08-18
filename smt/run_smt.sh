@@ -7,6 +7,8 @@ set -e  # Exit on any error
 
 # Default values
 DATASET="ITOps"
+MODEL="granite"
+MODEL="llama"
 MODEL="mistral-large"
 SAMPLES=""
 TIMEOUT="6000"

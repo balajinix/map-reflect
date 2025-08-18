@@ -78,9 +78,12 @@ class ReActEvaluationRunner:
         """Load evaluation utterances for a specific dataset using shared loader."""
         return self.dataset_loader.load_evaluation_utterances(dataset)
     
-    def run_single_evaluation(self, utterance: str, sample_id: str, model: str) -> Dict[str, Any]:
+    def run_single_evaluation(self, utterance_data: Dict[str, Any], model: str) -> Dict[str, Any]:
         """Run ReAct agent on a single utterance and return standardized result."""
         start_time = time.time()
+        
+        sample_id = utterance_data.get("sample_id", "unknown")
+        utterance = utterance_data.get("utterance", "")
         
         try:
             logger.info(f"Running ReAct agent on sample {sample_id}")
@@ -101,8 +104,9 @@ class ReActEvaluationRunner:
             # Extract predicted mappings from ReAct agent result
             predicted_mapping = self._extract_predicted_mappings(mapping_result)
             
-            # Calculate accuracy (placeholder - would need ground truth)
-            accuracy = self._calculate_accuracy_placeholder(predicted_mapping, sample_id)
+            # Calculate accuracy using ground truth if available
+            ground_truth = utterance_data.get("ground_truth_mapping", {})
+            accuracy = self._calculate_accuracy(ground_truth, predicted_mapping) if ground_truth else self._calculate_accuracy_placeholder(predicted_mapping)
             
             logger.info(f"ReAct agent completed for {sample_id} in {execution_time:.2f}s")
             logger.info(f"   Source schema: {agent_result.get('source_schema', 'N/A')}")
@@ -115,11 +119,16 @@ class ReActEvaluationRunner:
                 "accuracy": accuracy,
                 "source_schema": agent_result.get("source_schema", ""),
                 "target_schema": agent_result.get("target_schema", ""),
-                "schema_selection_reasoning": agent_result.get("schema_selection_reasoning", ""),
+                "schema_selection_reasoning": agent_result.get("schema_selection_reasoning", "ReAct agent schema selection"),
                 "execution_time": execution_time,
                 "success": success,
                 "error_message": agent_result.get("error"),
                 "agent_raw_result": mapping_result,
+                "expected_source": utterance_data.get("expected_source", ""),
+                "expected_target": utterance_data.get("expected_target", ""),
+                "original_utterance": utterance,
+                "ground_truth_mapping": ground_truth,
+                "timestamp": datetime.now().isoformat(),
                 "schema_similarities": agent_result.get("schema_similarities", [])[:5]  # Top 5 only
             }
             
@@ -138,6 +147,11 @@ class ReActEvaluationRunner:
                 "success": False,
                 "error_message": str(e),
                 "agent_raw_result": {},
+                "expected_source": utterance_data.get("expected_source", ""),
+                "expected_target": utterance_data.get("expected_target", ""),
+                "original_utterance": utterance,
+                "ground_truth_mapping": utterance_data.get("ground_truth_mapping", {}),
+                "timestamp": datetime.now().isoformat(),
                 "schema_similarities": []
             }
     
@@ -160,16 +174,39 @@ class ReActEvaluationRunner:
         
         return predicted_mapping
     
-    def _calculate_accuracy_placeholder(self, predicted_mapping: Dict[str, str], sample_id: str) -> float:
-        """Calculate accuracy against ground truth (placeholder implementation)."""
-        # TODO: Implement actual ground truth comparison
-        # For now, return a realistic accuracy based on mapping completeness
+    def _calculate_accuracy(self, ground_truth: Dict[str, Any], predicted: Dict[str, Any]) -> float:
+        """Calculate accuracy using the same method as SMT runner."""
+        if not ground_truth:
+            return 0.0
         
+        if not predicted:
+            return 0.0
+
+        # Exact match check first
+        gt_pairs = set(ground_truth.items())
+        pred_pairs = set(predicted.items())
+        exact_matches = len(gt_pairs.intersection(pred_pairs))
+
+        if exact_matches > 0:
+            return exact_matches / len(gt_pairs)
+
+        # Fuzzy matching for partial credit
+        correct_mappings = 0
+        for gt_source, gt_target in ground_truth.items():
+            for pred_source, pred_target in predicted.items():
+                if (gt_source.lower() in pred_source.lower() or pred_source.lower() in gt_source.lower()) and \
+                   (gt_target.lower() in pred_target.lower() or pred_target.lower() in gt_target.lower()):
+                    correct_mappings += 1
+                    break
+
+        return correct_mappings / len(ground_truth)
+    
+    def _calculate_accuracy_placeholder(self, predicted_mapping: Dict[str, str]) -> float:
+        """Calculate accuracy placeholder - same as SMT runner."""
         if not predicted_mapping:
             return 0.0
         
-        # Simulate accuracy based on number of mappings found
-        # This is a placeholder until we have actual ground truth
+        # Placeholder accuracy based on number of mappings
         num_mappings = len(predicted_mapping)
         if num_mappings >= 5:
             return 0.85
@@ -200,18 +237,7 @@ class ReActEvaluationRunner:
             logger.info(f"Processing utterance {i+1}/{len(utterances)}: {utterance_data['sample_id']}")
             
             # Run single evaluation
-            result = self.run_single_evaluation(
-                utterance_data["utterance"],
-                utterance_data["sample_id"],
-                model
-            )
-            
-            # Add expected information for analysis
-            result["expected_source"] = utterance_data.get("expected_source", "")
-            result["expected_target"] = utterance_data.get("expected_target", "")
-            result["original_utterance"] = utterance_data["utterance"]
-            result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
-            
+            result = self.run_single_evaluation(utterance_data, model)
             results.append(result)
             
             if (i + 1) % 2 == 0:
@@ -232,28 +258,17 @@ class ReActEvaluationRunner:
         logger.info(f"   Overall accuracy: {overall_accuracy:.3f}")
         logger.info(f"   Total time: {total_execution_time:.2f}s")
         
-        # Create final result structure
-        final_result = {
-            "metadata": {
-                "dataset": dataset,
-                "method": "ReAct",
-                "model": model,
-                "execution_time": total_execution_time,
-                "timestamp": datetime.now().isoformat(),
-                "total_samples": len(utterances),
-                "successful_samples": len(successful_results),
-                "overall_accuracy": overall_accuracy,
-                "agent_type": "LangGraph",
-                "schema_dir": str(self.schema_dir)
-            },
-            "results": results
+        # Return results in format compatible with evaluation script
+        # The evaluation script expects either:
+        # 1. {"results": [list of result objects]} (JSON format)
+        # 2. Direct list of result objects (JSONL format)
+        return {
+            "results": results  # This will be compatible with the evaluation script
         }
-        
-        return final_result
     
     def save_results(self, results: dict, dataset: str, model: str):
         """Save results to JSON file with NumPy-safe serialization."""
-        output_file = self.results_dir / f"{dataset}_{model}.json"
+        output_file = self.results_dir / f"{dataset.lower()}_{model}.json"
  
         def convert_numpy_types(obj):
             """Convert NumPy types to Python native types for JSON serialization"""
@@ -278,7 +293,7 @@ class ReActEvaluationRunner:
             with open(output_file, 'w') as f:
                 json.dump(serializable_results, f, indent=2)
 
-            logger.info(f"💾 Results saved to {output_file}")
+            logger.info(f"Results saved to {output_file}")
 
         except Exception as e:
             logger.error(f"Failed to save results to {output_file}: {e}")
@@ -286,18 +301,20 @@ class ReActEvaluationRunner:
 
     def print_evaluation_summary(self, results: Dict[str, Any]):
         """Print a summary of the evaluation results."""
-        metadata = results.get("metadata", {})
         results_list = results.get("results", [])
+        
+        total_samples = len(results_list)
+        successful_samples = len([r for r in results_list if r.get("success", False)])
+        overall_accuracy = sum(r.get("accuracy", 0.0) for r in results_list) / total_samples if total_samples > 0 else 0.0
+        total_time = sum(r.get("execution_time", 0.0) for r in results_list)
         
         print(f"\n{'='*60}")
         print(f"ReAct Evaluation Summary")
         print(f"{'='*60}")
-        print(f"Dataset: {metadata.get('dataset', 'N/A')}")
-        print(f"Model: {metadata.get('model', 'N/A')}")
-        print(f"Total Samples: {metadata.get('total_samples', 0)}")
-        print(f"Successful: {metadata.get('successful_samples', 0)}")
-        print(f"Overall Accuracy: {metadata.get('overall_accuracy', 0.0):.3f}")
-        print(f"Total Time: {metadata.get('execution_time', 0.0):.2f}s")
+        print(f"Total Samples: {total_samples}")
+        print(f"Successful: {successful_samples}")
+        print(f"Overall Accuracy: {overall_accuracy:.3f}")
+        print(f"Total Time: {total_time:.2f}s")
         
         print(f"\nIndividual Results:")
         print(f"{'Sample ID':<15} {'Success':<8} {'Accuracy':<10} {'Source Schema':<15} {'Target Schema':<15}")

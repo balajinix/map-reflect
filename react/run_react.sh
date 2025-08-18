@@ -24,10 +24,12 @@ fi
 # Create data directory if it doesn't exist (one level up)
 mkdir -p ../data
 
-# Default parameters
-DATASETS="ITOps,NL2GQL,GraphQLRestBench"
-MODELS="granite,llama,qwen"
-SCHEMA_DIR="../data/graphql"
+# Default parameters - match evaluation script defaults
+DATASETS="itops,nl2gql"
+DATASETS="itops"
+MODELS="granite,llama,mistral-large"
+MODELS="granite"
+SCHEMA_DIR="../data/itops_graphql"
 QUICK=false
 VERBOSE=false
 
@@ -58,16 +60,16 @@ while [[ $# -gt 0 ]]; do
             echo "Usage: $0 [OPTIONS]"
             echo ""
             echo "Options:"
-            echo "  --datasets DATASETS    Comma-separated list of datasets (default: ITOps,NL2GQL,GraphQLRestBench)"
-            echo "  --models MODELS        Comma-separated list of models (default: granite,llama,qwen)"
-            echo "  --schema-dir DIR       Directory containing GraphQL schemas (default: ../../data/graphql)"
+            echo "  --datasets DATASETS    Comma-separated list of datasets (default: itops,nl2gql)"
+            echo "  --models MODELS        Comma-separated list of models (default: granite,llama,mistral-large)"
+            echo "  --schema-dir DIR       Directory containing GraphQL schemas (default: ../data/graphql)"
             echo "  --quick               Quick evaluation with minimal samples"
             echo "  --verbose             Enable verbose logging"
             echo "  --help                Show this help message"
             echo ""
             echo "Examples:"
             echo "  $0 --quick                           # Quick evaluation"
-            echo "  $0 --datasets ITOps --models llama   # Specific dataset and model"
+            echo "  $0 --datasets itops --models llama   # Specific dataset and model"
             echo "  $0 --verbose                         # Enable debug logging"
             exit 0
             ;;
@@ -138,7 +140,7 @@ if [ -d "results" ]; then
     echo "Results saved in: ./results/"
     echo ""
     echo "Generated files:"
-    ls -la results/ | grep ".json"
+    ls -la results/ | grep -E "\.(json|jsonl)$"
 else
     echo ""
     echo "No results directory found. Check for errors above."

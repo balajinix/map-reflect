@@ -23,6 +23,10 @@ logger = logging.getLogger(__name__)
 # Add the data directory to Python path for shared components
 sys.path.insert(0, str(Path(__file__).parent.parent / "data"))
 
+
+from dotenv import load_dotenv
+load_dotenv()
+
 # Import components
 try:
     from smt_api_retriever import SMTAPIRetriever
@@ -378,7 +382,7 @@ class SMTRunner:
                 smt_result = solve(
                     source_schema_dict=source_schema_dict,
                     target_schema_dict=target_schema_dict,
-                    pipeline_name="genai_mapping"
+                    pipeline_name="graphql_pipeline"
                 )
                 
                 # Cache result
