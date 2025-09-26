@@ -38,7 +38,7 @@ class ResultCollector:
             'react': 'react/results', 
             'gnn': 'gnn/results',
             'anytool': 'anytool/results',
-            'mapreflect': 'mapreflect/results'
+            'map_reflect': 'map_reflect/results'
         }
     
     def get_result_file_path(self, method: str, dataset: str, model: str) -> Optional[Path]:
@@ -293,7 +293,7 @@ class EvaluationAnalyzer:
             print(f"  Total: {total_count} results, Overall Accuracy: {overall_accuracy:.3f}")
             
             # Print method results
-            for method in ['smt', 'react', 'gnn', 'anytool', 'mapreflect']:
+            for method in ['smt', 'react', 'gnn', 'anytool', 'map_reflect']:
                 if method in combo['methods']:
                     method_data = combo['methods'][method]
                     count = method_data['count']
@@ -311,7 +311,7 @@ class EvaluationAnalyzer:
         
         combinations = stats['combinations']
         datasets = sorted(self.df['dataset'].unique())
-        methods = ['smt', 'react', 'gnn', 'anytool', 'mapreflect']
+        methods = ['smt', 'react', 'gnn', 'anytool', 'map_reflect']
         models = sorted(self.df['model'].unique())
         
         latex_content = []

@@ -16,8 +16,8 @@ fi
 
 # Default parameters
 DATASETS="itops,nl2gql"
-METHODS="smt,react,gnn,anytool,mapreflect"
-MODELS="granite,llama,mistral-large"
+METHODS="smt,react,gnn,anytool,map_reflect"
+MODELS="granite,llama-3-70b-instruct,mistral-large"
 OUTPUT_DIR="./results"
 BASE_DIR="."
 CLEAN=false
@@ -54,7 +54,7 @@ while [[ $# -gt 0 ]]; do
             echo ""
             echo "Options:"
             echo "  --datasets DATASETS  Comma-separated list (default: itops,nl2gql)"
-            echo "  --methods METHODS    Comma-separated list (default: smt,react,gnn,anytool,mapreflect)"
+            echo "  --methods METHODS    Comma-separated list (default: smt,react,gnn,anytool,map_reflect)"
             echo "  --models MODELS      Comma-separated list (default: granite,llama,mistral-large)"
             echo "  --output-dir DIR     Output directory (default: ./results)"
             echo "  --base-dir DIR       Base directory containing methods/ folder (default: .)"

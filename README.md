@@ -1,6 +1,6 @@
 # GraphQL Schema Mapping
 
-Code for evaluating different schema mapping methods for the AAAI paper "Map-Reflect: GraphQL Schema Mapping using Self Reflection". The evaluation compares 5 methods across 3 datasets using 3 language models.
+Code for evaluating different schema mapping methods for the VLDB paper "Map-Reflect: GraphQL Schema Mapping using Self Reflection". The evaluation compares 5 methods across 3 datasets using 3 language models.
 
 ## Methods
 
