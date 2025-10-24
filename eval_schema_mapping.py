@@ -35,7 +35,7 @@ class ResultCollector:
         self.base_dir = Path(base_dir)
         self.method_dirs = {
             'smt': 'smt/results',
-            'react': 'react/results', 
+            'react': 'react/results',
             'gnn': 'gnn/results',
             'anytool': 'anytool/results',
             'map_reflect': 'map_reflect/results'
@@ -46,23 +46,21 @@ class ResultCollector:
         method_dir = self.method_dirs.get(method.lower())
         if not method_dir:
             return None
-        
-        possible_names = [
-            f"{dataset}_{model}.jsonl",
-            f"{dataset.lower()}_{model}.jsonl",
-            f"{dataset.upper()}_{model}.jsonl",
-            f"{dataset}_{model}.json",           # ITOps_granite.json
-            f"{dataset.lower()}_{model}.json",   # itops_granite.json
-            f"{dataset.upper()}_{model}.json",   # ITOPS_granite.json
-        ]
-        
-        for name in possible_names:
-            result_file = self.base_dir / method_dir / name
-            if result_file.exists():
-                return result_file
-        
+
+        # Create unique case combinations for dataset and model
+        dataset_cases = sorted(list(set([dataset, dataset.lower(), dataset.upper()])))
+        model_cases = sorted(list(set([model, model.lower(), model.upper()])))
+        extensions = ['.jsonl', '.json']
+
+        for d_case in dataset_cases:
+            for m_case in model_cases:
+                for ext in extensions:
+                    result_file = self.base_dir / method_dir / f"{d_case}_{m_case}{ext}"
+                    if result_file.exists():
+                        return result_file # Return on the first match
+
         return None
-    
+
     def load_result_file(self, file_path: Path) -> Optional[List[Dict[str, Any]]]:
         """Load a result file - supports both JSONL and JSON formats."""
         try:
@@ -103,7 +101,7 @@ class ResultCollector:
                     
                     if not result_file:
                         method_dir = self.method_dirs.get(method.lower(), f"{method.lower()}/results/")
-                        print(f"Missing result file: {method_dir}/{dataset}_{model}.jsonl")
+                        print(f"Missing result file: No match for {method_dir}/{dataset}_{model}.[jsonl/json]")
                         continue
                     
                     result_data = self.load_result_file(result_file)

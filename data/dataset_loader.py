@@ -34,6 +34,7 @@ class DatasetLoader:
             List of utterance dictionaries
         """
         
+        utterances = []
         # Try to load from actual dataset file
         dataset_file = self.data_dir / self.datasets.get(dataset, f"{dataset.lower()}_dataset.jsonl")
         

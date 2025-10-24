@@ -28,7 +28,7 @@ mkdir -p ../data
 DATASETS="itops,nl2gql"
 DATASETS="itops"
 MODELS="granite,llama,mistral-large"
-MODELS="granite"
+#MODELS="granite"
 SCHEMA_DIR="../data/itops_graphql"
 QUICK=false
 VERBOSE=false

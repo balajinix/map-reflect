@@ -1,13 +1,1577 @@
 {
-    "Concert": {
-        "ApiKey": [
+    "apptio": {
+        "AggregatesEntry": [
             {
-                "name": "concert_ApiKey.apikey",
-                "description": "API key value",
+                "name": "apptio_AggregatesEntry.basis",
+                "description": "",
                 "type": "String",
-                "schema_component": "concert_ApiKey"
+                "schema_component": "apptio_AggregatesEntry"
+            },
+            {
+                "name": "apptio_AggregatesEntry.cost",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_AggregatesEntry"
+            },
+            {
+                "name": "apptio_AggregatesEntry.idleSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_AggregatesEntry"
+            },
+            {
+                "name": "apptio_AggregatesEntry.optimizedSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_AggregatesEntry"
+            },
+            {
+                "name": "apptio_AggregatesEntry.rightsizeSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_AggregatesEntry"
             }
         ],
+        "BudgetResultEntry": [
+            {
+                "name": "apptio_BudgetResultEntry.basis",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_BudgetResultEntry"
+            },
+            {
+                "name": "apptio_BudgetResultEntry.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_BudgetResultEntry"
+            },
+            {
+                "name": "apptio_BudgetResultEntry.months.month",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_BudgetResultEntry.months"
+            },
+            {
+                "name": "apptio_BudgetResultEntry.months.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_BudgetResultEntry.months"
+            },
+            {
+                "name": "apptio_BudgetResultEntry.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_BudgetResultEntry"
+            },
+            {
+                "name": "apptio_BudgetResultEntry.ownerId",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_BudgetResultEntry"
+            },
+            {
+                "name": "apptio_BudgetResultEntry.viewId",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_BudgetResultEntry"
+            }
+        ],
+        "Budgets": [
+            {
+                "name": "apptio_Budgets.result.basis",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Budgets.result"
+            },
+            {
+                "name": "apptio_Budgets.result.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Budgets.result"
+            },
+            {
+                "name": "apptio_Budgets.result.months.month",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Budgets.result.months"
+            },
+            {
+                "name": "apptio_Budgets.result.months.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_Budgets.result.months"
+            },
+            {
+                "name": "apptio_Budgets.result.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Budgets.result"
+            },
+            {
+                "name": "apptio_Budgets.result.ownerId",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_Budgets.result"
+            },
+            {
+                "name": "apptio_Budgets.result.viewId",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_Budgets.result"
+            }
+        ],
+        "Clusters": [
+            {
+                "name": "apptio_Clusters.result.clusters.firstSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Clusters.result.clusters"
+            },
+            {
+                "name": "apptio_Clusters.result.clusters.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Clusters.result.clusters"
+            },
+            {
+                "name": "apptio_Clusters.result.clusters.lastSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Clusters.result.clusters"
+            },
+            {
+                "name": "apptio_Clusters.result.clusters.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Clusters.result.clusters"
+            },
+            {
+                "name": "apptio_Clusters.result.clusters.nodes.resourceIdentifier",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Clusters.result.clusters.nodes"
+            },
+            {
+                "name": "apptio_Clusters.result.clusters.nodes.vendor",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Clusters.result.clusters.nodes"
+            },
+            {
+                "name": "apptio_Clusters.result.clusters.provisionedAt",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Clusters.result.clusters"
+            },
+            {
+                "name": "apptio_Clusters.result.meta.firstSeenDate",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Clusters.result.meta"
+            },
+            {
+                "name": "apptio_Clusters.result.meta.orgHasData",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_Clusters.result.meta"
+            },
+            {
+                "name": "apptio_Clusters.result.meta.orgHasProvisioned",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_Clusters.result.meta"
+            }
+        ],
+        "ClustersEntry": [
+            {
+                "name": "apptio_ClustersEntry.firstSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_ClustersEntry"
+            },
+            {
+                "name": "apptio_ClustersEntry.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_ClustersEntry"
+            },
+            {
+                "name": "apptio_ClustersEntry.lastSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_ClustersEntry"
+            },
+            {
+                "name": "apptio_ClustersEntry.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_ClustersEntry"
+            },
+            {
+                "name": "apptio_ClustersEntry.nodes.resourceIdentifier",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_ClustersEntry.nodes"
+            },
+            {
+                "name": "apptio_ClustersEntry.nodes.vendor",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_ClustersEntry.nodes"
+            },
+            {
+                "name": "apptio_ClustersEntry.provisionedAt",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_ClustersEntry"
+            }
+        ],
+        "MonthsEntry": [
+            {
+                "name": "apptio_MonthsEntry.month",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_MonthsEntry"
+            },
+            {
+                "name": "apptio_MonthsEntry.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_MonthsEntry"
+            }
+        ],
+        "NodesEntry": [
+            {
+                "name": "apptio_NodesEntry.resourceIdentifier",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_NodesEntry"
+            },
+            {
+                "name": "apptio_NodesEntry.vendor",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_NodesEntry"
+            }
+        ],
+        "RecommendationMeta": [
+            {
+                "name": "apptio_RecommendationMeta.aggregates.basis",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationMeta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationMeta.aggregates.cost",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationMeta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationMeta.aggregates.idleSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationMeta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationMeta.aggregates.optimizedSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationMeta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationMeta.aggregates.rightsizeSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationMeta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationMeta.info",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "apptio_RecommendationMeta"
+            },
+            {
+                "name": "apptio_RecommendationMeta.totalCount",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationMeta"
+            }
+        ],
+        "RecommendationResultEntry": [
+            {
+                "name": "apptio_RecommendationResultEntry.accountName",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.availabilityZone",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.cpuCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.cpuMax",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.currencyCode",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.daysInactive",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.defaultCrossArchitecture",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.defaultCurrentGen",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.defaultMemoryFit",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.defaultSameFamily",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.gpuCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.gpuMax",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.gpuMemoryCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.gpuMemoryMax",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.hoursRunning",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.idle",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.instanceFamily",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.lastSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.localCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.localDrives",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.maxInstanceCount",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.memoryCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.memoryMax",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.minInstanceCount",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.networkCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.nodeType",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.os",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.provider",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.action",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.cpuCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.cpuRatio",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.cpuRisk",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.currentGen",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.defaultsOrder",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.diskRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.diskXPutCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.gpuCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.gpuMemoryCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.gpuMemoryRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.gpuRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.inDefaults",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.instanceFamily",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.localCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.localDrives",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.maxInstances",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.memoryCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.memoryFit",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.memoryRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.memoryRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.minInstances",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.networkCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.networkRatio",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.networkRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.nodeType",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.persistentStorageAdded",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.preferenceOrder",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.previousGenTarget",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.risk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.sameFamily",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.sameMemory",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.savings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.savingsPct",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.recommendations.unitPrice",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.region",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.resourceIdentifier",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.service",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.snoozeExpiresOn",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.snoozed",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.tagMappings.tag",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry.tagMappings"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.tagMappings.tagName",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry.tagMappings"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.tagMappings.vendorTagValue",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry.tagMappings"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.tenancy",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.totalSpend",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.unitPrice",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry"
+            },
+            {
+                "name": "apptio_RecommendationResultEntry.vendorAccountId",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationResultEntry"
+            }
+        ],
+        "RecommendationsEC2": [
+            {
+                "name": "apptio_RecommendationsEC2.meta.aggregates.basis",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.meta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.meta.aggregates.cost",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.meta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.meta.aggregates.idleSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.meta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.meta.aggregates.optimizedSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.meta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.meta.aggregates.rightsizeSavings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.meta.aggregates"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.meta.info",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "apptio_RecommendationsEC2.meta"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.meta.totalCount",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.meta"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.accountName",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.availabilityZone",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.cpuCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.cpuMax",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.currencyCode",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.daysInactive",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.defaultCrossArchitecture",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.defaultCurrentGen",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.defaultMemoryFit",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.defaultSameFamily",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.gpuCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.gpuMax",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.gpuMemoryCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.gpuMemoryMax",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.hoursRunning",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.idle",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.instanceFamily",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.lastSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.localCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.localDrives",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.maxInstanceCount",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.memoryCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.memoryMax",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.minInstanceCount",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.networkCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.nodeType",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.os",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.provider",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.action",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.cpuCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.cpuRatio",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.cpuRisk",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.currentGen",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.defaultsOrder",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.diskRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.diskXPutCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.gpuCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.gpuMemoryCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.gpuMemoryRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.gpuRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.inDefaults",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.instanceFamily",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.localCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.localDrives",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.maxInstances",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.memoryCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.memoryFit",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.memoryRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.memoryRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.minInstances",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.networkCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.networkRatio",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.networkRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.nodeType",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.persistentStorageAdded",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.preferenceOrder",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.previousGenTarget",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.risk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.sameFamily",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.sameMemory",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.savings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.savingsPct",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.recommendations.unitPrice",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result.recommendations"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.region",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.resourceIdentifier",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.service",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.snoozeExpiresOn",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.snoozed",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.tagMappings.tag",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result.tagMappings"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.tagMappings.tagName",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result.tagMappings"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.tagMappings.vendorTagValue",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result.tagMappings"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.tenancy",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.totalSpend",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.unitPrice",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            },
+            {
+                "name": "apptio_RecommendationsEC2.result.vendorAccountId",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEC2.result"
+            }
+        ],
+        "RecommendationsEntry": [
+            {
+                "name": "apptio_RecommendationsEntry.action",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.cpuCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.cpuRatio",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.cpuRisk",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.currentGen",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.defaultsOrder",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.diskRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.diskXPutCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.gpuCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.gpuMemoryCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.gpuMemoryRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.gpuRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.inDefaults",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.instanceFamily",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.localCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.localDrives",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.maxInstances",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.memoryCapacity",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.memoryFit",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.memoryRatio",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.memoryRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.minInstances",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.networkCapacity",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.networkRatio",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.networkRisk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.nodeType",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.persistentStorageAdded",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.preferenceOrder",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.previousGenTarget",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.risk",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.sameFamily",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.sameMemory",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.savings",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.savingsPct",
+                "description": "",
+                "type": "Int",
+                "schema_component": "apptio_RecommendationsEntry"
+            },
+            {
+                "name": "apptio_RecommendationsEntry.unitPrice",
+                "description": "",
+                "type": "Float",
+                "schema_component": "apptio_RecommendationsEntry"
+            }
+        ],
+        "Result": [
+            {
+                "name": "apptio_Result.clusters.firstSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Result.clusters"
+            },
+            {
+                "name": "apptio_Result.clusters.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Result.clusters"
+            },
+            {
+                "name": "apptio_Result.clusters.lastSeen",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Result.clusters"
+            },
+            {
+                "name": "apptio_Result.clusters.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Result.clusters"
+            },
+            {
+                "name": "apptio_Result.clusters.nodes.resourceIdentifier",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Result.clusters.nodes"
+            },
+            {
+                "name": "apptio_Result.clusters.nodes.vendor",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_Result.clusters.nodes"
+            },
+            {
+                "name": "apptio_Result.clusters.provisionedAt",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Result.clusters"
+            },
+            {
+                "name": "apptio_Result.meta.firstSeenDate",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_Result.meta"
+            },
+            {
+                "name": "apptio_Result.meta.orgHasData",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_Result.meta"
+            },
+            {
+                "name": "apptio_Result.meta.orgHasProvisioned",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_Result.meta"
+            }
+        ],
+        "ResultMeta": [
+            {
+                "name": "apptio_ResultMeta.firstSeenDate",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "apptio_ResultMeta"
+            },
+            {
+                "name": "apptio_ResultMeta.orgHasData",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_ResultMeta"
+            },
+            {
+                "name": "apptio_ResultMeta.orgHasProvisioned",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "apptio_ResultMeta"
+            }
+        ],
+        "TagMappingsEntry": [
+            {
+                "name": "apptio_TagMappingsEntry.tag",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_TagMappingsEntry"
+            },
+            {
+                "name": "apptio_TagMappingsEntry.tagName",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_TagMappingsEntry"
+            },
+            {
+                "name": "apptio_TagMappingsEntry.vendorTagValue",
+                "description": "",
+                "type": "String",
+                "schema_component": "apptio_TagMappingsEntry"
+            }
+        ]
+    },
+    "concert": {
         "ApiKeyDate": [
             {
                 "name": "concert_ApiKeyDate.created_on",
@@ -8273,7 +9837,7 @@
             }
         ]
     },
-    "Instana": {
+    "instana": {
         "ApplicationConnection": [
             {
                 "name": "instana_ApplicationConnection.edges.cursor",
@@ -8652,26 +10216,6 @@
                 "description": "Types of endpoints the service consists of.",
                 "type": "[Enum]",
                 "schema_component": "instana_ApplicationService"
-            }
-        ],
-        "Entity": [
-            {
-                "name": "instana_Entity__Mock.entityType",
-                "description": "",
-                "type": "Enum",
-                "schema_component": "instana_Entity__Mock"
-            },
-            {
-                "name": "instana_Entity__Mock.id",
-                "description": "Unique ID of the entity.",
-                "type": "ID",
-                "schema_component": "instana_Entity__Mock"
-            },
-            {
-                "name": "instana_Entity__Mock.label",
-                "description": "Name of the entity.",
-                "type": "String",
-                "schema_component": "instana_Entity__Mock"
             }
         ],
         "ServiceEndpoint": [
@@ -9185,7 +10729,7 @@
             }
         ]
     },
-    "Turbo": {
+    "turbo": {
         "Action": [
             {
                 "name": "turbo_Action.actionID",
@@ -14366,6 +15910,3224 @@
                 "description": "",
                 "type": "ID",
                 "schema_component": "turbo_VirtualDisksEntry"
+            }
+        ]
+    },
+    "wxo": {
+        "AccessToken": [
+            {
+                "name": "wxo_AccessToken.expired_in",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AccessToken"
+            },
+            {
+                "name": "wxo_AccessToken.token",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AccessToken"
+            },
+            {
+                "name": "wxo_AccessToken.token_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AccessToken"
+            }
+        ],
+        "AdditionalProperties": [
+            {
+                "name": "wxo_AdditionalProperties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AdditionalProperties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_AdditionalProperties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AdditionalProperties.wxa_message.output.generic"
+            }
+        ],
+        "Assistant": [
+            {
+                "name": "wxo_Assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Assistant"
+            }
+        ],
+        "AssistantInfo": [
+            {
+                "name": "wxo_AssistantInfo.assistant_id",
+                "description": "The unique identifier of the AI assistant.",
+                "type": "ID",
+                "schema_component": "wxo_AssistantInfo"
+            },
+            {
+                "name": "wxo_AssistantInfo.assistant_name",
+                "description": "The name of the assistant.",
+                "type": "String",
+                "schema_component": "wxo_AssistantInfo"
+            },
+            {
+                "name": "wxo_AssistantInfo.is_default",
+                "description": "Indicates whether this is the default assistant.",
+                "type": "Boolean",
+                "schema_component": "wxo_AssistantInfo"
+            }
+        ],
+        "AssistantRun": [
+            {
+                "name": "wxo_AssistantRun.assistant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.cancelled_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.completed_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.created_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.failed_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.guardrails",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.llm_params",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_AssistantRun.result.data.assistant"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.delta",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_AssistantRun.result.data.message.assistant"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.content.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message.content"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.content.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message.content"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.context",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.created_by",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.created_by_username",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.created_on",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.document_ids",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.mentions",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.parent_message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.role",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.step_history",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message.updated_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRun.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun.result.data"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data"
+            },
+            {
+                "name": "wxo_AssistantRun.result.data.thread_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result.data"
+            },
+            {
+                "name": "wxo_AssistantRun.result.next_run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result"
+            },
+            {
+                "name": "wxo_AssistantRun.result.type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.result"
+            },
+            {
+                "name": "wxo_AssistantRun.started_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.status",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRun"
+            },
+            {
+                "name": "wxo_AssistantRun.usage.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRun.usage"
+            },
+            {
+                "name": "wxo_AssistantRun.usage.token_usage.completion_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRun.usage.token_usage"
+            },
+            {
+                "name": "wxo_AssistantRun.usage.token_usage.prompt_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRun.usage.token_usage"
+            },
+            {
+                "name": "wxo_AssistantRun.usage.token_usage.total_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRun.usage.token_usage"
+            }
+        ],
+        "AssistantRunConnection": [
+            {
+                "name": "wxo_AssistantRunConnection.edges.cursor",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.assistant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.cancelled_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.completed_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.created_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.failed_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.guardrails",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.llm_params",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.assistant"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.delta",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message.assistant"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.content.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message.content"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.content.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message.content"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.context",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.created_by",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.created_by_username",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.created_on",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.document_ids",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.mentions",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.parent_message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.role",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.step_history",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message.updated_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.data.thread_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.next_run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.result.type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.result"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.started_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.status",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunConnection.edges.node"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.usage.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.usage"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.usage.token_usage.completion_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.usage.token_usage"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.usage.token_usage.prompt_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.usage.token_usage"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.edges.node.usage.token_usage.total_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRunConnection.edges.node.usage.token_usage"
+            },
+            {
+                "name": "wxo_AssistantRunConnection.pageInfo",
+                "description": "",
+                "type": "PageInfo",
+                "schema_component": "wxo_AssistantRunConnection"
+            }
+        ],
+        "AssistantRunEdge": [
+            {
+                "name": "wxo_AssistantRunEdge.cursor",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.assistant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.cancelled_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.completed_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.created_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.failed_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.guardrails",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.llm_params",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.assistant"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.delta",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message.assistant"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.content.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message.content"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.content.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message.content"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.context",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.created_by",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.created_by_username",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.created_on",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.document_ids",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.mentions",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.parent_message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.role",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.step_history",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message.updated_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data.message"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.data.thread_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result.data"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.next_run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.result.type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.result"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.started_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.status",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_AssistantRunEdge.node"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.usage.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_AssistantRunEdge.node.usage"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.usage.token_usage.completion_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRunEdge.node.usage.token_usage"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.usage.token_usage.prompt_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRunEdge.node.usage.token_usage"
+            },
+            {
+                "name": "wxo_AssistantRunEdge.node.usage.token_usage.total_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_AssistantRunEdge.node.usage.token_usage"
+            }
+        ],
+        "BaseLlm": [
+            {
+                "name": "wxo_BaseLlm.guardrails.hap.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_BaseLlm.guardrails.hap.input"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.hap.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_BaseLlm.guardrails.hap.input"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.hap.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_BaseLlm.guardrails.hap.output"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.hap.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_BaseLlm.guardrails.hap.output"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.pii.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_BaseLlm.guardrails.pii.input"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.pii.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_BaseLlm.guardrails.pii.input"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.pii.mask.remove_entity_value",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_BaseLlm.guardrails.pii.mask"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.pii.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_BaseLlm.guardrails.pii.output"
+            },
+            {
+                "name": "wxo_BaseLlm.guardrails.pii.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_BaseLlm.guardrails.pii.output"
+            },
+            {
+                "name": "wxo_BaseLlm.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_BaseLlm"
+            },
+            {
+                "name": "wxo_BaseLlm.model_params.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_BaseLlm.model_params"
+            },
+            {
+                "name": "wxo_BaseLlm.model_params.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_BaseLlm.model_params"
+            },
+            {
+                "name": "wxo_BaseLlm.model_params.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_BaseLlm.model_params"
+            },
+            {
+                "name": "wxo_BaseLlm.model_params.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_BaseLlm.model_params"
+            },
+            {
+                "name": "wxo_BaseLlm.model_params.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_BaseLlm.model_params"
+            },
+            {
+                "name": "wxo_BaseLlm.system_prompt",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_BaseLlm"
+            }
+        ],
+        "ContentEntry": [
+            {
+                "name": "wxo_ContentEntry.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ContentEntry"
+            },
+            {
+                "name": "wxo_ContentEntry.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ContentEntry"
+            }
+        ],
+        "Data": [
+            {
+                "name": "wxo_Data.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Data.assistant"
+            },
+            {
+                "name": "wxo_Data.delta",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data"
+            },
+            {
+                "name": "wxo_Data.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data"
+            },
+            {
+                "name": "wxo_Data.message.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Data.message.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Data.message.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Data.message.assistant"
+            },
+            {
+                "name": "wxo_Data.message.content.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message.content"
+            },
+            {
+                "name": "wxo_Data.message.content.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message.content"
+            },
+            {
+                "name": "wxo_Data.message.context",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.created_by",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.created_by_username",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.created_on",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.document_ids",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.mentions",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.parent_message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.role",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.step_history",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message.updated_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_Data.message"
+            },
+            {
+                "name": "wxo_Data.message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Data"
+            },
+            {
+                "name": "wxo_Data.run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data"
+            },
+            {
+                "name": "wxo_Data.thread_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Data"
+            }
+        ],
+        "DefaultAgentSettings": [
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.input"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.input"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.output"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.hap.output"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.input"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.input"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.mask.remove_entity_value",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.mask"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.output"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.guardrails.pii.output"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.base_llm.system_prompt",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.base_llm"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.embeddings.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings.embeddings"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.model_settings.is_base_llm_enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.model_settings"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.repetition_penalty",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.return_options.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.return_options.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.return_options.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.return_options.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.return_options.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.return_options.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.top_k",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.model_params.top_p",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.router_config.confidence_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.router_config"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.router_config.confidence_threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.router_config"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.router_config.continue_journey_on_none",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings.router_config"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.router_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.router_settings.routing_prompt",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.router_settings"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.repetition_penalty",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.return_options"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.top_k",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.model_params.top_p",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings.model_params"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.slot_filling_settings.slot_filler_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_DefaultAgentSettings.slot_filling_settings"
+            },
+            {
+                "name": "wxo_DefaultAgentSettings.user_settings.confirm_routing",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_DefaultAgentSettings.user_settings"
+            }
+        ],
+        "Embeddings": [
+            {
+                "name": "wxo_Embeddings.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Embeddings"
+            }
+        ],
+        "GenericEntry": [
+            {
+                "name": "wxo_GenericEntry.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_GenericEntry"
+            },
+            {
+                "name": "wxo_GenericEntry.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_GenericEntry"
+            }
+        ],
+        "Guardrails": [
+            {
+                "name": "wxo_Guardrails.hap.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Guardrails.hap.input"
+            },
+            {
+                "name": "wxo_Guardrails.hap.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Guardrails.hap.input"
+            },
+            {
+                "name": "wxo_Guardrails.hap.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Guardrails.hap.output"
+            },
+            {
+                "name": "wxo_Guardrails.hap.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Guardrails.hap.output"
+            },
+            {
+                "name": "wxo_Guardrails.pii.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Guardrails.pii.input"
+            },
+            {
+                "name": "wxo_Guardrails.pii.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Guardrails.pii.input"
+            },
+            {
+                "name": "wxo_Guardrails.pii.mask.remove_entity_value",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Guardrails.pii.mask"
+            },
+            {
+                "name": "wxo_Guardrails.pii.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Guardrails.pii.output"
+            },
+            {
+                "name": "wxo_Guardrails.pii.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Guardrails.pii.output"
+            }
+        ],
+        "Hap": [
+            {
+                "name": "wxo_Hap.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Hap.input"
+            },
+            {
+                "name": "wxo_Hap.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Hap.input"
+            },
+            {
+                "name": "wxo_Hap.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Hap.output"
+            },
+            {
+                "name": "wxo_Hap.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Hap.output"
+            }
+        ],
+        "Input": [
+            {
+                "name": "wxo_Input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Input"
+            },
+            {
+                "name": "wxo_Input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Input"
+            }
+        ],
+        "Input1": [
+            {
+                "name": "wxo_Input1.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Input1"
+            },
+            {
+                "name": "wxo_Input1.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Input1"
+            }
+        ],
+        "Mask": [
+            {
+                "name": "wxo_Mask.remove_entity_value",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Mask"
+            }
+        ],
+        "Mention": [
+            {
+                "name": "wxo_Mention.assistant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Mention"
+            },
+            {
+                "name": "wxo_Mention.assistant_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Mention"
+            }
+        ],
+        "Message": [
+            {
+                "name": "wxo_Message.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Message.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Message.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Message.assistant"
+            },
+            {
+                "name": "wxo_Message.content.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message.content"
+            },
+            {
+                "name": "wxo_Message.content.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message.content"
+            },
+            {
+                "name": "wxo_Message.context",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.created_by",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.created_by_username",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.created_on",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.document_ids",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.mentions",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.parent_message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.role",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.step_history",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Message"
+            },
+            {
+                "name": "wxo_Message.updated_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_Message"
+            }
+        ],
+        "ModelParams": [
+            {
+                "name": "wxo_ModelParams.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ModelParams"
+            },
+            {
+                "name": "wxo_ModelParams.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams"
+            },
+            {
+                "name": "wxo_ModelParams.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams"
+            },
+            {
+                "name": "wxo_ModelParams.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams"
+            },
+            {
+                "name": "wxo_ModelParams.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelParams"
+            }
+        ],
+        "ModelParams1": [
+            {
+                "name": "wxo_ModelParams1.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ModelParams1"
+            },
+            {
+                "name": "wxo_ModelParams1.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams1"
+            },
+            {
+                "name": "wxo_ModelParams1.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams1"
+            },
+            {
+                "name": "wxo_ModelParams1.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams1"
+            },
+            {
+                "name": "wxo_ModelParams1.repetition_penalty",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams1"
+            },
+            {
+                "name": "wxo_ModelParams1.return_options.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams1.return_options"
+            },
+            {
+                "name": "wxo_ModelParams1.return_options.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams1.return_options"
+            },
+            {
+                "name": "wxo_ModelParams1.return_options.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams1.return_options"
+            },
+            {
+                "name": "wxo_ModelParams1.return_options.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams1.return_options"
+            },
+            {
+                "name": "wxo_ModelParams1.return_options.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams1.return_options"
+            },
+            {
+                "name": "wxo_ModelParams1.return_options.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams1.return_options"
+            },
+            {
+                "name": "wxo_ModelParams1.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelParams1"
+            },
+            {
+                "name": "wxo_ModelParams1.top_k",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams1"
+            },
+            {
+                "name": "wxo_ModelParams1.top_p",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams1"
+            }
+        ],
+        "ModelParams2": [
+            {
+                "name": "wxo_ModelParams2.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ModelParams2"
+            },
+            {
+                "name": "wxo_ModelParams2.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams2"
+            },
+            {
+                "name": "wxo_ModelParams2.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams2"
+            },
+            {
+                "name": "wxo_ModelParams2.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams2"
+            },
+            {
+                "name": "wxo_ModelParams2.repetition_penalty",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams2"
+            },
+            {
+                "name": "wxo_ModelParams2.return_options.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams2.return_options"
+            },
+            {
+                "name": "wxo_ModelParams2.return_options.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams2.return_options"
+            },
+            {
+                "name": "wxo_ModelParams2.return_options.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams2.return_options"
+            },
+            {
+                "name": "wxo_ModelParams2.return_options.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams2.return_options"
+            },
+            {
+                "name": "wxo_ModelParams2.return_options.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelParams2.return_options"
+            },
+            {
+                "name": "wxo_ModelParams2.return_options.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams2.return_options"
+            },
+            {
+                "name": "wxo_ModelParams2.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelParams2"
+            },
+            {
+                "name": "wxo_ModelParams2.top_k",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams2"
+            },
+            {
+                "name": "wxo_ModelParams2.top_p",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelParams2"
+            }
+        ],
+        "ModelSettings": [
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.hap.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.hap.input"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.hap.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.hap.input"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.hap.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.hap.output"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.hap.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.hap.output"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.pii.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.pii.input"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.pii.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.pii.input"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.pii.mask.remove_entity_value",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.pii.mask"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.pii.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.pii.output"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.guardrails.pii.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelSettings.base_llm.guardrails.pii.output"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ModelSettings.base_llm"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.model_params.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ModelSettings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.model_params.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelSettings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.model_params.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelSettings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.model_params.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ModelSettings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.model_params.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_ModelSettings.base_llm.model_params"
+            },
+            {
+                "name": "wxo_ModelSettings.base_llm.system_prompt",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ModelSettings.base_llm"
+            },
+            {
+                "name": "wxo_ModelSettings.embeddings.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ModelSettings.embeddings"
+            },
+            {
+                "name": "wxo_ModelSettings.is_base_llm_enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ModelSettings"
+            }
+        ],
+        "Output": [
+            {
+                "name": "wxo_Output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Output"
+            },
+            {
+                "name": "wxo_Output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Output"
+            }
+        ],
+        "Output1": [
+            {
+                "name": "wxo_Output1.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Output1"
+            },
+            {
+                "name": "wxo_Output1.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Output1"
+            }
+        ],
+        "Pii": [
+            {
+                "name": "wxo_Pii.input.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Pii.input"
+            },
+            {
+                "name": "wxo_Pii.input.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Pii.input"
+            },
+            {
+                "name": "wxo_Pii.mask.remove_entity_value",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Pii.mask"
+            },
+            {
+                "name": "wxo_Pii.output.enabled",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Pii.output"
+            },
+            {
+                "name": "wxo_Pii.output.threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_Pii.output"
+            }
+        ],
+        "Result": [
+            {
+                "name": "wxo_Result.data.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Result.data.assistant"
+            },
+            {
+                "name": "wxo_Result.data.delta",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data"
+            },
+            {
+                "name": "wxo_Result.data.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data"
+            },
+            {
+                "name": "wxo_Result.data.message.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Result.data.message.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Result.data.message.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_Result.data.message.assistant"
+            },
+            {
+                "name": "wxo_Result.data.message.content.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message.content"
+            },
+            {
+                "name": "wxo_Result.data.message.content.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message.content"
+            },
+            {
+                "name": "wxo_Result.data.message.context",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.created_by",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.created_by_username",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.created_on",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.document_ids",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.mentions",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.parent_message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.role",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.step_history",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message.updated_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_Result.data.message"
+            },
+            {
+                "name": "wxo_Result.data.message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_Result.data"
+            },
+            {
+                "name": "wxo_Result.data.run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data"
+            },
+            {
+                "name": "wxo_Result.data.thread_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result.data"
+            },
+            {
+                "name": "wxo_Result.next_run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result"
+            },
+            {
+                "name": "wxo_Result.type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Result"
+            }
+        ],
+        "ReturnOptions": [
+            {
+                "name": "wxo_ReturnOptions.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions"
+            },
+            {
+                "name": "wxo_ReturnOptions.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions"
+            },
+            {
+                "name": "wxo_ReturnOptions.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions"
+            },
+            {
+                "name": "wxo_ReturnOptions.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions"
+            },
+            {
+                "name": "wxo_ReturnOptions.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions"
+            },
+            {
+                "name": "wxo_ReturnOptions.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ReturnOptions"
+            }
+        ],
+        "ReturnOptions1": [
+            {
+                "name": "wxo_ReturnOptions1.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions1"
+            },
+            {
+                "name": "wxo_ReturnOptions1.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions1"
+            },
+            {
+                "name": "wxo_ReturnOptions1.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions1"
+            },
+            {
+                "name": "wxo_ReturnOptions1.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions1"
+            },
+            {
+                "name": "wxo_ReturnOptions1.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_ReturnOptions1"
+            },
+            {
+                "name": "wxo_ReturnOptions1.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_ReturnOptions1"
+            }
+        ],
+        "RouterConfig": [
+            {
+                "name": "wxo_RouterConfig.confidence_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RouterConfig"
+            },
+            {
+                "name": "wxo_RouterConfig.confidence_threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_RouterConfig"
+            },
+            {
+                "name": "wxo_RouterConfig.continue_journey_on_none",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RouterConfig"
+            }
+        ],
+        "RouterSettings": [
+            {
+                "name": "wxo_RouterSettings.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RouterSettings"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.repetition_penalty",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.return_options.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RouterSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.return_options.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RouterSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.return_options.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RouterSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.return_options.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RouterSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.return_options.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RouterSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.return_options.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_RouterSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.top_k",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.model_params.top_p",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_RouterSettings.model_params"
+            },
+            {
+                "name": "wxo_RouterSettings.router_config.confidence_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RouterSettings.router_config"
+            },
+            {
+                "name": "wxo_RouterSettings.router_config.confidence_threshold",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_RouterSettings.router_config"
+            },
+            {
+                "name": "wxo_RouterSettings.router_config.continue_journey_on_none",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RouterSettings.router_config"
+            },
+            {
+                "name": "wxo_RouterSettings.router_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RouterSettings"
+            },
+            {
+                "name": "wxo_RouterSettings.routing_prompt",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RouterSettings"
+            }
+        ],
+        "RunEvent": [
+            {
+                "name": "wxo_RunEvent.data.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RunEvent.data.assistant"
+            },
+            {
+                "name": "wxo_RunEvent.data.delta",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data"
+            },
+            {
+                "name": "wxo_RunEvent.data.last_error",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.assistant.is_default",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_RunEvent.data.message.assistant"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.content.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message.content"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.content.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message.content"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.context",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.created_by",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.created_by_username",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.created_on",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.document_ids",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.mentions",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.parent_message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.role",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.step_history",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.tenant_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.thread_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message.updated_at",
+                "description": "",
+                "type": "DateTime",
+                "schema_component": "wxo_RunEvent.data.message"
+            },
+            {
+                "name": "wxo_RunEvent.data.message_id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_RunEvent.data"
+            },
+            {
+                "name": "wxo_RunEvent.data.run_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data"
+            },
+            {
+                "name": "wxo_RunEvent.data.thread_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent.data"
+            },
+            {
+                "name": "wxo_RunEvent.event",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_RunEvent"
+            },
+            {
+                "name": "wxo_RunEvent.id",
+                "description": "",
+                "type": "ID",
+                "schema_component": "wxo_RunEvent"
+            }
+        ],
+        "SkillSetByID": [
+            {
+                "name": "wxo_SkillSetByID.skills",
+                "description": "",
+                "type": "JSON",
+                "schema_component": "wxo_SkillSetByID"
+            }
+        ],
+        "SkillSets": [
+            {
+                "name": "wxo_SkillSets.skillsets.assistant_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillSets.skillsets"
+            },
+            {
+                "name": "wxo_SkillSets.skillsets.description",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillSets.skillsets"
+            },
+            {
+                "name": "wxo_SkillSets.skillsets.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillSets.skillsets"
+            },
+            {
+                "name": "wxo_SkillSets.skillsets.skillset_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillSets.skillsets"
+            },
+            {
+                "name": "wxo_SkillSets.skillsets.type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillSets.skillsets"
+            },
+            {
+                "name": "wxo_SkillSets.skillsets.url",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillSets.skillsets"
+            }
+        ],
+        "SkillsetsEntry": [
+            {
+                "name": "wxo_SkillsetsEntry.assistant_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillsetsEntry"
+            },
+            {
+                "name": "wxo_SkillsetsEntry.description",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillsetsEntry"
+            },
+            {
+                "name": "wxo_SkillsetsEntry.name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillsetsEntry"
+            },
+            {
+                "name": "wxo_SkillsetsEntry.skillset_id",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillsetsEntry"
+            },
+            {
+                "name": "wxo_SkillsetsEntry.type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillsetsEntry"
+            },
+            {
+                "name": "wxo_SkillsetsEntry.url",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SkillsetsEntry"
+            }
+        ],
+        "SlotFillingSettings": [
+            {
+                "name": "wxo_SlotFillingSettings.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SlotFillingSettings"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.decoding_method",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.max_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.min_new_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.random_seed",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.repetition_penalty",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.return_options.generated_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_SlotFillingSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.return_options.input_text",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_SlotFillingSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.return_options.input_tokens",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_SlotFillingSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.return_options.token_logprobs",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_SlotFillingSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.return_options.token_ranks",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_SlotFillingSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.return_options.top_n_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_SlotFillingSettings.model_params.return_options"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.temperature",
+                "description": "",
+                "type": "Float",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.top_k",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.model_params.top_p",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_SlotFillingSettings.model_params"
+            },
+            {
+                "name": "wxo_SlotFillingSettings.slot_filler_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_SlotFillingSettings"
+            }
+        ],
+        "Thread": [
+            {
+                "name": "wxo_Thread.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Thread.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Thread.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Thread.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_Thread.assistant.assistant_id",
+                "description": "The unique identifier of the AI assistant.",
+                "type": "ID",
+                "schema_component": "wxo_Thread.assistant"
+            },
+            {
+                "name": "wxo_Thread.assistant.assistant_name",
+                "description": "The name of the assistant.",
+                "type": "String",
+                "schema_component": "wxo_Thread.assistant"
+            },
+            {
+                "name": "wxo_Thread.assistant.is_default",
+                "description": "Indicates whether this is the default assistant.",
+                "type": "Boolean",
+                "schema_component": "wxo_Thread.assistant"
+            },
+            {
+                "name": "wxo_Thread.content",
+                "description": "The message content, either as a list content objects or string.",
+                "type": "JSON",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.created_by",
+                "description": "The unique identifier of the user who created the message.",
+                "type": "String",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.created_by_username",
+                "description": "The username of the user who created the message.",
+                "type": "String",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.created_on",
+                "description": "The timestamp when the message was created.",
+                "type": "DateTime",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.id",
+                "description": "The unique identifier of the message.",
+                "type": "ID",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.mentions.assistant_id",
+                "description": "List of mentions included in the message.",
+                "type": "ID",
+                "schema_component": "wxo_Thread.mentions"
+            },
+            {
+                "name": "wxo_Thread.mentions.assistant_name",
+                "description": "List of mentions included in the message.",
+                "type": "String",
+                "schema_component": "wxo_Thread.mentions"
+            },
+            {
+                "name": "wxo_Thread.parent_message_id",
+                "description": "The unique identifier of the parent message, if any.",
+                "type": "ID",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.role",
+                "description": "The role of the sender (Example: user and assistant).",
+                "type": "String",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.tenant_id",
+                "description": "The tenant unique identifier associated with the message.",
+                "type": "ID",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.thread_id",
+                "description": "The unique identifier of the thread the message belongs to.",
+                "type": "ID",
+                "schema_component": "wxo_Thread"
+            },
+            {
+                "name": "wxo_Thread.updated_at",
+                "description": "The timestamp when the message was last updated.",
+                "type": "DateTime",
+                "schema_component": "wxo_Thread"
+            }
+        ],
+        "ThreadConnection": [
+            {
+                "name": "wxo_ThreadConnection.edges.cursor",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges.node.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges.node.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.assistant.assistant_id",
+                "description": "The unique identifier of the AI assistant.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadConnection.edges.node.assistant"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.assistant.assistant_name",
+                "description": "The name of the assistant.",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges.node.assistant"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.assistant.is_default",
+                "description": "Indicates whether this is the default assistant.",
+                "type": "Boolean",
+                "schema_component": "wxo_ThreadConnection.edges.node.assistant"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.content",
+                "description": "The message content, either as a list content objects or string.",
+                "type": "JSON",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.created_by",
+                "description": "The unique identifier of the user who created the message.",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.created_by_username",
+                "description": "The username of the user who created the message.",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.created_on",
+                "description": "The timestamp when the message was created.",
+                "type": "DateTime",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.id",
+                "description": "The unique identifier of the message.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.mentions.assistant_id",
+                "description": "List of mentions included in the message.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadConnection.edges.node.mentions"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.mentions.assistant_name",
+                "description": "List of mentions included in the message.",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges.node.mentions"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.parent_message_id",
+                "description": "The unique identifier of the parent message, if any.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.role",
+                "description": "The role of the sender (Example: user and assistant).",
+                "type": "String",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.tenant_id",
+                "description": "The tenant unique identifier associated with the message.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.thread_id",
+                "description": "The unique identifier of the thread the message belongs to.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.edges.node.updated_at",
+                "description": "The timestamp when the message was last updated.",
+                "type": "DateTime",
+                "schema_component": "wxo_ThreadConnection.edges.node"
+            },
+            {
+                "name": "wxo_ThreadConnection.pageInfo",
+                "description": "",
+                "type": "PageInfo",
+                "schema_component": "wxo_ThreadConnection"
+            }
+        ],
+        "ThreadEdge": [
+            {
+                "name": "wxo_ThreadEdge.cursor",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.additional_properties.wxa_message.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge.node.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.additional_properties.wxa_message.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge.node.additional_properties.wxa_message.output.generic"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.assistant.assistant_id",
+                "description": "The unique identifier of the AI assistant.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadEdge.node.assistant"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.assistant.assistant_name",
+                "description": "The name of the assistant.",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge.node.assistant"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.assistant.is_default",
+                "description": "Indicates whether this is the default assistant.",
+                "type": "Boolean",
+                "schema_component": "wxo_ThreadEdge.node.assistant"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.content",
+                "description": "The message content, either as a list content objects or string.",
+                "type": "JSON",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.created_by",
+                "description": "The unique identifier of the user who created the message.",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.created_by_username",
+                "description": "The username of the user who created the message.",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.created_on",
+                "description": "The timestamp when the message was created.",
+                "type": "DateTime",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.id",
+                "description": "The unique identifier of the message.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.mentions.assistant_id",
+                "description": "List of mentions included in the message.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadEdge.node.mentions"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.mentions.assistant_name",
+                "description": "List of mentions included in the message.",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge.node.mentions"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.parent_message_id",
+                "description": "The unique identifier of the parent message, if any.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.role",
+                "description": "The role of the sender (Example: user and assistant).",
+                "type": "String",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.tenant_id",
+                "description": "The tenant unique identifier associated with the message.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.thread_id",
+                "description": "The unique identifier of the thread the message belongs to.",
+                "type": "ID",
+                "schema_component": "wxo_ThreadEdge.node"
+            },
+            {
+                "name": "wxo_ThreadEdge.node.updated_at",
+                "description": "The timestamp when the message was last updated.",
+                "type": "DateTime",
+                "schema_component": "wxo_ThreadEdge.node"
+            }
+        ],
+        "TokenUsage": [
+            {
+                "name": "wxo_TokenUsage.completion_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_TokenUsage"
+            },
+            {
+                "name": "wxo_TokenUsage.prompt_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_TokenUsage"
+            },
+            {
+                "name": "wxo_TokenUsage.total_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_TokenUsage"
+            }
+        ],
+        "Usage": [
+            {
+                "name": "wxo_Usage.model_name",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_Usage"
+            },
+            {
+                "name": "wxo_Usage.token_usage.completion_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_Usage.token_usage"
+            },
+            {
+                "name": "wxo_Usage.token_usage.prompt_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_Usage.token_usage"
+            },
+            {
+                "name": "wxo_Usage.token_usage.total_tokens",
+                "description": "",
+                "type": "Int",
+                "schema_component": "wxo_Usage.token_usage"
+            }
+        ],
+        "UserSettings": [
+            {
+                "name": "wxo_UserSettings.confirm_routing",
+                "description": "",
+                "type": "Boolean",
+                "schema_component": "wxo_UserSettings"
+            }
+        ],
+        "WXAOutput": [
+            {
+                "name": "wxo_WXAOutput.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_WXAOutput.generic"
+            },
+            {
+                "name": "wxo_WXAOutput.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_WXAOutput.generic"
+            }
+        ],
+        "WxaMessage": [
+            {
+                "name": "wxo_WxaMessage.output.generic.response_type",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_WxaMessage.output.generic"
+            },
+            {
+                "name": "wxo_WxaMessage.output.generic.text",
+                "description": "",
+                "type": "String",
+                "schema_component": "wxo_WxaMessage.output.generic"
             }
         ]
     }

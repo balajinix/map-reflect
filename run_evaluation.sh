@@ -16,8 +16,9 @@ fi
 
 # Default parameters
 DATASETS="itops,nl2gql"
+#DATASETS="itops"
 METHODS="smt,react,gnn,anytool,map_reflect"
-MODELS="granite,llama-3-70b-instruct,mistral-large"
+MODELS="granite,llama,mistral-large"
 OUTPUT_DIR="./results"
 BASE_DIR="."
 CLEAN=false

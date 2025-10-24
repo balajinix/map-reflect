@@ -14,7 +14,7 @@ from tqdm import tqdm
 
 load_dotenv()
 
-# Stable logger namespace (runner sets root level; we keep module logger tidy)
+# Stable logger namespace
 logger = logging.getLogger("solis_ai_api.map_reflect")
 
 # ---------- helpers ----------
@@ -64,7 +64,7 @@ class MapReflectAgent:
         self,
         property_lookup_file: str,
         rebuild_index: bool = False,
-        model: str = "watsonx/mistralai/mistral-large",
+        model: str = None,
         dataset: str | None = None,
         chroma_dir: str = "../data/chroma_db",
         collection_name: str | None = None,
@@ -72,14 +72,17 @@ class MapReflectAgent:
         neighbor_k: int = 5,
     ):
         """
-        Args match runner usage; extra args have safe defaults:
-          - property_lookup_file (required by runner)
-          - rebuild_index (runner flag)
-          - model (runner passes/overrides via .model attribute)
-          - dataset (optional; enables namespaced Chroma collection)
-          - chroma_dir (default ../data/chroma_db, matches runner checks)
-          - collection_name (override if needed)
-          - top_k, neighbor_k (retrieval knobs; deterministic limiting)
+        Initialize MapReflect agent.
+        
+        Args:
+            property_lookup_file: Path to property lookup JSON file (required)
+            rebuild_index: Whether to rebuild the ChromaDB index
+            model: LLM model to use (if None, uses default from environment or fallback)
+            dataset: Dataset name for namespaced collection (optional)
+            chroma_dir: Directory for ChromaDB storage
+            collection_name: Override collection name (optional)
+            top_k: Number of top results to retrieve
+            neighbor_k: Number of neighbors to expand
         """
         self.model = model
         self.dataset = dataset
@@ -112,6 +115,7 @@ class MapReflectAgent:
 
     # ---- LLM wrapper ----
     def call_llm(self, messages):
+        """Call LLM with the configured model."""
         try:
             resp = completion(
                 model=self.model,
@@ -121,7 +125,7 @@ class MapReflectAgent:
             )
             return resp.choices[0].message.content
         except Exception as e:
-            logger.error("LLM error: %s", e, exc_info=True)
+            logger.error("LLM error with model %s: %s", self.model, e, exc_info=True)
             return f"Error calling LLM: {e}"
 
     # ---- LangGraph DAG ----
@@ -316,7 +320,10 @@ Return your answer strictly in JSON format:
             logger.warning("Insufficient properties for mapping | src=%d dst=%d", len(srcs), len(dsts))
             state["candidate_mappings"] = {}
             return state
-
+    
+        logger.info("Finding mappings | evaluating %d source × %d dest = %d pairs", 
+                    len(srcs), len(dsts), len(srcs) * len(dsts))
+    
         prompt = [
             "Evaluate the following possible property mappings.",
             "For each candidate mapping, respond in JSON array format with:",
@@ -332,6 +339,7 @@ Return your answer strictly in JSON format:
   ...
 ]
 Only include entries where valid=true.
+CRITICAL: Return ONLY the JSON array with no additional text before or after.
 """.strip(),
             "\nCandidate Pairs:\n"
         ]
@@ -350,32 +358,69 @@ Only include entries where valid=true.
                 )
 
         messages = [
-            {"role": "system", "content": "You are an expert in data mapping and schema alignment."},
+            {"role": "system", "content": "You are an expert in data mapping and schema alignment. Return only valid JSON with no explanatory text."},
             {"role": "user", "content": "\n".join(prompt)}
         ]
 
         raw = self.call_llm(messages)
         raw = _strip_code_fences(raw)
         parsed, err = _safe_json_loads(raw)
+        
         if err or not isinstance(parsed, list):
-            logger.warning("Mapping JSON parse failed; err=%s raw=%s", err, raw[:200])
-            parsed = []
-
+            logger.warning("Mapping JSON parse failed; err=%s", err)
+            logger.info("Response length: %d characters", len(raw))
+            logger.info("Response preview (first 500 chars):\n%s", raw[:500])
+            logger.info("Response end (last 200 chars):\n%s", raw[-200:] if len(raw) > 200 else raw)
+            
+            # Try to extract JSON from verbose response
+            # Look for JSON array anywhere in the response
+            json_match = re.search(r'\[\s*\{[\s\S]*?\}\s*\]', raw)
+            if json_match:
+                try:
+                    extracted_json = json_match.group()
+                    logger.info("Found JSON array in response, attempting to parse...")
+                    parsed = json.loads(extracted_json)
+                    logger.info("Successfully recovered JSON array from verbose response (%d items)", len(parsed))
+                except Exception as e2:
+                    logger.warning("Failed to parse extracted JSON: %s", e2)
+                    logger.debug("Extracted text was: %s", extracted_json[:500])
+                    parsed = []
+            else:
+                logger.warning("No JSON array pattern found in response")
+                parsed = []
+    
         cand = defaultdict(list)
+        valid_count = 0
+        invalid_count = 0
+        
         for m in parsed:
-            if isinstance(m, dict) and m.get("valid") is True:
-                src = m.get("source_property")
-                dst = m.get("destination_property")
-                if not src or not dst:
-                    continue
-                cand[src].append({
-                    "mapProperty": dst,
-                    "justification": m.get("justification", ""),
-                    "confidence": float(m.get("confidence", 0.5))
-                })
-
+            if isinstance(m, dict):
+                if m.get("valid") is True:
+                    valid_count += 1
+                    src = m.get("source_property")
+                    dst = m.get("destination_property")
+                    if not src or not dst:
+                        logger.warning("Skipping mapping with missing src or dst: %s", m)
+                        continue
+                    cand[src].append({
+                        "mapProperty": dst,
+                        "justification": m.get("justification", ""),
+                        "confidence": float(m.get("confidence", 0.5))
+                    })
+                else:
+                    invalid_count += 1
+    
         state["candidate_mappings"] = dict(cand)
-        logger.info("Candidate mappings | sources_with_cands=%d", len(cand))
+        total_mappings = sum(len(v) for v in cand.values())
+        
+        logger.info("Parsed response: %d valid, %d invalid mappings", valid_count, invalid_count)
+        
+        if cand:
+            logger.info("Candidate mappings found | %d sources with %d total mappings", 
+                        len(cand), total_mappings)
+        else:
+            logger.warning("No candidate mappings found")
+        
         return state
 
     def _create_reflection_prompt(self, candidate_mappings: Dict, property_data: Dict) -> str:
@@ -454,7 +499,7 @@ Only include entries where valid=true.
 
     # ---- public ----
     def run(self, user_utterance: str) -> Dict[str, Any]:
-        logger.info("MapReflect run | utterance=%r", user_utterance)
+        logger.info("MapReflect run | utterance=%r model=%s", user_utterance, self.model)
         initial = MappingState(
             user_utterance=user_utterance,
             property_data=self.property_data,
@@ -481,7 +526,11 @@ Only include entries where valid=true.
 # Example usage
 def main():
     logging.basicConfig(level=logging.WARNING)
-    agent = MapReflectAgent(property_lookup_file="../data/itops_api_lookup.json", dataset="test")
+    agent = MapReflectAgent(
+        property_lookup_file="../data/itops_api_lookup.json",
+        dataset="test",
+        model="watsonx/mistralai/mistral-large"  # Example model specification
+    )
     user_input = "map concert vulnerabilities to turbo entities"
     result = agent.run(user_input)
     print("\nFinal Mappings:")

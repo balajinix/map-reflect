@@ -14,6 +14,8 @@ from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
 import numpy as np
+import math
+
 
 # Configure logging
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -266,37 +268,131 @@ class ReActEvaluationRunner:
             "results": results  # This will be compatible with the evaluation script
         }
     
-    def save_results(self, results: dict, dataset: str, model: str):
-        """Save results to JSON file with NumPy-safe serialization."""
-        output_file = self.results_dir / f"{dataset.lower()}_{model}.json"
- 
-        def convert_numpy_types(obj):
-            """Convert NumPy types to Python native types for JSON serialization"""
-            try:
-                import numpy as np
-                if isinstance(obj, (np.float32, np.float64)):
-                    return float(obj)
-                elif isinstance(obj, (np.int32, np.int64)):
-                    return int(obj)
-                elif isinstance(obj, dict):
-                    return {k: convert_numpy_types(v) for k, v in obj.items()}
-                elif isinstance(obj, list):
-                    return [convert_numpy_types(v) for v in obj]
-            except ImportError:
-                pass
-            return obj
-
+    def _to_json_safe(self, obj: Any):
+        """
+        Recursively convert objects to JSON-safe types:
+        - numpy scalars -> Python scalars
+        - numpy arrays  -> lists
+        - tuples/sets   -> lists
+        - dict/list     -> recurse
+        - NaN/Inf       -> None (or string if you prefer)
+        """
         try:
-            # Convert before writing to JSON
-            serializable_results = convert_numpy_types(results)
-
-            with open(output_file, 'w') as f:
-                json.dump(serializable_results, f, indent=2)
-
-            logger.info(f"Results saved to {output_file}")
-
+            import numpy as np
+            np_types = (np.generic, np.ndarray)
+        except Exception:
+            np_types = tuple()
+    
+        # numpy scalar
+        if np_types and isinstance(obj, np.generic):
+            return obj.item()
+    
+        # numpy array
+        if np_types and isinstance(obj, np.ndarray):
+            return [_to_json_safe(self, x) for x in obj.tolist()]
+    
+        # basic scalars
+        if isinstance(obj, (str, int)):
+            return obj
+        if isinstance(obj, float):
+            # Make sure we don't emit NaN/Inf (json module with allow_nan=False will barf)
+            if math.isfinite(obj):
+                return obj
+            return None
+        if isinstance(obj, bool) or obj is None:
+            return obj
+    
+        # containers
+        if isinstance(obj, dict):
+            return {str(k): _to_json_safe(self, v) for k, v in obj.items()}
+        if isinstance(obj, (list, tuple, set)):
+            return [_to_json_safe(self, v) for v in obj]
+    
+        # fallback to string
+        return str(obj)
+    
+    
+    def save_results(self, results: dict, dataset: str, model: str):
+        """
+        Robust save:
+          - Stream JSONL per record (append, flush, fsync).
+          - Also write a complete JSON atomically via temp file + rename.
+          - Sanitize all objects (numpy, NaN/Inf, tuples/sets) to be JSON-safe.
+          - Per-record try/except so one bad record won't break the file.
+        """
+        base = f"{dataset.lower()}_{model}"
+        jsonl_path = self.results_dir / f"{base}.jsonl"
+        final_json_path = self.results_dir / f"{base}.json"
+        tmp_json_path = self.results_dir / f"{base}.json.tmp"
+    
+        results_list = results.get("results", [])
+    
+        # 1) Stream JSONL (append mode) — resilient to crashes and bad records
+        appended = 0
+        try:
+            with open(jsonl_path, "a", encoding="utf-8") as jf:
+                for r in results_list:
+                    try:
+                        safe_r = _to_json_safe(self, r)
+                        line = json.dumps(safe_r, ensure_ascii=False)
+                        jf.write(line + "\n")
+                        appended += 1
+                    except Exception as e:
+                        # Last resort: drop problematic fields that are notorious
+                        minimal = {
+                            "sample_id": r.get("sample_id"),
+                            "success": bool(r.get("success", False)),
+                            "accuracy": float(r.get("accuracy", 0.0)) if str(r.get("accuracy", "")).replace('.','',1).isdigit() else 0.0,
+                            "error_message": str(r.get("error_message", ""))[:500],
+                        }
+                        try:
+                            safe_min = _to_json_safe(self, minimal)
+                            jf.write(json.dumps(safe_min, ensure_ascii=False) + "\n")
+                            appended += 1
+                        except Exception as e2:
+                            # Give up on this record, but continue
+                            logger.error(f"JSONL skip record {r.get('sample_id','?')}: {e} / fallback failed: {e2}")
+                jf.flush()
+                os.fsync(jf.fileno())
+            logger.info(f"Appended {appended}/{len(results_list)} records to {jsonl_path}")
         except Exception as e:
-            logger.error(f"Failed to save results to {output_file}: {e}")
+            logger.error(f"Failed streaming JSONL to {jsonl_path}: {e}")
+    
+        # 2) Also write the full JSON atomically
+        try:
+            safe_all = _to_json_safe(self, {"results": results_list})
+            with open(tmp_json_path, "w", encoding="utf-8") as f:
+                # Disallow NaN in final JSON (safer for downstream parsers)
+                json.dump(safe_all, f, indent=2, ensure_ascii=False, allow_nan=False)
+                f.flush()
+                os.fsync(f.fileno())
+            os.replace(tmp_json_path, final_json_path)
+            logger.info(f"Atomic JSON saved to {final_json_path}")
+        except Exception as e:
+            logger.error(f"Failed to save atomic JSON to {final_json_path}: {e}")
+            # Clean up temp on failure
+            try:
+                if os.path.exists(tmp_json_path):
+                    os.remove(tmp_json_path)
+            except Exception:
+                pass
+    
+
+    def _numpy_safe(self, obj):
+        """Convert NumPy types recursively to JSON-safe natives."""
+        try:
+            import numpy as np
+            if isinstance(obj, (np.floating,)):
+                return float(obj)
+            if isinstance(obj, (np.integer,)):
+                return int(obj)
+        except Exception:
+            pass
+        if isinstance(obj, dict):
+            return {k: self._numpy_safe(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [self._numpy_safe(v) for v in obj]
+        return obj
 
 
     def print_evaluation_summary(self, results: Dict[str, Any]):

@@ -14,28 +14,25 @@ from typing import Dict, List, Any, Optional, Tuple
 import logging
 from datetime import datetime
 import re
+from tqdm import tqdm
 
 # Suppress LiteLLM logging before any imports
-import os
 os.environ['LITELLM_LOG'] = 'ERROR'
 os.environ['LITELLM_DROP_PARAMS'] = 'True'
 
-# Load environment variables from map_reflect directory
+# Load environment variables
 from dotenv import load_dotenv
 
-# Get the directory where this script is located (map_reflect directory)
+# Get the directory where this script is located
 script_dir = Path(__file__).parent
 env_file = script_dir / ".env"
 
-# Load .env file from map_reflect directory if it exists
 if env_file.exists():
     load_dotenv(env_file)
     print(f"Loaded environment variables from {env_file}")
 else:
-    # Fallback to default behavior (current directory)
     load_dotenv()
 
-# Configure logging
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -56,20 +53,21 @@ for name in logging.root.manager.loggerDict:
 class MapReflectMappingAgent:
     """MapReflect mapping agent using the existing map_reflect_agent.py implementation."""
     
-    def __init__(self, property_lookup_file: str, data_dir: str = None, model: str = "watsonx/mistralai/mistral-large", rebuild_index: bool = False):
+    def __init__(self, property_lookup_file: str, data_dir: str = None, model: str = "watsonx/mistralai/mistral-large", rebuild_index: bool = False, dataset: str = None):
         """Initialize MapReflect mapping agent."""
         self.model = model
+        self.dataset = dataset
         self.property_lookup_file = Path(property_lookup_file)
         self.data_dir = Path(data_dir) if data_dir else self.property_lookup_file.parent
         self.rebuild_index = rebuild_index
         self.available = False
-        self.hierarchy_cache = {}  # Cache for dataset-specific hierarchies
+        self.hierarchy_cache = {}
         
         # Try to load property lookup and set up map_reflect_agent
         try:
             self._setup_map_reflect_agent()
             self.available = True
-            logger.info("MapReflect mapping agent initialized successfully")
+            logger.info(f"MapReflect mapping agent initialized successfully for dataset: {self.dataset}")
         except Exception as e:
             logger.error(f"Failed to initialize MapReflect agent: {e}")
             self.available = False
@@ -102,14 +100,13 @@ class MapReflectMappingAgent:
             except Exception as e:
                 logger.error(f"Failed to load hierarchy for {dataset}: {e}")
         
-        # Return empty hierarchy if file not found or failed to load
         logger.warning(f"Using empty hierarchy for dataset {dataset}")
         self.hierarchy_cache[dataset] = {}
         return {}
     
     def _setup_map_reflect_agent(self):
         """Set up map_reflect_agent with the correct property lookup file."""
-        # Add data directory to Python path for shared components
+        # Add data directory to Python path
         if str(self.data_dir) not in sys.path:
             sys.path.insert(0, str(self.data_dir))
         
@@ -130,7 +127,6 @@ class MapReflectMappingAgent:
         try:
             from map_reflect_agent import MapReflectAgent
             
-            # Check if property lookup file exists
             if not self.property_lookup_file.exists():
                 raise FileNotFoundError(f"Property lookup file not found: {self.property_lookup_file}")
             
@@ -138,10 +134,12 @@ class MapReflectMappingAgent:
             self.map_reflect_agent = MapReflectAgent(
                 property_lookup_file=str(self.property_lookup_file),
                 rebuild_index=self.rebuild_index,
-                model=self.model  # Pass the model parameter
+                model=self.model,
+                dataset=self.dataset  # Pass dataset for proper collection naming
             )
             
             logger.info(f"Loaded property lookup from {self.property_lookup_file}")
+            logger.info(f"MapReflect agent configured with model: {self.model}, dataset: {self.dataset}")
             
         except ImportError as e:
             logger.error(f"Failed to import map_reflect_agent: {e}")
@@ -172,7 +170,6 @@ class MapReflectMappingAgent:
             reflection_feedback = result.get('reflection_feedback', '')
             
             if mappings:
-                # Convert to mapping format
                 mapping_result = self._convert_to_mapping_format(mappings, result)
                 
                 return {
@@ -292,7 +289,6 @@ class MapReflectEvaluationRunner:
     
     def _initialize_dataset_loader(self):
         """Initialize the dataset loader with proper path handling."""
-        # Add data directory to Python path
         if str(self.data_dir) not in sys.path:
             sys.path.insert(0, str(self.data_dir))
         
@@ -303,13 +299,14 @@ class MapReflectEvaluationRunner:
             logger.error(f"Failed to import shared DatasetLoader from {self.data_dir}: {e}")
             raise
     
-    def _get_agent_for_model(self, model: str) -> MapReflectMappingAgent:
-        """Get or create an agent for the specified model."""
+    def _get_agent_for_model(self, model: str, dataset: str) -> MapReflectMappingAgent:
+        """Get or create an agent for the specified model and dataset."""
         return MapReflectMappingAgent(
             str(self.property_lookup_file), 
             str(self.data_dir), 
             model, 
-            self.rebuild_index
+            self.rebuild_index,
+            dataset  # Pass dataset for proper ChromaDB collection naming
         )
     
     def make_json_serializable(self, obj):
@@ -336,22 +333,16 @@ class MapReflectEvaluationRunner:
                     'content': str(obj)
                 }
         
-        # Handle dictionaries
         if isinstance(obj, dict):
             return {k: self.make_json_serializable(v) for k, v in obj.items()}
-        
-        # Handle lists
         elif isinstance(obj, list):
             return [self.make_json_serializable(v) for v in obj]
-        
-        # Handle other non-serializable objects
         elif hasattr(obj, '__dict__'):
             try:
                 return self.make_json_serializable(obj.__dict__)
             except:
                 return str(obj)
         
-        # Return as-is if already serializable
         return obj
     
     def save_results(self, results: dict, filename: str):
@@ -359,7 +350,6 @@ class MapReflectEvaluationRunner:
         output_file = self.results_dir / filename
         
         try:
-            # Convert to JSON serializable format
             serializable_results = self.make_json_serializable(results)
             
             with open(output_file, 'w') as f:
@@ -369,7 +359,6 @@ class MapReflectEvaluationRunner:
             
         except Exception as e:
             logger.error(f"Failed to save results to {output_file}: {e}")
-            # Try to save a minimal version
             try:
                 minimal_results = {
                     "metadata": results.get("metadata", {}),
@@ -392,14 +381,11 @@ class MapReflectEvaluationRunner:
             if not mapping_result:
                 return {}
             
-            # Extract mappings from the MapReflect result format
             properties = mapping_result.get("properties", {})
             
-            # Convert to a simplified format for evaluation
             simplified_mappings = {}
             for source_prop, mappings in properties.items():
                 if isinstance(mappings, list) and mappings:
-                    # Take the first mapping if multiple exist
                     mapping = mappings[0]
                     if isinstance(mapping, dict):
                         simplified_mappings[source_prop] = {
@@ -418,7 +404,6 @@ class MapReflectEvaluationRunner:
         if not predicted_mapping:
             return 0.0
         
-        # For now, return a basic score based on whether we found any mappings
         return 1.0 if len(predicted_mapping) > 0 else 0.0
     
     def _create_error_result(self, sample_id: str, error_message: str, start_time: float) -> Dict[str, Any]:
@@ -446,11 +431,12 @@ class MapReflectEvaluationRunner:
         
         try:
             logger.info(f"Running MapReflect on sample {sample_id}")
-            logger.info(f"Utterance: {utterance}")
-            logger.info(f"Dataset: {dataset}")
+            logger.info(f"   Utterance: {utterance}")
+            logger.info(f"   Dataset: {dataset}")
+            logger.info(f"   Model: {model}")
             
-            # Get agent for this specific model
-            mapping_agent = self._get_agent_for_model(model)
+            # Get agent for this specific model and dataset
+            mapping_agent = self._get_agent_for_model(model, dataset)
             
             # Load dataset-specific hierarchy if available
             if dataset:
@@ -490,6 +476,7 @@ class MapReflectEvaluationRunner:
                 "map_reflect_state": agent_result.get("map_reflect_state", {}),
                 "agent_available": mapping_agent.available,
                 "dataset": dataset,
+                "model": model,
                 "hierarchy_used": dataset if dataset and mapping_agent._get_hierarchy_file_for_dataset(dataset) else None
             }
             
@@ -503,7 +490,7 @@ class MapReflectEvaluationRunner:
         """Run evaluation for a specific dataset and model combination."""
         logger.info(f"Starting MapReflect evaluation for {dataset} with {model}")
         
-        # Load evaluation utterances using shared loader
+        # Load evaluation utterances
         utterances = self.load_evaluation_utterances(dataset)
         if not utterances:
             logger.error(f"No utterances found for dataset {dataset}")
@@ -515,40 +502,48 @@ class MapReflectEvaluationRunner:
         results = []
         total_start_time = time.time()
         
-        for i, utterance_data in enumerate(utterances):
-            logger.info(f"Processing utterance {i+1}/{len(utterances)}: {utterance_data['sample_id']}")
-            
-            # Run single evaluation
-            result = self.run_single_evaluation(
-                utterance_data["utterance"],
-                utterance_data["sample_id"],
-                model,
-                dataset
-            )
-            
-            # Add expected information for analysis
-            result["expected_source"] = utterance_data.get("expected_source", "")
-            result["expected_target"] = utterance_data.get("expected_target", "")
-            result["original_utterance"] = utterance_data["utterance"]
-            result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
-            
-            results.append(result)
-            
-            if (i + 1) % 2 == 0:
-                logger.info(f"Completed {i+1}/{len(utterances)} utterances")
-            
-            # Small delay between requests to avoid overwhelming the LLM
-            time.sleep(0.5)
+        with tqdm(utterances, desc=f"Processing {dataset}", unit="utterance") as pbar:
+            for i, utterance_data in enumerate(pbar):
+                sample_id = utterance_data['sample_id']
+                
+                # Update progress bar description
+                pbar.set_description(f"Processing {sample_id}")
+                
+                # Run single evaluation
+                result = self.run_single_evaluation(
+                    utterance_data["utterance"],
+                    sample_id,
+                    model,
+                    dataset
+                )
+                
+                # Add expected information for analysis
+                result["expected_source"] = utterance_data.get("expected_source", "")
+                result["expected_target"] = utterance_data.get("expected_target", "")
+                result["original_utterance"] = utterance_data["utterance"]
+                result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
+                
+                results.append(result)
+                
+                # Update progress bar with status
+                status = "✓" if result["success"] else "✗"
+                mappings_count = len(result.get("predicted_mapping", {}))
+                pbar.set_postfix({"status": status, "mappings": mappings_count})
+                
+                # Small delay between requests
+                time.sleep(0.5)
         
         total_execution_time = time.time() - total_start_time
         
         # Calculate overall statistics
         successful_results = [r for r in results if r["success"]]
         overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
+        total_mappings = sum(len(r.get("predicted_mapping", {})) for r in results)
         
         logger.info(f"MapReflect evaluation completed for {dataset}")
         logger.info(f"   Total utterances: {len(utterances)}")
         logger.info(f"   Successful: {len(successful_results)}")
+        logger.info(f"   Total mappings found: {total_mappings}")
         logger.info(f"   Overall accuracy: {overall_accuracy:.3f}")
         logger.info(f"   Total time: {total_execution_time:.2f}s")
         
@@ -562,6 +557,7 @@ class MapReflectEvaluationRunner:
                 "timestamp": datetime.now().isoformat(),
                 "total_samples": len(utterances),
                 "successful_samples": len(successful_results),
+                "total_mappings": total_mappings,
                 "overall_accuracy": overall_accuracy,
                 "property_lookup_file": str(self.property_lookup_file),
                 "data_dir": str(self.data_dir),
@@ -575,24 +571,28 @@ class MapReflectEvaluationRunner:
 
 def main():
     """Main function to run MapReflect evaluation with command line arguments."""
-    parser = argparse.ArgumentParser(description="MapReflect Schema Mapping Evaluation")
+    parser = argparse.ArgumentParser(
+        description="MapReflect Schema Mapping Evaluation",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    
+    # Required arguments
+    parser.add_argument("--property-lookup-file", type=str, required=True,
+                       help="Path to property lookup JSON file (required)")
+    parser.add_argument("--data-dir", type=str, required=True,
+                       help="Directory containing shared data components (required)")
     
     # Dataset and model arguments
-    parser.add_argument("--datasets", type=str, default="ITOps",
-                       help="Comma-separated list of datasets to evaluate (default: ITOps)")
-    parser.add_argument("--models", type=str, default="watsonx/mistralai/mistral-large",
-                       help="Comma-separated list of models to use (default: watsonx/mistralai/mistral-large)")
+    parser.add_argument("--datasets", type=str, required=True,
+                       help="Comma-separated list of datasets to evaluate (required)")
+    parser.add_argument("--models", type=str, required=True,
+                       help="Comma-separated list of models to use (required)")
     
-    # File and directory arguments - now all required
-    parser.add_argument("--property-lookup-file", type=str, required=True,
-                       help="Path to property lookup JSON file (e.g., api_lookup.json)")
-    parser.add_argument("--data-dir", type=str, required=True,
-                       help="Directory containing shared data components (dataset_loader.py, etc.)")
+    # Optional arguments
     parser.add_argument("--schema-dir", type=str, default=None,
                        help="Directory containing GraphQL schemas (optional)")
-
     parser.add_argument("--samples", type=str, default=None,
-                       help="Number of samples (optional)")
+                       help="Number of samples (optional, not yet implemented)")
     
     # MapReflect specific options
     parser.add_argument("--rebuild-index", action="store_true",
@@ -606,15 +606,13 @@ def main():
     
     args = parser.parse_args()
     
-    # Set logging level based on verbose flag
+    # Set logging level
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
         logger.info("Verbose logging enabled")
-        # Even in verbose mode, suppress LiteLLM spam
         logging.getLogger("litellm").setLevel(logging.WARNING)
         logging.getLogger("LiteLLM").setLevel(logging.WARNING)
     else:
-        # Disable verbose logging from external libraries when not in verbose mode
         logging.getLogger("litellm").setLevel(logging.ERROR)
         logging.getLogger("LiteLLM").setLevel(logging.ERROR)
         logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -622,7 +620,6 @@ def main():
         logging.getLogger("urllib3").setLevel(logging.WARNING)
         logging.getLogger("requests").setLevel(logging.WARNING)
         
-        # Suppress all LiteLLM related loggers
         for name in logging.root.manager.loggerDict:
             if 'litellm' in name.lower():
                 logging.getLogger(name).setLevel(logging.ERROR)
@@ -660,7 +657,9 @@ def main():
     for dataset in datasets:
         for model in models:
             combination_key = f"{dataset}_{model.replace('/', '_')}"
+            logger.info(f"\n{'='*60}")
             logger.info(f"Running evaluation: {dataset} with {model}")
+            logger.info(f"{'='*60}\n")
             
             try:
                 # Run evaluation for this dataset-model combination
@@ -673,12 +672,13 @@ def main():
                     result_filename = f"{dataset}_{model.replace('/', '_').replace('watsonx_', '')}.json"
                     runner.save_results(result, result_filename)
                     
-                    logger.info(f"Results saved to: {runner.results_dir / result_filename}")
+                    logger.info(f"\nResults saved to: {runner.results_dir / result_filename}")
                     
                     # Log summary statistics
                     metadata = result.get('metadata', {})
                     logger.info(f"   Total samples: {metadata.get('total_samples', 0)}")
                     logger.info(f"   Successful: {metadata.get('successful_samples', 0)}")
+                    logger.info(f"   Total mappings: {metadata.get('total_mappings', 0)}")
                     logger.info(f"   Accuracy: {metadata.get('overall_accuracy', 0.0):.3f}")
                 else:
                     logger.warning(f"No results returned for {dataset} with {model}")
@@ -687,26 +687,30 @@ def main():
                 logger.error(f"Evaluation failed for {dataset} with {model}: {e}")
                 continue
             
-            # Add delay between evaluations to avoid overwhelming the API
+            # Add delay between evaluations
             if not args.quick:
                 time.sleep(2)
     
     total_execution_time = time.time() - total_start_time
     
     if all_results:
+        logger.info(f"\n{'='*60}")
         logger.info("MapReflect evaluation completed!")
+        logger.info(f"\n{'='*60}")
         logger.info(f"   Total combinations: {len(all_results)}")
         logger.info(f"   Total execution time: {total_execution_time:.2f}s")
         
         # Calculate overall statistics
         total_samples = sum(r.get('metadata', {}).get('total_samples', 0) for r in all_results.values())
         total_successful = sum(r.get('metadata', {}).get('successful_samples', 0) for r in all_results.values())
+        total_all_mappings = sum(r.get('metadata', {}).get('total_mappings', 0) for r in all_results.values())
         avg_accuracy = sum(r.get('metadata', {}).get('overall_accuracy', 0.0) for r in all_results.values()) / len(all_results) if all_results else 0.0
         
         logger.info(f"   Overall samples: {total_samples}")
         logger.info(f"   Overall successful: {total_successful}")
+        logger.info(f"   Overall mappings: {total_all_mappings}")
         logger.info(f"   Average accuracy: {avg_accuracy:.3f}")
-        logger.info(f"Results saved in: {runner.results_dir}")
+        logger.info(f"   Results saved in: {runner.results_dir}")
         
         return 0
     else:
