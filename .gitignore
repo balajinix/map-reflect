@@ -3,3 +3,4 @@ results
 .venv
 .env
 nohup.out
+.DS_Store
