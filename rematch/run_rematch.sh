@@ -19,11 +19,9 @@ DATASETS="nl2gql"
 
 # Models to use
 # Examples:
-#   - "gpt-4"
-#   - "gpt-4-turbo"
-#   - "claude-3-opus"
+#   - "watsonx/meta-llama/llama-3-3-70b-instruct"
 #   - "watsonx/mistralai/mistral-medium-2505"
-MODELS="gpt-4"
+MODELS="watsonx/mistralai/mistral-medium-2505"
 
 # Data directory (contains all dataset files)
 DATA_DIR="../data"
