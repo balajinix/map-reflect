@@ -275,7 +275,7 @@ class ReActEvaluationRunner:
         - numpy arrays  -> lists
         - tuples/sets   -> lists
         - dict/list     -> recurse
-        - NaN/Inf       -> None (or string if you prefer)
+        - NaN/Inf       -> None
         """
         try:
             import numpy as np
@@ -289,13 +289,12 @@ class ReActEvaluationRunner:
     
         # numpy array
         if np_types and isinstance(obj, np.ndarray):
-            return [_to_json_safe(self, x) for x in obj.tolist()]
+            return [self._to_json_safe(x) for x in obj.tolist()]  # FIX: self._to_json_safe
     
         # basic scalars
         if isinstance(obj, (str, int)):
             return obj
         if isinstance(obj, float):
-            # Make sure we don't emit NaN/Inf (json module with allow_nan=False will barf)
             if math.isfinite(obj):
                 return obj
             return None
@@ -304,9 +303,9 @@ class ReActEvaluationRunner:
     
         # containers
         if isinstance(obj, dict):
-            return {str(k): _to_json_safe(self, v) for k, v in obj.items()}
+            return {str(k): self._to_json_safe(v) for k, v in obj.items()}  # FIX: self._to_json_safe
         if isinstance(obj, (list, tuple, set)):
-            return [_to_json_safe(self, v) for v in obj]
+            return [self._to_json_safe(v) for v in obj]  # FIX: self._to_json_safe
     
         # fallback to string
         return str(obj)
@@ -333,12 +332,13 @@ class ReActEvaluationRunner:
             with open(jsonl_path, "a", encoding="utf-8") as jf:
                 for r in results_list:
                     try:
-                        safe_r = _to_json_safe(self, r)
+                        safe_r = self._to_json_safe(r)  # FIX: self._to_json_safe
                         line = json.dumps(safe_r, ensure_ascii=False)
                         jf.write(line + "\n")
                         appended += 1
                     except Exception as e:
-                        # Last resort: drop problematic fields that are notorious
+                        logger.error(f"Failed to serialize record {r.get('sample_id', '?')}: {e}")
+                        # Last resort: drop problematic fields
                         minimal = {
                             "sample_id": r.get("sample_id"),
                             "success": bool(r.get("success", False)),
@@ -346,7 +346,7 @@ class ReActEvaluationRunner:
                             "error_message": str(r.get("error_message", ""))[:500],
                         }
                         try:
-                            safe_min = _to_json_safe(self, minimal)
+                            safe_min = self._to_json_safe(minimal)  # FIX: self._to_json_safe
                             jf.write(json.dumps(safe_min, ensure_ascii=False) + "\n")
                             appended += 1
                         except Exception as e2:
@@ -357,10 +357,12 @@ class ReActEvaluationRunner:
             logger.info(f"Appended {appended}/{len(results_list)} records to {jsonl_path}")
         except Exception as e:
             logger.error(f"Failed streaming JSONL to {jsonl_path}: {e}")
+            import traceback
+            traceback.print_exc()  # ADD: Print full traceback for debugging
     
         # 2) Also write the full JSON atomically
         try:
-            safe_all = _to_json_safe(self, {"results": results_list})
+            safe_all = self._to_json_safe({"results": results_list})  # FIX: self._to_json_safe
             with open(tmp_json_path, "w", encoding="utf-8") as f:
                 # Disallow NaN in final JSON (safer for downstream parsers)
                 json.dump(safe_all, f, indent=2, ensure_ascii=False, allow_nan=False)
@@ -370,13 +372,14 @@ class ReActEvaluationRunner:
             logger.info(f"Atomic JSON saved to {final_json_path}")
         except Exception as e:
             logger.error(f"Failed to save atomic JSON to {final_json_path}: {e}")
+            import traceback
+            traceback.print_exc()  # ADD: Print full traceback for debugging
             # Clean up temp on failure
             try:
                 if os.path.exists(tmp_json_path):
                     os.remove(tmp_json_path)
             except Exception:
                 pass
-    
 
     def _numpy_safe(self, obj):
         """Convert NumPy types recursively to JSON-safe natives."""

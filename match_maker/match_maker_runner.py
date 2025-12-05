@@ -102,66 +102,113 @@ class MatchMakerMappingAgent:
             f"dataset={self.dataset}, top_k={self.top_k}"
         )
     
-    def run_agent(self, source_attribute: str) -> Dict[str, Any]:
+    def run_agent(self, utterance_or_source_attr: str, is_utterance: bool = False) -> Dict[str, Any]:
         """
-        Run MatchMaker on a single source attribute.
+        Run MatchMaker on a source attribute or utterance.
         
         Args:
-            source_attribute: Source attribute ID to match
+            utterance_or_source_attr: Either a source attribute ID (MIMIC-OMOP) 
+                                      or a full utterance (itops/nl2gql)
+            is_utterance: Whether input is a full utterance needing parsing
             
         Returns:
             Dict with match results
         """
         if not self.available:
-            return self._fallback_response(source_attribute)
+            return self._fallback_response(utterance_or_source_attr)
         
         try:
-            logger.info(f"Running MatchMaker for: {source_attribute}")
+            # For itops/nl2gql: parse utterance to set source/target dynamically
+            if is_utterance:
+                logger.info(f"Parsing utterance: {utterance_or_source_attr}")
+                self.matchmaker_agent.set_source_target_from_utterance(utterance_or_source_attr)
+                
+                # After parsing, we need to extract the source attribute to match
+                # For now, match all source attributes found
+                source_attrs = list(self.matchmaker_agent.source_properties.keys())
+                
+                if not source_attrs:
+                    logger.warning("No source attributes found after parsing utterance")
+                    return {
+                        "utterance": utterance_or_source_attr,
+                        "mapping_result": {},
+                        "candidates": [],
+                        "selected_match": None,
+                        "abstain": True,
+                        "error": "No source attributes identified"
+                    }
+                
+                # For utterance-based matching, we match ALL source attrs to target
+                logger.info(f"Matching {len(source_attrs)} source attributes to target")
+                results = self.matchmaker_agent.run(source_attrs)
+                
+                # Aggregate results
+                all_candidates = []
+                mappings = {}
+                for source_attr, result in results.items():
+                    if result.selected_match and not result.abstain:
+                        mappings[source_attr] = result.selected_match
+                        all_candidates.extend(result.candidates)
+                
+                mapping_result = self._convert_utterance_to_mapping_format(results, utterance_or_source_attr)
+                
+                return {
+                    "utterance": utterance_or_source_attr,
+                    "mapping_result": mapping_result,
+                    "all_results": {k: self._result_to_dict(v) for k, v in results.items()},
+                    "total_mappings": len(mappings),
+                    "error": None
+                }
             
-            # Run MatchMaker
-            results = self.matchmaker_agent.run([source_attribute])
-            
-            if source_attribute not in results:
+            # For MIMIC-OMOP: direct attribute matching
+            else:
+                source_attribute = utterance_or_source_attr
+                logger.info(f"Running MatchMaker for: {source_attribute}")
+                
+                # Run MatchMaker
+                results = self.matchmaker_agent.run([source_attribute])
+                
+                if source_attribute not in results:
+                    return {
+                        "source_attribute": source_attribute,
+                        "mapping_result": {},
+                        "candidates": [],
+                        "selected_match": None,
+                        "abstain": True,
+                        "error": "No result returned"
+                    }
+                
+                result = results[source_attribute]
+                
+                # Convert to evaluation format
+                candidates_list = [
+                    {
+                        "target_attribute": cand.target_attribute,
+                        "confidence": cand.confidence,
+                        "rank": cand.rank,
+                        "justification": cand.justification,
+                        "source": cand.source
+                    }
+                    for cand in result.candidates
+                ]
+                
+                # Format for evaluation
+                mapping_result = self._convert_to_mapping_format(result)
+                
                 return {
                     "source_attribute": source_attribute,
-                    "mapping_result": {},
-                    "candidates": [],
-                    "selected_match": None,
-                    "abstain": True,
-                    "error": "No result returned"
+                    "mapping_result": mapping_result,
+                    "candidates": candidates_list,
+                    "selected_match": result.selected_match,
+                    "abstain": result.abstain,
+                    "reasoning_trace": result.reasoning_trace,
+                    "error": None
                 }
-            
-            result = results[source_attribute]
-            
-            # Convert to evaluation format
-            candidates_list = [
-                {
-                    "target_attribute": cand.target_attribute,
-                    "confidence": cand.confidence,
-                    "rank": cand.rank,
-                    "justification": cand.justification,
-                    "source": cand.source
-                }
-                for cand in result.candidates
-            ]
-            
-            # Format for evaluation
-            mapping_result = self._convert_to_mapping_format(result)
-            
-            return {
-                "source_attribute": source_attribute,
-                "mapping_result": mapping_result,
-                "candidates": candidates_list,
-                "selected_match": result.selected_match,
-                "abstain": result.abstain,
-                "reasoning_trace": result.reasoning_trace,
-                "error": None
-            }
             
         except Exception as e:
-            logger.error(f"MatchMaker failed for {source_attribute}: {e}")
+            logger.error(f"MatchMaker failed: {e}")
             return {
-                "source_attribute": source_attribute,
+                "input": utterance_or_source_attr,
                 "mapping_result": {},
                 "candidates": [],
                 "selected_match": None,
@@ -201,6 +248,42 @@ class MatchMakerMappingAgent:
             "name": f"matchmaker_{result.source_attribute}",
             "properties": properties
         }
+    
+    def _convert_utterance_to_mapping_format(self, results: Dict, utterance: str) -> Dict[str, Any]:
+        """Convert multiple MatchMaker results from utterance to mapping format."""
+        properties = {}
+        
+        for source_attr, result in results.items():
+            if not result.abstain and result.selected_match:
+                properties[source_attr] = [{
+                    "mapProperty": result.selected_match,
+                    "justification": f"Confidence: {result.candidates[0].confidence:.1f}"
+                    if result.candidates else "Selected match"
+                }]
+        
+        return {
+            "name": f"matchmaker_utterance_{len(properties)}_mappings",
+            "properties": properties
+        }
+    
+    def _result_to_dict(self, result) -> Dict[str, Any]:
+        """Convert MatchResult object to dictionary."""
+        return {
+            "source_attribute": result.source_attribute,
+            "selected_match": result.selected_match,
+            "abstain": result.abstain,
+            "candidates": [
+                {
+                    "target_attribute": c.target_attribute,
+                    "confidence": c.confidence,
+                    "rank": c.rank,
+                    "justification": c.justification,
+                    "source": c.source
+                }
+                for c in result.candidates
+            ],
+            "reasoning_trace": result.reasoning_trace
+        }
 
 
 class MatchMakerEvaluationRunner:
@@ -234,6 +317,9 @@ class MatchMakerEvaluationRunner:
         self.top_k = top_k
         self.results_dir = Path("results")
         self.results_dir.mkdir(exist_ok=True)
+        
+        # Cache for agents (reuse across samples)
+        self._agent_cache = {}
         
         # Validate files
         if not self.property_lookup_file.exists():
@@ -311,26 +397,32 @@ class MatchMakerEvaluationRunner:
     
     def run_single_evaluation(
         self,
-        source_attribute: str,
+        input_data: str,
         sample_id: str,
         model: str,
         dataset: str,
-        ground_truth: Optional[str] = None
+        ground_truth: Optional[str] = None,
+        is_utterance: bool = None
     ) -> Dict[str, Any]:
-        """Run MatchMaker on a single source attribute."""
+        """Run MatchMaker on a single input (attribute or utterance)."""
         start_time = time.time()
+        
+        # Auto-detect if utterance-based (itops/nl2gql) or attribute-based (MIMIC-OMOP)
+        if is_utterance is None:
+            is_utterance = dataset.lower() in ['itops', 'nl2gql']
         
         try:
             logger.info(f"Running MatchMaker on sample {sample_id}")
-            logger.info(f"  Source attribute: {source_attribute}")
+            logger.info(f"  Input: {input_data}")
             logger.info(f"  Dataset: {dataset}")
+            logger.info(f"  Is utterance: {is_utterance}")
             logger.info(f"  Model: {model}")
             
             # Get agent
             agent = self._get_agent_for_model(model, dataset)
             
             # Run agent
-            result = agent.run_agent(source_attribute)
+            result = agent.run_agent(input_data, is_utterance=is_utterance)
             
             execution_time = time.time() - start_time
             
@@ -349,10 +441,13 @@ class MatchMakerEvaluationRunner:
             # Compile result
             return {
                 "sample_id": sample_id,
-                "source_attribute": source_attribute,
+                "input": input_data,
+                "is_utterance": is_utterance,
                 "selected_match": result.get('selected_match'),
                 "abstain": result.get('abstain', False),
                 "candidates": result.get('candidates', []),
+                "mapping_result": result.get('mapping_result', {}),
+                "total_mappings": result.get('total_mappings', 0 if result.get('abstain') else 1),
                 "accuracy_metrics": accuracy_metrics,
                 "execution_time": execution_time,
                 "success": result.get('error') is None,
@@ -369,10 +464,13 @@ class MatchMakerEvaluationRunner:
             
             return {
                 "sample_id": sample_id,
-                "source_attribute": source_attribute,
+                "input": input_data,
+                "is_utterance": is_utterance,
                 "selected_match": None,
                 "abstain": True,
                 "candidates": [],
+                "mapping_result": {},
+                "total_mappings": 0,
                 "accuracy_metrics": {},
                 "execution_time": execution_time,
                 "success": False,
@@ -394,6 +492,9 @@ class MatchMakerEvaluationRunner:
         
         logger.info(f"Loaded {len(utterances)} evaluation samples")
         
+        # Determine if this is utterance-based or attribute-based
+        is_utterance_dataset = dataset.lower() in ['itops', 'nl2gql']
+        
         # Run MatchMaker on each sample
         results = []
         total_start = time.time()
@@ -403,26 +504,35 @@ class MatchMakerEvaluationRunner:
         with tqdm(utterances, desc=f"Evaluating {dataset}", unit="sample") as pbar:
             for item in pbar:
                 sample_id = item['sample_id']
-                source_attr = item.get('source_attribute', item.get('utterance', ''))
-                ground_truth = item.get('ground_truth_target', item.get('expected_target'))
+                
+                # For utterance-based: use full utterance
+                # For attribute-based: use source_attribute
+                if is_utterance_dataset:
+                    input_data = item.get('utterance', '')
+                    ground_truth = item.get('expected_target', item.get('ground_truth_target'))
+                else:
+                    input_data = item.get('source_attribute', item.get('utterance', ''))
+                    ground_truth = item.get('ground_truth_target', item.get('expected_target'))
                 
                 pbar.set_description(f"Processing {sample_id}")
                 
                 result = self.run_single_evaluation(
-                    source_attribute=source_attr,
+                    input_data=input_data,
                     sample_id=sample_id,
                     model=model,
                     dataset=dataset,
-                    ground_truth=ground_truth
+                    ground_truth=ground_truth,
+                    is_utterance=is_utterance_dataset
                 )
                 
                 results.append(result)
                 
                 # Update progress bar
                 status = "✓" if result["success"] else "✗"
+                matches = result.get("total_mappings", 0)
                 pbar.set_postfix({
                     "status": status,
-                    "match": "Yes" if result["selected_match"] else "No"
+                    "mappings": matches
                 })
                 
                 time.sleep(0.5)  # Rate limiting
@@ -445,13 +555,13 @@ class MatchMakerEvaluationRunner:
             )
         
         # Other statistics
-        total_matches = sum(1 for r in results if r["selected_match"])
+        total_mappings = sum(r.get("total_mappings", 0) for r in results)
         total_abstentions = sum(1 for r in results if r["abstain"])
         
         logger.info(f"Evaluation complete for {dataset}")
         logger.info(f"  Total samples: {len(utterances)}")
         logger.info(f"  Successful: {len(successful)}")
-        logger.info(f"  Matches found: {total_matches}")
+        logger.info(f"  Total mappings: {total_mappings}")
         logger.info(f"  Abstentions: {total_abstentions}")
         logger.info(f"  Accuracy@1: {accuracy_at_k.get('accuracy@1', 0):.3f}")
         logger.info(f"  Total time: {total_time:.2f}s")
@@ -461,11 +571,12 @@ class MatchMakerEvaluationRunner:
                 "dataset": dataset,
                 "method": "MatchMaker",
                 "model": model,
+                "is_utterance_dataset": is_utterance_dataset,
                 "execution_time": total_time,
                 "timestamp": datetime.now().isoformat(),
                 "total_samples": len(utterances),
                 "successful_samples": len(successful),
-                "total_matches": total_matches,
+                "total_mappings": total_mappings,
                 "total_abstentions": total_abstentions,
                 "accuracy_at_k": accuracy_at_k,
                 "property_lookup_file": str(self.property_lookup_file),
@@ -626,10 +737,14 @@ def main():
                     metadata = result.get('metadata', {})
                     print(f"  Samples: {metadata.get('total_samples', 0)}")
                     print(f"  Successful: {metadata.get('successful_samples', 0)}")
-                    print(f"  Matches: {metadata.get('total_matches', 0)}")
+                    print(f"  Total mappings: {metadata.get('total_mappings', 0)}")
+                    print(f"  Abstentions: {metadata.get('total_abstentions', 0)}")
                     print(f"  Accuracy@1: {metadata.get('accuracy_at_k', {}).get('accuracy@1', 0):.3f}")
                     print(f"  Accuracy@3: {metadata.get('accuracy_at_k', {}).get('accuracy@3', 0):.3f}")
                     print(f"  Accuracy@5: {metadata.get('accuracy_at_k', {}).get('accuracy@5', 0):.3f}")
+                    
+                    if metadata.get('is_utterance_dataset'):
+                        print(f"  [Utterance-based dataset: {dataset}]")
                 
             except Exception as e:
                 logger.error(f"Evaluation failed for {dataset} with {model}: {e}")

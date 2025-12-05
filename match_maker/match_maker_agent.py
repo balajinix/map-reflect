@@ -162,15 +162,98 @@ class MatchMakerAgent:
         )
     
     def _parse_properties(self):
-        """Parse properties into source and target based on naming convention."""
-        # This is dataset-specific. Adjust based on your property lookup format
-        for prop_id, prop_data in self.property_data.items():
-            # You may need to adjust this logic based on your data format
-            # For MIMIC-OMOP: MIMIC properties are source, OMOP are target
-            if 'source' in prop_data.get('category', '').lower():
-                self.source_properties[prop_id] = prop_data
-            else:
-                self.target_properties[prop_id] = prop_data
+        """Parse properties into source and target based on dataset."""
+        # For MIMIC-OMOP: pre-defined source/target
+        if self.dataset.lower() == 'mimic_omop':
+            for prop_id, prop_data in self.property_data.items():
+                product = prop_data.get('product_name', '').lower()
+                if 'mimic' in product:
+                    self.source_properties[prop_id] = prop_data
+                elif 'omop' in product:
+                    self.target_properties[prop_id] = prop_data
+        
+        # For itops/nl2gql: dynamic source/target (set via set_source_target_from_utterance)
+        else:
+            # Initially, all properties available
+            # Will be filtered dynamically per utterance
+            pass
+    
+    def set_source_target_from_utterance(self, utterance: str):
+        """
+        Dynamically set source and target properties based on utterance.
+        
+        For datasets like itops/nl2gql where source/target are not pre-defined,
+        parse the utterance to determine which products/schemas to use.
+        
+        Example: "map concert vulnerabilities to turbo entities"
+        → source: concert_* properties
+        → target: turbonomic_* properties
+        """
+        # Extract source and target from utterance using LLM
+        prompt = f"""Parse this schema mapping request and identify the source and target schemas.
+
+Utterance: "{utterance}"
+
+Available products in the system: {', '.join(set(p.get('product_name', '') for p in self.property_data.values()))}
+
+Return ONLY a JSON object with:
+{{
+  "source_schema": "source product name",
+  "target_schema": "target product name"
+}}
+
+Examples:
+- "map concert vulnerabilities to turbo entities" → {{"source_schema": "Concert", "target_schema": "Turbonomic"}}
+- "find instana metrics similar to apptio costs" → {{"source_schema": "Instana", "target_schema": "Apptio"}}
+"""
+        
+        messages = [
+            {"role": "system", "content": "You are a schema matching assistant. Return only valid JSON."},
+            {"role": "user", "content": prompt}
+        ]
+        
+        response = self._call_llm(messages, temperature=0.0)
+        response = _strip_code_fences(response)
+        
+        parsed, err = _safe_json_loads(response)
+        if err or not isinstance(parsed, dict):
+            logger.warning(f"Failed to parse source/target from utterance: {err}")
+            # Fallback: use all properties
+            self.source_properties = self.property_data.copy()
+            self.target_properties = self.property_data.copy()
+            return
+        
+        source_schema = parsed.get('source_schema', '').lower()
+        target_schema = parsed.get('target_schema', '').lower()
+        
+        logger.info(f"Parsed utterance → source: {source_schema}, target: {target_schema}")
+        
+        # Filter properties by product name
+        self.source_properties = {
+            prop_id: prop_data
+            for prop_id, prop_data in self.property_data.items()
+            if source_schema in prop_data.get('product_name', '').lower()
+        }
+        
+        self.target_properties = {
+            prop_id: prop_data
+            for prop_id, prop_data in self.property_data.items()
+            if target_schema in prop_data.get('product_name', '').lower()
+        }
+        
+        logger.info(
+            f"Filtered properties: {len(self.source_properties)} source, "
+            f"{len(self.target_properties)} target"
+        )
+        
+        # Rebuild index with filtered target properties if needed
+        if self.colbert_available:
+            logger.info("Rebuilding index with filtered target properties...")
+            self._build_multi_vector_index()
+        elif hasattr(self, 'collection'):
+            # Update ChromaDB collection with filtered targets
+            logger.info("Updating ChromaDB with filtered target properties...")
+            self._build_multi_vector_index()
     
     # ========== Step 1: Multi-Vector Index Creation ==========
     
@@ -178,13 +261,23 @@ class MatchMakerAgent:
         """Build ColBERT-v2 multi-vector index from target schema."""
         logger.info(f"Building multi-vector index: {self.collection_name}")
         
-        # Prepare documents from target schema
+        # For utterance-based datasets (itops/nl2gql), index ALL properties initially
+        # We'll filter at query time, not at index time
+        if self.dataset.lower() in ['itops', 'nl2gql']:
+            properties_to_index = self.property_data
+            logger.info(f"Utterance-based dataset: indexing all {len(properties_to_index)} properties")
+        else:
+            # For MIMIC-OMOP: only index target properties
+            properties_to_index = self.target_properties
+            logger.info(f"Attribute-based dataset: indexing {len(properties_to_index)} target properties")
+        
+        # Prepare documents
         documents = []
         doc_ids = []
         
         for prop_id, prop_data in tqdm(
-            self.target_properties.items(),
-            desc="Preparing target documents",
+            properties_to_index.items(),
+            desc="Preparing documents for indexing",
             disable=logger.level > logging.INFO
         ):
             # Create rich document representation
@@ -205,21 +298,35 @@ class MatchMakerAgent:
             # Fallback: use sentence-transformers with ChromaDB
             import chromadb
             self.chroma_client = chromadb.PersistentClient(path=self.index_path)
-            collection = self.chroma_client.get_or_create_collection(
+            
+            # Delete existing collection if it exists
+            try:
+                self.chroma_client.delete_collection(name=self.collection_name)
+            except:
+                pass
+            
+            collection = self.chroma_client.create_collection(
                 name=self.collection_name
             )
             
-            embeddings = [self.embedding_model.encode(doc) for doc in documents]
+            embeddings = [self.embedding_model.encode(doc) for doc in tqdm(
+                documents, 
+                desc="Embedding documents",
+                disable=logger.level > logging.INFO
+            )]
+            
             collection.add(
                 ids=doc_ids,
                 documents=documents,
                 embeddings=embeddings
             )
+            
+            self.collection = collection
         
-        logger.info(f"Index built with {len(documents)} target attributes")
-    
+        logger.info(f"Index built with {len(documents)} properties")
+
     def _load_index(self):
-        """Load existing index."""
+        """Load existing index, or create if it doesn't exist."""
         logger.info(f"Loading existing index: {self.collection_name}")
         
         if self.colbert_available:
@@ -228,7 +335,13 @@ class MatchMakerAgent:
         else:
             import chromadb
             self.chroma_client = chromadb.PersistentClient(path=self.index_path)
-            self.collection = self.chroma_client.get_collection(self.collection_name)
+            
+            try:
+                self.collection = self.chroma_client.get_collection(self.collection_name)
+                logger.info(f"Loaded existing collection: {self.collection_name}")
+            except Exception as e:
+                logger.warning(f"Collection {self.collection_name} doesn't exist, creating it now...")
+                self._build_multi_vector_index()
     
     def _create_document(self, prop_id: str, prop_data: Dict) -> str:
         """
