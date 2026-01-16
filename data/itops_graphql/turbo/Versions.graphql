@@ -1,0 +1,60 @@
+type GetVersionInfo {
+  """
+  A multi-line string describing the version information, including that of the various internal components.
+  """
+  versionInfo: String!
+
+  """
+  The Operations Manager product version, including major and minor versions.
+  """
+  version: String!
+
+  """
+  The build number associated with this deployment.
+  """
+  build: String!
+
+  """
+  The commit associated with this deployment.
+  """
+  commit: String
+
+  """
+  The branch associated with this deployment.
+  """
+  branch: String
+
+  """
+  Specific source control information associated with this deployment.
+  """
+  gitDescription: String
+
+  """
+  Description of available updates--not yet implemented in XL.
+  """
+  updates: String
+
+  """
+  The version of the market.
+  """
+  marketVersion: String
+
+  """
+  The version of the REST API.
+  """
+  apiVersion: String
+}
+
+type Query {
+  getVersionInfo(table: String!): GetVersionInfo
+    @rest(
+      table: table,
+      endpoint: "Getversioninfo",
+      method: "GET",
+      queryKeys: ["table"],
+      responseType: "GetVersionInfo",
+      responseKey: "data"
+    )
+}
+
+# This GraphQL query type `Query` includes a single field `getVersionInfo` that maps to the `Getversioninfo` REST endpoint. The `table` argument in the query is mapped to the `table` query key in the REST endpoint. The response type from the REST endpoint is expected to be `GetVersionInfo`, and the response key is set to `"data"` to extract the relevant data from the response.

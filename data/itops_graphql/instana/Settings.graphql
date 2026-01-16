@@ -1,0 +1,524 @@
+type GetAccessLogs {
+  # Define fields here
+}
+
+type GetAllApdexConfigurations {
+  # Define fields here
+}
+
+type CreateApdexConfiguration {
+  # Define fields here
+}
+
+type GetApdexConfigurationsForEntityTypeAndId {
+  # Define fields here
+}
+
+type DeleteApdexConfiguration {
+  # Define fields here
+}
+
+type GetApdexConfiguration {
+  # Define fields here
+}
+
+type GetApiTokens {
+  # Define fields here
+}
+
+type PostApiToken {
+  # Define fields here
+}
+
+type DeleteApiToken {
+  # Define fields here
+}
+
+type GetApiToken {
+  # Define fields here
+}
+
+type PutApiToken {
+  # Define fields here
+}
+
+type GetAuditLogs {
+  # Define fields here
+}
+
+type DeleteGoogleSsoConfig {
+  # Define fields here
+}
+
+type DeleteLdapConfig {
+  # Define fields here
+}
+
+type DeleteOidcConfig {
+  # Define fields here
+}
+
+type DeleteSamlConfig {
+  # Define fields here
+}
+
+type ShareAndInviteUsers {
+  # Define fields here
+}
+
+type RevokePendingInvitation {
+  # Define fields here
+}
+
+type GetInvitations {
+  # Define fields here
+}
+
+type InviteUsers {
+  # Define fields here
+}
+
+type GetMaintenanceConfigs {
+  # Define fields here
+}
+
+type DeleteMaintenanceConfig {
+  # Define fields here
+}
+
+type GetMaintenanceConfig {
+  # Define fields here
+}
+
+type PutMaintenanceConfig {
+  # Define fields here
+}
+
+type Group {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  membersCount: String
+  entitiesCount: String
+  costPrice: String
+  groupType: String
+  severity: String
+  state: String
+  environmentType: String
+  scope: String
+  isStatic: String
+  logicalOperator: String
+  criteriaList: [Criterion]
+  memberUuidList: [String]
+  realtimeMarketReference: String
+  stats: [Stat]
+  temporary: String
+  activeEntitiesCount: String
+  cloudType: String
+  source: String
+  memberTypes: String
+  entityTypes: String
+  aspects: String
+  vendorIds: String
+  groupOrigin: String
+  targetType: String
+  groupClassName: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Stat {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: String
+  epoch: String
+}
+
+type Criterion {
+  expVal: String
+  expType: String
+  filterType: String
+  caseSensitive: String
+  entityType: String
+  singleLine: String
+}
+
+type CreateGroup {
+  # Define fields here
+}
+
+type GetGroupsByUser {
+  # Define fields here
+}
+
+type AddPermissionsToGroup {
+  # Define fields here
+}
+
+type AddUsersToGroup {
+  # Define fields here
+}
+
+type DeleteGroup {
+  # Define fields here
+}
+
+type GetGroup {
+  # Define fields here
+}
+
+type UpdateGroup {
+  # Define fields here
+}
+
+type RemoveUserFromGroup {
+  # Define fields here
+}
+
+type GetGroupMappings {
+  # Define fields here
+}
+
+type CreateGroupMapping {
+  # Define fields here
+}
+
+type GetIdentityProviderPatch {
+  # Define fields here
+}
+
+type UpdateIdentityProvider {
+  # Define fields here
+}
+
+type DeleteGroupMapping {
+  # Define fields here
+}
+
+type UpdateGroupMapping {
+  # Define fields here
+}
+
+type DeleteSessionSettings {
+  # Define fields here
+}
+
+type GetSessionSettings {
+  # Define fields here
+}
+
+type SetSessionSettings {
+  # Define fields here
+}
+
+type GetAllSloConfigs {
+  # Define fields here
+}
+
+type CreateSloConfig {
+  # Define fields here
+}
+
+type GetSloConfigTags {
+  # Define fields here
+}
+
+type DeletesloConfig {
+  # Define fields here
+}
+
+type GetSloConfigById {
+  # Define fields here
+}
+
+type UpdatesloConfig {
+  # Define fields here
+}
+
+type DeleteSyntheticCall {
+  # Define fields here
+}
+
+type GetSyntheticCalls {
+  # Define fields here
+}
+
+type UpdatesyntheticCall {
+  # Define fields here
+}
+
+type User {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  username: String
+  password: String
+  roles: [Role]
+  loginProvider: String
+  type: String
+  scope: Scope
+  atdScope: AtdScope
+  features: [String]
+  authToken: String
+  showSharedUserSC: String
+}
+
+type Role {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  name: String
+}
+
+type Scope {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  membersCount: String
+  entitiesCount: String
+  costPrice: String
+  groupType: String
+  severity: String
+  state: String
+  environmentType: String
+  scope: String
+  isStatic: String
+  logicalOperator: String
+  criteriaList: [Criterion]
+  memberUuidList: [String]
+  realtimeMarketReference: String
+  stats: [Stat]
+  temporary: String
+  activeEntitiesCount: String
+  cloudType: String
+  source: String
+  memberTypes: String
+  entityTypes: String
+  aspects: String
+  vendorIds: String
+  groupOrigin: String
+  targetType: String
+  groupClassName: String
+}
+
+type AtdScope {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type GetMaintenanceConfigsV2 {
+  # Define fields here
+}
+
+type DeleteMaintenanceConfigV2 {
+  # Define fields here
+}
+
+type GetMaintenanceConfigV2 {
+  # Define fields here
+}
+
+type PutMaintenanceConfigV2 {
+  # Define fields here
+}
+
+type Pauserecurrentmaintenanceconfiguration {
+  # Define fields here
+}
+
+type Resumerecurrentmaintenanceconfiguration {
+  # Define fields here
+}
+
+type GetAllSloConfigsV2 {
+  # Define fields here
+}
+
+type Createsliconfigv2 {
+  # Define fields here
+}
+
+type Getsliconfigsforentitytypeandidv2 {
+  # Define fields here
+}
+
+type Deletesliconfigv2 {
+  # Define fields here
+}
+
+type Getsliconfigv2 {
+  # Define fields here
+}
+
+type Query {
+  # Retrieve all access logs using defined query.
+  getAccessLogs: [GetAccessLogs]
+
+  # API to Get All Apdex Configurations.
+  getAllApdexConfigurations: [GetAllApdexConfigurations]
+
+  # Create Apdex Configuration
+  createApdexConfiguration: CreateApdexConfiguration
+
+  # API to Get All Apdex Configurations for specified entity type and entity id.
+  getApdexConfigurationsForEntityTypeAndId(
+    entityType: String!
+    entityId: String!
+  ): [GetApdexConfigurationsForEntityTypeAndId]
+
+  # Delete Apdex Configuration
+  deleteApdexConfiguration(id: String!): DeleteApdexConfiguration
+
+  # API to Get Apdex Configuration for specified ID.
+  getApdexConfiguration(id: String!): GetApdexConfiguration
+
+  # Get the list of API Tokens for this Tenant-Unit
+  getApiTokens: [GetApiTokens]
+
+  # Create an API Token on the Tenant-Unit. Each API Token entry also contains a set of permissions
+  postApiToken: PostApiToken
+
+  # Delete the Api Token
+  deleteApiToken(id: String!): DeleteApiToken
+
+  # Returns API Token details, including the set of permissions
+  getApiToken(id: String!): GetApiToken
+
+  # Update API Token- Change Token name and associated permissions
+  putApiToken(id: String!, token: String, permissions: [String]): PutApiToken
+
+  # Retrieve all audit logs using defined query.
+  getAuditLogs: [GetAuditLogs]
+
+  # Delete the corresponding tenants Google SSO configuration.
+  deleteGoogleSsoConfig: DeleteGoogleSsoConfig
+
+  # Delete the corresponding tenants LDAP configuration.
+  deleteLdapConfig: DeleteLdapConfig
+
+  # Delete the corresponding tenants OIDC configuration.
+  deleteOidcConfig: DeleteOidcConfig
+
+  # Delete the corresponding tenants SAML configuration.
+  deleteSamlConfig: DeleteSamlConfig
+
+  # This API endpoint allows to invite users to this tenant.
+  shareAndInviteUsers(emails: [String]!, groups: [String]): ShareAndInviteUsers
+
+  # This API endpoint allows to delete an invitation, requires the users’ email as a Query parameter.
+  revokePendingInvitation(email: String!): RevokePendingInvitation
+
+  # This API endpoint retrieves the list of all pending invitations.
+  getInvitations: [GetInvitations]
+
+  # This API endpoint allows to invite users to this tenant.
+  inviteUsers(emails: [String]!, groups: [String]): InviteUsers
+
+  # All maintenance configurations
+  getMaintenanceConfigs: [GetMaintenanceConfigs]
+
+  # Delete maintenance configuration
+  deleteMaintenanceConfig(id: String!): DeleteMaintenanceConfig
+
+  # Maintenance configuration
+  getMaintenanceConfig(id: String!): GetMaintenanceConfig
+
+  # Create or update maintenance configuration
+  putMaintenanceConfig(id: String!, name: String, query: String, scheduling: Scheduling): PutMaintenanceConfig
+
+  # This endpoint retrieves all available maintenance configurations.
+  getMaintenanceConfigV2: [GetMaintenanceConfigsV2]
+
+  # This endpoint deletes a maintenance configuration given its ID.
+  deleteMaintenanceConfigV2(id: String!): DeleteMaintenanceConfigV2
+
+  # This endpoint retrieves a maintenance configuration given its ID.
+  getMaintenanceConfigV2(id: String!): GetMaintenanceConfigV2
+
+  # This endpoint creates or updates a maintenance configuration given its ID.
+  putMaintenanceConfigV2(id: String!, name: String, query: String, scheduling: Scheduling, tagFilterExpressionEnabled: Boolean, tagFilterExpression: String): PutMaintenanceConfigV2
+
+  # This endpoint pauses a maintenance configuration given its ID.
+  pauseRecurringMaintenanceConfiguration(id: String!): Pauserecurrentmaintenanceconfiguration
+
+  # This endpoint resumes a maintenance configuration given its ID.
+  resumeRecurringMaintenanceConfiguration(id: String!): Resumerecurrentmaintenanceconfiguration
+
+  # Get All SLI Configs
+  getAllSliConfigs: [GetAllSloConfigs]
+
+  # Create a new SLO Config
+  createSloConfig: Createsloconfig
+
+  # Get All SLO Config tags
+  getAllSloConfigTags: [GetSloConfigTags]
+
+  # Delete an existing SLO Config
+  deleteSloConfig: Deletesloconfig
+
+  # Get an existing SLO Config
+  getSloConfig: Getsloconfig
+
+  # Update an existing SLO Config
+  updateSloConfig: Updatesloconfig
+
+  # Get All SLI Configs
+  getAllSliConfigsV2: [GetAllSliconfigsV2]
+
+  # Create the Service Level Indicator Configuration
+  createSliconfigV2: Createsliconfigv2
+
+  # Get all SLI configs for entity type and entity id
+  getSliconfigsForEntityTypeAndIdV2(entityType: String!, entityId: String!): [Getsliconfigsforentitytypeandidv2]
+
+  # Delete SLI Config
+  deletesliconfigV2(id: String!): Deletesliconfigv2
+
+  # Get SLI Config
+  getsliconfigV2(id: String!): Getsliconfigv2
+}
+
+# input Scheduling {
+#   start: Int!
+#   duration: Duration!
+#   type: MaintenanceType!
+#   rrule: String
+#   paused: Boolean
+# }
+
+# input Duration {
+#   amount: Int!
+#   unit: TimeUnit!
+# }
+
+# enum TimeUnit {
+#   MILLISECONDS
+#   SECONDS
+#   MINUTES
+#   HOURS
+#   DAYS
+# }
+
+# enum MaintenanceType {
+#   ONE_TIME
+#   RECURRENT
+# }

@@ -1,0 +1,36 @@
+# """
+# Type representing deployment information
+# """
+type DeploymentInfo {
+  """
+  The client Id
+  """
+  clientId: String!
+
+  """
+  The client service account
+  """
+  clientSvcAccount: String!
+
+  """
+  The OIDC provider URL
+  """
+  oidcProviderUrl: String!
+}
+
+# """
+# Query to get deployment information
+# """
+type Query {
+  """
+  Fetch deployment information
+  """
+  getDeploymentInfo(clientId: String!): DeploymentInfo
+}
+
+type Query {
+  # Fetch deployment information
+  getDeploymentInfo(clientId: String!): DeploymentInfo @rest(table_name: "Getdeploymentinfo")
+}
+
+# This GraphQL query type includes a single field, `getDeploymentInfo`, which corresponds to the `Getdeploymentinfo` REST endpoint. The `clientId` argument in the GraphQL query maps to the `clientId` column in the REST endpoint. The return type of this field is `DeploymentInfo`, which is a custom GraphQL type that matches the structure of the data returned by the REST endpoint. The `@rest` directive is used to specify the corresponding REST endpoint table name.

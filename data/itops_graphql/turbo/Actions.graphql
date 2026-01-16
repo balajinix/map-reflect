@@ -1,0 +1,388 @@
+type GetActions {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [Stats!]!
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [VirtualDisk!]!
+  policy: String
+  relatedSettingsPolicies: [RelatedSettingsPolicy!]!
+  actionSchedule: String
+  compoundActions: String
+  reservedInstance: String
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: String
+  executionCharacteristics: String
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetActionsByUUIDsQuery {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [Stats!]!
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [VirtualDisk!]!
+  policy: String
+  relatedSettingsPolicies: [RelatedSettingsPolicy!]!
+  actionSchedule: String
+  compoundActions: String
+  reservedInstance: String
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: String
+  executionCharacteristics: String
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetActionByUUID {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [Stats!]!
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [VirtualDisk!]!
+  policy: String
+  relatedSettingsPolicies: [RelatedSettingsPolicy!]!
+  actionSchedule: String
+  compoundActions: String
+  reservedInstance: String
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: String
+  executionCharacteristics: String
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type ExecuteAction {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  actionImpactID: String
+  marketID: String
+  createTime: String
+  updateTime: String
+  clearTime: String
+  actionType: String
+  actionState: String
+  actionMode: String
+  userName: String
+  details: String
+  importance: String
+  target: String
+  currentEntity: String
+  newEntity: String
+  currentValue: String
+  newValue: String
+  valueUnits: String
+  resizeAttribute: String
+  template: String
+  risk: String
+  prerequisites: String
+  prioritizedAutomationOpportunities: String
+  stats: [Stats!]!
+  progress: String
+  currentLocation: String
+  newLocation: String
+  virtualDisks: [VirtualDisk!]!
+  policy: String
+  relatedSettingsPolicies: [RelatedSettingsPolicy!]!
+  actionSchedule: String
+  compoundActions: String
+  reservedInstance: String
+  reservedInstancePlatform: String
+  externalActionName: String
+  externalActionUrl: String
+  executionStatus: String
+  executionCharacteristics: String
+  entityCharacteristics: String
+  source: String
+  actionID: String
+}
+
+type GetActionDetails {
+  actionType: String!
+  actionDetailType: String!
+}
+
+type GetActionPolicies {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  type: String
+  name: String
+  enabled: String
+  capacity: String
+  commodityType: String
+  mergeType: String
+  consumerGroup: String
+  providerGroup: String
+  mergeGroups: [MergeGroup!]!
+}
+
+type GetRelatedActions {
+  action: String!
+  actionRelationType: String!
+}
+
+type GetActionSettingsPolicies {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  entityType: String
+  scopes: [Scope!]!
+  settingsManagers: [SettingsManager!]!
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type Scope {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  membersCount: String
+  entitiesCount: String
+  costPrice: String
+  groupType: String
+  severity: String
+  state: String
+  environmentType: String
+  scope: String
+  isStatic: String
+  logicalOperator: String
+  criteriaList: String
+  memberUuidList: String
+  realtimeMarketReference: String
+  stats: String
+  temporary: String
+  activeEntitiesCount: String
+  cloudType: String
+  source: String
+  memberTypes: String
+  entityTypes: String
+  aspects: String
+  vendorIds: String
+  groupOrigin: String
+  targetType: String
+  groupClassName: String
+}
+
+type SettingsManager {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  category: String
+  settings: [String!]!
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type GetActionStateChangesByUUID {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  state: String
+  stateChangeTime: String
+}
+
+type ReplaceWebhookBody {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  succeeded: String
+  error: String
+  replacedBody: String
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Stats {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  name: String
+  capacity: String
+  reserved: String
+  relatedEntityType: String
+  filters: String
+  relatedEntity: String
+  numRelatedEntities: String
+  units: String
+  values: String
+  value: String
+  commoditySource: String
+  histUtilizations: String
+}
+
+type VirtualDisk {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  tier: String
+  actions: String
+  stats: String
+  attachedVirtualMachine: String
+  provider: String
+  dataCenter: String
+  environmentType: String
+  lastModified: String
+  businessAccount: String
+  resourceGroup: String
+  creationTime: String
+  skuName: String
+  snapshotId: String
+  encryption: String
+  attachmentState: String
+  diskRole: String
+  name: String
+  ephemeral: String
+  lastAttachedVm: String
+  numDaysUnattached: String
+  hourlyBilledOps: String
+  creationTimeStamp: String
+  attachedVMStorageCompatibility: String
+  storageUsageType: String
+  resourceId: String
+  redundancyType: String
+}
+
+type MergeGroup {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  mergeGroups: [MergeGroup!]!
+}
+
+type RelatedSettingsPolicy {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  relatedSettingsPolicies: [RelatedSettingsPolicy!]!
+}
+
+type Query {
+  getActions: [GetActions!]!
+  getActionsByUUIDsQuery(scopeUuids: [String!]): [GetActionsByUUIDsQuery!]!
+  getActionByUUID(uuid: String!): GetActionByUUID
+  executeAction: ExecuteAction
+  getActionDetails(actionUUID: String!): GetActionDetails!
+  getActionPolicies: [GetActionPolicies!]!
+  getRelatedActions(actionUUID: String!): [GetRelatedActions!]!
+  getActionSettingsPolicies(actionUUID: String!): [GetActionSettingsPolicies!]!
+  getActionStateChangesByUUID(uuid: String!): [GetActionStateChangesByUUID!]!
+  replaceWebhookBody(templateUUID: String!, actionUUID: String!): ReplaceWebhookBody
+}
+
+# Note: The GraphQL schema provided does not include any input types for the queries, such as pagination parameters for the `getActionsByUUIDsQuery` or filtering parameters for other queries. These would need to be added as input types in a full GraphQL schema definition. The schema provided only includes the types and fields that map to the REST endpoints.

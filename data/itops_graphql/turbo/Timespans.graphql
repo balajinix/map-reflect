@@ -1,0 +1,217 @@
+type ListTimespanSchedules {
+  links: Link!
+  uuid: ID!
+  displayName: String!
+  className: String
+  description: String
+  timeZone: String!
+  timeSpans: TimeSpanGroup!
+}
+
+type AddTimespanSchedule {
+  links: Link!
+  uuid: ID!
+  displayName: String!
+  className: String
+  description: String
+  timeZone: String!
+  timeSpans: TimeSpanGroup!
+}
+
+type SearchTimespanSchedules {
+  links: Link!
+  uuid: ID!
+  displayName: String!
+  className: String
+  description: String
+  timeZone: String!
+  timeSpans: TimeSpanGroup!
+}
+
+type GetTimespanSchedule {
+  links: Link!
+  uuid: ID!
+  displayName: String!
+  className: String
+  description: String
+  timeZone: String!
+  timeSpans: TimeSpanGroup!
+}
+
+type EditTimespanSchedule {
+  links: Link!
+  uuid: ID!
+  displayName: String!
+  className: String
+  description: String
+  timeZone: String!
+  timeSpans: TimeSpanGroup!
+}
+
+type DeleteTimespanSchedule {
+  links: Link!
+  uuid: ID!
+}
+
+type FetchTimespanEntities {
+  entityUuids: [String!]!
+}
+
+type UpdateTimespanScheduleAttachment {
+  error: String
+  entityUUID: ID
+}
+
+type AttachTimespanSchedule {
+  error: String
+  entityUUID: ID
+}
+
+type DetachTimespanSchedule {
+  error: String
+  entityUUID: ID
+}
+
+type Link {
+  rel: String!
+  href: String!
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type TimeSpanGroup {
+  # Define TimeSpanGroup fields here
+}
+
+type Query {
+  # List timespan schedules
+  listTimespanSchedules(filter: [String]): [ListTimespanSchedules] @rest(
+    table_name: "Listtimespanschedules",
+    endpoint: "list_timespan_schedules",
+    method: "GET",
+    query_fields: {
+      filter: "filters"
+    }
+#   )
+  
+#   # Add a new timespan schedule
+#   addTimespanSchedule(input: TimespanScheduleInput): AddTimespanSchedule @rest(
+#     table_name: "Addtimespanschedule",
+#     endpoint: "add_timespan_schedule",
+#     method: "POST",
+#     body_fields: {
+#       input: "schedule"
+#     }
+#   )
+  
+#   # Search timespan schedules
+#   searchTimespanSchedules(filter: [String]): [SearchTimespanSchedules] @rest(
+#     table_name: "Searchtimespanschedules",
+#     endpoint: "search_timespan_schedules",
+#     method: "GET",
+#     query_fields: {
+#       filter: "filters"
+#     }
+#   )
+  
+#   # Get an existing timespan schedule
+#   getTimespanSchedule(uuid: ID!): GetTimespanSchedule @rest(
+#     table_name: "Gettimespanschedule",
+#     endpoint: "get_timespan_schedule",
+#     method: "GET",
+#     path_fields: {
+#       uuid: "id"
+#     }
+#   )
+  
+#   # Edit an existing timespan schedule
+#   editTimespanSchedule(uuid: ID!, input: TimespanScheduleInput): EditTimespanSchedule @rest(
+#     table_name: "Edittimespanschedule",
+#     endpoint: "edit_timespan_schedule",
+#     method: "PUT",
+#     path_fields: {
+#       uuid: "id"
+#     },
+#     body_fields: {
+#       input: "schedule"
+#     }
+#   )
+  
+#   # Delete a timespan schedule
+#   deleteTimespanSchedule(uuid: ID!): DeleteTimespanSchedule @rest(
+#     table_name: "Deletetimespanschedule",
+#     endpoint: "delete_timespan_schedule",
+#     method: "DELETE",
+#     path_fields: {
+#       uuid: "id"
+#     }
+#   )
+  
+#   # Fetch timespan entities
+#   fetchTimespanEntities(uuid: ID!): [FetchTimespanEntities] @rest(
+#     table_name: "Fetchtimespanentities",
+#     endpoint: "fetch_timespan_entities",
+#     method: "GET",
+#     path_fields: {
+#       uuid: "schedule_id"
+#     }
+#   )
+  
+#   # Update timespan schedule attachment
+#   updateTimespanScheduleAttachment(uuid: ID!, input: TimespanAttachmentInput): UpdateTimespanScheduleAttachment @rest(
+#     table_name: "Updatetimespanscheduleattachment",
+#     endpoint: "update_timespan_schedule_attachment",
+#     method: "PUT",
+#     path_fields: {
+#       uuid: "schedule_id"
+#     },
+#     body_fields: {
+#       input: "attachment"
+#     }
+#   )
+  
+#   # Attach timespan schedule
+#   attachTimespanSchedule(uuid: ID!, input: TimespanAttachmentInput): AttachTimespanSchedule @rest(
+#     table_name: "Attachtimespanschedule",
+#     endpoint: "attach_timespan_schedule",
+#     method: "POST",
+#     path_fields: {
+#       uuid: "schedule_id"
+#     },
+#     body_fields: {
+#       input: "attachment"
+#     }
+#   )
+  
+#   # Detach timespan schedule
+#   detachTimespanSchedule(uuid: ID!, input: TimespanAttachmentInput): DetachTimespanSchedule @rest(
+#     table_name: "Detachtimespanschedule",
+#     endpoint: "detach_timespan_schedule",
+#     method: "POST",
+#     path_fields: {
+#       uuid: "schedule_id"
+#     },
+#     body_fields: {
+#       input: "attachment"
+#     }
+#   )
+# }
+
+# input TimespanScheduleInput {
+#   displayName: String!
+#   className: String
+#   description: String
+#   timeZone: String!
+#   timeSpans: TimeSpanGroup!
+# }
+
+# input TimespanAttachmentInput {
+#   entityUuids: [String!]!
+# }
+
+# This GraphQL schema defines a `Query` type with fields corresponding to the provided REST endpoints. Each field is annotated with the `@rest` directive, specifying the table name, endpoint, method, path, and body fields. The `TimespanScheduleInput` and `TimespanAttachmentInput` are input types used for POST and PUT requests.

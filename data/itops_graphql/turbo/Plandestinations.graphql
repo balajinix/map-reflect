@@ -1,0 +1,73 @@
+type GetPlanDestinationsResponse {
+  """
+  Information about plan destinations.
+  """
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  market: String
+  businessUnit: String
+  numErrors: String
+  hasExportedData: Boolean
+  exportState: String
+  exportDescription: String
+  exportProgressPercentage: String
+}
+
+type Link {
+  rel: String!
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type UploadToPlanDestinationResponse {
+  """
+  Information about plan destinations.
+  """
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  market: String
+  businessUnit: String
+  numErrors: String
+  hasExportedData: Boolean
+  exportState: String
+  exportDescription: String
+  exportProgressPercentage: String
+}
+
+type GetPlanDestinationByIdResponse {
+  """
+  Information about a specific plan destination.
+  """
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  market: String
+  businessUnit: String
+  numErrors: String
+  hasExportedData: Boolean
+  exportState: String
+  exportDescription: String
+  exportProgressPercentage: String
+}
+
+type Query {
+  # Gets all plan destinations.
+  getPlanDestinations: [GetPlanDestinationsResponse!]! @rest(table_name: "Getplandestinations")
+
+  # Upload plan results to plan destination.
+  uploadToPlanDestination: UploadToPlanDestinationResponse! @rest(table_name: "Uploadtoplandestination")
+
+  # Get plan destination by uuid.
+  getPlanDestinationById(uuid: String!): GetPlanDestinationByIdResponse! @rest(table_name: "Getplandestinationbyid")
+}

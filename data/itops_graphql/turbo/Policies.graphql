@@ -1,0 +1,210 @@
+type GetParkingPoliciesConnection {
+  links: [Link!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [GetParkingPoliciesEdge!]!
+}
+
+type GetParkingPoliciesEdge {
+  node: GetParkingPolicy!
+}
+
+type GetParkingPolicy {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String!
+  impacts: String!
+  level: String!
+  scopes: [Scope!]!
+  criteriaList: [Criterion!]!
+  priority: String
+}
+
+type Scope {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String!
+}
+
+type Criterion {
+  expVal: String!
+  expType: String!
+  filterType: String!
+  caseSensitive: Boolean!
+  entityType: String!
+  singleLine: Boolean!
+}
+
+type AddPolicyInput {
+  displayName: String!
+  className: String
+  impacts: String
+  level: String
+  scopes: [ScopeInput!]!
+  criteriaList: [CriterionInput!]!
+  priority: String
+}
+
+type ScopeInput {
+  displayName: String!
+  className: String
+}
+
+type CriterionInput {
+  expVal: String!
+  expType: String!
+  filterType: String!
+  caseSensitive: Boolean!
+  entityType: String!
+  singleLine: Boolean!
+}
+
+type UpdatePolicyInput {
+  displayName: String
+  className: String
+  impacts: String
+  level: String
+  scopes: [ScopeInput!]
+  criteriaList: [CriterionInput!]
+  priority: String
+}
+
+type DeletePolicyByUUIDInput {
+  uuid: String!
+}
+
+type GetPoliciesConnection {
+  links: [Link!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [GetPolicyEdge!]!
+}
+
+type GetPolicyEdge {
+  node: GetPolicy!
+}
+
+type GetPolicy {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  type: String
+  name: String
+  enabled: Boolean
+  capacity: String
+  commodityType: String
+  mergeType: String
+  consumerGroup: String
+  providerGroup: String
+  mergeGroups: [MergeGroup!]!
+  providerEntityType: String
+}
+
+type MergeGroup {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+}
+
+type GetParkingPoliciesStatsConnection {
+  links: [Link!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [GetParkingPoliciesStatsEdge!]!
+}
+
+type GetParkingPoliciesStatsEdge {
+  node: GetParkingPoliciesStats!
+}
+
+type GetParkingPoliciesStats {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  date: String!
+  statistics: [Statistics!]!
+  epoch: String
+}
+
+type Statistics {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  name: String
+  capacity: String
+  reserved: String
+  relatedEntityType: String
+  filters: String
+  relatedEntity: String
+  numRelatedEntities: String
+  units: String
+  values: String
+  value: String
+  commoditySource: String
+  histUtilizations: String
+}
+
+type GetParkingPolicyByUUIDConnection {
+  links: [Link!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [GetParkingPolicyByUUIDEdge!]!
+}
+
+type GetParkingPolicyByUUIDEdge {
+  node: GetParkingPolicyByUUID!
+}
+
+type GetParkingPolicyByUUID {
+  links: [Link!]!
+  uuid: String!
+  displayName: String!
+  className: String
+  impacts: String
+  level: String
+  scopes: [Scope!]!
+  criteriaList: [Criterion!]!
+  priority: String
+}
+
+type UpdatePolicyConnection {
+  links: [Link!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+  edges: [UpdatePolicyEdge!]!
+}
+
+type UpdatePolicyEdge {
+  node: UpdatePolicy!
+}
+
+type UpdatePolicy {
+  links: [Link!]!
+  uuid: String
+  displayName: String
+  className: String
+  impacts: String
+  level: String
+  scopes: [Scope!]!
+  criteriaList: [Criterion!]!
+  priority: String
+}
+
+type Query {
+  getParkingPolicies(page: Int, perPage: Int): GetParkingPoliciesConnection!
+  addPolicy(input: AddPolicyInput!): GetParkingPolicy!
+  getParkingPoliciesStats(page: Int, perPage: Int): GetParkingPoliciesStatsConnection!
+  getParkingPolicyByUUID(uuid: String!): GetParkingPolicyByUUID!
+  updatePolicy(uuid: String!, input: UpdatePolicyInput!): UpdatePolicy!
+  deletePolicyByUUID(uuid: String!): Boolean!
+  getPolicies(page: Int, perPage: Int): GetPoliciesConnection!
+  getPolicyByUUID(uuid: String!): GetPolicy!
+}
+
+# This `Query` type includes fields that map to the provided REST endpoints. Each field corresponds to a REST endpoint and returns the appropriate GraphQL object. The `addPolicy` field accepts an `AddPolicyInput` argument, and the `updatePolicy` and `deletePolicyByUUID` fields accept `uuid` and `UpdatePolicyInput` arguments, respectively. The `getParkingPoliciesStats` field also includes pagination arguments `page` and `perPage`.

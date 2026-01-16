@@ -1,0 +1,586 @@
+# """
+# GetMobileAppBeaconGroups query
+# """
+type GetMobileAppBeaconGroupsQuery {
+  """
+  Fetches the beacon groups for a mobile app.
+  """
+  beaconGroups: [BeaconGroup]
+}
+
+# """
+# GetMobileAppBeacons query
+# """
+type GetMobileAppBeaconsQuery {
+  """
+  Fetches the beacons for a mobile app.
+  """
+  beacons: [Beacon]
+}
+
+# """
+# GetMobileAppTagCatalog query
+# """
+type GetMobileAppTagCatalogQuery {
+  """
+  Fetches the tag catalog for a mobile app.
+  """
+  tagCatalog: [Tag]
+}
+
+# """
+# GetMobileAppMetricCatalog query
+# """
+type GetMobileAppMetricCatalogQuery {
+  """
+  Fetches the metric catalog for a mobile app.
+  """
+  metricCatalog: [Metric]
+}
+
+# """
+# GetAllMobileAppCatalogTags query
+# """
+type GetAllMobileAppCatalogTagsQuery {
+  """
+  Fetches all tags from the mobile app catalog.
+  """
+  tags: [Tag]
+}
+
+# """
+# GetMobileAppConfig query
+# """
+type GetMobileAppConfigQuery {
+  """
+  Fetches the configuration for a mobile app.
+  """
+  config: MobileAppConfig
+}
+
+# """
+# PostMobileAppConfig mutation
+# """
+type PostMobileAppConfigMutation {
+  """
+  Creates or updates the configuration for a mobile app.
+  """
+  createOrUpdateConfig: MobileAppConfig
+}
+
+# """
+# DeleteMobileAppConfig mutation
+# """
+type DeleteMobileAppConfigMutation {
+  """
+  Deletes the configuration for a mobile app.
+  """
+  deleteConfig: Boolean
+}
+
+# """
+# RenameMobileAppConfig mutation
+# """
+type RenameMobileAppConfigMutation {
+  """
+  Renames the configuration for a mobile app.
+  """
+  renameConfig: MobileAppConfig
+}
+
+# """
+# GetMobileAppGeolocationConfiguration query
+# """
+type GetMobileAppGeolocationConfigurationQuery {
+  """
+  Fetches the geolocation configuration for a mobile app.
+  """
+  geolocationConfig: GeolocationConfig
+}
+
+# """
+# UpdateMobileAppGeolocationConfiguration mutation
+# """
+type UpdateMobileAppGeolocationConfigurationMutation {
+  """
+  Updates the geolocation configuration for a mobile app.
+  """
+  updateGeolocationConfig: GeolocationConfig
+}
+
+# """
+# GetMobileAppGeomappingRules query
+# """
+type GetMobileAppGeomappingRulesQuery {
+  """
+  Fetches the geomapping rules for a mobile app.
+  """
+  geomappingRules: [GeomappingRule]
+}
+
+# """
+# SetMobileAppGeomappingRules mutation
+# """
+type SetMobileAppGeomappingRulesMutation {
+  """
+  Sets the geomapping rules for a mobile app.
+  """
+  setGeomappingRules: [GeomappingRule]
+}
+
+# """
+# GetMobileAppIPMaskingConfiguration query
+# """
+type GetMobileAppIPMaskingConfigurationQuery {
+  """
+  Fetches the IP masking configuration for a mobile app.
+  """
+  ipMaskingConfig: IPMaskingConfig
+}
+
+# """
+# UpdateMobileAppIPMaskingConfiguration mutation
+# """
+type UpdateMobileAppIPMaskingConfigurationMutation {
+  """
+  Updates the IP masking configuration for a mobile app.
+  """
+  updateIPMaskingConfig: IPMaskingConfig
+}
+
+# """
+# GetMobileAppBeaconMetrics query
+# """
+type GetMobileAppBeaconMetricsQuery {
+  """
+  Fetches the beacon metrics for a mobile app.
+  """
+  beaconMetrics: [BeaconMetric]
+}
+
+# """
+# GetMobileAppBeaconMetricsV2 query
+# """
+type GetMobileAppBeaconMetricsV2Query {
+  """
+  Fetches the beacon metrics for a mobile app (v2).
+  """
+  beaconMetricsV2: [BeaconMetricV2]
+}
+
+# """
+# GetSession query
+# """
+type GetSessionQuery {
+  """
+  Fetches a session for a mobile app.
+  """
+  session: Session
+}
+
+# """
+# MobileAppConfig type
+# """
+type MobileAppConfig {
+  """
+  The configuration data for a mobile app.
+  """
+  data: String
+}
+
+# """
+# BeaconGroup type
+# """
+type BeaconGroup {
+  """
+  The unique identifier for the beacon group.
+  """
+  id: ID!
+
+  """
+  The name of the beacon group.
+  """
+  name: String!
+
+  """
+  The description of the beacon group.
+  """
+  description: String
+
+  """
+  The beacons associated with this group.
+  """
+  beacons: [Beacon]
+}
+
+# """
+# Beacon type
+# """
+type Beacon {
+  """
+  The unique identifier for the beacon.
+  """
+  id: ID!
+
+  """
+  The name of the beacon.
+  """
+  name: String!
+
+  """
+  The description of the beacon.
+  """
+  description: String
+
+  """
+  The type of the beacon.
+  """
+  type: BeaconType!
+
+  """
+  The location of the beacon.
+  """
+  location: Location
+
+  """
+  The tags associated with this beacon.
+  """
+  tags: [Tag]
+}
+
+# """
+# Tag type
+# """
+type Tag {
+  """
+  The unique identifier for the tag.
+  """
+  id: ID!
+
+  """
+  The name of the tag.
+  """
+  name: String!
+
+  """
+  The description of the tag.
+  """
+  description: String
+}
+
+# """
+# Metric type
+# """
+type Metric {
+  """
+  The unique identifier for the metric.
+  """
+  id: ID!
+
+  """
+  The name of the metric.
+  """
+  name: String!
+
+  """
+  The description of the metric.
+  """
+  description: String
+
+  """
+  The type of the metric.
+  """
+  type: MetricType!
+}
+
+# """
+# GeolocationConfig type
+# """
+type GeolocationConfig {
+  """
+  The enabled status of geolocation.
+  """
+  enabled: Boolean!
+
+  """
+  The accuracy of geolocation.
+  """
+  accuracy: Int
+
+  """
+  The timeout for geolocation.
+  """
+  timeout: Int
+}
+
+# """
+# GeomappingRule type
+# """
+type GeomappingRule {
+  """
+  The unique identifier for the geomapping rule.
+  """
+  id: ID!
+
+  """
+  The name of the geomapping rule.
+  """
+  name: String!
+
+  """
+  The description of the geomapping rule.
+  """
+  description: String
+
+  """
+  The type of the geomapping rule.
+  """
+  type: GeomappingRuleType!
+
+  """
+  The configuration for the geomapping rule.
+  """
+  config: GeomappingRuleConfig
+}
+
+# """
+# IPMaskingConfig type
+# """
+type IPMaskingConfig {
+  """
+  The enabled status of IP masking.
+  """
+  enabled: Boolean!
+
+  """
+  The masking type for IP.
+  """
+  maskingType: IPMaskingType!
+
+  """
+  The masking value for IP.
+  """
+  maskingValue: String
+}
+
+# """
+# BeaconMetric type
+# """
+type BeaconMetric {
+  """
+  The unique identifier for the beacon metric.
+  """
+  id: ID!
+
+  """
+  The name of the beacon metric.
+  """
+  name: String!
+
+  """
+  The description of the beacon metric.
+  """
+  description: String
+
+  """
+  The type of the beacon metric.
+  """
+  type: BeaconMetricType!
+
+  """
+  The value of the beacon metric.
+  """
+  value: Float
+}
+
+# """
+# BeaconMetricV2 type
+# """
+type BeaconMetricV2 {
+  """
+  The unique identifier for the beacon metric.
+  """
+  id: ID!
+
+  """
+  The name of the beacon metric.
+  """
+  name: String!
+
+  """
+  The description of the beacon metric.
+  """
+  description: String
+
+  """
+  The type of the beacon metric.
+  """
+  type: BeaconMetricTypeV2!
+
+  """
+  The value of the beacon metric.
+  """
+  value: Float
+}
+
+# """
+# Session type
+# """
+type Session {
+  """
+  The unique identifier for the session.
+  """
+  id: ID!
+
+  """
+  The start time of the session.
+  """
+  startTime: String!
+
+  """
+  The end time of the session.
+  """
+  endTime: String
+
+  """
+  The user associated with the session.
+  """
+  user: User
+
+  """
+  The beacons detected during the session.
+  """
+  beacons: [Beacon]
+
+  """
+  The metrics recorded during the session.
+  """
+  metrics: [Metric]
+}
+
+# """
+# User type
+# """
+type User {
+  """
+  The unique identifier for the user.
+  """
+  id: ID!
+
+  """
+  The name of the user.
+  """
+  name: String!
+
+  """
+  The email of the user.
+  """
+  email: String
+
+  """
+  The roles associated with the user.
+  """
+  roles: [Role]
+}
+
+# """
+# Location type
+# """
+type Location {
+  """
+  The latitude of the location.
+  """
+  latitude: Float!
+
+  """
+  The longitude of the location.
+  """
+  longitude: Float!
+}
+
+# """
+# BeaconType enum
+# """
+# enum BeaconType {
+#   BLE
+#   EDDYSTONE
+#   URIBEACON
+# }
+
+# """
+# MetricType enum
+# """
+# enum MetricType {
+#   APPLICATION_LAUNCH
+#   SESSION_START
+#   SESSION_END
+#   CRASH
+#   ERROR
+#   PERFORMANCE
+# }
+
+# """
+# GeomappingRuleType enum
+# """
+# enum GeomappingRuleType {
+#   GEO_FENCE
+#   GEO_ZONE
+#   GEO_SHAPE
+# }
+
+# """
+# IPMaskingType enum
+# """
+# enum IPMaskingType {
+#   IPV4
+#   IPV6
+# }
+
+# """
+# BeaconMetricType enum
+# """
+# enum BeaconMetricType {
+#   SIGNAL_STRENGTH
+#   RSSI
+#   PROXIMITY
+# }
+
+# """
+# BeaconMetricTypeV2 enum
+# """
+# enum BeaconMetricTypeV2 {
+#   SIGNAL_STRENGTH_V2
+#   RSSI_V2
+#   PROXIMITY_V2
+# }
+
+type Query {
+  # Get grouped beacon metrics
+  getMobileAppBeaconGroups: [BeaconGroup] @rest(table_name: "Getmobileappbeacongroups")
+
+  # Get all beacons
+  getMobileAppBeacons: [Beacon] @rest(table_name: "Getmobileappbeacons")
+
+  # Get mobile app tag catalog
+  getMobileAppTagCatalog: [Tag] @rest(table_name: "Getmobileapptagcatalog")
+
+  # Metric catalog
+  getMobileAppMetricCatalog: [Metric] @rest(table_name: "Getmobileappmetriccatalog")
+
+  # Get all existing mobile app tags
+  getAllMobileAppCatalogTags: [Tag] @rest(table_name: "Getallmobileappcatalogtags")
+
+  # Get configured mobile apps
+  getMobileAppConfig: MobileAppConfig @rest(table_name: "Getmobileappconfig")
+
+  # Get session
+  getSession: Session @rest(table_name: "Getsession")
+
+  # Get beacon metrics
+  getMobileAppBeaconMetrics: [BeaconMetric] @rest(table_name: "Getmobileappbeaconmetrics")
+
+  # Get beacon metrics (v2)
+  getMobileAppBeaconMetricsV2: [BeaconMetricV2] @rest(table_name: "Getmobileappbeaconmetricsv2")
+}
+
+# This 'type Query' block includes fields that map to the provided REST endpoints. Each field corresponds to a specific REST endpoint and uses the `@rest` directive to indicate that it should fetch data from the corresponding table. The data types for the returned values are inferred from the schema, ensuring that the query results match the expected format.

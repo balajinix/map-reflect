@@ -1,0 +1,172 @@
+type GetallprobesConnection {
+  links: Links
+  total: Int
+  pageInfo: PageInfo
+  edges: [GetallprobesEdge]
+}
+
+type GetallprobesEdge {
+  node: Getallprobes
+  cursor: String
+}
+
+type Getallprobes {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  category: String
+  isProbeRegistered: String
+  uiCategory: String
+  identifyingFields: String
+  inputFields: [InputField]
+  lastValidated: String
+  status: String
+  derivedTargets: String
+  patchedTargets: [PatchedTarget]
+  parentTargets: String
+  type: String
+  subType: String
+  readonly: String
+  healthSummary: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type PatchedTarget {
+  probeType: String
+  patchedFields: String
+}
+
+type InputField {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  name: String
+  value: String
+  defaultValue: String
+  isMandatory: String
+  isSecret: String
+  isMultiline: String
+  isTargetDisplayName: String
+  valueType: String
+  specificValueType: String
+  description: String
+  verificationRegex: String
+  groupProperties: String
+  allowedValues: String
+  dependencyKey: String
+  dependencyValue: String
+}
+
+type Getprobe {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  id: String
+  type: String
+  category: String
+  error: String
+}
+
+type Getallprobespecificprobeproperties {
+  name: String
+  value: String
+}
+
+type Putallprobespecificproperties {
+  name: String
+  value: String
+}
+
+type Getprobespecificprobeproperty {
+  probeId: String
+  targetId: String
+  name: String
+  value: String
+}
+
+type Putprobespecificproperty {
+  probeId: String
+  targetId: String
+  name: String
+  value: String
+}
+
+type Deleteprobespecificproperty {
+  probeId: String
+  targetId: String
+  name: String
+}
+
+type Getalltargetspecificprobeproperties {
+  name: String
+  value: String
+}
+
+type Putalltargetspecificproperties {
+  name: String
+  value: String
+}
+
+type Gettargetspecificprobeproperty {
+  probeId: String
+  targetId: String
+  name: String
+  value: String
+}
+
+type Puttargetspecificproperty {
+  probeId: String
+  targetId: String
+  name: String
+  value: String
+}
+
+type Deletetargetspecificproperty {
+  probeId: String
+  targetId: String
+  name: String
+}
+
+type Query {
+  GetAllProbes: GetallprobesConnection
+  GetProbe(uuid: String): Getprobe
+  GetAllProbeSpecificProperties(probeUuid: String): [Getallprobespecificprobeproperties]
+  PutAllProbeSpecificProperties(probeUuid: String, properties: [Putallprobespecificproperties]): Getprobe
+  GetProbeSpecificProperty(probeUuid: String, propertyName: String): Getprobespecificprobeproperty
+  PutProbeSpecificProperty(probeUuid: String, targetId: String, propertyName: String, propertyValue: String): Getprobe
+  DeleteProbeSpecificProperty(probeUuid: String, propertyName: String): Getprobe
+  GetAllTargetSpecificProperties(targetUuid: String): [Getalltargetspecificprobeproperties]
+  PutAllTargetSpecificProperties(targetUuid: String, properties: [Putalltargetspecificproperties]): Gettargetspecificprobeproperty
+  GetTargetSpecificProperty(targetUuid: String, propertyName: String): Gettargetspecificprobeproperty
+  PutTargetSpecificProperty(targetUuid: String, probeId: String, propertyName: String, propertyValue: String): Gettargetspecificprobeproperty
+  DeleteTargetSpecificProperty(targetUuid: String, propertyName: String): Gettargetspecificprobeproperty
+}
+
+# This GraphQL type `Query` includes fields that correspond to the provided REST endpoints. Each field in the `Query` type maps to a specific REST endpoint, with the argument types and return types reflecting the data requirements and expected responses for each endpoint.
+
+# - `GetAllProbes`: Returns a `GetallprobesConnection` object containing a list of probes with their associated metadata.
+# - `GetProbe`: Retrieves a specific probe based on its UUID.
+# - `GetAllProbeSpecificProperties`: Retrieves all specific properties of a given probe.
+# - `PutAllProbeSpecificProperties`: Updates all specific properties of a given probe.
+# - `GetProbeSpecificProperty`: Retrieves a specific property of a given probe.
+# - `PutProbeSpecificProperty`: Updates a specific property of a given probe.
+# - `DeleteProbeSpecificProperty`: Deletes a specific property from a given probe.
+# - `GetAllTargetSpecificProperties`: Retrieves all specific properties of a given target.
+# - `PutAllTargetSpecificProperties`: Updates all specific properties of a given target.
+# - `GetTargetSpecificProperty`: Retrieves a specific property of a given target.
+# - `PutTargetSpecificProperty`: Updates a specific property of a given target.
+# - `DeleteTargetSpecificProperty`: Deletes a specific property from a given target.

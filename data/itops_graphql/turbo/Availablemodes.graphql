@@ -1,0 +1,27 @@
+# """
+# GetAvailActionModes query to fetch available action modes
+# """
+type GetAvailActionModesQuery {
+  """
+  Fetches the available action modes
+  """
+  availableActionModes: [ActionMode!]!
+}
+
+# """
+# An action mode available in the system
+# """
+type ActionMode {
+  id: ID!
+  name: String!
+  description: String
+  priority: Int
+}
+
+# This GraphQL type definition includes a query named `GetAvailActionModesQuery` that fetches a list of `ActionMode` objects. Each `ActionMode` has an `id`, `name`, `description`, and `priority`. The `!` symbol after `ActionMode` in the query and the list indicates that these fields are non-nullable, meaning they must always have a value.
+
+type Query {
+  getAvailActionModes: [ActionMode!]! @rest(table_name: "Getavailactionmodes", description: "Get available action modes")
+}
+
+# This GraphQL type definition includes a new query named `getAvailActionModes` that maps to the provided REST endpoint 'Getavailactionmodes'. This query returns a list of `ActionMode` objects, just like the `GetAvailActionModesQuery` from the schema. The `@rest` directive is used to specify the REST endpoint details.

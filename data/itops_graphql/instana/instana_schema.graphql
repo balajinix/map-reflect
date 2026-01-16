@@ -1,0 +1,1585 @@
+scalar Long
+scalar NonNegativeFloat
+
+type TenantUnit {
+  id: ID!
+  name: String!
+  tenantUnitKey: String
+  region: String
+  tenantId: String
+  Tenant: Tenant
+  agentKeys: [String!]
+  downloadKey: String
+  license: String
+  isLicenseValid:  Boolean
+}
+
+type Tenant {
+  id: ID!
+  name: String!
+  tenantKey: String
+  onPremise: Boolean
+  ssoProviders: [SsoProvider!]
+}
+
+
+type SsoProvider {
+  name: String
+  filter: String
+}
+
+#scalar Long
+#
+#input TimeFrame {
+#  windowSize: Long,
+#  to: Long
+#}
+
+type PluginResult {
+  plugin: String
+  label: String
+}
+
+type GetPayloadKeysResult{
+  payloadKeys: [String]
+}
+
+type GetTopology {
+  edges: [GraphEdge]
+  nodes: [GraphNode]
+}
+
+type GraphEdge {
+  destination: String
+  relation: String
+  source: String
+}
+
+type GraphNode {
+  id: String
+  plugin: String
+  label: String
+  entityId: EntityId
+}
+
+type EntityId {
+  host: String!
+  pluginId: String!
+  steadyId: String!
+}
+
+enum Relation {
+  in
+  is
+  to
+  of
+  connected
+  describes
+  of20
+  to20
+  dummy
+  parent
+}
+
+
+# application-monitoring/settings
+
+type ApplicationConfig{
+  accessRules: [AccessRule]
+  boundaryScope: String!
+  id: String!
+  label: String!
+  matchSpecification: MatchExpressionDTO
+  scope: String!
+  tagFilterExpression: TagFilterExpressionElement
+}
+
+type AccessRule {
+  accessType: String!
+  relatedId: String
+  relationType: String!
+}
+
+type MatchExpressionDTO {
+  type: String!
+  conjunction: String
+}
+
+type TagFilterExpressionElement {
+  type: String
+  logicalOperator: String
+  name: String
+}
+
+type EndpointConfig {
+  endpointCase: String
+  endpointNameByCollectedPathTemplateRuleEnabled: Boolean
+  endpointNameByFirstPathSegmentRuleEnabled: Boolean
+  rules: [HttpEndpointRule]
+  serviceId: String
+}
+
+type HttpEndpointRule {
+  enabled: Boolean
+  pathSegments: [HttpPathSegmentMatchingRule]
+  testCases: [String]
+}
+
+type HttpPathSegmentMatchingRule {
+  type: String
+  name: String
+}
+
+type ManualServiceConfig {
+  description: String
+  enabled: Boolean
+  existingServiceId: String
+  id: String
+  tagFilterExpression: TagFilterExpressionElement
+  unmonitoredServiceName: String
+}
+
+type ServiceConfig {
+  comment: String
+  enabled: Boolean
+  id: String
+  label: String
+  matchSpecification: [ServiceMatchingRule]
+  name: String
+}
+
+type ServiceMatchingRule {
+  key: String
+  value: String
+}
+
+type SessionSettings {
+  tokenLifeTimeInMillis: Long
+  idleTimeInMillis: Long
+}
+
+interface ApiTokenBase {
+  id: String
+  name: String!
+}
+
+type ApiToken implements ApiTokenBase {
+  id: String
+  internalId: String!
+  accessGrantingToken: String!
+  name: String!
+  createdBy: String
+  createdOn: Long
+  lastUsedOn: Long
+  expiresOn: Long
+  limitedApplicationsScope: Boolean
+  limitedBizOpsScope: Boolean
+  limitedWebsitesScope: Boolean
+  limitedKubernetesScope: Boolean
+  limitedMobileAppsScope: Boolean
+  limitedInfrastructureScope: Boolean
+  limitedSyntheticsScope: Boolean
+  limitedVsphereScope: Boolean
+  limitedPhmcScope: Boolean
+  limitedPvcScope: Boolean
+  limitedZhmcScope: Boolean
+  limitedPcfScope: Boolean
+  limitedOpenstackScope: Boolean
+  limitedAutomationScope: Boolean
+  limitedLogsScope: Boolean
+  limitedNutanixScope: Boolean
+  limitedXenServerScope: Boolean
+  limitedAlertChannelsScope: Boolean
+  canConfigureServiceMapping: Boolean
+  canConfigureEumApplications: Boolean
+  canConfigureMobileAppMonitoring: Boolean
+  canConfigureUsers: Boolean
+  canInstallNewAgents: Boolean
+  canConfigureIntegrations: Boolean
+  canConfigureEventsAndAlerts: Boolean
+  canConfigureMaintenanceWindows: Boolean
+  canConfigureApplicationSmartAlerts: Boolean
+  canConfigureWebsiteSmartAlerts: Boolean
+  canConfigureMobileAppSmartAlerts: Boolean
+  canConfigureGlobalApplicationSmartAlerts: Boolean
+  canConfigureGlobalSyntheticSmartAlerts: Boolean
+  canConfigureGlobalInfraSmartAlerts: Boolean
+  canConfigureGlobalLogSmartAlerts: Boolean
+  canConfigureApiTokens: Boolean
+  canConfigurePersonalApiTokens: Boolean
+  canConfigureAgentRunMode: Boolean
+  canViewAuditLog: Boolean
+  canConfigureAgents: Boolean
+  canConfigureAuthenticationMethods: Boolean
+  canConfigureApplications: Boolean
+  canConfigureTeams: Boolean
+  canConfigureReleases: Boolean
+  canConfigureLogManagement: Boolean
+  canConfigureDatabaseManagement: Boolean
+  canCreatePublicCustomDashboards: Boolean
+  canViewLogs: Boolean
+  canViewTraceDetails: Boolean
+  canConfigureSessionSettings: Boolean
+  canConfigureServiceLevelIndicators: Boolean
+  canConfigureGlobalAlertPayload: Boolean
+  canViewAccountAndBillingInformation: Boolean
+  canEditAllAccessibleCustomDashboards: Boolean
+  canConfigureAutomationActions: Boolean
+  canConfigureAutomationPolicies: Boolean
+  canRunAutomationActions: Boolean
+  canDeleteAutomationActionHistory: Boolean
+  canConfigureSyntheticTests: Boolean
+  canConfigureSyntheticLocations: Boolean
+  canConfigureSyntheticCredentials: Boolean
+  canViewSyntheticTests: Boolean
+  canViewSyntheticLocations: Boolean
+  canViewSyntheticTestResults: Boolean
+  canUseSyntheticCredentials: Boolean
+  canConfigureBizops: Boolean
+  canViewBusinessProcesses: Boolean
+  canViewBusinessProcessDetails: Boolean
+  canViewBusinessActivities: Boolean
+  canViewBizAlerts: Boolean
+  canDeleteLogs: Boolean
+  canViewLogVolume: Boolean
+  canCreateHeapDump: Boolean
+  canCreateThreadDump: Boolean
+  canManuallyCloseIssue: Boolean
+  canConfigureLogRetentionPeriod: Boolean
+  canConfigureSubtraces: Boolean
+  canInvokeAlertChannel: Boolean
+}
+
+type ComplexApiToken {
+  ApiToken: ApiToken
+  name: String
+}
+
+type MonitoringState {
+  hasEntities: Boolean
+  hostCount: Int
+  serverlessCount: Int
+}
+
+interface SnapshotBase {
+  snapshotId: String
+  plugin: String
+  from: Long
+  to: Long
+  tags: [String]
+  label: String
+}
+
+type GetSnapshot implements SnapshotBase {
+  snapshotId: String
+  plugin: String
+  from: Long
+  to: Long
+  tags: [String]
+  label: String
+  entityId: EntityIdItem
+  data: JSON
+}
+
+type GetSnapshots implements SnapshotBase {
+  snapshotId: String
+  plugin: String
+  from: Long
+  to: Long
+  tags: [String]
+  label: String
+  host: String
+}
+
+type EntityIdItem {
+  host: String
+  pluginId: String
+  steadyId: String
+}
+
+type SoftwareVersions{
+  name: String!
+  plugin: String!
+  version: String!
+  discoveryType: DiscoveryType!
+  softwareType: SoftwareType!
+  vendor: String!
+  metadata: JSON
+  usedBy: [SoftwareUser]!
+}
+
+enum DiscoveryType{
+  NATIVE_SENSOR
+  REMOTE_SENSOR
+  PACKAGE_MANAGER
+  OTHER
+}
+
+enum SoftwareType{
+  DEPENDENCY
+  RUNTIME
+  DATABASE
+  MESSAGING
+  PLATFORM
+  PACKAGE
+  OS
+  CACHE
+  API_GATEWAY
+  OTHER
+  APPLICATION_FRAMEWORK
+}
+
+type SoftwareUser{
+  host: String
+  container: String
+  process: String
+  snapshotId: String
+}
+
+type HealthService {
+  health: String
+  messages: [String]
+}
+
+type Version {
+  branch: String
+  commit: String
+  imageTag: String
+}
+
+type Query {
+  tenantUnit: TenantUnit
+  infrastructureCatalogMetrics(plugin:String!, filter:String, label:String, limit:Int): [MetricInstance]
+  infrastructureCatalogPlugins: [PluginResult]
+  availablePayloadKeysByPluginId(plugin:String): GetPayloadKeysResult
+  infrastructureCatalogPluginsWithCustomMetrics: [PluginResult]
+  infrastructureCatalogSearchFields: [SearchFieldResult]
+  tagCatalogAll: [TagCatalog]
+  tagCatalog(plugin:String!): TagCatalog
+  entities(getInfrastructureQuery: GetInfrastructureQuery): Entities
+  entityGroups(getInfrastructureGroupsQuery: GetInfrastructureGroupsQuery): InfrastructureGroupsResult
+  entityTypes(getAvailablePluginsQuery: GetAvailablePluginsQuery): AvailablePlugins
+  metrics(getAvailableMetricsQuery: GetAvailableMetricsQuery): AvailableMetrics
+  topology(includeData: Boolean): GetTopology
+  sli:[SliConfiguration]
+  sliById(id: String!): SliConfiguration
+  sliConfigurationsByEntityTypeAndEntityId(entityType: String!, entityId: String!): [SliConfiguration]
+  applicationConfigs: [ApplicationConfig]
+  applicationConfigById(id: String!): ApplicationConfig
+  endpointConfigs: [EndpointConfig]
+  endpointConfigById(id: String!): EndpointConfig
+  manualServiceConfigs: [ManualServiceConfig]
+  serviceConfigs: [ServiceConfig]
+  serviceConfigById(id: String!): ServiceConfig
+  apiTokens: [ComplexApiToken]
+  apiToken(internalId: String!): ComplexApiToken
+  sessionSettings: ComplexSessionSettings
+  monitoringState: MonitoringState
+  getSnapshot(snapshotId: String!, to: Long, windowSize: Long): GetSnapshot
+  softwareVersions: [SoftwareVersions]
+  getSnapshots(query:String, to:Long, windowSize:Long, size:Int, plugin: String!, offline:Boolean): [GetSnapshots]
+  healthService: HealthService
+  version: Version
+  health(healthInput: HealthInput): [EventResult]
+  infrastructureMetrics(input:GetCombinedMetrics): [InfrastructureMetricResult]
+  applicationCatalogMetrics(includeInternalMetrics: Boolean = false): [MetricDescription!]!
+  applicationTags(from: Long dataSource: DataSource useCase: CatalogUseCase): [Tag!]!
+  applicationTagCatalog(from: Long dataSource: DataSource useCase: CatalogUseCase includeInternalMetrics: Boolean = false): TagCatalog
+  pendingInvitations: [InvitationResult]
+  usersWithoutInvitations: [UserResult]
+  usersIncludingInvitations: UsersWithInvitationsResult
+  userById(id: String!): User
+  applicationWithInfra(appInput: GetServices, infraInput: GetCombinedMetrics, includeSnapshotIds: Boolean, fillTimeSeries: Boolean, offline: Boolean
+  ): ApplicationWithInfraResult
+  snapshotInfoOfService(serviceInput: GetServices!, fillTimeSeries: Boolean, includeSnapshotIds: Boolean, to: Long, windowSize: Long
+  ): [GetSnapshot]
+  fetchApplications(name: String windowSize: Long to: Long page: Int pageSize: Int applicationBoundaryScope: ApplicationBoundaryScope): ApplicationResult
+  applicationServices(name: String windowSize: Long to: Long page: Int pageSize: Int applicationBoundaryScope: ApplicationBoundaryScope includeSnapshotIds: Boolean): ServiceResult
+  applicationEndpoints(name: String types: [String] technologies: [String] windowSize: Long to: Long page: Int pageSize: Int applicationBoundaryScope: ApplicationBoundaryScope): EndpointResult
+  fetchServices(name: String windowSize: Long to: Long page: Int pageSize: Int contextScope: ContextScope applicationBoundaryScope: ApplicationBoundaryScope includeSnapshotIds: Boolean): ServiceResult
+}
+
+type ApplicationResult{
+  items: [Application]
+  page: Long
+  pageSize: Long
+  totalHits: Long
+}
+
+enum UiEntityType{
+  APPLICATION
+  SERVICE
+  ENDPOINT
+}
+
+enum ApplicationBoundaryScope{
+  ALL
+  INBOUND
+}
+
+type ServiceResult{
+  items: [Service]
+  page: Long
+  pageSize: Long
+  totalHits: Long
+}
+
+type Service{
+  id: String
+  label: String
+  types: [EndpointType]
+  technologies: [String]
+  entityType: UiEntityType
+  snapshotIds: [String]
+}
+
+type EndpointResult{
+  items: [Endpoint]
+  page: Long
+  pageSize: Long
+  totalHits: Long
+}
+
+enum ContextScope{
+  NONE
+  UPSTREAM
+  DOWNSTREAM
+}
+
+type ApplicationWithInfraResult {
+  application: ApplicationMetricResult
+  endpoint: EndpointMetricResult
+  service: getApplicationServices_200_response
+  infrastructure: [InfrastructureMetricResult]
+}
+
+type ComplexSessionSettings{
+  SessionSettings: SessionSettings
+}
+
+type UsersWithInvitationsResult{
+  users: [UserResult]
+  invitations: [InvitationResult]
+}
+
+type InvitationResult{
+  id: String
+  email: String
+  groupId: String
+  groupName: String
+  invitedBy: String
+  expireAt: String
+}
+
+type UserResult{
+  id: String
+  email: String
+  fullName: String
+  lastLoggedIn: Long
+  groupCount: Long
+  isTfaEnabled: Boolean
+}
+
+type Invitation{
+  email: String!
+  groupId: String!
+  message: String
+  path: String
+}
+
+input InvitationInput{
+  email: String!
+  groupId: String!
+  message: String
+  path: String
+}
+
+type InvitationResponse{
+  invitationResults: [InviteUsersResult]
+}
+
+type InviteUsersResult{
+  userEmail: String
+  invitationStatus: InvitationStatus
+}
+
+enum InvitationStatus{
+  SUCCESS
+  INTERNAL_ERROR
+  FAILURE_USER_ALREADY_EXISTS
+  FAILURE_USER_ALREADY_INVITED
+  FAILURE_ONLY_DEFAULT_GROUP_INVITATION_ALLOWED
+  FAILURE_TENANT_IDP_CONFIGURED
+}
+
+input EditUserInput{
+  fullName: String
+}
+
+type User{
+  id: String
+  preferredName: String
+  fullName: String
+  email: String
+  encryptedPassword: String
+  tenants: [Tenant]
+  lastLoggedIn: Long
+  timestampAcceptedTos: Long
+  timestampAcceptedPrivacyAgreement: Long
+  acceptedTosVersion: Long
+  acceptedPrivacyAgreementVersion: Long
+  tenantsWhereMainContact: [String]
+  createDate: String
+  emailConfirmed: Boolean
+  tenantIds: [String]
+  passwordResetAttempt: Long
+  groupCount: Long
+  tfaEnabled: Boolean
+  role: Role
+}
+
+type Role {
+  id: String
+  name: String
+  teamId: String
+  permissions: [String]
+  limitedApplicationsScope: Boolean
+  limitedBizOpsScope: Boolean
+  limitedWebsitesScope: Boolean
+  limitedKubernetesScope: Boolean
+  limitedMobileAppsScope: Boolean
+  limitedInfrastructureScope: Boolean
+  limitedSyntheticsScope: Boolean
+  limitedVsphereScope: Boolean
+  limitedPhmcScope: Boolean
+  limitedPvcScope: Boolean
+  limitedZhmcScope: Boolean
+  limitedPcfScope: Boolean
+  limitedOpenstackScope: Boolean
+  limitedAutomationScope: Boolean
+  limitedLogsScope: Boolean
+  limitedNutanixScope: Boolean
+  limitedXenServerScope: Boolean
+  limitedAlertChannelsScope: Boolean
+  limitedCustomDashboardsScope: Boolean
+  limitedWindowsHypervisorScope: Boolean
+  canAccessAllUnits: Boolean
+  canSeeInternalTags: Boolean
+  canSetAgentTraceLogLevel: Boolean
+  canSeeExtendedInternalMonitoring: Boolean
+  canConfigureServiceMapping: Boolean
+  canConfigureEumApplications: Boolean
+  canConfigureMobileAppMonitoring: Boolean
+  canConfigureUsers: Boolean
+  canInstallNewAgents: Boolean
+  canConfigureIntegrations: Boolean
+  canConfigureEventsAndAlerts: Boolean
+  canConfigureMaintenanceWindows: Boolean
+  canConfigureApplicationSmartAlerts: Boolean
+  canConfigureWebsiteSmartAlerts: Boolean
+  canConfigureMobileAppSmartAlerts: Boolean
+  canConfigureGlobalApplicationSmartAlerts: Boolean
+  canConfigureGlobalSyntheticSmartAlerts: Boolean
+  canConfigureGlobalInfraSmartAlerts: Boolean
+  canConfigureGlobalLogSmartAlerts: Boolean
+  canConfigureApiTokens: Boolean
+  canConfigurePersonalApiTokens: Boolean
+  canConfigureAgentRunMode: Boolean
+  canViewAuditLog: Boolean
+  canConfigureAgents: Boolean
+  canConfigureAuthenticationMethods: Boolean
+  canConfigureApplications: Boolean
+  canConfigureTeams: Boolean
+  canConfigureReleases: Boolean
+  canConfigureLogManagement: Boolean
+  canConfigureDatabaseManagement: Boolean
+  canCreatePublicCustomDashboards: Boolean
+  canConfigureSessionSettings: Boolean
+  canConfigureServiceLevelIndicators: Boolean
+  canConfigureGlobalAlertPayload: Boolean
+  canConfigureAutomationActions: Boolean
+  canConfigureAutomationPolicies: Boolean
+  canRunAutomationActions: Boolean
+  canDeleteAutomationActionHistory: Boolean
+  canConfigureSyntheticTests: Boolean
+  canConfigureSyntheticLocations: Boolean
+  canConfigureSyntheticCredentials: Boolean
+  canConfigureBizops: Boolean
+  canConfigureLogRetentionPeriod: Boolean
+  canConfigureSubtraces: Boolean
+  canConfigureLLM: Boolean
+  canViewLogs: Boolean
+  canViewTraceDetails: Boolean
+  canViewAccountAndBillingInformation: Boolean
+  canViewSyntheticTests: Boolean
+  canViewSyntheticLocations: Boolean
+  canViewSyntheticTestResults: Boolean
+  canUseSyntheticCredentials: Boolean
+  canViewBusinessProcesses: Boolean
+  canViewBusinessProcessDetails: Boolean
+  canViewBusinessActivities: Boolean
+  canViewBizAlerts: Boolean
+  canViewLogVolume: Boolean
+  canEditAllAccessibleCustomDashboards: Boolean
+  canDeleteLogs: Boolean
+  canCreateHeapDump: Boolean
+  canCreateThreadDump: Boolean
+  canManuallyCloseIssue: Boolean
+  canInvokeAlertChannel: Boolean
+}
+
+
+enum DataSource {
+  CALLS
+  TRACES
+  SUBTRACES
+}
+
+enum CatalogUseCase {
+  GROUPING
+  FILTERING
+  SERVICE_MAPPING
+  SMART_ALERTS
+  SMART_ALERTS_LOGS
+  SMART_ALERTS_ADAPTIVE_BASELINE
+  SMART_ALERTS_CUSTOM_PAYLOAD
+  SLI_MANAGEMENT
+  APPLICATION_CONFIG
+  APPLICATION_CONFIG_BLUEPRINT
+  MAINTENANCE_WINDOWS
+  BIZOPS_CUSTOM_DASHBOARDS_FILTERING
+}
+
+type MetricDescription {
+  metricId: String!
+  label: String!
+  formatter: String!
+  description: String!
+  aggregations: [String!]!
+  defaultAggregation: String
+  customMetric: Boolean!
+}
+
+input GetCombinedMetrics{
+  timeFrame: TimeFrame
+  plugin: String
+  query: String
+  snapshotIds: [String]
+  rollup: Int
+  metrics: [String]
+}
+
+type InfrastructureMetricResult{
+  snapshotId: String
+  plugin: String
+  from: Long
+  to: Long
+  tags: [String]
+  label: String
+  host: String
+  metrics: JSON
+}
+
+type EventResult {
+  eventId: String
+  start: Long
+  end: Long
+  type: String
+  state: String
+  problem: String
+  detail: String
+  severity: Int
+  fixSuggestion: String
+  probableCause: JSON
+  eventSpecificationId: String
+}
+
+input HealthInput {
+  to: Long
+  from: Long
+  windowSize: Long
+  eventSeverity: String
+  entitySelfType: String
+}
+
+input GetInfrastructureGroupsQuery{
+  timeFrame: TimeFrame!
+  tagFilterExpression: tagFilterExpressionElement_Input!
+  pagination: CursorPagination!
+  order: Order
+  type: String
+  metrics: [InfraMetricConfiguration]
+  groupBy: [String]
+  missingPlaceholder: String
+}
+
+type InfrastructureGroupsResult{
+  items: [InfrastructureGroup]
+  adjustedTimeframe: AdjustedTimeFrame
+  canLoadMore: Boolean
+  totalHits: Long
+  totalRepresentedItemCount: Long
+  totalRetainedItemCount: Long
+  next: InfraExploreCursor
+}
+
+type InfrastructureGroup{
+  tags: JSON
+  count: Long
+  metrics: JSON
+}
+
+input GetAvailablePluginsQuery{
+  timeFrame: TimeFrame!
+  tagFilterExpression: tagFilterExpressionElement_Input!
+}
+
+type AvailablePlugins{
+  plugins:[String]
+}
+
+input GetAvailableMetricsQuery{
+  timeFrame: TimeFrame!
+  tagFilterExpression: tagFilterExpressionElement_Input!
+  type: String
+  query: String
+}
+
+type AvailableMetrics{
+  metrics:[MetricMetadata]
+}
+
+type MetricMetadata{
+  ownerType: String
+  infraTagCategory: InfraTagCategory
+  id: String,
+  category: String,
+  label: String,
+  description: String,
+  format:Formatter
+  crossSeriesAggregations: [AggregationType]
+}
+
+enum InfraTagCategory {
+  ACE
+  ALICLOUD
+  AWS
+  AZURE
+  CASSANDRA
+  CLOUD_FOUNDRY
+  CLR
+  COCKROACH
+  CONSUL
+  CONTAINER
+  COUCHBASE
+  DFQ
+  ELASTICSEARCH
+  GCP
+  HADOOP_YARN
+  HAZELCAST
+  IBM_CLOUD
+  IBM_DATAPOWER
+  IBM_I_SERIES
+  IBM_MQ
+  IBM_MQMFT
+  IBM_OPENSTACK
+  KAFKA_CONNECT
+  KUBERNETES
+  MONGO_DB
+  OTHERS
+  REDIS
+  SAP
+  SELF_MONITORING
+  SOLR
+  SPARK
+  TIBCOBW
+  TUXEDO
+  VSHPERE
+  WEBSPHERE
+}
+
+type TagCatalog{
+  tagTree: [TagTreeLevel]!
+  tags: [Tag]!
+}
+
+type Tag{
+  name: String!
+  type: String!
+  label:String
+  namePartsWithoutCategory: [String]
+  nameWithoutCategory: String
+  description: String
+  canApplyToSource: Boolean
+  canApplyToDestination: Boolean
+  idTag: Boolean
+  level1: String
+  level2: String
+  aliases: [String]
+  availability: [MetricSource]
+}
+
+enum MetricSource {
+  INFRASTRUCTURE_METRICS
+  APPLICATION
+  WEBSITE
+  MOBILE_APP
+  EUM
+  EVENT
+  SLI
+  SLO
+  SLO_PREVIEW
+  USAGE
+  LOG
+  SYNTHETICS
+  SYNTHETICS_DETAIL
+  APDEX
+  BIZOPS
+  SUBTRACE
+  UNKNOWN
+}
+
+type TagTreeLevel{
+  type: String
+  label: String!
+  description: String
+  icon: String
+  children: [TagTreeNode]!
+  scoreBoost: BigInteger
+  queryable: Boolean
+}
+
+type TagTreeNode{
+  type: String
+
+  #type = LEVEL
+  label: String!
+  description: String
+  icon: String
+  children: [TagTreeNode]!
+  scoreBoost: BigInteger
+
+  #type = TAG
+  tagName: String
+  queryable: Boolean
+  hidden: Boolean
+}
+
+type SearchFieldResult{
+  keyword: String
+  description: String
+  context: String
+  termType: String
+  fixedValues: [String]
+}
+
+type MetricInstance{
+  formatter: Formatter!
+  label: String!
+  description: String!
+  metricId: String!
+  pluginId: String!
+  custom: Boolean
+}
+
+enum Formatter{
+  NUMBER
+  BYTES
+  KILO_BYTES
+  MEGA_BYTES
+  PERCENTAGE
+  PERCENTAGE_100
+  PERCENTAGE_NO_CAPPING
+  PERCENTAGE_100_NO_CAPPING
+  LATENCY
+  NANOS
+  MILLIS
+  MICROS
+  SECONDS
+  RATE
+  BYTE_RATE
+  UNDEFINED
+}
+
+input GetInfrastructureQuery{
+  timeFrame: TimeFrame!
+  tagFilterExpression: tagFilterExpressionElement_Input!
+  pagination: CursorPagination!
+  order: Order
+  type: String
+  metrics: [InfraMetricConfiguration]
+  tags: [String]
+  missingPlaceholder: String
+}
+
+input TimeFrame {
+  windowSize: BigInteger
+  to: BigInteger
+}
+
+input CursorPagination{
+  cursor: JSON
+  retrievalSize: Int
+}
+
+input Order{
+  by: String!
+  direction: OrderDirection
+  collation: String
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+
+input InfraMetricConfiguration {
+  metric: String!
+  granularity: BigInteger
+  aggregation: AggregationType
+  crossSeriesAggregation: AggregationType
+  required: Boolean
+  regex: Boolean
+}
+
+enum AggregationType {
+  SUM
+  MEAN
+  MAX
+  MIN
+  P25
+  P50
+  P75
+  P90
+  P95
+  P98
+  P99
+  P99_9
+  P99_99
+  DISTINCT_COUNT
+  SUM_POSITIVE
+  PER_SECOND
+  INCREASE
+}
+
+enum LogicalOperator {
+  AND
+  OR
+}
+
+type InfrastructureEntities{
+  items: [InfrastructureItem]
+  adjustedTimeframe: AdjustedTimeFrame
+  canLoadMore: Boolean
+  totalHits: Long
+  totalRepresentedItemCount: Long
+  totalRetainedItemCount: Long
+  next: InfraExploreCursor
+}
+
+type AdjustedTimeFrame {
+  windowSize: BigInteger
+  to: BigInteger
+}
+
+interface Count {
+  totalHits: Long
+  totalRepresentedItemCount: Long
+}
+
+type InfraExploreCursor implements Count{
+  totalHits: Long
+  totalRepresentedItemCount: Long
+  ingestionTime: Long
+  offset: Int
+}
+
+type InfrastructureItem {
+  snapshotId: String
+  label: String
+  plugin: String
+  time: BigInteger
+  metrics: JSON
+  tags: JSON
+  entityHealthInfo: EntityHealthInfo
+}
+
+type EntityHealthInfo{
+  maxSeverity: NonNegativeFloat
+  openIssues: [Event]
+}
+
+type Event {
+  end: Long
+  endpointServiceId: String
+  entityId: String!
+  entityType: EntityType
+  id: String!
+  metadata: JSON
+  metricAccessId: String
+  plugin: String!
+  problem: Problem
+  rca: JSON
+  start: Long
+  state: String!
+  type: String!
+}
+
+enum EntityType {
+  Entity10
+  App20
+  Service20
+  Endpoint20
+  Website
+  Synthetic
+  MobileApp
+  Log
+  INFRASTRUCTURE
+}
+
+type Problem {
+  fixSuggestion: String
+  id: String!
+  problemText: String
+  severity: Int
+}
+
+type SliConfiguration implements Updated{
+  id: String!
+  sliName: String
+  initialEvaluationTimestamp: Long
+  metricConfiguration: MetricConfiguration
+  sliEntity: JSON
+  lastUpdated: Long
+}
+
+type MetricConfiguration{
+  metricName: String!
+  metricAggregation: AggregationType
+  threshold: NonNegativeFloat
+}
+
+extend type Query {
+  callGroup(fillTimeSeries:Boolean, input: GetCallGroups): callGroup_200_response
+  applicationMetricsServices(fillTimeSeries: Boolean, includeSnapshotIds: Boolean, input: GetServices
+  ): getApplicationServices_200_response
+  applicationMetricsEndpoints(fillTimeSeries: Boolean, input: GetEndpoints
+  ): EndpointMetricResult
+  applicationMetricsApplications(fillTimeSeries: Boolean, input: GetApplications
+  ): ApplicationMetricResult
+}
+
+input GetApplications {
+  applicationBoundaryScope: queryInput_getApplicationServices_applicationBoundaryScope
+  applicationId: String
+  endpointId: String
+  endpointTypes: [query_getTrace_rootSpan_destination_service_types_items]
+  metrics: [callGroup_input_metrics_items]!
+  nameFilter: String
+  order: callGroup_input_order
+  pagination: callGroup_input_pagination
+  serviceId: String
+  technologies: String
+  timeFrame: callGroup_input_timeFrame
+}
+
+input GetEndpoints {
+  applicationBoundaryScope: queryInput_getApplicationServices_applicationBoundaryScope
+  applicationId: String
+  endpointId: String
+  endpointTypes: [query_getTrace_rootSpan_destination_service_types_items]
+  excludeSynthetic: Boolean
+  metrics: [callGroup_input_metrics_items]!
+  nameFilter: String
+  order: callGroup_input_order
+  pagination: callGroup_input_pagination
+  serviceId: String
+  timeFrame: callGroup_input_timeFrame
+}
+
+input GetServices {
+  applicationBoundaryScope: queryInput_getApplicationServices_applicationBoundaryScope
+  applicationId: String
+  contextScope: queryInput_getServicesMetrics_input_contextScope
+  metrics: [AppDataMetricConfiguration]!
+  nameFilter: String
+  order: callGroup_input_order
+  pagination: pagination_input
+  serviceId: String
+  technologies: [String]
+  timeFrame: callGroup_input_timeFrame
+}
+
+input AppDataMetricConfiguration{
+  metric: String
+  granularity: Int
+  aggregation: AggregationType
+  numeratorTagFilterExpression: tagFilterExpressionElement_Input
+}
+
+input  pagination_input{
+  page: Int
+  pageSize: Int
+}
+
+enum queryInput_getServicesMetrics_input_contextScope {
+  NONE
+  UPSTREAM
+  DOWNSTREAM
+}
+
+type EndpointMetricResult {
+  """Returns a list of Endpoints."""
+  items: [EndpointItem]!
+
+  """
+  Page number you want to retrieve in a request / retrieved in a response.
+  """
+  page: Int
+
+  """number of elements retrieved in a single query."""
+  pageSize: Int
+
+  """
+  The number of results returned. For eg: If `items` has 5 elements, `totalhits` will be 5
+  """
+  totalHits: Int
+}
+
+type EndpointItem{
+  endpoint: Endpoint!
+  metrics: JSON!
+}
+
+type Endpoint{
+  id: String
+  label: String
+  type: EndpointType
+  serviceId: String
+  technologies:[String]
+  isSynthetic: Boolean
+  syntheticType: EndpointSyntheticType
+}
+
+enum EndpointType{
+  UNDEFINED
+
+  #Application
+  RPC
+  EVENT
+  GRAPHQL
+  BATCH
+  SHELL
+  HTTP
+  SDK
+  OPENTELEMETRY
+  INTERNAL
+
+  #Middleware
+  DATABASE
+  MESSAGING
+
+  #Website monitoring
+  PAGE
+  PAGE_RESOURCE
+}
+
+enum EndpointSyntheticType{
+  NON_SYNTHETIC
+  SYNTHETIC
+  MIXED
+}
+
+type ApplicationMetricResult{
+  """Returns a list of Applications."""
+  items: [ApplicationItem]!
+
+  """
+  Page number you want to retrieve in a request / retrieved in a response.
+  """
+  page: Int
+
+  """number of elements retrieved in a single query."""
+  pageSize: Int
+
+  """
+  The number of results returned. For eg: If `items` has 5 elements, `totalhits` will be 5
+  """
+  totalHits: Int
+}
+
+type ApplicationItem{
+  application: Application!
+  metrics: JSON!
+}
+
+type Application{
+  id: String!
+  label: String!
+  boundaryScope: String!
+  entityType: String
+}
+
+type getApplicationServices_200_response {
+  """Returns a list of Services."""
+  items: [query_getApplicationServices_items]
+
+  """
+  Page number you want to retrieve in a request / retrieved in a response.
+  """
+  page: Int
+
+  """number of elements retrieved in a single query."""
+  pageSize: Int
+
+  """
+  The number of results returned. For eg: If `items` has 5 elements, `totalhits` will be 5
+  """
+  totalHits: Int
+}
+
+type query_getApplicationServices_items {
+  service: query_getApplicationServices_items_items
+  metrics: JSON!
+}
+
+type query_getApplicationServices_items_items {
+  entityType: query_getTrace_rootSpan_destination_service_entityType
+
+  """
+  Unique ID of the Service. Eg: `3feb3dcd206c166ef2b41c707e0cd38d7cd325aa`.
+  """
+  id: String!
+
+  """Name of the Service. Eg: `payment`."""
+  label: String!
+
+  """A unique identifier the metrics are assigned to."""
+  snapshotIds: [String]!
+
+  """List of technologies: `Eg:["springbootApplicationContainer"]`"""
+  technologies: [String]!
+
+  """
+  Shows types of Endpoints a Service can consist of. It may be one or more. Eg: `HTTP` `OPENTELEMETRY` can be in 1 Service.
+  """
+  types: [query_getTrace_rootSpan_destination_service_types_items]!
+}
+
+enum queryInput_getApplicationServices_applicationBoundaryScope {
+  ALL
+  INBOUND
+}
+
+enum query_getTrace_rootSpan_destination_service_types_items {
+  UNDEFINED
+  RPC
+  EVENT
+  GRAPHQL
+  BATCH
+  SHELL
+  HTTP
+  SDK
+  OPENTELEMETRY
+  INTERNAL
+  DATABASE
+  MESSAGING
+  PAGE
+  PAGE_RESOURCE
+}
+
+enum query_getTrace_rootSpan_destination_service_entityType {
+  APPLICATION
+  SERVICE
+  ENDPOINT
+}
+
+
+type callGroup_adjustedTimeframe {
+  """
+  end of timeframe expressed as the Unix epoch time in milliseconds. Eg: `ISO 8601` standard time `2024-06-27T05:05:55.615Z` can be represented as `1719464755615` in Unix epoch time in milliseconds.
+  """
+  to: BigInteger!
+
+  """windowSize in milliseconds"""
+  windowSize: BigInteger
+}
+
+
+type callGroup_200_response {
+  adjustedTimeframe: callGroup_adjustedTimeframe
+
+  """
+  Determine if additional data is available when a new query is made using the cursor from the last item in the `items` list.
+  """
+  canLoadMore: Boolean
+
+  """
+  Represents an array of call group item containing several attributes that describe its properties.
+  The item includes fields such as cursor, metrics, name, and timestamp, which provide detailed information about the item.
+  """
+  items: [callGroup_items_items]!
+
+  """The total number of items that match a given filter"""
+  totalHits: BigInteger
+
+  """
+  For calls and EUM beacons, one row can represent multiple real items (batched call, sample multiplicity)
+  """
+  totalRepresentedItemCount: BigInteger
+
+  """
+  For calls and EUM beacons, only a subset is retained for historic data. Each retained row can represent multiple real items due to batching.
+  """
+  totalRetainedItemCount: BigInteger
+}
+
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type callGroup_items_items {
+  cursor: JSON!
+
+  """
+  Grouped metric details like `errors.mean`, `calls.sum`.
+  It is usually a array of key-value pair. Format of key is `metric.aggregation.granularity`, for example: `latency.p75.360`.
+  Format of value is `[earliest timestamp, value of key]`, for example: `[1725602720000, 0.013141001434936938]`.
+  """
+  metrics: JSON!
+
+  """Name of the group."""
+  name: String!
+
+  """Earliest timestamp of the call from the group"""
+  timestamp: BigInteger
+}
+
+input GetCallGroups {
+  group: Group!
+
+  """
+  Flag to include Internal Calls. These calls are work done inside a service and correspond to intermediate spans in custom tracing.
+  """
+  includeInternal: Boolean
+
+  """
+  Flag to include Synthetic Calls. These calls have a synthetic endpoint as their destination, such as calls to health-check endpoints.
+  """
+  includeSynthetic: Boolean
+
+  """
+  A list of objects each of which defines a metric and the (statistical) aggregation -- MEAN, SUM, MAX, etc -- that should be used to summarize it for the defined time frame. Eg: `[{ 'metric': 'latency', 'aggregation': 'MEAN'}]`. To know more about supported metrics and its aggregation, See `Get Metric catalog`.
+  """
+  metrics: [callGroup_input_metrics_items]!
+  order: callGroup_input_order
+  pagination: callGroup_input_pagination
+  tagFilterExpression: tagFilterExpressionElement_Input
+  timeFrame: callGroup_input_timeFrame
+}
+
+"""Time range for which the data should be retrieved."""
+input callGroup_input_timeFrame {
+  """
+  Use the world_time_api tool to get the current time in epoch.
+  end of timeframe expressed as the Unix epoch time in milliseconds. Eg: `ISO 8601` standard time `2024-06-27T05:05:55.615Z` can be represented as `1719464755615` in Unix epoch time in milliseconds.
+  """
+  to: BigInteger
+
+  focusedMoment: BigInteger
+  autoRefresh: Boolean
+
+  """windowSize in milliseconds"""
+  windowSize: BigInteger
+}
+
+input tagFilterExpressionElement_Input {
+  """
+  The discriminator used to decide whether this object
+  represents a TAG_FILTER or EXPRESSION.
+  """
+  type: tagFilterElementType_Input!
+
+  """
+  -- Fields for if type=TAG_FILTER case --
+  Required by JSON schema if type=TAG_FILTER,
+  but optional overall in GraphQL because we can't
+  conditionally require them in the schema itself.
+  """
+  entity: groupbyTagEntity # required
+  name: String                   # required
+  operator: tagOperator_Input    # required
+  key: String                    # optional
+  value: JSON                    # optional - can be string, number or boolean
+
+  """
+  -- Fields for if type=EXPRESSION case --
+  Array of nested tagFilterExpressionElement_Input for recursion.
+  """
+  elements: [tagFilterExpressionElement_Input!]         # required
+  logicalOperator: LogicalOperator                      # required
+}
+
+enum groupbyTagEntity {
+  NOT_APPLICABLE
+  DESTINATION
+  SOURCE
+}
+
+enum tagOperator_Input {
+  EQUALS
+  CONTAINS
+  LESS_THAN
+  LESS_OR_EQUAL_THAN
+  GREATER_THAN
+  GREATER_OR_EQUAL_THAN
+  NOT_EMPTY
+  NOT_EQUAL
+  NOT_CONTAIN
+  IS_EMPTY
+  NOT_BLANK
+  IS_BLANK
+  STARTS_WITH
+  ENDS_WITH
+  NOT_STARTS_WITH
+  NOT_ENDS_WITH
+}
+
+enum tagFilterElementType_Input {
+  EXPRESSION
+  TAG_FILTER
+}
+
+input callGroup_input_pagination {
+  """
+  The timestamp indicating the starting point from which data was ingested.
+  The format of the timestamp is in Unix epoch Time.
+  For example, `Thursday, 5 September 2024 07:03:13 GMT` can be represented as `1725519793`.
+  """
+  ingestionTime: BigInteger
+
+  """
+  The number of records to be skipped from the `ingestionTime`.
+  For example: when `offset` is 20 and `ingestionTime` is 1725519793, the API response should have records starting from the 21st record after the specified `ingestionTime`.
+  Note that if `offset` value is not empty, `ingestionTime` can't be empty.
+  """
+  offset: Int
+
+  """
+  The number of records to retrieve in a single request.
+  For example, when retrievalSize is set to 30, offset is 20, and ingestionTime is 1725519793, the API request will fetch 30 records starting from the 21st record after the specified `ingestionTime`.
+  Minimum value is 1 and maximum value is 200.
+  """
+  retrievalSize: Int
+}
+
+input callGroup_input_order {
+  """
+  If the granularity is set to `1` you can use the metric name eg. `latency.p95` to order by that value.
+  """
+  by: String!
+
+  """Language code used for sorting. Ignored for infrastructure queries."""
+  collation: String
+  direction: callGroup_input_order_direction!
+}
+
+enum callGroup_input_order_direction {
+  ASC
+  DESC
+}
+
+input callGroup_input_metrics_items {
+  aggregation: callGroup_input_metrics_items_aggregation!
+
+  """
+  If the granularity is set you will get data points with the specified granularity in seconds. Default: `1000` milliseconds
+  """
+  granularity: Int
+
+  """Set a particular metric, eg: `latency`."""
+  metric: String!
+}
+
+enum callGroup_input_metrics_items_aggregation {
+  SUM
+  MEAN
+  MAX
+  MIN
+  P25
+  P50
+  P75
+  P90
+  P95
+  P98
+  P99
+  P99_9
+  P99_99
+  DISTINCT_COUNT
+  SUM_POSITIVE
+  PER_SECOND
+  INCREASE
+}
+
+input Group {
+  """The name of the group tag (e.g. `agent.tag` or `docker.label`)."""
+  groupbyTag: String!
+  groupbyTagEntity: TagFilterEntity!
+  groupbyTagSecondLevelKey: String
+}
+
+enum TagFilterEntity {
+  NOT_APPLICABLE
+  DESTINATION
+  SOURCE
+}
+
+#scalar callGroup_input_group_groupbyTagSecondLevelKey
+#scalar callGroup_input_group_groupbyTag
+scalar BigInteger
+
+#input CombinedMetrics {
+#  timeFrame: TimeFrame,
+#  plugin: String,
+#  snapshotIds: [String]!
+#  rollup: Int,
+#  metrics: [String]!
+#}
+
+type Mutation {
+  createSli(input: JSON): SliConfiguration
+  deleteSliById(id: String!): Boolean
+  deleteApiToken(internalId: String!): Boolean
+  putApiToken(internalId: String!, input: JSON!): ApiToken
+  createApiToken(input: JSON): ApiToken
+  createSessionSettings(input: JSON!): ComplexSessionSettings
+  deleteSessionSettings : Boolean
+  deletePendingInvitations(email: String!): Boolean
+  deleteUserFromTenant(userId: String!): Boolean
+  inviteUsers(invitations: [InvitationInput!]!): InvitationResponse
+  removeUsersFromTenant(userIds: [String!]!): Boolean!
+  updateUser(email: String!, input: EditUserInput!): Boolean!
+}
+
+union infraCallGroupItems = InfrastructureItem | callGroup_items_items
+
+type Entities implements Count{
+  items: [infraCallGroupItems]
+  adjustedTimeframe: AdjustedTimeFrame
+  canLoadMore: Boolean
+  totalHits: Long
+  totalRepresentedItemCount: Long
+  totalRetainedItemCount: Long
+}
+
+extend type Entities {
+  next: InfraExploreCursor
+}
+
+interface Updated {
+  lastUpdated: Long
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

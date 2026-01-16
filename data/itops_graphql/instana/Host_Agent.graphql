@@ -1,0 +1,196 @@
+# """
+# Type representing a Searchhostagent
+# """
+type Searchhostagent {
+  """
+  The unique identifier for the host agent
+  """
+  id: ID!
+
+  """
+  The name of the host agent
+  """
+  name: String!
+
+  """
+  The version of the host agent
+  """
+  version: String!
+
+  """
+  The status of the host agent
+  """
+  status: String!
+
+  """
+  The last updated time of the host agent
+  """
+  lastUpdated: String!
+}
+
+# """
+# Type representing an Updateconfigurationbyquery operation
+# """
+type Updateconfigurationbyquery {
+  """
+  The unique identifier for the operation
+  """
+  id: ID!
+
+  """
+  The configuration query used for update
+  """
+  query: String!
+
+  """
+  The status of the operation
+  """
+  status: String!
+
+  """
+  The last updated time of the operation
+  """
+  lastUpdated: String!
+}
+
+# """
+# Type representing an Updateconfigurationbyhost operation
+# """
+type Updateconfigurationbyhost {
+  """
+  The unique identifier for the operation
+  """
+  id: ID!
+
+  """
+  The host identifier for the update
+  """
+  hostId: ID!
+
+  """
+  The configuration data for the update
+  """
+  configuration: String!
+
+  """
+  The status of the operation
+  """
+  status: String!
+
+  """
+  The last updated time of the operation
+  """
+  lastUpdated: String!
+}
+
+# """
+# Type representing an Getagentlogs operation
+# """
+type Getagentlogs {
+  """
+  The unique identifier for the operation
+  """
+  id: ID!
+
+  """
+  The logs retrieved from the host agent
+  """
+  logs: [String!]!
+
+  """
+  The status of the operation
+  """
+  status: String!
+
+  """
+  The last updated time of the operation
+  """
+  lastUpdated: String!
+}
+
+# """
+# Type representing an Getagentsupportinformation operation
+# """
+type Getagentsupportinformation {
+  """
+  The unique identifier for the operation
+  """
+  id: ID!
+
+  """
+  The support information retrieved from the host agent
+  """
+  supportInfo: String!
+
+  """
+  The status of the operation
+  """
+  status: String!
+
+  """
+  The last updated time of the operation
+  """
+  lastUpdated: String!
+}
+
+# """
+# Type representing an Updateagent operation
+# """
+type Updateagent {
+  """
+  The unique identifier for the operation
+  """
+  id: ID!
+
+  """
+  The new configuration data for the agent
+  """
+  configuration: String!
+
+  """
+  The status of the operation
+  """
+  status: String!
+
+  """
+  The last updated time of the operation
+  """
+  lastUpdated: String!
+}
+
+# """
+# Type representing an Getagentsnapshot operation
+# """
+type Getagentsnapshot {
+  """
+  The unique identifier for the operation
+  """
+  id: ID!
+
+  """
+  The snapshot of the host agent's current state
+  """
+  snapshot: String!
+
+  """
+  The status of the operation
+  """
+  status: String!
+
+  """
+  The last updated time of the operation
+  """
+  lastUpdated: String!
+}
+
+type Query {
+  searchHostagents: [Searchhostagent] @rest(table_name: "Searchhostagents", columns: [])
+  updateConfigurationByQuery: Updateconfigurationbyquery @rest(table_name: "Updateconfigurationbyquery", columns: [])
+  updateConfigurationByHost: Updateconfigurationbyhost @rest(table_name: "Updateconfigurationbyhost", columns: [])
+  getAgentLogs: Getagentlogs @rest(table_name: "Getagentlogs", columns: [])
+  getAgentSupportInformation: Getagentsupportinformation @rest(table_name: "Getagentsupportinformation", columns: [])
+  updateAgent: Updateagent @rest(table_name: "Updateagent", columns: [])
+  getAgentSnapshot: Getagentsnapshot @rest(table_name: "Getagentsnapshot", columns: [])
+}
+
+# This GraphQL Query type includes fields that map to the provided REST endpoints. Each field corresponds to a specific operation and is annotated with the `@rest` directive, which specifies the table name and columns to be fetched from the REST API. The returned data will be of the types defined in the schema, such as `Searchhostagent`, `Updateconfigurationbyquery`, and so on.

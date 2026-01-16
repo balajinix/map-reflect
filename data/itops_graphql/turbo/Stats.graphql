@@ -1,0 +1,213 @@
+# Here are the GraphQL type definitions based on the provided tables:
+
+type GetActionStatsByUUIDsQuery {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  realtimeMarketReference: String
+  stats: [Stats]
+}
+
+type GetActionResourceImpactStatsByUUIDsQuery {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  realtimeMarketReference: String
+  stats: [Stats]
+}
+
+type GetNotificationStats {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [Stats]
+  epoch: String
+}
+
+type GetReservationAwareStats {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  name: String
+  capacity: String
+  reserved: String
+  relatedEntityType: String
+  filters: [Filter]
+  relatedEntity: String
+  numRelatedEntities: String
+  units: String
+  values: String
+  value: String
+  commoditySource: String
+  histUtilizations: [HistUtilization]
+  epoch: String
+}
+
+type GetReservedInstanceStatsByEntityQuery {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  realtimeMarketReference: String
+  stats: [Stats]
+}
+
+type GetStats {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+}
+
+type GetStatsByUUIDsQuery {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  environmentType: String
+  realtimeMarketReference: String
+  stats: [Stats]
+}
+
+type GetStatsByEntityUUID {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [Stats]
+  epoch: String
+}
+
+type GetStatsByEntityQuery {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [Stats]
+  epoch: String
+}
+
+type GetRelatedStatTypes {
+  relationType: String
+  commodityDetailsList: [CommodityDetails]
+}
+
+type GetEntitiesCountStatsByUUID {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [Stats]
+  epoch: String
+}
+
+type GetTargetStats {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [Stats]
+  epoch: String
+}
+
+type GetWorkflowsStats {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [Stats]
+  epoch: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Stats {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  date: String
+  statistics: [Stat]
+  epoch: String
+}
+
+type Stat {
+  links: Links
+  uuid: String
+  displayName: String
+  className: String
+  name: String
+  capacity: String
+  reserved: String
+  relatedEntityType: String
+  filters: [Filter]
+  relatedEntity: String
+  numRelatedEntities: String
+  units: String
+  values: String
+  value: String
+  commoditySource: String
+  histUtilizations: [HistUtilization]
+}
+
+type Filter {
+  type: String
+  value: String
+  displayName: String
+}
+
+type HistUtilization {
+  type: String
+  usage: String
+  capacity: String
+  resizeMaxScalingObservationPeriod: String
+  resizeScalingAggressiveness: String
+}
+
+type CommodityDetails {
+  commodityType: String
+  filters: String
+}
+
+# These types represent the structure of the data returned by the provided queries. The types are named according to the table names, and the fields correspond to the columns in each table. The `Links` type is used as a common base for all types that contain link-related fields. The `Stat` type is used as a common base for all types that contain statistics-related fields. The `Filter` and `HistUtilization` types are used for the respective fields in the `GetReservationAwareStats` type. The `CommodityDetails` type is used for the respective field in the `GetRelatedStatTypes` type.
+
+type Query {
+  GetActionStatsByUUIDs(uuids: [String]!, environmentType: String, realtimeMarketReference: String): GetActionStatsByUUIDsQuery
+  GetActionResourceImpactStatsByUUIDs(uuids: [String]!, environmentType: String, realtimeMarketReference: String): GetActionResourceImpactStatsByUUIDsQuery
+  GetNotificationStats(date: String, epoch: String): GetNotificationStats
+  GetReservationAwareStats(uuid: String, environmentType: String, realtimeMarketReference: String, filters: [Filter]): GetReservationAwareStats
+  GetReservedInstanceStatsByEntity(uuid: String, environmentType: String, realtimeMarketReference: String): GetReservedInstanceStatsByEntityQuery
+  GetStats(uuid: String, environmentType: String, realtimeMarketReference: String): GetStats
+  GetStatsByUUIDs(uuids: [String]!, environmentType: String, realtimeMarketReference: String): GetStatsByUUIDsQuery
+  GetStatsByEntityUUID(uuid: String, environmentType: String, realtimeMarketReference: String): GetStatsByEntityUUID
+  GetStatsByEntity(uuid: String, environmentType: String, realtimeMarketReference: String, date: String): GetStatsByEntityQuery
+  GetRelatedStatTypes(uuid: String, environmentType: String, realtimeMarketReference: String): GetRelatedStatTypes
+  GetEntitiesCountStatsByUUID(uuid: String, environmentType: String, realtimeMarketReference: String): GetEntitiesCountStatsByUUID
+  GetTargetStats(uuid: String, environmentType: String, realtimeMarketReference: String): GetTargetStats
+  GetWorkflowsStats(uuid: String, environmentType: String, realtimeMarketReference: String): GetWorkflowsStats
+}
+
+# This GraphQL query block defines a type `Query` with fields that map to the provided REST endpoints. Each field corresponds to a specific table, and the arguments match the query parameters described in the table descriptions. Note that the `GetReservationAwareStats` field includes a list of `Filter` arguments to accommodate the `filters` field in the `GetReservationAwareStats` table.

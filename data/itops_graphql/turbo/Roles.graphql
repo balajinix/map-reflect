@@ -1,0 +1,203 @@
+type GetRolesResponse {
+  """
+  A list of roles.
+  """
+  roles: [Role]
+
+  """
+  Link to the next page of results.
+  """
+  next: Link
+
+  """
+  Link to the previous page of results.
+  """
+  previous: Link
+}
+
+type Role {
+  """
+  Unique identifier for the role.
+  """
+  uuid: ID!
+
+  """
+  User-readable name of the role.
+  """
+  displayName: String!
+
+  """
+  Class name of the role.
+  """
+  className: String
+
+  """
+  Name of the role.
+  """
+  name: String!
+
+  """
+  Links related to the role.
+  """
+  links: Links
+}
+
+type Link {
+  """
+  Relationship type of the link.
+  """
+  rel: String
+
+  """
+  URL for the link.
+  """
+  href: String
+
+  """
+  Language of the link.
+  """
+  hreflang: String
+
+  """
+  Media type of the link.
+  """
+  media: String
+
+  """
+  Title of the link.
+  """
+  title: String
+
+  """
+  Type of the link.
+  """
+  type: String
+
+  """
+  Deprecation status of the link.
+  """
+  deprecation: String
+
+  """
+  Profile of the link.
+  """
+  profile: String
+
+  """
+  Name of the link.
+  """
+  name: String
+}
+
+# Here is the GraphQL type Query block with fields that map to the provided REST endpoints:
+
+type Query {
+  """
+  Get a list of all available roles.
+  """
+  getRoles: [GetRolesResponse]
+
+  """
+  Gets information for the specified role.
+  """
+  getRole(uuid: ID!): GetRolesResponse
+}
+
+type GetRolesResponse {
+  """
+  A list of roles.
+  """
+  roles: [Role]
+
+  """
+  Link to the next page of results.
+  """
+  next: Link
+
+  """
+  Link to the previous page of results.
+  """
+  previous: Link
+}
+
+type Role {
+  """
+  Unique identifier for the role.
+  """
+  uuid: ID!
+
+  """
+  User-readable name of the role.
+  """
+  displayName: String!
+
+  """
+  Class name of the role.
+  """
+  className: String
+
+  """
+  Name of the role.
+  """
+  name: String!
+
+  """
+  Links related to the role.
+  """
+  links: [Link]
+}
+
+type Link {
+  """
+  Relationship type of the link.
+  """
+  rel: String
+
+  """
+  URL for the link.
+  """
+  href: String
+
+  """
+  Language of the link.
+  """
+  hreflang: String
+
+  """
+  Media type of the link.
+  """
+  media: String
+
+  """
+  Title of the link.
+  """
+  title: String
+
+  """
+  Type of the link.
+  """
+  type: String
+
+  """
+  Deprecation status of the link.
+  """
+  deprecation: String
+
+  """
+  Profile of the link.
+  """
+  profile: String
+
+  """
+  Name of the link.
+  """
+  name: String
+}
+
+# The `getRoles` field corresponds to the 'Getroles' REST endpoint, which returns a list of roles. The `getRole` field corresponds to the 'Getrole' REST endpoint, which returns information for a specific role.
+
+# The `Link` type is used to represent the link-related fields in both the `GetRolesResponse` and `Role` types.
+
+# Please note that the `getRole` field expects a `uuid` argument, which is a unique identifier for the role.
+
+# These queries use the `@rest` directive to map to the respective REST endpoints. The actual implementation of these queries would require a GraphQL server that can translate these queries into REST API calls.

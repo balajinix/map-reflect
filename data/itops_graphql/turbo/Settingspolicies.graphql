@@ -1,0 +1,281 @@
+type GetSettingPolicies {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type CreateSettingPolicyByUUID {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type GetSettingPolicyByUUID {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type EditSettingPolicyByUUID {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type Links {
+  rel: String
+  href: String
+  hreflang: String
+  media: String
+  title: String
+  type: String
+  deprecation: String
+  profile: String
+  name: String
+}
+
+type Scope {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  membersCount: String
+  entitiesCount: String
+  costPrice: String
+  groupType: String
+  severity: String
+  state: String
+  environmentType: String
+  scope: String
+  isStatic: String
+  logicalOperator: String
+  criteriaList: String
+  memberUuidList: String
+  realtimeMarketReference: String
+  stats: String
+  temporary: String
+  activeEntitiesCount: String
+  cloudType: String
+  source: String
+  memberTypes: String
+  entityTypes: String
+  aspects: String
+  vendorIds: String
+  groupOrigin: String
+  targetType: String
+  groupClassName: String
+}
+
+type SettingsManager {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  category: String
+  settings: String
+}
+
+type Query {
+  getSettingPolicies: [GetSettingPolicy]
+  createSettingPolicyByUUID(input: CreateSettingPolicyInput!): CreateSettingPolicyByUUID
+  getSettingPolicyByUUID(input: GetSettingPolicyByUUIDInput!): GetSettingPolicyByUUID
+  editSettingPolicyByUUID(input: EditSettingPolicyInput!): EditSettingPolicyByUUID
+  deleteSettingPolicyByUUID(input: DeleteSettingPolicyByUUIDInput!): DeleteSettingPolicyByUUID
+}
+
+# input CreateSettingPolicyInput {
+#   links: LinksInput
+#   displayName: String!
+#   className: String
+#   entityType: String!
+#   scopes: [ScopeInput]
+#   settingsManagers: [SettingsManagerInput]
+#   schedule: String
+#   disabled: String
+#   note: String
+#   readOnly: String
+#   default: String
+# }
+
+# input LinksInput {
+#   rel: String
+#   href: String
+#   hreflang: String
+#   media: String
+#   title: String
+#   type: String
+#   deprecation: String
+#   profile: String
+#   name: String
+# }
+
+# input ScopeInput {
+#   links: LinksInput
+#   uuid: String
+#   displayName: String!
+#   className: String
+#   membersCount: String
+#   entitiesCount: String
+#   costPrice: String
+#   groupType: String
+#   severity: String
+#   state: String
+#   environmentType: String
+#   scope: String
+#   isStatic: String
+#   logicalOperator: String
+#   criteriaList: String
+#   memberUuidList: String
+#   realtimeMarketReference: String
+#   stats: String
+#   temporary: String
+#   activeEntitiesCount: String
+#   cloudType: String
+#   source: String
+#   memberTypes: String
+#   entityTypes: String
+#   aspects: String
+#   vendorIds: String
+#   groupOrigin: String
+#   targetType: String
+#   groupClassName: String
+# }
+
+# input SettingsManagerInput {
+#   links: LinksInput
+#   uuid: String
+#   displayName: String!
+#   className: String
+#   category: String
+#   settings: String
+# }
+
+# input GetSettingPolicyByUUIDInput {
+#   uuid: String!
+# }
+
+# input EditSettingPolicyInput {
+#   uuid: String!
+#   displayName: String!
+#   className: String
+#   entityType: String!
+#   scopes: [ScopeInput]
+#   settingsManagers: [SettingsManagerInput]
+#   schedule: String
+#   disabled: String
+#   note: String
+#   readOnly: String
+#   default: String
+# }
+
+# input DeleteSettingPolicyByUUIDInput {
+#   uuid: String!
+# }
+
+type GetSettingPolicy {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type CreateSettingPolicyByUUID {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type GetSettingPolicyByUUID {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type EditSettingPolicyByUUID {
+  links: Links
+  uuid: String
+  displayName: String!
+  className: String
+  entityType: String!
+  scopes: [Scope]
+  settingsManagers: [SettingsManager]
+  schedule: String
+  disabled: String
+  note: String
+  readOnly: String
+  default: String
+}
+
+type DeleteSettingPolicyByUUID {
+  message: String
+}
+
+# This GraphQL schema defines the structure for querying the provided REST endpoints. The `Query` type includes fields for each endpoint, mapped to the corresponding GraphQL type (`GetSettingPolicy`, `CreateSettingPolicyByUUID`, `GetSettingPolicyByUUID`, `EditSettingPolicyByUUID`, and `DeleteSettingPolicyByUUID`).
+
+# The `CreateSettingPolicyInput`, `ScopeInput`, `SettingsManagerInput`, `GetSettingPolicyByUUIDInput`, `EditSettingPolicyInput`, and `DeleteSettingPolicyByUUIDInput` are input types used for the respective mutation inputs.
+
+# The `LinksInput` type is used for the nested `links` field in all other input types.
+
+# The `DeleteSettingPolicyByUUID` type represents the response from the `Deletesettingspolicybyuuid` endpoint.

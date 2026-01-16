@@ -7,7 +7,11 @@ from langchain_core.tools import StructuredTool
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
-from litellm import completion
+import os
+from ibm_watsonx_ai import Credentials
+from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
+from ibm_watsonx_ai.foundation_models.utils.enums import DecodingMethods
+from ibm_watsonx_ai.foundation_models import ModelInference
 import operator
 import re
 from dotenv import load_dotenv
@@ -28,6 +32,7 @@ class ToolConverter:
 #with open("../data/hierarchy.json") as f:
 #    hierarchy = json.load(f)
 hierarchy = {}
+MODEL = "watsonx/meta-llama/llama-3-3-70b-instruct"
 
 # Tool functions
 def get_properties_for_type(product, graphql_type):
@@ -124,18 +129,125 @@ class AgentState(TypedDict):
     final_properties: Dict
     reasoning: str
 
-# LLM wrapper for IBM watsonx.ai via litellm
-def call_llm(messages, model="watsonx/mistralai/mistral-large"):
-    """Call IBM watsonx.ai via litellm"""
+def format_prompt_for_model(messages, model_id):
+    """Format messages based on model-specific chat template.
+
+    Args:
+        messages: List of dicts with 'role' and 'content' keys
+        model_id: Model identifier string
+
+    Returns:
+        Tuple of (formatted_prompt, stop_sequences)
+    """
+    model_lower = model_id.lower()
+
+    # Granite 4 models (granite-4-h-small, etc.)
+    if "granite-4" in model_lower or "granite4" in model_lower:
+        prompt_parts = []
+        for m in messages:
+            role = m.get('role', 'user')
+            content = m.get('content', '')
+            prompt_parts.append(f"<|start_of_role|>{role}<|end_of_role|>{content}<|end_of_text|>\n")
+        prompt_parts.append("<|start_of_role|>assistant<|end_of_role|>")
+        return "".join(prompt_parts), ["<|end_of_text|>"]
+
+    # Mistral models
+    elif "mistral" in model_lower:
+        system_msg = ""
+        user_content = []
+        for m in messages:
+            if m.get('role') == 'system':
+                system_msg = m.get('content', '')
+            elif m.get('role') == 'user':
+                user_content.append(m.get('content', ''))
+
+        combined_user = "\n\n".join(user_content)
+        if system_msg:
+            prompt = f"[INST] {system_msg}\n\n{combined_user} [/INST]"
+        else:
+            prompt = f"[INST] {combined_user} [/INST]"
+        return prompt, ["[/INST]", "</s>"]
+
+    # Llama 3 models
+    elif "llama" in model_lower:
+        prompt_parts = ["<|begin_of_text|>"]
+        for m in messages:
+            role = m.get('role', 'user')
+            content = m.get('content', '')
+            prompt_parts.append(f"<|start_header_id|>{role}<|end_header_id|>\n\n{content}<|eot_id|>")
+        prompt_parts.append("<|start_header_id|>assistant<|end_header_id|>\n\n")
+        return "".join(prompt_parts), ["<|eot_id|>", "<|end_of_text|>"]
+
+    # Granite 3.x models (granite-3-2-8b, granite-3-3-8b, etc.)
+    elif "granite-3" in model_lower or "granite3" in model_lower:
+        prompt_parts = []
+        for m in messages:
+            role = m.get('role', 'user')
+            content = m.get('content', '')
+            prompt_parts.append(f"<|start_of_role|>{role}<|end_of_role|>{content}<|end_of_text|>\n")
+        prompt_parts.append("<|start_of_role|>assistant<|end_of_role|>")
+        return "".join(prompt_parts), ["<|end_of_text|>"]
+
+    # Default fallback for unknown models
+    else:
+        prompt_parts = []
+        for msg in messages:
+            role = msg.get("role", "")
+            content = msg.get("content", "")
+            if role == "system":
+                prompt_parts.append(f"System: {content}")
+            elif role == "user":
+                prompt_parts.append(content)
+        return "\n\n".join(prompt_parts), ["<|endoftext|>"]
+
+
+def call_llm(messages, model=None):
+    """Call IBM watsonx.ai using native SDK"""
+    if model is None:
+        print("################ Why is model None? ###############")
+        model = MODEL
     try:
-        response = completion(
-            model=model,
-            messages=messages,
-            temperature=0.1,
-            max_tokens=1000
+        # Get credentials
+        api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
+        project_id = os.getenv("WATSONX_PROJECT_ID")
+        url = os.getenv("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
+
+        if not api_key or not project_id:
+            raise RuntimeError("WATSONX_API_KEY and WATSONX_PROJECT_ID required")
+
+        # Remove watsonx/ prefix if present
+        model_id = model.replace("watsonx/", "")
+
+        # Format prompt based on model type
+        prompt, stop_sequences = format_prompt_for_model(messages, model_id)
+
+        # Call WatsonX
+        parameters = {
+            GenParams.MAX_NEW_TOKENS: 1000,
+            GenParams.TEMPERATURE: 0.1,
+            GenParams.DECODING_METHOD: DecodingMethods.GREEDY,
+            GenParams.STOP_SEQUENCES: stop_sequences,
+        }
+
+        credentials = Credentials(url=url, api_key=api_key)
+        model_obj = ModelInference(
+            model_id=model_id,
+            params=parameters,
+            credentials=credentials,
+            project_id=project_id
         )
-        return response.choices[0].message.content
+
+        response = model_obj.generate_text(prompt=prompt)
+        return response[0] if isinstance(response, list) else response
+
     except Exception as e:
+        error_str = str(e).lower()
+        critical_patterns = ["authentication", "unauthorized", "api key", "project", "provider not", "exceeded limit"]
+
+        if any(p in error_str for p in critical_patterns):
+            print(f"CRITICAL LLM error - stopping execution: {e}")
+            raise RuntimeError(f"Critical LLM error: {e}") from e
+
         print(f"LLM Error: {str(e)}")
         return f"Error calling LLM: {str(e)}"
 
@@ -160,29 +272,59 @@ def get_products_node(state: AgentState):
 
 def select_product_node(state: AgentState):
     """Second node: Select the most relevant product using LLM"""
-    print("🎯 Step 2: Selecting most relevant product...")
-    
+    print("Step 2: Selecting most relevant product...")
+
     user_query = state["user_query"]
     available_products = state["available_products"]
-    
-    # Create prompt for product selection
-    system_prompt = """You are an intelligent assistant that helps users find relevant properties in a product hierarchy.
-    Your task is to select the most relevant product based on the user's query.
-    
-    Analyze the user query and select the product that is most likely to contain the information they're looking for.
-    Respond with ONLY the product name, nothing else."""
-    
+
+    # Create prompt for product selection - more strict formatting
+    system_prompt = f"""You are selecting a product from a list based on a user query.
+
+Available products: {available_products}
+
+RULES:
+1. Output ONLY the exact product name from the list above
+2. Do NOT include any explanation or reasoning
+3. Do NOT include quotes or punctuation
+4. The output must be exactly one of: {', '.join(available_products)}
+
+Example valid outputs: concert, turbo, instana"""
+
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"User query: '{user_query}'\nAvailable products: {available_products}\n\nSelect the most relevant product:"}
+        {"role": "user", "content": f"Query: {user_query}\n\nOutput the single most relevant product name:"}
     ]
-    
-    selected_product = call_llm(messages).strip()
-    
-    # Validate selection
-    if selected_product not in available_products:
-        # Fallback: select first product if LLM response is invalid
+
+    raw_response = call_llm(messages, model=MODEL).strip()
+    print(f"LLM response: '{raw_response[:150]}...'")
+
+    # Try to extract a valid product from the response
+    selected_product = None
+
+    # First check for exact match (case-insensitive)
+    response_lower = raw_response.lower().strip()
+    for p in available_products:
+        if response_lower == p.lower():
+            selected_product = p
+            break
+
+    if selected_product is None:
+        # Find the FIRST mentioned product by position in response
+        first_positions = {}
+        for product in available_products:
+            pos = response_lower.find(product.lower())
+            if pos != -1:
+                first_positions[product] = pos
+
+        if first_positions:
+            # Select product that appears first (smallest position)
+            selected_product = min(first_positions, key=first_positions.get)
+            print(f"Extracted product '{selected_product}' (first mentioned at position {first_positions[selected_product]})")
+
+    # Final fallback
+    if selected_product is None:
         selected_product = available_products[0]
+        print(f"Warning: Could not parse product from response - using fallback")
     
     state["selected_product"] = selected_product
     state["current_step"] = "type_retrieval"
@@ -231,7 +373,7 @@ def get_types_node(state: AgentState):
 
 def select_type_node(state: AgentState):
     """Fourth node: Select the most relevant type using LLM"""
-    print("🎯 Step 4: Selecting most relevant type...")
+    print("Step 4: Selecting most relevant type...")
     
     user_query = state["user_query"]
     available_types = state["available_types"]
@@ -259,24 +401,47 @@ def select_type_node(state: AgentState):
         state["messages"].append(AIMessage(content="No valid types found"))
         return state
     
-    system_prompt = """You are an intelligent assistant that helps users find relevant properties in a product hierarchy.
-    Your task is to select the most relevant GraphQL type based on the user's query and type descriptions.
-    
-    Analyze the user query and the available types with their descriptions to select the type most likely to contain the relevant properties.
-    Respond with ONLY the type name, nothing else."""
-    
+    valid_types = [t.get('type_name', '') for t in available_types if isinstance(t, dict)]
+
+    system_prompt = f"""You are selecting a GraphQL type from a list based on a user query.
+
+RULES:
+1. Output ONLY the exact type name from the available types
+2. Do NOT include any explanation or reasoning
+3. Do NOT include quotes or punctuation
+4. Choose the type most relevant to the user's query"""
+
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"User query: '{user_query}'\n\nAvailable types:\n" + "\n".join(type_descriptions) + "\n\nSelect the most relevant type:"}
+        {"role": "user", "content": f"Query: {user_query}\n\nAvailable types:\n" + "\n".join(type_descriptions) + "\n\nOutput the single most relevant type name:"}
     ]
-    
-    selected_type = call_llm(messages).strip()
-    
-    # Validate selection
-    valid_types = [t.get('type_name', '') for t in available_types if isinstance(t, dict)]
-    if selected_type not in valid_types and valid_types:
-        # Fallback: select first type if LLM response is invalid
+
+    raw_response = call_llm(messages, model=MODEL).strip()
+    print(f"LLM type response: '{raw_response[:150]}...'")
+
+    # Try to extract a valid type from the response
+    selected_type = None
+
+    # First check for exact match
+    if raw_response in valid_types:
+        selected_type = raw_response
+    else:
+        # Find the FIRST mentioned type by position in response
+        first_positions = {}
+        for type_name in valid_types:
+            pos = raw_response.find(type_name)
+            if pos != -1:
+                first_positions[type_name] = pos
+
+        if first_positions:
+            # Select type that appears first (smallest position)
+            selected_type = min(first_positions, key=first_positions.get)
+            print(f"Extracted type '{selected_type}' (first mentioned at position {first_positions[selected_type]})")
+
+    # Final fallback
+    if selected_type is None and valid_types:
         selected_type = valid_types[0]
+        print(f"Warning: Could not parse type from response - using fallback")
     
     state["selected_type"] = selected_type
     state["current_step"] = "property_retrieval"
@@ -320,7 +485,7 @@ def get_properties_node(state: AgentState):
 
 def analyze_properties_node(state: AgentState):
     """Final node: Analyze and present relevant properties"""
-    print("🎯 Step 6: Analyzing and presenting relevant properties...")
+    print("Step 6: Analyzing and presenting relevant properties...")
     
     user_query = state["user_query"]
     properties_data = state["final_properties"]
@@ -375,7 +540,7 @@ Analyze the user query and return the relevant property mappings in the required
     print(messages[-1]["content"])
     
     # Call LLM and get response
-    raw_response = call_llm(messages)
+    raw_response = call_llm(messages, model=MODEL).strip()
     
     # Parse and validate JSON response
     try:

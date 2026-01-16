@@ -1,0 +1,138 @@
+# """
+# Details of a specific action identified by a UUID.
+# """
+type GetActionDetailsByUuids {
+  """
+  The unique identifier of the action.
+  """
+  uuid: ID!
+
+  """
+  The title of the action.
+  """
+  title: String!
+
+  """
+  The description of the action.
+  """
+  description: String
+
+  """
+  The date when the action was created.
+  """
+  createdAt: String
+
+  """
+  The date when the action was last updated.
+  """
+  updatedAt: String
+
+  """
+  The user who created the action.
+  """
+  createdBy: User
+
+  """
+  The list of tags associated with the action.
+  """
+  tags: [Tag!]!
+
+  """
+  The list of files associated with the action.
+  """
+  files: [File!]!
+
+  """
+  The list of comments associated with the action.
+  """
+  comments: [Comment!]!
+}
+
+# """
+# A user associated with the action.
+# """
+type User {
+  """
+  The unique identifier of the user.
+  """
+  id: ID!
+
+  """
+  The name of the user.
+  """
+  name: String!
+
+  """
+  The email of the user.
+  """
+  email: String!
+}
+
+# """
+# A tag associated with the action.
+# """
+type Tag {
+  """
+  The unique identifier of the tag.
+  """
+  id: ID!
+
+  """
+  The name of the tag.
+  """
+  name: String!
+}
+
+# """
+# A file associated with the action.
+# """
+type File {
+  """
+  The unique identifier of the file.
+  """
+  id: ID!
+
+  """
+  The name of the file.
+  """
+  name: String!
+
+  """
+  The URL to download the file.
+  """
+  url: String!
+}
+
+# """
+# A comment associated with the action.
+# """
+type Comment {
+  """
+  The unique identifier of the comment.
+  """
+  id: ID!
+
+  """
+  The text of the comment.
+  """
+  text: String!
+
+  """
+  The user who created the comment.
+  """
+  createdBy: User!
+
+  """
+  The date when the comment was created.
+  """
+  createdAt: String!
+}
+
+type Query {
+  """
+  Get a list of action details by multiple actionUuids.
+  """
+  getActionDetailsByUuids(uuids: [ID!]!): [GetActionDetailsByUuids] @rest(table_name: "Getactiondetailsbyuuids")
+}
+
+# This GraphQL `Query` type includes a single field `getActionDetailsByUuids`, which corresponds to the provided REST endpoint `Getactiondetailsbyuuids`. The `uuids` argument is an array of `ID`s, matching the `uuid` field in the `GetActionDetailsByUuids` type. The result is an array of `GetActionDetailsByUuids` objects, representing the list of action details fetched by the REST endpoint.

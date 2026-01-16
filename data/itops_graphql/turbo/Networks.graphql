@@ -1,0 +1,77 @@
+type ClientFirewallAllowlist {
+  name: String!
+  type: String!
+  host: String
+  ip: String!
+  port: String!
+}
+
+type ClientNetworkSite {
+  id: String!
+  name: String!
+}
+
+type SiteInformation {
+  tunnelComponents: String
+  siteId: String!
+  clientOperatorVersion: String
+  autoUpdateEnabled: String
+  lastUpdated: String
+  probes: [
+    {
+      name: String!
+      version: String
+      image: String!
+      imageHash: String
+    }
+#   ]
+# }
+
+type ClientNetworkToken {
+  id: String!
+  created: String!
+  claimsMade: String
+  claimsRemaining: String
+  claimExpiration: String
+}
+
+type NetworkQuery {
+  clientFirewallAllowlist(id: String!): ClientFirewallAllowlist
+  clientNetworkSites: [ClientNetworkSite!]!
+  siteInformation(siteId: String!): SiteInformation
+  clientNetworkTokens: [ClientNetworkToken!]!
+}
+
+type NetworkMutation {
+  createClientNetwork: CreateClientNetwork
+  revokeClientNetworkSites: RevokeClientNetworkSites
+}
+
+# Please note that the `CreateClientNetwork` and `RevokeClientNetworkSites` types are placeholders for the actual mutation fields, as the schema for these operations is not provided in the tables. You may need to adjust these types based on the actual implementation.
+
+type Query {
+  # Retrieve client configuration information
+  clientFirewallAllowlist(id: String!): ClientFirewallAllowlist
+  # Get a list of client network sites
+  clientNetworkSites: [ClientNetworkSite!]!
+  # Get Site Information for a given siteId
+  siteInformation(siteId: String!): SiteInformation
+  # Get a list of client network tokens
+  clientNetworkTokens: [ClientNetworkToken!]!
+}
+
+# Here are the corresponding GraphQL queries:
+
+# 1. `clientFirewallAllowlist(id: "endpoint_id")`: This query retrieves the client configuration information for a specific endpoint identified by its ID.
+
+# 2. `clientNetworkSites`: This query fetches a list of all client network sites.
+
+# 3. `siteInformation(siteId: "site_id")`: This query returns Site Information for a given site ID.
+
+# 4. `clientNetworkTokens`: This query retrieves a list of all client network tokens.
+
+# These queries map to the REST endpoints provided, with the exception of `Revokeclientnetworksites` which is a mutation and not a query. The schema provided does not include the details for this mutation, so it cannot be directly translated into a GraphQL mutation.
+
+# Please ensure to replace `"endpoint_id"` and `"site_id"` with actual values when executing these queries.
+
+# Also, note that the schema does not include details for the `CreateClientNetwork` and `DeleteClientNetwork` mutations. These operations would require additional fields and handling beyond what is provided in the schema. If you need assistance with these mutations, please provide the respective schema details.

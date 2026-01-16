@@ -1,0 +1,59 @@
+# """
+# Details of an entity
+# """
+type EntityDetails {
+  """
+  The key of the detail
+  """
+  key: String!
+
+  """
+  The value of the detail
+  """
+  value: String!
+
+  """
+  Indicates if the detail is critical
+  """
+  critical: String
+}
+
+# """
+# Entity details response
+# """
+type GetEntityDetailsResponse {
+  """
+  The internal UUID of the entity
+  """
+  uuid: String!
+
+  """
+  Details of the entity
+  """
+  details: [EntityDetails!]!
+}
+
+# Here is the GraphQL Query type based on the provided schema and REST endpoint:
+
+type Query {
+  """
+  Get entity details
+  """
+  getEntityDetails(uuid: String!): GetEntityDetailsResponse
+}
+
+# And here are the corresponding REST queries:
+
+# @rest(
+#   table: "Getentitydetails",
+#   description: "Get entity details",
+#   responseColumns: [
+#     { column: "uuid", type: "String" },
+#     { column: "details.key", type: "String" },
+#     { column: "details.value", type: "String" },
+#     { column: "details.critical", type: "String" }
+#   ]
+# )
+# getGetEntityDetails(uuid: String!): GetEntityDetailsResponse
+
+# This GraphQL query type `Query` includes a single field `getEntityDetails` that takes a `uuid` argument of type `String`. The corresponding REST query `getGetEntityDetails` is defined with the table name "Getentitydetails", a description "Get entity details", and response columns mapping to the provided schema. The argument `uuid` corresponds to the 'uuid' column in the REST endpoint. The response type `GetEntityDetailsResponse` matches the schema provided.

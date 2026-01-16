@@ -1,0 +1,41 @@
+# """
+# Exportdiagdata represents diagnostic data for an export.
+
+# Columns:
+# - id: The unique identifier for the export diagnostic data.
+# - export_id: The identifier of the export this data is associated with.
+# - status: The current status of the export (e.g., 'pending', 'completed', 'failed').
+# - error_message: A detailed error message if the export has failed.
+# - created_at: The timestamp when the diagnostic data was created.
+# - updated_at: The timestamp when the diagnostic data was last updated.
+# """
+type Exportdiagdata {
+  """The unique identifier for the export diagnostic data."""
+  id: ID!
+
+  """The identifier of the export this data is associated with."""
+  export_id: ID!
+
+  """The current status of the export (e.g., 'pending', 'completed', 'failed')."""
+  status: String!
+
+  """A detailed error message if the export has failed."""
+  error_message: String
+
+  """The timestamp when the diagnostic data was created."""
+  created_at: String
+
+  """The timestamp when the diagnostic data was last updated."""
+  updated_at: String
+}
+
+type Query {
+  exportDiagData(exportId: ID!): Exportdiagdata
+    @rest(
+      table: "Exportdiagdata",
+      description: "Export diagnostics locally to the httpd tmp directory and send to Support",
+      columns: ["id", "export_id", "status", "error_message", "created_at", "updated_at"]
+    )
+}
+
+# This GraphQL query type, named `Query`, includes a single field `exportDiagData`. This field is marked with the `@rest` directive, which maps it to the `Exportdiagdata` REST endpoint. The `exportId` argument is required and of type `ID!`, matching the `export_id` column in the schema. The `columns` array includes all the columns from the `Exportdiagdata` type, ensuring that all data is returned in the response.

@@ -1,0 +1,188 @@
+# """
+# Type representing a custom dashboard
+# """
+type CustomDashboard {
+  """
+  The unique identifier for the custom dashboard
+  """
+  id: ID!
+
+  """
+  The name of the custom dashboard
+  """
+  name: String!
+
+  """
+  The description of the custom dashboard
+  """
+  description: String
+
+  """
+  The creation timestamp of the custom dashboard
+  """
+  createdAt: String
+
+  """
+  The last modified timestamp of the custom dashboard
+  """
+  updatedAt: String
+}
+
+# """
+# Root mutation for adding a custom dashboard
+# """
+type Mutation {
+  """
+  Add a new custom dashboard
+  """
+  addCustomDashboard(name: String!, description: String): CustomDashboard
+}
+
+# """
+# Root query for retrieving custom dashboards
+# """
+type Query {
+  """
+  Retrieve custom dashboards
+  """
+  customDashboards: [CustomDashboard]
+
+  """
+  Retrieve a single custom dashboard by id
+  """
+  customDashboard(id: ID!): CustomDashboard
+}
+
+# """
+# Root mutation for deleting a custom dashboard
+# """
+type Mutation {
+  """
+  Delete a custom dashboard
+  """
+  deleteCustomDashboard(id: ID!): Boolean
+}
+
+# """
+# Root mutation for updating a custom dashboard
+# """
+type Mutation {
+  """
+  Update a custom dashboard
+  """
+  updateCustomDashboard(id: ID!, name: String, description: String): CustomDashboard
+}
+
+# """
+# Root query for retrieving shareable API tokens associated with a custom dashboard
+# """
+type Query {
+  """
+  Retrieve shareable API tokens for a custom dashboard
+  """
+  shareableApiTokens(customDashboardId: ID!): [ShareableApiToken]
+}
+
+# """
+# Root query for retrieving shareable users associated with a custom dashboard
+# """
+type Query {
+  """
+  Retrieve shareable users for a custom dashboard
+  """
+  shareableUsers(customDashboardId: ID!): [ShareableUser]
+}
+
+# """
+# Type representing a shareable API token
+# """
+type ShareableApiToken {
+  """
+  The unique identifier for the shareable API token
+  """
+  id: ID!
+
+  """
+  The token value
+  """
+  token: String!
+
+  """
+  The creation timestamp of the shareable API token
+  """
+  createdAt: String
+
+  """
+  The custom dashboard associated with this token
+  """
+  customDashboard: CustomDashboard!
+}
+
+# """
+# Type representing a shareable user
+# """
+type ShareableUser {
+  """
+  The unique identifier for the shareable user
+  """
+  id: ID!
+
+  """
+  The user's email address
+  """
+  email: String!
+
+  """
+  The creation timestamp of the shareable user
+  """
+  createdAt: String
+
+  """
+  The custom dashboard associated with this user
+  """
+  customDashboard: CustomDashboard!
+}
+
+type Query {
+  """
+  Retrieve custom dashboards
+  """
+  customDashboards: [CustomDashboard] @rest(table_name='Getcustomdashboards')
+
+  """
+  Retrieve a single custom dashboard by id
+  """
+  customDashboard(id: ID!): CustomDashboard @rest(table_name='Getcustomdashboard', where={id: :_id})
+
+  """
+  Retrieve all accessible custom dashboards details.
+  """
+  allCustomDashboards: [CustomDashboard] @rest(table_name='Getcustomdashboards')
+
+  """
+  Add custom dashboard
+  """
+  addCustomDashboard(name: String!, description: String): CustomDashboard @rest(table_name='Addcustomdashboard')
+
+  """
+  Retrieve all API tokens that have access to shareable custom dashboards.
+  """
+  shareableApiTokens: [ShareableApiToken] @rest(table_name='Getshareableapitokens')
+
+  """
+  Retrieve all users (without invitations) that have access to shareable custom dashboards.
+  """
+  shareableUsers: [ShareableUser] @rest(table_name='Getshareableusers')
+
+  """
+  Remove custom dashboard
+  """
+  deleteCustomDashboard(id: ID!): Boolean @rest(table_name='Deletecustomdashboard', where={id: :_id})
+
+  """
+  Update custom dashboard
+  """
+  updateCustomDashboard(id: ID!, name: String, description: String): CustomDashboard @rest(table_name='Updatecustomdashboard', where={id: :_id})
+}
+
+# This GraphQL Query type includes fields that map to the provided REST endpoints. Each field is annotated with a `@rest` directive, specifying the corresponding table name and, where applicable, a `where` clause to filter the results. Note that the `deleteCustomDashboard` and `updateCustomDashboard` mutations require the `id` of the custom dashboard to be provided as an argument.
