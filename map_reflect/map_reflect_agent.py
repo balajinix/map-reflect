@@ -303,8 +303,14 @@ class MapReflectAgent:
 
                 # Convert to litellm model format
                 # Mistral models use direct API, not watsonx
+                # LiteLLM uses 'mistral/' prefix, but model ID might be 'mistralai/...'
                 if 'mistral' in model_id.lower():
-                    litellm_model = model_id  # e.g., mistralai/mistral-medium-2505
+                    # Extract model name after provider prefix
+                    if '/' in model_id:
+                        model_name = model_id.split('/', 1)[1]  # e.g., mistral-medium-2505
+                    else:
+                        model_name = model_id
+                    litellm_model = f"mistral/{model_name}"  # e.g., mistral/mistral-medium-2505
                 else:
                     litellm_model = f"watsonx/{model_id}"
 
