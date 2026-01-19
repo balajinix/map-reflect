@@ -1,0 +1,499 @@
+{
+  "OMOP": {
+    "PERSON": {
+      "fields": [
+        "person_id",
+        "gender_concept_id",
+        "year_of_birth",
+        "month_of_birth",
+        "day_of_birth",
+        "birth_datetime",
+        "death_datetime",
+        "race_concept_id",
+        "ethnicity_concept_id",
+        "location_id",
+        "provider_id",
+        "care_site_id",
+        "person_source_value",
+        "gender_source_value",
+        "gender_source_concept_id",
+        "race_source_value",
+        "race_source_concept_id",
+        "ethnicity_source_value",
+        "ethnicity_source_concept_id"
+      ],
+      "description": "the person domain contains records that uniquely identify each patient in the source data who is time at-risk to have clinical observations recorded within the source systems."
+    },
+    "VISIT_OCCURRENCE": {
+      "fields": [
+        "visit_occurrence_id",
+        "person_id",
+        "visit_concept_id",
+        "visit_start_date",
+        "visit_start_datetime",
+        "visit_end_date",
+        "visit_end_datetime",
+        "visit_type_concept_id",
+        "provider_id",
+        "care_site_id",
+        "visit_source_value",
+        "visit_source_concept_id",
+        "admitted_from_concept_id",
+        "admitted_from_source_value",
+        "discharge_to_concept_id",
+        "discharge_to_source_value",
+        "preceding_visit_occurrence_id"
+      ],
+      "description": "the visit_occurrence table contains the spans of time a person continuously receives medical services from one or more providers at a care site in a given setting within the health care system. visits are classified into 4 settings: outpatient care, inpatient confinement, emergency room, and long-term care. persons may transition between these settings over the course of an episode of care (for example, treatment of a disease onset)."
+    },
+    "VISIT_DETAIL": {
+      "fields": [
+        "visit_detail_id",
+        "person_id",
+        "visit_detail_concept_id",
+        "visit_detail_start_date",
+        "visit_detail_start_datetime",
+        "visit_detail_end_date",
+        "visit_detail_end_datetime",
+        "visit_detail_type_concept_id",
+        "provider_id",
+        "care_site_id",
+        "visit_detail_source_value",
+        "visit_detail_source_concept_id",
+        "admitted_from_source_value",
+        "admitted_from_concept_id",
+        "discharge_to_source_value",
+        "discharge_to_concept_id",
+        "preceding_visit_detail_id",
+        "visit_detail_parent_id",
+        "visit_occurrence_id"
+      ],
+      "description": "the visit_detail table is an optional table used to represents details of each record in the parent visit_occurrence table. for every record in visit_occurrence table there may be 0 or more records in the visit_detail table with a 1:n relationship where n may be 0. the visit_detail table is structurally very similar to visit_occurrence table and belongs to the similar domain as the visit."
+    },
+    "SPECIMEN": {
+      "fields": [
+        "specimen_id",
+        "person_id",
+        "specimen_concept_id",
+        "specimen_type_concept_id",
+        "specimen_date",
+        "specimen_datetime",
+        "quantity",
+        "unit_concept_id",
+        "anatomic_site_concept_id",
+        "disease_status_concept_id",
+        "specimen_source_id",
+        "specimen_source_value",
+        "unit_source_value",
+        "anatomic_site_source_value",
+        "disease_status_source_value"
+      ],
+      "description": "the specimen domain contains the records identifying biological samples from a person."
+    },
+    "MEASUREMENT": {
+      "fields": [
+        "measurement_id",
+        "person_id",
+        "measurement_concept_id",
+        "measurement_date",
+        "measurement_datetime",
+        "measurement_time",
+        "measurement_type_concept_id",
+        "operator_concept_id",
+        "value_as_number",
+        "value_as_concept_id",
+        "unit_concept_id",
+        "range_low",
+        "range_high",
+        "provider_id",
+        "visit_occurrence_id",
+        "visit_detail_id",
+        "measurement_source_value",
+        "measurement_source_concept_id",
+        "unit_source_value",
+        "value_source_value"
+      ],
+      "description": "the measurement table contains records of measurement, i.e. structured values (numerical or categorical) obtained through systematic and standardized examination or testing of a person or person's sample. the measurement table contains both orders and results of such measurements as laboratory tests, vital signs, quantitative findings from pathology reports, etc."
+    },
+    "PROCEDURE_OCCURRENCE": {
+      "fields": [
+        "procedure_occurrence_id",
+        "person_id",
+        "procedure_concept_id",
+        "procedure_date",
+        "procedure_datetime",
+        "procedure_type_concept_id",
+        "modifier_concept_id",
+        "quantity",
+        "provider_id",
+        "visit_occurrence_id",
+        "visit_detail_id",
+        "procedure_source_value",
+        "procedure_source_concept_id",
+        "modifier_source_value"
+      ],
+      "description": "the procedure_occurrence table contains records of activities or processes ordered by, or carried out by, a healthcare provider on the patient to have a diagnostic or therapeutic purpose. procedures are present in various data sources in different forms with varying levels of standardization."
+    },
+    "CONDITION_OCCURRENCE": {
+      "fields": [
+        "condition_occurrence_id",
+        "person_id",
+        "condition_concept_id",
+        "condition_start_date",
+        "condition_start_datetime",
+        "condition_end_date",
+        "condition_end_datetime",
+        "condition_type_concept_id",
+        "condition_status_concept_id",
+        "stop_reason",
+        "provider_id",
+        "visit_occurrence_id",
+        "visit_detail_id",
+        "condition_source_value",
+        "condition_source_concept_id",
+        "condition_status_source_value"
+      ],
+      "description": "conditions are records of a person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign, or a symptom, which is either observed by a provider or reported by the patient. conditions are recorded in different sources and levels of standardization."
+    },
+    "DEATH": {
+      "fields": [
+        "person_id",
+        "death_date",
+        "death_datetime",
+        "death_type_concept_id",
+        "cause_concept_id",
+        "cause_source_value",
+        "cause_source_concept_id"
+      ],
+      "description": "the death domain contains the clinical event for how and when a person dies. a person can have up to one record if the source system contains evidence about the death."
+    },
+    "LOCATION": {
+      "fields": [
+        "location_id",
+        "address_1",
+        "address_2",
+        "city",
+        "state",
+        "zip",
+        "county",
+        "location_source_value"
+      ],
+      "description": "the location table represents a generic way to capture physical location or address information of persons and care sites."
+    },
+    "OBSERVATION": {
+      "fields": [
+        "observation_id",
+        "person_id",
+        "observation_concept_id",
+        "observation_date",
+        "observation_datetime",
+        "observation_type_concept_id",
+        "value_as_number",
+        "value_as_string",
+        "value_as_concept_id",
+        "qualifier_concept_id",
+        "unit_concept_id",
+        "provider_id",
+        "visit_occurrence_id",
+        "visit_detail_id",
+        "observation_source_value",
+        "observation_source_concept_id",
+        "unit_source_value",
+        "qualifier_source_value",
+        "observation_event_id",
+        "obs_event_field_concept_id",
+        "value_as_datetime"
+      ],
+      "description": "the observation table captures clinical facts about a person obtained in the context of examination, questioning or a procedure. any data that cannot be represented by any other domains, such as social and lifestyle facts, medical history, family history, etc. are recorded here."
+    },
+    "OBSERVATION_PERIOD": {
+      "fields": [
+        "observation_period_id",
+        "person_id",
+        "observation_period_start_date",
+        "observation_period_end_date",
+        "period_type_concept_id"
+      ],
+      "description": "the observation_period table contains records which uniquely define the spans of time for which a person is at-risk to have clinical events recorded within the source systems, even if no events in fact are recorded (healthy patient with no healthcare interactions)."
+    },
+    "DRUG_EXPOSURE": {
+      "fields": [
+        "drug_exposure_id",
+        "person_id",
+        "drug_concept_id",
+        "drug_exposure_start_date",
+        "drug_exposure_start_datetime",
+        "drug_exposure_end_date",
+        "drug_exposure_end_datetime",
+        "verbatim_end_date",
+        "drug_type_concept_id",
+        "stop_reason",
+        "refills",
+        "quantity",
+        "days_supply",
+        "sig",
+        "route_concept_id",
+        "lot_number",
+        "provider_id",
+        "visit_occurrence_id",
+        "visit_detail_id",
+        "drug_source_value",
+        "drug_source_concept_id",
+        "route_source_value",
+        "dose_unit_source_value"
+      ],
+      "description": "the 'drug' domain captures records about the utilization of a drug when ingested or otherwise introduced into the body. a drug is a biochemical substance formulated in such a way that when administered to a person it will exert a certain physiological effect. drugs include prescription and over-the-counter medicines, vaccines, and large-molecule biologic therapies. radiological devices ingested or applied locally do not count as drugs."
+    },
+    "DEVICE_EXPOSURE": {
+      "fields": [
+        "device_exposure_id",
+        "person_id",
+        "device_concept_id",
+        "device_exposure_start_date",
+        "device_exposure_start_datetime",
+        "device_exposure_end_date",
+        "device_exposure_end_datetime",
+        "device_type_concept_id",
+        "unique_device_id",
+        "quantity",
+        "provider_id",
+        "visit_occurrence_id",
+        "visit_detail_id",
+        "device_source_value",
+        "device_source_concept_id"
+      ],
+      "description": "the device exposure domain captures information about a person's exposure to a foreign physical object or instrument that which is used for diagnostic or therapeutic purposes through a mechanism beyond chemical action."
+    },
+    "NOTE": {
+      "fields": [
+        "note_id",
+        "person_id",
+        "note_event_id",
+        "note_event_field_concept_id",
+        "note_date",
+        "note_datetime",
+        "note_type_concept_id",
+        "note_class_concept_id",
+        "note_title",
+        "note_text",
+        "encoding_concept_id",
+        "language_concept_id",
+        "provider_id",
+        "visit_occurrence_id",
+        "visit_detail_id",
+        "note_source_value"
+      ],
+      "description": "the note table captures unstructured information that was recorded by a provider about a patient in free text notes on a given date."
+    },
+    "FACT_RELATIONSHIP": {
+      "fields": [
+        "domain_concept_id_1",
+        "fact_id_1",
+        "domain_concept_id_2",
+        "fact_id_2",
+        "relationship_concept_id"
+      ],
+      "description": "the fact_relationship table contains records about the relationships between facts stored as records in any table of the cdm."
+    },
+    "PAYER_PLAN_PERIOD": {
+      "fields": [
+        "payer_plan_period_id",
+        "person_id",
+        "payer_plan_period_start_date",
+        "payer_plan_period_end_date",
+        "payer_source_value",
+        "plan_source_value",
+        "family_source_value"
+      ],
+      "description": "the payer_plan_period table captures details of the period of time that a person is continuously enrolled under a specific health plan benefit structure from a given payer."
+    },
+    "CDM_SOURCE": {
+      "fields": [
+        "cdm_source_name",
+        "cdm_source_abbreviation",
+        "cdm_holder",
+        "source_description",
+        "source_documentation_reference",
+        "cdm_etl_reference",
+        "source_release_date",
+        "cdm_release_date",
+        "cdm_version",
+        "vocabulary_version"
+      ],
+      "description": "the cdm_source table contains detail about the source database and the process used to transform the data into the omop common data model."
+    },
+    "CARE_SITE": {
+      "fields": [
+        "care_site_id",
+        "care_site_name",
+        "place_of_service_concept_id",
+        "location_id",
+        "care_site_source_value",
+        "place_of_service_source_value"
+      ],
+      "description": "the care_site table contains a list of uniquely identified institutional (physical or organizational) units where healthcare delivery is practiced (offices, wards, hospitals, clinics, etc.)."
+    },
+    "COHORT": {
+      "fields": [
+        "cohort_definition_id",
+        "subject_id",
+        "cohort_start_date",
+        "cohort_end_date"
+      ],
+      "description": "the cohort table contains records of subjects that satisfy a given set of criteria for a duration of time."
+    },
+    "COHORT_DEFINITION": {
+      "fields": [
+        "cohort_definition_id",
+        "cohort_definition_name",
+        "cohort_definition_description",
+        "definition_type_concept_id",
+        "cohort_definition_syntax",
+        "subject_concept_id",
+        "cohort_initiation_date"
+      ],
+      "description": "the cohort_definition table contains records defining a cohort derived from the data through the associated description and syntax and upon instantiation (execution of the algorithm) placed into the cohort table."
+    },
+    "PROVIDER": {
+      "fields": [
+        "provider_id",
+        "provider_name",
+        "npi",
+        "dea",
+        "specialty_concept_id",
+        "care_site_id",
+        "year_of_birth",
+        "gender_concept_id",
+        "provider_source_value",
+        "specialty_source_value",
+        "specialty_source_concept_id",
+        "gender_source_value",
+        "gender_source_concept_id"
+      ],
+      "description": "the provider table contains a list of uniquely identified healthcare providers. these are individuals providing hands-on healthcare to patients, such as physicians, nurses, midwives, physical therapists etc."
+    }
+  },
+  "CMS": {
+    "BENEFICIARYSUMMARY": {
+      "fields": [
+        "desynpuf_id",
+        "bene_birth_dt",
+        "bene_death_dt",
+        "bene_sex_ident_cd",
+        "bene_race_cd",
+        "bene_esrd_ind",
+        "sp_state_code",
+        "bene_county_cd",
+        "bene_hi_cvrage_tot_mons",
+        "bene_smi_cvrage_tot_mons",
+        "bene_hmo_cvrage_tot_mons",
+        "plan_cvrg_mos_num",
+        "sp_alzhdmta",
+        "sp_chf",
+        "sp_chrnkidn",
+        "sp_cncr",
+        "sp_copd",
+        "sp_depressn",
+        "sp_diabetes",
+        "sp_ischmcht",
+        "sp_osteoprs",
+        "sp_ra_oa",
+        "sp_strketia",
+        "medreimb_ip",
+        "benres_ip",
+        "pppymt_ip",
+        "medreimb_op",
+        "benres_op",
+        "pppymt_op",
+        "medreimb_car",
+        "benres_car",
+        "pppymt_car"
+      ],
+      "description": "beneficiarysummary pertains to a synthetic medicare beneficiary "
+    },
+    "INPATIENTCLAIMS": {
+      "fields": [
+        "desynpuf_id",
+        "clm_id",
+        "segment",
+        "clm_from_dt",
+        "clm_thru_dt",
+        "prvdr_num",
+        "clm_pmt_amt",
+        "nch_prmry_pyr_clm_pd_amt",
+        "at_physn_npi",
+        "op_physn_npi",
+        "ot_physn_npi",
+        "clm_admsn_dt",
+        "admtng_icd9_dgns_cd",
+        "clm_pass_thru_per_diem_amt",
+        "nch_bene_ip_ddctbl_amt",
+        "nch_bene_pta_coinsrnc_lblty_am",
+        "nch_bene_blood_ddctbl_lblty_am",
+        "clm_utlztn_day_cnt",
+        "nch_bene_dschrg_dt",
+        "clm_drg_cd",
+        "icd9_dgns_cd",
+        "icd9_prcdr_cd",
+        "hcpcs_cd"
+      ],
+      "description": "inpatientclaims pertains to a synthetic inpatient claim"
+    },
+    "OUTPATIENTCLAIMS": {
+      "fields": [
+        "desynpuf_id",
+        "clm_id",
+        "segment",
+        "clm_from_dt",
+        "clm_thru_dt",
+        "prvdr_num",
+        "clm_pmt_amt",
+        "nch_prmry_pyr_clm_pd_amt",
+        "at_physn_npi",
+        "op_physn_npi",
+        "ot_physn_npi",
+        "nch_bene_blood_ddctbl_lblty_am",
+        "icd9_dgns_cd",
+        "icd9_prcdr_cd",
+        "nch_bene_ptb_ddctbl_amt",
+        "nch_bene_ptb_coinsrnc_amt",
+        "admtng_icd9_dgns_cd",
+        "hcpcs_cd"
+      ],
+      "description": "outpatientclaims pertains to a synthetic outpatient claim"
+    },
+    "CARRIERCLAIMS": {
+      "fields": [
+        "desynpuf_id",
+        "clm_id",
+        "clm_from_dt",
+        "clm_thru_dt",
+        "icd9_dgns_cd",
+        "prf_physn_npi",
+        "tax_num",
+        "hcpcs_cd",
+        "line_nch_pmt_amt",
+        "line_bene_ptb_ddctbl_amt",
+        "line_bene_prmry_pyr_pd_amt",
+        "line_coinsrnc_amt",
+        "line_alowd_chrg_amt",
+        "line_prcsg_ind_cd",
+        "line_icd9_dgns_cd"
+      ],
+      "description": "carrierclaims pertains to a synthetic physician or supplier claim"
+    },
+    "PRESCRIPTIONDRUGEVENTS": {
+      "fields": [
+        "desynpuf_id",
+        "pde_id",
+        "srvc_dt",
+        "prod_srvc_id",
+        "qty_dspnsd_num",
+        "days_suply_num",
+        "ptnt_pay_amt",
+        "tot_rx_cst_amt"
+      ],
+      "description": "prescriptiondrugevents pertains to a synthetic part d event"
+    }
+  }
+}
