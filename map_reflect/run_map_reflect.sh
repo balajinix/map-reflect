@@ -16,11 +16,11 @@ echo "============================================="
 # Options: "itops", "nl2gql", "itops,nl2gql"
 DATASETS="nl2gql"
 
+# Available models:
+#   - "ibm/granite-4-h-small" (Granite 4 - recommended)
+#   - "watsonx/meta-llama/llama-3-3-70b-instruct"
 #   - "watsonx/mistralai/mistral-large"
-#   - "watsonx/meta-llama/llama-3-70b-instruct"
-#   - "watsonx/ibm/granite-3-3-8b-instruct"
-#MODELS="watsonx/ibm/granite-3-3-8b-instruct"
-MODELS="watsonx/mistralai/mistral-medium-2505"
+MODELS="ibm/granite-4-h-small"
 
 DATA_DIR="../data"
 
