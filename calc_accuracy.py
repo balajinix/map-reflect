@@ -29,15 +29,23 @@ DATASETS = ['ITOps', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
 
 # Method directories and model patterns
 METHODS = {
+    'SMT': {
+        'dir': 'smt/results',
+        'models': [
+            ('Granite', 'granite'),
+            ('Llama', 'llama'),
+            ('Mistral', 'mistral'),
+        ],
+    },
     'GNN': {
         'dir': 'gnn/results',
         'models': [('(no LLM)', '')],  # GNN doesn't use LLM for inference
     },
-    'Map-Reflect': {
-        'dir': 'map_reflect/results',
+    'ReAct': {
+        'dir': 'react/results',
         'models': [
-            ('Granite-4', 'granite-4'),
-            ('Llama-3.3', 'llama-3-3'),
+            ('Granite', 'granite'),
+            ('Llama', 'llama'),
             ('Mistral-M', 'mistral-medium'),
         ],
     },
@@ -49,11 +57,11 @@ METHODS = {
             ('Mistral-M', 'mistral-medium'),
         ],
     },
-    'ReAct': {
-        'dir': 'react/results',
+    'Map-Reflect': {
+        'dir': 'map_reflect/results',
         'models': [
-            ('Granite', 'granite'),
-            ('Llama', 'llama'),
+            ('Granite-4', 'granite-4'),
+            ('Llama-3.3', 'llama-3-3'),
             ('Mistral-M', 'mistral-medium'),
         ],
     },

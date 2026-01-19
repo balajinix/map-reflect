@@ -4,7 +4,6 @@ results
 .env
 nohup.out
 .DS_Store
-vldb.tex
 
 # Generated data files
 *.pkl
