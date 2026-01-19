@@ -71,9 +71,31 @@ class MatchMakerMappingAgent:
         except Exception as e:
             logger.error(f"Failed to initialize MatchMaker agent: {e}")
             self.available = False
-    
+
+
+    def _validate_model(self):
+       """Validate that the LLM model is properly configured."""
+       from litellm import completion
+       
+       test_messages = [
+           {"role": "user", "content": "Reply with just the word 'ok'"}
+       ]
+       
+       try:
+           response = completion(
+               model=self.model,
+               messages=test_messages,
+               temperature=0.0,
+               max_tokens=10
+           )
+           logger.info(f"Model validation successful: {self.model}")
+           return True
+       except Exception as e:
+           error_msg = f"Model validation FAILED for {self.model}: {e}"
+           logger.error(error_msg)
+           raise RuntimeError(error_msg) from e   
     def _setup_matchmaker_agent(self):
-        """Set up MatchMaker agent."""
+        """Set up MatchMaker agent with model validation."""
         # Add current directory to path for import
         if str(script_dir) not in sys.path:
             sys.path.insert(0, str(script_dir))
@@ -84,6 +106,10 @@ class MatchMakerMappingAgent:
             raise FileNotFoundError(
                 f"Property lookup file not found: {self.property_lookup_file}"
             )
+        
+        # VALIDATE MODEL FIRST before doing expensive setup
+        logger.info(f"Validating model configuration: {self.model}")
+        self._validate_model()
         
         # Initialize MatchMaker agent
         self.matchmaker_agent = MatchMakerAgent(
@@ -481,7 +507,7 @@ class MatchMakerEvaluationRunner:
             }
     
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
-        """Run evaluation for dataset-model combination."""
+        """Run evaluation for dataset-model combination with failure tracking."""
         logger.info(f"Starting MatchMaker evaluation: {dataset} with {model}")
         
         # Load evaluation data
@@ -498,6 +524,10 @@ class MatchMakerEvaluationRunner:
         # Run MatchMaker on each sample
         results = []
         total_start = time.time()
+        
+        # FAILURE TRACKING
+        MAX_CONSECUTIVE_FAILURES = 3
+        consecutive_failures = 0
         
         from tqdm import tqdm
         
@@ -516,24 +546,69 @@ class MatchMakerEvaluationRunner:
                 
                 pbar.set_description(f"Processing {sample_id}")
                 
-                result = self.run_single_evaluation(
-                    input_data=input_data,
-                    sample_id=sample_id,
-                    model=model,
-                    dataset=dataset,
-                    ground_truth=ground_truth,
-                    is_utterance=is_utterance_dataset
-                )
-                
-                results.append(result)
-                
-                # Update progress bar
-                status = "✓" if result["success"] else "✗"
-                matches = result.get("total_mappings", 0)
-                pbar.set_postfix({
-                    "status": status,
-                    "mappings": matches
-                })
+                try:
+                    result = self.run_single_evaluation(
+                        input_data=input_data,
+                        sample_id=sample_id,
+                        model=model,
+                        dataset=dataset,
+                        ground_truth=ground_truth,
+                        is_utterance=is_utterance_dataset
+                    )
+                    
+                    results.append(result)
+                    
+                    # CHECK FOR CONSECUTIVE FAILURES
+                    if not result["success"]:
+                        consecutive_failures += 1
+                        error_msg = result.get("error_message", "Unknown error")
+                        
+                        # Check for critical errors in the error message
+                        critical_patterns = [
+                            "provider not provided",
+                            "provider not found",
+                            "invalid api key",
+                            "authentication",
+                            "critical llm",
+                        ]
+                        is_critical = any(
+                            p in error_msg.lower() 
+                            for p in critical_patterns
+                        )
+                        
+                        if is_critical:
+                            logger.error(f"CRITICAL ERROR detected: {error_msg}")
+                            raise RuntimeError(f"Critical error - stopping: {error_msg}")
+                        
+                        if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                            logger.error(
+                                f"Too many consecutive failures ({consecutive_failures}). "
+                                f"Last error: {error_msg}"
+                            )
+                            raise RuntimeError(
+                                f"Stopping after {consecutive_failures} consecutive failures. "
+                                f"Last error: {error_msg}"
+                            )
+                    else:
+                        consecutive_failures = 0  # Reset on success
+                    
+                    # Update progress bar
+                    status = "ok" if result["success"] else "FAIL"
+                    matches = result.get("total_mappings", 0)
+                    pbar.set_postfix({
+                        "status": status,
+                        "mappings": matches,
+                        "fails": consecutive_failures
+                    })
+                    
+                except RuntimeError:
+                    # Re-raise runtime errors (critical failures)
+                    raise
+                except Exception as e:
+                    logger.error(f"Unexpected error processing {sample_id}: {e}")
+                    consecutive_failures += 1
+                    if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                        raise RuntimeError(f"Too many failures: {e}") from e
                 
                 time.sleep(0.5)  # Rate limiting
         

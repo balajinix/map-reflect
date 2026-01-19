@@ -22,7 +22,7 @@ DATASETS="nl2gql"
 #   - "watsonx/mistralai/mistral-large"
 #   - "watsonx/meta-llama/llama-3-70b-instruct"
 #   - "watsonx/ibm/granite-3-3-8b-instruct"
-MODELS="watsonx/mistralai/mistral-medium-2505"
+MODELS="watsonx/mistral-medium-2505"
 
 # Data directory (contains all dataset files)
 DATA_DIR="../data"

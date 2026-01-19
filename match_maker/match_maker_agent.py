@@ -452,7 +452,7 @@ Task: Reason step-by-step about which target attributes are most likely to match
         logger.debug(f"Reasoning candidates for {query_attr}: {valid_candidates}")
         return valid_candidates
     
-    def _prepare_target_context(self, max_attrs: int = 50) -> str:
+    def _prepare_target_context(self, max_attrs: int = 10) -> str:
         """Prepare concise context about target schema."""
         context_parts = []
         for prop_id, prop_data in list(self.target_properties.items())[:max_attrs]:
@@ -943,7 +943,7 @@ Think step-by-step about the match quality, then provide ONLY a number from 0-5.
     # ========== LLM Helper ==========
     
     def _call_llm(self, messages: List[Dict], temperature: float = 0.1) -> str:
-        """Call LLM with error handling."""
+        """Call LLM with error handling. Raises on critical errors."""
         try:
             response = completion(
                 model=self.model,
@@ -953,7 +953,30 @@ Think step-by-step about the match quality, then provide ONLY a number from 0-5.
             )
             return response.choices[0].message.content
         except Exception as e:
-            logger.error(f"LLM call failed: {e}")
+            error_str = str(e).lower()
+            
+            # Critical errors that should stop execution immediately
+            critical_patterns = [
+                "provider not provided",
+                "provider not found", 
+                "invalid api key",
+                "authentication",
+                "unauthorized",
+                "api key not found",
+                "rate limit",  # May want to retry instead, but fail fast for now
+                "quota exceeded",
+                "model not found",
+                "model does not exist",
+            ]
+            
+            is_critical = any(pattern in error_str for pattern in critical_patterns)
+            
+            if is_critical:
+                logger.error(f"CRITICAL LLM error - stopping execution: {e}")
+                raise RuntimeError(f"Critical LLM configuration error: {e}") from e
+            
+            # Non-critical errors: log and return empty (allows graceful degradation)
+            logger.error(f"LLM call failed (non-critical): {e}")
             return ""
 
 
