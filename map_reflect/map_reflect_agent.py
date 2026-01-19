@@ -302,7 +302,11 @@ class MapReflectAgent:
                 logger.warning(f"LLM_TIMING | prompt_format: {t1-t0:.2f}s (litellm mode)")
 
                 # Convert to litellm model format
-                litellm_model = f"watsonx/{model_id}"
+                # Mistral models use direct API, not watsonx
+                if 'mistral' in model_id.lower():
+                    litellm_model = model_id  # e.g., mistralai/mistral-medium-2505
+                else:
+                    litellm_model = f"watsonx/{model_id}"
 
                 response = completion(
                     model=litellm_model,
