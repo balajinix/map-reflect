@@ -331,14 +331,66 @@ Total schemas analyzed: {len(similarities)}"""
 
         return state
 
+    def _parse_utterance_for_products(self, utterance: str) -> tuple:
+        """Parse utterance to extract source and target product names.
+
+        Handles patterns like:
+        - "map concert api key with turbo entity"
+        - "map instana applications with concert tokens"
+
+        Returns (source_product, target_product) or (None, None) if not found.
+        """
+        utterance_lower = utterance.lower().strip()
+
+        # Known product names
+        products = ['concert', 'turbo', 'instana']
+
+        # Pattern: "map X ... with Y ..." or "map X ... to Y ..."
+        patterns = [
+            r"map\s+(\w+)\s+.+?\s+with\s+(\w+)\s+",
+            r"map\s+(\w+)\s+.+?\s+to\s+(\w+)\s+",
+        ]
+
+        for pattern in patterns:
+            match = re.search(pattern, utterance_lower)
+            if match:
+                src_product, tgt_product = match.groups()
+                if src_product in products and tgt_product in products:
+                    logger.info(f"Extracted products from utterance: {src_product} -> {tgt_product}")
+                    return src_product, tgt_product
+
+        # Fallback: find any two products mentioned in order
+        found_products = [p for p in products if p in utterance_lower]
+        if len(found_products) >= 2:
+            # Determine order based on position in utterance
+            positions = [(p, utterance_lower.find(p)) for p in found_products]
+            positions.sort(key=lambda x: x[1])
+            logger.info(f"Extracted products (fallback): {positions[0][0]} -> {positions[1][0]}")
+            return positions[0][0], positions[1][0]
+
+        return None, None
+
     def _find_relevant_schema(self, user_question: str, recall_limit=10) -> tuple[list, dict, list]:
         """Find relevant schemas using embeddings and return similarities"""
         if not self.schema_map:
             logger.error("No schema map available")
             return [], {}, []
 
-        # Use all available schemas (no filtering)
+        # Extract products from utterance for filtering
+        src_product, tgt_product = self._parse_utterance_for_products(user_question)
+
         all_keys = list(self.schema_map.keys())
+
+        # Filter schemas by product if products were extracted
+        if src_product and tgt_product:
+            filtered_keys = [k for k in all_keys
+                           if k.lower().startswith(src_product) or k.lower().startswith(tgt_product)]
+            if filtered_keys:
+                logger.info(f"Product filter: {len(all_keys)} -> {len(filtered_keys)} schemas (products: {src_product}, {tgt_product})")
+                all_keys = filtered_keys
+            else:
+                logger.warning(f"Product filter returned no schemas, using all {len(all_keys)}")
+
         logger.info(f"Searching through {len(all_keys)} schemas")
 
         user_embedding = self.sentence_transformer.encode([user_question], show_progress_bar=False)[0]
