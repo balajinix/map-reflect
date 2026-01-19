@@ -4,3 +4,20 @@ results
 .env
 nohup.out
 .DS_Store
+vldb.tex
+
+# Generated data files
+*.pkl
+chroma_db/
+experiment_logs/
+*.log
+
+# Mapping outputs (generated)
+data/*_mappings/
+data/*_mappings_output*/
+data/gnn_results/
+
+# Backups
+*.bk
+*.bak
+results.bk/
