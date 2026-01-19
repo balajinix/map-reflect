@@ -85,9 +85,9 @@ class GNNEvaluationRunner:
             self.schema_dir = Path(schema_dir)
 
         if collection_name is None:
-            self.collection_name = Path(f"{dataset.lower()}_graphql_schemas")
+            self.collection_name = f"{dataset.lower()}_schemas"
         else:
-            self.collection_name = Path(collection_name)
+            self.collection_name = collection_name
         
         
         # Create directories

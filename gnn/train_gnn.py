@@ -13,7 +13,13 @@ import json
 import os
 import argparse
 from tqdm import tqdm
-import matplotlib.pyplot as plt
+# matplotlib is optional - only used for plotting
+try:
+    import matplotlib.pyplot as plt
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    MATPLOTLIB_AVAILABLE = False
+    plt = None
 import random
 import sys
 import traceback
@@ -322,8 +328,8 @@ def run_mapping_gnn_pipeline(graph_data_file, output_dir, seed=42):
         for i, (src_field, tgt_field, prob) in enumerate(predictions, 1):
             print(f"{i:2d}. {src_field} <-> {tgt_field} (confidence: {prob:.4f})")
         
-        # Plot training loss
-        if train_losses:
+        # Plot training loss (if matplotlib available)
+        if train_losses and MATPLOTLIB_AVAILABLE:
             try:
                 plt.figure(figsize=(10, 5))
                 plt.plot(train_losses)
@@ -331,16 +337,18 @@ def run_mapping_gnn_pipeline(graph_data_file, output_dir, seed=42):
                 plt.xlabel('Epoch')
                 plt.ylabel('Loss')
                 plt.tight_layout()
-                
+
                 # Create output directory
                 os.makedirs(output_dir, exist_ok=True)
-                
+
                 plt.savefig(os.path.join(output_dir, "training_loss.png"), dpi=300)
                 print(f"Training loss plot saved to {output_dir}/training_loss.png")
-                
+
                 plt.close()
             except Exception as e:
                 print(f"Warning: Could not save training plot: {e}")
+        elif train_losses:
+            print("Skipping plot (matplotlib not available)")
 
         return gnn_model, data, node_list, predictions, graph
         

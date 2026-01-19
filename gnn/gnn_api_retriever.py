@@ -155,15 +155,29 @@ class GNNAPIRetriever:
             return {}
     
     def _extract_api_names(self) -> List[str]:
-        """Extract unique API names from API lookup data."""
+        """Extract unique API/schema names from API lookup data.
+
+        Returns both product names AND schema type names for better matching.
+        E.g., ['Concert', 'concert_Application', 'concert_ApiKeyDate', ...]
+        """
         api_names = set()
-        
+        schema_types = set()
+
         for field_name, meta in self.api_lookup.items():
+            # Extract product name
             product_name = meta.get("product_name", "")
             if product_name:
                 api_names.add(product_name)
-        
-        return list(api_names)
+
+            # Extract schema type from field name (e.g., "concert_Application.id" -> "concert_Application")
+            parts = field_name.split('.')
+            if parts:
+                schema_type = parts[0]
+                schema_types.add(schema_type)
+
+        # Combine both - schema types are more specific and useful for matching
+        all_names = list(schema_types) + list(api_names)
+        return all_names
     
     def find_apis_for_utterance(self, utterance: str, top_k: int = 5) -> Tuple[List[str], List[str]]:
         """
@@ -206,11 +220,14 @@ class GNNAPIRetriever:
         utterance_lower = utterance.lower()
         
         # Common patterns for mapping utterances
+        # Note: ITOps dataset uses "with" not "to" (e.g., "map concert X with turbo Y")
         map_patterns = [
-            r"map\s+(\w+)\s+.*?to\s+(\w+)",
+            r"map\s+(\w+)\s+.*?with\s+(\w+)",      # "map concert X with turbo Y"
+            r"map\s+(\w+)\s+.*?to\s+(\w+)",        # "map concert X to turbo Y"
             r"map\s+(\w+)\s+.*?\s+to\s+(\w+)",
             r"from\s+(\w+)\s+.*?to\s+(\w+)",
-            r"(\w+)\s+.*?to\s+(\w+)\s+.*?mapping"
+            r"(\w+)\s+.*?to\s+(\w+)\s+.*?mapping",
+            r"(\w+)\s+.*?with\s+(\w+)\s+.*?mapping"
         ]
         
         source_hints = []
@@ -220,10 +237,34 @@ class GNNAPIRetriever:
         for pattern in map_patterns:
             match = re.search(pattern, utterance_lower)
             if match:
-                source_hints.append(match.group(1))
-                target_hints.append(match.group(2))
+                source_product = match.group(1)
+                target_product = match.group(2)
+                source_hints.append(source_product)
+                target_hints.append(target_product)
+
+                # Also extract domain terms from the query for better schema matching
+                # E.g., "map concert api key with turbo entity" ->
+                #   source: ['concert', 'api', 'key'], target: ['turbo', 'entity']
+                words = re.findall(r'\b\w+\b', utterance_lower)
+                common_words = {'map', 'to', 'from', 'the', 'a', 'an', 'and', 'or', 'of', 'in', 'on', 'at', 'by', 'for', 'with', 'as', 'data', 'schema', 'table', 'field', 'type'}
+
+                # Find position of products in the word list
+                try:
+                    src_idx = words.index(source_product)
+                    tgt_idx = words.index(target_product)
+
+                    # Words between source product and target product are source domain terms
+                    source_domain = [w for w in words[src_idx+1:tgt_idx] if w not in common_words and len(w) > 2]
+                    source_hints.extend(source_domain[:3])
+
+                    # Words after target product are target domain terms
+                    target_domain = [w for w in words[tgt_idx+1:] if w not in common_words and len(w) > 2]
+                    target_hints.extend(target_domain[:3])
+                except ValueError:
+                    pass
+
                 break
-        
+
         # If no pattern match, extract potential API names from the utterance
         if not source_hints or not target_hints:
             # Look for known API names in the utterance
@@ -246,7 +287,7 @@ class GNNAPIRetriever:
         if not source_hints and not target_hints:
             words = re.findall(r'\b\w+\b', utterance_lower)
             # Filter out common words
-            common_words = {'map', 'to', 'from', 'the', 'a', 'an', 'and', 'or', 'of', 'in', 'on', 'at', 'by', 'for', 'with', 'as'}
+            common_words = {'map', 'to', 'from', 'the', 'a', 'an', 'and', 'or', 'of', 'in', 'on', 'at', 'by', 'for', 'with', 'as', 'data', 'schema', 'table', 'field', 'type'}
             api_words = [w for w in words if w not in common_words and len(w) > 2]
             source_hints = api_words[:3]  # Take first few as source hints
             target_hints = api_words[-3:]  # Take last few as target hints
@@ -256,36 +297,86 @@ class GNNAPIRetriever:
     def _find_schemas_with_chromadb(self, hints: List[str], top_k: int = 5) -> List[str]:
         """Find similar schemas using Schema ChromaDB semantic search."""
         if not hints or not self.schema_indexer:
-            return []
-        
+            return self._find_similar_apis_fallback(hints, top_k)
+
         # Combine hints into a query
         query = " ".join(hints)
-        
+
         try:
             # Search for relevant schemas
             schema_results = self.schema_indexer.search_schemas(query, n_results=top_k)
-            
+
             # Extract schema names
             schema_names = [result.get("schema_name", "") for result in schema_results]
-            
+
+            # Fall back to API lookup matching if ChromaDB returns empty
+            if not schema_names:
+                logger.info(f"ChromaDB returned empty results for '{query}', using fallback")
+                return self._find_similar_apis_fallback(hints, top_k)
+
             return schema_names
-            
+
         except Exception as e:
             logger.warning(f"Schema ChromaDB search failed: {e}")
             return self._find_similar_apis_fallback(hints, top_k)
     
     def _find_similar_apis_fallback(self, hints: List[str], top_k: int = 5) -> List[str]:
-        """Fallback string matching when ChromaDB fails."""
+        """Fallback string matching to find schemas matching query hints.
+
+        Improved matching for ITOps queries like:
+        - 'concert api key' -> 'concert_ApiKeyDate'
+        - 'concert applications' -> 'concert_Application', 'concert_ApplicationCollection'
+        - 'concert exposures' -> 'concert_Exposures'
+        """
         matches = []
-        
+        scored_matches = []
+
+        # Normalize hints - combine multi-word hints
+        hint_words = []
+        for hint in hints:
+            hint_words.extend(hint.lower().split())
+
         for api_name in self.api_names:
             api_lower = api_name.lower()
-            for hint in hints:
+            score = 0
+
+            # Check each hint word
+            for hint in hint_words:
                 hint_lower = hint.lower()
-                if hint_lower in api_lower or api_lower in hint_lower:
-                    matches.append(api_name)
+
+                # Exact substring match
+                if hint_lower in api_lower:
+                    score += 2
+
+                # Handle common word variations
+                # 'api key' -> 'apikey', 'applications' -> 'application'
+                hint_normalized = hint_lower.rstrip('s')  # Remove plural 's'
+                api_words = api_lower.replace('_', ' ').split()
+
+                for api_word in api_words:
+                    if hint_normalized in api_word or api_word in hint_normalized:
+                        score += 1
+
+            if score > 0:
+                scored_matches.append((api_name, score))
+
+        # Sort by score descending
+        scored_matches.sort(key=lambda x: -x[1])
+
+        # Return top matches
+        matches = [m[0] for m in scored_matches[:top_k]]
+
+        # If no matches, fall back to product-level matching
+        if not matches:
+            for api_name in self.api_names:
+                api_lower = api_name.lower()
+                for hint in hints:
+                    if hint.lower() in api_lower:
+                        matches.append(api_name)
+                        break
+                if len(matches) >= top_k:
                     break
-        
+
         return matches[:top_k]
     
     def get_joinability_score(self, field1: str, field2: str, quiet: bool = False) -> float:
@@ -329,15 +420,32 @@ class GNNAPIRetriever:
             # Create query edges tensor
             import torch
             query_edges = torch.tensor([[idx1], [idx2]], dtype=torch.long)
-            
-            # Get joinability score from GNN
+
+            # Get joinability score using semantic similarity of original features
+            # This uses sentence-transformer embeddings directly, avoiding GNN over-smoothing
             with torch.no_grad():
-                score = self.gnn_model.predict_links(
-                    self.graph_data.x, 
-                    self.graph_data.edge_index, 
-                    query_edges
-                )
-            
+                # Use semantic similarity (original features) - best for generalization
+                if hasattr(self.gnn_model, 'predict_links_semantic'):
+                    score = self.gnn_model.predict_links_semantic(
+                        self.graph_data.x,
+                        self.graph_data.edge_index,
+                        query_edges
+                    )
+                elif hasattr(self.gnn_model, 'predict_links_cosine'):
+                    # Fallback to GNN cosine similarity
+                    score = self.gnn_model.predict_links_cosine(
+                        self.graph_data.x,
+                        self.graph_data.edge_index,
+                        query_edges
+                    )
+                else:
+                    # Fallback to original MLP method
+                    score = self.gnn_model.predict_links(
+                        self.graph_data.x,
+                        self.graph_data.edge_index,
+                        query_edges
+                    )
+
             return score.item()
             
         except Exception as e:
@@ -489,31 +597,89 @@ class GNNAPIRetriever:
         readable = readable.replace('_', ' ')  # snake_case
         return readable.lower()
     
+    def _extract_product_name(self, api_name: str) -> str:
+        """
+        Extract the product name from a schema/API name.
+
+        Examples:
+            concert__convertApplicationName -> concert
+            instana_applications -> instana
+            turbo_marketActionsFiltered -> turbo
+            concert -> concert
+        """
+        # Handle double underscore format (from ChromaDB schema names)
+        if '__' in api_name:
+            return api_name.split('__')[0].lower()
+        # Handle single underscore format
+        elif '_' in api_name:
+            return api_name.split('_')[0].lower()
+        # Already a product name
+        return api_name.lower()
+
+    def _extract_schema_type(self, api_name: str) -> str:
+        """
+        Extract the schema type from a schema/API name.
+
+        Examples:
+            omop_PERSON -> PERSON
+            mimic_PATIENTS -> PATIENTS
+            concert_Application -> Application
+            concert -> None (product only, no specific type)
+        """
+        # Handle underscore format: product_TYPE
+        if '_' in api_name:
+            parts = api_name.split('_', 1)
+            if len(parts) > 1:
+                return parts[1]
+        return None
+
     def get_top_field_mappings(self, source_api: str, target_api: str, top_k: int = 10) -> List[Dict[str, Any]]:
         """
         Get top field mappings between two APIs using GNN analysis.
-        
+
         Args:
-            source_api: Source API name
+            source_api: Source API name (e.g., omop_PERSON, mimic_PATIENTS)
             target_api: Target API name
             top_k: Number of top mappings to return
-            
+
         Returns:
             List of field mapping predictions with scores
         """
         if not self.gnn_model or not self.api_lookup:
             logger.warning("GNN model or API lookup not available")
             return []
-        
+
         try:
-            # Find fields for each API
-            source_fields = [field for field, meta in self.api_lookup.items() 
-                           if meta.get("product_name", "").lower() == source_api.lower()]
-            target_fields = [field for field, meta in self.api_lookup.items() 
-                           if meta.get("product_name", "").lower() == target_api.lower()]
-            
+            # Extract product names and schema types from API names
+            source_product = self._extract_product_name(source_api)
+            target_product = self._extract_product_name(target_api)
+            source_type = self._extract_schema_type(source_api)
+            target_type = self._extract_schema_type(target_api)
+
+            logger.info(f"Looking for fields: source={source_product}/{source_type}, target={target_product}/{target_type}")
+
+            # Find fields for each API by product AND schema type
+            source_fields = []
+            target_fields = []
+
+            for field, meta in self.api_lookup.items():
+                field_product = meta.get("product_name", "").lower()
+                field_type = meta.get("type_name", "")
+
+                # Match source fields
+                if field_product == source_product:
+                    if source_type is None or field_type.upper() == source_type.upper():
+                        source_fields.append(field)
+
+                # Match target fields
+                if field_product == target_product:
+                    if target_type is None or field_type.upper() == target_type.upper():
+                        target_fields.append(field)
+
+            logger.info(f"Found {len(source_fields)} source fields, {len(target_fields)} target fields")
+
             if not source_fields or not target_fields:
-                logger.warning(f"No fields found for {source_api} or {target_api}")
+                logger.warning(f"No fields found for {source_api} (product: {source_product}) or {target_api} (product: {target_product})")
                 return []
             
             # Filter to only fields that exist in the graph (to reduce warnings)
@@ -526,11 +692,17 @@ class GNNAPIRetriever:
                             full_name = node_data.get('full_name', '')
                             if full_name:
                                 graph_field_names.add(full_name)
-                
+
+                logger.info(f"Graph has {len(graph_field_names)} field names")
+
                 # Filter fields to only those in the graph
+                source_fields_before = len(source_fields)
+                target_fields_before = len(target_fields)
                 source_fields = [f for f in source_fields if f in graph_field_names]
                 target_fields = [f for f in target_fields if f in graph_field_names]
-                
+
+                logger.info(f"After filtering: {len(source_fields)}/{source_fields_before} source, {len(target_fields)}/{target_fields_before} target")
+
                 if not source_fields or not target_fields:
                     logger.info(f"No fields from {source_api} or {target_api} found in trained graph")
                     logger.info(f"Graph contains {len(graph_field_names)} field nodes")
@@ -562,7 +734,11 @@ class GNNAPIRetriever:
             
             # Sort by score and return top-k
             field_mappings.sort(key=lambda x: x["joinability_score"], reverse=True)
-            
+
+            logger.info(f"Calculated {len(field_mappings)} field mappings, returning top {top_k}")
+            if field_mappings:
+                logger.info(f"Top mapping: {field_mappings[0]['source_field']} -> {field_mappings[0]['target_field']} (score: {field_mappings[0]['joinability_score']:.4f})")
+
             return field_mappings[:top_k]
             
         except Exception as e:

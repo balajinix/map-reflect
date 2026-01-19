@@ -114,14 +114,62 @@ class MappingKGGNN(nn.Module):
         return x
     
     def predict_links(self, x, edge_index, query_edges):
-        """Predict links for given edge pairs"""
+        """Predict links for given edge pairs using trained MLP"""
         node_embeddings = self.forward(x, edge_index)
-        
+
         source_embeddings = node_embeddings[query_edges[0]]
         target_embeddings = node_embeddings[query_edges[1]]
-        
+
         edge_embeddings = torch.cat([source_embeddings, target_embeddings], dim=-1)
         return torch.sigmoid(self.link_predictor(edge_embeddings))
+
+    def predict_links_cosine(self, x, edge_index, query_edges):
+        """
+        Predict links using cosine similarity of learned embeddings.
+        This generalizes better to unseen field pairs because it measures
+        semantic similarity rather than memorized edge patterns.
+        """
+        node_embeddings = self.forward(x, edge_index)
+
+        # Normalize embeddings for cosine similarity
+        node_embeddings = F.normalize(node_embeddings, p=2, dim=-1)
+
+        source_embeddings = node_embeddings[query_edges[0]]
+        target_embeddings = node_embeddings[query_edges[1]]
+
+        # Cosine similarity (dot product of normalized vectors)
+        similarity = (source_embeddings * target_embeddings).sum(dim=-1, keepdim=True)
+
+        # Convert from [-1, 1] to [0, 1] range
+        return (similarity + 1) / 2
+
+    def predict_links_semantic(self, x, edge_index, query_edges):
+        """
+        Predict links using original feature similarity (sentence-transformer embeddings).
+        This avoids GNN over-smoothing and uses the discriminative power of
+        pre-trained language model embeddings.
+
+        For schema mapping, semantic similarity of field descriptions/names
+        is often more informative than learned graph patterns.
+        """
+        # Use ORIGINAL features (x) directly, not GNN-processed embeddings
+        # This preserves the discriminative power of sentence-transformer embeddings
+
+        # Normalize for cosine similarity
+        x_norm = F.normalize(x, p=2, dim=-1)
+
+        source_embeddings = x_norm[query_edges[0]]
+        target_embeddings = x_norm[query_edges[1]]
+
+        # Cosine similarity
+        similarity = (source_embeddings * target_embeddings).sum(dim=-1, keepdim=True)
+
+        # Convert from [-1, 1] to [0, 1] range
+        return (similarity + 1) / 2
+
+    def get_node_embeddings(self, x, edge_index):
+        """Get the learned node embeddings"""
+        return self.forward(x, edge_index)
     
     def get_model_info(self):
         """Get information about the model configuration"""

@@ -13,7 +13,7 @@ import argparse
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
-import matplotlib.pyplot as plt
+# matplotlib removed - not needed for graph building
 import random
 import numpy as np
 import torch
@@ -158,16 +158,84 @@ class MappingGraphBuilder:
         except Exception as e:
             print(f"Error processing file {file_path}: {e}")
     
+    def add_all_fields_from_lookup(self):
+        """
+        Add ALL fields from the API lookup as nodes in the graph.
+        This ensures the GNN can predict mappings for any field pair,
+        not just fields that appear in the training mappings.
+        """
+        print("Adding all fields from API lookup...")
+        fields_added = 0
+        types_added = 0
+        products_added = 0
+
+        for field_key, field_meta in self.api_lookup.items():
+            # field_key format: "TypeName.fieldName" or "TypeName.nested.fieldName"
+            # field_meta contains: product_name, description, etc.
+
+            product_name = field_meta.get('product_name', '')
+            if not product_name:
+                continue
+
+            # Parse the field key to get type and field name
+            parts = field_key.split('.', 1)
+            if len(parts) < 2:
+                continue
+
+            type_name = parts[0]
+            field_name = parts[1]
+
+            # Add product node if not exists
+            if product_name not in self.graph:
+                self.add_product_node(product_name)
+                products_added += 1
+
+            # Add type node if not exists
+            full_type_name = f"{product_name}_{type_name}"
+            if full_type_name not in self.graph:
+                self.add_type_node(product_name, type_name)
+                types_added += 1
+
+            # Add field node if not exists
+            field_id = f"{product_name}_{field_key}"
+            if field_id not in self.graph:
+                description = field_meta.get('description', 'No description available')
+                node_attrs = {
+                    "node_type": "field",
+                    "name": field_name,
+                    "full_name": field_key,
+                    "type": type_name,
+                    "product": product_name,
+                    "description": description
+                }
+                self.graph.add_node(field_id, **self.standardize_node_attrs(node_attrs))
+
+                # Add edge from type to field
+                self.graph.add_edge(full_type_name, field_id,
+                                   **self.standardize_edge_attrs({'relationship': 'has_field'}))
+                fields_added += 1
+
+        print(f"  Added {products_added} new products, {types_added} new types, {fields_added} new fields")
+
     def build_graph(self):
-        """Build the complete graph from all mapping files"""
+        """Build the complete graph from all mapping files and API lookup"""
         print("Building mapping graph...")
-        
-        # Process all JSON files in the mapping directory
+
+        # Step 1: Process all mapping files (creates nodes + mapping edges)
+        print("Step 1: Loading mappings from files...")
         for filename in os.listdir(self.mapping_dir):
             if filename.endswith('.json'):
                 file_path = os.path.join(self.mapping_dir, filename)
                 self.process_mapping_file(file_path)
-        
+
+        mapping_nodes = self.graph.number_of_nodes()
+        mapping_edges = self.graph.number_of_edges()
+        print(f"  From mappings: {mapping_nodes} nodes, {mapping_edges} edges")
+
+        # Step 2: Add ALL fields from API lookup (for complete node coverage)
+        print("Step 2: Adding all fields from API lookup...")
+        self.add_all_fields_from_lookup()
+
         # Clean all edge attributes except for 'relationship' and 'justification'
         for u, v, edge_attrs in list(self.graph.edges(data=True)):
             cleaned_attrs = {k: edge_attrs.get(k, '') for k in ['relationship', 'justification']}
