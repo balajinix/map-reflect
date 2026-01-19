@@ -19,8 +19,11 @@ class DatasetLoader:
         self.data_dir = Path(data_dir)
         self.datasets = {
             'ITOps': 'itops_dataset.jsonl',
-            'NL2GQL': 'nl2gql_dataset.jsonl', 
-            'GraphQLRestBench': 'graphqlrestbench_dataset.jsonl'
+            'NL2GQL': 'nl2gql_dataset.jsonl',
+            'GraphQLRestBench': 'graphqlrestbench_dataset.jsonl',
+            'OMOP_MIMIC': 'omop_mimic_dataset.jsonl',
+            'OMOP_CMS': 'omop_cms_dataset.jsonl',
+            'OMOP_Synthea': 'omop_synthea_dataset.jsonl'
         }
     
     def load_evaluation_utterances(self, dataset: str, max_samples: Optional[int] = None) -> List[Dict[str, Any]]:
@@ -176,7 +179,22 @@ class DatasetLoader:
                     "rest_endpoint": data.get("rest_endpoint", ""),
                     "graphql_schema": data.get("graphql_schema", "")
                 }
-            
+
+            elif dataset.startswith("OMOP_"):
+                # Handle OMOP datasets (OMOP_MIMIC, OMOP_CMS, OMOP_Synthea)
+                source_schema = data.get("source_schema", {})
+                target_schema = data.get("target_schema", {})
+                utterance_data = {
+                    "sample_id": data.get("id", f"{dataset.lower()}_{index:03d}"),
+                    "utterance": data.get("utterance", ""),
+                    "expected_source": source_schema.get("id", "") if isinstance(source_schema, dict) else str(source_schema),
+                    "expected_target": target_schema.get("id", "") if isinstance(target_schema, dict) else str(target_schema),
+                    "ground_truth_mapping": data.get("mapping", {}),
+                    "source_properties": source_schema.get("properties", []) if isinstance(source_schema, dict) else [],
+                    "target_properties": target_schema.get("properties", []) if isinstance(target_schema, dict) else [],
+                    "metadata": data.get("metadata", {})
+                }
+
             else:
                 # Generic fallback format
                 utterance_data = {
@@ -203,7 +221,10 @@ class DatasetLoader:
         expected_counts = {
             'ITOps': 100,
             'NL2GQL': 50,
-            'GraphQLRestBench': 75
+            'GraphQLRestBench': 75,
+            'OMOP_MIMIC': 46,
+            'OMOP_CMS': 38,
+            'OMOP_Synthea': 12
         }
         return expected_counts.get(dataset_name, 0)
     
