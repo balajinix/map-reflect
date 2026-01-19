@@ -72,6 +72,33 @@ class AnyToolMappingAgent:
             logger.error(f"Failed to initialize AnyTool agent: {e}")
             self.available = False
     
+    def _save_checkpoint(self, results: List[Dict], checkpoint_file: Path, dataset: str, model: str, start_time: float):
+        """Save checkpoint of partial results."""
+        try:
+            successful_results = [r for r in results if r["success"]]
+            checkpoint_data = {
+                "metadata": {
+                    "dataset": dataset,
+                    "method": "AnyTool",
+                    "model": model,
+                    "execution_time": time.time() - start_time,
+                    "timestamp": datetime.now().isoformat(),
+                    "total_samples": len(results),
+                    "successful_samples": len(successful_results),
+                    "total_mappings": sum(len(r.get("predicted_mapping", {})) for r in results),
+                    "overall_accuracy": sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0,
+                    "checkpoint": True
+                },
+                "results": results
+            }
+
+            serializable_data = self.make_json_serializable(checkpoint_data)
+            with open(checkpoint_file, 'w') as f:
+                json.dump(serializable_data, f, indent=2)
+
+        except Exception as e:
+            logger.error(f"Failed to save checkpoint: {e}")
+
     def _setup_anytool_agent(self):
         """Set up anytool_agent with the correct hierarchy file."""
         # Add data directory to Python path for shared components
@@ -101,6 +128,8 @@ class AnyToolMappingAgent:
             
             with open(self.hierarchy_file) as f:
                 anytool_agent.hierarchy = json.load(f)
+            
+            anytool_agent.MODEL = self.model
             
             # Import the search function
             from anytool_agent import search_properties
@@ -326,7 +355,35 @@ class AnyToolEvaluationRunner:
                 logger.info(f"Saved minimal results to {output_file}")
             except Exception as e2:
                 logger.error(f"Failed to save even minimal results: {e2}")
-    
+
+    def _save_checkpoint(self, results: List[Dict], checkpoint_file: Path, dataset: str, model: str, start_time: float):
+        """Save checkpoint of partial results."""
+        try:
+            successful_results = [r for r in results if r["success"]]
+            checkpoint_data = {
+                "metadata": {
+                    "dataset": dataset,
+                    "method": "AnyTool",
+                    "model": model,
+                    "execution_time": time.time() - start_time,
+                    "timestamp": datetime.now().isoformat(),
+                    "total_samples": len(results),
+                    "successful_samples": len(successful_results),
+                    "total_mappings": sum(len(r.get("predicted_mapping", {})) for r in results),
+                    "overall_accuracy": sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0,
+                    "checkpoint": True
+                },
+                "results": results
+            }
+
+            serializable_data = self.make_json_serializable(checkpoint_data)
+            with open(checkpoint_file, 'w') as f:
+                json.dump(serializable_data, f, indent=2)
+            logger.info(f"Checkpoint saved: {len(results)} samples to {checkpoint_file}")
+
+        except Exception as e:
+            logger.error(f"Failed to save checkpoint: {e}")
+
     def load_evaluation_utterances(self, dataset: str) -> List[Dict[str, Any]]:
         """Load evaluation utterances for a specific dataset using shared loader."""
         return self.dataset_loader.load_evaluation_utterances(dataset)
@@ -428,7 +485,12 @@ class AnyToolEvaluationRunner:
                 "anytool_state": agent_result.get("anytool_state", {}),
                 "agent_available": mapping_agent.available
             }
-            
+
+        except RuntimeError as e:
+            # Critical error - re-raise
+            logger.error(f"CRITICAL ERROR in {sample_id}: {e}")
+            raise
+
         except Exception as e:
             execution_time = time.time() - start_time
             logger.error(f"AnyTool failed for {sample_id}: {e}")
@@ -438,56 +500,90 @@ class AnyToolEvaluationRunner:
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
         logger.info(f"Starting AnyTool evaluation for {dataset} with {model}")
-        
-        # Load evaluation utterances using shared loader
+
+        # Load evaluation utterances
         utterances = self.load_evaluation_utterances(dataset)
         if not utterances:
             logger.error(f"No utterances found for dataset {dataset}")
             return {}
-        
+
         logger.info(f"Loaded {len(utterances)} utterances for {dataset}")
-        
+
         # Run AnyTool on each utterance
         results = []
         total_start_time = time.time()
-        
-        for i, utterance_data in enumerate(utterances):
-            logger.info(f"Processing utterance {i+1}/{len(utterances)}: {utterance_data['sample_id']}")
-            
-            # Run single evaluation
-            result = self.run_single_evaluation(
-                utterance_data["utterance"],
-                utterance_data["sample_id"],
-                model
-            )
-            
-            # Add expected information for analysis
-            result["expected_source"] = utterance_data.get("expected_source", "")
-            result["expected_target"] = utterance_data.get("expected_target", "")
-            result["original_utterance"] = utterance_data["utterance"]
-            result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
-            
-            results.append(result)
-            
-            if (i + 1) % 2 == 0:
-                logger.info(f"Completed {i+1}/{len(utterances)} utterances")
-            
-            # Small delay between requests to avoid overwhelming the LLM
-            time.sleep(0.5)
-        
+        MAX_CONSECUTIVE_FAILURES = 3
+        consecutive_failures = 0
+
+        # Incremental save settings
+        SAVE_INTERVAL = 10
+        checkpoint_file = self.results_dir / f"{dataset}_{model.replace('/', '_')}_checkpoint.json"
+
+        try:
+            for i, utterance_data in enumerate(utterances):
+                logger.info(f"Processing utterance {i+1}/{len(utterances)}: {utterance_data['sample_id']}")
+
+                # Run single evaluation
+                result = self.run_single_evaluation(
+                    utterance_data["utterance"],
+                    utterance_data["sample_id"],
+                    model
+                )
+
+                # Add expected information
+                result["expected_source"] = utterance_data.get("expected_source", "")
+                result["expected_target"] = utterance_data.get("expected_target", "")
+                result["original_utterance"] = utterance_data["utterance"]
+                result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
+
+                results.append(result)
+
+                # Incremental save
+                if (i + 1) % SAVE_INTERVAL == 0:
+                    self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                    logger.info(f"Checkpoint saved: {i + 1}/{len(utterances)} samples")
+
+                # Failure tracking
+                if not result["success"]:
+                    consecutive_failures += 1
+                    error_msg = result.get("error_message", "")
+
+                    if "critical" in str(error_msg).lower():
+                        logger.error(f"CRITICAL ERROR detected: {error_msg}")
+                        self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                        raise RuntimeError(f"Stopping: {error_msg}")
+
+                    if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                        logger.error(f"Stopping after {consecutive_failures} consecutive failures")
+                        self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                        raise RuntimeError(f"Too many consecutive failures")
+                else:
+                    consecutive_failures = 0
+
+                if (i + 1) % 2 == 0:
+                    logger.info(f"Completed {i+1}/{len(utterances)} utterances")
+
+                time.sleep(0.5)
+
+        except Exception as e:
+            logger.error(f"Exception during evaluation: {e}")
+            if results:
+                logger.info(f"Saving {len(results)} partial results before exit...")
+                self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+            raise
+
+        # Calculate statistics
         total_execution_time = time.time() - total_start_time
-        
-        # Calculate overall statistics
         successful_results = [r for r in results if r["success"]]
         overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
-        
+
         logger.info(f"AnyTool evaluation completed for {dataset}")
         logger.info(f"   Total utterances: {len(utterances)}")
         logger.info(f"   Successful: {len(successful_results)}")
         logger.info(f"   Overall accuracy: {overall_accuracy:.3f}")
         logger.info(f"   Total time: {total_execution_time:.2f}s")
-        
-        # Create final result structure
+
+        # Create final result
         final_result = {
             "metadata": {
                 "dataset": dataset,
@@ -503,7 +599,7 @@ class AnyToolEvaluationRunner:
             },
             "results": results
         }
-        
+
         return final_result
 
 

@@ -270,12 +270,63 @@ def get_products_node(state: AgentState):
     
     return state
 
+def _extract_products_from_utterance(utterance: str, available_products: list) -> tuple:
+    """Extract source and target products from utterance.
+
+    Returns (source_product, target_product) or (None, None) if not found.
+    """
+    utterance_lower = utterance.lower().strip()
+    products_lower = [p.lower() for p in available_products]
+
+    # Pattern: "map X ... with Y ..." or "map X ... to Y ..."
+    patterns = [
+        r"map\s+(\w+)\s+.+?\s+with\s+(\w+)\s+",
+        r"map\s+(\w+)\s+.+?\s+to\s+(\w+)\s+",
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, utterance_lower)
+        if match:
+            src, tgt = match.groups()
+            if src in products_lower and tgt in products_lower:
+                # Return original case from available_products
+                src_idx = products_lower.index(src)
+                tgt_idx = products_lower.index(tgt)
+                print(f"Extracted products from utterance: {available_products[src_idx]} -> {available_products[tgt_idx]}")
+                return available_products[src_idx], available_products[tgt_idx]
+
+    # Fallback: find products mentioned in utterance
+    found = []
+    for i, p in enumerate(products_lower):
+        pos = utterance_lower.find(p)
+        if pos != -1:
+            found.append((available_products[i], pos))
+
+    if len(found) >= 2:
+        found.sort(key=lambda x: x[1])
+        print(f"Extracted products (fallback): {found[0][0]} -> {found[1][0]}")
+        return found[0][0], found[1][0]
+
+    return None, None
+
 def select_product_node(state: AgentState):
     """Second node: Select the most relevant product using LLM"""
     print("Step 2: Selecting most relevant product...")
 
     user_query = state["user_query"]
     available_products = state["available_products"]
+
+    # Try to extract products directly from utterance first
+    src_product, tgt_product = _extract_products_from_utterance(user_query, available_products)
+    if src_product:
+        # Use source product (AnyTool only handles one schema at a time)
+        state["selected_product"] = src_product
+        state["target_product"] = tgt_product  # Store for later use
+        state["current_step"] = "type_retrieval"
+        reasoning = f"Extracted source product '{src_product}' and target '{tgt_product}' from query"
+        print(reasoning)
+        state["messages"].append(AIMessage(content=reasoning))
+        return state
 
     # Create prompt for product selection - more strict formatting
     system_prompt = f"""You are selecting a product from a list based on a user query.
