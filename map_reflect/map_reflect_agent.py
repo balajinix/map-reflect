@@ -1,9 +1,18 @@
 # schema_mapping/map_reflect_agent.py
 import json
 import networkx as nx
+
+# Workaround for old sqlite3 on some systems
+try:
+    import pysqlite3
+    import sys
+    sys.modules['sqlite3'] = pysqlite3
+except ImportError:
+    pass
+
 import chromadb
 from sentence_transformers import SentenceTransformer
-from typing import Dict, List, Any, TypedDict
+from typing import Dict, List, Any, TypedDict, Optional
 import re
 from dataclasses import dataclass
 from collections import defaultdict
@@ -11,12 +20,21 @@ import logging
 import os
 from pathlib import Path
 import yaml
-from ibm_watsonx_ai import Credentials
-from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
-from ibm_watsonx_ai.foundation_models.utils.enums import DecodingMethods
-from ibm_watsonx_ai.foundation_models import ModelInference
 from dotenv import load_dotenv
 from tqdm import tqdm
+
+# Always import litellm (needed for Mistral models which work better with chat API)
+from litellm import completion
+
+# Try native SDK for Granite/Llama models
+try:
+    from ibm_watsonx_ai import Credentials
+    from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
+    from ibm_watsonx_ai.foundation_models.utils.enums import DecodingMethods
+    from ibm_watsonx_ai.foundation_models import ModelInference
+    USE_LITELLM = False
+except ImportError:
+    USE_LITELLM = True
 
 load_dotenv()
 
@@ -125,9 +143,9 @@ class MapReflectAgent:
         property_lookup_file: str,
         rebuild_index: bool = False,
         model: str = None,
-        dataset: str | None = None,
+        dataset: Optional[str] = None,
         chroma_dir: str = "../data/chroma_db",
-        collection_name: str | None = None,
+        collection_name: Optional[str] = None,
         top_k: int = None,
         neighbor_k: int = None,
     ):
@@ -177,6 +195,12 @@ class MapReflectAgent:
             "MapReflect init | dataset=%s model=%s chroma_dir=%s collection=%s props=%d",
             self.dataset or "default", self.model, chroma_dir, self.collection_name, len(self.property_data)
         )
+
+        # Pre-build property graph once (O(n²) operation - caching saves ~10s per sample)
+        self._cached_property_graph = self._build_property_graph_once()
+        logger.info("Pre-built property graph | nodes=%d edges=%d",
+                    self._cached_property_graph.number_of_nodes(),
+                    self._cached_property_graph.number_of_edges())
 
         # Build workflow
         self.graph = self._build_graph()
@@ -254,8 +278,11 @@ class MapReflectAgent:
             return "\n\n".join(prompt_parts), ["<|endoftext|>"]
 
     def call_llm(self, messages):
-        """Call LLM using native WatsonX SDK."""
+        """Call LLM using native WatsonX SDK or litellm fallback."""
+        import time
         try:
+            t0 = time.time()
+
             # Get credentials
             api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
             project_id = os.getenv("WATSONX_PROJECT_ID")
@@ -267,26 +294,60 @@ class MapReflectAgent:
             # Remove watsonx/ prefix if present
             model_id = self.model.replace("watsonx/", "")
 
+            # Use litellm for Mistral models (works better with chat API) or if native SDK not available
+            use_litellm_for_model = USE_LITELLM or 'mistral' in model_id.lower()
+
+            if use_litellm_for_model:
+                t1 = time.time()
+                logger.warning(f"LLM_TIMING | prompt_format: {t1-t0:.2f}s (litellm mode)")
+
+                # Convert to litellm model format
+                litellm_model = f"watsonx/{model_id}"
+
+                response = completion(
+                    model=litellm_model,
+                    messages=messages,
+                    temperature=0,  # Use 0 for deterministic responses
+                    max_tokens=8000,
+                )
+                t2 = time.time()
+                logger.warning(f"LLM_TIMING | generate: {t2-t1:.2f}s | total: {t2-t0:.2f}s")
+
+                return response.choices[0].message.content
+
             # Format prompt based on model type
             prompt, stop_sequences = self._format_prompt_for_model(messages, model_id)
 
-            # Call WatsonX
-            parameters = {
-                GenParams.MAX_NEW_TOKENS: 8000,  # Increased from 5000 to handle longer responses
-                GenParams.TEMPERATURE: 0.1,
-                GenParams.DECODING_METHOD: DecodingMethods.GREEDY,
-                GenParams.STOP_SEQUENCES: stop_sequences,
-            }
+            t1 = time.time()
+            logger.warning(f"LLM_TIMING | prompt_format: {t1-t0:.2f}s")
 
-            credentials = Credentials(url=url, api_key=api_key)
-            model_obj = ModelInference(
-                model_id=model_id,
-                params=parameters,
-                credentials=credentials,
-                project_id=project_id
-            )
+            # Call WatsonX - reuse cached model if available
+            if not hasattr(self, '_cached_model') or self._cached_model_id != model_id:
+                parameters = {
+                    GenParams.MAX_NEW_TOKENS: 8000,
+                    GenParams.TEMPERATURE: 0.1,
+                    GenParams.DECODING_METHOD: DecodingMethods.GREEDY,
+                    GenParams.STOP_SEQUENCES: stop_sequences,
+                }
 
-            response = model_obj.generate_text(prompt=prompt)
+                credentials = Credentials(url=url, api_key=api_key)
+                self._cached_model = ModelInference(
+                    model_id=model_id,
+                    params=parameters,
+                    credentials=credentials,
+                    project_id=project_id
+                )
+                self._cached_model_id = model_id
+                t2 = time.time()
+                logger.warning(f"LLM_TIMING | model_init: {t2-t1:.2f}s (new)")
+            else:
+                t2 = time.time()
+                logger.warning(f"LLM_TIMING | model_init: {t2-t1:.2f}s (cached)")
+
+            response = self._cached_model.generate_text(prompt=prompt)
+            t3 = time.time()
+            logger.warning(f"LLM_TIMING | generate: {t3-t2:.2f}s | total: {t3-t0:.2f}s")
+
             return response[0] if isinstance(response, list) else response
 
         except Exception as e:
@@ -481,10 +542,12 @@ class MapReflectAgent:
 
         return type_hints
 
-    def _create_property_graph(self, state: MappingState) -> MappingState:
-        logger.info("Creating property graph")
+    def _build_property_graph_once(self) -> nx.Graph:
+        """Build property graph once during init (O(n²) - cached for reuse)."""
+        import time
+        t0 = time.time()
         G = nx.Graph()
-        props = state["property_data"]
+        props = self.property_data
 
         for k, v in props.items():
             G.add_node(k, **v)
@@ -508,8 +571,16 @@ class MapReflectAgent:
                     G.add_edge(p1, p2, weight=weight)
                     edge_count += 1
 
-        state["graph"] = G
-        logger.info("Graph built | nodes=%d edges=%d", G.number_of_nodes(), edge_count)
+        logger.info("Built property graph in %.2fs | nodes=%d edges=%d",
+                    time.time() - t0, G.number_of_nodes(), edge_count)
+        return G
+
+    def _create_property_graph(self, state: MappingState) -> MappingState:
+        """Use pre-cached property graph instead of rebuilding."""
+        state["graph"] = self._cached_property_graph
+        logger.info("Using cached property graph | nodes=%d edges=%d",
+                    self._cached_property_graph.number_of_nodes(),
+                    self._cached_property_graph.number_of_edges())
         return state
 
     def _get_or_create_collection(self, state: MappingState):
@@ -534,16 +605,24 @@ class MapReflectAgent:
             logger.info("Strict filter: found %d properties matching product=%s", len(matching_ids), source_product)
 
             if matching_ids:
-                # Now do semantic search within these candidates only
+                # Now do semantic search and intersect with type-filtered properties
                 q = state["source_context"]
                 q_emb = self.embedding_model.encode(q).tolist()
-                n_results = min(len(matching_ids), self.top_k * self.n_results_multiplier)
+                # Search more results to increase chance of finding type-matching ones
+                n_results = min(len(state["property_data"]), self.top_k * self.n_results_multiplier * 5)
                 res = collection.query(query_embeddings=[q_emb], n_results=n_results)
                 semantic_ids = res["ids"][0] if res.get("ids") else []
 
                 # Intersect semantic results with product-filtered results
                 filtered_ids = [pid for pid in semantic_ids if pid in matching_ids][:self.top_k]
                 logger.info("Strict filter: %d semantic results intersected to %d", len(semantic_ids), len(filtered_ids))
+
+                # If intersection is empty/too small, take type-filtered properties directly
+                if len(filtered_ids) < self.top_k:
+                    remaining = self.top_k - len(filtered_ids)
+                    extras = [pid for pid in sorted(matching_ids) if pid not in filtered_ids][:remaining]
+                    filtered_ids.extend(extras)
+                    logger.info("Strict filter: added %d type-matched properties to reach %d", len(extras), len(filtered_ids))
             else:
                 # Fallback if no product match
                 logger.warning("Strict filter: no properties match product=%s, falling back to semantic", source_product)
@@ -581,9 +660,27 @@ class MapReflectAgent:
             for pid in filtered_ids:
                 if pid in state["graph"]:
                     nbrs.update(state["graph"].neighbors(pid))
+            # When strict filtering is enabled, filter neighbors by product AND type
+            if self.strict_schema_filter and source_product:
+                product_lower = source_product.lower()
+                type_hints_lower = [h.lower() for h in (type_hints or [])]
+                filtered_nbrs = set()
+                for n in nbrs:
+                    if not n.lower().startswith(product_lower + "_"):
+                        continue
+                    # Also filter by type hints if available
+                    if type_hints_lower:
+                        pdata = state["property_data"].get(n, {})
+                        tname = pdata.get("type_name", "").lower()
+                        if any(hint in tname for hint in type_hints_lower):
+                            filtered_nbrs.add(n)
+                    else:
+                        filtered_nbrs.add(n)
+                nbrs = filtered_nbrs
             nbrs = set(sorted(nbrs)[: self.neighbor_k])
 
-        combined = sorted(filtered_ids | nbrs)
+        # Keep filtered_ids first (by semantic order), then append neighbors
+        combined = list(filtered_ids) + [n for n in sorted(nbrs) if n not in filtered_ids]
         state["source_properties"] = combined
         logger.info("Selected source properties | filtered=%d +nbr=%d -> %d (product=%s, hints=%s, strict=%s)",
                     len(filtered_ids), len(nbrs), len(combined), source_product, type_hints, self.strict_schema_filter)
@@ -595,6 +692,7 @@ class MapReflectAgent:
         Used for strict schema filtering where we filter by product BEFORE semantic search.
         """
         matching = set()
+        type_matched = set()
         product_lower = product.lower()
         type_hints_lower = [h.lower() for h in (type_hints or [])]
 
@@ -606,19 +704,23 @@ class MapReflectAgent:
             if product_lower not in pname and pname not in product_lower:
                 continue
 
-            # If type hints provided, at least one should match
+            matching.add(pid)
+
+            # Track which ones match type hints
             if type_hints_lower:
                 type_match = any(
                     hint in tname or tname in hint
                     for hint in type_hints_lower
                 )
                 if type_match:
-                    matching.add(pid)
-                # Also add if no type match but product matches (for broader recall)
-                else:
-                    matching.add(pid)
-            else:
-                matching.add(pid)
+                    type_matched.add(pid)
+
+        # If type hints were provided and found matches, prefer those
+        # Otherwise fall back to all product-matching properties
+        if type_hints_lower and type_matched:
+            logger.info("Type hint filter: %d of %d properties match type hints %s",
+                       len(type_matched), len(matching), type_hints_lower)
+            return type_matched
 
         return matching
 
@@ -734,16 +836,24 @@ class MapReflectAgent:
             logger.info("Strict filter (dest): found %d properties matching product=%s", len(matching_ids), target_product)
 
             if matching_ids:
-                # Now do semantic search within these candidates only
+                # Now do semantic search and intersect with type-filtered properties
                 q = state["destination_context"]
                 q_emb = self.embedding_model.encode(q).tolist()
-                n_results = min(len(matching_ids), self.top_k * self.n_results_multiplier)
+                # Search more results to increase chance of finding type-matching ones
+                n_results = min(len(state["property_data"]), self.top_k * self.n_results_multiplier * 5)
                 res = collection.query(query_embeddings=[q_emb], n_results=n_results)
                 semantic_ids = res["ids"][0] if res.get("ids") else []
 
                 # Intersect semantic results with product-filtered results
                 filtered_ids = [pid for pid in semantic_ids if pid in matching_ids][:self.top_k]
                 logger.info("Strict filter (dest): %d semantic results intersected to %d", len(semantic_ids), len(filtered_ids))
+
+                # If intersection is empty/too small, take type-filtered properties directly
+                if len(filtered_ids) < self.top_k:
+                    remaining = self.top_k - len(filtered_ids)
+                    extras = [pid for pid in sorted(matching_ids) if pid not in filtered_ids][:remaining]
+                    filtered_ids.extend(extras)
+                    logger.info("Strict filter (dest): added %d type-matched properties to reach %d", len(extras), len(filtered_ids))
             else:
                 # Fallback if no product match
                 logger.warning("Strict filter (dest): no properties match product=%s, falling back to semantic", target_product)
@@ -781,9 +891,27 @@ class MapReflectAgent:
             for pid in filtered_ids:
                 if pid in state["graph"]:
                     nbrs.update(state["graph"].neighbors(pid))
+            # When strict filtering is enabled, filter neighbors by product AND type
+            if self.strict_schema_filter and target_product:
+                product_lower = target_product.lower()
+                type_hints_lower = [h.lower() for h in (type_hints or [])]
+                filtered_nbrs = set()
+                for n in nbrs:
+                    if not n.lower().startswith(product_lower + "_"):
+                        continue
+                    # Also filter by type hints if available
+                    if type_hints_lower:
+                        pdata = state["property_data"].get(n, {})
+                        tname = pdata.get("type_name", "").lower()
+                        if any(hint in tname for hint in type_hints_lower):
+                            filtered_nbrs.add(n)
+                    else:
+                        filtered_nbrs.add(n)
+                nbrs = filtered_nbrs
             nbrs = set(sorted(nbrs)[: self.neighbor_k])
 
-        combined = sorted(filtered_ids | nbrs)
+        # Keep filtered_ids first (by semantic order), then append neighbors
+        combined = list(filtered_ids) + [n for n in sorted(nbrs) if n not in filtered_ids]
         # Remove any that are already in source properties
         filtered = [x for x in combined if x not in state["source_properties"]]
         state["destination_properties"] = filtered
@@ -830,7 +958,17 @@ class MapReflectAgent:
             {"role": "user", "content": "\n".join(prompt)}
         ]
 
+        logger.debug("Evaluating %d source x %d dest = %d pairs", len(srcs), len(dsts), len(srcs) * len(dsts))
+
         raw = self.call_llm(messages)
+
+        # Debug logging (only at DEBUG level)
+        logger.debug("LLM Response length: %d characters", len(raw) if raw else 0)
+        if len(raw) < 1000:
+            logger.debug("Full LLM response:\n%s", raw)
+        else:
+            logger.debug("LLM response preview (first 500):\n%s", raw[:500])
+
         raw = _strip_code_fences(raw)
 
         match = re.search(r'\[\s*\{.*?\}\s*\]', raw, re.DOTALL)
@@ -969,6 +1107,7 @@ class MapReflectAgent:
 
     # ---- public ----
     def run(self, user_utterance: str) -> Dict[str, Any]:
+        import time
         logger.info("MapReflect run | utterance=%r model=%s", user_utterance, self.model)
         initial = MappingState(
             user_utterance=user_utterance,
@@ -987,12 +1126,32 @@ class MapReflectAgent:
             source_type_hints=[],
             target_type_hints=[]
         )
-        final_state = self.graph.invoke(initial)
+
+        # Run with timing for each step
+        state = initial
+        steps = [
+            ("extract_contexts", self._extract_contexts),
+            ("create_graph", self._create_property_graph),
+            ("select_source_properties", self._select_source_properties),
+            ("select_destination_properties", self._select_destination_properties),
+            ("find_mappings", self._find_mappings),
+            ("format_output", self._format_output),
+        ]
+
+        total_start = time.time()
+        for step_name, step_fn in steps:
+            step_start = time.time()
+            state = step_fn(state)
+            step_time = time.time() - step_start
+            logger.warning(f"TIMING | {step_name}: {step_time:.2f}s")
+        total_time = time.time() - total_start
+        logger.warning(f"TIMING | TOTAL: {total_time:.2f}s")
+
         out = {
-            "mappings": final_state["final_mappings"],
-            "source_properties": final_state["source_properties"],
-            "destination_properties": final_state["destination_properties"],
-            "reflection_feedback": final_state["reflection_feedback"]
+            "mappings": state["final_mappings"],
+            "source_properties": state["source_properties"],
+            "destination_properties": state["destination_properties"],
+            "reflection_feedback": state["reflection_feedback"]
         }
         logger.info("MapReflect done | final_sources=%d", len(out["mappings"]))
         return out

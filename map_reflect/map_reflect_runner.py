@@ -189,7 +189,11 @@ class MapReflectMappingAgent:
                     "error": "No valid mappings generated",
                     "map_reflect_state": result
                 }
-                
+        except RuntimeError as e:
+            # Critical error - re-raise
+            logger.error(f"CRITICAL MapReflect agent error: {e}")
+            raise
+            
         except Exception as e:
             logger.error(f"MapReflect agent error: {e}")
             return {
@@ -399,12 +403,51 @@ class MapReflectEvaluationRunner:
             logger.warning(f"Error extracting predicted mappings: {e}")
             return {}
     
-    def _calculate_accuracy_placeholder(self, predicted_mapping: Dict[str, Any], sample_id: str) -> float:
-        """Calculate accuracy placeholder (to be implemented with ground truth)."""
+    def _calculate_accuracy(self, predicted_mapping: Dict[str, Any], ground_truth_mapping: Dict[str, str], sample_id: str) -> float:
+        """Calculate field-level accuracy by comparing predicted mappings to ground truth.
+
+        Args:
+            predicted_mapping: Dict of {source_field: {target_property: str, justification: str}}
+            ground_truth_mapping: Dict of {source_field: target_field}
+            sample_id: Sample identifier for logging
+
+        Returns:
+            Accuracy as fraction of ground truth fields correctly predicted (0.0 to 1.0)
+        """
+        if not ground_truth_mapping:
+            logger.warning(f"No ground truth for {sample_id}")
+            return 0.0
+
         if not predicted_mapping:
             return 0.0
-        
-        return 1.0 if len(predicted_mapping) > 0 else 0.0
+
+        correct = 0
+        total = len(ground_truth_mapping)
+
+        for source_field, expected_target in ground_truth_mapping.items():
+            if source_field in predicted_mapping:
+                pred = predicted_mapping[source_field]
+                # Handle nested format: {target_property: str, justification: str}
+                if isinstance(pred, dict):
+                    predicted_target = pred.get("target_property", "")
+                else:
+                    predicted_target = str(pred)
+
+                # Exact match
+                if predicted_target == expected_target:
+                    correct += 1
+                # Case-insensitive match
+                elif predicted_target.lower() == expected_target.lower():
+                    correct += 1
+                # Partial match: check if target field names match (ignoring schema prefix)
+                else:
+                    pred_field = predicted_target.split('.')[-1] if '.' in predicted_target else predicted_target
+                    exp_field = expected_target.split('.')[-1] if '.' in expected_target else expected_target
+                    if pred_field.lower() == exp_field.lower():
+                        correct += 0.5  # Partial credit for matching field name
+
+        accuracy = correct / total if total > 0 else 0.0
+        return accuracy
     
     def _create_error_result(self, sample_id: str, error_message: str, start_time: float) -> Dict[str, Any]:
         """Create an error result structure."""
@@ -424,8 +467,8 @@ class MapReflectEvaluationRunner:
             "map_reflect_state": {},
             "agent_available": False
         }
-    
-    def run_single_evaluation(self, utterance: str, sample_id: str, model: str, dataset: str = None) -> Dict[str, Any]:
+
+    def run_single_evaluation(self, utterance: str, sample_id: str, model: str, dataset: str = None, ground_truth_mapping: Dict[str, str] = None) -> Dict[str, Any]:
         """Run MapReflect evaluation on a single utterance."""
         start_time = time.time()
         
@@ -456,8 +499,8 @@ class MapReflectEvaluationRunner:
             # Extract predicted mappings
             predicted_mapping = self._extract_predicted_mappings(mapping_result)
             
-            # Calculate accuracy (placeholder)
-            accuracy = self._calculate_accuracy_placeholder(predicted_mapping, sample_id)
+            # Calculate accuracy using ground truth
+            accuracy = self._calculate_accuracy(predicted_mapping, ground_truth_mapping or {}, sample_id)
             
             logger.info(f"MapReflect completed for {sample_id} in {execution_time:.2f}s")
             logger.info(f"   Mappings found: {len(predicted_mapping)}")
@@ -479,74 +522,159 @@ class MapReflectEvaluationRunner:
                 "model": model,
                 "hierarchy_used": dataset if dataset and mapping_agent._get_hierarchy_file_for_dataset(dataset) else None
             }
+        
+        except RuntimeError as e:
+            # Critical error - re-raise to stop execution
+            logger.error(f"CRITICAL ERROR in {sample_id}: {e}")
+            raise
             
         except Exception as e:
             execution_time = time.time() - start_time
-            logger.error(f"MapReflect failed for {sample_id}: {e}")
+            error_msg = str(e)
             
-            return self._create_error_result(sample_id, str(e), start_time)
+            # Check for critical error patterns
+            critical_patterns = [
+                "provider not provided",
+                "provider not found", 
+                "invalid api key",
+                "authentication",
+                "critical llm",
+            ]
+            
+            if any(pattern in error_msg.lower() for pattern in critical_patterns):
+                logger.error(f"CRITICAL ERROR in {sample_id}: {error_msg}")
+                raise RuntimeError(f"Critical error: {error_msg}") from e
+            
+            logger.error(f"MapReflect failed for {sample_id}: {e}")
+            return self._create_error_result(sample_id, error_msg, start_time)
     
+    
+    def _save_checkpoint(self, results: List[Dict], checkpoint_file: Path, dataset: str, model: str, start_time: float):
+        """Save checkpoint of partial results."""
+        try:
+            successful_results = [r for r in results if r["success"]]
+            checkpoint_data = {
+                "metadata": {
+                    "dataset": dataset,
+                    "method": "MapReflect",
+                    "model": model,
+                    "execution_time": time.time() - start_time,
+                    "timestamp": datetime.now().isoformat(),
+                    "total_samples": len(results),
+                    "successful_samples": len(successful_results),
+                    "total_mappings": sum(len(r.get("predicted_mapping", {})) for r in results),
+                    "overall_accuracy": sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0,
+                    "checkpoint": True
+                },
+                "results": results
+            }
+            
+            serializable_data = self.make_json_serializable(checkpoint_data)
+            with open(checkpoint_file, 'w') as f:
+                json.dump(serializable_data, f, indent=2)
+                
+        except Exception as e:
+            logger.error(f"Failed to save checkpoint: {e}")
+
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
         logger.info(f"Starting MapReflect evaluation for {dataset} with {model}")
-        
+    
         # Load evaluation utterances
         utterances = self.load_evaluation_utterances(dataset)
         if not utterances:
             logger.error(f"No utterances found for dataset {dataset}")
             return {}
-        
+    
         logger.info(f"Loaded {len(utterances)} utterances for {dataset}")
-        
-        # Run MapReflect on each utterance
+    
         results = []
         total_start_time = time.time()
-        
-        with tqdm(utterances, desc=f"Processing {dataset}", unit="utterance") as pbar:
-            for i, utterance_data in enumerate(pbar):
-                sample_id = utterance_data['sample_id']
-                
-                # Update progress bar description
-                pbar.set_description(f"Processing {sample_id}")
-                
-                # Run single evaluation
-                result = self.run_single_evaluation(
-                    utterance_data["utterance"],
-                    sample_id,
-                    model,
-                    dataset
-                )
-                
-                # Add expected information for analysis
-                result["expected_source"] = utterance_data.get("expected_source", "")
-                result["expected_target"] = utterance_data.get("expected_target", "")
-                result["original_utterance"] = utterance_data["utterance"]
-                result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
-                
-                results.append(result)
-                
-                # Update progress bar with status
-                status = "✓" if result["success"] else "✗"
-                mappings_count = len(result.get("predicted_mapping", {}))
-                pbar.set_postfix({"status": status, "mappings": mappings_count})
-                
-                # Small delay between requests
-                time.sleep(0.5)
-        
+        MAX_CONSECUTIVE_FAILURES = 3
+        consecutive_failures = 0
+    
+        # ADD: Incremental save settings
+        SAVE_INTERVAL = 10  # Save every 10 samples
+        checkpoint_file = self.results_dir / f"{dataset}_{model.replace('/', '_')}_checkpoint.json"
+    
+        try:
+            with tqdm(utterances, desc=f"Processing {dataset}", unit="utterance") as pbar:
+                for i, utterance_data in enumerate(pbar):
+                    sample_id = utterance_data['sample_id']
+
+                    # Update progress bar description
+                    pbar.set_description(f"Processing {sample_id}")
+
+                    # Run single evaluation
+                    result = self.run_single_evaluation(
+                        utterance_data["utterance"],
+                        sample_id,
+                        model,
+                        dataset,
+                        utterance_data.get("ground_truth_mapping", {})
+                    )
+
+                    # Add expected information for analysis
+                    result["expected_source"] = utterance_data.get("expected_source", "")
+                    result["expected_target"] = utterance_data.get("expected_target", "")
+                    result["original_utterance"] = utterance_data["utterance"]
+                    result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
+
+                    results.append(result)
+
+                    # ADD: Incremental save every N samples
+                    if (i + 1) % SAVE_INTERVAL == 0:
+                        self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                        logger.info(f"Checkpoint saved: {i + 1}/{len(utterances)} samples")
+
+                    # Update progress bar with status
+                    status = "✓" if result["success"] else "✗"
+                    mappings_count = len(result.get("predicted_mapping", {}))
+                    pbar.set_postfix({"status": status, "mappings": mappings_count})
+
+                    # Failure tracking
+                    if not result["success"]:
+                        consecutive_failures += 1
+                        error_msg = result.get("error_message", "")
+
+                        if "critical" in str(error_msg).lower():
+                            logger.error(f"CRITICAL ERROR detected: {error_msg}")
+                            raise RuntimeError(f"Stopping: {error_msg}")
+
+                        if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                            logger.error(f"Stopping after {consecutive_failures} consecutive failures")
+                            # SAVE BEFORE RAISING
+                            self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                            raise RuntimeError(f"Too many consecutive failures")
+                    else:
+                        consecutive_failures = 0
+
+                    # Small delay between requests
+                    time.sleep(0.5)
+    
+        except Exception as e:
+            # ADD: Save partial results on ANY exception
+            logger.error(f"Exception during evaluation: {e}")
+            if results:
+                logger.info(f"Saving {len(results)} partial results before exit...")
+                self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+            raise  # Re-raise to maintain fail-fast behavior
+    
+        # Continue with normal completion...
         total_execution_time = time.time() - total_start_time
-        
-        # Calculate overall statistics
+    
+        # Calculate statistics
         successful_results = [r for r in results if r["success"]]
         overall_accuracy = sum(r["accuracy"] for r in successful_results) / len(successful_results) if successful_results else 0.0
         total_mappings = sum(len(r.get("predicted_mapping", {})) for r in results)
-        
+    
         logger.info(f"MapReflect evaluation completed for {dataset}")
         logger.info(f"   Total utterances: {len(utterances)}")
         logger.info(f"   Successful: {len(successful_results)}")
         logger.info(f"   Total mappings found: {total_mappings}")
         logger.info(f"   Overall accuracy: {overall_accuracy:.3f}")
         logger.info(f"   Total time: {total_execution_time:.2f}s")
-        
+    
         # Create final result structure
         final_result = {
             "metadata": {
@@ -565,7 +693,7 @@ class MapReflectEvaluationRunner:
             },
             "results": results
         }
-        
+    
         return final_result
 
 

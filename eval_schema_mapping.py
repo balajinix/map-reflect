@@ -38,7 +38,8 @@ class ResultCollector:
             'react': 'react/results',
             'gnn': 'gnn/results',
             'anytool': 'anytool/results',
-            'map_reflect': 'map_reflect/results'
+            'map_reflect': 'map_reflect/results',
+            'mapreflect': 'map_reflect/results'  # alias for MapReflect.lower()
         }
     
     def get_result_file_path(self, method: str, dataset: str, model: str) -> Optional[Path]:
@@ -118,19 +119,25 @@ class ResultCollector:
     def _process_result_data(self, result_data: List[Dict[str, Any]], dataset: str, method: str, model: str) -> List[EvaluationResult]:
         """Convert raw result data from JSONL or JSON to EvaluationResult objects."""
         results = []
-        
+
+        # Normalize method name to canonical form (lowercase with underscores)
+        method_normalized = method.lower().replace('mapreflect', 'map_reflect')
+
         for result_entry in result_data:
             try:
-                # Calculate accuracy if not provided
-                accuracy = result_entry.get('accuracy')
-                if accuracy is None:
-                    predicted = result_entry.get('predicted_mapping', {})
-                    ground_truth = result_entry.get('ground_truth_mapping', {})
-                    accuracy = self._calculate_accuracy(ground_truth, predicted)
+                # Use stored accuracy for methods that calculate it correctly
+                # Recalculate for anytool (stores incorrect 1.0 for everything)
+                predicted = result_entry.get('predicted_mapping', {})
+                ground_truth = result_entry.get('ground_truth_mapping', {})
+                stored_accuracy = result_entry.get('accuracy')
+
+                # Always recalculate accuracy using ground truth for consistency
+                # Previous stored accuracy values used placeholder (1.0 for any non-empty mapping)
+                accuracy = self._calculate_accuracy(ground_truth, predicted)
                 
                 result = EvaluationResult(
                     dataset=dataset,
-                    method=method,
+                    method=method_normalized,
                     model=model,
                     sample_id=result_entry.get('sample_id', ''),
                     predicted_mapping=result_entry.get('predicted_mapping', {}),
@@ -149,31 +156,47 @@ class ResultCollector:
         return results
     
     def _calculate_accuracy(self, ground_truth: Dict[str, Any], predicted: Dict[str, Any]) -> float:
-        """Calculate accuracy for schema mapping with flexible field matching."""
+        """Calculate field-level accuracy by comparing predicted mappings to ground truth.
+
+        Ground truth format: {source_field: target_field}
+        MapReflect format: {source_field: {target_property: str, justification: str}}
+        GNN format: {source_field: target_field}
+        AnyTool format: {source_field: {target_property: ..., justification: ...}}
+
+        Returns accuracy as fraction of ground truth fields correctly predicted.
+        """
         if not ground_truth:
             return 0.0
-        
+
         if not predicted:
             return 0.0
 
-        # Exact match check first
-        gt_pairs = set(ground_truth.items())
-        pred_pairs = set(predicted.items())
-        exact_matches = len(gt_pairs.intersection(pred_pairs))
+        correct = 0
+        total = len(ground_truth)
 
-        if exact_matches > 0:
-            return exact_matches / len(gt_pairs)
+        for source_field, expected_target in ground_truth.items():
+            if source_field in predicted:
+                pred = predicted[source_field]
+                # Handle nested format: {target_property: str, justification: str}
+                if isinstance(pred, dict):
+                    predicted_target = pred.get('target_property', pred.get('mapped_property', ''))
+                else:
+                    predicted_target = str(pred)
 
-        # Fuzzy matching for partial credit
-        correct_mappings = 0
-        for gt_source, gt_target in ground_truth.items():
-            for pred_source, pred_target in predicted.items():
-                if (gt_source.lower() in pred_source.lower() or pred_source.lower() in gt_source.lower()) and \
-                   (gt_target.lower() in pred_target.lower() or pred_target.lower() in gt_target.lower()):
-                    correct_mappings += 1
-                    break
+                # Exact match
+                if predicted_target == expected_target:
+                    correct += 1
+                # Case-insensitive match
+                elif predicted_target.lower() == expected_target.lower():
+                    correct += 1
+                # Partial match: check if target field names match (ignoring schema prefix)
+                else:
+                    pred_field = predicted_target.split('.')[-1] if '.' in predicted_target else predicted_target
+                    exp_field = expected_target.split('.')[-1] if '.' in expected_target else expected_target
+                    if pred_field.lower() == exp_field.lower():
+                        correct += 0.5  # Partial credit for matching field name
 
-        return correct_mappings / len(ground_truth)
+        return correct / total if total > 0 else 0.0
 
 
 class EvaluationAnalyzer:
