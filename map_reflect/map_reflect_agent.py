@@ -302,15 +302,22 @@ class MapReflectAgent:
                 logger.warning(f"LLM_TIMING | prompt_format: {t1-t0:.2f}s (litellm mode)")
 
                 # Convert to litellm model format
-                # Mistral models use direct API, not watsonx
-                # LiteLLM uses 'mistral/' prefix, but model ID might be 'mistralai/...'
+                # Check for Mistral API key to decide routing
+                mistral_api_key = os.getenv("MISTRAL_API_KEY")
+
                 if 'mistral' in model_id.lower():
-                    # Extract model name after provider prefix
-                    if '/' in model_id:
-                        model_name = model_id.split('/', 1)[1]  # e.g., mistral-medium-2505
+                    if mistral_api_key:
+                        # Use direct Mistral API
+                        if '/' in model_id:
+                            model_name = model_id.split('/', 1)[1]  # e.g., mistral-medium-2505
+                        else:
+                            model_name = model_id
+                        litellm_model = f"mistral/{model_name}"
+                        logger.warning(f"LLM: Using Mistral API directly for {litellm_model}")
                     else:
-                        model_name = model_id
-                    litellm_model = f"mistral/{model_name}"  # e.g., mistral/mistral-medium-2505
+                        # Route through WatsonX (no MISTRAL_API_KEY)
+                        litellm_model = f"watsonx/{model_id}"
+                        logger.warning(f"LLM: Using WatsonX for Mistral model {litellm_model}")
                 else:
                     litellm_model = f"watsonx/{model_id}"
 
