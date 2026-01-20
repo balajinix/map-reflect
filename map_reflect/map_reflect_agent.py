@@ -813,11 +813,14 @@ class MapReflectAgent:
 
     def _create_collection_from_state(self, state: MappingState):
         logger.info("Building Chroma collection: %s", self.collection_name)
-        col = self.chroma_client.get_or_create_collection(name=self.collection_name, embedding_function=None)
+        # Delete existing collection entirely to ensure clean rebuild
         try:
-            col.delete(where={})
-        except Exception:
-            pass
+            self.chroma_client.delete_collection(name=self.collection_name)
+            logger.info("Deleted existing collection: %s", self.collection_name)
+        except Exception as e:
+            logger.debug("No existing collection to delete: %s", e)
+        # Create fresh collection
+        col = self.chroma_client.create_collection(name=self.collection_name, embedding_function=None)
 
         ids, docs, metas, embs = [], [], [], []
         props = state["property_data"]
