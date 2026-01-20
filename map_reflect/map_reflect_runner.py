@@ -590,7 +590,7 @@ class MapReflectEvaluationRunner:
     
         results = []
         total_start_time = time.time()
-        MAX_CONSECUTIVE_FAILURES = 3
+        MAX_CONSECUTIVE_FAILURES = 10
         consecutive_failures = 0
     
         # ADD: Incremental save settings
