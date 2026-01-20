@@ -1146,14 +1146,20 @@ class MapReflectAgent:
 
         # Run with timing for each step
         state = initial
-        steps = [
+        steps = []
+
+        # Add initialize_index step if rebuild_index is True
+        if self.rebuild_index:
+            steps.append(("initialize_index", self._initialize_index))
+
+        steps.extend([
             ("extract_contexts", self._extract_contexts),
             ("create_graph", self._create_property_graph),
             ("select_source_properties", self._select_source_properties),
             ("select_destination_properties", self._select_destination_properties),
             ("find_mappings", self._find_mappings),
             ("format_output", self._format_output),
-        ]
+        ])
 
         total_start = time.time()
         for step_name, step_fn in steps:
