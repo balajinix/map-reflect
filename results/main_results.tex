@@ -1,0 +1,27 @@
+% Main Results Table for AAAI Paper
+% Map-Reflect: GraphQL Schema Mapping using Self Reflection
+
+\begin{table*}[htbp]
+\centering
+\caption{Schema Mapping Performance Comparison Across Methods and Models}
+\label{tab:main_results}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{Model} & \textbf{Accuracy} & \textbf{Success Rate} & \textbf{Samples} \\
+\midrule
+SMT & granite & 0.083 & 1.000 & 16 \\
+ & llama & 0.549 & 1.000 & 16 \\
+ & qwen & 0.083 & 1.000 & 16 \\
+\midrule
+ReAct & granite & 0.256 & 0.812 & 16 \\
+ & llama & 0.203 & 0.812 & 16 \\
+ & qwen & 0.203 & 0.812 & 16 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
+
+% Table notes and explanation
+The main results table presents the performance of evaluated schema mapping methods across different language models. SMT uses the Schema Mapping Toolkit approach, while ReAct employs reasoning and acting with language models. Accuracy measures the proportion of correctly identified schema mappings using flexible matching. Success Rate indicates the percentage of evaluations that completed without errors. Samples shows the number of schema pairs evaluated per method-model combination.
+

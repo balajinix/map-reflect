@@ -1,9 +1,11 @@
 #!/bin/bash
+# Run LLM-based batch evaluation on all mapping files
+# Usage: ./eval/llm_eval_batch.sh
+# Requires: WATSONX_APIKEY and WATSONX_PROJECT_ID in environment
 
-export PYTHONPATH=$(pwd)/../src:$PYTHONPATH
+cd "$(dirname "$0")/.."
 
-python evaluation-scripts/llm_eval_batch.py \
-  --mapping_dir mappings_output \
-  --api_lookup_file evaluation-scripts/api_lookup.json \
-  --output evaluation-scripts/all_results.json
-
+python eval/llm_eval_batch.py \
+  --mapping_dir data/mappings_output \
+  --api_lookup_file eval/api_lookup.json \
+  --output eval/all_results.json

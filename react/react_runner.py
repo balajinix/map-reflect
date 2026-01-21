@@ -10,6 +10,13 @@ import json
 import time
 import argparse
 from pathlib import Path
+
+# Fix SLATE_MODEL_PATH to be absolute path before imports
+_project_root = Path(__file__).parent.parent
+_slate_path = _project_root / "data" / "slate_30m"
+if _slate_path.exists():
+    os.environ["SLATE_MODEL_PATH"] = str(_slate_path)
+    print(f"Set SLATE_MODEL_PATH to: {_slate_path}")
 from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
@@ -47,25 +54,54 @@ except ImportError as e:
 
 class ReActEvaluationRunner:
     """Runner class for ReAct agent evaluation."""
-    
+
+    # Dataset to schema directory mapping
+    DATASET_SCHEMA_DIRS = {
+        'ITOps': 'itops_graphql',
+        'NL2GQL': 'nl2gql_graphql',
+        'OMOP_CMS': 'omop_cms_graphql',
+        'OMOP_MIMIC': 'omop_mimic_graphql',
+        'OMOP_Synthea': 'omop_synthea_graphql',
+        'GraphQLRestBench': 'graphql',  # fallback
+    }
+
     def __init__(self, schema_dir: str = "../data/graphql", model_config: Dict[str, str] = None):
+        self.base_schema_dir = Path(schema_dir).parent  # Parent of graphql dir (data/)
         self.schema_dir = Path(schema_dir)
         self.results_dir = Path("results")
         self.results_dir.mkdir(exist_ok=True)
-        
+
         # Model configuration for different LLMs
         self.model_config = model_config or self._get_default_model_config()
-        
+
         # Initialize the shared dataset loader
         data_dir = Path(__file__).parent.parent / "data"
         self.dataset_loader = DatasetLoader(str(data_dir))
-        
-        # Initialize the ReAct agent
+        self.base_schema_dir = data_dir  # Use data dir as base
+
+        # Agent will be initialized per dataset
+        self.agent = None
+        self.current_dataset = None
+
+    def _get_schema_dir_for_dataset(self, dataset: str) -> Path:
+        """Get the schema directory for a specific dataset."""
+        schema_subdir = self.DATASET_SCHEMA_DIRS.get(dataset, 'graphql')
+        return self.base_schema_dir / schema_subdir
+
+    def _initialize_agent_for_dataset(self, dataset: str):
+        """Initialize or reinitialize the agent for a specific dataset."""
+        if self.current_dataset == dataset and self.agent is not None:
+            return  # Already initialized for this dataset
+
+        schema_dir = self._get_schema_dir_for_dataset(dataset)
+        logger.info(f"Initializing ReAct agent for {dataset} with schema dir: {schema_dir}")
+
         try:
-            self.agent = GraphQLSchemaMappingAgent(base_schema_dir=str(self.schema_dir))
-            logger.info(f"ReAct agent initialized with schema dir: {self.schema_dir}")
+            self.agent = GraphQLSchemaMappingAgent(base_schema_dir=str(schema_dir))
+            self.current_dataset = dataset
+            logger.info(f"ReAct agent initialized for {dataset}")
         except Exception as e:
-            logger.error(f"Failed to initialize ReAct agent: {e}")
+            logger.error(f"Failed to initialize ReAct agent for {dataset}: {e}")
             raise
     
     def _get_default_model_config(self) -> Dict[str, str]:
@@ -222,7 +258,10 @@ class ReActEvaluationRunner:
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
         logger.info(f"Starting ReAct evaluation for {dataset} with {model}")
-        
+
+        # Initialize agent for this dataset
+        self._initialize_agent_for_dataset(dataset)
+
         # Load evaluation utterances using shared loader
         utterances = self.load_evaluation_utterances(dataset)
         if not utterances:
@@ -451,16 +490,9 @@ def main():
     logger.info(f"ReAct Agent Schema Mapping Evaluation")
     logger.info(f"Datasets: {args.datasets}")
     logger.info(f"Models: {args.models}")
-    logger.info(f"Schema directory: {args.schema_dir}")
-    
-    # Check if schema directory exists
-    schema_dir = Path(args.schema_dir)
-    if not schema_dir.exists():
-        logger.error(f"Schema directory not found: {schema_dir}")
-        logger.error("Make sure you're running from the correct directory")
-        sys.exit(1)
-    
-    # Initialize runner
+    logger.info(f"Base schema directory: {args.schema_dir}")
+
+    # Initialize runner - it will resolve dataset-specific schema directories
     runner = ReActEvaluationRunner(schema_dir=args.schema_dir)
     
     # Run evaluation for each dataset/model combination

@@ -42,33 +42,42 @@ class SMTAPIRetriever:
     2. Mappings ChromaDB: For finding existing mappings to reuse
     """
     
-    def __init__(self, 
+    def __init__(self,
                  dataset: str = None,
-                 mappings_dir: str = None, 
+                 mappings_dir: str = None,
                  chroma_db_path: str = "../data/chroma_db",
-                 collection_name:  str= None):
+                 collection_name: str = None,
+                 mappings_collection_name: str = None):
         """
         Initialize the API retriever with two ChromaDB instances.
-        
+
         Args:
             dataset: Dataset name for collection naming
             mappings_dir: Directory containing existing mapping files
             chroma_db_path: Path to ChromaDB database
             collection_name: Explicit collection name for schemas
+            mappings_collection_name: Explicit collection name for mappings (dataset-specific)
         """
         self.mappings_dir = Path(mappings_dir) if mappings_dir else Path("../data/mappings_output")
         self.chroma_db_path = Path(chroma_db_path)
         self.collection_name = collection_name
         self.dataset = dataset
 
-        # Determine collection names
+        # Determine schema collection name
         if collection_name:
             schema_collection_name = collection_name
         else:
             schema_collection_name = f"{dataset.lower()}_graphql_schemas" if dataset else "graphql_schemas"
 
-        # For mappings, use shared collection (not dataset-specific for now)
-        mappings_collection_name = "smt_mappings"
+        # For mappings, use dataset-specific collection if provided
+        if mappings_collection_name:
+            mappings_collection_name = mappings_collection_name
+        elif dataset:
+            mappings_collection_name = f"smt_mappings_{dataset.lower()}"
+        else:
+            mappings_collection_name = "smt_mappings"
+
+        logger.info(f"Using mappings collection: {mappings_collection_name}")
         
         # Initialize Schema ChromaDB indexer for schema discovery
         try:

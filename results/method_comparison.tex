@@ -1,0 +1,22 @@
+% Method Comparison Across Datasets
+% Map-Reflect: GraphQL Schema Mapping using Self Reflection
+
+\begin{table*}[htbp]
+\centering
+\caption{Method Performance Across Different Datasets}
+\label{tab:method_comparison}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Method} & \textbf{ITOps} & \textbf{NL2GQL} & \textbf{GraphQLRestBench} & \textbf{Average} & \textbf{Rank} \\
+\midrule
+SMT & 0.248 & 0.444 & 0.000 & 0.231 & TBA \\
+ReAct & 0.170 & 0.344 & 0.267 & 0.260 & TBA \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
+
+% Dataset-specific analysis
+This table compares method performance across different GraphQL datasets, highlighting the adaptability of each approach to various schema types. ITOps represents IT operations monitoring schemas, NL2GQL focuses on natural language to GraphQL translation scenarios, and GraphQLRestBench provides GraphQL-REST API mapping challenges. The Average column shows overall method performance, while Rank indicates relative standing (1=best).
+

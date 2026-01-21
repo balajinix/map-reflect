@@ -7,10 +7,10 @@ This script reads results from each method's results/ directory and calculates:
 - Field-level accuracy (correct field mappings, conditional on correct API)
 
 Usage:
-    python calc_accuracy.py
-    python calc_accuracy.py --methods map_reflect,gnn --datasets ITOps,NL2GQL
-    python calc_accuracy.py --output markdown  # Output as markdown table
-    python calc_accuracy.py --output csv       # Output as CSV
+    python eval/calc_accuracy.py
+    python eval/calc_accuracy.py --methods map_reflect,gnn --datasets ITOps,NL2GQL
+    python eval/calc_accuracy.py --output markdown  # Output as markdown table
+    python eval/calc_accuracy.py --output csv       # Output as CSV
 """
 
 import json
@@ -24,7 +24,8 @@ from typing import Dict, List, Tuple, Optional
 # Configuration
 # =============================================================================
 
-BASE_DIR = Path(__file__).parent
+# Script is in eval/, so parent.parent gets to project root
+BASE_DIR = Path(__file__).parent.parent
 DATASETS = ['ITOps', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
 
 # Method directories and model patterns
@@ -72,9 +73,24 @@ METHODS = {
 # =============================================================================
 
 def load_results(file_path: Path) -> List[Dict]:
-    """Load results from JSON file."""
+    """Load results from JSON or JSONL file."""
     with open(file_path, 'r') as f:
-        data = json.load(f)
+        content = f.read().strip()
+
+    # Try JSONL format (one JSON object per line)
+    if file_path.suffix == '.jsonl' or '\n{' in content:
+        results = []
+        for line in content.split('\n'):
+            line = line.strip()
+            if line:
+                try:
+                    results.append(json.loads(line))
+                except json.JSONDecodeError:
+                    continue
+        return results
+
+    # Standard JSON format
+    data = json.loads(content)
     if isinstance(data, dict) and 'results' in data:
         return data['results']
     return data if isinstance(data, list) else [data]
@@ -209,20 +225,22 @@ def find_result_files(method_dir: Path, dataset: str, model_pattern: str) -> Lis
     ds_lower = dataset.lower()
     ds_patterns = [dataset, ds_lower, dataset.replace('_', '-'), ds_lower.replace('_', '-')]
 
-    for f in method_dir.glob('*.json'):
-        if 'checkpoint' in f.name.lower():
-            continue
+    # Look for both .json and .jsonl files
+    for pattern in ['*.json', '*.jsonl']:
+        for f in method_dir.glob(pattern):
+            if 'checkpoint' in f.name.lower():
+                continue
 
-        fname_lower = f.name.lower()
+            fname_lower = f.name.lower()
 
-        # Check dataset match
-        dataset_match = any(p.lower() in fname_lower for p in ds_patterns)
+            # Check dataset match
+            dataset_match = any(p.lower() in fname_lower for p in ds_patterns)
 
-        # Check model match (empty pattern matches all)
-        model_match = not model_pattern or model_pattern.lower() in fname_lower
+            # Check model match (empty pattern matches all)
+            model_match = not model_pattern or model_pattern.lower() in fname_lower
 
-        if dataset_match and model_match:
-            files.append(f)
+            if dataset_match and model_match:
+                files.append(f)
 
     return files
 

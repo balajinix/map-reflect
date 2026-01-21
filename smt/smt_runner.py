@@ -27,6 +27,129 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "data"))
 from dotenv import load_dotenv
 load_dotenv()
 
+import requests
+import re
+
+def get_watsonx_token(api_key: str) -> str:
+    """Get IBM Cloud IAM token for watsonx API."""
+    token_url = "https://iam.cloud.ibm.com/identity/token"
+    response = requests.post(
+        token_url,
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        data={"grant_type": "urn:ibm:params:oauth:grant-type:apikey", "apikey": api_key}
+    )
+    return response.json().get("access_token")
+
+
+def call_watsonx_llm(prompt: str, api_key: str, project_id: str, model_id: str = "ibm/granite-3-8b-instruct") -> str:
+    """Call watsonx LLM API directly."""
+    token = get_watsonx_token(api_key)
+    url = "https://us-south.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29"
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    payload = {
+        "model_id": model_id,
+        "input": prompt,
+        "parameters": {
+            "max_new_tokens": 2048,
+            "decoding_method": "greedy",
+            "stop_sequences": ["\n\n\n"]
+        },
+        "project_id": project_id
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+    result = response.json()
+    return result.get("results", [{}])[0].get("generated_text", "")
+
+
+def llm_based_field_mapping(source_schema: Dict, target_schema: Dict, api_key: str, project_id: str) -> Dict:
+    """Generate field mappings using LLM directly."""
+    source_name = source_schema.get("name", source_schema.get("id", "source"))
+    target_name = target_schema.get("name", target_schema.get("id", "target"))
+
+    # Build property lists
+    source_props = []
+    for prop in source_schema.get("properties", []):
+        name = prop.get("name", "")
+        desc = prop.get("description", "")[:150]
+        source_props.append(f"  - {name}: {desc}")
+
+    target_props = []
+    for prop in target_schema.get("properties", []):
+        name = prop.get("name", "")
+        desc = prop.get("description", "")[:150]
+        target_props.append(f"  - {name}: {desc}")
+
+    prompt = f"""Map fields from source schema to target schema.
+
+Source Schema: {source_name}
+Properties:
+{chr(10).join(source_props[:25])}
+
+Target Schema: {target_name}
+Properties:
+{chr(10).join(target_props[:25])}
+
+For each source field, identify the best matching target field based on semantic meaning and description.
+Return ONLY a JSON object with source fields as keys and target fields as values.
+Format: {{"source_field": "target_field", ...}}
+Only include high-confidence mappings (>0.7).
+
+JSON Output:"""
+
+    try:
+        response = call_watsonx_llm(prompt, api_key, project_id)
+        # Extract JSON from response - try multiple patterns
+        mappings = None
+
+        # Try to find JSON object in response
+        # First try: simple JSON without nested braces
+        match = re.search(r'\{[^{}]+\}', response, re.DOTALL)
+        if match:
+            try:
+                mappings = json.loads(match.group())
+            except json.JSONDecodeError:
+                pass
+
+        # Second try: extract key-value pairs manually
+        if not mappings:
+            pairs = re.findall(r'"([^"]+)":\s*"([^"]+)"', response)
+            if pairs:
+                mappings = dict(pairs)
+
+        if mappings and isinstance(mappings, dict) and len(mappings) > 0:
+            # Filter out invalid entries
+            valid_mappings = {}
+            for src, tgt in mappings.items():
+                # Check that source and target look like actual field names
+                if '.' in src or src.startswith(source_name.split()[0].lower()):
+                    valid_mappings[src] = tgt
+                elif '.' in tgt or any(c.islower() and c.isupper() for c in src+tgt):
+                    # Has mixed case, likely a real field name
+                    valid_mappings[src] = tgt
+
+            if valid_mappings:
+                return {
+                    "name": f"{source_name}_to_{target_name}_mapping",
+                    "description": f"LLM-based mapping from {source_name} to {target_name}",
+                    "properties": {
+                        src: [{"mapTable": target_name, "mapProperty": tgt, "justification": "LLM semantic mapping", "confidence": 0.8}]
+                        for src, tgt in valid_mappings.items()
+                    },
+                    "metadata": {"method": "llm_direct", "created_at": datetime.now().isoformat()}
+                }
+    except Exception as e:
+        logger.warning(f"LLM-based mapping failed: {e}")
+
+    return None
+
+
 # Import components
 try:
     from smt_api_retriever import SMTAPIRetriever
@@ -42,45 +165,65 @@ except ImportError as e:
 class SMTRunner:
     """High-performance parallelized SMT evaluation runner."""
     
-    def __init__(self, 
+    def __init__(self,
                  mappings_dir: str = "../data/mappings_output",
-                 chroma_db_path: str = "../data/chroma_db", 
+                 chroma_db_path: str = "../data/chroma_db",
                  schema_dir: str = "../data/graphql",
                  dataset: str = None,
                  collection_name: str = None,
+                 mappings_collection_name: str = None,
                  max_workers: int = None):
         """Initialize with incremental writing support."""
-        
+
         self.mappings_dir = Path(mappings_dir)
         self.chroma_db_path = Path(chroma_db_path)
         self.schema_dir = Path(schema_dir)
         self.results_dir = Path("results")
         self.dataset = dataset
-        
+
         # Parallelization settings
         self.max_workers = max_workers or min(os.cpu_count(), 8)
-        
+
         # Create directories
         self.mappings_dir.mkdir(exist_ok=True)
         self.results_dir.mkdir(exist_ok=True)
-        
+
         # Initialize shared components
         data_dir = Path(__file__).parent.parent / "data"
         self.dataset_loader = DatasetLoader(str(data_dir))
-        
-        # Collection name setup
+
+        # Schema collection name setup
         if collection_name:
             self.collection_name = collection_name
         elif dataset:
             self.collection_name = f"{dataset.lower()}_graphql_schemas"
         else:
             self.collection_name = "default_graphql_schemas"
-        
+
+        # Mappings collection name setup (separate from schemas)
+        if mappings_collection_name:
+            self.mappings_collection_name = mappings_collection_name
+        elif dataset:
+            self.mappings_collection_name = f"smt_mappings_{dataset.lower()}"
+        else:
+            self.mappings_collection_name = "smt_mappings"
+
         # Thread-safe counters
         self.write_lock = threading.Lock()
-        
+
+        # WatsonX credentials for SMT toolkit
+        self.watsonx_config = {
+            "credentials": {
+                "apikey": os.environ.get("WATSONX_APIKEY") or os.environ.get("WATSONX_API_KEY"),
+                "project_id": os.environ.get("WATSONX_PROJECT_ID")
+            },
+            "model_name": "ibm/granite-3-8b-instruct",
+            "max_new_tokens": 2048
+        }
+
         logger.info(f"SMT runner initialized with {self.max_workers} workers")
-        logger.info(f"Collection name: {self.collection_name}")
+        logger.info(f"Schema collection: {self.collection_name}")
+        logger.info(f"Mappings collection: {self.mappings_collection_name}")
     
     def create_results_file(self, dataset: str, model: str) -> Path:
         """Create results file for incremental writing."""
@@ -105,12 +248,14 @@ class SMTRunner:
         """Create fresh component instances for each worker (thread-safe)."""
         try:
             # Create components with explicit error handling
-            logger.debug(f"Creating worker components with collection: {self.collection_name}")
-            
+            logger.debug(f"Creating worker components with schema collection: {self.collection_name}")
+            logger.debug(f"Using mappings collection: {self.mappings_collection_name}")
+
             api_retriever = SMTAPIRetriever(
                 mappings_dir=str(self.mappings_dir),
                 chroma_db_path=str(self.chroma_db_path),
-                collection_name=self.collection_name
+                collection_name=self.collection_name,
+                mappings_collection_name=self.mappings_collection_name
             )
             
             schema_indexer = GraphQLSchemaIndexer(
@@ -164,22 +309,62 @@ class SMTRunner:
             
             api_retriever = components["api_retriever"]
             schema_indexer = components["schema_indexer"]
-            
-            # Step 1: Find best API pair
-            try:
-                source_api, target_api, confidence = api_retriever.find_best_api_pair(utterance)
-                logger.debug(f"Sample {sample_id}: Found API pair {source_api} -> {target_api} (confidence: {confidence})")
-            except Exception as e:
-                logger.error(f"Sample {sample_id}: API pair selection failed: {e}")
-                return self._create_error_result(sample_id, f"API pair selection failed: {e}", start_time, sample_data)
-            
+
+            # Step 1: Get API pair - prefer using provided schemas if available
+            source_api = None
+            target_api = None
+            confidence = 1.0
+            use_provided_schemas = False
+
+            # Check if source/target schemas are provided in the dataset
+            # Note: dataset_loader uses expected_source/expected_target keys
+            source_schema_data = sample_data.get("expected_source") or sample_data.get("source_schema")
+            target_schema_data = sample_data.get("expected_target") or sample_data.get("target_schema")
+
+            if source_schema_data and target_schema_data:
+                # Parse schema data (may be string or dict)
+                if isinstance(source_schema_data, str):
+                    try:
+                        source_schema_data = eval(source_schema_data)
+                    except:
+                        source_schema_data = None
+                if isinstance(target_schema_data, str):
+                    try:
+                        target_schema_data = eval(target_schema_data)
+                    except:
+                        target_schema_data = None
+
+                if source_schema_data and target_schema_data:
+                    source_api = source_schema_data.get("id", source_schema_data.get("name", ""))
+                    target_api = target_schema_data.get("id", target_schema_data.get("name", ""))
+                    use_provided_schemas = True
+                    logger.debug(f"Sample {sample_id}: Using provided schemas {source_api} -> {target_api}")
+
+            # Fallback to utterance-based API selection if schemas not provided
+            if not source_api or not target_api:
+                try:
+                    source_api, target_api, confidence = api_retriever.find_best_api_pair(utterance)
+                    logger.debug(f"Sample {sample_id}: Found API pair {source_api} -> {target_api} (confidence: {confidence})")
+                except Exception as e:
+                    logger.error(f"Sample {sample_id}: API pair selection failed: {e}")
+                    return self._create_error_result(sample_id, f"API pair selection failed: {e}", start_time, sample_data)
+
             if not source_api or not target_api:
                 return self._create_error_result(sample_id, "No suitable API pair found", start_time, sample_data)
             
             # Step 2: Get or create mapping
             try:
+                # Pass the provided schemas if available
+                provided_schemas = None
+                if use_provided_schemas and source_schema_data and target_schema_data:
+                    provided_schemas = {
+                        "source": source_schema_data,
+                        "target": target_schema_data
+                    }
+
                 mapping_result = self._get_or_create_mapping_worker(
-                    api_retriever, schema_indexer, source_api, target_api, utterance
+                    api_retriever, schema_indexer, source_api, target_api, utterance,
+                    provided_schemas=provided_schemas
                 )
                 logger.debug(f"Sample {sample_id}: Got mapping result")
             except Exception as e:
@@ -328,21 +513,84 @@ class SMTRunner:
         
         return final_metadata
     
-    def _get_or_create_mapping_worker(self, api_retriever, schema_indexer, 
-                                    source_api: str, target_api: str, utterance: str) -> Optional[Dict[str, Any]]:
+    def _transform_schema_for_toolkit(self, schema: Dict) -> Dict:
+        """Transform schema properties to include schema_component for toolkit compatibility."""
+        transformed = schema.copy()
+        if "properties" in transformed and isinstance(transformed["properties"], list):
+            new_properties = []
+            schema_name = transformed.get("id", transformed.get("name", ""))
+            for prop in transformed["properties"]:
+                new_prop = prop.copy()
+                # Extract schema_component from property name (e.g., "omop_PERSON.field" -> "omop_PERSON")
+                prop_name = prop.get("name", "")
+                if "." in prop_name:
+                    schema_component = prop_name.split(".")[0]
+                else:
+                    schema_component = schema_name
+                new_prop["schema_component"] = schema_component
+                new_properties.append(new_prop)
+            transformed["properties"] = new_properties
+        return transformed
+
+    def _get_or_create_mapping_worker(self, api_retriever, schema_indexer,
+                                    source_api: str, target_api: str, utterance: str,
+                                    provided_schemas: Optional[Dict] = None) -> Optional[Dict[str, Any]]:
         """Worker version of mapping creation."""
-        
+
         try:
+            # If schemas are provided directly (from dataset), use them
+            if provided_schemas:
+                logger.debug(f"Using provided schemas for {source_api} -> {target_api}")
+                source_schema_dict = self._transform_schema_for_toolkit(provided_schemas["source"])
+                target_schema_dict = self._transform_schema_for_toolkit(provided_schemas["target"])
+
+                # Ensure schemas have required fields for toolkit
+                if not source_schema_dict.get("properties"):
+                    logger.warning(f"Provided source schema missing properties, using fallback")
+                    return self._create_fallback_mapping(source_api, target_api)
+                if not target_schema_dict.get("properties"):
+                    logger.warning(f"Provided target schema missing properties, using fallback")
+                    return self._create_fallback_mapping(source_api, target_api)
+
+                # Run SMT toolkit with provided schemas
+                try:
+                    logger.debug(f"Running SMT toolkit with provided schemas for {source_api} -> {target_api}")
+                    smt_result = solve(
+                        source_schema_dict=source_schema_dict,
+                        target_schema_dict=target_schema_dict,
+                        pipeline_name="graphql_pipeline",
+                        **self.watsonx_config
+                    )
+
+                    # Cache result
+                    self._cache_mapping_result_threadsafe(source_api, target_api, smt_result)
+
+                    return smt_result
+                except Exception as e:
+                    logger.error(f"SMT toolkit failed with provided schemas: {e}")
+                    # Try LLM-based mapping as fallback
+                    api_key = self.watsonx_config["credentials"]["apikey"]
+                    project_id = self.watsonx_config["credentials"]["project_id"]
+                    llm_result = llm_based_field_mapping(
+                        provided_schemas["source"], provided_schemas["target"], api_key, project_id
+                    )
+                    if llm_result:
+                        logger.info(f"Used LLM-based fallback for {source_api} -> {target_api}")
+                        self._cache_mapping_result_threadsafe(source_api, target_api, llm_result)
+                        return llm_result
+                    return self._create_fallback_mapping(source_api, target_api)
+
+            # Otherwise, use the original flow with ChromaDB lookup
             # Check for existing mapping in utterance context
             try:
                 existing_mapping_result = api_retriever.find_existing_mapping_for_utterance(utterance)
-                
+
                 if existing_mapping_result and existing_mapping_result.get("reused"):
                     logger.debug(f"Reusing existing mapping for utterance")
                     return existing_mapping_result["mapping_data"]
             except Exception as e:
                 logger.warning(f"Could not check existing mapping for utterance: {e}")
-            
+
             # Check file-based lookup
             try:
                 existing_mapping = api_retriever.get_existing_mapping(source_api, target_api)
@@ -351,11 +599,11 @@ class SMTRunner:
                     return existing_mapping
             except Exception as e:
                 logger.warning(f"Could not check file-based mapping: {e}")
-            
+
             # Try to use schema indexer if available
             source_schemas = None
             target_schemas = None
-            
+
             try:
                 source_schemas = schema_indexer.search_schemas(f"{source_api} schema", n_results=1)
                 target_schemas = schema_indexer.search_schemas(f"{target_api} schema", n_results=1)
@@ -363,11 +611,11 @@ class SMTRunner:
             except Exception as e:
                 logger.warning(f"Schema indexer search failed: {e}")
                 logger.warning("Falling back to fallback mapping creation")
-            
+
             if not source_schemas or not target_schemas:
                 logger.warning(f"Could not find schemas for {source_api} -> {target_api}, using fallback")
                 return self._create_fallback_mapping(source_api, target_api)
-            
+
             # Prepare schemas for SMT toolkit
             try:
                 source_schema_dict = self._prepare_schema_for_smt(source_schemas[0])
@@ -382,12 +630,13 @@ class SMTRunner:
                 smt_result = solve(
                     source_schema_dict=source_schema_dict,
                     target_schema_dict=target_schema_dict,
-                    pipeline_name="graphql_pipeline"
+                    pipeline_name="graphql_pipeline",
+                    **self.watsonx_config
                 )
-                
+
                 # Cache result
                 self._cache_mapping_result_threadsafe(source_api, target_api, smt_result)
-                
+
                 return smt_result
             except Exception as e:
                 logger.warning(f"SMT toolkit execution failed: {e}, using fallback")
@@ -551,7 +800,8 @@ def main():
     parser.add_argument("--mappings-dir", default="../data/mappings_output", help="Mappings output directory")
     parser.add_argument("--schema-dir", default="../data/graphql", help="GraphQL schemas directory")
     parser.add_argument("--chroma-db-path", default="../data/chroma_db", help="ChromaDB path")
-    parser.add_argument("--collection-name", help="ChromaDB collection name")
+    parser.add_argument("--collection-name", help="ChromaDB schema collection name")
+    parser.add_argument("--mappings-collection", help="ChromaDB mappings collection name (defaults to smt_mappings)")
     parser.add_argument("--max-workers", type=int, help="Maximum number of worker threads")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     
@@ -577,6 +827,7 @@ def main():
                     schema_dir=args.schema_dir,
                     dataset=dataset,
                     collection_name=args.collection_name,
+                    mappings_collection_name=args.mappings_collection,
                     max_workers=args.max_workers
                 )
                 

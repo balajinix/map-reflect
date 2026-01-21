@@ -1,8 +1,10 @@
 #!/bin/bash
+# Run similarity-based evaluation on a mapping file
+# Usage: ./eval/similarity_evaluator.sh
 
-export PYTHONPATH=$(pwd)/../src:$PYTHONPATH
+cd "$(dirname "$0")/.."
 
-python evaluation-scripts/similarity_evaluator.py \
-  --mapping_file "mappings_output/conert_vulnerability-turbo_entity.json" \
-  --api_lookup_file "evaluation-scripts/api_lookup.json" \
-  --output "evaluation-scripts/similarity_eval_output.json"
+python eval/similarity_evaluator.py \
+  --mapping_file "data/mappings_output/concert_vulnerability-turbo_entity.json" \
+  --api_lookup_file "eval/api_lookup.json" \
+  --output "eval/similarity_eval_output.json"

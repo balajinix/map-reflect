@@ -1,5 +1,4 @@
 __pycache__
-results
 .venv
 .env
 nohup.out
@@ -8,10 +7,11 @@ nohup.out
 # Generated data files
 *.pkl
 chroma_db/
-experiment_logs/
+logs/
 *.log
 
-# Mapping outputs (generated)
+# Mapping outputs (generated/cached)
+data/mappings_output/
 data/*_mappings/
 data/*_mappings_output*/
 data/gnn_results/
@@ -20,3 +20,6 @@ data/gnn_results/
 *.bk
 *.bak
 results.bk/
+
+# Large model files
+data/slate_30m/

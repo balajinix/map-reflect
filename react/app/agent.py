@@ -23,20 +23,175 @@ import logging
 load_dotenv()
 logger = logging.getLogger("solis_ai_api")
 
-# LLM wrapper for IBM watsonx.ai via litellm
-def call_llm(messages, model="watsonx/mistralai/mistral-large"):
-    """Call IBM watsonx.ai via litellm"""
+# Timeout and retry configuration
+LLM_TIMEOUT = 120  # seconds
+LLM_MAX_RETRIES = 3
+LLM_RETRY_DELAY = 5  # seconds
+
+import time
+
+# Helper functions for LLM-based field mapping fallback
+def get_watsonx_token(api_key: str, timeout: int = 30) -> str:
+    """Get IBM Cloud IAM token for watsonx API."""
+    token_url = "https://iam.cloud.ibm.com/identity/token"
     try:
-        response = completion(
-            model=model,
-            messages=messages,
-            temperature=0.1,
-            max_tokens=1000
+        response = requests.post(
+            token_url,
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
+            data={"grant_type": "urn:ibm:params:oauth:grant-type:apikey", "apikey": api_key},
+            timeout=timeout
         )
-        return response.choices[0].message.content
+        response.raise_for_status()
+        return response.json().get("access_token")
+    except requests.exceptions.Timeout:
+        logger.error(f"Token request timed out after {timeout}s")
+        raise
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Token request failed: {e}")
+        raise
+
+def call_watsonx_llm_direct(prompt: str, api_key: str, project_id: str, model_id: str = "ibm/granite-3-8b-instruct", timeout: int = LLM_TIMEOUT, max_retries: int = LLM_MAX_RETRIES) -> str:
+    """Call watsonx LLM API directly with timeout and retry handling."""
+    url = "https://us-south.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29"
+
+    payload = {
+        "model_id": model_id,
+        "input": prompt,
+        "parameters": {
+            "max_new_tokens": 2048,
+            "decoding_method": "greedy",
+            "stop_sequences": ["\n\n\n"]
+        },
+        "project_id": project_id
+    }
+
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            # Get fresh token for each attempt
+            token = get_watsonx_token(api_key)
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+
+            response = requests.post(url, headers=headers, json=payload, timeout=timeout)
+            response.raise_for_status()
+            result = response.json()
+            return result.get("results", [{}])[0].get("generated_text", "")
+
+        except requests.exceptions.Timeout:
+            last_error = f"Request timed out after {timeout}s"
+            logger.warning(f"Attempt {attempt + 1}/{max_retries}: {last_error}")
+        except requests.exceptions.RequestException as e:
+            last_error = str(e)
+            logger.warning(f"Attempt {attempt + 1}/{max_retries}: Request failed: {last_error}")
+
+        if attempt < max_retries - 1:
+            delay = LLM_RETRY_DELAY * (attempt + 1)  # Exponential backoff
+            logger.info(f"Retrying in {delay}s...")
+            time.sleep(delay)
+
+    logger.error(f"All {max_retries} attempts failed. Last error: {last_error}")
+    return ""
+
+def llm_based_field_mapping(source_schema: Dict, target_schema: Dict, api_key: str, project_id: str) -> Dict:
+    """Generate field mappings using LLM directly."""
+    from datetime import datetime
+    source_name = source_schema.get("name", source_schema.get("id", "source"))
+    target_name = target_schema.get("name", target_schema.get("id", "target"))
+
+    # Build property lists
+    source_props = []
+    for prop in source_schema.get("properties", []):
+        name = prop.get("name", "")
+        desc = prop.get("description", "")[:150]
+        source_props.append(f"  - {name}: {desc}")
+
+    target_props = []
+    for prop in target_schema.get("properties", []):
+        name = prop.get("name", "")
+        desc = prop.get("description", "")[:150]
+        target_props.append(f"  - {name}: {desc}")
+
+    prompt = f"""Map fields from source schema to target schema.
+
+Source Schema: {source_name}
+Properties:
+{chr(10).join(source_props[:25])}
+
+Target Schema: {target_name}
+Properties:
+{chr(10).join(target_props[:25])}
+
+For each source field, identify the best matching target field based on semantic meaning and description.
+Return ONLY a JSON object with source fields as keys and target fields as values.
+Format: {{"source_field": "target_field", ...}}
+Only include high-confidence mappings (>0.7).
+
+JSON Output:"""
+
+    try:
+        response = call_watsonx_llm_direct(prompt, api_key, project_id)
+        # Extract JSON from response
+        mappings = None
+
+        # Try to find JSON object in response
+        match = re.search(r'\{[^{}]+\}', response, re.DOTALL)
+        if match:
+            try:
+                mappings = json.loads(match.group())
+            except json.JSONDecodeError:
+                pass
+
+        # Second try: extract key-value pairs manually
+        if not mappings:
+            pairs = re.findall(r'"([^"]+)":\s*"([^"]+)"', response)
+            if pairs:
+                mappings = dict(pairs)
+
+        if mappings and isinstance(mappings, dict) and len(mappings) > 0:
+            return {
+                "name": f"{source_name}_to_{target_name}_mapping",
+                "description": f"LLM-based mapping from {source_name} to {target_name}",
+                "properties": {
+                    src: [{"mapTable": target_name, "mapProperty": tgt, "justification": "LLM semantic mapping", "confidence": 0.8}]
+                    for src, tgt in mappings.items()
+                },
+                "metadata": {"method": "llm_direct", "created_at": datetime.now().isoformat()}
+            }
     except Exception as e:
-        print(f"LLM Error: {str(e)}")
-        return f"Error calling LLM: {str(e)}"
+        logger.warning(f"LLM-based mapping failed: {e}")
+
+    return None
+
+# LLM wrapper for IBM watsonx.ai via litellm
+def call_llm(messages, model="watsonx/meta-llama/llama-3-3-70b-instruct", timeout: int = LLM_TIMEOUT, max_retries: int = LLM_MAX_RETRIES):
+    """Call IBM watsonx.ai via litellm with timeout and retry handling."""
+    last_error = None
+
+    for attempt in range(max_retries):
+        try:
+            response = completion(
+                model=model,
+                messages=messages,
+                temperature=0.1,
+                max_tokens=1000,
+                timeout=timeout  # litellm supports timeout parameter
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            last_error = str(e)
+            logger.warning(f"LLM call attempt {attempt + 1}/{max_retries} failed: {last_error}")
+
+            if attempt < max_retries - 1:
+                delay = LLM_RETRY_DELAY * (attempt + 1)
+                logger.info(f"Retrying in {delay}s...")
+                time.sleep(delay)
+
+    logger.error(f"All {max_retries} LLM call attempts failed. Last error: {last_error}")
+    return f"Error calling LLM after {max_retries} attempts: {last_error}"
 
 # State definition for LangGraph
 class AgentState(TypedDict):
@@ -58,21 +213,22 @@ def split_camel_case(name: str):
     return " ".join(split)
 
 def find_mappings(source_graphql_schema, source_name, target_graphql_schema, target_name):
-    """Generate schema mappings using the SMT toolkit."""
+    """Generate schema mappings using the SMT toolkit with LLM fallback."""
+    api_key = os.getenv("WATSONX_APIKEY")
+    project_id = os.getenv("WATSONX_PROJECT_ID")
+
     try:
         print(f"DEBUG: Starting mapping generation {source_name} -> {target_name}")
-        print(f"DEBUG: Are these schemas semantically related? Checking field name overlap...")
-
         print(f"DEBUG: SLATE_MODEL_PATH = {os.getenv('SLATE_MODEL_PATH', 'NOT SET')}")
-        print(f"DEBUG: WATSONX_APIKEY = {'SET' if os.getenv('WATSONX_APIKEY') else 'NOT SET'}")
+        print(f"DEBUG: WATSONX_APIKEY = {'SET' if api_key else 'NOT SET'}")
 
         source_schema = process(source_graphql_schema, source_name)
         target_schema = process(target_graphql_schema, target_name)
 
         config = {
             "credentials": {
-                "apikey": os.getenv("WATSONX_APIKEY"),
-                "project_id": os.getenv("WATSONX_PROJECT_ID"),
+                "apikey": api_key,
+                "project_id": project_id,
             },
             "model_name": "meta-llama/llama-3-3-70b-instruct",
             "max_new_tokens": 4096,
@@ -81,33 +237,51 @@ def find_mappings(source_graphql_schema, source_name, target_graphql_schema, tar
         print(f"DEBUG: Running solve() with config")
         print(f"DEBUG: Source schema has {len(source_schema.get('properties', []))} properties")
         print(f"DEBUG: Target schema has {len(target_schema.get('properties', []))} properties")
-        print(f"DEBUG: Sample source properties: {list(source_schema.get('properties', []))[:3]}")
-        print(f"DEBUG: Sample target properties: {list(target_schema.get('properties', []))[:3]}")
 
-        # Fixed: Use correct source->target order
-        result = solve(
-            source_schema_dict=source_schema,
-            target_schema_dict=target_schema,
-            pipeline_name="graphql_pipeline",
-            **config,
-        )
+        # Try SMT toolkit first
+        try:
+            result = solve(
+                source_schema_dict=source_schema,
+                target_schema_dict=target_schema,
+                pipeline_name="graphql_pipeline",
+                **config,
+            )
 
-        print(f"DEBUG: solve() returned: {type(result)}, keys: {result.keys() if isinstance(result, dict) else 'not dict'}")
-        print(f"DEBUG: Raw properties: {result.get('properties', {})}")
+            print(f"DEBUG: solve() returned: {type(result)}, keys: {result.keys() if isinstance(result, dict) else 'not dict'}")
 
-        # Clean up result to only include non-empty mappings
-        trimmed_result = {"name": result["name"], "properties": {}}
-        for x in result["properties"]:
-            if result["properties"][x] != []:
-                trimmed_result["properties"][x] = result["properties"][x]
+            # Clean up result to only include non-empty mappings
+            trimmed_result = {"name": result["name"], "properties": {}}
+            for x in result["properties"]:
+                if result["properties"][x] != []:
+                    trimmed_result["properties"][x] = result["properties"][x]
 
-        print(f"DEBUG: Trimmed result has {len(trimmed_result['properties'])} non-empty properties")
-        return trimmed_result
+            print(f"DEBUG: Trimmed result has {len(trimmed_result['properties'])} non-empty properties")
+
+            # If toolkit returned results, use them
+            if trimmed_result["properties"]:
+                return trimmed_result
+
+        except Exception as toolkit_error:
+            print(f"DEBUG: SMT toolkit failed: {toolkit_error}")
+            logger.warning(f"SMT toolkit failed: {toolkit_error}")
+
+        # Fallback to LLM-based mapping
+        print(f"DEBUG: Trying LLM-based field mapping fallback...")
+        if api_key and project_id:
+            llm_result = llm_based_field_mapping(source_schema, target_schema, api_key, project_id)
+            if llm_result and llm_result.get("properties"):
+                print(f"DEBUG: LLM fallback found {len(llm_result['properties'])} mappings")
+                return llm_result
+
+        print(f"DEBUG: No mappings found from either toolkit or LLM fallback")
+        return {
+            "name": f"{source_name}_to_{target_name}_mapping",
+            "properties": {},
+        }
 
     except Exception as e:
         print(f"DEBUG: Error in find_mappings: {e}")
         logger.error(f"Error in find_mappings: {e}")
-        # Return fallback mapping
         return {
             "name": f"{source_name}_to_{target_name}_mapping",
             "properties": {},
@@ -428,6 +602,75 @@ Total schemas analyzed: {len(similarities)}"""
 
         return best_keys, best_schema_map, key_scores_sorted
 
+    def _extract_direction_from_utterance(self, utterance: str, schemas: List[str]) -> tuple[Optional[str], Optional[str]]:
+        """Extract source and target schema names from utterance pattern.
+
+        Pattern: "map [source] with/to [target]"
+        The FIRST schema mentioned is SOURCE, SECOND is TARGET.
+
+        Returns (source_schema, target_schema) or (None, None) if not extractable.
+        """
+        utterance_lower = utterance.lower().strip()
+
+        # Pattern: "map X ... with/to Y ..."
+        # Extract the two schema name parts
+        patterns = [
+            r"map\s+(.+?)\s+with\s+(.+?)$",
+            r"map\s+(.+?)\s+to\s+(.+?)$",
+        ]
+
+        for pattern in patterns:
+            match = re.search(pattern, utterance_lower)
+            if match:
+                source_part = match.group(1).strip()
+                target_part = match.group(2).strip()
+
+                # Find best matching schema for each part
+                source_schema = self._find_best_matching_schema(source_part, schemas)
+                target_schema = self._find_best_matching_schema(target_part, schemas)
+
+                if source_schema and target_schema and source_schema != target_schema:
+                    logger.info(f"Extracted direction: '{source_part}' -> {source_schema}, '{target_part}' -> {target_schema}")
+                    return source_schema, target_schema
+
+        return None, None
+
+    def _find_best_matching_schema(self, text_part: str, schemas: List[str]) -> Optional[str]:
+        """Find the best matching schema name for a text part.
+
+        Example: "omop person" should match "omop_PERSON"
+        """
+        text_normalized = text_part.lower().replace(" ", "_").replace("-", "_")
+
+        # Try exact match first (case-insensitive)
+        for schema in schemas:
+            if schema.lower() == text_normalized:
+                return schema
+
+        # Try prefix match (e.g., "omop person" matches "omop_PERSON")
+        for schema in schemas:
+            schema_normalized = schema.lower()
+            # Check if all words in the text part appear in the schema name
+            words = text_part.lower().split()
+            if all(word in schema_normalized for word in words):
+                return schema
+
+        # Try partial match - find schema that contains key parts
+        best_match = None
+        best_score = 0
+        for schema in schemas:
+            schema_lower = schema.lower()
+            words = text_part.lower().split()
+            matches = sum(1 for word in words if word in schema_lower)
+            if matches > best_score:
+                best_score = matches
+                best_match = schema
+
+        if best_score > 0:
+            return best_match
+
+        return None
+
     def _select_schemas_with_llm(self, utterance: str, schemas: List[str], similarities: List[tuple]) -> tuple[str, str, str]:
         """Select schemas using the LLM wrapper with detailed reasoning"""
 
@@ -445,26 +688,42 @@ Total schemas analyzed: {len(similarities)}"""
             score = similarity_dict.get(schema, 0.0)
             schema_info.append(f"- {schema} (similarity: {score:.3f})")
 
+        # Try to extract direction from utterance pattern first
+        extracted_source, extracted_target = self._extract_direction_from_utterance(utterance, schemas)
+        direction_hint = ""
+        if extracted_source and extracted_target:
+            direction_hint = f"""
+        IMPORTANT DIRECTION HINT:
+        Based on the utterance pattern, the mapping direction should be:
+        - Source (FROM): {extracted_source}
+        - Target (TO): {extracted_target}
+        Use these if the extracted schemas are in the available list.
+        """
+
         schema_selection_prompt = f"""
         Given a user utterance and a list of schemas for mapping, choose a source and a target schema.
 
         User utterance: "{utterance}"
 
+        CRITICAL DIRECTION RULE:
+        The utterance follows the pattern "map [SOURCE] with/to [TARGET]".
+        - The FIRST schema mentioned is the SOURCE (what you're mapping FROM)
+        - The SECOND schema mentioned is the TARGET (what you're mapping TO)
+        - Example: "map omop person with mimic patients" means:
+          - Source = omop_PERSON (mapping FROM)
+          - Target = mimic_PATIENTS (mapping TO)
+        {direction_hint}
+
         Available schemas with similarity scores:
         {chr(10).join(schema_info)}
 
         Please analyze the utterance and select:
-        1. A source schema (what you're mapping FROM)
-        2. A target schema (what you're mapping TO)
-
-        Consider:
-        - Keywords in the utterance that match schema names
-        - Semantic similarity scores provided
-        - Logical mapping direction based on the request
+        1. A source schema (what you're mapping FROM) - this is the FIRST schema in the utterance
+        2. A target schema (what you're mapping TO) - this is the SECOND schema in the utterance
 
         Your response should be a JSON with the following fields:
-        1. "source_schema": the name of the source schema
-        2. "target_schema": the name of the target schema  
+        1. "source_schema": the name of the source schema (FIRST mentioned)
+        2. "target_schema": the name of the target schema (SECOND mentioned)
         3. "reasoning": detailed explanation of why these schemas were chosen
 
         Respond ONLY with valid JSON, no other text.
@@ -488,25 +747,50 @@ Total schemas analyzed: {len(similarities)}"""
 
             # Validate that selected schemas exist
             if source not in schemas:
-                source = schemas[0]
-                reasoning += f"\n(Note: Original source selection not found, using {source})"
+                # Use extracted direction if available
+                if extracted_source and extracted_source in schemas:
+                    source = extracted_source
+                    reasoning += f"\n(Note: Using extracted source from utterance pattern: {source})"
+                else:
+                    source = schemas[0]
+                    reasoning += f"\n(Note: Original source selection not found, using {source})"
             if target not in schemas:
-                target = schemas[1] if len(schemas) > 1 else schemas[0]
-                reasoning += f"\n(Note: Original target selection not found, using {target})"
+                # Use extracted direction if available
+                if extracted_target and extracted_target in schemas:
+                    target = extracted_target
+                    reasoning += f"\n(Note: Using extracted target from utterance pattern: {target})"
+                else:
+                    target = schemas[1] if len(schemas) > 1 else schemas[0]
+                    reasoning += f"\n(Note: Original target selection not found, using {target})"
+
+            # Double-check: if we have extracted direction and LLM got it swapped, correct it
+            if extracted_source and extracted_target:
+                if source == extracted_target and target == extracted_source:
+                    logger.warning(f"LLM swapped direction, correcting: {source}<->{target} to {extracted_source}->{extracted_target}")
+                    source, target = extracted_source, extracted_target
+                    reasoning += f"\n(Note: Direction corrected based on utterance pattern)"
 
             return source, target, reasoning
 
         except Exception as e:
             logger.warning(f"LLM schema selection failed: {e}")
-            # Fallback with basic reasoning
-            fallback_reasoning = f"""Fallback selection due to LLM error: {str(e)}
+            # Fallback: use extracted direction if available, otherwise similarity-based
+            if extracted_source and extracted_target:
+                fallback_reasoning = f"""Fallback selection using utterance pattern extraction (LLM error: {str(e)})
+
+Extracted from utterance pattern "map [SOURCE] with/to [TARGET]":
+- Source: {extracted_source}
+- Target: {extracted_target}"""
+                return extracted_source, extracted_target, fallback_reasoning
+            else:
+                fallback_reasoning = f"""Fallback selection due to LLM error: {str(e)}
 
 Selected based on highest similarity scores:
 - Source: {schemas[0]} (score: {similarity_dict.get(schemas[0], 0.0):.3f})
 - Target: {schemas[1]} (score: {similarity_dict.get(schemas[1], 0.0):.3f})
 
 This is an automatic fallback when LLM response cannot be parsed."""
-            return schemas[0], schemas[1], fallback_reasoning
+                return schemas[0], schemas[1], fallback_reasoning
 
     def run_agent(self, utterance: str) -> Dict[str, Any]:
         """Run the agent with a user utterance"""

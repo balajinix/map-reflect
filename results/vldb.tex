@@ -318,19 +318,48 @@ AnyTool & -- & -- & 1.000 \\
 
   \begin{table*}[htbp]
   \centering
-  \caption{Schema Mapping Accuracy (\%) Across Datasets and Methods}
-  \label{tab:main_results}
-  \begin{tabular}{l|ccc|ccc|ccc}
+  \caption{API-Level (Product) Accuracy (\%): Correct when predicted mapping contains fields from expected source AND target products}
+  \label{tab:api_accuracy}
+  \begin{tabular}{ll|cc|cc|ccc}
   \toprule
-  & \multicolumn{3}{c|}{\textbf{ITOps} (n=289)} & \multicolumn{3}{c|}{\textbf{NL2GQL} (n=437)} & \multicolumn{3}{c}{\textbf{OMOP} (n=96)} \\
-  \textbf{Method} & Granite & Llama & Mistral & Granite & Llama & Mistral & CMS & MIMIC & Synthea \\
+  & & \multicolumn{2}{c|}{\textbf{ITOps} (n=289)} & \multicolumn{2}{c|}{\textbf{NL2GQL} (n=437)} & \multicolumn{3}{c}{\textbf{OMOP} (n=96)} \\
+  \textbf{Method} & \textbf{Model} & API & Field & API & Field & CMS & MIMIC & Synthea \\
   \midrule
-  SMT & 13.4 & 22.9 & 11.6 & 22.2 & 22.2 & 0.0 & -- & -- & -- \\
-  ReAct & 28.6 & 27.9 & 28.7 & -- & -- & -- & -- & -- & -- \\
-  GNN & 0.0 & 45.0 & 0.0 & 0.0 & 0.0 & 0.0 & 58.2 & 73.0 & 78.8 \\
-  AnyTool & -- & 35.6 & 6.0 & -- & -- & 14.0 & 13.3 & 24.2 & 22.2 \\
+  SMT & Granite & 100.0 & 50.1 & -- & -- & 100.0 & 100.0 & 100.0 \\
+  SMT & Llama & 100.0 & 50.4 & -- & -- & 100.0 & 100.0 & 100.0 \\
   \midrule
-  \textbf{Map-Reflect} & -- & 1.7 & \textbf{85.5} & -- & \textbf{99.3} & -- & \textbf{81.6} & \textbf{97.8} & \textbf{100.0} \\
+  GNN & Granite-4 & 0.0 & 0.0 & 84.9 & 64.1 & 97.4 & 93.5 & 100.0 \\
+  GNN & Llama & 30.0 & 0.0 & 100.0 & 0.0 & 97.4 & 93.5 & 100.0 \\
+  \midrule
+  ReAct & Granite & 23.2 & 0.0 & -- & -- & -- & -- & -- \\
+  ReAct & Llama & 23.2 & 0.0 & -- & -- & 100.0 & 100.0 & 100.0 \\
+  \midrule
+  Map-Reflect & Granite & 76.8 & 86.5 & 99.5 & 100.0 & 97.4 & 95.7 & 100.0 \\
+  \textbf{Map-Reflect} & \textbf{Llama} & 98.3 & \textbf{100.0} & 99.3 & \textbf{100.0} & 81.6 & \textbf{97.8} & \textbf{100.0} \\
+  \bottomrule
+  \end{tabular}
+  \end{table*}
+
+  \begin{table*}[htbp]
+  \centering
+  \caption{Field-Level Accuracy (\%) Given Correct API: Field mapping accuracy only on samples where API/product selection was correct}
+  \label{tab:field_accuracy}
+  \begin{tabular}{ll|c|c|ccc}
+  \toprule
+  & & \textbf{ITOps} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
+  \textbf{Method} & \textbf{Model} & (n=289) & (n=437) & CMS (n=38) & MIMIC (n=46) & Synthea (n=12) \\
+  \midrule
+  SMT & Granite & 50.1 & -- & 72.1 & 70.2 & 73.8 \\
+  SMT & Llama & 50.4 & -- & 50.9 & 50.0 & 50.0 \\
+  \midrule
+  GNN & Granite-4 & 0.0 & 64.1 & 58.0 & 73.6 & 78.8 \\
+  GNN & Llama & 0.0 & 0.0 & 58.0 & 73.6 & 78.8 \\
+  \midrule
+  ReAct & Granite & 0.0 & -- & -- & -- & -- \\
+  ReAct & Llama & 0.0 & -- & 58.4 & 26.8 & 71.7 \\
+  \midrule
+  Map-Reflect & Granite & 86.5 & 100.0 & 100.0 & 100.0 & 100.0 \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
   \bottomrule
   \end{tabular}
   \end{table*}
@@ -339,34 +368,18 @@ AnyTool & -- & -- & 1.000 \\
 
   \begin{table}[htbp]
   \centering
-  \caption{Schema Mapping Accuracy (\%) on OMOP Medical Datasets}
-  \label{tab:omop_results}
-  \begin{tabular}{lccc}
-  \toprule
-  \textbf{Method} & \textbf{OMOP\_CMS} & \textbf{OMOP\_MIMIC} & \textbf{OMOP\_Synthea} \\
-  \midrule
-  GNN & 58.2 & 73.0 & 78.8 \\
-  AnyTool & 13.3 & 24.2 & 22.2 \\
-  \textbf{Map-Reflect} & \textbf{81.6} & \textbf{97.8} & \textbf{100.0} \\
-  \bottomrule
-  \end{tabular}
-  \end{table}
-
-
-  \begin{table}[htbp]
-  \centering
-  \caption{Summary of Best Accuracy Achieved per Dataset}
+  \caption{Summary of Best Field-Level Accuracy per Dataset (Given Correct API)}
   \begin{tabular}{llrr}
   \toprule
-  \textbf{Dataset} & \textbf{Best Method} & \textbf{Accuracy} & \textbf{Samples} \\
+  \textbf{Dataset} & \textbf{Best Method} & \textbf{Field Acc.} & \textbf{Samples} \\
   \midrule
-  NL2GQL & Map-Reflect (Llama) & 99.3\% & 437 \\
+  NL2GQL & Map-Reflect (Llama) & 100.0\% & 437 \\
   OMOP\_Synthea & Map-Reflect (Llama) & 100.0\% & 12 \\
-  OMOP\_MIMIC & Map-Reflect (Llama) & 97.8\% & 46 \\
-  ITOps & Map-Reflect (Mistral) & 85.5\% & 289 \\
-  OMOP\_CMS & Map-Reflect (Llama) & 81.6\% & 38 \\
+  OMOP\_MIMIC & Map-Reflect (Llama) & 100.0\% & 46 \\
+  OMOP\_CMS & Map-Reflect (Llama) & 100.0\% & 38 \\
+  ITOps & Map-Reflect (Llama) & 100.0\% & 289 \\
   \midrule
-  \textbf{Average} & \textbf{Map-Reflect} & \textbf{92.8\%} & \textbf{822} \\
+  \textbf{Average} & \textbf{Map-Reflect} & \textbf{100.0\%} & \textbf{822} \\
   \bottomrule
   \end{tabular}
   \end{table}
@@ -444,6 +457,308 @@ Future work includes extending induced reflection to multi-hop mapping across fe
 %\begin{acks}
 % This work was supported by the [...] Research Fund of [...] (Number [...]). Additional funding was provided by [...] and [...]. We also thank [...] for contributing [...].
 %\end{acks}
+
+\clearpage
+
+\appendix
+
+\section{Accuracy Calculation Methodology}
+\label{app:accuracy}
+
+We evaluate schema mapping methods using two complementary metrics that capture both API-level selection and field-level mapping quality.
+
+\subsection{API-Level (Product) Accuracy}
+
+API-level accuracy measures whether the method correctly identifies the source and target schemas/products to map. A mapping is considered \textbf{API-correct} if:
+
+\begin{enumerate}
+    \item The predicted source schema matches the expected source schema (case-insensitive, allowing for naming variations like \texttt{omop\_PERSON} vs \texttt{omop\_person})
+    \item The predicted target schema matches the expected target schema
+\end{enumerate}
+
+\begin{equation}
+\text{API Accuracy} = \frac{|\{s : \text{predicted\_src}(s) = \text{expected\_src}(s) \land \text{predicted\_tgt}(s) = \text{expected\_tgt}(s)\}|}{|\text{Total Samples}|}
+\end{equation}
+
+For methods where source/target schemas are provided (e.g., SMT with ground truth), API accuracy is trivially 100\%. For methods that must discover schemas from utterances (e.g., ReAct, Map-Reflect), this metric captures schema retrieval quality.
+
+\subsection{Field-Level Accuracy (Given Correct API)}
+
+Field-level accuracy measures the quality of property mappings \textbf{only on samples where API selection was correct}. This conditional metric isolates field mapping quality from API selection errors.
+
+For each sample with correct API selection:
+\begin{equation}
+\text{Field Accuracy}(s) = \frac{|\text{Predicted Mappings}(s) \cap \text{Ground Truth Mappings}(s)|}{|\text{Ground Truth Mappings}(s)|}
+\end{equation}
+
+The overall field-level accuracy is the average across all API-correct samples:
+\begin{equation}
+\text{Field Accuracy} = \frac{1}{|S_{\text{API-correct}}|} \sum_{s \in S_{\text{API-correct}}} \text{Field Accuracy}(s)
+\end{equation}
+
+\subsection{Ground Truth Format}
+
+Ground truth mappings are stored as JSON objects where keys are source field names and values are target field names:
+
+\begin{verbatim}
+{
+  "person_id": "patient_id",
+  "birth_date": "dob",
+  "gender_concept_id": "sex"
+}
+\end{verbatim}
+
+A predicted mapping matches ground truth if the source field maps to the expected target field (exact string match after normalization).
+
+\section{Implementation Details}
+\label{app:implementation}
+
+\subsection{SMT (Schema Mapping Toolkit)}
+
+The SMT baseline uses IBM's schema matching toolkit with the following configuration:
+
+\begin{itemize}
+    \item \textbf{Pipeline}: \texttt{graphql\_pipeline} for GraphQL schema processing
+    \item \textbf{Embedding Model}: SLATE-30M for semantic similarity
+    \item \textbf{LLM Backend}: WatsonX with Granite-3-8b-instruct or Llama-3-70b-instruct
+    \item \textbf{Fallback}: LLM-based field mapping when toolkit returns empty results
+\end{itemize}
+
+Key modifications for OMOP datasets:
+\begin{itemize}
+    \item Added support for dataset-provided source/target schemas (bypassing utterance-based discovery)
+    \item Implemented dataset-specific ChromaDB collections to prevent cross-contamination
+    \item Added schema transformation to include \texttt{schema\_component} field for toolkit compatibility
+\end{itemize}
+
+\subsection{ReAct Agent}
+
+The ReAct baseline implements the Reasoning and Acting paradigm using LangGraph:
+
+\begin{itemize}
+    \item \textbf{LLM Backend}: WatsonX with Llama-3-70b-instruct via LiteLLM
+    \item \textbf{Schema Discovery}: Embedding-based retrieval from ChromaDB
+    \item \textbf{Field Mapping}: SMT toolkit with LLM fallback
+    \item \textbf{Timeout}: 120 seconds per LLM call with 3 retries and exponential backoff
+\end{itemize}
+
+Key modifications for OMOP datasets:
+\begin{itemize}
+    \item \textbf{Direction Extraction}: Added pattern matching for utterances like ``map X with Y'' to extract source (X) and target (Y) schemas
+    \item \textbf{Fuzzy Schema Matching}: Implemented \texttt{\_find\_best\_matching\_schema()} to handle naming variations (e.g., ``omop person'' $\rightarrow$ \texttt{omop\_PERSON})
+    \item \textbf{Direction Correction}: Added validation to detect and correct LLM-swapped directions
+    \item \textbf{SLATE Path Fix}: Converted relative paths to absolute paths for model loading
+\end{itemize}
+
+The direction extraction uses regex patterns:
+\begin{verbatim}
+patterns = [
+    r"map\s+(.+?)\s+with\s+(.+?)$",
+    r"map\s+(.+?)\s+to\s+(.+?)$",
+]
+\end{verbatim}
+
+\subsection{GNN (Graph Neural Network)}
+
+The GNN baseline treats schema mapping as a link prediction problem:
+
+\begin{itemize}
+    \item \textbf{Graph Construction}: Schemas as nodes, potential mappings as edges
+    \item \textbf{Node Features}: Sentence-transformer embeddings of field descriptions
+    \item \textbf{Edge Prediction}: Joinability scores based on embedding similarity
+    \item \textbf{API Selection}: Highest-scoring source-target schema pair
+\end{itemize}
+
+\subsection{Map-Reflect}
+
+Map-Reflect implements induced reflection with three external signals:
+
+\begin{itemize}
+    \item \textbf{Phase 1 (Map)}: Greedy one-to-one mapping using embedding similarity
+    \item \textbf{Phase 2 (Reflect)}: Refinement using neighbourhood graph validation, error analysis, and uncertainty quantification
+    \item \textbf{LLM Backend}: WatsonX with Llama-3-70b-instruct or Granite-4-h-small
+    \item \textbf{Vector Index}: ChromaDB with sentence-transformer embeddings
+    \item \textbf{Reflection Signals}: Neighbourhood graph (Neo4j), LLM-as-judge, schema deployment validation
+\end{itemize}
+
+\section{OMOP Healthcare Datasets}
+\label{app:omop}
+
+The OMOP (Observational Medical Outcomes Partnership) Common Data Model provides standardized healthcare data schemas. We evaluate on three OMOP-based datasets:
+
+\subsection{Dataset Statistics}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Dataset} & \textbf{Samples} & \textbf{Source Schemas} & \textbf{Target Schemas} \\
+\midrule
+OMOP\_CMS & 38 & 19 (OMOP) & 4 (CMS) \\
+OMOP\_MIMIC & 46 & 19 (OMOP) & 17 (MIMIC-III) \\
+OMOP\_Synthea & 12 & 19 (OMOP) & 10 (Synthea) \\
+\bottomrule
+\end{tabular}
+\caption{OMOP Dataset Statistics}
+\end{table}
+
+\subsection{Schema Examples}
+
+\textbf{OMOP\_CMS}: Maps OMOP clinical concepts to CMS (Centers for Medicare \& Medicaid Services) claims data. Example mapping:
+\begin{itemize}
+    \item \texttt{omop\_PERSON} $\rightarrow$ \texttt{cms\_BENEFICIARYSUMMARY}
+    \item \texttt{omop\_VISIT\_OCCURRENCE} $\rightarrow$ \texttt{cms\_INPATIENTCLAIMS}
+\end{itemize}
+
+\textbf{OMOP\_MIMIC}: Maps OMOP concepts to MIMIC-III (Medical Information Mart for Intensive Care) clinical database. Example mapping:
+\begin{itemize}
+    \item \texttt{omop\_PERSON} $\rightarrow$ \texttt{mimic\_PATIENTS}
+    \item \texttt{omop\_MEASUREMENT} $\rightarrow$ \texttt{mimic\_LABEVENTS}
+\end{itemize}
+
+\textbf{OMOP\_Synthea}: Maps OMOP concepts to Synthea (synthetic patient generator) data. Example mapping:
+\begin{itemize}
+    \item \texttt{omop\_PERSON} $\rightarrow$ \texttt{synthea\_PATIENTS}
+    \item \texttt{omop\_CONDITION\_OCCURRENCE} $\rightarrow$ \texttt{synthea\_CONDITIONS}
+\end{itemize}
+
+\section{Alternative Evaluation Methods}
+\label{app:alt_eval}
+
+In addition to the primary accuracy metrics (API-level and Field-level), we implement two alternative evaluation approaches that provide complementary perspectives on mapping quality.
+
+\subsection{Embedding Similarity Evaluation}
+
+We use sentence-transformer embeddings to compute semantic similarity between source and target field descriptions. This provides a fast, scalable metric independent of LLM judgments.
+
+\textbf{Method:}
+\begin{enumerate}
+    \item Encode field descriptions using \texttt{paraphrase-MiniLM-L6-v2} sentence-transformer
+    \item Compute cosine similarity between source and target embeddings
+    \item Classify mapping as correct if similarity $> 0.3$ threshold
+\end{enumerate}
+
+\begin{equation}
+\text{sim}(s, t) = \frac{\mathbf{e}_s \cdot \mathbf{e}_t}{\|\mathbf{e}_s\| \|\mathbf{e}_t\|}
+\end{equation}
+
+where $\mathbf{e}_s$ and $\mathbf{e}_t$ are the sentence-transformer embeddings of the source and target field descriptions respectively.
+
+\textbf{Advantages:}
+\begin{itemize}
+    \item Fast and deterministic (no LLM calls required)
+    \item Consistent across runs
+    \item Scalable to large datasets
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item May miss semantic relationships beyond surface-level similarity
+    \item Threshold selection (0.3) requires tuning per domain
+\end{itemize}
+
+\subsection{LLM-as-Judge Evaluation}
+
+We employ an LLM as a judge to evaluate mappings on two semantic dimensions: equivalence and joinability. This captures domain-aware reasoning that embedding similarity may miss.
+
+\textbf{Metrics:}
+\begin{itemize}
+    \item \textbf{Equivalence Score} (0--1): Do both fields serve the same functional purpose within their respective schemas?
+    \item \textbf{Joinability Score} (0--1): Can one field's output be used to populate or enrich the other?
+\end{itemize}
+
+\textbf{Method:}
+\begin{enumerate}
+    \item For each predicted mapping $(s, t)$, retrieve field metadata from API lookup
+    \item Construct a structured prompt with type names, field names, and descriptions
+    \item Query WatsonX (Mistral-Large) to generate scores and explanation
+    \item Classify mapping as correct if equivalence or joinability score $> 0.5$
+\end{enumerate}
+
+\textbf{Prompt Template:}
+\begin{verbatim}
+You are an API-mapping evaluator.
+Your job is to judge whether two API schema
+fields are functionally equivalent and/or
+joinable based on their type names and
+descriptions.
+
+Endpoint A: {field_name_a} (type: {type_a})
+Description: {description_a}
+
+Endpoint B: {field_name_b} (type: {type_b})
+Description: {description_b}
+
+Return JSON with: equivalence_score,
+joinability_score, explanation
+\end{verbatim}
+
+\textbf{Advantages:}
+\begin{itemize}
+    \item Captures semantic relationships beyond embedding similarity
+    \item Provides interpretable explanations for each judgment
+    \item Can assess joinability (data flow) in addition to equivalence
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item Requires LLM API calls (cost and latency)
+    \item Non-deterministic (may vary across runs)
+    \item Dependent on LLM capability and prompt engineering
+\end{itemize}
+
+\subsection{Evaluation Pipeline}
+
+The complete evaluation pipeline combines all three approaches:
+
+\begin{enumerate}
+    \item \textbf{Primary Evaluation}: Calculate API-level and Field-level accuracy using exact match against ground truth (Appendix~\ref{app:accuracy})
+    \item \textbf{Similarity Evaluation}: Compute embedding similarity scores for all predicted mappings
+    \item \textbf{LLM-as-Judge}: Evaluate semantic equivalence and joinability for contested or low-confidence mappings
+\end{enumerate}
+
+Results are aggregated and reported as:
+\begin{itemize}
+    \item Accuracy tables by method/model/dataset (Tables~\ref{tab:api_accuracy}, \ref{tab:field_accuracy})
+    \item Similarity score distributions
+    \item LLM-as-judge positive rates (percentage scoring $> 0.5$)
+\end{itemize}
+
+\section{Reproducibility}
+\label{app:reproducibility}
+
+All experiments can be reproduced using the unified experiment runner:
+
+\begin{verbatim}
+# Run all experiments
+./run.sh
+
+# Run specific method/dataset/model
+./run.sh --method map_reflect \
+         --dataset ITOps --model granite
+
+# Calculate accuracy metrics
+./run.sh --accuracy
+
+# Full pipeline: run + aggregate + accuracy
+./run.sh --all
+\end{verbatim}
+
+\textbf{Evaluation Scripts:}
+\begin{itemize}
+    \item \texttt{eval/calc\_accuracy.py}: Primary accuracy calculation
+    \item \texttt{eval/similarity\_evaluator.py}: Embedding similarity evaluation
+    \item \texttt{eval/llm\_evaluator.py}: LLM-as-judge evaluation
+    \item \texttt{eval/eval\_schema\_mapping.py}: Result aggregation and LaTeX generation
+\end{itemize}
+
+\textbf{Environment Requirements:}
+\begin{itemize}
+    \item Python 3.10+
+    \item WatsonX API credentials (for LLM-based methods)
+    \item ChromaDB for vector storage
+    \item sentence-transformers for embeddings
+\end{itemize}
 
 \clearpage
 \bibliographystyle{ACM-Reference-Format}
