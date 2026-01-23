@@ -141,7 +141,293 @@ class ReMatchAgent:
                 self.source_properties[prop_id] = prop_data
             else:
                 self.target_properties[prop_id] = prop_data
-    
+
+    def set_source_target_from_utterance(self, utterance: str) -> Tuple[str, str]:
+        """
+        Dynamically set source and target properties based on utterance.
+
+        For datasets like itops/nl2gql where source/target are not pre-defined,
+        parse the utterance to determine which products/schemas to use.
+
+        Example ITOps: "map concert vulnerabilities to turbo entities"
+        -> source: concert_* properties (by product_name)
+        -> target: turbonomic_* properties (by product_name)
+
+        Example NL2GQL: "map concert data to stadium data"
+        -> source: Concert_* properties (by type_name)
+        -> target: Stadium_* properties (by type_name)
+
+        Returns:
+            Tuple of (source_schema, target_schema) product/table names
+        """
+        # Check if this is a single-product dataset like NL2GQL
+        available_products = list(set(
+            p.get('product_name', '')
+            for p in self.property_data.values()
+            if p.get('product_name')
+        ))
+
+        # For datasets with only one product (like nl2gql), use type_name (table name) instead
+        use_type_name = len(available_products) <= 1
+
+        if use_type_name:
+            # Extract available table names from type_name
+            available_tables = list(set(
+                p.get('type_name', '')
+                for p in self.property_data.values()
+                if p.get('type_name')
+            ))
+            available_schemas = available_tables
+            schema_field = 'type_name'
+            examples = """- "map concert data to stadium data" -> {{"source_schema": "Concert", "target_schema": "Stadium"}}
+- "map singer_in_concert data to singer data" -> {{"source_schema": "SingerInConcert", "target_schema": "Singer"}}"""
+        else:
+            available_schemas = available_products
+            schema_field = 'product_name'
+            examples = """- "map concert vulnerabilities to turbo entities" -> {{"source_schema": "Concert", "target_schema": "Turbonomic"}}
+- "find instana metrics similar to apptio costs" -> {{"source_schema": "Instana", "target_schema": "Apptio"}}"""
+
+        # For NL2GQL with many tables, try direct pattern matching first
+        # Utterances like "map concert data to stadium data" have simple structure
+        if use_type_name:
+            import re
+            # Pattern: "map X data to Y data" or "map X to Y"
+            pattern = r'map\s+(\w+)(?:\s+data)?\s+to\s+(\w+)(?:\s+data)?'
+            match = re.search(pattern, utterance.lower())
+            if match:
+                source_candidate = match.group(1)
+                target_candidate = match.group(2)
+                # Check if these match available tables (case-insensitive)
+                available_lower = {t.lower(): t for t in available_schemas}
+                # Also try with underscores replaced by spaces
+                source_match = available_lower.get(source_candidate) or available_lower.get(source_candidate.replace(' ', '_'))
+                target_match = available_lower.get(target_candidate) or available_lower.get(target_candidate.replace(' ', '_'))
+
+                if source_match and target_match:
+                    logger.info(f"Direct pattern match: source={source_match}, target={target_match}")
+                    source_schema = source_match.lower()
+                    target_schema = target_match.lower()
+                    # Skip LLM call, go directly to filtering
+                    self.source_properties = {
+                        prop_id: prop_data
+                        for prop_id, prop_data in self.property_data.items()
+                        if source_schema in prop_data.get(schema_field, '').lower()
+                    }
+                    self.target_properties = {
+                        prop_id: prop_data
+                        for prop_id, prop_data in self.property_data.items()
+                        if target_schema in prop_data.get(schema_field, '').lower()
+                    }
+                    logger.info(f"Filtered properties: {len(self.source_properties)} source, {len(self.target_properties)} target")
+                    # Rebuild table groupings and document corpus
+                    self.source_tables = self._group_by_table(self.source_properties)
+                    self.target_tables = self._group_by_table(self.target_properties)
+                    self._build_document_corpus()
+                    return (source_schema, target_schema)
+
+        # Fall back to LLM for complex utterances
+        prompt = f"""Parse this schema mapping request and identify the source and target schemas.
+
+Utterance: "{utterance}"
+
+Available {'tables' if use_type_name else 'products'} in the system: {', '.join(sorted(available_schemas)[:100])}{'...' if len(available_schemas) > 100 else ''}
+
+Return ONLY a JSON object with:
+{{
+  "source_schema": "source {'table' if use_type_name else 'product'} name",
+  "target_schema": "target {'table' if use_type_name else 'product'} name"
+}}
+
+Examples:
+{examples}
+"""
+
+        messages = [
+            {"role": "system", "content": "You are a schema matching assistant. Return only valid JSON."},
+            {"role": "user", "content": prompt}
+        ]
+
+        response = self._call_llm(messages, temperature=0.0)
+        logger.debug(f"LLM response for utterance parsing: {response[:500]}")
+        response = _strip_code_fences(response)
+
+        parsed, err = _safe_json_loads(response)
+        if err or not isinstance(parsed, dict):
+            logger.warning(f"Failed to parse source/target from utterance: {err}. Response: {response[:200]}")
+            # Fallback: use all properties
+            self.source_properties = self.property_data.copy()
+            self.target_properties = self.property_data.copy()
+            return ('', '')
+
+        source_schema = parsed.get('source_schema', '').lower()
+        target_schema = parsed.get('target_schema', '').lower()
+
+        logger.info(f"Parsed utterance -> source: {source_schema}, target: {target_schema} (using {schema_field})")
+
+        # Filter properties by the appropriate field
+        self.source_properties = {
+            prop_id: prop_data
+            for prop_id, prop_data in self.property_data.items()
+            if source_schema in prop_data.get(schema_field, '').lower()
+        }
+
+        self.target_properties = {
+            prop_id: prop_data
+            for prop_id, prop_data in self.property_data.items()
+            if target_schema in prop_data.get(schema_field, '').lower()
+        }
+
+        logger.info(
+            f"Filtered properties: {len(self.source_properties)} source, "
+            f"{len(self.target_properties)} target"
+        )
+
+        # If no properties found, try a more lenient match
+        if not self.source_properties or not self.target_properties:
+            logger.warning(f"No properties found for source={source_schema} target={target_schema} schema_field={schema_field}, trying lenient match")
+            # Try matching just the first word of the schema name
+            source_word = source_schema.split('_')[0] if '_' in source_schema else source_schema
+            target_word = target_schema.split('_')[0] if '_' in target_schema else target_schema
+
+            if not self.source_properties:
+                self.source_properties = {
+                    prop_id: prop_data
+                    for prop_id, prop_data in self.property_data.items()
+                    if source_word in prop_data.get(schema_field, '').lower()
+                }
+
+            if not self.target_properties:
+                self.target_properties = {
+                    prop_id: prop_data
+                    for prop_id, prop_data in self.property_data.items()
+                    if target_word in prop_data.get(schema_field, '').lower()
+                }
+
+            logger.info(
+                f"After lenient match: {len(self.source_properties)} source, "
+                f"{len(self.target_properties)} target"
+            )
+
+        # Rebuild table groupings and document corpus with filtered properties
+        self.source_tables = self._group_by_table(self.source_properties)
+        self.target_tables = self._group_by_table(self.target_properties)
+
+        # Rebuild embeddings for filtered target tables
+        self._build_document_corpus()
+
+        return (source_schema, target_schema)
+
+    def run_utterance(
+        self,
+        utterance: str,
+        ground_truth_fields: Optional[List[str]] = None
+    ) -> Dict[str, Any]:
+        """
+        Run ReMatch on an utterance (for itops/nl2gql datasets).
+
+        This method:
+        1. Parses the utterance to identify source/target products
+        2. Matches source attributes to target schema (only ground_truth fields if provided)
+        3. Returns results in evaluation format
+
+        Args:
+            utterance: Natural language mapping request
+            ground_truth_fields: Optional list of source field IDs to match (from ground_truth_mapping)
+                                If None, matches all source attributes (slower)
+
+        Returns:
+            Dict with mapping results in evaluation format
+        """
+        # Step 1: Parse utterance to set source/target
+        source_schema, target_schema = self.set_source_target_from_utterance(utterance)
+
+        if not self.source_properties or not self.target_properties:
+            logger.warning("No source or target properties after parsing utterance")
+            return {
+                'utterance': utterance,
+                'source_schema': source_schema,
+                'target_schema': target_schema,
+                'predicted_mapping': {},
+                'error': 'No source or target properties identified'
+            }
+
+        # Step 2: Determine which source attributes to match
+        if ground_truth_fields:
+            # Only match fields that are in the ground truth
+            fields_to_match = []
+            for gt_field in ground_truth_fields:
+                # Find matching source property
+                # Handle format differences:
+                # - NL2GQL ground truth: "concert_stadium_id" (table_field)
+                # - Property lookup: "nl2gql_Concert.stadium_id" (product_Table.field)
+                gt_lower = gt_field.lower()
+                gt_parts = gt_lower.split('_')
+
+                for source_id in self.source_properties.keys():
+                    source_lower = source_id.lower()
+
+                    # Check exact match first
+                    if source_lower == gt_lower:
+                        fields_to_match.append(source_id)
+                        break
+
+                    # Check if gt_field is contained in source_id
+                    if gt_lower in source_lower:
+                        fields_to_match.append(source_id)
+                        break
+
+                    # For NL2GQL format: extract field_name and check
+                    # ground_truth: "concert_stadium_id" -> field could be "stadium_id"
+                    # source: "nl2gql_Concert.stadium_id" -> field is "stadium_id"
+                    source_data = self.source_properties[source_id]
+                    source_field = source_data.get('field_name', '').lower()
+
+                    if len(gt_parts) > 1:
+                        # Extract field part from ground truth (e.g., "stadium_id" from "concert_stadium_id")
+                        gt_field_part = '_'.join(gt_parts[1:])
+                        if source_field == gt_field_part:
+                            fields_to_match.append(source_id)
+                            break
+                        # Also try matching without table prefix
+                        if source_field and source_field in gt_lower:
+                            fields_to_match.append(source_id)
+                            break
+
+            logger.info(f"Matching {len(fields_to_match)} fields from ground truth (from {len(ground_truth_fields)} gt fields)")
+        else:
+            # Match all source attributes (slow)
+            fields_to_match = list(self.source_properties.keys())
+            logger.info(f"Matching all {len(fields_to_match)} source attributes")
+
+        # Step 3: Match selected source attributes
+        all_mappings = {}
+
+        for source_id in fields_to_match:
+            if source_id not in self.source_properties:
+                continue
+            source_data = self.source_properties[source_id]
+            source_table = source_data.get('type_name', 'unknown')
+            result = self.match_attribute(source_id, source_table)
+
+            if result.top_k_matches:
+                # Use top match
+                target_id = result.top_k_matches[0]
+                all_mappings[source_id] = {
+                    'target_property': target_id,
+                    'justification': f"ReMatch top-1 match from {len(result.top_k_matches)} candidates",
+                    'candidates': result.top_k_matches
+                }
+
+        return {
+            'utterance': utterance,
+            'source_schema': source_schema,
+            'target_schema': target_schema,
+            'predicted_mapping': all_mappings,
+            'total_source_properties': len(self.source_properties),
+            'total_mappings': len(all_mappings),
+            'error': None
+        }
+
     def _group_by_table(self, properties: Dict) -> Dict[str, List[str]]:
         """Group property IDs by their table name."""
         tables = defaultdict(list)

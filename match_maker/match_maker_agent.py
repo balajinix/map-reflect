@@ -181,40 +181,70 @@ class MatchMakerAgent:
     def set_source_target_from_utterance(self, utterance: str):
         """
         Dynamically set source and target properties based on utterance.
-        
+
         For datasets like itops/nl2gql where source/target are not pre-defined,
         parse the utterance to determine which products/schemas to use.
-        
-        Example: "map concert vulnerabilities to turbo entities"
-        → source: concert_* properties
-        → target: turbonomic_* properties
+
+        Example ITOps: "map concert vulnerabilities to turbo entities"
+        → source: concert_* properties (by product_name)
+        → target: turbonomic_* properties (by product_name)
+
+        Example NL2GQL: "map concert data to stadium data"
+        → source: Concert_* properties (by type_name)
+        → target: Stadium_* properties (by type_name)
         """
+        # Check if this is a single-product dataset like NL2GQL
+        available_products = list(set(
+            p.get('product_name', '')
+            for p in self.property_data.values()
+            if p.get('product_name')
+        ))
+
+        # For datasets with only one product (like nl2gql), use type_name (table name) instead
+        use_type_name = len(available_products) <= 1
+
+        if use_type_name:
+            # Extract available table names from type_name
+            available_tables = list(set(
+                p.get('type_name', '')
+                for p in self.property_data.values()
+                if p.get('type_name')
+            ))
+            available_schemas = available_tables
+            schema_field = 'type_name'
+            examples = """- "map concert data to stadium data" → {{"source_schema": "Concert", "target_schema": "Stadium"}}
+- "map singer_in_concert data to singer data" → {{"source_schema": "SingerInConcert", "target_schema": "Singer"}}"""
+        else:
+            available_schemas = available_products
+            schema_field = 'product_name'
+            examples = """- "map concert vulnerabilities to turbo entities" → {{"source_schema": "Concert", "target_schema": "Turbonomic"}}
+- "find instana metrics similar to apptio costs" → {{"source_schema": "Instana", "target_schema": "Apptio"}}"""
+
         # Extract source and target from utterance using LLM
         prompt = f"""Parse this schema mapping request and identify the source and target schemas.
 
 Utterance: "{utterance}"
 
-Available products in the system: {', '.join(set(p.get('product_name', '') for p in self.property_data.values()))}
+Available {'tables' if use_type_name else 'products'} in the system: {', '.join(available_schemas[:50])}{'...' if len(available_schemas) > 50 else ''}
 
 Return ONLY a JSON object with:
 {{
-  "source_schema": "source product name",
-  "target_schema": "target product name"
+  "source_schema": "source {'table' if use_type_name else 'product'} name",
+  "target_schema": "target {'table' if use_type_name else 'product'} name"
 }}
 
 Examples:
-- "map concert vulnerabilities to turbo entities" → {{"source_schema": "Concert", "target_schema": "Turbonomic"}}
-- "find instana metrics similar to apptio costs" → {{"source_schema": "Instana", "target_schema": "Apptio"}}
+{examples}
 """
-        
+
         messages = [
             {"role": "system", "content": "You are a schema matching assistant. Return only valid JSON."},
             {"role": "user", "content": prompt}
         ]
-        
+
         response = self._call_llm(messages, temperature=0.0)
         response = _strip_code_fences(response)
-        
+
         parsed, err = _safe_json_loads(response)
         if err or not isinstance(parsed, dict):
             logger.warning(f"Failed to parse source/target from utterance: {err}")
@@ -222,30 +252,56 @@ Examples:
             self.source_properties = self.property_data.copy()
             self.target_properties = self.property_data.copy()
             return
-        
+
         source_schema = parsed.get('source_schema', '').lower()
         target_schema = parsed.get('target_schema', '').lower()
-        
-        logger.info(f"Parsed utterance → source: {source_schema}, target: {target_schema}")
-        
-        # Filter properties by product name
+
+        logger.info(f"Parsed utterance → source: {source_schema}, target: {target_schema} (using {schema_field})")
+
+        # Filter properties by the appropriate field
         self.source_properties = {
             prop_id: prop_data
             for prop_id, prop_data in self.property_data.items()
-            if source_schema in prop_data.get('product_name', '').lower()
+            if source_schema in prop_data.get(schema_field, '').lower()
         }
-        
+
         self.target_properties = {
             prop_id: prop_data
             for prop_id, prop_data in self.property_data.items()
-            if target_schema in prop_data.get('product_name', '').lower()
+            if target_schema in prop_data.get(schema_field, '').lower()
         }
-        
+
         logger.info(
             f"Filtered properties: {len(self.source_properties)} source, "
             f"{len(self.target_properties)} target"
         )
-        
+
+        # If no properties found, try a more lenient match
+        if not self.source_properties or not self.target_properties:
+            logger.warning(f"No properties found, trying lenient match")
+            # Try matching just the first word of the schema name
+            source_word = source_schema.split('_')[0] if '_' in source_schema else source_schema
+            target_word = target_schema.split('_')[0] if '_' in target_schema else target_schema
+
+            if not self.source_properties:
+                self.source_properties = {
+                    prop_id: prop_data
+                    for prop_id, prop_data in self.property_data.items()
+                    if source_word in prop_data.get(schema_field, '').lower()
+                }
+
+            if not self.target_properties:
+                self.target_properties = {
+                    prop_id: prop_data
+                    for prop_id, prop_data in self.property_data.items()
+                    if target_word in prop_data.get(schema_field, '').lower()
+                }
+
+            logger.info(
+                f"After lenient match: {len(self.source_properties)} source, "
+                f"{len(self.target_properties)} target"
+            )
+
         # Rebuild index with filtered target properties if needed
         if self.colbert_available:
             logger.info("Rebuilding index with filtered target properties...")

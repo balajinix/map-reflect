@@ -160,13 +160,39 @@ class DatasetLoader:
                 }
             
             elif dataset == "NL2GQL":
+                # NL2GQL format:
+                # - mapping_utterance: "map concert data to stadium data"
+                # - result.name: source table (e.g., "concert")
+                # - result.properties: ground truth mapping
+                result = data.get("result", {})
+                properties = result.get("properties", {})
+
+                # Extract ground truth mapping: convert from result format to expected format
+                # Input: {"concert_stadium_id": [{"mapTable": "stadium", "mapProperty": "stadium_stadium_id"}]}
+                # Output: {"concert_stadium_id": "stadium_stadium_id"}
+                ground_truth = {}
+                for source_field, mappings in properties.items():
+                    if mappings and len(mappings) > 0:
+                        target_field = mappings[0].get("mapProperty", "")
+                        if target_field:
+                            ground_truth[source_field] = target_field
+
+                # Extract source and target from mapping_utterance or result
+                source_table = result.get("name", "")
+                # Target can be extracted from first mapping's mapTable
+                target_table = ""
+                for mappings in properties.values():
+                    if mappings and len(mappings) > 0:
+                        target_table = mappings[0].get("mapTable", "")
+                        break
+
                 utterance_data = {
                     "sample_id": data.get("id", f"nl2gql_{index:03d}"),
-                    "utterance": data.get("natural_language", data.get("utterance", "")),
-                    "expected_source": data.get("source_schema", "user"),
-                    "expected_target": data.get("target_schema", "account"),
-                    "ground_truth_mapping": data.get("mapping", {}),
-                    "graphql_query": data.get("graphql_query", "")
+                    "utterance": data.get("mapping_utterance", data.get("utterance", "")),
+                    "expected_source": source_table,
+                    "expected_target": target_table,
+                    "ground_truth_mapping": ground_truth,
+                    "question": data.get("question", "")
                 }
             
             elif dataset == "GraphQLRestBench":

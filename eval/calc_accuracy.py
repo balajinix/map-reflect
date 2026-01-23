@@ -62,6 +62,20 @@ METHODS = {
             ('Llama', 'llama-3-3'),
         ],
     },
+    'MatchMaker': {
+        'dir': 'match_maker/results',
+        'models': [
+            ('Granite', 'granite'),
+            ('Llama', 'llama'),
+        ],
+    },
+    'ReMatch': {
+        'dir': 'rematch/results',
+        'models': [
+            ('Granite', 'granite'),
+            ('Llama', 'llama'),
+        ],
+    },
 }
 
 # =============================================================================
