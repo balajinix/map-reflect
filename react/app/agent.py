@@ -1,9 +1,13 @@
 import os
+import sys
 import json
 import requests
 import re
 import numpy as np
 from pathlib import Path
+
+# Increase recursion limit for large schemas (NL2GQL schemas can have 750+ properties)
+sys.setrecursionlimit(3000)
 from typing import Dict, Any, List, Optional, TypedDict, Annotated
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 from sentence_transformers import SentenceTransformer

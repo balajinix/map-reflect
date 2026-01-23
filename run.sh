@@ -94,6 +94,7 @@ else
     IS_REMOTE=false
     SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     BASE_DIR="$SCRIPT_DIR"
+    VENV_PATH="${BASE_DIR}/.venv"
 fi
 
 DATA_DIR="${BASE_DIR}/data"
@@ -563,8 +564,8 @@ run_experiments() {
     # Create log directory
     mkdir -p "$LOG_DIR"
 
-    # Activate virtual environment for remote execution
-    if [[ "$IS_REMOTE" == "true" && -f "${VENV_PATH}/bin/activate" ]]; then
+    # Activate virtual environment if available
+    if [[ -f "${VENV_PATH}/bin/activate" ]]; then
         log "Activating virtual environment: $VENV_PATH"
         source "${VENV_PATH}/bin/activate"
     fi

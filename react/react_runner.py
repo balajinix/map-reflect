@@ -6,6 +6,10 @@ Standardized execution script using the existing GraphQLSchemaMappingAgent
 
 import os
 import sys
+
+# Increase recursion limit for large NL2GQL schemas (some have 750+ properties)
+sys.setrecursionlimit(3000)
+
 import json
 import time
 import argparse

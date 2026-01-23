@@ -127,6 +127,9 @@ class MappingState(TypedDict):
     target_product: str
     source_type_hints: List[str]
     target_type_hints: List[str]
+    # Field hints extracted from utterance for better field-level mapping
+    source_field_hints: List[str]
+    target_field_hints: List[str]
 
 @dataclass
 class PropertyMapping:
@@ -473,6 +476,63 @@ class MapReflectAgent:
                     state.get("source_product"), state.get("target_product"))
         return state
 
+    def _extract_field_hints(self, state: MappingState) -> MappingState:
+        """Extract specific field/attribute hints from utterance for better field-level mapping.
+
+        This method analyzes the user's utterance to identify specific field names or
+        attributes they want to map, improving field-level accuracy beyond just schema matching.
+        """
+        user_utterance = state["user_utterance"]
+        logger.info("Extracting field hints from utterance")
+
+        prompt = f"""Analyze this schema mapping request: "{user_utterance}"
+
+Extract specific field or attribute names that the user wants to map between schemas.
+Focus on nouns and field-like terms that indicate what data should be mapped.
+
+Examples:
+- "map concert application name with turbo entity" → source: ["name", "application"], target: ["entity"]
+- "map instana timestamp to concert created_on" → source: ["timestamp"], target: ["created_on"]
+- "map concert tags to turbo entity tags" → source: ["tags"], target: ["tags"]
+- "map concert vulnerabilities severity to turbo entity" → source: ["severity", "vulnerabilities"], target: ["entity"]
+- "map concert api key with instana call group" → source: ["api", "key", "apikey"], target: ["call", "group", "callgroup"]
+
+Return ONLY a JSON object with field hints (lowercase, include both singular and compound forms):
+{{"source_field_hints": ["field1", "field2"], "target_field_hints": ["field1", "field2"]}}
+
+Your entire response must be ONLY the JSON object starting with {{ and ending with }}.
+""".strip()
+
+        messages = [
+            {"role": "system", "content": "You are an expert in schema mapping. Extract field-level hints from natural language requests."},
+            {"role": "user", "content": prompt},
+        ]
+        raw = self.call_llm(messages)
+        raw = _strip_code_fences(raw)
+
+        match = re.search(r'\{[^}]+\}', raw, re.DOTALL)
+        if match:
+            hints, err = _safe_json_loads(match.group())
+        else:
+            hints, err = _safe_json_loads(raw)
+
+        if err or not isinstance(hints, dict):
+            logger.warning("Field hints JSON parse failed; extracting from utterance directly. err=%s", err)
+            # Fallback: extract words from utterance that look like field names
+            words = re.findall(r'\b[a-z_]+\b', user_utterance.lower())
+            # Filter out common words
+            stop_words = {'map', 'with', 'to', 'from', 'the', 'and', 'or', 'a', 'an', 'in', 'on', 'for'}
+            field_words = [w for w in words if w not in stop_words and len(w) > 2]
+            state["source_field_hints"] = field_words
+            state["target_field_hints"] = field_words
+        else:
+            state["source_field_hints"] = [h.lower() for h in hints.get("source_field_hints", [])]
+            state["target_field_hints"] = [h.lower() for h in hints.get("target_field_hints", [])]
+
+        logger.info("Field hints | source=%r target=%r",
+                    state["source_field_hints"], state["target_field_hints"])
+        return state
+
     def _parse_utterance_for_schemas(self, utterance: str) -> tuple:
         """Parse utterance to extract source and target schema hints.
 
@@ -652,13 +712,17 @@ class MapReflectAgent:
             q = state["source_context"]
             q_emb = self.embedding_model.encode(q).tolist()
 
-            # Get more results initially, then filter by product/type hints
+            # Get more results initially, then filter by product/type/field hints
             n_results = min(self.top_k * self.n_results_multiplier, len(state["property_data"]))
             res = collection.query(query_embeddings=[q_emb], n_results=n_results)
             all_ids = res["ids"][0] if res.get("ids") else []
 
+            # Get field hints for utterance-aware property selection
+            source_field_hints = state.get("source_field_hints", [])
+
             filtered_ids = self._filter_properties_by_hints(
-                all_ids, state["property_data"], source_product, type_hints
+                all_ids, state["property_data"], source_product, type_hints,
+                field_hints=source_field_hints
             )
 
             # If filtering returned nothing, fall back to top results
@@ -742,8 +806,9 @@ class MapReflectAgent:
         return matching
 
     def _filter_properties_by_hints(self, property_ids: list, property_data: dict,
-                                     product: str, type_hints: list) -> set:
-        """Re-rank properties by product name and type hints.
+                                     product: str, type_hints: list,
+                                     field_hints: list = None) -> set:
+        """Re-rank properties by product name, type hints, and field hints.
 
         Uses a soft re-ranking approach: properties matching the product get boosted,
         but we don't strictly filter out non-matching properties (since the semantic
@@ -754,6 +819,7 @@ class MapReflectAgent:
             property_data: Full property metadata dict
             product: Product name to filter by (e.g., 'concert')
             type_hints: List of type name hints (e.g., ['ApiKey', 'Application'])
+            field_hints: List of field name hints extracted from utterance (e.g., ['name', 'tags'])
 
         Returns:
             Set of re-ranked property IDs
@@ -764,14 +830,21 @@ class MapReflectAgent:
         type_exact_boost = self.config.get("type_exact_boost", 20)
         type_partial_boost = self.config.get("type_partial_boost", 10)
         type_field_boost = self.config.get("type_field_boost", 5)
+        # New: field hint boost (high priority for utterance-aware matching)
+        field_hint_exact_boost = self.config.get("field_hint_exact_boost", 50)
+        field_hint_partial_boost = self.config.get("field_hint_partial_boost", 25)
 
+        field_hints = field_hints or []
         scored = []
 
         for i, pid in enumerate(property_ids):
             pdata = property_data.get(pid, {})
             pname = pdata.get("product_name", "").lower()
             tname = pdata.get("type_name", "").lower()
+            actual_field = pdata.get("field_name", "").lower()
             field_name = pid.split('.')[0].lower() if '.' in pid else pid.lower()
+            # Full property path for matching
+            full_path = pid.lower()
 
             # Base score from semantic similarity (inverse of position)
             base_score = len(property_ids) - i
@@ -796,6 +869,22 @@ class MapReflectAgent:
                 # Type name in field path
                 if hint_lower in field_name:
                     boost += type_field_boost
+
+            # NEW: Field hint matching (high priority for utterance-aware selection)
+            for hint in field_hints:
+                hint_lower = hint.lower()
+                # Exact field name match (e.g., hint="name" matches field="name")
+                if hint_lower == actual_field:
+                    boost += field_hint_exact_boost
+                    logger.debug("Field hint exact match: %s in %s", hint_lower, pid)
+                # Field name contains hint (e.g., hint="name" matches field="display_name")
+                elif hint_lower in actual_field or actual_field in hint_lower:
+                    boost += field_hint_partial_boost
+                    logger.debug("Field hint partial match: %s in %s", hint_lower, pid)
+                # Hint appears anywhere in property path
+                elif hint_lower in full_path:
+                    boost += field_hint_partial_boost // 2
+                    logger.debug("Field hint path match: %s in %s", hint_lower, pid)
 
             total_score = base_score + boost
             scored.append((pid, total_score))
@@ -886,13 +975,17 @@ class MapReflectAgent:
             q = state["destination_context"]
             q_emb = self.embedding_model.encode(q).tolist()
 
-            # Get more results initially, then filter by product/type hints
+            # Get more results initially, then filter by product/type/field hints
             n_results = min(self.top_k * self.n_results_multiplier, len(state["property_data"]))
             res = collection.query(query_embeddings=[q_emb], n_results=n_results)
             all_ids = res["ids"][0] if res.get("ids") else []
 
+            # Get field hints for utterance-aware property selection
+            target_field_hints = state.get("target_field_hints", [])
+
             filtered_ids = self._filter_properties_by_hints(
-                all_ids, state["property_data"], target_product, type_hints
+                all_ids, state["property_data"], target_product, type_hints,
+                field_hints=target_field_hints
             )
 
             # If filtering returned nothing, fall back to top results
@@ -943,22 +1036,43 @@ class MapReflectAgent:
         srcs = state["source_properties"]
         dsts = state["destination_properties"]
         pdata = state["property_data"]
+        user_utterance = state["user_utterance"]
+        source_field_hints = state.get("source_field_hints", [])
+        target_field_hints = state.get("target_field_hints", [])
 
         if not srcs or not dsts:
             logger.warning("Insufficient properties for mapping | src=%d dst=%d", len(srcs), len(dsts))
             state["candidate_mappings"] = {}
             return state
-    
-        logger.info("Finding mappings | evaluating %d source × %d dest = %d pairs", 
+
+        logger.info("Finding mappings | evaluating %d source × %d dest = %d pairs",
                     len(srcs), len(dsts), len(srcs) * len(dsts))
-   
+
+        # Build prompt with utterance context for better field-level mapping
         prompt = [
-            "Evaluate these property mappings. Return ONLY a JSON array. No preamble, no explanation.",
+            f'User Request: "{user_utterance}"',
+            "",
+        ]
+
+        # Add field hints if available
+        if source_field_hints or target_field_hints:
+            prompt.append("Key fields/attributes mentioned in request:")
+            if source_field_hints:
+                prompt.append(f"  Source fields: {', '.join(source_field_hints)}")
+            if target_field_hints:
+                prompt.append(f"  Target fields: {', '.join(target_field_hints)}")
+            prompt.append("")
+
+        prompt.extend([
+            "Based on the user's request above, evaluate which source properties should map to which destination properties.",
+            "PRIORITIZE mappings that semantically match the user's intent - focus on properties whose names or descriptions relate to the fields mentioned in the request.",
+            "",
+            "Return ONLY a JSON array. No preamble, no explanation.",
             "Format: [{\"source_property\": \"id\", \"destination_property\": \"id\", \"valid\": true, \"confidence\": 0.9, \"justification\": \"reason\"}]",
             "Only include entries where valid=true.",
             "Your entire response must be ONLY the JSON array starting with [ and ending with ].",
             "\nCandidate Pairs:\n"
-        ]
+        ])
 
         for sp in srcs:
             si = pdata[sp]
@@ -974,7 +1088,7 @@ class MapReflectAgent:
                 )
 
         messages = [
-            {"role": "system", "content": "You are an expert in data mapping and schema alignment. Return only valid JSON with no explanatory text."},
+            {"role": "system", "content": "You are an expert in data mapping and schema alignment. Prioritize mappings that match the user's specific request. Return only valid JSON with no explanatory text."},
             {"role": "user", "content": "\n".join(prompt)}
         ]
 
@@ -1054,8 +1168,24 @@ class MapReflectAgent:
         
         return state
 
-    def _create_reflection_prompt(self, candidate_mappings: Dict, property_data: Dict) -> str:
-        lines = ["Review the following property mappings and identify any that should be removed:"]
+    def _create_reflection_prompt(self, candidate_mappings: Dict, property_data: Dict,
+                                    user_utterance: str = "", field_hints: List[str] = None) -> str:
+        """Create reflection prompt with utterance context for better filtering."""
+        lines = []
+
+        # Add user context at the top
+        if user_utterance:
+            lines.append(f'User Request: "{user_utterance}"')
+            lines.append("")
+            if field_hints:
+                lines.append(f"Key fields mentioned: {', '.join(field_hints)}")
+                lines.append("")
+
+        lines.append("Review the following property mappings against the user's request.")
+        lines.append("REMOVE mappings that don't align with what the user is asking for.")
+        lines.append("KEEP mappings that match the user's intent and the fields they mentioned.")
+        lines.append("")
+
         for sp, maps in candidate_mappings.items():
             sdesc = property_data.get(sp, {}).get("description", "")
             lines.append(f"\nSource: {sp} ({sdesc[:100]}...)")
@@ -1063,27 +1193,38 @@ class MapReflectAgent:
                 dp = m["mapProperty"]
                 ddesc = property_data.get(dp, {}).get("description", "")
                 lines.append(f"  -> {dp} ({ddesc[:100]}...)\n     Justification: {m['justification']}\n     Confidence: {m['confidence']}")
-        lines.append("\nConsider: type compatibility, purpose similarity, business value, inconsistencies.")
+
+        lines.append("\nConsider: alignment with user's request, type compatibility, purpose similarity, business value.")
         return "\n".join(lines)
 
     def _reflect_and_prune(self, state: MappingState) -> MappingState:
         cand = state["candidate_mappings"]
+        user_utterance = state["user_utterance"]
+        source_field_hints = state.get("source_field_hints", [])
+        target_field_hints = state.get("target_field_hints", [])
+        all_field_hints = list(set(source_field_hints + target_field_hints))
+
         if not cand:
             state["final_mappings"] = {}
             state["reflection_feedback"] = "No candidate mappings were generated"
             logger.info("No candidates to reflect on")
             return state
 
-        prompt = self._create_reflection_prompt(cand, state["property_data"])
+        prompt = self._create_reflection_prompt(cand, state["property_data"],
+                                                 user_utterance, all_field_hints)
         messages = [
-            {"role": "system", "content": "You are an expert data mapper tasked with validating property mappings. Review each mapping critically and provide feedback."},
+            {"role": "system", "content": "You are an expert data mapper tasked with validating property mappings against user requirements. Review each mapping critically and provide feedback."},
             {"role": "user", "content": prompt}
         ]
         feedback = self.call_llm(messages)
 
         prune_prompt = [
+            f'User Request: "{user_utterance}"',
+            "",
             f"Feedback: {feedback}",
-            "\nBased on this feedback, prune the candidate mappings below.",
+            "",
+            "Based on this feedback and the user's original request, prune the candidate mappings below.",
+            "ONLY KEEP mappings that align with what the user is asking for.",
             "Return ONLY a JSON object. No text before or after.",
             'Format: {"source_id": [{"mapProperty": "dest_id", "justification": "reason"}]}',
             "\nYour entire response must be ONLY the JSON object starting with { and ending with }.",
@@ -1095,7 +1236,7 @@ class MapReflectAgent:
                 prune_prompt.append(f"  -> {m['mapProperty']} (Confidence: {m['confidence']})\n     Justification: {m['justification']}")
 
         messages = [
-            {"role": "system", "content": "You are an expert in schema mapping. Output only the final valid mappings in JSON."},
+            {"role": "system", "content": "You are an expert in schema mapping. Filter mappings to match the user's intent. Output only the final valid mappings in JSON."},
             {"role": "user", "content": "\n".join(prune_prompt)}
         ]
 
@@ -1144,7 +1285,10 @@ class MapReflectAgent:
             source_product="",
             target_product="",
             source_type_hints=[],
-            target_type_hints=[]
+            target_type_hints=[],
+            # New fields for utterance-aware field-level mapping
+            source_field_hints=[],
+            target_field_hints=[]
         )
 
         # Run with timing for each step
@@ -1157,6 +1301,7 @@ class MapReflectAgent:
 
         steps.extend([
             ("extract_contexts", self._extract_contexts),
+            ("extract_field_hints", self._extract_field_hints),  # NEW: Extract field hints from utterance
             ("create_graph", self._create_property_graph),
             ("select_source_properties", self._select_source_properties),
             ("select_destination_properties", self._select_destination_properties),

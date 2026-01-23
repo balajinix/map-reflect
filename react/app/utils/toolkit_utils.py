@@ -43,16 +43,34 @@ def parse_graphql_schema(schema):
     
     return type_definitions, enum_definitions, scalar_definitions
 
-def build_fields(type_definitions, response_type):
+def build_fields(type_definitions, response_type, visited=None, max_depth=10):
+    """Build field structure with circular reference protection.
+
+    Args:
+        type_definitions: Dictionary of type definitions
+        response_type: The type to build fields for
+        visited: Set of already visited types (for circular reference detection)
+        max_depth: Maximum recursion depth to prevent stack overflow
+    """
+    if visited is None:
+        visited = set()
+
     fields = {}
+
+    # Prevent circular references and excessive depth
+    if response_type in visited or max_depth <= 0:
+        return fields
+
     if response_type in type_definitions:
+        visited = visited | {response_type}  # Create new set to avoid mutation
         for field, field_info in type_definitions[response_type].items():
             field_description = field_info["description"]
             field_type = field_info["data_type"]
+            nested_type = field_type.replace("!", "").replace("[", "").replace("]", "")
             fields[field] = {
                 "description": field_description,
                 "data_type": field_type,
-                "fields": build_fields(type_definitions, field_type.replace("!", "").replace("[", "").replace("]", ""))
+                "fields": build_fields(type_definitions, nested_type, visited, max_depth - 1)
             }
     return fields
 

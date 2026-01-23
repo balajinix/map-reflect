@@ -35,7 +35,6 @@ METHODS = {
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
-            ('Mistral', 'mistral'),
         ],
     },
     'GNN': {
@@ -47,23 +46,20 @@ METHODS = {
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
-            ('Mistral-M', 'mistral-medium'),
         ],
     },
     'AnyTool': {
         'dir': 'anytool/results',
         'models': [
-            ('Granite-4', 'granite-4'),
-            ('Llama-3.3', 'llama-3-3'),
-            ('Mistral-M', 'mistral-medium'),
+            ('Granite', 'granite-3-3'),  # use granite-3-3-8b-instruct results
+            ('Llama', 'llama-3-3'),
         ],
     },
     'Map-Reflect': {
         'dir': 'map_reflect/results',
         'models': [
-            ('Granite-4', 'granite-4'),
-            ('Llama-3.3', 'llama-3-3'),
-            ('Mistral-M', 'mistral-medium'),
+            ('Granite', 'granite-4'),  # use granite-4-h-small results
+            ('Llama', 'llama-3-3'),
         ],
     },
 }
