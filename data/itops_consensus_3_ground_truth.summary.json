@@ -1,0 +1,19 @@
+{
+  "total_samples": 4,
+  "total_mappings": 27,
+  "min_agreement": 3,
+  "methods_used": [
+    "SMT",
+    "ReAct",
+    "GNN",
+    "MapReflect",
+    "AnyTool",
+    "ReMatch",
+    "MatchMaker"
+  ],
+  "product_pairs": 5,
+  "agreement_distribution": {
+    "3": 24,
+    "4": 7
+  }
+}
