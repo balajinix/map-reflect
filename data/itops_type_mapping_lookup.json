@@ -1,0 +1,6508 @@
+{
+  "Access_points": {
+    "AssociationID": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Action": {
+    "ActionSource": [
+      "ReAct (Granite)"
+    ],
+    "ActionType": [
+      "ReAct (Granite)"
+    ],
+    "Automation_rules": [
+      "ReAct (Granite)"
+    ],
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ],
+    "NONE": [
+      "ReAct (Granite)"
+    ],
+    "PackageDetailsCollection": [
+      "ReAct (Granite)"
+    ],
+    "apiKey": [
+      "ReAct (Granite)"
+    ],
+    "concert_SourceEntityType": [
+      "ReAct (Granite)"
+    ]
+  },
+  "ActionSchedule": {
+    "None": [
+      "ReAct (Granite)"
+    ],
+    "apiKey": [
+      "ReAct (Granite)"
+    ]
+  },
+  "ActionSource": {
+    "PackageDetailsCollection": [
+      "ReAct (Granite)"
+    ]
+  },
+  "ActionType": {
+    "ActionMode": [
+      "ReAct (Granite)"
+    ]
+  },
+  "ApiKeyDate": {
+    "IssueLink": [
+      "ReAct (Granite)"
+    ],
+    "PackageDetailsCollection": [
+      "ReAct (Granite)"
+    ],
+    "updated": [
+      "ReAct (Granite)"
+    ]
+  },
+  "ApplicationCollection": {
+    "RelatedEntity": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Applications_source_repo": {
+    "filterOperator": [
+      "ReAct (Granite)"
+    ],
+    "tagValue": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Aspects": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  },
+  "AssociationID": {
+    "createGroupMapping_200_response": [
+      "ReAct (Granite)"
+    ],
+    "getServicesMap_200_response": [
+      "ReAct (Granite)"
+    ]
+  },
+  "BuildArtifactAssociations": {
+    "playbackMode": [
+      "ReAct (Granite)"
+    ],
+    "query_getSyntheticLocations_items_playbackCapabilities": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Data_mapper": {
+    "Action": [
+      "ReAct (Granite)"
+    ],
+    "ActionMode": [
+      "ReAct (Granite)"
+    ],
+    "AssessmentCustomDetails": [
+      "ReAct (Granite)"
+    ],
+    "SeverityBreakdown": [
+      "ReAct (Granite)"
+    ],
+    "created": [
+      "ReAct (Granite)"
+    ],
+    "last_updated": [
+      "ReAct (Granite)"
+    ],
+    "mapping": [
+      "ReAct (Granite)"
+    ],
+    "pipeline": [
+      "ReAct (Granite)"
+    ],
+    "scan": [
+      "ReAct (Granite)"
+    ],
+    "scanner": [
+      "ReAct (Granite)"
+    ],
+    "version": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Entity": {
+    "Action": [
+      "ReAct (Granite)"
+    ],
+    "ApplicationAssociationsInfo": [
+      "ReAct (Granite)"
+    ],
+    "className": [
+      "ReAct (Granite)"
+    ],
+    "connectedEntities": [
+      "ReAct (Granite)"
+    ],
+    "consumers": [
+      "ReAct (Granite)"
+    ],
+    "costPrice": [
+      "ReAct (Granite)"
+    ],
+    "discoveredBy": [
+      "ReAct (Granite)"
+    ],
+    "displayName": [
+      "ReAct (Granite)"
+    ],
+    "environmentType": [
+      "ReAct (Granite)"
+    ],
+    "numRelatedVMs": [
+      "ReAct (Granite)"
+    ],
+    "providers": [
+      "ReAct (Granite)"
+    ],
+    "severity": [
+      "ReAct (Granite)"
+    ],
+    "severityBreakdown": [
+      "ReAct (Granite)"
+    ],
+    "tags": [
+      "ReAct (Granite)"
+    ],
+    "template": [
+      "ReAct (Granite)"
+    ],
+    "uuid": [
+      "ReAct (Granite)"
+    ],
+    "vendorIds": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpOrganization": {
+    "HcpOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpResource": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformRun": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformStateVersion": [
+      "ReAct (Granite)"
+    ],
+    "PackerRegistry": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpProject": {
+    "HcpProject": [
+      "ReAct (Granite)"
+    ],
+    "HcpResource": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpResource": {
+    "HcpOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpProject": [
+      "ReAct (Granite)"
+    ],
+    "HcpResource": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformProject": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformStateVersion": [
+      "ReAct (Granite)"
+    ],
+    "PackerBuild": [
+      "ReAct (Granite)"
+    ],
+    "PackerSbom": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpTerraformAgentPool": {
+    "HcpTerraformAgentPool": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpTerraformOrganization": {
+    "HcpOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpResource": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformProject": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformRun": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpTerraformProject": {
+    "HcpTerraformAgentPool": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformWorkspace": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpTerraformRun": {
+    "HcpOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformAgentPool": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformRun": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformStateVersion": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformWorkspace": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpTerraformStateVersion": {
+    "HcpResource": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformRun": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformStateVersion": [
+      "ReAct (Granite)"
+    ],
+    "None": [
+      "ReAct (Granite)"
+    ]
+  },
+  "HcpTerraformWorkspace": {
+    "HcpTerraformWorkspace": [
+      "ReAct (Granite)"
+    ]
+  },
+  "IDNamePair": {
+    "AssociationID": [
+      "ReAct (Granite)"
+    ]
+  },
+  "IssueLink": {
+    "SeverityBreakdown": [
+      "ReAct (Granite)"
+    ]
+  },
+  "PackageDetailsCollection": {
+    "ActionSchedule": [
+      "ReAct (Granite)"
+    ],
+    "PackageDetailsSummary": [
+      "ReAct (Granite)"
+    ]
+  },
+  "PackageDetailsSummary": {
+    "ApiKeyDate": [
+      "ReAct (Granite)"
+    ]
+  },
+  "PackageRecommendation": {
+    "Action": [
+      "ReAct (Granite)"
+    ],
+    "ActionType": [
+      "ReAct (Granite)"
+    ],
+    "Package_status": [
+      "ReAct (Granite)"
+    ]
+  },
+  "PackerBuild": {
+    "HcpOrganization": [
+      "ReAct (Granite)"
+    ]
+  },
+  "PackerChannel": {
+    "HcpResource": [
+      "ReAct (Granite)"
+    ]
+  },
+  "PackerRegistry": {
+    "HcpOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformOrganization": [
+      "ReAct (Granite)"
+    ],
+    "HcpTerraformStateVersion": [
+      "ReAct (Granite)"
+    ]
+  },
+  "PackerVersion": {
+    "HcpTerraformStateVersion": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Provider": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Recommendations": {
+    "Recommendations": [
+      "ReAct (Granite)"
+    ],
+    "Resources": [
+      "ReAct (Granite)"
+    ]
+  },
+  "RelatedActionsCountByType": {
+    "Action": [
+      "ReAct (Granite)"
+    ],
+    "StatsEntry": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Risk": {
+    "Sbom_risk_summary": [
+      "ReAct (Granite)"
+    ]
+  },
+  "SeverityBreakdown": {
+    "Criticality": [
+      "ReAct (Granite)"
+    ],
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ],
+    "FiltersValues": [
+      "ReAct (Granite)"
+    ],
+    "Severity": [
+      "ReAct (Granite)"
+    ],
+    "Vulnerabilities_insights": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Statistics": {
+    "StatsEntry": [
+      "ReAct (Granite)"
+    ]
+  },
+  "Tags_entity": {
+    "NamespaceEntity": [
+      "ReAct (Granite)"
+    ],
+    "None": [
+      "ReAct (Granite)"
+    ],
+    "Tags": [
+      "ReAct (Granite)"
+    ],
+    "turbonomic_EnvironmentType": [
+      "ReAct (Granite)"
+    ]
+  },
+  "VulnerabilitiesSummary": {
+    "Aspects": [
+      "ReAct (Granite)"
+    ]
+  },
+  "action": {
+    "mapping": [
+      "ReAct (Granite)"
+    ]
+  },
+  "actionID": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "actionMode": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "actionSchedule": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "actionState": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "actionType": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "clearTime": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "cms_CARRIERCLAIMS-1769002614420-6220804096": {
+    "1769002595212-6237630464-omop_PROCEDURE_OCCURRENCE": [
+      "SMT (Granite)"
+    ]
+  },
+  "compoundActions": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "concert": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "AnyTool (Granite)"
+    ],
+    "instana_callGroup": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_Action": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_Entity": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_entityActionStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_About_categories": {
+    "turbonomic_Target": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "concert_Access_control": {
+    "instana_query_getInfrastructureCatalogPlugins_items": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "concert_ApiKeyDate": {
+    "concert_TokenDetails": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_callGroup_adjustedTimeframe": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_callGroup_items_items": [
+      "Map-Reflect (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_ActionSchedule": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ApiKeyDate": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Statistics": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_VirtualDisksEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_AppComponentCount": {
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_DiscoveredBy": [
+      "ReMatch (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_AppEnvironment": {
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)"
+    ]
+  },
+  "concert_Application": {
+    "concert_ApiKeyDate": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_Application": [
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "UE-Reflect (Granite)"
+    ],
+    "concert_ApplicationSbomsCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationEdge": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_nodes_items": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_ActionSchedule": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_CurrentEntity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_ApplicationAssociationsInfo": {
+    "concert_Environments": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "concert_ApplicationAssociationsInfoPrototypeInput": {
+    "turbonomic_CurrentEntity": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "concert_ApplicationCollection": {
+    "concert_Application": [
+      "UE-Reflect (Granite)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "UE-Reflect (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "UE-Reflect (Granite)"
+    ],
+    "concert_Tags": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationEdge": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)",
+      "MatchMaker (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "DualContext (Granite)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)"
+    ],
+    "instana_callGroup_items_items": [
+      "DualContext (Granite)"
+    ],
+    "turbo": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Application": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_CurrentEntity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_ApplicationDetails": {
+    "instana_ApplicationPerspective": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "concert_ApplicationFilters": {
+    "concert_CVEFilters": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ExposureFilters": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_StatFilterEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "MatchMaker (Granite)"
+    ]
+  },
+  "concert_ApplicationReleaseProperties": {
+    "concert_ApplicationReleaseProperties": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_ApplicationSbomsCollection": {
+    "instana_ApplicationService": [
+      "ReMatch (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "ReMatch (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_Applications_source_repo": {
+    "turbonomic_TagValueFilterOperator": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "concert_AssociatedBuildArtifacts": {
+    "concert_VulnerabilityApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_AssociationID": {
+    "concert_AssociationID": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_query_getSloConfigById_oneOf_0_entity_tagFilterExpression": [
+      "GNN ((no LLM))"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "concert_Automation_rules": {
+    "turbonomic_ActionMode": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "concert_BuildArtifact": {
+    "concert_ConcertDefSbom": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "AnyTool (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "GNN ((no LLM))",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_adjustedTimeframe": [
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_RelatedEntity": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Target": [
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Template": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_BuildArtifactAssociations": {
+    "concert_BuildArtifactAssociations": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationEdge": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "concert_CVEFilters": {
+    "concert_CvesInfo": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_Checks": {
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_ConcertDefSbom": {
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ServiceEndpoint": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_findServiceLevelsAlertConfig_200_response": [
+      "GNN ((no LLM))"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_CurrentEntity": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbonomic_Action": [
+      "GNN ((no LLM))"
+    ],
+    "turbonomic_SeverityBreakdown": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "concert_CveInfo": {
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "ReMatch (Granite)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_Cves": {
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Risk": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Statistics": [
+      "ReMatch (Granite)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_CvesInfo": {
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Statistics": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_CvesPublicAccessPoints": {
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_ExposureAssociationsDetails": {
+    "concert_ExposuresInfo": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_ExposureFilters": {
+    "concert_Exposures": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ExposuresInfo": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_MostCommonExposureRules": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "ReAct (Granite)"
+    ],
+    "instana_ApplicationConnection": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Risk": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_StatFilterEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Target": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_Exposure_assessment": {
+    "turbonomic_Risk": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "concert_Exposure_findings": {
+    "turbonomic_Severity": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "concert_Exposures": {
+    "concert_ExposureFilters": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ExposuresInfo": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_MostCommonExposureRules": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)"
+    ],
+    "turbo_Risk": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)"
+    ]
+  },
+  "concert_ExposuresCollection": {
+    "concert_ExposuresInfo": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Granite)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_ExposuresInfo": {
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "concert_FilterInfo": {
+    "concert_CVEFilters": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)"
+    ],
+    "turbo_DiscoveredBy": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_RelatedEntity": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_StatFilterEntry": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Target": [
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_FiltersValues": {
+    "concert_CVEFilters": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ExposureFilters": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_RelatedEntity": [
+      "ReMatch (Granite)"
+    ],
+    "turbo_StatFilterEntry": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_VirtualDisksEntry": [
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_IDNamePair": {
+    "concert_VulnerabilityApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_RelatedEntity": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_Issue": {
+    "concert_ExposureFilters": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)"
+    ],
+    "instana_ServiceEndpoint": [
+      "MatchMaker (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_adjustedTimeframe": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_manuallyCloseEvent_problem": [
+      "ReMatch (Granite)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Risk": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_IssueLink": {
+    "concert_IssueLink": [
+      "UE-Reflect (Granite)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_IssueLink": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Target": [
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_LicenseStatus": {
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "ReMatch (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_RelatedEntity": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Statistics": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "concert_MostCommonExposureRule": {
+    "instana_ApplicationPerspective": [
+      "DualContext (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Llama)"
+    ],
+    "turbo_Risk": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Statistics": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Llama)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_MostCommonExposureRules": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)"
+    ],
+    "turbo": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Llama)"
+    ],
+    "turbo_Risk": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_MostVulnerableApplication": {
+    "concert_VulnerabilityApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerableApplications": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "MatchMaker (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_nodes_items": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Granite)"
+    ],
+    "turbo_CurrentEntity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Risk": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Llama)"
+    ]
+  },
+  "concert_MostVulnerableApplicationCollection": {
+    "concert_VulnerabilityApplicationCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerableApplicationsCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "ReAct (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_CurrentEntity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)"
+    ],
+    "turbonomic_CurrentEntity": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "concert_PackageDetailsCollection": {
+    "concert_PackageRecommendation": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)"
+    ]
+  },
+  "concert_PackageDetailsSummary": {
+    "concert_PackageDetailsSummary": [
+      "UE-Reflect (Granite)"
+    ],
+    "concert_PackageRecommendation": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ]
+  },
+  "concert_PackageRecommendation": {
+    "concert_PackageRecommendation": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "instana_callGroup_200_response": [
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "MatchMaker (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)",
+      "SMT (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "ReMatch (Granite)"
+    ],
+    "turbo_Risk": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Statistics": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_entityActions": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbonomic_Action": [
+      "GNN ((no LLM))"
+    ],
+    "turbonomic_ProvidersEntry": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "concert_PackageReferences": {
+    "instana__entities_200_response": [
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_PackageVulnerability": {
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_PackageVulnerabilityCollection": {
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_Release": {
+    "concert_Release": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ServiceEndpoint": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_SbomBlastRadius": {
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_SbomBlastRadiusNodes": {
+    "instana_ApplicationConnection": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_ApplicationEdge": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "ReMatch (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_nodes_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_nodes_items_entityId": [
+      "ReMatch (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Target": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_SbomBlastRadiusRelationNodes": {
+    "instana_ApplicationEdge": [
+      "ReMatch (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "ReMatch (Granite)"
+    ],
+    "instana__query_topology_edges_items": [
+      "ReMatch (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_RelatedEntity": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Target": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_Scan": {
+    "instana_ApplicationPerspective": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_adjustedTimeframe": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_ScanCollection": {
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "concert_SourceEntityType": {
+    "VulnerabilityAssociationComponent": [
+      "ReAct (Granite)"
+    ]
+  },
+  "concert_SuccessResponse": {
+    "concert_TokenDetails": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_TagsPrototype": {
+    "instana_ApplicationPerspective": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Target": [
+      "MatchMaker (Granite)"
+    ]
+  },
+  "concert_Tags_entity": {
+    "turbonomic_CurrentEntity": [
+      "GNN ((no LLM))"
+    ],
+    "turbonomic_EnvironmentType": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "concert_TokenDetails": {
+    "concert_SuccessResponse": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "MatchMaker (Llama)",
+      "ReAct (Granite)"
+    ],
+    "instana_ServiceEndpoint": [
+      "MatchMaker (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "SMT (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "SMT (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_ActionSchedule": [
+      "Map-Reflect (Llama)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_ConsumersEntry": [
+      "ReMatch (Granite)"
+    ],
+    "turbo_CurrentEntity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_DiscoveredBy": [
+      "DualContext (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "SMT (Llama)"
+    ],
+    "turbo_Provider": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_RelatedEntity": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_VulnerabilitiesAssessmentSummary": {
+    "concert_VulnerabilitiesSummary": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_VulnerabilitiesCveHighlightSummary": {
+    "instana__entities_200_response": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Risk": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_VulnerabilitiesExposureHighlightSummary": {
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Statistics": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "concert_VulnerabilitiesSummary": {
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "ReAct (Granite)"
+    ],
+    "concert_VulnerabilitiesSummary": [
+      "UE-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_SeverityBreakdown": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbonomic_SeverityBreakdown": [
+      "ReMatch (Granite)"
+    ],
+    "turbonomic_StatsEntry": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "concert_Vulnerability": {
+    "concert_Cves": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_CvesPublicAccessPoints": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationConnection": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_canLoadMore": [
+      "DualContext (Granite)"
+    ],
+    "instana_callGroup_items_items": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Risk": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_SeverityBreakdown": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_Vulnerability": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "concert_VulnerabilityApplication": {
+    "concert_Issue": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_IssueLink": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_TagsPrototype": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_WorkspaceRepositorySummary": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "SMT (Granite)"
+    ],
+    "turbo_CurrentEntity": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Llama)"
+    ],
+    "turbo_Target": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "concert_VulnerabilityApplicationCollection": {
+    "concert_MostVulnerableApplicationCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_WorkspaceRepositoryCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)"
+    ]
+  },
+  "concert_VulnerabilityAssociationComponent": {
+    "concert_Cves": [
+      "ReAct (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "UE-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)"
+    ],
+    "vulnerability_association_component": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "concert_VulnerabilityAssociations": {
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_VulnerabilityCollection": {
+    "concert_Cves": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)"
+    ],
+    "turbo_StatsEntry": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)"
+    ]
+  },
+  "concert_VulnerabilityDetailsCollection": {
+    "instana_ApplicationPerspective": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationService": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Statistics": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Target": [
+      "DualContext (Granite)"
+    ]
+  },
+  "concert_VulnerableApplications": {
+    "concert_MostVulnerableApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_VulnerableApplicationsCollection": {
+    "concert_MostVulnerableApplicationCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert_WorkspaceRepositoryCollection": {
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Action": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Target": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "concert_WorkspaceRepositorySummary": {
+    "instana__entities_200_response": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "concert_apiKey": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana_callGroup": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationFilters": {
+    "turbo_entityActionStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationPackages": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana_callGroup": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationRevenue": {
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationSboms": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationVulnerabilities": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationVulnerabilitiesSummary": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert_applicationVulnerabilityDetails": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationVulnerabilityDetailsByName": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_applicationsSummary": {
+    "concert_applicationsSummary": [
+      "SMT (Granite)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActionStats": [
+      "SMT (Granite)"
+    ]
+  },
+  "concert_cveFilters": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_cveHighlights": {
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_exchangeToken": {
+    "turbo": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_Action": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActions": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert_exposureFilters": {
+    "instana": [
+      "AnyTool (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_Action": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert_exposureHighlights": {
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_exposures": {
+    "concert_exposures": [
+      "SMT (Llama)"
+    ]
+  },
+  "concert_mostCommonExposureRules": {
+    "instana": [
+      "AnyTool (Granite)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_entityActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_mostVulnerableApplications": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActionStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_packageVulnerabilities": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_refreshToken": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana_callGroup": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_Action": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_Entity": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActions": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketActionsFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_ssoEndpoint": {
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_vulnerabilitiesAffectingPublicAccessPoints": {
+    "instana": [
+      "AnyTool (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert_vulnerabilitiesAssessmentSummary": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_vulnerabilitiesSummary": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_vulnerabilityApplications": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana_callGroup": [
+      "SMT (Granite)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_Action": [
+      "AnyTool (Granite)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_vulnerabilityBlastRadius": {
+    "instana_callGroup": [
+      "AnyTool (Granite)"
+    ],
+    "instana_callGroup_200_response": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_vulnerabilityScans": {
+    "concert_exposureHighlights": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "concert_exposures": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "concert_login": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "concert_logout": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "concert_packageVulnerabilities": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "concert_ssoEndpoint": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "concert_vulnerabilityApplications": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "concert_vulnerabilityScans": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_vulnerabilitySourceRepos": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearch": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_marketEntities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert_vulnerableApplications": {
+    "instana": [
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "createTime": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "created": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  },
+  "currentEntity": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "currentLocation": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "currentValue": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "cursor": {
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "cve": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "details": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "displayName": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "edges": {
+    "auth_user": [
+      "Map-Reflect (Granite)"
+    ],
+    "created": [
+      "Map-Reflect (Granite)"
+    ],
+    "cve": [
+      "Map-Reflect (Granite)"
+    ],
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "exposure": [
+      "Map-Reflect (Granite)"
+    ],
+    "has_open": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ],
+    "libraries": [
+      "Map-Reflect (Granite)"
+    ],
+    "severity": [
+      "Map-Reflect (Granite)"
+    ],
+    "source": [
+      "Map-Reflect (Granite)"
+    ],
+    "vulnerabilities": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "entityCharacteristics": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "entityType": {
+    "type": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "environment": {
+    "environments": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "environments": {
+    "environment": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "executionCharacteristics": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "exposure": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "exposures": {
+    "actionID": [
+      "Map-Reflect (Granite)"
+    ],
+    "actionImpactID": [
+      "Map-Reflect (Granite)"
+    ],
+    "actionMode": [
+      "Map-Reflect (Granite)"
+    ],
+    "actionSchedule": [
+      "Map-Reflect (Granite)"
+    ],
+    "actionType": [
+      "Map-Reflect (Granite)"
+    ],
+    "applications": [
+      "Map-Reflect (Granite)"
+    ],
+    "associations": [
+      "Map-Reflect (Granite)"
+    ],
+    "compoundActions": [
+      "Map-Reflect (Granite)"
+    ],
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "details": [
+      "Map-Reflect (Granite)"
+    ],
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "exposure": [
+      "Map-Reflect (Granite)"
+    ],
+    "issues": [
+      "Map-Reflect (Granite)"
+    ],
+    "severity": [
+      "Map-Reflect (Granite)"
+    ],
+    "solution": [
+      "Map-Reflect (Granite)"
+    ],
+    "status": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "exposuresCollection": {
+    "associations": [
+      "Map-Reflect (Granite)"
+    ],
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "exposure": [
+      "Map-Reflect (Granite)"
+    ],
+    "severity": [
+      "Map-Reflect (Granite)"
+    ],
+    "solution": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "fillTimeSeries": {
+    "environments": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "filter": {
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "filter": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "filter_values": {
+    "filter": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "first": {
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "has_exceptions": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "has_open": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "has_unassessed": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "hcp_HcpProject": {
+    "hcp_HcpProject": [
+      "ReMatch (Granite)"
+    ],
+    "packer_PackerRegistry": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "hcp_HcpTerraformStateVersion": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))",
+      "ReMatch (Granite)"
+    ],
+    "hcp_terraform_HcpTerraformStateVersion": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "hcp_packer_PackerAncestry": {
+    "packer_PackerAncestry": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerArtifact": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerArtifact": {
+    "packer_PackerArtifact": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerBucket": {
+    "packer_PackerBucket": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerBuild": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerBuild": {
+    "hcp_packer_PackerBuild": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerArtifact": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerBuild": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerRegistry": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerChannel": {
+    "packer_PackerAncestry": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerChannel": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerInheritedRevocation": {
+    "packer_PackerInheritedRevocation": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerRegistry": {
+    "packer_PackerArtifact": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerInheritedRevocation": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerRegistry": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerSbom": {
+    "packer_PackerArtifact": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerSbom": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "hcp_packer_PackerVersion": {
+    "hcp_packer_PackerVersion": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerArtifact": [
+      "UE-Reflect (Granite)"
+    ],
+    "packer_PackerVersion": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "highest_finding": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "id": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "images": {
+    "technologies": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "importance": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "input": {
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ],
+    "name": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "instana": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_ApplicationReleaseProperties": [
+      "AnyTool (Llama)"
+    ],
+    "concert_MostCommonExposureRule": [
+      "AnyTool (Llama)"
+    ],
+    "concert_MostCommonExposureRules": [
+      "AnyTool (Llama)"
+    ],
+    "concert_apiKey": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationRevenue": [
+      "AnyTool (Granite)"
+    ],
+    "concert_applicationSboms": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilities": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilityDetails": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilityDetailsByName": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationsSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_cveFilters": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_mostCommonExposureRules": [
+      "AnyTool (Granite)"
+    ],
+    "concert_mostVulnerableApplications": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_refreshToken": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_ssoEndpoint": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesAffectingPublicAccessPoints": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilityApplications": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilityScans": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitySourceRepos": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActionStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entitySearchFiltered": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "instana_ApplicationConnection": {
+    "concert_Application": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationFilters": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_CVEFilters": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_CveInfo": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_VulnerabilityCollection": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "instana_ApplicationEdge": {
+    "concert_TokenDetails": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "instana_ApplicationPerspective": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_ApplicationDetails": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_ApplicationFilters": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_AssociationID": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_FilterInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_PackageVulnerability": [
+      "DualContext (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "DualContext (Granite)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Provider": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_Target": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "instana_ApplicationService": {
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_ApplicationDetails": [
+      "ReMatch (Granite)"
+    ],
+    "concert_ApplicationFilters": [
+      "DualContext (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_FiltersValues": [
+      "DualContext (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Llama)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_PackageVulnerability": [
+      "DualContext (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilitiesSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "instana_ServiceEndpoint": {
+    "concert_AppEnvironment": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_Application": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_ApplicationFilters": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_SbomBlastRadius": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_SuccessResponse": [
+      "ReMatch (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ]
+  },
+  "instana__entities_200_response": {
+    "concert_ApiKeyDate": [
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_ApplicationDetails": [
+      "ReMatch (Granite)"
+    ],
+    "concert_ApplicationFilters": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_ApplicationReleaseProperties": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ApplicationSbomsCollection": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_AssociationID": [
+      "DualContext (Granite)"
+    ],
+    "concert_BuildArtifact": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_Checks": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Exposures": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ExposuresCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ExposuresInfo": [
+      "DualContext (Granite)",
+      "ReMatch (Granite)"
+    ],
+    "concert_FilterInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_HistoryDetails": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "concert_IDNamePair": [
+      "DualContext (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_LicenseStatus": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_MostCommonExposureRule": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_MostCommonExposureRules": [
+      "DualContext (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "DualContext (Granite)"
+    ],
+    "concert_MostVulnerableApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_Scan": [
+      "DualContext (Granite)"
+    ],
+    "concert_SuccessResponse": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_TagsPrototype": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "turbo_Statistics": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_VirtualDisksEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "instana__query_topology_edges_items": {
+    "concert_Application": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_ExposureFilters": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Issue": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_IssueLink": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_PackageRecommendation": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_SourceRepo": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "instana__query_topology_nodes_items": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_AssociationID": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_CVEFilters": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Checks": [
+      "DualContext (Llama)"
+    ],
+    "concert_CveInfo": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_Cves": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_CvesInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_IssueLink": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_LicenseStatus": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "DualContext (Granite)"
+    ],
+    "concert_MostVulnerableApplicationCollection": [
+      "DualContext (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_PackageVulnerability": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Release": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_SbomBlastRadiusNodes": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "SMT (Granite)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "instana__query_topology_nodes_items_entityId": {
+    "concert_ApiKeyDate": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Application": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "MatchMaker (Granite)"
+    ]
+  },
+  "instana__topology_200_response": {
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_AssociationID": [
+      "DualContext (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_CVEFilters": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_CveInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_Cves": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_CvesInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_ExposureFilters": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_LicenseStatus": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_MostCommonExposureRule": [
+      "DualContext (Granite)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_MostVulnerableApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_PackageDetailsSummary": [
+      "DualContext (Granite)"
+    ],
+    "concert_PackageRecommendation": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_PackageVulnerability": [
+      "DualContext (Granite)"
+    ],
+    "concert_SbomBlastRadiusNodes": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "SMT (Granite)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "DualContext (Granite)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ConnectedEntitiesEntry": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "instana_callGroup": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert__convertApplicationName": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_apiKey": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationFilters": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_cveFilters": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_exchangeToken": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_refreshToken": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_ssoEndpoint": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActionStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityStats": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "instana_callGroup_200_response": {
+    "concert_ApiKeyDate": [
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_ApplicationDetails": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ApplicationFilters": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ApplicationReleaseProperties": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_AssociationID": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_CVEFilters": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_CallGroup": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Checks": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_CveInfo": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_Cves": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_CvesInfo": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_FilterInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_HistoryDetails": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_SuccessResponse": [
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_edges_items": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_ActionSchedule": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_StatValue": [
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Statistics": [
+      "MatchMaker (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_StatsEntry": [
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ]
+  },
+  "instana_callGroup_adjustedTimeframe": {
+    "concert_ApiKeyDate": [
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_Application": [
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_ActionSchedule": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ]
+  },
+  "instana_callGroup_items_items": {
+    "concert_ApiKeyDate": [
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_ApplicationDetails": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationFilters": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_AssociationID": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_CVEFilters": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Cves": [
+      "DualContext (Granite)"
+    ],
+    "concert_HistoryDetails": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Scan": [
+      "DualContext (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__query_topology_edges_items": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "turbo_Action": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "turbo_Entity": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "instana_findServiceLevelsAlertConfig_200_response": {
+    "concert_ConcertDefSbom": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "instana_mutation_entities_adjustedTimeframe": {
+    "concert_Issue": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "MatchMaker (Llama)"
+    ]
+  },
+  "instana_mutation_entities_items_items": {
+    "concert_ApiKeyDate": [
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "MatchMaker (Llama)"
+    ],
+    "concert_ApplicationSbomsCollection": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_Issue": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_TagsPrototype": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_Vulnerability": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "ReMatch (Granite)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "MatchMaker (Llama)"
+    ]
+  },
+  "instana_mutation_entities_items_items_entityHealthInfo": {
+    "concert_ApiKeyDate": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Application": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_AssociationID": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Checks": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Issue": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": {
+    "concert_ApiKeyDate": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_AppEnvironment": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Application": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "instana_mutation_manuallyCloseEvent_problem": {
+    "concert_Issue": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ]
+  },
+  "items": {
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ],
+    "name": [
+      "Map-Reflect (Granite)"
+    ],
+    "recommendation": [
+      "Map-Reflect (Granite)"
+    ],
+    "state": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "label": {
+    "label": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "last_updated": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  },
+  "libraries": {
+    "technologies": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "mapping": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  },
+  "marketID": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "maxSeverity": {
+    "maxSeverity": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "mimic_PRESCRIPTIONS": {
+    "synthea_PROCEDURES-1769002754813-6163722240": [
+      "SMT (Llama)"
+    ]
+  },
+  "newEntity": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "newLocation": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "newValue": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "next": {
+    "next": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "nodes": {
+    "vulnerabilities": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "openIssues": {
+    "endpointServiceId": [
+      "Map-Reflect (Granite)"
+    ],
+    "entityId": [
+      "Map-Reflect (Granite)"
+    ],
+    "entityType": [
+      "Map-Reflect (Granite)"
+    ],
+    "fixSuggestion": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ],
+    "plugin": [
+      "Map-Reflect (Granite)"
+    ],
+    "problemText": [
+      "Map-Reflect (Granite)"
+    ],
+    "rca": [
+      "Map-Reflect (Granite)"
+    ],
+    "state": [
+      "Map-Reflect (Granite)"
+    ],
+    "type": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "order": {
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "packer_PackerAncestry": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "packer_PackerArtifact": {
+    "hcp_HcpTerraformProject": [
+      "ReMatch (Granite)"
+    ],
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "packer_PackerBucket": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "packer_PackerBuild": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ],
+    "hcp_terraform_HcpTerraformStateVersion": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "packer_PackerChannel": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "packer_PackerInheritedRevocation": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "packer_PackerRegistry": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "packer_PackerSbom": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "packer_PackerVersion": {
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "pipeline": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  },
+  "plugin": {
+    "plugin": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "policy": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "prerequisites": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "prioritizedAutomationOpportunities": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "scan": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ],
+    "technologies": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "scanner": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  },
+  "severity": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "source": {
+    "technologies": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "status": {
+    "openIssues": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "technologies": {
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "to": {
+    "created": [
+      "Map-Reflect (Granite)"
+    ],
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "turbo": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "AnyTool (Granite)"
+    ],
+    "concert_PackageRecommendation": [
+      "AnyTool (Llama)"
+    ],
+    "concert_WorkspaceRepositorySummary": [
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationFilters": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Granite)"
+    ],
+    "concert_applicationVulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_mostVulnerableApplications": [
+      "AnyTool (Llama)"
+    ],
+    "concert_ssoEndpoint": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesAssessmentSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilityApplications": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitySourceRepos": [
+      "AnyTool (Granite)"
+    ],
+    "concert_vulnerableApplications": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbo_Action": {
+    "actions": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApiKeyDate": [
+      "MatchMaker (Llama)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)"
+    ],
+    "concert_ApplicationDetails": [
+      "ReMatch (Llama)"
+    ],
+    "concert_ApplicationReleaseProperties": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_AssociationID": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_CveInfo": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_ExposureAssociationsDetails": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposureFilters": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Exposures": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)",
+      "SMT (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_FiltersValues": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_HistoryDetails": [
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Issue": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_IssueLink": [
+      "ReMatch (Llama)"
+    ],
+    "concert_LicenseStatus": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_MostCommonExposureRule": [
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "concert_MostCommonExposureRules": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "MatchMaker (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_PackageDetailsCollection": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_PackageDetailsSummary": [
+      "DualContext (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)",
+      "SMT (Llama)"
+    ],
+    "concert_PackageVulnerability": [
+      "DualContext (Granite)"
+    ],
+    "concert_Release": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_SourceRepo": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_SuccessResponse": [
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_TokenDetails": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "ReMatch (Granite)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_VulnerabilityCollection": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_applicationVulnerabilityDetails": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilityDetailsByName": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "entity": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationPerspective": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "ReMatch (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_edges_items": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__query_topology_nodes_items": [
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "market": [
+      "Map-Reflect (Llama)"
+    ],
+    "turbo": [
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "turbo_BusinessAccount": {
+    "concert_ApplicationReleaseProperties": [
+      "ReMatch (Granite)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "turbo_CompoundActionsEntry": {
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "Map-Reflect (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana__query_topology_nodes_items": [
+      "DualContext (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "turbo_CurrentEntity": {
+    "concert_Application": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationFilters": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_AssociationID": [
+      "Map-Reflect (Llama)",
+      "ReMatch (Granite)"
+    ],
+    "concert_BuildArtifactAssociations": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposureAssociationsDetails": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_HistoryDetails": [
+      "ReMatch (Granite)"
+    ],
+    "concert_IDNamePair": [
+      "ReMatch (Granite)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_PackageDetailsCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_TagsPrototype": [
+      "ReMatch (Granite)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "turbo_CurrentLocation": {
+    "concert_Exposures": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "turbo_DiscoveredBy": {
+    "concert_Application": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "turbo_Entity": {
+    "concert_AppEnvironment": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "concert_ApplicationAssociationsInfo": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "concert_ApplicationFilters": [
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationReleaseProperties": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_AssociationID": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_BuildArtifact": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)"
+    ],
+    "concert_BuildArtifactAssociations": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Cves": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_CvesPublicAccessPoints": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "concert_DiscoveredBy": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ExposureAssociationsDetails": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposureFilters": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "DualContext (Llama)"
+    ],
+    "concert_Issue": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_LicenseStatus": [
+      "MatchMaker (Granite)"
+    ],
+    "concert_MostCommonExposureRule": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_MostVulnerableApplication": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_MostVulnerableApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_PackageDetailsCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_PackageDetailsSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_PackageVulnerability": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_Scan": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_Target": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Template": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_TokenDetails": [
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesSummary": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "Map-Reflect (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_VulnerableApplications": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana_ApplicationService": [
+      "MatchMaker (Llama)"
+    ],
+    "instana_ServiceEndpoint": [
+      "MatchMaker (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_nodes_items": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_callGroup_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_callGroup_items_items": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo": [
+      "MatchMaker (Granite)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_problem": [
+      "MatchMaker (Granite)"
+    ]
+  },
+  "turbo_NewEntity": {
+    "concert_Application": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "turbo_StatFilterEntry": {
+    "concert_Application": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Llama)"
+    ],
+    "concert_ApplicationFilters": [
+      "DualContext (Llama)"
+    ],
+    "instana__topology_200_response": [
+      "DualContext (Llama)"
+    ]
+  },
+  "turbo_Statistics": {
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_Exposures": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ExposuresCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_ExposuresInfo": [
+      "DualContext (Granite)"
+    ],
+    "concert_IDNamePair": [
+      "DualContext (Llama)"
+    ],
+    "concert_MostCommonExposureRule": [
+      "DualContext (Granite)"
+    ],
+    "concert_MostVulnerableApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_PackageVulnerability": [
+      "DualContext (Granite)"
+    ],
+    "concert_Scan": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "DualContext (Granite)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "DualContext (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items": [
+      "MatchMaker (Granite)"
+    ]
+  },
+  "turbo_StatsEntry": {
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_BuildArtifact": [
+      "DualContext (Granite)"
+    ],
+    "concert_Exposures": [
+      "DualContext (Granite)"
+    ],
+    "concert_ExposuresCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_MostCommonExposureRules": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_MostVulnerableApplicationCollection": [
+      "DualContext (Llama)"
+    ],
+    "concert_PackageVulnerability": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_Scan": [
+      "DualContext (Llama)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "MatchMaker (Granite)",
+      "MatchMaker (Llama)"
+    ],
+    "instana__query_topology_edges_items": [
+      "MatchMaker (Granite)",
+      "ReMatch (Granite)",
+      "ReMatch (Llama)"
+    ],
+    "instana_callGroup_200_response": [
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ]
+  },
+  "turbo_Target": {
+    "concert_Application": [
+      "DualContext (Granite)",
+      "DualContext (Llama)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ApplicationCollection": [
+      "DualContext (Granite)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_ExposuresCollection": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_MostVulnerableApplicationCollection": [
+      "DualContext (Granite)",
+      "DualContext (Llama)"
+    ],
+    "concert_Target": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_VulnerabilitiesAssessmentSummary": [
+      "Map-Reflect (Llama)"
+    ],
+    "concert_Vulnerability": [
+      "DualContext (Granite)",
+      "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "DualContext (Granite)"
+    ],
+    "instana__entities_200_response": [
+      "DualContext (Granite)",
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Llama)"
+    ]
+  },
+  "turbo_VirtualDisksEntry": {
+    "instana__entities_200_response": [
+      "MatchMaker (Llama)"
+    ]
+  },
+  "turbo_entityActionStats": {
+    "concert_applicationsSummary": [
+      "SMT (Granite)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "turbo_entityActionStats": [
+      "SMT (Granite)",
+      "SMT (Llama)"
+    ]
+  },
+  "turbo_entityActions": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "AnyTool (Granite)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilityDetailsByName": [
+      "AnyTool (Llama)"
+    ],
+    "concert_exposures": [
+      "SMT (Llama)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbo_entitySearch": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "AnyTool (Granite)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "AnyTool (Llama)"
+    ],
+    "concert_WorkspaceRepositorySummary": [
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationFilters": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_mostVulnerableApplications": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_ssoEndpoint": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesAssessmentSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilityApplications": [
+      "AnyTool (Granite)"
+    ],
+    "concert_vulnerabilitySourceRepos": [
+      "AnyTool (Granite)"
+    ],
+    "concert_vulnerableApplications": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbo_entitySearchFiltered": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_FilterInfo": [
+      "AnyTool (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "AnyTool (Granite)"
+    ],
+    "concert_VulnerableApplications": [
+      "AnyTool (Granite)"
+    ],
+    "concert_applicationFilters": [
+      "AnyTool (Granite)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_mostCommonExposureRules": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_mostVulnerableApplications": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_ssoEndpoint": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesAssessmentSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerableApplications": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbo_entityStats": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "instana_callGroup": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbo_marketActions": {
+    "concert": [
+      "AnyTool (Granite)"
+    ],
+    "concert_Exposures": [
+      "AnyTool (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "AnyTool (Granite)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Llama)"
+    ],
+    "instana": [
+      "AnyTool (Granite)"
+    ],
+    "instana__query_topology_nodes_items": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbo_marketActionsFiltered": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_PackageRecommendation": [
+      "AnyTool (Llama)"
+    ],
+    "concert__convertApplicationName": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Granite)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbo_marketEntities": {
+    "concert": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_IDNamePair": [
+      "AnyTool (Granite)"
+    ],
+    "concert_MostCommonExposureRules": [
+      "AnyTool (Llama)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "AnyTool (Llama)"
+    ],
+    "concert_VulnerableApplications": [
+      "AnyTool (Granite)"
+    ],
+    "concert_applicationPackages": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_applicationVulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_mostCommonExposureRules": [
+      "AnyTool (Granite)"
+    ],
+    "concert_mostVulnerableApplications": [
+      "AnyTool (Llama)"
+    ],
+    "concert_ssoEndpoint": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesAssessmentSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerabilityApplications": [
+      "AnyTool (Granite)"
+    ],
+    "concert_vulnerabilitySourceRepos": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "concert_vulnerableApplications": [
+      "AnyTool (Llama)"
+    ],
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "turbonomic_Action": {
+    "concert_Components": [
+      "ReMatch (Granite)"
+    ],
+    "concert_PackageRecommendation": [
+      "GNN ((no LLM))"
+    ],
+    "concert_Recommendations": [
+      "GNN ((no LLM))"
+    ],
+    "concert_Remediation_insights": [
+      "ReMatch (Granite)"
+    ],
+    "concert_StateType": [
+      "ReMatch (Granite)"
+    ],
+    "instana_mutation_getActionMatches_items_action": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbonomic_Action": [
+      "UE-Reflect (Granite)"
+    ],
+    "turbonomic_ActionType": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "turbonomic_ActionSchedule": {
+    "concert_PackageRecommendation": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "turbonomic_ActionType": {
+    "PackageRecommendation": [
+      "ReAct (Granite)"
+    ]
+  },
+  "turbonomic_CloudAspect": {
+    "concert_SourceEntityType": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "turbonomic_CompoundActionsEntry": {
+    "concert_ApplicationPrototypeInput": [
+      "ReMatch (Granite)"
+    ]
+  },
+  "turbonomic_CurrentEntity": {
+    "concert_ConcertDefSbom": [
+      "GNN ((no LLM))"
+    ],
+    "concert_VulnerabilitiesSummary": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "turbonomic_DetailLevel": {
+    "concert_Recommendations": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "turbonomic_Entity": {
+    "turbonomic_Entity": [
+      "UE-Reflect (Granite)"
+    ]
+  },
+  "turbonomic_ProvidersEntry": {
+    "concert_ConcertDefSbom": [
+      "GNN ((no LLM))"
+    ],
+    "concert_Recommendations": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "turbonomic_SeverityBreakdown": {
+    "concert_VulnerabilitiesExposureHighlightSummary": [
+      "GNN ((no LLM))"
+    ]
+  },
+  "type": {
+    "type": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "types": {
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "environments": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "updateTime": {
+    "Action": [
+      "ReAct (Granite)"
+    ]
+  },
+  "version": {
+    "Data_mapper": [
+      "ReAct (Granite)"
+    ]
+  }
+}
