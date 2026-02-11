@@ -1,0 +1,16 @@
+"""d_icd_diagnoses defines international classification of diseases version 9 (icd-9) codes for diagnoses."""
+type mimic_D_ICD_DIAGNOSES {
+  "icd9 code - note that this is a fixed length character field, as whitespaces are important in uniquely identifying icd-9 codes."
+  icd9_code: String
+  "short_title provides a brief definition for the given diagnosis code in icd9_code."
+  short_title: String
+  "long_title provides a brief definition for the given diagnosis code in icd9_code."
+  long_title: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  d_icd_diagnosesList: [mimic_D_ICD_DIAGNOSES]
+  d_icd_diagnoses(id: ID!): mimic_D_ICD_DIAGNOSES
+}

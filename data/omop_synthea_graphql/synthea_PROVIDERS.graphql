@@ -1,0 +1,28 @@
+"""clinicians that provide patient care."""
+type synthea_PROVIDERS {
+  "primary key of the provider/clinician."
+  id: String
+  "foreign key to the organization that employees this provider."
+  organization: String
+  "first and last name of the provider."
+  name: String
+  "gender. m is male, f is female."
+  gender: String
+  "provider speciality."
+  speciality: String
+  "provider's street address without commas or newlines."
+  address: String
+  "street address city."
+  city: String
+  "street address state abbreviation."
+  state: String
+  "street address zip or postal code."
+  zip: String
+  "the number of encounter's performed by this provider."
+  utilization: String
+}
+
+type Query {
+  providersList: [synthea_PROVIDERS]
+  providers(id: ID!): synthea_PROVIDERS
+}

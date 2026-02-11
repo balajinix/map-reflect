@@ -1,0 +1,22 @@
+"""outputevents outputs data for patients."""
+type mimic_OUTPUTEVENTS {
+  "charttime records the time at which an observation was made, and is usually the closest proxy to the time the data was actually measured."
+  charttime: String
+  "value contains the value measured for the concept identified by the itemid."
+  value: String
+  "valueuom is the unit of measurement for the value, if appropriate."
+  valueuom: String
+  "iserror with 1 indicates that a physician has identified this note as an error."
+  iserror: String
+  "stopped indicates whether the infusion has been disconnected or continued."
+  stopped: String
+  "newbottleindicates if a new preparation of the solution was hung at the bedside."
+  newbottle: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  outputeventsList: [mimic_OUTPUTEVENTS]
+  outputevents(id: ID!): mimic_OUTPUTEVENTS
+}

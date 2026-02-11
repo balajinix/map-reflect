@@ -1,0 +1,36 @@
+"""microbiologyevents contains microbiology information, including tests performed and sensitivities."""
+type mimic_MICROBIOLOGYEVENTS {
+  "charttime records the time at which an observation was made, and is usually the closest proxy to the time the data was actually measured."
+  charttime: String
+  "chartdate was included as time information is not always available for microbiology measurements."
+  chartdate: String
+  "spec_itemid is the id of specimen which is tested for bacterial growth."
+  spec_itemid: String
+  "spec_type_desc is the description of specimen which is tested for bacterial growth."
+  spec_type_desc: String
+  "org_itemid is the id of the organism."
+  org_itemid: String
+  "org_name is the name of the organism."
+  org_name: String
+  "isolate_num is the number of the isolated colony for testing antibiotics."
+  isolate_num: String
+  "ab_itemid is the id is listed here, if an antibiotic was tested against the given organism for sensitivity."
+  ab_itemid: String
+  "ab_name is the name is listed here, if an antibiotic was tested against the given organism for sensitivity."
+  ab_name: String
+  "dilution values when testing antibiotic sensitivity."
+  dilution_text: String
+  "dilution values when testing antibiotic sensitivity."
+  dilution_comparison: String
+  "dilution values when testing antibiotic sensitivity."
+  dilution_value: String
+  "interpretation of the antibiotic sensitivity, and indicates the results of the test."
+  interpretation: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  microbiologyeventsList: [mimic_MICROBIOLOGYEVENTS]
+  microbiologyevents(id: ID!): mimic_MICROBIOLOGYEVENTS
+}

@@ -1,0 +1,956 @@
+"""the person domain contains records that uniquely identify each patient in the source data who is time at-risk to have clinical observations recorded within the source systems."""
+type omop_PERSON {
+  "a unique identifier for each person."
+  person_id: String
+  "a foreign key that refers to an identifier in the concept table for the unique gender of the person."
+  gender_concept_id: String
+  "the year of birth of the person. for data sources with date of birth, the year is extracted. for data sources where the year of birth is not available, the approximate year of birth is derived based on any age group categorization available."
+  year_of_birth: String
+  "the month of birth of the person. for data sources that provide the precise date of birth, the month is extracted and stored in this field."
+  month_of_birth: String
+  "the day of the month of birth of the person. for data sources that provide the precise date of birth, the day is extracted and stored in this field."
+  day_of_birth: String
+  "the date and time of birth of the person."
+  birth_datetime: String
+  "the date and time of death of the person."
+  death_datetime: String
+  "a foreign key that refers to an identifier in the concept table for the unique race of the person, belonging to the 'race' vocabulary."
+  race_concept_id: String
+  "a foreign key that refers to the standard concept identifier in the standardized vocabularies for the ethnicity of the person, belonging to the 'ethnicity' vocabulary."
+  ethnicity_concept_id: String
+  "a foreign key to the place of residency for the person in the location table, where the detailed address information is stored."
+  location_id: String
+  "a foreign key to the primary care provider the person is seeing in the provider table."
+  provider_id: String
+  "a foreign key to the site of primary care in the care_site table, where the details of the care site are stored."
+  care_site_id: String
+  "an (encrypted) key derived from the person identifier in the source data. this is necessary when a use case requires a link back to the person data at the source dataset."
+  person_source_value: String
+  "the source code for the gender of the person as it appears in the source data. the person’s gender is mapped to a standard gender concept in the standardized vocabularies"
+  gender_source_value: String
+  "a foreign key to the gender concept that refers to the code used in the source."
+  gender_source_concept_id: String
+  "the source code for the race of the person as it appears in the source data. the person race is mapped to a standard race concept in the standardized vocabularies and the original value is stored here for reference."
+  race_source_value: String
+  "a foreign key to the race concept that refers to the code used in the source."
+  race_source_concept_id: String
+  "the source code for the ethnicity of the person as it appears in the source data. the person ethnicity is mapped to a standard ethnicity concept in the standardized vocabularies and the original code is, stored here for reference."
+  ethnicity_source_value: String
+  "a foreign key to the ethnicity concept that refers to the code used in the source."
+  ethnicity_source_concept_id: String
+}
+
+"""the visit_occurrence table contains the spans of time a person continuously receives medical services from one or more providers at a care site in a given setting within the health care system. visits are classified into 4 settings: outpatient care, inpatient confinement, emergency room, and long-term care. persons may transition between these settings over the course of an episode of care (for example, treatment of a disease onset)."""
+type omop_VISIT_OCCURRENCE {
+  "a unique identifier for each person's visit or encounter at a healthcare provider."
+  visit_occurrence_id: String
+  "a foreign key identifier to the person for whom the visit is recorded. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key that refers to a visit concept identifier in the standardized vocabularies belonging to the 'visit' vocabulary."
+  visit_concept_id: String
+  "the start date of the visit."
+  visit_start_date: String
+  "the date and time of the visit started."
+  visit_start_datetime: String
+  "the end date of the visit. if this is a one-day visit the end date should match the start date."
+  visit_end_date: String
+  "the date and time of the visit end."
+  visit_end_datetime: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the type of source data from which the visit record is derived belonging to the 'visit type' vocabulary."
+  visit_type_concept_id: String
+  "a foreign key to the provider in the provider table who was associated with the visit."
+  provider_id: String
+  "a foreign key to the care site in the care site table that was visited."
+  care_site_id: String
+  "the source code for the visit as it appears in the source data."
+  visit_source_value: String
+  "a foreign key to a concept that refers to the code used in the source."
+  visit_source_concept_id: String
+  "a foreign key to the predefined concept in the place of service vocabulary reflecting where the patient was admitted from."
+  admitted_from_concept_id: String
+  "the source code for where the patient was admitted from as it appears in the source data."
+  admitted_from_source_value: String
+  "a foreign key to the predefined concept in the place of service vocabulary reflecting the discharge disposition for a visit."
+  discharge_to_concept_id: String
+  "the source code for the discharge disposition as it appears in the source data."
+  discharge_to_source_value: String
+  "a foreign key to the visit_occurrence table of the visit immediately preceding this visit"
+  preceding_visit_occurrence_id: String
+}
+
+"""the visit_detail table is an optional table used to represents details of each record in the parent visit_occurrence table. for every record in visit_occurrence table there may be 0 or more records in the visit_detail table with a 1:n relationship where n may be 0. the visit_detail table is structurally very similar to visit_occurrence table and belongs to the similar domain as the visit."""
+type omop_VISIT_DETAIL {
+  "a unique identifier for each person's visit or encounter at a healthcare provider."
+  visit_detail_id: String
+  "a foreign key identifier to the person for whom the visit is recorded. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key that refers to a visit concept identifier in the standardized vocabularies belonging to the 'visit' vocabulary."
+  visit_detail_concept_id: String
+  "the start date of the visit."
+  visit_detail_start_date: String
+  "the date and time of the visit started."
+  visit_detail_start_datetime: String
+  "the end date of the visit. if this is a one-day visit the end date should match the start date."
+  visit_detail_end_date: String
+  "the date and time of the visit end."
+  visit_detail_end_datetime: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the type of source data from which the visit record is derived belonging to the 'visit type' vocabulary."
+  visit_detail_type_concept_id: String
+  "a foreign key to the provider in the provider table who was associated with the visit."
+  provider_id: String
+  "a foreign key to the care site in the care site table that was visited."
+  care_site_id: String
+  "the source code for the visit as it appears in the source data."
+  visit_detail_source_value: String
+  "a foreign key to a concept that refers to the code used in the source."
+  visit_detail_source_concept_id: String
+  "the source code for the admitting source as it appears in the source data."
+  admitted_from_source_value: String
+  "a foreign key to the predefined concept in the 'place of service' vocabulary reflecting the admitting source for a visit."
+  admitted_from_concept_id: String
+  "the source code for the discharge disposition as it appears in the source data."
+  discharge_to_source_value: String
+  "a foreign key to the predefined concept in the 'place of service' vocabulary reflecting the discharge disposition for a visit."
+  discharge_to_concept_id: String
+  "a foreign key to the visit_detail table of the visit immediately preceding this visit"
+  preceding_visit_detail_id: String
+  "a foreign key to the visit_detail table record to represent the immediate parent visit-detail record."
+  visit_detail_parent_id: String
+  "a foreign key that refers to the record in the visit_occurrence table. this is a required field, because for every visit_detail is a child of visit_occurrence and cannot exist without a corresponding parent record in visit_occurrence."
+  visit_occurrence_id: String
+}
+
+"""the specimen domain contains the records identifying biological samples from a person."""
+type omop_SPECIMEN {
+  "a unique identifier for each specimen."
+  specimen_id: String
+  "a foreign key identifier to the person for whom the specimen is recorded."
+  person_id: String
+  "a foreign key referring to a standard concept identifier in the standardized vocabularies for the specimen."
+  specimen_concept_id: String
+  "a foreign key referring to the concept identifier in the standardized vocabularies reflecting the system of record from which the specimen was represented in the source data."
+  specimen_type_concept_id: String
+  "the date the specimen was obtained from the person."
+  specimen_date: String
+  "the date and time on the date when the specimen was obtained from the person."
+  specimen_datetime: String
+  "the amount of specimen collection from the person during the sampling procedure."
+  quantity: String
+  "a foreign key to a standard concept identifier for the unit associated with the numeric quantity of the specimen collection."
+  unit_concept_id: String
+  "a foreign key to a standard concept identifier for the anatomic location of specimen collection."
+  anatomic_site_concept_id: String
+  "a foreign key to a standard concept identifier for the disease status of specimen collection."
+  disease_status_concept_id: String
+  "the specimen identifier as it appears in the source data."
+  specimen_source_id: String
+  "the specimen value as it appears in the source data. this value is mapped to a standard concept in the standardized vocabularies and the original code is, stored here for reference."
+  specimen_source_value: String
+  "the information about the unit as detailed in the source."
+  unit_source_value: String
+  "the information about the anatomic site as detailed in the source."
+  anatomic_site_source_value: String
+  "the information about the disease status as detailed in the source."
+  disease_status_source_value: String
+}
+
+"""the measurement table contains records of measurement, i.e. structured values (numerical or categorical) obtained through systematic and standardized examination or testing of a person or person's sample. the measurement table contains both orders and results of such measurements as laboratory tests, vital signs, quantitative findings from pathology reports, etc."""
+type omop_MEASUREMENT {
+  "a unique identifier for each measurement."
+  measurement_id: String
+  "a foreign key identifier to the person about whom the measurement was recorded. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key to the standard measurement concept identifier in the standardized vocabularies. these belong to the 'measurement' domain, but could overlap with the 'observation' domain (see #3 below)."
+  measurement_concept_id: String
+  "the date of the measurement."
+  measurement_date: String
+  "the date and time of the measurement. some database systems don't have a datatype of time. to accommodate all temporal analyses, datatype datetime can be used (combining measurement_date and measurement_time forum discussion)"
+  measurement_datetime: String
+  "the time of the measurement. this is present for backwards compatibility and will be deprecated in an upcoming version"
+  measurement_time: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the provenance from where the measurement record was recorded. these belong to the 'meas type' vocabulary"
+  measurement_type_concept_id: String
+  "a foreign key identifier to the predefined concept in the standardized vocabularies reflecting the mathematical operator that is applied to the value_as_number. operators are <, <=, =, >=, > and these concepts belong to the 'meas value operator' domain."
+  operator_concept_id: String
+  "a measurement result where the result is expressed as a numeric value."
+  value_as_number: String
+  "a foreign key to a measurement result represented as a concept from the standardized vocabularies (e.g., positive/negative, present/absent, low/high, etc.). these belong to the 'meas value' domain"
+  value_as_concept_id: String
+  "a foreign key to a standard concept id of measurement units in the standardized vocabularies that belong to the 'unit' domain."
+  unit_concept_id: String
+  "the lower limit of the normal range of the measurement result. the lower range is assumed to be of the same unit of measure as the measurement value."
+  range_low: String
+  "the upper limit of the normal range of the measurement. the upper range is assumed to be of the same unit of measure as the measurement value."
+  range_high: String
+  "a foreign key to the provider in the provider table who was responsible for initiating or obtaining the measurement."
+  provider_id: String
+  "a foreign key to the visit in the visit_occurrence table during which the measurement was recorded."
+  visit_occurrence_id: String
+  "a foreign key to the visit detail in the visit_detail table during which the measurement was recorded."
+  visit_detail_id: String
+  "the measurement name as it appears in the source data. this code is mapped to a standard concept in the standardized vocabularies and the original code is stored here for reference."
+  measurement_source_value: String
+  "a foreign key to a concept in the standard vocabularies that refers to the code used in the source."
+  measurement_source_concept_id: String
+  "the source code for the unit as it appears in the source data. this code is mapped to a standard unit concept in the standardized vocabularies and the original code is stored here for reference."
+  unit_source_value: String
+  "the source value associated with the content of the value_as_number or value_as_concept_id as stored in the source data."
+  value_source_value: String
+}
+
+"""the procedure_occurrence table contains records of activities or processes ordered by, or carried out by, a healthcare provider on the patient to have a diagnostic or therapeutic purpose. procedures are present in various data sources in different forms with varying levels of standardization."""
+type omop_PROCEDURE_OCCURRENCE {
+  "a system-generated unique identifier for each procedure occurrence."
+  procedure_occurrence_id: String
+  "a foreign key identifier to the person who is subjected to the procedure. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key that refers to a standard procedure concept identifier in the standardized vocabularies."
+  procedure_concept_id: String
+  "the date on which the procedure was performed."
+  procedure_date: String
+  "the date and time on which the procedure was performed."
+  procedure_datetime: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the type of source data from which the procedure record is derived, belonging to the 'procedure type' vocabulary."
+  procedure_type_concept_id: String
+  "a foreign key to a standard concept identifier for a modifier to the procedure (e.g. bilateral). these concepts are typically distinguished by 'modifier' concept classes (e.g., 'cpt4 modifier' as part of the 'cpt4' vocabulary)."
+  modifier_concept_id: String
+  "the quantity of procedures ordered or administered."
+  quantity: String
+  "a foreign key to the provider in the provider table who was responsible for carrying out the procedure."
+  provider_id: String
+  "a foreign key to the visit in the visit_occurrence table during which the procedure was carried out."
+  visit_occurrence_id: String
+  "a foreign key to the visit detail in the visit_detail table during which the procedure was carried out."
+  visit_detail_id: String
+  "the source code for the procedure as it appears in the source data. this code is mapped to a standard procedure concept in the standardized vocabularies and the original code is, stored here for reference. procedure source codes are typically icd-9-proc, cpt-4, hcpcs or opcs-4 codes."
+  procedure_source_value: String
+  "a foreign key to a procedure concept that refers to the code used in the source."
+  procedure_source_concept_id: String
+  "the source code for the qualifier as it appears in the source data."
+  modifier_source_value: String
+}
+
+"""conditions are records of a person suggesting the presence of a disease or medical condition stated as a diagnosis, a sign, or a symptom, which is either observed by a provider or reported by the patient. conditions are recorded in different sources and levels of standardization."""
+type omop_CONDITION_OCCURRENCE {
+  "a unique identifier for each condition occurrence event."
+  condition_occurrence_id: String
+  "a foreign key identifier to the person who is experiencing the condition. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key that refers to a standard concept identifier in the standardized vocabularies belonging to the 'condition' domain."
+  condition_concept_id: String
+  "the date when the instance of the condition is recorded."
+  condition_start_date: String
+  "the date and time when the instance of the condition is recorded."
+  condition_start_datetime: String
+  "the date when the instance of the condition is considered to have ended."
+  condition_end_date: String
+  "the date when the instance of the condition is considered to have ended."
+  condition_end_datetime: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the source data from which the condition was recorded, the level of standardization, and the type of occurrence. these belong to the 'condition type' vocabulary"
+  condition_type_concept_id: String
+  "a foreign key that refers to a standard concept identifier in the standardized vocabularies reflecting the point of care at which the condition was diagnosed."
+  condition_status_concept_id: String
+  "the reason that the condition was no longer present, as indicated in the source data."
+  stop_reason: String
+  "a foreign key to the provider in the provider table who was responsible for capturing (diagnosing) the condition."
+  provider_id: String
+  "a foreign key to the visit in the visit_occurrence table during which the condition was determined (diagnosed)."
+  visit_occurrence_id: String
+  "a foreign key to the visit in the visit_detail table during which the condition was determined (diagnosed)."
+  visit_detail_id: String
+  "the source code for the condition as it appears in the source data. this code is mapped to a standard condition concept in the standardized vocabularies and the original code is stored here for reference."
+  condition_source_value: String
+  "a foreign key to a condition concept that refers to the code used in the source."
+  condition_source_concept_id: String
+  "the source code for the condition status as it appears in the source data. this code is mapped to a standard concept in the standardized vocabularies and the original code is stored here for reference."
+  condition_status_source_value: String
+}
+
+"""the death domain contains the clinical event for how and when a person dies. a person can have up to one record if the source system contains evidence about the death."""
+type omop_DEATH {
+  "a foreign key identifier to the deceased person. the demographic details of that person are stored in the person table."
+  person_id: String
+  "the date the person was deceased. if the precise date including day or month is not known or not allowed, december is used as the default month, and the last day of the month the default day."
+  death_date: String
+  "the date and time the person was deceased. if the precise date including day or month is not known or not allowed, december is used as the default month, and the last day of the month the default day."
+  death_datetime: String
+  "a foreign key referring to the predefined concept identifier in the standardized vocabularies reflecting how the death was represented in the source data."
+  death_type_concept_id: String
+  "a foreign key referring to a standard concept identifier in the standardized vocabularies for conditions."
+  cause_concept_id: String
+  "the source code for the cause of death as it appears in the source data. this code is mapped to a standard concept in the standardized vocabularies and the original code is, stored here for reference."
+  cause_source_value: String
+  "a foreign key to the concept that refers to the code used in the source. note, this variable name is abbreviated to ensure it will be allowable across database platforms."
+  cause_source_concept_id: String
+}
+
+"""the location table represents a generic way to capture physical location or address information of persons and care sites."""
+type omop_LOCATION {
+  "a unique identifier for each geographic location."
+  location_id: String
+  "the address field 1, typically used for the street address, as it appears in the source data."
+  address_1: String
+  "the address field 2, typically used for additional detail such as buildings, suites, floors, as it appears in the source data."
+  address_2: String
+  "the city field as it appears in the source data."
+  city: String
+  "the state field as it appears in the source data."
+  state: String
+  "the zip or postal code."
+  zip: String
+  "the county."
+  county: String
+  "the verbatim information that is used to uniquely identify the location as it appears in the source data."
+  location_source_value: String
+}
+
+"""the observation table captures clinical facts about a person obtained in the context of examination, questioning or a procedure. any data that cannot be represented by any other domains, such as social and lifestyle facts, medical history, family history, etc. are recorded here."""
+type omop_OBSERVATION {
+  "a unique identifier for each observation."
+  observation_id: String
+  "a foreign key identifier to the person about whom the observation was recorded. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key to the standard observation concept identifier in the standardized vocabularies."
+  observation_concept_id: String
+  "the date of the observation."
+  observation_date: String
+  "the date and time of the observation."
+  observation_datetime: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the type of the observation."
+  observation_type_concept_id: String
+  "the observation result stored as a number. this is applicable to observations where the result is expressed as a numeric value."
+  value_as_number: String
+  "the observation result stored as a string. this is applicable to observations where the result is expressed as verbatim text."
+  value_as_string: String
+  "a foreign key to an observation result stored as a concept id. this is applicable to observations where the result can be expressed as a standard concept from the standardized vocabularies (e.g., positive/negative, present/absent, low/high, etc.)."
+  value_as_concept_id: String
+  "a foreign key to a standard concept id for a qualifier (e.g., severity of drug-drug interaction alert)"
+  qualifier_concept_id: String
+  "a foreign key to a standard concept id of measurement units in the standardized vocabularies."
+  unit_concept_id: String
+  "a foreign key to the provider in the provider table who was responsible for making the observation."
+  provider_id: String
+  "a foreign key to the visit in the visit_occurrence table during which the observation was recorded."
+  visit_occurrence_id: String
+  "a foreign key to the visit in the visit_detail table during which the observation was recorded."
+  visit_detail_id: String
+  "the observation code as it appears in the source data. this code is mapped to a standard concept in the standardized vocabularies and the original code is, stored here for reference."
+  observation_source_value: String
+  "a foreign key to a concept that refers to the code used in the source."
+  observation_source_concept_id: String
+  "the source code for the unit as it appears in the source data. this code is mapped to a standard unit concept in the standardized vocabularies and the original code is, stored here for reference."
+  unit_source_value: String
+  "the source value associated with a qualifier to characterize the observation"
+  qualifier_source_value: String
+  "a foreign key to an event table (e.g., procedure_occurrence_id)."
+  observation_event_id: String
+  "a foreign key that refers to a standard concept identifier in the standardized vocabularies referring to the field represented in the observation_event_id."
+  obs_event_field_concept_id: String
+  "the observation result stored as a datetime value. this is applicable to observations where the result is expressed as a point in time."
+  value_as_datetime: String
+}
+
+"""the observation_period table contains records which uniquely define the spans of time for which a person is at-risk to have clinical events recorded within the source systems, even if no events in fact are recorded (healthy patient with no healthcare interactions)."""
+type omop_OBSERVATION_PERIOD {
+  "a unique identifier for each observation period."
+  observation_period_id: String
+  "a foreign key identifier to the person for whom the observation period is defined. the demographic details of that person are stored in the person table."
+  person_id: String
+  "the start date of the observation period for which data are available from the data source."
+  observation_period_start_date: String
+  "the end date of the observation period for which data are available from the data source."
+  observation_period_end_date: String
+  "a foreign key identifier to the predefined concept in the standardized vocabularies reflecting the source of the observation period information"
+  period_type_concept_id: String
+}
+
+"""the 'drug' domain captures records about the utilization of a drug when ingested or otherwise introduced into the body. a drug is a biochemical substance formulated in such a way that when administered to a person it will exert a certain physiological effect. drugs include prescription and over-the-counter medicines, vaccines, and large-molecule biologic therapies. radiological devices ingested or applied locally do not count as drugs."""
+type omop_DRUG_EXPOSURE {
+  "a system-generated unique identifier for each drug utilization event."
+  drug_exposure_id: String
+  "a foreign key identifier to the person who is subjected to the drug. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key that refers to a standard concept identifier in the standardized vocabularies belonging to the 'drug' domain."
+  drug_concept_id: String
+  "the start date for the current instance of drug utilization. valid entries include a start date of a prescription, the date a prescription was filled, or the date on which a drug administration procedure was recorded."
+  drug_exposure_start_date: String
+  "the start date and time for the current instance of drug utilization. valid entries include a start datetime of a prescription, the date and time a prescription was filled, or the date and time on which a drug administration procedure was recorded."
+  drug_exposure_start_datetime: String
+  "the end date for the current instance of drug utilization. depending on different sources, it could be a known or an inferred date and denotes the last day at which the patient was still exposed to drug."
+  drug_exposure_end_date: String
+  "the end date and time for the current instance of drug utilization. depending on different sources, it could be a known or an inferred date and time and denotes the last day at which the patient was still exposed to drug."
+  drug_exposure_end_datetime: String
+  "the known end date of a drug_exposure as provided by the source."
+  verbatim_end_date: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the type of drug exposure recorded. it indicates how the drug exposure was represented in the source data and belongs to the 'drug type' vocabulary."
+  drug_type_concept_id: String
+  "the reason the drug was stopped. reasons include regimen completed, changed, removed, etc."
+  stop_reason: String
+  "the number of refills after the initial prescription. the initial prescription is not counted, values start with null."
+  refills: String
+  "the quantity of drug as recorded in the original prescription or dispensing record."
+  quantity: String
+  "the number of days of supply of the medication as prescribed. this reflects the intention of the provider for the length of exposure."
+  days_supply: String
+  "the directions ('signetur') on the drug prescription as recorded in the original prescription (and printed on the container) or dispensing record."
+  sig: String
+  "a foreign key that refers to a standard concept identifier in the standardized vocabularies reflecting the route of administration and belonging to the 'route' domain."
+  route_concept_id: String
+  "an identifier assigned to a particular quantity or lot of drug product from the manufacturer."
+  lot_number: String
+  "a foreign key to the provider in the provider table who initiated (prescribed or administered) the drug exposure."
+  provider_id: String
+  "a foreign key to the visit in the visit_occurrence table during which the drug exposure was initiated."
+  visit_occurrence_id: String
+  "a foreign key to the visit detail in the visit_detail table during which the drug exposure was initiated."
+  visit_detail_id: String
+  "the source code for the drug as it appears in the source data. this code is mapped to a standard drug concept in the standardized vocabularies and the original code is, stored here for reference."
+  drug_source_value: String
+  "a foreign key to a drug concept that refers to the code used in the source."
+  drug_source_concept_id: String
+  "the information about the route of administration as detailed in the source."
+  route_source_value: String
+  "the information about the dose unit as detailed in the source."
+  dose_unit_source_value: String
+}
+
+"""the device exposure domain captures information about a person's exposure to a foreign physical object or instrument that which is used for diagnostic or therapeutic purposes through a mechanism beyond chemical action."""
+type omop_DEVICE_EXPOSURE {
+  "a system-generated unique identifier for each device exposure."
+  device_exposure_id: String
+  "a foreign key identifier to the person who is subjected to the device. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key that refers to a standard concept identifier in the standardized vocabularies for the device concept."
+  device_concept_id: String
+  "the date the device or supply was applied or used."
+  device_exposure_start_date: String
+  "the date and time the device or supply was applied or used."
+  device_exposure_start_datetime: String
+  "the date the device or supply was removed from use."
+  device_exposure_end_date: String
+  "the date and time the device or supply was removed from use."
+  device_exposure_end_datetime: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the type of device exposure recorded. it indicates how the device exposure was represented in the source data."
+  device_type_concept_id: String
+  "a udi or equivalent identifying the instance of the device used in the person."
+  unique_device_id: String
+  "the number of individual devices used for the exposure."
+  quantity: String
+  "a foreign key to the provider in the provider table who initiated of administered the device."
+  provider_id: String
+  "a foreign key to the visit in the visit table during which the device was used."
+  visit_occurrence_id: String
+  "a foreign key to the visit in the visit-detail table during which the drug exposure was initiated."
+  visit_detail_id: String
+  "the source code for the device as it appears in the source data. this code is mapped to a standard device concept in the standardized vocabularies and the original code is stored here for reference."
+  device_source_value: String
+  "a foreign key to a device concept that refers to the code used in the source."
+  device_source_concept_id: String
+}
+
+"""the note table captures unstructured information that was recorded by a provider about a patient in free text notes on a given date."""
+type omop_NOTE {
+  "a unique identifier for each note."
+  note_id: String
+  "a foreign key identifier to the person about whom the note was recorded. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key identifier to the event (e.g. measurement, procedure, visit, drug exposure, etc) record during which the note was recorded."
+  note_event_id: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the field to which the note_event_id is referring."
+  note_event_field_concept_id: String
+  "the date the note was recorded."
+  note_date: String
+  "the date and time the note was recorded."
+  note_datetime: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the type, origin or provenance of the note. these belong to the 'note type' vocabulary"
+  note_type_concept_id: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the hl7 loinc document type vocabulary classification of the note."
+  note_class_concept_id: String
+  "the title of the note as it appears in the source."
+  note_title: String
+  "the content of the note."
+  note_text: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the note character encoding type"
+  encoding_concept_id: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the language of the note"
+  language_concept_id: String
+  "a foreign key to the provider in the provider table who took the note."
+  provider_id: String
+  "a foreign key to the visit in the visit_occurrence table when the note was taken."
+  visit_occurrence_id: String
+  "a foreign key to the visit in the visit_detail table when the note was taken."
+  visit_detail_id: String
+  "the source value associated with the origin of the note"
+  note_source_value: String
+}
+
+"""the fact_relationship table contains records about the relationships between facts stored as records in any table of the cdm."""
+type omop_FACT_RELATIONSHIP {
+  "the concept representing the domain of fact one, from which the corresponding table can be inferred."
+  domain_concept_id_1: String
+  "the unique identifier in the table corresponding to the domain of fact one."
+  fact_id_1: String
+  "the concept representing the domain of fact two, from which the corresponding table can be inferred."
+  domain_concept_id_2: String
+  "the unique identifier in the table corresponding to the domain of fact two."
+  fact_id_2: String
+  "a foreign key to a standard concept id of relationship in the standardized vocabularies."
+  relationship_concept_id: String
+}
+
+"""the payer_plan_period table captures details of the period of time that a person is continuously enrolled under a specific health plan benefit structure from a given payer."""
+type omop_PAYER_PLAN_PERIOD {
+  "a identifier for each unique combination of payer, plan, family code and time span."
+  payer_plan_period_id: String
+  "a foreign key identifier to the person covered by the payer. the demographic details of that person are stored in the person table."
+  person_id: String
+  "the start date of the payer plan period."
+  payer_plan_period_start_date: String
+  "the end date of the payer plan period."
+  payer_plan_period_end_date: String
+  "the source code for the payer as it appears in the source data."
+  payer_source_value: String
+  "the source code for the person's health benefit plan as it appears in the source data."
+  plan_source_value: String
+  "the source code for the person's family as it appears in the source data."
+  family_source_value: String
+}
+
+"""the cdm_source table contains detail about the source database and the process used to transform the data into the omop common data model."""
+type omop_CDM_SOURCE {
+  "the full name of the source"
+  cdm_source_name: String
+  "an abbreviation of the name"
+  cdm_source_abbreviation: String
+  "the name of the organization responsible for the development of the cdm instance"
+  cdm_holder: String
+  "a description of the source data origin and purpose for collection. the description may contain a summary of the period of time that is expected to be covered by this dataset."
+  source_description: String
+  "url or other external reference to location of source documentation"
+  source_documentation_reference: String
+  "url or other external reference to location of etl specification documentation and etl source code"
+  cdm_etl_reference: String
+  "the date for which the source data are most current, such as the last day of data capture"
+  source_release_date: String
+  "the date when the cdm was instantiated"
+  cdm_release_date: String
+  "the version of cdm used"
+  cdm_version: String
+  "the version of the vocabulary used"
+  vocabulary_version: String
+}
+
+"""the care_site table contains a list of uniquely identified institutional (physical or organizational) units where healthcare delivery is practiced (offices, wards, hospitals, clinics, etc.)."""
+type omop_CARE_SITE {
+  "a unique identifier for each care site."
+  care_site_id: String
+  "the verbatim description or name of the care site as in data source"
+  care_site_name: String
+  "a foreign key that refers to a place of service concept id in the standardized vocabularies."
+  place_of_service_concept_id: String
+  "a foreign key to the geographic location in the location table, where the detailed address information is stored."
+  location_id: String
+  "the identifier for the care site in the source data, stored here for reference."
+  care_site_source_value: String
+  "the source code for the place of service as it appears in the source data, stored here for reference."
+  place_of_service_source_value: String
+}
+
+"""the cohort table contains records of subjects that satisfy a given set of criteria for a duration of time."""
+type omop_COHORT {
+  "a foreign key to a record in the cohort_definition table containing relevant cohort definition information."
+  cohort_definition_id: String
+  "a foreign key to the subject in the cohort. these could be referring to records in the person, provider, visit_occurrence table."
+  subject_id: String
+  "the date when the cohort definition criteria for the person, provider or visit first match."
+  cohort_start_date: String
+  "the date when the cohort definition criteria for the person, provider or visit no longer match or the cohort membership was terminated."
+  cohort_end_date: String
+}
+
+"""the cohort_definition table contains records defining a cohort derived from the data through the associated description and syntax and upon instantiation (execution of the algorithm) placed into the cohort table."""
+type omop_COHORT_DEFINITION {
+  "a unique identifier for each cohort."
+  cohort_definition_id: String
+  "a short description of the cohort."
+  cohort_definition_name: String
+  "a complete description of the cohort definition"
+  cohort_definition_description: String
+  "type defining what kind of cohort definition the record represents and how the syntax may be executed"
+  definition_type_concept_id: String
+  "syntax or code to operationalize the cohort definition"
+  cohort_definition_syntax: String
+  "a foreign key to the concept to which defines the domain of subjects that are members of the cohort (e.g., person, provider, visit)."
+  subject_concept_id: String
+  "a date to indicate when the cohort was initiated in the cohort table"
+  cohort_initiation_date: String
+}
+
+"""the provider table contains a list of uniquely identified healthcare providers. these are individuals providing hands-on healthcare to patients, such as physicians, nurses, midwives, physical therapists etc."""
+type omop_PROVIDER {
+  "a unique identifier for each provider."
+  provider_id: String
+  "a description of the provider."
+  provider_name: String
+  "the national provider identifier (npi) of the provider."
+  npi: String
+  "the drug enforcement administration (dea) number of the provider."
+  dea: String
+  "a foreign key to a standard specialty concept id in the standardized vocabularies."
+  specialty_concept_id: String
+  "a foreign key to the main care site where the provider is practicing."
+  care_site_id: String
+  "the year of birth of the provider."
+  year_of_birth: String
+  "the gender of the provider."
+  gender_concept_id: String
+  "the identifier used for the provider in the source data, stored here for reference."
+  provider_source_value: String
+  "the source code for the provider specialty as it appears in the source data, stored here for reference."
+  specialty_source_value: String
+  "a foreign key to a concept that refers to the code used in the source."
+  specialty_source_concept_id: String
+  "the gender code for the provider as it appears in the source data, stored here for reference."
+  gender_source_value: String
+  "a foreign key to a concept that refers to the code used in the source."
+  gender_source_concept_id: String
+}
+
+"""patient allergy data."""
+type synthea_ALLERGIES {
+  "the date the allergy was diagnosed."
+  start: String
+  "the date the allergy ended, if applicable."
+  stop: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter when the allergy was diagnosed."
+  encounter: String
+  "allergy code from snomed-ct"
+  code: String
+  "description of the allergy"
+  description: String
+}
+
+"""patient care plan data, including goals."""
+type synthea_CAREPLANS {
+  "primary key. unique identifier of the care plan."
+  id: String
+  "the date the care plan was initiated."
+  start: String
+  "the date the care plan ended, if applicable."
+  stop: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter when the care plan was initiated."
+  encounter: String
+  "code from snomed-ct"
+  code: String
+  "description of the care plan."
+  description: String
+  "diagnosis code from snomed-ct that this care plan addresses."
+  reasoncode: String
+  "description of the reason code."
+  reasondescription: String
+}
+
+"""patient conditions or diagnoses."""
+type synthea_CONDITIONS {
+  "the date the condition was diagnosed."
+  start: String
+  "the date the condition resolved, if applicable."
+  stop: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter when the condition was diagnosed."
+  encounter: String
+  "diagnosis code from snomed-ct"
+  code: String
+  "description of the condition."
+  description: String
+}
+
+"""patient encounter data."""
+type synthea_ENCOUNTERS {
+  "primary key. unique identifier of the encounter."
+  id: String
+  "the date and time the encounter started."
+  start: String
+  "the date and time the encounter concluded."
+  stop: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the organization."
+  provider: String
+  "the class of the encounter, such as ambulatory, emergency, inpatient, wellness, or urgentcare"
+  encounterclass: String
+  "encounter code from snomed-ct"
+  code: String
+  "description of the type of encounter."
+  description: String
+  "the base cost of the encounter, not including any line item costs related to medications, immunizations, procedures, or other services."
+  cost: String
+  "diagnosis code from snomed-ct, only if this encounter targeted a specific condition."
+  reasoncode: String
+  "description of the reason code."
+  reasondescription: String
+}
+
+"""patient imaging metadata."""
+type synthea_IMAGING_STUDIES {
+  "primary key. unique identifier of the imaging study."
+  id: String
+  "the date the imaging study was conducted."
+  date: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter where the imaging study was conducted."
+  encounter: String
+  "a snomed body structures code describing what part of the body the images in the series were taken of."
+  body_site_code: String
+  "description of the body site."
+  body_site_description: String
+  "a dicom-dcm code describing the method used to take the images."
+  modality_code: String
+  "description of the modality."
+  modality_description: String
+  "a dicom-sop code describing the subject-object pair (sop) that constitutes the image."
+  sop_code: String
+  "description of the sop code."
+  sop_description: String
+}
+
+"""patient immunization data."""
+type synthea_IMMUNIZATIONS {
+  "the date the immunization was administered."
+  date: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter where the immunization was administered."
+  encounter: String
+  "immunization code from cvx."
+  code: String
+  "description of the immunization."
+  description: String
+  "the line item cost of the immunization."
+  cost: String
+}
+
+"""patient medication data."""
+type synthea_MEDICATIONS {
+  "the date the medication was prescribed."
+  start: String
+  "the date the prescription ended, if applicable."
+  stop: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter where the medication was prescribed."
+  encounter: String
+  "medication code from rxnorm."
+  code: String
+  "description of the medication."
+  description: String
+  "the line item cost of the medication."
+  cost: String
+  "diagnosis code from snomed-ct specifying why this medication was prescribed."
+  reasoncode: String
+  "description of the reason code."
+  reasondescription: String
+}
+
+"""patient observations including vital signs and lab reports."""
+type synthea_OBSERVATIONS {
+  "the date the observation was performed."
+  date: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter where the observation was performed."
+  encounter: String
+  "observation or lab code from loinc"
+  code: String
+  "description of the observation or lab."
+  description: String
+  "the recorded value of the observation."
+  value: String
+  "the units of measure for the value."
+  units: String
+  "the datatype of value text or numeric."
+  type: String
+}
+
+"""provider organizations including hospitals."""
+type synthea_ORGANIZATIONS {
+  "primary key of the organization."
+  id: String
+  "name of the organization."
+  name: String
+  "organization's street address without commas or newlines."
+  address: String
+  "street address city."
+  city: String
+  "street address state abbreviation."
+  state: String
+  "street address zip or postal code."
+  zip: String
+  "organization's phone number."
+  phone: String
+  "the number of encounter's performed by this organization."
+  utilization: String
+}
+
+"""patient demographic data."""
+type synthea_PATIENTS {
+  "primary key. unique identifier of the patient."
+  id: String
+  "the date the patient was born."
+  birthdate: String
+  "the date the patient died."
+  deathdate: String
+  "patient social security identifier."
+  ssn: String
+  "patient drivers license identifier."
+  drivers: String
+  "patient passport identifier."
+  passport: String
+  "name prefix, such as mr., mrs., dr., etc."
+  prefix: String
+  "first name of the patient."
+  first: String
+  "last or surname of the patient."
+  last: String
+  "name suffix, such as phd, md, jd, etc."
+  suffix: String
+  "maiden name of the patient."
+  maiden: String
+  "marital status. m is married, s is single. currently no support for divorce (d) or widowing (w)"
+  marital: String
+  "description of the patient's primary race."
+  race: String
+  "description of the patient's primary ethnicity."
+  ethnicity: String
+  "gender. m is male, f is female."
+  gender: String
+  "name of the town where the patient was born."
+  birthplace: String
+  "patient's street address without commas or newlines."
+  address: String
+  "patient's address city."
+  city: String
+  "patient's address state."
+  state: String
+  "patient's zip code."
+  zip: String
+}
+
+"""patient procedure data including surgeries."""
+type synthea_PROCEDURES {
+  "the date the procedure was performed."
+  date: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter where the procedure was performed."
+  encounter: String
+  "procedure code from snomed-ct"
+  code: String
+  "description of the procedure."
+  description: String
+  "the line item cost of the procedure."
+  cost: String
+  "diagnosis code from snomed-ct specifying why this procedure was performed."
+  reasoncode: String
+  "description of the reason code."
+  reasondescription: String
+}
+
+"""clinicians that provide patient care."""
+type synthea_PROVIDERS {
+  "primary key of the provider/clinician."
+  id: String
+  "foreign key to the organization that employees this provider."
+  organization: String
+  "first and last name of the provider."
+  name: String
+  "gender. m is male, f is female."
+  gender: String
+  "provider speciality."
+  speciality: String
+  "provider's street address without commas or newlines."
+  address: String
+  "street address city."
+  city: String
+  "street address state abbreviation."
+  state: String
+  "street address zip or postal code."
+  zip: String
+  "the number of encounter's performed by this provider."
+  utilization: String
+}
+
+type Query {
+  personList: [omop_PERSON]
+  person(id: ID!): omop_PERSON
+  visit_occurrenceList: [omop_VISIT_OCCURRENCE]
+  visit_occurrence(id: ID!): omop_VISIT_OCCURRENCE
+  visit_detailList: [omop_VISIT_DETAIL]
+  visit_detail(id: ID!): omop_VISIT_DETAIL
+  specimenList: [omop_SPECIMEN]
+  specimen(id: ID!): omop_SPECIMEN
+  measurementList: [omop_MEASUREMENT]
+  measurement(id: ID!): omop_MEASUREMENT
+  procedure_occurrenceList: [omop_PROCEDURE_OCCURRENCE]
+  procedure_occurrence(id: ID!): omop_PROCEDURE_OCCURRENCE
+  condition_occurrenceList: [omop_CONDITION_OCCURRENCE]
+  condition_occurrence(id: ID!): omop_CONDITION_OCCURRENCE
+  deathList: [omop_DEATH]
+  death(id: ID!): omop_DEATH
+  locationList: [omop_LOCATION]
+  location(id: ID!): omop_LOCATION
+  observationList: [omop_OBSERVATION]
+  observation(id: ID!): omop_OBSERVATION
+  observation_periodList: [omop_OBSERVATION_PERIOD]
+  observation_period(id: ID!): omop_OBSERVATION_PERIOD
+  drug_exposureList: [omop_DRUG_EXPOSURE]
+  drug_exposure(id: ID!): omop_DRUG_EXPOSURE
+  device_exposureList: [omop_DEVICE_EXPOSURE]
+  device_exposure(id: ID!): omop_DEVICE_EXPOSURE
+  noteList: [omop_NOTE]
+  note(id: ID!): omop_NOTE
+  fact_relationshipList: [omop_FACT_RELATIONSHIP]
+  fact_relationship(id: ID!): omop_FACT_RELATIONSHIP
+  payer_plan_periodList: [omop_PAYER_PLAN_PERIOD]
+  payer_plan_period(id: ID!): omop_PAYER_PLAN_PERIOD
+  cdm_sourceList: [omop_CDM_SOURCE]
+  cdm_source(id: ID!): omop_CDM_SOURCE
+  care_siteList: [omop_CARE_SITE]
+  care_site(id: ID!): omop_CARE_SITE
+  cohortList: [omop_COHORT]
+  cohort(id: ID!): omop_COHORT
+  cohort_definitionList: [omop_COHORT_DEFINITION]
+  cohort_definition(id: ID!): omop_COHORT_DEFINITION
+  providerList: [omop_PROVIDER]
+  provider(id: ID!): omop_PROVIDER
+  allergiesList: [synthea_ALLERGIES]
+  allergies(id: ID!): synthea_ALLERGIES
+  careplansList: [synthea_CAREPLANS]
+  careplans(id: ID!): synthea_CAREPLANS
+  conditionsList: [synthea_CONDITIONS]
+  conditions(id: ID!): synthea_CONDITIONS
+  encountersList: [synthea_ENCOUNTERS]
+  encounters(id: ID!): synthea_ENCOUNTERS
+  imaging_studiesList: [synthea_IMAGING_STUDIES]
+  imaging_studies(id: ID!): synthea_IMAGING_STUDIES
+  immunizationsList: [synthea_IMMUNIZATIONS]
+  immunizations(id: ID!): synthea_IMMUNIZATIONS
+  medicationsList: [synthea_MEDICATIONS]
+  medications(id: ID!): synthea_MEDICATIONS
+  observationsList: [synthea_OBSERVATIONS]
+  observations(id: ID!): synthea_OBSERVATIONS
+  organizationsList: [synthea_ORGANIZATIONS]
+  organizations(id: ID!): synthea_ORGANIZATIONS
+  patientsList: [synthea_PATIENTS]
+  patients(id: ID!): synthea_PATIENTS
+  proceduresList: [synthea_PROCEDURES]
+  procedures(id: ID!): synthea_PROCEDURES
+  providersList: [synthea_PROVIDERS]
+  providers(id: ID!): synthea_PROVIDERS
+}

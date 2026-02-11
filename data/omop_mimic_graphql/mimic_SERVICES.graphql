@@ -1,0 +1,16 @@
+"""services lists services that a patient was admitted/transferred under."""
+type mimic_SERVICES {
+  "transfertime is the time at which the patient moved from the prev_service to the curr_service."
+  transfertime: String
+  "prev_service is the previous service that the patient resides under."
+  prev_service: String
+  "curr_service is the current service that the patient resides under."
+  curr_service: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  servicesList: [mimic_SERVICES]
+  services(id: ID!): mimic_SERVICES
+}

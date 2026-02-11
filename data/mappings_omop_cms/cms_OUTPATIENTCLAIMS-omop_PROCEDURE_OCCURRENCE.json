@@ -1,0 +1,33 @@
+{
+    "name": "cms_OUTPATIENTCLAIMS",
+    "properties": {
+        "cms_OUTPATIENTCLAIMS.desynpuf_id": [
+            {
+                "mapTable": "omop_PROCEDURE_OCCURRENCE",
+                "mapProperty": "omop_PROCEDURE_OCCURRENCE.person_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.desynpuf_id maps to omop.PROCEDURE_OCCURRENCE.person_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.clm_from_dt": [
+            {
+                "mapTable": "omop_PROCEDURE_OCCURRENCE",
+                "mapProperty": "omop_PROCEDURE_OCCURRENCE.procedure_date",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.clm_from_dt maps to omop.PROCEDURE_OCCURRENCE.procedure_date for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.at_physn_npi": [
+            {
+                "mapTable": "omop_PROCEDURE_OCCURRENCE",
+                "mapProperty": "omop_PROCEDURE_OCCURRENCE.provider_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.at_physn_npi maps to omop.PROCEDURE_OCCURRENCE.provider_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.hcpcs_cd": [
+            {
+                "mapTable": "omop_PROCEDURE_OCCURRENCE",
+                "mapProperty": "omop_PROCEDURE_OCCURRENCE.procedure_source_value",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.hcpcs_cd maps to omop.PROCEDURE_OCCURRENCE.procedure_source_value for medical data standardization."
+            }
+        ]
+    }
+}

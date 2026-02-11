@@ -1,0 +1,16 @@
+"""this table provides information regarding care givers."""
+type mimic_CAREGIVERS {
+  "cgid is a unique identifier for each distinct caregiver present in the database."
+  cgid: String
+  "label defines the type of caregiver."
+  label: String
+  "description provides additional information regarding the caregiver."
+  description: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  caregiversList: [mimic_CAREGIVERS]
+  caregivers(id: ID!): mimic_CAREGIVERS
+}

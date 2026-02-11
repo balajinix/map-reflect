@@ -1,0 +1,67 @@
+{
+    "name": "synthea_OBSERVATIONS",
+    "properties": {
+        "synthea_OBSERVATIONS.patient": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.person_id",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.patient maps to omop.MEASUREMENT.person_id for medical data standardization."
+            }
+        ],
+        "synthea_OBSERVATIONS.code": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_concept_id",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.code maps to omop.MEASUREMENT.measurement_concept_id for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_source_value",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.code maps to omop.MEASUREMENT.measurement_source_value for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_source_concept_id",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.code maps to omop.MEASUREMENT.measurement_source_concept_id for medical data standardization."
+            }
+        ],
+        "synthea_OBSERVATIONS.date": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_date",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.date maps to omop.MEASUREMENT.measurement_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_datetime",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.date maps to omop.MEASUREMENT.measurement_datetime for medical data standardization."
+            }
+        ],
+        "synthea_OBSERVATIONS.value": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.value_as_number",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.value maps to omop.MEASUREMENT.value_as_number for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.value_source_value",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.value maps to omop.MEASUREMENT.value_source_value for medical data standardization."
+            }
+        ],
+        "synthea_OBSERVATIONS.encounter": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.visit_occurrence_id",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.encounter maps to omop.MEASUREMENT.visit_occurrence_id for medical data standardization."
+            }
+        ],
+        "synthea_OBSERVATIONS.units": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.unit_source_value",
+                "justification": "OMOP CDM mapping: synthea.OBSERVATIONS.units maps to omop.MEASUREMENT.unit_source_value for medical data standardization."
+            }
+        ]
+    }
+}

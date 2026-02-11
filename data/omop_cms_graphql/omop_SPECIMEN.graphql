@@ -1,0 +1,38 @@
+"""the specimen domain contains the records identifying biological samples from a person."""
+type omop_SPECIMEN {
+  "a unique identifier for each specimen."
+  specimen_id: String
+  "a foreign key identifier to the person for whom the specimen is recorded."
+  person_id: String
+  "a foreign key referring to a standard concept identifier in the standardized vocabularies for the specimen."
+  specimen_concept_id: String
+  "a foreign key referring to the concept identifier in the standardized vocabularies reflecting the system of record from which the specimen was represented in the source data."
+  specimen_type_concept_id: String
+  "the date the specimen was obtained from the person."
+  specimen_date: String
+  "the date and time on the date when the specimen was obtained from the person."
+  specimen_datetime: String
+  "the amount of specimen collection from the person during the sampling procedure."
+  quantity: String
+  "a foreign key to a standard concept identifier for the unit associated with the numeric quantity of the specimen collection."
+  unit_concept_id: String
+  "a foreign key to a standard concept identifier for the anatomic location of specimen collection."
+  anatomic_site_concept_id: String
+  "a foreign key to a standard concept identifier for the disease status of specimen collection."
+  disease_status_concept_id: String
+  "the specimen identifier as it appears in the source data."
+  specimen_source_id: String
+  "the specimen value as it appears in the source data. this value is mapped to a standard concept in the standardized vocabularies and the original code is, stored here for reference."
+  specimen_source_value: String
+  "the information about the unit as detailed in the source."
+  unit_source_value: String
+  "the information about the anatomic site as detailed in the source."
+  anatomic_site_source_value: String
+  "the information about the disease status as detailed in the source."
+  disease_status_source_value: String
+}
+
+type Query {
+  specimenList: [omop_SPECIMEN]
+  specimen(id: ID!): omop_SPECIMEN
+}

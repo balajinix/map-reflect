@@ -1,0 +1,47 @@
+{
+    "name": "cms_INPATIENTCLAIMS",
+    "properties": {
+        "cms_INPATIENTCLAIMS.desynpuf_id": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.person_id",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.desynpuf_id maps to omop.MEASUREMENT.person_id for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.clm_from_dt": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_date",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.clm_from_dt maps to omop.MEASUREMENT.measurement_date for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.at_physn_npi": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.provider_id",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.at_physn_npi maps to omop.MEASUREMENT.provider_id for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.admtng_icd9_dgns_cd": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_source_value",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.admtng_icd9_dgns_cd maps to omop.MEASUREMENT.measurement_source_value for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.icd9_dgns_cd": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_source_value",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.icd9_dgns_cd maps to omop.MEASUREMENT.measurement_source_value for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.icd9_prcdr_cd": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_source_value",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.icd9_prcdr_cd maps to omop.MEASUREMENT.measurement_source_value for medical data standardization."
+            }
+        ]
+    }
+}

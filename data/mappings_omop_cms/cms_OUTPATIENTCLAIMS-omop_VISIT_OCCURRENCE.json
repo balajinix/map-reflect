@@ -1,0 +1,47 @@
+{
+    "name": "cms_OUTPATIENTCLAIMS",
+    "properties": {
+        "cms_OUTPATIENTCLAIMS.desynpuf_id": [
+            {
+                "mapTable": "omop_VISIT_OCCURRENCE",
+                "mapProperty": "omop_VISIT_OCCURRENCE.person_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.desynpuf_id maps to omop.VISIT_OCCURRENCE.person_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.clm_from_dt": [
+            {
+                "mapTable": "omop_VISIT_OCCURRENCE",
+                "mapProperty": "omop_VISIT_OCCURRENCE.visit_start_date",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.clm_from_dt maps to omop.VISIT_OCCURRENCE.visit_start_date for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.clm_thru_dt": [
+            {
+                "mapTable": "omop_VISIT_OCCURRENCE",
+                "mapProperty": "omop_VISIT_OCCURRENCE.visit_end_date",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.clm_thru_dt maps to omop.VISIT_OCCURRENCE.visit_end_date for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.at_physn_npi": [
+            {
+                "mapTable": "omop_VISIT_OCCURRENCE",
+                "mapProperty": "omop_VISIT_OCCURRENCE.provider_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.at_physn_npi maps to omop.VISIT_OCCURRENCE.provider_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.prvdr_num": [
+            {
+                "mapTable": "omop_VISIT_OCCURRENCE",
+                "mapProperty": "omop_VISIT_OCCURRENCE.care_site_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.prvdr_num maps to omop.VISIT_OCCURRENCE.care_site_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.clm_id": [
+            {
+                "mapTable": "omop_VISIT_OCCURRENCE",
+                "mapProperty": "omop_VISIT_OCCURRENCE.visit_source_value",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.clm_id maps to omop.VISIT_OCCURRENCE.visit_source_value for medical data standardization."
+            }
+        ]
+    }
+}

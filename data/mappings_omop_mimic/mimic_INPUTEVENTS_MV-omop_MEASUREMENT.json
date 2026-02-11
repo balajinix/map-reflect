@@ -1,0 +1,24 @@
+{
+    "name": "mimic_INPUTEVENTS_MV",
+    "properties": {
+        "mimic_INPUTEVENTS_MV.starttime": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_date",
+                "justification": "OMOP CDM mapping: mimic.INPUTEVENTS_MV.starttime maps to omop.MEASUREMENT.measurement_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_datetime",
+                "justification": "OMOP CDM mapping: mimic.INPUTEVENTS_MV.starttime maps to omop.MEASUREMENT.measurement_datetime for medical data standardization."
+            }
+        ],
+        "mimic_INPUTEVENTS_MV.patientweight": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.value_as_number",
+                "justification": "OMOP CDM mapping: mimic.INPUTEVENTS_MV.patientweight maps to omop.MEASUREMENT.value_as_number for medical data standardization."
+            }
+        ]
+    }
+}

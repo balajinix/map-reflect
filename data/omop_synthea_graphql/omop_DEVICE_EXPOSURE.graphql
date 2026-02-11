@@ -1,0 +1,38 @@
+"""the device exposure domain captures information about a person's exposure to a foreign physical object or instrument that which is used for diagnostic or therapeutic purposes through a mechanism beyond chemical action."""
+type omop_DEVICE_EXPOSURE {
+  "a system-generated unique identifier for each device exposure."
+  device_exposure_id: String
+  "a foreign key identifier to the person who is subjected to the device. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key that refers to a standard concept identifier in the standardized vocabularies for the device concept."
+  device_concept_id: String
+  "the date the device or supply was applied or used."
+  device_exposure_start_date: String
+  "the date and time the device or supply was applied or used."
+  device_exposure_start_datetime: String
+  "the date the device or supply was removed from use."
+  device_exposure_end_date: String
+  "the date and time the device or supply was removed from use."
+  device_exposure_end_datetime: String
+  "a foreign key to the predefined concept identifier in the standardized vocabularies reflecting the type of device exposure recorded. it indicates how the device exposure was represented in the source data."
+  device_type_concept_id: String
+  "a udi or equivalent identifying the instance of the device used in the person."
+  unique_device_id: String
+  "the number of individual devices used for the exposure."
+  quantity: String
+  "a foreign key to the provider in the provider table who initiated of administered the device."
+  provider_id: String
+  "a foreign key to the visit in the visit table during which the device was used."
+  visit_occurrence_id: String
+  "a foreign key to the visit in the visit-detail table during which the drug exposure was initiated."
+  visit_detail_id: String
+  "the source code for the device as it appears in the source data. this code is mapped to a standard device concept in the standardized vocabularies and the original code is stored here for reference."
+  device_source_value: String
+  "a foreign key to a device concept that refers to the code used in the source."
+  device_source_concept_id: String
+}
+
+type Query {
+  device_exposureList: [omop_DEVICE_EXPOSURE]
+  device_exposure(id: ID!): omop_DEVICE_EXPOSURE
+}

@@ -1,0 +1,24 @@
+"""patients contains all charted data for all patients."""
+type mimic_PATIENTS {
+  "subject_id is a unique identifier which specifies an individual patient."
+  subject_id: String
+  "gender is the genotypical sex of the patient."
+  gender: String
+  "dob is the date of birth of the given patient."
+  dob: String
+  "dod is the date of death for the given patient."
+  dod: String
+  "dod_hosp is the date of death as recorded in the hospital database."
+  dod_hosp: String
+  "dod_ssn is the date of death from the social security database."
+  dod_ssn: String
+  "expire_flag is a binary flag which indicates whether the patient died."
+  expire_flag: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  patientsList: [mimic_PATIENTS]
+  patients(id: ID!): mimic_PATIENTS
+}

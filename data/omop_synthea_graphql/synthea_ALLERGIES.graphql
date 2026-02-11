@@ -1,0 +1,20 @@
+"""patient allergy data."""
+type synthea_ALLERGIES {
+  "the date the allergy was diagnosed."
+  start: String
+  "the date the allergy ended, if applicable."
+  stop: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter when the allergy was diagnosed."
+  encounter: String
+  "allergy code from snomed-ct"
+  code: String
+  "description of the allergy"
+  description: String
+}
+
+type Query {
+  allergiesList: [synthea_ALLERGIES]
+  allergies(id: ID!): synthea_ALLERGIES
+}

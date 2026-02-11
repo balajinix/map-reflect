@@ -1,0 +1,22 @@
+"""the death domain contains the clinical event for how and when a person dies. a person can have up to one record if the source system contains evidence about the death."""
+type omop_DEATH {
+  "a foreign key identifier to the deceased person. the demographic details of that person are stored in the person table."
+  person_id: String
+  "the date the person was deceased. if the precise date including day or month is not known or not allowed, december is used as the default month, and the last day of the month the default day."
+  death_date: String
+  "the date and time the person was deceased. if the precise date including day or month is not known or not allowed, december is used as the default month, and the last day of the month the default day."
+  death_datetime: String
+  "a foreign key referring to the predefined concept identifier in the standardized vocabularies reflecting how the death was represented in the source data."
+  death_type_concept_id: String
+  "a foreign key referring to a standard concept identifier in the standardized vocabularies for conditions."
+  cause_concept_id: String
+  "the source code for the cause of death as it appears in the source data. this code is mapped to a standard concept in the standardized vocabularies and the original code is, stored here for reference."
+  cause_source_value: String
+  "a foreign key to the concept that refers to the code used in the source. note, this variable name is abbreviated to ensure it will be allowable across database platforms."
+  cause_source_concept_id: String
+}
+
+type Query {
+  deathList: [omop_DEATH]
+  death(id: ID!): omop_DEATH
+}

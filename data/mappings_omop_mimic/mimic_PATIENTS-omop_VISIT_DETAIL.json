@@ -1,0 +1,12 @@
+{
+    "name": "mimic_PATIENTS",
+    "properties": {
+        "mimic_PATIENTS.mimic_id": [
+            {
+                "mapTable": "omop_VISIT_DETAIL",
+                "mapProperty": "omop_VISIT_DETAIL.person_id",
+                "justification": "OMOP CDM mapping: mimic.PATIENTS.mimic_id maps to omop.VISIT_DETAIL.person_id for medical data standardization."
+            }
+        ]
+    }
+}

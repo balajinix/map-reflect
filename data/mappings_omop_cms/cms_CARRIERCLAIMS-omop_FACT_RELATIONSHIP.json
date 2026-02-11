@@ -1,0 +1,12 @@
+{
+    "name": "cms_CARRIERCLAIMS",
+    "properties": {
+        "cms_CARRIERCLAIMS.hcpcs_cd": [
+            {
+                "mapTable": "omop_FACT_RELATIONSHIP",
+                "mapProperty": "omop_FACT_RELATIONSHIP.fact_id_2",
+                "justification": "OMOP CDM mapping: cms.CARRIERCLAIMS.hcpcs_cd maps to omop.FACT_RELATIONSHIP.fact_id_2 for medical data standardization."
+            }
+        ]
+    }
+}

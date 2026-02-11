@@ -1,0 +1,85 @@
+{
+    "name": "synthea_MEDICATIONS",
+    "properties": {
+        "synthea_MEDICATIONS.patient": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.person_id",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.patient maps to omop.DRUG_EXPOSURE.person_id for medical data standardization."
+            }
+        ],
+        "synthea_MEDICATIONS.code": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_concept_id",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.code maps to omop.DRUG_EXPOSURE.drug_concept_id for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_source_value",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.code maps to omop.DRUG_EXPOSURE.drug_source_value for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_source_concept_id",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.code maps to omop.DRUG_EXPOSURE.drug_source_concept_id for medical data standardization."
+            }
+        ],
+        "synthea_MEDICATIONS.start": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_start_date",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.start maps to omop.DRUG_EXPOSURE.drug_exposure_start_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_start_datetime",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.start maps to omop.DRUG_EXPOSURE.drug_exposure_start_datetime for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_end_date",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.start maps to omop.DRUG_EXPOSURE.drug_exposure_end_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_end_datetime",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.start maps to omop.DRUG_EXPOSURE.drug_exposure_end_datetime for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.days_supply",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.start maps to omop.DRUG_EXPOSURE.days_supply for medical data standardization."
+            }
+        ],
+        "synthea_MEDICATIONS.stop": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_end_date",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.stop maps to omop.DRUG_EXPOSURE.drug_exposure_end_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_end_datetime",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.stop maps to omop.DRUG_EXPOSURE.drug_exposure_end_datetime for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.verbatim_end_date",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.stop maps to omop.DRUG_EXPOSURE.verbatim_end_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.days_supply",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.stop maps to omop.DRUG_EXPOSURE.days_supply for medical data standardization."
+            }
+        ],
+        "synthea_MEDICATIONS.encounter": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.visit_occurrence_id",
+                "justification": "OMOP CDM mapping: synthea.MEDICATIONS.encounter maps to omop.DRUG_EXPOSURE.visit_occurrence_id for medical data standardization."
+            }
+        ]
+    }
+}

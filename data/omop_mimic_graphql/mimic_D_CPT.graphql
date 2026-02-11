@@ -1,0 +1,24 @@
+"""d_cpt gives some high level information regarding current procedural terminology (cpt) codes."""
+type mimic_D_CPT {
+  "category is a integer which identifies the category of the cpt code."
+  category: String
+  "sectionrange defines the range of codes for the given section."
+  sectionrange: String
+  "sectionheader provides the description of the given section."
+  sectionheader: String
+  "subsectionrange defines the range of codes for the given subsection."
+  subsectionrange: String
+  "subsectionheader provides the description of the given subsection."
+  subsectionheader: String
+  "mincodeinsubsection provides numeric representations of minimum value in the subsectionrange column."
+  mincodeinsubsection: String
+  "maxcodeinsubsection provides numeric representations of minimum value in the subsectionrange column."
+  maxcodeinsubsection: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  d_cptList: [mimic_D_CPT]
+  d_cpt(id: ID!): mimic_D_CPT
+}

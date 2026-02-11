@@ -1,0 +1,22 @@
+"""the cohort_definition table contains records defining a cohort derived from the data through the associated description and syntax and upon instantiation (execution of the algorithm) placed into the cohort table."""
+type omop_COHORT_DEFINITION {
+  "a unique identifier for each cohort."
+  cohort_definition_id: String
+  "a short description of the cohort."
+  cohort_definition_name: String
+  "a complete description of the cohort definition"
+  cohort_definition_description: String
+  "type defining what kind of cohort definition the record represents and how the syntax may be executed"
+  definition_type_concept_id: String
+  "syntax or code to operationalize the cohort definition"
+  cohort_definition_syntax: String
+  "a foreign key to the concept to which defines the domain of subjects that are members of the cohort (e.g., person, provider, visit)."
+  subject_concept_id: String
+  "a date to indicate when the cohort was initiated in the cohort table"
+  cohort_initiation_date: String
+}
+
+type Query {
+  cohort_definitionList: [omop_COHORT_DEFINITION]
+  cohort_definition(id: ID!): omop_COHORT_DEFINITION
+}

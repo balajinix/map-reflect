@@ -1,0 +1,33 @@
+{
+    "name": "mimic_LABEVENTS",
+    "properties": {
+        "mimic_LABEVENTS.mimic_id": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_id",
+                "justification": "OMOP CDM mapping: mimic.LABEVENTS.mimic_id maps to omop.MEASUREMENT.measurement_id for medical data standardization."
+            }
+        ],
+        "mimic_LABEVENTS.charttime": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_datetime",
+                "justification": "OMOP CDM mapping: mimic.LABEVENTS.charttime maps to omop.MEASUREMENT.measurement_datetime for medical data standardization."
+            }
+        ],
+        "mimic_LABEVENTS.valueuom": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.unit_source_value",
+                "justification": "OMOP CDM mapping: mimic.LABEVENTS.valueuom maps to omop.MEASUREMENT.unit_source_value for medical data standardization."
+            }
+        ],
+        "mimic_LABEVENTS.value": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.value_source_value",
+                "justification": "OMOP CDM mapping: mimic.LABEVENTS.value maps to omop.MEASUREMENT.value_source_value for medical data standardization."
+            }
+        ]
+    }
+}

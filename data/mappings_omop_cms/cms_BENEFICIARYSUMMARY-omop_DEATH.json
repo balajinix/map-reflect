@@ -1,0 +1,19 @@
+{
+    "name": "cms_BENEFICIARYSUMMARY",
+    "properties": {
+        "cms_BENEFICIARYSUMMARY.desynpuf_id": [
+            {
+                "mapTable": "omop_DEATH",
+                "mapProperty": "omop_DEATH.person_id",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.desynpuf_id maps to omop.DEATH.person_id for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.bene_death_dt": [
+            {
+                "mapTable": "omop_DEATH",
+                "mapProperty": "omop_DEATH.death_date",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.bene_death_dt maps to omop.DEATH.death_date for medical data standardization."
+            }
+        ]
+    }
+}

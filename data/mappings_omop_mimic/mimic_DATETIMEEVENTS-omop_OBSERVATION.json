@@ -1,0 +1,36 @@
+{
+    "name": "mimic_DATETIMEEVENTS",
+    "properties": {
+        "mimic_DATETIMEEVENTS.mimic_id": [
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.observation_id",
+                "justification": "OMOP CDM mapping: mimic.DATETIMEEVENTS.mimic_id maps to omop.OBSERVATION.observation_id for medical data standardization."
+            }
+        ],
+        "mimic_DATETIMEEVENTS.charttime": [
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.observation_date",
+                "justification": "OMOP CDM mapping: mimic.DATETIMEEVENTS.charttime maps to omop.OBSERVATION.observation_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.observation_datetime",
+                "justification": "OMOP CDM mapping: mimic.DATETIMEEVENTS.charttime maps to omop.OBSERVATION.observation_datetime for medical data standardization."
+            }
+        ],
+        "mimic_DATETIMEEVENTS.value": [
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.observation_date",
+                "justification": "OMOP CDM mapping: mimic.DATETIMEEVENTS.value maps to omop.OBSERVATION.observation_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.observation_datetime",
+                "justification": "OMOP CDM mapping: mimic.DATETIMEEVENTS.value maps to omop.OBSERVATION.observation_datetime for medical data standardization."
+            }
+        ]
+    }
+}

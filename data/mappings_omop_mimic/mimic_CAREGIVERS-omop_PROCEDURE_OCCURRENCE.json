@@ -1,0 +1,12 @@
+{
+    "name": "mimic_CAREGIVERS",
+    "properties": {
+        "mimic_CAREGIVERS.mimic_id": [
+            {
+                "mapTable": "omop_PROCEDURE_OCCURRENCE",
+                "mapProperty": "omop_PROCEDURE_OCCURRENCE.provider_id",
+                "justification": "OMOP CDM mapping: mimic.CAREGIVERS.mimic_id maps to omop.PROCEDURE_OCCURRENCE.provider_id for medical data standardization."
+            }
+        ]
+    }
+}

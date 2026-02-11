@@ -1,0 +1,18 @@
+"""the observation_period table contains records which uniquely define the spans of time for which a person is at-risk to have clinical events recorded within the source systems, even if no events in fact are recorded (healthy patient with no healthcare interactions)."""
+type omop_OBSERVATION_PERIOD {
+  "a unique identifier for each observation period."
+  observation_period_id: String
+  "a foreign key identifier to the person for whom the observation period is defined. the demographic details of that person are stored in the person table."
+  person_id: String
+  "the start date of the observation period for which data are available from the data source."
+  observation_period_start_date: String
+  "the end date of the observation period for which data are available from the data source."
+  observation_period_end_date: String
+  "a foreign key identifier to the predefined concept in the standardized vocabularies reflecting the source of the observation period information"
+  period_type_concept_id: String
+}
+
+type Query {
+  observation_periodList: [omop_OBSERVATION_PERIOD]
+  observation_period(id: ID!): omop_OBSERVATION_PERIOD
+}

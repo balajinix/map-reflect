@@ -1,0 +1,24 @@
+"""the location table represents a generic way to capture physical location or address information of persons and care sites."""
+type omop_LOCATION {
+  "a unique identifier for each geographic location."
+  location_id: String
+  "the address field 1, typically used for the street address, as it appears in the source data."
+  address_1: String
+  "the address field 2, typically used for additional detail such as buildings, suites, floors, as it appears in the source data."
+  address_2: String
+  "the city field as it appears in the source data."
+  city: String
+  "the state field as it appears in the source data."
+  state: String
+  "the zip or postal code."
+  zip: String
+  "the county."
+  county: String
+  "the verbatim information that is used to uniquely identify the location as it appears in the source data."
+  location_source_value: String
+}
+
+type Query {
+  locationList: [omop_LOCATION]
+  location(id: ID!): omop_LOCATION
+}

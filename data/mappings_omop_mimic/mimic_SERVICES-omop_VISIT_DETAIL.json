@@ -1,0 +1,34 @@
+{
+    "name": "mimic_SERVICES",
+    "properties": {
+        "mimic_SERVICES.mimic_id": [
+            {
+                "mapTable": "omop_VISIT_DETAIL",
+                "mapProperty": "omop_VISIT_DETAIL.visit_detail_id",
+                "justification": "OMOP CDM mapping: mimic.SERVICES.mimic_id maps to omop.VISIT_DETAIL.visit_detail_id for medical data standardization."
+            }
+        ],
+        "mimic_SERVICES.transfertime": [
+            {
+                "mapTable": "omop_VISIT_DETAIL",
+                "mapProperty": "omop_VISIT_DETAIL.visit_detail_start_date",
+                "justification": "OMOP CDM mapping: mimic.SERVICES.transfertime maps to omop.VISIT_DETAIL.visit_detail_start_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_VISIT_DETAIL",
+                "mapProperty": "omop_VISIT_DETAIL.visit_detail_start_datetime",
+                "justification": "OMOP CDM mapping: mimic.SERVICES.transfertime maps to omop.VISIT_DETAIL.visit_detail_start_datetime for medical data standardization."
+            },
+            {
+                "mapTable": "omop_VISIT_DETAIL",
+                "mapProperty": "omop_VISIT_DETAIL.visit_detail_end_date",
+                "justification": "OMOP CDM mapping: mimic.SERVICES.transfertime maps to omop.VISIT_DETAIL.visit_detail_end_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_VISIT_DETAIL",
+                "mapProperty": "omop_VISIT_DETAIL.visit_detail_end_datetime",
+                "justification": "OMOP CDM mapping: mimic.SERVICES.transfertime maps to omop.VISIT_DETAIL.visit_detail_end_datetime for medical data standardization."
+            }
+        ]
+    }
+}

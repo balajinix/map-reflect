@@ -1,0 +1,17 @@
+{
+    "name": "mimic_LABEVENTS",
+    "properties": {
+        "mimic_LABEVENTS.charttime": [
+            {
+                "mapTable": "omop_SPECIMEN",
+                "mapProperty": "omop_SPECIMEN.specimen_date",
+                "justification": "OMOP CDM mapping: mimic.LABEVENTS.charttime maps to omop.SPECIMEN.specimen_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_SPECIMEN",
+                "mapProperty": "omop_SPECIMEN.specimen_datetime",
+                "justification": "OMOP CDM mapping: mimic.LABEVENTS.charttime maps to omop.SPECIMEN.specimen_datetime for medical data standardization."
+            }
+        ]
+    }
+}

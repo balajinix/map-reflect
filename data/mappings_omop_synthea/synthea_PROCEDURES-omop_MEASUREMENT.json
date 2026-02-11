@@ -1,0 +1,53 @@
+{
+    "name": "synthea_PROCEDURES",
+    "properties": {
+        "synthea_PROCEDURES.patient": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.person_id",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.patient maps to omop.MEASUREMENT.person_id for medical data standardization."
+            }
+        ],
+        "synthea_PROCEDURES.code": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_concept_id",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.code maps to omop.MEASUREMENT.measurement_concept_id for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_source_value",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.code maps to omop.MEASUREMENT.measurement_source_value for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_source_concept_id",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.code maps to omop.MEASUREMENT.measurement_source_concept_id for medical data standardization."
+            }
+        ],
+        "synthea_PROCEDURES.date": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_date",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.date maps to omop.MEASUREMENT.measurement_date for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_datetime",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.date maps to omop.MEASUREMENT.measurement_datetime for medical data standardization."
+            },
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_time",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.date maps to omop.MEASUREMENT.measurement_time for medical data standardization."
+            }
+        ],
+        "synthea_PROCEDURES.encounter": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.visit_occurrence_id",
+                "justification": "OMOP CDM mapping: synthea.PROCEDURES.encounter maps to omop.MEASUREMENT.visit_occurrence_id for medical data standardization."
+            }
+        ]
+    }
+}

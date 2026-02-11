@@ -1,0 +1,33 @@
+{
+    "name": "mimic_CHARTEVENTS",
+    "properties": {
+        "mimic_CHARTEVENTS.mimic_id": [
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.observation_id",
+                "justification": "OMOP CDM mapping: mimic.CHARTEVENTS.mimic_id maps to omop.OBSERVATION.observation_id for medical data standardization."
+            }
+        ],
+        "mimic_CHARTEVENTS.charttime": [
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.observation_datetime",
+                "justification": "OMOP CDM mapping: mimic.CHARTEVENTS.charttime maps to omop.OBSERVATION.observation_datetime for medical data standardization."
+            }
+        ],
+        "mimic_CHARTEVENTS.valuenum": [
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.value_as_number",
+                "justification": "OMOP CDM mapping: mimic.CHARTEVENTS.valuenum maps to omop.OBSERVATION.value_as_number for medical data standardization."
+            }
+        ],
+        "mimic_CHARTEVENTS.value": [
+            {
+                "mapTable": "omop_OBSERVATION",
+                "mapProperty": "omop_OBSERVATION.value_as_string",
+                "justification": "OMOP CDM mapping: mimic.CHARTEVENTS.value maps to omop.OBSERVATION.value_as_string for medical data standardization."
+            }
+        ]
+    }
+}

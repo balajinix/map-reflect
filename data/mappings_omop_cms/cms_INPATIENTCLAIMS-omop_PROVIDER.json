@@ -1,0 +1,33 @@
+{
+    "name": "cms_INPATIENTCLAIMS",
+    "properties": {
+        "cms_INPATIENTCLAIMS.at_physn_npi": [
+            {
+                "mapTable": "omop_PROVIDER",
+                "mapProperty": "omop_PROVIDER.npi",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.at_physn_npi maps to omop.PROVIDER.npi for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.op_physn_npi": [
+            {
+                "mapTable": "omop_PROVIDER",
+                "mapProperty": "omop_PROVIDER.npi",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.op_physn_npi maps to omop.PROVIDER.npi for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.ot_physn_npi": [
+            {
+                "mapTable": "omop_PROVIDER",
+                "mapProperty": "omop_PROVIDER.npi",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.ot_physn_npi maps to omop.PROVIDER.npi for medical data standardization."
+            }
+        ],
+        "cms_INPATIENTCLAIMS.prvdr_num": [
+            {
+                "mapTable": "omop_PROVIDER",
+                "mapProperty": "omop_PROVIDER.care_site_id",
+                "justification": "OMOP CDM mapping: cms.INPATIENTCLAIMS.prvdr_num maps to omop.PROVIDER.care_site_id for medical data standardization."
+            }
+        ]
+    }
+}

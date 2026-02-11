@@ -1,0 +1,12 @@
+"""diagnoses_icd contains icd diagnoses for patients, most notably icd-9 diagnoses."""
+type mimic_DIAGNOSES_ICD {
+  "seq_num provides the order in which the icd diagnoses relate to the patient."
+  seq_num: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  diagnoses_icdList: [mimic_DIAGNOSES_ICD]
+  diagnoses_icd(id: ID!): mimic_DIAGNOSES_ICD
+}

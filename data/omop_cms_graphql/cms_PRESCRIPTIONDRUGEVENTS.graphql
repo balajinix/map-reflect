@@ -1,0 +1,24 @@
+"""prescriptiondrugevents pertains to a synthetic part d event"""
+type cms_PRESCRIPTIONDRUGEVENTS {
+  "beneficiary code"
+  desynpuf_id: String
+  "ccw part d event number"
+  pde_id: String
+  "rx service date"
+  srvc_dt: String
+  "product service id"
+  prod_srvc_id: String
+  "quantity dispensed"
+  qty_dspnsd_num: String
+  "days supply"
+  days_suply_num: String
+  "patient pay amount"
+  ptnt_pay_amt: String
+  "gross drug cost"
+  tot_rx_cst_amt: String
+}
+
+type Query {
+  prescriptiondrugeventsList: [cms_PRESCRIPTIONDRUGEVENTS]
+  prescriptiondrugevents(id: ID!): cms_PRESCRIPTIONDRUGEVENTS
+}

@@ -1,0 +1,40 @@
+{
+    "name": "cms_OUTPATIENTCLAIMS",
+    "properties": {
+        "cms_OUTPATIENTCLAIMS.desynpuf_id": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.person_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.desynpuf_id maps to omop.DRUG_EXPOSURE.person_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.clm_from_dt": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_start_date",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.clm_from_dt maps to omop.DRUG_EXPOSURE.drug_exposure_start_date for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.clm_thru_dt": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_exposure_end_date",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.clm_thru_dt maps to omop.DRUG_EXPOSURE.drug_exposure_end_date for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.at_physn_npi": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.provider_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.at_physn_npi maps to omop.DRUG_EXPOSURE.provider_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.hcpcs_cd": [
+            {
+                "mapTable": "omop_DRUG_EXPOSURE",
+                "mapProperty": "omop_DRUG_EXPOSURE.drug_source_value",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.hcpcs_cd maps to omop.DRUG_EXPOSURE.drug_source_value for medical data standardization."
+            }
+        ]
+    }
+}

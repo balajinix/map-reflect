@@ -1,0 +1,26 @@
+{
+    "name": "mimic_CHARTEVENTS",
+    "properties": {
+        "mimic_CHARTEVENTS.storetime": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.measurement_datetime",
+                "justification": "OMOP CDM mapping: mimic.CHARTEVENTS.storetime maps to omop.MEASUREMENT.measurement_datetime for medical data standardization."
+            }
+        ],
+        "mimic_CHARTEVENTS.valueuom": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.unit_source_value",
+                "justification": "OMOP CDM mapping: mimic.CHARTEVENTS.valueuom maps to omop.MEASUREMENT.unit_source_value for medical data standardization."
+            }
+        ],
+        "mimic_CHARTEVENTS.value": [
+            {
+                "mapTable": "omop_MEASUREMENT",
+                "mapProperty": "omop_MEASUREMENT.value_source_value",
+                "justification": "OMOP CDM mapping: mimic.CHARTEVENTS.value maps to omop.MEASUREMENT.value_source_value for medical data standardization."
+            }
+        ]
+    }
+}

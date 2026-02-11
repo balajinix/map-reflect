@@ -1,0 +1,24 @@
+"""patient procedure data including surgeries."""
+type synthea_PROCEDURES {
+  "the date the procedure was performed."
+  date: String
+  "foreign key to the patient."
+  patient: String
+  "foreign key to the encounter where the procedure was performed."
+  encounter: String
+  "procedure code from snomed-ct"
+  code: String
+  "description of the procedure."
+  description: String
+  "the line item cost of the procedure."
+  cost: String
+  "diagnosis code from snomed-ct specifying why this procedure was performed."
+  reasoncode: String
+  "description of the reason code."
+  reasondescription: String
+}
+
+type Query {
+  proceduresList: [synthea_PROCEDURES]
+  procedures(id: ID!): synthea_PROCEDURES
+}

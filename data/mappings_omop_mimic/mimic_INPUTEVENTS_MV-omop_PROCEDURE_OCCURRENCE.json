@@ -1,0 +1,12 @@
+{
+    "name": "mimic_INPUTEVENTS_MV",
+    "properties": {
+        "mimic_INPUTEVENTS_MV.mimic_id": [
+            {
+                "mapTable": "omop_PROCEDURE_OCCURRENCE",
+                "mapProperty": "omop_PROCEDURE_OCCURRENCE.procedure_concept_id",
+                "justification": "OMOP CDM mapping: mimic.INPUTEVENTS_MV.mimic_id maps to omop.PROCEDURE_OCCURRENCE.procedure_concept_id for medical data standardization."
+            }
+        ]
+    }
+}

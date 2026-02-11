@@ -1,0 +1,28 @@
+"""icustays defines each icustay_id in the database, i.e. defines a single icu stay."""
+type mimic_ICUSTAYS {
+  "icustay_id is unique to a patient icu stay."
+  icustay_id: String
+  "dbsource contains the original icu database the data was sourced from."
+  dbsource: String
+  "first_careunit contains the first icu type in which the patient was cared for."
+  first_careunit: String
+  "last_careunit contains the last icu type in which the patient was cared for."
+  last_careunit: String
+  "first_wardid contains the first icu unit in which the patient stayed."
+  first_wardid: String
+  "last_wardid contains the last icu unit in which the patient stayed."
+  last_wardid: String
+  "intime provides the date and time the patient was transferred into the icu."
+  intime: String
+  "outtimeprovides the date and time the patient was transferred out of the icu."
+  outtime: String
+  "los is the length of stay for the patient for the given icu stay, which may include one or more icu units."
+  los: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  icustaysList: [mimic_ICUSTAYS]
+  icustays(id: ID!): mimic_ICUSTAYS
+}

@@ -1,0 +1,89 @@
+{
+    "name": "cms_BENEFICIARYSUMMARY",
+    "properties": {
+        "cms_BENEFICIARYSUMMARY.bene_esrd_ind": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.bene_esrd_ind maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_alzhdmta": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_alzhdmta maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_chf": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_chf maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_chrnkidn": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_chrnkidn maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_cncr": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_cncr maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_copd": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_copd maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_depressn": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_depressn maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_diabetes": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_diabetes maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_ischmcht": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_ischmcht maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_osteoprs": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_osteoprs maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_ra_oa": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_ra_oa maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ],
+        "cms_BENEFICIARYSUMMARY.sp_strketia": [
+            {
+                "mapTable": "omop_COHORT_DEFINITION",
+                "mapProperty": "omop_COHORT_DEFINITION.cohort_definition_name",
+                "justification": "OMOP CDM mapping: cms.BENEFICIARYSUMMARY.sp_strketia maps to omop.COHORT_DEFINITION.cohort_definition_name for medical data standardization."
+            }
+        ]
+    }
+}

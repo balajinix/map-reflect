@@ -1,0 +1,60 @@
+"""inputevents_mv is input data for patients from metavision icu databases."""
+type mimic_INPUTEVENTS_MV {
+  "starttime records the start time of an input/output event."
+  starttime: String
+  "endtime records the end time of an input/output event."
+  endtime: String
+  "amount of the item administered to the patient."
+  amount: String
+  "unit of measurement for the amount."
+  amountuom: String
+  "rate at which the item is being administered to the patient."
+  rate: String
+  "unit of measurement for the rate."
+  rateuom: String
+  "time when the event was recorded in the system."
+  storetime: String
+  "identifier linking items which are grouped in a solution."
+  orderid: String
+  "identifier linking orders across multiple administrations. linkorderid is always equal to the first occuring orderid of the series."
+  linkorderid: String
+  "a group which the item corresponds to."
+  ordercategoryname: String
+  "a secondary group for those items with more than one grouping possible."
+  secondaryordercategoryname: String
+  "the role of the item administered in the order."
+  ordercomponenttypedescription: String
+  "the type of item administered."
+  ordercategorydescription: String
+  "for drugs dosed by weight, the value of the weight used in the calculation."
+  patientweight: String
+  "the total amount in the solution for the given item."
+  totalamount: String
+  "unit of measurement for the total amount in the solution."
+  totalamountuom: String
+  "indicates whether the bag containing the solution is open."
+  isopenbag: String
+  "indicates whether the item will be continued in the next department where the patient is transferred to."
+  continueinnextdept: String
+  "reason for cancellation, if cancelled."
+  cancelreason: String
+  "the current status of the order: stopped, rewritten, running or cancelled."
+  statusdescription: String
+  "the title of the caregiver who edited the order."
+  comments_editedby: String
+  "the title of the caregiver who canceled the order."
+  comments_canceledby: String
+  "time at which the caregiver edited or cancelled the order."
+  comments_date: String
+  "amount of the item which was originally charted."
+  originalamount: String
+  "rate of administration originally chosen for the item."
+  originalrate: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  inputevents_mvList: [mimic_INPUTEVENTS_MV]
+  inputevents_mv(id: ID!): mimic_INPUTEVENTS_MV
+}

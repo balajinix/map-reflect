@@ -1,0 +1,40 @@
+"""the note table captures unstructured information that was recorded by a provider about a patient in free text notes on a given date."""
+type omop_NOTE {
+  "a unique identifier for each note."
+  note_id: String
+  "a foreign key identifier to the person about whom the note was recorded. the demographic details of that person are stored in the person table."
+  person_id: String
+  "a foreign key identifier to the event (e.g. measurement, procedure, visit, drug exposure, etc) record during which the note was recorded."
+  note_event_id: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the field to which the note_event_id is referring."
+  note_event_field_concept_id: String
+  "the date the note was recorded."
+  note_date: String
+  "the date and time the note was recorded."
+  note_datetime: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the type, origin or provenance of the note. these belong to the 'note type' vocabulary"
+  note_type_concept_id: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the hl7 loinc document type vocabulary classification of the note."
+  note_class_concept_id: String
+  "the title of the note as it appears in the source."
+  note_title: String
+  "the content of the note."
+  note_text: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the note character encoding type"
+  encoding_concept_id: String
+  "a foreign key to the predefined concept in the standardized vocabularies reflecting the language of the note"
+  language_concept_id: String
+  "a foreign key to the provider in the provider table who took the note."
+  provider_id: String
+  "a foreign key to the visit in the visit_occurrence table when the note was taken."
+  visit_occurrence_id: String
+  "a foreign key to the visit in the visit_detail table when the note was taken."
+  visit_detail_id: String
+  "the source value associated with the origin of the note"
+  note_source_value: String
+}
+
+type Query {
+  noteList: [omop_NOTE]
+  note(id: ID!): omop_NOTE
+}

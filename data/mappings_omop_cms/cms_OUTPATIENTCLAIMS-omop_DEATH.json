@@ -1,0 +1,33 @@
+{
+    "name": "cms_OUTPATIENTCLAIMS",
+    "properties": {
+        "cms_OUTPATIENTCLAIMS.desynpuf_id": [
+            {
+                "mapTable": "omop_DEATH",
+                "mapProperty": "omop_DEATH.person_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.desynpuf_id maps to omop.DEATH.person_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.clm_thru_dt": [
+            {
+                "mapTable": "omop_DEATH",
+                "mapProperty": "omop_DEATH.death_date",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.clm_thru_dt maps to omop.DEATH.death_date for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.icd9_dgns_cd": [
+            {
+                "mapTable": "omop_DEATH",
+                "mapProperty": "omop_DEATH.cause_source_concept_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.icd9_dgns_cd maps to omop.DEATH.cause_source_concept_id for medical data standardization."
+            }
+        ],
+        "cms_OUTPATIENTCLAIMS.admtng_icd9_dgns_cd": [
+            {
+                "mapTable": "omop_DEATH",
+                "mapProperty": "omop_DEATH.cause_source_concept_id",
+                "justification": "OMOP CDM mapping: cms.OUTPATIENTCLAIMS.admtng_icd9_dgns_cd maps to omop.DEATH.cause_source_concept_id for medical data standardization."
+            }
+        ]
+    }
+}

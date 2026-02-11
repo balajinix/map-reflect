@@ -1,0 +1,16 @@
+"""the cohort table contains records of subjects that satisfy a given set of criteria for a duration of time."""
+type omop_COHORT {
+  "a foreign key to a record in the cohort_definition table containing relevant cohort definition information."
+  cohort_definition_id: String
+  "a foreign key to the subject in the cohort. these could be referring to records in the person, provider, visit_occurrence table."
+  subject_id: String
+  "the date when the cohort definition criteria for the person, provider or visit first match."
+  cohort_start_date: String
+  "the date when the cohort definition criteria for the person, provider or visit no longer match or the cohort membership was terminated."
+  cohort_end_date: String
+}
+
+type Query {
+  cohortList: [omop_COHORT]
+  cohort(id: ID!): omop_COHORT
+}

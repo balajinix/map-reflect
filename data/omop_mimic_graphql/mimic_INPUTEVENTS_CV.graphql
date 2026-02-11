@@ -1,0 +1,44 @@
+"""inputevents_cv is input data for patients from carevue icu databases."""
+type mimic_INPUTEVENTS_CV {
+  "itemid is a identifier for a single measurement type in the database."
+  itemid: String
+  "charttime records the time at which an observation was made, and is usually the closest proxy to the time the data was actually measured."
+  charttime: String
+  "amount lists the amount of a drug or substance administered to the patient either between the starttime and endtime or at the endtime."
+  amount: String
+  "amountuomlists the amount of a drug or substance administered to the patient either between the starttime and endtime or at the endtime."
+  amountuom: String
+  "rate lists the rate at which the drug or substance was administered to the patient either between the starttime and endtime, or it lists the rate at which the drug is currently administered at the endtime."
+  rate: String
+  "rateuom lists the rate at which the drug or substance was administered to the patient either between the starttime and endtime, or it lists the rate at which the drug is currently administered at the endtime."
+  rateuom: String
+  "storetime records the time at which an observation was manually input or manually validated by a member of the clinical staff."
+  storetime: String
+  "orderid links multiple items contained in the same solution together."
+  orderid: String
+  "linkorderid links the same order across multiple instantiations."
+  linkorderid: String
+  "stopped indicates whether the infusion has been disconnected or continued."
+  stopped: String
+  "newbottleindicates if a new preparation of the solution was hung at the bedside."
+  newbottle: String
+  "originalamount provides information about the solution the medication was a part of when it was first entered into the information system."
+  originalamount: String
+  "originalamountuom provides information about the solution the medication was a part of when it was first entered into the information system."
+  originalamountuom: String
+  "originalroute provides information about the solution the medication was a part of when it was first entered into the information system."
+  originalroute: String
+  "originalrate provides information about the solution the medication was a part of when it was first entered into the information system."
+  originalrate: String
+  "originalrateuom provides information about the solution the medication was a part of when it was first entered into the information system."
+  originalrateuom: String
+  "originalsite provides information about the solution the medication was a part of when it was first entered into the information system."
+  originalsite: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  inputevents_cvList: [mimic_INPUTEVENTS_CV]
+  inputevents_cv(id: ID!): mimic_INPUTEVENTS_CV
+}

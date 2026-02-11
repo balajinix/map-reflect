@@ -1,0 +1,20 @@
+"""drgcodes contains diagnosis related groups (drg) codes for patients."""
+type mimic_DRGCODES {
+  "drg_type provides the type of drg code in the entry."
+  drg_type: String
+  "drg_code contains a code which represents the diagnosis billed for by the hospital."
+  drg_code: String
+  "description provides a human understandable summary of the meaning of the given drg code."
+  description: String
+  "drg_severity provides additional granularity to drg codes in the ‘apr’ drg type."
+  drg_severity: String
+  "drg_mortality provides additional granularity to drg codes in the ‘apr’ drg type."
+  drg_mortality: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  drgcodesList: [mimic_DRGCODES]
+  drgcodes(id: ID!): mimic_DRGCODES
+}

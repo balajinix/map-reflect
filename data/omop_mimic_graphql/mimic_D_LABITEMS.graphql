@@ -1,0 +1,20 @@
+"""d_labitems contains definitions for all itemid associated with lab measurements in the mimic database."""
+type mimic_D_LABITEMS {
+  "d_items defines table for all items in the icu databases."
+  itemid: String
+  "label describes the concept which is represented by the itemid."
+  label: String
+  "fluid describes the substance on which the measurement was made."
+  fluid: String
+  "category provides higher level information as to the type of measurement."
+  category: String
+  "loinc_code contains the loinc code associated with the given itemid."
+  loinc_code: String
+  "a unique id for all mimic tables."
+  mimic_id: String
+}
+
+type Query {
+  d_labitemsList: [mimic_D_LABITEMS]
+  d_labitems(id: ID!): mimic_D_LABITEMS
+}
