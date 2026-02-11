@@ -19,6 +19,7 @@ class DatasetLoader:
         self.data_dir = Path(data_dir)
         self.datasets = {
             'ITOps': 'itops_dataset.jsonl',
+            'ITOpsGraph': 'itopsgraph_dataset.jsonl',  # Validated coverage mappings (521 samples)
             'NL2GQL': 'nl2gql_dataset.jsonl',
             'GraphQLRestBench': 'graphqlrestbench_dataset.jsonl',
             'OMOP_MIMIC': 'omop_mimic_dataset.jsonl',
@@ -158,7 +159,23 @@ class DatasetLoader:
                     "ground_truth_mapping": data.get("mapping", {}),
                     "metadata": data.get("metadata", {})
                 }
-            
+
+            elif dataset.startswith("ITOpsGraph"):
+                # ITOpsGraph format (utterance and attribute variants):
+                # - id: sample identifier
+                # - utterance: natural language or attribute name
+                # - source_schema: source product name
+                # - target_schema: target product name
+                # - mapping: {source_field: target_field}
+                utterance_data = {
+                    "sample_id": data.get("id", f"itopsgraph_{index:03d}"),
+                    "utterance": data.get("utterance", ""),
+                    "expected_source": data.get("source_schema", ""),
+                    "expected_target": data.get("target_schema", ""),
+                    "ground_truth_mapping": data.get("mapping", {}),
+                    "metadata": data.get("metadata", {})
+                }
+
             elif dataset == "NL2GQL":
                 # NL2GQL format:
                 # - mapping_utterance: "map concert data to stadium data"
@@ -246,6 +263,7 @@ class DatasetLoader:
         """Get expected number of samples for a dataset."""
         expected_counts = {
             'ITOps': 100,
+            'ITOpsGraph': 521,  # Validated coverage mappings
             'NL2GQL': 50,
             'GraphQLRestBench': 75,
             'OMOP_MIMIC': 46,

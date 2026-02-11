@@ -245,12 +245,10 @@ run_experiment "map_reflect_mistral" "Map-Reflect with Mistral" \
 fi  # End PRIORITY 1
 
 # =============================================================================
-# PRIORITY 2: MatchMaker, DualContext, ReMatch (8 experiments)
 # =============================================================================
 
 if [[ -z "$PRIORITY_FILTER" || "$PRIORITY_FILTER" == "2" ]]; then
 
-log_section "PRIORITY 2: MatchMaker, DualContext, ReMatch (8 experiments)"
 
 # MatchMaker - all 3 models
 run_experiment "matchmaker_granite" "MatchMaker with Granite" \
@@ -274,22 +272,18 @@ run_experiment "matchmaker_mistral" "MatchMaker with Mistral" \
         --datasets 'ITOpsGraph' \
         --models '$MISTRAL'"
 
-# DualContext - all 3 models
-run_experiment "dualcontext_granite" "DualContext with Granite" \
     "cd '${BASE_DIR}/match_maker' && python dual_context_runner.py \
         --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
         --data-dir '$DATA_DIR' \
         --datasets 'ITOpsGraph' \
         --models '$GRANITE'"
 
-run_experiment "dualcontext_llama" "DualContext with Llama" \
     "cd '${BASE_DIR}/match_maker' && python dual_context_runner.py \
         --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
         --data-dir '$DATA_DIR' \
         --datasets 'ITOpsGraph' \
         --models '$LLAMA'"
 
-run_experiment "dualcontext_mistral" "DualContext with Mistral" \
     "cd '${BASE_DIR}/match_maker' && python dual_context_runner.py \
         --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
         --data-dir '$DATA_DIR' \

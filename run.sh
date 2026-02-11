@@ -117,10 +117,10 @@ MISTRAL_SHORT="mistral-medium"
 # -----------------------------------------------------------------------------
 # Dataset Configuration
 # -----------------------------------------------------------------------------
-ALL_DATASETS="ITOps NL2GQL OMOP_CMS OMOP_MIMIC OMOP_Synthea"
+ALL_DATASETS="ITOps ITOpsGraph NL2GQL OMOP_CMS OMOP_MIMIC OMOP_Synthea"
 
 # Datasets that support AnyTool (require hierarchy files)
-ANYTOOL_DATASETS="ITOps NL2GQL"
+ANYTOOL_DATASETS="ITOps ITOpsGraph NL2GQL"
 
 # -----------------------------------------------------------------------------
 # Method Configuration

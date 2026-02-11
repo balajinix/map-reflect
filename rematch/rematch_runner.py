@@ -517,7 +517,7 @@ class ReMatchEvaluationRunner:
         logger.info(f"Loaded {len(utterances)} evaluation samples")
 
         # Determine if this is utterance-based or attribute-based
-        is_utterance_dataset = dataset.lower() in ['itops', 'nl2gql']
+        is_utterance_dataset = dataset.lower() in ['itops', 'nl2gql'] or dataset.lower().startswith('itopsgraph')
 
         # Run ReMatch on each sample
         results = []

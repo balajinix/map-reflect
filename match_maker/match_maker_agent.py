@@ -87,11 +87,13 @@ class MatchMakerAgent:
         rebuild_index: bool = False,
         use_optimization: bool = True,
         n_incontext_examples: int = 4,
-        eval_set_size: int = 20
+        eval_set_size: int = 20,
+        abstention_mode: str = 'lenient',
+        min_confidence_threshold: float = 20.0
     ):
         """
         Initialize MatchMaker agent.
-        
+
         Args:
             property_lookup_file: Path to property lookup JSON
             model: LLM model identifier
@@ -103,6 +105,20 @@ class MatchMakerAgent:
             use_optimization: Whether to use self-improvement
             n_incontext_examples: Number of in-context examples
             eval_set_size: Size of evaluation set for optimization
+            abstention_mode: Controls when the model abstains from making a match.
+                - 'strict': Abstain if "None of the above" score > best candidate (original paper behavior)
+                - 'lenient': Abstain only if best candidate confidence < min_confidence_threshold
+                             AND "None" score is higher (default, recommended for most use cases)
+                - 'disabled': Never abstain, always select the best candidate
+                - 'threshold': Abstain only if best candidate confidence < min_confidence_threshold
+            min_confidence_threshold: Minimum confidence score (0-100) required to make a match
+                when using 'lenient' or 'threshold' abstention modes. Default: 20.0
+
+        Note on abstention_mode:
+            The original MatchMaker paper uses 'strict' mode which compares the best candidate's
+            confidence against a "None of the above" option. However, this can lead to excessive
+            abstentions when the LLM is conservative about confidence scores. The 'lenient' mode
+            (default) addresses this by only abstaining when the best match has very low confidence.
         """
         self.model = model
         self.dataset = dataset
@@ -111,6 +127,13 @@ class MatchMakerAgent:
         self.use_optimization = use_optimization
         self.n_incontext_examples = n_incontext_examples
         self.eval_set_size = eval_set_size
+        self.abstention_mode = abstention_mode
+        self.min_confidence_threshold = min_confidence_threshold
+
+        # Validate abstention_mode
+        valid_modes = ['strict', 'lenient', 'disabled', 'threshold']
+        if abstention_mode not in valid_modes:
+            raise ValueError(f"abstention_mode must be one of {valid_modes}, got '{abstention_mode}'")
         
         # Load property data
         with open(property_lookup_file, 'r') as f:
@@ -178,12 +201,17 @@ class MatchMakerAgent:
             # Will be filtered dynamically per utterance
             pass
     
-    def set_source_target_from_utterance(self, utterance: str):
+    def set_source_target_from_utterance(self, utterance: str, source_hint: str = None, target_hint: str = None):
         """
         Dynamically set source and target properties based on utterance.
 
         For datasets like itops/nl2gql where source/target are not pre-defined,
         parse the utterance to determine which products/schemas to use.
+
+        Args:
+            utterance: The natural language utterance
+            source_hint: Optional hint for source schema (from ground truth)
+            target_hint: Optional hint for target schema (from ground truth)
 
         Example ITOps: "map concert vulnerabilities to turbo entities"
         → source: concert_* properties (by product_name)
@@ -218,10 +246,53 @@ class MatchMakerAgent:
             available_schemas = available_products
             schema_field = 'product_name'
             examples = """- "map concert vulnerabilities to turbo entities" → {{"source_schema": "Concert", "target_schema": "Turbonomic"}}
-- "find instana metrics similar to apptio costs" → {{"source_schema": "Instana", "target_schema": "Apptio"}}"""
+- "find instana metrics similar to apptio costs" → {{"source_schema": "Instana", "target_schema": "Apptio"}}
+- "map omop person with synthea patients" → {{"source_schema": "OMOP", "target_schema": "SYNTHEA"}}
+- "map omop visit occurrence with cms inpatientclaims" → {{"source_schema": "OMOP", "target_schema": "CMS"}}"""
 
-        # Extract source and target from utterance using LLM
-        prompt = f"""Parse this schema mapping request and identify the source and target schemas.
+        # First check if hints are provided and valid
+        source_schema = None
+        target_schema = None
+
+        logger.warning(f"DEBUG: source_hint={source_hint}, target_hint={target_hint}, available_schemas[:5]={available_schemas[:5]}")
+
+        if source_hint and target_hint:
+            # Validate hints against available schemas
+            source_hint_lower = source_hint.lower()
+            target_hint_lower = target_hint.lower()
+            available_lower = [s.lower() for s in available_schemas]
+
+            if source_hint_lower in available_lower and target_hint_lower in available_lower:
+                source_schema = source_hint_lower
+                target_schema = target_hint_lower
+                logger.info(f"Using provided hints → source: {source_schema}, target: {target_schema}")
+
+        # If no valid hints, try rule-based extraction by matching available schemas in utterance
+        if not source_schema or not target_schema:
+            utterance_lower = utterance.lower()
+            utterance_words = set(utterance_lower.replace('_', ' ').split())
+
+            matched_schemas = []
+            for schema in available_schemas:
+                if schema.lower() in utterance_lower or schema.lower() in utterance_words:
+                    matched_schemas.append(schema)
+
+            # If we found exactly 2 matches, use them in order of appearance
+            if len(matched_schemas) == 2:
+                # Determine order based on position in utterance
+                pos1 = utterance_lower.find(matched_schemas[0].lower())
+                pos2 = utterance_lower.find(matched_schemas[1].lower())
+                if pos1 < pos2:
+                    source_schema = matched_schemas[0].lower()
+                    target_schema = matched_schemas[1].lower()
+                else:
+                    source_schema = matched_schemas[1].lower()
+                    target_schema = matched_schemas[0].lower()
+                logger.info(f"Rule-based extraction → source: {source_schema}, target: {target_schema}")
+
+        # Fall back to LLM extraction only if both schemas still not set
+        if not source_schema or not target_schema:
+            prompt = f"""Parse this schema mapping request and identify the source and target schemas.
 
 Utterance: "{utterance}"
 
@@ -237,24 +308,25 @@ Examples:
 {examples}
 """
 
-        messages = [
-            {"role": "system", "content": "You are a schema matching assistant. Return only valid JSON."},
-            {"role": "user", "content": prompt}
-        ]
+            messages = [
+                {"role": "system", "content": "You are a schema matching assistant. Return only valid JSON."},
+                {"role": "user", "content": prompt}
+            ]
 
-        response = self._call_llm(messages, temperature=0.0)
-        response = _strip_code_fences(response)
+            response = self._call_llm(messages, temperature=0.0)
+            response = _strip_code_fences(response)
 
-        parsed, err = _safe_json_loads(response)
-        if err or not isinstance(parsed, dict):
-            logger.warning(f"Failed to parse source/target from utterance: {err}")
-            # Fallback: use all properties
-            self.source_properties = self.property_data.copy()
-            self.target_properties = self.property_data.copy()
-            return
+            parsed, err = _safe_json_loads(response)
+            if err or not isinstance(parsed, dict):
+                logger.warning(f"Failed to parse source/target from utterance: {err}")
+                # Fallback: use all properties
+                self.source_properties = self.property_data.copy()
+                self.target_properties = self.property_data.copy()
+                return
 
-        source_schema = parsed.get('source_schema', '').lower()
-        target_schema = parsed.get('target_schema', '').lower()
+            source_schema = parsed.get('source_schema', '').lower()
+            target_schema = parsed.get('target_schema', '').lower()
+            logger.info(f"LLM extraction → source: {source_schema}, target: {target_schema}")
 
         logger.info(f"Parsed utterance → source: {source_schema}, target: {target_schema} (using {schema_field})")
 
@@ -303,7 +375,11 @@ Examples:
             )
 
         # Rebuild index with filtered target properties if needed
-        if self.colbert_available:
+        # Skip rebuild for utterance-based datasets that already index all properties
+        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'omop_cms', 'omop_mimic', 'omop_synthea']
+        if self.dataset.lower() in utterance_datasets:
+            logger.info("Utterance-based dataset: skipping index rebuild (all properties already indexed)")
+        elif self.colbert_available:
             logger.info("Rebuilding index with filtered target properties...")
             self._build_multi_vector_index()
         elif hasattr(self, 'collection'):
@@ -317,9 +393,10 @@ Examples:
         """Build ColBERT-v2 multi-vector index from target schema."""
         logger.info(f"Building multi-vector index: {self.collection_name}")
         
-        # For utterance-based datasets (itops/nl2gql), index ALL properties initially
+        # For utterance-based datasets (itops/nl2gql/itopsgraph/OMOP), index ALL properties initially
         # We'll filter at query time, not at index time
-        if self.dataset.lower() in ['itops', 'nl2gql']:
+        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'omop_cms', 'omop_mimic', 'omop_synthea']
+        if self.dataset.lower() in utterance_datasets:
             properties_to_index = self.property_data
             logger.info(f"Utterance-based dataset: indexing all {len(properties_to_index)} properties")
         else:
@@ -353,29 +430,35 @@ Examples:
         else:
             # Fallback: use sentence-transformers with ChromaDB
             import chromadb
-            self.chroma_client = chromadb.PersistentClient(path=self.index_path)
-            
+            # Reuse existing client if available to avoid collection reference issues
+            if not hasattr(self, 'chroma_client') or self.chroma_client is None:
+                self.chroma_client = chromadb.PersistentClient(path=self.index_path)
+
             # Delete existing collection if it exists
             try:
                 self.chroma_client.delete_collection(name=self.collection_name)
             except:
                 pass
-            
-            collection = self.chroma_client.create_collection(
+
+            collection = self.chroma_client.get_or_create_collection(
                 name=self.collection_name
             )
             
             embeddings = [self.embedding_model.encode(doc) for doc in tqdm(
-                documents, 
+                documents,
                 desc="Embedding documents",
                 disable=logger.level > logging.INFO
             )]
-            
-            collection.add(
-                ids=doc_ids,
-                documents=documents,
-                embeddings=embeddings
-            )
+
+            # Add in batches to avoid ChromaDB max batch size limit (5461)
+            batch_size = 5000
+            for i in range(0, len(documents), batch_size):
+                batch_end = min(i + batch_size, len(documents))
+                collection.add(
+                    ids=doc_ids[i:batch_end],
+                    documents=documents[i:batch_end],
+                    embeddings=embeddings[i:batch_end]
+                )
             
             self.collection = collection
         
@@ -384,13 +467,15 @@ Examples:
     def _load_index(self):
         """Load existing index, or create if it doesn't exist."""
         logger.info(f"Loading existing index: {self.collection_name}")
-        
+
         if self.colbert_available:
             # Index already loaded in __init__
             pass
         else:
             import chromadb
-            self.chroma_client = chromadb.PersistentClient(path=self.index_path)
+            # Reuse existing client if available
+            if not hasattr(self, 'chroma_client') or self.chroma_client is None:
+                self.chroma_client = chromadb.PersistentClient(path=self.index_path)
             
             try:
                 self.collection = self.chroma_client.get_collection(self.collection_name)
@@ -440,14 +525,29 @@ Examples:
         else:
             # Fallback: simple embedding similarity
             query_embedding = self.embedding_model.encode(query_doc)
+            # Request many more results to account for filtering out source properties
+            # Need to request at least top_k + len(source_properties) to ensure we get top_k targets
+            source_prop_count = len(self.source_properties) if self.source_properties else 0
+            n_request = min(self.top_k + source_prop_count + 10, 500)  # Cap at 500
             results = self.collection.query(
                 query_embeddings=[query_embedding.tolist()],
-                n_results=self.top_k
+                n_results=n_request
             )
             candidates = results['ids'][0] if results.get('ids') else []
-        
-        logger.debug(f"Semantic candidates for {query_attr}: {candidates}")
-        return candidates
+
+        # Filter out the query attribute itself and source properties
+        # This prevents self-matching when index contains all properties
+        source_prop_ids = set(self.source_properties.keys()) if self.source_properties else set()
+        filtered_candidates = [
+            c for c in candidates
+            if c != query_attr and c not in source_prop_ids
+        ][:self.top_k]  # Take only top_k after filtering
+
+        if not filtered_candidates and candidates:
+            logger.warning(f"All {len(candidates)} semantic candidates were source properties - no target matches found")
+
+        logger.debug(f"Semantic candidates for {query_attr}: {filtered_candidates} (filtered from {len(candidates)})")
+        return filtered_candidates
     
     def _reasoning_candidate_generation(
         self,
@@ -638,15 +738,22 @@ Options:
 {incontext}
 
 Task: For each option (including "None of the above"), provide a confidence score from 0-100. Consider:
-- Semantic similarity
-- Type compatibility
-- Schema relationships
-- Whether a good match exists
+- Semantic similarity (field names, descriptions)
+- Type compatibility (data types, formats)
+- Schema relationships (parent types, context)
 
-If no option is a good match, score "None of the above" highest.
+Scoring Guidelines:
+- 80-100: Strong match (semantically equivalent, compatible types)
+- 60-79: Good match (similar meaning, minor differences acceptable)
+- 40-59: Moderate match (related concepts, some uncertainty)
+- 20-39: Weak match (loosely related, significant differences)
+- 0-19: Poor match (unrelated or incompatible)
+
+For "None of the above": Only score it high (>50) if ALL other options are clearly wrong or incompatible.
+Prefer making a match when there's a reasonable candidate over abstaining.
 
 Return ONLY a JSON object mapping option letters to scores:
-{{"A": 85, "B": 45, "C": 20, "D": 10, "E": 5, "F": 100}}"""
+{{"A": 85, "B": 45, "C": 20, "D": 10, "E": 5, "F": 15}}"""
 
         messages = [
             {"role": "system", "content": "You are an expert schema matcher. Respond only with valid JSON."},
@@ -946,16 +1053,31 @@ Think step-by-step about the match quality, then provide ONLY a number from 0-5.
         for i, cand in enumerate(candidates):
             cand.rank = i + 1
         
-        # Select best match
+        # Select best match based on abstention_mode
         none_option = options[-1]
         none_confidence = scores.get(none_option, 0.0)
-        
-        if candidates and candidates[0].confidence > none_confidence:
+        best_confidence = candidates[0].confidence if candidates else 0.0
+
+        # Determine whether to abstain based on abstention_mode
+        if self.abstention_mode == 'disabled':
+            # Never abstain - always select best candidate
+            abstain = not candidates
+        elif self.abstention_mode == 'threshold':
+            # Abstain only if best confidence is below threshold
+            abstain = best_confidence < self.min_confidence_threshold
+        elif self.abstention_mode == 'lenient':
+            # Abstain only if best confidence is below threshold AND "None" is higher
+            abstain = (best_confidence < self.min_confidence_threshold and
+                      best_confidence <= none_confidence)
+        else:  # 'strict' - original paper behavior
+            # Abstain if "None of the above" has higher confidence than best candidate
+            abstain = not candidates or best_confidence <= none_confidence
+
+        if candidates and not abstain:
             selected_match = candidates[0].target_attribute
-            abstain = False
         else:
             selected_match = None
-            abstain = True
+            abstain = True  # Ensure abstain is True if no match selected
         
         return MatchResult(
             source_attribute=source_id,

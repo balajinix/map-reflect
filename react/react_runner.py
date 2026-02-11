@@ -62,6 +62,7 @@ class ReActEvaluationRunner:
     # Dataset to schema directory mapping
     DATASET_SCHEMA_DIRS = {
         'ITOps': 'itops_graphql',
+        'ITOpsGraph': 'itopsgraph_graphql',
         'NL2GQL': 'nl2gql_graphql',
         'OMOP_CMS': 'omop_cms_graphql',
         'OMOP_MIMIC': 'omop_mimic_graphql',

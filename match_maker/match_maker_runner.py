@@ -43,7 +43,7 @@ for lib in ['litellm', 'LiteLLM', 'httpx', 'httpcore', 'urllib3', 'requests']:
 
 class MatchMakerMappingAgent:
     """Wrapper for MatchMakerAgent to provide unified interface."""
-    
+
     def __init__(
         self,
         property_lookup_file: str,
@@ -52,9 +52,20 @@ class MatchMakerMappingAgent:
         rebuild_index: bool,
         dataset: str,
         use_optimization: bool = True,
-        top_k: int = 5
+        top_k: int = 5,
+        abstention_mode: str = 'lenient',
+        min_confidence_threshold: float = 20.0
     ):
-        """Initialize MatchMaker mapping agent."""
+        """Initialize MatchMaker mapping agent.
+
+        Args:
+            abstention_mode: Controls when the model abstains from making a match.
+                - 'strict': Abstain if "None of the above" score > best candidate (original paper)
+                - 'lenient': Abstain only if best confidence < threshold AND "None" is higher (default)
+                - 'disabled': Never abstain, always select best candidate
+                - 'threshold': Abstain only if best confidence < threshold
+            min_confidence_threshold: Minimum confidence (0-100) for 'lenient'/'threshold' modes
+        """
         self.model = model
         self.dataset = dataset
         self.property_lookup_file = Path(property_lookup_file)
@@ -62,8 +73,10 @@ class MatchMakerMappingAgent:
         self.rebuild_index = rebuild_index
         self.use_optimization = use_optimization
         self.top_k = top_k
+        self.abstention_mode = abstention_mode
+        self.min_confidence_threshold = min_confidence_threshold
         self.available = False
-        
+
         try:
             self._setup_matchmaker_agent()
             self.available = True
@@ -116,23 +129,28 @@ class MatchMakerMappingAgent:
             property_lookup_file=str(self.property_lookup_file),
             model=self.model,
             dataset=self.dataset,
-            chroma_dir=str(self.data_dir / "chroma_db"),
+            chroma_dir=str(self.data_dir / f"chroma_db_{self.dataset.lower()}"),
             collection_name=None,  # Auto-generate
             top_k=self.top_k,
             rebuild_index=self.rebuild_index,
-            use_optimization=self.use_optimization
+            use_optimization=self.use_optimization,
+            abstention_mode=self.abstention_mode,
+            min_confidence_threshold=self.min_confidence_threshold
         )
-        
+
         logger.info(
             f"MatchMaker agent configured: model={self.model}, "
-            f"dataset={self.dataset}, top_k={self.top_k}"
+            f"dataset={self.dataset}, top_k={self.top_k}, "
+            f"abstention_mode={self.abstention_mode}"
         )
     
     def run_agent(
         self,
         utterance_or_source_attr: str,
         is_utterance: bool = False,
-        ground_truth_fields: Optional[List[str]] = None
+        ground_truth_fields: Optional[List[str]] = None,
+        expected_source: Optional[str] = None,
+        expected_target: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Run MatchMaker on a source attribute or utterance.
@@ -143,18 +161,42 @@ class MatchMakerMappingAgent:
             is_utterance: Whether input is a full utterance needing parsing
             ground_truth_fields: For utterance mode, list of source field IDs to match
                                 (from ground_truth_mapping keys)
+            expected_source: Optional hint for source schema (from ground truth)
+            expected_target: Optional hint for target schema (from ground truth)
 
         Returns:
             Dict with match results
         """
         if not self.available:
             return self._fallback_response(utterance_or_source_attr)
-        
+
         try:
             # For itops/nl2gql: parse utterance to set source/target dynamically
             if is_utterance:
                 logger.info(f"Parsing utterance: {utterance_or_source_attr}")
-                self.matchmaker_agent.set_source_target_from_utterance(utterance_or_source_attr)
+
+                # Extract schema name from expected_source/target (can be string or dict)
+                def extract_schema_name(hint):
+                    if hint is None:
+                        return None
+                    if isinstance(hint, str):
+                        return hint
+                    if isinstance(hint, dict):
+                        # Extract from 'id' field: "omop_PERSON" -> "omop"
+                        hint_id = hint.get('id', '')
+                        if '_' in hint_id:
+                            return hint_id.split('_')[0]
+                        return hint_id
+                    return None
+
+                source_hint = extract_schema_name(expected_source)
+                target_hint = extract_schema_name(expected_target)
+
+                self.matchmaker_agent.set_source_target_from_utterance(
+                    utterance_or_source_attr,
+                    source_hint=source_hint,
+                    target_hint=target_hint
+                )
 
                 # Get the parsed source and target schemas
                 # For NL2GQL (single product), use type_name; for ITOps (multiple products), use product_name
@@ -184,11 +226,35 @@ class MatchMakerMappingAgent:
                     source_attrs = []
                     for gt_field in ground_truth_fields:
                         gt_lower = gt_field.lower()
+                        # Parse ground truth field: "concert_stadium_id" -> table="concert", field="stadium_id"
+                        gt_parts = gt_lower.split('_', 1)
+                        gt_table = gt_parts[0] if gt_parts else ''
+                        gt_field_name = gt_parts[1] if len(gt_parts) > 1 else gt_lower
+
                         for source_id in self.matchmaker_agent.source_properties.keys():
-                            if source_id.lower() == gt_lower or gt_lower in source_id.lower():
+                            source_lower = source_id.lower()
+                            # Direct match
+                            if source_lower == gt_lower or gt_lower in source_lower:
                                 source_attrs.append(source_id)
                                 break
-                    logger.info(f"Matching {len(source_attrs)} fields from ground truth")
+                            # Parse source_id: "nl2gql_Concert.stadium_id" -> table="concert", field="stadium_id"
+                            # Handle format: prefix_Table.field or prefix_Table_field
+                            if '.' in source_lower:
+                                src_parts = source_lower.rsplit('.', 1)
+                                src_table = src_parts[0].split('_')[-1]  # Get last part before dot
+                                src_field = src_parts[1]
+                            else:
+                                src_parts = source_lower.split('_')
+                                if len(src_parts) >= 3:  # prefix_table_field
+                                    src_table = src_parts[-2]
+                                    src_field = src_parts[-1]
+                                else:
+                                    continue
+                            # Match if both table and field components match
+                            if gt_table == src_table and gt_field_name == src_field:
+                                source_attrs.append(source_id)
+                                break
+                    logger.info(f"Matching {len(source_attrs)} fields from ground truth (from {len(ground_truth_fields)} gt fields)")
                 else:
                     # Match all source attributes (slow)
                     source_attrs = list(self.matchmaker_agent.source_properties.keys())
@@ -363,7 +429,7 @@ class MatchMakerMappingAgent:
 
 class MatchMakerEvaluationRunner:
     """Runner for MatchMaker evaluation across datasets."""
-    
+
     def __init__(
         self,
         property_lookup_file: str,
@@ -371,11 +437,13 @@ class MatchMakerEvaluationRunner:
         schema_dir: Optional[str] = None,
         rebuild_index: bool = False,
         use_optimization: bool = True,
-        top_k: int = 5
+        top_k: int = 5,
+        abstention_mode: str = 'lenient',
+        min_confidence_threshold: float = 20.0
     ):
         """
         Initialize MatchMaker evaluation runner.
-        
+
         Args:
             property_lookup_file: Path to property lookup JSON
             data_dir: Directory with shared data components
@@ -383,6 +451,8 @@ class MatchMakerEvaluationRunner:
             rebuild_index: Whether to rebuild vector index
             use_optimization: Whether to use self-improvement
             top_k: Number of candidates to retrieve
+            abstention_mode: Controls when the model abstains ('strict', 'lenient', 'disabled', 'threshold')
+            min_confidence_threshold: Minimum confidence for 'lenient'/'threshold' modes
         """
         self.property_lookup_file = Path(property_lookup_file)
         self.data_dir = Path(data_dir)
@@ -390,11 +460,13 @@ class MatchMakerEvaluationRunner:
         self.rebuild_index = rebuild_index
         self.use_optimization = use_optimization
         self.top_k = top_k
+        self.abstention_mode = abstention_mode
+        self.min_confidence_threshold = min_confidence_threshold
         # Save results relative to this script's directory
         script_dir = Path(__file__).parent
         self.results_dir = script_dir / "results"
         self.results_dir.mkdir(exist_ok=True)
-        
+
         # Cache for agents (reuse across samples)
         self._agent_cache = {}
         
@@ -442,7 +514,9 @@ class MatchMakerEvaluationRunner:
             rebuild_index=self.rebuild_index,
             dataset=dataset,
             use_optimization=self.use_optimization,
-            top_k=self.top_k
+            top_k=self.top_k,
+            abstention_mode=self.abstention_mode,
+            min_confidence_threshold=self.min_confidence_threshold
         )
     
     def load_evaluation_utterances(self, dataset: str) -> List[Dict[str, Any]]:
@@ -487,9 +561,9 @@ class MatchMakerEvaluationRunner:
         """Run MatchMaker on a single input (attribute or utterance)."""
         start_time = time.time()
 
-        # Auto-detect if utterance-based (itops/nl2gql) or attribute-based (MIMIC-OMOP)
+        # Auto-detect if utterance-based (itops/nl2gql/itopsgraph/OMOP) or attribute-based
         if is_utterance is None:
-            is_utterance = dataset.lower() in ['itops', 'nl2gql']
+            is_utterance = dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic', 'omop_synthea'] or dataset.lower().startswith('itopsgraph')
 
         try:
             logger.info(f"Running MatchMaker on sample {sample_id}")
@@ -504,8 +578,14 @@ class MatchMakerEvaluationRunner:
             # Extract ground truth fields for efficient matching
             gt_fields = list(ground_truth_mapping.keys()) if ground_truth_mapping else None
 
-            # Run agent
-            result = agent.run_agent(input_data, is_utterance=is_utterance, ground_truth_fields=gt_fields)
+            # Run agent with expected source/target hints for correct schema detection
+            result = agent.run_agent(
+                input_data,
+                is_utterance=is_utterance,
+                ground_truth_fields=gt_fields,
+                expected_source=expected_source,
+                expected_target=expected_target
+            )
 
             execution_time = time.time() - start_time
 
@@ -523,7 +603,10 @@ class MatchMakerEvaluationRunner:
                     "success": result.get('error') is None,
                     "error_message": result.get('error'),
                     "dataset": dataset,
-                    "model": model
+                    "model": model,
+                    "accuracy_metrics": {},  # Placeholder for utterance-based
+                    "abstain": not result.get('predicted_mapping'),
+                    "total_mappings": len(result.get('predicted_mapping', {}))
                 }
             else:
                 # Attribute-based evaluation format
@@ -574,7 +657,10 @@ class MatchMakerEvaluationRunner:
                     "success": False,
                     "error_message": str(e),
                     "dataset": dataset,
-                    "model": model
+                    "model": model,
+                    "accuracy_metrics": {},
+                    "abstain": True,
+                    "total_mappings": 0
                 }
             else:
                 return {
@@ -608,14 +694,14 @@ class MatchMakerEvaluationRunner:
         logger.info(f"Loaded {len(utterances)} evaluation samples")
         
         # Determine if this is utterance-based or attribute-based
-        is_utterance_dataset = dataset.lower() in ['itops', 'nl2gql']
+        is_utterance_dataset = dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic', 'omop_synthea'] or dataset.lower().startswith('itopsgraph')
         
         # Run MatchMaker on each sample
         results = []
         total_start = time.time()
         
         # FAILURE TRACKING
-        MAX_CONSECUTIVE_FAILURES = 3
+        MAX_CONSECUTIVE_FAILURES = 50  # Increased significantly for ITOpsGraph nested field samples
         consecutive_failures = 0
         
         from tqdm import tqdm
@@ -630,8 +716,9 @@ class MatchMakerEvaluationRunner:
                     input_data = item.get('utterance', '')
                     ground_truth = None
                     ground_truth_mapping = item.get('ground_truth_mapping', {})
-                    expected_source = item.get('expected_source', '')
-                    expected_target = item.get('expected_target', '')
+                    # Support both field naming conventions
+                    expected_source = item.get('expected_source', '') or item.get('source_schema', '')
+                    expected_target = item.get('expected_target', '') or item.get('target_schema', '')
                 else:
                     input_data = item.get('source_attribute', item.get('utterance', ''))
                     ground_truth = item.get('ground_truth_target', item.get('expected_target'))
@@ -866,7 +953,24 @@ def main():
         action="store_true",
         help="Enable verbose logging"
     )
-    
+    parser.add_argument(
+        "--abstention-mode",
+        type=str,
+        default="lenient",
+        choices=["strict", "lenient", "disabled", "threshold"],
+        help="""Controls when the model abstains from making a match:
+            - strict: Abstain if 'None' score > best candidate (original paper behavior)
+            - lenient: Abstain only if best confidence < threshold AND 'None' is higher (default)
+            - disabled: Never abstain, always select best candidate
+            - threshold: Abstain only if best confidence < threshold"""
+    )
+    parser.add_argument(
+        "--min-confidence",
+        type=float,
+        default=20.0,
+        help="Minimum confidence (0-100) for 'lenient'/'threshold' abstention modes (default: 20)"
+    )
+
     args = parser.parse_args()
     
     # Set logging level
@@ -884,6 +988,8 @@ def main():
     logger.info(f"  Rebuild index: {args.rebuild_index}")
     logger.info(f"  Use optimization: {not args.no_optimization}")
     logger.info(f"  Top-k: {args.top_k}")
+    logger.info(f"  Abstention mode: {args.abstention_mode}")
+    logger.info(f"  Min confidence: {args.min_confidence}")
     
     # Initialize runner
     try:
@@ -893,7 +999,9 @@ def main():
             schema_dir=args.schema_dir,
             rebuild_index=args.rebuild_index,
             use_optimization=not args.no_optimization,
-            top_k=args.top_k
+            top_k=args.top_k,
+            abstention_mode=args.abstention_mode,
+            min_confidence_threshold=args.min_confidence
         )
     except Exception as e:
         logger.error(f"Failed to initialize runner: {e}")

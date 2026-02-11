@@ -1,393 +1,1057 @@
 {
   "Access_points": {
     "AssociationID": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Action": {
+    "Action": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "ActionPolicy": [
+      "AnyTool (Mistral)"
+    ],
     "ActionSource": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "ActionType": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "Automation_rules": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "NONE": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "PackageDetailsCollection": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "PackageRecommendation": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "action": [
+      "AnyTool (Granite)"
+    ],
+    "actionType": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
     ],
     "apiKey": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_SourceEntityType": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)"
+    ],
+    "details": [
+      "AnyTool (Granite)"
+    ],
+    "entityCharacteristics": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "externalActionName": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "importance": [
+      "AnyTool (Granite)"
+    ],
+    "policy": [
+      "AnyTool (Granite)"
+    ],
+    "recommendation": [
+      "AnyTool (Granite)"
+    ],
+    "updateTime": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "Action actionID": {
+    "actionID": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Action createTime": {
+    "createdAt": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Action details": {
+    "Action": [
+      "AnyTool (Llama)"
+    ],
+    "Action Details": [
+      "AnyTool (Llama)"
+    ],
+    "PackageDetailsCollection": [
+      "AnyTool (Mistral)"
+    ],
+    "actionDetails": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Action displayName": {
+    "actionDisplayName": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Action entityCharacteristics": {
+    "Action": [
+      "AnyTool (Mistral)"
+    ],
+    "action": [
+      "AnyTool (Granite)"
+    ],
+    "entityCharacteristics": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "Action externalActionName": {
+    "actionName": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Action importance": {
+    "ActionImportance": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "action": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "Action policy": {
+    "Action Policy": [
+      "AnyTool (Llama)"
+    ],
+    "ActionPolicy": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Action updateTime": {
+    "Action": [
+      "AnyTool (Mistral)"
+    ],
+    "updateTime": [
+      "AnyTool (Granite)"
     ]
   },
   "ActionSchedule": {
     "None": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "apiKey": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "ActionSource": {
     "PackageDetailsCollection": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "ActionType": {
     "ActionMode": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "ApiKeyDate": {
     "IssueLink": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "PackageDetailsCollection": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "updated": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ]
+  },
+  "Application": {
+    "Entity": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "tags": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "Application associations": {
+    "Application": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "tags": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "ApplicationAssociationsInfo": {
+    "ApplicationAssociationsInfo": [
+      "AnyTool (Llama)"
+    ],
+    "Entity": [
+      "AnyTool (Mistral)"
+    ],
+    "vendorIds": [
+      "AnyTool (Granite)"
     ]
   },
   "ApplicationCollection": {
+    "Entity": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
     "RelatedEntity": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "tags": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "ApplicationCollection applications": {
+    "tags": [
+      "AnyTool (Llama)"
     ]
   },
   "Applications_source_repo": {
     "filterOperator": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "tagValue": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Aspects": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "AssociationID": {
+    "AssociationID": [
+      "AnyTool (Llama)"
+    ],
+    "Entity__Mock": [
+      "AnyTool (Mistral)"
+    ],
     "createGroupMapping_200_response": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "getServicesMap_200_response": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Granite)"
     ]
   },
   "BuildArtifactAssociations": {
+    "BuildArtifactAssociations": [
+      "AnyTool (Mistral)"
+    ],
+    "access_points": [
+      "AnyTool (Granite)"
+    ],
+    "id": [
+      "AnyTool (Mistral)"
+    ],
     "playbackMode": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "query_getSyntheticLocations_items_playbackCapabilities": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Data_mapper": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "ActionMode": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "AssessmentCustomDetails": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "SeverityBreakdown": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "created": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "last_updated": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "mapping": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "pipeline": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "scan": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "scanner": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "version": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Entity": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "ApplicationAssociationsInfo": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "Entity": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "VulnerabilitiesSummary": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "className": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "connectedEntities": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "consumers": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "costPrice": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "discoveredBy": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "displayName": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "environmentType": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "numRelatedVMs": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "providers": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "severity": [
-      "ReAct (Granite)"
+      "AnyTool (Granite)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "severityBreakdown": [
-      "ReAct (Granite)"
+      "AnyTool (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "tags": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "template": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "uuid": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "vendorIds": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ]
+  },
+  "Entity severityBreakdown": {
+    "severityBreakdown": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Entity tags": {
+    "Entity tags": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "Entity vendorIds": {
+    "Entity": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "Entity__Mock": {
+    "Entity__Mock": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "Entity__Mock label": {
+    "BuildArtifactAssociations": [
+      "AnyTool (Llama)"
     ]
   },
   "HcpOrganization": {
     "HcpOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpResource": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformRun": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformStateVersion": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "PackerRegistry": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "HcpProject": {
     "HcpProject": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpResource": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "HcpResource": {
     "HcpOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpProject": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpResource": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformProject": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)"
     ],
     "HcpTerraformStateVersion": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "PackerBuild": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "PackerSbom": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "HcpTerraformAgentPool": {
     "HcpTerraformAgentPool": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "HcpTerraformOrganization": {
     "HcpOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpResource": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformProject": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformRun": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "HcpTerraformProject": {
     "HcpTerraformAgentPool": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformWorkspace": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "HcpTerraformRun": {
     "HcpOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformAgentPool": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformRun": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformStateVersion": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformWorkspace": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "hcp_terraform": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "HcpTerraformRun description": {
+    "hcp_terraform_HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ],
+    "terraform_HcpTerraformRun": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "HcpTerraformRun name": {
+    "hcp_terraform_HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "HcpTerraformRun zone": {
+    "hcp_terraform_run_zone": [
+      "AnyTool (Mistral)"
     ]
   },
   "HcpTerraformStateVersion": {
     "HcpResource": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformRun": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformStateVersion": [
-      "ReAct (Granite)"
+      "AnyTool (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "None": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "hcp_terraform_state": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "HcpTerraformStateVersion account": {
+    "hcp_terraform_HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "HcpTerraformStateVersion id": {
+    "hcp_terraform_HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "HcpTerraformStateVersion updated": {
+    "terraform_HcpTerraformStateVersion_updated": [
+      "AnyTool (Llama)"
     ]
   },
   "HcpTerraformWorkspace": {
     "HcpTerraformWorkspace": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "IDNamePair": {
     "AssociationID": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "IssueLink": {
     "SeverityBreakdown": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ]
+  },
+  "NORMAL": {
+    "normal": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "Package risk type": {
+    "PackageDetailsCollection": [
+      "AnyTool (Llama)"
     ]
   },
   "PackageDetailsCollection": {
     "ActionSchedule": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "PackageDetailsCollection": [
+      "AnyTool (Llama)"
     ],
     "PackageDetailsSummary": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)"
+    ],
+    "packages": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackageDetailsCollection packages": {
+    "PackageDetailsCollection": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "PackageDetailsSummary": {
     "ApiKeyDate": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "PackageDetailsCollection": [
+      "ReAct (Mistral)"
+    ],
+    "PackageDetailsSummary": [
+      "AnyTool (Mistral)"
+    ],
+    "created": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackageDetailsSummary recommendation": {
+    "action": [
+      "AnyTool (Mistral)"
     ]
   },
   "PackageRecommendation": {
     "Action": [
-      "ReAct (Granite)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "ActionType": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "PackageRecommendation": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "Package_status": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "externalActionName": [
+      "AnyTool (Granite)"
+    ],
+    "packageRecommendation": [
+      "AnyTool (Granite)"
+    ],
+    "recommendationID": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "PackageRecommendation action": {
+    "Action": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackageRecommendation created": {
+    "created": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "PackageRecommendation description": {
+    "description": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackageRecommendation risk": {
+    "PackageRecommendation": [
+      "AnyTool (Mistral)"
+    ],
+    "risk": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "PackerAncestry": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "id": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "PackerArtifact": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "PackerArtifact description": {
+    "hcp_packer_PackerArtifact": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerArtifact id": {
+    "hcp_packer_PackerArtifact": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerArtifact name": {
+    "hcp_packer_PackerArtifact": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerBucket description": {
+    "hcp_packer_PackerBucket": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerBucket id": {
+    "hcp_packer_PackerBucket": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerBucket name": {
+    "hcp_packer_PackerBucket": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerBucket zone": {
+    "hcp_packer_bucket_zone": [
+      "AnyTool (Mistral)"
     ]
   },
   "PackerBuild": {
     "HcpOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "PackerBuild description": {
+    "hcp_packer_PackerBuild": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerBuild id": {
+    "hcp_packer_PackerBuild": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerBuild name": {
+    "hcp_packer_PackerBuild": [
+      "AnyTool (Mistral)"
     ]
   },
   "PackerChannel": {
     "HcpResource": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "id": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "PackerChannel account": {
+    "hcp_packer_PackerChannel": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "PackerInheritedRevocation": {
+    "PackerInheritedRevocation": [
+      "AnyTool (Llama)"
     ]
   },
   "PackerRegistry": {
     "HcpOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformOrganization": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "HcpTerraformStateVersion": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
     ]
   },
   "PackerVersion": {
     "HcpTerraformStateVersion": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "PackerVersion": [
+      "AnyTool (Llama)"
+    ],
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "packer": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "PackerVersion description": {
+    "packer_PackerVersion": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "PackerVersion updated": {
+    "packer_PackerVersion_updated": [
+      "AnyTool (Llama)"
     ]
   },
   "Provider": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Recommendations": {
     "Recommendations": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "Resources": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "RelatedActionsCountByType": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "StatsEntry": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Risk": {
     "Sbom_risk_summary": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "SeverityBreakdown": {
@@ -395,75 +1059,249 @@
       "ReAct (Granite)"
     ],
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "Entity_settings": [
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "FiltersValues": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "Severity": [
       "ReAct (Granite)"
     ],
     "Vulnerabilities_insights": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Statistics": {
     "StatsEntry": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "Tags_entity": {
     "NamespaceEntity": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "None": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "Tags": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbonomic_EnvironmentType": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "VulnerabilitiesSummary": {
     "Aspects": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "VulnerabilitiesSummary": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "vulnerabilities_summary": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "VulnerabilitiesSummary high": {
+    "VulnerabilitySummary": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "access_points": {
+    "BuildArtifactAssociations": [
+      "AnyTool (Llama)"
+    ],
+    "accessPoints": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "account": {
+    "account": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ],
+    "accountId": [
+      "AnyTool (Granite)"
+    ],
+    "hcp": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_PackerArtifact_account": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_PackerBuild_account": [
+      "AnyTool (Mistral)"
     ]
   },
   "action": {
+    "action": [
+      "Map-Reflect (Granite)"
+    ],
+    "externalActionName": [
+      "Map-Reflect (Granite)"
+    ],
     "mapping": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "packages": [
+      "Map-Reflect (Granite)"
+    ],
+    "policy": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "actionDisplayName": {
+    "recommendation": [
+      "Map-Reflect (Granite)"
     ]
   },
   "actionID": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "actionID": [
+      "AnyTool (Llama)"
+    ],
+    "id": [
+      "Map-Reflect (Granite)"
+    ],
+    "package": [
+      "Map-Reflect (Granite)"
+    ],
+    "recommendation": [
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "actionImpactID": {
+    "actionImpactID": [
+      "AnyTool (Llama)"
+    ],
+    "recommendation": [
+      "Map-Reflect (Granite)"
     ]
   },
   "actionMode": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "action": [
+      "Map-Reflect (Granite)"
     ]
   },
   "actionSchedule": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "created": [
+      "Map-Reflect (Granite)"
     ]
   },
   "actionState": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "risk": [
+      "Map-Reflect (Granite)"
     ]
   },
   "actionType": {
     "Action": [
-      "ReAct (Granite)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "action": [
+      "Map-Reflect (Granite)"
+    ],
+    "actionType": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "actiontype": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert": [
+      "AnyTool (Mistral)"
+    ],
+    "externalactionname": [
+      "Map-Reflect (Granite)"
+    ],
+    "packages": [
+      "Map-Reflect (Granite)"
+    ],
+    "recommendation": [
+      "Map-Reflect (Granite)"
+    ],
+    "risk": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "applications": {
+    "applications": [
+      "AnyTool (Llama)"
+    ],
+    "tags": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "buildartifactassociations": {
+    "label": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "checks": {
+    "entityCharacteristics": [
+      "Map-Reflect (Granite)"
     ]
   },
   "clearTime": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "clearTime": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "cms_CARRIERCLAIMS-1769002614420-6220804096": {
@@ -473,24 +1311,29 @@
   },
   "compoundActions": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "concert": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "AnyTool (Granite)"
     ],
     "instana_callGroup": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_Action": [
       "AnyTool (Granite)"
@@ -500,35 +1343,168 @@
     ],
     "turbo_entityActionStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "concert ApplicationCollection applications": {
+    "application_tags": [
+      "AnyTool (Granite)"
+    ],
+    "tags": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "concert BuildArtifactAssociations access_points": {
+    "access_points": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert PackageDetailsCollection packages": {
+    "recommendation": [
+      "AnyTool (Granite)"
+    ],
+    "recommendationAction": [
+      "AnyTool (Granite)"
+    ],
+    "risk": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert PackageDetailsSummary recommendation": {
+    "recommendation": [
+      "AnyTool (Granite)"
+    ],
+    "recommendationAction": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert PackageRecommendation": {
+    "recommendation": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert PackageRecommendation description": {
+    "description": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert PackageRecommendation risk": {
+    "risk": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert VulnerabilitiesSummary high": {
+    "vulnerabilities": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert applications": {
+    "tags": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "concert associations": {
+    "associations": [
       "AnyTool (Llama)"
+    ],
+    "tags": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert created": {
+    "created": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert environments": {
+    "environmentType": [
+      "AnyTool (Granite)"
+    ],
+    "id": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert high": {
+    "concertMode": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert id": {
+    "concert": [
+      "AnyTool (Granite)"
+    ],
+    "id": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "concert packages": {
+    "actionType": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "recommendationAction": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "concert packages recommendation action": {
+    "action": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "concert recommendation": {
+    "action": [
+      "AnyTool (Llama)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "recommendation": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "concert risk": {
+    "risk": [
+      "AnyTool (Granite)"
     ]
   },
   "concert_About_categories": {
@@ -536,20 +1512,40 @@
       "ReMatch (Granite)"
     ]
   },
+  "concert_About_checks": {
+    "turbonomic_Action": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "concert_Access_control": {
     "instana_query_getInfrastructureCatalogPlugins_items": [
       "ReMatch (Granite)"
+    ],
+    "turbonomic_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbonomic_SeverityBreakdown": [
+      "Map-Reflect (Granite)"
     ]
   },
   "concert_ApiKeyDate": {
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_TokenDetails": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationPerspective": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana__entities_200_response": [
+      "Map-Reflect (Mistral)",
       "MatchMaker (Llama)",
       "ReMatch (Granite)",
       "ReMatch (Llama)"
@@ -563,7 +1559,9 @@
     ],
     "turbo_Action": [
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Llama)",
+      "SMT (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_ActionSchedule": [
@@ -573,7 +1571,8 @@
       "UE-Reflect (Granite)"
     ],
     "turbo_Entity": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Statistics": [
       "ReMatch (Granite)",
@@ -585,10 +1584,26 @@
     ]
   },
   "concert_AppComponentCount": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_AssociatedBuildArtifacts": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_BuildArtifact": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_ExposureAssociationsDetails": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_SourceRepo": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
     ],
     "instana_ApplicationPerspective": [
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReMatch (Granite)",
@@ -601,16 +1616,19 @@
     "instana__entities_200_response": [
       "MatchMaker (Granite)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Action": [
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_DiscoveredBy": [
       "ReMatch (Granite)"
     ],
     "turbo_Entity": [
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Target": [
       "Map-Reflect (Granite)",
@@ -619,11 +1637,18 @@
     ]
   },
   "concert_AppEnvironment": {
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
     ],
     "instana__entities_200_response": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana_callGroup_items_items": [
       "Map-Reflect (Llama)"
@@ -631,7 +1656,8 @@
     "turbo_Action": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_ConnectedEntitiesEntry": [
       "Map-Reflect (Llama)"
@@ -639,7 +1665,8 @@
     "turbo_Entity": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Target": [
       "DualContext (Granite)"
@@ -648,19 +1675,59 @@
   "concert_Application": {
     "concert_ApiKeyDate": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_AppEnvironment": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_Application": [
+      "Map-Reflect (Mistral)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "concert_ApplicationAssociationsInfo": [
       "UE-Reflect (Granite)"
     ],
+    "concert_ApplicationCollection": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_ApplicationFilters": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ApplicationSbomsCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_AssociatedBuildArtifacts": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_HistoryDetails": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Scan": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_TokenDetails": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_VulnerabilityCollection": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_VulnerabilityDetailsCollection": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)",
@@ -676,6 +1743,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "UE-Reflect (Granite)"
     ],
@@ -691,6 +1759,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -699,7 +1768,8 @@
     ],
     "instana__topology_200_response": [
       "DualContext (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana_callGroup_200_response": [
       "DualContext (Granite)",
@@ -720,8 +1790,10 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_ActionSchedule": [
@@ -742,10 +1814,12 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_Statistics": [
@@ -769,9 +1843,18 @@
     ],
     "turbo_marketEntities": [
       "AnyTool (Llama)"
+    ],
+    "turbonomic_Action": [
+      "Map-Reflect (Granite)"
+    ],
+    "turbonomic_Entity": [
+      "Map-Reflect (Granite)"
     ]
   },
   "concert_ApplicationAssociationsInfo": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_Environments": [
       "UE-Reflect (Granite)"
     ],
@@ -791,6 +1874,7 @@
     "turbo_Action": [
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -804,11 +1888,16 @@
     "turbo_Entity": [
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
+    ],
+    "turbonomic_Entity": [
+      "Map-Reflect (Granite)"
     ]
   },
   "concert_ApplicationAssociationsInfoPrototypeInput": {
@@ -817,7 +1906,11 @@
     ]
   },
   "concert_ApplicationCollection": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_Application": [
+      "Map-Reflect (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "concert_ApplicationAssociationsInfo": [
@@ -825,6 +1918,9 @@
     ],
     "concert_ApplicationCollection": [
       "UE-Reflect (Granite)"
+    ],
+    "concert_AssociatedBuildArtifacts": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_Tags": [
       "UE-Reflect (Granite)"
@@ -839,6 +1935,7 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "UE-Reflect (Granite)"
     ],
@@ -851,6 +1948,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Llama)"
     ],
     "instana__topology_200_response": [
@@ -870,8 +1968,10 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_Application": [
@@ -892,10 +1992,12 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_Statistics": [
@@ -930,24 +2032,32 @@
   "concert_ApplicationFilters": {
     "concert_CVEFilters": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ExposureFilters": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "DualContext (Granite)",
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Llama)"
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_StatFilterEntry": [
       "MatchMaker (Granite)",
@@ -960,7 +2070,8 @@
   "concert_ApplicationReleaseProperties": {
     "concert_ApplicationReleaseProperties": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -971,12 +2082,15 @@
     ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)"
     ],
     "turbo_Entity": [
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_entitySearchFiltered": [
@@ -995,6 +2109,7 @@
       "ReMatch (Granite)"
     ],
     "instana__entities_200_response": [
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1010,19 +2125,29 @@
       "ReMatch (Llama)"
     ]
   },
+  "concert_Applications": {
+    "turbonomic": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "concert_Applications_source_repo": {
     "turbonomic_TagValueFilterOperator": [
       "GNN ((no LLM))"
     ]
   },
   "concert_AssociatedBuildArtifacts": {
+    "concert_BuildArtifact": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_VulnerabilityApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilityApplicationCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana__entities_200_response": [
       "MatchMaker (Granite)",
@@ -1031,11 +2156,17 @@
     "turbo_Action": [
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Mistral)"
     ]
   },
   "concert_AssociationID": {
     "concert_AssociationID": [
       "UE-Reflect (Granite)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -1069,9 +2200,19 @@
     ]
   },
   "concert_BuildArtifact": {
+    "concert_AssociatedBuildArtifacts": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_BuildArtifact": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ConcertDefSbom": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_VulnerabilityCollection": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "AnyTool (Llama)",
@@ -1103,12 +2244,14 @@
       "ReMatch (Llama)"
     ],
     "turbo_Action": [
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)"
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_RelatedEntity": [
       "MatchMaker (Granite)",
@@ -1146,12 +2289,16 @@
     ],
     "turbo_StatsEntry": [
       "UE-Reflect (Granite)"
+    ],
+    "turbonomic": [
+      "Map-Reflect (Granite)"
     ]
   },
   "concert_CVEFilters": {
     "concert_CvesInfo": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -1166,8 +2313,15 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "Map-Reflect (Mistral)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Entity": [
       "Map-Reflect (Llama)"
@@ -1182,13 +2336,20 @@
     ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_ConnectedEntitiesEntry": [
       "Map-Reflect (Llama)"
     ]
   },
   "concert_ConcertDefSbom": {
+    "concert_ApiKeyDate": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
     ],
@@ -1198,7 +2359,8 @@
     ],
     "instana__entities_200_response": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana_callGroup_200_response": [
       "Map-Reflect (Llama)"
@@ -1211,7 +2373,8 @@
     ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_CompoundActionsEntry": [
       "Map-Reflect (Llama)"
@@ -1224,7 +2387,8 @@
     ],
     "turbo_Entity": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Target": [
       "Map-Reflect (Llama)"
@@ -1237,6 +2401,12 @@
     ]
   },
   "concert_CveInfo": {
+    "concert_Cves": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana__entities_200_response": [
       "DualContext (Granite)",
       "MatchMaker (Granite)",
@@ -1257,13 +2427,21 @@
     ]
   },
   "concert_Cves": {
+    "concert_CveInfo": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationPerspective": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana__entities_200_response": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1298,14 +2476,21 @@
     ]
   },
   "concert_CvesInfo": {
+    "concert_CVEFilters": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationPerspective": [
       "DualContext (Granite)"
     ],
     "instana__entities_200_response": [
       "DualContext (Granite)"
     ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "Map-Reflect (Mistral)"
+    ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1331,21 +2516,41 @@
     ],
     "turbo_Entity": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
+    ]
+  },
+  "concert_Environment": {
+    "turbonomic_EnvironmentType": [
+      "Map-Reflect (Granite)"
     ]
   },
   "concert_ExposureAssociationsDetails": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ExposuresInfo": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana__entities_200_response": [
       "Map-Reflect (Llama)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
+    "turbo_Action": [
+      "Map-Reflect (Mistral)"
+    ],
     "turbo_Entity": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Target": [
       "Map-Reflect (Llama)"
@@ -1354,15 +2559,18 @@
   "concert_ExposureFilters": {
     "concert_Exposures": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ExposuresInfo": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_MostCommonExposureRules": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilitiesExposureHighlightSummary": [
       "ReAct (Granite)"
@@ -1377,6 +2585,7 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1387,10 +2596,15 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "turbo_CompoundActionsEntry": [
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
@@ -1423,17 +2637,32 @@
     ]
   },
   "concert_Exposures": {
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ExposureFilters": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposuresInfo": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_MostCommonExposureRules": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_SourceRepo": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -1449,12 +2678,14 @@
     "instana__entities_200_response": [
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
     "instana_callGroup_200_response": [
       "Map-Reflect (Llama)",
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Mistral)"
     ],
     "instana_mutation_entities_items_items": [
       "ReMatch (Llama)"
@@ -1467,6 +2698,7 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1477,6 +2709,7 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "ReAct (Granite)"
     ],
     "turbo_Risk": [
@@ -1495,9 +2728,34 @@
     ]
   },
   "concert_ExposuresCollection": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_AssociationID": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_ExposureAssociationsDetails": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_ExposureFilters": [
+      "ReAct (Mistral)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_ExposuresCollection": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ExposuresInfo": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -1514,7 +2772,8 @@
     "instana__entities_200_response": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana_callGroup_200_response": [
       "DualContext (Granite)",
@@ -1526,7 +2785,8 @@
     "turbo_Action": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_CompoundActionsEntry": [
       "DualContext (Granite)"
@@ -1538,7 +2798,8 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Statistics": [
       "DualContext (Granite)",
@@ -1570,7 +2831,14 @@
   "concert_FilterInfo": {
     "concert_CVEFilters": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Mistral)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Action": [
       "DualContext (Granite)"
@@ -1579,7 +2847,8 @@
       "MatchMaker (Granite)"
     ],
     "turbo_Entity": [
-      "DualContext (Granite)"
+      "DualContext (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_RelatedEntity": [
       "ReMatch (Granite)",
@@ -1602,15 +2871,18 @@
   "concert_FiltersValues": {
     "concert_CVEFilters": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ExposureFilters": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "DualContext (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana__entities_200_response": [
       "Map-Reflect (Granite)"
@@ -1620,10 +2892,12 @@
     ],
     "turbo_Action": [
       "DualContext (Granite)",
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Entity": [
-      "DualContext (Granite)"
+      "DualContext (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_RelatedEntity": [
       "ReMatch (Granite)"
@@ -1641,13 +2915,25 @@
       "MatchMaker (Llama)"
     ]
   },
+  "concert_HistoryDetails": {
+    "instana__entities_200_response": [
+      "Map-Reflect (Mistral)"
+    ]
+  },
   "concert_IDNamePair": {
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_VulnerabilityApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
+    ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationService": [
       "MatchMaker (Granite)",
@@ -1656,17 +2942,21 @@
     "instana_ServiceEndpoint": [
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana__entities_200_response": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_ConnectedEntitiesEntry": [
       "Map-Reflect (Llama)"
@@ -1674,6 +2964,7 @@
     "turbo_Entity": [
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1683,13 +2974,24 @@
     ]
   },
   "concert_Issue": {
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ExposureFilters": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_HistoryDetails": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Issue": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilityApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -1703,6 +3005,7 @@
     "instana__entities_200_response": [
       "DualContext (Granite)",
       "DualContext (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1740,9 +3043,11 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_CompoundActionsEntry": [
@@ -1779,7 +3084,8 @@
     ],
     "concert_VulnerabilityApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana__entities_200_response": [
       "MatchMaker (Granite)",
@@ -1795,6 +3101,7 @@
       "Map-Reflect (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_IssueLink": [
@@ -1851,7 +3158,8 @@
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
       "MatchMaker (Granite)",
-      "MatchMaker (Llama)"
+      "MatchMaker (Llama)",
+      "SMT (Mistral)"
     ],
     "turbo_CompoundActionsEntry": [
       "MatchMaker (Llama)"
@@ -1875,6 +3183,9 @@
     ]
   },
   "concert_MostCommonExposureRules": {
+    "concert_AssociationID": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana": [
       "AnyTool (Granite)",
       "AnyTool (Llama)"
@@ -1882,6 +3193,7 @@
     "instana__entities_200_response": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)"
     ],
     "turbo": [
@@ -1891,11 +3203,13 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
     "turbo_Entity": [
-      "DualContext (Llama)"
+      "DualContext (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Risk": [
       "MatchMaker (Granite)",
@@ -1906,17 +3220,23 @@
     ]
   },
   "concert_MostVulnerableApplication": {
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_VulnerabilityApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilityApplicationCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerableApplications": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "DualContext (Granite)",
@@ -1939,6 +3259,7 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -1952,7 +3273,9 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "ReAct (Llama)"
+      "Map-Reflect (Mistral)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Risk": [
       "MatchMaker (Granite)",
@@ -1960,7 +3283,8 @@
     ],
     "turbo_StatsEntry": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Target": [
       "DualContext (Llama)"
@@ -1969,11 +3293,13 @@
   "concert_MostVulnerableApplicationCollection": {
     "concert_VulnerabilityApplicationCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerableApplicationsCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "DualContext (Granite)",
@@ -1989,7 +3315,8 @@
       "MatchMaker (Llama)"
     ],
     "instana_callGroup_200_response": [
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Action": [
       "DualContext (Granite)",
@@ -2024,6 +3351,7 @@
   },
   "concert_PackageDetailsCollection": {
     "concert_PackageRecommendation": [
+      "Map-Reflect (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "instana_ApplicationConnection": [
@@ -2037,16 +3365,19 @@
       "DualContext (Granite)"
     ],
     "instana__entities_200_response": [
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
     "instana_callGroup_200_response": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Action": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -2054,18 +3385,28 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Statistics": [
       "DualContext (Granite)"
     ]
   },
   "concert_PackageDetailsSummary": {
+    "concert_CveInfo": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Cves": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_PackageDetailsSummary": [
       "UE-Reflect (Granite)"
     ],
     "concert_PackageRecommendation": [
       "UE-Reflect (Granite)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -2083,7 +3424,8 @@
     "turbo_Entity": [
       "Map-Reflect (Granite)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "concert_PackageRecommendation": {
@@ -2105,6 +3447,7 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReMatch (Granite)"
@@ -2112,7 +3455,8 @@
     "instana_callGroup_200_response": [
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_callGroup_items_items": [
       "MatchMaker (Granite)",
@@ -2124,10 +3468,12 @@
     ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)",
       "ReMatch (Llama)",
       "SMT (Llama)"
@@ -2188,7 +3534,8 @@
       "MatchMaker (Llama)"
     ],
     "turbo_Entity": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ]
   },
   "concert_PackageVulnerabilityCollection": {
@@ -2221,6 +3568,15 @@
     ]
   },
   "concert_SbomBlastRadius": {
+    "concert_AppEnvironment": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_BuildArtifact": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
     ],
@@ -2290,6 +3646,9 @@
     ]
   },
   "concert_Scan": {
+    "concert_ScanCollection": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationPerspective": [
       "ReMatch (Granite)",
       "ReMatch (Llama)"
@@ -2320,7 +3679,8 @@
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
@@ -2339,6 +3699,9 @@
     ]
   },
   "concert_ScanCollection": {
+    "concert_Scan": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana__entities_200_response": [
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
@@ -2349,13 +3712,21 @@
   },
   "concert_SourceEntityType": {
     "VulnerabilityAssociationComponent": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ]
+  },
+  "concert_SourceRepo": {
+    "concert_WorkspaceRepositoryCollection": [
+      "Map-Reflect (Mistral)"
     ]
   },
   "concert_SuccessResponse": {
     "concert_TokenDetails": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_callGroup_200_response": [
       "DualContext (Llama)"
@@ -2366,7 +3737,8 @@
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_CompoundActionsEntry": [
       "DualContext (Llama)",
@@ -2409,27 +3781,35 @@
     ]
   },
   "concert_TokenDetails": {
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_SuccessResponse": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
     ],
     "instana_ApplicationPerspective": [
       "DualContext (Granite)",
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationService": [
       "MatchMaker (Llama)",
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Mistral)"
     ],
     "instana_ServiceEndpoint": [
-      "MatchMaker (Llama)"
+      "MatchMaker (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana__entities_200_response": [
       "DualContext (Llama)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReMatch (Granite)",
@@ -2441,6 +3821,7 @@
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "SMT (Llama)"
     ],
     "instana_callGroup_items_items": [
@@ -2449,6 +3830,7 @@
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "SMT (Llama)"
     ],
     "instana_mutation_entities_items_items_entityHealthInfo": [
@@ -2459,10 +3841,12 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_ActionSchedule": [
       "Map-Reflect (Llama)",
@@ -2483,17 +3867,20 @@
       "DualContext (Granite)"
     ],
     "turbo_DiscoveredBy": [
-      "DualContext (Llama)"
+      "DualContext (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "SMT (Llama)"
     ],
     "turbo_Provider": [
@@ -2524,7 +3911,8 @@
   "concert_VulnerabilitiesAssessmentSummary": {
     "concert_VulnerabilitiesSummary": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana__entities_200_response": [
       "Map-Reflect (Granite)",
@@ -2532,7 +3920,8 @@
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_mutation_entities_items_items": [
       "ReMatch (Granite)",
@@ -2548,8 +3937,17 @@
     ]
   },
   "concert_VulnerabilitiesCveHighlightSummary": {
+    "concert_CvesInfo": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana__entities_200_response": [
       "Map-Reflect (Llama)"
+    ],
+    "instana_mutation_entities_items_items_entityHealthInfo_openIssues_items": [
+      "Map-Reflect (Mistral)"
+    ],
+    "turbo_Action": [
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
@@ -2570,12 +3968,14 @@
     "turbo_Action": [
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
     "turbo_Entity": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Statistics": [
       "Map-Reflect (Llama)"
@@ -2616,6 +4016,9 @@
       "ReMatch (Granite)",
       "ReMatch (Llama)"
     ],
+    "turbonomic_Action": [
+      "Map-Reflect (Granite)"
+    ],
     "turbonomic_SeverityBreakdown": [
       "ReMatch (Granite)"
     ],
@@ -2624,13 +4027,33 @@
     ]
   },
   "concert_Vulnerability": {
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_Cves": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_CvesPublicAccessPoints": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_ExposureFilters": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Scan": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Vulnerability": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationConnection": [
       "Map-Reflect (Granite)"
@@ -2650,12 +4073,14 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
     "instana__topology_200_response": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana_callGroup_200_response": [
       "DualContext (Granite)",
@@ -2675,8 +4100,10 @@
     "turbo_Action": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_CompoundActionsEntry": [
@@ -2690,8 +4117,10 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_Risk": [
@@ -2715,29 +4144,47 @@
     ]
   },
   "concert_VulnerabilityApplication": {
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_ExposureFilters": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_Issue": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_IssueLink": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_MostVulnerableApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_TagsPrototype": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_VulnerabilityApplication": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilityAssociationComponent": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_WorkspaceRepositorySummary": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "DualContext (Llama)",
@@ -2752,6 +4199,7 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -2763,10 +4211,12 @@
     ],
     "turbo_Action": [
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "SMT (Granite)"
     ],
     "turbo_CurrentEntity": [
@@ -2790,17 +4240,26 @@
     ]
   },
   "concert_VulnerabilityApplicationCollection": {
+    "concert_Application": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_MostVulnerableApplicationCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "concert_VulnerabilityApplicationCollection": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilityAssociationComponent": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_WorkspaceRepositoryCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "Map-Reflect (Granite)",
@@ -2809,6 +4268,7 @@
     "instana__entities_200_response": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -2816,7 +4276,8 @@
       "Map-Reflect (Llama)"
     ],
     "turbo_Action": [
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
@@ -2830,6 +4291,12 @@
   "concert_VulnerabilityAssociationComponent": {
     "concert_Cves": [
       "ReAct (Granite)"
+    ],
+    "concert_Scan": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "Map-Reflect (Mistral)"
     ],
     "instana_ApplicationService": [
       "Map-Reflect (Granite)"
@@ -2852,6 +4319,7 @@
     "turbo_Action": [
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
+      "ReAct (Mistral)",
       "UE-Reflect (Granite)"
     ],
     "turbo_Entity": [
@@ -2878,7 +4346,8 @@
   "concert_VulnerabilityCollection": {
     "concert_Cves": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana_ApplicationPerspective": [
       "Map-Reflect (Granite)"
@@ -2892,7 +4361,8 @@
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Statistics": [
       "DualContext (Granite)"
@@ -2905,6 +4375,9 @@
     ]
   },
   "concert_VulnerabilityDetailsCollection": {
+    "concert_Scan": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationPerspective": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)"
@@ -2912,9 +4385,13 @@
     "instana_ApplicationService": [
       "DualContext (Granite)"
     ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Mistral)"
+    ],
     "turbo_Entity": [
       "DualContext (Granite)",
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Statistics": [
       "DualContext (Granite)"
@@ -2926,11 +4403,13 @@
   "concert_VulnerableApplications": {
     "concert_MostVulnerableApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilityApplication": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana__entities_200_response": [
       "MatchMaker (Granite)",
@@ -2944,11 +4423,13 @@
   "concert_VulnerableApplicationsCollection": {
     "concert_MostVulnerableApplicationCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilityApplicationCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "instana": [
       "AnyTool (Granite)",
@@ -2965,6 +4446,9 @@
     ]
   },
   "concert_WorkspaceRepositoryCollection": {
+    "concert_SourceRepo": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationPerspective": [
       "Map-Reflect (Granite)"
     ],
@@ -2973,6 +4457,7 @@
     ],
     "turbo_Entity": [
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -2997,114 +4482,142 @@
   "concert_apiKey": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana_callGroup": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationFilters": {
     "turbo_entityActionStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationPackages": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana_callGroup": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationRevenue": {
+    "turbo": [
+      "AnyTool (Mistral)"
+    ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationSboms": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationVulnerabilities": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationVulnerabilitiesSummary": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana__entities_200_response": [
       "AnyTool (Granite)"
@@ -3113,13 +4626,21 @@
   "concert_applicationVulnerabilityDetails": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationVulnerabilityDetailsByName": {
+    "concert_applicationVulnerabilityDetailsByName": [
+      "SMT (Mistral)"
+    ],
+    "concert_exposureHighlights": [
+      "SMT (Mistral)"
+    ],
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_applicationsSummary": {
@@ -3128,7 +4649,8 @@
     ],
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActionStats": [
       "SMT (Granite)"
@@ -3137,47 +4659,63 @@
   "concert_cveFilters": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_cveHighlights": {
+    "1769002628056-6237630464-omop_DRUG_EXPOSURE": [
+      "SMT (Mistral)"
+    ],
+    "concert_cveHighlights": [
+      "SMT (Mistral)"
+    ],
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_exchangeToken": {
     "turbo": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "turbo_Action": [
       "AnyTool (Llama)"
     ],
     "turbo_entityActions": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_exposureFilters": {
     "instana": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana__entities_200_response": [
       "AnyTool (Granite)"
@@ -3186,37 +4724,48 @@
       "AnyTool (Granite)",
       "AnyTool (Llama)"
     ],
+    "turbo_entityActions": [
+      "AnyTool (Mistral)"
+    ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_exposureHighlights": {
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_exposures": {
@@ -3226,91 +4775,112 @@
   },
   "concert_mostCommonExposureRules": {
     "instana": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "turbo": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_mostVulnerableApplications": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActionStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActions": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_packageVulnerabilities": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_refreshToken": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana_callGroup": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_Action": [
       "AnyTool (Granite)",
@@ -3319,37 +4889,48 @@
     "turbo_Entity": [
       "AnyTool (Granite)"
     ],
+    "turbo_entityActions": [
+      "AnyTool (Mistral)"
+    ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActions": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketActionsFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_ssoEndpoint": {
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_vulnerabilitiesAffectingPublicAccessPoints": {
     "instana": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana__entities_200_response": [
       "AnyTool (Granite)"
@@ -3358,41 +4939,48 @@
   "concert_vulnerabilitiesAssessmentSummary": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_vulnerabilitiesSummary": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_vulnerabilityApplications": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana_callGroup": [
       "SMT (Granite)"
     ],
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_Action": [
       "AnyTool (Granite)"
     ],
     "turbo_entitySearchFiltered": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_vulnerabilityBlastRadius": {
     "instana_callGroup": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "instana_callGroup_200_response": [
       "AnyTool (Llama)"
@@ -3401,107 +4989,209 @@
   "concert_vulnerabilityScans": {
     "concert_exposureHighlights": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "concert_exposures": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "concert_login": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "concert_logout": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "concert_packageVulnerabilities": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "concert_ssoEndpoint": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "concert_vulnerabilityApplications": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "concert_vulnerabilityScans": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ],
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_vulnerabilitySourceRepos": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearch": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_marketEntities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "concert_vulnerableApplications": {
     "instana": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "createTime": {
     "Action": [
-      "ReAct (Granite)"
+      "AnyTool (Mistral)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "Action createTime": [
+      "AnyTool (Llama)"
+    ],
+    "createTime": [
+      "AnyTool (Llama)"
+    ],
+    "created": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
     ]
   },
   "created": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "PackageDetailsCollection": [
+      "AnyTool (Mistral)"
+    ],
+    "PackageDetailsSummary": [
+      "AnyTool (Llama)"
+    ],
+    "PackageRecommendation": [
+      "AnyTool (Mistral)"
+    ],
+    "PackerArtifact": [
+      "AnyTool (Llama)"
+    ],
+    "PackerBucket": [
+      "AnyTool (Llama)"
+    ],
+    "PackerInheritedRevocation": [
+      "AnyTool (Llama)"
+    ],
+    "PackerVersion": [
+      "AnyTool (Llama)"
+    ],
+    "clearTime": [
+      "Map-Reflect (Granite)"
+    ],
+    "createTime": [
+      "Map-Reflect (Granite)"
+    ],
+    "created": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ],
+    "createdAt": [
+      "AnyTool (Granite)"
+    ],
+    "hcp": [
+      "AnyTool (Mistral)"
+    ],
+    "packages": [
+      "AnyTool (Llama)"
+    ],
+    "terraform_HcpTerraformRun_created": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformStateVersion_created": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_state_version_created": [
+      "AnyTool (Granite)"
+    ],
+    "updateTime": [
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "critical": {
+    "severityBreakdown": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "currentEntity": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "currentLocation": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "currentValue": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "cursor": {
@@ -3514,14 +5204,58 @@
       "Map-Reflect (Granite)"
     ]
   },
+  "cves": {
+    "entityCharacteristics": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "description": {
+    "PackerBucket": [
+      "AnyTool (Llama)"
+    ],
+    "PackerRegistry": [
+      "AnyTool (Llama)"
+    ],
+    "base": [
+      "Map-Reflect (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ],
+    "details": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "details": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "description": [
+      "AnyTool (Llama)",
+      "Map-Reflect (Granite)"
     ]
   },
   "displayName": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "displayName": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "recommendation": [
+      "Map-Reflect (Granite)"
     ]
   },
   "edges": {
@@ -3564,7 +5298,22 @@
   },
   "entityCharacteristics": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "description": [
+      "Map-Reflect (Granite)"
+    ],
+    "entityCharacteristics": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "recommendation": [
+      "AnyTool (Granite)"
+    ],
+    "risk": [
+      "Map-Reflect (Granite)"
     ]
   },
   "entityType": {
@@ -3578,13 +5327,41 @@
     ]
   },
   "environments": {
+    "ApplicationAssociationsInfo": [
+      "AnyTool (Mistral)"
+    ],
+    "BuildArtifactAssociations": [
+      "AnyTool (Llama)"
+    ],
     "environment": [
+      "Map-Reflect (Granite)"
+    ],
+    "environmentType": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "environments": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ],
+    "tags": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "turbonomic": [
       "Map-Reflect (Granite)"
     ]
   },
   "executionCharacteristics": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "exposure": {
@@ -3659,6 +5436,30 @@
       "Map-Reflect (Granite)"
     ]
   },
+  "externalActionName": {
+    "externalActionName": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "packages": [
+      "AnyTool (Mistral)"
+    ],
+    "recommendation": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "externalactionname": {
+    "displayName": [
+      "Map-Reflect (Granite)"
+    ],
+    "recommendation": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "fillTimeSeries": {
     "environments": [
       "Map-Reflect (Granite)"
@@ -3703,6 +5504,746 @@
       "Map-Reflect (Granite)"
     ]
   },
+  "hcp account": {
+    "account": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "hcp account": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp created": {
+    "created": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp description": {
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "hcp description": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp id": {
+    "hcp": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp name": {
+    "hcp": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer": {
+    "packer": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer version": {
+    "PackerVersion": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerAncestry": {
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerAncestry description": {
+    "PackerAncestry": [
+      "AnyTool (Llama)"
+    ],
+    "packer_PackerAncestry": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerAncestry id": {
+    "PackerAncestry": [
+      "AnyTool (Llama)"
+    ],
+    "PackerAncestryId": [
+      "AnyTool (Llama)"
+    ],
+    "packer_PackerAncestry": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerAncestry name": {
+    "PackerAncestry": [
+      "AnyTool (Llama)"
+    ],
+    "hcp packer_PackerAncestry name": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerAncestry region": {
+    "hcp packer_PackerAncestry region": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerAncestry updated": {
+    "hcp packer_PackerAncestry updated": [
+      "AnyTool (Mistral)"
+    ],
+    "updated": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerAncestry zone": {
+    "hcp packer_PackerAncestry zone": [
+      "AnyTool (Mistral)"
+    ],
+    "zone": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerArtifact": {
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerArtifact account": {
+    "hcp_packer_PackerArtifact": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerArtifact created": {
+    "created": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerArtifact description": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp packer_PackerArtifact": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerArtifact id": {
+    "PackerArtifactId": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerArtifact name": {
+    "PackerArtifact": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer": [
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerArtifact region": {
+    "hcp packer_PackerArtifact region": [
+      "AnyTool (Mistral)"
+    ],
+    "region": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerArtifact zone": {
+    "hcp packer_PackerArtifact zone": [
+      "AnyTool (Mistral)"
+    ],
+    "zone": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerBucket": {
+    "account": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp packer_PackerBucket": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerBucket account": {
+    "hcp_packer_PackerBucket_account": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerBucket created": {
+    "created": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerBucket description": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer_PackerBucket": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerBucket id": {
+    "hcp_packer_bucket": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerBucket name": {
+    "hcp_packer": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_bucket": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerBucket zone": {
+    "hcp_packer_packer_bucket_zone": [
+      "AnyTool (Mistral)"
+    ],
+    "zone": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerBuild": {
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerBuild account": {
+    "hcp_packer_PackerBuild_account": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerBuild created": {
+    "created": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerBuild description": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp packer_PackerBuild": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerBuild id": {
+    "hcp_packer_build": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerBuild name": {
+    "hcp_packer_build": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerBuild zone": {
+    "hcp_packer_packer_build_zone": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerChannel": {
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerChannel description": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "packer_PackerChannel": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerChannel id": {
+    "hcp packer_PackerChannel id": [
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Llama)"
+    ],
+    "packer_channel": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerChannel name": {
+    "hcp packer_PackerChannel": [
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerChannel region": {
+    "hcp packer_PackerChannel region": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerChannel updated": {
+    "updated": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerChannel zone": {
+    "hcp packer_PackerChannel zone": [
+      "AnyTool (Mistral)"
+    ],
+    "zone": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerInheritedRevocation": {
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerInheritedRevocation account": {
+    "hcp packer_PackerInheritedRevocation account": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerInheritedRevocation created": {
+    "created": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerInheritedRevocation id": {
+    "PackerInheritedRevocationId": [
+      "AnyTool (Llama)"
+    ],
+    "hcp packer_PackerInheritedRevocation id": [
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "hcp packer_PackerInheritedRevocation name": {
+    "PackerInheritedRevocation": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer_PackerInheritedRevocation": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerInheritedRevocation region": {
+    "hcp packer_PackerInheritedRevocation region": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerInheritedRevocation updated": {
+    "updated": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerRegistry": {
+    "hcp packer_PackerRegistry": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerRegistry description": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp packer_PackerRegistry": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerRegistry id": {
+    "hcp_packer_PackerRegistry": [
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "packer_registry": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerRegistry name": {
+    "hcp_packer_PackerRegistry": [
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerRegistry region": {
+    "hcp packer_PackerRegistry region": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerRegistry updated": {
+    "updated": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerRegistry zone": {
+    "hcp packer_PackerRegistry zone": [
+      "AnyTool (Mistral)"
+    ],
+    "zone": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerSbom": {
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerSbom description": {
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "hcp packer_PackerSbom": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerSbom id": {
+    "hcp_packersbom": [
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)"
+    ],
+    "packer_sbom": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerSbom name": {
+    "hcp_packer_PackerSbom": [
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerSbom region": {
+    "hcp packer_PackerSbom region": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_PackerSbom_region": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerSbom updated": {
+    "hcp_packersbom_updated": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerSbom zone": {
+    "hcp packer_PackerSbom zone": [
+      "AnyTool (Mistral)"
+    ],
+    "zone": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerVersion": {
+    "PackerVersion": [
+      "AnyTool (Llama)"
+    ],
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "packer_PackerVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerVersion account": {
+    "account": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerVersion created": {
+    "created": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp packer_PackerVersion description": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp packer_PackerVersion description": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerVersion name": {
+    "hcp_packer_PackerVersion": [
+      "AnyTool (Llama)"
+    ],
+    "packer_PackerVersion": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp packer_PackerVersion zone": {
+    "zone": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp region": {
+    "region": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp status": {
+    "hcp": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp status": [
+      "AnyTool (Llama)"
+    ],
+    "status": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "hcp terraform": {
+    "terraform": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp terraform state version": {
+    "HcpTerraformStateVersion": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp terraform_HcpTerraformAgentPool": {
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_TerraformAgentPoolName": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp terraform_HcpTerraformRun description": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_terraform_HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp terraform_HcpTerraformRun id": {
+    "HcpTerraformRunId": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_terraform_HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_terraform_run": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Llama)"
+    ],
+    "terraform_HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp terraform_HcpTerraformRun name": {
+    "HcpTerraformRun": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_terraform_HcpTerraformRun": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_terraform_run": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp terraform_HcpTerraformRun region": {
+    "hcp_terraform_HcpTerraformRun_region": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp terraform_HcpTerraformRun zone": {
+    "hcp_terraform_HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp terraform_HcpTerraformStateVersion": {
+    "hcp_terraform": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp terraform_HcpTerraformStateVersion description": {
+    "HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp terraform_HcpTerraformStateVersion id": {
+    "HcpTerraformStateVersionId": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_terraform_state_version": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp terraform_HcpTerraformStateVersion name": {
+    "HcpTerraformStateVersion": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_terraform_HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp terraform_HcpTerraformWorkspace": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp terraform_HcpTerraformWorkspace": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_HcpTerraformWorkspace": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "hcp updated": {
+    "updated": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp zone": {
+    "zone": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "hcp_HcpPackerAncestry": {
+    "hcp_HcpTerraformWorkspace": [
+      "Map-Reflect (Granite)"
+    ],
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "hcp_HcpPackerArtifact": {
+    "hcp_HcpTerraformWorkspace": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "hcp_HcpPackerBucket": {
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "hcp_HcpPackerVersion": {
+    "hcp_terraform_HcpTerraformWorkspace": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "hcp_HcpProject": {
     "hcp_HcpProject": [
       "ReMatch (Granite)"
@@ -3711,12 +6252,18 @@
       "ReMatch (Granite)"
     ]
   },
+  "hcp_HcpTerraformAgentPool": {
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "hcp_HcpTerraformStateVersion": {
     "hcp_HcpTerraformStateVersion": [
       "GNN ((no LLM))",
       "ReMatch (Granite)"
     ],
     "hcp_terraform_HcpTerraformStateVersion": [
+      "Map-Reflect (Granite)",
       "ReMatch (Granite)"
     ]
   },
@@ -3805,9 +6352,21 @@
   },
   "id": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "actionID": [
+      "Map-Reflect (Granite)"
+    ],
+    "actionImpactID": [
+      "Map-Reflect (Granite)"
     ],
     "id": [
+      "AnyTool (Llama)",
+      "Map-Reflect (Granite)"
+    ],
+    "label": [
       "Map-Reflect (Granite)"
     ]
   },
@@ -3818,7 +6377,17 @@
   },
   "importance": {
     "Action": [
-      "ReAct (Granite)"
+      "AnyTool (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "importance": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "risk": [
+      "Map-Reflect (Granite)"
     ]
   },
   "input": {
@@ -3838,7 +6407,8 @@
   "instana": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_ApplicationReleaseProperties": [
       "AnyTool (Llama)"
@@ -3851,95 +6421,138 @@
     ],
     "concert_apiKey": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationPackages": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationRevenue": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationSboms": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilities": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilityDetails": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilityDetailsByName": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationsSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_cveFilters": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostCommonExposureRules": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostVulnerableApplications": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_refreshToken": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_ssoEndpoint": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesAffectingPublicAccessPoints": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilityApplications": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilityScans": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitySourceRepos": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActionStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entitySearchFiltered": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityStats": [
       "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "instana Entity__Mock label": {
+    "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "instana id": {
+    "instana": [
       "AnyTool (Llama)"
+    ]
+  },
+  "instana label": {
+    "instana": [
+      "AnyTool (Granite)"
+    ],
+    "label": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "instana_ApplicationConnection": {
     "concert_Application": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ApplicationAssociationsInfo": [
       "Map-Reflect (Granite)"
@@ -3962,6 +6575,9 @@
     "concert_ExposuresCollection": [
       "Map-Reflect (Granite)"
     ],
+    "concert_IDNamePair": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_TokenDetails": [
       "Map-Reflect (Llama)"
     ],
@@ -3976,10 +6592,12 @@
       "Map-Reflect (Granite)"
     ],
     "turbo_Action": [
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_Entity": [
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ]
   },
   "instana_ApplicationEdge": {
@@ -3988,6 +6606,9 @@
     ]
   },
   "instana_ApplicationPerspective": {
+    "concert_AppComponentCount": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_AppEnvironment": [
       "Map-Reflect (Llama)",
       "MatchMaker (Llama)",
@@ -3999,6 +6620,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)"
     ],
     "concert_ApplicationCollection": [
@@ -4065,6 +6687,9 @@
     "concert_VulnerabilityDetailsCollection": [
       "DualContext (Granite)"
     ],
+    "turbo_Entity": [
+      "Map-Reflect (Mistral)"
+    ],
     "turbo_Provider": [
       "ReMatch (Granite)",
       "ReMatch (Llama)"
@@ -4114,7 +6739,8 @@
     "concert_TokenDetails": [
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilitiesSummary": [
       "Map-Reflect (Llama)"
@@ -4151,13 +6777,15 @@
     ],
     "concert_TokenDetails": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "instana__entities_200_response": {
     "concert_ApiKeyDate": [
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)",
       "ReMatch (Llama)"
     ],
@@ -4165,7 +6793,8 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ApplicationAssociationsInfo": [
       "DualContext (Granite)"
@@ -4183,13 +6812,15 @@
     ],
     "concert_ApplicationReleaseProperties": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ApplicationSbomsCollection": [
       "Map-Reflect (Llama)",
       "MatchMaker (Granite)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_AssociationID": [
       "DualContext (Granite)"
@@ -4202,12 +6833,14 @@
     ],
     "concert_Exposures": [
       "DualContext (Granite)",
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposuresCollection": [
       "DualContext (Granite)",
       "DualContext (Llama)",
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposuresInfo": [
       "DualContext (Granite)",
@@ -4223,6 +6856,7 @@
     ],
     "concert_IDNamePair": [
       "DualContext (Llama)",
+      "Map-Reflect (Mistral)",
       "ReMatch (Granite)",
       "ReMatch (Llama)"
     ],
@@ -4230,9 +6864,11 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_LicenseStatus": [
       "MatchMaker (Granite)"
@@ -4244,7 +6880,8 @@
     "concert_MostCommonExposureRules": [
       "DualContext (Granite)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_MostVulnerableApplication": [
       "DualContext (Granite)"
@@ -4252,6 +6889,9 @@
     "concert_MostVulnerableApplicationCollection": [
       "DualContext (Granite)",
       "DualContext (Llama)"
+    ],
+    "concert_PackageDetailsCollection": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_PackageRecommendation": [
       "MatchMaker (Granite)"
@@ -4263,7 +6903,8 @@
       "DualContext (Granite)",
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_TagsPrototype": [
       "ReMatch (Granite)",
@@ -4273,18 +6914,23 @@
       "DualContext (Granite)",
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_Vulnerability": [
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilityApplication": [
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Llama)"
+    ],
+    "concert_VulnerabilityAssociationComponent": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilityCollection": [
       "DualContext (Granite)"
@@ -4301,6 +6947,7 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
       "ReMatch (Granite)"
@@ -4320,7 +6967,8 @@
   "instana__query_topology_edges_items": {
     "concert_Application": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ApplicationAssociationsInfo": [
       "Map-Reflect (Llama)"
@@ -4328,14 +6976,21 @@
     "concert_BuildArtifact": [
       "MatchMaker (Llama)"
     ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ExposureFilters": [
       "Map-Reflect (Llama)"
     ],
     "concert_ExposuresCollection": [
       "Map-Reflect (Llama)"
     ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_IDNamePair": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_Issue": [
       "Map-Reflect (Llama)"
@@ -4416,7 +7071,8 @@
       "Map-Reflect (Llama)"
     ],
     "concert_FiltersValues": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_IDNamePair": [
       "Map-Reflect (Llama)"
@@ -4467,6 +7123,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
+      "ReAct (Mistral)",
       "SMT (Granite)"
     ],
     "concert_VulnerabilityApplicationCollection": [
@@ -4524,6 +7181,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)"
     ],
     "concert_ApplicationAssociationsInfo": [
@@ -4544,6 +7202,9 @@
     "concert_CVEFilters": [
       "DualContext (Granite)",
       "Map-Reflect (Llama)"
+    ],
+    "concert_ConcertDefSbom": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_CveInfo": [
       "DualContext (Granite)"
@@ -4566,10 +7227,12 @@
       "Map-Reflect (Llama)"
     ],
     "concert_FiltersValues": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_IDNamePair": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_Issue": [
       "DualContext (Granite)",
@@ -4606,7 +7269,8 @@
     "concert_TokenDetails": [
       "DualContext (Granite)",
       "DualContext (Llama)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilitiesAssessmentSummary": [
       "Map-Reflect (Llama)"
@@ -4627,6 +7291,7 @@
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "SMT (Granite)"
     ],
     "concert_VulnerabilityApplicationCollection": [
@@ -4641,11 +7306,21 @@
     "concert_VulnerabilityDetailsCollection": [
       "DualContext (Granite)"
     ],
+    "concert__query_topology_edges_items": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert__query_topology_nodes_items": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert__topology_200_response": [
+      "Map-Reflect (Mistral)"
+    ],
     "turbo_Action": [
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "turbo_ConnectedEntitiesEntry": [
       "MatchMaker (Granite)",
@@ -4663,50 +7338,62 @@
   "instana_callGroup": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert__convertApplicationName": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_apiKey": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationFilters": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_cveFilters": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_exchangeToken": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_refreshToken": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_ssoEndpoint": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActionStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityStats": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "instana_callGroup_200_response": {
     "concert_ApiKeyDate": [
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_Application": [
       "DualContext (Granite)",
@@ -4715,7 +7402,8 @@
       "Map-Reflect (Llama)",
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ApplicationAssociationsInfo": [
       "DualContext (Granite)",
@@ -4727,14 +7415,16 @@
     ],
     "concert_ApplicationDetails": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ApplicationFilters": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ApplicationReleaseProperties": [
       "Map-Reflect (Granite)"
@@ -4750,7 +7440,8 @@
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_CallGroup": [
       "Map-Reflect (Granite)"
@@ -4777,6 +7468,9 @@
     "concert_FilterInfo": [
       "DualContext (Granite)"
     ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_HistoryDetails": [
       "MatchMaker (Granite)",
       "MatchMaker (Llama)",
@@ -4799,6 +7493,7 @@
       "MatchMaker (Granite)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)"
     ],
     "concert_TokenDetails": [
@@ -4806,7 +7501,8 @@
       "DualContext (Llama)",
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilityDetailsCollection": [
       "MatchMaker (Llama)"
@@ -4817,7 +7513,8 @@
     ],
     "instana__topology_200_response": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Action": [
       "DualContext (Llama)",
@@ -4834,6 +7531,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -4848,23 +7546,27 @@
     "turbo_StatsEntry": [
       "MatchMaker (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "instana_callGroup_adjustedTimeframe": {
     "concert_ApiKeyDate": [
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_Application": [
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_TokenDetails": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Action": [
       "Map-Reflect (Llama)"
@@ -4872,13 +7574,18 @@
     "turbo_ActionSchedule": [
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
+    ],
+    "turbo_Statistics": [
+      "ReAct (Mistral)"
     ]
   },
   "instana_callGroup_items_items": {
     "concert_ApiKeyDate": [
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_Application": [
       "DualContext (Granite)",
@@ -4915,6 +7622,9 @@
     "concert_Cves": [
       "DualContext (Granite)"
     ],
+    "concert_FiltersValues": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_HistoryDetails": [
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
@@ -4939,7 +7649,8 @@
     ],
     "instana__query_topology_edges_items": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "turbo_Action": [
       "DualContext (Granite)",
@@ -4948,7 +7659,8 @@
     ],
     "turbo_Entity": [
       "DualContext (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ]
   },
   "instana_findServiceLevelsAlertConfig_200_response": {
@@ -4959,7 +7671,8 @@
   "instana_mutation_entities_adjustedTimeframe": {
     "concert_Issue": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilityAssociationComponent": [
       "MatchMaker (Granite)"
@@ -4972,6 +7685,7 @@
     "concert_ApiKeyDate": [
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Llama)"
     ],
     "concert_ApplicationAssociationsInfo": [
@@ -4979,21 +7693,24 @@
     ],
     "concert_ApplicationSbomsCollection": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_BuildArtifact": [
       "MatchMaker (Granite)"
     ],
     "concert_Issue": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_TagsPrototype": [
       "MatchMaker (Granite)"
     ],
     "concert_TokenDetails": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_VulnerabilitiesAssessmentSummary": [
       "MatchMaker (Granite)"
@@ -5073,11 +7790,23 @@
     "concert_BuildArtifact": [
       "Map-Reflect (Llama)"
     ],
+    "concert_ExposureFilters": [
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_Exposures": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_ExposuresCollection": [
       "Map-Reflect (Llama)"
     ],
+    "concert_Issue": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_Vulnerability": [
       "Map-Reflect (Llama)"
+    ],
+    "instana__entities_200_response": [
+      "Map-Reflect (Mistral)"
     ]
   },
   "instana_mutation_manuallyCloseEvent_problem": {
@@ -5113,7 +7842,9 @@
   },
   "last_updated": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "libraries": {
@@ -5121,14 +7852,28 @@
       "Map-Reflect (Granite)"
     ]
   },
+  "link": {
+    "concert_recommendation": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "link hcp id": {
+    "hcp": [
+      "AnyTool (Mistral)"
+    ]
+  },
   "mapping": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "marketID": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "maxSeverity": {
@@ -5141,19 +7886,33 @@
       "SMT (Llama)"
     ]
   },
+  "name": {
+    "base": [
+      "Map-Reflect (Granite)"
+    ],
+    "name": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "newEntity": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "newLocation": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "newValue": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "next": {
@@ -5206,60 +7965,737 @@
       "Map-Reflect (Granite)"
     ]
   },
+  "packages": {
+    "action": [
+      "Map-Reflect (Granite)"
+    ],
+    "recommendation": [
+      "AnyTool (Granite)"
+    ],
+    "recommendationCreatedDate": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer account": {
+    "PackerSbom": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "packer registry id": {
+    "PackerRegistry": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "packer version id": {
+    "hcp_packer_PackerVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "packer version name": {
+    "hcp_packer_PackerVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
   "packer_PackerAncestry": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "hcp": [
+      "AnyTool (Mistral)"
+    ],
     "hcp_HcpTerraformStateVersion": [
       "GNN ((no LLM))"
+    ],
+    "hcp_PackerAncestry": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "region": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "updated": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerAncestry description": {
+    "description": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerAncestry id": {
+    "packerAncestryId": [
+      "AnyTool (Granite)"
+    ],
+    "packerPackerAncestryId": [
+      "AnyTool (Granite)"
+    ],
+    "packer_PackerAncestry": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "packer_PackerAncestry name": {
+    "packerAncestry": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerAncestry region": {
+    "packer_ancestry_region": [
+      "AnyTool (Granite)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerAncestry updated": {
+    "updated": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerAncestry zone": {
+    "zone": [
+      "AnyTool (Granite)"
     ]
   },
   "packer_PackerArtifact": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
     "hcp_HcpTerraformProject": [
       "ReMatch (Granite)"
     ],
-    "hcp_HcpTerraformStateVersion": [
-      "GNN ((no LLM))"
-    ]
-  },
-  "packer_PackerBucket": {
-    "hcp_HcpTerraformStateVersion": [
-      "GNN ((no LLM))"
-    ]
-  },
-  "packer_PackerBuild": {
+    "hcp_HcpTerraformRun": [
+      "Map-Reflect (Granite)"
+    ],
     "hcp_HcpTerraformStateVersion": [
       "GNN ((no LLM))"
     ],
+    "hcp_PackerArtifact": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer": [
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "packer_PackerArtifact": [
+      "AnyTool (Llama)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerArtifact account": {
+    "account": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerArtifact created": {
+    "created": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerArtifact description": {
+    "description": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerArtifact id": {
+    "packerArtifactId": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerArtifact name": {
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "packer_artifact": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerArtifact region": {
+    "packer_artifact_region": [
+      "AnyTool (Granite)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ],
+    "hcp_PackerBucket": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_PackerBucket": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket account": {
+    "account": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket created": {
+    "created": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket description": {
+    "description": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket id": {
+    "packer_bucket": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket name": {
+    "packer_bucket": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket region": {
+    "packer_bucket_region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBucket zone": {
+    "packer_bucket_zone": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBuild": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "hcp_HcpTerraformStateVersion": [
+      "GNN ((no LLM))"
+    ],
+    "hcp_PackerBuild": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer_PackerBuild": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer_build": [
+      "AnyTool (Mistral)"
+    ],
     "hcp_terraform_HcpTerraformStateVersion": [
       "ReMatch (Granite)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "packer_PackerBuild": [
+      "AnyTool (Llama)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformStateVersion": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBuild description": {
+    "description": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBuild id": {
+    "packer_build": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerBuild name": {
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "packer_build": [
+      "AnyTool (Granite)"
     ]
   },
   "packer_PackerChannel": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
     "hcp_HcpTerraformStateVersion": [
       "GNN ((no LLM))"
+    ],
+    "hcp_HcpTerraformWorkspace": [
+      "Map-Reflect (Granite)"
+    ],
+    "hcp_PackerChannel": [
+      "AnyTool (Llama)"
+    ],
+    "id": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "packer_PackerChannel": [
+      "AnyTool (Mistral)"
+    ],
+    "region": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "updated": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "packer_PackerChannel account": {
+    "packer_channel_account": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerChannel description": {
+    "description": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerChannel id": {
+    "id": [
+      "AnyTool (Granite)"
+    ],
+    "packer_PackerChannel": [
+      "AnyTool (Mistral)"
+    ],
+    "packer_channel": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerChannel name": {
+    "packerChannelName": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerChannel region": {
+    "packer_channel_region": [
+      "AnyTool (Granite)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerChannel updated": {
+    "packer_channel_updated": [
+      "AnyTool (Granite)"
+    ],
+    "updated": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerChannel zone": {
+    "zone": [
+      "AnyTool (Granite)"
     ]
   },
   "packer_PackerInheritedRevocation": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Llama)"
+    ],
     "hcp_HcpTerraformStateVersion": [
-      "GNN ((no LLM))"
+      "GNN ((no LLM))",
+      "Map-Reflect (Granite)"
+    ],
+    "hcp_PackerInheritedRevocation": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_PackerInheritedRevocationName": [
+      "AnyTool (Llama)"
+    ],
+    "id": [
+      "AnyTool (Granite)"
+    ],
+    "packer_PackerInheritedRevocation": [
+      "AnyTool (Mistral)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "updated": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerInheritedRevocation created": {
+    "created": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerInheritedRevocation description": {
+    "PackerInheritedRevocation": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "packer_PackerInheritedRevocation name": {
+    "packerPackerInheritedRevocationName": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerInheritedRevocation region": {
+    "packerInheritedRevocationRegionId": [
+      "AnyTool (Granite)"
     ]
   },
   "packer_PackerRegistry": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
     "hcp_HcpTerraformStateVersion": [
       "GNN ((no LLM))"
+    ],
+    "hcp_PackerRegistry": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer": [
+      "AnyTool (Mistral)"
+    ],
+    "id": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "updated": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerRegistry description": {
+    "description": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerRegistry id": {
+    "packer_registry": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerRegistry region": {
+    "region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerRegistry updated": {
+    "updated": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerRegistry zone": {
+    "zone": [
+      "AnyTool (Granite)"
     ]
   },
   "packer_PackerSbom": {
+    "account": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
     "hcp_HcpTerraformStateVersion": [
-      "GNN ((no LLM))"
+      "GNN ((no LLM))",
+      "Map-Reflect (Granite)"
+    ],
+    "hcp_PackerSbom": [
+      "AnyTool (Llama)"
+    ],
+    "id": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "name": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)"
+    ],
+    "updated": [
+      "AnyTool (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerSbom id": {
+    "packerPackerSbomId": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerSbom name": {
+    "name": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerSbom region": {
+    "packer_region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerSbom zone": {
+    "zone": [
+      "AnyTool (Granite)"
     ]
   },
   "packer_PackerVersion": {
+    "account": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ],
+    "description": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "hcp terraform_HcpTerraformAgentPool": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_HcpTerraformRun": [
+      "Map-Reflect (Granite)"
+    ],
     "hcp_HcpTerraformStateVersion": [
       "GNN ((no LLM))"
+    ],
+    "hcp_PackerVersion": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_packer": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_PackerVersion": [
+      "AnyTool (Llama)"
+    ],
+    "name": [
+      "AnyTool (Granite)"
+    ],
+    "packerVersion": [
+      "AnyTool (Granite)"
+    ],
+    "packer_PackerVersion": [
+      "AnyTool (Mistral)"
+    ],
+    "region": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformAgentPool": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformStateVersion": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformWorkspace": [
+      "AnyTool (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "zone": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "packer_PackerVersion description": {
+    "hcp_packer_PackerVersion": [
+      "AnyTool (Mistral)"
+    ],
+    "packerVersion": [
+      "AnyTool (Granite)"
+    ],
+    "packer_version": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerVersion id": {
+    "packer_version": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerVersion name": {
+    "packerVersion": [
+      "AnyTool (Granite)"
+    ],
+    "packer_version": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerVersion region": {
+    "packer": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerVersion updated": {
+    "packer_version_updated": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_PackerVersion zone": {
+    "hcp_packer_PackerVersion": [
+      "AnyTool (Mistral)"
+    ],
+    "packer_version_zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "packer_packerancestry": {
+    "terraform_hcpterraformworkspace": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "packer_packerbucket": {
+    "terraform_hcpterraformworkspace": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "packer_packerchannel": {
+    "terraform_hcpterraformworkspace": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "packerpackerversionname": {
+    "hcpterraformrunname": [
+      "Map-Reflect (Granite)"
     ]
   },
   "pipeline": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "plugin": {
@@ -5269,22 +8705,96 @@
   },
   "policy": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "policy": [
+      "AnyTool (Llama)"
+    ],
+    "recommendation": [
+      "AnyTool (Mistral)"
     ]
   },
   "prerequisites": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "prioritizedAutomationOpportunities": {
     "Action": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ]
+  },
+  "recommendation": {
+    "PackageDetailsSummary": [
+      "AnyTool (Llama)"
+    ],
+    "actionID": [
+      "Map-Reflect (Granite)"
+    ],
+    "actionImpactID": [
+      "AnyTool (Mistral)"
+    ],
+    "actionType": [
+      "Map-Reflect (Granite)"
+    ],
+    "id": [
+      "AnyTool (Granite)"
+    ],
+    "packages": [
+      "AnyTool (Mistral)"
+    ],
+    "policy": [
+      "Map-Reflect (Granite)"
+    ],
+    "recommendation": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ],
+    "risk": [
+      "AnyTool (Llama)"
+    ],
+    "type": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "region": {
+    "PackerArtifact": [
+      "AnyTool (Llama)"
+    ],
+    "hcp": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_artifact": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_registry_region": [
+      "AnyTool (Mistral)"
+    ],
+    "region": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "risk": {
+    "risk": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
     ]
   },
   "scan": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "technologies": [
       "Map-Reflect (Granite)"
@@ -5292,11 +8802,40 @@
   },
   "scanner": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "severity": {
     "openIssues": [
+      "Map-Reflect (Granite)"
+    ],
+    "severity": [
+      "Map-Reflect (Granite)"
+    ],
+    "severityBreakdown": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "severity level": {
+    "severityBreakdown": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "severityBreakdown": {
+    "critical": [
+      "Map-Reflect (Granite)"
+    ],
+    "high": [
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
+    ],
+    "severity": [
+      "AnyTool (Granite)"
+    ],
+    "severityBreakdown": [
+      "AnyTool (Llama)",
       "Map-Reflect (Granite)"
     ]
   },
@@ -5307,6 +8846,18 @@
   },
   "status": {
     "openIssues": [
+      "Map-Reflect (Granite)"
+    ],
+    "status": [
+      "Map-Reflect (Granite)"
+    ]
+  },
+  "tags": {
+    "color": [
+      "Map-Reflect (Granite)"
+    ],
+    "tags": [
+      "AnyTool (Granite)",
       "Map-Reflect (Granite)"
     ]
   },
@@ -5319,6 +8870,129 @@
     ],
     "id": [
       "Map-Reflect (Granite)"
+    ]
+  },
+  "terraform account": {
+    "HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "terraform run id": {
+    "HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "terraform run name": {
+    "hcp_terraform_HcpTerraformRun": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "terraform state version id": {
+    "hcp_terraform_HcpTerraformStateVersion": [
+      "AnyTool (Mistral)"
+    ]
+  },
+  "terraform_HcpTerraformAgentPool": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_HcpTerraformAgentPool": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_TerraformAgentPool": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_terraform_HcpTerraformAgentPool": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "terraform_HcpTerraformRun description": {
+    "terraform_run": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformRun id": {
+    "terraformHcpTerraformRunId": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_run": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformRun name": {
+    "terraform_run": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformRun region": {
+    "terraform_region": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_run_region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformRun updated": {
+    "terraform_run_updated": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformRun zone": {
+    "terraform_run_zone": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_zone": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformStateVersion": {
+    "hcp_HcpTerraformStateVersion": [
+      "AnyTool (Llama)"
+    ],
+    "terraform_HcpTerraformStateVersion": [
+      "AnyTool (Llama)"
+    ]
+  },
+  "terraform_HcpTerraformStateVersion account": {
+    "terraform_state_version_account": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformStateVersion id": {
+    "terraformStateVersionId": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_state_version": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformStateVersion name": {
+    "terraformHcpTerraformStateVersionName": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformStateVersion region": {
+    "terraform_state": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_state_version_region": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformStateVersion updated": {
+    "terraform_state_version_updated": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "terraform_HcpTerraformWorkspace": {
+    "description": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_HcpTerraformWorkspace": [
+      "AnyTool (Llama)"
+    ],
+    "hcp_TerraformWorkspace": [
+      "AnyTool (Llama)"
     ]
   },
   "to": {
@@ -5335,7 +9009,8 @@
   "turbo": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_IDNamePair": [
       "AnyTool (Granite)"
@@ -5348,40 +9023,50 @@
     ],
     "concert_applicationFilters": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationPackages": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostVulnerableApplications": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_ssoEndpoint": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesAssessmentSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilityApplications": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitySourceRepos": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerableApplications": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "turbo_Action": {
@@ -5397,6 +9082,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -5407,6 +9093,7 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)"
     ],
     "concert_ApplicationDetails": [
@@ -5429,7 +9116,8 @@
     ],
     "concert_CveInfo": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_ExposureAssociationsDetails": [
       "DualContext (Granite)",
@@ -5442,6 +9130,7 @@
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "ReMatch (Granite)",
       "ReMatch (Llama)",
@@ -5451,7 +9140,8 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_FiltersValues": [
       "MatchMaker (Granite)"
@@ -5459,6 +9149,7 @@
     "concert_HistoryDetails": [
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)",
       "ReMatch (Llama)"
     ],
@@ -5468,7 +9159,8 @@
     ],
     "concert_Issue": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_IssueLink": [
       "ReMatch (Llama)"
@@ -5480,23 +9172,28 @@
     "concert_MostCommonExposureRule": [
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)"
     ],
     "concert_MostCommonExposureRules": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_MostVulnerableApplication": [
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "ReMatch (Llama)"
     ],
     "concert_PackageDetailsCollection": [
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_PackageDetailsSummary": [
       "DualContext (Llama)",
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_PackageRecommendation": [
       "DualContext (Llama)",
@@ -5505,6 +9202,7 @@
       "MatchMaker (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)",
       "ReMatch (Llama)",
       "SMT (Llama)"
@@ -5523,6 +9221,7 @@
     "concert_SuccessResponse": [
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)",
       "ReMatch (Llama)"
     ],
@@ -5543,7 +9242,8 @@
       "MatchMaker (Llama)"
     ],
     "concert_VulnerabilityApplication": [
-      "Map-Reflect (Granite)"
+      "Map-Reflect (Granite)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilityAssociationComponent": [
       "MatchMaker (Granite)"
@@ -5577,6 +9277,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -5591,7 +9292,11 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
+    ],
+    "instana_callGroup_200_response": [
+      "Map-Reflect (Mistral)"
     ],
     "market": [
       "Map-Reflect (Llama)"
@@ -5624,13 +9329,18 @@
     ],
     "concert_Exposures": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposuresCollection": [
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
+    ],
+    "concert_PackageDetailsCollection": [
+      "Map-Reflect (Mistral)"
     ],
     "concert_PackageRecommendation": [
       "Map-Reflect (Granite)"
@@ -5680,7 +9390,8 @@
       "Map-Reflect (Llama)"
     ],
     "concert_ExposureAssociationsDetails": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_Exposures": [
       "Map-Reflect (Granite)",
@@ -5688,7 +9399,8 @@
     ],
     "concert_ExposuresCollection": [
       "DualContext (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_FiltersValues": [
       "Map-Reflect (Llama)"
@@ -5752,6 +9464,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)"
     ],
     "concert_ApplicationAssociationsInfo": [
@@ -5767,7 +9480,8 @@
     "concert_ApplicationFilters": [
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ApplicationReleaseProperties": [
       "Map-Reflect (Granite)"
@@ -5789,28 +9503,34 @@
     ],
     "concert_Cves": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_CvesPublicAccessPoints": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ],
     "concert_DiscoveredBy": [
       "Map-Reflect (Granite)"
     ],
     "concert_ExposureAssociationsDetails": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposureFilters": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_Exposures": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposuresCollection": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposuresInfo": [
       "DualContext (Granite)"
@@ -5841,7 +9561,8 @@
     ],
     "concert_MostVulnerableApplicationCollection": [
       "DualContext (Granite)",
-      "DualContext (Llama)"
+      "DualContext (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_PackageDetailsCollection": [
       "Map-Reflect (Llama)"
@@ -5873,6 +9594,9 @@
     "concert_VulnerabilitiesAssessmentSummary": [
       "Map-Reflect (Llama)"
     ],
+    "concert_VulnerabilitiesCveHighlightSummary": [
+      "ReAct (Mistral)"
+    ],
     "concert_VulnerabilitiesExposureHighlightSummary": [
       "Map-Reflect (Llama)"
     ],
@@ -5881,6 +9605,7 @@
       "Map-Reflect (Llama)",
       "ReAct (Granite)",
       "ReAct (Llama)",
+      "ReAct (Mistral)",
       "ReMatch (Granite)",
       "ReMatch (Llama)"
     ],
@@ -5909,6 +9634,9 @@
     "concert_VulnerableApplications": [
       "Map-Reflect (Llama)"
     ],
+    "instana_ApplicationPerspective": [
+      "Map-Reflect (Mistral)"
+    ],
     "instana_ApplicationService": [
       "MatchMaker (Llama)"
     ],
@@ -5920,6 +9648,7 @@
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)",
       "MatchMaker (Granite)",
       "MatchMaker (Llama)"
     ],
@@ -5930,7 +9659,8 @@
       "DualContext (Granite)",
       "DualContext (Llama)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "instana_callGroup_items_items": [
       "DualContext (Granite)",
@@ -5950,6 +9680,9 @@
     ],
     "instana_mutation_entities_items_items_entityHealthInfo_openIssues_problem": [
       "MatchMaker (Granite)"
+    ],
+    "turbo_Entity": [
+      "Map-Reflect (Mistral)"
     ]
   },
   "turbo_NewEntity": {
@@ -5957,11 +9690,15 @@
       "Map-Reflect (Granite)",
       "Map-Reflect (Llama)"
     ],
+    "concert_ExposureAssociationsDetails": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_Exposures": [
       "Map-Reflect (Llama)"
     ],
     "concert_ExposuresCollection": [
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_VulnerabilitiesAssessmentSummary": [
       "Map-Reflect (Llama)"
@@ -6105,7 +9842,8 @@
     ],
     "instana_callGroup_200_response": [
       "ReAct (Granite)",
-      "ReAct (Llama)"
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "turbo_Target": {
@@ -6118,14 +9856,19 @@
     "concert_ApplicationCollection": [
       "DualContext (Granite)"
     ],
+    "concert_ExposureAssociationsDetails": [
+      "Map-Reflect (Mistral)"
+    ],
     "concert_Exposures": [
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_ExposuresCollection": [
       "DualContext (Granite)",
       "Map-Reflect (Granite)",
-      "Map-Reflect (Llama)"
+      "Map-Reflect (Llama)",
+      "Map-Reflect (Mistral)"
     ],
     "concert_MostVulnerableApplicationCollection": [
       "DualContext (Granite)",
@@ -6161,39 +9904,46 @@
     ],
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "turbo_entityActionStats": [
       "SMT (Granite)",
-      "SMT (Llama)"
+      "SMT (Llama)",
+      "SMT (Mistral)"
     ]
   },
   "turbo_entityActions": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_PackageRecommendation": [
       "AnyTool (Granite)"
     ],
     "concert_applicationPackages": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilityDetailsByName": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_exposures": [
       "SMT (Llama)"
     ],
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "turbo_entitySearch": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_PackageRecommendation": [
       "AnyTool (Granite)"
@@ -6206,50 +9956,62 @@
     ],
     "concert_applicationFilters": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationPackages": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostVulnerableApplications": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_ssoEndpoint": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesAssessmentSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilityApplications": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitySourceRepos": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerableApplications": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "turbo_entitySearchFiltered": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_FilterInfo": [
       "AnyTool (Llama)"
@@ -6261,52 +10023,64 @@
       "AnyTool (Granite)"
     ],
     "concert_applicationFilters": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationPackages": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostCommonExposureRules": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostVulnerableApplications": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_ssoEndpoint": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesAssessmentSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerableApplications": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "turbo_entityStats": {
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana_callGroup": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "turbo_marketActions": {
     "concert": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_Exposures": [
       "AnyTool (Llama)"
@@ -6315,10 +10089,12 @@
       "AnyTool (Granite)"
     ],
     "concert_applicationPackages": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "instana__query_topology_nodes_items": [
       "AnyTool (Llama)"
@@ -6327,27 +10103,32 @@
   "turbo_marketActionsFiltered": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_PackageRecommendation": [
       "AnyTool (Llama)"
     ],
     "concert__convertApplicationName": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationPackages": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "instana": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ]
   },
   "turbo_marketEntities": {
     "concert": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_IDNamePair": [
       "AnyTool (Granite)"
@@ -6363,60 +10144,182 @@
     ],
     "concert_applicationPackages": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_applicationVulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostCommonExposureRules": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_mostVulnerableApplications": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_ssoEndpoint": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesAssessmentSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitiesSummary": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilityApplications": [
-      "AnyTool (Granite)"
+      "AnyTool (Granite)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerabilitySourceRepos": [
       "AnyTool (Granite)",
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "concert_vulnerableApplications": [
-      "AnyTool (Llama)"
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
     ],
     "instana": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "turbonomic Action": {
+    "turboAction": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action actionID": {
+    "action": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action actionType": {
+    "actionType": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action clearTime": {
+    "clearTime": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action createTime": {
+    "actionCreateTime": [
+      "AnyTool (Granite)"
+    ],
+    "created": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action details": {
+    "action": [
+      "AnyTool (Granite)"
+    ],
+    "actionDetails": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action displayName": {
+    "name": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action externalActionName": {
+    "external_action": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Action policy": {
+    "action": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Entity severityBreakdown": {
+    "severity": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic Entity vendorIds": {
+    "Entity": [
+      "AnyTool (Llama)"
+    ],
+    "vendorIds": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic actionID": {
+    "action": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic actionType": {
+    "actionType": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic details": {
+    "description": [
+      "AnyTool (Granite)"
+    ],
+    "details": [
       "AnyTool (Granite)",
       "AnyTool (Llama)"
     ]
   },
+  "turbonomic importance": {
+    "importance": [
+      "AnyTool (Granite)"
+    ]
+  },
+  "turbonomic policy": {
+    "policy": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "turbonomic updateTime": {
+    "updateTime": [
+      "AnyTool (Granite)"
+    ]
+  },
   "turbonomic_Action": {
+    "concert_About_checks": [
+      "Map-Reflect (Granite)"
+    ],
+    "concert_Access_control": [
+      "Map-Reflect (Granite)"
+    ],
     "concert_Components": [
       "ReMatch (Granite)"
     ],
     "concert_PackageRecommendation": [
-      "GNN ((no LLM))"
+      "GNN ((no LLM))",
+      "Map-Reflect (Granite)"
     ],
     "concert_Recommendations": [
-      "GNN ((no LLM))"
+      "GNN ((no LLM))",
+      "Map-Reflect (Granite)"
     ],
     "concert_Remediation_insights": [
       "ReMatch (Granite)"
     ],
     "concert_StateType": [
       "ReMatch (Granite)"
+    ],
+    "concert_recommendation": [
+      "Map-Reflect (Granite)"
     ],
     "instana_mutation_getActionMatches_items_action": [
       "UE-Reflect (Granite)"
@@ -6435,7 +10338,9 @@
   },
   "turbonomic_ActionType": {
     "PackageRecommendation": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
     ]
   },
   "turbonomic_CloudAspect": {
@@ -6474,9 +10379,15 @@
       "GNN ((no LLM))"
     ]
   },
+  "turbonomic_Severity": {
+    "concert_Access_control": [
+      "Map-Reflect (Granite)"
+    ]
+  },
   "turbonomic_SeverityBreakdown": {
     "concert_VulnerabilitiesExposureHighlightSummary": [
-      "GNN ((no LLM))"
+      "GNN ((no LLM))",
+      "Map-Reflect (Granite)"
     ]
   },
   "type": {
@@ -6495,14 +10406,75 @@
       "Map-Reflect (Granite)"
     ]
   },
+  "unknown": {
+    "unknown": [
+      "AnyTool (Granite)"
+    ]
+  },
   "updateTime": {
     "Action": [
-      "ReAct (Granite)"
+      "AnyTool (Llama)",
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ],
+    "update": [
+      "AnyTool (Granite)",
+      "Map-Reflect (Granite)"
+    ],
+    "updateTime": [
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)"
+    ]
+  },
+  "updated": {
+    "hcp": [
+      "AnyTool (Mistral)"
+    ],
+    "terraform_HcpTerraformRun_updated": [
+      "AnyTool (Granite)"
+    ],
+    "terraform_HcpTerraformStateVersion_updated": [
+      "AnyTool (Granite)"
+    ],
+    "updated": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
     ]
   },
   "version": {
     "Data_mapper": [
-      "ReAct (Granite)"
+      "ReAct (Granite)",
+      "ReAct (Llama)",
+      "ReAct (Mistral)"
+    ]
+  },
+  "zone": {
+    "hcp_packer_PackerAncestry": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_artifact_zone": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_bucket_zone": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_packerbuild_zone": [
+      "AnyTool (Mistral)"
+    ],
+    "hcp_packer_registry_zone": [
+      "AnyTool (Mistral)"
+    ],
+    "zone": [
+      "AnyTool (Granite)",
+      "AnyTool (Llama)",
+      "AnyTool (Mistral)",
+      "Map-Reflect (Granite)"
+    ],
+    "zoneIds": [
+      "AnyTool (Granite)"
     ]
   }
 }

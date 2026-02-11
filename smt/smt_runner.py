@@ -150,10 +150,14 @@ JSON Output:"""
     return None
 
 
-# Import components
+# Import components - try package imports first, then relative imports
 try:
-    from smt_api_retriever import SMTAPIRetriever
-    from smt_schema_indexer import GraphQLSchemaIndexer
+    try:
+        from smt.smt_api_retriever import SMTAPIRetriever
+        from smt.smt_schema_indexer import GraphQLSchemaIndexer
+    except ImportError:
+        from smt_api_retriever import SMTAPIRetriever
+        from smt_schema_indexer import GraphQLSchemaIndexer
     from dataset_loader import DatasetLoader
     from toolkit.solve import solve
     logger.info("All components imported successfully")
@@ -162,9 +166,54 @@ except ImportError as e:
     sys.exit(1)
 
 
+def construct_schema_from_api_lookup(product: str, type_name: str, api_lookup: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """Construct a schema object from the API lookup for a given product/type.
+
+    Args:
+        product: Product name (e.g., 'cloudability')
+        type_name: Type name (e.g., 'StringFilterInput')
+        api_lookup: The full API lookup dictionary
+
+    Returns:
+        Schema dict suitable for SMT toolkit, or None if not found
+    """
+    prefix = f"{product}_{type_name}."
+
+    # Find all fields for this type
+    fields = []
+    for key, field_info in api_lookup.items():
+        if key.startswith(prefix):
+            field_name = key[len(prefix):]
+            fields.append({
+                "name": f"{product}_{type_name}.{field_name}",
+                "description": field_info.get("description", ""),
+                "metadata": {
+                    "type": field_info.get("field_type", "String"),
+                    "is_list": field_info.get("is_list", False),
+                    "is_required": field_info.get("is_required", False)
+                },
+                "schema_component": f"{product}_{type_name}"
+            })
+
+    if not fields:
+        return None
+
+    return {
+        "id": f"{product}_{type_name}",
+        "name": f"{product}_{type_name}",
+        "description": api_lookup.get(f"{product}_{type_name}.{fields[0]['name'].split('.')[-1]}", {}).get("type_description", ""),
+        "properties": fields,
+        "metadata": {
+            "product": product,
+            "type": type_name,
+            "source": "api_lookup"
+        }
+    }
+
+
 class SMTRunner:
     """High-performance parallelized SMT evaluation runner."""
-    
+
     def __init__(self,
                  mappings_dir: str = "../data/mappings_output",
                  chroma_db_path: str = "../data/chroma_db",
@@ -211,6 +260,22 @@ class SMTRunner:
         # Thread-safe counters
         self.write_lock = threading.Lock()
 
+        # Load API lookup for multi-target datasets
+        self.api_lookup = {}
+        api_lookup_path = data_dir / "itopsgraph_api_lookup.json"
+        if api_lookup_path.exists():
+            try:
+                with open(api_lookup_path) as f:
+                    self.api_lookup = json.load(f)
+                logger.info(f"Loaded API lookup with {len(self.api_lookup)} entries")
+            except Exception as e:
+                logger.warning(f"Failed to load API lookup: {e}")
+
+        # Multi-target datasets that have per-sample source/target schemas
+        self.multi_target_datasets = {
+            'itopsgraph', 'nl2gql', 'toolbench'
+        }
+
         # WatsonX credentials for SMT toolkit
         self.watsonx_config = {
             "credentials": {
@@ -227,11 +292,13 @@ class SMTRunner:
     
     def create_results_file(self, dataset: str, model: str) -> Path:
         """Create results file for incremental writing."""
-        results_file = self.results_dir / f"{dataset.lower()}_{model}.jsonl"
-        
+        # Sanitize model name to be filesystem-safe (replace slashes with underscores)
+        safe_model = model.replace("/", "_").replace("\\", "_")
+        results_file = self.results_dir / f"{dataset.lower()}_{safe_model}.jsonl"
+
         # Clear the file if it exists
         results_file.write_text("")
-        
+
         return results_file
     
     def write_result_incremental(self, result: Dict[str, Any], results_file: Path):
@@ -315,26 +382,56 @@ class SMTRunner:
             target_api = None
             confidence = 1.0
             use_provided_schemas = False
+            source_schema_data = None
+            target_schema_data = None
 
             # Check if source/target schemas are provided in the dataset
             # Note: dataset_loader uses expected_source/expected_target keys
-            source_schema_data = sample_data.get("expected_source") or sample_data.get("source_schema")
-            target_schema_data = sample_data.get("expected_target") or sample_data.get("target_schema")
+            expected_source = sample_data.get("expected_source") or sample_data.get("source_schema")
+            expected_target = sample_data.get("expected_target") or sample_data.get("target_schema")
 
-            if source_schema_data and target_schema_data:
-                # Parse schema data (may be string or dict)
-                if isinstance(source_schema_data, str):
+            # For multi-target datasets, expected_source/target are product names, not schema objects
+            # We need to construct schemas from API lookup using product + type from metadata
+            metadata = sample_data.get("metadata", {})
+            source_type = metadata.get("source_type", "")
+            target_type = metadata.get("target_type", "")
+
+            if expected_source and expected_target and source_type and target_type and self.api_lookup:
+                # Multi-target dataset: construct schemas from API lookup
+                source_schema_data = construct_schema_from_api_lookup(
+                    expected_source, source_type, self.api_lookup
+                )
+                target_schema_data = construct_schema_from_api_lookup(
+                    expected_target, target_type, self.api_lookup
+                )
+
+                if source_schema_data and target_schema_data:
+                    source_api = source_schema_data.get("id", "")
+                    target_api = target_schema_data.get("id", "")
+                    use_provided_schemas = True
+                    logger.debug(f"Sample {sample_id}: Constructed schemas {source_api} -> {target_api}")
+                else:
+                    logger.warning(f"Sample {sample_id}: Could not construct schemas for {expected_source}_{source_type} -> {expected_target}_{target_type}")
+
+            # If not a multi-target dataset, try to parse as schema objects
+            if not use_provided_schemas and expected_source and expected_target:
+                if isinstance(expected_source, dict):
+                    source_schema_data = expected_source
+                elif isinstance(expected_source, str):
                     try:
-                        source_schema_data = eval(source_schema_data)
+                        source_schema_data = eval(expected_source)
                     except:
                         source_schema_data = None
-                if isinstance(target_schema_data, str):
+
+                if isinstance(expected_target, dict):
+                    target_schema_data = expected_target
+                elif isinstance(expected_target, str):
                     try:
-                        target_schema_data = eval(target_schema_data)
+                        target_schema_data = eval(expected_target)
                     except:
                         target_schema_data = None
 
-                if source_schema_data and target_schema_data:
+                if source_schema_data and target_schema_data and isinstance(source_schema_data, dict) and isinstance(target_schema_data, dict):
                     source_api = source_schema_data.get("id", source_schema_data.get("name", ""))
                     target_api = target_schema_data.get("id", target_schema_data.get("name", ""))
                     use_provided_schemas = True

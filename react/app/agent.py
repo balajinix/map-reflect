@@ -520,8 +520,11 @@ Total schemas analyzed: {len(similarities)}"""
         """
         utterance_lower = utterance.lower().strip()
 
-        # Known product names
-        products = ['concert', 'turbo', 'instana']
+        # Known product names (ITOpsGraph + other datasets)
+        products = ['concert', 'turbonomic', 'turbo', 'instana', 'aws', 'azure', 'gcp',
+                    'cloudability', 'edge', 'hcp', 'hcp_terraform', 'infragraph',
+                    'model', 'ns1', 'packer', 'resource', 'watsonx-orchestrate', 'base',
+                    'omop', 'mimic', 'synthea', 'cms']
 
         # Pattern: "map X ... with Y ..." or "map X ... to Y ..."
         patterns = [
@@ -548,14 +551,96 @@ Total schemas analyzed: {len(similarities)}"""
 
         return None, None
 
-    def _find_relevant_schema(self, user_question: str, recall_limit=10) -> tuple[list, dict, list]:
-        """Find relevant schemas using embeddings and return similarities"""
+    def _extract_type_hints_from_utterance(self, utterance: str) -> tuple[list, list]:
+        """Extract source and target type hints from utterance.
+
+        Parses patterns like:
+        - "map turbonomic Action.actionID to concert PackageRecommendation.recommendation_id"
+        - "map concert ApiKey with instana Application"
+
+        Returns (source_type_hints, target_type_hints) where each is a list of type names.
+        """
+        utterance_lower = utterance.lower().strip()
+
+        # Patterns to match: "map [product] [type.field] to/with [product] [type.field]"
+        patterns = [
+            r"map\s+(\w+)\s+(.+?)\s+to\s+(\w+)\s+(.+?)$",
+            r"map\s+(\w+)\s+(.+?)\s+with\s+(\w+)\s+(.+?)$",
+            r"find\s+(\w+)\s+fields?\s+equivalent\s+to\s+(\w+)\s+(.+?)$",
+        ]
+
+        source_hints = []
+        target_hints = []
+
+        for pattern in patterns:
+            match = re.match(pattern, utterance_lower)
+            if match:
+                groups = match.groups()
+                if len(groups) == 4:
+                    src_product, src_rest, tgt_product, tgt_rest = groups
+                    source_hints = self._extract_type_names(src_rest)
+                    target_hints = self._extract_type_names(tgt_rest)
+                elif len(groups) == 3:
+                    # "find X fields equivalent to Y Z" pattern
+                    tgt_product, src_product, src_rest = groups
+                    source_hints = self._extract_type_names(src_rest)
+                break
+
+        logger.info(f"Extracted type hints: source={source_hints}, target={target_hints}")
+        return source_hints, target_hints
+
+    def _extract_type_names(self, text: str) -> list:
+        """Extract type names from text like 'Action.actionID' or 'PackageRecommendation.recommendation_id'.
+
+        Returns list of potential type names in original case.
+        """
+        type_names = []
+
+        # Pattern 1: Type.field format (e.g., "Action.actionID")
+        dot_pattern = r'(\w+)\.\w+'
+        matches = re.findall(dot_pattern, text)
+        for m in matches:
+            # Convert to proper case (first letter uppercase)
+            type_name = m[0].upper() + m[1:] if m else m
+            if type_name and len(type_name) > 1:
+                type_names.append(type_name)
+
+        # Pattern 2: CamelCase or PascalCase words
+        camel_pattern = r'\b([A-Z][a-zA-Z]+)\b'
+        matches = re.findall(camel_pattern, text)
+        for m in matches:
+            if m not in type_names and len(m) > 1:
+                type_names.append(m)
+
+        # Pattern 3: Words that look like type names (capitalized in original utterance)
+        # Handle lowercase input by looking for multi-word type names
+        words = text.split()
+        for word in words:
+            # Remove field part if present
+            word = word.split('.')[0]
+            # Clean punctuation
+            word = re.sub(r'[^\w]', '', word)
+            if word and len(word) > 1:
+                # Capitalize first letter
+                type_name = word[0].upper() + word[1:]
+                if type_name not in type_names:
+                    type_names.append(type_name)
+
+        return type_names
+
+    def _find_relevant_schema(self, user_question: str, recall_limit=20) -> tuple[list, dict, list]:
+        """Find relevant schemas using embeddings + type hint boosting and return similarities"""
         if not self.schema_map:
             logger.error("No schema map available")
             return [], {}, []
 
         # Extract products from utterance for filtering
         src_product, tgt_product = self._parse_utterance_for_products(user_question)
+
+        # Extract type hints from utterance for boosting
+        src_type_hints, tgt_type_hints = self._extract_type_hints_from_utterance(user_question)
+        all_type_hints = src_type_hints + tgt_type_hints
+        logger.info(f"Type hints for boosting: {all_type_hints}")
 
         all_keys = list(self.schema_map.keys())
 
@@ -574,6 +659,10 @@ Total schemas analyzed: {len(similarities)}"""
         user_embedding = self.sentence_transformer.encode([user_question], show_progress_bar=False)[0]
         key_scores = []
 
+        # Type hint boost value (large enough to override semantic similarity)
+        TYPE_HINT_EXACT_BOOST = 0.5   # Exact type name match
+        TYPE_HINT_PARTIAL_BOOST = 0.3  # Partial/substring match
+
         for k in all_keys:
             try:
                 # Extract schema name from filename (no subdirectories)
@@ -586,13 +675,43 @@ Total schemas analyzed: {len(similarities)}"""
                     np.linalg.norm(user_embedding) * np.linalg.norm(key_embedding)
                 )
 
-                key_scores.append((schema_name, cosine_sim))
+                # Apply type hint boosting
+                boost = 0.0
+                schema_name_lower = schema_name.lower()
+                # Extract the type part (after product_)
+                schema_parts = schema_name.split('_', 1)
+                schema_type = schema_parts[1] if len(schema_parts) > 1 else schema_name
+                schema_type_lower = schema_type.lower()
+
+                for hint in all_type_hints:
+                    hint_lower = hint.lower()
+                    # Exact type match (e.g., "PackageRecommendation" matches "concert_PackageRecommendation")
+                    if schema_type_lower == hint_lower:
+                        boost = max(boost, TYPE_HINT_EXACT_BOOST)
+                        logger.debug(f"Exact type hint match: {schema_name} matches hint '{hint}'")
+                    # Partial match (hint is substring of type or vice versa)
+                    elif hint_lower in schema_type_lower or schema_type_lower in hint_lower:
+                        boost = max(boost, TYPE_HINT_PARTIAL_BOOST)
+                        logger.debug(f"Partial type hint match: {schema_name} ~ hint '{hint}'")
+
+                final_score = cosine_sim + boost
+                key_scores.append((schema_name, final_score, cosine_sim, boost))
             except Exception as e:
                 logger.warning(f"Error processing schema {k}: {e}")
                 continue
 
+        # Sort by final score (similarity + boost)
         key_scores_sorted = sorted(key_scores, key=lambda x: x[1], reverse=True)
-        best_keys_with_scores = key_scores_sorted[:recall_limit]
+
+        # Log boosted schemas for debugging
+        boosted = [(s, f, b) for s, f, c, b in key_scores_sorted[:20] if b > 0]
+        if boosted:
+            logger.info(f"Type-hint boosted schemas: {[(s, f'{f:.3f}', f'boost={b:.1f}') for s, f, b in boosted[:5]]}")
+
+        # Return format: (schema_name, final_score) for compatibility
+        key_scores_for_return = [(s, f) for s, f, c, b in key_scores_sorted]
+
+        best_keys_with_scores = key_scores_for_return[:recall_limit]
         best_keys = [x[0] for x in best_keys_with_scores]
 
         # Build schema map for selected schemas
@@ -604,7 +723,7 @@ Total schemas analyzed: {len(similarities)}"""
 
         logger.info(f"Found {len(best_keys)} relevant schemas: {best_keys[:5]}{'...' if len(best_keys) > 5 else ''}")
 
-        return best_keys, best_schema_map, key_scores_sorted
+        return best_keys, best_schema_map, key_scores_for_return
 
     def _extract_direction_from_utterance(self, utterance: str, schemas: List[str]) -> tuple[Optional[str], Optional[str]]:
         """Extract source and target schema names from utterance pattern.

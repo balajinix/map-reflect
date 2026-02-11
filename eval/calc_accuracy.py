@@ -69,8 +69,8 @@ METHODS = {
     'Map-Reflect': {
         'dir': 'map_reflect/results',
         'models': [
-            ('Granite', 'granite-4'),  # uses full model name granite-4-h-small
-            ('Llama', 'llama-3-3'),
+            ('Granite', '^(?!ue_reflect_).*granite'),  # exclude ue_reflect_ files
+            ('Llama', '^(?!ue_reflect_).*llama'),
         ],
     },
     'MatchMaker': {
@@ -206,34 +206,157 @@ def extract_field_parts(field_name: str) -> Tuple[str, str]:
     return ('', field_name)
 
 
+# Global cache for nested path mappings
+_nested_to_flat_cache = None
+
+def load_nested_path_mappings() -> Dict[str, str]:
+    """Load nested to flat path mappings from enhanced hierarchy.
+
+    Returns lowercase-keyed dict for case-insensitive lookup.
+    """
+    global _nested_to_flat_cache
+    if _nested_to_flat_cache is not None:
+        return _nested_to_flat_cache
+
+    hierarchy_path = Path(__file__).parent.parent / 'data' / 'itopsgraph_enhanced_hierarchy.json'
+    if hierarchy_path.exists():
+        with open(hierarchy_path) as f:
+            data = json.load(f)
+            # Convert keys to lowercase for case-insensitive lookup
+            raw_mappings = data.get('nested_to_flat_mappings', {})
+            _nested_to_flat_cache = {k.lower(): v.lower() for k, v in raw_mappings.items()}
+    else:
+        _nested_to_flat_cache = {}
+
+    return _nested_to_flat_cache
+
+
+def resolve_nested_path(field_path: str) -> str:
+    """Resolve a nested path to its flat equivalent if it exists.
+
+    E.g., concert_PackageDetailsSummary.recommendation.recommendation_id
+       -> concert_PackageRecommendation.recommendation_id
+
+    Handles multi-level nesting recursively:
+    E.g., concert_PackageDetailsCollection.packages.recommendation.action
+       -> first resolves packages to PackageDetailsSummary
+       -> then resolves recommendation to PackageRecommendation
+       -> final: concert_PackageRecommendation.action
+    """
+    mappings = load_nested_path_mappings()
+    path_lower = field_path.lower()
+
+    # Direct lookup
+    if path_lower in mappings:
+        return mappings[path_lower]
+
+    # Try progressive resolution for nested paths
+    # E.g., product_A.b.c.d -> try resolving product_A.b first, then extend
+    parts = path_lower.split('.')
+    if len(parts) <= 2:
+        # No nesting beyond type.field, can't resolve further
+        return path_lower
+
+    # Extract product prefix (e.g., "concert")
+    first_part = parts[0]  # e.g., "concert_packagedetailscollection"
+    if '_' in first_part:
+        product = first_part.split('_')[0]
+    else:
+        return path_lower  # No product prefix, can't resolve
+
+    # Try to resolve progressively from the root
+    # For path A.b.c.d: try A.b -> resolved_type, then resolved_type.c.d
+    current_prefix = first_part
+    remaining_parts = parts[1:]
+
+    for i in range(len(remaining_parts) - 1):
+        # Build the nested path to resolve
+        test_path = current_prefix + '.' + remaining_parts[i]
+
+        if test_path in mappings:
+            # Found a mapping! Use it as new prefix
+            resolved = mappings[test_path]
+            current_prefix = resolved
+        else:
+            # No mapping, extend the current prefix
+            current_prefix = current_prefix + '.' + remaining_parts[i]
+
+    # Add the final field name
+    final_path = current_prefix + '.' + remaining_parts[-1]
+
+    # Try one more lookup in case the final path itself has a mapping
+    return mappings.get(final_path, final_path)
+
+
 def fields_match(gt_field: str, pred_field: str) -> bool:
-    """Check if two field names match."""
+    """Check if two field names match.
+
+    Handles nested paths by resolving them to flat equivalents.
+    E.g., gt=concert_PackageDetailsSummary.recommendation.recommendation_id
+          pred=concert_PackageRecommendation.recommendation_id
+          -> MATCH (both resolve to same flat path)
+    """
+    gt_lower = gt_field.lower().strip()
+    pred_lower = pred_field.lower().strip()
+
+    # Exact match
+    if gt_lower == pred_lower:
+        return True
+
+    # Resolve nested paths to flat equivalents
+    gt_resolved = resolve_nested_path(gt_lower)
+    pred_resolved = resolve_nested_path(pred_lower)
+
+    # Match after resolution
+    if gt_resolved == pred_resolved:
+        return True
+
+    # Also check if prediction matches the resolved ground truth
+    if pred_lower == gt_resolved:
+        return True
+
+    # Original matching logic as fallback
     gt_table, gt_name = extract_field_parts(gt_field)
     pred_table, pred_name = extract_field_parts(pred_field)
 
-    # Exact match
+    # Table + field match
     if gt_table == pred_table and gt_name == pred_name:
         return True
 
-    # Field name only match
-    if gt_name and pred_name and gt_name == pred_name:
+    # Field name only match (same product)
+    gt_product = gt_field.split('_')[0].lower() if '_' in gt_field else ''
+    pred_product = pred_field.split('_')[0].lower() if '_' in pred_field else ''
+
+    if gt_product == pred_product and gt_name and pred_name and gt_name == pred_name:
         return True
 
-    # Partial match (last part of field name)
-    if gt_name and pred_name:
-        gt_last = gt_name.split('_')[-1]
-        pred_last = pred_name.split('_')[-1]
-        if gt_last == pred_last and len(gt_last) > 2:
-            gt_first = gt_name.split('_')[0] if '_' in gt_name else gt_name
-            pred_first = pred_name.split('_')[0] if '_' in pred_name else pred_name
-            if gt_first == pred_first or gt_table == pred_table:
-                return True
+    # Strip product prefix from table and compare
+    # E.g., gt_table='turbonomic_action', pred_table='action' -> match
+    if gt_name == pred_name:
+        # Strip product prefix from gt_table
+        gt_table_no_product = gt_table
+        if '_' in gt_table:
+            gt_table_no_product = gt_table.split('_', 1)[1]  # e.g., 'turbonomic_action' -> 'action'
+
+        pred_table_no_product = pred_table
+        if '_' in pred_table:
+            pred_table_no_product = pred_table.split('_', 1)[1]
+
+        if gt_table_no_product == pred_table or gt_table_no_product == pred_table_no_product:
+            return True
+        if pred_table_no_product == gt_table:
+            return True
 
     return False
 
 
-def calculate_accuracies(results: List[Dict], dataset: str = '') -> Dict:
-    """Calculate API-level and field-level accuracy."""
+def calculate_accuracies(results: List[Dict], dataset: str = '', oracle_api: bool = False) -> Dict:
+    """Calculate API-level and field-level accuracy.
+
+    If oracle_api=True, assume API selection is always correct (for methods like SMT
+    that only do field mapping, not API selection). In this case, API accuracy is
+    reported as 100% and field accuracy is calculated for all samples with predictions.
+    """
     api_correct_samples = 0
     total_samples = len(results)
     field_correct = 0
@@ -264,7 +387,52 @@ def calculate_accuracies(results: List[Dict], dataset: str = '') -> Dict:
                 if expected_tgt_product and tgt_product == expected_tgt_product:
                     target_match = True
 
+        # Fallback 1: check map_reflect_state properties for product match
+        # This handles cases where predicted_mapping field names don't have product prefixes
+        if not (source_match and target_match) and predicted_mapping:
+            mr_state = result.get('map_reflect_state', {})
+            src_props = mr_state.get('source_properties', [])
+            dst_props = mr_state.get('destination_properties', [])
+
+            # Check if any source property matches expected source product
+            if not source_match and src_props:
+                for prop in src_props:
+                    if extract_product(prop) == expected_src_product:
+                        source_match = True
+                        break
+
+            # Check if any destination property matches expected target product
+            if not target_match and dst_props:
+                for prop in dst_props:
+                    if extract_product(prop) == expected_tgt_product:
+                        target_match = True
+                        break
+
+        # Fallback 2: check source_schema/target_schema fields
+        # Some methods store the schema/product info directly
+        if not (source_match and target_match) and predicted_mapping:
+            src_schema = result.get('source_schema', '')
+            tgt_schema = result.get('target_schema', '')
+
+            # Check if source_schema matches expected source product
+            if not source_match and src_schema:
+                src_schema_product = extract_product(src_schema)
+                if src_schema_product == expected_src_product:
+                    source_match = True
+
+            # Check if target_schema matches expected target product
+            if not target_match and tgt_schema:
+                tgt_schema_product = extract_product(tgt_schema)
+                if tgt_schema_product == expected_tgt_product:
+                    target_match = True
+
         api_correct = source_match and target_match
+
+        # Oracle API mode: assume API selection is always correct
+        # Used for methods like SMT that only do field mapping
+        if oracle_api and predicted_mapping:
+            api_correct = True
+
         if api_correct:
             api_correct_samples += 1
 
@@ -590,7 +758,10 @@ def main():
                     for f in files:
                         try:
                             results = load_results(f)
-                            acc = calculate_accuracies(results, dataset)
+                            # SMT only does field mapping, not API selection
+                            # Use oracle API (assume correct API) for fair comparison
+                            use_oracle_api = (method_name == 'SMT')
+                            acc = calculate_accuracies(results, dataset, oracle_api=use_oracle_api)
                             if best_acc is None or acc['samples'] > best_acc.get('samples', 0):
                                 best_acc = acc
                                 best_file = f
