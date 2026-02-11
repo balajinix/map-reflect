@@ -1,0 +1,5 @@
+type RouterConfig {
+  confidence_method: String
+  confidence_threshold: Float
+  continue_journey_on_none: Boolean
+}

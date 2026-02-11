@@ -1,0 +1,33 @@
+type query_kubernetesInfoEvents_items {
+  """Details of the event."""
+  detail: String
+  """A Unix timestamp representing the end time of the Event."""
+  end: BigInt
+  """The label of the affected entity of the event."""
+  entityLabel: String
+  """The name or type of the affected entity of the event."""
+  entityName: String
+  """The category of the affected entity."""
+  entityType: String
+  """ID of this Event."""
+  eventId: String
+  """Details of the event."""
+  fixSuggestion: String
+  """List of metrics associated with the Event."""
+  metrics: [JSON]
+  """Metadata of the probable root cause for this event. Only present in case of specific "Incident" type events."""
+  probableCause: JSON
+  """Main problem title of the Event."""
+  problem: String
+  """List of related recent events. Only present in case of "Incident" type events."""
+  recentEvents: [JSON]
+  """The severity of the Event when triggered."""
+  severity: Int
+  """The snapshot ID of the affected entity of this event."""
+  snapshotId: String
+  """A Unix timestamp representing the start time of the Event."""
+  start: BigInt
+  state: String
+  """The type of Event."""
+  type: String
+}

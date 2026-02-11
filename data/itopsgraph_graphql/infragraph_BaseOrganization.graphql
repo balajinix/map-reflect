@@ -1,0 +1,4 @@
+"""BaseOrganization is a base type all organizations are expected to embed."""
+type BaseOrganization {
+  base: Base!
+}

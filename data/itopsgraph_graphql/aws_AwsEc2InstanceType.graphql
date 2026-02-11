@@ -1,0 +1,4 @@
+type AwsEc2InstanceType {
+  virtual_machine_type: BaseVirtualMachineType!
+  aws_resource: AwsResource!
+}

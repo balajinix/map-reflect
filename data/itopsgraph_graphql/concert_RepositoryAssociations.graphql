@@ -1,0 +1,4 @@
+type RepositoryAssociations {
+  """Associated build artifacts"""
+  build_artifacts: [AssociationID]!
+}

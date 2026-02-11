@@ -1,0 +1,23 @@
+type query_getAlerts_items {
+  """Set of Alert Channel names added in the Alert Configuration."""
+  alertChannelNames: [String]
+  """Name of the Alert Configuration."""
+  alertName: query_getAlerts_items_alertName!
+  """Set of Application Perspective names added in the Alert Configuration."""
+  applicationNames: [String]
+  """Custom payload fields to send additional information in the alert notifications. Can be left empty."""
+  customPayloadFields: [query_getAlerts_items_customPayloadFields_items]!
+  eventFilteringConfiguration: query_getAlerts_items_eventFilteringConfiguration!
+  """ID of the Alert Configuration."""
+  id: query_getAlerts_items_id!
+  """To include the entity name in a legacy alert based on built-in/custom events."""
+  includeEntityNameInLegacyAlerts: Boolean
+  """List of Alert Channel IDs added in this Alert Configuration."""
+  integrationIds: [String]!
+  """Flag to show whether the Alert Configuration is valid."""
+  invalid: Boolean
+  """Unix timestamp representing the time the configuration was last updated."""
+  lastUpdated: BigInt
+  """Timer dictating how long the Alert Configuration will stay muted. A value of `0` means the Alert Configuration is currently enabled. Otherwise, the Alert Configuration is currently disabled (muted)."""
+  muteUntil: BigInt
+}

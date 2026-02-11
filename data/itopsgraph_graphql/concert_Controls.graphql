@@ -1,0 +1,10 @@
+type Controls {
+  catalog_id: ID
+  class: String
+  code: String
+  control_id: ID!
+  description: String
+  last_updated_by: String
+  last_updated_on: ID!
+  title: String
+}

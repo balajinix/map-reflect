@@ -1,0 +1,1 @@
+"""A list of objects each of which defines a metric and the (statistical) aggregation -- MEAN, SUM, MAX, etc -- that should be used to summarize it for the defined time frame. Eg: `[{ 'metric': 'latency', 'aggregation': 'MEAN'}]`. To know more about supported metrics and its aggregation, See `Get Metric catalog`."""

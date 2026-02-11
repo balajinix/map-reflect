@@ -1,0 +1,4 @@
+enum ArtifactType {
+  image
+  library
+}

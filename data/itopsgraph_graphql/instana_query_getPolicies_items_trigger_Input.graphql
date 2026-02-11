@@ -1,0 +1,1 @@
+"""The trigger is the Instana event or Smart Alert that defines the initial conditions that must be met for the policy to apply on the actions in `typeConfiguration`."""

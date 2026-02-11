@@ -1,0 +1,5 @@
+"""This applies to only `automatic` policy type. A Dynamic Focus Query that selects a list of entities on which the policy is run."""
+type query_getPolicies_items_typeConfigurations_items_condition {
+  """Dynamic Focus Query string that selects a list of entities on which the policy is run."""
+  query: String
+}

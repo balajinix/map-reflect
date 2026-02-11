@@ -1,0 +1,12 @@
+type Topology_dast_and_sast_exposure_view {
+  applications: JSON
+  certificates: JSON
+  compliance_assessments: JSON
+  cves: JSON
+  dast_and_sast_exposures: JSON
+  environments: JSON
+  images: JSON
+  private_access_points: JSON
+  public_access_points: JSON
+  repositories: JSON
+}

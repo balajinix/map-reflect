@@ -1,0 +1,9 @@
+type DiscoveredBy {
+  category: String
+  displayName: String
+  isProbeRegistered: Boolean
+  readonly: Boolean
+  type: String
+  subType: String
+  uuid: ID
+}

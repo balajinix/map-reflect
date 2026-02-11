@@ -1,0 +1,3 @@
+type getAvailablePlugins_200_response {
+  plugins: [String]
+}

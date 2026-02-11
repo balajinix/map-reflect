@@ -1,0 +1,5 @@
+type query_getSyntheticLocations_items_configuration {
+  clusterName: String
+  namespace: String
+  tenantType: query_getSyntheticLocations_items_configuration_tenantType
+}

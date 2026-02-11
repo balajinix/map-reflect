@@ -1,0 +1,5 @@
+enum query_getTrace_rootSpan_destination_endpoint_syntheticType {
+  NON_SYNTHETIC
+  SYNTHETIC
+  MIXED
+}

@@ -1,0 +1,9 @@
+type Zsys_product_usage {
+  last_used: String
+  library: String
+  osmf_managed: Boolean
+  product_id: String
+  product_release: String
+  sysplex_id: ID
+  system_id: ID
+}

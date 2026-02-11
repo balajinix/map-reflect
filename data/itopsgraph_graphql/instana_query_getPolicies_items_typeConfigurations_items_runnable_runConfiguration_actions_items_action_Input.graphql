@@ -1,0 +1,1 @@
+"""Automation action definition. When this is used in policy creation request, only `id` should be specified."""

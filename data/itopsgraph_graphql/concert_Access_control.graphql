@@ -1,0 +1,9 @@
+type Access_control {
+  entity_id: ID!
+  entity_type: String!
+  id: String!
+  last_updated_by: String
+  last_updated_on: ID!
+  role: String!
+  role_type: String!
+}

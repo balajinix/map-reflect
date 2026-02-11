@@ -1,0 +1,11 @@
+type AwsLambdaFunction {
+  serverless_function: BaseServerlessFunction!
+  aws_resource: AwsResource!
+  description: string!
+  role: string!
+  memory_size: int32!
+  run_time: string!
+  architectures: [string]
+  subnet_ids: [string]
+  security_group_ids: [string]
+}

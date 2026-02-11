@@ -1,0 +1,4 @@
+type ExecutionCharacteristics {
+  disruptiveness: String
+  reversibility: String
+}

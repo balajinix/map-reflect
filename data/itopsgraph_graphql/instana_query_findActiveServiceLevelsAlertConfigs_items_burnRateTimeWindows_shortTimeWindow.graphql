@@ -1,0 +1,5 @@
+type query_findActiveServiceLevelsAlertConfigs_items_burnRateTimeWindows_shortTimeWindow {
+  duration: Int!
+  durationType: query_findActiveServiceLevelsAlertConfigs_items_burnRateTimeWindows_longTimeWindow_durationType!
+  durationUnit: query_findActiveServiceLevelsAlertConfigs_items_burnRateTimeWindows_longTimeWindow_durationUnit
+}

@@ -1,0 +1,9 @@
+enum query_findApplicationAlertConfigVersions_items_changeSummary_changeType {
+  CREATE
+  UPDATE
+  DELETE
+  ENABLE
+  DISABLE
+  RESTORE
+  UNKNOWN
+}

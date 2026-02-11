@@ -1,0 +1,14 @@
+type Data_mapper {
+  created_by: String
+  created_on: ID!
+  id: ID!
+  last_updated_by: String
+  last_updated_on: ID!
+  mapping_data: ID!
+  mapping_format: String!
+  mapping_type: String!
+  pipeline: String!
+  scan_type: String
+  scanner_name: String!
+  version: String
+}

@@ -1,0 +1,4 @@
+type Output1 {
+  enabled: Boolean
+  threshold: Float
+}

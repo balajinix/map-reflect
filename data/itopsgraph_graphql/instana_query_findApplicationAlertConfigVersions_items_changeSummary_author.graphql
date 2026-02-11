@@ -1,0 +1,4 @@
+type query_findApplicationAlertConfigVersions_items_changeSummary_author {
+  id: String
+  type: query_findApplicationAlertConfigVersions_items_changeSummary_author_type
+}

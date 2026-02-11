@@ -1,0 +1,3 @@
+type updateWebsiteIpMaskingConfiguration_200_response {
+  ipMasking: query_getMobileAppIpMaskingConfiguration_ipMasking!
+}

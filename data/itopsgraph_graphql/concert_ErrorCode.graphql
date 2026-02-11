@@ -1,0 +1,15 @@
+enum ErrorCode {
+  bad_request
+  not_authorized
+  no_need_to_know
+  required_field
+  invalid_content
+  invalid_file
+  internal_error
+  invalid_data
+  invalid_enum
+  invalid_pattern
+  invalid_format
+  missing_unique
+  invalid_field
+}

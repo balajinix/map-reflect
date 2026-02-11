@@ -1,0 +1,16 @@
+type Package_status {
+  backlevel: String
+  component: String!
+  default_published_at: DateTime
+  default_version: String
+  latest_published_at: DateTime
+  latest_version: String
+  ossrepo: String!
+  package_manager_url: String
+  published_at: DateTime
+  purl: String!
+  purl_type: String
+  stat: String!
+  ts: DateTime!
+  version: String
+}

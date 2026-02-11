@@ -1,0 +1,6 @@
+type query_getAllReleases_items_scopes_items {
+  applicationId: String
+  applicationName: String
+  serviceId: String
+  serviceName: String
+}

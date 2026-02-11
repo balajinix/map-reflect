@@ -1,0 +1,5 @@
+enum mutationInput_getMobileAppBeacons_input_tagFilters_items_entity {
+  NOT_APPLICABLE
+  DESTINATION
+  SOURCE
+}

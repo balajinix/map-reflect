@@ -1,0 +1,5 @@
+enum query_getAuditLogs_entries_items_actor_type {
+  USER
+  API_TOKEN
+  POLICY
+}

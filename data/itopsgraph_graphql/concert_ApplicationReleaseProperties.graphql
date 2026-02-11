@@ -1,0 +1,4 @@
+type ApplicationReleaseProperties {
+  """Application revenue per hour"""
+  revenue: Float
+}

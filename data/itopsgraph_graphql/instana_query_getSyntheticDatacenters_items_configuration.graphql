@@ -1,0 +1,3 @@
+type query_getSyntheticDatacenters_items_configuration {
+  ipAddresses: [String]
+}

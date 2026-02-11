@@ -1,0 +1,9 @@
+type Packages {
+  ecosystem: String
+  id: ID!
+  last_updated_by: String
+  last_updated_on: ID!
+  name: String
+  source_url: String
+  version: String
+}

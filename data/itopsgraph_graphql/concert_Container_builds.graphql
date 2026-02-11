@@ -1,0 +1,10 @@
+type Container_builds {
+  build_number: String
+  id: ID!
+  image_id: ID
+  last_updated_by: String
+  last_updated_on: ID!
+  name: String
+  sbom_id: ID
+  version: String
+}

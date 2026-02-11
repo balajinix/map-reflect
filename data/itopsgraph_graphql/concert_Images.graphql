@@ -1,0 +1,16 @@
+type Images {
+  cyclonedx_link: String
+  data_impact_risk: Int
+  digest: String
+  filename: String
+  id: ID!
+  image_tag: String
+  last_updated_by: String
+  last_updated_on: ID!
+  name: String
+  purl: String
+  scope: String
+  type: String!
+  url: String
+  version: String
+}

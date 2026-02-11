@@ -1,0 +1,5 @@
+"""Collection of users and groups"""
+type UsersGroupsCollection {
+  """List of user groups"""
+  groups: [String]
+}

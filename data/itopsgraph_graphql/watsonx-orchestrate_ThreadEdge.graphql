@@ -1,0 +1,5 @@
+"""Thread Edge with node"""
+type ThreadEdge {
+  node: Thread
+  cursor: String
+}

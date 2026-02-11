@@ -1,0 +1,5 @@
+enum query_getApplicationConfigs_items_boundaryScope {
+  ALL
+  INBOUND
+  DEFAULT
+}

@@ -1,0 +1,5 @@
+enum queryInput_getCallGroup_input_group_groupbyTagEntity {
+  NOT_APPLICABLE
+  DESTINATION
+  SOURCE
+}

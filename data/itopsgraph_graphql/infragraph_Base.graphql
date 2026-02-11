@@ -1,0 +1,17 @@
+"""Base is a base all domain models are expected to embed."""
+type Base {
+  """the unique identifier in the source system"""
+  id: string!
+  """the name of the model in the source system"""
+  name: string
+  tags: string>!
+  """unique identifier of the container holding the type in the source system"""
+  account_id: string
+  """unique identifier of the region holding the type in the source system"""
+  region_id: string
+  """unique identifier of the zone holding the type in the source system"""
+  zone_ids: [string]
+  created_at: google.protobuf.Timestamp
+  updated_at: google.protobuf.Timestamp
+  description: string
+}

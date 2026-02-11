@@ -1,0 +1,6 @@
+enum query_getSloConfigById_oneOf_0_indicator_operator {
+  _GREATER_THAN_
+  _GREATER_THAN__EQUALS_
+  _LESS_THAN_
+  _LESS_THAN__EQUALS_
+}

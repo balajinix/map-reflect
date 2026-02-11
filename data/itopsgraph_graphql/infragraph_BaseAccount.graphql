@@ -1,0 +1,5 @@
+"""examples: AWS account, GCP project, HCP project."""
+type BaseAccount {
+  base: Base!
+  organization_id: string!
+}

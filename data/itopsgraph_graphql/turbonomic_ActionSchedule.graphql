@@ -1,0 +1,9 @@
+type ActionSchedule {
+  acceptedByUserForMaintenanceWindow: Boolean
+  displayName: String
+  mode: String
+  nextOccurrence: DateTime
+  nextOccurrenceTimestamp: Float
+  timeZoneId: String
+  uuid: ID
+}

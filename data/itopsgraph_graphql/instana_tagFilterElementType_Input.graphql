@@ -1,0 +1,4 @@
+enum tagFilterElementType_Input {
+  EXPRESSION
+  TAG_FILTER
+}

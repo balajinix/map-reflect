@@ -1,0 +1,4 @@
+"""BaseVirtualMachineType is a base type all virtual machine types are expected to embed."""
+type BaseVirtualMachineType {
+  base: Base!
+}

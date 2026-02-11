@@ -1,0 +1,5 @@
+type AwsIamPolicy {
+  policy: BasePolicy!
+  aws_resource: AwsResource!
+  attachment_count: int32
+}

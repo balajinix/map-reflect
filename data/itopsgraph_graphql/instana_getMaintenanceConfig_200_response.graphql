@@ -1,0 +1,11 @@
+type getMaintenanceConfig_200_response {
+  """ID of the Maintenance Window Configuration."""
+  id: query_getMaintenanceConfig_id!
+  lastUpdated: BigInt
+  """Name of the Maintenance Window Configuration."""
+  name: query_getMaintenanceConfig_name!
+  """Dynamic Focus Query that determines the scope of the Maintenance Window configuration."""
+  query: query_getMaintenanceConfig_query!
+  """A set of time periods when the Maintenance Window Configuration is active."""
+  windows: [query_getMaintenanceConfig_windows_items]
+}

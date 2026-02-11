@@ -1,0 +1,7 @@
+type Meta {
+  aggregates: [Aggregate]
+  dates: Dates
+  dimensions: [Dimension_MeasureInfo]
+  filters: [Filter_MetaInfo]
+  metrics: [Metric_MetaInfo]
+}

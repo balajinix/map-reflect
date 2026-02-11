@@ -1,0 +1,24 @@
+type Vulnerabilities_view {
+  access_points_count: ID
+  application_count: ID
+  application_releases: JSON
+  custom_score: Float
+  cve: String
+  cvss_score: Float
+  deprioritized_findings: ID
+  description: String
+  exceptions_requested: ID
+  has_exceptions_requested: Boolean
+  has_open_tickets: Boolean
+  has_unassessed_findings: Boolean
+  highest_finding_priority: String
+  highest_finding_risk_score: ID
+  open_tickets: ID
+  priority_1_findings: ID
+  priority_2_findings: ID
+  priority_3_findings: ID
+  severity: String
+  total_findings: ID
+  unassessed_findings: ID
+  vector_string: String
+}

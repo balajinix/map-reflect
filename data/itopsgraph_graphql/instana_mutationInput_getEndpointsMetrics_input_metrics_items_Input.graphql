@@ -1,0 +1,1 @@
+"""A list of endpoint types, each of which is a string. An endpoint can specified for a database, an SDK, etc."""

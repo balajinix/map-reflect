@@ -1,0 +1,8 @@
+type query_getAccessLogs_entries_items {
+  action: query_getAccessLogs_entries_items_action!
+  email: String!
+  fullName: String!
+  tenantId: String!
+  tenantUnitId: String
+  timestamp: BigInt!
+}

@@ -1,0 +1,7 @@
+"""List of metadata parameters set to this action run by sensors."""
+type query_getActionInstance_metadata_items {
+  """Metadata name."""
+  name: String!
+  """Metadata value."""
+  value: String
+}

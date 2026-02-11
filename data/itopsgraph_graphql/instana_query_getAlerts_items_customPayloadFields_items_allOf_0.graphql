@@ -1,0 +1,5 @@
+"""Custom payload fields to send additional information in the alert notifications. Can be left empty."""
+interface query_getAlerts_items_customPayloadFields_items_allOf_0 {
+  key: String!
+  type: String!
+}

@@ -1,0 +1,13 @@
+type Zsys_product_inventory_view {
+  mcu_hiper_count: ID
+  mcu_pe_count: ID
+  mcu_secint_count: ID
+  product_family: String
+  product_id: String
+  product_name: String
+  product_release: String
+  swi_uuid: ID
+  total_hiper_count: ID
+  total_pe_count: ID
+  total_secint_count: ID
+}

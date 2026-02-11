@@ -1,0 +1,5 @@
+type BaseSecurityRule {
+  base: Base!
+  """the security group this rule applies to"""
+  security_group_id: string!
+}

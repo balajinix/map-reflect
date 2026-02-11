@@ -1,0 +1,8 @@
+type CostReport {
+  limit: Int
+  meta: Meta
+  offset: Int
+  pagination: JSON
+  results: [JSON]
+  total_results: Int
+}

@@ -1,0 +1,17 @@
+type CompoundActionsEntry {
+  actionMode: String
+  actionState: String
+  actionType: String
+  currentEntity: CurrentEntity
+  currentLocation: CurrentLocation
+  currentValue: Float
+  details: String
+  displayName: String
+  newEntity: NewEntity
+  newLocation: NewLocation
+  newValue: Float
+  resizeAttribute: String
+  risk: Risk
+  target: Target
+  valueUnits: String
+}

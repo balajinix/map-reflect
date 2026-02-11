@@ -1,0 +1,4 @@
+type query_getTrace_rootSpan_childSpans_items {
+  callId: String
+  batchSize: Int
+}

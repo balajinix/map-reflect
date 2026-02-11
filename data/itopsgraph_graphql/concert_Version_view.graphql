@@ -1,0 +1,14 @@
+type Version_view {
+  backlevel: String
+  component: String
+  default_published_at: DateTime
+  default_version: String
+  latest_published_at: DateTime
+  latest_version: String
+  ossrepo: String
+  published_at: DateTime
+  purl: String
+  sbom_id: String
+  sbom_version: Int
+  version: String
+}

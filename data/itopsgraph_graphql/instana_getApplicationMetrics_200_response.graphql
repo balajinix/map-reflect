@@ -1,0 +1,8 @@
+type getApplicationMetrics_200_response {
+  adjustedTimeframe: mutation_getApplicationMetrics_adjustedTimeframe
+  items: [mutation_getApplicationMetrics_items_items]!
+  """Page Number"""
+  page: Int
+  pageSize: Int
+  totalHits: BigInt
+}

@@ -1,0 +1,4 @@
+type NodesEntry {
+  resourceIdentifier: String
+  vendor: String
+}

@@ -1,0 +1,28 @@
+type query_getSlo_oneOf_0_items {
+  """Value of accumulated bad minutes/events of SLO configuration in different timestamps from starting to ending point"""
+  errorAccumulationChart: JSON
+  """Error Budget Remain value of SLO configuration in different timestamps from starting to ending point"""
+  errorBudgetRemainChart: JSON
+  """Latest Remaining Error Budget value of SLO Configuration"""
+  errorBudgetRemaining: Int
+  """Spent Error Budget of SLO Configuration"""
+  errorBudgetSpent: Int
+  """Latest Burn Rate value of SLO Configuration"""
+  errorBurnRate: Int
+  """Budget Rate value of SLO configuration in different timestamps from starting to ending point"""
+  errorBurnRateChart: JSON
+  """Value indicating presence of bad minutes/events of SLO configuration in different timestamps from starting to ending point"""
+  errorChart: JSON
+  """Starting point of the data retrieval, specified as 13 digit Unix Timestamp milliseconds"""
+  fromTimestamp: BigInt
+  """Latest Status value of SLO Configuration"""
+  sli: Float
+  """Target status of SLO Configuration"""
+  slo: Float
+  """Ending point of the data retrieval, specified as 13 digit Unix Timestamp milliseconds"""
+  toTimestamp: BigInt
+  """Latest Available Error Budget value of SLO Configuration"""
+  totalErrorBudget: Int
+  """Value indicating violation of SLO configuration in different timestamps from starting to ending point"""
+  violationDistribution: JSON
+}

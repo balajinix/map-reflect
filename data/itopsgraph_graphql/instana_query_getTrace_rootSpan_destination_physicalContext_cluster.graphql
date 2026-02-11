@@ -1,0 +1,7 @@
+type query_getTrace_rootSpan_destination_physicalContext_cluster {
+  data: JSON
+  id: String!
+  label: String
+  plugin: String
+  time: BigInt
+}

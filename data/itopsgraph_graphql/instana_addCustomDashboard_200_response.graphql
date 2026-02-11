@@ -1,0 +1,6 @@
+type addCustomDashboard_200_response {
+  accessRules: [query_getCustomDashboard_accessRules_items]!
+  id: String!
+  title: String!
+  widgets: [query_getCustomDashboard_widgets_items]!
+}

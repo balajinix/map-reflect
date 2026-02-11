@@ -1,0 +1,9 @@
+enum query_getActionInstance_status {
+  STATUS_UNKNOWN
+  SUBMITTED
+  IN_PROGRESS
+  SUCCESS
+  FAILED
+  READY
+  TIMEOUT
+}

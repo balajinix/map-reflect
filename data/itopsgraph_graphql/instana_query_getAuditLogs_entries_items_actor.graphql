@@ -1,0 +1,6 @@
+type query_getAuditLogs_entries_items_actor {
+  email: String
+  id: String!
+  name: String!
+  type: query_getAuditLogs_entries_items_actor_type!
+}

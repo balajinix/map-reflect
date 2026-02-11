@@ -1,0 +1,4 @@
+type Materialized_view_refresh_flag {
+  refresh_needed: Boolean
+  view_name: String!
+}

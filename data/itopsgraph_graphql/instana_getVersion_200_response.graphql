@@ -1,0 +1,5 @@
+type getVersion_200_response {
+  branch: String
+  commit: String
+  imageTag: String
+}

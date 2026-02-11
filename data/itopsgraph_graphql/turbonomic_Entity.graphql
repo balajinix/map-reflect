@@ -1,0 +1,31 @@
+type Entity {
+  className: String
+  """Limited list of connected entities relevant to the service entity. This will not contain all connected entities."""
+  connectedEntities: [ConnectedEntitiesEntry]
+  """List of Consumers"""
+  consumers: [ConsumersEntry]
+  """Cost price per Hour"""
+  costPrice: Float
+  """Target that discovered the entity"""
+  discoveredBy: DiscoveredBy
+  """A user readable name of the api object. Cannot be blank. The UTF-8 encoding must be at most 255 bytes."""
+  displayName: String
+  """Environment type Values : HYBRID, CLOUD, ONPREM"""
+  environmentType: EnvironmentType
+  numRelatedVMs: Int
+  """List of Providers"""
+  providers: [ProvidersEntry]
+  """Highest severity of the Actions related to this entity UNKNOWN, NORMAL, MINOR, MAJOR, CRITICAL mixed case in response"""
+  severity: String
+  """severity and count. E.g. {CRITICAL: 1, NORMAL: 10}"""
+  severityBreakdown: SeverityBreakdown
+  staleness: String
+  state: String
+  """"Tags are the metadata defined in name/value pairs. Each name can have multiple values."""
+  tags: JSON
+  """Related Template"""
+  template: Template
+  uuid: ID
+  """Mapping of target identifier to vendor-provided identity of this entity on the remote target"""
+  vendorIds: JSON
+}

@@ -1,0 +1,9 @@
+type Assessment_plan_result {
+  assessment_plan_id: ID
+  assessment_plan_result_id: ID!
+  assessment_result_id: ID
+  component_definition_id: ID
+  component_name: String
+  observation_id: ID
+  subject_name: String
+}

@@ -1,0 +1,13 @@
+"""A list which indicates which services are consumers and which are providers in the communication chain."""
+type query_getServicesMap_connections_items {
+  """The number of calls between the 2 services. Eg: The number of calls from `24558242fdeb52571cfb9fa42f1b334aa65d7e61` service to `3feb3dcd206c166ef2b41c707e0cd38d7cd325aa` service over the mentioned timeframe is `200`.  If no timeframe (`to` and `windowSize` in query paramter) is mentioned, the timeframe is taken as last hour."""
+  calls: BigInt
+  """The error rate of the calls between the 2 services. Eg: The error rate of calls from `24558242fdeb52571cfb9fa42f1b334aa65d7e61` service to `3feb3dcd206c166ef2b41c707e0cd38d7cd325aa` service over the mentioned timeframe is `0.1`.  The value is between 0 and 1.  If no timeframe (`to` and `windowSize` in query paramter) is mentioned, the timeframe is taken as last hour."""
+  errorRate: NonNegativeFloat
+  """The service that initiates a request to another service. It contains a unique service id. Eg: `24558242fdeb52571cfb9fa42f1b334aa65d7e61`."""
+  from: String!
+  """The mean latency of the calls between the 2 services. Eg: The mean latency of calls from `24558242fdeb52571cfb9fa42f1b334aa65d7e61` service to `3feb3dcd206c166ef2b41c707e0cd38d7cd325aa` service over the mentioned timeframe is `4.46`.  The value is in milliseconds.  If no timeframe (`to` and `windowSize` in query paramter) is mentioned, the timeframe is taken as last hour."""
+  latency: NonNegativeFloat
+  """The service that receives the request sent by the source service. It contains a unique service id. Eg: `3feb3dcd206c166ef2b41c707e0cd38d7cd325aa`."""
+  to: String!
+}

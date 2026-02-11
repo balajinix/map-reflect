@@ -1,0 +1,9 @@
+type Measure_MeasureInfo {
+  data_type: String
+  description: String
+  group: Group
+  label: String
+  name: String
+  sub_group: Group
+  type: String
+}

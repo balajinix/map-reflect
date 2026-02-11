@@ -1,0 +1,16 @@
+type Zsys_archive_product_family {
+  created: ID
+  created_by: String
+  description: String
+  global_zone: String
+  id: ID
+  last_modified: ID
+  locked: Boolean
+  locked_by: String
+  mcu_status: String
+  mfu_status: String
+  modified_by: String
+  name: String
+  product_info_retrieved: ID
+  swi_url: String
+}

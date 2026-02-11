@@ -7,8 +7,13 @@ nohup.out
 # Generated data files
 *.pkl
 chroma_db/
+data/chroma_db_*/
 logs/
 *.log
+
+# Intermediate pipeline files
+data/batch_coverage_results*.json
+data/*_coverage_candidates.json
 
 # Mapping outputs (generated/cached)
 data/mappings_output/

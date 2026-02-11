@@ -1,0 +1,4 @@
+type getHealthState_200_response {
+  health: query_getHealthState_health
+  messages: [String]
+}

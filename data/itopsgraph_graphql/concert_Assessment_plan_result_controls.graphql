@@ -1,0 +1,12 @@
+type Assessment_plan_result_controls {
+  ai_appraisal: JSON
+  assessment_plan_result_control_id: ID!
+  assessment_plan_result_id: ID
+  assessment_status: String
+  control_id: ID
+  evidence: JSON
+  observations: JSON
+  remarks: String
+  remediation: String
+  status: String
+}

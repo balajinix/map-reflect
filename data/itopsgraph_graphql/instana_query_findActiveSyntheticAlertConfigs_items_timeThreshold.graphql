@@ -1,0 +1,5 @@
+"""The type of threshold to define the criteria when the event and alert triggers and resolves."""
+type query_findActiveSyntheticAlertConfigs_items_timeThreshold {
+  type: String!
+  violationsCount: Int
+}

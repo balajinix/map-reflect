@@ -1,0 +1,30 @@
+type updateInfraAlertConfig_200_response {
+  """List of IDs of alert channels defined in Instana. Can be left empty."""
+  alertChannelIds: [String]
+  """Set of alert channel IDs associated with the severity."""
+  alertChannels: JSON
+  created: BigInt
+  """Custom payload fields to send additional information in the alert notifications. Can be left empty."""
+  customPayloadFields: [query_findActiveInfraAlertConfigs_items_customPayloadFields_items]!
+  """Description of the Infrastructure Smart Alert. Used as a template for the description of alert/event notifications triggered by this Smart Alert configuration."""
+  description: query_findActiveInfraAlertConfigs_items_description!
+  enabled: Boolean
+  """The duration for which an alert remains open after conditions are no longer violated, with the alert auto-closing once the grace period expires."""
+  gracePeriod: BigInt
+  granularity: query_findActiveInfraAlertConfigs_items_granularity!
+  """The grouping tags used to group the metric results."""
+  groupBy: [String]!
+  id: query_findActiveInfraAlertConfigs_items_id!
+  initialCreated: BigInt
+  """Name of the Infrastructure Smart Alert. Used as a template for the title of alert/event notifications triggered by this Smart Alert configuration."""
+  name: query_findActiveInfraAlertConfigs_items_name!
+  readOnly: Boolean
+  rule: query_findActiveInfraAlertConfigs_items_rule
+  """A list of rules where each rule is associated with multiple thresholds and their corresponding severity levels. This enables more complex alert configurations with validations to ensure consistent and logical threshold-severity combinations."""
+  rules: [query_findActiveInfraAlertConfigs_items_rules_items]
+  """The severity of the alert when triggered, which is either 5 (Warning), or 10 (Critical)."""
+  severity: Int
+  tagFilterExpression: query_findActiveInfraAlertConfigs_items_tagFilterExpression!
+  threshold: query_findActiveInfraAlertConfigs_items_threshold
+  timeThreshold: query_findActiveInfraAlertConfigs_items_timeThreshold!
+}

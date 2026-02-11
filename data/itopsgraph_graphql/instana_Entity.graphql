@@ -1,0 +1,6 @@
+"""Entity type."""
+interface Entity {
+  entityType: EntityType
+  id: ID!
+  label: String!
+}

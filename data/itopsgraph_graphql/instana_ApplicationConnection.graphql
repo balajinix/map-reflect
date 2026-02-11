@@ -1,0 +1,4 @@
+type ApplicationConnection {
+  edges: [ApplicationEdge]
+  pageInfo: PageInfo!
+}

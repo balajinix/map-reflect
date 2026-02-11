@@ -1,0 +1,6 @@
+"""NodeIdentifier encompasses values that uniquely identify a node in the graph."""
+type NodeIdentifier {
+  id: string!
+  source: Source!
+  kind: Kind!
+}

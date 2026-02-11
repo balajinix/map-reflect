@@ -1,0 +1,6 @@
+enum query_getMobileAppGeoLocationConfiguration_geoDetailRemoval {
+  NO_REMOVAL
+  REMOVE_COORDINATES
+  REMOVE_CITY
+  REMOVE_ALL
+}

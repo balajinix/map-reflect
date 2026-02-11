@@ -1,0 +1,6 @@
+enum query_findActiveInfraAlertConfigs_items_rules_items_thresholdOperator {
+  _GREATER_THAN_
+  _GREATER_THAN__EQUALS_
+  _LESS_THAN_
+  _LESS_THAN__EQUALS_
+}

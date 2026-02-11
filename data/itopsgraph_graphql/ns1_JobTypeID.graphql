@@ -1,0 +1,5 @@
+enum JobTypeID {
+  responseTime
+  latency
+  custom
+}

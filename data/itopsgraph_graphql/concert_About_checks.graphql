@@ -1,0 +1,8 @@
+type About_checks {
+  category: String!
+  ckname: String!
+  description: String!
+  long_description: String
+  risk_level: String
+  weight: Float
+}

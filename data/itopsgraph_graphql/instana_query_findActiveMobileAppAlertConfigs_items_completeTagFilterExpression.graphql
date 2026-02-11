@@ -1,0 +1,6 @@
+"""Floats that will have a value of 0 or more."""
+type query_findActiveMobileAppAlertConfigs_items_completeTagFilterExpression implements q & u & e & r & y & _ & f & i & n & d & A & c & t & i & v & e & M & o & b & i & l & e & A & p & p & A & l & e & r & t & C & o & n & f & i & g & s & _ & i & t & e & m & s & _ & c & o & m & p & l & e & t & e & T & a & g & F & i & l & t & e & r & E & x & p & r & e & s & s & i & o & n & _ & a & l & l & O & f & _ & 0 {
+  type: String!
+  elements: [query_findActiveMobileAppAlertConfigs_items_completeTagFilterExpression_allOf_1_elements_items]!
+  logicalOperator: query_findActiveMobileAppAlertConfigs_items_completeTagFilterExpression_allOf_1_logicalOperator!
+}

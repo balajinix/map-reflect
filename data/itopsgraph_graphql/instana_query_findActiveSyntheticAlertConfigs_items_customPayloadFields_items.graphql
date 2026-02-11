@@ -1,0 +1,6 @@
+"""Custom payload fields to send additional information in the alert notifications. Can be left empty."""
+type query_findActiveSyntheticAlertConfigs_items_customPayloadFields_items {
+  """A user-specified unique identifier or name for a custom payload entry."""
+  key: String!
+  type: String!
+}

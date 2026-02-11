@@ -1,0 +1,5 @@
+type Profile_controls {
+  catalog_id: ID
+  control_id: ID
+  profile_id: ID
+}

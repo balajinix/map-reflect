@@ -1,0 +1,5 @@
+type TokenUsage {
+  completion_tokens: Int
+  prompt_tokens: Int
+  total_tokens: Int
+}

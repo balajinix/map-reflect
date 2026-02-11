@@ -1,0 +1,13 @@
+type mutation_addPolicies_items {
+  """Policy description."""
+  description: query_getPolicies_items_description
+  """Policy identifier."""
+  id: query_getPolicies_items_id!
+  """Policy name."""
+  name: query_getPolicies_items_name!
+  """A list of policy tags."""
+  tags: [String]
+  trigger: query_getPolicies_items_trigger!
+  """List of configurations that contains the list of actions to run and the mode (automatic or manual) in which the policy is run."""
+  typeConfigurations: [query_getPolicies_items_typeConfigurations_items]!
+}

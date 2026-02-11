@@ -1,0 +1,16 @@
+type Table_of_contents_el {
+  application_id: ID
+  archived_timestamp: DateTime
+  data_type: String!
+  el_path: String!
+  event_time: DateTime
+  file_size: Float!
+  file_type: String!
+  is_archived: Boolean
+  is_event_interesting: Boolean
+  meta_data: JSON
+  submitted_by: String!
+  timestamp: DateTime!
+  usecase: String
+  uuid: ID!
+}

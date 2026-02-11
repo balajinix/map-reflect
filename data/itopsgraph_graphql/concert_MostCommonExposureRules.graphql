@@ -1,0 +1,5 @@
+"""Collection of most common exposure rules"""
+type MostCommonExposureRules {
+  """Most common exposure rules"""
+  exposure_rules: [MostCommonExposureRule]
+}

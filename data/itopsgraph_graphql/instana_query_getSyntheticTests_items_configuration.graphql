@@ -1,0 +1,8 @@
+"""Synthetic test configuration that is unique to a synthetic type. Valid types are BrowserScript, HTTPAction, HTTPScript, SSLCertificate, WebpageAction, and WebpageScript."""
+type query_getSyntheticTests_items_configuration {
+  markSyntheticCall: Boolean!
+  retries: Int
+  retryInterval: Int
+  syntheticType: query_getSyntheticTests_items_configuration_syntheticType!
+  timeout: String
+}

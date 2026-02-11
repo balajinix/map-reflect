@@ -1,0 +1,11 @@
+type query_findWebsiteAlertConfigVersions_items {
+  changeSummary: query_findApplicationAlertConfigVersions_items_changeSummary
+  """Unix timestamp representing the creation time of this revision."""
+  created: BigInt
+  """Flag to indicate whether or not the configuration was deleted."""
+  deleted: Boolean
+  """Flag to indicate whether or not the configuration is enabled."""
+  enabled: Boolean
+  """ID of this configuration version."""
+  id: query_findApplicationAlertConfigVersions_items_id!
+}

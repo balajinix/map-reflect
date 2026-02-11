@@ -1,0 +1,6 @@
+type LicenseStatus {
+  """License Name/Id"""
+  id: String!
+  """License Status"""
+  status: String!
+}

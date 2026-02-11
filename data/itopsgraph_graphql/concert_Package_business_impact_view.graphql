@@ -1,0 +1,23 @@
+type Package_business_impact_view {
+  action: String
+  action_metadata: JSON
+  created_date: ID
+  description: String
+  findings_id: ID
+  is_archived: Boolean
+  issue_id: String
+  last_updated_by: String
+  object_id: ID
+  object_type: String
+  package_id: ID
+  package_name: String
+  package_version: String
+  recommendation: String
+  recommendation_id: ID
+  risk_type: String
+  sbom_id: ID
+  sbom_name: String
+  sbom_version: Int
+  status: String
+  updated_date: ID
+}

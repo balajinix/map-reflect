@@ -1,0 +1,7 @@
+"""HcpResource is a type containing HCP specific fields."""
+type HcpResource {
+  """organization_id that owns the resource"""
+  organization_id: string!
+  """project_id the resource belongs to"""
+  project_id: string!
+}

@@ -1,0 +1,6 @@
+type createGroupMapping_200_response {
+  groupId: String!
+  id: query_getGroupMappings_items_id
+  key: query_getGroupMappings_items_key!
+  value: query_getGroupMappings_items_value!
+}

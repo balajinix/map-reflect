@@ -1,0 +1,4 @@
+type query_getInfrastructureCatalogPlugins_items {
+  label: String
+  plugin: String
+}

@@ -1,0 +1,4 @@
+type Assessment_plan_controls {
+  assessment_plan_id: ID
+  control_id: ID
+}

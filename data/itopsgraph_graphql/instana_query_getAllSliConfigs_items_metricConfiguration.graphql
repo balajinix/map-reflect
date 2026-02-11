@@ -1,0 +1,8 @@
+"""Details regarding the metric to be configured, including the metric name, threshold, and aggregation method"""
+type query_getAllSliConfigs_items_metricConfiguration {
+  metricAggregation: query_getAllSliConfigs_items_metricConfiguration_metricAggregation
+  """Defines the name of the metric to be monitored. Examples include `calls` and `latency`"""
+  metricName: String!
+  """Specifies the threshold value for the metric being monitored"""
+  threshold: NonNegativeFloat
+}

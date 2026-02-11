@@ -1,0 +1,4 @@
+enum query_getEventSpecificationInfos_items_type {
+  BUILT_IN
+  CUSTOM
+}

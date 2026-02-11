@@ -1,0 +1,65 @@
+"""Exposure details"""
+type Exposures {
+  """Unique ID"""
+  id: String
+  """Tool names that found this exposure"""
+  tool_names: [String]
+  """Tool version"""
+  tool_version: String
+  """Rule ID"""
+  rule_id: String
+  """Rule name"""
+  rule_name: String
+  """Severity level"""
+  severity: String
+  """Priority classification"""
+  priority: String
+  """Exposure object ID"""
+  exposure_object_id: String
+  """Exposure object attribute 1"""
+  exposure_object_attr1: String
+  """Exposure object attribute 2"""
+  exposure_object_attr2: String
+  """Exposure object attribute 3"""
+  exposure_object_attr3: String
+  """Exposed path"""
+  exposure_path: String
+  """Description"""
+  description: String
+  """Count of exposures"""
+  count: Int
+  """Solution information"""
+  solution: String
+  """CWE ID"""
+  cwe_id: String
+  """WASC ID"""
+  wasc_id: String
+  """Status"""
+  status: String
+  """Other information"""
+  other_info: String
+  """Additional data"""
+  additional_data: String
+  """Score"""
+  score: Float
+  """Scan type"""
+  scan_type: String
+  """Exposure type"""
+  exposure_type: String
+  """Last updated by"""
+  last_updated_by: String
+  """Created timestamp"""
+  created_on: Int
+  """Last updated timestamp"""
+  last_updated_on: Int
+  """Whether it's archived"""
+  is_archived: Boolean
+  """Assessment status"""
+  assessment_status: String
+  """Assessment ID"""
+  assessment_id: String
+  """Associations information"""
+  associations: ExposureAssociationsDetails
+  """Associated issues"""
+  issues: [Issue]
+}

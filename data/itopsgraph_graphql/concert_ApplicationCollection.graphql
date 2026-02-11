@@ -1,0 +1,4 @@
+type ApplicationCollection {
+  """List of applications"""
+  applications: [Application]!
+}

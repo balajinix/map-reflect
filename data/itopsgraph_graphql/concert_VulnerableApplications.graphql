@@ -1,0 +1,13 @@
+"""Vulnerable application details"""
+type VulnerableApplications {
+  """Application ID"""
+  application_id: String
+  """Risk score"""
+  risk_score: Float
+  """Number of CVEs"""
+  cves: Int
+  """Number of impacted public APIs"""
+  impacted_public_api: Int
+  """Cost information"""
+  cost: String
+}

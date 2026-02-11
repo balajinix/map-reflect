@@ -1,0 +1,8 @@
+"""PackerArtifact domain model message"""
+type PackerArtifact {
+  base: Base!
+  hcp_resource: HcpResource!
+  build_id: string!
+  external_identifier: string!
+  region: string!
+}

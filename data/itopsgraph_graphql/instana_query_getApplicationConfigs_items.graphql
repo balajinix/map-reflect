@@ -1,0 +1,12 @@
+type query_getApplicationConfigs_items {
+  """Defines permissions and access relationships."""
+  accessRules: [query_getApplicationConfigs_items_accessRules_items]!
+  boundaryScope: query_getApplicationConfigs_items_boundaryScope!
+  """Unique ID of the Application Perspective. Eg: `Av62RoIKQv-A3n6DbMQh9g`."""
+  id: query_getApplicationConfigs_items_id!
+  """Name of the Application Perspective. Eg: `app1`."""
+  label: query_getApplicationConfigs_items_label!
+  matchSpecification: query_getApplicationConfigs_items_matchSpecification
+  scope: query_getApplicationConfigs_items_scope!
+  tagFilterExpression: query_getApplicationConfigs_items_tagFilterExpression
+}

@@ -1,0 +1,4 @@
+enum queryInput_getApplicationTagCatalog_dataSource {
+  CALLS
+  TRACES
+}

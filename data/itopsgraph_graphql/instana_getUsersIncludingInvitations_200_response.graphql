@@ -1,0 +1,4 @@
+type getUsersIncludingInvitations_200_response {
+  invitations: [query_getUsersIncludingInvitations_invitations_items]
+  users: [query_getUsersIncludingInvitations_users_items]
+}

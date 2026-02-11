@@ -1,0 +1,4 @@
+type Zsys_archive_sysplex {
+  id: ID
+  name: String
+}

@@ -1,0 +1,5 @@
+enum query_getTrace_rootSpan_destination_applications_items_entityType {
+  APPLICATION
+  SERVICE
+  ENDPOINT
+}

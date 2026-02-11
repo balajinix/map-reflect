@@ -1,0 +1,9 @@
+enum query_findActiveServiceLevelsAlertConfigs_items_burnRateTimeWindows_longTimeWindow_durationType {
+  millisecond
+  second
+  minute
+  hour
+  day
+  week
+  month
+}

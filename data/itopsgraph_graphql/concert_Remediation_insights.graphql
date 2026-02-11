@@ -1,0 +1,19 @@
+type Remediation_insights {
+  action_details: JSON
+  action_expected_outcome: JSON
+  action_subtype: String
+  action_type: String
+  actions_identifier: Int!
+  archived_date: ID
+  comments: String
+  create_date: ID
+  history: JSON
+  is_archived: Boolean
+  last_update_date: ID
+  risk_details: JSON
+  risk_type: String
+  status: String
+  target_component_identifier: String
+  target_component_metadata: JSON
+  target_component_type: String
+}

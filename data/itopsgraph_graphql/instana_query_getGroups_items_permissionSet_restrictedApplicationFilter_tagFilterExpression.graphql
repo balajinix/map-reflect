@@ -1,0 +1,4 @@
+"""Boolean expression of tag filters to define the scope of relevant calls."""
+type query_getGroups_items_permissionSet_restrictedApplicationFilter_tagFilterExpression {
+  type: String!
+}

@@ -1,0 +1,6 @@
+type mutation_getActionMatches_items {
+  action: mutation_getActionMatches_items_action!
+  aiEngine: String!
+  confidence: String!
+  score: Float!
+}

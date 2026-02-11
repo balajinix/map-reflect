@@ -1,0 +1,9 @@
+"""AzureVirtualMachine domain model message."""
+type AzureVirtualMachine {
+  """inherited types"""
+  virtual_machine: BaseVirtualMachine!
+  azure_resource: AzureResource!
+  """type specific fields"""
+  priority: string
+  extensions_time_budget: string
+}

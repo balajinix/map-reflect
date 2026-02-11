@@ -1,0 +1,15 @@
+type G_fwk_category {
+  accuracy: Float
+  assessed_score: Float
+  cost: Float
+  data_completeness_impact: Float
+  description: String
+  domain: String!
+  explanation: String
+  grade: String
+  id: ID!
+  label: String
+  name: String!
+  recommendation: String
+  risk: String
+}

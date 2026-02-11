@@ -1,0 +1,18 @@
+type mutation_getAvailableMetrics_metrics_items {
+  """Category of the metric"""
+  category: String
+  """Possible cross series aggregation the metric supports"""
+  crossSeriesAggregations: [mutation_getAvailableMetrics_metrics_items_crossSeriesAggregations_items]
+  """Description of the metric"""
+  description: String
+  format: mutation_getAvailableMetrics_metrics_items_format
+  """Identifier for the metric"""
+  id: String!
+  infraTagCategory: mutation_getAvailableMetrics_metrics_items_infraTagCategory!
+  """Label for the metric"""
+  label: String!
+  """Type of the entity associated with the metric"""
+  ownerType: String!
+  """Metric tags"""
+  tags: [String]
+}

@@ -1,0 +1,10 @@
+type AssessmentCustomDetails {
+  """Effort"""
+  effort: String
+  """Comments"""
+  comments: String
+  """Guidance"""
+  guidance: String
+  """Complexity"""
+  complexity: String
+}

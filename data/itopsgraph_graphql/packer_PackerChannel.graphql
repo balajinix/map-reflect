@@ -1,0 +1,9 @@
+type PackerChannel {
+  base: Base!
+  hcp_resource: HcpResource!
+  bucket_id: string!
+  version_id: string!
+  author_id: string!
+  managed: bool!
+  restricted: bool!
+}

@@ -1,0 +1,14 @@
+type query_getServiceConfigs_items {
+  """A small description of the service configuration would be present in this field if it was provided during creation of the custom service rule. If it was not provided, this field will remain empty. It is considered as best practice to add a comment to document the reasoning behind creating the rule."""
+  comment: query_getServiceConfigs_items_comment
+  """If enabled, calls will be mapped to the rule."""
+  enabled: Boolean!
+  """A unique string for the service configuration. Eg: `G510hmXYSDysLZ5kuj0BaQ`"""
+  id: String!
+  """It contains the tags defined in `matchSpecification` concatenated with a dash. Eg: if the `matchSpecification` contains keys `kubernetes.namespace.name` and `docker.label`, `label` would be `kubernetes.namespace.name-docker.label`."""
+  label: String!
+  """Calls will be matched with the array of key-value tags present in this field."""
+  matchSpecification: [query_getServiceConfigs_items_matchSpecification_items]!
+  """The name of the service configuration. Eg: `Rule ABC`"""
+  name: query_getServiceConfigs_items_name!
+}

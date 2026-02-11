@@ -1,0 +1,9 @@
+"""PackerSBOM domain model message."""
+type PackerSbom {
+  base: Base!
+  hcp_resource: HcpResource!
+  """id of the parent build"""
+  build_id: string
+  """sbom format type"""
+  format: string
+}

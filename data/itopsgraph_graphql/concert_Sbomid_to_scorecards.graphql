@@ -1,0 +1,11 @@
+type Sbomid_to_scorecards {
+  category: String
+  ckname: String
+  description: String
+  ossrepo: String
+  purl: String
+  sbom_id: String
+  score: Int
+  stat: String
+  version: Int
+}

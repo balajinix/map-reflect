@@ -1,0 +1,10 @@
+"""Represents an array of call group item containing several attributes that describe its properties. The item includes fields such as cursor, metrics, name, and timestamp, which provide detailed information about the item."""
+type mutation_getCallGroup_items_items {
+  cursor: JSON!
+  """Grouped metric details like `errors.mean`, `calls.sum`. It is usually a array of key-value pair. Format of key is `metric.aggregation.granularity`, for example: `latency.p75.360`. Format of value is `[earliest timestamp, value of key]`, for example: `[1725602720000, 0.013141001434936938]`."""
+  metrics: JSON!
+  """Name of the group."""
+  name: String!
+  """Earliest timestamp of the call from the group"""
+  timestamp: BigInt
+}

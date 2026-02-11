@@ -1,0 +1,5 @@
+"""Time window of the Maintence Window configuration occurrences."""
+type query_getMaintenanceConfigsV2_items_occurrence {
+  end: BigInt
+  start: BigInt
+}

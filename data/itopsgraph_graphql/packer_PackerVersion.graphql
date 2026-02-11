@@ -1,0 +1,13 @@
+"""PackerVersion domain model message"""
+type PackerVersion {
+  base: Base!
+  hcp_resource: HcpResource!
+  bucket_id: string
+  status: string!
+  author_id: string!
+  revocation_type: string
+  revocation_message: string
+  revocation_author: string
+  revoked_at: Timestamp!
+  template_type: string
+}

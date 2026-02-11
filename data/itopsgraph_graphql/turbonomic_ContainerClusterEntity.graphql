@@ -1,0 +1,5 @@
+type ContainerClusterEntity {
+  className: String
+  displayName: String
+  uuid: ID
+}

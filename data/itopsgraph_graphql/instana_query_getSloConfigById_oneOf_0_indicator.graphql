@@ -1,0 +1,10 @@
+"""Indicator of the Service Levels Objective Configuration, it indicates the type of metric by which the SLO should be evaluated"""
+type query_getSloConfigById_oneOf_0_indicator {
+  aggregation: query_getSloConfigById_oneOf_0_indicator_aggregation
+  blueprint: query_getSloConfigById_oneOf_0_indicator_blueprint
+  operator: query_getSloConfigById_oneOf_0_indicator_operator
+  serviceLevelsMeasurement: query_getSloConfigById_oneOf_0_indicator_serviceLevelsMeasurement
+  """Threshold Value for the Blueprint"""
+  threshold: Float
+  type: query_getSloConfigById_oneOf_0_indicator_type
+}

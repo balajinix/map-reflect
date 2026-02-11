@@ -1,0 +1,8 @@
+type Access_control_view {
+  entity_id: ID
+  entity_name: String
+  entity_type: String
+  id: String
+  role: String
+  role_type: String
+}

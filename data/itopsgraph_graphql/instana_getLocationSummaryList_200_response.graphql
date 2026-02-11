@@ -1,0 +1,7 @@
+type getLocationSummaryList_200_response {
+  items: [mutation_getSyntheticResultList_items_items]!
+  """Page Number"""
+  page: Int
+  pageSize: Int
+  totalHits: BigInt
+}

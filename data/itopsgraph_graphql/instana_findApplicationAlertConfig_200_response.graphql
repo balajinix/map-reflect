@@ -1,0 +1,45 @@
+type findApplicationAlertConfig_200_response {
+  """List of IDs of alert channels defined in Instana. Can be left empty."""
+  alertChannelIds: [String]!
+  """Set of alert channel IDs associated with the severity."""
+  alertChannels: JSON
+  """ID of the application that this Smart Alert configuration is applied to."""
+  applicationId: query_findActiveApplicationAlertConfigs_items_applicationId
+  applications: query_findActiveApplicationAlertConfigs_items_applications!
+  boundaryScope: query_findActiveApplicationAlertConfigs_items_boundaryScope!
+  """Unix timestamp representing the creation time of this revision."""
+  created: BigInt
+  """Custom payload fields to send additional information in the alert notifications. Can be left empty."""
+  customPayloadFields: [query_findActiveApplicationAlertConfigs_items_customPayloadFields_items]!
+  """Description of the application alert configuration. Used as a template for the description of alert/event notifications triggered by this Smart Alert configuration."""
+  description: query_findActiveApplicationAlertConfigs_items_description!
+  """Flag to indicate whether or not the configuration is enabled."""
+  enabled: Boolean
+  evaluationType: query_findActiveApplicationAlertConfigs_items_evaluationType!
+  """The duration for which an alert remains open after conditions are no longer violated, with the alert auto-closing once the grace period expires."""
+  gracePeriod: BigInt
+  granularity: query_findActiveApplicationAlertConfigs_items_granularity!
+  """ID of this Application App Alert Config."""
+  id: query_findActiveApplicationAlertConfigs_items_id!
+  """Flag to include Internal Calls. These calls are work done inside a service and correspond to intermediate spans in custom tracing."""
+  includeInternal: Boolean
+  """Flag to include Synthetic Calls. These calls have a synthetic endpoint as their destination, such as calls to health-check endpoints."""
+  includeSynthetic: Boolean
+  """Unix timestamp representing the time of the initial revision."""
+  initialCreated: BigInt
+  """Name of the application alert configuration. Used as a template for the title of alert/event notifications triggered by this Smart Alert configuration."""
+  name: query_findActiveApplicationAlertConfigs_items_name!
+  """Flag to indicate whether or not the configuration is read-only. Read-only access restricts modification of the config."""
+  readOnly: Boolean
+  rule: query_findActiveApplicationAlertConfigs_items_rule
+  """A list of rules where each rule is associated with multiple thresholds and their corresponding severity levels. This enables more complex alert configurations with validations to ensure consistent and logical threshold-severity combinations."""
+  rules: [query_findActiveApplicationAlertConfigs_items_rules_items]
+  """The severity of the alert when triggered, which is either 5 (Warning), or 10 (Critical)."""
+  severity: Int
+  tagFilterExpression: query_findActiveApplicationAlertConfigs_items_tagFilterExpression!
+  tagFilters: [query_findActiveApplicationAlertConfigs_items_tagFilters_items]
+  threshold: query_findActiveApplicationAlertConfigs_items_threshold
+  timeThreshold: query_findActiveApplicationAlertConfigs_items_timeThreshold!
+  """Optional flag to indicate whether an Incident is also triggered or not."""
+  triggering: Boolean
+}

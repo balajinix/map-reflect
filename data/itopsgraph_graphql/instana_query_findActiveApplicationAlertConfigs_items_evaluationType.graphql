@@ -1,0 +1,5 @@
+enum query_findActiveApplicationAlertConfigs_items_evaluationType {
+  PER_AP
+  PER_AP_SERVICE
+  PER_AP_ENDPOINT
+}

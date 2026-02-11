@@ -1,0 +1,11 @@
+"""Type of dependency between the source and the destination."""
+type _query_topology_nodes_items {
+  data: JSON
+  entityId: _query_topology_nodes_items_entityId
+  """GraphNode ID."""
+  id: String
+  """Label of the entity"""
+  label: String
+  """Name of the plugin"""
+  plugin: String
+}

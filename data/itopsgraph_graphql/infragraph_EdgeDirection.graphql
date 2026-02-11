@@ -1,0 +1,6 @@
+"""EdgeDirection indicates the direction of the edge in the graph."""
+enum EdgeDirection {
+  EDGE_DIRECTION_UNSPECIFIED
+  EDGE_DIRECTION_INCOMING
+  EDGE_DIRECTION_OUTGOING
+}

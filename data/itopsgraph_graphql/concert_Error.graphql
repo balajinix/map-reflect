@@ -1,0 +1,9 @@
+"""Error details"""
+type Error {
+  """Error code"""
+  code: String
+  """Error message"""
+  message: String
+  """Additional info about the error"""
+  more_info: String
+}

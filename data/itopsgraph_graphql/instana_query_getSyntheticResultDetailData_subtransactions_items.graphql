@@ -1,0 +1,4 @@
+type query_getSyntheticResultDetailData_subtransactions_items {
+  metrics: JSON!
+  properties: JSON!
+}

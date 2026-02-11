@@ -1,0 +1,13 @@
+"""Response structure for cost reports."""
+type LLMCostReport {
+  """Total number of results available (before limit/offset)."""
+  total_results: Int
+  """Number of results returned in this response."""
+  limit: Int
+  """Starting position of results (0-indexed)."""
+  offset: Int
+  """Array of report data rows."""
+  results: [ReportRow]
+  """Metadata about the report request and available fields."""
+  meta: Meta
+}

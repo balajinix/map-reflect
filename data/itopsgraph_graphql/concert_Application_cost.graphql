@@ -1,0 +1,7 @@
+type Application_cost {
+  application_id: ID
+  cloud_cost: String
+  engineering_cost: String
+  total_cost: String
+  vendor_cost: String
+}

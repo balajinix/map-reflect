@@ -1,0 +1,13 @@
+type addManualServiceConfig_200_response {
+  """A description of the manual service configuration."""
+  description: String
+  """Enable or disable the manual service configuration. By default it is enabled."""
+  enabled: Boolean
+  """The service ID of the existing monitored service to which the calls should be linked."""
+  existingServiceId: String
+  """A unique id of the manual service configuration."""
+  id: query_getAllManualServiceConfigs_items_id!
+  tagFilterExpression: query_getAllManualServiceConfigs_items_tagFilterExpression!
+  """A service name if you want to map calls to an unmonitored service."""
+  unmonitoredServiceName: String
+}

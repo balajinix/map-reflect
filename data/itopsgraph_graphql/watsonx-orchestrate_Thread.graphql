@@ -1,0 +1,27 @@
+"""message threads"""
+type Thread {
+  """The unique identifier of the message."""
+  id: ID!
+  """The tenant unique identifier associated with the message."""
+  tenant_id: ID!
+  """The unique identifier of the user who created the message."""
+  created_by: String
+  """The username of the user who created the message."""
+  created_by_username: String
+  """The timestamp when the message was created."""
+  created_on: DateTime
+  """The timestamp when the message was last updated."""
+  updated_at: DateTime
+  """The unique identifier of the thread the message belongs to."""
+  thread_id: ID!
+  assistant: AssistantInfo!
+  """The unique identifier of the parent message, if any."""
+  parent_message_id: ID
+  """The role of the sender (Example: user and assistant)."""
+  role: String!
+  """The message content, either as a list content objects or string."""
+  content: [JSON]!
+  """List of mentions included in the message."""
+  mentions: [Mention]
+  additional_properties: AdditionalProperties
+}

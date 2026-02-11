@@ -1,0 +1,16 @@
+"""List of services in the topology."""
+type query_getServicesMap_services_items {
+  applications: [String]!
+  entityType: query_getServicesMap_services_items_entityType
+  """Unique ID of the Service. Eg: `3feb3dcd206c166ef2b41c707e0cd38d7cd325aa`."""
+  id: String!
+  """Name of the Service. Eg: `payment`."""
+  label: String!
+  maxSeverity: NonNegativeFloat
+  numberOfOpenIssues: Int
+  """A unique identifier the metrics are assigned to."""
+  snapshotIds: [String]!
+  technologies: [String]!
+  """Shows types of Endpoints a Service can consist of. It may be one or more. Eg: `HTTP` `OPENTELEMETRY` can be in 1 Service."""
+  types: [query_getServicesMap_services_items_types_items]!
+}

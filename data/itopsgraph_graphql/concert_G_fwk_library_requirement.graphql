@@ -1,0 +1,17 @@
+type G_fwk_library_requirement {
+  category: String
+  created_by: String!
+  creation_ts: DateTime
+  criteria: String
+  criteria_type: String
+  description: String
+  expected_score_goal: Float
+  input_data_keys: String
+  label: String
+  last_modified_ts: DateTime
+  library_id: ID
+  modified_by: String!
+  rating_thresholds: String
+  req_id: ID!
+  req_name: String!
+}

@@ -1,0 +1,10 @@
+type VulnerabilitiesSummary {
+  """Count of critical severities"""
+  critical: Int
+  """Count of high severities"""
+  high: Int
+  """Count of medium severities"""
+  medium: Int
+  """Count of low severities"""
+  low: Int
+}

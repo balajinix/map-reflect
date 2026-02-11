@@ -1,0 +1,5 @@
+type query_getAllReleases_items_services_items {
+  id: String!
+  name: String
+  scopedTo: query_getAllReleases_items_services_items_scopedTo
+}

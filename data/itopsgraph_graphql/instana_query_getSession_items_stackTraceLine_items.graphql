@@ -1,0 +1,8 @@
+type query_getSession_items_stackTraceLine_items {
+  column: Int
+  file: String!
+  line: Int
+  name: String
+  translationExplanation: String
+  translationStatus: Int
+}

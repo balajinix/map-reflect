@@ -1,0 +1,4 @@
+type Applications_images {
+  app_release_id: ID
+  image_id: ID
+}

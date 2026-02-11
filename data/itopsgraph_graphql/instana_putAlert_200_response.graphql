@@ -1,0 +1,17 @@
+type putAlert_200_response {
+  """Name of the Alert Configuration."""
+  alertName: query_getAlert_alertName!
+  """Custom payload fields to send additional information in the alert notifications. Can be left empty."""
+  customPayloadFields: [query_getAlert_customPayloadFields_items]!
+  eventFilteringConfiguration: query_getAlert_eventFilteringConfiguration!
+  """ID of the Alert Configuration."""
+  id: query_getAlert_id!
+  """To include the entity name in a legacy alert based on built-in/custom events."""
+  includeEntityNameInLegacyAlerts: Boolean
+  """List of Alert Channel IDs added in this Alert Configuration."""
+  integrationIds: [String]!
+  """Unix timestamp representing the time the configuration was last updated."""
+  lastUpdated: BigInt
+  """Timer dictating how long the Alert Configuration will stay muted. A value of `0` means the Alert Configuration is currently enabled. Otherwise, the Alert Configuration is currently disabled (muted)."""
+  muteUntil: BigInt
+}

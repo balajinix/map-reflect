@@ -1,0 +1,5 @@
+enum query_getMaintenanceConfigsV2_items_scheduling_duration_unit {
+  MINUTES
+  HOURS
+  DAYS
+}

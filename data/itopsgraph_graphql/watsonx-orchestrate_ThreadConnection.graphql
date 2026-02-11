@@ -1,0 +1,5 @@
+"""Thread Connection with edges"""
+type ThreadConnection {
+  edges: [ThreadEdge]
+  pageInfo: PageInfo!
+}

@@ -1,0 +1,4 @@
+type getAuditLogs_200_response {
+  entries: [query_getAuditLogs_entries_items]
+  total: BigInt
+}

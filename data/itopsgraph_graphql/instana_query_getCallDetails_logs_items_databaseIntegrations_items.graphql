@@ -1,0 +1,4 @@
+type query_getCallDetails_logs_items_databaseIntegrations_items {
+  type: String
+  url: String
+}

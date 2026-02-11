@@ -1,0 +1,4 @@
+type query_getUsersIncludingInvitations_invitations_items {
+  invitationStatus: query_getInvitations_items_invitationStatus
+  userEmail: String
+}

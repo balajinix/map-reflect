@@ -1,0 +1,4 @@
+type CommoditySource {
+  capacityCommoditySource: String
+  capacitySourceIndex: Int
+}

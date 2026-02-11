@@ -1,0 +1,12 @@
+type AwsIamRole {
+  role: BaseRole!
+  aws_resource: AwsResource!
+  path: string!
+  assume_role_policy_document: string
+  description: string
+  max_session_duration: int32
+  last_used_date: Timestamp!
+  last_used_region: string
+  permissions_boundary_arn: string
+  permissions_boundary_type: string
+}

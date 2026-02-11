@@ -1,0 +1,4 @@
+type getPluginPayload_200_response {
+  raw_payload: [query_getPluginPayload_raw_payload_items]
+  timestamp: Int
+}

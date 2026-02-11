@@ -1,0 +1,8 @@
+type getAlertingChannel_200_response {
+  """Unique ID of the returned Alert Channel"""
+  id: String!
+  """The type of the Alerting Channel."""
+  kind: String!
+  """The name of the Alerting Channel."""
+  name: String!
+}

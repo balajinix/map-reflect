@@ -1,0 +1,5 @@
+type About_categories {
+  category: String!
+  description: String!
+  long_description: String
+}

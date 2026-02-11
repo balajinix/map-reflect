@@ -1,0 +1,9 @@
+type Packages_view {
+  app_release_id: ID
+  application_id: ID
+  environment_id: ID
+  image_id: ID
+  last_updated_by: String
+  package_id: ID
+  source_repo_id: ID
+}

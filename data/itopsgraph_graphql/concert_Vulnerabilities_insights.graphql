@@ -1,0 +1,10 @@
+type Vulnerabilities_insights {
+  end_date: String
+  generated_date: String
+  id: ID!
+  insights_focal_object_id: String
+  insights_metadata: JSON
+  insights_scope: String
+  insights_text: String
+  score: ID
+}

@@ -1,0 +1,4 @@
+type Resources_images {
+  image_id: ID
+  resource_id: ID
+}

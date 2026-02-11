@@ -1,0 +1,10 @@
+enum query_getSyntheticTests_items_configuration_syntheticType {
+  BrowserScript
+  DNSAction
+  HTTPAction
+  HTTPScript
+  SSLCertificate
+  WebpageAction
+  WebpageScript
+  NotConfigured
+}

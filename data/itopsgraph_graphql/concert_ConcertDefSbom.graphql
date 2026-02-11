@@ -1,0 +1,20 @@
+type ConcertDefSbom {
+  """ID of the sbom"""
+  id: String
+  """Name of the SBOM file"""
+  file_name: String
+  """El link"""
+  el_link: String
+  """Path of the SBOM file"""
+  el_path: String
+  """Timestamp"""
+  timestamp: Int
+  """Type of the sbom"""
+  type: String
+  """Tags of the concertdef_sbom"""
+  tags: [String]!
+  """Last updated on"""
+  last_updated_on: Int
+  """Last updated by"""
+  last_updated_by: String
+}

@@ -1,0 +1,6 @@
+type AssistantRunRoot {
+  message_id: String
+  run_id: String
+  task_id: String
+  thread_id: String
+}

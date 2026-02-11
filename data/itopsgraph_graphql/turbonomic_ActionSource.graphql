@@ -1,0 +1,6 @@
+enum ActionSource {
+  MARKET
+  PARKING
+  BUY_RI
+  CLOUD_OPTIMIZER
+}

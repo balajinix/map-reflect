@@ -1,0 +1,4 @@
+enum query_getApplicationConfigs_items_accessRules_items_accessType {
+  READ
+  READ_WRITE
+}

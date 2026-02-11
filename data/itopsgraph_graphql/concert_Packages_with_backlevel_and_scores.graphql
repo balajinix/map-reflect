@@ -1,0 +1,22 @@
+type Packages_with_backlevel_and_scores {
+  backlevel: String
+  category: String
+  ckname: String
+  default_published_at: DateTime
+  default_version: String
+  description: String
+  ecosystem: String
+  id: ID
+  last_updated_by: String
+  last_updated_on: ID
+  latest_published_at: DateTime
+  latest_version: String
+  name: String
+  ossrepo: String
+  published_at: DateTime
+  reason: String
+  score: Int
+  source_url: String
+  stat: String
+  version: String
+}

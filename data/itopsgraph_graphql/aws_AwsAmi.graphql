@@ -1,0 +1,4 @@
+type AwsAmi {
+  virtual_machine_image: BaseVirtualMachineImage!
+  aws_resource: AwsResource!
+}

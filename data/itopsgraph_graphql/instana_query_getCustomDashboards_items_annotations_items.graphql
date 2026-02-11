@@ -1,0 +1,4 @@
+enum query_getCustomDashboards_items_annotations_items {
+  SHARED
+  WRITABLE
+}

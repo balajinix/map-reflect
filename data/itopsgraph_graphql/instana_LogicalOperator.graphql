@@ -1,0 +1,4 @@
+enum LogicalOperator {
+  AND
+  OR
+}

@@ -1,0 +1,5 @@
+"""API key object"""
+type ApiKey {
+  """The generated API key"""
+  key: String
+}

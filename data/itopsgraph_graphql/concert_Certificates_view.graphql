@@ -1,0 +1,25 @@
+type Certificates_view {
+  additional_data: JSON
+  api_server: String
+  certificate_id: ID
+  certificate_type: String
+  cluster_name: String
+  created_at: ID
+  description: String
+  dns_names: String
+  environment_id: ID
+  environment_name: String
+  is_archived: Boolean
+  issuer: String
+  last_updated_by: String
+  last_updated_on: ID
+  metadata: JSON
+  owner: String
+  secret_key: String
+  serial_number: String
+  status: String
+  subject: String
+  validity_end_date: ID
+  validity_period: ID
+  validity_start_date: ID
+}

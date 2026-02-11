@@ -1,0 +1,6 @@
+type CveInfo {
+  """CVE"""
+  cve: String
+  """Represents if there are any findings of the CVE"""
+  exists_in_vulnerabilities: Boolean!
+}

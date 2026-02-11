@@ -1,0 +1,11 @@
+type Topology_application_view {
+  applications: JSON
+  cves: JSON
+  dast_exposures: JSON
+  environments: JSON
+  images: JSON
+  private_access_points: JSON
+  public_access_points: JSON
+  repositories: JSON
+  sast_exposures: JSON
+}

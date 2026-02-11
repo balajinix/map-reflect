@@ -1,0 +1,11 @@
+enum query_getActions_items_type {
+  SCRIPT
+  HTTP
+  ANSIBLE
+  EXTERNAL
+  GITHUB
+  GITLAB
+  JIRA
+  MANUAL
+  DOC_LINK
+}

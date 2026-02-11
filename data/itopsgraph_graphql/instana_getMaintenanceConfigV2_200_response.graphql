@@ -1,0 +1,19 @@
+type getMaintenanceConfigV2_200_response {
+  """ID of the Maintenance Window configuration."""
+  id: query_getMaintenanceConfigV2_id!
+  lastUpdated: BigInt
+  """Name of the Maintenance Window configuration."""
+  name: query_getMaintenanceConfigV2_name!
+  occurrence: query_getMaintenanceConfigV2_occurrence!
+  """Boolean flag to determine if the Maintenance Window configuration is paused or still live."""
+  paused: Boolean
+  """Dynamic Focus Query that determines the scope of the Maintenance Window configuration."""
+  query: query_getMaintenanceConfigV2_query!
+  """Boolean flag to determine if we should retrigger open alerts to be sent out for any events that opened during this maintenance window, and continues to remain open after the window expires"""
+  retriggerOpenAlertsEnabled: Boolean
+  scheduling: query_getMaintenanceConfigV2_scheduling!
+  state: query_getMaintenanceConfigV2_state
+  tagFilterExpression: query_getMaintenanceConfigV2_tagFilterExpression
+  """Boolean flag to determine if the tagFilterExpression is enabled."""
+  tagFilterExpressionEnabled: Boolean
+}

@@ -1,0 +1,11 @@
+type Application_release {
+  application_id: ID
+  id: ID!
+  last_updated_by: String
+  last_updated_on: ID!
+  latest: Boolean
+  properties: JSON
+  release_version: String
+  sbom_id: ID
+  status: String
+}

@@ -1,0 +1,6 @@
+type query_getGroups_items {
+  id: query_getGroups_items_id!
+  members: [query_getGroups_items_members_items]!
+  name: String!
+  permissionSet: query_getGroups_items_permissionSet!
+}

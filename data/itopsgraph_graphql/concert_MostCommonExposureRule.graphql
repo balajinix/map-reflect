@@ -1,0 +1,9 @@
+"""Most common exposure rule information"""
+type MostCommonExposureRule {
+  """Rule name"""
+  rule_name: String
+  """Priority"""
+  priority: String
+  """Frequency of occurrence"""
+  frequency: Int
+}

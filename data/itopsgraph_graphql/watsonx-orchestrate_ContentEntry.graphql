@@ -1,0 +1,4 @@
+type ContentEntry {
+  response_type: String
+  text: String
+}

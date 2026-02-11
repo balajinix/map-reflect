@@ -1,0 +1,8 @@
+type query_getUsersIncludingInvitations_users_items {
+  email: String!
+  fullName: String!
+  groupCount: BigInt
+  id: String!
+  lastLoggedIn: BigInt
+  tfaEnabled: Boolean
+}

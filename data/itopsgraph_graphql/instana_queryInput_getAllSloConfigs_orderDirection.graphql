@@ -1,0 +1,4 @@
+enum queryInput_getAllSloConfigs_orderDirection {
+  ASC
+  DESC
+}

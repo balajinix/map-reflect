@@ -1,0 +1,8 @@
+type query_getAuditLogs_entries_items {
+  action: String!
+  actor: query_getAuditLogs_entries_items_actor!
+  id: String!
+  message: String!
+  meta: JSON!
+  timestamp: BigInt
+}

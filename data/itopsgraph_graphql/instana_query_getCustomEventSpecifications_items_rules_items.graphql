@@ -1,0 +1,5 @@
+"""Set AND / OR"""
+type query_getCustomEventSpecifications_items_rules_items {
+  ruleType: String!
+  severity: Int
+}

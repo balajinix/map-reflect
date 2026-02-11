@@ -1,0 +1,9 @@
+enum query_getSloConfigById_oneOf_0_timeWindow_durationUnit {
+  millisecond
+  second
+  minute
+  hour
+  day
+  week
+  month
+}

@@ -1,0 +1,13 @@
+"""Service endpoint."""
+type ServiceEndpoint implements E & n & t & i & t & y {
+  entityType: EntityType
+  """Unique ID of the endpoint."""
+  id: ID!
+  """Name of the endpoint. Eg: payment."""
+  label: String!
+  syntheticType: SyntheticType
+  """List of technologies: Eg: `["springbootApplicationContainer"]`"""
+  technologies: [String]!
+  """Types of the endpoint."""
+  type: ServiceType!
+}

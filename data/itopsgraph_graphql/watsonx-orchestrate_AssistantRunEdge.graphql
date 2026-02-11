@@ -1,0 +1,5 @@
+"""AssistantRun Edge with node"""
+type AssistantRunEdge {
+  node: AssistantRun
+  cursor: String
+}

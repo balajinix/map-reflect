@@ -1,0 +1,20 @@
+"""List of queryable tags available in a tagTree. Eg: `call.erroneous`. Consider these tags as attributes of a tagTree. Eg: `Call` tagTree has have `Erroneous`, `Call name`, `Latency` etc as attributes."""
+type query_getApplicationTags_items {
+  """List of other names that can refer to this tag"""
+  aliases: [String]
+  """List of product areas this tag is available in"""
+  availability: [query_getApplicationTagCatalog_tags_items_availability_items]
+  """Whether the tag is available for destination or not. If source and destination is false, it means the tag is independent of source and destination. Eg: of such tag is `call.http.path`."""
+  canApplyToDestination: Boolean
+  """Whether the tag is available for source or not. If source and destination is false, it means the tag is independent of source and destination. Eg: of such tag is `call.http.path`."""
+  canApplyToSource: Boolean
+  """The description of the tag if it is provided."""
+  description: String
+  """Whether the Tag is a unique ID or not. Eg: `idTag` for `endpoint.id` is true but for `call.rpc.method` it is false."""
+  idTag: Boolean
+  """The name of the tag which is seen in the UI. Eg: `Call name`"""
+  label: query_getApplicationTagCatalog_tags_items_label
+  """The name of the tag. Eg: `call.name`"""
+  name: String!
+  type: query_getApplicationTagCatalog_tags_items_type!
+}

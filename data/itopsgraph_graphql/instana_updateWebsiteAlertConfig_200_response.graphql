@@ -1,0 +1,37 @@
+"""ID of the website that this Smart Alert configuration is applied to."""
+type updateWebsiteAlertConfig_200_response {
+  """List of IDs of alert channels defined in Instana. Can be left empty."""
+  alertChannelIds: [String]!
+  """Unix timestamp representing the creation time of this revision."""
+  created: BigInt
+  """Custom payload fields to send additional information in the alert notifications. Can be left empty."""
+  customPayloadFields: [query_findActiveWebsiteAlertConfigs_items_customPayloadFields_items]!
+  """Description of the website alert configuration. Used as a template for the description of alert/event notifications triggered by this Smart Alert configuration."""
+  description: query_findActiveWebsiteAlertConfigs_items_description!
+  """Flag to indicate whether or not the configuration is enabled."""
+  enabled: Boolean
+  """The duration for which an alert remains open after conditions are no longer violated, with the alert auto-closing once the grace period expires."""
+  gracePeriod: BigInt
+  granularity: query_findActiveWebsiteAlertConfigs_items_granularity!
+  """ID of this Website Alert Config."""
+  id: query_findActiveWebsiteAlertConfigs_items_id!
+  """Unix timestamp representing the time of the initial revision."""
+  initialCreated: BigInt
+  """Name of the website alert configuration. Used as a template for the title of alert/event notifications triggered by this Smart Alert configuration."""
+  name: query_findActiveWebsiteAlertConfigs_items_name!
+  """Flag to indicate whether or not the configuration is read-only. Read-only access restricts modification of the config."""
+  readOnly: Boolean
+  rule: query_findActiveWebsiteAlertConfigs_items_rule
+  """A list of rules where each rule is associated with multiple thresholds and their corresponding severity levels. This enables more complex alert configurations with validations to ensure consistent and logical threshold-severity combinations."""
+  rules: [query_findActiveWebsiteAlertConfigs_items_rules_items]
+  """The severity of the alert when triggered, which is either 5 (Warning), or 10 (Critical)."""
+  severity: Int
+  tagFilterExpression: query_findActiveWebsiteAlertConfigs_items_tagFilterExpression!
+  tagFilters: [query_findActiveWebsiteAlertConfigs_items_tagFilters_items]
+  threshold: query_findActiveWebsiteAlertConfigs_items_threshold
+  timeThreshold: query_findActiveWebsiteAlertConfigs_items_timeThreshold!
+  """Optional flag to indicate whether an Incident is also triggered or not."""
+  triggering: Boolean
+  """ID of the website that this Smart Alert configuration is applied to."""
+  websiteId: query_findActiveWebsiteAlertConfigs_items_websiteId!
+}

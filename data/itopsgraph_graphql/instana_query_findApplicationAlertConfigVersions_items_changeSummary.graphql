@@ -1,0 +1,5 @@
+"""Brief summary of changes made in this config version."""
+type query_findApplicationAlertConfigVersions_items_changeSummary {
+  author: query_findApplicationAlertConfigVersions_items_changeSummary_author!
+  changeType: query_findApplicationAlertConfigVersions_items_changeSummary_changeType!
+}

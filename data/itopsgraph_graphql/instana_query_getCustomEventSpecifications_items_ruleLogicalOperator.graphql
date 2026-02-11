@@ -1,0 +1,4 @@
+enum query_getCustomEventSpecifications_items_ruleLogicalOperator {
+  AND
+  OR
+}

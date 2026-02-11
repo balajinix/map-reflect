@@ -1,0 +1,11 @@
+type Applications {
+  business_id: ID
+  criticality: Int
+  data_impact_risk: Int
+  description: String
+  id: ID!
+  last_updated_by: String
+  last_updated_on: ID!
+  name: String
+  sample: Boolean
+}

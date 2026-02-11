@@ -1,0 +1,6 @@
+enum query_findApplicationAlertConfigVersions_items_changeSummary_author_type {
+  API
+  USER
+  INSTANA
+  UNKNOWN
+}

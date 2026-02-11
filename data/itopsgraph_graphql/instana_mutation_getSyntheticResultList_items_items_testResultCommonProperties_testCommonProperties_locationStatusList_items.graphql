@@ -1,0 +1,7 @@
+type mutation_getSyntheticResultList_items_items_testResultCommonProperties_testCommonProperties_locationStatusList_items {
+  locationDisplayLabel: String
+  locationId: String!
+  successRate: Float
+  successRuns: BigInt
+  totalTestRuns: BigInt
+}

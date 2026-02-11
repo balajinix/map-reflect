@@ -1,0 +1,6 @@
+enum query_getSloConfigById_oneOf_0_indicator_serviceLevelsMeasurement {
+  eventBased
+  timeBased
+  erroneous
+  all
+}

@@ -1,0 +1,7 @@
+"""This is the warm-up and cool-down setting to emit or stop alert event after threshold reached."""
+type query_findActiveServiceLevelsAlertConfigs_items_timeThreshold {
+  """This is the cooldown period when the active alert misses threshold and stop emitting notification."""
+  expiry: BigInt
+  """This is the grace period when the threshold is reached and the alert becomes active to emit notification."""
+  timeWindow: BigInt
+}

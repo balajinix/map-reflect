@@ -1,0 +1,6 @@
+type Score_card_category_view {
+  category: String
+  description: String
+  ossrepo: String
+  score: Float
+}

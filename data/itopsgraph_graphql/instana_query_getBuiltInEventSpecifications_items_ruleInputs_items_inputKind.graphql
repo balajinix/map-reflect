@@ -1,0 +1,7 @@
+enum query_getBuiltInEventSpecifications_items_ruleInputs_items_inputKind {
+  METRIC
+  SNAPSHOT_FIELD
+  EVENT
+  DERIVED_METRIC
+  METRIC_PATTERN
+}

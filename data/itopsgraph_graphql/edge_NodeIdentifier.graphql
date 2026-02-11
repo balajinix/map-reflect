@@ -1,0 +1,30 @@
+"""EdgeLabel is a label that describes the relationship between nodes in the graph.
+enum EdgeLabel {
+  EDGE_LABEL_UNSPECIFIED = 0;
+  EDGE_LABEL_CONTAINS = 1;
+  EDGE_LABEL_RUNS = 2;
+  EDGE_LABEL_ATTACHES_TO = 4;
+  EDGE_LABEL_APPLIES_TO = 5;
+  EDGE_LABEL_PRODUCES = 6;
+  EDGE_LABEL_CONNECTS_TO = 7;
+  EDGE_LABEL_STORES = 8;
+  EDGE_LABEL_HAS_CURRENT = 9;
+  EDGE_LABEL_INSTANCE_OF = 10;
+  EDGE_LABEL_MANAGES = 11;
+  EDGE_LABEL_RUNS_ON = 12;
+  EDGE_LABEL_OWNS = 13;
+}
+
+// EdgeDirection indicates the direction of the edge in the graph.
+enum EdgeDirection {
+  EDGE_DIRECTION_UNSPECIFIED = 0;
+  EDGE_DIRECTION_INCOMING = 1;
+  EDGE_DIRECTION_OUTGOING = 2;
+}
+
+// NodeIdentifier encompasses values that uniquely identify a node in the graph."""
+type NodeIdentifier {
+  id: string!
+  source: Source!
+  kind: Kind!
+}

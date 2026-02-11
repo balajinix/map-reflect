@@ -1,0 +1,4 @@
+type Businesses {
+  id: ID!
+  name: String
+}

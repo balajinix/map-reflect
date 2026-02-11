@@ -1,0 +1,12 @@
+enum ExpType {
+  EQ
+  NEQ
+  GT
+  LT
+  GTE
+  LTE
+  RXEQ
+  RXNEQ
+  EX
+  NEX
+}

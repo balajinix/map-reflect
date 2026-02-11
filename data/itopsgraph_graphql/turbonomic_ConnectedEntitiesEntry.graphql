@@ -1,0 +1,10 @@
+type ConnectedEntitiesEntry {
+  className: String
+  discoveredBy: DiscoveredBy
+  displayName: String
+  environmentType: String
+  state: String
+  tags: JSON
+  uuid: ID
+  vendorIds: JSON
+}

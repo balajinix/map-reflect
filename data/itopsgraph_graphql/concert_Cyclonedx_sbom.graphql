@@ -1,0 +1,14 @@
+type Cyclonedx_sbom {
+  file_name: String
+  id: ID!
+  is_archived: Boolean
+  last_updated_by: String
+  last_updated_on: ID!
+  manufacturer: ID
+  metadata: JSON
+  name: String
+  sbom_type: String
+  serial_number: String
+  supplier: ID
+  version: Int!
+}

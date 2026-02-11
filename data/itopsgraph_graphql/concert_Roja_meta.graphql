@@ -1,0 +1,7 @@
+type Roja_meta {
+  create_ts: DateTime!
+  description: String!
+  id: Int!
+  last_mod_ts: DateTime!
+  release: String!
+}

@@ -1,0 +1,4 @@
+type mutation_putMaintenanceConfigV2_scheduling_duration {
+  amount: Int
+  unit: String
+}

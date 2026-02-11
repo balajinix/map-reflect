@@ -1,0 +1,5 @@
+enum mutationInput_addApplicationConfig_input_boundaryScope {
+  ALL
+  INBOUND
+  DEFAULT
+}

@@ -1,0 +1,9 @@
+enum query_getApplicationTagCatalog_tags_items_type {
+  BOOLEAN
+  STRING
+  NUMBER
+  STRING_SET
+  STRING_LIST
+  KEY_VALUE_PAIR
+  KEY_NUMBER_PAIR
+}

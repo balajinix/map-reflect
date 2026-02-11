@@ -1,0 +1,485 @@
+"""Represents a single row in the cost report."""
+type ReportRow {
+  """(Dimension) Payer Account ID"""
+  account_identifier: String
+  """(Dimension) Payer Account Name"""
+  account_name: String
+  """(Metric) Fairshare Cost (Adjusted Amortized)"""
+  adjusted_amortized_fairshare_cost: Float
+  """(Metric) Idle Cost (Adjusted Amortized)"""
+  adjusted_amortized_idle_cost: Float
+  """(Metric) Utilized Cost (Adjusted Amortized)"""
+  adjusted_amortized_utilized_cost: Float
+  """(Metric) Cost (Adjusted)"""
+  adjusted_cost: Float
+  """(Metric) Fairshare Cost (Adjusted)"""
+  adjusted_fairshare_cost: Float
+  """(Metric) Idle Cost (Adjusted)"""
+  adjusted_idle_cost: Float
+  """(Metric) Utilized Cost (Adjusted)"""
+  adjusted_utilized_cost: Float
+  """(Dimension) GCP Ancestry Numbers"""
+  ancestry_numbers: String
+  """(Dimension) ATUM Service Category"""
+  atum_service_category: String
+  """(Dimension) ATUM Service Name"""
+  atum_service_name: String
+  """(Dimension) ATUM Service Type"""
+  atum_service_type: String
+  """(Dimension) ATUM Sub-Tower"""
+  atum_subtower: String
+  """(Dimension) ATUM Tower"""
+  atum_tower: String
+  """(Dimension) Azure Reservation Order Name"""
+  azure_reservation_order_name: String
+  """(Metric) Rate (Blended)"""
+  blended_rate: Float
+  """(Metric) Cost (Commited)"""
+  business_metric1: Float
+  """(Metric) Someone's Test"""
+  business_metric10: Float
+  """(Metric) Bytes Transferred Passthrough"""
+  business_metric11: String
+  """(Metric) Cost of East"""
+  business_metric13: Float
+  """(Metric) CBR Savings Plans Savings"""
+  business_metric14: Float
+  """(Metric) test it"""
+  business_metric15: Float
+  """(Metric) Test_UsageFam"""
+  business_metric2: Float
+  """(Metric) test_EC2_COST"""
+  business_metric3: String
+  """(Metric) test_powerup"""
+  business_metric4: Float
+  """(Metric) GST"""
+  business_metric5: Float
+  """(Metric) test demo"""
+  business_metric6: Float
+  """(Metric) Savings testak"""
+  business_metric7: Float
+  """(Metric) Account Count"""
+  business_metric8: String
+  """(Metric) Surcharge"""
+  business_metric9: String
+  """(Metric) GiB Hours"""
+  byte_hours: Float
+  """(Metric) Data Transfer (GiB)"""
+  bytes_transferred: Float
+  """(Metric) Estimated Carbon Emissions (MTCO2e)"""
+  carbon_emissions: Float
+  """(Dimension) Transaction Type(BM)"""
+  category1: String
+  """(Dimension) JLevel2"""
+  category10: String
+  """(Dimension) Filter out Unutilized Reservation Costs"""
+  category11: String
+  """(Dimension) AWS Commitment"""
+  category12: String
+  """(Dimension) Apptio Product"""
+  category13: String
+  """(Dimension) Accounting Cost Type"""
+  category14: String
+  """(Dimension) Vendor (Dont Delete)"""
+  category15: String
+  """(Dimension) CT Customer"""
+  category16: String
+  """(Dimension) Apptio Project"""
+  category17: String
+  """(Dimension) Level 2"""
+  category18: String
+  """(Dimension) CT Customer Type"""
+  category19: String
+  """(Dimension) Service Charge"""
+  category2: String
+  """(Dimension) Cost Owner"""
+  category20: String
+  """(Dimension) Level 1"""
+  category21: String
+  """(Dimension) Layer 11"""
+  category22: String
+  """(Dimension) Products shared cost (Don't delete)"""
+  category23: String
+  """(Dimension) Apptio Team"""
+  category24: String
+  """(Dimension) Layer 22"""
+  category25: String
+  """(Dimension) Environment List(BM)"""
+  category3: String
+  """(Dimension) Categories wise spend"""
+  category4: String
+  """(Dimension) JLevel1"""
+  category5: String
+  """(Dimension) Container Namespace"""
+  category6: String
+  """(Dimension) Team Name (don't delete)"""
+  category7: String
+  """(Dimension) ATUM - Towers"""
+  category8: String
+  """(Dimension) Layer 1"""
+  category9: String
+  """(Dimension) Compute Usage Type"""
+  compute_usage_type: String
+  """(Dimension) Cluster Name"""
+  container_cluster_name: String
+  """(Dimension) Namespace"""
+  container_namespace: String
+  """(Metric) Cost Adjustment"""
+  cost_adjusted: Float
+  """(Dimension) Cost Adjustment Description"""
+  cost_adjustment_description: String
+  """(Dimension) Currency Code"""
+  currency_code: String
+  """(Dimension) Date"""
+  date: String
+  """(Dimension) Day"""
+  day: String
+  """(Dimension) Day of Week"""
+  day_of_week: String
+  """(Dimension) Engine"""
+  engine: String
+  """(Dimension) Service Name"""
+  enhanced_service_name: String
+  """(Metric) GiB Months"""
+  gb_months: Float
+  """(Dimension)  mock demo"""
+  group_name1: String
+  """(Dimension) Vendor"""
+  group_name10: String
+  """(Dimension) Change Control Process"""
+  group_name11: String
+  """(Dimension) Testing Limit-1"""
+  group_name12: String
+  """(Dimension) Testing Limit-2"""
+  group_name13: String
+  """(Dimension) Testing Limit-3"""
+  group_name14: String
+  """(Dimension) Testing Limit-4"""
+  group_name15: String
+  """(Dimension) Testing Limit-5"""
+  group_name16: String
+  """(Dimension) Testing Limit-6"""
+  group_name17: String
+  """(Dimension) Testing Limit-7"""
+  group_name18: String
+  """(Dimension) Testing Limit-8"""
+  group_name19: String
+  """(Dimension) Cost Center"""
+  group_name2: String
+  """(Dimension) Testing Limit-9"""
+  group_name20: String
+  """(Dimension) Testing Limit-10"""
+  group_name21: String
+  """(Dimension) Testing Limit-11"""
+  group_name22: String
+  """(Dimension) Testing Limit-12"""
+  group_name23: String
+  """(Dimension) Testing Limit-13"""
+  group_name24: String
+  """(Dimension) Testing Limit-14"""
+  group_name25: String
+  """(Dimension) Availability Zone"""
+  group_name3: String
+  """(Dimension) Application"""
+  group_name4: String
+  """(Dimension) Region"""
+  group_name5: String
+  """(Dimension) Account Owner"""
+  group_name6: String
+  """(Dimension) Environment"""
+  group_name7: String
+  """(Dimension) product"""
+  group_name8: String
+  """(Dimension) 28"""
+  group_name9: String
+  """(Dimension) Instance Category"""
+  instance_category: String
+  """(Dimension) Instance Family"""
+  instance_family: String
+  """(Dimension) Instance Size"""
+  instance_size: String
+  """(Dimension) Instance Type"""
+  instance_type: String
+  """(Dimension) Invoice Date"""
+  invoice_date: String
+  """(Dimension) Invoice ID"""
+  invoice_id: String
+  """(Metric) Cost (Total Blended)"""
+  invoiced_cost: Float
+  """(Metric) I/O Requests"""
+  io_requests: Int
+  """(Dimension) Item Description"""
+  item_description: String
+  """(Metric) Power Consumed (kWh)"""
+  kwh_consumption: Float
+  """(Dimension) Lease Type"""
+  lease_type: String
+  """(Dimension) Month (Category)"""
+  month: String
+  """(Dimension) Reservation Class"""
+  offering_class: String
+  """(Metric) On Demand Hours"""
+  on_demand_hours: Float
+  """(Dimension) Operating System"""
+  operating_system: String
+  """(Dimension) Operation"""
+  operation: String
+  """(Dimension) Part Number"""
+  part_number: String
+  """(Metric) Cost (List)"""
+  public_on_demand_cost: Float
+  """(Dimension) Region"""
+  region: String
+  """(Dimension) Availability Zone"""
+  region_zone: String
+  """(Metric) Requests"""
+  requests: Int
+  """(Dimension) Reservation ID"""
+  reservation_identifier: String
+  """(Dimension) Reservation Name"""
+  reservation_name: String
+  """(Metric) Reserved Hours"""
+  reserved_hours: Float
+  """(Metric) Reserved Coverage Rate"""
+  reserved_utilization_rate: String
+  """(Dimension) Resource ID"""
+  resource_identifier: String
+  """(Metric) Resource Count"""
+  resource_identifier_count: Int
+  """(Dimension) Resource Name"""
+  resource_name: String
+  """(Dimension) Seller"""
+  seller: String
+  """(Dimension) Product Name"""
+  service_name: String
+  """(Dimension) Business unit (value)"""
+  tag1: String
+  """(Dimension) KubernetesPod (value)"""
+  tag10: String
+  """(Dimension) KubernetesGroup (value)"""
+  tag11: String
+  """(Dimension) Owner (value)"""
+  tag12: String
+  """(Dimension) Finance (value)"""
+  tag13: String
+  """(Dimension) Org ID (value)"""
+  tag14: String
+  """(Dimension) Department (value)"""
+  tag15: String
+  """(Dimension) Service (value)"""
+  tag16: String
+  """(Dimension) Category (value)"""
+  tag17: String
+  """(Dimension) Name (value)"""
+  tag18: String
+  """(Dimension) Production (value)"""
+  tag19: String
+  """(Dimension) Team  (value)"""
+  tag2: String
+  """(Dimension) environment (value)"""
+  tag20: String
+  """(Dimension) Team (value)"""
+  tag21: String
+  """(Dimension) GCP Tags (value)"""
+  tag22: String
+  """(Dimension) Application (value)"""
+  tag24: String
+  """(Dimension) Workload (value)"""
+  tag25: String
+  """(Dimension) org (value)"""
+  tag26: String
+  """(Dimension) account-level-team-dimension (value)"""
+  tag27: String
+  """(Dimension) OCI Compartment (value)"""
+  tag28: String
+  """(Dimension) Project (value)"""
+  tag29: String
+  """(Dimension) Cloud - HCM (value)"""
+  tag3: String
+  """(Dimension) CostCenter (value)"""
+  tag30: String
+  """(Dimension) Owners (value)"""
+  tag31: String
+  """(Dimension) Product (value)"""
+  tag32: String
+  """(Dimension) Project (value)"""
+  tag33: String
+  """(Dimension) testingtt (value)"""
+  tag35: String
+  """(Dimension) RG (value)"""
+  tag36: String
+  """(Dimension) Production (value)"""
+  tag37: String
+  """(Dimension) prod (value)"""
+  tag38: String
+  """(Dimension) Production (value)"""
+  tag39: String
+  """(Dimension) Cost Center (value)"""
+  tag4: String
+  """(Dimension) env (value)"""
+  tag40: String
+  """(Dimension) Prod (value)"""
+  tag41: String
+  """(Dimension) project 100 (value)"""
+  tag42: String
+  """(Dimension) project 1 (value)"""
+  tag43: String
+  """(Dimension) env (value)"""
+  tag44: String
+  """(Dimension) Data (value)"""
+  tag45: String
+  """(Dimension) Env (value)"""
+  tag46: String
+  """(Dimension) Time 2 (value)"""
+  tag47: String
+  """(Dimension) Environment-doNoReuseTagDimensionNames (value)"""
+  tag48: String
+  """(Dimension) testing (value)"""
+  tag49: String
+  """(Dimension) Project (value)"""
+  tag5: String
+  """(Dimension) TEST_MOCK (value)"""
+  tag50: String
+  """(Dimension) Customer_Id (value)"""
+  tag6: String
+  """(Dimension) Region (value)"""
+  tag7: String
+  """(Dimension) azure-subscription-dimension (value)"""
+  tag8: String
+  """(Dimension) Kubernetes service-clustername (value)"""
+  tag9: String
+  """(Dimension) Business unit (key)"""
+  tagkey1: String
+  """(Dimension) KubernetesPod (key)"""
+  tagkey10: String
+  """(Dimension) KubernetesGroup (key)"""
+  tagkey11: String
+  """(Dimension) Owner (key)"""
+  tagkey12: String
+  """(Dimension) Finance (key)"""
+  tagkey13: String
+  """(Dimension) Org ID (key)"""
+  tagkey14: String
+  """(Dimension) Department (key)"""
+  tagkey15: String
+  """(Dimension) Service (key)"""
+  tagkey16: String
+  """(Dimension) Category (key)"""
+  tagkey17: String
+  """(Dimension) Name (key)"""
+  tagkey18: String
+  """(Dimension) Production (key)"""
+  tagkey19: String
+  """(Dimension) Team  (key)"""
+  tagkey2: String
+  """(Dimension) environment (key)"""
+  tagkey20: String
+  """(Dimension) Team (key)"""
+  tagkey21: String
+  """(Dimension) GCP Tags (key)"""
+  tagkey22: String
+  """(Dimension) Application (key)"""
+  tagkey24: String
+  """(Dimension) Workload (key)"""
+  tagkey25: String
+  """(Dimension) org (key)"""
+  tagkey26: String
+  """(Dimension) account-level-team-dimension (key)"""
+  tagkey27: String
+  """(Dimension) OCI Compartment (key)"""
+  tagkey28: String
+  """(Dimension) Project (key)"""
+  tagkey29: String
+  """(Dimension) Cloud - HCM (key)"""
+  tagkey3: String
+  """(Dimension) CostCenter (key)"""
+  tagkey30: String
+  """(Dimension) Owners (key)"""
+  tagkey31: String
+  """(Dimension) Product (key)"""
+  tagkey32: String
+  """(Dimension) Project (key)"""
+  tagkey33: String
+  """(Dimension) testingtt (key)"""
+  tagkey35: String
+  """(Dimension) RG (key)"""
+  tagkey36: String
+  """(Dimension) Production (key)"""
+  tagkey37: String
+  """(Dimension) prod (key)"""
+  tagkey38: String
+  """(Dimension) Production (key)"""
+  tagkey39: String
+  """(Dimension) Cost Center (key)"""
+  tagkey4: String
+  """(Dimension) env (key)"""
+  tagkey40: String
+  """(Dimension) Prod (key)"""
+  tagkey41: String
+  """(Dimension) project 100 (key)"""
+  tagkey42: String
+  """(Dimension) project 1 (key)"""
+  tagkey43: String
+  """(Dimension) env (key)"""
+  tagkey44: String
+  """(Dimension) Data (key)"""
+  tagkey45: String
+  """(Dimension) Env (key)"""
+  tagkey46: String
+  """(Dimension) Time 2 (key)"""
+  tagkey47: String
+  """(Dimension) Environment-doNoReuseTagDimensionNames (key)"""
+  tagkey48: String
+  """(Dimension) testing (key)"""
+  tagkey49: String
+  """(Dimension) Project (key)"""
+  tagkey5: String
+  """(Dimension) TEST_MOCK (key)"""
+  tagkey50: String
+  """(Dimension) Customer_Id (key)"""
+  tagkey6: String
+  """(Dimension) Region (key)"""
+  tagkey7: String
+  """(Dimension) azure-subscription-dimension (key)"""
+  tagkey8: String
+  """(Dimension) Kubernetes service-clustername (key)"""
+  tagkey9: String
+  """(Dimension) Tenancy"""
+  tenancy: String
+  """(Metric) Cost (Adjusted Amortized)"""
+  total_adjusted_amortized_cost: Float
+  """(Metric) Cost (Amortized)"""
+  total_amortized_cost: Float
+  """(Dimension) Transaction Type"""
+  transaction_type: String
+  """(Metric) Cost (Total)"""
+  unblended_cost: Float
+  """(Metric) Rate (Unblended)"""
+  unblended_rate: Float
+  """(Dimension) Usage Family"""
+  usage_family: String
+  """(Metric) Usage Hours"""
+  usage_hours: Float
+  """(Metric) Usage Quantity"""
+  usage_quantity: Float
+  """(Dimension) Usage Type"""
+  usage_type: String
+  """(Metric) vCPU Hours"""
+  vcpu_hours: Int
+  """(Dimension) Vendor"""
+  vendor: String
+  """(Dimension) Account ID"""
+  vendor_account_identifier: String
+  """(Dimension) Account Name"""
+  vendor_account_name: String
+  """(Dimension) Week (Category)"""
+  week: String
+  """(Dimension) Year"""
+  year: String
+  """(Dimension) Month (Year)"""
+  year_month: String
+  """(Dimension) Week (Year)"""
+  year_week: String
+  """(Dimension) Zone"""
+  zone: String
+}

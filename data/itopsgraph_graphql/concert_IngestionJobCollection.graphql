@@ -1,0 +1,5 @@
+"""Collection of ingestion jobs"""
+type IngestionJobCollection {
+  """List of ingestion jobs"""
+  ingestionJobs: [IngestionJob]
+}

@@ -1,0 +1,7 @@
+type RelatedActionsCountByType {
+  NONE: Int
+  BLOCKED_BY: Int
+  BLOCKING: Int
+  CAUSED_BY: Int
+  CAUSING: Int
+}

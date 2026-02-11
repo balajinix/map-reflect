@@ -1,0 +1,16 @@
+type Access_points_impact_view {
+  access_point_id: ID
+  applications: JSON
+  artifacts: JSON
+  bomref: String
+  certificate_id: ID
+  certificate_serial_number: String
+  endpoints: JSON
+  environment_id: ID
+  environment_name: String
+  host: String
+  id: ID
+  impacted_application_count: ID
+  is_public: Boolean
+  name: String
+}

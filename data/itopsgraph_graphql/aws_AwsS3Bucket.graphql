@@ -1,0 +1,4 @@
+type AwsS3Bucket {
+  storage_bucket: BaseStorageBucket!
+  aws_resource: AwsResource!
+}

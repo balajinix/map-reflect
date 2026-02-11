@@ -1,0 +1,6 @@
+enum query_getActionInstance_actorType {
+  ACTOR_UNKNOWN
+  USER
+  APITOKEN
+  POLICY
+}

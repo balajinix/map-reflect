@@ -1,0 +1,6 @@
+type query_getCustomDashboards_items {
+  annotations: [query_getCustomDashboards_items_annotations_items]!
+  id: query_getCustomDashboards_items_id!
+  ownerId: String!
+  title: String!
+}

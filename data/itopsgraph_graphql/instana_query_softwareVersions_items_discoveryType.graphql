@@ -1,0 +1,6 @@
+enum query_softwareVersions_items_discoveryType {
+  NATIVE_SENSOR
+  REMOTE_SENSOR
+  PACKAGE_MANAGER
+  OTHER
+}

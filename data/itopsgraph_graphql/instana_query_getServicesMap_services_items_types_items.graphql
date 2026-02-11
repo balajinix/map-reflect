@@ -1,0 +1,16 @@
+enum query_getServicesMap_services_items_types_items {
+  UNDEFINED
+  RPC
+  EVENT
+  GRAPHQL
+  BATCH
+  SHELL
+  HTTP
+  SDK
+  OPENTELEMETRY
+  INTERNAL
+  DATABASE
+  MESSAGING
+  PAGE
+  PAGE_RESOURCE
+}

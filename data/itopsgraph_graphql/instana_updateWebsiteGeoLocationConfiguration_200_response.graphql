@@ -1,0 +1,4 @@
+type updateWebsiteGeoLocationConfiguration_200_response {
+  geoDetailRemoval: query_getMobileAppGeoLocationConfiguration_geoDetailRemoval!
+  geoMappingRules: [query_getMobileAppGeoLocationConfiguration_geoMappingRules_items]
+}

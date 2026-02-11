@@ -1,0 +1,7 @@
+type Sbom_package_version_status_breakdown {
+  backlevel: String
+  backlevel_pct: Float
+  count: ID
+  sbom_id: String
+  version: Int
+}

@@ -1,0 +1,5 @@
+"""Collection of vulnerability scans"""
+type ScanCollection {
+  """List of scans"""
+  scans: [Scan]
+}

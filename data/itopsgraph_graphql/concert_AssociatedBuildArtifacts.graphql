@@ -1,0 +1,12 @@
+type AssociatedBuildArtifacts {
+  """ID of associated component"""
+  id: String
+  """Name of associated component"""
+  name: String
+  """Tag of associated component"""
+  tag: String
+  """Digest of associated component"""
+  digest: String
+  """Type of associated component"""
+  type: String
+}

@@ -1,0 +1,6 @@
+type query_getTrace_rootSpan_destination_physicalContext_kubernetes {
+  cluster: query_getTrace_rootSpan_destination_physicalContext_kubernetes_cluster
+  namespace: query_getTrace_rootSpan_destination_physicalContext_kubernetes_namespace
+  node: query_getTrace_rootSpan_destination_physicalContext_kubernetes_node
+  pod: query_getTrace_rootSpan_destination_physicalContext_kubernetes_pod
+}

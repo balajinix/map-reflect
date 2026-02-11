@@ -1,0 +1,4 @@
+type query_findActiveGlobalApplicationAlertConfigs_items_applications_additionalProperties_entry {
+  key: ID!
+  value: query_findActiveGlobalApplicationAlertConfigs_items_applications_additionalProperties
+}

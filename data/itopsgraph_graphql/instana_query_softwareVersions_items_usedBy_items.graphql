@@ -1,0 +1,6 @@
+type query_softwareVersions_items_usedBy_items {
+  container: String
+  host: String
+  process: String
+  snapshotId: String
+}

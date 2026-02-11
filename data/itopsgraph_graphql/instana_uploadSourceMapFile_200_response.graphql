@@ -1,0 +1,7 @@
+type uploadSourceMapFile_200_response {
+  createdAt: DateTime
+  description: String
+  id: String!
+  metadata: [mutation_uploadSourceMapFile_metadata_items]!
+  modifiedAt: DateTime
+}

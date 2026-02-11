@@ -1,0 +1,6 @@
+type Statistics {
+  date: DateTime
+  displayName: String
+  epoch: String
+  statistics: [StatsEntry]
+}

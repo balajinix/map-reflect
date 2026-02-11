@@ -1,0 +1,13 @@
+type query_getMobileAppGeoLocationConfiguration_geoMappingRules_items {
+  accuracyRadius: BigInt
+  cidr: query_getMobileAppGeoLocationConfiguration_geoMappingRules_items_cidr!
+  city: String
+  continent: String
+  continentCode: String
+  country: String
+  countryCode: String
+  latitude: Float
+  leastSpecificSubdivision: query_getMobileAppGeoLocationConfiguration_geoMappingRules_items_leastSpecificSubdivision
+  longitude: Float
+  subdivisions: [query_getMobileAppGeoLocationConfiguration_geoMappingRules_items_subdivisions_items]!
+}

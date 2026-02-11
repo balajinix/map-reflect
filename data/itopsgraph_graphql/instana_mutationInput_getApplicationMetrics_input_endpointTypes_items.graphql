@@ -1,0 +1,16 @@
+enum mutationInput_getApplicationMetrics_input_endpointTypes_items {
+  UNDEFINED
+  RPC
+  EVENT
+  GRAPHQL
+  BATCH
+  SHELL
+  HTTP
+  SDK
+  OPENTELEMETRY
+  INTERNAL
+  DATABASE
+  MESSAGING
+  PAGE
+  PAGE_RESOURCE
+}

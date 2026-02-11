@@ -1,0 +1,5 @@
+enum mutationInput_createApplicationAlertConfig_input_evaluationType {
+  PER_AP
+  PER_AP_SERVICE
+  PER_AP_ENDPOINT
+}

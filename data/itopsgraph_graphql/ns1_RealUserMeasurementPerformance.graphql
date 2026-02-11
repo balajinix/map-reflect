@@ -1,0 +1,10 @@
+type RealUserMeasurementPerformance {
+  """name of region"""
+  regionName: String!
+  """individual job response times"""
+  jobsResponseTimes: [JobsResponseTimes]
+  """name of parent, GLOBAL for top level"""
+  parent: String
+  """aggregate responseTime for selected jobs"""
+  responseTime: Float
+}

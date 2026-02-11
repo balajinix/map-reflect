@@ -1,0 +1,13 @@
+type Cd_rule_mapping {
+  component_definition_id: ID
+  component_id: ID
+  component_name: String
+  control_code: String!
+  last_updated_by: String
+  last_updated_on: ID!
+  profile_name: String
+  rule_description: String
+  rule_id: ID!
+  rule_name: String!
+  type: String
+}

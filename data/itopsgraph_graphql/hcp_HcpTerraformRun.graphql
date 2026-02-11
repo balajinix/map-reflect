@@ -1,0 +1,7 @@
+type HcpTerraformRun {
+  base: Base!
+  is_destroyed: bool
+  message: string
+  status: string
+  workspace_id: string
+}

@@ -1,0 +1,11 @@
+"""List of dynamic parameters"""
+type mutation_resolve_parameters_items {
+  """Parameter key"""
+  key: String
+  """Parameter name"""
+  name: String
+  """Parameter value after resolution"""
+  resolvedValue: String
+  """The name of the tag. Eg: `call.name`"""
+  tagName: String
+}

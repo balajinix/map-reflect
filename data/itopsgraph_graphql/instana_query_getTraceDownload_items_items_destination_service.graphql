@@ -1,0 +1,4 @@
+type query_getTraceDownload_items_items_destination_service {
+  id: String
+  label: String
+}

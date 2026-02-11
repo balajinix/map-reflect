@@ -1,0 +1,8 @@
+type Export_jobs {
+  created_on: ID!
+  file_path: String
+  id: ID!
+  last_updated_by: String
+  last_updated_on: ID!
+  status: String!
+}

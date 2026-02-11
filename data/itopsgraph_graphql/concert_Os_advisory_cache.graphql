@@ -1,0 +1,12 @@
+type Os_advisory_cache {
+  advisory: String
+  advisory_payload: JSON
+  advisory_recommender: String!
+  cpe: String
+  cve: String!
+  id: ID!
+  key: String!
+  os_version: String
+  product: String!
+  severity: String
+}

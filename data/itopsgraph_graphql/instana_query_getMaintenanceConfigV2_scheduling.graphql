@@ -1,0 +1,6 @@
+"""Time scheduling of the Maintenance Window configurations."""
+type query_getMaintenanceConfigV2_scheduling {
+  duration: query_getMaintenanceConfigsV2_items_scheduling_duration!
+  start: BigInt!
+  type: query_getMaintenanceConfigsV2_items_scheduling_type!
+}

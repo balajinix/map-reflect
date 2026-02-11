@@ -1,0 +1,4 @@
+type _TimeFrame {
+  to: String!
+  windowSize: String!
+}

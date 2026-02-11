@@ -1,0 +1,4 @@
+enum query_findActiveMobileAppAlertConfigs_items_completeTagFilterExpression_allOf_1_logicalOperator {
+  AND
+  OR
+}

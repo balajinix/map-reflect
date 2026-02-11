@@ -1,0 +1,11 @@
+type Assessment_plan {
+  assessment_plan_id: ID!
+  description: String
+  end_date: ID
+  last_updated_by: String
+  last_updated_on: ID!
+  profile_id: ID
+  start_date: ID
+  title: String
+  version: String
+}

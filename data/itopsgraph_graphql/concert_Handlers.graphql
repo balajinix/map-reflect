@@ -1,0 +1,12 @@
+type Handlers {
+  accessibility: String
+  auth: JSON
+  default_headers: JSON
+  description: String
+  hostname: String!
+  name: String!
+  port: Int
+  prefix: String
+  protocol: String
+  supports: JSON
+}

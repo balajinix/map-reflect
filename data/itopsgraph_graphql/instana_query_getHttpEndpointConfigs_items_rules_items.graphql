@@ -1,0 +1,8 @@
+type query_getHttpEndpointConfigs_items_rules_items {
+  """Set this flag to `true` if custom rule configurations has to be considered."""
+  enabled: Boolean
+  """A list of path segment matching rules, each defining how a segment of the HTTP path should be matched. Each object in this array represents a segment rule, allowing for fixed segments, dynamic parameters, wildcards, or unsupported segments.  **UNSUPPORTED**: A path segment that is not recognized by the system.  **FIXED**: This type represents a static, unchanging part of the URL path. For example, `/api/{version}/users`, `api` and `users` would be `FIXED` segment.  **PARAMETER**: This type represents a variable part of the URL path, often used to capture specific parameters or IDs that change with each request. For example, `/api/{version}/users`, `version` would be `PARAMETER` segment. `version` can be `v1`, `v2`, `v3` etc.  **MATCH_ALL**: This type represents a wildcard, capturing all remaining segments from this point onward in the URL path. For example, `/api/{version}/users/*` — Matches all paths like `/api/v1/users/123`. `/api/v3/users/456` etc."""
+  pathSegments: [query_getEndpointConfigs_items_rules_items_pathSegments_items]!
+  """To validate whether the the defined custom endpoint rule configuration is working as expected. For example, given a query `/api/*/{version}`, the following test case `/api/anyName/123` will match, while `/otherApi/anyName/123` will not."""
+  testCases: [String]
+}

@@ -1,0 +1,7 @@
+type Sbom_organization_view {
+  manufacturer_id: ID
+  manufacturer_name: String
+  sbom_id: ID
+  supplier_id: ID
+  supplier_name: String
+}

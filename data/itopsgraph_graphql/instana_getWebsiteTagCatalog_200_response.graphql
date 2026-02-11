@@ -1,0 +1,6 @@
+type getWebsiteTagCatalog_200_response {
+  """The name of the tag dataset (tagTree) which can contain one or more tags as its attributes or children. Eg: `Call`. Consider this as the root of the tree where it has tags as attributes or children."""
+  tagTree: [query_getApplicationTagCatalog_tagTree_items]!
+  """List of queryable tags available in a tagTree. Eg: `call.erroneous`. Consider these tags as attributes of a tagTree. Eg: `Call` tagTree has have `Erroneous`, `Call name`, `Latency` etc as attributes."""
+  tags: [query_getApplicationTagCatalog_tags_items]!
+}

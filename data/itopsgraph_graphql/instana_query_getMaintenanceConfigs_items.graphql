@@ -1,0 +1,14 @@
+type query_getMaintenanceConfigs_items {
+  """ID of the Maintenance Window Configuration."""
+  id: query_getMaintenanceConfigs_items_id!
+  """Boolean flag that tells if the Dynamic Focus Query(DFQ) is invalid."""
+  invalid: Boolean
+  lastUpdated: BigInt
+  """Name of the Maintenance Window Configuration."""
+  name: query_getMaintenanceConfigs_items_name!
+  """Dynamic Focus Query that determines the scope of the Maintenance Window configuration."""
+  query: query_getMaintenanceConfigs_items_query!
+  status: query_getMaintenanceConfigs_items_status!
+  """A set of time periods when the Maintenance Window Configuration is active."""
+  windows: [query_getMaintenanceConfigs_items_windows_items]
+}

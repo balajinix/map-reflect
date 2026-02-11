@@ -1,0 +1,8 @@
+enum mutationInput_createApplicationAlertConfig_input_granularity {
+  _60000
+  _300000
+  _600000
+  _900000
+  _1200000
+  _1800000
+}

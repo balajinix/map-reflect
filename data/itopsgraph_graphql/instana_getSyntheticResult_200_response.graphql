@@ -1,0 +1,4 @@
+type getSyntheticResult_200_response {
+  testResult: [mutation_getSyntheticResult_testResult_items]
+  testResultItems: [mutation_getSyntheticResult_testResultItems_items]
+}

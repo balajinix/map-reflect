@@ -1,0 +1,12 @@
+type Target {
+  aspects: JSON
+  className: String
+  connectedEntities: [ConnectedEntitiesEntry]
+  discoveredBy: DiscoveredBy
+  displayName: String
+  environmentType: String
+  state: String
+  tags: JSON
+  uuid: ID
+  vendorIds: JSON
+}

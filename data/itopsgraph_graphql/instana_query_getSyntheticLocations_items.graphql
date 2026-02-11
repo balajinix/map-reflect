@@ -1,0 +1,17 @@
+type query_getSyntheticLocations_items {
+  configuration: query_getSyntheticLocations_items_configuration
+  createdAt: BigInt
+  customProperties: JSON
+  description: query_getSyntheticLocations_items_description
+  displayLabel: query_getSyntheticLocations_items_displayLabel
+  geoPoint: query_getSyntheticLocations_items_geoPoint!
+  id: query_getSyntheticLocations_items_id
+  label: query_getSyntheticLocations_items_label!
+  locationType: String!
+  modifiedAt: BigInt
+  observedAt: BigInt
+  playbackCapabilities: query_getSyntheticLocations_items_playbackCapabilities!
+  popVersion: query_getSyntheticLocations_items_popVersion
+  status: String
+  totalTests: Int
+}

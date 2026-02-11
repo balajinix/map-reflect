@@ -1,0 +1,7 @@
+"""Application details for filtering"""
+type ApplicationDetails {
+  """Application ID"""
+  application_id: String
+  """Release versions"""
+  release_version: [String]
+}

@@ -1,0 +1,10 @@
+type AppComponentCount {
+  """Count of images"""
+  images: Int
+  """Count of libraries"""
+  libraries: Int
+  """Count of environments"""
+  environments: Int
+  """Count of repositories"""
+  source_repos: Int
+}

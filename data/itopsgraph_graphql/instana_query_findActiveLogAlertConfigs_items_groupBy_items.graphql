@@ -1,0 +1,4 @@
+type query_findActiveLogAlertConfigs_items_groupBy_items {
+  key: String
+  tagName: String!
+}

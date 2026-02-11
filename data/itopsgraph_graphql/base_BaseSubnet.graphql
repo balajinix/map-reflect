@@ -1,0 +1,5 @@
+type BaseSubnet {
+  base: Base!
+  """the VPC the subnet is contained in"""
+  vpc_id: string!
+}

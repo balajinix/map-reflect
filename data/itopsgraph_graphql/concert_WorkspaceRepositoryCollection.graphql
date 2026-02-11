@@ -1,0 +1,5 @@
+"""Collection of workspace repositories"""
+type WorkspaceRepositoryCollection {
+  """Source repositories"""
+  source_repos: [WorkspaceRepositorySummary]
+}

@@ -1,0 +1,5 @@
+enum query_getServicesMap_services_items_entityType {
+  APPLICATION
+  SERVICE
+  ENDPOINT
+}

@@ -1,0 +1,5 @@
+type query_getWebsites_items {
+  appName: String
+  id: String!
+  name: String!
+}

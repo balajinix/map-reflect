@@ -1,0 +1,9 @@
+type putRelease_200_response {
+  applications: [query_getAllReleases_items_applications_items]
+  id: query_getAllReleases_items_id!
+  lastUpdated: BigInt
+  name: query_getAllReleases_items_name!
+  scopes: [query_getAllReleases_items_scopes_items]
+  services: [query_getAllReleases_items_services_items]
+  start: BigInt
+}

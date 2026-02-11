@@ -1,0 +1,10 @@
+type Package_findings {
+  created_date: ID!
+  findings_id: ID!
+  last_updated_by: String
+  package_id: ID
+  sbom_id: ID
+  sbom_name: String
+  sbom_version: Int
+  updated_date: ID!
+}

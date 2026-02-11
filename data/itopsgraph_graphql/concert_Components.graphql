@@ -1,0 +1,6 @@
+type Components {
+  app_release_id: ID
+  id: ID!
+  name: String
+  version: String
+}

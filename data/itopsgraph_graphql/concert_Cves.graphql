@@ -1,0 +1,11 @@
+"""Vulnerability information for public access points"""
+type Cves {
+  """CVE identifier"""
+  cve: String
+  """Priority classification"""
+  priority: String
+  """Number of impacted public access points"""
+  impacted_public_access_points: Int
+  """Risk score"""
+  risk_score: Int
+}

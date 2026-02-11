@@ -1,0 +1,8 @@
+type User_preferences {
+  id: String!
+  notification: String
+  table_preferences: JSON
+  theme: String
+  topology_preferences: JSON
+  username: String
+}

@@ -1,0 +1,23 @@
+type VirtualDisksEntry {
+  attachedVMStorageCompatibility: String
+  attachedVirtualMachine: AttachedVirtualMachine
+  attachmentState: String
+  businessAccount: BusinessAccount
+  creationTimeStamp: Float
+  dataCenter: DataCenter
+  diskRole: String
+  displayName: String
+  encryption: String
+  environmentType: String
+  hourlyBilledOps: Float
+  lastAttachedVm: String
+  lastModified: Float
+  numDaysUnattached: Int
+  provider: Provider
+  redundancyType: String
+  resourceId: ID
+  snapshotId: ID
+  stats: [StatsEntry]
+  tier: String
+  uuid: ID
+}

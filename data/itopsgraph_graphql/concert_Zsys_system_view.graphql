@@ -1,0 +1,7 @@
+type Zsys_system_view {
+  missing_apar: ID
+  sysplex_name: String
+  system_name: String
+  total_number_of_apars: Float
+  total_number_of_product: ID
+}

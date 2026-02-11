@@ -1,0 +1,4 @@
+type Packages_source_repos {
+  package_id: ID
+  repo_id: ID
+}

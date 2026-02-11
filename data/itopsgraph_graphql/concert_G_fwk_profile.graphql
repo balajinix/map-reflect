@@ -1,0 +1,19 @@
+type G_fwk_profile {
+  aggregate_criteria: String
+  aggregate_criteria_type: String
+  created_by: String!
+  creation_ts: DateTime
+  description: String
+  domain: String!
+  expected_score_goal: Float
+  input_data_keys: String
+  is_default: Boolean
+  label: String
+  last_modified_ts: DateTime
+  modified_by: String!
+  profile_id: ID!
+  profile_name: String!
+  provider: String
+  rating_thresholds: String
+  target_type: String
+}

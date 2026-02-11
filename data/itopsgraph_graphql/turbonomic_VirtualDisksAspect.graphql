@@ -1,0 +1,4 @@
+type VirtualDisksAspect {
+  type: String
+  virtualDisks: [VirtualDisksEntry]
+}

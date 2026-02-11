@@ -1,0 +1,5 @@
+type Certificates_environments {
+  certificate_id: ID
+  environment_id: ID
+  is_archived: Boolean
+}

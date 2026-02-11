@@ -1,0 +1,6 @@
+"""Here, the `backendTraceId` is typically used which can be obtained from the `Get all beacons` API endpoint for website and mobile app monitoring. For XHR, fetch, or HTTP beacons, the `beaconId` retrieved from the same API endpoint can also serve as the `correlationId`."""
+type getTrace_200_response {
+  id: String!
+  rootSpan: query_getTrace_rootSpan!
+  totalErrorCount: Int
+}

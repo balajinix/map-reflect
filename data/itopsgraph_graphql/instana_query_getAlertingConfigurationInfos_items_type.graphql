@@ -1,0 +1,10 @@
+enum query_getAlertingConfigurationInfos_items_type {
+  Alert
+  WebsiteSmartAlert
+  MobileSmartAlert
+  ApplicationSmartAlert
+  GlobalApplicationSmartAlert
+  SyntheticSmartAlert
+  InfraSmartAlert
+  ServiceLevelSmartAlert
+}

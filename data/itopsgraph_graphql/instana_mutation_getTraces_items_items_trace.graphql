@@ -1,0 +1,9 @@
+type mutation_getTraces_items_items_trace {
+  duration: BigInt
+  endpoint: mutation_getTraces_items_items_trace_endpoint
+  erroneous: Boolean
+  id: String!
+  label: String!
+  service: mutation_getTraces_items_items_trace_service
+  startTime: BigInt
+}

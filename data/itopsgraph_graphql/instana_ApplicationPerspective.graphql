@@ -1,0 +1,12 @@
+"""Application Perspectives."""
+type ApplicationPerspective implements E & n & t & i & t & y {
+  """Here, `ALL` Application Boundary Scope is considered."""
+  boundaryScope: BoundaryScope!
+  entityType: EntityType
+  """Unique ID of the Application Perspective. Eg: `Av62RoIKQv-A3n6DbMQh9g`."""
+  id: ID!
+  """Name of the Application Perspective. Eg: `app1`."""
+  label: String!
+  to: String!
+  windowSize: String!
+}

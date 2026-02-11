@@ -1,0 +1,11 @@
+type Score_card_report_view {
+  category: String
+  ckname: String
+  description: String
+  long_description: String
+  ossrepo: String
+  purl: String
+  reason: String
+  score: Int
+  stat: String
+}

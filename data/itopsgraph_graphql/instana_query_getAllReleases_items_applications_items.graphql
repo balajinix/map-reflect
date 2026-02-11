@@ -1,0 +1,4 @@
+type query_getAllReleases_items_applications_items {
+  id: String!
+  name: String
+}

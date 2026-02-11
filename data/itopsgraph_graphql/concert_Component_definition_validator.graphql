@@ -1,0 +1,11 @@
+type Component_definition_validator {
+  additional_validator_payload: JSON
+  benchmark: String!
+  comp_def_id: ID!
+  description: String
+  last_updated_by: String
+  last_updated_on: ID!
+  scanner_name: String!
+  scanner_version: String
+  validator_id: ID!
+}

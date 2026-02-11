@@ -1,0 +1,7 @@
+"""CVE highlight summary"""
+type VulnerabilitiesCveHighlightSummary {
+  """Whether attention is required"""
+  attention_required: Boolean
+  """CVE statistics"""
+  cves: CvesInfo
+}

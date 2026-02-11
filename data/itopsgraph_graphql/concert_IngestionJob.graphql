@@ -1,0 +1,9 @@
+"""Ingestion job details"""
+type IngestionJob {
+  """Unique identifier of the ingestion job"""
+  id: String
+  """Name of the ingestion job"""
+  name: String
+  """Current status of the ingestion job"""
+  status: String
+}

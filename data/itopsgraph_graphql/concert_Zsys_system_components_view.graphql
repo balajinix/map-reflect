@@ -1,0 +1,16 @@
+type Zsys_system_components_view {
+  mcu_hiper_count: ID
+  mcu_pe_count: ID
+  mcu_secint_count: ID
+  mcu_total_hiper_count: ID
+  mcu_total_pe_count: ID
+  mcu_total_secint_count: ID
+  product_family_name: String
+  product_id: String
+  product_name: String
+  product_release: String
+  sysplex_id: ID
+  system_id: ID
+  total_function_count: ID
+  unique_feature_count: ID
+}

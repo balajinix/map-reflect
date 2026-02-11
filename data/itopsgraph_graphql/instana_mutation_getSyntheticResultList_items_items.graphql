@@ -1,0 +1,4 @@
+type mutation_getSyntheticResultList_items_items {
+  metrics: JSON!
+  testResultCommonProperties: mutation_getSyntheticResultList_items_items_testResultCommonProperties!
+}

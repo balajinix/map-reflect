@@ -1,0 +1,13 @@
+"""Action metadata."""
+type query_getActions_items_metadata {
+  """List of metadata for AI originated actions."""
+  ai: [JSON]
+  """AI originated action flag. Value is `true` if action is AI generated `false` otherwise."""
+  aiOriginated: Boolean
+  """Built-in out of the box action flag. Value is `true` if built-in action `false` otherwise."""
+  builtIn: Boolean
+  """Read only action flag. Value is `true` if read only `false` otherwise."""
+  readOnly: Boolean
+  """Sensor imported action flag. Value is `true` if action is imported from sensor `false` otherwise."""
+  sensorImported: Boolean
+}

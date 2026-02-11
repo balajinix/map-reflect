@@ -1,0 +1,6 @@
+"""A set of time periods when the Maintenance Window Configuration is active."""
+type query_getMaintenanceConfig_windows_items {
+  end: BigInt
+  id: query_getMaintenanceConfigs_items_windows_items_id!
+  start: BigInt
+}

@@ -1,0 +1,19 @@
+enum query_getApplicationTagCatalog_tags_items_availability_items {
+  INFRASTRUCTURE_METRICS
+  APPLICATION
+  WEBSITE
+  MOBILE_APP
+  EUM
+  EVENT
+  SLI
+  SLO
+  SLO_PREVIEW
+  USAGE
+  LOG
+  SYNTHETICS
+  SYNTHETICS_DETAIL
+  APDEX
+  BIZOPS
+  SUBTRACE
+  UNKNOWN
+}

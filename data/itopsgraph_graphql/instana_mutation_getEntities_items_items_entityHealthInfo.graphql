@@ -1,0 +1,4 @@
+type mutation_getEntities_items_items_entityHealthInfo {
+  maxSeverity: NonNegativeFloat
+  openIssues: [mutation_getEntities_items_items_entityHealthInfo_openIssues_items]!
+}

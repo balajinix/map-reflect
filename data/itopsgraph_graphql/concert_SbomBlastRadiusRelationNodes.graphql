@@ -1,0 +1,15 @@
+"""Relationships between nodes in the blast radius graph"""
+type SbomBlastRadiusRelationNodes {
+  """Build artifact IDs"""
+  build_artifacts: [String]
+  """Repository IDs"""
+  repositories: [String]
+  """Application IDs"""
+  applications: [String]
+  """Environment IDs"""
+  environments: [String]
+  """Access point IDs"""
+  access_points: [String]
+  """Package IDs"""
+  packages: [String]
+}

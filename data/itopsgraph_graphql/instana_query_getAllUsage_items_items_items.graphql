@@ -1,0 +1,4 @@
+type query_getAllUsage_items_items_items {
+  name: String
+  sims: BigInt
+}

@@ -1,0 +1,10 @@
+"""Returns a list of Application Perspectives."""
+type query_getApplications_items_items {
+  """Here, `ALL` Application Boundary Scope is considered."""
+  boundaryScope: String!
+  entityType: query_getTrace_rootSpan_destination_applications_items_entityType
+  """Unique ID of the Application Perspective. Eg: `Av62RoIKQv-A3n6DbMQh9g`."""
+  id: String!
+  """Name of the Application Perspective. Eg: `app1`."""
+  label: String!
+}

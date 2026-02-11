@@ -1,0 +1,11 @@
+type mutation_getSyntheticResultList_items_items_testResultCommonProperties {
+  clientId: String!
+  customTags: JSON
+  errors: [String]
+  id: String
+  locationDisplayLabel: String
+  locationId: String
+  testCommonProperties: mutation_getSyntheticResultList_items_items_testResultCommonProperties_testCommonProperties
+  testId: String!
+  testName: String
+}

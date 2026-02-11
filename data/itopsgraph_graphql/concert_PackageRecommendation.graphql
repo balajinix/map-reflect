@@ -1,0 +1,14 @@
+type PackageRecommendation {
+  """Recommendation ID"""
+  recommendation_id: String
+  """Recommendation Description"""
+  description: String
+  """Type of the risk"""
+  risk_type: String
+  """Action to perform"""
+  action: String
+  """Recommendation for action"""
+  recommendation: String
+  """Recommendation created date"""
+  created_date: Int
+}

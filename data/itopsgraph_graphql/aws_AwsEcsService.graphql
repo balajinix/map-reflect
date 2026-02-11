@@ -1,0 +1,6 @@
+type AwsEcsService {
+  base: Base!
+  aws_resource: AwsResource!
+  cluster_id: string!
+  subnet_ids: [string]
+}

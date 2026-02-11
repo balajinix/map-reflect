@@ -1,0 +1,5 @@
+type query_getShareableUsers_items {
+  email: String!
+  fullName: String!
+  id: String!
+}

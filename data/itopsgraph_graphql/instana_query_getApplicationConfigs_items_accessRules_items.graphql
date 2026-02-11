@@ -1,0 +1,6 @@
+type query_getApplicationConfigs_items_accessRules_items {
+  accessType: query_getApplicationConfigs_items_accessRules_items_accessType!
+  """An identifier that connects the access rule to a specific entity. For example, if the `relationType` is `USER`, the corresponding `relatedId` would be a user id.  **Note**: when `relationType` is `GLOBAL`, `relatedId` is `null`."""
+  relatedId: query_getApplicationConfigs_items_accessRules_items_relatedId
+  relationType: query_getApplicationConfigs_items_accessRules_items_relationType!
+}

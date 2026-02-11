@@ -1,0 +1,5 @@
+type Zsys_archive_product_product_family {
+  product_family_id: ID
+  product_id: String
+  product_release: String
+}

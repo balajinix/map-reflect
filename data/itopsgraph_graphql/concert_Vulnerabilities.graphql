@@ -1,0 +1,15 @@
+type Vulnerabilities {
+  cve: String!
+  cvss_score: Float
+  description: String
+  has_fix: Boolean
+  link2lz: String
+  package_name: String
+  package_type: String
+  pub_date: ID
+  severity: String
+  title: String
+  vector_string: String
+  ai_details: String
+  ai_status: String
+}

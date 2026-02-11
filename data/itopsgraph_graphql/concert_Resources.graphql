@@ -1,0 +1,20 @@
+type Resources {
+  additional_data: JSON
+  api_server: String
+  archived_timestamp: DateTime
+  creation_timestamp: DateTime
+  id: ID!
+  ipv4_address: String
+  ipv6_address: String
+  is_archived: Boolean
+  last_updated_by: String
+  last_updated_on: ID!
+  link2lz: String
+  namespace: String
+  resource_metadata: JSON
+  resource_name: String
+  resource_provider: String
+  resource_reference_id: String!
+  resource_sub_type: String
+  resource_type: String
+}

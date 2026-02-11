@@ -1,0 +1,17 @@
+type getCallDetails_200_response {
+  batchSelfTime: BigInt
+  batchSize: Int
+  destination: query_getCallDetails_destination
+  duration: BigInt
+  errorCount: Int
+  id: String!
+  isSynthetic: Boolean
+  label: query_getCallDetails_label!
+  logs: [query_getCallDetails_logs_items]!
+  minSelfTime: BigInt
+  networkTime: BigInt
+  source: query_getCallDetails_source
+  spans: [query_getCallDetails_spans_items]!
+  start: BigInt
+  synthetic: Boolean
+}

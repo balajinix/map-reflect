@@ -1,0 +1,7 @@
+type query_getInfrastructureCatalogSearchFields_items {
+  context: String
+  description: String
+  fixedValues: [String]
+  keyword: String
+  termType: String
+}

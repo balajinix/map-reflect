@@ -1,0 +1,18 @@
+type Message {
+  id: String
+  role: String
+  content: [ContentEntry]
+  context: JSON
+  mentions: JSON
+  assistant: Assistant
+  tenant_id: ID
+  thread_id: ID
+  created_by: String
+  created_on: DateTime
+  updated_at: DateTime
+  document_ids: JSON
+  step_history: JSON
+  parent_message_id: ID
+  additional_properties: AdditionalProperties
+  created_by_username: String
+}

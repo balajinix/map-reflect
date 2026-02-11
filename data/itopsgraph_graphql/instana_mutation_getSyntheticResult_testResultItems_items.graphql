@@ -1,0 +1,12 @@
+type mutation_getSyntheticResult_testResultItems_items {
+  applicationId: String
+  applicationIds: [String]
+  customTags: JSON
+  locationId: [String]
+  metrics: [JSON]
+  mobileApplicationIds: [String]
+  serviceId: String
+  testId: String!
+  testName: String
+  websiteIds: [String]
+}

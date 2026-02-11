@@ -1,0 +1,3 @@
+type mutation_inviteUsers_oneOf_0_items {
+  invitationResults: [mutation_shareAndInviteUsers_oneOf_0_items_invitationResults_items]
+}

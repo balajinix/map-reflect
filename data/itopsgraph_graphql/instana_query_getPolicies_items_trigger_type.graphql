@@ -1,0 +1,12 @@
+enum query_getPolicies_items_trigger_type {
+  customEvent
+  builtinEvent
+  applicationSmartAlert
+  globalApplicationSmartAlert
+  websiteSmartAlert
+  infraSmartAlert
+  mobileAppSmartAlert
+  syntheticsSmartAlert
+  logSmartAlert
+  sloSmartAlert
+}

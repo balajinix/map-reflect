@@ -1,0 +1,17 @@
+type AssistantRun {
+  id: ID
+  tenant_id: ID
+  assistant_id: ID
+  thread_id: ID!
+  status: String
+  created_at: DateTime
+  started_at: DateTime
+  completed_at: DateTime
+  failed_at: DateTime
+  cancelled_at: DateTime
+  llm_params: JSON
+  usage: Usage
+  last_error: String
+  result: Result
+  guardrails: JSON
+}

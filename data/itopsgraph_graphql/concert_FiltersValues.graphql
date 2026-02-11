@@ -1,0 +1,10 @@
+type FiltersValues {
+  """Key should be list API parameter name"""
+  filter_key: String!
+  """Label be translated string which is shown in UI"""
+  label: String!
+  """Type of filter values"""
+  type: FilterValueType!
+  """Possible values of filter"""
+  filter_values: [FilterInfo]!
+}

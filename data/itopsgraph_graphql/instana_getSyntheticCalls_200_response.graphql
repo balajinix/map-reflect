@@ -1,0 +1,6 @@
+"""Unit of the Time Window Duration"""
+type getSyntheticCalls_200_response {
+  customRules: [query_getSyntheticCalls_customRules_items]!
+  defaultRules: [query_getSyntheticCalls_defaultRules_items]!
+  defaultRulesEnabled: Boolean
+}

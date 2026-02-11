@@ -1,0 +1,20 @@
+type Exposure_assessment {
+  additional_details: JSON
+  application_id: ID
+  assessment_date: ID
+  created_by: String
+  created_date: ID
+  custom_details: JSON
+  custom_score: Float
+  details_url: String
+  findings_id: ID
+  fix_by: ID
+  history: JSON
+  id: ID
+  last_updated_by: String
+  lin2el: String
+  priority: String
+  recommendation: String
+  risk_score: ID
+  status: String
+}

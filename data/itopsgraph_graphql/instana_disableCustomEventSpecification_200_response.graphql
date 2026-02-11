@@ -1,0 +1,17 @@
+type disableCustomEventSpecification_200_response {
+  actions: [query_getCustomEventSpecifications_items_actions_items]
+  applicationAlertConfigId: query_getCustomEventSpecifications_items_applicationAlertConfigId
+  deleted: Boolean
+  description: query_getCustomEventSpecifications_items_description
+  enabled: Boolean
+  entityType: query_getCustomEventSpecifications_items_entityType!
+  expirationTime: BigInt
+  id: query_getCustomEventSpecifications_items_id!
+  lastUpdated: BigInt
+  migrated: Boolean
+  name: query_getCustomEventSpecifications_items_name!
+  query: query_getCustomEventSpecifications_items_query
+  ruleLogicalOperator: query_getCustomEventSpecifications_items_ruleLogicalOperator
+  rules: [query_getCustomEventSpecifications_items_rules_items]!
+  triggering: Boolean
+}

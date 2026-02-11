@@ -1,0 +1,6 @@
+type _Backend_CostReportArguments {
+  dimensions: String
+  metrics: String
+  filters: [String]
+  sort: String
+}

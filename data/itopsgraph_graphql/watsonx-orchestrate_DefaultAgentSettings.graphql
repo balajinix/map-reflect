@@ -1,0 +1,6 @@
+type DefaultAgentSettings {
+  model_settings: ModelSettings
+  router_settings: RouterSettings
+  slot_filling_settings: SlotFillingSettings
+  user_settings: UserSettings
+}

@@ -1,0 +1,3 @@
+type getSnapshots_200_response {
+  items: [query_searchHostAgents_items_items]
+}

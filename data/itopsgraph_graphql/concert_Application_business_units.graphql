@@ -1,0 +1,4 @@
+type Application_business_units {
+  application_id: ID
+  business_unit_id: ID
+}

@@ -1,0 +1,16 @@
+type IssueLink {
+  """Issue ID"""
+  issue_id: String!
+  """System"""
+  system: String!
+  """URL"""
+  url: String!
+  """Array of labels"""
+  labels: [String]!
+  """System Status"""
+  system_status: String!
+  """Array of Assignees"""
+  assignees: [String]!
+  """Represents if the issue is updated"""
+  has_issue_updated: Boolean
+}

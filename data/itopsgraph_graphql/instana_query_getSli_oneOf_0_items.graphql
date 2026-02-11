@@ -1,0 +1,15 @@
+type query_getSli_oneOf_0_items {
+  """This is the error budget remaining compared to the total error budget"""
+  errorBudgetRemaining: BigInt
+  """from timestamp in milliseconds (13-digit)"""
+  fromTimestamp: BigInt
+  """Service Level Indicator: This indicates the actual performance measure of the service"""
+  sli: Float
+  """Service Level Objective: This is the target value that should be met by the SLI"""
+  slo: Float
+  """to timestamp in milliseconds (13-digit)"""
+  toTimestamp: BigInt
+  """This is the total error budget available"""
+  totalErrorBudget: BigInt
+  violationDistribution: JSON
+}

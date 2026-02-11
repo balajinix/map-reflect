@@ -1,0 +1,12 @@
+enum _query_topology_edges_items_relation {
+  in
+  is
+  to
+  of
+  connected
+  describes
+  of20
+  to20
+  dummy
+  parent
+}

@@ -1,0 +1,23 @@
+type mutation_getSyntheticResultList_items_items_testResultCommonProperties_testCommonProperties {
+  active: Boolean!
+  applicationId: String
+  applicationIds: [String]
+  applicationLabel: String
+  applicationLabels: [String]
+  createdAt: BigInt
+  frequency: Int!
+  getWebsiteLabels: [String]
+  id: String!
+  label: String!
+  locationDisplayLabels: [String]
+  locationIds: [String]
+  locationLabels: [String]
+  locationStatusList: [mutation_getSyntheticResultList_items_items_testResultCommonProperties_testCommonProperties_locationStatusList_items]
+  mobileApplicationIds: [String]
+  mobileApplicationLabels: [String]
+  modifiedAt: BigInt
+  serviceId: String
+  type: String!
+  websiteIds: [String]
+  websiteLabels: [String]
+}

@@ -1,0 +1,4 @@
+type AwsSecurityGroup {
+  security_group: BaseSecurityGroup!
+  aws_resource: AwsResource!
+}

@@ -1,0 +1,5 @@
+type SlotFillingSettings {
+  model_name: String
+  model_params: ModelParams2
+  slot_filler_type: String
+}

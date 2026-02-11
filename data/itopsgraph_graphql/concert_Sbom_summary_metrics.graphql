@@ -1,0 +1,6 @@
+type Sbom_summary_metrics {
+  avg_score: Float
+  count: ID
+  sbom_id: String
+  version: Int
+}

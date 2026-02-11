@@ -1,0 +1,8 @@
+type Template {
+  className: String
+  discovered: Boolean
+  displayName: String
+  enableMatch: Boolean
+  price: Float
+  uuid: ID
+}

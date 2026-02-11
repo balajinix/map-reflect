@@ -1,0 +1,17 @@
+"""Available filters for exposures"""
+type ExposureFilters {
+  """Severity filters"""
+  severity: [String]
+  """Status filters"""
+  status: [String]
+  """Scan type filters"""
+  scan_type: [String]
+  """Exposure type filters"""
+  exposure_type: [String]
+  """Public access point impact filters"""
+  impacts_public_access_point: [Boolean]
+  """Open ticket filters"""
+  has_open_ticket: [Boolean]
+  """Solution availability filters"""
+  has_solution: [Boolean]
+}

@@ -1,0 +1,21 @@
+"""Automation action definition. When this is used in policy creation request, only `id` should be specified."""
+type query_getCustomEventSpecifications_items_actions_items {
+  """Action created time."""
+  createdAt: DateTime!
+  """Action description."""
+  description: query_getActions_items_description
+  """List of fields that describe an action."""
+  fields: [query_getActions_items_fields_items]
+  """Action identifier."""
+  id: query_getActions_items_id!
+  """List of inputs to the action."""
+  inputParameters: [query_getActions_items_inputParameters_items]
+  metadata: query_getActions_items_metadata
+  """Action modified time."""
+  modifiedAt: DateTime!
+  """Action name."""
+  name: query_getActions_items_name!
+  """List of tags added to the action."""
+  tags: [String]
+  type: query_getActions_items_type!
+}

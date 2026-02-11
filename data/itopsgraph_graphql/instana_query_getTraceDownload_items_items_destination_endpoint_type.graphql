@@ -1,0 +1,16 @@
+enum query_getTraceDownload_items_items_destination_endpoint_type {
+  UNDEFINED
+  RPC
+  EVENT
+  GRAPHQL
+  BATCH
+  SHELL
+  HTTP
+  SDK
+  OPENTELEMETRY
+  INTERNAL
+  DATABASE
+  MESSAGING
+  PAGE
+  PAGE_RESOURCE
+}

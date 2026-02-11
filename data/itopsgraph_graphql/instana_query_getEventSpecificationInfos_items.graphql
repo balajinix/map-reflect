@@ -1,0 +1,12 @@
+type query_getEventSpecificationInfos_items {
+  description: String
+  enabled: Boolean
+  entityType: String!
+  id: query_getEventSpecificationInfos_items_id!
+  invalid: Boolean
+  migrated: Boolean
+  name: query_getEventSpecificationInfos_items_name!
+  severity: Int
+  triggering: Boolean
+  type: query_getEventSpecificationInfos_items_type!
+}

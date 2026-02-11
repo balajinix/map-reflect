@@ -1,0 +1,6 @@
+enum mutation_uploadSourceMapFile_metadata_items_type {
+  JS_MAP
+  JS
+  R8PG_MAP
+  DWARF
+}

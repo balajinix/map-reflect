@@ -1,0 +1,5 @@
+type Control_relation {
+  control1_id: ID
+  control2_id: ID
+  type: String
+}

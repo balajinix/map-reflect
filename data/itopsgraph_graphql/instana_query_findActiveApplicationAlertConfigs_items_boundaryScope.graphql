@@ -1,0 +1,4 @@
+enum query_findActiveApplicationAlertConfigs_items_boundaryScope {
+  ALL
+  INBOUND
+}

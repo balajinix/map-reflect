@@ -1,0 +1,5 @@
+"""Represents an array of call group item containing several attributes that describe its properties. The item includes fields such as cursor, metrics, name, and timestamp, which provide detailed information about the item."""
+type mutation_getMobileAppBeacons_items_items {
+  beacon: mutation_getMobileAppBeacons_items_items_beacon!
+  cursor: JSON!
+}

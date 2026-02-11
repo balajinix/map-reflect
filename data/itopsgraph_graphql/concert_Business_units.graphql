@@ -1,0 +1,7 @@
+type Business_units {
+  business_id: ID
+  email: String
+  id: ID!
+  name: String
+  phone: String
+}

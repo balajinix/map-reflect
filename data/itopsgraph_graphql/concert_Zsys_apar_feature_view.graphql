@@ -1,0 +1,14 @@
+type Zsys_apar_feature_view {
+  apar_id: String
+  apar_type: String
+  description: String
+  feature_id: ID
+  feature_name: String
+  function_id: String
+  product_id: String
+  product_name: String
+  product_release: String
+  risk_assessment: String
+  risk_assessment_score: Int
+  usage_count: ID
+}

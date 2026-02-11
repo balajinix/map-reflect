@@ -1,0 +1,13 @@
+"""PackerBuild domain model message."""
+type PackerBuild {
+  base: Base!
+  hcp_resource: HcpResource!
+  """id of the parent version"""
+  version_id: string
+  """id of the source"""
+  source_external_identifier: string
+  component_type: string
+  packer_run_uuid: string
+  platform: string
+  status: string
+}

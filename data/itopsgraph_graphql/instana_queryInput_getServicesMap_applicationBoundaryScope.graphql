@@ -1,0 +1,4 @@
+enum queryInput_getServicesMap_applicationBoundaryScope {
+  ALL
+  INBOUND
+}

@@ -1,0 +1,8 @@
+type Environments_access_points {
+  access_point_id: ID
+  certificate_id: ID
+  environment_id: ID
+  host_name: String
+  id: ID
+  port: Int
+}

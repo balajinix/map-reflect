@@ -1,0 +1,26 @@
+type Exposure_business_impact_view {
+  access_point_url: String
+  access_points_id: ID
+  access_points_name: String
+  additional_data: JSON
+  app_id: ID
+  application_name: String
+  application_release_id: ID
+  created_by: String
+  env_id: ID
+  environment_access_point_id: ID
+  exposure_path: String
+  id: ID
+  image_id: ID
+  image_name: String
+  image_tag: String
+  is_archived: Boolean
+  is_public: Boolean
+  last_updated_by: String
+  release_version: String
+  repo_id: ID
+  repo_name: String
+  repo_url: String
+  rule_id: String
+  rule_name: String
+}

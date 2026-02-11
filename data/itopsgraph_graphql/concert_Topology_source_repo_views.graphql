@@ -1,0 +1,13 @@
+type Topology_source_repo_views {
+  applications: JSON
+  certificates: JSON
+  compliance_assessments: JSON
+  cves: JSON
+  dast_exposures: JSON
+  environments: JSON
+  images: JSON
+  private_access_points: JSON
+  public_access_points: JSON
+  repositories: JSON
+  sast_exposures: JSON
+}

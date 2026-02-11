@@ -1,0 +1,8 @@
+enum GroupOrigin {
+  DISCOVERED
+  DISCOVERED
+  USER
+  USER
+  SYSTEM
+  SYSTEM
+}

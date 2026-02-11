@@ -1,0 +1,4 @@
+enum query_getSloConfigById_oneOf_0_indicator_type {
+  eventBased
+  timeBased
+}

@@ -1,0 +1,1 @@
+"""Custom payload fields to send additional information in the alert notifications. Can be left empty."""

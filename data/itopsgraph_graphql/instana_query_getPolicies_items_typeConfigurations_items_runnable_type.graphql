@@ -1,0 +1,4 @@
+enum query_getPolicies_items_typeConfigurations_items_runnable_type {
+  action
+  workflow
+}

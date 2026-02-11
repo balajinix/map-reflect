@@ -1,0 +1,6 @@
+"""A list of rules where each rule is associated with multiple thresholds and their corresponding severity levels. This enables more complex alert configurations with validations to ensure consistent and logical threshold-severity combinations."""
+type query_findActiveMobileAppAlertConfigs_items_rules_items {
+  rule: query_findActiveMobileAppAlertConfigs_items_rules_items_rule!
+  thresholdOperator: query_findActiveMobileAppAlertConfigs_items_rules_items_thresholdOperator!
+  thresholds: JSON!
+}

@@ -1,0 +1,6 @@
+type SeverityBreakdown {
+  CRITICAL: Int
+  MINOR: Int
+  MAJOR: Int
+  NORMAL: Int
+}

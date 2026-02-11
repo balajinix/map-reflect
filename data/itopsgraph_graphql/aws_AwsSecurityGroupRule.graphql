@@ -1,0 +1,4 @@
+type AwsSecurityGroupRule {
+  security_rule: BaseSecurityRule!
+  aws_resource: AwsResource!
+}

@@ -1,0 +1,4 @@
+type Zsys_archive_feature {
+  id: ID
+  name: String
+}

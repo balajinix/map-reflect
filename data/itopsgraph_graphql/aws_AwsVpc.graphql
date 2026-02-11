@@ -1,0 +1,4 @@
+type AwsVpc {
+  vpc: BaseVpc!
+  aws_resource: AwsResource!
+}

@@ -1,0 +1,1 @@
+"""separate filtering and group by service id field - upstream is filtered on destination service and groups on source service - downstream is filtered on source service and groups on destination service - none is filtered on destination service and no grouping"""

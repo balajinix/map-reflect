@@ -1,0 +1,4 @@
+type getMobileAppBeaconMetricsV2_200_response {
+  adjustedTimeframe: mutation_getApplicationDataMetricsV2_adjustedTimeframe
+  metrics: JSON!
+}

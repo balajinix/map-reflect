@@ -1,0 +1,1 @@
+"""Set aggregation that can be applied to a series of values. Eg: `MEAN`."""

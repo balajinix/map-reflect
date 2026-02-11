@@ -1,0 +1,4 @@
+type Images_repositories {
+  image_id: ID
+  repository_id: ID
+}

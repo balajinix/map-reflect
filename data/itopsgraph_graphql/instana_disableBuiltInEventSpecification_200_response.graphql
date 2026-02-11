@@ -1,0 +1,13 @@
+type disableBuiltInEventSpecification_200_response {
+  description: query_getBuiltInEventSpecifications_items_description
+  enabled: Boolean
+  hidden: Boolean
+  hyperParams: [query_getBuiltInEventSpecifications_items_hyperParams_items]!
+  id: query_getBuiltInEventSpecifications_items_id!
+  lastUpdated: BigInt
+  name: query_getBuiltInEventSpecifications_items_name!
+  ruleInputs: [query_getBuiltInEventSpecifications_items_ruleInputs_items]!
+  severity: Int
+  shortPluginId: query_getBuiltInEventSpecifications_items_shortPluginId!
+  triggering: Boolean
+}

@@ -1,0 +1,7 @@
+"""Event Filter Configuration for supporting the scope of the Alert Configuration. Applies a filter based on the application perspective or selected entities."""
+type query_getAlerts_items_eventFilteringConfiguration {
+  applicationAlertConfigIds: [String]
+  eventTypes: [query_getAlerts_items_eventFilteringConfiguration_eventTypes_items]
+  query: query_getAlerts_items_eventFilteringConfiguration_query
+  ruleIds: [String]
+}

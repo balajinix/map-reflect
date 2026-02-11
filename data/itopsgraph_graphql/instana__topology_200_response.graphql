@@ -1,0 +1,5 @@
+"""Include snapshot data in nodes"""
+type _topology_200_response {
+  edges: [_query_topology_edges_items]
+  nodes: [_query_topology_nodes_items]
+}

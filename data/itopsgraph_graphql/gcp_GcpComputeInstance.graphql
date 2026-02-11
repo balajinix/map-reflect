@@ -1,0 +1,4 @@
+"""GcpComputeInstance domain model message."""
+type GcpComputeInstance {
+  virtual_machine: BaseVirtualMachine!
+}

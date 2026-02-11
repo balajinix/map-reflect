@@ -1,0 +1,13 @@
+enum query_softwareVersions_items_softwareType {
+  DEPENDENCY
+  RUNTIME
+  DATABASE
+  MESSAGING
+  PLATFORM
+  PACKAGE
+  OS
+  CACHE
+  API_GATEWAY
+  OTHER
+  APPLICATION_FRAMEWORK
+}

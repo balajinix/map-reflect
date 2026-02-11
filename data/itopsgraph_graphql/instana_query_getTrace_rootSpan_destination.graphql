@@ -1,0 +1,6 @@
+type query_getTrace_rootSpan_destination {
+  applications: [query_getTrace_rootSpan_destination_applications_items]!
+  endpoint: query_getTrace_rootSpan_destination_endpoint
+  physicalContext: query_getTrace_rootSpan_destination_physicalContext
+  service: query_getTrace_rootSpan_destination_service
+}

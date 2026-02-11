@@ -1,0 +1,8 @@
+type Sbomid_to_scorecard_categories {
+  category: String
+  description: String
+  ossrepo: String
+  sbom_id: String
+  score: Float
+  version: Int
+}

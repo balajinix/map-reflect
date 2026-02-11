@@ -1,0 +1,6 @@
+enum SearchOrderBy {
+  NAME
+  UTILIZATION
+  SEVERITY
+  COST
+}

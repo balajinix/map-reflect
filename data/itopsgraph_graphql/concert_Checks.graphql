@@ -1,0 +1,10 @@
+type Checks {
+  """ckname of package"""
+  ckname: String
+  """Check Reason of package"""
+  reason: String
+  """Check Score of package"""
+  score: Int
+  """Check Category of package"""
+  category: String
+}

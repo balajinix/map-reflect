@@ -1,0 +1,66 @@
+type Action {
+  """actionID"""
+  actionID: ID
+  """ID for the action, which will persist across restarts""""
+  actionImpactID: ID
+  actionMode: ActionMode
+  actionSchedule: ActionSchedule
+  actionState: ActionState
+  actionType: ActionType
+  """compound move actions"""
+  compoundActions: [CompoundActionsEntry]
+  createTime: DateTime
+  updateTime: DateTime
+  clearTime: DateTime
+  """Current entity e.g. the current host that a VM resides on for a VM move action"""
+  currentEntity: CurrentEntity
+  """The region (DataCenter) where the current service entity is located, for cloud migration actions"""
+  currentLocation: CurrentLocation
+  currentValue: Float
+  """describing the action"""
+  details: String
+  """A user readable name of the api object. Cannot be blank. The UTF-8 encoding must be at most 255 bytes.""""
+  displayName: String
+  """Characteristics of the execution of the Action. Include disruptiveness and reversibility."""
+  entityCharacteristics: JSON
+  """Characteristics of the execution of the Action. Include disruptiveness and reversibility."""
+  executionCharacteristics: ExecutionCharacteristics
+  importance: Float
+  """Market ID associated with the requested items"""
+  marketID: ID
+  """Destination entity, such as the host that a VM will move to for a VM move action"""
+  newEntity: NewEntity
+  """The region, represented as a DataCenter entity, where the target service entity will be located for cloud migration actions"""
+  newLocation: NewLocation
+  newValue: Float
+  """policy associated with the action"""
+  policy: JSON
+  """Description(s) of any prerequisite(s) that must occur before execution is possible. If this field is populated, the action would otherwise be executable but has been blocked by this prerequisite, and is displayed accordingly. If this field is not populated, no prerequisite has caused the action mode to be modified, and the action is displayed as normal."""
+  prerequisites: [String]
+  """generated using the Prioritze Automationsetting, indicating that it is possible to have more savings if these opportunities are satisfied"""
+  prioritizedAutomationOpportunities: [String]
+  relatedActionsCountByType: RelatedActionsCountByType
+  """The related settings policies associated with the action"""
+  relatedSettingsPolicies: JSON
+  """The Reserved Instance associated with the action"""
+  reservedInstance: JSON
+  """The platform of the recommended RI if the action has a supersaving"""
+  reservedInstancePlatform: String
+  """name under which this action appears in third-party software or external approval backend"""
+  externalActionName: String
+  """URL to third-party software showing this action. Suitable for external action approval"""
+  externalActionUrl: String
+  resizeAttribute: ResizeAttribute
+  """Cause of the action"""
+  risk: Risk
+  source: ActionSource
+  """Collected monitoring statistics"""
+  stats: [StatsEntry]
+  """Target entity for an action. For example, the VM in a Resize Action, or the host for a VM move"""
+  target: Target
+  template: Template
+  uuid: ID
+  valueUnits: String
+  """"Virtual Disk used for the action, for example in a storage move"""
+  virtualDisks: [VirtualDisksEntry]
+}

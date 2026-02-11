@@ -1,0 +1,6 @@
+type query_getHttpEndpointConfigs_items {
+  endpointNameByCollectedPathTemplateRuleEnabled: Boolean
+  endpointNameByFirstPathSegmentRuleEnabled: Boolean
+  rules: [query_getHttpEndpointConfigs_items_rules_items]!
+  serviceId: String!
+}

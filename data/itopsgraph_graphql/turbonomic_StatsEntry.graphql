@@ -1,0 +1,18 @@
+type StatsEntry {
+  uuid: ID
+  displayName: String
+  className: String
+  name: String
+  capacity: StatValue
+  reserved: StatValue
+  commoditySource: CommoditySource
+  relatedEntityType: String
+  filters: [StatFilterEntry]
+  relatedEntity: RelatedEntity
+  """Number of providers or consumers for this statistic, 'relatedEntity' and 'numRelatedEntities' are mutually exclusive"""
+  numRelatedEntities: Int
+  units: String
+  values: StatValue
+  value: Float
+  histUtilizations: JSON
+}

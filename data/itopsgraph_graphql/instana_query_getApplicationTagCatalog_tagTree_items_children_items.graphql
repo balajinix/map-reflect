@@ -1,0 +1,7 @@
+"""Children tags of tagTree"""
+type query_getApplicationTagCatalog_tagTree_items_children_items {
+  icon: String
+  label: String
+  """Type would be either `LEVEL` or `TAG` depending on whether the tag has any child tags or not respectively."""
+  type: String
+}

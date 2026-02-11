@@ -1,0 +1,8 @@
+type getEndpointsMetrics_200_response {
+  adjustedTimeframe: mutation_getEndpointsMetrics_adjustedTimeframe
+  items: [mutation_getEndpointsMetrics_items_items]!
+  """Page Number"""
+  page: Int
+  pageSize: Int
+  totalHits: BigInt
+}

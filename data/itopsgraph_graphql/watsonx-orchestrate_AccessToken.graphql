@@ -1,0 +1,6 @@
+"""AccessToken generation  two ways to auth that require slightly different URLs api.dl.watson-orchestrate.ibm.com - uses bearer tokens derived from the IAM-API-KEY [ in config ] api.us-south.watson-orchestrate.cloud.ibm.com - old style, uses IAM-API-KEY directly Note: for now we pass in both the Authorization and IAM-API_KEY to calls; this means non-ibm cloud calls have IAM-API-TOKEN showing.  Fix later."""
+type AccessToken {
+  token: String
+  token_type: String
+  expired_in: Int
+}

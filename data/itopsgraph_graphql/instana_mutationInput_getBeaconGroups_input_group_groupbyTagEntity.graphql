@@ -1,0 +1,5 @@
+enum mutationInput_getBeaconGroups_input_group_groupbyTagEntity {
+  NOT_APPLICABLE
+  DESTINATION
+  SOURCE
+}

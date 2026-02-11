@@ -1,0 +1,4 @@
+"""HcpOrganization is a type containing HCP Organization specific fields."""
+type HcpOrganization {
+  organization: BaseOrganization!
+}

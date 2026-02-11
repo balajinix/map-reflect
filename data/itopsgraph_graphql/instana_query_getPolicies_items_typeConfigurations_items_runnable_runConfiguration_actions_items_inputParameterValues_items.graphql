@@ -1,0 +1,7 @@
+"""List of action input parameters."""
+type query_getPolicies_items_typeConfigurations_items_runnable_runConfiguration_actions_items_inputParameterValues_items {
+  """Parameter name."""
+  name: String!
+  """Parameter value."""
+  value: String!
+}

@@ -1,0 +1,4 @@
+type query_getMobileAppConfig_items {
+  id: query_getMobileAppConfig_items_id!
+  name: query_getMobileAppConfig_items_name!
+}

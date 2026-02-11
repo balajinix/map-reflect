@@ -1,0 +1,24 @@
+type AppEnvironment {
+  """ID for the Environment"""
+  id: String!
+  """Name of the Environment"""
+  name: String!
+  """Type of the Environment"""
+  type: String
+  """platform_k8 of the Environment"""
+  platform_k8: String
+  """Region of the Environment"""
+  region: String
+  """Role of the auth user for the entity"""
+  auth_user_role: String
+  """Tags of Environment"""
+  tags: [TagsPrototype]
+  """Description of Environment"""
+  description: String
+  """Last modified date"""
+  last_updated_on: Int
+  """Environment last updated by"""
+  last_updated_by: String!
+  """Purpose of the Environment"""
+  purpose: String
+}

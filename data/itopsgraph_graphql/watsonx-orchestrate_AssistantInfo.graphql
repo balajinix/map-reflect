@@ -1,0 +1,9 @@
+"""Basic information about an assistant."""
+type AssistantInfo {
+  """The unique identifier of the AI assistant."""
+  assistant_id: ID
+  """The name of the assistant."""
+  assistant_name: String
+  """Indicates whether this is the default assistant."""
+  is_default: Boolean
+}

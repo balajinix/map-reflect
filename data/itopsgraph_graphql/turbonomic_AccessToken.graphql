@@ -1,0 +1,6 @@
+type AccessToken {
+  access_token: Secret!
+  scope: String!
+  token_type: String!
+  expires_in: Int!
+}
