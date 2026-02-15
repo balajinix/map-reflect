@@ -49,3 +49,14 @@ data/*_expanded*.json
 
 # Documentation scraped from APIs (very large)
 docs_info/
+
+# Coverage results (experiment outputs)
+map_reflect/coverage_results/
+
+# Paper build outputs
+paper/*.pdf
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
