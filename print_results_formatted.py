@@ -59,7 +59,7 @@ def print_box_table(title, subtitle, headers, rows, col_widths):
 def main():
     results = get_results()
 
-    datasets = ['ITOps', 'ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
+    datasets = ['ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
 
     # Define method order and models
     method_order = [
@@ -76,8 +76,6 @@ def main():
         ('MatchMaker', 'Llama'),
         ('ReMatch', 'Granite'),
         ('ReMatch', 'Llama'),
-        ('DualContext', 'Granite'),
-        ('DualContext', 'Llama'),
         ('UE-Reflect', 'Granite'),
         ('UE-Reflect', 'Llama'),
         ('UE-Reflect-V2', 'Granite'),

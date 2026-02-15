@@ -55,8 +55,7 @@ def print_table(title, subtitle, headers, rows, col_widths):
 def main():
     results = get_results()
 
-    # Exclude ITOpsGraph as per user's format
-    datasets = ['ITOps', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
+    datasets = ['ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
 
     # Define method order and models
     # Baselines: SMT, GNN, ReAct, AnyTool, MatchMaker, ReMatch
@@ -79,7 +78,7 @@ def main():
         ('UE-Reflect', 'Llama'),
     ]
 
-    headers = ['Method', 'Model', 'ITOps', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
+    headers = ['Method', 'Model', 'ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
     col_widths = [14, 12, 8, 8, 10, 12, 13]
 
     # TABLE 1: API-LEVEL ACCURACY
@@ -135,7 +134,7 @@ def main():
     print()
 
     # TABLE 3: SAMPLE COUNTS
-    headers3 = ['Method', 'Model', 'ITOps', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synth']
+    headers3 = ['Method', 'Model', 'ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synth']
     col_widths3 = [14, 12, 10, 10, 10, 12, 11]
 
     rows = []

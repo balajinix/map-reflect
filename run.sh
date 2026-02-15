@@ -29,7 +29,7 @@
 #   ./run.sh
 #
 #   # Run specific method/dataset/model
-#   ./run.sh --method map_reflect --dataset ITOps --model granite
+#   ./run.sh --method map_reflect --dataset ITOpsGraph --model granite
 #
 #   # Dry run to see what would execute
 #   ./run.sh --dry-run
@@ -47,7 +47,7 @@
 #   ./run.sh --all --method map_reflect
 #
 #   # Quick test with minimal delay
-#   ./run.sh --quick --method react --dataset ITOps
+#   ./run.sh --quick --method react --dataset ITOpsGraph
 #
 # =============================================================================
 # AVAILABLE METHODS
@@ -56,14 +56,14 @@
 #   map_reflect  - Map-Reflect: semantic search + LLM reflection
 #   react        - ReAct: agent-based approach with tool use
 #   smt          - SMT: schema matching with transformers
-#   anytool      - AnyTool: hierarchical tool selection (ITOps/NL2GQL only)
+#   anytool      - AnyTool: hierarchical tool selection (ITOpsGraph/NL2GQL only)
 #   gnn          - GNN: graph neural network (inference only, no LLM)
 #
 # =============================================================================
 # AVAILABLE DATASETS
 # =============================================================================
 #
-#   ITOps        - IT Operations (Concert, Instana, Turbonomic)
+#   ITOpsGraph   - IT Operations Graph (Concert, Instana, Turbonomic, etc.)
 #   NL2GQL       - Natural Language to GraphQL
 #   OMOP_CMS     - OMOP healthcare with CMS data
 #   OMOP_MIMIC   - OMOP healthcare with MIMIC data
@@ -117,10 +117,10 @@ MISTRAL_SHORT="mistral-medium"
 # -----------------------------------------------------------------------------
 # Dataset Configuration
 # -----------------------------------------------------------------------------
-ALL_DATASETS="ITOps ITOpsGraph NL2GQL OMOP_CMS OMOP_MIMIC OMOP_Synthea"
+ALL_DATASETS="ITOpsGraph NL2GQL OMOP_CMS OMOP_MIMIC OMOP_Synthea"
 
 # Datasets that support AnyTool (require hierarchy files)
-ANYTOOL_DATASETS="ITOps ITOpsGraph NL2GQL"
+ANYTOOL_DATASETS="ITOpsGraph NL2GQL"
 
 # -----------------------------------------------------------------------------
 # Method Configuration
@@ -166,7 +166,7 @@ MODES:
 
 USAGE EXAMPLES:
   ./run.sh                                          # Run all experiments
-  ./run.sh --method map_reflect --dataset ITOps    # Run with filters
+  ./run.sh --method map_reflect --dataset ITOpsGraph    # Run with filters
   ./run.sh --dry-run                                # Preview commands
   ./run.sh --remote                                 # Run on remote machine
   ./run.sh --aggregate                              # Only aggregate results
@@ -177,11 +177,11 @@ METHODS:
   map_reflect  - Semantic search + LLM reflection
   react        - Agent-based approach with tool use
   smt          - Schema Matching with Transformers
-  anytool      - Hierarchical tool selection (ITOps/NL2GQL only)
+  anytool      - Hierarchical tool selection (ITOpsGraph/NL2GQL only)
   gnn          - Graph Neural Network (inference only)
 
 DATASETS:
-  ITOps, NL2GQL, OMOP_CMS, OMOP_MIMIC, OMOP_Synthea
+  ITOpsGraph, NL2GQL, OMOP_CMS, OMOP_MIMIC, OMOP_Synthea
 
 MODELS:
   granite (IBM Granite 4), llama (Meta Llama 3.3), mistral (Mistral Medium)
@@ -194,7 +194,7 @@ HELP_EOF
     echo "  --all              Run + Aggregate + Accuracy (full pipeline)"
     echo ""
     echo "  --method METHOD    Filter by method (map_reflect, react, smt, anytool, gnn)"
-    echo "  --dataset DATASET  Filter by dataset (ITOps, NL2GQL, OMOP_CMS, OMOP_MIMIC, OMOP_Synthea)"
+    echo "  --dataset DATASET  Filter by dataset (ITOpsGraph, NL2GQL, OMOP_CMS, OMOP_MIMIC, OMOP_Synthea)"
     echo "  --model MODEL      Filter by model (granite, llama, mistral)"
     echo ""
     echo "  --remote           Force remote machine paths (auto-detected normally)"
@@ -658,7 +658,7 @@ aggregate_results() {
     if [[ -n "$FILTER_DATASET" ]]; then
         datasets="$FILTER_DATASET"
     else
-        datasets="ITOps NL2GQL OMOP_CMS OMOP_MIMIC OMOP_Synthea"
+        datasets="ITOpsGraph NL2GQL OMOP_CMS OMOP_MIMIC OMOP_Synthea"
     fi
 
     # Build method list

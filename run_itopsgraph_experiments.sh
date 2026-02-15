@@ -272,24 +272,6 @@ run_experiment "matchmaker_mistral" "MatchMaker with Mistral" \
         --datasets 'ITOpsGraph' \
         --models '$MISTRAL'"
 
-    "cd '${BASE_DIR}/match_maker' && python dual_context_runner.py \
-        --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
-        --data-dir '$DATA_DIR' \
-        --datasets 'ITOpsGraph' \
-        --models '$GRANITE'"
-
-    "cd '${BASE_DIR}/match_maker' && python dual_context_runner.py \
-        --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
-        --data-dir '$DATA_DIR' \
-        --datasets 'ITOpsGraph' \
-        --models '$LLAMA'"
-
-    "cd '${BASE_DIR}/match_maker' && python dual_context_runner.py \
-        --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
-        --data-dir '$DATA_DIR' \
-        --datasets 'ITOpsGraph' \
-        --models '$MISTRAL'"
-
 # ReMatch - Llama and Mistral (Granite already done)
 run_experiment "rematch_llama" "ReMatch with Llama" \
     "cd '${BASE_DIR}/rematch' && python rematch_runner.py \

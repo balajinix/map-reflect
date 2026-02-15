@@ -13,7 +13,7 @@ Two evaluation modes:
 Usage:
     # Default mode (per-sample accuracy)
     python eval/calc_accuracy.py
-    python eval/calc_accuracy.py --methods map_reflect,gnn --datasets ITOps,NL2GQL
+    python eval/calc_accuracy.py --methods map_reflect,gnn --datasets ITOpsGraph,NL2GQL
     python eval/calc_accuracy.py --output markdown  # Output as markdown table
     python eval/calc_accuracy.py --output csv       # Output as CSV
 
@@ -35,7 +35,7 @@ from typing import Dict, List, Tuple, Optional, Set
 
 # Script is in eval/, so parent.parent gets to project root
 BASE_DIR = Path(__file__).parent.parent
-DATASETS = ['ITOps', 'ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
+DATASETS = ['ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
 
 # Method directories and model patterns
 # Note: Patterns are matched against lowercased filenames
@@ -85,13 +85,6 @@ METHODS = {
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
-        ],
-    },
-    'DualContext': {
-        'dir': 'match_maker/results',
-        'models': [
-            ('Granite', 'dual_context_.*granite'),
-            ('Llama', 'dual_context_.*llama'),
         ],
     },
     'UE-Reflect': {
@@ -643,7 +636,7 @@ def run_consensus_evaluation(args, base_dir: Path, selected_methods: List[str]):
         method_config = METHODS[method_name]
         method_dir = base_dir / method_config['dir']
 
-        # Load all ITOps results for this method
+        # Load all ITOpsGraph results for this method
         results = []
         for f in method_dir.glob('*.json'):
             if 'itops' in f.name.lower() and 'checkpoint' not in f.name.lower():

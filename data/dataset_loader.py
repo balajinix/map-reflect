@@ -18,13 +18,13 @@ class DatasetLoader:
     def __init__(self, data_dir: str = "./data"):
         self.data_dir = Path(data_dir)
         self.datasets = {
-            'ITOps': 'itops_dataset.jsonl',
             'ITOpsGraph': 'itopsgraph_dataset.jsonl',  # Validated coverage mappings (521 samples)
             'NL2GQL': 'nl2gql_dataset.jsonl',
             'GraphQLRestBench': 'graphqlrestbench_dataset.jsonl',
             'OMOP_MIMIC': 'omop_mimic_dataset.jsonl',
             'OMOP_CMS': 'omop_cms_dataset.jsonl',
-            'OMOP_Synthea': 'omop_synthea_dataset.jsonl'
+            'OMOP_Synthea': 'omop_synthea_dataset.jsonl',
+            'ToolBench': 'toolbench_eval_dataset.jsonl'
         }
     
     def load_evaluation_utterances(self, dataset: str, max_samples: Optional[int] = None) -> List[Dict[str, Any]]:
@@ -150,17 +150,7 @@ class DatasetLoader:
                     return None
 
             # Dataset-specific format detection
-            if dataset == "ITOps":
-                utterance_data = {
-                    "sample_id": data.get("id", f"itops_{index:03d}"),
-                    "utterance": data.get("utterance", data.get("query", "")),
-                    "expected_source": data.get("source_schema", ""),
-                    "expected_target": data.get("target_schema", ""),
-                    "ground_truth_mapping": data.get("mapping", {}),
-                    "metadata": data.get("metadata", {})
-                }
-
-            elif dataset.startswith("ITOpsGraph"):
+            if dataset.startswith("ITOpsGraph"):
                 # ITOpsGraph format (utterance and attribute variants):
                 # - id: sample identifier
                 # - utterance: natural language or attribute name
@@ -238,6 +228,22 @@ class DatasetLoader:
                     "metadata": data.get("metadata", {})
                 }
 
+            elif dataset == "ToolBench":
+                # Handle ToolBench REST API mapping dataset
+                # Format: sample_id, utterance, expected_source (str), expected_target (dict), ground_truth_mapping
+                expected_target = data.get("expected_target", {})
+                utterance_data = {
+                    "sample_id": data.get("sample_id", f"toolbench_{index:04d}"),
+                    "utterance": data.get("utterance", ""),
+                    "expected_source": data.get("expected_source", ""),
+                    "expected_target": expected_target.get("id", "") if isinstance(expected_target, dict) else str(expected_target),
+                    "ground_truth_mapping": data.get("ground_truth_mapping", {}),
+                    "category": data.get("category", ""),
+                    "source_api": data.get("source_api", {}),
+                    "target_api": data.get("target_api", {}),
+                    "metadata": {"category": data.get("category", "")}
+                }
+
             else:
                 # Generic fallback format
                 utterance_data = {
@@ -262,13 +268,13 @@ class DatasetLoader:
     def get_expected_samples_count(self, dataset_name: str) -> int:
         """Get expected number of samples for a dataset."""
         expected_counts = {
-            'ITOps': 100,
             'ITOpsGraph': 521,  # Validated coverage mappings
             'NL2GQL': 50,
             'GraphQLRestBench': 75,
             'OMOP_MIMIC': 46,
             'OMOP_CMS': 38,
-            'OMOP_Synthea': 12
+            'OMOP_Synthea': 12,
+            'ToolBench': 3190  # REST API mappings
         }
         return expected_counts.get(dataset_name, 0)
     
@@ -350,20 +356,20 @@ if __name__ == "__main__":
         available = loader.get_available_datasets()
         print(f"Available datasets: {available}")
         
-        # Test loading ITOps dataset
+        # Test loading ITOpsGraph dataset
         try:
-            utterances = loader.load_evaluation_utterances("ITOps", max_samples=3)
+            utterances = loader.load_evaluation_utterances("ITOpsGraph", max_samples=3)
             print(f"Loaded {len(utterances)} utterances")
-            
+
             if utterances:
                 print("Sample utterance:")
                 for key, value in utterances[0].items():
                     print(f"  {key}: {value}")
         except Exception as e:
             print(f"Error loading dataset: {e}")
-        
+
         # Show dataset info
-        info = loader.dataset_info("ITOps")
+        info = loader.dataset_info("ITOpsGraph")
         print(f"Dataset info: {info}")
         
         if info["exists"]:

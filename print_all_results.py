@@ -17,8 +17,8 @@ BASE_DIR = Path(__file__).parent
 # Configuration - matching vldb.tex naming
 # =============================================================================
 
-# Datasets in display order (ITOps is primary, ITOpsGraph as fallback)
-DATASETS = ["ITOps", "NL2GQL", "OMOP_CMS", "OMOP_MIMIC", "OMOP_Synthea"]
+# Datasets in display order
+DATASETS = ["ITOpsGraph", "NL2GQL", "OMOP_CMS", "OMOP_MIMIC", "OMOP_Synthea"]
 
 # Methods configuration with directory and model patterns
 METHODS = {
@@ -50,10 +50,6 @@ METHODS = {
         'dirs': ['rematch/results', 'remote_results/rematch'],
         'models': [('Granite', 'granite'), ('Llama', 'llama')],
     },
-    'DualContext': {
-        'dirs': ['match_maker/results', 'remote_results/match_maker'],
-        'models': [('Granite', r'dual_context.*granite'), ('Llama', r'dual_context.*llama')],
-    },
     'UE-Reflect': {
         'dirs': ['map_reflect/results', 'remote_results/map_reflect'],
         'models': [('Granite', r'ue_reflect.*granite'), ('Llama', r'ue_reflect.*llama')],
@@ -61,7 +57,7 @@ METHODS = {
 }
 
 # Method display order matching vldb.tex
-METHOD_ORDER = ['SMT', 'GNN', 'ReAct', 'AnyTool', 'Map-Reflect', 'MatchMaker', 'ReMatch', 'DualContext', 'UE-Reflect']
+METHOD_ORDER = ['SMT', 'GNN', 'ReAct', 'AnyTool', 'Map-Reflect', 'MatchMaker', 'ReMatch', 'UE-Reflect']
 
 # =============================================================================
 # Helper Functions (from calc_accuracy.py)
