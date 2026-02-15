@@ -41,3 +41,11 @@ results_archive/
 
 # Test files
 test_*.py
+
+# Large data files (generate locally or sync via rsync)
+data/property_lookup.json
+data/toolbench_schema_mapping.json
+data/*_expanded*.json
+
+# Documentation scraped from APIs (very large)
+docs_info/
