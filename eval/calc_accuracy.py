@@ -35,7 +35,7 @@ from typing import Dict, List, Tuple, Optional, Set
 
 # Script is in eval/, so parent.parent gets to project root
 BASE_DIR = Path(__file__).parent.parent
-DATASETS = ['ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea']
+DATASETS = ['ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea', 'ToolBench']
 
 # Method directories and model patterns
 # Note: Patterns are matched against lowercased filenames
@@ -781,7 +781,8 @@ def main():
     # Print tables
     print("\n" + "=" * 100)
     print("## TABLE 1: API-LEVEL (PRODUCT) ACCURACY")
-    print("*Correct when predicted mapping contains fields from expected source AND target products*\n")
+    print("*Correct when predicted mapping contains fields from expected source AND target products*")
+    print("*Note: SMT uses ground truth for API selection (--), only field mapping is evaluated*\n")
 
     if args.output == 'csv':
         print("Method,Model," + ",".join(selected_datasets))
@@ -795,7 +796,11 @@ def main():
         for ds in selected_datasets:
             r = all_results.get((method, model, ds))
             if r:
-                row.append(f"{r['api_accuracy']*100:.1f}%")
+                # SMT uses ground truth for API selection, show "-" instead of 100%
+                if method == 'SMT':
+                    row.append('--')
+                else:
+                    row.append(f"{r['api_accuracy']*100:.1f}%")
             else:
                 row.append('--')
 
