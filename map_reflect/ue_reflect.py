@@ -263,7 +263,15 @@ class SamplingUncertaintyEstimator:
             return {"uncertainty": 0.8, "method": "invalid_format"}
 
         primary_top = primary_ranking[0].get("id", "") if primary_ranking else ""
-        primary_scores = {r.get("id", ""): r.get("score", 0.5) for r in primary_ranking}
+
+        def _safe_score(v, default=0.5):
+            """Safely convert score to float."""
+            try:
+                return float(v) if v is not None else default
+            except (ValueError, TypeError):
+                return default
+
+        primary_scores = {r.get("id", ""): _safe_score(r.get("score", 0.5)) for r in primary_ranking}
 
         # Generate additional samples with higher temperature
         agreement_count = 1  # Primary response agrees with itself
@@ -283,7 +291,7 @@ class SamplingUncertaintyEstimator:
                         agreement_count += 1
 
                     # Calculate score variance for overlapping candidates
-                    sample_scores = {r.get("id", ""): r.get("score", 0.5) for r in sample_ranking}
+                    sample_scores = {r.get("id", ""): _safe_score(r.get("score", 0.5)) for r in sample_ranking}
                     for cid in primary_scores:
                         if cid in sample_scores:
                             score_variances.append(abs(primary_scores[cid] - sample_scores[cid]))

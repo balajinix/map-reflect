@@ -561,9 +561,9 @@ class MatchMakerEvaluationRunner:
         """Run MatchMaker on a single input (attribute or utterance)."""
         start_time = time.time()
 
-        # Auto-detect if utterance-based (itops/nl2gql/itopsgraph/OMOP) or attribute-based
+        # Auto-detect if utterance-based (itops/nl2gql/itopsgraph/OMOP/toolbench) or attribute-based
         if is_utterance is None:
-            is_utterance = dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic', 'omop_synthea'] or dataset.lower().startswith('itopsgraph')
+            is_utterance = dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench'] or dataset.lower().startswith('itopsgraph')
 
         try:
             logger.info(f"Running MatchMaker on sample {sample_id}")
@@ -694,7 +694,7 @@ class MatchMakerEvaluationRunner:
         logger.info(f"Loaded {len(utterances)} evaluation samples")
         
         # Determine if this is utterance-based or attribute-based
-        is_utterance_dataset = dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic', 'omop_synthea'] or dataset.lower().startswith('itopsgraph')
+        is_utterance_dataset = dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench'] or dataset.lower().startswith('itopsgraph')
         
         # Run MatchMaker on each sample
         results = []

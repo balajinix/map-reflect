@@ -145,7 +145,11 @@ class ReActEvaluationRunner:
             mapping_result = agent_result.get("mapping_result", {})
             
             # Extract predicted mappings from ReAct agent result
-            predicted_mapping = self._extract_predicted_mappings(mapping_result)
+            predicted_mapping = self._extract_predicted_mappings(
+                mapping_result,
+                source_schema=agent_result.get("source_schema", ""),
+                target_schema=agent_result.get("target_schema", "")
+            )
             
             # Calculate accuracy using ground truth if available
             ground_truth = utterance_data.get("ground_truth_mapping", {})
@@ -198,23 +202,52 @@ class ReActEvaluationRunner:
                 "schema_similarities": []
             }
     
-    def _extract_predicted_mappings(self, mapping_result: Dict[str, Any]) -> Dict[str, str]:
-        """Extract field mappings from ReAct agent result in standardized format."""
+    def _extract_predicted_mappings(self, mapping_result: Dict[str, Any],
+                                     source_schema: str = "",
+                                     target_schema: str = "") -> Dict[str, str]:
+        """Extract field mappings from ReAct agent result in standardized format.
+
+        Converts field names from 'Type.field' to 'product_Type.field' format
+        using the source_schema and target_schema which contain the full names.
+        """
         predicted_mapping = {}
-        
+
         if not mapping_result or "properties" not in mapping_result:
             return predicted_mapping
-        
+
         properties = mapping_result.get("properties", {})
-        
+
         for source_field, mappings in properties.items():
             if mappings and isinstance(mappings, list) and len(mappings) > 0:
                 # Take the first mapping if multiple exist
                 first_mapping = mappings[0]
                 if isinstance(first_mapping, dict) and "mapProperty" in first_mapping:
                     target_field = first_mapping["mapProperty"]
+                    map_table = first_mapping.get("mapTable", "")
+
+                    # Add schema prefix to field names if available
+                    # source_field format: "Type.field" -> "product_Type.field"
+                    if source_schema and "." in source_field:
+                        type_name = source_field.split(".")[0]
+                        field_name = source_field.split(".", 1)[1]
+                        # If source_schema ends with the type_name, use full source_schema
+                        if source_schema.endswith("_" + type_name) or source_schema == type_name:
+                            source_field = f"{source_schema}.{field_name}"
+
+                    # target_field format: use mapTable if available, otherwise target_schema
+                    # mapTable format is "product_Type", mapProperty is just "field"
+                    if map_table and "." not in target_field:
+                        # mapProperty is just the field name, prepend mapTable
+                        target_field = f"{map_table}.{target_field}"
+                    elif target_schema and "." in target_field:
+                        # target_field already has "Type.field" format, add product prefix
+                        type_name = target_field.split(".")[0]
+                        field_name = target_field.split(".", 1)[1]
+                        if target_schema.endswith("_" + type_name) or target_schema == type_name:
+                            target_field = f"{target_schema}.{field_name}"
+
                     predicted_mapping[source_field] = target_field
-        
+
         return predicted_mapping
     
     def _calculate_accuracy(self, ground_truth: Dict[str, Any], predicted: Dict[str, Any]) -> float:

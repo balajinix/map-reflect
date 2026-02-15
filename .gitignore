@@ -28,3 +28,16 @@ results.bk/
 
 # Large model files
 data/slate_30m/
+
+# Experiment result files (sync via rsync, not git)
+*/results/*.json
+*/results/*.jsonl
+*/results/archive/
+results/*.json
+results/*.jsonl
+results/archive/
+remote_results/
+results_archive/
+
+# Test files
+test_*.py

@@ -330,17 +330,21 @@ Examples:
 
         logger.info(f"Parsed utterance → source: {source_schema}, target: {target_schema} (using {schema_field})")
 
+        # Normalize schema names (spaces to underscores) for matching
+        source_schema_normalized = source_schema.replace(' ', '_')
+        target_schema_normalized = target_schema.replace(' ', '_')
+
         # Filter properties by the appropriate field
         self.source_properties = {
             prop_id: prop_data
             for prop_id, prop_data in self.property_data.items()
-            if source_schema in prop_data.get(schema_field, '').lower()
+            if source_schema_normalized in prop_data.get(schema_field, '').lower().replace(' ', '_')
         }
 
         self.target_properties = {
             prop_id: prop_data
             for prop_id, prop_data in self.property_data.items()
-            if target_schema in prop_data.get(schema_field, '').lower()
+            if target_schema_normalized in prop_data.get(schema_field, '').lower().replace(' ', '_')
         }
 
         logger.info(
@@ -352,21 +356,21 @@ Examples:
         if not self.source_properties or not self.target_properties:
             logger.warning(f"No properties found, trying lenient match")
             # Try matching just the first word of the schema name
-            source_word = source_schema.split('_')[0] if '_' in source_schema else source_schema
-            target_word = target_schema.split('_')[0] if '_' in target_schema else target_schema
+            source_word = source_schema_normalized.split('_')[0] if '_' in source_schema_normalized else source_schema_normalized
+            target_word = target_schema_normalized.split('_')[0] if '_' in target_schema_normalized else target_schema_normalized
 
             if not self.source_properties:
                 self.source_properties = {
                     prop_id: prop_data
                     for prop_id, prop_data in self.property_data.items()
-                    if source_word in prop_data.get(schema_field, '').lower()
+                    if source_word in prop_data.get(schema_field, '').lower().replace(' ', '_')
                 }
 
             if not self.target_properties:
                 self.target_properties = {
                     prop_id: prop_data
                     for prop_id, prop_data in self.property_data.items()
-                    if target_word in prop_data.get(schema_field, '').lower()
+                    if target_word in prop_data.get(schema_field, '').lower().replace(' ', '_')
                 }
 
             logger.info(
@@ -376,7 +380,7 @@ Examples:
 
         # Rebuild index with filtered target properties if needed
         # Skip rebuild for utterance-based datasets that already index all properties
-        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'omop_cms', 'omop_mimic', 'omop_synthea']
+        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench']
         if self.dataset.lower() in utterance_datasets:
             logger.info("Utterance-based dataset: skipping index rebuild (all properties already indexed)")
         elif self.colbert_available:
