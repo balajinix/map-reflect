@@ -130,6 +130,9 @@ class MappingState(TypedDict):
     # Field hints extracted from utterance for better field-level mapping
     source_field_hints: List[str]
     target_field_hints: List[str]
+    # Retrieval mode flag (True when target must be found via retrieval)
+    is_retrieval_mode: bool
+
 
 @dataclass
 class PropertyMapping:
@@ -426,21 +429,44 @@ class MapReflectAgent:
         # First, extract schema hints directly from utterance using pattern matching
         source_hints, target_hints = self._parse_utterance_for_schemas(user_utterance)
 
-        prompt = f"""Analyze this schema mapping request: "{user_utterance}"
+        # Check if this is a retrieval-style query (no target specified)
+        is_retrieval_query = self._is_retrieval_query(user_utterance)
 
-        Extract the specific source and destination schema/type information.
+        if is_retrieval_query:
+            # Retrieval mode: extract only source, target will be found via semantic search
+            prompt = f"""Analyze this schema mapping request: "{user_utterance}"
 
-        The request follows the pattern: "map [source_product] [source_type] with [target_product] [target_type]"
+            This is a RETRIEVAL query - the user wants to find target schemas that can be mapped to a source schema.
+            Extract ONLY the source schema information. The target will be found via retrieval.
 
-        Examples:
-        - "map concert api key with turbo entity" -> source: "concert ApiKey", dest: "turbo Entity"
-        - "map instana applications with concert tokens" -> source: "instana Application", dest: "concert Token"
+            Patterns:
+            - "find types that can be mapped to [product] [type]" -> extract source product and type
+            - "find APIs that can be mapped with [product] [api]" -> extract source product and api
+            - "find tables that can be joined with [table]" -> extract source table
+            - "find OMOP tables that map to [source]" -> extract source, target_product is "omop"
 
-        Return ONLY a JSON object:
-        {{"source_context": "[product] [specific type name]", "destination_context": "[product] [specific type name]", "source_product": "[product name]", "target_product": "[product name]", "source_types": ["type1", "type2"], "target_types": ["type1", "type2"]}}
+            Return ONLY a JSON object:
+            {{"source_context": "[product] [specific type name]", "source_product": "[product name]", "source_types": ["type1", "type2"], "is_retrieval": true}}
 
-        Your entire response must be ONLY the JSON object starting with {{ and ending with }}.
-        """.strip()
+            Your entire response must be ONLY the JSON object starting with {{ and ending with }}.
+            """.strip()
+        else:
+            # Oracle mode: both source and target specified in utterance
+            prompt = f"""Analyze this schema mapping request: "{user_utterance}"
+
+            Extract the specific source and destination schema/type information.
+
+            The request follows the pattern: "map [source_product] [source_type] with [target_product] [target_type]"
+
+            Examples:
+            - "map concert api key with turbo entity" -> source: "concert ApiKey", dest: "turbo Entity"
+            - "map instana applications with concert tokens" -> source: "instana Application", dest: "concert Token"
+
+            Return ONLY a JSON object:
+            {{"source_context": "[product] [specific type name]", "destination_context": "[product] [specific type name]", "source_product": "[product name]", "target_product": "[product name]", "source_types": ["type1", "type2"], "target_types": ["type1", "type2"]}}
+
+            Your entire response must be ONLY the JSON object starting with {{ and ending with }}.
+            """.strip()
 
         messages = [
             {"role": "system", "content": "You are an expert in API schema mapping. Extract specific schema type names, not general domains."},
@@ -463,13 +489,22 @@ class MapReflectAgent:
             state["target_product"] = target_hints[0] if target_hints else ""
             state["source_type_hints"] = source_hints[1:] if len(source_hints) > 1 else []
             state["target_type_hints"] = target_hints[1:] if len(target_hints) > 1 else []
+            state["is_retrieval_mode"] = is_retrieval_query
         else:
             state["source_context"] = ctx.get("source_context", user_utterance)
-            state["destination_context"] = ctx.get("destination_context", user_utterance)
             state["source_product"] = ctx.get("source_product", source_hints[0] if source_hints else "")
-            state["target_product"] = ctx.get("target_product", target_hints[0] if target_hints else "")
             state["source_type_hints"] = ctx.get("source_types", source_hints[1:] if len(source_hints) > 1 else [])
-            state["target_type_hints"] = ctx.get("target_types", target_hints[1:] if len(target_hints) > 1 else [])
+            state["is_retrieval_mode"] = ctx.get("is_retrieval", is_retrieval_query)
+
+            if state["is_retrieval_mode"]:
+                # In retrieval mode, destination context is derived from source for semantic search
+                state["destination_context"] = state["source_context"]
+                state["target_product"] = ""  # Will be found via retrieval
+                state["target_type_hints"] = []
+            else:
+                state["destination_context"] = ctx.get("destination_context", user_utterance)
+                state["target_product"] = ctx.get("target_product", target_hints[0] if target_hints else "")
+                state["target_type_hints"] = ctx.get("target_types", target_hints[1:] if len(target_hints) > 1 else [])
 
         logger.info("Contexts | source=%r dest=%r src_product=%r tgt_product=%r",
                     state["source_context"], state["destination_context"],
@@ -589,6 +624,47 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
             return ([found_products[0]] + src_types, [found_products[1]] + tgt_types)
 
         return ([], [])
+
+    def _is_retrieval_query(self, utterance: str) -> bool:
+        """Check if the utterance is a retrieval-style query (no target specified).
+
+        Retrieval queries ask to FIND targets, rather than specifying both source and target.
+
+        Returns True for patterns like:
+        - "find types that can be mapped to X"
+        - "find APIs that can be mapped with X"
+        - "find tables that can be joined with X"
+        - "find OMOP tables that map to X"
+        """
+        utterance_lower = utterance.lower().strip()
+
+        # Retrieval patterns - these don't specify a target
+        retrieval_patterns = [
+            r"^find\s+(types|apis|tables|schemas)\s+that\s+(can\s+be\s+)?mapp",
+            r"^find\s+(types|apis|tables|schemas)\s+that\s+(can\s+be\s+)?join",
+            r"^find\s+\w+\s+tables\s+that\s+map",  # "find OMOP tables that map to X"
+            r"^retrieve\s+(types|apis|tables)",
+            r"^search\s+for\s+(types|apis|tables)",
+        ]
+
+        for pattern in retrieval_patterns:
+            if re.search(pattern, utterance_lower):
+                return True
+
+        # Oracle patterns - these specify both source and target
+        oracle_patterns = [
+            r"^map\s+\w+.*\s+(to|with)\s+\w+",  # "map X to Y" or "map X with Y"
+        ]
+
+        for pattern in oracle_patterns:
+            if re.search(pattern, utterance_lower):
+                return False
+
+        # Default: if no "map X to Y" pattern found, treat as retrieval
+        if not re.search(r"\s+(to|with)\s+", utterance_lower):
+            return True
+
+        return False
 
     def _extract_type_hints(self, text: str) -> list:
         """Extract potential schema type names from text.
@@ -937,7 +1013,53 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
         collection = state["chroma_collection"]
         target_product = state.get("target_product", "").lower()
         type_hints = state.get("target_type_hints", [])
+        is_retrieval_mode = state.get("is_retrieval_mode", False)
+        source_product = state.get("source_product", "").lower()
 
+        # RETRIEVAL MODE: Find destination properties semantically similar to source
+        if is_retrieval_mode:
+            logger.info("Retrieval mode: finding destination properties via semantic search from source")
+
+            # Use source properties to find similar destination properties
+            source_props = state.get("source_properties", [])
+            if not source_props:
+                # Fall back to source context if no source properties selected yet
+                q = state.get("source_context", state["user_utterance"])
+                q_emb = self.embedding_model.encode(q).tolist()
+            else:
+                # Build query from source properties
+                source_texts = []
+                for pid in source_props[:5]:  # Use top 5 source properties
+                    pdata = state["property_data"].get(pid, {})
+                    source_texts.append(f"{pdata.get('type_name', '')} {pdata.get('field_name', '')} {pdata.get('description', '')}")
+                q = " ".join(source_texts)
+                q_emb = self.embedding_model.encode(q).tolist()
+
+            # Search for similar properties, but exclude same product
+            n_results = min(self.top_k * self.n_results_multiplier * 3, len(state["property_data"]))
+            res = collection.query(query_embeddings=[q_emb], n_results=n_results)
+            all_ids = res["ids"][0] if res.get("ids") else []
+
+            # Filter out properties from the source product
+            filtered_ids = []
+            for pid in all_ids:
+                pdata = state["property_data"].get(pid, {})
+                prop_product = pdata.get("product_name", "").lower()
+                # Exclude same product as source
+                if source_product and prop_product == source_product:
+                    continue
+                filtered_ids.append(pid)
+                if len(filtered_ids) >= self.top_k:
+                    break
+
+            logger.info("Retrieval mode: found %d destination properties (excluded source_product=%s)",
+                       len(filtered_ids), source_product)
+
+            # Set destination properties and return
+            state["destination_properties"] = filtered_ids
+            return state
+
+        # ORACLE MODE: Target product is known
         # For strict schema filtering (OMOP), filter by product FIRST before semantic search
         if self.strict_schema_filter and target_product:
             # Get all properties matching the product
@@ -1288,7 +1410,9 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
             target_type_hints=[],
             # New fields for utterance-aware field-level mapping
             source_field_hints=[],
-            target_field_hints=[]
+            target_field_hints=[],
+            # Retrieval mode flag (set during context extraction)
+            is_retrieval_mode=False
         )
 
         # Run with timing for each step

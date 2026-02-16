@@ -182,8 +182,8 @@ def create_evaluation_dataset(property_lookup, ground_truth, converted_lookup):
     # Create samples for each table pair
     sample_id = 1
     for (src_db, src_table, tgt_db, tgt_table), mappings in table_mappings.items():
-        # Create utterance
-        utterance = f"map {src_db} {src_table.lower().replace('_', ' ')} with {tgt_db} {tgt_table.lower().replace('_', ' ')}"
+        # Create retrieval-style utterance - model must find matching OMOP tables
+        utterance = f"find OMOP tables that map to {src_db} {src_table.lower().replace('_', ' ')}"
 
         # Get source properties (all fields from source table)
         source_properties = []

@@ -1,7 +1,7 @@
 [
   {
     "id": "omop_cms_001",
-    "utterance": "map omop person with cms beneficiarysummary",
+    "utterance": "find OMOP tables that map to omop person",
     "source_schema": {
       "id": "omop_PERSON",
       "name": "OMOP PERSON",
@@ -291,7 +291,7 @@
   },
   {
     "id": "omop_cms_002",
-    "utterance": "map omop visit occurrence with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop visit occurrence",
     "source_schema": {
       "id": "omop_VISIT_OCCURRENCE",
       "name": "OMOP VISIT_OCCURRENCE",
@@ -519,7 +519,7 @@
   },
   {
     "id": "omop_cms_003",
-    "utterance": "map omop visit occurrence with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop visit occurrence",
     "source_schema": {
       "id": "omop_VISIT_OCCURRENCE",
       "name": "OMOP VISIT_OCCURRENCE",
@@ -722,7 +722,7 @@
   },
   {
     "id": "omop_cms_004",
-    "utterance": "map omop visit occurrence with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop visit occurrence",
     "source_schema": {
       "id": "omop_VISIT_OCCURRENCE",
       "name": "OMOP VISIT_OCCURRENCE",
@@ -909,7 +909,7 @@
   },
   {
     "id": "omop_cms_005",
-    "utterance": "map omop measurement with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop measurement",
     "source_schema": {
       "id": "omop_MEASUREMENT",
       "name": "OMOP MEASUREMENT",
@@ -1150,7 +1150,7 @@
   },
   {
     "id": "omop_cms_006",
-    "utterance": "map omop measurement with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop measurement",
     "source_schema": {
       "id": "omop_MEASUREMENT",
       "name": "OMOP MEASUREMENT",
@@ -1366,7 +1366,7 @@
   },
   {
     "id": "omop_cms_007",
-    "utterance": "map omop measurement with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop measurement",
     "source_schema": {
       "id": "omop_MEASUREMENT",
       "name": "OMOP MEASUREMENT",
@@ -1566,7 +1566,7 @@
   },
   {
     "id": "omop_cms_008",
-    "utterance": "map omop procedure occurrence with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop procedure occurrence",
     "source_schema": {
       "id": "omop_PROCEDURE_OCCURRENCE",
       "name": "OMOP PROCEDURE_OCCURRENCE",
@@ -1777,7 +1777,7 @@
   },
   {
     "id": "omop_cms_009",
-    "utterance": "map omop procedure occurrence with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop procedure occurrence",
     "source_schema": {
       "id": "omop_PROCEDURE_OCCURRENCE",
       "name": "OMOP PROCEDURE_OCCURRENCE",
@@ -1963,7 +1963,7 @@
   },
   {
     "id": "omop_cms_010",
-    "utterance": "map omop procedure occurrence with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop procedure occurrence",
     "source_schema": {
       "id": "omop_PROCEDURE_OCCURRENCE",
       "name": "OMOP PROCEDURE_OCCURRENCE",
@@ -2134,7 +2134,7 @@
   },
   {
     "id": "omop_cms_011",
-    "utterance": "map omop condition occurrence with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop condition occurrence",
     "source_schema": {
       "id": "omop_CONDITION_OCCURRENCE",
       "name": "OMOP CONDITION_OCCURRENCE",
@@ -2356,7 +2356,7 @@
   },
   {
     "id": "omop_cms_012",
-    "utterance": "map omop condition occurrence with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop condition occurrence",
     "source_schema": {
       "id": "omop_CONDITION_OCCURRENCE",
       "name": "OMOP CONDITION_OCCURRENCE",
@@ -2553,7 +2553,7 @@
   },
   {
     "id": "omop_cms_013",
-    "utterance": "map omop condition occurrence with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop condition occurrence",
     "source_schema": {
       "id": "omop_CONDITION_OCCURRENCE",
       "name": "OMOP CONDITION_OCCURRENCE",
@@ -2735,7 +2735,7 @@
   },
   {
     "id": "omop_cms_014",
-    "utterance": "map omop death with cms beneficiarysummary",
+    "utterance": "find OMOP tables that map to omop death",
     "source_schema": {
       "id": "omop_DEATH",
       "name": "OMOP DEATH",
@@ -2954,7 +2954,7 @@
   },
   {
     "id": "omop_cms_015",
-    "utterance": "map omop death with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop death",
     "source_schema": {
       "id": "omop_DEATH",
       "name": "OMOP DEATH",
@@ -3129,7 +3129,7 @@
   },
   {
     "id": "omop_cms_016",
-    "utterance": "map omop death with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop death",
     "source_schema": {
       "id": "omop_DEATH",
       "name": "OMOP DEATH",
@@ -3279,7 +3279,7 @@
   },
   {
     "id": "omop_cms_017",
-    "utterance": "map omop death with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop death",
     "source_schema": {
       "id": "omop_DEATH",
       "name": "OMOP DEATH",
@@ -3414,7 +3414,7 @@
   },
   {
     "id": "omop_cms_018",
-    "utterance": "map omop location with cms beneficiarysummary",
+    "utterance": "find OMOP tables that map to omop location",
     "source_schema": {
       "id": "omop_LOCATION",
       "name": "OMOP LOCATION",
@@ -3639,7 +3639,7 @@
   },
   {
     "id": "omop_cms_019",
-    "utterance": "map omop observation with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop observation",
     "source_schema": {
       "id": "omop_OBSERVATION",
       "name": "OMOP OBSERVATION",
@@ -3885,7 +3885,7 @@
   },
   {
     "id": "omop_cms_020",
-    "utterance": "map omop observation with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop observation",
     "source_schema": {
       "id": "omop_OBSERVATION",
       "name": "OMOP OBSERVATION",
@@ -4106,7 +4106,7 @@
   },
   {
     "id": "omop_cms_021",
-    "utterance": "map omop observation with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop observation",
     "source_schema": {
       "id": "omop_OBSERVATION",
       "name": "OMOP OBSERVATION",
@@ -4312,7 +4312,7 @@
   },
   {
     "id": "omop_cms_022",
-    "utterance": "map omop drug exposure with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop drug exposure",
     "source_schema": {
       "id": "omop_DRUG_EXPOSURE",
       "name": "OMOP DRUG_EXPOSURE",
@@ -4569,7 +4569,7 @@
   },
   {
     "id": "omop_cms_023",
-    "utterance": "map omop drug exposure with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop drug exposure",
     "source_schema": {
       "id": "omop_DRUG_EXPOSURE",
       "name": "OMOP DRUG_EXPOSURE",
@@ -4801,7 +4801,7 @@
   },
   {
     "id": "omop_cms_024",
-    "utterance": "map omop drug exposure with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop drug exposure",
     "source_schema": {
       "id": "omop_DRUG_EXPOSURE",
       "name": "OMOP DRUG_EXPOSURE",
@@ -5018,7 +5018,7 @@
   },
   {
     "id": "omop_cms_025",
-    "utterance": "map omop drug exposure with cms prescriptiondrugevents",
+    "utterance": "find OMOP tables that map to omop drug exposure",
     "source_schema": {
       "id": "omop_DRUG_EXPOSURE",
       "name": "OMOP DRUG_EXPOSURE",
@@ -5200,7 +5200,7 @@
   },
   {
     "id": "omop_cms_026",
-    "utterance": "map omop device exposure with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop device exposure",
     "source_schema": {
       "id": "omop_DEVICE_EXPOSURE",
       "name": "OMOP DEVICE_EXPOSURE",
@@ -5416,7 +5416,7 @@
   },
   {
     "id": "omop_cms_027",
-    "utterance": "map omop device exposure with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop device exposure",
     "source_schema": {
       "id": "omop_DEVICE_EXPOSURE",
       "name": "OMOP DEVICE_EXPOSURE",
@@ -5608,7 +5608,7 @@
   },
   {
     "id": "omop_cms_028",
-    "utterance": "map omop device exposure with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop device exposure",
     "source_schema": {
       "id": "omop_DEVICE_EXPOSURE",
       "name": "OMOP DEVICE_EXPOSURE",
@@ -5786,7 +5786,7 @@
   },
   {
     "id": "omop_cms_029",
-    "utterance": "map omop fact relationship with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop fact relationship",
     "source_schema": {
       "id": "omop_FACT_RELATIONSHIP",
       "name": "OMOP FACT_RELATIONSHIP",
@@ -5909,7 +5909,7 @@
   },
   {
     "id": "omop_cms_030",
-    "utterance": "map omop payer plan period with cms beneficiarysummary",
+    "utterance": "find OMOP tables that map to omop payer plan period",
     "source_schema": {
       "id": "omop_PAYER_PLAN_PERIOD",
       "name": "OMOP PAYER_PLAN_PERIOD",
@@ -6128,7 +6128,7 @@
   },
   {
     "id": "omop_cms_031",
-    "utterance": "map omop care site with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop care site",
     "source_schema": {
       "id": "omop_CARE_SITE",
       "name": "OMOP CARE_SITE",
@@ -6296,7 +6296,7 @@
   },
   {
     "id": "omop_cms_032",
-    "utterance": "map omop care site with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop care site",
     "source_schema": {
       "id": "omop_CARE_SITE",
       "name": "OMOP CARE_SITE",
@@ -6439,7 +6439,7 @@
   },
   {
     "id": "omop_cms_033",
-    "utterance": "map omop care site with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop care site",
     "source_schema": {
       "id": "omop_CARE_SITE",
       "name": "OMOP CARE_SITE",
@@ -6567,7 +6567,7 @@
   },
   {
     "id": "omop_cms_034",
-    "utterance": "map omop cohort with cms beneficiarysummary",
+    "utterance": "find OMOP tables that map to omop cohort",
     "source_schema": {
       "id": "omop_COHORT",
       "name": "OMOP COHORT",
@@ -6771,7 +6771,7 @@
   },
   {
     "id": "omop_cms_035",
-    "utterance": "map omop cohort definition with cms beneficiarysummary",
+    "utterance": "find OMOP tables that map to omop cohort definition",
     "source_schema": {
       "id": "omop_COHORT_DEFINITION",
       "name": "OMOP COHORT_DEFINITION",
@@ -6989,7 +6989,7 @@
   },
   {
     "id": "omop_cms_036",
-    "utterance": "map omop provider with cms inpatientclaims",
+    "utterance": "find OMOP tables that map to omop provider",
     "source_schema": {
       "id": "omop_PROVIDER",
       "name": "OMOP PROVIDER",
@@ -7193,7 +7193,7 @@
   },
   {
     "id": "omop_cms_037",
-    "utterance": "map omop provider with cms outpatientclaims",
+    "utterance": "find OMOP tables that map to omop provider",
     "source_schema": {
       "id": "omop_PROVIDER",
       "name": "OMOP PROVIDER",
@@ -7372,7 +7372,7 @@
   },
   {
     "id": "omop_cms_038",
-    "utterance": "map omop provider with cms carrierclaims",
+    "utterance": "find OMOP tables that map to omop provider",
     "source_schema": {
       "id": "omop_PROVIDER",
       "name": "OMOP PROVIDER",

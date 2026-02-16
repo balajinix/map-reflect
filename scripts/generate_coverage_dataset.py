@@ -77,7 +77,8 @@ def create_sample(
     source_type_short = source_type.split('_', 1)[-1] if '_' in source_type else source_type
     target_type_short = target_type.split('_', 1)[-1] if '_' in target_type else target_type
 
-    utterance = f"map {source_product} {source_type_short} fields to {target_product} {target_type_short}"
+    # Retrieval-style utterance - model must find the target
+    utterance = f"find types that can be mapped to {source_product} {source_type_short}"
 
     # Create ground truth mapping as empty - this is a discovery task
     # The mapping will be filled in by UE-Reflect

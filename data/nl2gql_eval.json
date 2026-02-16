@@ -1,7 +1,7 @@
 [
   {
     "sample_id": "nl2gql_001",
-    "utterance": "map concert data to stadium data",
+    "utterance": "find tables that can be joined with concert",
     "expected_source": "Concert",
     "expected_target": "Stadium",
     "description": "Show the stadium name and the number of concerts in each stadium.",
@@ -17,7 +17,7 @@
   },
   {
     "sample_id": "nl2gql_002",
-    "utterance": "map singer_in_concert data to concert data",
+    "utterance": "find tables that can be joined with singer_in_concert",
     "expected_source": "SingerInConcert",
     "expected_target": "Concert",
     "description": "Show the name and theme for all concerts and the number of singers in each concert.",
@@ -33,23 +33,7 @@
   },
   {
     "sample_id": "nl2gql_003",
-    "utterance": "map singer_in_concert data to singer data",
-    "expected_source": "SingerInConcert",
-    "expected_target": "Singer",
-    "description": "List singer names and number of concerts for each singer.",
-    "ground_truth_mapping": {
-      "singer_in_concert_singer_id": [
-        "singer_singer_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "List singer names and number of concerts for each singer.",
-      "query": "SELECT T2.name ,  count(*) FROM singer_in_concert AS T1 JOIN singer AS T2 ON T1.singer_id  =  T2.singer_id GROUP BY T2.singer_id"
-    }
-  },
-  {
-    "sample_id": "nl2gql_004",
-    "utterance": "map student data to has_pet data",
+    "utterance": "find tables that can be joined with student",
     "expected_source": "Student",
     "expected_target": "HasPet",
     "description": "Find number of pets owned by students who are older than 20.",
@@ -64,8 +48,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_005",
-    "utterance": "map has_pet data to pets data",
+    "sample_id": "nl2gql_004",
+    "utterance": "find tables that can be joined with has_pet",
     "expected_source": "HasPet",
     "expected_target": "Pets",
     "description": "Find the number of dog pets that are raised by female students (with sex F).",
@@ -80,8 +64,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_006",
-    "utterance": "map continents data to countries data",
+    "sample_id": "nl2gql_005",
+    "utterance": "find tables that can be joined with continents",
     "expected_source": "Continents",
     "expected_target": "Countries",
     "description": "How many countries does each continent have? List the continent id, continent name and the number of countries.",
@@ -96,8 +80,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_007",
-    "utterance": "map car_makers data to model_list data",
+    "sample_id": "nl2gql_006",
+    "utterance": "find tables that can be joined with car_makers",
     "expected_source": "CarMakers",
     "expected_target": "ModelList",
     "description": "How many models does each car maker produce? List maker full name, id and the number.",
@@ -112,8 +96,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_008",
-    "utterance": "map car_names data to cars_data data",
+    "sample_id": "nl2gql_007",
+    "utterance": "find tables that can be joined with car_names",
     "expected_source": "CarNames",
     "expected_target": "CarsData",
     "description": "Which model of the car has the minimum horsepower?",
@@ -128,8 +112,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_009",
-    "utterance": "map model_list data to car_names data",
+    "sample_id": "nl2gql_008",
+    "utterance": "find tables that can be joined with model_list",
     "expected_source": "ModelList",
     "expected_target": "CarNames",
     "description": "Find the name of the makers that produced some cars in the year of 1970?",
@@ -144,8 +128,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_010",
-    "utterance": "map cars_data data to car_names data",
+    "sample_id": "nl2gql_009",
+    "utterance": "find tables that can be joined with cars_data",
     "expected_source": "CarsData",
     "expected_target": "CarNames",
     "description": "Find the make and production time of the cars that were produced in the earliest year?",
@@ -160,8 +144,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_011",
-    "utterance": "map countries data to car_makers data",
+    "sample_id": "nl2gql_010",
+    "utterance": "find tables that can be joined with countries",
     "expected_source": "Countries",
     "expected_target": "CarMakers",
     "description": "How many car makers are there in each continents? List the continent name and the count.",
@@ -176,72 +160,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_012",
-    "utterance": "map car_makers data to countries data",
-    "expected_source": "CarMakers",
-    "expected_target": "Countries",
-    "description": "Which of the countries has the most car makers? List the country name.",
-    "ground_truth_mapping": {
-      "car_makers_country": [
-        "countries_countryid"
-      ]
-    },
-    "metadata": {
-      "original_question": "Which of the countries has the most car makers? List the country name.",
-      "query": "SELECT T2.CountryName FROM CAR_MAKERS AS T1 JOIN COUNTRIES AS T2 ON T1.Country  =  T2.CountryId GROUP BY T1.Country ORDER BY Count(*) DESC LIMIT 1;"
-    }
-  },
-  {
-    "sample_id": "nl2gql_013",
-    "utterance": "map model_list data to car_makers data",
-    "expected_source": "ModelList",
-    "expected_target": "CarMakers",
-    "description": "How many car models are produced by each maker ? Only list the count and the maker full name .",
-    "ground_truth_mapping": {
-      "model_list_maker": [
-        "car_makers_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "How many car models are produced by each maker ? Only list the count and the maker full name .",
-      "query": "select count(*) ,  t2.fullname from model_list as t1 join car_makers as t2 on t1.maker  =  t2.id group by t2.id;"
-    }
-  },
-  {
-    "sample_id": "nl2gql_014",
-    "utterance": "map countries data to continents data",
-    "expected_source": "Countries",
-    "expected_target": "Continents",
-    "description": "Which countries in europe have at least 3 car manufacturers?",
-    "ground_truth_mapping": {
-      "countries_continent": [
-        "continents_contid"
-      ]
-    },
-    "metadata": {
-      "original_question": "Which countries in europe have at least 3 car manufacturers?",
-      "query": "SELECT T1.CountryName FROM COUNTRIES AS T1 JOIN CONTINENTS AS T2 ON T1.Continent  =  T2.ContId JOIN CAR_MAKERS AS T3 ON T1.CountryId  =  T3.Country WHERE T2.Continent  =  'europe' GROUP BY T1.CountryName HAVING count(*)  >=  3;"
-    }
-  },
-  {
-    "sample_id": "nl2gql_015",
-    "utterance": "map car_names data to model_list data",
-    "expected_source": "CarNames",
-    "expected_target": "ModelList",
-    "description": "Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?",
-    "ground_truth_mapping": {
-      "car_names_model": [
-        "model_list_model"
-      ]
-    },
-    "metadata": {
-      "original_question": "Which distinctive models are produced by maker with the full name General Motors or weighing more than 3500?",
-      "query": "SELECT DISTINCT T2.Model FROM CAR_NAMES AS T1 JOIN MODEL_LIST AS T2 ON T1.Model  =  T2.Model JOIN CAR_MAKERS AS T3 ON T2.Maker  =  T3.Id JOIN CARS_DATA AS T4 ON T1.MakeId  =  T4.Id WHERE T3.FullName  =  'General Motors' OR T4.weight  >  3500;"
-    }
-  },
-  {
-    "sample_id": "nl2gql_016",
-    "utterance": "map flights data to airports data",
+    "sample_id": "nl2gql_011",
+    "utterance": "find tables that can be joined with flights",
     "expected_source": "Flights",
     "expected_target": "Airports",
     "description": "How many flights depart from City Aberdeen?",
@@ -256,24 +176,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_017",
-    "utterance": "map flights data to airlines data",
-    "expected_source": "Flights",
-    "expected_target": "Airlines",
-    "description": "How many flights does airline 'JetBlue Airways' have?",
-    "ground_truth_mapping": {
-      "flights_airline": [
-        "airlines_uid"
-      ]
-    },
-    "metadata": {
-      "original_question": "How many flights does airline 'JetBlue Airways' have?",
-      "query": "SELECT count(*) FROM FLIGHTS AS T1 JOIN AIRLINES AS T2 ON T1.Airline  =  T2.uid WHERE T2.Airline = \"JetBlue Airways\""
-    }
-  },
-  {
-    "sample_id": "nl2gql_018",
-    "utterance": "map airlines data to flights data",
+    "sample_id": "nl2gql_012",
+    "utterance": "find tables that can be joined with airlines",
     "expected_source": "Airlines",
     "expected_target": "Flights",
     "description": "How many 'United Airlines' flights go to Airport 'ASY'?",
@@ -288,8 +192,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_019",
-    "utterance": "map airports data to flights data",
+    "sample_id": "nl2gql_013",
+    "utterance": "find tables that can be joined with airports",
     "expected_source": "Airports",
     "expected_target": "Flights",
     "description": "Which city has most number of arriving flights?",
@@ -304,8 +208,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_020",
-    "utterance": "map employee data to evaluation data",
+    "sample_id": "nl2gql_014",
+    "utterance": "find tables that can be joined with employee",
     "expected_source": "Employee",
     "expected_target": "Evaluation",
     "description": "find the name of employee who was awarded the most times in the evaluation.",
@@ -320,8 +224,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_021",
-    "utterance": "map hiring data to shop data",
+    "sample_id": "nl2gql_015",
+    "utterance": "find tables that can be joined with hiring",
     "expected_source": "Hiring",
     "expected_target": "Shop",
     "description": "What is the name of the shop that is hiring the largest number of employees?",
@@ -336,8 +240,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_022",
-    "utterance": "map documents data to templates data",
+    "sample_id": "nl2gql_016",
+    "utterance": "find tables that can be joined with documents",
     "expected_source": "Documents",
     "expected_target": "Templates",
     "description": "How many documents are using the template with type code 'PPT'?",
@@ -352,8 +256,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_023",
-    "utterance": "map templates data to documents data",
+    "sample_id": "nl2gql_017",
+    "utterance": "find tables that can be joined with templates",
     "expected_source": "Templates",
     "expected_target": "Documents",
     "description": "What is the template type code of the template used by document with the name \"Data base\"?",
@@ -368,8 +272,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_024",
-    "utterance": "map ref_template_types data to templates data",
+    "sample_id": "nl2gql_018",
+    "utterance": "find tables that can be joined with ref_template_types",
     "expected_source": "RefTemplateTypes",
     "expected_target": "Templates",
     "description": "What are the distinct template type descriptions for the templates ever used by any document?",
@@ -384,8 +288,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_025",
-    "utterance": "map paragraphs data to documents data",
+    "sample_id": "nl2gql_019",
+    "utterance": "find tables that can be joined with paragraphs",
     "expected_source": "Paragraphs",
     "expected_target": "Documents",
     "description": "How many paragraphs for the document with name 'Summer Show'?",
@@ -400,8 +304,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_026",
-    "utterance": "map course_arrange data to course data",
+    "sample_id": "nl2gql_020",
+    "utterance": "find tables that can be joined with course_arrange",
     "expected_source": "CourseArrange",
     "expected_target": "Course",
     "description": "Show names of teachers and the courses they are arranged to teach.",
@@ -416,24 +320,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_027",
-    "utterance": "map course_arrange data to teacher data",
-    "expected_source": "CourseArrange",
-    "expected_target": "Teacher",
-    "description": "Show names of teachers and the courses they are arranged to teach in ascending alphabetical order of the teacher's name.",
-    "ground_truth_mapping": {
-      "course_arrange_teacher_id": [
-        "teacher_teacher_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "Show names of teachers and the courses they are arranged to teach in ascending alphabetical order of the teacher's name.",
-      "query": "SELECT T3.Name ,  T2.Course FROM course_arrange AS T1 JOIN course AS T2 ON T1.Course_ID  =  T2.Course_ID JOIN teacher AS T3 ON T1.Teacher_ID  =  T3.Teacher_ID ORDER BY T3.Name"
-    }
-  },
-  {
-    "sample_id": "nl2gql_028",
-    "utterance": "map visitor data to visit data",
+    "sample_id": "nl2gql_021",
+    "utterance": "find tables that can be joined with visitor",
     "expected_source": "Visitor",
     "expected_target": "Visit",
     "description": "find the id, name and age for visitors who visited some museums more than once.",
@@ -448,8 +336,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_029",
-    "utterance": "map museum data to visit data",
+    "sample_id": "nl2gql_022",
+    "utterance": "find tables that can be joined with museum",
     "expected_source": "Museum",
     "expected_target": "Visit",
     "description": "What are the id and name of the museum visited most times?",
@@ -464,8 +352,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_030",
-    "utterance": "map visit data to museum data",
+    "sample_id": "nl2gql_023",
+    "utterance": "find tables that can be joined with visit",
     "expected_source": "Visit",
     "expected_target": "Museum",
     "description": "What is the name of the visitor who visited both a museum opened before 2009 and a museum opened after 2011?",
@@ -480,8 +368,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_031",
-    "utterance": "map players data to matches data",
+    "sample_id": "nl2gql_024",
+    "utterance": "find tables that can be joined with players",
     "expected_source": "Players",
     "expected_target": "Matches",
     "description": "What are the country code and first name of the players who won in both tourney WTA Championships and Australian Open?",
@@ -496,24 +384,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_032",
-    "utterance": "map players data to rankings data",
-    "expected_source": "Players",
-    "expected_target": "Rankings",
-    "description": "Find the first name and country code of the player who did the most number of tours.",
-    "ground_truth_mapping": {
-      "players_player_id": [
-        "rankings_player_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "Find the first name and country code of the player who did the most number of tours.",
-      "query": "SELECT T1.country_code ,  T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id  =  T2.player_id ORDER BY T2.tours DESC LIMIT 1"
-    }
-  },
-  {
-    "sample_id": "nl2gql_033",
-    "utterance": "map death data to ship data",
+    "sample_id": "nl2gql_025",
+    "utterance": "find tables that can be joined with death",
     "expected_source": "Death",
     "expected_target": "Ship",
     "description": "What are the death and injury situations caused by the ship with tonnage 't'?",
@@ -528,8 +400,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_034",
-    "utterance": "map battle data to ship data",
+    "sample_id": "nl2gql_026",
+    "utterance": "find tables that can be joined with battle",
     "expected_source": "Battle",
     "expected_target": "Ship",
     "description": "What are the different ids and names of the battles that lost any 'Brig' type shipes?",
@@ -544,8 +416,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_035",
-    "utterance": "map ship data to death data",
+    "sample_id": "nl2gql_027",
+    "utterance": "find tables that can be joined with ship",
     "expected_source": "Ship",
     "expected_target": "Death",
     "description": "What are the ids and names of the battles that led to more than 10 people killed in total.",
@@ -560,8 +432,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_036",
-    "utterance": "map degree_programs data to departments data",
+    "sample_id": "nl2gql_028",
+    "utterance": "find tables that can be joined with degree_programs",
     "expected_source": "DegreePrograms",
     "expected_target": "Departments",
     "description": "Which department offers the most number of degrees? List department name and id.",
@@ -576,8 +448,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_037",
-    "utterance": "map departments data to degree_programs data",
+    "sample_id": "nl2gql_029",
+    "utterance": "find tables that can be joined with departments",
     "expected_source": "Departments",
     "expected_target": "DegreePrograms",
     "description": "How many degrees does the engineering department offer?",
@@ -592,8 +464,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_038",
-    "utterance": "map courses data to sections data",
+    "sample_id": "nl2gql_030",
+    "utterance": "find tables that can be joined with courses",
     "expected_source": "Courses",
     "expected_target": "Sections",
     "description": "What are the names and id of courses having at most 2 sections?",
@@ -608,8 +480,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_039",
-    "utterance": "map semesters data to student_enrolment data",
+    "sample_id": "nl2gql_031",
+    "utterance": "find tables that can be joined with semesters",
     "expected_source": "Semesters",
     "expected_target": "StudentEnrolment",
     "description": "What is the semester which most student registered in? Show both the name and the id.",
@@ -624,8 +496,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_040",
-    "utterance": "map students data to student_enrolment data",
+    "sample_id": "nl2gql_032",
+    "utterance": "find tables that can be joined with students",
     "expected_source": "Students",
     "expected_target": "StudentEnrolment",
     "description": "Who are enrolled in 2 degree programs in one semester? List the first name, middle name and last name and the id.",
@@ -640,8 +512,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_041",
-    "utterance": "map student_enrolment data to degree_programs data",
+    "sample_id": "nl2gql_033",
+    "utterance": "find tables that can be joined with student_enrolment",
     "expected_source": "StudentEnrolment",
     "expected_target": "DegreePrograms",
     "description": "Who is enrolled in a Bachelor degree program? List the first name, middle name, last name.",
@@ -656,56 +528,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_042",
-    "utterance": "map degree_programs data to student_enrolment data",
-    "expected_source": "DegreePrograms",
-    "expected_target": "StudentEnrolment",
-    "description": "Find the kind of program which most number of students are enrolled in?",
-    "ground_truth_mapping": {
-      "degree_programs_degree_program_id": [
-        "student_enrolment_degree_program_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "Find the kind of program which most number of students are enrolled in?",
-      "query": "SELECT T1.degree_summary_name FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id  =  T2.degree_program_id GROUP BY T1.degree_summary_name ORDER BY count(*) DESC LIMIT 1"
-    }
-  },
-  {
-    "sample_id": "nl2gql_043",
-    "utterance": "map courses data to student_enrolment_courses data",
-    "expected_source": "Courses",
-    "expected_target": "StudentEnrolmentCourses",
-    "description": "What's the name of the course with most number of enrollments?",
-    "ground_truth_mapping": {
-      "courses_course_id": [
-        "student_enrolment_courses_course_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "What's the name of the course with most number of enrollments?",
-      "query": "SELECT  T1.course_name FROM Courses AS T1 JOIN Student_Enrolment_Courses AS T2 ON T1.course_id  =  T2.course_id GROUP BY T1.course_name ORDER BY count(*) DESC LIMIT 1"
-    }
-  },
-  {
-    "sample_id": "nl2gql_044",
-    "utterance": "map students data to addresses data",
-    "expected_source": "Students",
-    "expected_target": "Addresses",
-    "description": "Find the last name of the students who currently live in the state of North Carolina but have not registered in any degree program.",
-    "ground_truth_mapping": {
-      "students_current_address_id": [
-        "addresses_address_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "Find the last name of the students who currently live in the state of North Carolina but have not registered in any degree program.",
-      "query": "SELECT T1.last_name FROM Students AS T1 JOIN Addresses AS T2 ON T1.current_address_id  =  T2.address_id WHERE T2.state_province_county  =  'NorthCarolina' EXCEPT SELECT DISTINCT T3.last_name FROM Students AS T3 JOIN Student_Enrolment AS T4 ON T3.student_id  =  T4.student_id"
-    }
-  },
-  {
-    "sample_id": "nl2gql_045",
-    "utterance": "map transcript_contents data to transcripts data",
+    "sample_id": "nl2gql_034",
+    "utterance": "find tables that can be joined with transcript_contents",
     "expected_source": "TranscriptContents",
     "expected_target": "Transcripts",
     "description": "Show the date and id of the transcript with at least 2 course results.",
@@ -720,8 +544,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_046",
-    "utterance": "map addresses data to students data",
+    "sample_id": "nl2gql_035",
+    "utterance": "find tables that can be joined with addresses",
     "expected_source": "Addresses",
     "expected_target": "Students",
     "description": "Which address holds the most number of students currently? List the address id and all lines.",
@@ -736,8 +560,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_047",
-    "utterance": "map tv_channel data to cartoon data",
+    "sample_id": "nl2gql_036",
+    "utterance": "find tables that can be joined with tv_channel",
     "expected_source": "TvChannel",
     "expected_target": "Cartoon",
     "description": "What is the TV Channel that shows the cartoon \"The Rise of the Blue Beetle!\"? List the TV Channel's series name.",
@@ -752,24 +576,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_048",
-    "utterance": "map tv_channel data to tv_series data",
-    "expected_source": "TvChannel",
-    "expected_target": "TvSeries",
-    "description": "What is the TV Channel of TV series with Episode \"A Love of a Lifetime\"? List the TV Channel's series name.",
-    "ground_truth_mapping": {
-      "tv_channel_id": [
-        "tv_series_channel"
-      ]
-    },
-    "metadata": {
-      "original_question": "What is the TV Channel of TV series with Episode \"A Love of a Lifetime\"? List the TV Channel's series name.",
-      "query": "SELECT T1.series_name FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T2.Episode = \"A Love of a Lifetime\";"
-    }
-  },
-  {
-    "sample_id": "nl2gql_049",
-    "utterance": "map people data to poker_player data",
+    "sample_id": "nl2gql_037",
+    "utterance": "find tables that can be joined with people",
     "expected_source": "People",
     "expected_target": "PokerPlayer",
     "description": "What are the names of poker players whose earnings is higher than 300000?",
@@ -784,8 +592,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_050",
-    "utterance": "map contestants data to votes data",
+    "sample_id": "nl2gql_038",
+    "utterance": "find tables that can be joined with contestants",
     "expected_source": "Contestants",
     "expected_target": "Votes",
     "description": "What are the contestant numbers and names of the contestants who had at least two votes?",
@@ -800,8 +608,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_051",
-    "utterance": "map area_code_state data to votes data",
+    "sample_id": "nl2gql_039",
+    "utterance": "find tables that can be joined with area_code_state",
     "expected_source": "AreaCodeState",
     "expected_target": "Votes",
     "description": "What is the area code in which the most voters voted?",
@@ -816,8 +624,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_052",
-    "utterance": "map votes data to area_code_state data",
+    "sample_id": "nl2gql_040",
+    "utterance": "find tables that can be joined with votes",
     "expected_source": "Votes",
     "expected_target": "AreaCodeState",
     "description": "List the area codes in which voters voted both for the contestant 'Tabatha Gehling' and the contestant 'Kelly Clauss'.",
@@ -832,8 +640,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_053",
-    "utterance": "map country data to city data",
+    "sample_id": "nl2gql_041",
+    "utterance": "find tables that can be joined with country",
     "expected_source": "Country",
     "expected_target": "City",
     "description": "Which region is the city Kabul located in?",
@@ -848,24 +656,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_054",
-    "utterance": "map country data to countrylanguage data",
-    "expected_source": "Country",
-    "expected_target": "Countrylanguage",
-    "description": "Which language is the most popular in Aruba?",
-    "ground_truth_mapping": {
-      "country_code": [
-        "countrylanguage_countrycode"
-      ]
-    },
-    "metadata": {
-      "original_question": "Which language is the most popular in Aruba?",
-      "query": "SELECT T2.Language FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code  =  T2.CountryCode WHERE T1.Name  =  \"Aruba\" ORDER BY Percentage DESC LIMIT 1"
-    }
-  },
-  {
-    "sample_id": "nl2gql_055",
-    "utterance": "map city data to countrylanguage data",
+    "sample_id": "nl2gql_042",
+    "utterance": "find tables that can be joined with city",
     "expected_source": "City",
     "expected_target": "Countrylanguage",
     "description": "Find the city with the largest population that uses English.",
@@ -880,8 +672,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_056",
-    "utterance": "map conductor data to orchestra data",
+    "sample_id": "nl2gql_043",
+    "utterance": "find tables that can be joined with conductor",
     "expected_source": "Conductor",
     "expected_target": "Orchestra",
     "description": "Show the names of conductors that have conducted more than one orchestras.",
@@ -896,8 +688,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_057",
-    "utterance": "map orchestra data to performance data",
+    "sample_id": "nl2gql_044",
+    "utterance": "find tables that can be joined with orchestra",
     "expected_source": "Orchestra",
     "expected_target": "Performance",
     "description": "Show the years in which orchestras that have given more than one performance are founded.",
@@ -912,8 +704,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_058",
-    "utterance": "map friend data to highschooler data",
+    "sample_id": "nl2gql_045",
+    "utterance": "find tables that can be joined with friend",
     "expected_source": "Friend",
     "expected_target": "Highschooler",
     "description": "Show the names of high school students and their corresponding number of friends.",
@@ -928,8 +720,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_059",
-    "utterance": "map likes data to highschooler data",
+    "sample_id": "nl2gql_046",
+    "utterance": "find tables that can be joined with likes",
     "expected_source": "Likes",
     "expected_target": "Highschooler",
     "description": "Show name of all students who have some friends and also are liked by someone else.",
@@ -944,8 +736,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_060",
-    "utterance": "map professionals data to treatments data",
+    "sample_id": "nl2gql_047",
+    "utterance": "find tables that can be joined with professionals",
     "expected_source": "Professionals",
     "expected_target": "Treatments",
     "description": "Which professionals live in the state of Indiana or have done treatment on more than 2 treatments? List his or her id, last name and cell phone.",
@@ -960,8 +752,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_061",
-    "utterance": "map dogs data to owners data",
+    "sample_id": "nl2gql_048",
+    "utterance": "find tables that can be joined with dogs",
     "expected_source": "Dogs",
     "expected_target": "Owners",
     "description": "Which owner owns the most dogs? List the owner id, first name and last name.",
@@ -976,8 +768,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_062",
-    "utterance": "map breeds data to dogs data",
+    "sample_id": "nl2gql_049",
+    "utterance": "find tables that can be joined with breeds",
     "expected_source": "Breeds",
     "expected_target": "Dogs",
     "description": "What is the name of the breed with the most dogs?",
@@ -992,8 +784,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_063",
-    "utterance": "map owners data to dogs data",
+    "sample_id": "nl2gql_050",
+    "utterance": "find tables that can be joined with owners",
     "expected_source": "Owners",
     "expected_target": "Dogs",
     "description": "Which owner has paid for the most treatments on his or her dogs? List the owner id and last name.",
@@ -1008,24 +800,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_064",
-    "utterance": "map dogs data to treatments data",
-    "expected_source": "Dogs",
-    "expected_target": "Treatments",
-    "description": "Which owner has paid for the most treatments on his or her dogs? List the owner id and last name.",
-    "ground_truth_mapping": {
-      "dogs_dog_id": [
-        "treatments_dog_id"
-      ]
-    },
-    "metadata": {
-      "original_question": "Which owner has paid for the most treatments on his or her dogs? List the owner id and last name.",
-      "query": "SELECT T1.owner_id ,  T1.last_name FROM Owners AS T1 JOIN Dogs AS T2 ON T1.owner_id  =  T2.owner_id JOIN Treatments AS T3 ON T2.dog_id  =  T3.dog_id GROUP BY T1.owner_id ORDER BY count(*) DESC LIMIT 1"
-    }
-  },
-  {
-    "sample_id": "nl2gql_065",
-    "utterance": "map treatment_types data to treatments data",
+    "sample_id": "nl2gql_051",
+    "utterance": "find tables that can be joined with treatment_types",
     "expected_source": "TreatmentTypes",
     "expected_target": "Treatments",
     "description": "What is the description of the treatment type that costs the least money in total?",
@@ -1040,8 +816,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_066",
-    "utterance": "map singer data to song data",
+    "sample_id": "nl2gql_052",
+    "utterance": "find tables that can be joined with singer",
     "expected_source": "Singer",
     "expected_target": "Song",
     "description": "Show distinct names of singers that have songs with sales more than 300000.",
@@ -1056,8 +832,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_067",
-    "utterance": "map other_available_features data to ref_feature_types data",
+    "sample_id": "nl2gql_053",
+    "utterance": "find tables that can be joined with other_available_features",
     "expected_source": "OtherAvailableFeatures",
     "expected_target": "RefFeatureTypes",
     "description": "What is the feature type name of feature AirCon?",
@@ -1072,8 +848,8 @@
     }
   },
   {
-    "sample_id": "nl2gql_068",
-    "utterance": "map properties data to ref_property_types data",
+    "sample_id": "nl2gql_054",
+    "utterance": "find tables that can be joined with properties",
     "expected_source": "Properties",
     "expected_target": "RefPropertyTypes",
     "description": "Show the property type descriptions of properties belonging to that code.",

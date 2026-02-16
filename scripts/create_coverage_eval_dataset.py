@@ -51,14 +51,16 @@ def create_eval_sample(result: Dict, api_lookup: Dict) -> Dict:
         # Add to mapping with product prefixes
         mapping[f"{source_product}_{source_full}"] = f"{target_product}_{target_full}"
 
-    # Create utterance
-    utterance = f"map {source_product} {source_type_short} to {target_product} {target_type_short}"
+    # Create retrieval-style utterance (doesn't give away the target)
+    # The model must retrieve the target type from the corpus
+    utterance = f"find types that can be mapped to {source_product} {source_type_short}"
 
     return {
         'id': result.get('sample_id', ''),
         'utterance': utterance,
         'source_schema': source_product,
         'target_schema': target_product,
+        'expected_target_type': f"{target_product}_{target_type_short}",
         'mapping': mapping,
         'metadata': {
             'source_type': source_type_short,

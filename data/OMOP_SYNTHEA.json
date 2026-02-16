@@ -1,7 +1,7 @@
 [
   {
     "id": "omop_synthea_001",
-    "utterance": "map omop person with synthea patients",
+    "utterance": "find OMOP tables that map to omop person",
     "source_schema": {
       "id": "omop_PERSON",
       "name": "OMOP PERSON",
@@ -230,7 +230,7 @@
   },
   {
     "id": "omop_synthea_002",
-    "utterance": "map omop visit occurrence with synthea encounters",
+    "utterance": "find OMOP tables that map to omop visit occurrence",
     "source_schema": {
       "id": "omop_VISIT_OCCURRENCE",
       "name": "OMOP VISIT_OCCURRENCE",
@@ -399,7 +399,7 @@
   },
   {
     "id": "omop_synthea_003",
-    "utterance": "map omop measurement with synthea observations",
+    "utterance": "find OMOP tables that map to omop measurement",
     "source_schema": {
       "id": "omop_MEASUREMENT",
       "name": "OMOP MEASUREMENT",
@@ -571,7 +571,7 @@
   },
   {
     "id": "omop_synthea_004",
-    "utterance": "map omop measurement with synthea procedures",
+    "utterance": "find OMOP tables that map to omop measurement",
     "source_schema": {
       "id": "omop_MEASUREMENT",
       "name": "OMOP MEASUREMENT",
@@ -741,7 +741,7 @@
   },
   {
     "id": "omop_synthea_005",
-    "utterance": "map omop procedure occurrence with synthea procedures",
+    "utterance": "find OMOP tables that map to omop procedure occurrence",
     "source_schema": {
       "id": "omop_PROCEDURE_OCCURRENCE",
       "name": "OMOP PROCEDURE_OCCURRENCE",
@@ -880,7 +880,7 @@
   },
   {
     "id": "omop_synthea_006",
-    "utterance": "map omop condition occurrence with synthea conditions",
+    "utterance": "find OMOP tables that map to omop condition occurrence",
     "source_schema": {
       "id": "omop_CONDITION_OCCURRENCE",
       "name": "OMOP CONDITION_OCCURRENCE",
@@ -1021,7 +1021,7 @@
   },
   {
     "id": "omop_synthea_007",
-    "utterance": "map omop observation with synthea allergies",
+    "utterance": "find OMOP tables that map to omop observation",
     "source_schema": {
       "id": "omop_OBSERVATION",
       "name": "OMOP OBSERVATION",
@@ -1185,7 +1185,7 @@
   },
   {
     "id": "omop_synthea_008",
-    "utterance": "map omop observation with synthea conditions",
+    "utterance": "find OMOP tables that map to omop observation",
     "source_schema": {
       "id": "omop_OBSERVATION",
       "name": "OMOP OBSERVATION",
@@ -1349,7 +1349,7 @@
   },
   {
     "id": "omop_synthea_009",
-    "utterance": "map omop observation period with synthea encounters",
+    "utterance": "find OMOP tables that map to omop observation period",
     "source_schema": {
       "id": "omop_OBSERVATION_PERIOD",
       "name": "OMOP OBSERVATION_PERIOD",
@@ -1454,7 +1454,7 @@
   },
   {
     "id": "omop_synthea_010",
-    "utterance": "map omop drug exposure with synthea conditions",
+    "utterance": "find OMOP tables that map to omop drug exposure",
     "source_schema": {
       "id": "omop_DRUG_EXPOSURE",
       "name": "OMOP DRUG_EXPOSURE",
@@ -1631,7 +1631,7 @@
   },
   {
     "id": "omop_synthea_011",
-    "utterance": "map omop drug exposure with synthea immunizations",
+    "utterance": "find OMOP tables that map to omop drug exposure",
     "source_schema": {
       "id": "omop_DRUG_EXPOSURE",
       "name": "OMOP DRUG_EXPOSURE",
@@ -1808,7 +1808,7 @@
   },
   {
     "id": "omop_synthea_012",
-    "utterance": "map omop drug exposure with synthea medications",
+    "utterance": "find OMOP tables that map to omop drug exposure",
     "source_schema": {
       "id": "omop_DRUG_EXPOSURE",
       "name": "OMOP DRUG_EXPOSURE",

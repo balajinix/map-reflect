@@ -33,10 +33,11 @@ def extract_eval_samples(dataset_file: str, max_samples: int = None) -> List[Dic
                 data = json.loads(line.strip())
                 
                 # Extract information
-                utterance = data.get('mapping_utterance', '')
                 result = data.get('result', {})
-                
                 source_table = result.get('name', '')
+
+                # Create retrieval-style utterance - model must find the target
+                utterance = f"find tables that can be joined with {source_table}"
                 properties = result.get('properties', {})
                 
                 # Get target table from first mapping

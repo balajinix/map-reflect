@@ -72,8 +72,9 @@ def convert_toolbench_dataset():
                 tgt_full = f"{target_id}.{tgt_param}"
                 converted_mappings[src_full] = tgt_full
 
-            # Create utterance
-            utterance = f"Map parameters from {source_api.get('tool_name', '')} {source_api.get('api_name', '')} to {target_api.get('tool_name', '')} {target_api.get('api_name', '')}"
+            # Create retrieval-style utterance (doesn't give away the target)
+            # The model must retrieve the target API from the corpus
+            utterance = f"Find APIs that can be mapped with {source_api.get('tool_name', '')} {source_api.get('api_name', '')}"
 
             # Create target schema with properties
             target_properties = []
