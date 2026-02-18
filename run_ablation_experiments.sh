@@ -1,250 +1,122 @@
-#!/usr/bin/env bash
-# =============================================================================
-# Ablation Experiments Runner
-# =============================================================================
-#
-# Runs Map-Reflect baseline experiments for UE-Reflect ablation study.
-#
-# Required experiments:
-#   1. Map-Reflect on ITOpsGraph (Llama) - baseline for UE-Reflect ablation
-#   2. UE-Reflect on NL2GQL (Llama) - complete coverage (optional)
-#
-# Model IDs:
-#   - Llama: watsonx/meta-llama/llama-3-3-70b-instruct
-#
-# Usage:
-#   Local:  ./run_ablation_experiments.sh
-#   Remote: ./run_ablation_experiments.sh --remote
-#   Background: nohup ./run_ablation_experiments.sh --remote > logs/ablation.log 2>&1 &
-#
-# Options:
-#   --remote        Force remote machine paths
-#   --map-reflect   Only run Map-Reflect experiments
-#   --ue-reflect    Only run UE-Reflect experiments
-#   --all-datasets  Run on all datasets (not just missing ones)
-#
-# =============================================================================
+#!/bin/bash
+# Ablation experiments for Map-Reflect on ITOpsGraph
+# Runs 8 variants: 2^3 factorial design (neighborhood, reflection, UQ)
 
 set -e
 
-# Parse arguments
-FORCE_REMOTE=false
-RUN_MAP_REFLECT=true
-RUN_UE_REFLECT=true
-ALL_DATASETS=false
+# Configuration
+DATASET="ITOpsGraph"
+MODEL="watsonx/meta-llama/llama-3-3-70b-instruct"
+LOOKUP_FILE="data/itopsgraph_api_lookup.json"
+DATA_DIR="data"
+OUTPUT_DIR="results/ablation"
+MAX_SAMPLES=""  # Empty for full dataset, or set to a number for testing
 
-while [[ $# -gt 0 ]]; do
-    case $1 in
-        --remote)
-            FORCE_REMOTE=true
-            shift
-            ;;
-        --map-reflect)
-            RUN_MAP_REFLECT=true
-            RUN_UE_REFLECT=false
-            shift
-            ;;
-        --ue-reflect)
-            RUN_MAP_REFLECT=false
-            RUN_UE_REFLECT=true
-            shift
-            ;;
-        --all-datasets)
-            ALL_DATASETS=true
-            shift
-            ;;
-        *)
-            echo "Unknown option: $1"
-            echo "Usage: $0 [--remote] [--map-reflect] [--ue-reflect] [--all-datasets]"
-            exit 1
-            ;;
-    esac
-done
+# Create output directory
+mkdir -p "$OUTPUT_DIR"
 
-# Configuration - auto-detect local vs remote
-if [[ -d "/home/bganesa1/code/graphql-schema-mapping" ]] || [[ "$FORCE_REMOTE" == "true" ]]; then
-    IS_REMOTE=true
-    BASE_DIR="/home/bganesa1/code/graphql-schema-mapping"
-else
-    IS_REMOTE=false
-    BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Base command
+BASE_CMD="python -m map_reflect.map_reflect_runner \
+    --datasets $DATASET \
+    --models $MODEL \
+    --property-lookup-file $LOOKUP_FILE \
+    --data-dir $DATA_DIR"
+
+if [ -n "$MAX_SAMPLES" ]; then
+    BASE_CMD="$BASE_CMD --max-samples $MAX_SAMPLES"
 fi
 
-DATA_DIR="${BASE_DIR}/data"
-LOG_DIR="${BASE_DIR}/logs"
-RESULTS_DIR="${BASE_DIR}/map_reflect/results"
+echo "=========================================="
+echo "Map-Reflect Ablation Experiments"
+echo "Dataset: $DATASET"
+echo "Model: $MODEL"
+echo "=========================================="
 
-# Create directories
-mkdir -p "${LOG_DIR}"
-mkdir -p "${RESULTS_DIR}"
+# Experiment 1: Base (no neighborhood, no reflection, no UQ)
+echo ""
+echo "[1/8] Running: Base (no features)"
+$BASE_CMD \
+    --neighbor-k 0 \
+    --output-dir "$OUTPUT_DIR/base" \
+    2>&1 | tee "$OUTPUT_DIR/base.log"
 
-# Model IDs
-LLAMA="watsonx/meta-llama/llama-3-3-70b-instruct"
+# Experiment 2: +Neighborhood only
+echo ""
+echo "[2/8] Running: +Neighborhood"
+$BASE_CMD \
+    --neighbor-k 5 \
+    --output-dir "$OUTPUT_DIR/neighborhood" \
+    2>&1 | tee "$OUTPUT_DIR/neighborhood.log"
 
-# Data files
-ITOPSGRAPH_LOOKUP="${DATA_DIR}/itopsgraph_api_lookup.json"
-NL2GQL_LOOKUP="${DATA_DIR}/property_lookup.json"
-OMOP_LOOKUP="${DATA_DIR}/omop_api_lookup.json"
+# Experiment 3: +Reflection only (includes error analysis)
+echo ""
+echo "[3/8] Running: +Reflection (with error analysis)"
+$BASE_CMD \
+    --neighbor-k 0 \
+    --use-reflection \
+    --output-dir "$OUTPUT_DIR/reflection" \
+    2>&1 | tee "$OUTPUT_DIR/reflection.log"
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Experiment 4: +UQ only
+echo ""
+echo "[4/8] Running: +UQ"
+$BASE_CMD \
+    --neighbor-k 0 \
+    --use-uncertainty \
+    --output-dir "$OUTPUT_DIR/uq" \
+    2>&1 | tee "$OUTPUT_DIR/uq.log"
 
-echo "=============================================="
-echo "Ablation Experiments Runner"
-echo "=============================================="
-echo "Environment: $([ "$IS_REMOTE" = true ] && echo "REMOTE" || echo "LOCAL")"
-echo "Base directory: ${BASE_DIR}"
-echo "Run Map-Reflect: ${RUN_MAP_REFLECT}"
-echo "Run UE-Reflect: ${RUN_UE_REFLECT}"
-echo "All datasets: ${ALL_DATASETS}"
-echo "=============================================="
+# Experiment 5: +Neighborhood +Reflection
+echo ""
+echo "[5/8] Running: +Neighborhood +Reflection"
+$BASE_CMD \
+    --neighbor-k 5 \
+    --use-reflection \
+    --output-dir "$OUTPUT_DIR/neighborhood_reflection" \
+    2>&1 | tee "$OUTPUT_DIR/neighborhood_reflection.log"
 
-cd "${BASE_DIR}"
+# Experiment 6: +Neighborhood +UQ
+echo ""
+echo "[6/8] Running: +Neighborhood +UQ"
+$BASE_CMD \
+    --neighbor-k 5 \
+    --use-uncertainty \
+    --output-dir "$OUTPUT_DIR/neighborhood_uq" \
+    2>&1 | tee "$OUTPUT_DIR/neighborhood_uq.log"
 
-# Activate virtual environment if it exists
-if [[ -f "${BASE_DIR}/.venv/bin/activate" ]]; then
-    source "${BASE_DIR}/.venv/bin/activate"
-    echo -e "${GREEN}Activated virtual environment${NC}"
-fi
+# Experiment 7: +Reflection +UQ (no neighborhood)
+echo ""
+echo "[7/8] Running: +Reflection +UQ"
+$BASE_CMD \
+    --neighbor-k 0 \
+    --use-reflection \
+    --use-uncertainty \
+    --output-dir "$OUTPUT_DIR/reflection_uq" \
+    2>&1 | tee "$OUTPUT_DIR/reflection_uq.log"
 
-# Function to run experiment with logging
-run_experiment() {
-    local name="$1"
-    local cmd="$2"
-    local log_file="${LOG_DIR}/${name}_$(date +%Y%m%d_%H%M%S).log"
+# Experiment 8: Full (all features)
+echo ""
+echo "[8/8] Running: Full (Neighborhood + Reflection + UQ)"
+$BASE_CMD \
+    --neighbor-k 5 \
+    --use-reflection \
+    --use-uncertainty \
+    --output-dir "$OUTPUT_DIR/full" \
+    2>&1 | tee "$OUTPUT_DIR/full.log"
 
-    echo ""
-    echo -e "${BLUE}========================================${NC}"
-    echo -e "${BLUE}Running: ${name}${NC}"
-    echo -e "${BLUE}Log: ${log_file}${NC}"
-    echo -e "${BLUE}========================================${NC}"
-    echo "Command: ${cmd}"
-    echo ""
+echo ""
+echo "=========================================="
+echo "All experiments completed!"
+echo "Results saved to: $OUTPUT_DIR"
+echo "=========================================="
 
-    # Run with logging
-    if eval "${cmd}" 2>&1 | tee "${log_file}"; then
-        echo -e "${GREEN}SUCCESS: ${name}${NC}"
-        return 0
-    else
-        echo -e "${RED}FAILED: ${name}${NC}"
-        return 1
-    fi
-}
-
-# =============================================================================
-# Map-Reflect Experiments (baseline for UE-Reflect ablation)
-# =============================================================================
-
-if [[ "$RUN_MAP_REFLECT" == "true" ]]; then
-    echo ""
-    echo "=============================================="
-    echo "MAP-REFLECT BASELINE EXPERIMENTS"
-    echo "=============================================="
-
-    # 1. Map-Reflect on ITOpsGraph (REQUIRED - missing baseline)
-    echo -e "${YELLOW}[1/4] Map-Reflect on ITOpsGraph (Llama)${NC}"
-    run_experiment "map_reflect_itopsgraph_llama" \
-        "python -m map_reflect.map_reflect_runner \
-            --datasets ITOpsGraph \
-            --models ${LLAMA} \
-            --property-lookup-file ${ITOPSGRAPH_LOOKUP} \
-            --data-dir ${DATA_DIR}"
-
-    if [[ "$ALL_DATASETS" == "true" ]]; then
-        # 2. Map-Reflect on NL2GQL (already have results, but run for completeness)
-        echo -e "${YELLOW}[2/4] Map-Reflect on NL2GQL (Llama)${NC}"
-        run_experiment "map_reflect_nl2gql_llama" \
-            "python -m map_reflect.map_reflect_runner \
-                --datasets NL2GQL \
-                --models ${LLAMA} \
-                --property-lookup-file ${NL2GQL_LOOKUP} \
-                --data-dir ${DATA_DIR}"
-
-        # 3. Map-Reflect on OMOP datasets (already have results)
-        echo -e "${YELLOW}[3/4] Map-Reflect on OMOP_Synthea (Llama)${NC}"
-        run_experiment "map_reflect_omop_synthea_llama" \
-            "python -m map_reflect.map_reflect_runner \
-                --datasets OMOP_Synthea \
-                --models ${LLAMA} \
-                --property-lookup-file ${OMOP_LOOKUP} \
-                --data-dir ${DATA_DIR}"
-
-        echo -e "${YELLOW}[4/4] Map-Reflect on OMOP_MIMIC,OMOP_CMS (Llama)${NC}"
-        run_experiment "map_reflect_omop_mimic_cms_llama" \
-            "python -m map_reflect.map_reflect_runner \
-                --datasets OMOP_MIMIC,OMOP_CMS \
-                --models ${LLAMA} \
-                --property-lookup-file ${OMOP_LOOKUP} \
-                --data-dir ${DATA_DIR}"
-    fi
-fi
-
-# =============================================================================
-# UE-Reflect Experiments (complete coverage)
-# =============================================================================
-
-if [[ "$RUN_UE_REFLECT" == "true" ]]; then
-    echo ""
-    echo "=============================================="
-    echo "UE-REFLECT EXPERIMENTS"
-    echo "=============================================="
-
-    # 1. UE-Reflect on NL2GQL (missing)
-    echo -e "${YELLOW}[1/2] UE-Reflect on NL2GQL (Llama)${NC}"
-    run_experiment "ue_reflect_nl2gql_llama" \
-        "python -m map_reflect.ue_reflect \
-            --datasets NL2GQL \
-            --models ${LLAMA} \
-            --property-lookup-file ${NL2GQL_LOOKUP} \
-            --data-dir ${DATA_DIR} \
-            --output-dir ${RESULTS_DIR} \
-            --top-k 10 \
-            --use-sampling"
-
-    if [[ "$ALL_DATASETS" == "true" ]]; then
-        # 2. UE-Reflect on ITOpsGraph (already have results, but run for completeness)
-        echo -e "${YELLOW}[2/2] UE-Reflect on ITOpsGraph (Llama)${NC}"
-        run_experiment "ue_reflect_itopsgraph_llama" \
-            "python -m map_reflect.ue_reflect \
-                --datasets ITOpsGraph \
-                --models ${LLAMA} \
-                --property-lookup-file ${ITOPSGRAPH_LOOKUP} \
-                --data-dir ${DATA_DIR} \
-                --output-dir ${RESULTS_DIR} \
-                --top-k 10 \
-                --use-sampling"
-    fi
-fi
-
-# =============================================================================
 # Summary
-# =============================================================================
-
 echo ""
-echo "=============================================="
-echo "ABLATION EXPERIMENTS COMPLETE"
-echo "=============================================="
-echo ""
-echo "Results saved to: ${RESULTS_DIR}"
-echo "Logs saved to: ${LOG_DIR}"
-echo ""
-echo "To evaluate results, run:"
-echo "  python -m eval.calc_accuracy --methods Map-Reflect,UE-Reflect"
-echo ""
-echo "Expected ablation table after experiments:"
-echo ""
-echo "| Dataset     | Method       | API Acc | Field Acc | Delta |"
-echo "|-------------|--------------|---------|-----------|-------|"
-echo "| ITOpsGraph  | Map-Reflect  | ???     | ???       | -     |"
-echo "| ITOpsGraph  | UE-Reflect   | 98.1%   | 76.6%     | +UQ   |"
-echo "| Synthea     | Map-Reflect  | 100%    | 55.4%     | -     |"
-echo "| Synthea     | UE-Reflect   | 100%    | 81.2%     | +25.8 |"
-echo "| MIMIC       | Map-Reflect  | 97.8%   | 31.4%     | -     |"
-echo "| MIMIC       | UE-Reflect   | 100%    | 42.9%     | +11.5 |"
-echo "| CMS         | Map-Reflect  | 81.6%   | 30.3%     | -     |"
-echo "| CMS         | UE-Reflect   | 100%    | 41.4%     | +11.1 |"
-echo ""
+echo "Experiment Summary:"
+echo "-------------------"
+for exp in base neighborhood reflection uq neighborhood_reflection neighborhood_uq reflection_uq full; do
+    if [ -f "$OUTPUT_DIR/$exp.log" ]; then
+        acc=$(grep -o "'accuracy': [0-9.]*" "$OUTPUT_DIR/$exp.log" | tail -1 || echo "N/A")
+        echo "$exp: $acc"
+    fi
+done
