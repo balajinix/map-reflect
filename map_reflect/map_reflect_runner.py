@@ -1395,7 +1395,10 @@ Return a JSON object:
 
     def run(self, samples: List[Dict]) -> Dict:
         """
-        Run the Map-Reflect pipeline on samples.
+        Run the Map-Reflect pipeline on samples using batch inference.
+
+        This method batches all ranking prompts together for efficient API usage,
+        then processes reflection in a second batch pass if enabled.
 
         Args:
             samples: List of sample dicts
@@ -1429,43 +1432,231 @@ Return a JSON object:
         if HAS_CHROMADB:
             index_chroma(collection_name, self.property_lookup, self.chroma_dir)
 
-        # Process samples
-        with tqdm(samples, desc=f"Processing {self.dataset}") as pbar:
-            for i, sample in enumerate(pbar):
-                sample_id = sample.get("sample_id", f"sample_{i}")
+        # Filter samples to process
+        samples_to_process = []
+        for i, sample in enumerate(samples):
+            sample_id = sample.get("sample_id", f"sample_{i}")
+            if sample_id in processed_ids:
+                continue
+            if not sample.get("ground_truth_mapping"):
+                continue
+            samples_to_process.append((i, sample))
 
-                # Skip already processed
-                if sample_id in processed_ids:
+        if not samples_to_process:
+            logger.info("No samples to process")
+            return self._build_final_results(results, all_uncertainties, time.time() - total_start)
+
+        logger.info(f"Processing {len(samples_to_process)} samples in batch mode (batch_size={self.config.batch_size})")
+
+        # =====================================================================
+        # PHASE 1: Collect all ranking prompts
+        # =====================================================================
+        logger.info("Phase 1: Collecting ranking prompts...")
+        prompt_tasks = []  # List of (sample_idx, sample, src_field, gt_target, candidates, prompt, source_product, target_product)
+
+        for sample_idx, sample in tqdm(samples_to_process, desc="Collecting prompts"):
+            ground_truth = sample.get("ground_truth_mapping", {})
+            expected_source = sample.get("expected_source", "")
+            expected_target = sample.get("expected_target", "")
+
+            if isinstance(expected_source, dict):
+                source_product = expected_source.get("name", "SOURCE").upper()
+            else:
+                source_product = str(expected_source).split("_")[0].upper() if expected_source else "SOURCE"
+
+            if isinstance(expected_target, dict):
+                target_product = expected_target.get("name", "TARGET").upper()
+            else:
+                target_product = str(expected_target).split("_")[0].upper() if expected_target else "TARGET"
+
+            for src_field, gt_target in ground_truth.items():
+                candidates = self._get_candidates_for_sample(src_field, sample, collection_name)
+                if not candidates:
                     continue
 
-                # Skip samples without ground truth
-                if not sample.get("ground_truth_mapping"):
-                    continue
+                src_info = self.property_lookup.get(src_field, {})
+                src_desc = src_info.get("description", src_field) if isinstance(src_info, dict) else str(src_info)
 
-                # Process sample
-                result = self.process_sample(sample, collection_name, all_uncertainties)
-                results.append(result)
+                ranking_prompt = self._build_ranking_prompt(
+                    src_field, src_desc, candidates, source_product, target_product
+                )
 
-                # Update progress
-                pbar.set_postfix({
-                    "accuracy": f"{result['accuracy']:.2f}",
-                    "fields": result['total_count']
+                prompt_tasks.append({
+                    "sample_idx": sample_idx,
+                    "sample": sample,
+                    "src_field": src_field,
+                    "gt_target": gt_target,
+                    "candidates": candidates,
+                    "prompt": ranking_prompt,
+                    "src_desc": src_desc,
+                    "source_product": source_product,
+                    "target_product": target_product,
                 })
 
-                # Save checkpoint
-                if (i + 1) % self.config.checkpoint_interval == 0:
-                    checkpoint_data = {
-                        "dataset": self.dataset,
-                        "model": self.model,
-                        "results": results,
-                        "all_uncertainties": all_uncertainties,
-                    }
-                    with open(checkpoint_file, 'w') as f:
-                        json.dump(checkpoint_data, f, cls=NumpyEncoder)
+        logger.info(f"Collected {len(prompt_tasks)} ranking prompts from {len(samples_to_process)} samples")
 
-        total_time = time.time() - total_start
+        # =====================================================================
+        # PHASE 2: Batch inference for initial rankings
+        # =====================================================================
+        logger.info("Phase 2: Batch inference for rankings...")
+        ranking_prompts = [t["prompt"] for t in prompt_tasks]
+        ranking_responses = self.client.generate_batch(
+            ranking_prompts,
+            use_cache=True,
+            batch_size=self.config.batch_size
+        )
 
-        # Calculate metrics
+        # =====================================================================
+        # PHASE 3: Process responses and collect reflection prompts
+        # =====================================================================
+        logger.info("Phase 3: Processing responses...")
+        reflection_tasks = []  # Tasks that need reflection
+
+        for task_idx, (task, response) in enumerate(zip(prompt_tasks, ranking_responses)):
+            ranking = self._parse_ranking_response(response, task["candidates"])
+            task["ranking"] = ranking
+            task["response"] = response
+
+            # Estimate uncertainty (heuristic - fast)
+            uncertainty_score = estimate_uncertainty_from_response(response, task["candidates"])
+            task["uncertainty"] = uncertainty_score
+            task["uncertainty_info"] = {"uncertainty": uncertainty_score, "method": "heuristics"}
+            all_uncertainties.append(uncertainty_score)
+
+            # Detect mapping errors
+            detected_errors = detect_mapping_errors(
+                task["src_field"], task["source_product"], task["target_product"],
+                ranking, task["candidates"]
+            )
+            task["detected_errors"] = detected_errors
+
+            # Check if reflection is needed
+            if self.config.use_reflection:
+                if len(all_uncertainties) > 1:
+                    mean_u = np.mean(all_uncertainties)
+                    std_u = np.std(all_uncertainties)
+                    threshold = mean_u + 0.5 * std_u
+                else:
+                    threshold = 0.6
+
+                high_uncertainty = uncertainty_score > threshold
+                should_reflect = high_uncertainty or len(detected_errors) > 0
+                task["high_uncertainty"] = high_uncertainty
+
+                if should_reflect:
+                    reflection_prompt = self._build_reflection_prompt(
+                        task["src_field"], task["src_desc"], ranking, task["candidates"],
+                        uncertainty_score, high_uncertainty, task["source_product"], task["target_product"],
+                        detected_errors=detected_errors
+                    )
+                    task["reflection_prompt"] = reflection_prompt
+                    reflection_tasks.append(task_idx)
+
+        # =====================================================================
+        # PHASE 4: Batch inference for reflections (if any)
+        # =====================================================================
+        if reflection_tasks and self.config.use_reflection:
+            logger.info(f"Phase 4: Batch inference for {len(reflection_tasks)} reflections...")
+            reflection_prompts = [prompt_tasks[idx]["reflection_prompt"] for idx in reflection_tasks]
+            reflection_responses = self.client.generate_batch(
+                reflection_prompts,
+                use_cache=True,
+                batch_size=self.config.batch_size
+            )
+
+            for task_idx, response in zip(reflection_tasks, reflection_responses):
+                task = prompt_tasks[task_idx]
+                reflection = self._parse_reflection_response(response, task["candidates"], task["ranking"])
+                reflection["high_uncertainty"] = task.get("high_uncertainty", False)
+                reflection["detected_errors"] = task.get("detected_errors", [])
+                task["reflection"] = reflection
+        else:
+            logger.info("Phase 4: Skipped (no reflections needed)")
+
+        # =====================================================================
+        # PHASE 5: Assemble results by sample
+        # =====================================================================
+        logger.info("Phase 5: Assembling results...")
+
+        # Group tasks by sample
+        sample_tasks = {}
+        for task in prompt_tasks:
+            sample_idx = task["sample_idx"]
+            if sample_idx not in sample_tasks:
+                sample_tasks[sample_idx] = []
+            sample_tasks[sample_idx].append(task)
+
+        # Build results for each sample
+        for sample_idx, sample in samples_to_process:
+            tasks = sample_tasks.get(sample_idx, [])
+            if not tasks:
+                continue
+
+            sample = tasks[0]["sample"]
+            ground_truth = sample.get("ground_truth_mapping", {})
+
+            sample_result = {
+                "sample_id": sample.get("sample_id", f"sample_{sample_idx}"),
+                "utterance": sample.get("utterance", ""),
+                "expected_source": sample.get("expected_source", ""),
+                "expected_target": sample.get("expected_target", ""),
+                "ground_truth_mapping": ground_truth,
+                "predictions": {},
+            }
+
+            sample_uncertainties = []
+            for task in tasks:
+                src_field = task["src_field"]
+                sample_uncertainties.append(task["uncertainty"])
+
+                sample_result["predictions"][src_field] = {
+                    "initial_ranking": task["ranking"],
+                    "reflection": task.get("reflection"),
+                    "uncertainty": float(task["uncertainty"]),
+                    "uncertainty_info": task["uncertainty_info"],
+                    "detected_errors": task.get("detected_errors", []),
+                }
+
+            # Evaluate sample
+            correct_count = 0
+            total_count = 0
+            for src_field, gt_target in ground_truth.items():
+                if src_field in sample_result["predictions"]:
+                    pred = sample_result["predictions"][src_field]
+                    if self.config.use_reflection and pred.get("reflection"):
+                        revised = pred["reflection"].get("revised_ranking", [])
+                    else:
+                        revised = pred.get("initial_ranking", [])
+
+                    if revised and isinstance(revised[0], dict):
+                        top_pred = revised[0].get("id", "")
+                        if top_pred == gt_target:
+                            correct_count += 1
+                    total_count += 1
+
+            sample_result["accuracy"] = correct_count / total_count if total_count > 0 else 0.0
+            sample_result["correct_count"] = correct_count
+            sample_result["total_count"] = total_count
+            sample_result["mean_uncertainty"] = float(np.mean(sample_uncertainties)) if sample_uncertainties else 0.5
+
+            results.append(sample_result)
+
+            # Checkpoint periodically
+            if len(results) % self.config.checkpoint_interval == 0:
+                checkpoint_data = {
+                    "dataset": self.dataset,
+                    "model": self.model,
+                    "results": results,
+                    "all_uncertainties": all_uncertainties,
+                }
+                with open(checkpoint_file, 'w') as f:
+                    json.dump(checkpoint_data, f, cls=NumpyEncoder)
+                logger.info(f"Checkpoint saved: {len(results)} samples")
+
+        return self._build_final_results(results, all_uncertainties, time.time() - total_start)
+
+    def _build_final_results(self, results: List[Dict], all_uncertainties: List[float], total_time: float) -> Dict:
+        """Build the final results dictionary."""
         total_correct = sum(r["correct_count"] for r in results)
         total_fields = sum(r["total_count"] for r in results)
         overall_accuracy = total_correct / total_fields if total_fields > 0 else 0.0
