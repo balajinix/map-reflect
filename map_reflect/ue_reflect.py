@@ -1,6 +1,21 @@
 """
 ue_reflect.py - Uncertainty-Quantified Map-Reflect Pipeline
 
+DEPRECATED: This module has been merged into map_reflect_runner.py.
+Please use `python -m map_reflect.map_reflect_runner` with --use-uncertainty and --use-reflection flags instead.
+
+Example:
+    python -m map_reflect.map_reflect_runner \\
+        --datasets OMOP_Synthea \\
+        --models watsonx/ibm/granite-4-h-small \\
+        --property-lookup-file data/omop_synthea_api_lookup.json \\
+        --data-dir data \\
+        --use-uncertainty \\
+        --use-reflection
+
+---
+
+Original description:
 Mapping pipeline with LM-Polygraph perplexity-based uncertainty estimation
 for self-reflection step. Uses WatsonX models.
 
@@ -15,6 +30,12 @@ Environment variables needed:
 Usage:
   python -m map_reflect.ue_reflect --datasets OMOP_Synthea --models watsonx/ibm/granite-4-h-small --property-lookup-file data/omop_synthea_api_lookup.json --data-dir data
 """
+import warnings
+warnings.warn(
+    "ue_reflect.py is deprecated. Use map_reflect_runner.py with --use-uncertainty --use-reflection flags instead.",
+    DeprecationWarning,
+    stacklevel=2
+)
 
 import json
 import os
@@ -29,6 +50,7 @@ import numpy as np
 from dotenv import load_dotenv
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
+import networkx as nx
 
 
 class NumpyEncoder(json.JSONEncoder):
@@ -440,6 +462,114 @@ def load_property_lookup(lookup_file: str) -> Dict[str, Any]:
     """Load property lookup file."""
     with open(lookup_file, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+
+def build_property_graph(lookup: Dict[str, Any]) -> nx.Graph:
+    """Build a property graph connecting semantically related properties.
+
+    Properties are connected if they share:
+    - Same product_name (+0.5 weight)
+    - Same type_name (+0.3 weight)
+    - Similar field names (+0.2 * Jaccard similarity)
+
+    Edges are created for pairs with weight > 0.1.
+    """
+    import time
+    t0 = time.time()
+    G = nx.Graph()
+
+    # Add all properties as nodes
+    for key, value in lookup.items():
+        node_data = value if isinstance(value, dict) else {"value": value}
+        G.add_node(key, **node_data)
+
+    # Create edges based on similarity
+    keys = list(lookup.keys())
+    edge_count = 0
+
+    for i, p1 in enumerate(keys):
+        d1 = lookup[p1] if isinstance(lookup[p1], dict) else {}
+        for p2 in keys[i + 1:]:
+            d2 = lookup[p2] if isinstance(lookup[p2], dict) else {}
+
+            weight = 0.0
+
+            # Same product
+            if d1.get("product_name") == d2.get("product_name") and d1.get("product_name"):
+                weight += 0.5
+
+            # Same type
+            if d1.get("type_name") == d2.get("type_name") and d1.get("type_name"):
+                weight += 0.3
+
+            # Field name similarity (Jaccard on words)
+            w1 = set(str(d1.get("field_name", p1)).lower().replace("_", ".").split("."))
+            w2 = set(str(d2.get("field_name", p2)).lower().replace("_", ".").split("."))
+            if w1 and w2:
+                sim = len(w1 & w2) / max(len(w1 | w2), 1)
+                weight += 0.2 * sim
+
+            if weight > 0.1:
+                G.add_edge(p1, p2, weight=weight)
+                edge_count += 1
+
+    logger.info(f"Built property graph in {time.time() - t0:.2f}s | nodes={G.number_of_nodes()} edges={edge_count}")
+    return G
+
+
+def expand_candidates_with_neighbors(
+    candidates: List[Dict],
+    property_graph: nx.Graph,
+    lookup: Dict[str, Any],
+    neighbor_k: int = 5
+) -> List[Dict]:
+    """Expand candidate list with 1-hop neighbors from the property graph.
+
+    Args:
+        candidates: Initial candidate list from retrieval
+        property_graph: NetworkX graph of property relationships
+        lookup: Property lookup for descriptions
+        neighbor_k: Maximum number of neighbors to add per candidate
+
+    Returns:
+        Expanded candidate list with neighbors appended
+    """
+    if neighbor_k <= 0 or property_graph.number_of_nodes() == 0:
+        return candidates
+
+    # Get IDs of current candidates
+    candidate_ids = {c.get("id", "") for c in candidates}
+
+    # Collect neighbors
+    neighbor_ids = set()
+    for cand in candidates:
+        cand_id = cand.get("id", "")
+        if cand_id in property_graph:
+            for nbr in property_graph.neighbors(cand_id):
+                if nbr not in candidate_ids:
+                    neighbor_ids.add(nbr)
+
+    # Limit neighbors
+    neighbor_ids = set(sorted(neighbor_ids)[:neighbor_k])
+
+    # Build neighbor candidate entries
+    neighbor_candidates = []
+    for nbr_id in neighbor_ids:
+        nbr_info = lookup.get(nbr_id, {})
+        nbr_desc = nbr_info.get("description", nbr_id) if isinstance(nbr_info, dict) else str(nbr_info)
+        neighbor_candidates.append({
+            "doc_id": nbr_id,
+            "id": nbr_id,
+            "doc": f"{nbr_id} -- {nbr_desc}",
+            "distance": 0.6,  # Slightly worse than direct retrieval
+            "meta": nbr_info if isinstance(nbr_info, dict) else {},
+            "from_neighbor_expansion": True
+        })
+
+    if neighbor_candidates:
+        logger.debug(f"    Expanded candidates with {len(neighbor_candidates)} neighbors")
+
+    return candidates + neighbor_candidates
 
 
 def get_product_properties(lookup: Dict[str, Any], product_name: str) -> Dict[str, Any]:
@@ -915,6 +1045,7 @@ def run_ue_reflect_pipeline(
     use_sampling: bool = True,
     n_uncertainty_samples: int = 3,
     resume_from_checkpoint: bool = True,
+    neighbor_k: int = 5,
 ):
     """Run the uncertainty-quantified map-reflect pipeline.
 
@@ -922,12 +1053,14 @@ def run_ue_reflect_pipeline(
         use_sampling: If True, use sampling-based uncertainty estimation
         n_uncertainty_samples: Number of samples for uncertainty estimation
         resume_from_checkpoint: If True, resume from checkpoint if available
+        neighbor_k: Number of 1-hop neighbors to expand candidates with (0 to disable)
     """
 
     logger.info(f"Running UE-Reflect Pipeline")
     logger.info(f"  Dataset: {dataset}")
     logger.info(f"  Model: {model_id}")
     logger.info(f"  Top-K: {top_k}")
+    logger.info(f"  Neighbor-K: {neighbor_k}")
     logger.info(f"  Uncertainty: {'sampling-based' if use_sampling else 'heuristics'} (n={n_uncertainty_samples})")
     logger.info(f"  Resume from checkpoint: {resume_from_checkpoint}")
 
@@ -937,6 +1070,11 @@ def run_ue_reflect_pipeline(
     # Load property lookup
     lookup = load_property_lookup(property_lookup_file)
     logger.info(f"Loaded {len(lookup)} properties from lookup file")
+
+    # Build property graph for neighbor expansion
+    property_graph = None
+    if neighbor_k > 0:
+        property_graph = build_property_graph(lookup)
 
     # Load evaluation samples
     samples = load_dataset_samples(data_dir, dataset, max_samples)
@@ -1153,6 +1291,12 @@ def run_ue_reflect_pipeline(
                 logger.warning(f"    {src_field[:40]}: No candidates found, skipping")
                 continue
 
+            # Expand candidates with 1-hop neighbors from property graph
+            if property_graph is not None and neighbor_k > 0:
+                candidates = expand_candidates_with_neighbors(
+                    candidates, property_graph, lookup, neighbor_k=neighbor_k
+                )
+
             # LLM re-ranking with uncertainty
             ranking, uncertainty_info = llm_rerank_with_uncertainty(
                 llm, src_field, src_desc, candidates, sample_source_product, sample_target_product,
@@ -1298,6 +1442,8 @@ def main():
                         help='Number of samples for uncertainty estimation (default: 3)')
     parser.add_argument('--no-resume', action='store_true',
                         help='Start fresh instead of resuming from checkpoint')
+    parser.add_argument('--neighbor-k', type=int, default=5,
+                        help='Number of 1-hop neighbors to expand candidates with (default: 5, 0 to disable)')
 
     args = parser.parse_args()
 
@@ -1317,6 +1463,7 @@ def main():
         use_sampling=use_sampling,
         n_uncertainty_samples=args.n_uncertainty_samples,
         resume_from_checkpoint=not args.no_resume,
+        neighbor_k=args.neighbor_k,
     )
 
 

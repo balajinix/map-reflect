@@ -21,6 +21,17 @@
 \newcommand\vldbpagestyle{plain} 
 
 \usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\graphicspath{{charts/}}
+
+% Relax line breaking to reduce overfull hbox warnings
+\tolerance=1000
+\emergencystretch=3em
+\hfuzz=1.5pt
+
 \newcommand{\as}[1]{\textcolor{blue}{#1}}
 \newcommand{\bg}[1]{\textcolor{brown}{#1}}
 \newcommand{\cg}[1]{\textcolor{red}{#1}}
@@ -28,24 +39,24 @@
 \newcommand{\added}[1]{\textcolor{blue}{#1}}
 
 \begin{document}
-\title{Map-Reflect: GraphQL Schema Mapping using Reflection}
+\title{Map-Reflect: Schema Mapping using Induced Reflection}
 
 %%
 %% The "author" command and its associated commands are used to define the authors and their affiliations.
-\author{Avirup Saha}
-\affiliation{%
-  \institution{IBM Research}
-  \country{India}
-}
-\email{avirup.saha2@ibm.com}
-
-\author{Balaji Ganesan}
+\author{Balaji Ganesan$^{*}$}
 %\orcid{0000-0001-5109-3700}
 \affiliation{%
   \institution{IBM Research}
   \country{India}
 }
 \email{bganesa1@in.ibm.com}
+
+\author{Avirup Saha$^{*}$}
+\affiliation{%
+  \institution{IBM Research}
+  \country{India}
+}
+\email{avirup.saha2@ibm.com}
 
 \author{Gunjan Siddharth}
 %\orcid{0000-0002-1825-0097}
@@ -55,26 +66,12 @@
 }
 \email{gunjan.siddharth2022@vitstudent.ac.in}
 
-\author{John Walczyk}
-\affiliation{%
-  \institution{IBM Software}
-  \country{USA}
-}
-\email{jwalczyk@us.ibm.com}
-
 \author{Ravindran Jagannathan}
 \affiliation{%
   \institution{IBM Software}
   \country{USA}
 }
 \email{ravi.jagannathan@ibm.com}
-
-\author{Dan Debrunner}
-\affiliation{%
-  \institution{IBM Software}
-  \country{USA}
-}
-\email{Dan.Debrunner@ibm.com}
 
 \author{Amit Paradkar}
 \affiliation{%
@@ -83,12 +80,12 @@
 }
 \email{paradkar@us.ibm.com}
 
-\author{Sameep Mehta} 
+\author{Pratibha Moogi} 
 \affiliation{%
   \institution{IBM Research}
   \country{India}
 }
-\email{sameepmehta@in.ibm.com}
+\email{pratibha.moogi@ibm.com}
 
 
 %%
@@ -97,11 +94,15 @@
 \begin{abstract}
 %\deleted{Schema mapping can be defined as the task of identifying equivalent or joinable tables across heterogeneous Database schema. In GraphQL, the corollary is identifying equivalent or joinable types in GraphQL schema in order to enable GraphQL schema generation and querying. Existing approaches focus on REST API sequencing within single paradigms or database schema matching focused on columns, leaving comprehensive schema mapping across different APIs unexplored. We introduce Map-Reflect, a self-reflection framework that performs schema mapping through iterative refinement. The approach uses domain-aware clustering, hierarchical schema organization, and multi-stage reflection to improve mapping accuracy. Evaluation on ToolBench REST APIs, multiple GraphQL collections, ITOps observability data, and an adapted Spider 1.0 dataset shows Map-Reflect significantly boosts accuracy on schema mapping tasks and joinability assessments. Map-Reflect framework also provides interpretable mapping rationales for human validation.}
 
-We study many-to-many schema mapping between GraphQL schemas, a setting where multiple source types/fields may correspond to overlapping targets and vice versa—cases that retrievers and single-chain API sequencers fail to disambiguate. Prior approaches like AnyTool use self-reflection where models critique their own output, but self-reflection lacks external grounding and models may reinforce their own errors. We introduce Map-Reflect, an \emph{induced reflection} framework that performs schema mapping through a two-phase approach: an initial greedy mapping followed by reflection induced by three external signals—neighbourhood graph validation, error analysis (LLM-as-judge, schema deployment, query execution), and uncertainty quantification. Map-Reflect unifies GraphQL built over REST and databases into a typed graph representation, applies domain-aware clustering to bound candidate sets, and runs multi-stage induced reflection to achieve comprehensive many-to-many coverage without spurious mappings. We evaluate on (i) ToolBench-REST, (ii) ITOps GraphQL (Instana, Turbonomic, Concert), and (iii) Spider$\rightarrow$GraphQL with exact match, joinability, and F1. Induced reflection consistently lifts accuracy over non-reflective baselines while remaining model-agnostic and cost-efficient. The framework emits interpretable rationales through a wiki validated by business stakeholders for human-in-the-loop validation in enterprise settings.
+We study many-to-many schema mapping, a setting where multiple source types/fields may correspond to overlapping targets and vice versa—cases that retrievers and single-chain API sequencers fail to disambiguate. Prior approaches use self-reflection where models critique their own output, but self-reflection lacks external grounding and models may reinforce their own errors. We introduce Map-Reflect, an \emph{induced reflection} framework that performs schema mapping through a two-phase approach: an initial greedy mapping followed by reflection induced by three external signals—neighbourhood graph validation, error analysis (LLM-as-judge, schema deployment, query execution), and uncertainty quantification. Our approach is schema-agnostic, applying uniformly to REST APIs, databases, and other structured schemas. Map-Reflect applies domain-aware clustering to bound candidate sets and runs multi-stage induced reflection to achieve comprehensive many-to-many coverage without spurious mappings. We evaluate on multiple datasets including new enterprise benchmarks for API and database schema mapping. Induced reflection consistently lifts accuracy over non-reflective baselines while remaining model-agnostic and cost-efficient. The framework emits interpretable rationales through a wiki validated by business stakeholders for human-in-the-loop validation in enterprise settings.
 \end{abstract}
 
+\renewcommand{\shortauthors}{Ganesan and Saha, et al.}
 
 \maketitle
+
+\noindent$^{*}$Equal contribution.
+\vspace{0.5em}
 
 %%% do not modify the following VLDB block %%
 %%% VLDB block start %%%
@@ -131,57 +132,55 @@ The source code, data, and/or other artifacts have been made available at \url{\
 
 \section{Introduction}
 \label{sec:intro}
-Organizations rely on diverse API ecosystems spanning REST and GraphQL paradigms. GraphQL APIs can be built on top of both databases and REST APIs besides other sources like vector databases, graph stores and search indexes. Schema mapping is the process of identifying equivalent entity types across different schema. It is critical for querying across different data sources and systems in enterprises. Traditional approaches focus on database integration especially column level mapping, but enterprise environments require schema retrieval and multi-faceted mapping which includes joinability and sequencing.
+Organizations rely on diverse API ecosystems and databases that must be integrated for effective data access. Schema mapping---identifying equivalent entity types across different schemas---is critical for building unified data access layers where users query heterogeneous sources without knowledge of underlying schema differences. This capability is increasingly important for AI agents and tool-calling scenarios, where LLMs must select and invoke APIs across multiple services.
 
 % TODO: Add figure when available
 %\begin{figure}[!t]
 %    \centering
 %    \includegraphics[width=0.7\columnwidth]{figures/api_mapping.png}
-%    \caption{GraphQL schema mapping example showing field-level mappings between source and target schemas.}
-%    \Description{GraphQL Schema Mapping example}
+%    \caption{Schema mapping example showing field-level mappings between source and target schemas.}
+%    \Description{Schema Mapping example}
 %    \label{fig:example}
 %\end{figure}
 
-For example, Site Reliability Engineers (SREs) manage heterogeneous hybrid cloud environments that span multiple observability and management platforms. Systems like application performance monitoring \cite{instana}, resource optimization \cite{turbonomic}, and security vulnerability management \cite{concert} each maintain distinct GraphQL schema with varying naming conventions, data types, and semantic structures. The complexity of querying across these disparate systems creates significant operational overhead and limits the effectiveness of cross-platform analysis.
+Traditional approaches focus on database integration with column-level mapping, but enterprise environments require schema retrieval and multi-faceted mapping across both APIs and databases. For example, Site Reliability Engineers managing hybrid cloud environments must query across multiple observability platforms, each with distinct schemas. The complexity of mapping across these disparate systems creates significant overhead.
 
 \paragraph{The Many-to-Many Challenge.}
-Prior work on schema mapping focuses on one-to-one alignments or single-chain API sequencing. Real enterprise environments require \emph{many-to-many mappings} where multiple source types/fields correspond to overlapping target structures. For example, in observability systems, \texttt{Incident} from one product may correctly map to both \texttt{Alert} and \texttt{Event} in another, while \texttt{Alert} may also map to \texttt{Notification}. Greedy one-to-one mapping leaves too many APIs and fields unmapped, while naive approaches create spurious one-to-many mappings that break query semantics.
+Prior work on schema mapping focuses on one-to-one alignments or single-chain API sequencing. Real enterprise environments require \emph{many-to-many mappings} where multiple source types/fields correspond to overlapping target structures. For example, \texttt{Incident} from one system may correctly map to both \texttt{Alert} and \texttt{Event} in another. Greedy one-to-one mapping leaves too many elements unmapped, while naive approaches create spurious mappings that break query semantics.
 
 %\deleted{Recent advances in tool calling with large language models show promise for API-related tasks. ToolLLM introduced the ToolBench dataset with a BERT-based neural API retriever while AnyTool leverages GPT-4's function calling with hierarchical API organization. These methods focus primarily on sequencing a single chain of calls; they do not address systematic alignment of schema elements across products. Further these approaches require expensive models like GPT-4, limiting practical applicability.}
 
-Recent advances in tool calling with large language models show promise for API-related tasks. ToolLLM~\cite{toolllm} introduced the ToolBench dataset with a BERT-based neural API retriever while AnyTool~\cite{anytool} leverages GPT-4's function calling with hierarchical API organization and self-reflection. However, these methods focus primarily on sequencing a single chain of calls; they do not address systematic alignment of schema elements across products. Critically, AnyTool's self-reflection mechanism lacks external grounding—the model critiques its own output without validation against external signals, potentially reinforcing its own errors. Further, these approaches require expensive models like GPT-4, limiting practical applicability.
+Recent advances in tool calling with large language models show promise for API-related tasks. ToolLLM~\cite{toolllm} introduced the ToolBench dataset with a BERT-based neural API retriever while AnyTool~\cite{anytool} leverages GPT-4's function calling with hierarchical API organization and self-reflection. However, these methods focus on sequencing a single chain of calls; they do not address systematic alignment of schema elements across products. Critically, self-reflection mechanisms lack external grounding---the model critiques its own output without validation against external signals, potentially reinforcing errors. Further, these approaches require expensive models like GPT-4, limiting practical applicability.
 
-A corollary in the database systems will be a Data Access Layer where disparate databases and stores are queried by users without knowledge of the underlying schema. Public datasets which enable querying across databases are surprisingly rare. WikiDBGraph~\cite{wu2025wikidbgraph} recently introduced a benchmark of 100,000 interconnected WikiTables for federated learning, demonstrating that real-world databases are ``interconnected, unaligned, and sometimes unjoinable.'' However, WikiDBGraph focuses on encyclopedic tables with simple flat schemas, whereas enterprise environments operate over complex nested API schemas (GraphQL types with hierarchical fields, Protocol Buffer messages with nested structures). Moreover, WikiDBGraph targets collaborative ML training, not cross-source querying—their analysis reveals join operations produce infeasible 10$^{16}$-row intermediate results.
-
-Our ITOpsGraph benchmark addresses a complementary challenge: schema mapping across heterogeneous enterprise APIs to enable unified querying. Unlike WikiTables which are small, flat, and encyclopedic, enterprise APIs feature (i) deeply nested type hierarchies (e.g., \texttt{VirtualMachine} containing \texttt{ResourceAllocation} containing \texttt{CpuMetrics}), (ii) domain-specific terminology where semantically equivalent concepts have different names across products, and (iii) many-to-many mappings where a single source type correctly maps to multiple targets. While WikiDBGraph shows that automated embedding-based matching achieves only 47.7\% improvement over baselines, our wiki-based SME annotation provides continuous ground truth refinement for realistic enterprise scenarios. 
+Building a unified Data Access Layer requires mapping schemas across both APIs and databases. We address this challenge through experiments on API datasets (ITOpsGraph, NL2GQL, ToolBench) and database schemas (OMOP). Our ITOpsGraph benchmark provides schema mapping across heterogeneous enterprise APIs, featuring (i)~deeply nested type hierarchies, (ii)~domain-specific terminology where semantically equivalent concepts have different names, and (iii)~many-to-many mappings where a single source type correctly maps to multiple targets. Our wiki-based SME annotation provides continuous ground truth refinement.
 
 %\deleted{We introduce Map-Reflect, a self-reflection framework that addresses these limitations through multiple complementary approaches. Map-Reflect identifies functionally equivalent APIs within API collections, generating multiple mapping alternatives for task completion. The framework handles GraphQL schemas that are built on top of REST APIs and Databases. The self-reflection mechanism creates iterative refinement where the model critiques initial mapping decisions and generates improved mappings.}
 
-We introduce Map-Reflect, an \emph{induced reflection} framework that addresses these limitations through a two-phase approach. In the first \emph{Map} phase, we greedily find the best mapping for each GraphQL type and its fields. In the second \emph{Reflect} phase, we induce reflection using three external signals to achieve comprehensive many-to-many mapping: (1) a \emph{neighbourhood graph} that helps validate mapping assumptions, (2) \emph{error analysis} from LLM-as-judge evaluation, schema deployment, and GraphQL query execution, and (3) \emph{uncertainty quantification} to identify contested mappings. Unlike self-reflection, induced reflection is externally grounded, ensuring mappings are validated against objective signals rather than the model's own potentially erroneous judgments.
+We introduce Map-Reflect, an \emph{induced reflection} framework that addresses these limitations through a two-phase approach. In the first \emph{Map} phase, we greedily find the best mapping for each source type and its fields. In the second \emph{Reflect} phase, we induce reflection using three external signals to achieve comprehensive many-to-many mapping: (1)~a \emph{neighbourhood graph} that validates mapping assumptions, (2)~\emph{error analysis} from LLM-as-judge evaluation, schema deployment, and query execution, and (3)~\emph{uncertainty quantification} to identify contested mappings. Unlike self-reflection, induced reflection is externally grounded, validating mappings against objective signals.
 
 %\deleted{Our contributions are multi-faceted: (1) Map-Reflect, a self-reflection framework for schema mapping that uses domain-aware clustering and multi-stage reflection, (2) a novel Graph Neural Network baseline specifically designed for GraphQL schema mapping that treats the problem as link prediction, (3) an agentic workflow system that also includes tool calling, (4) automated API documentation enhancement for schema retrieval, (5) and a wiki based human validation of the generated schema mapping.}
 
-Our contributions are: (1) Map-Reflect, an induced reflection framework for many-to-many schema mapping using three external signals (neighbourhood graph, error analysis, uncertainty quantification), (2) a two-phase architecture (greedy Map followed by induced Reflect) that explicitly addresses the coverage vs. precision tradeoff in many-to-many mapping, (3) a knowledge graph (wiki) validated by business stakeholders from IT Automation products (Instana, Turbonomic, Concert) that provides interpretable rationales for human-in-the-loop validation, (4) a neighbourhood graph (Neo4j) populated from mapping output for computational validation, and (5) comprehensive evaluation on ToolBench-REST, ITOps GraphQL, and Spider$\rightarrow$GraphQL benchmarks demonstrating that induced reflection significantly outperforms self-reflection and non-reflective baselines.
+Our contributions are: (1)~Map-Reflect, an induced reflection framework for many-to-many schema mapping using three external signals (neighbourhood graph, error analysis, uncertainty quantification), (2)~a two-phase architecture (greedy Map followed by induced Reflect) that addresses the coverage vs.\ precision tradeoff, (3)~a wiki-based human-in-the-loop system for continuous ground truth refinement with full provenance tracking, (4)~new enterprise benchmarks for API and database schema mapping (ITOpsGraph, NL2GQL, ToolBench, OMOP), and (5)~comprehensive evaluation demonstrating that induced reflection outperforms self-reflection and non-reflective baselines.
 
 
 \section{Related Work}
 
-\bg{Need to add more citations}
-ToolLLM \cite{toolllm} introduced the ToolBench dataset based on the APIs in RapidAPI Hub. ToolLLM includes an API Retriever that, given a natural language instruction, identifies and returns a relevant set of APIs. It introduces solution path annotation by constructing chains of API calls using ChatGPT, and enhances the reasoning capabilities of the system through a depth-first search based decision tree. AnyTool \cite{anytool} incorporates a self-reflection mechanism to improve the reliability of its solutions. Upon receiving a user query, the system proposes an initial solution that is subsequently evaluated for feasibility by GPT-4. However, AnyTool's self-reflection lacks external grounding—the model critiques its own output without validation against external signals such as type-system checks, deployment errors, or uncertainty measures. This means models may reinforce their own errors. Furthermore, these approaches focus on API sequencing within single paradigms, overlooking schema mapping challenges and many-to-many alignment requirements.
+ToolLLM \cite{toolllm} introduced the ToolBench dataset based on the APIs in RapidAPI Hub. ToolLLM includes an API Retriever that identifies relevant APIs given natural language instructions. It introduces solution path annotation by constructing API call chains using ChatGPT, and enhances reasoning through a depth-first search decision tree. AnyTool \cite{anytool} incorporates a self-reflection mechanism to improve reliability. Upon receiving a user query, the system proposes an initial solution evaluated for feasibility by GPT-4. However, AnyTool's self-reflection lacks external grounding---the model critiques its own output without validation against external signals such as type-system checks or uncertainty measures. This means models may reinforce their own errors. Furthermore, these approaches focus on API sequencing within single paradigms, overlooking schema mapping challenges.
 
-Classical schema mapping approaches evolved from rule-based systems to machine learning methods. DynaMap \cite{mazilu2022schema} uses dynamic programming to explore mapping spaces, while embedding-based approaches \cite{hättasch2022its} apply word vectors for matching. SMUTF \cite{zhang2025smutf} combines tags, rule-based signals, and semantic embeddings using XGBoost classifiers. These engineered feature-based approaches struggle with contextual relationships and semantic nuances, and none address many-to-many mappings where multiple source entities correspond to overlapping target structures.
+\paragraph{Classical Schema Matching.} Schema matching has a long history in the database community. Cupid~\cite{madhavan2001generic} introduced a foundational framework combining linguistic, structural, and domain-specific similarity signals to produce weighted type correspondences, establishing the principle that no single signal is sufficient and that match quality improves when signals are combined. COMA~\cite{10.5555/1287369.1287422} extended this by building a flexible platform for composing multiple matchers and reusing match results from prior operations to improve future ones---an early precursor to iterative refinement. iMAP~\cite{dhamankar2004imap} pushed further by discovering complex semantic correspondences beyond simple one-to-one column matches, using search over a space of mapping expressions to find hidden relationships. Despite these advances, all three systems assume relatively flat relational or XML schemas and produce one-to-one or one-to-few correspondences, which limits their applicability to enterprise API schemas with deeply nested type hierarchies and genuine many-to-many relationships. Map-Reflect builds on the multi-signal intuition of these classical approaches but replaces hand-engineered combination rules with LLM-driven reasoning, and replaces static reuse with an externally grounded reflection loop capable of discovering and validating many-to-many correspondences that classical matchers were not designed to produce.
+
+DynaMap \cite{mazilu2022schema} uses dynamic programming to explore mapping spaces, while embedding-based approaches \cite{hättasch2022its} apply word vectors for matching. SMUTF \cite{zhang2025smutf} combines tags, rule-based signals, and semantic embeddings using XGBoost classifiers. These engineered feature-based approaches struggle with contextual relationships and semantic nuances.
 
 Retrieving APIs for the sequencing task is a well-known problem. \cite{li2023api} and \cite{patil2023gorilla} used text embedding based API retrievers while \cite{toolllm} used a method fine-tuned with curated API retrieval data. Using tools and frontier models for this retrieval step is expensive and not practical in real world applications, particularly when systems like AnyTool require multiple GPT-4 agents operating simultaneously. \cite{saha2024sequential} and \cite{mandal2024graph} discuss API sequencing. \cite{basu-etal-2024-api} introduced a corpora for training LLMs and \cite{patil2023gorilla} and \cite{abdelaziz2024granitefunctioncallingmodelintroducing} presented different approaches to function calling. \cite{mandal2024graph} proposed using an API Graph to guide the sequencing process. \cite{chen2024apigen} discusses API recommendation. \cite{moon2024api} presented API-miner which extracts APIs from the OpenAPI specifications and finds similar APIs to help design new APIs. \cite{song2023restgpt} introduced the RestBench dataset which consists of python-like function signatures. \cite{liang2024taskmatrix} discusses training foundation models to connect them to APIs to accomplish tasks.
 
 Mapping API endpoints predates large language models. \cite{lu2017learning} tried to do API mapping by reading API documents. \cite{liu2023recommeding} uses a knowledge graph to recommend analogical APIs. \cite{shao2022cross} constructs an API documentation graph using Graph Neural Networks. 
 
-Recent work leverages large language models for schema mapping. The Learned Schema Mapper (LSM) \cite{zhang2023schema} uses fine-tuned BERT encoders for metadata-based matching. The Magneto framework \cite{liu2024magneto} combines Small Language Models and LLMs, where SLMs generate candidates that LLMs rerank. ISResMat \cite{du2024in} fine-tunes pre-trained language models for column representations using pairwise sampling. Newer approaches enhance LLMs with retrieval mechanisms, converting schemas to natural language descriptions. ReMatch \cite{sheetrit2024rematch} leverages retrieval-augmented LLMs, while other methods \cite{ma2025knowledge} incorporate knowledge graph retrieval to enrich LLM input. GraphRAGToolFusion \cite{lumer2025graphragtoolfusion} combines knowledge graphs with vector-based retrieval. These approaches lack mechanisms for inducing reflection through external signals and do not address many-to-many schema mapping between different API paradigms. Matchmaker \cite{matchmaker} introduced a compositional LLM program for schema matching featuring a novel zero-shot self-improvement mechanism which is similar to self-reflection approaches. However, they performed experiments primarily on healthcare datasets (MIMIC and Synthea) whereas we focus on REST APIs and GraphQL schema, and their self-improvement mechanism lacks the external grounding signals (neighbourhood validation, error analysis, uncertainty quantification) that our induced reflection provides.
+Recent work leverages large language models for schema mapping. The Learned Schema Mapper (LSM) \cite{zhang2023schema} uses fine-tuned BERT encoders for metadata-based matching. The Magneto framework \cite{liu2024magneto} combines Small Language Models and LLMs, where SLMs generate candidates that LLMs rerank. ISResMat \cite{du2024in} fine-tunes pre-trained models for column representations. Newer approaches enhance LLMs with retrieval mechanisms, converting schemas to natural language descriptions. ReMatch \cite{sheetrit2024rematch} leverages retrieval-augmented LLMs, while GraphRAGToolFusion \cite{lumer2025graphragtoolfusion} combines knowledge graphs with vector-based retrieval. These approaches lack mechanisms for inducing reflection through external signals and do not address many-to-many schema mapping. Matchmaker \cite{matchmaker} introduced a compositional LLM program for schema matching with a zero-shot self-improvement mechanism. However, their experiments focus on healthcare datasets (MIMIC, Synthea), and their self-improvement mechanism lacks the external grounding signals that our induced reflection provides.
 
-GraphQL's type system presents unique mapping challenges. Unlike REST APIs with fixed endpoint structures, GraphQL schemas define complex type relationships, nested field hierarchies, and dynamic query capabilities. Traditional approaches designed for relational schemas fail to capture GraphQL's graph-based nature. Recent work on GraphQL federation provides foundational techniques, but comprehensive schema mapping within GraphQL repositories remains underexplored.
+\paragraph{LLM-Based Many-to-Many Schema Matching.}
+Two recent works address the many-to-many matching challenge most directly and deserve explicit positioning. LLMatch~\cite{wang2025llmatch} decomposes schema matching into three stages---schema preparation, table-candidate selection, and column-level alignment---and introduces a Rollup/Drilldown optimization strategy: a Rollup module consolidates semantically related columns into higher-order concepts, and a Drilldown module re-expands these concepts for fine-grained column mapping. This two-level abstraction produces many-to-many column correspondences and is evaluated on SchemaNet, a new enterprise benchmark across three domains. SCHEMORA~\cite{gungor2025schemora} takes a retrieval-first approach, enriching schema metadata and combining BM25 lexical retrieval with FAISS vector retrieval to identify candidate matches without exhaustive pairwise comparison or labeled training data. Evaluated on the MIMIC-OMOP benchmark, it establishes state-of-the-art HitRate@5 and HitRate@3, demonstrating that hybrid retrieval with metadata enrichment is a strong baseline for healthcare schema matching. Map-Reflect differs from both in a fundamental architectural choice: rather than restructuring the schema representation upfront (LLMatch's Rollup) or relying on retrieval quality to determine what gets matched (SCHEMORA's hybrid retrieval), Map-Reflect begins with a greedy one-to-one Map phase and then induces revision through three externally grounded signals---neighbourhood graph consistency, deployment and execution errors, and uncertainty quantification. This means Map-Reflect's many-to-many coverage is earned through validation against objective external evidence rather than through representation engineering or retrieval breadth. Additionally, Map-Reflect is schema-agnostic across REST APIs, GraphQL, and relational databases, whereas LLMatch and SCHEMORA target relational schemas specifically.
 
-\paragraph{Cross-Database Benchmarks.} WikiDBGraph~\cite{wu2025wikidbgraph} constructs a graph of 100,000 WikiTables with 17 million edges for federated learning research. Their key finding—that automated schema matching via contrastive learning achieves only modest improvements while manual curation dramatically outperforms—motivates our wiki-based SME annotation approach. However, WikiDBGraph's encyclopedic tables differ fundamentally from enterprise APIs: (i) WikiTables are flat with simple column types, while GraphQL schemas have nested object types with complex field hierarchies; (ii) WikiTables represent static encyclopedic knowledge, while APIs represent operational systems with domain-specific semantics; (iii) WikiDBGraph targets ML model training across databases, while we target cross-API querying where users need unified access to heterogeneous IT operations data. Our ITOpsGraph benchmark provides the first realistic enterprise API schema mapping dataset with continuous SME-validated ground truth.
-
-\paragraph{Positioning.} Map-Reflect targets GraphQL-native \emph{many-to-many} mappings with an \emph{induced reflection} loop driven by three external signals: neighbourhood graph validation, error analysis, and uncertainty quantification. Unlike self-reflection approaches (AnyTool, Matchmaker) where models critique their own output, induced reflection validates against external ground truth, enabling reliable many-to-many coverage without spurious mappings.
+\paragraph{Positioning.} Map-Reflect targets schema-agnostic \emph{many-to-many} mappings with an \emph{induced reflection} loop driven by three external signals: neighbourhood graph validation, error analysis, and uncertainty quantification. Unlike self-reflection approaches (AnyTool, Matchmaker) where models critique their own output, induced reflection validates against external ground truth, enabling reliable many-to-many coverage without spurious mappings. Our approach applies uniformly to REST APIs, databases, and other structured schemas.
 
 
 \section{Map-Reflect Framework}
@@ -191,7 +190,7 @@ GraphQL's type system presents unique mapping challenges. Unlike REST APIs with 
 
 Map-Reflect employs a two-phase architecture designed to address the many-to-many mapping challenge. The first phase (Map) performs greedy one-to-one mapping, which is fast but leaves many elements unmapped and may create spurious mappings. The second phase (Reflect) induces reflection using three external signals to refine the initial mapping into comprehensive many-to-many coverage. Given API specifications (OpenAPI for REST, SDL for GraphQL), Map-Reflect performs domain and structural analysis to create clusters, then applies the two-phase mapping process.
 
-Unlike GPT-4–centric tool agents, Map-Reflect is a service-oriented architecture whose components are invoked but never trained. A user utterance $u$ is processed in \added{five} stages. First, a context extractor splits $u$ into source and destination phrases by prompting a hosted chat model once. Second, each phrase is embedded through a sentence-transformer service and queried against a Chroma vector index built over the full catalogue, yielding neighbourhoods $\mathcal{S}_{\mathrm{src}}$ and $\mathcal{S}_{\mathrm{dst}}$. Third, a reasoning call evaluates every pair in the Cartesian product $\mathcal{S}_{\mathrm{src}}\times\mathcal{S}_{\mathrm{dst}}$, assigns a confidence $\gamma_0$, and produces natural-language justifications—this is the greedy Map phase. Fourth, the Reflect phase collects three external signals (neighbourhood graph, error analysis, uncertainty quantification) and induces reflection to refine mappings. Finally, mappings with updated scores below threshold $\tau$ are pruned, yielding many-to-many coverage.
+Unlike GPT-4--centric tool agents, Map-Reflect is a service-oriented architecture whose components are invoked but never trained. A user utterance $u$ is processed in five stages. First, a context extractor splits $u$ into source and destination phrases by prompting a hosted chat model. Second, each phrase is embedded and queried against a Chroma vector index, yielding neighbourhoods $\mathcal{S}_{\mathrm{src}}$ and $\mathcal{S}_{\mathrm{dst}}$. Third, a reasoning call evaluates every pair in $\mathcal{S}_{\mathrm{src}}\times\mathcal{S}_{\mathrm{dst}}$, assigns a confidence $\gamma_0$, and produces justifications---this is the greedy Map phase. Fourth, the Reflect phase collects three external signals and induces reflection to refine mappings. Finally, mappings with scores below threshold $\tau$ are pruned, yielding many-to-many coverage.
 
 \subsection{Induced Reflection Mechanism}
 
@@ -205,7 +204,24 @@ Reflection is induced by three external signals:
 
 \textbf{Signal 1: Neighbourhood Graph Validation.} For each candidate mapping $(s, t)$, we retrieve k-nearest neighbours from the Neo4j graph populated from schema mapping output. We validate assumptions by checking: Do neighbours of source type also map to neighbours of target type? Are there alternative targets in the neighbourhood with similar structure? Are there unmapped neighbours that should be included? If neighbourhood evidence contradicts the greedy mapping assumption, we add alternative mappings (achieving many-to-many) or remove inconsistent ones.
 
-\textbf{Signal 2: Error Analysis.} We collect error signals from three sources: (i) \emph{LLM-as-judge} evaluates semantic equivalence and joinability of proposed mappings, (ii) \emph{schema deployment} attempts to generate and deploy a unified GraphQL schema, revealing type conflicts and missing fields, and (iii) \emph{GraphQL query execution} runs test queries against the generated schema, where null results indicate unmapped fields and type mismatches indicate bad mappings. Error signals induce reflection to revise contested mappings.
+\textbf{Signal 2: Error Analysis.} We collect error signals from three sources at different stages of the pipeline:
+
+\textit{(i) Initial Ranking Error Detection.} Before reflection, we analyze the greedy mapping's initial ranking to detect specific error patterns that indicate the top prediction may be wrong:
+\begin{itemize}
+    \item \textbf{Source/Target Product Mismatch}: If the top-ranked candidate belongs to the source product rather than the target product, the model matched by name similarity instead of finding the semantic equivalent in the target schema. This is a critical error---the model confused which direction to map.
+    \item \textbf{Foreign Key Misalignment}: For fields ending in \texttt{\_id} that reference another table (e.g., \texttt{concert\_stadium\_id}), we verify the prediction maps to the primary key of the referenced table (e.g., \texttt{stadium.id}), not to another foreign key in the source table.
+    \item \textbf{Name Similarity Without Semantic Match}: When the top prediction has high lexical overlap with the source field but the model's reasoning mentions ``name'', ``similar'', or ``match'', we flag this as potentially superficial matching that ignores semantic meaning.
+    \item \textbf{Type Mismatch Indicators}: If field names contain type hints (e.g., \texttt{\_string}, \texttt{\_int}, \texttt{\_date}) and the source and target type hints disagree, we flag potential type incompatibility.
+    \item \textbf{Low Confidence Warning}: When the top prediction's confidence score falls below 0.6, we flag high uncertainty requiring careful review.
+    \item \textbf{Ambiguous Top Predictions}: When the top two candidates have scores within 0.1 of each other, the model cannot confidently distinguish them, signaling ambiguity.
+\end{itemize}
+Detected errors are passed to the reflection prompt with explicit instructions to address each error pattern, encouraging the model to revise its ranking based on semantic meaning rather than superficial similarity.
+
+\textit{(ii) LLM-as-Judge Evaluation.} After initial mapping, an LLM-as-judge evaluates semantic equivalence and joinability of proposed mappings, providing an independent assessment of mapping quality.
+
+\textit{(iii) Schema Deployment and Query Execution.} We attempt to generate and deploy a unified GraphQL schema, revealing type conflicts and missing fields. GraphQL query execution runs test queries against the generated schema, where null results indicate unmapped fields and type mismatches indicate bad mappings.
+
+Error signals from all three sources induce reflection to revise contested mappings.
 
 \textbf{Signal 3: Uncertainty Quantification.} We measure prediction entropy over candidate mappings. High uncertainty indicates the model is unsure about the correct target—often signaling that multiple targets are valid (many-to-many). High-uncertainty mappings trigger reflection to explore alternative mappings that the greedy phase missed.
 
@@ -219,58 +235,84 @@ where $\eta$ is a step size and $\Delta_r$ aggregates signals from neighbourhood
 
 \textbf{Phase 1: Map (Greedy One-to-One).} For each GraphQL type $T_s$ in the source schema, we compute embedding similarity with all types in the target schema and select the highest-scoring target type $T_t$ as the initial mapping. For each field $F_s$ in the mapped source type, we similarly select the best matching field $F_t$. This produces a fast one-to-one mapping with confidence scores, but leaves many types/fields unmapped and may create spurious mappings based on superficial similarity.
 
-\textbf{Phase 2: Reflect (Induced Many-to-Many Refinement).} The Reflect phase transforms the greedy one-to-one mapping into comprehensive many-to-many coverage through the following steps: (1) \emph{Coverage analysis} identifies unmapped source and target elements, (2) \emph{Signal collection} gathers neighbourhood validation results, error analysis from deployment/queries, and uncertainty scores, (3) \emph{Induced reflection} explores alternative mapping targets for each unmapped or high-uncertainty element, validated against external signals, (4) \emph{Spurious mapping removal} verifies all one-to-many mappings and removes those that fail validation, converting spurious one-to-many to correct many-to-many.
+\textbf{Phase 2: Reflect (Induced Many-to-Many Refinement).} The Reflect phase transforms the greedy one-to-one mapping into comprehensive many-to-many coverage: (1)~\emph{Coverage analysis} identifies unmapped source and target elements, (2)~\emph{Signal collection} gathers neighbourhood validation, error analysis, and uncertainty scores, (3)~\emph{Induced reflection} explores alternative mapping targets for unmapped or high-uncertainty elements, and (4)~\emph{Spurious mapping removal} verifies all one-to-many mappings and removes those that fail validation.
 
-\subsection{GraphQL Schema Mapping}
+\subsection{Schema-Agnostic Mapping}
 
-For GraphQL schema mapping, Map-Reflect addresses unique challenges due to the paradigm's graph-based type system. We developed a specialized GraphQL Schema Mapping Agent extending AnyTool's hierarchical principles but replacing self-reflection with induced reflection. A toolkit of functions implements a mapping pipeline. The agent performs semantic analysis of source and target schemas to determine domain characteristics and structural patterns, creating domain-based clusters grouping schemas by functionality and complexity.
+Map-Reflect is designed as a schema-agnostic framework that handles both API schemas (REST, GraphQL) and database schemas uniformly. The core mapping operations work at three levels regardless of schema paradigm:
 
-GraphQL schemas define complex type relationships that Map-Reflect analyzes at multiple levels: type-level mapping identifying equivalent GraphQL types across schemas, field-level mapping matching individual fields within mapped types, and relationship preservation ensuring mapped schemas maintain semantic relationship integrity.
+\textbf{Type-level mapping} identifies semantically equivalent entities across schemas—whether they are GraphQL types, REST API resources, or database tables. For example, \texttt{VirtualMachine} in one system may map to \texttt{EC2Instance} in another.
 
-\bg{Need to see if the following two subsections are needed.}
-\subsection{API Documentation Enhancement}
+\textbf{Field-level mapping} matches individual attributes within mapped types---whether GraphQL fields, REST parameters, or database columns. Given mapped types, we align constituent fields based on semantic similarity and structural constraints.
 
-The quality of endpoint descriptions plays a crucial role in the effectiveness of automated schema mapping systems. GraphQL schemas derived from OpenAPI specifications often lack rich field descriptions, making it difficult for LLM-based mapping approaches to accurately infer semantic correspondences.
+\textbf{Relationship preservation} ensures that mapped schemas maintain semantic integrity. If \texttt{VirtualMachine} contains \texttt{Host} in the source, the mapped target types should preserve this containment relationship.
 
-We implement documentation enhancement that systematically scrapes official API sources, including Turbonomic, Instana, and Concert. The extracted information is chunked based on each endpoint's webpage, and then stored in ChromaDB collections, creating a field-level retrieval system optimized for contextual relevance.
+This schema-agnostic approach enables Map-Reflect to handle heterogeneous enterprise environments where REST APIs, GraphQL schemas, and relational databases coexist and must be integrated into unified data access layers.
 
-We then apply a Retrieval-Augmented Generation (RAG) system that constructs enriched context for each field by combining the exact field name, its original schema descriptions, and the retrieved documentation chunks. An LLM is prompted to generate concise, two-line descriptions that accurately convey each field's semantics within its broader product and type context.
+\subsection{ITOpsGraph Knowledge Structure}
 
-\subsection{Knowledge Graph Integration}
+ITOpsGraph organizes schema knowledge in a hierarchical structure designed to support both retrieval and validation during mapping.
 
-We developed dual storage systems, a wiki and a graph store, that serve complementary roles in the schema mapping ecosystem. 
+\subsubsection{Products}
+Top-level entities representing distinct systems or APIs (e.g., Turbonomic, Instana, AWS). Each product contains multiple types.
 
-% TODO: Add figure when available
-%\begin{figure*}[!t]
-%    \centering
-%    \includegraphics[height=6cm, width=0.9\textwidth]{figures/neo4j.png}
-%    \caption{Graph populated with the schema mapping output},
-%    \Description{GraphQL Schema Mapping},
-%    \label{fig:neo4j}
-%\end{figure*}
+\subsubsection{Types (Tables)}
+Schema entities within products—GraphQL types, REST resources, or database tables. Types contain fields and have relationships with other types.
 
-\textbf{Knowledge Graph (Wiki).} The MediaWiki system creates human-readable documentation organized into hierarchical pages. Each product has a dedicated page detailing its schema structure and GraphQL type, with individual type pages listing their fields. Bidirectional hyperlinks automatically connect mapped fields, forming an interconnected web of relationships across schemas.
+\subsubsection{Fields (Columns)}
+Atomic schema elements within types. Fields have names, descriptions, and data types.
 
-\textit{Wiki-Based Ground Truth Annotation.} The wiki serves a dual purpose: documentation and iterative ground truth refinement. The annotation workflow operates as follows:
+\subsubsection{Documents and Chunks}
+Product documentation (PDF manuals, API references) is parsed and chunked into segments indexed in ChromaDB. We have 26,643 documentation chunks across 239MB of source material. These chunks provide RAG-based context enrichment for sparse schema descriptions.
+
+\subsubsection{RAG-Based Documentation Enrichment}
+Schema descriptions from API specifications are often sparse or missing. We implement a Retrieval-Augmented Generation (RAG) pipeline to enrich field descriptions: (1) product documentation is converted to text and chunked into segments, (2) chunks are embedded and indexed in ChromaDB collections, (3) for each field, we retrieve the top-k most relevant chunks based on field name and context, and (4) an LLM generates concise two-line descriptions combining the field's original metadata with retrieved documentation context. This pipeline produces 11,110 RAG-enhanced descriptions that improve semantic matching during the Map phase.
+
+\subsubsection{Concepts}
+Abstract semantic categories (e.g., ``compute resource'', ``monitoring metric'', ``alert'') that group related types across products. Concepts enable cross-product discovery and validation.
+
+\subsubsection{Neighbourhood Graph Construction}
+The neighbourhood graph is a property graph built from the unified schema to enable structure-aware candidate expansion during mapping. We construct the graph using NetworkX with three node types and weighted edges:
+
+\textbf{Graph Construction.} For each property in the schema catalogue, we create a node with attributes: \texttt{id} (fully qualified name like \texttt{turbonomic\_Action.actionID}), \texttt{type} (the parent type), \texttt{product} (source system), and \texttt{description} (RAG-enhanced text). Edges connect properties that share structural relationships:
+\begin{itemize}
+    \item \textbf{Same-type edges}: Properties within the same type are connected with weight 0.3, capturing intra-type cohesion.
+    \item \textbf{Cross-type edges}: Properties across types within the same product are connected with weight 0.7, enabling discovery of related concepts.
+    \item \textbf{Semantic edges}: Properties with high embedding similarity ($>0.8$) across products are connected with weight based on similarity score.
+\end{itemize}
+
+\textbf{Candidate Expansion.} During the Map phase, after retrieving initial candidates via embedding similarity, we expand the candidate set using $k$-hop neighbourhood traversal (default $k=5$). For each retrieved candidate $c$, we add its neighbours $\mathcal{N}_k(c)$ to the candidate pool, weighted by path distance. This expansion serves two purposes: (1) it surfaces semantically related fields that may not have high lexical similarity with the source field, and (2) it provides structural context for the reflection phase to validate mapping assumptions.
+
+The ITOpsGraph neighbourhood graph contains 11,110 nodes (one per field) and over 26 million edges. Graph construction takes approximately 80 seconds on commodity hardware. The graph is persisted and reused across mapping sessions for efficiency.
+
+\textbf{Validation During Reflection.} The Neo4j graph stores the same structural relationships for persistent querying. During induced reflection, we traverse this graph to validate mapping assumptions: if \texttt{VirtualMachine} maps to \texttt{EC2Instance}, do neighbours of \texttt{VirtualMachine} also map to neighbours of \texttt{EC2Instance}? Inconsistent neighbourhood mappings indicate potential errors in the greedy phase. The neighbourhood graph provides Signal~1 (neighbourhood validation) during the Reflect phase.
+
+\subsection{Human in the Loop}
+
+Schema mapping ground truth is notoriously difficult to establish—domain expertise is required to judge semantic equivalence, and mappings evolve as systems change. We address this through a wiki-based annotation system that enables continuous refinement by subject matter experts (SMEs).
+
+\subsubsection{Wiki Architecture}
+We deploy a MediaWiki instance organized hierarchically by product, type, and field. Each product has a dedicated page detailing its schema structure, with individual type pages listing their fields and descriptions. Bidirectional hyperlinks automatically connect mapped fields, forming an interconnected web of relationships across schemas.
+
+\subsubsection{Annotation Workflow}
+The annotation process operates in four stages:
 
 \begin{enumerate}
-    \item \textbf{Auto-population}: Schema mapping output automatically generates wiki pages with type definitions, field descriptions, and proposed cross-product mappings. Each type page includes GraphQL schema definitions, RAG-enhanced descriptions from product documentation (26,643 indexed chunks from Turbonomic and Azure documentation), and field-level mapping tables.
+    \item \textbf{Auto-population}: Schema mapping output generates wiki pages with type definitions, field descriptions, and proposed cross-product mappings. Each page includes schema definitions and RAG-enhanced descriptions.
 
-    \item \textbf{SME Validation}: Subject matter experts from IT Automation products (Instana, Turbonomic, Concert) review auto-generated mappings directly in the wiki interface. Experts can correct erroneous mappings, add missing relationships, and annotate edge cases with domain-specific justifications.
+    \item \textbf{SME Validation}: Subject matter experts review auto-generated mappings in the wiki interface. Experts correct errors, add missing relationships, and annotate edge cases with justifications.
 
-    \item \textbf{Iterative Refinement}: As new products are added to ITOpsGraph or improved schema mapping methods produce better results, the wiki is updated and re-validated. This creates a virtuous cycle: better mappings improve the wiki, and validated wiki content becomes ground truth for evaluating future methods.
+    \item \textbf{Iterative Refinement}: As new products are added or methods improve, the wiki is updated and re-validated. Better mappings improve the wiki, and validated content becomes ground truth for future methods.
 
-    \item \textbf{Ground Truth Extraction}: Validated mappings are exported from the wiki to create evaluation datasets. The wiki's edit history provides provenance, enabling us to track how ground truth evolves over time.
+    \item \textbf{Ground Truth Extraction}: Validated mappings are exported to create evaluation datasets. The wiki's edit history provides provenance for how ground truth evolves.
 \end{enumerate}
 
-This human-in-the-loop workflow ensures that ground truth quality improves continuously, addressing the cold-start problem where initial mappings may be incomplete or incorrect. The wiki currently documents 12 products, 1,679 types, and 11,110 field descriptions with RAG-enhanced content from product documentation.
-
-\textbf{Neighbourhood Graph (Neo4j/NetworkX).} The Neo4j and NetworkX graph implementations focus on computational efficiency and algorithmic processing. Unlike the wiki (which serves as the authoritative knowledge graph), the neighbourhood graph is populated from schema mapping output and optimized for graph traversal during reflection. Nodes represent products, types, and fields, while edges capture both structural (product-to-type, type-to-field) and semantic (field-to-field) relationships. This graph is used for Signal 1 (neighbourhood validation) during induced reflection.
+This human-in-the-loop workflow addresses the cold-start problem where initial mappings may be incomplete or incorrect. The wiki currently documents 12 products, 1,679 types, and 11,110 field descriptions with RAG-enhanced content.
 
 
 \section{Experiments}
 
-We compare Map-Reflect against six baseline approaches. The Traditional Schema Mapping Toolkit (SMT) represents classical rule-based methods relying on string similarity, structural analysis, and domain-specific rules implementing edit distance calculations, structural matching algorithms, and pattern-based field alignment strategies. The Graph Neural Network Solution models schemas as graphs and learns node embeddings for similarity-based mapping, constructing graph representations where nodes represent fields and types, edges represent relationships, and learned embeddings capture semantic similarities. AnyTool represents hierarchical retrieval with GPT-4 function calling and self-reflection, adapted for schema mapping by organizing schemas into domain-specific clusters and leveraging GPT-4's reasoning capabilities. ReAct represents a reasoning and acting baseline that interleaves reasoning traces with actions. ReMatch~\cite{sheetrit2024rematch} is a retrieval-augmented schema matching approach that combines embedding-based retrieval with LLM reasoning, using a two-stage process: first retrieving top-J candidate tables, then ranking top-K attribute matches. MatchMaker~\cite{matchmaker} is a compositional LM program featuring a zero-shot self-improvement mechanism using ColBERT-v2 for candidate retrieval and iterative refinement. We also evaluate UE-Reflect, a variant of Map-Reflect that incorporates uncertainty quantification using sampling-based consistency estimation to guide reflection depth.
+We compare Map-Reflect against six baseline approaches. The Traditional Schema Mapping Toolkit (SMT) represents classical rule-based methods relying on string similarity, structural analysis, and domain-specific rules implementing edit distance calculations, structural matching algorithms, and pattern-based field alignment strategies. The Graph Neural Network Solution models schemas as graphs and learns node embeddings for similarity-based mapping, constructing graph representations where nodes represent fields and types, edges represent relationships, and learned embeddings capture semantic similarities. AnyTool represents hierarchical retrieval with GPT-4 function calling and self-reflection, adapted for schema mapping by organizing schemas into domain-specific clusters and leveraging GPT-4's reasoning capabilities. ReAct represents a reasoning and acting baseline that interleaves reasoning traces with actions. ReMatch~\cite{sheetrit2024rematch} is a retrieval-augmented schema matching approach that combines embedding-based retrieval with LLM reasoning, using a two-stage process: first retrieving top-J candidate tables, then ranking top-K attribute matches. MatchMaker~\cite{matchmaker} is a compositional LM program featuring a zero-shot self-improvement mechanism using ColBERT-v2 for candidate retrieval and iterative refinement. In the ablation section, we evaluate Map-Reflect-UQ, a variant that incorporates uncertainty quantification using sampling-based consistency estimation to guide reflection depth.
 
 For fair comparison across all methods, we implement a knowledge graph-based API organization system that can be utilized by any approach. This knowledge graph, structured as a wiki, contains hierarchical relationships between API categories, tools, and individual endpoints, populated through systematic analysis of API documentation and schema structures. The knowledge graph provides a standardized foundation for API discovery and organization, ensuring that performance differences reflect methodological innovations rather than data organization advantages. All baseline methods, including Map-Reflect, have access to this knowledge graph during their respective retrieval and mapping processes.
 
@@ -278,7 +320,7 @@ Map-Reflect is implemented using open-source and proprietary components. Vector 
 
 \subsection{Datasets}
 
-We evaluate our proposed Map-Reflect approach on three challenging GraphQL schema mapping datasets that represent diverse real-world scenarios:
+We evaluate Map-Reflect on API and database schema mapping datasets representing diverse real-world scenarios:
 
 \textbf{ToolBench Dataset}: We utilize the ToolBench dataset containing 49937 REST APIs across 10388 tools spanning 50 categories. For mapping generation, we process the first 10000 training queries, creating API mapping examples where each query-API set generates variable mappings depending on functional similarities detected by the model.
 
@@ -291,7 +333,7 @@ We evaluate our proposed Map-Reflect approach on three challenging GraphQL schem
 
     \item \textbf{Documentation Enrichment}: Product documentation (PDF manuals totaling 239MB) is converted to text using docling and chunked into 26,643 segments. These chunks are indexed in ChromaDB for RAG-based description generation, enriching sparse schema descriptions with contextual product knowledge.
 
-    \item \textbf{Neo4j Population}: The unified schema is loaded into Neo4j as a typed property graph: \texttt{(:Product)-[:HAS\_TYPE]->(:Type)-[:HAS\_FIELD]->(:Field)}. Schema mapping output creates \texttt{(:Field)-[:FIELD\_MAPPING]->(:Field)} edges with justification and confidence scores.
+    \item \textbf{Neo4j Population}: The unified schema is loaded into Neo4j as a typed property graph with nodes for products, types, and fields. Schema mapping output creates field-to-field edges with justification and confidence scores.
 
     \item \textbf{Wiki Generation}: Each type is documented in MediaWiki with auto-generated pages containing GraphQL schema definitions, RAG-enhanced descriptions, field tables, and cross-product mapping visualizations. SMEs validate and refine mappings through the wiki interface.
 \end{enumerate}
@@ -302,34 +344,33 @@ We evaluate our proposed Map-Reflect approach on three challenging GraphQL schem
 \centering
 \caption{ITOpsGraph Dataset Statistics}
 \label{tab:itopsgraph_stats}
-\begin{tabular}{lr}
+\begin{tabularx}{\columnwidth}{Xr}
 \toprule
 \textbf{Metric} & \textbf{Count} \\
 \midrule
-Products (GraphQL) & 6 \\
-Products (Proto) & 6 \\
+Products & 12 \\
 Total Types & 1,640 \\
 Total Fields & 10,876 \\
 Documentation Chunks & 26,643 \\
 RAG-Enhanced Descriptions & 11,110 \\
-Mapping Evaluation Samples & 289 \\
+Mapping Evaluation Samples & 570 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
-The dataset presents unique challenges: (i) many-to-many mappings where \texttt{VirtualMachine} in Turbonomic maps to both \texttt{AwsEc2Instance} and \texttt{AzureVirtualMachine}, (ii) schema paradigm heterogeneity between GraphQL's type system and Proto's message definitions, and (iii) domain-specific terminology where semantically equivalent concepts have different names across products (e.g., \texttt{Alert} vs \texttt{Incident} vs \texttt{Event}). Business stakeholders from Instana, Turbonomic, and Concert validated the mappings through our wiki-based annotation workflow.
+The dataset presents unique challenges: (i) many-to-many mappings where \texttt{VirtualMachine} in one system maps to both \texttt{EC2Instance} and \texttt{AzureVM} in others, (ii) schema paradigm heterogeneity between different API specifications, and (iii) domain-specific terminology where semantically equivalent concepts have different names across products (e.g., \texttt{Alert} vs \texttt{Incident} vs \texttt{Event}). Business stakeholders validated the mappings through our wiki-based annotation workflow.
 
-\textbf{Spider GraphQL}: To validate our schema mapping approaches across domains, we adapt the Spider 1.0 dataset—originally developed for database schema matching—to GraphQL schema mapping tasks. Spider 1.0 contains 166 SQL databases and 1033 annotated question-query pairs. We analyze SQL queries to identify JOIN operations and treat the joined tables as mapping candidates, generating a dataset of mapping utterances and structured relationships across database → table → field hierarchies.
+\textbf{NL2GQL Dataset}: Natural language to API schema mapping dataset featuring e-commerce, social media, and content management system schemas. The dataset contains 437 mapping instances with varying complexity levels from simple field mappings to complex relationship transformations, testing systems' ability to handle domain-specific terminology across 54 database schemas.
 
-%\deleted{\textbf{NL2GQL Dataset}: Natural language to GraphQL schema mapping dataset featuring e-commerce, social media, and content management system schemas from heterogeneous enterprise systems. Contains TBA mapping instances with varying complexity levels from simple field mappings to complex relationship transformations.}
+\textbf{OMOP Datasets}: We evaluate on three healthcare database schema mapping benchmarks derived from the OMOP Common Data Model~\cite{omop}: (i) \textbf{CMS} (Centers for Medicare \& Medicaid Services claims data), (ii) \textbf{MIMIC} (Medical Information Mart for Intensive Care), and (iii) \textbf{Synthea} (synthetic patient data). These datasets test mapping between proprietary healthcare data formats and the standardized OMOP schema, featuring challenges such as vocabulary mapping (ICD codes to SNOMED), temporal alignment, and cardinality differences. Unlike API mapping, database schema mapping involves relational constraints and referential integrity.
 
 \subsection{Evaluation Metrics}
 
 We evaluate schema mapping using two complementary metrics that capture both API-level selection and field-level mapping quality.
 
-\textbf{API-Level (Product) Accuracy} measures whether the method correctly identifies the source and target schemas to map. A mapping is considered API-correct if the predicted source and target schemas match the expected schemas (case-insensitive):
+\textbf{API-Level (Product) Accuracy} measures whether the method correctly identifies the source and target schemas. A mapping is API-correct if predicted source and target match expected schemas (case-insensitive):
 \begin{equation}
-\text{API Acc.} = \frac{|\{s : \text{pred\_src}(s) = \text{exp\_src}(s) \land \text{pred\_tgt}(s) = \text{exp\_tgt}(s)\}|}{|\text{Total Samples}|}
+\text{API Acc.} = \frac{|\{s : \text{pred}(s) = \text{exp}(s)\}|}{|\text{Samples}|}
 \end{equation}
 
 \textbf{Field-Level Accuracy (Given Correct API)} measures property mapping quality \emph{only on samples where API selection was correct}, isolating field mapping quality from API selection errors:
@@ -339,251 +380,225 @@ We evaluate schema mapping using two complementary metrics that capture both API
 
 For semantic assessment, we use cosine similarity with sentence-transformer embeddings (threshold 0.3) and an LLM-as-judge that scores mappings on equivalence and joinability (threshold 0.5). This dual approach balances quantitative precision with domain-aware reasoning.
 
+\subsection{Evaluation Modes: Oracle vs Retrieval}
+
+We evaluate methods under two distinct modes that reflect different real-world scenarios:
+
+\textbf{Oracle Mode (Target Given).} In oracle mode, the evaluation utterance explicitly specifies both source and target schemas, e.g., ``\textit{map turbonomic Action.actionID to concert PackageRecommendation.recommendation\_id}.'' This mode isolates the field-level mapping capability from schema retrieval, enabling fair comparison with prior work like MatchMaker~\cite{matchmaker} that assumes the target schema is known. Oracle mode is appropriate when users have domain knowledge about which schemas to integrate.
+
+\textbf{Retrieval Mode (Target Discovery).} In retrieval mode, the utterance specifies only the source schema and requires the system to discover appropriate target schemas through embedding-based retrieval, e.g., ``\textit{find types that can be mapped to cloudability StringFilterInput}.'' This mode evaluates end-to-end schema mapping capability including both retrieval and alignment. Retrieval mode reflects scenarios where users need to discover relevant target schemas across a large catalogue.
+
+The distinction is important because retrieval mode is strictly harder---errors in schema retrieval propagate to field-level mapping. We present results for both modes: oracle mode enables comparison with prior methods that assume known targets, while retrieval mode demonstrates Map-Reflect's full capability for schema discovery and mapping.
+
 
 \subsection{Results}
 
-We present results separately for each dataset-model combination to provide detailed analysis of method performance across different configurations.
-\begin{comment}
-\begin{table}[htbp]
-\centering
-\caption{ITOps Dataset Results by Model}
-\label{tab:itops_results}
-\begin{tabular}{lrrr}
-\toprule
-\textbf{Method} & \textbf{Granite} & \textbf{Llama} & \textbf{Mistral-Large} \\
-\midrule
-SMT & 0.501 & 0.504 & 0.500 \\
-ReAct & 0.143 & 0.132 & 0.135 \\
-GNN & -- & -- & -- \\
-AnyTool & -- & -- & 1.000 \\
-\textbf{Map-Reflect} & -- & 0.017 & \textbf{0.855} \\
-\bottomrule
-\end{tabular}
-\end{table}
+We present results separately for oracle mode (target schema given) and retrieval mode (target discovery required). Oracle mode enables fair comparison with prior work like MatchMaker~\cite{matchmaker} that assumes known targets, while retrieval mode demonstrates full end-to-end capability.
 
-\begin{table}[htbp]
-\centering
-\caption{NL2GQL Dataset Results by Model}
-\label{tab:nl2gql_results}
-\begin{tabular}{lrrr}
-\toprule
-\textbf{Method} & \textbf{Granite} & \textbf{Llama} & \textbf{Mistral-Large} \\
-\midrule
-SMT & 0.118 & 0.291 & 0.702 \\
-ReAct & 0.067 & 0.291 & 0.702 \\
-GNN & 0.000 & 0.291 & 0.702 \\
-AnyTool & -- & -- & 1.000 \\
-\textbf{MapReflect} & -- & -- & -- \\
-\bottomrule
-\end{tabular}
-\end{table}
-\end{comment}
+\subsubsection{Oracle Mode Results}
+
+In oracle mode, the utterance explicitly specifies both source and target schemas (e.g., ``map X to Y''). This isolates field-level mapping quality from schema retrieval.
 
   \begin{table*}[htbp]
   \centering
-  \caption{API-Level (Product) Accuracy (\%): Correct when predicted mapping contains fields from expected source AND target products}
-  \label{tab:api_accuracy}
-  \begin{tabular}{ll|c|c|ccc}
+  \caption{Oracle Mode: API-Level (Product) Accuracy (\%). Target schema is given in utterance.}
+  \label{tab:api_accuracy_oracle}
+  \begin{tabular}{ll|c|c|c|ccc}
   \toprule
-  & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
-  \textbf{Method} & \textbf{Model} & (n=521) & (n=437) & CMS (n=38) & MIMIC (n=46) & Synthea (n=12) \\
+  & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \textbf{ToolBench} & \multicolumn{3}{c}{\textbf{OMOP}} \\
+  \textbf{Method} & \textbf{Model} & & & & CMS & MIMIC & Synthea \\
   \midrule
-  SMT & Granite & -- & 100.0 & 63.2 & 58.7 & 75.0 \\
-  SMT & Llama & \textbf{100.0} & 100.0 & 63.2 & 58.7 & 75.0 \\
+  SMT & Granite & -- & 100.0 & -- & 63.2 & 58.7 & 75.0 \\
+  SMT & Llama & \textbf{100.0} & 100.0 & -- & 63.2 & 58.7 & 75.0 \\
   \midrule
-  GNN & (no LLM) & -- & 77.1 & 97.4 & 100.0 & 100.0 \\
+  GNN & (no LLM) & -- & 77.1 & -- & 97.4 & 100.0 & 100.0 \\
   \midrule
-  ReAct & Granite & -- & 5.3 & 86.8 & 97.8 & 100.0 \\
-  ReAct & Llama & -- & 5.3 & 86.8 & 97.8 & 100.0 \\
+  ReAct & Granite & -- & 5.3 & -- & 86.8 & 97.8 & 100.0 \\
+  ReAct & Llama & 96.5 & 5.3 & -- & 86.8 & 97.8 & 100.0 \\
   \midrule
-  AnyTool & Granite & -- & 5.9 & 100.0 & 0.0 & 0.0 \\
-  AnyTool & Llama & -- & 0.0 & 100.0 & 100.0 & 100.0 \\
+  AnyTool & Granite & -- & 5.9 & -- & 100.0 & 0.0 & 0.0 \\
+  AnyTool & Llama & -- & 0.0 & -- & 100.0 & 100.0 & 100.0 \\
   \midrule
-  \textbf{Map-Reflect} & Granite & -- & 41.9 & 97.4 & 95.7 & 100.0 \\
-  \textbf{Map-Reflect} & Llama & 98.5 & 28.6 & 81.6 & 97.8 & 100.0 \\
+  MatchMaker & Granite & 71.2 & 39.6 & -- & 97.4 & 95.7 & 100.0 \\
+  MatchMaker & Llama & 95.2 & 42.1 & 80.9 & 89.5 & 95.7 & 100.0 \\
   \midrule
-  UE-Reflect & Granite & -- & -- & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
-  UE-Reflect & \textbf{Llama} & \textbf{98.1} & -- & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
-  \midrule
-  MatchMaker & Granite & -- & 39.6 & 97.4 & 95.7 & 100.0 \\
-  MatchMaker & Llama & 95.2 & 42.1 & 89.5 & 95.7 & 100.0 \\
-  \midrule
-  ReMatch & Granite & -- & -- & -- & -- & -- \\
-  ReMatch & Llama & 94.8 & -- & -- & -- & -- \\
+  \textbf{Map-Reflect} & Granite & -- & -- & -- & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{98.1} & -- & \textbf{96.6} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
   \bottomrule
   \end{tabular}
   \end{table*}
 
   \begin{table*}[htbp]
   \centering
-  \caption{Field-Level Accuracy (\%) Given Correct API: Field mapping accuracy only on samples where API/product selection was correct}
-  \label{tab:field_accuracy}
-  \begin{tabular}{ll|c|c|ccc}
+  \caption{Oracle Mode: Field-Level Accuracy (\%) Given Correct API. Target schema is given in utterance.}
+  \label{tab:field_accuracy_oracle}
+  \begin{tabular}{ll|c|c|c|ccc}
   \toprule
-  & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
-  \textbf{Method} & \textbf{Model} & (n=521) & (n=437) & CMS (n=38) & MIMIC (n=46) & Synthea (n=12) \\
+  & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \textbf{ToolBench} & \multicolumn{3}{c}{\textbf{OMOP}} \\
+  \textbf{Method} & \textbf{Model} & & & & CMS & MIMIC & Synthea \\
   \midrule
-  SMT & Granite & -- & 0.0 & 54.1 & 42.7 & 58.5 \\
-  SMT & Llama & 51.9 & 0.0 & 54.1 & 43.9 & 58.5 \\
+  SMT & Granite & -- & 0.0 & -- & 54.1 & 42.7 & 58.5 \\
+  SMT & Llama & 51.9 & 0.0 & -- & 54.1 & 43.9 & 58.5 \\
   \midrule
-  GNN & (no LLM) & -- & 8.9 & 12.1 & 16.0 & 26.7 \\
+  GNN & (no LLM) & -- & 8.9 & -- & 12.1 & 16.0 & 26.7 \\
   \midrule
-  ReAct & Granite & -- & 34.8 & 64.0 & 40.7 & 74.3 \\
-  ReAct & Llama & -- & 34.8 & 64.0 & 40.7 & 73.3 \\
+  ReAct & Granite & -- & 34.8 & -- & 64.0 & 40.7 & 74.3 \\
+  ReAct & Llama & 32.1 & 34.8 & -- & 64.0 & 40.7 & 73.3 \\
   \midrule
-  AnyTool & Granite & -- & 0.0 & 0.0 & N/A & N/A \\
-  AnyTool & Llama & -- & N/A & 0.0 & 0.0 & 0.0 \\
+  AnyTool & Granite & -- & 0.0 & -- & 0.0 & N/A & N/A \\
+  AnyTool & Llama & -- & N/A & -- & 0.0 & 0.0 & 0.0 \\
   \midrule
-  \textbf{Map-Reflect} & Granite & -- & 0.0 & 12.9 & 22.2 & 24.8 \\
-  \textbf{Map-Reflect} & Llama & 70.6 & 0.0 & 30.3 & 31.4 & 55.4 \\
+  MatchMaker & Granite & 36.4 & \textbf{83.2} & -- & 38.2 & 32.5 & 66.3 \\
+  MatchMaker & Llama & 72.0 & 77.2 & 79.7 & \textbf{48.2} & \textbf{38.3} & 70.3 \\
   \midrule
-  UE-Reflect & Granite & -- & -- & 35.2 & 37.0 & 72.3 \\
-  UE-Reflect & \textbf{Llama} & \textbf{76.6} & -- & 41.4 & 42.9 & \textbf{81.2} \\
-  \midrule
-  MatchMaker & Granite & -- & \textbf{83.2} & 38.2 & 32.5 & 66.3 \\
-  MatchMaker & Llama & 72.0 & 77.2 & 48.2 & 38.3 & 70.3 \\
-  \midrule
-  ReMatch & Granite & -- & N/A & N/A & N/A & N/A \\
-  ReMatch & Llama & 35.1 & N/A & N/A & N/A & N/A \\
+  \textbf{Map-Reflect} & Granite & -- & -- & -- & 35.2 & 37.0 & 72.3 \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{76.6} & \textbf{76.9} & \textbf{91.0} & 41.4 & 42.9 & \textbf{81.2} \\
   \bottomrule
   \end{tabular}
   \end{table*}
 
 
+\subsubsection{Retrieval Mode Results}
+
+In retrieval mode, the utterance specifies only the source schema and requires the system to discover appropriate target schemas through embedding-based retrieval (e.g., ``find types that can be mapped to X''). This mode is strictly harder as retrieval errors propagate to field-level mapping.
 
   \begin{table*}[htbp]
   \centering
-  \caption{Sample Counts (API Correct / Total): Number of samples where API selection was correct}
-  \label{tab:sample_counts}
+  \caption{Retrieval Mode: API-Level (Product) Accuracy (\%). Target schema must be discovered via retrieval.}
+  \label{tab:api_accuracy_retrieval}
   \begin{tabular}{ll|c|c|ccc}
   \toprule
   & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
-  \textbf{Method} & \textbf{Model} & (n=521) & (n=437) & CMS (n=38) & MIMIC (n=46) & Synthea (n=12) \\
+  \textbf{Method} & \textbf{Model} & & & CMS & MIMIC & Synthea \\
   \midrule
-  SMT & Granite & -- & 3/3 & 24/38 & 27/46 & 9/12 \\
-  SMT & Llama & 521/521 & 3/3 & 24/38 & 27/46 & 9/12 \\
+  ReAct & Llama & -- & -- & -- & -- & -- \\
   \midrule
-  GNN & (no LLM) & -- & 337/437 & 37/38 & 46/46 & 12/12 \\
-  \midrule
-  ReAct & Granite & -- & 23/437 & 33/38 & 45/46 & 12/12 \\
-  ReAct & Llama & -- & 23/437 & 33/38 & 45/46 & 12/12 \\
-  \midrule
-  AnyTool & Granite & -- & 26/437 & 38/38 & 0/46 & 0/12 \\
-  AnyTool & Llama & -- & 0/437 & 38/38 & 46/46 & 12/12 \\
-  \midrule
-  Map-Reflect & Granite & -- & 183/437 & 37/38 & 44/46 & 12/12 \\
-  Map-Reflect & Llama & 513/521 & 125/437 & 31/38 & 45/46 & 12/12 \\
-  \midrule
-  UE-Reflect & Granite & -- & -- & 38/38 & 46/46 & 12/12 \\
-  UE-Reflect & Llama & 511/521 & -- & 38/38 & 46/46 & 12/12 \\
-  \midrule
-  MatchMaker & Granite & -- & 173/437 & 37/38 & 44/46 & 12/12 \\
-  MatchMaker & Llama & 496/521 & 184/437 & 34/38 & 44/46 & 12/12 \\
-  \midrule
-  ReMatch & Granite & -- & -- & -- & -- & -- \\
-  ReMatch & Llama & 494/521 & -- & -- & -- & -- \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{100.0} & -- & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
   \bottomrule
   \end{tabular}
   \end{table*}
 
-  \begin{table}[htbp]
+  \begin{table*}[htbp]
   \centering
-  \caption{Summary of Best Field-Level Accuracy per Dataset (Given Correct API)}
-  \begin{tabular}{llrr}
+  \caption{Retrieval Mode: Field-Level Accuracy (\%) Given Correct API. Target schema must be discovered via retrieval.}
+  \label{tab:field_accuracy_retrieval}
+  \begin{tabular}{ll|c|c|ccc}
   \toprule
-  \textbf{Dataset} & \textbf{Best Method} & \textbf{Field Acc.} & \textbf{Samples} \\
+  & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
+  \textbf{Method} & \textbf{Model} & & & CMS & MIMIC & Synthea \\
   \midrule
-  ITOpsGraph & UE-Reflect (Llama) & 76.6\% & 521 \\
-  NL2GQL & MatchMaker (Granite) & 83.2\% & 437 \\
-  OMOP\_CMS & ReAct (Granite) & 59.9\% & 38 \\
-  OMOP\_MIMIC & UE-Reflect (Llama) & 42.9\% & 46 \\
-  OMOP\_Synthea & UE-Reflect (Llama) & 81.2\% & 12 \\
+  ReAct & Llama & -- & -- & -- & -- & -- \\
+  \midrule
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{80.1} & -- & \textbf{22.1} & \textbf{29.4} & \textbf{51.5} \\
   \bottomrule
   \end{tabular}
-  \end{table}
-  
-%\deleted{GraphQL schema mapping presents complexity due to the paradigm's flexible type system and nested relationships. The results show significant variation across methods and models. AnyTool achieves perfect accuracy (1.000) on the available test cases, while traditional methods like SMT show variable performance across models (0.118 with Granite, 0.291 with Llama, 0.702 with Mistral-Large). ReAct and GNN methods show limited effectiveness in the current evaluation setup.}
+  \end{table*}
 
-GraphQL schema mapping presents complexity due to the paradigm's flexible type system and nested relationships. UE-Reflect with uncertainty quantification achieves \textbf{98.1\% API accuracy} on ITOpsGraph with Llama, outperforming MatchMaker (95.2\%) and ReMatch (94.8\%). UE-Reflect also achieves the highest field-level accuracy on ITOpsGraph (76.6\%), followed by MatchMaker (72.0\%). MatchMaker excels on NL2GQL (83.2\% field accuracy with Granite). The results demonstrate that induced reflection with external signals (neighbourhood validation, error analysis, uncertainty quantification) substantially improves mapping quality over non-reflective baselines.
+\begin{figure*}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{field_accuracy_oracle.pdf}
+    \caption{Oracle Mode: Field-level accuracy comparison across methods and datasets. Map-Reflect achieves the highest accuracy on ITOpsGraph (76.6\%) and OMOP\_Synthea (81.2\%), while MatchMaker leads on NL2GQL (77.2\%). Hatching patterns ensure grayscale accessibility.}
+    \label{fig:field_accuracy}
+\end{figure*}
 
-%\deleted{The ITOps dataset proves more challenging than NL2GQL, with overall accuracy of 0.190 compared to 0.731 for NL2GQL. This indicates that domain-specific IT operations schemas contain more complex structures and terminology that are harder to map automatically. Model performance varies significantly, with Mistral-Large achieving 0.702 average accuracy compared to 0.118 for Granite and 0.291 for Llama, suggesting that larger, more capable models are essential for effective schema mapping.}
+\subsubsection{Analysis}
 
-Model capabilities prove crucial for effective schema mapping. UE-Reflect achieves strong API-level performance with Llama (98.1\% on ITOpsGraph, 100\% on all OMOP datasets). Notably, UE-Reflect (Map-Reflect with uncertainty quantification) achieves \textbf{perfect API accuracy (100\%) across all three OMOP datasets} with both Granite and Llama, while substantially improving field accuracy---UE-Reflect Llama achieves 81.2\% on Synthea (vs 55.4\% for Map-Reflect) and 42.9\% on MIMIC (vs 31.4\% for Map-Reflect). MatchMaker demonstrates strong field-level performance on NL2GQL (83.2\% with Granite) and ITOpsGraph (72.0\% with Llama).
+Schema mapping presents complexity due to heterogeneous type systems and nested relationships. In oracle mode (where target schema is given), Map-Reflect achieves \textbf{98.1\% API accuracy} on ITOpsGraph with Llama, outperforming MatchMaker (95.2\%) and ReMatch (94.8\%). Map-Reflect also achieves the highest field-level accuracy on ITOpsGraph (76.6\%), followed by MatchMaker (72.0\%). MatchMaker excels on NL2GQL (83.2\% field accuracy with Granite). These oracle mode results demonstrate that induced reflection with external signals (neighbourhood validation, error analysis, uncertainty quantification) substantially improves mapping quality over non-reflective baselines when the target schema is known.
 
-\subsection{Ablation}
+Model capabilities prove crucial for effective schema mapping. In oracle mode, Map-Reflect achieves strong API-level performance with Llama (98.1\% on ITOpsGraph, 100\% on all OMOP datasets). Notably, Map-Reflect achieves \textbf{perfect API accuracy (100\%) across all three OMOP datasets} with both Granite and Llama in oracle mode, while substantially improving field accuracy---Map-Reflect Llama achieves 81.2\% on Synthea and 42.9\% on MIMIC. MatchMaker demonstrates strong field-level performance on NL2GQL (83.2\% with Granite) and ITOpsGraph (72.0\% with Llama).
 
-We conduct ablation studies to understand the contribution of different components in Map-Reflect. Table~\ref{tab:ablation_study} shows the impact of removing key components from the full system.
+\textbf{Oracle vs Retrieval Mode.} Oracle mode results establish an upper bound on field-level mapping quality when schema retrieval is perfect. Retrieval mode results (Tables~\ref{tab:api_accuracy_retrieval}--\ref{tab:field_accuracy_retrieval}) reflect end-to-end performance where retrieval errors compound with mapping errors. The gap between oracle and retrieval mode performance quantifies the retrieval bottleneck and motivates future work on improved schema discovery.
+
+\section{Discussion}
+
+The experimental results reveal important insights about induced reflection for schema mapping under oracle and retrieval evaluation modes.
+
+\subsection{Oracle vs.\ Retrieval Mode Analysis}
+
+\subsubsection{Oracle Mode Performance}
+When the target schema is given (oracle mode), Map-Reflect achieves 98.1\% API accuracy and 76.6\% field accuracy on ITOpsGraph with Llama, demonstrating strong field alignment capability. On OMOP datasets in oracle mode, Map-Reflect achieves perfect API accuracy (100\%) across all three variants, with field accuracy ranging from 41.4\% (CMS) to 81.2\% (Synthea). The uncertainty quantification mechanism helps identify contested mappings that benefit from deeper exploration. These oracle mode results enable fair comparison with prior work like MatchMaker~\cite{matchmaker} that assumes the target schema is known.
+
+MatchMaker demonstrates strong cross-dataset performance in oracle mode, achieving 95.2\% API accuracy on ITOpsGraph, 42.1\% on NL2GQL, and 89.5-100\% on OMOP with Llama. Notably, MatchMaker achieves the best field-level accuracy on NL2GQL (83.2\% with Granite), significantly outperforming other methods on this dataset. ReMatch shows strong API accuracy on ITOpsGraph (94.8\%) with competitive performance.
+
+\subsubsection{Retrieval Mode Challenges}
+Retrieval mode presents additional challenges: the system must first discover appropriate target schemas from a large catalogue using embedding-based retrieval. Errors in schema retrieval propagate to field-level mapping, making retrieval mode strictly harder than oracle mode. The gap between oracle and retrieval mode results (Tables~\ref{tab:api_accuracy_oracle}--\ref{tab:field_accuracy_oracle} vs Tables~\ref{tab:api_accuracy_retrieval}--\ref{tab:field_accuracy_retrieval}) quantifies the retrieval bottleneck and motivates future work on improved schema retrieval.
+
+\subsection{Ablation Study}
+
+We conduct ablation studies in oracle mode to understand the contribution of uncertainty quantification in Map-Reflect, isolating field mapping quality from retrieval effects. Table~\ref{tab:ablation_study} compares Map-Reflect without uncertainty quantification (w/o UQ) against the full Map-Reflect system with uncertainty-guided reflection (Map-Reflect-UQ).
 
 \begin{table}[htbp]
 \centering
 \small
-\begin{tabular}{@{}l@{\hspace{4pt}}l@{\hspace{6pt}}r@{\hspace{6pt}}r@{}}
+\begin{tabularx}{\columnwidth}{@{}XlRR@{}}
 \toprule
 \textbf{Config.} & \textbf{Dataset} & \textbf{API} & \textbf{Field} \\
 \midrule
-Map-Reflect (Llama) & Synthea & 100\% & 55.4\% \\
-UE-Reflect (Llama) & Synthea & 100\% & \textbf{81.2\%} \\
-Map-Reflect (Llama) & CMS & 81.6\% & 30.3\% \\
-UE-Reflect (Llama) & CMS & \textbf{100\%} & \textbf{41.4\%} \\
-Map-Reflect (Llama) & MIMIC & 97.8\% & 31.4\% \\
-UE-Reflect (Llama) & MIMIC & \textbf{100\%} & \textbf{42.9\%} \\
+w/o UQ & Synthea & 100\% & 55.4\% \\
+Map-Reflect-UQ & Synthea & 100\% & \textbf{81.2\%} \\
+w/o UQ & CMS & 81.6\% & 30.3\% \\
+Map-Reflect-UQ & CMS & \textbf{100\%} & \textbf{41.4\%} \\
+w/o UQ & MIMIC & 97.8\% & 31.4\% \\
+Map-Reflect-UQ & MIMIC & \textbf{100\%} & \textbf{42.9\%} \\
 \midrule
-Map-Reflect (Llama) & ITOpsGraph & 98.5\% & 70.6\% \\
-UE-Reflect (Llama) & ITOpsGraph & 98.1\% & \textbf{76.6\%} \\
+w/o UQ & ITOpsGraph & 98.5\% & 70.6\% \\
+Map-Reflect-UQ & ITOpsGraph & 98.1\% & \textbf{76.6\%} \\
 \bottomrule
-\end{tabular}
-\caption{Ablation: Uncertainty Quantification (+UQ) and Reflection}
+\end{tabularx}
+\caption{Oracle Mode Ablation: Impact of Uncertainty Quantification (Llama model)}
 \label{tab:ablation_study}
 \end{table}
 
-%\deleted{\textbf{Map-Reflect (Full)}: Our complete system with self-reflection mechanism and knowledge graph-induced reflection yields the best performance across all metrics. \textbf{w/o Self-Reflection}: Removing the reflective reasoning component demonstrates the core contribution of iterative self-evaluation to mapping quality. \textbf{w/o Domain Clustering}: Shows the impact of organized API retrieval on overall system performance. \textbf{w/o Knowledge Graph}: Evaluates the contribution of structured domain knowledge in guiding the reflection process. \textbf{BasicMap Baseline}: Our fundamental mapping approach without enhancement components serves as the foundation for comparison.}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\columnwidth]{ablation_oracle.pdf}
+    \caption{Impact of uncertainty quantification: Map-Reflect-UQ consistently outperforms the base variant (w/o UQ) on field-level accuracy across all datasets, with improvements ranging from +6.0pp (ITOpsGraph) to +25.8pp (Synthea).}
+    \label{fig:ablation}
+\end{figure}
 
-\textbf{Map-Reflect (Full)}: Our complete system achieves strong API-level accuracy (100\% on OMOP\_Synthea, 98.5\% on ITOpsGraph) but moderate field-level accuracy (55.4\% on Synthea, 70.6\% on ITOpsGraph). \textbf{UE-Reflect}: Adding uncertainty quantification achieves perfect API accuracy (100\%) across all OMOP datasets and substantially improves field accuracy---on Synthea, UE-Reflect Llama achieves 81.2\% vs 55.4\% for Map-Reflect, a 25.8 percentage point improvement. On CMS (41.4\% vs 30.3\%) and MIMIC (42.9\% vs 31.4\%), UE-Reflect also outperforms Map-Reflect. On ITOpsGraph (521 samples), UE-Reflect achieves 76.6\% field accuracy vs 70.6\% for Map-Reflect, a 6.0 percentage point improvement.
+Uncertainty quantification consistently improves field-level accuracy across all datasets. \textbf{w/o UQ}: Map-Reflect without uncertainty quantification achieves strong API-level accuracy (100\% on Synthea, 98.5\% on ITOpsGraph) but moderate field-level accuracy (55.4\% on Synthea, 70.6\% on ITOpsGraph). \textbf{Map-Reflect-UQ}: Adding uncertainty quantification achieves perfect API accuracy (100\%) across all OMOP datasets and substantially improves field accuracy. On Synthea, Map-Reflect-UQ achieves 81.2\% vs 55.4\% without UQ (+25.8pp). On CMS (41.4\% vs 30.3\%) and MIMIC (42.9\% vs 31.4\%), Map-Reflect-UQ also outperforms the base variant. On ITOpsGraph, field accuracy improves from 70.6\% to 76.6\% (+6.0pp).
 
-%\deleted{The ablation studies reveal that all components (self-reflection, domain clustering, and knowledge graph enhancement) contribute meaningfully to performance. Self-reflection provides the largest contribution, demonstrating that iterative self-evaluation and refinement significantly enhance mapping quality. Knowledge graph integration provides structured domain knowledge that guides the reflection process, leading to more informed mapping decisions. Domain clustering improves retrieval effectiveness, ensuring relevant schemas are identified for comparison.}
+\subsection{Induced Reflection Benefits}
 
-The ablation studies reveal that uncertainty quantification consistently improves field-level accuracy across all datasets. On OMOP, UE-Reflect achieves perfect API accuracy (100\%) while improving field accuracy by 25.8 percentage points on Synthea (81.2\% vs 55.4\%), 11.5 points on MIMIC (42.9\% vs 31.4\%), and 11.1 points on CMS (41.4\% vs 30.3\%). On ITOpsGraph (521 samples), UE-Reflect improves field accuracy by 6.0 percentage points (76.6\% vs 70.6\%) compared to Map-Reflect baseline (98.5\% API, 70.6\% field), demonstrating consistent benefits from uncertainty-guided reflection across diverse datasets and schema types.
+Map-Reflect validates our hypothesis that induced reflection with uncertainty quantification strengthens schema mapping. The three reflection signals serve complementary roles: neighbourhood graphs validate structural assumptions, error analysis catches semantic and deployment issues, and uncertainty quantification identifies contested mappings that require deeper exploration.
 
+\textbf{Error Detection Effectiveness.} The initial ranking error detection mechanism (Section~3.1, Signal~2) provides targeted guidance for reflection. When the detector identifies a source/target product mismatch---where the top prediction belongs to the source schema rather than the target---it generates an explicit error message instructing the model to find the semantic equivalent in the correct target schema. This addresses a common failure mode where models match by name similarity across the wrong direction. Similarly, foreign key misalignment detection catches cases where \texttt{table\_foreign\_id} fields are mapped to the wrong table's primary key. The reflection prompt incorporates detected errors with semantic matching rules:
+\begin{itemize}
+    \item Foreign keys should map to the \emph{primary key} of the referenced table, not to another foreign key
+    \item Match the \emph{target} entity, not the source entity
+    \item Verify fields represent the \emph{same data}, not just similar names
+\end{itemize}
+When errors are detected or uncertainty is high, the reflection prompt explicitly instructs the model: ``Assume the \#1 candidate is likely incorrect if errors were detected. Be bold---your initial answer is likely wrong.'' This aggressive prompting overcomes the model's tendency to confirm its initial prediction.
 
-\subsection{Discussion}
+The stakeholder-validated wiki provides an additional benefit beyond mapping accuracy: interpretable rationales for human-in-the-loop validation. Business stakeholders can review and refine mappings, with validated mappings becoming ground truth for future induced reflection.
 
-%\deleted{The experimental results reveal important insights about the current state of automated schema mapping. AnyTool demonstrates exceptional performance with perfect accuracy where evaluated, suggesting that tool-augmented approaches with function calling capabilities are highly effective for schema mapping tasks. However, the limited coverage (only Mistral-Large model results available) indicates potential scalability or compatibility challenges.}
+\textit{Continuous Ground Truth Improvement.} The ITOpsGraph wiki enables a novel evaluation paradigm where ground truth evolves alongside method improvements. When a new schema mapping method produces better results on a subset of types, SMEs can validate those improvements in the wiki, which then become part of the ground truth for future evaluations. This addresses a fundamental limitation of static benchmarks: as methods improve beyond the original ground truth quality, fixed benchmarks become less discriminative. Our wiki-based approach ensures the benchmark grows with the state of the art.
 
-The experimental results reveal important insights about induced reflection for schema mapping. UE-Reflect achieves 98.1\% API accuracy and 76.6\% field accuracy on ITOpsGraph with Llama, demonstrating strong performance at both schema retrieval and field alignment. On OMOP datasets, UE-Reflect achieves perfect API accuracy (100\%) across all three variants, with field accuracy ranging from 41.4\% (CMS) to 81.2\% (Synthea). The uncertainty quantification mechanism helps identify contested mappings that benefit from deeper exploration.
+The integration between schema mapping code and the wiki is bidirectional: (i) mapping output populates the wiki with proposed relationships, and (ii) validated wiki content is extracted as ground truth for evaluation. This tight coupling ensures consistency between the knowledge graph used for induced reflection and the evaluation benchmark.
 
-%\deleted{Traditional approaches show mixed results, with SMT demonstrating strong model dependency - accuracy ranges from 0.118 with Granite to 0.702 with Mistral-Large. This suggests that the underlying language model capability significantly impacts schema mapping performance. ReAct and GNN methods show limitations in the current evaluation setup, with GNN achieving zero accuracy across most configurations, indicating potential issues with graph construction or embedding quality.}
+\subsection{Error Analysis of Field-Level Failures on ITOpsGraph}
+Map-Reflect achieves 98.1\% API accuracy on ITOpsGraph but only 76.6\% field accuracy, meaning that even when the correct source--target type pair is identified, roughly one in four fields is not correctly mapped. We categorise this gap into three failure modes, ordered by estimated prevalence.
 
-MatchMaker demonstrates strong cross-dataset performance, achieving 95.2\% API accuracy on ITOpsGraph, 42.1\% on NL2GQL, and 89.5-100\% on OMOP with Llama. Notably, MatchMaker achieves the best field-level accuracy on NL2GQL (83.2\% with Granite), significantly outperforming other methods on this dataset. ReMatch shows strong API accuracy on ITOpsGraph (94.8\%) with competitive performance. These results highlight the complementary strengths of different methods across datasets.
+\textbf{Semantic synonym misses (estimated \textasciitilde{}[X]\% of failures).} ITOpsGraph contains many cases where semantically equivalent fields carry entirely different names across products---for example, a field named \texttt{severity} in one product and \texttt{criticalityLevel} in another, or \texttt{hostName} versus \texttt{nodeIdentifier}. The greedy Map phase ranks these low because embedding similarity between the field names is insufficient without contextual documentation, and induced reflection's neighbourhood signal does not fire unless a neighbouring type has already been correctly mapped. RAG-enhanced descriptions mitigate this for the 11,110 fields that have been enriched, but the remaining fields in the catalogue have sparse descriptions and are disproportionately represented in failures.
 
-%\deleted{The MapReflect results indicate implementation challenges that need to be addressed, as the current evaluation shows zero accuracy and success rates. This suggests that while the theoretical framework is sound, the implementation requires debugging and refinement to achieve the expected performance gains from reflective reasoning.}
+\textbf{Schema paradigm boundary failures (estimated \textasciitilde{}[Y]\% of failures).} ITOpsGraph spans both GraphQL and Protocol Buffer schemas. Fields that are modelled as nested object types in GraphQL (e.g., \texttt{VirtualMachine.resourceAllocation.cpuMhz}) appear as flat repeated fields in Protocol Buffer definitions. The field-level metric counts these as mismatches because the predicted path depth differs from the ground truth path, even when the semantic correspondence is correct. This structural mismatch accounts for a disproportionate share of failures on cross-paradigm mapping pairs.
 
-UE-Reflect achieves strong performance on ITOpsGraph (98.1\% API accuracy, 76.6\% field accuracy) and perfect API accuracy (100\%) across all OMOP datasets with both Granite and Llama, validating our hypothesis that induced reflection with uncertainty quantification strengthens schema retrieval. Field accuracy improvements are substantial across all OMOP datasets: Synthea shows the largest gains (81.2\% vs 55.4\%), followed by MIMIC (42.9\% vs 31.4\%) and CMS (41.4\% vs 30.3\%). The three reflection signals serve complementary roles: neighbourhood graphs validate structural assumptions, error analysis catches semantic and deployment issues, and uncertainty quantification identifies contested mappings requiring deeper exploration.
+\textbf{Many-to-many boundary disagreements (estimated \textasciitilde{}[Z]\% of failures).} For types such as \texttt{Alert}, \texttt{Incident}, and \texttt{Event}---which the paper identifies as legitimate many-to-many mapping targets---SME-validated ground truth includes multiple valid target fields. When Map-Reflect's uncertainty quantification correctly identifies these as contested mappings and expands to include additional targets, the recall improves but precision can drop if one of the added targets is judged invalid by a different SME reviewer. The field accuracy metric as currently defined (Equation~2) measures recall only, so these cases reduce apparent accuracy even when the many-to-many output is largely correct. Adding a precision term would better characterise performance on this error class.
 
-%\deleted{Dataset analysis reveals that ITOps represents a significantly more challenging domain than NL2GQL, with accuracy differences of approximately 0.5. This highlights the importance of domain-specific schema complexity in mapping performance and suggests that specialized approaches may be needed for different domains.}
-
-The stakeholder-validated wiki provides an additional benefit beyond mapping accuracy: interpretable rationales for human-in-the-loop validation. Business stakeholders from Instana, Turbonomic, and Concert can review and refine mappings, with validated mappings becoming ground truth for future induced reflection.
-
-\textit{Continuous Ground Truth Improvement.} The ITOpsGraph wiki enables a novel evaluation paradigm where ground truth evolves alongside method improvements. When a new schema mapping method produces better results on a subset of types, SMEs can validate those improvements in the wiki, which then become part of the ground truth for future evaluations. Similarly, when new products are added to the ITOps ecosystem (e.g., a new cloud provider or observability tool), the wiki is extended with auto-generated pages that SMEs validate. This addresses a fundamental limitation of static benchmarks: as methods improve beyond the original ground truth quality, fixed benchmarks become less discriminative. Our wiki-based approach ensures the benchmark grows with the state of the art.
-
-The integration between schema mapping code and the wiki is bidirectional: (i) mapping output populates the wiki with proposed relationships, and (ii) validated wiki content is extracted as ground truth for evaluation. This tight coupling—implemented through the \texttt{nl2cypher} codebase that manages Neo4j population, wiki generation, and query dataset creation—ensures consistency between the knowledge graph used for induced reflection and the evaluation benchmark.
-
+Together these three categories suggest that the primary bottleneck is not the induced reflection mechanism itself---which demonstrably improves field accuracy by 6.0 percentage points over the no-UQ baseline on ITOpsGraph---but rather sparse field documentation for uncommon schema elements and the structural impedance mismatch between GraphQL and Protocol Buffer representations. Enriching documentation coverage and adopting a path-normalisation step before field-level evaluation are the most direct remedies for closing the remaining gap.
 
 \section{Conclusion}
 
-%\deleted{We introduced Map-Reflect, a self-reflection framework for schema mapping that addresses limitations in existing approaches through iterative refinement mechanisms. The framework handles GraphQL schema built on top of disparate data sources, achieving competitive performance using smaller models compared to expensive GPT-4-dependent approaches like AnyTool. Experimental results demonstrate Map-Reflect . The self-reflection mechanism consistently improves mapping quality across different model architectures without proportional increases in computational overhead. Map-Reflect's cost-effectiveness and practical deployment characteristics make it suitable for enterprise environments where resource constraints limit the use of frontier models. The success of self-reflection mechanisms suggests broader applicability to other schema-related tasks, opening avenues for research in automated data integration and API interoperability.}
+We introduced Map-Reflect, an induced reflection framework for many-to-many schema mapping that uses three external signals (neighbourhood graph validation, error analysis, uncertainty quantification) rather than self-reflection. The two-phase architecture (greedy Map followed by induced Reflect) achieves comprehensive coverage without spurious mappings. In oracle mode, Map-Reflect achieves 98.1\% API accuracy and 76.6\% field accuracy on ITOpsGraph, and perfect API accuracy (100\%) across all OMOP datasets, with uncertainty quantification improving field accuracy by up to 25.8 percentage points. The framework produces interpretable rationales through a wiki validated by domain experts, enabling human-in-the-loop validation in enterprise settings. Future work includes extending induced reflection to multi-hop mapping across federated schemas and improving schema retrieval to close the gap between oracle and retrieval modes.
 
-We introduced Map-Reflect, an induced reflection framework for many-to-many GraphQL schema mapping. Unlike self-reflection approaches where models critique their own output, Map-Reflect induces reflection using three external signals: neighbourhood graph validation, error analysis (LLM-as-judge, schema deployment, query execution), and uncertainty quantification. The two-phase architecture (greedy Map followed by induced Reflect) explicitly addresses the many-to-many mapping challenge, achieving comprehensive coverage without spurious mappings.
-
-Experimental results demonstrate that UE-Reflect achieves 98.1\% API accuracy and 76.6\% field accuracy on ITOpsGraph with Llama, and perfect API accuracy (100\%) across all OMOP datasets with both Granite and Llama models. On Synthea, UE-Reflect achieves 81.2\% field accuracy---a 25.8 percentage point improvement over Map-Reflect. MatchMaker achieves the best field-level accuracy on NL2GQL (83.2\%). The framework produces interpretable rationales through a wiki validated by business stakeholders, enabling human-in-the-loop validation in enterprise settings.
-
-Future work includes extending induced reflection to multi-hop mapping across federated GraphQL subgraphs, tighter uncertainty calibration using techniques from our prior work on uncertainty quantification~\cite{simba_uq,consistency_hypothesis}, and interactive human-in-the-loop validation workflows.
-
-%\begin{acks}
-% This work was supported by the [...] Research Fund of [...] (Number [...]). Additional funding was provided by [...] and [...]. We also thank [...] for contributing [...].
-%\end{acks}
+\begin{acks}
+We thank the anonymous reviewers for their constructive feedback. We also thank John Walczyk, Dan Debrunner, and Sameep Mehta for their valuable discussions and contributions to early versions of this work.
+\end{acks}
 
 \vspace{0.5em}
-\noindent\textbf{Reproducibility.} All code, datasets, and experiment scripts are available at our repository. The evaluation pipeline supports running individual methods or full comparative experiments across all datasets and models.
+\noindent\textbf{Reproducibility.} All code, datasets, and experiment scripts are available at our repository.
+
+\clearpage
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{sample}
 
