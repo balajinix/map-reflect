@@ -1005,8 +1005,17 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
             })
             embs.append(self.embedding_model.encode(doc))
 
-        col.add(ids=ids, documents=docs, metadatas=metas, embeddings=embs)
-        logger.info("Chroma collection populated | %d items", len(ids))
+        # Add in batches to avoid ChromaDB batch size limit (max ~5461)
+        batch_size = 5000
+        for i in range(0, len(ids), batch_size):
+            end = min(i + batch_size, len(ids))
+            col.add(
+                ids=ids[i:end],
+                documents=docs[i:end],
+                metadatas=metas[i:end],
+                embeddings=embs[i:end]
+            )
+        logger.info("Chroma collection populated | %d items in %d batches", len(ids), (len(ids) + batch_size - 1) // batch_size)
         return col
 
     def _select_destination_properties(self, state: MappingState) -> MappingState:
@@ -1035,10 +1044,15 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
                 q = " ".join(source_texts)
                 q_emb = self.embedding_model.encode(q).tolist()
 
-            # Search for similar properties, but exclude same product
-            n_results = min(self.top_k * self.n_results_multiplier * 3, len(state["property_data"]))
+            # Search broadly to ensure we find cross-product matches
+            # Many top results may be from same product, so we need to search broadly
+            # Cap at 5000 to avoid ChromaDB batch size limit (max ~5461)
+            n_results = min(len(state["property_data"]), 5000)
+            logger.info("Retrieval mode: querying ChromaDB n_results=%d, collection_count=%d",
+                       n_results, collection.count())
             res = collection.query(query_embeddings=[q_emb], n_results=n_results)
             all_ids = res["ids"][0] if res.get("ids") else []
+            logger.info("Retrieval mode: ChromaDB returned %d results", len(all_ids))
 
             # Filter out properties from the source product
             filtered_ids = []
@@ -1052,8 +1066,8 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
                 if len(filtered_ids) >= self.top_k:
                     break
 
-            logger.info("Retrieval mode: found %d destination properties (excluded source_product=%s)",
-                       len(filtered_ids), source_product)
+            logger.info("Retrieval mode: found %d destination properties (excluded source_product=%s, searched %d total)",
+                       len(filtered_ids), source_product, len(all_ids))
 
             # Set destination properties and return
             state["destination_properties"] = filtered_ids

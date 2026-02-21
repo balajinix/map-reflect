@@ -98,10 +98,20 @@ class MapReflectConfig:
     top_k: int = 10
     neighbor_k: int = 5  # 1-hop neighbors (0 to disable)
 
-    # Optional features
-    use_uncertainty: bool = False
-    use_reflection: bool = False
+    # Reflection signals (independent flags for clean ablation)
+    use_self_reflection: bool = False      # Always reflect (no external signal)
+    use_error_reflection: bool = False     # Reflect on detected errors
+    use_uq_reflection: bool = False        # Reflect on high uncertainty
+    use_neighborhood_reflection: bool = False  # Reflect using neighborhood validation
+
+    # Legacy flags (for backward compatibility)
+    use_uncertainty: bool = False  # Enable UQ calculation
+    use_reflection: bool = False   # Legacy: enables error + uq reflection
     n_uncertainty_samples: int = 3
+
+    # UQ threshold configuration
+    uq_threshold: Optional[float] = None  # Fixed threshold (overrides adaptive)
+    uq_threshold_percentile: Optional[float] = None  # Percentile-based threshold (e.g., 50 = median)
 
     # Checkpointing
     checkpoint_interval: int = 50
@@ -1061,9 +1071,11 @@ Return only the JSON array and nothing else."""
         high_uncertainty: bool,
         source_product: str,
         target_product: str,
-        detected_errors: List[str] = None
+        detected_errors: List[str] = None,
+        reflection_triggers: List[str] = None
     ) -> str:
-        """Build prompt for self-reflection with error analysis."""
+        """Build prompt for reflection based on triggered signals."""
+        reflection_triggers = reflection_triggers or []
         n_candidates = 8 if high_uncertainty else 5
         initial_block = "\n".join([
             f"{i+1}. {r.get('id', 'unknown')} (score={r.get('score')}) - {r.get('reason', '')}"
@@ -1090,23 +1102,65 @@ SEMANTIC MATCHING RULES - Apply these carefully:
 4. Filter/Input types: Match by the semantic operation (eq->equals, like->pattern match, in->contains)
 5. Do NOT match by name similarity alone - verify the fields represent the SAME DATA"""
 
-        if high_uncertainty or detected_errors:
-            reflection_instruction = f"""CRITICAL: The initial ranking shows HIGH UNCERTAINTY or has DETECTED ERRORS, which strongly suggests the top-ranked candidate may be WRONG.
+        # Build reflection instruction based on which signals triggered
+        if "self" in reflection_triggers and len(reflection_triggers) == 1:
+            # Pure self-reflection: no external signals, just ask to reconsider
+            reflection_instruction = f"""Please reconsider your initial ranking.
 {semantic_rules}
 
-You MUST:
-1. Carefully review the DETECTED ERRORS above (if any)
-2. Assume the #1 candidate is likely incorrect if errors were detected
-3. Look for the candidate that represents the SAME DATA in the TARGET schema
-4. For foreign keys, find the primary key they reference
-5. CHANGE your top prediction based on semantic meaning, not name similarity
+Review your ranking and check if you might have missed a better candidate.
+Only change the ranking if you find a clear improvement."""
 
-Be bold - your initial answer is likely wrong if errors were detected."""
+        elif "uq" in reflection_triggers and "error" not in reflection_triggers:
+            # UQ-triggered reflection (no errors)
+            reflection_instruction = f"""The initial ranking has elevated uncertainty. Please VERIFY the ranking is correct.
+{semantic_rules}
+
+Please:
+1. Verify the top candidate represents the SAME DATA in the TARGET schema
+2. For foreign keys, check they map to the correct primary key
+3. Confirm semantic meaning matches, not just name similarity
+4. Only change the ranking if you find a clear error - keep it if it looks correct
+
+Note: Elevated uncertainty may simply mean multiple candidates are similar, not that the answer is wrong."""
+
+        elif "error" in reflection_triggers and "uq" not in reflection_triggers:
+            # Error-triggered reflection (no high uncertainty)
+            reflection_instruction = f"""The initial ranking has some POTENTIAL ISSUES to review (see DETECTED ERRORS above).
+{semantic_rules}
+
+Please:
+1. Review the detected errors carefully
+2. Check if they apply to this specific case
+3. Only change your ranking if the errors reveal a clear mistake
+4. Keep the original ranking if you believe it is correct despite the warnings."""
+
+        elif "neighborhood" in reflection_triggers:
+            # Neighborhood-triggered reflection
+            reflection_instruction = f"""Multiple candidates have similar scores. Use structural context to decide.
+{semantic_rules}
+
+Please:
+1. Consider which candidate is most consistent with how similar fields are mapped
+2. Check if the top candidate's type/table makes sense given the source field's context
+3. Only change the ranking if neighborhood context reveals a better match."""
+
+        elif "error" in reflection_triggers and "uq" in reflection_triggers:
+            # Both error and UQ triggered
+            reflection_instruction = f"""The initial ranking has both detected errors AND high uncertainty.
+{semantic_rules}
+
+Please:
+1. Review the detected errors carefully
+2. The high uncertainty suggests the model is unsure - consider alternatives
+3. Only change the ranking if you find clear evidence of a better match."""
+
         else:
-            reflection_instruction = f"""The initial ranking shows reasonable confidence.
+            # Fallback
+            reflection_instruction = f"""Please review your initial ranking.
 {semantic_rules}
 
-Please review for any obvious errors or improvements based on the semantic matching rules above."""
+Check for any obvious errors or improvements based on the semantic matching rules above."""
 
         prompt = f"""You previously ranked {target_product} candidates for this {source_product} property:
 
@@ -1219,14 +1273,21 @@ Return a JSON object:
             sample_metadata = sample.get("metadata", {})
             target_type = sample_metadata.get("target_type", "")
 
+            # Handle dict target_schema (OMOP datasets have nested schema objects)
+            if isinstance(target_schema, dict):
+                target_schema = target_schema.get("name", target_schema.get("id", ""))
+
             if target_schema and isinstance(target_schema, str):
                 # Build target prefix for filtering
+                # Handle multi-word schema names (e.g., "MIMIC PATIENTS" -> "mimic_")
+                target_product = target_schema.split()[0].lower() if " " in target_schema else target_schema.lower()
+
                 if target_type:
                     # ITOpsGraph style: product + type prefix (e.g., "turbonomic_FilterInput.")
-                    target_prefix = f"{target_schema.lower()}_{target_type}."
+                    target_prefix = f"{target_product}_{target_type}."
                 else:
-                    # Simple product prefix (e.g., "turbonomic_")
-                    target_prefix = f"{target_schema.lower()}_"
+                    # Simple product prefix (e.g., "mimic_" from "MIMIC PATIENTS")
+                    target_prefix = f"{target_product}_"
 
                 # Filter candidates from lookup by target prefix
                 candidates = []
@@ -1530,24 +1591,66 @@ Return a JSON object:
             )
             task["detected_errors"] = detected_errors
 
-            # Check if reflection is needed
-            if self.config.use_reflection:
-                if len(all_uncertainties) > 1:
+            # Check if reflection is needed based on enabled signals
+            any_reflection_enabled = (
+                self.config.use_self_reflection or
+                self.config.use_error_reflection or
+                self.config.use_uq_reflection or
+                self.config.use_neighborhood_reflection or
+                self.config.use_reflection  # Legacy flag
+            )
+
+            if any_reflection_enabled:
+                # Calculate uncertainty threshold
+                if self.config.uq_threshold is not None:
+                    # Use fixed threshold
+                    threshold = self.config.uq_threshold
+                elif self.config.uq_threshold_percentile is not None and len(all_uncertainties) > 1:
+                    # Use percentile-based threshold
+                    threshold = np.percentile(all_uncertainties, self.config.uq_threshold_percentile)
+                elif len(all_uncertainties) > 1:
+                    # Default: adaptive threshold based on mean + std
                     mean_u = np.mean(all_uncertainties)
                     std_u = np.std(all_uncertainties)
-                    threshold = mean_u + 0.5 * std_u
+                    threshold = max(0.25, mean_u + 1.5 * std_u)
                 else:
                     threshold = 0.6
 
                 high_uncertainty = uncertainty_score > threshold
-                should_reflect = high_uncertainty or len(detected_errors) > 0
                 task["high_uncertainty"] = high_uncertainty
+
+                # Determine which signals trigger reflection
+                triggers = []
+
+                # Self-reflection: always triggers (no external signal needed)
+                if self.config.use_self_reflection:
+                    triggers.append("self")
+
+                # Error-based reflection
+                if (self.config.use_error_reflection or self.config.use_reflection) and len(detected_errors) > 0:
+                    triggers.append("error")
+
+                # UQ-based reflection
+                if (self.config.use_uq_reflection or self.config.use_reflection) and high_uncertainty:
+                    triggers.append("uq")
+
+                # Neighborhood-based reflection (TODO: implement neighborhood validation signal)
+                if self.config.use_neighborhood_reflection:
+                    # For now, trigger if using neighborhood expansion and multiple close candidates
+                    if self.config.neighbor_k > 0 and len(ranking) >= 2:
+                        score_gap = ranking[0].get("score", 1) - ranking[1].get("score", 0)
+                        if score_gap < 0.2:  # Close competition suggests neighborhood check needed
+                            triggers.append("neighborhood")
+
+                task["reflection_triggers"] = triggers
+                should_reflect = len(triggers) > 0
 
                 if should_reflect:
                     reflection_prompt = self._build_reflection_prompt(
                         task["src_field"], task["src_desc"], ranking, task["candidates"],
                         uncertainty_score, high_uncertainty, task["source_product"], task["target_product"],
-                        detected_errors=detected_errors
+                        detected_errors=detected_errors if "error" in triggers else [],
+                        reflection_triggers=triggers
                     )
                     task["reflection_prompt"] = reflection_prompt
                     reflection_tasks.append(task_idx)
@@ -1555,7 +1658,14 @@ Return a JSON object:
         # =====================================================================
         # PHASE 4: Batch inference for reflections (if any)
         # =====================================================================
-        if reflection_tasks and self.config.use_reflection:
+        any_reflection_enabled = (
+            self.config.use_self_reflection or
+            self.config.use_error_reflection or
+            self.config.use_uq_reflection or
+            self.config.use_neighborhood_reflection or
+            self.config.use_reflection
+        )
+        if reflection_tasks and any_reflection_enabled:
             logger.info(f"Phase 4: Batch inference for {len(reflection_tasks)} reflections...")
             reflection_prompts = [prompt_tasks[idx]["reflection_prompt"] for idx in reflection_tasks]
             reflection_responses = self.client.generate_batch(
@@ -1670,6 +1780,12 @@ Return a JSON object:
             "config": {
                 "batch_size": self.config.batch_size,
                 "neighbor_k": self.config.neighbor_k,
+                # Reflection signals
+                "use_self_reflection": self.config.use_self_reflection,
+                "use_error_reflection": self.config.use_error_reflection,
+                "use_uq_reflection": self.config.use_uq_reflection,
+                "use_neighborhood_reflection": self.config.use_neighborhood_reflection,
+                # Legacy
                 "use_uncertainty": self.config.use_uncertainty,
                 "use_reflection": self.config.use_reflection,
                 "n_uncertainty_samples": self.config.n_uncertainty_samples,
@@ -1712,10 +1828,24 @@ def main():
     parser.add_argument("--top-k", type=int, default=10, help="Top-K candidates (default: 10)")
     parser.add_argument("--neighbor-k", type=int, default=5, help="1-hop neighbors (default: 5, 0 to disable)")
 
-    # Optional features
+    # Reflection signals (use these for clean ablation)
+    parser.add_argument("--use-self-reflection", action="store_true",
+                        help="Enable self-reflection (no external signals)")
+    parser.add_argument("--use-error-reflection", action="store_true",
+                        help="Enable error-triggered reflection")
+    parser.add_argument("--use-uq-reflection", action="store_true",
+                        help="Enable uncertainty-triggered reflection")
+    parser.add_argument("--use-neighborhood-reflection", action="store_true",
+                        help="Enable neighborhood-triggered reflection")
+
+    # Legacy flags (for backward compatibility)
     parser.add_argument("--use-uncertainty", action="store_true", help="Enable uncertainty quantification")
-    parser.add_argument("--use-reflection", action="store_true", help="Enable self-reflection")
+    parser.add_argument("--use-reflection", action="store_true", help="Legacy: enable error+uq reflection")
     parser.add_argument("--n-uncertainty-samples", type=int, default=3, help="Samples for UQ (default: 3)")
+
+    # UQ threshold configuration
+    parser.add_argument("--uq-threshold", type=float, help="Fixed UQ threshold (overrides adaptive)")
+    parser.add_argument("--uq-threshold-percentile", type=float, help="Percentile-based UQ threshold (e.g., 50 = median)")
 
     # Checkpointing
     parser.add_argument("--checkpoint-interval", type=int, default=50, help="Save every N samples (default: 50)")
@@ -1734,9 +1864,18 @@ def main():
         use_cache=not args.no_cache,
         top_k=args.top_k,
         neighbor_k=args.neighbor_k,
+        # New reflection signal flags
+        use_self_reflection=args.use_self_reflection,
+        use_error_reflection=args.use_error_reflection,
+        use_uq_reflection=args.use_uq_reflection,
+        use_neighborhood_reflection=args.use_neighborhood_reflection,
+        # Legacy flags
         use_uncertainty=args.use_uncertainty,
         use_reflection=args.use_reflection,
         n_uncertainty_samples=args.n_uncertainty_samples,
+        # UQ threshold configuration
+        uq_threshold=args.uq_threshold,
+        uq_threshold_percentile=args.uq_threshold_percentile,
         checkpoint_interval=args.checkpoint_interval,
         resume=args.resume,
     )

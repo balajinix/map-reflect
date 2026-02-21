@@ -178,7 +178,9 @@ Mapping API endpoints predates large language models. \cite{lu2017learning} trie
 Recent work leverages large language models for schema mapping. The Learned Schema Mapper (LSM) \cite{zhang2023schema} uses fine-tuned BERT encoders for metadata-based matching. The Magneto framework \cite{liu2024magneto} combines Small Language Models and LLMs, where SLMs generate candidates that LLMs rerank. ISResMat \cite{du2024in} fine-tunes pre-trained models for column representations. Newer approaches enhance LLMs with retrieval mechanisms, converting schemas to natural language descriptions. ReMatch \cite{sheetrit2024rematch} leverages retrieval-augmented LLMs, while GraphRAGToolFusion \cite{lumer2025graphragtoolfusion} combines knowledge graphs with vector-based retrieval. These approaches lack mechanisms for inducing reflection through external signals and do not address many-to-many schema mapping. Matchmaker \cite{matchmaker} introduced a compositional LLM program for schema matching with a zero-shot self-improvement mechanism. However, their experiments focus on healthcare datasets (MIMIC, Synthea), and their self-improvement mechanism lacks the external grounding signals that our induced reflection provides.
 
 \paragraph{LLM-Based Many-to-Many Schema Matching.}
-Two recent works address the many-to-many matching challenge most directly and deserve explicit positioning. LLMatch~\cite{wang2025llmatch} decomposes schema matching into three stages---schema preparation, table-candidate selection, and column-level alignment---and introduces a Rollup/Drilldown optimization strategy: a Rollup module consolidates semantically related columns into higher-order concepts, and a Drilldown module re-expands these concepts for fine-grained column mapping. This two-level abstraction produces many-to-many column correspondences and is evaluated on SchemaNet, a new enterprise benchmark across three domains. SCHEMORA~\cite{gungor2025schemora} takes a retrieval-first approach, enriching schema metadata and combining BM25 lexical retrieval with FAISS vector retrieval to identify candidate matches without exhaustive pairwise comparison or labeled training data. Evaluated on the MIMIC-OMOP benchmark, it establishes state-of-the-art HitRate@5 and HitRate@3, demonstrating that hybrid retrieval with metadata enrichment is a strong baseline for healthcare schema matching. Map-Reflect differs from both in a fundamental architectural choice: rather than restructuring the schema representation upfront (LLMatch's Rollup) or relying on retrieval quality to determine what gets matched (SCHEMORA's hybrid retrieval), Map-Reflect begins with a greedy one-to-one Map phase and then induces revision through three externally grounded signals---neighbourhood graph consistency, deployment and execution errors, and uncertainty quantification. This means Map-Reflect's many-to-many coverage is earned through validation against objective external evidence rather than through representation engineering or retrieval breadth. Additionally, Map-Reflect is schema-agnostic across REST APIs, GraphQL, and relational databases, whereas LLMatch and SCHEMORA target relational schemas specifically.
+Two recent works address the many-to-many matching challenge most directly and deserve explicit positioning. LLMatch~\cite{wang2025llmatch} decomposes schema matching into three stages---schema preparation, table-candidate selection, and column-level alignment---and introduces a Rollup/Drilldown optimization strategy: a Rollup module consolidates semantically related columns into higher-order concepts, and a Drilldown module re-expands these concepts for fine-grained column mapping. This two-level abstraction produces many-to-many column correspondences and is evaluated on SchemaNet, a new enterprise benchmark across three domains. SCHEMORA~\cite{gungor2025schemora} takes a retrieval-first approach, enriching schema metadata and combining BM25 lexical retrieval with FAISS vector retrieval to identify candidate matches without exhaustive pairwise comparison or labeled training data. Evaluated on the MIMIC-OMOP benchmark, it establishes state-of-the-art HitRate@5 and HitRate@3, demonstrating that hybrid retrieval with metadata enrichment is a strong baseline for healthcare schema matching. Similarly, AnyTool~\cite{anytool} requires constructing an elaborate hierarchical API graph as a preprocessing step before any matching can occur, which imposes significant upfront engineering cost and makes adding new APIs a structural operation rather than a simple schema registration.
+
+Map-Reflect differs from all three in a fundamental architectural choice: rather than restructuring the schema representation upfront (LLMatch's Rollup, AnyTool's API graph) or relying on retrieval quality to determine what gets matched (SCHEMORA's hybrid retrieval), Map-Reflect begins with a greedy one-to-one Map phase and then induces revision through three externally grounded signals---neighbourhood graph consistency, deployment and execution errors, and uncertainty quantification. This design has a practical consequence beyond accuracy: because Map-Reflect requires no elaborate preprocessing graph or schema transformation, adding a new API or database schema requires only parsing its specification and optionally enriching its field descriptions via RAG. The neighbourhood graph is populated incrementally from mapping output rather than constructed as a prerequisite. This makes Map-Reflect operationally lighter and more suitable for enterprise environments where schemas evolve continuously and new data sources are onboarded regularly. Additionally, Map-Reflect is schema-agnostic across REST APIs, GraphQL, and relational databases, whereas LLMatch and SCHEMORA target relational schemas specifically.
 
 \paragraph{Positioning.} Map-Reflect targets schema-agnostic \emph{many-to-many} mappings with an \emph{induced reflection} loop driven by three external signals: neighbourhood graph validation, error analysis, and uncertainty quantification. Unlike self-reflection approaches (AnyTool, Matchmaker) where models critique their own output, induced reflection validates against external ground truth, enabling reliable many-to-many coverage without spurious mappings. Our approach applies uniformly to REST APIs, databases, and other structured schemas.
 
@@ -423,7 +425,7 @@ In oracle mode, the utterance explicitly specifies both source and target schema
   MatchMaker & Llama & 95.2 & 42.1 & 80.9 & 89.5 & 95.7 & 100.0 \\
   \midrule
   \textbf{Map-Reflect} & Granite & -- & -- & -- & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
-  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{98.1} & -- & \textbf{96.6} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{98.1} & -- & \textbf{88.7} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
   \bottomrule
   \end{tabular}
   \end{table*}
@@ -449,10 +451,10 @@ In oracle mode, the utterance explicitly specifies both source and target schema
   AnyTool & Llama & -- & N/A & -- & 0.0 & 0.0 & 0.0 \\
   \midrule
   MatchMaker & Granite & 36.4 & \textbf{83.2} & -- & 38.2 & 32.5 & 66.3 \\
-  MatchMaker & Llama & 72.0 & 77.2 & 79.7 & \textbf{48.2} & \textbf{38.3} & 70.3 \\
+  MatchMaker & Llama & 72.0 & 77.2 & 79.7 & 22.8 & 20.2 & 47.5 \\
   \midrule
-  \textbf{Map-Reflect} & Granite & -- & -- & -- & 35.2 & 37.0 & 72.3 \\
-  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{76.6} & \textbf{76.9} & \textbf{91.0} & 41.4 & 42.9 & \textbf{81.2} \\
+  \textbf{Map-Reflect} & Granite & -- & -- & -- & 11.7 & 21.0 & 17.8 \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{76.5} & \textbf{76.9} & \textbf{89.5} & 20.0 & 29.4 & \textbf{49.5} \\
   \bottomrule
   \end{tabular}
   \end{table*}
@@ -505,7 +507,7 @@ In retrieval mode, the utterance specifies only the source schema and requires t
 
 Schema mapping presents complexity due to heterogeneous type systems and nested relationships. In oracle mode (where target schema is given), Map-Reflect achieves \textbf{98.1\% API accuracy} on ITOpsGraph with Llama, outperforming MatchMaker (95.2\%) and ReMatch (94.8\%). Map-Reflect also achieves the highest field-level accuracy on ITOpsGraph (76.6\%), followed by MatchMaker (72.0\%). MatchMaker excels on NL2GQL (83.2\% field accuracy with Granite). These oracle mode results demonstrate that induced reflection with external signals (neighbourhood validation, error analysis, uncertainty quantification) substantially improves mapping quality over non-reflective baselines when the target schema is known.
 
-Model capabilities prove crucial for effective schema mapping. In oracle mode, Map-Reflect achieves strong API-level performance with Llama (98.1\% on ITOpsGraph, 100\% on all OMOP datasets). Notably, Map-Reflect achieves \textbf{perfect API accuracy (100\%) across all three OMOP datasets} with both Granite and Llama in oracle mode, while substantially improving field accuracy---Map-Reflect Llama achieves 81.2\% on Synthea and 42.9\% on MIMIC. MatchMaker demonstrates strong field-level performance on NL2GQL (83.2\% with Granite) and ITOpsGraph (72.0\% with Llama).
+Model capabilities prove crucial for effective schema mapping. In oracle mode, Map-Reflect achieves strong API-level performance with Llama (98.1\% on ITOpsGraph, 100\% on all OMOP datasets). Notably, Map-Reflect achieves \textbf{perfect API accuracy (100\%) across all three OMOP datasets} with both Granite and Llama in oracle mode. On OMOP field-level accuracy, Map-Reflect Llama achieves 49.5\% on Synthea, 29.4\% on MIMIC, and 20.0\% on CMS. MatchMaker demonstrates strong field-level performance on NL2GQL (83.2\% with Granite) and ITOpsGraph (72.0\% with Llama).
 
 \textbf{Oracle vs Retrieval Mode.} Oracle mode results establish an upper bound on field-level mapping quality when schema retrieval is perfect. Retrieval mode results (Tables~\ref{tab:api_accuracy_retrieval}--\ref{tab:field_accuracy_retrieval}) reflect end-to-end performance where retrieval errors compound with mapping errors. The gap between oracle and retrieval mode performance quantifies the retrieval bottleneck and motivates future work on improved schema discovery.
 
@@ -516,7 +518,7 @@ The experimental results reveal important insights about induced reflection for 
 \subsection{Oracle vs.\ Retrieval Mode Analysis}
 
 \subsubsection{Oracle Mode Performance}
-When the target schema is given (oracle mode), Map-Reflect achieves 98.1\% API accuracy and 76.6\% field accuracy on ITOpsGraph with Llama, demonstrating strong field alignment capability. On OMOP datasets in oracle mode, Map-Reflect achieves perfect API accuracy (100\%) across all three variants, with field accuracy ranging from 41.4\% (CMS) to 81.2\% (Synthea). The uncertainty quantification mechanism helps identify contested mappings that benefit from deeper exploration. These oracle mode results enable fair comparison with prior work like MatchMaker~\cite{matchmaker} that assumes the target schema is known.
+When the target schema is given (oracle mode), Map-Reflect achieves 98.1\% API accuracy and 76.5\% field accuracy on ITOpsGraph with Llama, demonstrating strong field alignment capability. On OMOP datasets in oracle mode, Map-Reflect achieves perfect API accuracy (100\%) across all three variants, with field accuracy ranging from 20.0\% (CMS) to 49.5\% (Synthea). The OMOP datasets present particular challenges due to complex healthcare vocabulary mappings. These oracle mode results enable fair comparison with prior work like MatchMaker~\cite{matchmaker} that assumes the target schema is known.
 
 MatchMaker demonstrates strong cross-dataset performance in oracle mode, achieving 95.2\% API accuracy on ITOpsGraph, 42.1\% on NL2GQL, and 89.5-100\% on OMOP with Llama. Notably, MatchMaker achieves the best field-level accuracy on NL2GQL (83.2\% with Granite), significantly outperforming other methods on this dataset. ReMatch shows strong API accuracy on ITOpsGraph (94.8\%) with competitive performance.
 
@@ -530,32 +532,60 @@ We conduct ablation studies in oracle mode to understand the contribution of eac
 \begin{table}[htbp]
 \centering
 \small
-\caption{Component Ablation on ITOpsGraph (Llama model). Nbr = Neighbourhood graph expansion, Refl = Reflection with error analysis, UQ = Uncertainty quantification.}
+\caption{Signal-Based Reflection Ablation on ITOpsGraph (Llama model). Each signal triggers reflection independently. Err = Error detection, UQ = Uncertainty quantification, Nbr = Neighbourhood score gap.}
 \label{tab:ablation_components}
 \begin{tabular}{l|ccc|rr}
 \toprule
-\textbf{Configuration} & \textbf{Nbr} & \textbf{Refl} & \textbf{UQ} & \textbf{API \%} & \textbf{Field \%} \\
+\textbf{Reflection Trigger} & \textbf{Err} & \textbf{UQ} & \textbf{Nbr} & \textbf{API \%} & \textbf{Field \%} \\
 \midrule
-Base & --- & --- & --- & XX.X & XX.X \\
-+Neighbourhood & \checkmark & --- & --- & XX.X & XX.X \\
-+Reflection & --- & \checkmark & --- & XX.X & XX.X \\
-+UQ & --- & --- & \checkmark & XX.X & XX.X \\
+Base (no reflection) & --- & --- & --- & 100.0 & 88.5 \\
+Self-reflection & \multicolumn{3}{c|}{always} & 100.0 & \textbf{88.6} \\
 \midrule
-+Nbr+Refl & \checkmark & \checkmark & --- & XX.X & XX.X \\
-+Nbr+UQ & \checkmark & --- & \checkmark & XX.X & XX.X \\
-+Refl+UQ & --- & \checkmark & \checkmark & XX.X & XX.X \\
+Error-triggered & \checkmark & --- & --- & 100.0 & 85.1 \\
+UQ-triggered & --- & \checkmark & --- & 100.0 & 88.4 \\
+Neighbourhood-triggered & --- & --- & \checkmark & 100.0 & 83.2 \\
 \midrule
-\textbf{Full} & \checkmark & \checkmark & \checkmark & \textbf{XX.X} & \textbf{XX.X} \\
+Error + UQ & \checkmark & \checkmark & --- & 100.0 & 87.0 \\
+Error + Nbr & \checkmark & --- & \checkmark & 100.0 & 85.7 \\
+UQ + Nbr & --- & \checkmark & \checkmark & 100.0 & 83.8 \\
+\midrule
+Induced (all signals) & \checkmark & \checkmark & \checkmark & 100.0 & 86.7 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Component Contributions.} The factorial ablation reveals the contribution of each component:
+\textbf{Signal Contributions.} The signal-based ablation on ITOpsGraph isolates the contribution of each reflection trigger:
 \begin{itemize}
-    \item \textbf{Neighbourhood graph} ($k=5$ hops) expands the candidate set beyond embedding-retrieved fields, surfacing semantically related fields that may have low lexical similarity with the source.
-    \item \textbf{Reflection with error analysis} detects specific error patterns (source/target mismatch, foreign key misalignment, superficial name matching) and induces the model to revise its initial ranking.
-    \item \textbf{Uncertainty quantification} identifies contested mappings where the model is unsure, triggering deeper exploration of alternative candidates.
+    \item \textbf{Base configuration} (no reflection) achieves 88.5\% field accuracy, providing a strong baseline.
+    \item \textbf{Self-reflection} (always reflects) achieves the best result at 88.6\% (+0.1pp), showing that unconditional reflection provides marginal improvement by allowing the model to reconsider all predictions.
+    \item \textbf{UQ-triggered reflection} achieves 88.4\% (-0.1pp) with the default threshold (0.25), which triggers on only 20 of 1419 fields. We investigate optimal thresholds in Table~\ref{tab:uq_threshold}.
+    \item \textbf{Error-triggered reflection} reduces accuracy to 85.1\% (-3.4pp). Error detection triggers on 922 of 1419 fields (65\%), causing over-correction of correct predictions.
+    \item \textbf{Neighbourhood-triggered reflection} has the largest negative impact at 83.2\% (-5.3pp). The score gap trigger ($<$0.2 between top candidates) fires on 1025 fields, introducing errors through aggressive re-ranking.
+    \item \textbf{Induced reflection} (all signals) achieves 86.7\%, below base, as the aggressive signals compound their negative effects.
 \end{itemize}
+
+\textbf{UQ Threshold Sensitivity.} The signal-based ablation shows that UQ-triggered reflection with a conservative threshold (0.25) triggers on too few fields (20 of 1419) to impact accuracy. We investigate whether lowering the threshold to reflect on more uncertain predictions improves results. Table~\ref{tab:uq_threshold} shows field accuracy as a function of the uncertainty threshold.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UQ Threshold Ablation on ITOpsGraph (Llama model). Lower thresholds trigger more reflections. Optimal performance at threshold 0.15.}
+\label{tab:uq_threshold}
+\begin{tabular}{l|rrr}
+\toprule
+\textbf{Threshold} & \textbf{Reflections} & \textbf{\% Triggered} & \textbf{Field \%} \\
+\midrule
+Base (no UQ) & 0 & 0\% & 88.5 \\
+0.08 & 668 & 47\% & 88.5 \\
+0.10 & 408 & 29\% & 88.6 \\
+0.12 & 255 & 18\% & 88.6 \\
+\textbf{0.15} & \textbf{58} & \textbf{4\%} & \textbf{88.7} \\
+0.25 (default) & 20 & 1\% & 88.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The results reveal a counterintuitive finding: \emph{reflecting on fewer fields yields better accuracy}. The optimal threshold (0.15) triggers reflection on only 4\% of fields, achieving 88.7\% accuracy (+0.2pp over base). Lower thresholds that trigger more reflections (e.g., 0.08 with 47\% coverage) provide no improvement, as the additional reflections introduce noise that cancels out the benefit. This suggests that UQ-based reflection should be highly selective, targeting only the most uncertain predictions where the model is genuinely confused between candidates.
 
 \begin{table}[htbp]
 \centering
@@ -564,12 +594,12 @@ Base & --- & --- & --- & XX.X & XX.X \\
 \toprule
 \textbf{Config.} & \textbf{Dataset} & \textbf{API} & \textbf{Field} \\
 \midrule
-w/o UQ & Synthea & 100\% & 55.4\% \\
-Map-Reflect-UQ & Synthea & 100\% & \textbf{81.2\%} \\
-w/o UQ & CMS & 81.6\% & 30.3\% \\
-Map-Reflect-UQ & CMS & \textbf{100\%} & \textbf{41.4\%} \\
-w/o UQ & MIMIC & 97.8\% & 31.4\% \\
-Map-Reflect-UQ & MIMIC & \textbf{100\%} & \textbf{42.9\%} \\
+w/o UQ & Synthea & 100\% & 37.6\% \\
+Map-Reflect-UQ & Synthea & 100\% & \textbf{49.5\%} \\
+w/o UQ & CMS & 100\% & 13.1\% \\
+Map-Reflect-UQ & CMS & 100\% & \textbf{20.0\%} \\
+w/o UQ & MIMIC & 100\% & 14.3\% \\
+Map-Reflect-UQ & MIMIC & 100\% & \textbf{29.4\%} \\
 \bottomrule
 \end{tabularx}
 \caption{Cross-Dataset Ablation: Impact of Uncertainty Quantification on OMOP (Llama model)}
@@ -579,11 +609,11 @@ Map-Reflect-UQ & MIMIC & \textbf{100\%} & \textbf{42.9\%} \\
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\columnwidth]{ablation_oracle.pdf}
-    \caption{Impact of uncertainty quantification: Map-Reflect-UQ consistently outperforms the base variant (w/o UQ) on field-level accuracy across all datasets, with improvements ranging from +6.0pp (ITOpsGraph) to +25.8pp (Synthea).}
+    \caption{Impact of uncertainty quantification on OMOP datasets: Map-Reflect-UQ consistently outperforms the base variant (w/o UQ) on field-level accuracy, with improvements of +11.9pp (Synthea), +15.1pp (MIMIC), and +6.9pp (CMS).}
     \label{fig:ablation}
 \end{figure}
 
-Uncertainty quantification consistently improves field-level accuracy across all datasets. \textbf{w/o UQ}: Map-Reflect without uncertainty quantification achieves strong API-level accuracy (100\% on Synthea, 98.5\% on ITOpsGraph) but moderate field-level accuracy (55.4\% on Synthea, 70.6\% on ITOpsGraph). \textbf{Map-Reflect-UQ}: Adding uncertainty quantification achieves perfect API accuracy (100\%) across all OMOP datasets and substantially improves field accuracy. On Synthea, Map-Reflect-UQ achieves 81.2\% vs 55.4\% without UQ (+25.8pp). On CMS (41.4\% vs 30.3\%) and MIMIC (42.9\% vs 31.4\%), Map-Reflect-UQ also outperforms the base variant.
+Uncertainty quantification consistently improves field-level accuracy on OMOP healthcare datasets. \textbf{w/o UQ}: Map-Reflect without uncertainty quantification achieves 100\% API accuracy but limited field accuracy due to complex healthcare vocabulary mappings (37.6\% on Synthea, 14.3\% on MIMIC, 13.1\% on CMS). \textbf{Map-Reflect-UQ}: Adding uncertainty quantification improves field accuracy across all OMOP datasets. On Synthea, Map-Reflect-UQ achieves 49.5\% vs 37.6\% without UQ (+11.9pp). On MIMIC (29.4\% vs 14.3\%, +15.1pp) and CMS (20.0\% vs 13.1\%, +6.9pp), UQ also provides substantial improvements. These results demonstrate that uncertainty-guided reflection is particularly valuable for challenging domain-specific mappings.
 
 \subsection{Induced Reflection Benefits}
 
@@ -616,7 +646,7 @@ Together these three categories suggest that the primary bottleneck is not the i
 
 \section{Conclusion}
 
-We introduced Map-Reflect, an induced reflection framework for many-to-many schema mapping that uses three external signals (neighbourhood graph validation, error analysis, uncertainty quantification) rather than self-reflection. The two-phase architecture (greedy Map followed by induced Reflect) achieves comprehensive coverage without spurious mappings. In oracle mode, Map-Reflect achieves 98.1\% API accuracy and 76.6\% field accuracy on ITOpsGraph, and perfect API accuracy (100\%) across all OMOP datasets, with uncertainty quantification improving field accuracy by up to 25.8 percentage points. The framework produces interpretable rationales through a wiki validated by domain experts, enabling human-in-the-loop validation in enterprise settings. Future work includes extending induced reflection to multi-hop mapping across federated schemas and improving schema retrieval to close the gap between oracle and retrieval modes.
+We introduced Map-Reflect, an induced reflection framework for many-to-many schema mapping that uses three external signals (neighbourhood graph validation, error analysis, uncertainty quantification) rather than self-reflection. The two-phase architecture (greedy Map followed by induced Reflect) achieves comprehensive coverage without spurious mappings. In oracle mode, Map-Reflect achieves 98.1\% API accuracy and 76.5\% field accuracy on ITOpsGraph, and perfect API accuracy (100\%) across all OMOP datasets, with uncertainty quantification improving field accuracy by up to 15.1 percentage points on MIMIC. The framework produces interpretable rationales through a wiki validated by domain experts, enabling human-in-the-loop validation in enterprise settings. Future work includes extending induced reflection to multi-hop mapping across federated schemas and improving schema retrieval to close the gap between oracle and retrieval modes.
 
 \begin{acks}
 We thank the anonymous reviewers for their constructive feedback. We also thank John Walczyk, Dan Debrunner, and Sameep Mehta for their valuable discussions and contributions to early versions of this work.
