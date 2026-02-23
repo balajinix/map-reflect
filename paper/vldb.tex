@@ -193,6 +193,14 @@ Map-Reflect employs a two-phase architecture designed to address the many-to-man
 
 Unlike GPT-4--centric tool agents, Map-Reflect is a service-oriented architecture whose components are invoked but never trained. A user utterance $u$ is processed in five stages. First, a context extractor splits $u$ into source and destination phrases by prompting a hosted chat model. Second, each phrase is embedded and queried against a Chroma vector index, yielding neighbourhoods $\mathcal{S}_{\mathrm{src}}$ and $\mathcal{S}_{\mathrm{dst}}$. Third, a reasoning call evaluates every pair in $\mathcal{S}_{\mathrm{src}}\times\mathcal{S}_{\mathrm{dst}}$, assigns a confidence $\gamma_0$, and produces justifications---this is the greedy Map phase. Fourth, the Reflect phase collects three external signals and induces reflection to refine mappings. Finally, mappings with scores below threshold $\tau$ are pruned, yielding many-to-many coverage.
 
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.95\textwidth]{solution_diagram.png}
+    \caption{Induced reflection example on ITOpsGraph. The MAP phase produces incorrect initial predictions (mapping to source-schema fields). All three signals trigger: neighbourhood gap $<$0.2, source/target confusion error, and high uncertainty (0.285). The REFLECT phase corrects predictions to target-schema fields with improved confidence scores.}
+    \Description{Table showing Map-Reflect correction process: three source fields (Aggregate.name, Aggregate.type, Aggregate.value) with initial wrong predictions from source schema, three reflection signals triggering, and revised correct predictions from target schema.}
+    \label{fig:reflection_example}
+\end{figure*}
+
 \subsection{Induced Reflection Mechanism}
 
 %\deleted{The self-reflection mechanism is Map-Reflect's key innovation. After generating initial mappings, the system engages in iterative self-critique where the LLM analyzes initial mapping decisions, identifies issues or inconsistencies, and generates improved mappings based on self-analysis. This process involves multiple refinement rounds with each iteration incorporating lessons from previous attempts.}
@@ -225,14 +233,6 @@ Detected errors are passed to the reflection prompt with explicit instructions t
 Error signals from all three sources induce reflection to revise contested mappings.
 
 \textbf{Signal 3: Uncertainty Quantification.} We measure prediction entropy over candidate mappings. High uncertainty indicates the model is unsure about the correct target—often signaling that multiple targets are valid (many-to-many). High-uncertainty mappings trigger reflection to explore alternative mappings that the greedy phase missed.
-
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=0.95\textwidth]{solution_diagram.png}
-    \caption{Induced reflection example on ITOpsGraph. The MAP phase produces incorrect initial predictions (mapping to source-schema fields). All three signals trigger: neighbourhood gap $<$0.2, source/target confusion error, and high uncertainty (0.285). The REFLECT phase corrects predictions to target-schema fields with improved confidence scores.}
-    \Description{Table showing Map-Reflect correction process: three source fields (Aggregate.name, Aggregate.type, Aggregate.value) with initial wrong predictions from source schema, three reflection signals triggering, and revised correct predictions from target schema.}
-    \label{fig:reflection_example}
-\end{figure*}
 
 Let $\gamma_r(s,t)$ be the confidence after reflection round $r$. Given an adjustment $\Delta_r(s,t)$ constrained to $[-1,1]$, scores are updated as
 \[
