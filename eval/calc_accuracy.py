@@ -86,13 +86,6 @@ METHODS = {
             ('Llama', '^(?!dual_context).*llama'),
         ],
     },
-    'ReMatch': {
-        'dirs': ['rematch/results', 'results/oracle_mode/rematch_results'],
-        'models': [
-            ('Granite', 'granite'),
-            ('Llama', 'llama'),
-        ],
-    },
 }
 
 # =============================================================================
