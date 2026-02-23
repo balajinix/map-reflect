@@ -67,11 +67,16 @@ METHODS = {
         ],
     },
     'Map-Reflect': {
+        # Unified Map-Reflect: includes all outputs from map_reflect_runner.py
+        # (formerly split between Map-Reflect and UE-Reflect)
         'dirs': ['map_reflect/results', 'results/oracle_mode/map_reflect_results',
-                 'results/signal_ablation/base'],
+                 'results/signal_ablation/base',
+                 'results/reflection_fix_v4/uq_refl',
+                 'results/reflection_fix_v4/uq_refl_granite',
+                 'results/reflection_fix_v4/self_refl'],
         'models': [
-            ('Granite', '^(?!ue_reflect_).*granite'),
-            ('Llama', '^(?!ue_reflect_).*llama'),
+            ('Granite', '(ue_reflect_|mapreflect_|map_reflect_).*granite'),
+            ('Llama', '(ue_reflect_|mapreflect_|map_reflect_).*llama'),
         ],
     },
     'MatchMaker': {
@@ -86,15 +91,6 @@ METHODS = {
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
-        ],
-    },
-    'UE-Reflect': {
-        'dirs': ['map_reflect/results', 'results/oracle_mode/map_reflect_results',
-                 'results/reflection_fix_v4/uq_refl',
-                 'results/reflection_fix_v4/uq_refl_granite'],
-        'models': [
-            ('Granite', '(ue_reflect_|mapreflect_).*granite'),
-            ('Llama', '(ue_reflect_|mapreflect_).*llama'),
         ],
     },
 }
@@ -126,9 +122,8 @@ def load_results(file_path: Path) -> List[Dict]:
         results = data['results']
         # Check if this is map_reflect_runner format (has 'predictions' instead of 'predicted_mapping')
         if results and 'predictions' in results[0] and 'predicted_mapping' not in results[0]:
-            # UE-Reflect files use reflection; base Map-Reflect uses initial_ranking
-            is_ue_reflect = 'ue_reflect' in file_path.name.lower()
-            results = [convert_ue_reflect_result(r, use_reflection=is_ue_reflect) for r in results]
+            # Always prefer reflection when available (unified Map-Reflect)
+            results = [convert_ue_reflect_result(r, use_reflection=True) for r in results]
         return results
     return data if isinstance(data, list) else [data]
 

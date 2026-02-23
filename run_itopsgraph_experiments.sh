@@ -295,22 +295,26 @@ fi  # End PRIORITY 2
 
 if [[ -z "$PRIORITY_FILTER" || "$PRIORITY_FILTER" == "3" ]]; then
 
-log_section "PRIORITY 3: UE-Reflect (2 experiments)"
+log_section "PRIORITY 3: Map-Reflect with UQ (2 experiments)"
 
-# UE-Reflect - Llama and Mistral (Granite already done)
-run_experiment "ue_reflect_llama" "UE-Reflect with Llama" \
-    "cd '${BASE_DIR}/map_reflect' && python ue_reflect.py \
+# Map-Reflect with UQ - Llama and Mistral (using unified runner)
+run_experiment "mapreflect_uq_llama" "Map-Reflect+UQ with Llama" \
+    "python -m map_reflect.map_reflect_runner \
         --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
         --data-dir '$DATA_DIR' \
         --datasets 'ITOpsGraph' \
-        --models '$LLAMA'"
+        --models '$LLAMA' \
+        --use-uncertainty \
+        --use-uq-reflection"
 
-run_experiment "ue_reflect_mistral" "UE-Reflect with Mistral" \
-    "cd '${BASE_DIR}/map_reflect' && python ue_reflect.py \
+run_experiment "mapreflect_uq_mistral" "Map-Reflect+UQ with Mistral" \
+    "python -m map_reflect.map_reflect_runner \
         --property-lookup-file '$ITOPSGRAPH_LOOKUP' \
         --data-dir '$DATA_DIR' \
         --datasets 'ITOpsGraph' \
-        --models '$MISTRAL'"
+        --models '$MISTRAL' \
+        --use-uncertainty \
+        --use-uq-reflection"
 
 fi  # End PRIORITY 3
 

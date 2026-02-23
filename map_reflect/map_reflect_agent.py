@@ -1,4 +1,30 @@
-# schema_mapping/map_reflect_agent.py
+"""
+map_reflect_agent.py - LangGraph-based Map-Reflect Pipeline
+
+DEPRECATED: This module has been superseded by map_reflect_runner.py.
+Please use `python -m map_reflect.map_reflect_runner` instead.
+
+The runner provides:
+- Batch inference (10x speedup)
+- All reflection modes (self, error, UQ, neighborhood)
+- Unified CLI interface
+
+Example:
+    python -m map_reflect.map_reflect_runner \\
+        --datasets ITOpsGraph \\
+        --models watsonx/meta-llama/llama-3-3-70b-instruct \\
+        --property-lookup-file data/itopsgraph_api_lookup.json \\
+        --data-dir data \\
+        --use-uncertainty \\
+        --use-uq-reflection
+"""
+import warnings
+warnings.warn(
+    "map_reflect_agent.py is deprecated. Use map_reflect_runner.py instead.",
+    DeprecationWarning,
+    stacklevel=2
+)
+
 import json
 import networkx as nx
 
