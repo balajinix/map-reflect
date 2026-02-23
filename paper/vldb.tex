@@ -332,7 +332,7 @@ We evaluate all methods using two primary LLMs:
     \item \textbf{Granite-4} (\texttt{ibm/granite-4-h-small}): IBM's Granite 4 model, a smaller model for schema mapping tasks.
     \item \textbf{Llama-3.3-70B} (\texttt{meta-llama/llama-3-3-70b-instruct}): Meta's Llama 3.3 70B instruction-tuned model, providing stronger reasoning capabilities.
 \end{itemize}
-Both models are accessed via WatsonX. In the tables, ``Granite'' refers to Granite-4 and ``Llama'' refers to Llama-3.3-70B.
+Both models are accessed via WatsonX. In the tables, ``Granite'' refers to Granite-4 and ``Llama'' refers to Llama-3.3-70B. For fair comparison, all LLM-based baselines (ReAct, AnyTool, MatchMaker) use these same model versions; the original AnyTool paper~\cite{anytool} used GPT-4, but we re-implement with Llama-3.3-70B and Granite-4 to isolate methodological differences. MatchMaker additionally uses ColBERT-v2~\cite{colbert} (\texttt{colbert-ir/colbertv2.0}) for candidate retrieval.
 
 \subsection{Datasets}
 
