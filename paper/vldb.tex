@@ -553,6 +553,8 @@ Retrieval mode presents additional challenges: the system must first discover ap
 
 We conduct ablation studies in oracle mode to understand the contribution of each component in Map-Reflect: neighbourhood graph expansion, reflection with error analysis, and uncertainty quantification. Table~\ref{tab:ablation_components} presents a factorial ablation on ITOpsGraph, while Table~\ref{tab:ablation_uq} shows the impact of uncertainty quantification across all datasets.
 
+\textbf{Ablation evaluation set and metrics.} The ablation uses the ITOpsGraph coverage evaluation set (511 API-correct samples) rather than the full evaluation set. The ablation ``Field \%'' column reports \emph{recall} (correct predictions / ground truth count = 88.5\%), while the main results tables report \emph{F1} (harmonic mean of precision and recall = 76.6\%). The difference arises because F1 penalizes both missed mappings (low recall) and spurious predictions (low precision), whereas recall alone only measures coverage. The ablation uses recall to isolate how each signal affects the model's ability to find correct mappings; full F1 evaluation is reported in the main tables.
+
 \begin{table}[htbp]
 \centering
 \small
