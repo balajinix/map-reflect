@@ -33,11 +33,13 @@ data/slate_30m/
 */results/*.json
 */results/*.jsonl
 */results/archive/
-results/*.json
-results/*.jsonl
-results/archive/
+results/
 remote_results/
 results_archive/
+
+# Data directories (sync via rsync, not git)
+data/oracle_mode/
+data/retrieval_mode/
 
 # Test files
 test_*.py

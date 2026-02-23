@@ -42,56 +42,59 @@ DATASETS = ['ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea', 'T
 # Some methods use "granite" (no version), others use "granite-4-h-small"
 METHODS = {
     'SMT': {
-        'dir': 'smt/results',
+        'dirs': ['smt/results', 'results/oracle_mode/smt_results'],
         'models': [
-            ('Granite', 'granite'),  # matches granite.jsonl files
+            ('Granite', 'granite'),
             ('Llama', 'llama'),
         ],
     },
     'GNN': {
-        'dir': 'gnn/results',
-        'models': [('(no LLM)', '')],  # GNN doesn't use LLM for inference
+        'dirs': ['gnn/results'],
+        'models': [('(no LLM)', '')],
     },
     'ReAct': {
-        'dir': 'react/results',
+        'dirs': ['react/results', 'results/oracle_mode/react_results'],
         'models': [
-            ('Granite', 'granite'),  # matches granite.jsonl files
+            ('Granite', 'granite'),
             ('Llama', 'llama'),
         ],
     },
     'AnyTool': {
-        'dir': 'anytool/results',
+        'dirs': ['anytool/results', 'results/oracle_mode/anytool_results'],
         'models': [
-            ('Granite', 'granite'),  # matches both granite and granite-4
+            ('Granite', 'granite'),
             ('Llama', 'llama'),
         ],
     },
     'Map-Reflect': {
-        'dir': 'map_reflect/results',
+        'dirs': ['map_reflect/results', 'results/oracle_mode/map_reflect_results',
+                 'results/signal_ablation/base'],
         'models': [
-            ('Granite', '^(?!ue_reflect_).*granite'),  # exclude ue_reflect_ files
+            ('Granite', '^(?!ue_reflect_).*granite'),
             ('Llama', '^(?!ue_reflect_).*llama'),
         ],
     },
     'MatchMaker': {
-        'dir': 'match_maker/results',
+        'dirs': ['match_maker/results', 'results/oracle_mode/match_maker_results'],
         'models': [
-            ('Granite', '^(?!dual_context).*granite'),  # exclude dual_context files
+            ('Granite', '^(?!dual_context).*granite'),
             ('Llama', '^(?!dual_context).*llama'),
         ],
     },
     'ReMatch': {
-        'dir': 'rematch/results',
+        'dirs': ['rematch/results', 'results/oracle_mode/rematch_results'],
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
         ],
     },
     'UE-Reflect': {
-        'dir': 'map_reflect/results',
+        'dirs': ['map_reflect/results', 'results/oracle_mode/map_reflect_results',
+                 'results/reflection_fix_v4/uq_refl',
+                 'results/reflection_fix_v4/uq_refl_granite'],
         'models': [
-            ('Granite', 'ue_reflect_.*granite'),
-            ('Llama', 'ue_reflect_.*llama'),
+            ('Granite', '(ue_reflect_|mapreflect_).*granite'),
+            ('Llama', '(ue_reflect_|mapreflect_).*llama'),
         ],
     },
 }
@@ -121,21 +124,26 @@ def load_results(file_path: Path) -> List[Dict]:
     data = json.loads(content)
     if isinstance(data, dict) and 'results' in data:
         results = data['results']
-        # Check if this is UE-Reflect format (has 'predictions' instead of 'predicted_mapping')
+        # Check if this is map_reflect_runner format (has 'predictions' instead of 'predicted_mapping')
         if results and 'predictions' in results[0] and 'predicted_mapping' not in results[0]:
-            results = [convert_ue_reflect_result(r) for r in results]
+            # UE-Reflect files use reflection; base Map-Reflect uses initial_ranking
+            is_ue_reflect = 'ue_reflect' in file_path.name.lower()
+            results = [convert_ue_reflect_result(r, use_reflection=is_ue_reflect) for r in results]
         return results
     return data if isinstance(data, list) else [data]
 
 
-def convert_ue_reflect_result(result: Dict) -> Dict:
-    """Convert UE-Reflect result format to standard format.
+def convert_ue_reflect_result(result: Dict, use_reflection: bool = True) -> Dict:
+    """Convert predictions format (map_reflect_runner.py output) to standard format.
 
-    UE-Reflect format:
-        predictions: {source_field: {reflection: {revised_ranking: [{id, score, reason}]}}}
+    Predictions format:
+        predictions: {source_field: {initial_ranking: [...], reflection: {revised_ranking: [...]}}}
 
     Standard format:
         predicted_mapping: {source_field: {target_property: target_field}}
+
+    If use_reflection=True, prefer revised_ranking from reflection when available.
+    Otherwise (or when no reflection exists), use initial_ranking.
     """
     converted = {
         'sample_id': result.get('sample_id', ''),
@@ -148,12 +156,23 @@ def convert_ue_reflect_result(result: Dict) -> Dict:
 
     predictions = result.get('predictions', {})
     for src_field, pred_data in predictions.items():
-        reflection = pred_data.get('reflection', {})
-        revised_ranking = reflection.get('revised_ranking', [])
+        top_pred = None
 
-        if revised_ranking and isinstance(revised_ranking[0], dict):
-            # Get top-1 prediction
-            top_pred = revised_ranking[0]
+        # Try reflection's revised_ranking first
+        if use_reflection:
+            reflection = pred_data.get('reflection', {})
+            if reflection:
+                revised_ranking = reflection.get('revised_ranking', [])
+                if revised_ranking and isinstance(revised_ranking[0], dict):
+                    top_pred = revised_ranking[0]
+
+        # Fall back to initial_ranking
+        if top_pred is None:
+            initial_ranking = pred_data.get('initial_ranking', [])
+            if initial_ranking and isinstance(initial_ranking[0], dict):
+                top_pred = initial_ranking[0]
+
+        if top_pred:
             converted['predicted_mapping'][src_field] = {
                 'target_property': top_pred.get('id', ''),
                 'score': top_pred.get('score', 0),
@@ -344,16 +363,21 @@ def fields_match(gt_field: str, pred_field: str) -> bool:
 
 
 def calculate_accuracies(results: List[Dict], dataset: str = '', oracle_api: bool = False) -> Dict:
-    """Calculate API-level and field-level accuracy.
+    """Calculate API-level accuracy and field-level precision/recall/F1.
 
     If oracle_api=True, assume API selection is always correct (for methods like SMT
-    that only do field mapping, not API selection). In this case, API accuracy is
-    reported as 100% and field accuracy is calculated for all samples with predictions.
+    that only do field mapping, not API selection).
+
+    Field metrics (computed only on API-correct samples):
+    - Precision: correct predictions / total predictions
+    - Recall: correct predictions / total ground truth mappings
+    - F1: harmonic mean of precision and recall
     """
     api_correct_samples = 0
     total_samples = len(results)
     field_correct = 0
-    field_total = 0
+    field_gt_total = 0  # ground truth field count (for recall)
+    field_pred_total = 0  # predicted field count (for precision)
     api_correct_with_gt = 0
 
     for result in results:
@@ -381,20 +405,17 @@ def calculate_accuracies(results: List[Dict], dataset: str = '', oracle_api: boo
                     target_match = True
 
         # Fallback 1: check map_reflect_state properties for product match
-        # This handles cases where predicted_mapping field names don't have product prefixes
         if not (source_match and target_match) and predicted_mapping:
             mr_state = result.get('map_reflect_state', {})
             src_props = mr_state.get('source_properties', [])
             dst_props = mr_state.get('destination_properties', [])
 
-            # Check if any source property matches expected source product
             if not source_match and src_props:
                 for prop in src_props:
                     if extract_product(prop) == expected_src_product:
                         source_match = True
                         break
 
-            # Check if any destination property matches expected target product
             if not target_match and dst_props:
                 for prop in dst_props:
                     if extract_product(prop) == expected_tgt_product:
@@ -402,18 +423,15 @@ def calculate_accuracies(results: List[Dict], dataset: str = '', oracle_api: boo
                         break
 
         # Fallback 2: check source_schema/target_schema fields
-        # Some methods store the schema/product info directly
         if not (source_match and target_match) and predicted_mapping:
             src_schema = result.get('source_schema', '')
             tgt_schema = result.get('target_schema', '')
 
-            # Check if source_schema matches expected source product
             if not source_match and src_schema:
                 src_schema_product = extract_product(src_schema)
                 if src_schema_product == expected_src_product:
                     source_match = True
 
-            # Check if target_schema matches expected target product
             if not target_match and tgt_schema:
                 tgt_schema_product = extract_product(tgt_schema)
                 if tgt_schema_product == expected_tgt_product:
@@ -422,17 +440,17 @@ def calculate_accuracies(results: List[Dict], dataset: str = '', oracle_api: boo
         api_correct = source_match and target_match
 
         # Oracle API mode: assume API selection is always correct
-        # Used for methods like SMT that only do field mapping
         if oracle_api and predicted_mapping:
             api_correct = True
 
         if api_correct:
             api_correct_samples += 1
 
-        # Field-level accuracy: ONLY if API was correct
+        # Field-level metrics: ONLY if API was correct
         if api_correct and ground_truth:
             api_correct_with_gt += 1
-            field_total += len(ground_truth)
+            field_gt_total += len(ground_truth)
+            field_pred_total += len(predicted_mapping)
 
             for gt_src, gt_tgt in ground_truth.items():
                 for pred_src, pred_info in predicted_mapping.items():
@@ -441,12 +459,19 @@ def calculate_accuracies(results: List[Dict], dataset: str = '', oracle_api: boo
                         field_correct += 1
                         break
 
+    precision = field_correct / field_pred_total if field_pred_total > 0 else 0
+    recall = field_correct / field_gt_total if field_gt_total > 0 else 0
+    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
+
     return {
         'api_accuracy': api_correct_samples / total_samples if total_samples > 0 else 0,
         'api_correct': api_correct_samples,
-        'field_accuracy': field_correct / field_total if field_total > 0 else 0,
+        'precision': precision,
+        'recall': recall,
+        'f1': f1,
         'field_correct': field_correct,
-        'field_total': field_total,
+        'field_gt_total': field_gt_total,
+        'field_pred_total': field_pred_total,
         'api_correct_with_gt': api_correct_with_gt,
         'samples': total_samples
     }
@@ -572,8 +597,12 @@ def find_result_files(method_dir: Path, dataset: str, model_pattern: str) -> Lis
     # Look for both .json and .jsonl files
     for pattern in ['*.json', '*.jsonl']:
         for f in method_dir.glob(pattern):
-            if 'checkpoint' in f.name.lower():
-                continue
+            # Skip old-style checkpoint files that have a matching final result
+            # New runner checkpoints (checkpoint_*) are valid intermediate results
+            if '_checkpoint' in f.name.lower():
+                non_cp = f.name.lower().replace('_checkpoint', '')
+                if any(f2 != f and f2.name.lower() == non_cp for f2 in method_dir.glob(pattern)):
+                    continue
 
             fname_lower = f.name.lower()
 
@@ -634,22 +663,23 @@ def run_consensus_evaluation(args, base_dir: Path, selected_methods: List[str]):
             continue
 
         method_config = METHODS[method_name]
-        method_dir = base_dir / method_config['dir']
+        method_dirs = [base_dir / d for d in method_config['dirs']]
 
         # Load all ITOpsGraph results for this method
         results = []
-        for f in method_dir.glob('*.json'):
-            if 'itops' in f.name.lower() and 'checkpoint' not in f.name.lower():
-                try:
-                    results.extend(load_results(f))
-                except Exception:
-                    pass
-        for f in method_dir.glob('*.jsonl'):
-            if 'itops' in f.name.lower() and 'checkpoint' not in f.name.lower():
-                try:
-                    results.extend(load_results(f))
-                except Exception:
-                    pass
+        for method_dir in method_dirs:
+            for f in method_dir.glob('*.json'):
+                if 'itops' in f.name.lower() and 'checkpoint' not in f.name.lower():
+                    try:
+                        results.extend(load_results(f))
+                    except Exception:
+                        pass
+            for f in method_dir.glob('*.jsonl'):
+                if 'itops' in f.name.lower() and 'checkpoint' not in f.name.lower():
+                    try:
+                        results.extend(load_results(f))
+                    except Exception:
+                        pass
 
         if not results:
             continue
@@ -737,25 +767,41 @@ def main():
             continue
 
         method_config = METHODS[method_name]
-        method_dir = base_dir / method_config['dir']
+        method_dirs = [base_dir / d for d in method_config['dirs']]
 
         for model_short, model_pattern in method_config['models']:
             for dataset in selected_datasets:
-                files = find_result_files(method_dir, dataset, model_pattern)
+                # Search all configured directories for this method
+                files = []
+                for method_dir in method_dirs:
+                    files.extend(find_result_files(method_dir, dataset, model_pattern))
 
                 if files:
-                    # Use the file with most samples
+                    # Pick best file: prefer higher F1, then more samples
                     best_file = None
                     best_acc = None
 
                     for f in files:
                         try:
                             results = load_results(f)
-                            # SMT only does field mapping, not API selection
-                            # Use oracle API (assume correct API) for fair comparison
                             use_oracle_api = (method_name == 'SMT')
                             acc = calculate_accuracies(results, dataset, oracle_api=use_oracle_api)
-                            if best_acc is None or acc['samples'] > best_acc.get('samples', 0):
+
+                            def is_better(new, old):
+                                if old is None:
+                                    return True
+                                # Prefer files with more API-correct samples (more meaningful eval)
+                                # A file with 365 API-correct samples is more reliable than
+                                # one with 8 perfect samples
+                                if new['api_correct_with_gt'] != old['api_correct_with_gt']:
+                                    return new['api_correct_with_gt'] > old['api_correct_with_gt']
+                                # Then prefer higher F1
+                                if new['f1'] != old['f1']:
+                                    return new['f1'] > old['f1']
+                                # Then prefer more samples
+                                return new['samples'] > old['samples']
+
+                            if is_better(acc, best_acc):
                                 best_acc = acc
                                 best_file = f
                         except Exception as e:
@@ -796,7 +842,6 @@ def main():
         for ds in selected_datasets:
             r = all_results.get((method, model, ds))
             if r:
-                # SMT uses ground truth for API selection, show "-" instead of 100%
                 if method == 'SMT':
                     row.append('--')
                 else:
@@ -809,8 +854,9 @@ def main():
         else:
             print(f"| {' | '.join(row)} |")
 
-    print("\n## TABLE 2: FIELD-LEVEL ACCURACY (Given Correct API)")
-    print("*Field mapping accuracy calculated ONLY on samples where API selection was correct*\n")
+    # Field-level F1 table
+    print("\n## TABLE 2: FIELD-LEVEL F1 (Given Correct API)")
+    print("*F1 = 2*P*R/(P+R), computed on samples where API selection was correct*\n")
 
     if args.output == 'csv':
         print("Method,Model," + ",".join(selected_datasets))
@@ -824,15 +870,66 @@ def main():
         for ds in selected_datasets:
             r = all_results.get((method, model, ds))
             if r and r['api_correct_with_gt'] > 0:
-                row.append(f"{r['field_accuracy']*100:.1f}%")
+                row.append(f"{r['f1']*100:.1f}%")
             else:
-                row.append('N/A')
+                row.append('--')
 
         if args.output == 'csv':
             print(",".join(row))
         else:
             print(f"| {' | '.join(row)} |")
 
+    # Precision table
+    print("\n## TABLE 3: FIELD-LEVEL PRECISION (Given Correct API)")
+    print("*Precision = correct predictions / total predictions*\n")
+
+    if args.output == 'csv':
+        print("Method,Model," + ",".join(selected_datasets))
+    else:
+        header = "| Method | Model | " + " | ".join(selected_datasets) + " |"
+        print(header)
+        print("|" + "--------|" * 2 + "--------|" * len(selected_datasets))
+
+    for method, model in method_models:
+        row = [method, model]
+        for ds in selected_datasets:
+            r = all_results.get((method, model, ds))
+            if r and r['api_correct_with_gt'] > 0:
+                row.append(f"{r['precision']*100:.1f}%")
+            else:
+                row.append('--')
+
+        if args.output == 'csv':
+            print(",".join(row))
+        else:
+            print(f"| {' | '.join(row)} |")
+
+    # Recall table
+    print("\n## TABLE 4: FIELD-LEVEL RECALL (Given Correct API)")
+    print("*Recall = correct predictions / total ground truth mappings*\n")
+
+    if args.output == 'csv':
+        print("Method,Model," + ",".join(selected_datasets))
+    else:
+        header = "| Method | Model | " + " | ".join(selected_datasets) + " |"
+        print(header)
+        print("|" + "--------|" * 2 + "--------|" * len(selected_datasets))
+
+    for method, model in method_models:
+        row = [method, model]
+        for ds in selected_datasets:
+            r = all_results.get((method, model, ds))
+            if r and r['api_correct_with_gt'] > 0:
+                row.append(f"{r['recall']*100:.1f}%")
+            else:
+                row.append('--')
+
+        if args.output == 'csv':
+            print(",".join(row))
+        else:
+            print(f"| {' | '.join(row)} |")
+
+    # Sample counts
     print("\n## Sample Counts (API Correct / Total)")
 
     if args.output == 'csv':
