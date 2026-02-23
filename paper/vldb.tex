@@ -391,10 +391,13 @@ We evaluate schema mapping using two complementary metrics that capture both API
 \text{API Acc.} = \frac{|\{s : \text{pred}(s) = \text{exp}(s)\}|}{|\text{Samples}|}
 \end{equation}
 
-\textbf{Field-Level Accuracy (Given Correct API)} measures property mapping quality \emph{only on samples where API selection was correct}, isolating field mapping quality from API selection errors:
+\textbf{Field-Level F1 (Given Correct API)} measures property mapping quality \emph{only on samples where API selection was correct}, isolating field mapping quality from API selection errors. We compute precision, recall, and their harmonic mean:
 \begin{equation}
-\text{Field Acc.} = \frac{1}{|S_{\text{API-correct}}|} \sum_{s \in S_{\text{API-correct}}} \frac{|\text{Pred}(s) \cap \text{GT}(s)|}{|\text{GT}(s)|}
+P = \frac{|\text{Pred} \cap \text{GT}|}{|\text{Pred}|}, \quad
+R = \frac{|\text{Pred} \cap \text{GT}|}{|\text{GT}|}, \quad
+\text{F1} = \frac{2 \cdot P \cdot R}{P + R}
 \end{equation}
+where Pred and GT are the sets of predicted and ground-truth field mappings across all API-correct samples.
 
 For semantic assessment, we use cosine similarity with sentence-transformer embeddings (threshold 0.3) and an LLM-as-judge that scores mappings on equivalence and joinability (threshold 0.5). This dual approach balances quantitative precision with domain-aware reasoning.
 
@@ -661,7 +664,7 @@ Map-Reflect achieves 98.1\% API accuracy on ITOpsGraph but only 76.6\% field acc
 
 \textbf{Schema paradigm boundary failures (estimated \textasciitilde{}30\% of failures).} ITOpsGraph spans both GraphQL and Protocol Buffer schemas. Fields that are modelled as nested object types in GraphQL (e.g., \texttt{VirtualMachine.resourceAllocation.cpuMhz}) appear as flat repeated fields in Protocol Buffer definitions. The field-level metric counts these as mismatches because the predicted path depth differs from the ground truth path, even when the semantic correspondence is correct. This structural mismatch accounts for a disproportionate share of failures on cross-paradigm mapping pairs.
 
-\textbf{Many-to-many boundary disagreements (estimated \textasciitilde{}15\% of failures).} For types such as \texttt{Alert}, \texttt{Incident}, and \texttt{Event}---which the paper identifies as legitimate many-to-many mapping targets---SME-validated ground truth includes multiple valid target fields. When Map-Reflect's uncertainty quantification correctly identifies these as contested mappings and expands to include additional targets, the recall improves but precision can drop if one of the added targets is judged invalid by a different SME reviewer. The field accuracy metric as currently defined (Equation~2) measures recall only, so these cases reduce apparent accuracy even when the many-to-many output is largely correct. Adding a precision term would better characterise performance on this error class.
+\textbf{Many-to-many boundary disagreements (estimated \textasciitilde{}15\% of failures).} For types such as \texttt{Alert}, \texttt{Incident}, and \texttt{Event}---which the paper identifies as legitimate many-to-many mapping targets---SME-validated ground truth includes multiple valid target fields. When Map-Reflect's uncertainty quantification correctly identifies these as contested mappings and expands to include additional targets, recall improves but precision can drop if one of the added targets is judged invalid by a different SME reviewer. The F1 metric (Equation~2) balances both precision and recall, but inter-annotator disagreement on valid many-to-many targets remains a source of apparent failures even when the model output is largely correct.
 
 Together these three categories suggest that the primary bottleneck is not the induced reflection mechanism itself---which demonstrably improves field accuracy by 6.0 percentage points over the no-UQ baseline on ITOpsGraph---but rather sparse field documentation for uncommon schema elements and the structural impedance mismatch between GraphQL and Protocol Buffer representations. Enriching documentation coverage and adopting a path-normalisation step before field-level evaluation are the most direct remedies for closing the remaining gap.
 
