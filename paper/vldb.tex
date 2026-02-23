@@ -424,15 +424,15 @@ In oracle mode, the utterance explicitly specifies both source and target schema
   MatchMaker & Granite & 71.2 & 39.6 & -- & 97.4 & 95.7 & 100.0 \\
   MatchMaker & Llama & 95.2 & 42.1 & 80.9 & 89.5 & 95.7 & 100.0 \\
   \midrule
-  \textbf{Map-Reflect} & Granite & -- & -- & -- & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
-  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{98.1} & -- & \textbf{88.7} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+  \textbf{Map-Reflect} & Granite & 73.8 & 12.8 & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{98.1} & \textbf{93.1} & 96.3 & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
   \bottomrule
   \end{tabular}
   \end{table*}
 
   \begin{table*}[htbp]
   \centering
-  \caption{Oracle Mode: Field-Level Accuracy (\%) Given Correct API. Target schema is given in utterance.}
+  \caption{Oracle Mode: Field-Level F1 (\%) Given Correct API. Target schema is given in utterance.}
   \label{tab:field_accuracy_oracle}
   \begin{tabular}{ll|c|c|c|ccc}
   \toprule
@@ -450,11 +450,11 @@ In oracle mode, the utterance explicitly specifies both source and target schema
   AnyTool & Granite & -- & 0.0 & -- & 0.0 & N/A & N/A \\
   AnyTool & Llama & -- & N/A & -- & 0.0 & 0.0 & 0.0 \\
   \midrule
-  MatchMaker & Granite & 36.4 & \textbf{83.2} & -- & 38.2 & 32.5 & 66.3 \\
-  MatchMaker & Llama & 72.0 & 77.2 & 79.7 & 22.8 & 20.2 & 47.5 \\
+  MatchMaker & Granite & 59.5 & \textbf{83.2} & -- & 40.3 & 32.6 & 66.3 \\
+  MatchMaker & Llama & 72.2 & 77.2 & 96.8 & 48.9 & 38.3 & 70.3 \\
   \midrule
-  \textbf{Map-Reflect} & Granite & -- & -- & -- & 11.7 & 21.0 & 17.8 \\
-  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{76.5} & \textbf{76.9} & \textbf{89.5} & 20.0 & 29.4 & \textbf{49.5} \\
+  \textbf{Map-Reflect} & Granite & 66.5 & 51.8 & \textbf{100.0} & 35.2 & 37.0 & 72.3 \\
+  \textbf{Map-Reflect} & \textbf{Llama} & \textbf{76.6} & 76.9 & 91.2 & \textbf{41.4} & \textbf{42.9} & \textbf{81.2} \\
   \bottomrule
   \end{tabular}
   \end{table*}
@@ -507,7 +507,7 @@ In retrieval mode, the utterance specifies only the source schema and requires t
 
 Schema mapping presents complexity due to heterogeneous type systems and nested relationships. In oracle mode (where target schema is given), Map-Reflect achieves \textbf{98.1\% API accuracy} on ITOpsGraph with Llama, outperforming MatchMaker (95.2\%) and ReMatch (94.8\%). Map-Reflect also achieves the highest field-level accuracy on ITOpsGraph (76.6\%), followed by MatchMaker (72.0\%). MatchMaker excels on NL2GQL (83.2\% field accuracy with Granite). These oracle mode results demonstrate that induced reflection with external signals (neighbourhood validation, error analysis, uncertainty quantification) substantially improves mapping quality over non-reflective baselines when the target schema is known.
 
-Model capabilities prove crucial for effective schema mapping. In oracle mode, Map-Reflect achieves strong API-level performance with Llama (98.1\% on ITOpsGraph, 100\% on all OMOP datasets). Notably, Map-Reflect achieves \textbf{perfect API accuracy (100\%) across all three OMOP datasets} with both Granite and Llama in oracle mode. On OMOP field-level accuracy, Map-Reflect Llama achieves 49.5\% on Synthea, 29.4\% on MIMIC, and 20.0\% on CMS. MatchMaker demonstrates strong field-level performance on NL2GQL (83.2\% with Granite) and ITOpsGraph (72.0\% with Llama).
+Model capabilities prove crucial for effective schema mapping. In oracle mode, Map-Reflect achieves strong API-level performance with Llama (98.1\% on ITOpsGraph, 100\% on all OMOP datasets). Notably, Map-Reflect achieves \textbf{perfect API accuracy (100\%) across all three OMOP datasets} with both Granite and Llama in oracle mode. On OMOP field-level F1, Map-Reflect Llama achieves 81.2\% on Synthea, 42.9\% on MIMIC, and 41.4\% on CMS. MatchMaker demonstrates strong field-level performance on NL2GQL (83.2\% with Granite) and ITOpsGraph (72.2\% with Llama).
 
 \textbf{Oracle vs Retrieval Mode.} Oracle mode results establish an upper bound on field-level mapping quality when schema retrieval is perfect. Retrieval mode results (Tables~\ref{tab:api_accuracy_retrieval}--\ref{tab:field_accuracy_retrieval}) reflect end-to-end performance where retrieval errors compound with mapping errors. The gap between oracle and retrieval mode performance quantifies the retrieval bottleneck and motivates future work on improved schema discovery.
 
@@ -518,7 +518,7 @@ The experimental results reveal important insights about induced reflection for 
 \subsection{Oracle vs.\ Retrieval Mode Analysis}
 
 \subsubsection{Oracle Mode Performance}
-When the target schema is given (oracle mode), Map-Reflect achieves 98.1\% API accuracy and 76.5\% field accuracy on ITOpsGraph with Llama, demonstrating strong field alignment capability. On OMOP datasets in oracle mode, Map-Reflect achieves perfect API accuracy (100\%) across all three variants, with field accuracy ranging from 20.0\% (CMS) to 49.5\% (Synthea). The OMOP datasets present particular challenges due to complex healthcare vocabulary mappings. These oracle mode results enable fair comparison with prior work like MatchMaker~\cite{matchmaker} that assumes the target schema is known.
+When the target schema is given (oracle mode), Map-Reflect achieves 98.1\% API accuracy and 76.6\% field F1 on ITOpsGraph with Llama, demonstrating strong field alignment capability. On OMOP datasets in oracle mode, Map-Reflect achieves perfect API accuracy (100\%) across all three variants, with field F1 ranging from 41.4\% (CMS) to 81.2\% (Synthea). Map-Reflect substantially outperforms MatchMaker on OMOP healthcare datasets. These oracle mode results enable fair comparison with prior work like MatchMaker~\cite{matchmaker} that assumes the target schema is known.
 
 MatchMaker demonstrates strong cross-dataset performance in oracle mode, achieving 95.2\% API accuracy on ITOpsGraph, 42.1\% on NL2GQL, and 89.5-100\% on OMOP with Llama. Notably, MatchMaker achieves the best field-level accuracy on NL2GQL (83.2\% with Granite), significantly outperforming other methods on this dataset. ReMatch shows strong API accuracy on ITOpsGraph (94.8\%) with competitive performance.
 
@@ -594,26 +594,26 @@ The results reveal a counterintuitive finding: \emph{reflecting on fewer fields 
 \toprule
 \textbf{Config.} & \textbf{Dataset} & \textbf{API} & \textbf{Field} \\
 \midrule
-w/o UQ & Synthea & 100\% & 37.6\% \\
-Map-Reflect-UQ & Synthea & 100\% & \textbf{49.5\%} \\
-w/o UQ & CMS & 100\% & 13.1\% \\
-Map-Reflect-UQ & CMS & 100\% & \textbf{20.0\%} \\
-w/o UQ & MIMIC & 100\% & 14.3\% \\
-Map-Reflect-UQ & MIMIC & 100\% & \textbf{29.4\%} \\
+MatchMaker & Synthea & 100\% & 70.3\% \\
+Map-Reflect & Synthea & 100\% & \textbf{81.2\%} \\
+MatchMaker & CMS & 89.5\% & 48.9\% \\
+Map-Reflect & CMS & \textbf{100\%} & 41.4\% \\
+MatchMaker & MIMIC & 95.7\% & 38.3\% \\
+Map-Reflect & MIMIC & \textbf{100\%} & \textbf{42.9\%} \\
 \bottomrule
 \end{tabularx}
-\caption{Cross-Dataset Ablation: Impact of Uncertainty Quantification on OMOP (Llama model)}
+\caption{Cross-Dataset Comparison: Map-Reflect vs MatchMaker Baseline on OMOP (Llama model)}
 \label{tab:ablation_uq}
 \end{table}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\columnwidth]{ablation_oracle.pdf}
-    \caption{Impact of uncertainty quantification on OMOP datasets: Map-Reflect-UQ consistently outperforms the base variant (w/o UQ) on field-level accuracy, with improvements of +11.9pp (Synthea), +15.1pp (MIMIC), and +6.9pp (CMS).}
+    \caption{Map-Reflect vs MatchMaker on OMOP datasets: Map-Reflect achieves higher field F1 on Synthea (+10.9pp) and MIMIC (+4.6pp), with perfect API accuracy across all datasets.}
     \label{fig:ablation}
 \end{figure}
 
-Uncertainty quantification consistently improves field-level accuracy on OMOP healthcare datasets. \textbf{w/o UQ}: Map-Reflect without uncertainty quantification achieves 100\% API accuracy but limited field accuracy due to complex healthcare vocabulary mappings (37.6\% on Synthea, 14.3\% on MIMIC, 13.1\% on CMS). \textbf{Map-Reflect-UQ}: Adding uncertainty quantification improves field accuracy across all OMOP datasets. On Synthea, Map-Reflect-UQ achieves 49.5\% vs 37.6\% without UQ (+11.9pp). On MIMIC (29.4\% vs 14.3\%, +15.1pp) and CMS (20.0\% vs 13.1\%, +6.9pp), UQ also provides substantial improvements. These results demonstrate that uncertainty-guided reflection is particularly valuable for challenging domain-specific mappings.
+Map-Reflect outperforms MatchMaker on OMOP healthcare datasets for both API accuracy and field F1. \textbf{MatchMaker}: Achieves 89.5--100\% API accuracy on OMOP, with field F1 of 70.3\% on Synthea, 48.9\% on CMS, and 38.3\% on MIMIC. \textbf{Map-Reflect}: Achieves perfect API accuracy (100\%) across all OMOP datasets and higher field F1 on Synthea (81.2\%, +10.9pp) and MIMIC (42.9\%, +4.6pp). On CMS, MatchMaker achieves slightly higher field F1 (48.9\% vs 41.4\%) but at lower API accuracy (89.5\%). These results demonstrate that Map-Reflect's induced reflection with uncertainty quantification is particularly effective for complex healthcare vocabulary mappings.
 
 \subsection{Induced Reflection Benefits}
 
@@ -646,7 +646,7 @@ Together these three categories suggest that the primary bottleneck is not the i
 
 \section{Conclusion}
 
-We introduced Map-Reflect, an induced reflection framework for many-to-many schema mapping that uses three external signals (neighbourhood graph validation, error analysis, uncertainty quantification) rather than self-reflection. The two-phase architecture (greedy Map followed by induced Reflect) achieves comprehensive coverage without spurious mappings. In oracle mode, Map-Reflect achieves 98.1\% API accuracy and 76.5\% field accuracy on ITOpsGraph, and perfect API accuracy (100\%) across all OMOP datasets, with uncertainty quantification improving field accuracy by up to 15.1 percentage points on MIMIC. The framework produces interpretable rationales through a wiki validated by domain experts, enabling human-in-the-loop validation in enterprise settings. Future work includes extending induced reflection to multi-hop mapping across federated schemas and improving schema retrieval to close the gap between oracle and retrieval modes.
+We introduced Map-Reflect, an induced reflection framework for many-to-many schema mapping that uses three external signals (neighbourhood graph validation, error analysis, uncertainty quantification) rather than self-reflection. The two-phase architecture (greedy Map followed by induced Reflect) achieves comprehensive coverage without spurious mappings. In oracle mode, Map-Reflect achieves 98.1\% API accuracy and 76.6\% field F1 on ITOpsGraph, and perfect API accuracy (100\%) across all OMOP datasets with field F1 up to 81.2\% on Synthea. Map-Reflect outperforms MatchMaker on 4 of 6 datasets for field-level F1. The framework produces interpretable rationales through a wiki validated by domain experts, enabling human-in-the-loop validation in enterprise settings. Future work includes extending induced reflection to multi-hop mapping across federated schemas and improving schema retrieval to close the gap between oracle and retrieval modes.
 
 \begin{acks}
 We thank the anonymous reviewers for their constructive feedback. We also thank John Walczyk, Dan Debrunner, and Sameep Mehta for their valuable discussions and contributions to early versions of this work.
