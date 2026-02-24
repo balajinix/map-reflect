@@ -420,13 +420,12 @@ The dataset presents unique challenges: (i) many-to-many mappings where \texttt{
   \label{tab:field_accuracy_oracle}
   \end{table*}
 
-  \begin{table}[htbp]
+  \begin{table*}[htbp]
   \centering
-  \small
   \begin{tabular}{ll|l|c|ccc}
   \toprule
-  & & & \textbf{ITOps} & \multicolumn{3}{c}{\textbf{OMOP}} \\
-  \textbf{Method} & \textbf{Model} & \textbf{Metric} & \textbf{Graph} & CMS & MIMIC & Synth. \\
+  & & & \textbf{ITOpsGraph} & \multicolumn{3}{c}{\textbf{OMOP}} \\
+  \textbf{Method} & \textbf{Model} & \textbf{Metric} & & CMS & MIMIC & Synthea \\
   \midrule
   ReAct & Llama-3.3 & API & -- & -- & -- & -- \\
   & & Field & -- & -- & -- & -- \\
@@ -437,7 +436,7 @@ The dataset presents unique challenges: (i) many-to-many mappings where \texttt{
   \end{tabular}
   \caption{Retrieval Mode: API Accuracy and Field F1 (\%). Target schema must be discovered via retrieval.}
   \label{tab:retrieval_results}
-  \end{table}
+  \end{table*}
 
 \subsection{Evaluation Metrics}
 
