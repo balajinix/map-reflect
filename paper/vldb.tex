@@ -357,7 +357,7 @@ The dataset presents unique challenges: (i) many-to-many mappings where \texttt{
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\columnwidth]{chart_api_field_gap.png}
+    \includegraphics[height=10cm]{chart_api_field_gap.png}
     \caption{%
         API-level accuracy (filled dot) vs.\ field-level F1 (hollow dot)
         per method and dataset in oracle mode (Llama-3.3-70B).
@@ -420,37 +420,24 @@ The dataset presents unique challenges: (i) many-to-many mappings where \texttt{
   \label{tab:field_accuracy_oracle}
   \end{table*}
 
-  \begin{table*}[htbp]
+  \begin{table}[htbp]
   \centering
-  \begin{tabular}{ll|c|c|ccc}
+  \small
+  \begin{tabular}{ll|l|c|ccc}
   \toprule
-  & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
-  \textbf{Method} & \textbf{Model} & & & CMS & MIMIC & Synthea \\
+  & & & \textbf{ITOps} & \multicolumn{3}{c}{\textbf{OMOP}} \\
+  \textbf{Method} & \textbf{Model} & \textbf{Metric} & \textbf{Graph} & CMS & MIMIC & Synth. \\
   \midrule
-  ReAct & Llama-3.3 & -- & -- & -- & -- & -- \\
+  ReAct & Llama-3.3 & API & -- & -- & -- & -- \\
+  & & Field & -- & -- & -- & -- \\
   \midrule
-  \textbf{Map-Reflect} & \textbf{Llama-3.3} & \textbf{100.0} & -- & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+  \textbf{Map-Reflect} & \textbf{Llama-3.3} & API & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+  & & Field & \textbf{80.1} & 22.1 & 29.4 & 51.5 \\
   \bottomrule
   \end{tabular}
-  \caption{Retrieval Mode: API-Level (Product) Accuracy (\%). Target schema must be discovered via retrieval.}
-  \label{tab:api_accuracy_retrieval}
-  \end{table*}
-
-  \begin{table*}[htbp]
-  \centering
-  \begin{tabular}{ll|c|c|ccc}
-  \toprule
-  & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
-  \textbf{Method} & \textbf{Model} & & & CMS & MIMIC & Synthea \\
-  \midrule
-  ReAct & Llama-3.3 & -- & -- & -- & -- & -- \\
-  \midrule
-  \textbf{Map-Reflect} & \textbf{Llama-3.3} & \textbf{80.1} & -- & \textbf{22.1} & \textbf{29.4} & \textbf{51.5} \\
-  \bottomrule
-  \end{tabular}
-  \caption{Retrieval Mode: Field-Level Accuracy (\%) Given Correct API. Target schema must be discovered via retrieval.}
-  \label{tab:field_accuracy_retrieval}
-  \end{table*}
+  \caption{Retrieval Mode: API Accuracy and Field F1 (\%). Target schema must be discovered via retrieval.}
+  \label{tab:retrieval_results}
+  \end{table}
 
 \subsection{Evaluation Metrics}
 
@@ -527,7 +514,7 @@ In oracle mode, the utterance explicitly specifies both source and target schema
 
 \subsubsection{Retrieval Mode Results}
 
-In retrieval mode, the utterance specifies only the source schema and requires the system to discover appropriate target schemas through embedding-based retrieval (e.g., ``find types that can be mapped to X''). This mode is strictly harder as retrieval errors propagate to field-level mapping. See Tables~\ref{tab:api_accuracy_retrieval} and~\ref{tab:field_accuracy_retrieval}.
+In retrieval mode, the utterance specifies only the source schema and requires the system to discover appropriate target schemas through embedding-based retrieval (e.g., ``find types that can be mapped to X''). This mode is strictly harder as retrieval errors propagate to field-level mapping. See Table~\ref{tab:retrieval_results}.
 
 \subsubsection{Analysis}
 
@@ -571,7 +558,7 @@ MatchMaker demonstrates cross-dataset performance in oracle mode, achieving 95.2
 \subsubsection{Retrieval Mode Challenges}
 Retrieval mode presents additional challenges: the system must first discover appropriate target schemas from a catalogue using embedding-based retrieval. Errors in schema retrieval propagate to field-level mapping, making retrieval mode strictly harder than oracle mode in the general case.
 
-\textbf{Why 100\% API accuracy is achievable in retrieval mode.} The retrieval mode API accuracy of 100\% on ITOpsGraph and OMOP (Table~\ref{tab:api_accuracy_retrieval}) reflects dataset characteristics rather than trivial retrieval. ITOpsGraph contains only 12 products in the target pool; given a source utterance with strong embedding similarity, the retrieval top-$k$ reliably includes the correct target. OMOP datasets have a single fixed target schema (the OMOP CDM), so retrieval reduces to confirming the source schema against a known target. These constrained pools make API-level retrieval tractable even when field-level mapping remains challenging.
+\textbf{Why 100\% API accuracy is achievable in retrieval mode.} The retrieval mode API accuracy of 100\% on ITOpsGraph and OMOP (Table~\ref{tab:retrieval_results}) reflects dataset characteristics rather than trivial retrieval. ITOpsGraph contains only 12 products in the target pool; given a source utterance with strong embedding similarity, the retrieval top-$k$ reliably includes the correct target. OMOP datasets have a single fixed target schema (the OMOP CDM), so retrieval reduces to confirming the source schema against a known target. These constrained pools make API-level retrieval tractable even when field-level mapping remains challenging.
 
 \textbf{Field F1 inversion: retrieval (80.1\%) vs oracle (76.6\%).} Counter-intuitively, retrieval mode achieves higher field F1 than oracle mode on ITOpsGraph. This inversion arises from evaluation set differences: retrieval mode evaluates only samples where embedding-based retrieval successfully identifies the target schema, which biases toward schema pairs with stronger semantic alignment. Oracle mode includes all ground-truth pairs, including cross-paradigm mappings (GraphQL to Protocol Buffer) where structural mismatches cause field-level failures regardless of retrieval. The retrieval pre-filter thus selects ``easier'' pairs where field-level mapping is more tractable. This selection bias means retrieval mode field F1 is not directly comparable to oracle mode; future work should evaluate on identical sample sets to isolate retrieval effects.
 
