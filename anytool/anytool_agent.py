@@ -7,15 +7,29 @@ from langchain_core.tools import StructuredTool
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
-import os
-from ibm_watsonx_ai import Credentials
-from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
-from ibm_watsonx_ai.foundation_models.utils.enums import DecodingMethods
-from ibm_watsonx_ai.foundation_models import ModelInference
 import operator
 import re
 from dotenv import load_dotenv
 load_dotenv()
+
+# Try to import WatsonX SDK, fall back to litellm
+HAS_WATSONX_SDK = False
+try:
+    from ibm_watsonx_ai import Credentials
+    from ibm_watsonx_ai.metanames import GenTextParamsMetaNames as GenParams
+    from ibm_watsonx_ai.foundation_models.utils.enums import DecodingMethods
+    from ibm_watsonx_ai.foundation_models import ModelInference
+    HAS_WATSONX_SDK = True
+except ImportError:
+    print("ibm_watsonx_ai not available, using litellm")
+
+# Import litellm as fallback
+try:
+    import litellm
+    HAS_LITELLM = True
+except ImportError:
+    HAS_LITELLM = False
+    print("WARNING: litellm not available")
 
 # # Enable verbose logging for debugging
 # litellm.set_verbose = True
@@ -202,10 +216,17 @@ def format_prompt_for_model(messages, model_id):
 
 
 def call_llm(messages, model=None):
-    """Call IBM watsonx.ai using native SDK"""
+    """Call IBM watsonx.ai using native SDK or litellm fallback"""
     if model is None:
         print("################ Why is model None? ###############")
         model = MODEL
+
+    # Use litellm if WatsonX SDK not available
+    if not HAS_WATSONX_SDK:
+        if not HAS_LITELLM:
+            raise RuntimeError("Neither ibm_watsonx_ai nor litellm available")
+        return call_llm_litellm(messages, model)
+
     try:
         # Get credentials
         api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
@@ -249,6 +270,48 @@ def call_llm(messages, model=None):
             raise RuntimeError(f"Critical LLM error: {e}") from e
 
         print(f"LLM Error: {str(e)}")
+        return f"Error calling LLM: {str(e)}"
+
+
+def call_llm_litellm(messages, model):
+    """Call LLM using litellm (fallback when WatsonX SDK unavailable)"""
+    try:
+        # Ensure model has watsonx/ prefix for litellm
+        if not model.startswith("watsonx/"):
+            model = f"watsonx/{model}"
+
+        # Convert messages to litellm format
+        litellm_messages = []
+        for msg in messages:
+            if isinstance(msg, dict):
+                litellm_messages.append(msg)
+            elif hasattr(msg, 'role') and hasattr(msg, 'content'):
+                litellm_messages.append({"role": msg.role, "content": msg.content})
+            elif isinstance(msg, SystemMessage):
+                litellm_messages.append({"role": "system", "content": msg.content})
+            elif isinstance(msg, HumanMessage):
+                litellm_messages.append({"role": "user", "content": msg.content})
+            elif isinstance(msg, AIMessage):
+                litellm_messages.append({"role": "assistant", "content": msg.content})
+
+        response = litellm.completion(
+            model=model,
+            messages=litellm_messages,
+            temperature=0.1,
+            max_tokens=1000,
+        )
+
+        return response.choices[0].message.content
+
+    except Exception as e:
+        error_str = str(e).lower()
+        critical_patterns = ["authentication", "unauthorized", "api key", "project", "provider not", "exceeded limit"]
+
+        if any(p in error_str for p in critical_patterns):
+            print(f"CRITICAL LLM error - stopping execution: {e}")
+            raise RuntimeError(f"Critical LLM error: {e}") from e
+
+        print(f"LLM Error (litellm): {str(e)}")
         return f"Error calling LLM: {str(e)}"
 
 # Node functions

@@ -20,6 +20,7 @@ data/mappings_output/
 data/*_mappings/
 data/*_mappings_output*/
 data/gnn_results/
+data/*.graphql
 
 # Backups
 *.bk

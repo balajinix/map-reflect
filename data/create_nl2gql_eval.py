@@ -43,15 +43,33 @@ def extract_eval_samples(dataset_file: str, max_samples: int = None) -> List[Dic
                 # Get target table from first mapping
                 target_table = ''
                 ground_truth_mapping = {}
-                
+
                 for src_field, mappings in properties.items():
                     if mappings and isinstance(mappings, list):
                         target_table = mappings[0].get('mapTable', '')
                         target_field = mappings[0].get('mapProperty', '')
-                        
-                        # Build ground truth mapping
+
+                        # Build ground truth mapping with nl2gql_Table.field format
+                        # to match property lookup naming convention
+                        # Format: nl2gql_Singer_in_concert.concert_id (first letter capitalized, rest lowercase)
                         if target_field:
-                            ground_truth_mapping[src_field] = [target_field]
+                            # Convert source field: concert_stadium_id -> nl2gql_Concert.stadium_id
+                            # Strip table prefix from field name
+                            src_field_name = src_field
+                            if src_field.startswith(source_table + '_'):
+                                src_field_name = src_field[len(source_table) + 1:]
+                            # First letter capitalized: singer_in_concert -> Singer_in_concert
+                            src_table_fmt = source_table[0].upper() + source_table[1:] if source_table else ''
+                            src_key = f"nl2gql_{src_table_fmt}.{src_field_name}"
+
+                            # Convert target field: stadium_stadium_id -> nl2gql_Stadium.stadium_id
+                            tgt_field_name = target_field
+                            if target_field.startswith(target_table + '_'):
+                                tgt_field_name = target_field[len(target_table) + 1:]
+                            tgt_table_fmt = target_table[0].upper() + target_table[1:] if target_table else ''
+                            tgt_key = f"nl2gql_{tgt_table_fmt}.{tgt_field_name}"
+
+                            ground_truth_mapping[src_key] = [tgt_key]
                 
                 # Skip if missing required fields or duplicate utterance
                 if not utterance or not source_table or not target_table:
