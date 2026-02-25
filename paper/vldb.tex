@@ -151,6 +151,9 @@ Prior work on schema mapping focuses on one-to-one alignments or single-chain AP
 
 Recent advances in tool calling with large language models show promise for API-related tasks. ToolLLM~\cite{toolllm} introduced the ToolBench dataset with a BERT-based neural API retriever while AnyTool~\cite{anytool} leverages GPT-4~\cite{achiam2023gpt4}'s function calling with hierarchical API organization and self-reflection. However, these methods focus on sequencing a single chain of calls; they do not address systematic alignment of schema elements across products. Critically, self-reflection mechanisms lack external grounding---the model critiques its own output without validation against external signals, potentially reinforcing errors. Further, these approaches require expensive models like GPT-4, limiting practical applicability.
 
+\paragraph{The Preprocessing Cost Problem.}
+Existing approaches front-load schema complexity into expensive preprocessing pipelines. AnyTool~\cite{anytool} organizes APIs into a hierarchical tree that must be rebuilt when schemas change. Our prior work on API sequencing~\cite{mandal2024graph} constructs an API graph via GNN-based link prediction and trains an RL agent to navigate it---effective, but domain-specific and costly to maintain. Such preprocessing is brittle in enterprise environments where schemas evolve continuously. Map-Reflect takes the opposite position: retrieval is intentionally lightweight (hybrid dense and lexical search), and imperfect retrieval is tolerated because the Reflect phase corrects rank errors through externally grounded signals. New schemas require only parsing---no graph construction, no model training, no schema restructuring.
+
 Building a unified Data Access Layer requires mapping schemas across both APIs and databases. We address this challenge through experiments on API datasets (ITOpsGraph, NL2GQL, ToolBench) and database schemas (OMOP). Our ITOpsGraph benchmark provides schema mapping across heterogeneous enterprise APIs, featuring (i)~deeply nested type hierarchies, (ii)~domain-specific terminology where semantically equivalent concepts have different names, and (iii)~many-to-many mappings where a single source type correctly maps to multiple targets. Our wiki-based SME annotation provides continuous ground truth refinement.
 
 %\deleted{We introduce Map-Reflect, a self-reflection framework that addresses these limitations through multiple complementary approaches. Map-Reflect identifies functionally equivalent APIs within API collections, generating multiple mapping alternatives for task completion. The framework handles GraphQL schemas that are built on top of REST APIs and Databases. The self-reflection mechanism creates iterative refinement where the model critiques initial mapping decisions and generates improved mappings.}
@@ -159,7 +162,7 @@ We introduce Map-Reflect, an \emph{induced reflection} framework that addresses 
 
 %\deleted{Our contributions are multi-faceted: (1) Map-Reflect, a self-reflection framework for schema mapping that uses domain-aware clustering and multi-stage reflection, (2) a novel Graph Neural Network baseline specifically designed for GraphQL schema mapping that treats the problem as link prediction, (3) an agentic workflow system that also includes tool calling, (4) automated API documentation enhancement for schema retrieval, (5) and a wiki based human validation of the generated schema mapping.}
 
-Our contributions are: (1)~Map-Reflect, an induced reflection framework for many-to-many schema mapping using three external signals (neighbourhood graph, error analysis, uncertainty quantification), (2)~a two-phase architecture (greedy Map followed by induced Reflect) that addresses the coverage vs.\ precision tradeoff, (3)~a wiki-based human-in-the-loop system for continuous ground truth refinement with full provenance tracking, (4)~new enterprise benchmarks for API and database schema mapping (ITOpsGraph, NL2GQL, ToolBench, OMOP), and (5)~comprehensive evaluation demonstrating that induced reflection outperforms self-reflection and non-reflective baselines.
+Our contributions are: (1)~Map-Reflect, an induced reflection framework for many-to-many schema mapping using three external signals (neighbourhood graph, error analysis, uncertainty quantification), (2)~a two-phase architecture (greedy Map followed by induced Reflect) that addresses the coverage vs.\ precision tradeoff, (3)~a lightweight hybrid retrieval design (dense + BM25, merged by Reciprocal Rank Fusion) that requires no schema preprocessing, with reflection absorbing residual retrieval errors, (4)~a wiki-based human-in-the-loop system for continuous ground truth refinement with full provenance tracking, (5)~new enterprise benchmarks for API and database schema mapping (ITOpsGraph, NL2GQL, ToolBench, OMOP), and (6)~comprehensive evaluation demonstrating that induced reflection outperforms self-reflection and non-reflective baselines.
 
 
 \section{Related Work}
@@ -182,7 +185,7 @@ API retrieval and sequencing have been addressed by embedding-based retrievers~\
 
 \paragraph{LLM-Based Schema Mapping.} LSM~\cite{zhang2023schema} uses fine-tuned BERT encoders; Magneto~\cite{liu2024magneto} combines SLMs with LLM reranking; ReMatch~\cite{sheetrit2024rematch} and GraphRAGToolFusion~\cite{lumer2025graphragtoolfusion} add retrieval mechanisms. MatchMaker~\cite{matchmaker} introduced compositional LLM programs with zero-shot self-improvement, but lacks external grounding signals. For many-to-many matching, LLMatch~\cite{wang2025llmatch} uses Rollup/Drilldown abstraction, while SCHEMORA~\cite{gungor2025schemora} combines BM25 and FAISS retrieval. Both target relational schemas and require upfront schema restructuring.
 
-\paragraph{Positioning.} Map-Reflect differs by beginning with greedy one-to-one mapping and inducing revision through three externally grounded signals. This requires no elaborate preprocessing---new schemas need only parsing and optional RAG enrichment. Map-Reflect is schema-agnostic across REST APIs, GraphQL, and databases, using induced reflection (neighbourhood validation, error analysis, uncertainty quantification) rather than self-reflection.
+\paragraph{Positioning.} Map-Reflect differs by beginning with greedy one-to-one mapping and inducing revision through three externally grounded signals. Retrieval is intentionally lightweight---hybrid dense vector search and BM25 lexical matching merged by Reciprocal Rank Fusion~\cite{cormack2009reciprocal}---because the Reflect phase corrects residual rank errors rather than requiring retrieval to be perfect. This contrasts with AnyTool's hierarchical API tree~\cite{anytool} and graph-based sequencing approaches~\cite{mandal2024graph} that invest heavily in preprocessing to make retrieval tractable. New schemas require only parsing and optional RAG enrichment, with no graph construction, model training, or schema restructuring. Map-Reflect is schema-agnostic across REST APIs, GraphQL, and databases, using induced reflection (neighbourhood validation, error analysis, uncertainty quantification) rather than self-reflection.
 
 
 \section{Map-Reflect Framework}
@@ -231,7 +234,7 @@ Let $\gamma_r(s,t)$ be the confidence after reflection round $r$. Given an adjus
 \[
 \gamma_{r+1}(s,t)=\operatorname{clip}(\gamma_r(s,t)+\eta\,\Delta_r(s,t),0,1),
 \]
-where $\eta$ is a step size and $\Delta_r$ aggregates signals from neighbourhood validation, error analysis, and uncertainty quantification. The mapping set returned to the user is $\{(s,t,j,\gamma)\mid\gamma\ge\tau\}$ after convergence.
+where $\eta{=}0.1$ is a fixed step size. $\Delta_r(s,t)\in[-1,0]$ is negative when a signal fires and zero otherwise: the neighbourhood signal sets $\Delta_r = -(g - 0.2)$ when the neighbourhood consistency gap $g$ exceeds 0.2; the error signal sums per-error penalties (source/target mismatch $-0.40$, foreign-key misalignment $-0.30$, low confidence $-0.10$, ambiguous top-2 $-0.10$); and the UQ signal sets $\Delta_r = -(H - 0.5)$ when prediction entropy $H > 0.5$. The mapping set returned to the user is $\{(s,t,j,\gamma)\mid\gamma\ge\tau\}$ with pruning threshold $\tau{=}0.5$.
 
 \subsection{Two-Phase Architecture: Map and Reflect}
 
@@ -256,12 +259,12 @@ The neighbourhood graph is a property graph built from the unified schema to ena
 
 \textbf{Graph Construction.} For each property in the schema catalogue, we create a node with attributes: \texttt{id} (fully qualified name like \texttt{product\_Type.fieldName}), \texttt{type} (the parent type), \texttt{product} (source system), and \texttt{description} (enriched text). Edges connect properties that share structural relationships:
 \begin{itemize}
-    \item \textbf{Same-type edges}: Properties within the same type are connected with weight 0.3, capturing intra-type cohesion.
-    \item \textbf{Cross-type edges}: Properties across types within the same product are connected with weight 0.7, enabling discovery of related concepts.
+    \item \textbf{Same-type edges}: Properties within the same type are connected with weight 0.3, capturing intra-type cohesion (lower weight reflects weaker mapping signal within a single type).
+    \item \textbf{Cross-type edges}: Properties across types within the same product are connected with weight 0.7, enabling discovery of related concepts (higher weight reflects that cross-type structural links are stronger indicators of mapping candidates).
     \item \textbf{Semantic edges}: Properties with high embedding similarity ($>0.8$) across products are connected with weight based on similarity score.
 \end{itemize}
 
-\textbf{Candidate Expansion.} During the Map phase, after retrieving initial candidates via embedding similarity, we expand the candidate set using $k$-hop neighbourhood traversal (default $k=5$). For each retrieved candidate $c$, we add its neighbours $\mathcal{N}_k(c)$ to the candidate pool, weighted by path distance. This expansion serves two purposes: (1) it surfaces semantically related fields that may not have high lexical similarity with the source field, and (2) it provides structural context for the reflection phase to validate mapping assumptions.
+\textbf{Candidate Expansion.} During the Map phase, after retrieving initial candidates via embedding similarity, we expand the candidate set using $k$-hop neighbourhood traversal ($k{=}5$, chosen empirically on a held-out validation subset from ITOpsGraph; sensitivity analysis across $k\in\{2,3,5,7\}$ is left to future work). For each retrieved candidate $c$, we add its neighbours $\mathcal{N}_k(c)$ to the candidate pool, weighted by path distance. This expansion serves two purposes: (1) it surfaces semantically related fields that may not have high lexical similarity with the source field, and (2) it provides structural context for the reflection phase to validate mapping assumptions.
 
 Graph construction scales linearly with schema size; for ITOpsGraph (11,110 fields), construction takes approximately 80 seconds on commodity hardware. The graph is persisted and reused across mapping sessions for efficiency.
 
@@ -422,16 +425,16 @@ The dataset presents unique challenges: (i) many-to-many mappings where \texttt{
 
   \begin{table*}[htbp]
   \centering
-  \begin{tabular}{ll|l|c|ccc}
+  \begin{tabular}{ll|l|c|c|ccc}
   \toprule
-  & & & \textbf{ITOpsGraph} & \multicolumn{3}{c}{\textbf{OMOP}} \\
-  \textbf{Method} & \textbf{Model} & \textbf{Metric} & & CMS & MIMIC & Synthea \\
+  & & & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \multicolumn{3}{c}{\textbf{OMOP}} \\
+  \textbf{Method} & \textbf{Model} & \textbf{Metric} & & & CMS & MIMIC & Synthea \\
   \midrule
-  ReAct & Llama-3.3 & API & -- & -- & -- & -- \\
-  & & Field & -- & -- & -- & -- \\
+  ReAct & Llama-3.3 & API & -- & -- & -- & -- & -- \\
+  & & Field & -- & -- & -- & -- & -- \\
   \midrule
-  \textbf{Map-Reflect} & \textbf{Llama-3.3} & API & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
-  & & Field & \textbf{80.1} & 22.1 & 29.4 & 51.5 \\
+  \textbf{Map-Reflect} & \textbf{Llama-3.3} & API & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+  & & Field & \textbf{80.1} & \textbf{73.5} & 22.1 & 29.4 & 51.5 \\
   \bottomrule
   \end{tabular}
   \caption{Retrieval Mode: API Accuracy and Field F1 (\%). Target schema must be discovered via retrieval.}
@@ -517,7 +520,7 @@ In retrieval mode, the utterance specifies only the source schema and requires t
 
 \subsubsection{Analysis}
 
-Schema mapping presents complexity due to heterogeneous type systems and nested relationships. In oracle mode (where target schema is given), Map-Reflect achieves \textbf{98.1\% API accuracy} on ITOpsGraph with Llama-3.3-70B, outperforming MatchMaker (95.2\%). Map-Reflect also achieves the highest field-level F1 on ITOpsGraph (76.6\%), followed by MatchMaker (72.2\%). MatchMaker excels on NL2GQL (83.2\% field F1 with Granite-4). ReAct achieves 87.6\% API accuracy on ITOpsGraph but 0\% field F1, indicating it identifies correct schema pairs but fails to produce field-level mappings. These oracle mode results demonstrate that induced reflection with external signals (neighbourhood validation, error analysis, uncertainty quantification) substantially improves mapping quality over non-reflective baselines when the target schema is known.
+Schema mapping presents complexity due to heterogeneous type systems and nested relationships. In oracle mode (where target schema is given), Map-Reflect achieves \textbf{98.1\% API accuracy} on ITOpsGraph with Llama-3.3-70B, outperforming MatchMaker (95.2\%). Map-Reflect also achieves the highest field-level F1 on ITOpsGraph (76.6\%), followed by MatchMaker (72.2\%). MatchMaker achieves the best NL2GQL field F1 among oracle-mode configurations (83.2\% with Granite-4), though Map-Reflect with Llama-3.3-70B is competitive (76.9\% field F1, 93.1\% API accuracy). In retrieval mode, Map-Reflect achieves 100\% API accuracy on NL2GQL with 73.5\% field F1, demonstrating that hybrid retrieval successfully discovers the correct schema without target specification. ReAct achieves 87.6\% API accuracy on ITOpsGraph but 0\% field F1, indicating it identifies correct schema pairs but fails to produce field-level mappings. These results demonstrate that induced reflection improves mapping quality over non-reflective baselines, with NL2GQL performance competitive with MatchMaker despite Map-Reflect's more general-purpose design.
 
 Model capabilities prove crucial for effective schema mapping (Figure~\ref{fig:method_sensitivity}). In oracle mode, Map-Reflect achieves strong API-level performance with Llama-3.3-70B (98.1\% on ITOpsGraph, 100\% on all OMOP datasets). Notably, Map-Reflect achieves \textbf{perfect API accuracy (100\%) across all three OMOP datasets} with both Granite-4 and Llama-3.3-70B in oracle mode. On OMOP field-level F1, Map-Reflect outperforms MatchMaker across all three datasets: 100.0\% vs 70.3\% on Synthea (+29.7pp), 56.3\% vs 38.3\% on MIMIC (+18.0pp), and 76.6\% vs 48.9\% on CMS (+27.7pp). Map-Reflect also achieves \textbf{perfect API accuracy (100\%)} on all OMOP datasets, compared to MatchMaker's 89.5--100\%. This demonstrates that Map-Reflect excels at both schema-level alignment and field-level mapping for OMOP's complex healthcare ontology.
 
@@ -563,9 +566,9 @@ Retrieval mode presents additional challenges: the system must first discover ap
 
 \subsection{Ablation Study}
 
-We conduct ablation studies in oracle mode to understand the contribution of each component in Map-Reflect: neighbourhood graph expansion, reflection with error analysis, and uncertainty quantification. Table~\ref{tab:ablation_components} presents a factorial ablation on ITOpsGraph, while Table~\ref{tab:ablation_uq} shows the impact of uncertainty quantification across all datasets.
+We conduct ablation studies in oracle mode to understand the contribution of each component in Map-Reflect: neighbourhood graph expansion, reflection with error analysis, and uncertainty quantification. Table~\ref{tab:ablation_components} presents a factorial ablation on ITOpsGraph, while Table~\ref{tab:ablation_omop} shows the impact of uncertainty quantification across OMOP datasets.
 
-\textbf{Ablation evaluation set and metrics.} The ablation uses the ITOpsGraph oracle evaluation set (521 samples) where all samples achieve API-correct status. The ablation ``Field \%'' column reports \emph{recall} (correct predictions / ground truth count), while the main results tables report \emph{F1} (harmonic mean of precision and recall). We use recall for the ablation because the reflection signals primarily affect which mappings are \emph{revised}, not how many are \emph{generated}---all configurations produce the same number of predictions (one per source field), so precision remains constant at 86.2\% across all rows. The F1 variation thus tracks recall variation exactly: base recall 88.5\% yields F1 = 76.6\%; optimal UQ-triggered recall 88.7\% yields F1 = 76.8\%. We report recall in the ablation tables for clarity, as it directly reflects each signal's effect on mapping correctness without redundant precision columns.
+\textbf{Ablation evaluation set and metrics.} The ablation uses the ITOpsGraph oracle evaluation set (521 samples) where all samples achieve API-correct status. The ablation ``Field \%'' column reports \emph{recall} (correct predictions / ground truth count), while the main results tables report \emph{F1} (harmonic mean of precision and recall). We use recall for the ablation because the reflection signals primarily affect which mappings are \emph{revised}, not how many are \emph{generated}---all configurations produce the same number of predictions (one per source field), so precision remains constant at 86.2\% across all rows. The F1 variation thus tracks recall variation exactly: base recall 88.0\% yields F1 = 76.6\%; optimal UQ-triggered recall 88.2\% yields F1 = 76.8\%. We report recall in the ablation tables for clarity, as it directly reflects each signal's effect on mapping correctness without redundant precision columns.
 
 \begin{table}[htbp]
 \centering
@@ -598,10 +601,10 @@ Error-triggered & \checkmark & --- & --- & 100.0 & 73.1 \\
     \item \textbf{Self-reflection} (always reflects) reduces accuracy to 82.6\% (-5.4pp), demonstrating that unconditional reflection introduces errors by revising correct predictions unnecessarily.
     \item \textbf{Neighbourhood-triggered reflection} reduces accuracy to 80.9\% (-7.1pp). The score gap trigger fires broadly, causing over-correction through aggressive re-ranking.
     \item \textbf{Error-triggered reflection} has the largest negative impact at 73.1\% (-14.9pp). Error detection's high false-positive rate causes over-correction of correct predictions.
-    \item \textbf{Induced reflection} (all signals) achieves 73.3\%, the lowest accuracy, as the aggressive error and neighbourhood signals dominate and compound their negative effects.
+    \item \textbf{Induced reflection} (all signals) achieves 73.3\%, near the bottom, as the aggressive error and neighbourhood signals dominate. Error-triggered alone is marginally worse (73.1\%), confirming that the error detector's high false-positive rate is the primary driver of degradation.
 \end{itemize}
 
-\textbf{Key Finding: Selective Reflection Outperforms Aggressive Reflection.} The ablation reveals a crucial insight: \emph{less reflection is more}. UQ-triggered reflection, which selectively targets genuinely uncertain predictions, is the only signal that improves accuracy (+0.2pp). All other signals---error detection (-14.9pp), neighbourhood validation (-7.1pp), and self-reflection (-5.4pp)---fire too broadly and introduce errors by over-correcting predictions that were already correct. Combining multiple aggressive signals compounds the damage: induced reflection with all signals achieves only 73.3\%, the worst result. This suggests that the primary value of induced reflection lies not in comprehensive signal fusion, but in \emph{highly selective targeting} of low-confidence predictions where UQ identifies genuine model confusion.
+\textbf{Key Finding: Selective Reflection Outperforms Aggressive Reflection.} The ablation reveals a crucial insight: \emph{less reflection is more}. UQ-triggered reflection, which selectively targets genuinely uncertain predictions, is the only signal that improves accuracy (+0.2pp). All other signals---error detection (-14.9pp), neighbourhood validation (-7.1pp), and self-reflection (-5.4pp)---fire too broadly and introduce errors by over-correcting predictions that were already correct. Combining multiple aggressive signals compounds the damage: induced reflection with all signals achieves only 73.3\%, near the worst---marginally above error-triggered alone (73.1\%)---confirming that the error detector dominates and adding further signals provides no recovery. This suggests that the primary value of induced reflection lies not in comprehensive signal fusion, but in \emph{highly selective targeting} of low-confidence predictions where UQ identifies genuine model confusion.
 
 \textbf{OMOP Ablation: Dataset-Dependent UQ Benefit.} Table~\ref{tab:ablation_omop} shows the effect of UQ-triggered reflection on OMOP datasets. Unlike ITOpsGraph where UQ provides consistent benefit, OMOP results are mixed: MIMIC shows modest improvement (+1.7pp), CMS shows no change, and Synthea shows a decrease (-7.9pp). This dataset dependence suggests that UQ benefit correlates with prediction uncertainty distribution---datasets where initial predictions are already high-confidence (Synthea: 89.1\% base) gain less from reflection, while datasets with moderate uncertainty (MIMIC) benefit more.
 
@@ -704,5 +707,3 @@ We thank the anonymous reviewers for their constructive feedback. We also thank 
 
 \end{document}
 \endinput
-
-

@@ -36,6 +36,14 @@ Usage:
 
 import os
 import sys
+
+# SQLite workaround for older systems (must be before chromadb import)
+try:
+    import pysqlite3
+    sys.modules['sqlite3'] = pysqlite3
+except ImportError:
+    pass
+
 import json
 import time
 import re
@@ -82,6 +90,15 @@ except ImportError:
     HAS_CHROMADB = False
     logger.warning("chromadb not installed, retrieval-based candidate selection unavailable")
 
+# Try to import BM25 for hybrid retrieval
+try:
+    from rank_bm25 import BM25Okapi
+    import pickle
+    HAS_BM25 = True
+except ImportError:
+    HAS_BM25 = False
+    logger.warning("rank_bm25 not installed. Install with: pip install rank-bm25")
+
 
 # =============================================================================
 # Configuration
@@ -98,6 +115,10 @@ class MapReflectConfig:
     top_k: int = 10
     neighbor_k: int = 5  # 1-hop neighbors (0 to disable)
 
+    # OMOP-specific enhancements (auto-enabled for OMOP_* datasets)
+    omop_table_filtering: bool = True  # Filter candidates to utterance-specified table
+    omop_type_hints: bool = True       # Add field type hints to prompts
+
     # Reflection signals (independent flags for clean ablation)
     use_self_reflection: bool = False      # Always reflect (no external signal)
     use_error_reflection: bool = False     # Reflect on detected errors
@@ -108,6 +129,9 @@ class MapReflectConfig:
     use_uncertainty: bool = False  # Enable UQ calculation
     use_reflection: bool = False   # Legacy: enables error + uq reflection
     n_uncertainty_samples: int = 3
+
+    # UQ method: "sampling" (consistency), "heuristic" (response-based), "perplexity" (logprobs)
+    uq_method: str = "sampling"
 
     # UQ threshold configuration
     uq_threshold: Optional[float] = None  # Fixed threshold (overrides adaptive)
@@ -206,6 +230,193 @@ def safe_parse_json_array(s: str) -> Optional[List]:
             return None
 
 
+# =============================================================================
+# OMOP-Specific Enhancements
+# =============================================================================
+
+def is_omop_dataset(dataset: str) -> bool:
+    """Check if dataset is an OMOP dataset."""
+    return dataset.upper().startswith("OMOP")
+
+
+def parse_omop_utterance(utterance: str) -> Dict[str, str]:
+    """
+    Parse OMOP-style utterance to extract source/target table information.
+
+    Examples:
+        "map omop person with cms beneficiarysummary"
+            → {"source_schema": "omop", "source_table": "person",
+               "target_schema": "cms", "target_table": "beneficiarysummary"}
+        "map omop visit occurrence with cms inpatientclaims"
+            → {"source_schema": "omop", "source_table": "visit_occurrence",
+               "target_schema": "cms", "target_table": "inpatientclaims"}
+    """
+    utterance_lower = utterance.lower().strip()
+    result = {
+        "source_schema": "",
+        "source_table": "",
+        "target_schema": "",
+        "target_table": ""
+    }
+
+    # Pattern: "map {source_schema} {source_table} with {target_schema} {target_table}"
+    # Handle multi-word table names like "visit occurrence"
+    pattern = r"map\s+(\w+)\s+(.+?)\s+with\s+(\w+)\s+(.+?)$"
+    match = re.match(pattern, utterance_lower)
+
+    if match:
+        result["source_schema"] = match.group(1)
+        result["source_table"] = match.group(2).replace(" ", "_")
+        result["target_schema"] = match.group(3)
+        result["target_table"] = match.group(4).replace(" ", "_")
+
+    return result
+
+
+def extract_omop_target_table(sample: Dict) -> Dict[str, str]:
+    """
+    Extract target table info from OMOP sample's target_schema field.
+
+    For OMOP datasets, the target_schema is often a dict like:
+        {"id": "cms_BENEFICIARYSUMMARY", "name": "CMS BENEFICIARYSUMMARY", ...}
+
+    Returns dict with target_schema (e.g., "cms") and target_table (e.g., "BENEFICIARYSUMMARY")
+    """
+    result = {"target_schema": "", "target_table": ""}
+
+    target_schema = sample.get("target_schema") or sample.get("expected_target") or ""
+
+    if isinstance(target_schema, dict):
+        # Extract from dict format
+        target_id = target_schema.get("id", target_schema.get("name", ""))
+    else:
+        target_id = str(target_schema)
+
+    if target_id and "_" in target_id:
+        # Parse "cms_BENEFICIARYSUMMARY" → schema="cms", table="BENEFICIARYSUMMARY"
+        parts = target_id.split("_", 1)
+        result["target_schema"] = parts[0].lower()
+        result["target_table"] = parts[1] if len(parts) > 1 else ""
+
+    return result
+
+
+def get_omop_field_type_hints(field_name: str) -> List[str]:
+    """
+    Get type hints for OMOP field to help with semantic matching.
+
+    Returns hints about what kind of field this is (ID, date, code, etc.)
+    """
+    field_lower = field_name.lower()
+    # Extract just the field name (after the last dot)
+    field_only = field_lower.split(".")[-1] if "." in field_lower else field_lower
+    hints = []
+
+    # ID fields - check field_only for more precise matching
+    if field_only.endswith("_id") or field_only == "id":
+        # Check specific ID types in order of specificity
+        if field_only.startswith("provider") or field_only == "provider_id":
+            hints.append("This is a PROVIDER identifier field")
+            hints.append("Should map to provider fields like: *_npi, provider_id, attending_*")
+            hints.append("WARNING: Do NOT map to patient IDs (desynpuf_id, bene_id)")
+        elif field_only.startswith("location") or field_only == "location_id":
+            hints.append("This is a LOCATION identifier field")
+            hints.append("Should map to geographic fields like: *_county_cd, *_state_cd, sp_state_code, zip_code")
+            hints.append("WARNING: Do NOT map to provider NPIs or patient IDs")
+        elif field_only.startswith("care_site") or field_only == "care_site_id":
+            hints.append("This is a CARE SITE identifier field")
+            hints.append("Should map to facility/site fields like: facility_id, hospital_id")
+        elif "concept" in field_only:
+            hints.append("This is a CONCEPT code field (categorical/coded value)")
+            hints.append("Should map to code fields like: *_cd, *_code, *_type")
+        elif field_only.startswith("person") or field_only in ["person_id", "person_source_value"]:
+            hints.append("This is a PERSON/PATIENT identifier field")
+            hints.append("Should map to patient ID fields like: desynpuf_id, bene_id, subject_id, patient_id")
+            hints.append("WARNING: Do NOT map to provider NPIs (*_npi)")
+        elif field_only.startswith("visit") or "occurrence" in field_only:
+            hints.append("This is a VISIT/ENCOUNTER identifier field")
+            hints.append("Should map to claim/encounter IDs like: clm_id, hadm_id, encounter_id")
+        else:
+            hints.append("This is an identifier field")
+
+    # Date fields
+    if any(kw in field_lower for kw in ["date", "datetime", "time", "_dt"]):
+        hints.append("This is a DATE/TIME field")
+        if "birth" in field_lower:
+            hints.append("Birth date - should map to: bene_birth_dt, dob, date_of_birth")
+        elif "death" in field_lower:
+            hints.append("Death date - should map to: bene_death_dt, dod, date_of_death")
+        elif "start" in field_lower or "admission" in field_lower:
+            hints.append("Start/admission date - should map to: clm_admsn_dt, admittime, start_date")
+        elif "end" in field_lower or "discharge" in field_lower:
+            hints.append("End/discharge date - should map to: nch_bene_dschrg_dt, dischtime, end_date")
+        else:
+            hints.append("Should map to date fields like: *_dt, *_date, *time")
+
+    # Demographics
+    if any(kw in field_lower for kw in ["gender", "sex"]):
+        hints.append("This is a GENDER/SEX field")
+        hints.append("Should map to: bene_sex_ident_cd, gender, sex")
+
+    if any(kw in field_lower for kw in ["race", "ethnicity"]):
+        hints.append("This is a RACE/ETHNICITY field")
+        hints.append("Should map to: bene_race_cd, race, ethnicity")
+
+    if any(kw in field_lower for kw in ["year_of_birth", "month_of_birth", "day_of_birth"]):
+        hints.append("This is a BIRTH DATE component")
+        hints.append("Should map to birth date fields: bene_birth_dt, dob")
+
+    return hints
+
+
+def filter_candidates_by_omop_table(
+    candidates: List[Dict],
+    target_table: str,
+    target_schema: str
+) -> List[Dict]:
+    """
+    Filter candidates to only include those from the specified OMOP target table.
+
+    Args:
+        candidates: List of candidate dicts with 'id' field
+        target_table: Target table name (e.g., "beneficiarysummary")
+        target_schema: Target schema name (e.g., "cms")
+
+    Returns:
+        Filtered list of candidates from the target table only
+    """
+    if not target_table:
+        return candidates
+
+    # Build expected prefix: cms_BENEFICIARYSUMMARY, mimic_PATIENTS, synthea_patients
+    target_prefix = f"{target_schema}_{target_table}".lower()
+
+    filtered = []
+    for cand in candidates:
+        cand_id = cand.get("id", cand.get("name", "")).lower()
+        # Check if candidate is from the target table
+        if cand_id.startswith(target_prefix + ".") or cand_id.startswith(target_prefix + "_"):
+            filtered.append(cand)
+
+    if filtered:
+        logger.debug(f"OMOP table filter: {len(candidates)} → {len(filtered)} candidates (table={target_table})")
+        return filtered
+    else:
+        # If no matches found, try a looser match (table name anywhere in ID)
+        for cand in candidates:
+            cand_id = cand.get("id", cand.get("name", "")).lower()
+            if target_table.lower() in cand_id:
+                filtered.append(cand)
+
+        if filtered:
+            logger.debug(f"OMOP table filter (loose): {len(candidates)} → {len(filtered)} candidates")
+            return filtered
+
+    # Fallback: return original candidates with warning
+    logger.warning(f"OMOP table filter found no matches for table '{target_table}', returning all candidates")
+    return candidates
+
+
 def safe_parse_json_object(s: str) -> Optional[Dict]:
     """Parse JSON object from text."""
     if not s:
@@ -219,6 +430,29 @@ def safe_parse_json_object(s: str) -> Optional[Dict]:
             return json.loads(txt.replace("'", '"'))
         except Exception:
             return None
+
+
+def normalize_field_id(field_id: str) -> str:
+    """Normalize a field ID by stripping formatting prefixes.
+
+    Removes:
+    - Leading rank prefixes like "1. ", "2. "
+    - Leading "id: " prefix
+    - Extra whitespace
+
+    Args:
+        field_id: The field ID string to normalize
+
+    Returns:
+        Normalized field ID
+    """
+    if not field_id or not isinstance(field_id, str):
+        return field_id
+    # Strip leading rank prefix (e.g., "1. ", "2. ", "10. ")
+    s = re.sub(r'^\d+\.\s*', '', field_id)
+    # Strip leading "id: " prefix (case-insensitive)
+    s = re.sub(r'^id:\s*', '', s, flags=re.IGNORECASE)
+    return s.strip()
 
 
 def build_property_graph(lookup: Dict[str, Any]) -> nx.Graph:
@@ -505,10 +739,655 @@ class WatsonXBatchClient:
             "size": len(self._cache)
         }
 
+    def generate_with_logprobs(self, prompt: str, max_tokens: int = None) -> Dict[str, Any]:
+        """
+        Generate response with token-level log probabilities.
+
+        Args:
+            prompt: The prompt to generate from
+            max_tokens: Override max tokens (useful for short verification prompts)
+
+        Returns:
+            Dict with 'text', 'generated_tokens' (list of {text, logprob}), and 'perplexity'
+        """
+        api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
+        project_id = os.getenv("WATSONX_PROJECT_ID")
+        url = os.getenv("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
+
+        if not api_key or not project_id:
+            raise RuntimeError("WATSONX_API_KEY and WATSONX_PROJECT_ID required")
+
+        _, stop_sequences = format_prompt_for_model([], self.model_id)
+
+        # Create model with return_options for logprobs
+        try:
+            from ibm_watsonx_ai.foundation_models.schema import TextGenParameters, ReturnOptionProperties
+        except ImportError:
+            # Fallback for older SDK versions
+            logger.warning("ReturnOptionProperties not available, using heuristic UQ instead")
+            return {
+                "text": self.generate_single(prompt),
+                "generated_tokens": [],
+                "perplexity": None
+            }
+
+        params = {
+            GenParams.MAX_NEW_TOKENS: max_tokens if max_tokens else self.config.max_tokens,
+            GenParams.TEMPERATURE: self.config.temperature,
+            GenParams.DECODING_METHOD: DecodingMethods.GREEDY,
+            GenParams.STOP_SEQUENCES: stop_sequences,
+            GenParams.RETURN_OPTIONS: {
+                "input_text": True,  # Required when requesting logprobs
+                "generated_tokens": True,
+                "token_logprobs": True,
+                "top_n_tokens": 5,  # Get top alternatives for P(True) analysis (WatsonX max is 5)
+            }
+        }
+
+        model = ModelInference(
+            model_id=self.model_id,
+            params=params,
+            credentials=Credentials(url=url, api_key=api_key),
+            project_id=project_id
+        )
+
+        try:
+            result = model.generate(prompt=prompt)
+
+            # Extract text and tokens
+            if isinstance(result, dict):
+                text = result.get("results", [{}])[0].get("generated_text", "")
+                tokens = result.get("results", [{}])[0].get("generated_tokens", [])
+            else:
+                # Handle list response
+                text = result[0].get("generated_text", "") if result else ""
+                tokens = result[0].get("generated_tokens", []) if result else []
+
+            # Calculate perplexity from logprobs
+            logprobs = []
+            for token in tokens:
+                if isinstance(token, dict) and "logprob" in token:
+                    lp = token.get("logprob")
+                    if lp is not None and lp != 0:  # Skip padding tokens
+                        logprobs.append(lp)
+
+            if logprobs:
+                # Perplexity = exp(-mean(log_probs))
+                perplexity = float(np.exp(-np.mean(logprobs)))
+            else:
+                perplexity = None
+
+            return {
+                "text": text,
+                "generated_tokens": tokens,
+                "perplexity": perplexity,
+                "logprobs": logprobs
+            }
+
+        except Exception as e:
+            logger.error(f"Generate with logprobs failed: {e}")
+            return {
+                "text": self.generate_single(prompt),
+                "generated_tokens": [],
+                "perplexity": None
+            }
+
 
 # =============================================================================
 # Uncertainty Estimation
 # =============================================================================
+
+class PerplexityEstimator:
+    """Perplexity-based uncertainty estimation using token logprobs."""
+
+    def __init__(self, client: 'WatsonXBatchClient'):
+        self.client = client
+
+    def estimate_uncertainty(self, prompt: str, response: str = None) -> Dict[str, Any]:
+        """
+        Estimate uncertainty using perplexity from token log probabilities.
+
+        Lower perplexity = more confident model = lower uncertainty
+        Higher perplexity = less confident model = higher uncertainty
+
+        Returns:
+            Dict with uncertainty score (0-1) and perplexity value
+        """
+        result = self.client.generate_with_logprobs(prompt)
+        perplexity = result.get("perplexity")
+
+        if perplexity is None:
+            # Fallback to heuristic if logprobs unavailable
+            return {
+                "uncertainty": 0.5,
+                "perplexity": None,
+                "method": "fallback_heuristic"
+            }
+
+        # Convert perplexity to uncertainty score (0-1)
+        # Perplexity ranges: ~1 (very confident) to potentially >100 (very uncertain)
+        # Using sigmoid-like mapping: uncertainty = 1 - 1/(1 + log(perplexity)/k)
+        # where k controls the sensitivity
+        k = 3.0  # Tunable parameter
+
+        if perplexity <= 1.0:
+            uncertainty = 0.0
+        else:
+            # log(perplexity) maps perplexity to a more linear scale
+            log_ppl = np.log(perplexity)
+            uncertainty = log_ppl / (log_ppl + k)
+            uncertainty = float(min(1.0, max(0.0, uncertainty)))
+
+        return {
+            "uncertainty": uncertainty,
+            "perplexity": float(perplexity),
+            "method": "perplexity",
+            "n_tokens": len(result.get("logprobs", []))
+        }
+
+
+class PTrueEstimator:
+    """
+    P(True) uncertainty estimation.
+
+    Asks the model to verify its own prediction:
+    "Is this mapping correct? (A) True (B) False"
+
+    Uses the probability of "True" vs "False" to estimate confidence.
+    Based on: https://github.com/IINemo/lm-polygraph
+    """
+
+    def __init__(self, client: 'WatsonXBatchClient'):
+        self.client = client
+
+    def _build_verification_prompt(
+        self,
+        source_field: str,
+        source_desc: str,
+        predicted_target: str,
+        target_desc: str,
+        source_product: str,
+        target_product: str
+    ) -> str:
+        """Build a verification prompt for P(True) estimation."""
+        # Use a direct, constrained format that forces immediate answer
+        prompt = f"""Schema mapping verification task.
+
+Source: {source_field} ({source_desc}) from {source_product}
+Target: {predicted_target} ({target_desc}) from {target_product}
+
+Is this a correct semantic mapping? Answer only A or B.
+A = Yes, correct mapping
+B = No, incorrect mapping
+
+Answer:"""
+        return prompt
+
+    def estimate_uncertainty(
+        self,
+        source_field: str,
+        source_desc: str,
+        predicted_target: str,
+        target_desc: str,
+        source_product: str = "",
+        target_product: str = ""
+    ) -> Dict[str, Any]:
+        """
+        Estimate uncertainty using P(True) method.
+
+        Asks the model if its prediction is correct and uses the
+        probability of "True" as confidence.
+
+        Returns:
+            Dict with uncertainty score (0-1) and p_true value
+        """
+        verification_prompt = self._build_verification_prompt(
+            source_field, source_desc,
+            predicted_target, target_desc,
+            source_product, target_product
+        )
+
+        # Format for the model
+        messages = [{"role": "user", "content": verification_prompt}]
+        formatted_prompt, _ = format_prompt_for_model(messages, self.client.model_id)
+
+        # Get response with logprobs (limited tokens for faster verification)
+        result = self.client.generate_with_logprobs(formatted_prompt, max_tokens=5)
+
+        generated_text = result.get("text", "").strip().upper()
+        generated_tokens = result.get("generated_tokens", [])
+
+        # Try to extract P(A) vs P(B) from first token logprobs
+        p_true = None  # P(A) = correct
+        p_false = None  # P(B) = incorrect
+
+        # Look through first few tokens for A/B answers
+        for token_idx, token_data in enumerate(generated_tokens[:3]):
+            if not isinstance(token_data, dict):
+                continue
+
+            top_tokens = token_data.get("top_tokens", [])
+
+            # Search top_tokens for A or B
+            for tok in top_tokens:
+                tok_text = tok.get("text", "").strip().upper()
+                # Remove special characters like Ġ (space marker)
+                tok_text_clean = tok_text.replace("Ġ", "").replace("▁", "").strip()
+                tok_logprob = tok.get("logprob", -10)
+
+                if tok_text_clean in ["A", "(A)", "A)", "YES", "CORRECT", "TRUE"]:
+                    if p_true is None or np.exp(tok_logprob) > p_true:
+                        p_true = np.exp(tok_logprob)
+                elif tok_text_clean in ["B", "(B)", "B)", "NO", "INCORRECT", "FALSE"]:
+                    if p_false is None or np.exp(tok_logprob) > p_false:
+                        p_false = np.exp(tok_logprob)
+
+            # If we found both, we can compute relative probabilities
+            if p_true is not None and p_false is not None:
+                break
+
+        # If we found probabilities, normalize them
+        if p_true is not None and p_false is not None:
+            total = p_true + p_false
+            if total > 0:
+                p_true = p_true / total
+                p_false = p_false / total
+
+        # Fallback: parse the text response if no logprobs found
+        if p_true is None and p_false is None:
+            # Check the actual generated text
+            if "A" in generated_text[:10] or "YES" in generated_text[:10] or "CORRECT" in generated_text[:20]:
+                p_true = 0.7  # Default confidence for text-based
+            elif "B" in generated_text[:10] or "NO" in generated_text[:10] or "INCORRECT" in generated_text[:20]:
+                p_false = 0.7
+            else:
+                # Couldn't determine - return moderate uncertainty
+                return {
+                    "uncertainty": 0.5,
+                    "p_true": None,
+                    "p_false": None,
+                    "response": generated_text[:100],
+                    "method": "p_true_fallback"
+                }
+
+        # Calculate uncertainty from P(True)
+        if p_true is not None:
+            # High P(True) = low uncertainty
+            uncertainty = 1.0 - p_true
+        elif p_false is not None:
+            # High P(False) = high uncertainty (model thinks it's wrong)
+            uncertainty = p_false
+        else:
+            uncertainty = 0.5
+
+        uncertainty = float(min(1.0, max(0.0, uncertainty)))
+
+        return {
+            "uncertainty": uncertainty,
+            "p_true": float(p_true) if p_true is not None else None,
+            "p_false": float(p_false) if p_false is not None else None,
+            "response": generated_text,
+            "method": "p_true"
+        }
+
+    def estimate_uncertainty_batch(
+        self,
+        fields: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """
+        Batch estimate uncertainty for multiple fields.
+
+        Uses batch generation for massive speedup (10-50x faster).
+
+        Args:
+            fields: List of dicts with keys:
+                - source_field, source_desc, predicted_target, target_desc
+                - source_product, target_product
+
+        Returns:
+            List of uncertainty info dicts in same order
+        """
+        if not fields:
+            return []
+
+        # Build all verification prompts
+        prompts = []
+        for field in fields:
+            prompt = self._build_verification_prompt(
+                source_field=field.get("source_field", ""),
+                source_desc=field.get("source_desc", ""),
+                predicted_target=field.get("predicted_target", ""),
+                target_desc=field.get("target_desc", ""),
+                source_product=field.get("source_product", ""),
+                target_product=field.get("target_product", "")
+            )
+            # Format for model
+            messages = [{"role": "user", "content": prompt}]
+            formatted_prompt, _ = format_prompt_for_model(messages, self.client.model_id)
+            prompts.append(formatted_prompt)
+
+        # Batch generate all responses
+        logger.info(f"P(True) batch: verifying {len(prompts)} predictions...")
+        responses = self.client.generate_batch(prompts, use_cache=True, batch_size=50)
+
+        # Parse all responses
+        results = []
+        for response in responses:
+            response_text = (response or "").strip().upper()
+
+            # Parse A/B answer
+            if "A" in response_text[:10] or "YES" in response_text[:15] or "CORRECT" in response_text[:20]:
+                p_true = 0.9  # High confidence for clear A answer
+                uncertainty = 0.1
+            elif "B" in response_text[:10] or "NO" in response_text[:15] or "INCORRECT" in response_text[:20]:
+                p_true = 0.1  # Low confidence - model says it's wrong
+                uncertainty = 0.9
+            else:
+                p_true = 0.5  # Unclear response
+                uncertainty = 0.5
+
+            results.append({
+                "uncertainty": uncertainty,
+                "p_true": p_true,
+                "p_false": 1.0 - p_true,
+                "response": response_text[:50],
+                "method": "p_true_batch"
+            })
+
+        return results
+
+
+class SemanticEntropyEstimator:
+    """
+    Semantic Entropy uncertainty estimation for schema mapping.
+
+    For discrete field mappings, we simplify semantic entropy to exact-match clustering:
+    1. Generate N samples of rankings (with temperature > 0)
+    2. Extract top-1 prediction from each sample
+    3. Cluster by exact match (field IDs are discrete)
+    4. Compute entropy: H = -Σ p(class) * log(p(class))
+
+    High entropy = samples disagree = uncertain
+    Low entropy = samples agree = confident
+
+    Based on: Kuhn et al. "Semantic Uncertainty" (2023)
+    """
+
+    def __init__(self, client: 'WatsonXBatchClient', n_samples: int = 5):
+        self.client = client
+        self.n_samples = n_samples
+        self.sampling_temperature = 0.7  # Higher temp for diverse samples
+
+    def estimate_uncertainty(
+        self,
+        ranking_prompt: str,
+        initial_response: str,
+        candidates: List[Dict]
+    ) -> Dict[str, Any]:
+        """
+        Estimate uncertainty using semantic entropy over multiple samples.
+
+        Args:
+            ranking_prompt: The ranking prompt to sample from
+            initial_response: The initial (greedy) response
+            candidates: List of candidate fields
+
+        Returns:
+            Dict with uncertainty score (0-1), entropy, and sample distribution
+        """
+        # Parse initial response to get first prediction
+        initial_ranking = safe_parse_json_array(initial_response)
+        if not initial_ranking or not isinstance(initial_ranking[0], dict):
+            return {
+                "uncertainty": 0.8,
+                "entropy": None,
+                "method": "semantic_entropy_parse_error"
+            }
+
+        initial_top1 = initial_ranking[0].get("id", "")
+
+        # Collect predictions: start with the initial one
+        predictions = [initial_top1]
+
+        # Generate additional samples with temperature
+        for _ in range(self.n_samples - 1):
+            try:
+                sample_response = self._generate_sample(ranking_prompt)
+                sample_ranking = safe_parse_json_array(sample_response)
+
+                if sample_ranking and isinstance(sample_ranking[0], dict):
+                    sample_top1 = sample_ranking[0].get("id", "")
+                    predictions.append(sample_top1)
+                else:
+                    # Parse failed - add empty prediction
+                    predictions.append("")
+
+            except Exception as e:
+                logger.warning(f"Semantic entropy sampling error: {e}")
+                predictions.append("")
+
+        # Cluster by exact match and compute distribution
+        cluster_counts = {}
+        for pred in predictions:
+            cluster_counts[pred] = cluster_counts.get(pred, 0) + 1
+
+        # Compute entropy
+        n_total = len(predictions)
+        entropy = 0.0
+        distribution = {}
+
+        for pred, count in cluster_counts.items():
+            p = count / n_total
+            distribution[pred] = p
+            if p > 0:
+                entropy -= p * np.log(p)
+
+        # Normalize entropy to [0, 1] range
+        # Max entropy = log(n_samples) when all samples are different
+        max_entropy = np.log(self.n_samples)
+        normalized_entropy = entropy / max_entropy if max_entropy > 0 else 0.0
+
+        # Convert to uncertainty score
+        # High entropy = high uncertainty
+        uncertainty = float(min(1.0, max(0.0, normalized_entropy)))
+
+        # Calculate agreement rate (what fraction agree with top prediction)
+        top_pred = max(cluster_counts.keys(), key=lambda k: cluster_counts[k])
+        agreement_rate = cluster_counts[top_pred] / n_total
+
+        return {
+            "uncertainty": uncertainty,
+            "entropy": float(entropy),
+            "normalized_entropy": float(normalized_entropy),
+            "agreement_rate": float(agreement_rate),
+            "n_samples": self.n_samples,
+            "n_unique": len(cluster_counts),
+            "top_prediction": top_pred,
+            "distribution": distribution,
+            "method": "semantic_entropy"
+        }
+
+    def _generate_sample(self, prompt: str) -> str:
+        """Generate a single sample with temperature for diversity."""
+        # Use the client's model but with higher temperature
+        api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
+        project_id = os.getenv("WATSONX_PROJECT_ID")
+        url = os.getenv("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
+
+        if not api_key or not project_id:
+            raise RuntimeError("WATSONX_API_KEY and WATSONX_PROJECT_ID required")
+
+        _, stop_sequences = format_prompt_for_model([], self.client.model_id)
+
+        # Create model with sampling temperature
+        model = ModelInference(
+            model_id=self.client.model_id,
+            params={
+                GenParams.MAX_NEW_TOKENS: self.client.config.max_tokens,
+                GenParams.TEMPERATURE: self.sampling_temperature,
+                GenParams.DECODING_METHOD: DecodingMethods.SAMPLE,  # Use sampling, not greedy
+                GenParams.STOP_SEQUENCES: stop_sequences,
+                GenParams.TOP_K: 50,
+                GenParams.TOP_P: 0.95,
+            },
+            credentials=Credentials(url=url, api_key=api_key),
+            project_id=project_id
+        )
+
+        response = model.generate_text(prompt=prompt)
+        if isinstance(response, list):
+            response = response[0]
+        return response
+
+    def _generate_samples_batch(self, prompts: List[str]) -> List[str]:
+        """Generate samples with temperature in batch for massive speedup."""
+        if not prompts:
+            return []
+
+        api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
+        project_id = os.getenv("WATSONX_PROJECT_ID")
+        url = os.getenv("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
+
+        if not api_key or not project_id:
+            raise RuntimeError("WATSONX_API_KEY and WATSONX_PROJECT_ID required")
+
+        _, stop_sequences = format_prompt_for_model([], self.client.model_id)
+
+        # Create model with sampling temperature
+        model = ModelInference(
+            model_id=self.client.model_id,
+            params={
+                GenParams.MAX_NEW_TOKENS: self.client.config.max_tokens,
+                GenParams.TEMPERATURE: self.sampling_temperature,
+                GenParams.DECODING_METHOD: DecodingMethods.SAMPLE,
+                GenParams.STOP_SEQUENCES: stop_sequences,
+                GenParams.TOP_K: 50,
+                GenParams.TOP_P: 0.95,
+            },
+            credentials=Credentials(url=url, api_key=api_key),
+            project_id=project_id
+        )
+
+        # Batch generate with concurrency
+        try:
+            responses = model.generate_text(prompt=prompts, concurrency_limit=10)
+            if isinstance(responses, str):
+                responses = [responses]
+            elif not isinstance(responses, list):
+                responses = list(responses)
+            return responses
+        except Exception as e:
+            logger.error(f"Batch sampling failed: {e}")
+            # Fallback to sequential
+            return [self._generate_sample(p) for p in prompts]
+
+    def estimate_uncertainty_batch(
+        self,
+        fields: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """
+        Batch estimate uncertainty using semantic entropy.
+
+        For each field, generates N samples and computes entropy.
+        Uses batch generation for massive speedup.
+
+        Args:
+            fields: List of dicts with keys:
+                - ranking_prompt: The formatted ranking prompt
+                - initial_response: The greedy response
+                - candidates: List of candidate fields
+
+        Returns:
+            List of uncertainty info dicts in same order
+        """
+        if not fields:
+            return []
+
+        n_fields = len(fields)
+        logger.info(f"Semantic entropy batch: sampling {n_fields} fields x {self.n_samples} samples...")
+
+        # Parse all initial responses first
+        initial_top1s = []
+        for field in fields:
+            initial_response = field.get("initial_response", "")
+            initial_ranking = safe_parse_json_array(initial_response)
+            if initial_ranking and isinstance(initial_ranking[0], dict):
+                initial_top1s.append(initial_ranking[0].get("id", ""))
+            else:
+                initial_top1s.append("")
+
+        # Build all sampling prompts: (n_samples - 1) samples per field
+        # (we already have the initial greedy response)
+        all_prompts = []
+        prompt_to_field_idx = []  # Track which field each prompt belongs to
+
+        for field_idx, field in enumerate(fields):
+            prompt = field.get("ranking_prompt", "")
+            for _ in range(self.n_samples - 1):
+                all_prompts.append(prompt)
+                prompt_to_field_idx.append(field_idx)
+
+        # Batch generate all samples
+        if all_prompts:
+            all_responses = self._generate_samples_batch(all_prompts)
+        else:
+            all_responses = []
+
+        # Organize responses by field
+        field_samples = {i: [initial_top1s[i]] for i in range(n_fields)}
+
+        for resp_idx, response in enumerate(all_responses):
+            field_idx = prompt_to_field_idx[resp_idx]
+            sample_ranking = safe_parse_json_array(response)
+            if sample_ranking and isinstance(sample_ranking[0], dict):
+                field_samples[field_idx].append(sample_ranking[0].get("id", ""))
+            else:
+                field_samples[field_idx].append("")
+
+        # Compute entropy for each field
+        results = []
+        for field_idx in range(n_fields):
+            predictions = field_samples[field_idx]
+
+            # Cluster by exact match
+            cluster_counts = {}
+            for pred in predictions:
+                cluster_counts[pred] = cluster_counts.get(pred, 0) + 1
+
+            # Compute entropy
+            n_total = len(predictions)
+            entropy = 0.0
+            distribution = {}
+
+            for pred, count in cluster_counts.items():
+                p = count / n_total
+                distribution[pred] = p
+                if p > 0:
+                    entropy -= p * np.log(p)
+
+            # Normalize
+            max_entropy = np.log(self.n_samples)
+            normalized_entropy = entropy / max_entropy if max_entropy > 0 else 0.0
+            uncertainty = float(min(1.0, max(0.0, normalized_entropy)))
+
+            # Agreement rate
+            top_pred = max(cluster_counts.keys(), key=lambda k: cluster_counts[k])
+            agreement_rate = cluster_counts[top_pred] / n_total
+
+            results.append({
+                "uncertainty": uncertainty,
+                "entropy": float(entropy),
+                "normalized_entropy": float(normalized_entropy),
+                "agreement_rate": float(agreement_rate),
+                "n_samples": self.n_samples,
+                "n_unique": len(cluster_counts),
+                "top_prediction": top_pred,
+                "distribution": distribution,
+                "method": "semantic_entropy_batch"
+            })
+
+        return results
+
 
 class UncertaintyEstimator:
     """Sampling-based uncertainty estimation for rankings."""
@@ -769,27 +1648,34 @@ def load_property_lookup(lookup_file: str) -> Dict[str, Any]:
         return json.load(f)
 
 
-def load_dataset(data_dir: Path, dataset: str, max_samples: Optional[int] = None) -> List[Dict]:
+def load_dataset(data_dir: Path, dataset: str, max_samples: Optional[int] = None,
+                 eval_file: Optional[Path] = None) -> List[Dict]:
     """Load evaluation dataset."""
-    dataset_lower = dataset.lower()
+    # Use custom eval file if provided
+    if eval_file:
+        filepath = Path(eval_file)
+        if not filepath.exists():
+            raise FileNotFoundError(f"Eval file not found: {eval_file}")
+    else:
+        dataset_lower = dataset.lower()
 
-    # Try different file patterns
-    patterns = [
-        f"{dataset_lower}_dataset.jsonl",
-        f"{dataset_lower}_eval_dataset.jsonl",
-        f"{dataset_lower}_coverage_eval_dataset.jsonl",
-        f"{dataset}_dataset.jsonl",
-    ]
+        # Try different file patterns
+        patterns = [
+            f"{dataset_lower}_dataset.jsonl",
+            f"{dataset_lower}_eval_dataset.jsonl",
+            f"{dataset_lower}_coverage_eval_dataset.jsonl",
+            f"{dataset}_dataset.jsonl",
+        ]
 
-    filepath = None
-    for pattern in patterns:
-        candidate = data_dir / pattern
-        if candidate.exists():
-            filepath = candidate
-            break
+        filepath = None
+        for pattern in patterns:
+            candidate = data_dir / pattern
+            if candidate.exists():
+                filepath = candidate
+                break
 
-    if not filepath:
-        raise FileNotFoundError(f"No dataset file found for {dataset} in {data_dir}")
+        if not filepath:
+            raise FileNotFoundError(f"No dataset file found for {dataset} in {data_dir}")
 
     samples = []
     with open(filepath) as f:
@@ -858,12 +1744,21 @@ def extract_sample_data(data: Dict[str, Any], dataset: str, index: int) -> Optio
 
     # Handle ITOpsGraph format
     if "mapping" in data or "source_schema" in data:
+        # Extract target_fields from target_schema.properties if available (OMOP datasets)
+        target_fields = []
+        target_schema = data.get("target_schema", {})
+        if isinstance(target_schema, dict) and "properties" in target_schema:
+            props = target_schema.get("properties", [])
+            if isinstance(props, list):
+                target_fields = [p.get("name", "") for p in props if p.get("name")]
+
         return {
             "sample_id": data.get("id", f"{dataset.lower()}_{index:03d}"),
             "utterance": data.get("utterance", data.get("mapping_utterance", "")),
             "expected_source": data.get("source_schema", ""),
-            "expected_target": data.get("target_schema", ""),
+            "expected_target": target_schema,
             "ground_truth_mapping": data.get("mapping", {}),
+            "target_fields": target_fields,
             "metadata": data.get("metadata", {}),
         }
 
@@ -896,12 +1791,14 @@ def index_chroma(collection_name: str, data: Dict[str, Any], chroma_dir: str):
         model_name="all-MiniLM-L6-v2"
     )
 
+    # Delete existing collection if it exists, then create fresh
     try:
         client.delete_collection(name=collection_name)
     except Exception:
         pass
 
-    collection = client.create_collection(
+    # Use get_or_create to avoid race conditions
+    collection = client.get_or_create_collection(
         name=collection_name,
         embedding_function=embed_model_function,
         metadata={"hnsw:space": "cosine"}
@@ -921,11 +1818,178 @@ def index_chroma(collection_name: str, data: Dict[str, Any], chroma_dir: str):
     return collection
 
 
+# =============================================================================
+# BM25 Hybrid Retrieval
+# =============================================================================
+
+def tokenize_field_name(field_name: str) -> List[str]:
+    """
+    Tokenize a field name by splitting on _, ., and camelCase boundaries.
+    Example: infragraph_Kind.KIND_PACKER_SBOM -> ["infragraph", "kind", "kind", "packer", "sbom"]
+    """
+    # First split on . and _
+    parts = re.split(r'[._]', field_name)
+
+    tokens = []
+    for part in parts:
+        # Split camelCase: insert space before uppercase letters that follow lowercase
+        camel_split = re.sub(r'([a-z])([A-Z])', r'\1 \2', part)
+        # Also split on consecutive uppercase followed by lowercase (e.g., HTTPServer -> HTTP Server)
+        camel_split = re.sub(r'([A-Z]+)([A-Z][a-z])', r'\1 \2', camel_split)
+        # Split and lowercase
+        for token in camel_split.split():
+            token_lower = token.lower().strip()
+            if token_lower:
+                tokens.append(token_lower)
+
+    return tokens
+
+
+class BM25Retriever:
+    """BM25 retriever for lexical matching of field names."""
+
+    def __init__(self, collection_name: str, chroma_dir: str):
+        self.collection_name = collection_name
+        self.chroma_dir = chroma_dir
+        self.index_path = os.path.join(chroma_dir, f"bm25_index_{collection_name}.pkl")
+        self.bm25 = None
+        self.doc_ids = []
+        self.doc_texts = []
+        self.tokenized_corpus = []
+
+    def build_index(self, documents: List[Dict[str, Any]]):
+        """Build BM25 index from documents."""
+        self.doc_ids = []
+        self.doc_texts = []
+        self.tokenized_corpus = []
+
+        for doc in documents:
+            doc_id = doc.get("id", doc.get("doc_id", ""))
+            doc_text = doc.get("doc", doc.get("text", doc_id))
+
+            self.doc_ids.append(doc_id)
+            self.doc_texts.append(doc_text)
+            # Tokenize using field name tokenizer
+            tokens = tokenize_field_name(doc_id) + tokenize_field_name(doc_text)
+            self.tokenized_corpus.append(tokens)
+
+        self.bm25 = BM25Okapi(self.tokenized_corpus)
+        self._save_index()
+        logger.info(f"Built BM25 index with {len(self.doc_ids)} documents")
+
+    def _save_index(self):
+        """Persist BM25 index to disk."""
+        data = {
+            "doc_ids": self.doc_ids,
+            "doc_texts": self.doc_texts,
+            "tokenized_corpus": self.tokenized_corpus
+        }
+        os.makedirs(os.path.dirname(self.index_path) if os.path.dirname(self.index_path) else ".", exist_ok=True)
+        with open(self.index_path, 'wb') as f:
+            pickle.dump(data, f)
+        logger.debug(f"Saved BM25 index to {self.index_path}")
+
+    def load_index(self) -> bool:
+        """Load BM25 index from disk. Returns True if loaded successfully."""
+        if not os.path.exists(self.index_path):
+            return False
+
+        try:
+            with open(self.index_path, 'rb') as f:
+                data = pickle.load(f)
+            self.doc_ids = data["doc_ids"]
+            self.doc_texts = data["doc_texts"]
+            self.tokenized_corpus = data["tokenized_corpus"]
+            self.bm25 = BM25Okapi(self.tokenized_corpus)
+            logger.debug(f"Loaded BM25 index from {self.index_path} with {len(self.doc_ids)} documents")
+            return True
+        except Exception as e:
+            logger.warning(f"Failed to load BM25 index: {e}")
+            return False
+
+    def search(self, query: str, top_k: int = 10) -> List[Dict]:
+        """Search for documents matching the query."""
+        if self.bm25 is None:
+            return []
+
+        # Tokenize query the same way as documents
+        query_tokens = tokenize_field_name(query)
+
+        # Get BM25 scores
+        scores = self.bm25.get_scores(query_tokens)
+
+        # Get top-k indices
+        top_indices = np.argsort(scores)[::-1][:top_k]
+
+        results = []
+        for idx in top_indices:
+            if scores[idx] > 0:  # Only include if there's some match
+                results.append({
+                    "doc_id": self.doc_ids[idx],
+                    "id": self.doc_ids[idx],
+                    "name": self.doc_ids[idx],
+                    "doc": self.doc_texts[idx],
+                    "bm25_score": float(scores[idx]),
+                    "distance": 1.0 - min(float(scores[idx]) / 10.0, 1.0),  # Convert score to distance-like
+                    "meta": {}
+                })
+
+        return results
+
+
+def reciprocal_rank_fusion(semantic_results: List[Dict], bm25_results: List[Dict], k: int = 60) -> List[Dict]:
+    """
+    Merge results using Reciprocal Rank Fusion.
+    score(doc) = 1/(k + rank_semantic) + 1/(k + rank_bm25)
+    """
+    # Build score dict
+    scores = {}
+    doc_info = {}
+
+    # Add semantic scores
+    for rank, doc in enumerate(semantic_results):
+        doc_id = doc.get("id", doc.get("doc_id", ""))
+        scores[doc_id] = scores.get(doc_id, 0) + 1.0 / (k + rank + 1)
+        if doc_id not in doc_info:
+            doc_info[doc_id] = doc
+
+    # Add BM25 scores
+    for rank, doc in enumerate(bm25_results):
+        doc_id = doc.get("id", doc.get("doc_id", ""))
+        scores[doc_id] = scores.get(doc_id, 0) + 1.0 / (k + rank + 1)
+        if doc_id not in doc_info:
+            doc_info[doc_id] = doc
+
+    # Sort by fused score
+    sorted_docs = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+
+    results = []
+    for doc_id, fused_score in sorted_docs:
+        doc = doc_info[doc_id].copy()
+        doc["fused_score"] = fused_score
+        # Ensure 'distance' field exists (use 1 - fused_score as proxy if missing)
+        if "distance" not in doc:
+            doc["distance"] = 1.0 - fused_score
+        results.append(doc)
+
+    return results
+
+
+# Global BM25 retriever cache
+_bm25_retrievers: Dict[str, BM25Retriever] = {}
+
+
 def retrieve_candidates(query_text: str, collection_name: str, chroma_dir: str, top_k: int = 10) -> List[Dict]:
-    """Retrieve candidate matches from ChromaDB."""
+    """
+    Retrieve candidate matches using hybrid search (ChromaDB + BM25 with Reciprocal Rank Fusion).
+
+    Uses both semantic (ChromaDB with sentence-transformers) and lexical (BM25) retrieval,
+    then merges results using Reciprocal Rank Fusion for better coverage.
+    """
     if not HAS_CHROMADB:
         return []
 
+    # --- Semantic retrieval via ChromaDB ---
     embed_model = embedding_functions.SentenceTransformerEmbeddingFunction(
         model_name="all-MiniLM-L6-v2"
     )
@@ -947,10 +2011,10 @@ def retrieve_candidates(query_text: str, collection_name: str, chroma_dir: str, 
     metas = results.get("metadatas", [[]])[0]
     dists = results.get("distances", [[]])[0]
 
-    candidates = []
+    semantic_candidates = []
     for _id, doc, dist, meta in zip(ids, docs, dists, metas):
         full_name = meta.get('class') if isinstance(meta, dict) else _id
-        candidates.append({
+        semantic_candidates.append({
             "doc_id": _id,
             "id": full_name,
             "name": full_name,
@@ -959,7 +2023,39 @@ def retrieve_candidates(query_text: str, collection_name: str, chroma_dir: str, 
             "meta": meta
         })
 
-    return candidates
+    # --- BM25 retrieval (if available) ---
+    bm25_candidates = []
+    if HAS_BM25:
+        # Get or create BM25 retriever for this collection
+        if collection_name not in _bm25_retrievers:
+            bm25_retriever = BM25Retriever(collection_name, chroma_dir)
+            if not bm25_retriever.load_index():
+                # Build index from ChromaDB collection
+                logger.info(f"Building BM25 index for collection '{collection_name}'...")
+                all_docs = collection.get(include=["documents", "metadatas"])
+                documents = []
+                for _id, doc, meta in zip(all_docs["ids"], all_docs["documents"], all_docs["metadatas"]):
+                    full_name = meta.get('class') if isinstance(meta, dict) else _id
+                    documents.append({
+                        "id": full_name,
+                        "doc_id": _id,
+                        "doc": doc,
+                        "meta": meta
+                    })
+                bm25_retriever.build_index(documents)
+            _bm25_retrievers[collection_name] = bm25_retriever
+
+        bm25_retriever = _bm25_retrievers[collection_name]
+        bm25_candidates = bm25_retriever.search(query_text, top_k=top_k)
+
+    # --- Merge with Reciprocal Rank Fusion ---
+    if bm25_candidates:
+        fused_candidates = reciprocal_rank_fusion(semantic_candidates, bm25_candidates)
+        # Return top_k after fusion
+        return fused_candidates[:top_k]
+    else:
+        # Fall back to semantic-only if BM25 not available
+        return semantic_candidates
 
 
 # =============================================================================
@@ -998,12 +2094,30 @@ class MapReflectRunner:
         if self.config.neighbor_k > 0:
             self.property_graph = build_property_graph(self.property_lookup)
 
-        # Initialize uncertainty estimator if needed
+        # Initialize uncertainty estimator based on method
         self.uncertainty_estimator = None
+        self.perplexity_estimator = None
+        self.p_true_estimator = None
+        self.semantic_entropy_estimator = None
         if self.config.use_uncertainty:
-            self.uncertainty_estimator = UncertaintyEstimator(
-                self.client, self.config.n_uncertainty_samples
-            )
+            if self.config.uq_method == "perplexity":
+                self.perplexity_estimator = PerplexityEstimator(self.client)
+                logger.info(f"  UQ Method: perplexity (logprobs-based)")
+            elif self.config.uq_method == "p_true":
+                self.p_true_estimator = PTrueEstimator(self.client)
+                logger.info(f"  UQ Method: p_true (self-verification)")
+            elif self.config.uq_method == "semantic_entropy":
+                self.semantic_entropy_estimator = SemanticEntropyEstimator(
+                    self.client, self.config.n_uncertainty_samples
+                )
+                logger.info(f"  UQ Method: semantic_entropy (n={self.config.n_uncertainty_samples} samples)")
+            elif self.config.uq_method == "sampling":
+                self.uncertainty_estimator = UncertaintyEstimator(
+                    self.client, self.config.n_uncertainty_samples
+                )
+                logger.info(f"  UQ Method: sampling (consistency-based, n={self.config.n_uncertainty_samples})")
+            else:  # heuristic
+                logger.info(f"  UQ Method: heuristic (response-based)")
 
         # Results directory
         self.results_dir = Path(__file__).parent / "results"
@@ -1011,6 +2125,13 @@ class MapReflectRunner:
 
         # Chroma directory
         self.chroma_dir = str(self.data_dir / "chroma_db")
+
+        # OMOP-specific settings
+        self.is_omop = is_omop_dataset(dataset)
+        if self.is_omop:
+            logger.info(f"OMOP dataset detected - enabling OMOP-specific enhancements")
+            logger.info(f"  Table filtering: {self.config.omop_table_filtering}")
+            logger.info(f"  Type hints: {self.config.omop_type_hints}")
 
         logger.info(f"MapReflectRunner initialized")
         logger.info(f"  Model: {model}")
@@ -1031,7 +2152,8 @@ class MapReflectRunner:
         source_desc: str,
         candidates: List[Dict],
         source_product: str,
-        target_product: str
+        target_product: str,
+        omop_type_hints: List[str] = None
     ) -> str:
         """Build prompt for ranking candidates."""
         cand_block = "\n".join([
@@ -1039,11 +2161,30 @@ class MapReflectRunner:
             for i, c in enumerate(candidates[:20])  # Limit for prompt size
         ])
 
+        # Build OMOP-specific type hints section
+        type_hints_block = ""
+        if omop_type_hints:
+            type_hints_block = "\n\nFIELD TYPE HINTS (use these to guide matching):\n" + "\n".join(f"- {h}" for h in omop_type_hints)
+
+        # OMOP-specific instructions for healthcare schema mapping
+        omop_instructions = ""
+        if self.is_omop and self.config.omop_type_hints:
+            omop_instructions = """
+
+IMPORTANT: This is a healthcare schema mapping task. Follow these rules:
+1. Match by SEMANTIC PURPOSE, not just name similarity
+2. Patient/person IDs (person_id, person_source_value) should map to patient identifiers (desynpuf_id, bene_id, subject_id)
+3. Provider IDs should map to provider fields (*_npi, provider_id) - NOT to patient IDs
+4. Location IDs should map to geographic fields (*_county_cd, *_state_cd, zip) - NOT to provider NPIs
+5. Date fields should map to date fields (*_dt, *_date, *time)
+6. Concept/code fields should map to code fields (*_cd, *_code, *_type)
+7. DO NOT confuse patient identifiers with provider identifiers (NPIs)"""
+
         prompt = f"""You are given a {source_product} property and a list of candidate {target_product} properties.
 Rank the candidates by how well they semantically match the {source_product} property.
 
 {source_product} property: {source_prop}
-Description: {source_desc}
+Description: {source_desc}{type_hints_block}{omop_instructions}
 
 Candidates:
 {cand_block}
@@ -1177,12 +2318,15 @@ Return a JSON object:
                 })
             return sorted(scored, key=lambda x: -x['score'])
 
-        # Map numeric IDs back to actual field IDs
+        # Map numeric IDs back to actual field IDs and normalize
         id_to_candidate = {str(i+1): c.get('id', c.get('name', '')) for i, c in enumerate(candidates)}
         for item in parsed:
             item_id = str(item['id'])
             if item_id in id_to_candidate:
                 item['id'] = id_to_candidate[item_id]
+            else:
+                # Normalize any formatting prefixes (e.g., "1. ", "id: ")
+                item['id'] = normalize_field_id(item['id'])
 
         return parsed
 
@@ -1199,7 +2343,7 @@ Return a JSON object:
             else:
                 result = {"analysis": "Could not parse response", "revised_ranking": initial_ranking}
 
-        # Map numeric IDs back to actual field IDs
+        # Map numeric IDs back to actual field IDs and normalize
         if result.get("revised_ranking"):
             id_to_candidate = {str(i+1): c.get('id', c.get('name', '')) for i, c in enumerate(candidates)}
             for item in result["revised_ranking"]:
@@ -1207,6 +2351,9 @@ Return a JSON object:
                     item_id = str(item['id'])
                     if item_id in id_to_candidate:
                         item['id'] = id_to_candidate[item_id]
+                    else:
+                        # Normalize any formatting prefixes (e.g., "1. ", "id: ")
+                        item['id'] = normalize_field_id(item['id'])
 
         return result
 
@@ -1214,12 +2361,22 @@ Return a JSON object:
         self,
         src_field: str,
         sample: Dict,
-        collection_name: str
-    ) -> List[Dict]:
-        """Get candidates for a source field."""
+        collection_name: str,
+        parsed_utterance: Dict[str, str] = None
+    ) -> Tuple[List[Dict], List[str]]:
+        """Get candidates for a source field.
+
+        Returns:
+            Tuple of (candidates list, omop_type_hints list)
+        """
         src_info = self.property_lookup.get(src_field, {})
         src_desc = src_info.get("description", src_field) if isinstance(src_info, dict) else str(src_info)
         query_text = f"{src_field}: {src_desc}"
+
+        # Get OMOP type hints if applicable
+        omop_type_hints = []
+        if self.is_omop and self.config.omop_type_hints:
+            omop_type_hints = get_omop_field_type_hints(src_field)
 
         # Check for explicit target fields in sample
         sample_target_fields = sample.get("target_fields", [])
@@ -1239,7 +2396,8 @@ Return a JSON object:
                 })
         else:
             # Check for target schema filtering (multi-target datasets like ITOpsGraph)
-            target_schema = sample.get("expected_target", sample.get("target_schema", ""))
+            # Use 'or' to handle None values (not just missing keys)
+            target_schema = sample.get("expected_target") or sample.get("target_schema") or ""
             sample_metadata = sample.get("metadata", {})
             target_type = sample_metadata.get("target_type", "")
 
@@ -1252,9 +2410,28 @@ Return a JSON object:
                 # Handle multi-word schema names (e.g., "MIMIC PATIENTS" -> "mimic_")
                 target_product = target_schema.split()[0].lower() if " " in target_schema else target_schema.lower()
 
-                if target_type:
+                # NL2GQL uses special prefix format: "nl2gql_TableName." (e.g., "nl2gql_Stadium.")
+                if self.dataset.lower() == "nl2gql":
+                    target_prefix = f"nl2gql_{target_schema}."
+                # ToolBench uses "APIName." prefix (e.g., "Cloud_Cast_Get_humidty.")
+                elif self.dataset.lower() == "toolbench":
+                    target_prefix = f"{target_schema}."
+                elif target_type:
                     # ITOpsGraph style: product + type prefix (e.g., "turbonomic_FilterInput.")
                     target_prefix = f"{target_product}_{target_type}."
+
+                    # Fix: Handle case where target_type already contains part of target_product
+                    # e.g., target_product="hcp_terraform", target_type="terraform_HcpTerraformProject"
+                    # would create "hcp_terraform_terraform_HcpTerraformProject." (double prefix)
+                    # Check if this prefix finds any matches; if not, try stripping overlap
+                    if not any(k.lower().startswith(target_prefix.lower()) for k in self.property_lookup):
+                        for part in target_product.split("_"):
+                            if target_type.lower().startswith(part.lower() + "_"):
+                                alt_type = target_type[len(part) + 1:]
+                                alt_prefix = f"{target_product}_{alt_type}."
+                                if any(k.lower().startswith(alt_prefix.lower()) for k in self.property_lookup):
+                                    target_prefix = alt_prefix
+                                    break
                 else:
                     # Simple product prefix (e.g., "mimic_" from "MIMIC PATIENTS")
                     target_prefix = f"{target_product}_"
@@ -1287,7 +2464,16 @@ Return a JSON object:
                 candidates, self.property_graph, self.property_lookup, self.config.neighbor_k
             )
 
-        return candidates
+        # OMOP-specific: Filter candidates to target table from utterance
+        if self.is_omop and self.config.omop_table_filtering and parsed_utterance:
+            target_table = parsed_utterance.get("target_table", "")
+            target_schema = parsed_utterance.get("target_schema", "")
+            if target_table and target_schema:
+                candidates = filter_candidates_by_omop_table(
+                    candidates, target_table, target_schema
+                )
+
+        return candidates, omop_type_hints
 
     def process_sample(
         self,
@@ -1325,10 +2511,21 @@ Return a JSON object:
         sample_uncertainties = []
         sibling_mappings: Dict[str, str] = {}  # Collect top-1 predictions for sibling context
 
+        # Parse utterance for OMOP datasets
+        parsed_utterance = None
+        if self.is_omop:
+            # First try to extract from sample's target_schema (more reliable)
+            parsed_utterance = extract_omop_target_table(sample)
+            # Fallback to utterance parsing if target_schema not available
+            if not parsed_utterance.get("target_table"):
+                parsed_utterance = parse_omop_utterance(sample.get("utterance", ""))
+
         # Process each source field
         for src_field, gt_target in ground_truth.items():
             # Get candidates
-            candidates = self._get_candidates_for_sample(src_field, sample, collection_name)
+            candidates, omop_type_hints = self._get_candidates_for_sample(
+                src_field, sample, collection_name, parsed_utterance
+            )
 
             if not candidates:
                 logger.warning(f"No candidates for {src_field}, skipping")
@@ -1340,7 +2537,8 @@ Return a JSON object:
 
             # Build ranking prompt
             ranking_prompt = self._build_ranking_prompt(
-                src_field, src_desc, candidates, source_product, target_product
+                src_field, src_desc, candidates, source_product, target_product,
+                omop_type_hints=omop_type_hints
             )
 
             # Get ranking response
@@ -1351,14 +2549,50 @@ Return a JSON object:
             if ranking and isinstance(ranking[0], dict):
                 sibling_mappings[src_field] = ranking[0].get("id", "")
 
-            # Estimate uncertainty
-            if self.config.use_uncertainty and self.uncertainty_estimator:
-                uncertainty_info = self.uncertainty_estimator.estimate_ranking_uncertainty(
-                    ranking_prompt, response, candidates
-                )
+            # Estimate uncertainty based on configured method
+            if self.config.use_uncertainty:
+                if self.config.uq_method == "perplexity" and self.perplexity_estimator:
+                    # Perplexity-based UQ using token logprobs
+                    uncertainty_info = self.perplexity_estimator.estimate_uncertainty(ranking_prompt)
+                elif self.config.uq_method == "p_true" and self.p_true_estimator:
+                    # P(True) self-verification UQ
+                    if ranking and isinstance(ranking[0], dict):
+                        top_pred = ranking[0]
+                        top_pred_id = top_pred.get("id", "")
+                        # Find the candidate info for the top prediction
+                        top_pred_desc = ""
+                        for cand in candidates:
+                            if cand.get("id") == top_pred_id or cand.get("name") == top_pred_id:
+                                top_pred_desc = cand.get("doc", "")
+                                break
+                        uncertainty_info = self.p_true_estimator.estimate_uncertainty(
+                            source_field=src_field,
+                            source_desc=src_desc,
+                            predicted_target=top_pred_id,
+                            target_desc=top_pred_desc,
+                            source_product=source_product,
+                            target_product=target_product
+                        )
+                    else:
+                        uncertainty_info = {"uncertainty": 0.8, "method": "p_true_no_prediction"}
+                elif self.config.uq_method == "semantic_entropy" and self.semantic_entropy_estimator:
+                    # Semantic entropy UQ using multiple samples
+                    uncertainty_info = self.semantic_entropy_estimator.estimate_uncertainty(
+                        ranking_prompt, response, candidates
+                    )
+                elif self.config.uq_method == "sampling" and self.uncertainty_estimator:
+                    # Sampling-based UQ using consistency
+                    uncertainty_info = self.uncertainty_estimator.estimate_ranking_uncertainty(
+                        ranking_prompt, response, candidates
+                    )
+                else:
+                    # Heuristic-based UQ from response characteristics
+                    uncertainty_score = estimate_uncertainty_from_response(response, candidates)
+                    uncertainty_info = {"uncertainty": uncertainty_score, "method": "heuristic"}
             else:
+                # Default: quick heuristic
                 uncertainty_score = estimate_uncertainty_from_response(response, candidates)
-                uncertainty_info = {"uncertainty": uncertainty_score, "method": "heuristics"}
+                uncertainty_info = {"uncertainty": uncertainty_score, "method": "heuristic"}
 
             uncertainty_score = uncertainty_info.get("uncertainty", 0.5)
             sample_uncertainties.append(uncertainty_score)
@@ -1423,8 +2657,12 @@ Return a JSON object:
                     revised = pred.get("initial_ranking", [])
 
                 if revised and isinstance(revised[0], dict):
-                    top_pred = revised[0].get("id", "")
-                    if top_pred == gt_target:
+                    top_pred = normalize_field_id(revised[0].get("id", ""))
+                    # gt_target can be a list or string
+                    if isinstance(gt_target, list):
+                        if top_pred in gt_target:
+                            correct_count += 1
+                    elif top_pred == gt_target:
                         correct_count += 1
                 total_count += 1
 
@@ -1511,8 +2749,19 @@ Return a JSON object:
             else:
                 target_product = str(expected_target).split("_")[0].upper() if expected_target else "TARGET"
 
+            # Parse utterance for OMOP datasets
+            parsed_utterance = None
+            if self.is_omop:
+                # First try to extract from sample's target_schema (more reliable)
+                parsed_utterance = extract_omop_target_table(sample)
+                # Fallback to utterance parsing if target_schema not available
+                if not parsed_utterance.get("target_table"):
+                    parsed_utterance = parse_omop_utterance(sample.get("utterance", ""))
+
             for src_field, gt_target in ground_truth.items():
-                candidates = self._get_candidates_for_sample(src_field, sample, collection_name)
+                candidates, omop_type_hints = self._get_candidates_for_sample(
+                    src_field, sample, collection_name, parsed_utterance
+                )
                 if not candidates:
                     continue
 
@@ -1520,7 +2769,8 @@ Return a JSON object:
                 src_desc = src_info.get("description", src_field) if isinstance(src_info, dict) else str(src_info)
 
                 ranking_prompt = self._build_ranking_prompt(
-                    src_field, src_desc, candidates, source_product, target_product
+                    src_field, src_desc, candidates, source_product, target_product,
+                    omop_type_hints=omop_type_hints
                 )
 
                 prompt_tasks.append({
@@ -1533,6 +2783,7 @@ Return a JSON object:
                     "src_desc": src_desc,
                     "source_product": source_product,
                     "target_product": target_product,
+                    "omop_type_hints": omop_type_hints,
                 })
 
         logger.info(f"Collected {len(prompt_tasks)} ranking prompts from {len(samples_to_process)} samples")
@@ -1554,16 +2805,94 @@ Return a JSON object:
         logger.info("Phase 3: Processing responses...")
         reflection_tasks = []  # Tasks that need reflection
 
+        # First pass: parse all responses
         for task_idx, (task, response) in enumerate(zip(prompt_tasks, ranking_responses)):
             ranking = self._parse_ranking_response(response, task["candidates"])
             task["ranking"] = ranking
             task["response"] = response
 
-            # Estimate uncertainty (heuristic - fast)
-            uncertainty_score = estimate_uncertainty_from_response(response, task["candidates"])
-            task["uncertainty"] = uncertainty_score
-            task["uncertainty_info"] = {"uncertainty": uncertainty_score, "method": "heuristics"}
-            all_uncertainties.append(uncertainty_score)
+        # BATCH UQ: Estimate uncertainty for all tasks at once (massive speedup)
+        if self.config.use_uncertainty and self.config.uq_method == "p_true" and self.p_true_estimator:
+            # P(True) batch estimation
+            uq_fields = []
+            for task in prompt_tasks:
+                ranking = task.get("ranking", [])
+                if ranking and isinstance(ranking[0], dict):
+                    top_pred = ranking[0]
+                    top_pred_id = top_pred.get("id", "")
+                    top_pred_desc = ""
+                    for cand in task["candidates"]:
+                        if cand.get("id") == top_pred_id or cand.get("name") == top_pred_id:
+                            top_pred_desc = cand.get("doc", "")
+                            break
+                    uq_fields.append({
+                        "source_field": task["src_field"],
+                        "source_desc": task["src_desc"],
+                        "predicted_target": top_pred_id,
+                        "target_desc": top_pred_desc,
+                        "source_product": task["source_product"],
+                        "target_product": task["target_product"]
+                    })
+                else:
+                    uq_fields.append(None)  # No prediction
+
+            # Batch estimate for valid fields
+            valid_indices = [i for i, f in enumerate(uq_fields) if f is not None]
+            valid_fields = [uq_fields[i] for i in valid_indices]
+
+            if valid_fields:
+                batch_results = self.p_true_estimator.estimate_uncertainty_batch(valid_fields)
+
+                # Assign results back to tasks
+                result_idx = 0
+                for task_idx, task in enumerate(prompt_tasks):
+                    if uq_fields[task_idx] is not None:
+                        task["uncertainty_info"] = batch_results[result_idx]
+                        task["uncertainty"] = batch_results[result_idx]["uncertainty"]
+                        result_idx += 1
+                    else:
+                        task["uncertainty_info"] = {"uncertainty": 0.8, "method": "p_true_no_prediction"}
+                        task["uncertainty"] = 0.8
+                    all_uncertainties.append(task["uncertainty"])
+
+        elif self.config.use_uncertainty and self.config.uq_method == "semantic_entropy" and self.semantic_entropy_estimator:
+            # Semantic entropy batch estimation
+            uq_fields = []
+            for task in prompt_tasks:
+                uq_fields.append({
+                    "ranking_prompt": task["prompt"],
+                    "initial_response": task["response"],
+                    "candidates": task["candidates"]
+                })
+
+            batch_results = self.semantic_entropy_estimator.estimate_uncertainty_batch(uq_fields)
+
+            for task_idx, task in enumerate(prompt_tasks):
+                task["uncertainty_info"] = batch_results[task_idx]
+                task["uncertainty"] = batch_results[task_idx]["uncertainty"]
+                all_uncertainties.append(task["uncertainty"])
+
+        elif self.config.use_uncertainty and self.config.uq_method == "perplexity" and self.perplexity_estimator:
+            # Perplexity-based UQ (still sequential - requires logprobs per call)
+            for task in prompt_tasks:
+                uncertainty_info = self.perplexity_estimator.estimate_uncertainty(task["prompt"])
+                task["uncertainty_info"] = uncertainty_info
+                task["uncertainty"] = uncertainty_info.get("uncertainty", 0.5)
+                all_uncertainties.append(task["uncertainty"])
+
+        else:
+            # Fast heuristic-based UQ from response (default for batch mode)
+            for task in prompt_tasks:
+                uncertainty_score = estimate_uncertainty_from_response(task["response"], task["candidates"])
+                task["uncertainty_info"] = {"uncertainty": uncertainty_score, "method": "heuristic"}
+                task["uncertainty"] = uncertainty_score
+                all_uncertainties.append(uncertainty_score)
+
+        # Second pass: detect errors and reflection triggers
+        for task_idx, task in enumerate(prompt_tasks):
+            ranking = task.get("ranking", [])
+            response = task.get("response", "")
+            uncertainty_score = task.get("uncertainty", 0.5)
 
             # Detect mapping errors
             detected_errors = detect_mapping_errors(
@@ -1744,8 +3073,12 @@ Return a JSON object:
                         revised = pred.get("initial_ranking", [])
 
                     if revised and isinstance(revised[0], dict):
-                        top_pred = revised[0].get("id", "")
-                        if top_pred == gt_target:
+                        top_pred = normalize_field_id(revised[0].get("id", ""))
+                        # gt_target can be a list or string
+                        if isinstance(gt_target, list):
+                            if top_pred in gt_target:
+                                correct_count += 1
+                        elif top_pred == gt_target:
                             correct_count += 1
                     total_count += 1
 
@@ -1847,10 +3180,19 @@ def main():
     parser.add_argument("--use-uncertainty", action="store_true", help="Enable uncertainty quantification")
     parser.add_argument("--use-reflection", action="store_true", help="Legacy: enable error+uq reflection")
     parser.add_argument("--n-uncertainty-samples", type=int, default=3, help="Samples for UQ (default: 3)")
+    parser.add_argument("--uq-method", type=str, default="sampling",
+                        choices=["sampling", "heuristic", "perplexity", "p_true", "semantic_entropy"],
+                        help="UQ method: sampling, heuristic, perplexity, p_true, semantic_entropy")
 
     # UQ threshold configuration
     parser.add_argument("--uq-threshold", type=float, help="Fixed UQ threshold (overrides adaptive)")
     parser.add_argument("--uq-threshold-percentile", type=float, help="Percentile-based UQ threshold (e.g., 50 = median)")
+
+    # OMOP-specific enhancements (auto-enabled for OMOP_* datasets)
+    parser.add_argument("--no-omop-table-filtering", action="store_true",
+                        help="Disable OMOP table filtering from utterance")
+    parser.add_argument("--no-omop-type-hints", action="store_true",
+                        help="Disable OMOP field type hints in prompts")
 
     # Checkpointing
     parser.add_argument("--checkpoint-interval", type=int, default=50, help="Save every N samples (default: 50)")
@@ -1858,6 +3200,9 @@ def main():
 
     # Limiting
     parser.add_argument("--max-samples", type=int, help="Limit samples for testing")
+
+    # Custom eval file (for running on subset of samples)
+    parser.add_argument("--eval-file", type=str, help="Custom JSONL eval file (overrides default dataset file)")
 
     # Output
     parser.add_argument("--output-dir", type=str, default="map_reflect/results", help="Output directory")
@@ -1878,9 +3223,13 @@ def main():
         use_uncertainty=args.use_uncertainty,
         use_reflection=args.use_reflection,
         n_uncertainty_samples=args.n_uncertainty_samples,
+        uq_method=args.uq_method,
         # UQ threshold configuration
         uq_threshold=args.uq_threshold,
         uq_threshold_percentile=args.uq_threshold_percentile,
+        # OMOP-specific (enabled by default, use --no-* to disable)
+        omop_table_filtering=not args.no_omop_table_filtering,
+        omop_type_hints=not args.no_omop_type_hints,
         checkpoint_interval=args.checkpoint_interval,
         resume=args.resume,
     )
@@ -1890,7 +3239,8 @@ def main():
         logger.info(f"Processing dataset: {dataset}")
 
         # Load data
-        samples = load_dataset(Path(args.data_dir), dataset, args.max_samples)
+        eval_file = Path(args.eval_file) if args.eval_file else None
+        samples = load_dataset(Path(args.data_dir), dataset, args.max_samples, eval_file)
 
         # Initialize runner
         runner = MapReflectRunner(

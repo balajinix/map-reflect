@@ -44,10 +44,19 @@ from dataclasses import dataclass
 from collections import defaultdict
 import logging
 import os
+import pickle
+import numpy as np
 from pathlib import Path
 import yaml
 from dotenv import load_dotenv
 from tqdm import tqdm
+
+# Try to import BM25 for hybrid retrieval
+try:
+    from rank_bm25 import BM25Okapi
+    HAS_BM25 = True
+except ImportError:
+    HAS_BM25 = False
 
 # Always import litellm (needed for Mistral models which work better with chat API)
 from litellm import completion
@@ -63,6 +72,144 @@ except ImportError:
     USE_LITELLM = True
 
 load_dotenv()
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+
+# ---------- BM25 Hybrid Retrieval ----------
+
+def tokenize_field_name(field_name: str) -> List[str]:
+    """
+    Tokenize a field name by splitting on _, ., and camelCase boundaries.
+    Example: infragraph_Kind.KIND_PACKER_SBOM -> ["infragraph", "kind", "kind", "packer", "sbom"]
+    """
+    # First split on . and _
+    parts = re.split(r'[._]', field_name)
+
+    tokens = []
+    for part in parts:
+        # Split camelCase: insert space before uppercase letters that follow lowercase
+        camel_split = re.sub(r'([a-z])([A-Z])', r'\1 \2', part)
+        # Also split on consecutive uppercase followed by lowercase (e.g., HTTPServer -> HTTP Server)
+        camel_split = re.sub(r'([A-Z]+)([A-Z][a-z])', r'\1 \2', camel_split)
+        # Split and lowercase
+        for token in camel_split.split():
+            token_lower = token.lower().strip()
+            if token_lower:
+                tokens.append(token_lower)
+
+    return tokens
+
+
+class BM25Retriever:
+    """BM25 retriever for lexical matching of field names."""
+
+    def __init__(self, collection_name: str, index_dir: str):
+        self.collection_name = collection_name
+        self.index_dir = index_dir
+        self.index_path = os.path.join(index_dir, f"bm25_index_{collection_name}.pkl")
+        self.bm25 = None
+        self.doc_ids = []
+        self.doc_texts = []
+        self.tokenized_corpus = []
+
+    def build_index(self, documents: List[Dict[str, Any]]):
+        """Build BM25 index from documents."""
+        self.doc_ids = []
+        self.doc_texts = []
+        self.tokenized_corpus = []
+
+        for doc in documents:
+            doc_id = doc.get("id", doc.get("doc_id", ""))
+            doc_text = doc.get("doc", doc.get("text", doc_id))
+
+            self.doc_ids.append(doc_id)
+            self.doc_texts.append(doc_text)
+            # Tokenize using field name tokenizer
+            tokens = tokenize_field_name(doc_id) + tokenize_field_name(doc_text)
+            self.tokenized_corpus.append(tokens)
+
+        self.bm25 = BM25Okapi(self.tokenized_corpus)
+        self._save_index()
+        logger.info(f"Built BM25 index with {len(self.doc_ids)} documents")
+
+    def _save_index(self):
+        """Persist BM25 index to disk."""
+        data = {
+            "doc_ids": self.doc_ids,
+            "doc_texts": self.doc_texts,
+            "tokenized_corpus": self.tokenized_corpus
+        }
+        os.makedirs(self.index_dir, exist_ok=True)
+        with open(self.index_path, 'wb') as f:
+            pickle.dump(data, f)
+        logger.debug(f"Saved BM25 index to {self.index_path}")
+
+    def load_index(self) -> bool:
+        """Load BM25 index from disk. Returns True if loaded successfully."""
+        if not os.path.exists(self.index_path):
+            return False
+
+        try:
+            with open(self.index_path, 'rb') as f:
+                data = pickle.load(f)
+            self.doc_ids = data["doc_ids"]
+            self.doc_texts = data["doc_texts"]
+            self.tokenized_corpus = data["tokenized_corpus"]
+            self.bm25 = BM25Okapi(self.tokenized_corpus)
+            logger.debug(f"Loaded BM25 index from {self.index_path} with {len(self.doc_ids)} documents")
+            return True
+        except Exception as e:
+            logger.warning(f"Failed to load BM25 index: {e}")
+            return False
+
+    def search(self, query: str, top_k: int = 10) -> List[str]:
+        """Search for document IDs matching the query."""
+        if self.bm25 is None:
+            return []
+
+        # Tokenize query the same way as documents
+        query_tokens = tokenize_field_name(query)
+
+        # Get BM25 scores
+        scores = self.bm25.get_scores(query_tokens)
+
+        # Get top-k indices
+        top_indices = np.argsort(scores)[::-1][:top_k]
+
+        results = []
+        for idx in top_indices:
+            if scores[idx] > 0:  # Only include if there's some match
+                results.append(self.doc_ids[idx])
+
+        return results
+
+
+def reciprocal_rank_fusion(semantic_ids: List[str], bm25_ids: List[str], k: int = 60) -> List[str]:
+    """
+    Merge results using Reciprocal Rank Fusion.
+    score(doc) = 1/(k + rank_semantic) + 1/(k + rank_bm25)
+    Returns list of doc IDs sorted by fused score.
+    """
+    scores = {}
+
+    # Add semantic scores
+    for rank, doc_id in enumerate(semantic_ids):
+        scores[doc_id] = scores.get(doc_id, 0) + 1.0 / (k + rank + 1)
+
+    # Add BM25 scores
+    for rank, doc_id in enumerate(bm25_ids):
+        scores[doc_id] = scores.get(doc_id, 0) + 1.0 / (k + rank + 1)
+
+    # Sort by fused score
+    sorted_docs = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    return [doc_id for doc_id, _ in sorted_docs]
+
+
+# Global BM25 retriever cache
+_bm25_retrievers: Dict[str, BM25Retriever] = {}
+
 
 # ---------- config loading ----------
 
@@ -1051,16 +1198,15 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
         is_retrieval_mode = state.get("is_retrieval_mode", False)
         source_product = state.get("source_product", "").lower()
 
-        # RETRIEVAL MODE: Find destination properties semantically similar to source
+        # RETRIEVAL MODE: Find destination properties via hybrid search (semantic + BM25)
         if is_retrieval_mode:
-            logger.info("Retrieval mode: finding destination properties via semantic search from source")
+            logger.info("Retrieval mode: finding destination properties via hybrid search from source")
 
             # Use source properties to find similar destination properties
             source_props = state.get("source_properties", [])
             if not source_props:
                 # Fall back to source context if no source properties selected yet
                 q = state.get("source_context", state["user_utterance"])
-                q_emb = self.embedding_model.encode(q).tolist()
             else:
                 # Build query from source properties
                 source_texts = []
@@ -1068,17 +1214,45 @@ Your entire response must be ONLY the JSON object starting with {{ and ending wi
                     pdata = state["property_data"].get(pid, {})
                     source_texts.append(f"{pdata.get('type_name', '')} {pdata.get('field_name', '')} {pdata.get('description', '')}")
                 q = " ".join(source_texts)
-                q_emb = self.embedding_model.encode(q).tolist()
 
+            q_emb = self.embedding_model.encode(q).tolist()
+
+            # --- Semantic retrieval via ChromaDB ---
             # Search broadly to ensure we find cross-product matches
-            # Many top results may be from same product, so we need to search broadly
             # Cap at 5000 to avoid ChromaDB batch size limit (max ~5461)
             n_results = min(len(state["property_data"]), 5000)
             logger.info("Retrieval mode: querying ChromaDB n_results=%d, collection_count=%d",
                        n_results, collection.count())
             res = collection.query(query_embeddings=[q_emb], n_results=n_results)
-            all_ids = res["ids"][0] if res.get("ids") else []
-            logger.info("Retrieval mode: ChromaDB returned %d results", len(all_ids))
+            semantic_ids = res["ids"][0] if res.get("ids") else []
+            logger.info("Retrieval mode: ChromaDB returned %d semantic results", len(semantic_ids))
+
+            # --- BM25 retrieval (if available) ---
+            bm25_ids = []
+            if HAS_BM25:
+                # Get or create BM25 retriever
+                if self.collection_name not in _bm25_retrievers:
+                    bm25_retriever = BM25Retriever(self.collection_name, self.chroma_client._persist_directory)
+                    if not bm25_retriever.load_index():
+                        # Build index from property data
+                        logger.info(f"Building BM25 index for collection '{self.collection_name}'...")
+                        documents = []
+                        for pid, pdata in state["property_data"].items():
+                            doc_text = f"{pdata.get('type_name', '')} {pdata.get('field_name', '')} {pdata.get('description', '')}"
+                            documents.append({"id": pid, "doc": doc_text})
+                        bm25_retriever.build_index(documents)
+                    _bm25_retrievers[self.collection_name] = bm25_retriever
+
+                bm25_retriever = _bm25_retrievers[self.collection_name]
+                bm25_ids = bm25_retriever.search(q, top_k=n_results)
+                logger.info("Retrieval mode: BM25 returned %d results", len(bm25_ids))
+
+            # --- Merge with Reciprocal Rank Fusion ---
+            if bm25_ids:
+                all_ids = reciprocal_rank_fusion(semantic_ids, bm25_ids)
+                logger.info("Retrieval mode: RRF merged to %d unique results", len(all_ids))
+            else:
+                all_ids = semantic_ids
 
             # Filter out properties from the source product
             filtered_ids = []
