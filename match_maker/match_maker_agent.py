@@ -539,12 +539,14 @@ Examples:
             )
             candidates = results['ids'][0] if results.get('ids') else []
 
-        # Filter out the query attribute itself and source properties
-        # This prevents self-matching when index contains all properties
+        # Filter out the query attribute itself, source properties, and non-target properties
+        # This prevents self-matching and ensures candidates are from the correct target API
         source_prop_ids = set(self.source_properties.keys()) if self.source_properties else set()
+        target_prop_ids = set(self.target_properties.keys()) if self.target_properties else set()
+
         filtered_candidates = [
             c for c in candidates
-            if c != query_attr and c not in source_prop_ids
+            if c != query_attr and c not in source_prop_ids and (not target_prop_ids or c in target_prop_ids)
         ][:self.top_k]  # Take only top_k after filtering
 
         if not filtered_candidates and candidates:
