@@ -306,20 +306,91 @@ class MatchMakerAgent:
         source_schema_normalized = source_schema.replace(' ', '_')
         target_schema_normalized = target_schema.replace(' ', '_')
 
-        self.source_properties = {
-            prop_id: prop_data
-            for prop_id, prop_data in self.property_data.items()
-            if source_schema_normalized in prop_data.get(schema_field, '').lower().replace(' ', '_')
-        }
-        self.target_properties = {
-            prop_id: prop_data
-            for prop_id, prop_data in self.property_data.items()
-            if target_schema_normalized in prop_data.get(schema_field, '').lower().replace(' ', '_')
-        }
+        # For multi-product datasets (OMOP), also extract table names from utterance
+        # Utterance format: "map omop <source_table> with cms <target_table>"
+        source_table = None
+        target_table = None
+
+        if not use_type_name:
+            # Get all available table names
+            available_tables = list(set(
+                p.get('type_name', '').lower()
+                for p in self.property_data.values()
+                if p.get('type_name')
+            ))
+
+            # Try to extract table names from utterance
+            utterance_lower = utterance.lower().replace('_', ' ')
+
+            # Find tables mentioned in utterance
+            matched_tables = []
+            for table in available_tables:
+                table_normalized = table.lower().replace('_', ' ')
+                if table_normalized in utterance_lower:
+                    # Get position in utterance
+                    pos = utterance_lower.find(table_normalized)
+                    matched_tables.append((table, pos))
+
+            # Sort by position in utterance
+            matched_tables.sort(key=lambda x: x[1])
+
+            if len(matched_tables) >= 2:
+                # First table after source namespace is source_table
+                # First table after target namespace is target_table
+                source_pos = utterance_lower.find(source_schema_normalized)
+                target_pos = utterance_lower.find(target_schema_normalized)
+
+                for table, pos in matched_tables:
+                    if source_pos < pos < target_pos and source_table is None:
+                        source_table = table
+                    elif pos > target_pos and target_table is None:
+                        target_table = table
+
+                logger.info(f"Extracted tables → source_table: {source_table}, target_table: {target_table}")
+            elif len(matched_tables) == 1:
+                # Single table - determine if it's source or target based on position
+                table, pos = matched_tables[0]
+                source_pos = utterance_lower.find(source_schema_normalized)
+                target_pos = utterance_lower.find(target_schema_normalized)
+                if target_pos >= 0 and pos > target_pos:
+                    target_table = table
+                elif source_pos >= 0 and pos > source_pos:
+                    source_table = table
+                logger.info(f"Extracted single table → source_table: {source_table}, target_table: {target_table}")
+
+        # Filter properties by namespace and optionally by table
+        if source_table:
+            self.source_properties = {
+                prop_id: prop_data
+                for prop_id, prop_data in self.property_data.items()
+                if (source_schema_normalized in prop_data.get('product_name', '').lower().replace(' ', '_')
+                    and prop_data.get('type_name', '').lower().replace(' ', '_') == source_table.lower().replace(' ', '_'))
+            }
+        else:
+            self.source_properties = {
+                prop_id: prop_data
+                for prop_id, prop_data in self.property_data.items()
+                if source_schema_normalized in prop_data.get(schema_field, '').lower().replace(' ', '_')
+            }
+
+        if target_table:
+            self.target_properties = {
+                prop_id: prop_data
+                for prop_id, prop_data in self.property_data.items()
+                if (target_schema_normalized in prop_data.get('product_name', '').lower().replace(' ', '_')
+                    and prop_data.get('type_name', '').lower().replace(' ', '_') == target_table.lower().replace(' ', '_'))
+            }
+        else:
+            self.target_properties = {
+                prop_id: prop_data
+                for prop_id, prop_data in self.property_data.items()
+                if target_schema_normalized in prop_data.get(schema_field, '').lower().replace(' ', '_')
+            }
 
         logger.info(
             f"Filtered properties: {len(self.source_properties)} source, "
             f"{len(self.target_properties)} target"
+            f"{' (table-filtered)' if source_table or target_table else ''}"
         )
 
         if not self.source_properties or not self.target_properties:
