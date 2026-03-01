@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 import logging
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import re
 
 # Suppress LiteLLM logging before any imports
@@ -148,39 +149,45 @@ class AnyToolMappingAgent:
         """Run the AnyTool agent on a user query."""
         if not self.available:
             return self._fallback_response(user_query)
-        
+
         try:
             logger.info(f"Running AnyTool agent for query: '{user_query}'")
-            
-            # Use the working search_properties function from anytool_agent
+
             result = self.search_properties(user_query)
-            
-            # Convert result to expected format
-            reasoning = result.get('reasoning', [])
-            selected_product = result.get('selected_product', '')
-            
-            if isinstance(reasoning, list) and reasoning:
-                # Convert to mapping format
-                mapping_result = self._convert_to_mapping_format(reasoning, result)
-                
+
+            # Build qualified schema names: product_TYPE (e.g., "omop_VISIT_OCCURRENCE")
+            src_product = result.get('selected_source_product', '')
+            src_type = result.get('selected_source_type', '')
+            tgt_product = result.get('selected_target_product', '')
+            tgt_type = result.get('selected_target_type', '')
+            source_schema = f"{src_product}_{src_type}" if src_product and src_type else src_product
+            target_schema = f"{tgt_product}_{tgt_type}" if tgt_product and tgt_type else tgt_product
+            final_mappings = result.get('final_mappings', [])
+
+            if isinstance(final_mappings, list) and final_mappings:
+                mapping_result = self._convert_to_mapping_format(final_mappings, result)
+
                 return {
                     "mapping_result": mapping_result,
-                    "source_schema": selected_product,
-                    "target_schema": "anytool_target",
-                    "schema_selection_reasoning": f"AnyTool selected {selected_product} using tool-based discovery",
+                    "source_schema": source_schema,
+                    "target_schema": target_schema,
+                    "schema_selection_reasoning": (
+                        f"AnyTool: source='{source_schema}' ({result.get('selected_source_type', '')}), "
+                        f"target='{target_schema}' ({result.get('selected_target_type', '')})"
+                    ),
                     "error": None,
                     "anytool_state": result
                 }
             else:
                 return {
                     "mapping_result": {},
-                    "source_schema": "",
-                    "target_schema": "",
-                    "schema_selection_reasoning": "AnyTool failed to find relevant mappings",
-                    "error": "No valid reasoning generated",
+                    "source_schema": source_schema,
+                    "target_schema": target_schema,
+                    "schema_selection_reasoning": "AnyTool found no field-level mappings",
+                    "error": "No valid mappings generated",
                     "anytool_state": result
                 }
-                
+
         except Exception as e:
             logger.error(f"AnyTool agent error: {e}")
             return {
@@ -212,23 +219,39 @@ class AnyToolMappingAgent:
             "anytool_state": {}
         }
     
-    def _convert_to_mapping_format(self, reasoning: List[Dict], state: Dict) -> Dict[str, Any]:
-        """Convert AnyTool reasoning to mapping format."""
+    def _convert_to_mapping_format(self, final_mappings: List[Dict], state: Dict) -> Dict[str, Any]:
+        """Convert AnyTool final_mappings list to mapping format.
+
+        The new agent produces items with keys: source_property, target_property, justification.
+        Field names are qualified as product_TYPE.field (e.g., omop_VISIT_OCCURRENCE.person_id).
+        """
+        src_product = state.get("selected_source_product", state.get("selected_product", "unknown"))
+        src_type = state.get("selected_source_type", state.get("selected_type", ""))
+        tgt_product = state.get("selected_target_product", "unknown")
+        tgt_type = state.get("selected_target_type", "")
+
+        src_prefix = f"{src_product}_{src_type}" if src_type else src_product
+        tgt_prefix = f"{tgt_product}_{tgt_type}" if tgt_type else tgt_product
+
         properties = {}
-        
-        for item in reasoning:
+
+        for item in final_mappings:
             if isinstance(item, dict):
                 source_prop = item.get("source_property", "unknown")
-                mapped_prop = item.get("mapped_property", "unknown")
+                target_prop = item.get("target_property") or item.get("mapped_property", "unknown")
                 justification = item.get("justification", "No justification")
-                
-                properties[source_prop] = [{
-                    "mapProperty": mapped_prop,
-                    "justification": justification
-                }]
-        
+
+                if source_prop and source_prop != "unknown":
+                    # Qualify field names: bare "person_id" -> "omop_VISIT_OCCURRENCE.person_id"
+                    qualified_src = f"{src_prefix}.{source_prop}" if '.' not in source_prop else source_prop
+                    qualified_tgt = f"{tgt_prefix}.{target_prop}" if '.' not in target_prop else target_prop
+                    properties[qualified_src] = [{
+                        "mapProperty": qualified_tgt,
+                        "justification": justification
+                    }]
+
         return {
-            "name": f"anytool_mapping_{state.get('selected_product', 'unknown')}",
+            "name": f"anytool_mapping_{src_prefix}_to_{tgt_prefix}",
             "properties": properties
         }
 
@@ -283,8 +306,12 @@ class AnyToolEvaluationRunner:
             raise
     
     def _get_agent_for_model(self, model: str) -> AnyToolMappingAgent:
-        """Get or create an agent for the specified model."""
-        return AnyToolMappingAgent(str(self.hierarchy_file), str(self.data_dir), model)
+        """Get or create an agent for the specified model (cached)."""
+        if not hasattr(self, '_agent_cache'):
+            self._agent_cache = {}
+        if model not in self._agent_cache:
+            self._agent_cache[model] = AnyToolMappingAgent(str(self.hierarchy_file), str(self.data_dir), model)
+        return self._agent_cache[model]
     
     def make_json_serializable(self, obj):
         """Convert objects to JSON serializable format."""
@@ -497,9 +524,9 @@ class AnyToolEvaluationRunner:
             
             return self._create_error_result(sample_id, str(e), start_time)
     
-    def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
+    def run_evaluation(self, dataset: str, model: str, max_workers: int = 4) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
-        logger.info(f"Starting AnyTool evaluation for {dataset} with {model}")
+        logger.info(f"Starting AnyTool evaluation for {dataset} with {model} (workers={max_workers})")
 
         # Load evaluation utterances
         utterances = self.load_evaluation_utterances(dataset)
@@ -512,58 +539,106 @@ class AnyToolEvaluationRunner:
         # Run AnyTool on each utterance
         results = []
         total_start_time = time.time()
-        MAX_CONSECUTIVE_FAILURES = 3
+        MAX_CONSECUTIVE_FAILURES = 10
         consecutive_failures = 0
 
         # Incremental save settings
         SAVE_INTERVAL = 10
         checkpoint_file = self.results_dir / f"{dataset}_{model.replace('/', '_')}_checkpoint.json"
 
+        # Resume from checkpoint if available
+        processed_ids = set()
+        # First try lightweight "done IDs" file (for large checkpoints that can't fit in memory)
+        done_ids_file = checkpoint_file.parent / f"{checkpoint_file.stem}_done_ids.txt"
+        if done_ids_file.exists():
+            try:
+                with open(done_ids_file) as f:
+                    processed_ids = {line.strip() for line in f if line.strip()}
+                logger.info(f"Resuming from done_ids file: {len(processed_ids)} samples already processed")
+                # Start with empty results list - we'll only have new results
+                results = []
+                # Use a new checkpoint file to avoid overwriting the large original
+                checkpoint_file = self.results_dir / f"{dataset}_{model.replace('/', '_')}_checkpoint_v2.json"
+            except Exception as e:
+                logger.warning(f"Failed to load done_ids file: {e}")
+        elif checkpoint_file.exists():
+            try:
+                with open(checkpoint_file) as f:
+                    checkpoint_data = json.load(f)
+                results = checkpoint_data.get("results", [])
+                processed_ids = {r["sample_id"] for r in results}
+                logger.info(f"Resuming from checkpoint: {len(processed_ids)} samples already processed")
+            except Exception as e:
+                logger.warning(f"Failed to load checkpoint, starting fresh: {e}")
+                results = []
+
+        # Filter to only unprocessed utterances
+        remaining = [u for u in utterances if u["sample_id"] not in processed_ids]
+        logger.info(f"Processing {len(remaining)} remaining utterances ({len(processed_ids)} already done)")
+
+        def _process_one(utterance_data):
+            """Process a single utterance (for concurrent execution)."""
+            result = self.run_single_evaluation(
+                utterance_data["utterance"],
+                utterance_data["sample_id"],
+                model
+            )
+            result["expected_source"] = utterance_data.get("expected_source", "")
+            result["expected_target"] = utterance_data.get("expected_target", "")
+            result["original_utterance"] = utterance_data["utterance"]
+            result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
+            return result
+
         try:
-            for i, utterance_data in enumerate(utterances):
-                logger.info(f"Processing utterance {i+1}/{len(utterances)}: {utterance_data['sample_id']}")
+            if max_workers <= 1:
+                # Sequential processing
+                for i, utterance_data in enumerate(remaining):
+                    logger.info(f"Processing {len(results)+1}/{len(utterances)}: {utterance_data['sample_id']}")
+                    result = _process_one(utterance_data)
+                    results.append(result)
 
-                # Run single evaluation
-                result = self.run_single_evaluation(
-                    utterance_data["utterance"],
-                    utterance_data["sample_id"],
-                    model
-                )
-
-                # Add expected information
-                result["expected_source"] = utterance_data.get("expected_source", "")
-                result["expected_target"] = utterance_data.get("expected_target", "")
-                result["original_utterance"] = utterance_data["utterance"]
-                result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
-
-                results.append(result)
-
-                # Incremental save
-                if (i + 1) % SAVE_INTERVAL == 0:
-                    self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
-                    logger.info(f"Checkpoint saved: {i + 1}/{len(utterances)} samples")
-
-                # Failure tracking
-                if not result["success"]:
-                    consecutive_failures += 1
-                    error_msg = result.get("error_message", "")
-
-                    if "critical" in str(error_msg).lower():
-                        logger.error(f"CRITICAL ERROR detected: {error_msg}")
+                    if len(results) % SAVE_INTERVAL == 0:
                         self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
-                        raise RuntimeError(f"Stopping: {error_msg}")
+
+                    if not result["success"]:
+                        consecutive_failures += 1
+                        if "critical" in str(result.get("error_message", "")).lower():
+                            self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                            raise RuntimeError(f"Stopping: {result.get('error_message')}")
+                        if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                            self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                            raise RuntimeError(f"Too many consecutive failures")
+                    else:
+                        consecutive_failures = 0
+            else:
+                # Concurrent processing in batches
+                BATCH = max_workers * 2
+                for batch_start in range(0, len(remaining), BATCH):
+                    batch = remaining[batch_start:batch_start + BATCH]
+                    logger.info(f"Batch {batch_start//BATCH + 1}: processing {len(batch)} samples concurrently ({len(results)}/{len(utterances)} done)")
+
+                    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                        future_to_utt = {executor.submit(_process_one, u): u for u in batch}
+                        for future in as_completed(future_to_utt):
+                            try:
+                                result = future.result()
+                                results.append(result)
+                                if not result["success"]:
+                                    consecutive_failures += 1
+                                else:
+                                    consecutive_failures = 0
+                            except Exception as e:
+                                utt = future_to_utt[future]
+                                logger.error(f"Worker error for {utt['sample_id']}: {e}")
+                                results.append(self._create_error_result(utt["sample_id"], str(e), total_start_time))
+                                consecutive_failures += 1
+
+                    # Checkpoint after each batch
+                    self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
+                    logger.info(f"Checkpoint: {len(results)}/{len(utterances)} samples")
 
                     if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
-                        logger.error(f"Stopping after {consecutive_failures} consecutive failures")
-                        self._save_checkpoint(results, checkpoint_file, dataset, model, total_start_time)
                         raise RuntimeError(f"Too many consecutive failures")
-                else:
-                    consecutive_failures = 0
-
-                if (i + 1) % 2 == 0:
-                    logger.info(f"Completed {i+1}/{len(utterances)} utterances")
-
-                time.sleep(0.5)
 
         except Exception as e:
             logger.error(f"Exception during evaluation: {e}")
@@ -626,6 +701,8 @@ def main():
                        help="Quick evaluation with minimal samples")
     parser.add_argument("--verbose", action="store_true",
                        help="Enable verbose logging")
+    parser.add_argument("--workers", type=int, default=4,
+                       help="Number of concurrent workers (default: 4, use 1 for sequential)")
     
     args = parser.parse_args()
     
@@ -737,7 +814,7 @@ def main():
             
             try:
                 # Run evaluation for this dataset-model combination
-                result = runner.run_evaluation(dataset, model)
+                result = runner.run_evaluation(dataset, model, max_workers=args.workers)
                 
                 if result:
                     all_results[combination_key] = result

@@ -31,22 +31,20 @@ except ImportError:
     HAS_LITELLM = False
     print("WARNING: litellm not available")
 
-# # Enable verbose logging for debugging
-# litellm.set_verbose = True
 
-# Tool definitions (from your provided code)
 class ToolConverter:
     @staticmethod
     def to_langchain_tool(fn):
         langchain_tool = StructuredTool.from_function(func=fn)
         return langchain_tool
 
-# Load hierarchy data (with error handling)
 
-#with open("../data/hierarchy.json") as f:
-#    hierarchy = json.load(f)
 hierarchy = {}
 MODEL = "watsonx/meta-llama/llama-3-3-70b-instruct"
+
+# Cached WatsonX model instances (avoid re-creating on every call)
+_model_cache: Dict[str, Any] = {}
+
 
 # Tool functions
 def get_properties_for_type(product, graphql_type):
@@ -56,12 +54,12 @@ def get_properties_for_type(product, graphql_type):
         if not isinstance(product_data, dict):
             print(f"Warning: Product '{product}' data is not a dictionary")
             return {'type_name': graphql_type, 'properties': []}
-            
+
         properties = product_data.get(graphql_type, [])
         if not isinstance(properties, list):
             print(f"Warning: Properties for type '{graphql_type}' is not a list")
             return {'type_name': graphql_type, 'properties': []}
-        
+
         return {
             'type_name': graphql_type,
             'properties': [
@@ -77,36 +75,36 @@ def get_properties_for_type(product, graphql_type):
         print(f"Error in get_properties_for_type: {str(e)}")
         return {'type_name': graphql_type, 'properties': []}
 
+
 def get_types_for_product(product):
     """Get all GraphQL types with their descriptions for a specific product."""
     try:
         product_types = hierarchy.get(product, {})
-        
-        # Handle case where product_types might not be a dict
+
         if not isinstance(product_types, dict):
             print(f"Warning: Product '{product}' data is not a dictionary: {type(product_types)}")
             return []
-        
+
         result = []
         for type_name, properties in product_types.items():
-            # Ensure properties is a list
             if not isinstance(properties, list):
                 print(f"Warning: Properties for type '{type_name}' is not a list: {type(properties)}")
                 continue
-                
+
             property_names = [prop.get('name', 'unknown') for prop in properties if isinstance(prop, dict)]
             description = f'GraphQL type containing {len(properties)} properties: {", ".join(property_names)}'
-            
+
             result.append({
                 'type_name': type_name,
                 'description': description,
                 'property_count': len(properties)
             })
-        
+
         return result
     except Exception as e:
         print(f"Error in get_types_for_product: {str(e)}")
         return []
+
 
 def get_products():
     """Get all products."""
@@ -114,48 +112,62 @@ def get_products():
         if not isinstance(hierarchy, dict):
             print(f"Warning: Hierarchy is not a dictionary: {type(hierarchy)}")
             return []
-        
-        products = [x for x in list(hierarchy.keys()) if not x.startswith("Mutation")]
+
+        # FIX BUG 8: Only filter Mutation keys for GraphQL schemas; preserve all product keys.
+        # Mutation is a GraphQL convention not a product name, but we should only exclude
+        # it when it appears at the top level as a schema artefact (i.e. it has no subkeys
+        # that look like real product types).
+        products = []
+        for key in hierarchy.keys():
+            if key.startswith("Mutation"):
+                # Include anyway if the value has product-like structure
+                val = hierarchy[key]
+                if isinstance(val, dict) and val:
+                    products.append(key)
+                # else skip it (bare Mutation stub with no content)
+            else:
+                products.append(key)
         print(products)
         return products
     except Exception as e:
         print(f"Error in get_products: {str(e)}")
         return []
 
+
 # Create LangChain tools
 get_products_tool = ToolConverter.to_langchain_tool(get_products)
 get_types_for_product_tool = ToolConverter.to_langchain_tool(get_types_for_product)
 get_properties_for_type_tool = ToolConverter.to_langchain_tool(get_properties_for_type)
 
-# Tool node (updated from deprecated ToolExecutor)
 tools = [get_products_tool, get_types_for_product_tool, get_properties_for_type_tool]
 tool_node = ToolNode(tools)
 
-# State definition
+
+# FIX BUG 1: AgentState now tracks source and target separately.
 class AgentState(TypedDict):
     messages: Annotated[List[Any], operator.add]
     user_query: str
     current_step: str
     available_products: List[str]
-    selected_product: str
-    available_types: List[Dict]
-    selected_type: str
-    final_properties: Dict
+    # Source schema fields
+    selected_source_product: str
+    available_source_types: List[Dict]
+    selected_source_type: str
+    source_properties: Dict
+    # Target schema fields
+    selected_target_product: str
+    available_target_types: List[Dict]
+    selected_target_type: str
+    target_properties: Dict
+    # Output
+    final_mappings: List[Dict]
     reasoning: str
 
+
 def format_prompt_for_model(messages, model_id):
-    """Format messages based on model-specific chat template.
-
-    Args:
-        messages: List of dicts with 'role' and 'content' keys
-        model_id: Model identifier string
-
-    Returns:
-        Tuple of (formatted_prompt, stop_sequences)
-    """
+    """Format messages based on model-specific chat template."""
     model_lower = model_id.lower()
 
-    # Granite 4 models (granite-4-h-small, etc.)
     if "granite-4" in model_lower or "granite4" in model_lower:
         prompt_parts = []
         for m in messages:
@@ -165,7 +177,6 @@ def format_prompt_for_model(messages, model_id):
         prompt_parts.append("<|start_of_role|>assistant<|end_of_role|>")
         return "".join(prompt_parts), ["<|end_of_text|>"]
 
-    # Mistral models
     elif "mistral" in model_lower:
         system_msg = ""
         user_content = []
@@ -182,7 +193,6 @@ def format_prompt_for_model(messages, model_id):
             prompt = f"[INST] {combined_user} [/INST]"
         return prompt, ["[/INST]", "</s>"]
 
-    # Llama 3 models
     elif "llama" in model_lower:
         prompt_parts = ["<|begin_of_text|>"]
         for m in messages:
@@ -192,7 +202,6 @@ def format_prompt_for_model(messages, model_id):
         prompt_parts.append("<|start_header_id|>assistant<|end_header_id|>\n\n")
         return "".join(prompt_parts), ["<|eot_id|>", "<|end_of_text|>"]
 
-    # Granite 3.x models (granite-3-2-8b, granite-3-3-8b, etc.)
     elif "granite-3" in model_lower or "granite3" in model_lower:
         prompt_parts = []
         for m in messages:
@@ -202,7 +211,6 @@ def format_prompt_for_model(messages, model_id):
         prompt_parts.append("<|start_of_role|>assistant<|end_of_role|>")
         return "".join(prompt_parts), ["<|end_of_text|>"]
 
-    # Default fallback for unknown models
     else:
         prompt_parts = []
         for msg in messages:
@@ -216,19 +224,17 @@ def format_prompt_for_model(messages, model_id):
 
 
 def call_llm(messages, model=None):
-    """Call IBM watsonx.ai using native SDK or litellm fallback"""
+    """Call IBM watsonx.ai using native SDK or litellm fallback."""
     if model is None:
         print("################ Why is model None? ###############")
         model = MODEL
 
-    # Use litellm if WatsonX SDK not available
     if not HAS_WATSONX_SDK:
         if not HAS_LITELLM:
             raise RuntimeError("Neither ibm_watsonx_ai nor litellm available")
         return call_llm_litellm(messages, model)
 
     try:
-        # Get credentials
         api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
         project_id = os.getenv("WATSONX_PROJECT_ID")
         url = os.getenv("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
@@ -236,28 +242,27 @@ def call_llm(messages, model=None):
         if not api_key or not project_id:
             raise RuntimeError("WATSONX_API_KEY and WATSONX_PROJECT_ID required")
 
-        # Remove watsonx/ prefix if present
         model_id = model.replace("watsonx/", "")
-
-        # Format prompt based on model type
         prompt, stop_sequences = format_prompt_for_model(messages, model_id)
 
-        # Call WatsonX
-        parameters = {
-            GenParams.MAX_NEW_TOKENS: 1000,
-            GenParams.TEMPERATURE: 0.1,
-            GenParams.DECODING_METHOD: DecodingMethods.GREEDY,
-            GenParams.STOP_SEQUENCES: stop_sequences,
-        }
+        # Reuse cached model object to avoid re-creating credentials on every call
+        cache_key = f"{model_id}:{url}"
+        if cache_key not in _model_cache:
+            parameters = {
+                GenParams.MAX_NEW_TOKENS: 2000,
+                GenParams.TEMPERATURE: 0.1,
+                GenParams.DECODING_METHOD: DecodingMethods.GREEDY,
+                GenParams.STOP_SEQUENCES: stop_sequences,
+            }
+            credentials = Credentials(url=url, api_key=api_key)
+            _model_cache[cache_key] = ModelInference(
+                model_id=model_id,
+                params=parameters,
+                credentials=credentials,
+                project_id=project_id
+            )
 
-        credentials = Credentials(url=url, api_key=api_key)
-        model_obj = ModelInference(
-            model_id=model_id,
-            params=parameters,
-            credentials=credentials,
-            project_id=project_id
-        )
-
+        model_obj = _model_cache[cache_key]
         response = model_obj.generate_text(prompt=prompt)
         return response[0] if isinstance(response, list) else response
 
@@ -274,13 +279,11 @@ def call_llm(messages, model=None):
 
 
 def call_llm_litellm(messages, model):
-    """Call LLM using litellm (fallback when WatsonX SDK unavailable)"""
+    """Call LLM using litellm (fallback when WatsonX SDK unavailable)."""
     try:
-        # Ensure model has watsonx/ prefix for litellm
         if not model.startswith("watsonx/"):
             model = f"watsonx/{model}"
 
-        # Convert messages to litellm format
         litellm_messages = []
         for msg in messages:
             if isinstance(msg, dict):
@@ -298,7 +301,7 @@ def call_llm_litellm(messages, model):
             model=model,
             messages=litellm_messages,
             temperature=0.1,
-            max_tokens=1000,
+            max_tokens=2000,
         )
 
         return response.choices[0].message.content
@@ -314,24 +317,22 @@ def call_llm_litellm(messages, model):
         print(f"LLM Error (litellm): {str(e)}")
         return f"Error calling LLM: {str(e)}"
 
-# Node functions
+
+# ── Node functions ────────────────────────────────────────────────────────────
+
 def get_products_node(state: AgentState):
-    """First node: Get all available products"""
+    """Step 1: Get all available products."""
     print("Step 1: Getting available products...")
-    
-    # Execute the get_products tool
+
     products = get_products()
-    
-    # Update state
     state["available_products"] = products
     state["current_step"] = "product_selection"
-    
-    # Add system message about available products
+
     products_msg = f"Available products: {', '.join(products)}"
     print(products_msg)
     state["messages"].append(AIMessage(content=f"Found {len(products)} products: {products_msg}"))
-    
     return state
+
 
 def _extract_products_from_utterance(utterance: str, available_products: list) -> tuple:
     """Extract source and target products from utterance.
@@ -341,7 +342,6 @@ def _extract_products_from_utterance(utterance: str, available_products: list) -
     utterance_lower = utterance.lower().strip()
     products_lower = [p.lower() for p in available_products]
 
-    # Pattern: "map X ... with Y ..." or "map X ... to Y ..."
     patterns = [
         r"map\s+(\w+)\s+.+?\s+with\s+(\w+)\s+",
         r"map\s+(\w+)\s+.+?\s+to\s+(\w+)\s+",
@@ -352,13 +352,12 @@ def _extract_products_from_utterance(utterance: str, available_products: list) -
         if match:
             src, tgt = match.groups()
             if src in products_lower and tgt in products_lower:
-                # Return original case from available_products
                 src_idx = products_lower.index(src)
                 tgt_idx = products_lower.index(tgt)
                 print(f"Extracted products from utterance: {available_products[src_idx]} -> {available_products[tgt_idx]}")
                 return available_products[src_idx], available_products[tgt_idx]
 
-    # Fallback: find products mentioned in utterance
+    # Fallback: find products mentioned in utterance by position
     found = []
     for i, p in enumerate(products_lower):
         pos = utterance_lower.find(p)
@@ -372,402 +371,455 @@ def _extract_products_from_utterance(utterance: str, available_products: list) -
 
     return None, None
 
+
 def select_product_node(state: AgentState):
-    """Second node: Select the most relevant product using LLM"""
-    print("Step 2: Selecting most relevant product...")
+    """Step 2: Identify both source and target products from the utterance."""
+    print("Step 2: Selecting source and target products...")
 
     user_query = state["user_query"]
     available_products = state["available_products"]
 
-    # Try to extract products directly from utterance first
     src_product, tgt_product = _extract_products_from_utterance(user_query, available_products)
-    if src_product:
-        # Use source product (AnyTool only handles one schema at a time)
-        state["selected_product"] = src_product
-        state["target_product"] = tgt_product  # Store for later use
-        state["current_step"] = "type_retrieval"
-        reasoning = f"Extracted source product '{src_product}' and target '{tgt_product}' from query"
+    if src_product and tgt_product:
+        state["selected_source_product"] = src_product
+        state["selected_target_product"] = tgt_product
+        reasoning = f"Extracted source='{src_product}', target='{tgt_product}' from query"
         print(reasoning)
         state["messages"].append(AIMessage(content=reasoning))
         return state
 
-    # Create prompt for product selection - more strict formatting
-    system_prompt = f"""You are selecting a product from a list based on a user query.
+    # LLM fallback: ask for both products in one call
+    system_prompt = f"""You are identifying the SOURCE and TARGET products for a schema mapping task.
 
 Available products: {available_products}
 
 RULES:
-1. Output ONLY the exact product name from the list above
-2. Do NOT include any explanation or reasoning
-3. Do NOT include quotes or punctuation
-4. The output must be exactly one of: {', '.join(available_products)}
+1. Output ONLY a JSON object: {{"source": "<product>", "target": "<product>"}}
+2. Both values must be exact names from the available products list
+3. No explanation, no extra text
 
-Example valid outputs: concert, turbo, instana"""
+Example: {{"source": "instana", "target": "concert"}}"""
 
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"Query: {user_query}\n\nOutput the single most relevant product name:"}
+        {"role": "user", "content": f"Query: {user_query}\n\nIdentify source and target products:"}
     ]
 
     raw_response = call_llm(messages, model=MODEL).strip()
-    print(f"LLM response: '{raw_response[:150]}...'")
+    print(f"LLM response: '{raw_response[:200]}'")
 
-    # Try to extract a valid product from the response
-    selected_product = None
+    src_product = None
+    tgt_product = None
 
-    # First check for exact match (case-insensitive)
-    response_lower = raw_response.lower().strip()
-    for p in available_products:
-        if response_lower == p.lower():
-            selected_product = p
-            break
+    try:
+        json_match = re.search(r'\{[^}]+\}', raw_response, re.DOTALL)
+        if json_match:
+            parsed = json.loads(json_match.group(0))
+            src_candidate = str(parsed.get("source", "")).strip()
+            tgt_candidate = str(parsed.get("target", "")).strip()
 
-    if selected_product is None:
-        # Find the FIRST mentioned product by position in response
-        first_positions = {}
-        for product in available_products:
-            pos = response_lower.find(product.lower())
+            products_lower = [p.lower() for p in available_products]
+            if src_candidate.lower() in products_lower:
+                src_product = available_products[products_lower.index(src_candidate.lower())]
+            if tgt_candidate.lower() in products_lower:
+                tgt_product = available_products[products_lower.index(tgt_candidate.lower())]
+    except (json.JSONDecodeError, ValueError, AttributeError) as e:
+        print(f"Could not parse product JSON: {e}")
+
+    # Position-based fallback within the LLM response
+    if not src_product or not tgt_product:
+        response_lower = raw_response.lower()
+        positions = {}
+        for p in available_products:
+            pos = response_lower.find(p.lower())
             if pos != -1:
-                first_positions[product] = pos
-
-        if first_positions:
-            # Select product that appears first (smallest position)
-            selected_product = min(first_positions, key=first_positions.get)
-            print(f"Extracted product '{selected_product}' (first mentioned at position {first_positions[selected_product]})")
+                positions[p] = pos
+        if len(positions) >= 2:
+            sorted_prods = sorted(positions.items(), key=lambda x: x[1])
+            src_product = src_product or sorted_prods[0][0]
+            tgt_product = tgt_product or sorted_prods[1][0]
 
     # Final fallback
-    if selected_product is None:
-        selected_product = available_products[0]
-        print(f"Warning: Could not parse product from response - using fallback")
-    
-    state["selected_product"] = selected_product
-    state["current_step"] = "type_retrieval"
-    
-    reasoning = f"Selected product '{selected_product}' as most relevant to query: '{user_query}'"
+    if not src_product:
+        src_product = available_products[0]
+        print("Warning: Could not identify source product - using first available")
+    if not tgt_product:
+        tgt_product = available_products[1] if len(available_products) > 1 else available_products[0]
+        print("Warning: Could not identify target product - using second available")
+
+    state["selected_source_product"] = src_product
+    state["selected_target_product"] = tgt_product
+    reasoning = f"Selected source='{src_product}', target='{tgt_product}'"
     print(reasoning)
     state["messages"].append(AIMessage(content=reasoning))
-    
     return state
 
-def get_types_node(state: AgentState):
-    """Third node: Get available types for selected product"""
-    print("Step 3: Getting available types for selected product...")
-    
-    selected_product = state["selected_product"]
-    
-    try:
-        # Execute the get_types_for_product tool
-        types_data = get_types_for_product(selected_product)
-        
-        # Ensure types_data is a list
-        if isinstance(types_data, str):
-            print(f"Warning: get_types_for_product returned string: {types_data}")
-            types_data = []
-        elif not isinstance(types_data, list):
-            print(f"Warning: get_types_for_product returned unexpected type: {type(types_data)}")
-            types_data = []
-        
-        state["available_types"] = types_data
-        state["current_step"] = "type_selection"
-        
-        if types_data:
-            types_summary = f"Found {len(types_data)} types in product '{selected_product}'"
-        else:
-            types_summary = f"No types found in product '{selected_product}'"
-        
-        print(types_summary)
-        state["messages"].append(AIMessage(content=types_summary))
-        
-    except Exception as e:
-        print(f"Error in get_types_node: {str(e)}")
-        state["available_types"] = []
-        state["messages"].append(AIMessage(content=f"Error getting types: {str(e)}"))
-    
-    return state
 
-def select_type_node(state: AgentState):
-    """Fourth node: Select the most relevant type using LLM"""
-    print("Step 4: Selecting most relevant type...")
-    
-    user_query = state["user_query"]
-    available_types = state["available_types"]
-    
-    # Check if we have any types available
+def _select_type_with_llm(user_query: str, product: str, available_types: list, role: str) -> str:
+    """Use LLM to select the most relevant type for a given product and role (source/target)."""
     if not available_types:
-        print("No types available for selection")
-        state["selected_type"] = ""
-        state["current_step"] = "property_retrieval"
-        state["messages"].append(AIMessage(content="No types available for selection"))
-        return state
-    
-    # Create detailed type descriptions for LLM
+        return ""
+
     type_descriptions = []
+    valid_types = []
     for type_info in available_types:
         if isinstance(type_info, dict) and 'type_name' in type_info:
             type_descriptions.append(
-                f"- {type_info['type_name']}: {type_info.get('description', 'No description')} ({type_info.get('property_count', 0)} properties)"
+                f"- {type_info['type_name']}: {type_info.get('description', 'No description')} "
+                f"({type_info.get('property_count', 0)} properties)"
             )
-    
-    if not type_descriptions:
-        print("No valid type descriptions found")
-        state["selected_type"] = ""
-        state["current_step"] = "property_retrieval"
-        state["messages"].append(AIMessage(content="No valid types found"))
-        return state
-    
-    valid_types = [t.get('type_name', '') for t in available_types if isinstance(t, dict)]
+            valid_types.append(type_info['type_name'])
 
-    system_prompt = f"""You are selecting a GraphQL type from a list based on a user query.
+    if not valid_types:
+        return ""
+
+    system_prompt = f"""You are selecting the most relevant GraphQL type from the {role} schema '{product}'.
 
 RULES:
 1. Output ONLY the exact type name from the available types
-2. Do NOT include any explanation or reasoning
-3. Do NOT include quotes or punctuation
-4. Choose the type most relevant to the user's query"""
+2. No explanation, no quotes, no punctuation
+3. Choose the type most relevant to the mapping task"""
 
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"Query: {user_query}\n\nAvailable types:\n" + "\n".join(type_descriptions) + "\n\nOutput the single most relevant type name:"}
+        {"role": "user", "content": (
+            f"Mapping query: {user_query}\n\n"
+            f"Available types in '{product}':\n" + "\n".join(type_descriptions) +
+            "\n\nOutput the single most relevant type name:"
+        )}
     ]
 
     raw_response = call_llm(messages, model=MODEL).strip()
-    print(f"LLM type response: '{raw_response[:150]}...'")
+    print(f"LLM {role} type response: '{raw_response[:150]}'")
 
-    # Try to extract a valid type from the response
-    selected_type = None
-
-    # First check for exact match
+    # Exact match first
     if raw_response in valid_types:
-        selected_type = raw_response
-    else:
-        # Find the FIRST mentioned type by position in response
-        first_positions = {}
-        for type_name in valid_types:
-            pos = raw_response.find(type_name)
-            if pos != -1:
-                first_positions[type_name] = pos
+        return raw_response
 
-        if first_positions:
-            # Select type that appears first (smallest position)
-            selected_type = min(first_positions, key=first_positions.get)
-            print(f"Extracted type '{selected_type}' (first mentioned at position {first_positions[selected_type]})")
+    # Find first mentioned
+    first_positions = {}
+    for type_name in valid_types:
+        pos = raw_response.find(type_name)
+        if pos != -1:
+            first_positions[type_name] = pos
 
-    # Final fallback
-    if selected_type is None and valid_types:
-        selected_type = valid_types[0]
-        print(f"Warning: Could not parse type from response - using fallback")
-    
-    state["selected_type"] = selected_type
-    state["current_step"] = "property_retrieval"
-    
-    reasoning = f"Selected type '{selected_type}' as most relevant to query"
-    print(reasoning)
-    state["messages"].append(AIMessage(content=reasoning))
-    
-    return state
+    if first_positions:
+        selected = min(first_positions, key=first_positions.get)
+        print(f"Extracted {role} type '{selected}' from response")
+        return selected
 
-def get_properties_node(state: AgentState):
-    """Fifth node: Get properties for selected type"""
-    print("Step 5: Getting properties for selected type...")
-    
-    selected_product = state["selected_product"]
-    selected_type = state["selected_type"]
-    
-    if not selected_type:
-        print("No type selected, cannot get properties")
-        state["final_properties"] = {"type_name": "", "properties": []}
-        state["current_step"] = "property_analysis"
-        return state
-    
+    # Fallback
+    print(f"Warning: Could not parse {role} type - using first available")
+    return valid_types[0]
+
+
+def get_source_types_node(state: AgentState):
+    """Step 3a: Get available types for source product."""
+    print("Step 3a: Getting types for source product...")
+    product = state["selected_source_product"]
     try:
-        # Execute the get_properties_for_type tool
-        properties_data = get_properties_for_type(selected_product, selected_type)
-        
-        # Ensure properties_data is properly structured
-        if not isinstance(properties_data, dict):
-            properties_data = {"type_name": selected_type, "properties": []}
-        
-        state["final_properties"] = properties_data
-        state["current_step"] = "property_analysis"
-        
+        types_data = get_types_for_product(product)
+        if not isinstance(types_data, list):
+            types_data = []
+        state["available_source_types"] = types_data
+        print(f"Found {len(types_data)} source types in '{product}'")
+        state["messages"].append(AIMessage(content=f"Source product '{product}': {len(types_data)} types"))
     except Exception as e:
-        print(f"Error getting properties: {str(e)}")
-        state["final_properties"] = {"type_name": selected_type, "properties": []}
-        state["current_step"] = "property_analysis"
-    
+        print(f"Error in get_source_types_node: {str(e)}")
+        state["available_source_types"] = []
+    state["current_step"] = "source_type_selection"
     return state
+
+
+def select_source_type_node(state: AgentState):
+    """Step 4a: Select the most relevant source type."""
+    print("Step 4a: Selecting source type...")
+    selected = _select_type_with_llm(
+        state["user_query"],
+        state["selected_source_product"],
+        state["available_source_types"],
+        "source"
+    )
+    state["selected_source_type"] = selected
+    print(f"Selected source type: '{selected}'")
+    state["messages"].append(AIMessage(content=f"Source type: '{selected}'"))
+    state["current_step"] = "source_property_retrieval"
+    return state
+
+
+def get_source_properties_node(state: AgentState):
+    """Step 5a: Get properties for selected source type."""
+    print("Step 5a: Getting source properties...")
+    product = state["selected_source_product"]
+    type_name = state["selected_source_type"]
+    if not type_name:
+        state["source_properties"] = {"type_name": "", "properties": []}
+    else:
+        try:
+            state["source_properties"] = get_properties_for_type(product, type_name)
+        except Exception as e:
+            print(f"Error getting source properties: {e}")
+            state["source_properties"] = {"type_name": type_name, "properties": []}
+    print(f"Source properties: {len(state['source_properties'].get('properties', []))} fields")
+    state["current_step"] = "target_type_retrieval"
+    return state
+
+
+def get_target_types_node(state: AgentState):
+    """Step 3b: Get available types for target product."""
+    print("Step 3b: Getting types for target product...")
+    product = state["selected_target_product"]
+    try:
+        types_data = get_types_for_product(product)
+        if not isinstance(types_data, list):
+            types_data = []
+        state["available_target_types"] = types_data
+        print(f"Found {len(types_data)} target types in '{product}'")
+        state["messages"].append(AIMessage(content=f"Target product '{product}': {len(types_data)} types"))
+    except Exception as e:
+        print(f"Error in get_target_types_node: {str(e)}")
+        state["available_target_types"] = []
+    state["current_step"] = "target_type_selection"
+    return state
+
+
+def select_target_type_node(state: AgentState):
+    """Step 4b: Select the most relevant target type."""
+    print("Step 4b: Selecting target type...")
+    selected = _select_type_with_llm(
+        state["user_query"],
+        state["selected_target_product"],
+        state["available_target_types"],
+        "target"
+    )
+    state["selected_target_type"] = selected
+    print(f"Selected target type: '{selected}'")
+    state["messages"].append(AIMessage(content=f"Target type: '{selected}'"))
+    state["current_step"] = "target_property_retrieval"
+    return state
+
+
+def get_target_properties_node(state: AgentState):
+    """Step 5b: Get properties for selected target type."""
+    print("Step 5b: Getting target properties...")
+    product = state["selected_target_product"]
+    type_name = state["selected_target_type"]
+    if not type_name:
+        state["target_properties"] = {"type_name": "", "properties": []}
+    else:
+        try:
+            state["target_properties"] = get_properties_for_type(product, type_name)
+        except Exception as e:
+            print(f"Error getting target properties: {e}")
+            state["target_properties"] = {"type_name": type_name, "properties": []}
+    print(f"Target properties: {len(state['target_properties'].get('properties', []))} fields")
+    state["current_step"] = "mapping_analysis"
+    return state
+
 
 def analyze_properties_node(state: AgentState):
-    """Final node: Analyze and present relevant properties"""
-    print("Step 6: Analyzing and presenting relevant properties...")
-    
+    """Step 6: Cross-map source fields to target fields.
+
+    FIX BUG 2+3: This node now has BOTH source and target properties and produces
+    genuine source→target field mappings instead of source→source self-mappings.
+    """
+    print("Step 6: Cross-mapping source fields to target fields...")
+
     user_query = state["user_query"]
-    properties_data = state["final_properties"]
-    
-    # Create detailed property descriptions for analysis
-    property_descriptions = []
-    for prop in properties_data['properties']:
-        property_descriptions.append(
-            f"- {prop['name']} ({prop['data_type']}): {prop['description']}"
+    source_props = state["source_properties"]
+    target_props = state["target_properties"]
+    source_product = state["selected_source_product"]
+    target_product = state["selected_target_product"]
+    source_type = state["selected_source_type"]
+    target_type = state["selected_target_type"]
+
+    # Build property description strings
+    source_descriptions = []
+    for prop in source_props.get('properties', []):
+        source_descriptions.append(
+            f"  - {prop['name']} ({prop['data_type']}): {prop['description']}"
         )
-    
-    system_prompt = """You are an intelligent assistant that analyzes user queries and maps them to relevant properties.
-    Your task is to identify the most relevant properties and return them in a specific JSON format.
-    
-    For each relevant property you identify, you need to:
-    1. Infer the source property from the user's query (what they're asking about)
-    2. Map it to the selected product and type
-    3. Generate an appropriate mapped property name
-    4. Provide justification for why this mapping is relevant
-    
-    You must respond with ONLY a valid JSON array in this exact format:
-    [
-        {
-            "source_property": "<property name inferred from user query>",
-            "mapped_product": "<selected_product>",
-            "mapped_type": "<selected_type>",
-            "mapped_property": "<property name from available properties>",
-            "justification": "<explanation of why this mapping is relevant>"
-        }
-    ]
-    
-    Important:
-    - Only include properties that are directly relevant to the user's query
-    - The source_property should reflect what the user is asking about
-    - The mapped_property should be the exact property name from the available properties
-    - Provide clear, concise justification for each mapping
-    - Return only the JSON array, no additional text"""
-    
+
+    target_descriptions = []
+    for prop in target_props.get('properties', []):
+        target_descriptions.append(
+            f"  - {prop['name']} ({prop['data_type']}): {prop['description']}"
+        )
+
+    if not source_descriptions:
+        print("No source properties available - cannot produce mappings")
+        state["final_mappings"] = []
+        state["reasoning"] = []
+        state["current_step"] = "complete"
+        state["messages"].append(AIMessage(content="No source properties to map"))
+        return state
+
+    if not target_descriptions:
+        print("No target properties available - cannot produce mappings")
+        state["final_mappings"] = []
+        state["reasoning"] = []
+        state["current_step"] = "complete"
+        state["messages"].append(AIMessage(content="No target properties to map"))
+        return state
+
+    system_prompt = """You are a schema mapping expert. Your task is to map fields from a SOURCE schema to semantically equivalent fields in a TARGET schema.
+
+For each source field, identify the best matching target field based on semantic meaning, not just name similarity.
+A source field may have no match in the target (omit it), or may map to a differently named target field with the same meaning.
+
+You must respond with ONLY a valid JSON array in this exact format:
+[
+    {
+        "source_property": "<exact field name from SOURCE schema>",
+        "target_property": "<exact field name from TARGET schema>",
+        "justification": "<brief explanation of why these fields are semantically equivalent>"
+    }
+]
+
+Rules:
+- source_property must be an exact name from the SOURCE properties list
+- target_property must be an exact name from the TARGET properties list
+- Only include mappings where there is genuine semantic equivalence
+- Omit source fields that have no meaningful target equivalent
+- Return only the JSON array, no additional text"""
+
+    user_content = f"""Mapping task: {user_query}
+
+SOURCE schema: {source_product}.{source_type}
+SOURCE properties:
+{chr(10).join(source_descriptions)}
+
+TARGET schema: {target_product}.{target_type}
+TARGET properties:
+{chr(10).join(target_descriptions)}
+
+Map the SOURCE fields to semantically equivalent TARGET fields:"""
+
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"""User query: '{user_query}'
-
-Selected product: {state['selected_product']}
-Selected type: {state['selected_type']}
-
-Available properties:
-{chr(10).join(property_descriptions)}
-
-Analyze the user query and return the relevant property mappings in the required JSON format."""}
+        {"role": "user", "content": user_content}
     ]
-    
-    print(messages[-1]["content"])
-    
-    # Call LLM and get response
+
+    print(f"Mapping {len(source_props.get('properties', []))} source fields "
+          f"against {len(target_props.get('properties', []))} target fields")
+
     raw_response = call_llm(messages, model=MODEL).strip()
-    
-    # Parse and validate JSON response
+
+    # Parse JSON response
     try:
-        # Extract JSON from response if it contains additional text
         json_match = re.search(r'\[.*\]', raw_response, re.DOTALL)
         if json_match:
             json_str = json_match.group(0)
         else:
             json_str = raw_response.strip()
-        
-        # Parse JSON
+
         analysis_result = json.loads(json_str)
-        
-        # Validate structure
+
         if not isinstance(analysis_result, list):
             raise ValueError("Response must be a JSON array")
-        
+
+        # Validate and filter entries
+        valid_source_names = {p['name'] for p in source_props.get('properties', [])}
+        valid_target_names = {p['name'] for p in target_props.get('properties', [])}
+
+        filtered_result = []
         for item in analysis_result:
-            required_keys = ["source_property", "mapped_product", "mapped_type", "mapped_property", "justification"]
+            required_keys = ["source_property", "target_property", "justification"]
             if not all(key in item for key in required_keys):
-                raise ValueError(f"Missing required keys in item: {item}")
-        
-        print(f"Successfully parsed {len(analysis_result)} property mappings")
-        
+                print(f"Skipping item missing required keys: {item}")
+                continue
+            src_name = item["source_property"]
+            tgt_name = item["target_property"]
+            # Only keep mappings with valid field names from both schemas
+            if src_name not in valid_source_names:
+                print(f"Skipping mapping: '{src_name}' not in source schema")
+                continue
+            if tgt_name not in valid_target_names:
+                print(f"Skipping mapping: '{tgt_name}' not in target schema")
+                continue
+            filtered_result.append(item)
+
+        print(f"Produced {len(filtered_result)} valid field mappings")
+        analysis_result = filtered_result
+
     except (json.JSONDecodeError, ValueError) as e:
         print(f"Error parsing JSON response: {e}")
-        print(f"Raw response: {raw_response}")
-        
-        # Fallback: create a basic structure if parsing fails
-        analysis_result = [{
-            "source_property": "unknown",
-            "mapped_product": state['selected_product'],
-            "mapped_type": state['selected_type'],
-            "mapped_property": properties_data['properties'][0]['name'] if properties_data['properties'] else "unknown",
-            "justification": "Failed to parse LLM response, using fallback mapping"
-        }]
-    
-    # Store the structured result
+        print(f"Raw response: {raw_response[:500]}")
+        analysis_result = []
+
+    state["final_mappings"] = analysis_result
     state["reasoning"] = analysis_result
     state["current_step"] = "complete"
     state["messages"].append(AIMessage(content=json.dumps(analysis_result, indent=2)))
-    
     return state
 
-# Build the graph
+
+# ── Graph construction ────────────────────────────────────────────────────────
+
 def create_property_search_graph():
-    """Create and return the LangGraph workflow"""
-    
+    """Create and return the LangGraph workflow."""
     workflow = StateGraph(AgentState)
-    
-    # Add nodes
+
     workflow.add_node("get_products", get_products_node)
     workflow.add_node("select_product", select_product_node)
-    workflow.add_node("get_types", get_types_node)
-    workflow.add_node("select_type", select_type_node)
-    workflow.add_node("get_properties", get_properties_node)
+    workflow.add_node("get_source_types", get_source_types_node)
+    workflow.add_node("select_source_type", select_source_type_node)
+    workflow.add_node("get_source_properties", get_source_properties_node)
+    workflow.add_node("get_target_types", get_target_types_node)
+    workflow.add_node("select_target_type", select_target_type_node)
+    workflow.add_node("get_target_properties", get_target_properties_node)
     workflow.add_node("analyze_properties", analyze_properties_node)
-    
-    # Add edges (sequential flow)
+
+    # Sequential: source path first, then target path, then cross-mapping
     workflow.add_edge("get_products", "select_product")
-    workflow.add_edge("select_product", "get_types")
-    workflow.add_edge("get_types", "select_type")
-    workflow.add_edge("select_type", "get_properties")
-    workflow.add_edge("get_properties", "analyze_properties")
+    workflow.add_edge("select_product", "get_source_types")
+    workflow.add_edge("get_source_types", "select_source_type")
+    workflow.add_edge("select_source_type", "get_source_properties")
+    workflow.add_edge("get_source_properties", "get_target_types")
+    workflow.add_edge("get_target_types", "select_target_type")
+    workflow.add_edge("select_target_type", "get_target_properties")
+    workflow.add_edge("get_target_properties", "analyze_properties")
     workflow.add_edge("analyze_properties", END)
-    
-    # Set entry point
+
     workflow.set_entry_point("get_products")
-    
     return workflow.compile()
 
-def print_stream(stream):
-    for s in stream:
-        message = s["messages"][-1]
-        if isinstance(message, tuple):
-            print(message)
-        else:
-            message.pretty_print()
 
-# Main execution function
 def search_properties(user_query: str):
-    """Main function to execute the property search"""
-    
+    """Main function to execute the property search."""
     print(f"Starting property search for query: '{user_query}'")
     print("=" * 60)
-    
-    # Initialize state
+
     initial_state = {
         "messages": [HumanMessage(content=user_query)],
         "user_query": user_query,
         "current_step": "initialization",
         "available_products": [],
-        "selected_product": "",
-        "available_types": [],
-        "selected_type": "",
-        "final_properties": {},
+        "selected_source_product": "",
+        "available_source_types": [],
+        "selected_source_type": "",
+        "source_properties": {},
+        "selected_target_product": "",
+        "available_target_types": [],
+        "selected_target_type": "",
+        "target_properties": {},
+        "final_mappings": [],
         "reasoning": ""
     }
-    
-    # Create and run the graph
+
     graph = create_property_search_graph()
     final_state = graph.invoke(initial_state)
-    # print_stream(graph.stream(initial_state))
-    
+
     print("\n" + "=" * 60)
     print("Search completed!")
-    print(f"Final reasoning: {final_state['reasoning']}")
-    
+    n_mappings = len(final_state.get('final_mappings', []))
+    print(f"Mappings produced: {n_mappings}")
+
     return final_state
+
 
 # Example usage
 if __name__ == "__main__":
-    
     data = {
         "name": "instana_ServiceEndpoint.id",
         "description": "Unique ID of the endpoint.",
@@ -778,21 +830,19 @@ if __name__ == "__main__":
             "graphql_type": "ServiceEndpoint"
         }
     }
-    # Test queries
     test_queries = [
         "find a property in concert which can be mapped directly to the following property:\n"
         f"{data['name']}: {data['description']}"
     ]
-    
+
     for query in test_queries:
         print(f"\n{'='*80}")
         print(f"Testing query: {query}")
         print('='*80)
-        
+
         try:
             result = search_properties(query)
-            # print(f"\nResult: {result['reasoning']}")
         except Exception as e:
             print(f"Error processing query: {e}")
-        
+
         print("\n" + "="*80)

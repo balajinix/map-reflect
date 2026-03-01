@@ -71,6 +71,7 @@ METHODS = {
         # (formerly split between Map-Reflect and UE-Reflect)
         'dirs': ['map_reflect/results', 'results/oracle_mode/map_reflect_results',
                  'results/signal_ablation/base',
+                 'results/signal_ablation/uq_refl',
                  'results/reflection_fix_v4/uq_refl',
                  'results/reflection_fix_v4/uq_refl_granite',
                  'results/reflection_fix_v4/self_refl'],
@@ -301,6 +302,13 @@ def fields_match(gt_field: str, pred_field: str) -> bool:
 
     # Exact match
     if gt_lower == pred_lower:
+        return True
+
+    # Normalize dotted format to underscore: strip product prefix and convert . to _
+    # E.g., "nl2gql_Singer_in_concert.concert_id" -> "singer_in_concert_concert_id"
+    gt_flat = re.sub(r'^(nl2gql_|omop_)', '', gt_lower).replace('.', '_')
+    pred_flat = re.sub(r'^(nl2gql_|omop_)', '', pred_lower).replace('.', '_')
+    if gt_flat == pred_flat:
         return True
 
     # Resolve nested paths to flat equivalents
@@ -765,35 +773,42 @@ def main():
                     files.extend(find_result_files(method_dir, dataset, model_pattern))
 
                 if files:
-                    # Pick best file: prefer higher F1, then more samples
+                    # Pick best file: prefer higher F1 among files with sufficient samples
                     best_file = None
                     best_acc = None
 
+                    # First pass: find max sample count to set threshold
+                    all_accs = []
                     for f in files:
                         try:
                             results = load_results(f)
                             use_oracle_api = (method_name == 'SMT')
                             acc = calculate_accuracies(results, dataset, oracle_api=use_oracle_api)
-
-                            def is_better(new, old):
-                                if old is None:
-                                    return True
-                                # Prefer files with more API-correct samples (more meaningful eval)
-                                # A file with 365 API-correct samples is more reliable than
-                                # one with 8 perfect samples
-                                if new['api_correct_with_gt'] != old['api_correct_with_gt']:
-                                    return new['api_correct_with_gt'] > old['api_correct_with_gt']
-                                # Then prefer higher F1
-                                if new['f1'] != old['f1']:
-                                    return new['f1'] > old['f1']
-                                # Then prefer more samples
-                                return new['samples'] > old['samples']
-
-                            if is_better(acc, best_acc):
-                                best_acc = acc
-                                best_file = f
+                            all_accs.append((f, acc))
                         except Exception as e:
                             print(f"Warning: Error loading {f}: {e}")
+
+                    if all_accs:
+                        max_samples = max(a['samples'] for _, a in all_accs)
+                        # Require at least 80% of max samples to filter tiny test files
+                        min_samples = int(max_samples * 0.8)
+
+                        def is_better(new, old):
+                            if old is None:
+                                return True
+                            # Among files with sufficient samples, prefer higher F1
+                            if new['f1'] != old['f1']:
+                                return new['f1'] > old['f1']
+                            # Then prefer more API-correct samples
+                            if new['api_correct_with_gt'] != old['api_correct_with_gt']:
+                                return new['api_correct_with_gt'] > old['api_correct_with_gt']
+                            # Then prefer more samples
+                            return new['samples'] > old['samples']
+
+                        for f, acc in all_accs:
+                            if acc['samples'] >= min_samples and is_better(acc, best_acc):
+                                best_acc = acc
+                                best_file = f
 
                     if best_acc:
                         key = (method_name, model_short, dataset)

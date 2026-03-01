@@ -1,0 +1,236 @@
+{
+  "bank2_branch": {
+    "name": "branch",
+    "description": "Table branch in bank2 schema",
+    "fields": {
+      "branch_id": {
+        "name": "branch_id",
+        "type": "int",
+        "description": "Column branch_id in table branch"
+      },
+      "branch_name": {
+        "name": "branch_name",
+        "type": "varchar",
+        "description": "Column branch_name in table branch"
+      },
+      "assets": {
+        "name": "assets",
+        "type": "int",
+        "description": "Column assets in table branch"
+      },
+      "branch_address": {
+        "name": "branch_address",
+        "type": "varchar",
+        "description": "Column branch_address in table branch"
+      }
+    }
+  },
+  "bank2_banker_info": {
+    "name": "banker_info",
+    "description": "Table banker_info in bank2 schema",
+    "fields": {
+      "banker_id": {
+        "name": "banker_id",
+        "type": "int",
+        "description": "Column banker_id in table banker_info"
+      },
+      "banker_name": {
+        "name": "banker_name",
+        "type": "varchar",
+        "description": "Column banker_name in table banker_info"
+      },
+      "branch_id": {
+        "name": "branch_id",
+        "type": "int",
+        "description": "Column branch_id in table banker_info"
+      }
+    }
+  },
+  "bank2_account": {
+    "name": "account",
+    "description": "Table account in bank2 schema",
+    "fields": {
+      "account_id": {
+        "name": "account_id",
+        "type": "int",
+        "description": "Column account_id in table account"
+      },
+      "account_type": {
+        "name": "account_type",
+        "type": "varchar",
+        "description": "Column account_type in table account"
+      },
+      "account_balance": {
+        "name": "account_balance",
+        "type": "int",
+        "description": "Column account_balance in table account"
+      },
+      "branch_id": {
+        "name": "branch_id",
+        "type": "int",
+        "description": "Column branch_id in table account"
+      }
+    }
+  },
+  "bank2_transaction": {
+    "name": "transaction",
+    "description": "Table transaction in bank2 schema",
+    "fields": {
+      "transaction_id": {
+        "name": "transaction_id",
+        "type": "int",
+        "description": "Column transaction_id in table transaction"
+      },
+      "amount": {
+        "name": "amount",
+        "type": "int",
+        "description": "Column amount in table transaction"
+      },
+      "customer_id": {
+        "name": "customer_id",
+        "type": "int",
+        "description": "Column customer_id in table transaction"
+      },
+      "account_id": {
+        "name": "account_id",
+        "type": "int",
+        "description": "Column account_id in table transaction"
+      }
+    }
+  },
+  "bank2_customer": {
+    "name": "customer",
+    "description": "Table customer in bank2 schema",
+    "fields": {
+      "customer_id": {
+        "name": "customer_id",
+        "type": "int",
+        "description": "Column customer_id in table customer"
+      },
+      "customer_name": {
+        "name": "customer_name",
+        "type": "varchar",
+        "description": "Column customer_name in table customer"
+      },
+      "mobileno": {
+        "name": "mobileno",
+        "type": "varchar",
+        "description": "Column mobileno in table customer"
+      },
+      "dob": {
+        "name": "dob",
+        "type": "date",
+        "description": "Column dob in table customer"
+      },
+      "account_id": {
+        "name": "account_id",
+        "type": "int",
+        "description": "Column account_id in table customer"
+      }
+    }
+  },
+  "bank2_customer_credit_card": {
+    "name": "customer_credit_card",
+    "description": "Table customer_credit_card in bank2 schema",
+    "fields": {
+      "credit_card_id": {
+        "name": "credit_card_id",
+        "type": "int",
+        "description": "Column credit_card_id in table customer_credit_card"
+      },
+      "expiry_date": {
+        "name": "expiry_date",
+        "type": "date",
+        "description": "Column expiry_date in table customer_credit_card"
+      },
+      "card_limit": {
+        "name": "card_limit",
+        "type": "int",
+        "description": "Column card_limit in table customer_credit_card"
+      },
+      "customer_id": {
+        "name": "customer_id",
+        "type": "int",
+        "description": "Column customer_id in table customer_credit_card"
+      },
+      "account_id": {
+        "name": "account_id",
+        "type": "int",
+        "description": "Column account_id in table customer_credit_card"
+      }
+    }
+  },
+  "bank2_loan": {
+    "name": "loan",
+    "description": "Table loan in bank2 schema",
+    "fields": {
+      "loan_id": {
+        "name": "loan_id",
+        "type": "int",
+        "description": "Column loan_id in table loan"
+      },
+      "issued_amount": {
+        "name": "issued_amount",
+        "type": "int",
+        "description": "Column issued_amount in table loan"
+      },
+      "remaining_amount": {
+        "name": "remaining_amount",
+        "type": "int",
+        "description": "Column remaining_amount in table loan"
+      },
+      "branch_id": {
+        "name": "branch_id",
+        "type": "int",
+        "description": "Column branch_id in table loan"
+      },
+      "account_id": {
+        "name": "account_id",
+        "type": "int",
+        "description": "Column account_id in table loan"
+      }
+    }
+  },
+  "bank2_loan_payment": {
+    "name": "loan_payment",
+    "description": "Table loan_payment in bank2 schema",
+    "fields": {
+      "loan_payment_id": {
+        "name": "loan_payment_id",
+        "type": "int",
+        "description": "Column loan_payment_id in table loan_payment"
+      },
+      "amount": {
+        "name": "amount",
+        "type": "int",
+        "description": "Column amount in table loan_payment"
+      },
+      "loan_id": {
+        "name": "loan_id",
+        "type": "int",
+        "description": "Column loan_id in table loan_payment"
+      }
+    }
+  },
+  "bank2_borrower": {
+    "name": "borrower",
+    "description": "Table borrower in bank2 schema",
+    "fields": {
+      "borrower_id": {
+        "name": "borrower_id",
+        "type": "int",
+        "description": "Column borrower_id in table borrower"
+      },
+      "customer_id": {
+        "name": "customer_id",
+        "type": "int",
+        "description": "Column customer_id in table borrower"
+      },
+      "loan_id": {
+        "name": "loan_id",
+        "type": "int",
+        "description": "Column loan_id in table borrower"
+      }
+    }
+  }
+}

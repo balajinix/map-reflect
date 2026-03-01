@@ -75,33 +75,46 @@ def build_field_lookup(schema_info: Dict) -> Dict[str, str]:
     return lookup
 
 
+# Minimum token length to use in substring matching.  Short tokens like "id",
+# "at", "on" would match almost everything and produce spurious mappings.
+_MIN_FUZZY_TOKEN_LEN = 6
+
+
 def find_best_match(human_name: str, lookup: Dict[str, str], schema_id: str = '') -> Optional[str]:
-    """Find the best matching schema field name for a human-readable name."""
+    """Find the best matching schema field name for a human-readable name.
+
+    Matching is attempted in order from most to least precise:
+      1. Direct normalised-name match (exact, safe)
+      2. Individual word match with a minimum length guard (avoids short tokens
+         like "id" matching every field that contains the letters "id")
+      3. Substring match with the same length guard on both the key and the
+         query token (prevents "id" in "person_id" matching "administration")
+      4. No synthetic placeholder is generated - returning None is safer than
+         inventing a field name that will silently inflate false-positive counts.
+    """
     normalized = normalize_name(human_name)
 
-    # Direct match
+    # 1. Direct match
     if normalized in lookup:
         return lookup[normalized]
 
-    # Try matching individual words
+    # 2. Individual word match - only for tokens long enough to be distinctive
     words = normalized.split()
     for word in words:
-        if len(word) > 3 and word in lookup:
+        if len(word) >= _MIN_FUZZY_TOKEN_LEN and word in lookup:
             return lookup[word]
 
-    # Try substring matching
+    # 3. Substring match - both the lookup key and the query token must be long
+    #    enough that a containment relationship is meaningful
     for key, value in lookup.items():
-        if len(key) > 3:
-            if key in normalized or normalized in key:
-                return value
+        if len(key) < _MIN_FUZZY_TOKEN_LEN:
+            continue
+        if key in normalized and len(key) >= _MIN_FUZZY_TOKEN_LEN:
+            return value
+        if normalized in key and len(normalized) >= _MIN_FUZZY_TOKEN_LEN:
+            return value
 
-    # If we have schema_id, return a placeholder with schema prefix
-    if schema_id:
-        # Convert human name to field-like format
-        field_name = re.sub(r'[^a-z0-9]', '_', normalized)
-        field_name = re.sub(r'_+', '_', field_name).strip('_')
-        return f"{schema_id}.{field_name}"
-
+    # 4. No match found - do not fabricate a field name
     return None
 
 

@@ -1,0 +1,547 @@
+{
+  "sakila_actor": {
+    "name": "actor",
+    "description": "Table actor in sakila schema",
+    "fields": {
+      "actor_id": {
+        "name": "actor_id",
+        "type": "smallint",
+        "description": "Column actor_id in table actor"
+      },
+      "first_name": {
+        "name": "first_name",
+        "type": "varchar",
+        "description": "Column first_name in table actor"
+      },
+      "last_name": {
+        "name": "last_name",
+        "type": "varchar",
+        "description": "Column last_name in table actor"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table actor"
+      }
+    }
+  },
+  "sakila_address": {
+    "name": "address",
+    "description": "Table address in sakila schema",
+    "fields": {
+      "address_id": {
+        "name": "address_id",
+        "type": "smallint",
+        "description": "Column address_id in table address"
+      },
+      "address": {
+        "name": "address",
+        "type": "varchar",
+        "description": "Column address in table address"
+      },
+      "address2": {
+        "name": "address2",
+        "type": "varchar",
+        "description": "Column address2 in table address"
+      },
+      "district": {
+        "name": "district",
+        "type": "varchar",
+        "description": "Column district in table address"
+      },
+      "city_id": {
+        "name": "city_id",
+        "type": "smallint",
+        "description": "Column city_id in table address"
+      },
+      "postal_code": {
+        "name": "postal_code",
+        "type": "varchar",
+        "description": "Column postal_code in table address"
+      },
+      "phone": {
+        "name": "phone",
+        "type": "varchar",
+        "description": "Column phone in table address"
+      },
+      "location": {
+        "name": "location",
+        "type": "geometry",
+        "description": "Column location in table address"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table address"
+      }
+    }
+  },
+  "sakila_category": {
+    "name": "category",
+    "description": "Table category in sakila schema",
+    "fields": {
+      "category_id": {
+        "name": "category_id",
+        "type": "tinyint",
+        "description": "Column category_id in table category"
+      },
+      "name": {
+        "name": "name",
+        "type": "varchar",
+        "description": "Column name in table category"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table category"
+      }
+    }
+  },
+  "sakila_city": {
+    "name": "city",
+    "description": "Table city in sakila schema",
+    "fields": {
+      "city_id": {
+        "name": "city_id",
+        "type": "smallint",
+        "description": "Column city_id in table city"
+      },
+      "city": {
+        "name": "city",
+        "type": "varchar",
+        "description": "Column city in table city"
+      },
+      "country_id": {
+        "name": "country_id",
+        "type": "smallint",
+        "description": "Column country_id in table city"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table city"
+      }
+    }
+  },
+  "sakila_country": {
+    "name": "country",
+    "description": "Table country in sakila schema",
+    "fields": {
+      "country_id": {
+        "name": "country_id",
+        "type": "smallint",
+        "description": "Column country_id in table country"
+      },
+      "country": {
+        "name": "country",
+        "type": "varchar",
+        "description": "Column country in table country"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table country"
+      }
+    }
+  },
+  "sakila_customer": {
+    "name": "customer",
+    "description": "Table customer in sakila schema",
+    "fields": {
+      "customer_id": {
+        "name": "customer_id",
+        "type": "smallint",
+        "description": "Column customer_id in table customer"
+      },
+      "store_id": {
+        "name": "store_id",
+        "type": "tinyint",
+        "description": "Column store_id in table customer"
+      },
+      "first_name": {
+        "name": "first_name",
+        "type": "varchar",
+        "description": "Column first_name in table customer"
+      },
+      "last_name": {
+        "name": "last_name",
+        "type": "varchar",
+        "description": "Column last_name in table customer"
+      },
+      "email": {
+        "name": "email",
+        "type": "varchar",
+        "description": "Column email in table customer"
+      },
+      "address_id": {
+        "name": "address_id",
+        "type": "smallint",
+        "description": "Column address_id in table customer"
+      },
+      "active": {
+        "name": "active",
+        "type": "boolean",
+        "description": "Column active in table customer"
+      },
+      "create_date": {
+        "name": "create_date",
+        "type": "datetime",
+        "description": "Column create_date in table customer"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table customer"
+      }
+    }
+  },
+  "sakila_film": {
+    "name": "film",
+    "description": "Table film in sakila schema",
+    "fields": {
+      "film_id": {
+        "name": "film_id",
+        "type": "smallint",
+        "description": "Column film_id in table film"
+      },
+      "title": {
+        "name": "title",
+        "type": "varchar",
+        "description": "Column title in table film"
+      },
+      "description": {
+        "name": "description",
+        "type": "text",
+        "description": "Column description in table film"
+      },
+      "release_year": {
+        "name": "release_year",
+        "type": "year",
+        "description": "Column release_year in table film"
+      },
+      "language_id": {
+        "name": "language_id",
+        "type": "tinyint",
+        "description": "Column language_id in table film"
+      },
+      "original_language_id": {
+        "name": "original_language_id",
+        "type": "tinyint",
+        "description": "Column original_language_id in table film"
+      },
+      "rental_duration": {
+        "name": "rental_duration",
+        "type": "tinyint",
+        "description": "Column rental_duration in table film"
+      },
+      "rental_rate": {
+        "name": "rental_rate",
+        "type": "decimal",
+        "description": "Column rental_rate in table film"
+      },
+      "length": {
+        "name": "length",
+        "type": "smallint",
+        "description": "Column length in table film"
+      },
+      "replacement_cost": {
+        "name": "replacement_cost",
+        "type": "decimal",
+        "description": "Column replacement_cost in table film"
+      },
+      "rating": {
+        "name": "rating",
+        "type": "enum",
+        "description": "Column rating in table film"
+      },
+      "special_features": {
+        "name": "special_features",
+        "type": "set",
+        "description": "Column special_features in table film"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table film"
+      }
+    }
+  },
+  "sakila_film_actor": {
+    "name": "film_actor",
+    "description": "Table film_actor in sakila schema",
+    "fields": {
+      "actor_id": {
+        "name": "actor_id",
+        "type": "smallint",
+        "description": "Column actor_id in table film_actor"
+      },
+      "film_id": {
+        "name": "film_id",
+        "type": "smallint",
+        "description": "Column film_id in table film_actor"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table film_actor"
+      }
+    }
+  },
+  "sakila_film_category": {
+    "name": "film_category",
+    "description": "Table film_category in sakila schema",
+    "fields": {
+      "film_id": {
+        "name": "film_id",
+        "type": "smallint",
+        "description": "Column film_id in table film_category"
+      },
+      "category_id": {
+        "name": "category_id",
+        "type": "tinyint",
+        "description": "Column category_id in table film_category"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table film_category"
+      }
+    }
+  },
+  "sakila_film_text": {
+    "name": "film_text",
+    "description": "Table film_text in sakila schema",
+    "fields": {
+      "film_id": {
+        "name": "film_id",
+        "type": "smallint",
+        "description": "Column film_id in table film_text"
+      },
+      "title": {
+        "name": "title",
+        "type": "varchar",
+        "description": "Column title in table film_text"
+      },
+      "description": {
+        "name": "description",
+        "type": "text",
+        "description": "Column description in table film_text"
+      },
+      "fulltext": {
+        "name": "fulltext",
+        "type": "key",
+        "description": "Column fulltext in table film_text"
+      },
+      "create": {
+        "name": "create",
+        "type": "table",
+        "description": "Column create in table film_text"
+      },
+      "inventory_id": {
+        "name": "inventory_id",
+        "type": "mediumint",
+        "description": "Column inventory_id in table film_text"
+      },
+      "store_id": {
+        "name": "store_id",
+        "type": "tinyint",
+        "description": "Column store_id in table film_text"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table film_text"
+      }
+    }
+  },
+  "sakila_language": {
+    "name": "language",
+    "description": "Table language in sakila schema",
+    "fields": {
+      "language_id": {
+        "name": "language_id",
+        "type": "tinyint",
+        "description": "Column language_id in table language"
+      },
+      "name": {
+        "name": "name",
+        "type": "char",
+        "description": "Column name in table language"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table language"
+      }
+    }
+  },
+  "sakila_payment": {
+    "name": "payment",
+    "description": "Table payment in sakila schema",
+    "fields": {
+      "payment_id": {
+        "name": "payment_id",
+        "type": "smallint",
+        "description": "Column payment_id in table payment"
+      },
+      "customer_id": {
+        "name": "customer_id",
+        "type": "smallint",
+        "description": "Column customer_id in table payment"
+      },
+      "staff_id": {
+        "name": "staff_id",
+        "type": "tinyint",
+        "description": "Column staff_id in table payment"
+      },
+      "rental_id": {
+        "name": "rental_id",
+        "type": "int",
+        "description": "Column rental_id in table payment"
+      },
+      "amount": {
+        "name": "amount",
+        "type": "decimal",
+        "description": "Column amount in table payment"
+      },
+      "payment_date": {
+        "name": "payment_date",
+        "type": "datetime",
+        "description": "Column payment_date in table payment"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table payment"
+      }
+    }
+  },
+  "sakila_rental": {
+    "name": "rental",
+    "description": "Table rental in sakila schema",
+    "fields": {
+      "rental_id": {
+        "name": "rental_id",
+        "type": "int",
+        "description": "Column rental_id in table rental"
+      },
+      "rental_date": {
+        "name": "rental_date",
+        "type": "datetime",
+        "description": "Column rental_date in table rental"
+      },
+      "inventory_id": {
+        "name": "inventory_id",
+        "type": "mediumint",
+        "description": "Column inventory_id in table rental"
+      },
+      "customer_id": {
+        "name": "customer_id",
+        "type": "smallint",
+        "description": "Column customer_id in table rental"
+      },
+      "return_date": {
+        "name": "return_date",
+        "type": "datetime",
+        "description": "Column return_date in table rental"
+      },
+      "staff_id": {
+        "name": "staff_id",
+        "type": "tinyint",
+        "description": "Column staff_id in table rental"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table rental"
+      }
+    }
+  },
+  "sakila_staff": {
+    "name": "staff",
+    "description": "Table staff in sakila schema",
+    "fields": {
+      "staff_id": {
+        "name": "staff_id",
+        "type": "tinyint",
+        "description": "Column staff_id in table staff"
+      },
+      "first_name": {
+        "name": "first_name",
+        "type": "varchar",
+        "description": "Column first_name in table staff"
+      },
+      "last_name": {
+        "name": "last_name",
+        "type": "varchar",
+        "description": "Column last_name in table staff"
+      },
+      "address_id": {
+        "name": "address_id",
+        "type": "smallint",
+        "description": "Column address_id in table staff"
+      },
+      "picture": {
+        "name": "picture",
+        "type": "blob",
+        "description": "Column picture in table staff"
+      },
+      "email": {
+        "name": "email",
+        "type": "varchar",
+        "description": "Column email in table staff"
+      },
+      "store_id": {
+        "name": "store_id",
+        "type": "tinyint",
+        "description": "Column store_id in table staff"
+      },
+      "active": {
+        "name": "active",
+        "type": "boolean",
+        "description": "Column active in table staff"
+      },
+      "username": {
+        "name": "username",
+        "type": "varchar",
+        "description": "Column username in table staff"
+      },
+      "password": {
+        "name": "password",
+        "type": "varchar",
+        "description": "Column password in table staff"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table staff"
+      }
+    }
+  },
+  "sakila_store": {
+    "name": "store",
+    "description": "Table store in sakila schema",
+    "fields": {
+      "store_id": {
+        "name": "store_id",
+        "type": "tinyint",
+        "description": "Column store_id in table store"
+      },
+      "manager_staff_id": {
+        "name": "manager_staff_id",
+        "type": "tinyint",
+        "description": "Column manager_staff_id in table store"
+      },
+      "address_id": {
+        "name": "address_id",
+        "type": "smallint",
+        "description": "Column address_id in table store"
+      },
+      "last_update": {
+        "name": "last_update",
+        "type": "timestamp",
+        "description": "Column last_update in table store"
+      }
+    }
+  }
+}

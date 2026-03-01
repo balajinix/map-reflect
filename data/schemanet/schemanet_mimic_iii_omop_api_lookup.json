@@ -1,0 +1,2391 @@
+{
+  "omop_person": {
+    "name": "person",
+    "description": "Table person in omop schema",
+    "fields": {
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table person"
+      },
+      "gender_concept_id": {
+        "name": "gender_concept_id",
+        "type": "integer",
+        "description": "Column gender_concept_id in table person"
+      },
+      "year_of_birth": {
+        "name": "year_of_birth",
+        "type": "integer",
+        "description": "Column year_of_birth in table person"
+      },
+      "month_of_birth": {
+        "name": "month_of_birth",
+        "type": "integer",
+        "description": "Column month_of_birth in table person"
+      },
+      "day_of_birth": {
+        "name": "day_of_birth",
+        "type": "integer",
+        "description": "Column day_of_birth in table person"
+      },
+      "birth_datetime": {
+        "name": "birth_datetime",
+        "type": "timestamp",
+        "description": "Column birth_datetime in table person"
+      },
+      "race_concept_id": {
+        "name": "race_concept_id",
+        "type": "integer",
+        "description": "Column race_concept_id in table person"
+      },
+      "ethnicity_concept_id": {
+        "name": "ethnicity_concept_id",
+        "type": "integer",
+        "description": "Column ethnicity_concept_id in table person"
+      },
+      "location_id": {
+        "name": "location_id",
+        "type": "integer",
+        "description": "Column location_id in table person"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table person"
+      },
+      "care_site_id": {
+        "name": "care_site_id",
+        "type": "integer",
+        "description": "Column care_site_id in table person"
+      },
+      "person_source_value": {
+        "name": "person_source_value",
+        "type": "varchar",
+        "description": "Column person_source_value in table person"
+      },
+      "gender_source_value": {
+        "name": "gender_source_value",
+        "type": "varchar",
+        "description": "Column gender_source_value in table person"
+      },
+      "gender_source_concept_id": {
+        "name": "gender_source_concept_id",
+        "type": "integer",
+        "description": "Column gender_source_concept_id in table person"
+      },
+      "race_source_value": {
+        "name": "race_source_value",
+        "type": "varchar",
+        "description": "Column race_source_value in table person"
+      },
+      "race_source_concept_id": {
+        "name": "race_source_concept_id",
+        "type": "integer",
+        "description": "Column race_source_concept_id in table person"
+      },
+      "ethnicity_source_value": {
+        "name": "ethnicity_source_value",
+        "type": "varchar",
+        "description": "Column ethnicity_source_value in table person"
+      },
+      "ethnicity_source_concept_id": {
+        "name": "ethnicity_source_concept_id",
+        "type": "integer",
+        "description": "Column ethnicity_source_concept_id in table person"
+      }
+    }
+  },
+  "omop_observation_period": {
+    "name": "observation_period",
+    "description": "Table observation_period in omop schema",
+    "fields": {
+      "observation_period_id": {
+        "name": "observation_period_id",
+        "type": "integer",
+        "description": "Column observation_period_id in table observation_period"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table observation_period"
+      },
+      "observation_period_start_date": {
+        "name": "observation_period_start_date",
+        "type": "date",
+        "description": "Column observation_period_start_date in table observation_period"
+      },
+      "observation_period_end_date": {
+        "name": "observation_period_end_date",
+        "type": "date",
+        "description": "Column observation_period_end_date in table observation_period"
+      },
+      "period_type_concept_id": {
+        "name": "period_type_concept_id",
+        "type": "integer",
+        "description": "Column period_type_concept_id in table observation_period"
+      }
+    }
+  },
+  "omop_visit_occurrence": {
+    "name": "visit_occurrence",
+    "description": "Table visit_occurrence in omop schema",
+    "fields": {
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table visit_occurrence"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table visit_occurrence"
+      },
+      "visit_concept_id": {
+        "name": "visit_concept_id",
+        "type": "integer",
+        "description": "Column visit_concept_id in table visit_occurrence"
+      },
+      "visit_start_date": {
+        "name": "visit_start_date",
+        "type": "date",
+        "description": "Column visit_start_date in table visit_occurrence"
+      },
+      "visit_start_datetime": {
+        "name": "visit_start_datetime",
+        "type": "timestamp",
+        "description": "Column visit_start_datetime in table visit_occurrence"
+      },
+      "visit_end_date": {
+        "name": "visit_end_date",
+        "type": "date",
+        "description": "Column visit_end_date in table visit_occurrence"
+      },
+      "visit_end_datetime": {
+        "name": "visit_end_datetime",
+        "type": "timestamp",
+        "description": "Column visit_end_datetime in table visit_occurrence"
+      },
+      "visit_type_concept_id": {
+        "name": "visit_type_concept_id",
+        "type": "integer",
+        "description": "Column visit_type_concept_id in table visit_occurrence"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table visit_occurrence"
+      },
+      "care_site_id": {
+        "name": "care_site_id",
+        "type": "integer",
+        "description": "Column care_site_id in table visit_occurrence"
+      },
+      "visit_source_value": {
+        "name": "visit_source_value",
+        "type": "varchar",
+        "description": "Column visit_source_value in table visit_occurrence"
+      },
+      "visit_source_concept_id": {
+        "name": "visit_source_concept_id",
+        "type": "integer",
+        "description": "Column visit_source_concept_id in table visit_occurrence"
+      },
+      "admitted_from_concept_id": {
+        "name": "admitted_from_concept_id",
+        "type": "integer",
+        "description": "Column admitted_from_concept_id in table visit_occurrence"
+      },
+      "admitted_from_source_value": {
+        "name": "admitted_from_source_value",
+        "type": "varchar",
+        "description": "Column admitted_from_source_value in table visit_occurrence"
+      },
+      "discharged_to_concept_id": {
+        "name": "discharged_to_concept_id",
+        "type": "integer",
+        "description": "Column discharged_to_concept_id in table visit_occurrence"
+      },
+      "discharged_to_source_value": {
+        "name": "discharged_to_source_value",
+        "type": "varchar",
+        "description": "Column discharged_to_source_value in table visit_occurrence"
+      },
+      "preceding_visit_occurrence_id": {
+        "name": "preceding_visit_occurrence_id",
+        "type": "integer",
+        "description": "Column preceding_visit_occurrence_id in table visit_occurrence"
+      }
+    }
+  },
+  "omop_visit_detail": {
+    "name": "visit_detail",
+    "description": "Table visit_detail in omop schema",
+    "fields": {
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table visit_detail"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table visit_detail"
+      },
+      "visit_detail_concept_id": {
+        "name": "visit_detail_concept_id",
+        "type": "integer",
+        "description": "Column visit_detail_concept_id in table visit_detail"
+      },
+      "visit_detail_start_date": {
+        "name": "visit_detail_start_date",
+        "type": "date",
+        "description": "Column visit_detail_start_date in table visit_detail"
+      },
+      "visit_detail_start_datetime": {
+        "name": "visit_detail_start_datetime",
+        "type": "timestamp",
+        "description": "Column visit_detail_start_datetime in table visit_detail"
+      },
+      "visit_detail_end_date": {
+        "name": "visit_detail_end_date",
+        "type": "date",
+        "description": "Column visit_detail_end_date in table visit_detail"
+      },
+      "visit_detail_end_datetime": {
+        "name": "visit_detail_end_datetime",
+        "type": "timestamp",
+        "description": "Column visit_detail_end_datetime in table visit_detail"
+      },
+      "visit_detail_type_concept_id": {
+        "name": "visit_detail_type_concept_id",
+        "type": "integer",
+        "description": "Column visit_detail_type_concept_id in table visit_detail"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table visit_detail"
+      },
+      "care_site_id": {
+        "name": "care_site_id",
+        "type": "integer",
+        "description": "Column care_site_id in table visit_detail"
+      },
+      "visit_detail_source_value": {
+        "name": "visit_detail_source_value",
+        "type": "varchar",
+        "description": "Column visit_detail_source_value in table visit_detail"
+      },
+      "visit_detail_source_concept_id": {
+        "name": "visit_detail_source_concept_id",
+        "type": "integer",
+        "description": "Column visit_detail_source_concept_id in table visit_detail"
+      },
+      "admitted_from_concept_id": {
+        "name": "admitted_from_concept_id",
+        "type": "integer",
+        "description": "Column admitted_from_concept_id in table visit_detail"
+      },
+      "admitted_from_source_value": {
+        "name": "admitted_from_source_value",
+        "type": "varchar",
+        "description": "Column admitted_from_source_value in table visit_detail"
+      },
+      "discharged_to_source_value": {
+        "name": "discharged_to_source_value",
+        "type": "varchar",
+        "description": "Column discharged_to_source_value in table visit_detail"
+      },
+      "discharged_to_concept_id": {
+        "name": "discharged_to_concept_id",
+        "type": "integer",
+        "description": "Column discharged_to_concept_id in table visit_detail"
+      },
+      "preceding_visit_detail_id": {
+        "name": "preceding_visit_detail_id",
+        "type": "integer",
+        "description": "Column preceding_visit_detail_id in table visit_detail"
+      },
+      "visit_detail_parent_id": {
+        "name": "visit_detail_parent_id",
+        "type": "integer",
+        "description": "Column visit_detail_parent_id in table visit_detail"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table visit_detail"
+      }
+    }
+  },
+  "omop_condition_occurrence": {
+    "name": "condition_occurrence",
+    "description": "Table condition_occurrence in omop schema",
+    "fields": {
+      "condition_occurrence_id": {
+        "name": "condition_occurrence_id",
+        "type": "integer",
+        "description": "Column condition_occurrence_id in table condition_occurrence"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table condition_occurrence"
+      },
+      "condition_concept_id": {
+        "name": "condition_concept_id",
+        "type": "integer",
+        "description": "Column condition_concept_id in table condition_occurrence"
+      },
+      "condition_start_date": {
+        "name": "condition_start_date",
+        "type": "date",
+        "description": "Column condition_start_date in table condition_occurrence"
+      },
+      "condition_start_datetime": {
+        "name": "condition_start_datetime",
+        "type": "timestamp",
+        "description": "Column condition_start_datetime in table condition_occurrence"
+      },
+      "condition_end_date": {
+        "name": "condition_end_date",
+        "type": "date",
+        "description": "Column condition_end_date in table condition_occurrence"
+      },
+      "condition_end_datetime": {
+        "name": "condition_end_datetime",
+        "type": "timestamp",
+        "description": "Column condition_end_datetime in table condition_occurrence"
+      },
+      "condition_type_concept_id": {
+        "name": "condition_type_concept_id",
+        "type": "integer",
+        "description": "Column condition_type_concept_id in table condition_occurrence"
+      },
+      "condition_status_concept_id": {
+        "name": "condition_status_concept_id",
+        "type": "integer",
+        "description": "Column condition_status_concept_id in table condition_occurrence"
+      },
+      "stop_reason": {
+        "name": "stop_reason",
+        "type": "varchar",
+        "description": "Column stop_reason in table condition_occurrence"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table condition_occurrence"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table condition_occurrence"
+      },
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table condition_occurrence"
+      },
+      "condition_source_value": {
+        "name": "condition_source_value",
+        "type": "varchar",
+        "description": "Column condition_source_value in table condition_occurrence"
+      },
+      "condition_source_concept_id": {
+        "name": "condition_source_concept_id",
+        "type": "integer",
+        "description": "Column condition_source_concept_id in table condition_occurrence"
+      },
+      "condition_status_source_value": {
+        "name": "condition_status_source_value",
+        "type": "varchar",
+        "description": "Column condition_status_source_value in table condition_occurrence"
+      }
+    }
+  },
+  "omop_drug_exposure": {
+    "name": "drug_exposure",
+    "description": "Table drug_exposure in omop schema",
+    "fields": {
+      "drug_exposure_id": {
+        "name": "drug_exposure_id",
+        "type": "integer",
+        "description": "Column drug_exposure_id in table drug_exposure"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table drug_exposure"
+      },
+      "drug_concept_id": {
+        "name": "drug_concept_id",
+        "type": "integer",
+        "description": "Column drug_concept_id in table drug_exposure"
+      },
+      "drug_exposure_start_date": {
+        "name": "drug_exposure_start_date",
+        "type": "date",
+        "description": "Column drug_exposure_start_date in table drug_exposure"
+      },
+      "drug_exposure_start_datetime": {
+        "name": "drug_exposure_start_datetime",
+        "type": "timestamp",
+        "description": "Column drug_exposure_start_datetime in table drug_exposure"
+      },
+      "drug_exposure_end_date": {
+        "name": "drug_exposure_end_date",
+        "type": "date",
+        "description": "Column drug_exposure_end_date in table drug_exposure"
+      },
+      "drug_exposure_end_datetime": {
+        "name": "drug_exposure_end_datetime",
+        "type": "timestamp",
+        "description": "Column drug_exposure_end_datetime in table drug_exposure"
+      },
+      "verbatim_end_date": {
+        "name": "verbatim_end_date",
+        "type": "date",
+        "description": "Column verbatim_end_date in table drug_exposure"
+      },
+      "drug_type_concept_id": {
+        "name": "drug_type_concept_id",
+        "type": "integer",
+        "description": "Column drug_type_concept_id in table drug_exposure"
+      },
+      "stop_reason": {
+        "name": "stop_reason",
+        "type": "varchar",
+        "description": "Column stop_reason in table drug_exposure"
+      },
+      "refills": {
+        "name": "refills",
+        "type": "integer",
+        "description": "Column refills in table drug_exposure"
+      },
+      "quantity": {
+        "name": "quantity",
+        "type": "numeric",
+        "description": "Column quantity in table drug_exposure"
+      },
+      "days_supply": {
+        "name": "days_supply",
+        "type": "integer",
+        "description": "Column days_supply in table drug_exposure"
+      },
+      "sig": {
+        "name": "sig",
+        "type": "text",
+        "description": "Column sig in table drug_exposure"
+      },
+      "route_concept_id": {
+        "name": "route_concept_id",
+        "type": "integer",
+        "description": "Column route_concept_id in table drug_exposure"
+      },
+      "lot_number": {
+        "name": "lot_number",
+        "type": "varchar",
+        "description": "Column lot_number in table drug_exposure"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table drug_exposure"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table drug_exposure"
+      },
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table drug_exposure"
+      },
+      "drug_source_value": {
+        "name": "drug_source_value",
+        "type": "varchar",
+        "description": "Column drug_source_value in table drug_exposure"
+      },
+      "drug_source_concept_id": {
+        "name": "drug_source_concept_id",
+        "type": "integer",
+        "description": "Column drug_source_concept_id in table drug_exposure"
+      },
+      "route_source_value": {
+        "name": "route_source_value",
+        "type": "varchar",
+        "description": "Column route_source_value in table drug_exposure"
+      },
+      "dose_unit_source_value": {
+        "name": "dose_unit_source_value",
+        "type": "varchar",
+        "description": "Column dose_unit_source_value in table drug_exposure"
+      }
+    }
+  },
+  "omop_procedure_occurrence": {
+    "name": "procedure_occurrence",
+    "description": "Table procedure_occurrence in omop schema",
+    "fields": {
+      "procedure_occurrence_id": {
+        "name": "procedure_occurrence_id",
+        "type": "integer",
+        "description": "Column procedure_occurrence_id in table procedure_occurrence"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table procedure_occurrence"
+      },
+      "procedure_concept_id": {
+        "name": "procedure_concept_id",
+        "type": "integer",
+        "description": "Column procedure_concept_id in table procedure_occurrence"
+      },
+      "procedure_date": {
+        "name": "procedure_date",
+        "type": "date",
+        "description": "Column procedure_date in table procedure_occurrence"
+      },
+      "procedure_datetime": {
+        "name": "procedure_datetime",
+        "type": "timestamp",
+        "description": "Column procedure_datetime in table procedure_occurrence"
+      },
+      "procedure_end_date": {
+        "name": "procedure_end_date",
+        "type": "date",
+        "description": "Column procedure_end_date in table procedure_occurrence"
+      },
+      "procedure_end_datetime": {
+        "name": "procedure_end_datetime",
+        "type": "timestamp",
+        "description": "Column procedure_end_datetime in table procedure_occurrence"
+      },
+      "procedure_type_concept_id": {
+        "name": "procedure_type_concept_id",
+        "type": "integer",
+        "description": "Column procedure_type_concept_id in table procedure_occurrence"
+      },
+      "modifier_concept_id": {
+        "name": "modifier_concept_id",
+        "type": "integer",
+        "description": "Column modifier_concept_id in table procedure_occurrence"
+      },
+      "quantity": {
+        "name": "quantity",
+        "type": "integer",
+        "description": "Column quantity in table procedure_occurrence"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table procedure_occurrence"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table procedure_occurrence"
+      },
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table procedure_occurrence"
+      },
+      "procedure_source_value": {
+        "name": "procedure_source_value",
+        "type": "varchar",
+        "description": "Column procedure_source_value in table procedure_occurrence"
+      },
+      "procedure_source_concept_id": {
+        "name": "procedure_source_concept_id",
+        "type": "integer",
+        "description": "Column procedure_source_concept_id in table procedure_occurrence"
+      },
+      "modifier_source_value": {
+        "name": "modifier_source_value",
+        "type": "varchar",
+        "description": "Column modifier_source_value in table procedure_occurrence"
+      }
+    }
+  },
+  "omop_device_exposure": {
+    "name": "device_exposure",
+    "description": "Table device_exposure in omop schema",
+    "fields": {
+      "device_exposure_id": {
+        "name": "device_exposure_id",
+        "type": "integer",
+        "description": "Column device_exposure_id in table device_exposure"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table device_exposure"
+      },
+      "device_concept_id": {
+        "name": "device_concept_id",
+        "type": "integer",
+        "description": "Column device_concept_id in table device_exposure"
+      },
+      "device_exposure_start_date": {
+        "name": "device_exposure_start_date",
+        "type": "date",
+        "description": "Column device_exposure_start_date in table device_exposure"
+      },
+      "device_exposure_start_datetime": {
+        "name": "device_exposure_start_datetime",
+        "type": "timestamp",
+        "description": "Column device_exposure_start_datetime in table device_exposure"
+      },
+      "device_exposure_end_date": {
+        "name": "device_exposure_end_date",
+        "type": "date",
+        "description": "Column device_exposure_end_date in table device_exposure"
+      },
+      "device_exposure_end_datetime": {
+        "name": "device_exposure_end_datetime",
+        "type": "timestamp",
+        "description": "Column device_exposure_end_datetime in table device_exposure"
+      },
+      "device_type_concept_id": {
+        "name": "device_type_concept_id",
+        "type": "integer",
+        "description": "Column device_type_concept_id in table device_exposure"
+      },
+      "production_id": {
+        "name": "production_id",
+        "type": "varchar",
+        "description": "Column production_id in table device_exposure"
+      },
+      "quantity": {
+        "name": "quantity",
+        "type": "integer",
+        "description": "Column quantity in table device_exposure"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table device_exposure"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table device_exposure"
+      },
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table device_exposure"
+      },
+      "device_source_value": {
+        "name": "device_source_value",
+        "type": "varchar",
+        "description": "Column device_source_value in table device_exposure"
+      },
+      "device_source_concept_id": {
+        "name": "device_source_concept_id",
+        "type": "integer",
+        "description": "Column device_source_concept_id in table device_exposure"
+      },
+      "unit_concept_id": {
+        "name": "unit_concept_id",
+        "type": "integer",
+        "description": "Column unit_concept_id in table device_exposure"
+      },
+      "unit_source_value": {
+        "name": "unit_source_value",
+        "type": "varchar",
+        "description": "Column unit_source_value in table device_exposure"
+      },
+      "unit_source_concept_id": {
+        "name": "unit_source_concept_id",
+        "type": "integer",
+        "description": "Column unit_source_concept_id in table device_exposure"
+      }
+    }
+  },
+  "omop_measurement": {
+    "name": "measurement",
+    "description": "Table measurement in omop schema",
+    "fields": {
+      "measurement_id": {
+        "name": "measurement_id",
+        "type": "integer",
+        "description": "Column measurement_id in table measurement"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table measurement"
+      },
+      "measurement_concept_id": {
+        "name": "measurement_concept_id",
+        "type": "integer",
+        "description": "Column measurement_concept_id in table measurement"
+      },
+      "measurement_date": {
+        "name": "measurement_date",
+        "type": "date",
+        "description": "Column measurement_date in table measurement"
+      },
+      "measurement_datetime": {
+        "name": "measurement_datetime",
+        "type": "timestamp",
+        "description": "Column measurement_datetime in table measurement"
+      },
+      "measurement_time": {
+        "name": "measurement_time",
+        "type": "varchar",
+        "description": "Column measurement_time in table measurement"
+      },
+      "measurement_type_concept_id": {
+        "name": "measurement_type_concept_id",
+        "type": "integer",
+        "description": "Column measurement_type_concept_id in table measurement"
+      },
+      "operator_concept_id": {
+        "name": "operator_concept_id",
+        "type": "integer",
+        "description": "Column operator_concept_id in table measurement"
+      },
+      "value_as_number": {
+        "name": "value_as_number",
+        "type": "numeric",
+        "description": "Column value_as_number in table measurement"
+      },
+      "value_as_concept_id": {
+        "name": "value_as_concept_id",
+        "type": "integer",
+        "description": "Column value_as_concept_id in table measurement"
+      },
+      "unit_concept_id": {
+        "name": "unit_concept_id",
+        "type": "integer",
+        "description": "Column unit_concept_id in table measurement"
+      },
+      "range_low": {
+        "name": "range_low",
+        "type": "numeric",
+        "description": "Column range_low in table measurement"
+      },
+      "range_high": {
+        "name": "range_high",
+        "type": "numeric",
+        "description": "Column range_high in table measurement"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table measurement"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table measurement"
+      },
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table measurement"
+      },
+      "measurement_source_value": {
+        "name": "measurement_source_value",
+        "type": "varchar",
+        "description": "Column measurement_source_value in table measurement"
+      },
+      "measurement_source_concept_id": {
+        "name": "measurement_source_concept_id",
+        "type": "integer",
+        "description": "Column measurement_source_concept_id in table measurement"
+      },
+      "unit_source_value": {
+        "name": "unit_source_value",
+        "type": "varchar",
+        "description": "Column unit_source_value in table measurement"
+      },
+      "unit_source_concept_id": {
+        "name": "unit_source_concept_id",
+        "type": "integer",
+        "description": "Column unit_source_concept_id in table measurement"
+      },
+      "value_source_value": {
+        "name": "value_source_value",
+        "type": "varchar",
+        "description": "Column value_source_value in table measurement"
+      },
+      "measurement_event_id": {
+        "name": "measurement_event_id",
+        "type": "integer",
+        "description": "Column measurement_event_id in table measurement"
+      },
+      "meas_event_field_concept_id": {
+        "name": "meas_event_field_concept_id",
+        "type": "integer",
+        "description": "Column meas_event_field_concept_id in table measurement"
+      }
+    }
+  },
+  "omop_observation": {
+    "name": "observation",
+    "description": "Table observation in omop schema",
+    "fields": {
+      "observation_id": {
+        "name": "observation_id",
+        "type": "integer",
+        "description": "Column observation_id in table observation"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table observation"
+      },
+      "observation_concept_id": {
+        "name": "observation_concept_id",
+        "type": "integer",
+        "description": "Column observation_concept_id in table observation"
+      },
+      "observation_date": {
+        "name": "observation_date",
+        "type": "date",
+        "description": "Column observation_date in table observation"
+      },
+      "observation_datetime": {
+        "name": "observation_datetime",
+        "type": "timestamp",
+        "description": "Column observation_datetime in table observation"
+      },
+      "observation_type_concept_id": {
+        "name": "observation_type_concept_id",
+        "type": "integer",
+        "description": "Column observation_type_concept_id in table observation"
+      },
+      "value_as_number": {
+        "name": "value_as_number",
+        "type": "numeric",
+        "description": "Column value_as_number in table observation"
+      },
+      "value_as_string": {
+        "name": "value_as_string",
+        "type": "varchar",
+        "description": "Column value_as_string in table observation"
+      },
+      "value_as_concept_id": {
+        "name": "value_as_concept_id",
+        "type": "integer",
+        "description": "Column value_as_concept_id in table observation"
+      },
+      "qualifier_concept_id": {
+        "name": "qualifier_concept_id",
+        "type": "integer",
+        "description": "Column qualifier_concept_id in table observation"
+      },
+      "unit_concept_id": {
+        "name": "unit_concept_id",
+        "type": "integer",
+        "description": "Column unit_concept_id in table observation"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table observation"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table observation"
+      },
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table observation"
+      },
+      "observation_source_value": {
+        "name": "observation_source_value",
+        "type": "varchar",
+        "description": "Column observation_source_value in table observation"
+      },
+      "observation_source_concept_id": {
+        "name": "observation_source_concept_id",
+        "type": "integer",
+        "description": "Column observation_source_concept_id in table observation"
+      },
+      "unit_source_value": {
+        "name": "unit_source_value",
+        "type": "varchar",
+        "description": "Column unit_source_value in table observation"
+      },
+      "qualifier_source_value": {
+        "name": "qualifier_source_value",
+        "type": "varchar",
+        "description": "Column qualifier_source_value in table observation"
+      },
+      "value_source_value": {
+        "name": "value_source_value",
+        "type": "varchar",
+        "description": "Column value_source_value in table observation"
+      },
+      "observation_event_id": {
+        "name": "observation_event_id",
+        "type": "integer",
+        "description": "Column observation_event_id in table observation"
+      },
+      "obs_event_field_concept_id": {
+        "name": "obs_event_field_concept_id",
+        "type": "integer",
+        "description": "Column obs_event_field_concept_id in table observation"
+      }
+    }
+  },
+  "omop_death": {
+    "name": "death",
+    "description": "Table death in omop schema",
+    "fields": {
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table death"
+      },
+      "death_date": {
+        "name": "death_date",
+        "type": "date",
+        "description": "Column death_date in table death"
+      },
+      "death_datetime": {
+        "name": "death_datetime",
+        "type": "timestamp",
+        "description": "Column death_datetime in table death"
+      },
+      "death_type_concept_id": {
+        "name": "death_type_concept_id",
+        "type": "integer",
+        "description": "Column death_type_concept_id in table death"
+      },
+      "cause_concept_id": {
+        "name": "cause_concept_id",
+        "type": "integer",
+        "description": "Column cause_concept_id in table death"
+      },
+      "cause_source_value": {
+        "name": "cause_source_value",
+        "type": "varchar",
+        "description": "Column cause_source_value in table death"
+      },
+      "cause_source_concept_id": {
+        "name": "cause_source_concept_id",
+        "type": "integer",
+        "description": "Column cause_source_concept_id in table death"
+      }
+    }
+  },
+  "omop_note": {
+    "name": "note",
+    "description": "Table note in omop schema",
+    "fields": {
+      "note_id": {
+        "name": "note_id",
+        "type": "integer",
+        "description": "Column note_id in table note"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table note"
+      },
+      "note_date": {
+        "name": "note_date",
+        "type": "date",
+        "description": "Column note_date in table note"
+      },
+      "note_datetime": {
+        "name": "note_datetime",
+        "type": "timestamp",
+        "description": "Column note_datetime in table note"
+      },
+      "note_type_concept_id": {
+        "name": "note_type_concept_id",
+        "type": "integer",
+        "description": "Column note_type_concept_id in table note"
+      },
+      "note_class_concept_id": {
+        "name": "note_class_concept_id",
+        "type": "integer",
+        "description": "Column note_class_concept_id in table note"
+      },
+      "note_title": {
+        "name": "note_title",
+        "type": "varchar",
+        "description": "Column note_title in table note"
+      },
+      "note_text": {
+        "name": "note_text",
+        "type": "text",
+        "description": "Column note_text in table note"
+      },
+      "encoding_concept_id": {
+        "name": "encoding_concept_id",
+        "type": "integer",
+        "description": "Column encoding_concept_id in table note"
+      },
+      "language_concept_id": {
+        "name": "language_concept_id",
+        "type": "integer",
+        "description": "Column language_concept_id in table note"
+      },
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table note"
+      },
+      "visit_occurrence_id": {
+        "name": "visit_occurrence_id",
+        "type": "integer",
+        "description": "Column visit_occurrence_id in table note"
+      },
+      "visit_detail_id": {
+        "name": "visit_detail_id",
+        "type": "integer",
+        "description": "Column visit_detail_id in table note"
+      },
+      "note_source_value": {
+        "name": "note_source_value",
+        "type": "varchar",
+        "description": "Column note_source_value in table note"
+      },
+      "note_event_id": {
+        "name": "note_event_id",
+        "type": "integer",
+        "description": "Column note_event_id in table note"
+      },
+      "note_event_field_concept_id": {
+        "name": "note_event_field_concept_id",
+        "type": "integer",
+        "description": "Column note_event_field_concept_id in table note"
+      }
+    }
+  },
+  "omop_note_nlp": {
+    "name": "note_nlp",
+    "description": "Table note_nlp in omop schema",
+    "fields": {
+      "note_nlp_id": {
+        "name": "note_nlp_id",
+        "type": "integer",
+        "description": "Column note_nlp_id in table note_nlp"
+      },
+      "note_id": {
+        "name": "note_id",
+        "type": "integer",
+        "description": "Column note_id in table note_nlp"
+      },
+      "section_concept_id": {
+        "name": "section_concept_id",
+        "type": "integer",
+        "description": "Column section_concept_id in table note_nlp"
+      },
+      "snippet": {
+        "name": "snippet",
+        "type": "varchar",
+        "description": "Column snippet in table note_nlp"
+      },
+      "offset": {
+        "name": "offset",
+        "type": "varchar",
+        "description": "Column offset in table note_nlp"
+      },
+      "lexical_variant": {
+        "name": "lexical_variant",
+        "type": "varchar",
+        "description": "Column lexical_variant in table note_nlp"
+      },
+      "note_nlp_concept_id": {
+        "name": "note_nlp_concept_id",
+        "type": "integer",
+        "description": "Column note_nlp_concept_id in table note_nlp"
+      },
+      "note_nlp_source_concept_id": {
+        "name": "note_nlp_source_concept_id",
+        "type": "integer",
+        "description": "Column note_nlp_source_concept_id in table note_nlp"
+      },
+      "nlp_system": {
+        "name": "nlp_system",
+        "type": "varchar",
+        "description": "Column nlp_system in table note_nlp"
+      },
+      "nlp_date": {
+        "name": "nlp_date",
+        "type": "date",
+        "description": "Column nlp_date in table note_nlp"
+      },
+      "nlp_datetime": {
+        "name": "nlp_datetime",
+        "type": "timestamp",
+        "description": "Column nlp_datetime in table note_nlp"
+      },
+      "term_exists": {
+        "name": "term_exists",
+        "type": "varchar",
+        "description": "Column term_exists in table note_nlp"
+      },
+      "term_temporal": {
+        "name": "term_temporal",
+        "type": "varchar",
+        "description": "Column term_temporal in table note_nlp"
+      },
+      "term_modifiers": {
+        "name": "term_modifiers",
+        "type": "varchar",
+        "description": "Column term_modifiers in table note_nlp"
+      }
+    }
+  },
+  "omop_specimen": {
+    "name": "specimen",
+    "description": "Table specimen in omop schema",
+    "fields": {
+      "specimen_id": {
+        "name": "specimen_id",
+        "type": "integer",
+        "description": "Column specimen_id in table specimen"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table specimen"
+      },
+      "specimen_concept_id": {
+        "name": "specimen_concept_id",
+        "type": "integer",
+        "description": "Column specimen_concept_id in table specimen"
+      },
+      "specimen_type_concept_id": {
+        "name": "specimen_type_concept_id",
+        "type": "integer",
+        "description": "Column specimen_type_concept_id in table specimen"
+      },
+      "specimen_date": {
+        "name": "specimen_date",
+        "type": "date",
+        "description": "Column specimen_date in table specimen"
+      },
+      "specimen_datetime": {
+        "name": "specimen_datetime",
+        "type": "timestamp",
+        "description": "Column specimen_datetime in table specimen"
+      },
+      "quantity": {
+        "name": "quantity",
+        "type": "numeric",
+        "description": "Column quantity in table specimen"
+      },
+      "unit_concept_id": {
+        "name": "unit_concept_id",
+        "type": "integer",
+        "description": "Column unit_concept_id in table specimen"
+      },
+      "anatomic_site_concept_id": {
+        "name": "anatomic_site_concept_id",
+        "type": "integer",
+        "description": "Column anatomic_site_concept_id in table specimen"
+      },
+      "disease_status_concept_id": {
+        "name": "disease_status_concept_id",
+        "type": "integer",
+        "description": "Column disease_status_concept_id in table specimen"
+      },
+      "specimen_source_id": {
+        "name": "specimen_source_id",
+        "type": "varchar",
+        "description": "Column specimen_source_id in table specimen"
+      },
+      "specimen_source_value": {
+        "name": "specimen_source_value",
+        "type": "varchar",
+        "description": "Column specimen_source_value in table specimen"
+      },
+      "unit_source_value": {
+        "name": "unit_source_value",
+        "type": "varchar",
+        "description": "Column unit_source_value in table specimen"
+      },
+      "anatomic_site_source_value": {
+        "name": "anatomic_site_source_value",
+        "type": "varchar",
+        "description": "Column anatomic_site_source_value in table specimen"
+      },
+      "disease_status_source_value": {
+        "name": "disease_status_source_value",
+        "type": "varchar",
+        "description": "Column disease_status_source_value in table specimen"
+      }
+    }
+  },
+  "omop_fact_relationship": {
+    "name": "fact_relationship",
+    "description": "Table fact_relationship in omop schema",
+    "fields": {
+      "domain_concept_id_1": {
+        "name": "domain_concept_id_1",
+        "type": "integer",
+        "description": "Column domain_concept_id_1 in table fact_relationship"
+      },
+      "fact_id_1": {
+        "name": "fact_id_1",
+        "type": "integer",
+        "description": "Column fact_id_1 in table fact_relationship"
+      },
+      "domain_concept_id_2": {
+        "name": "domain_concept_id_2",
+        "type": "integer",
+        "description": "Column domain_concept_id_2 in table fact_relationship"
+      },
+      "fact_id_2": {
+        "name": "fact_id_2",
+        "type": "integer",
+        "description": "Column fact_id_2 in table fact_relationship"
+      },
+      "relationship_concept_id": {
+        "name": "relationship_concept_id",
+        "type": "integer",
+        "description": "Column relationship_concept_id in table fact_relationship"
+      }
+    }
+  },
+  "omop_location": {
+    "name": "location",
+    "description": "Table location in omop schema",
+    "fields": {
+      "location_id": {
+        "name": "location_id",
+        "type": "integer",
+        "description": "Column location_id in table location"
+      },
+      "address_1": {
+        "name": "address_1",
+        "type": "varchar",
+        "description": "Column address_1 in table location"
+      },
+      "address_2": {
+        "name": "address_2",
+        "type": "varchar",
+        "description": "Column address_2 in table location"
+      },
+      "city": {
+        "name": "city",
+        "type": "varchar",
+        "description": "Column city in table location"
+      },
+      "state": {
+        "name": "state",
+        "type": "varchar",
+        "description": "Column state in table location"
+      },
+      "zip": {
+        "name": "zip",
+        "type": "varchar",
+        "description": "Column zip in table location"
+      },
+      "county": {
+        "name": "county",
+        "type": "varchar",
+        "description": "Column county in table location"
+      },
+      "location_source_value": {
+        "name": "location_source_value",
+        "type": "varchar",
+        "description": "Column location_source_value in table location"
+      },
+      "country_concept_id": {
+        "name": "country_concept_id",
+        "type": "integer",
+        "description": "Column country_concept_id in table location"
+      },
+      "country_source_value": {
+        "name": "country_source_value",
+        "type": "varchar",
+        "description": "Column country_source_value in table location"
+      },
+      "latitude": {
+        "name": "latitude",
+        "type": "numeric",
+        "description": "Column latitude in table location"
+      },
+      "longitude": {
+        "name": "longitude",
+        "type": "numeric",
+        "description": "Column longitude in table location"
+      }
+    }
+  },
+  "omop_care_site": {
+    "name": "care_site",
+    "description": "Table care_site in omop schema",
+    "fields": {
+      "care_site_id": {
+        "name": "care_site_id",
+        "type": "integer",
+        "description": "Column care_site_id in table care_site"
+      },
+      "care_site_name": {
+        "name": "care_site_name",
+        "type": "varchar",
+        "description": "Column care_site_name in table care_site"
+      },
+      "place_of_service_concept_id": {
+        "name": "place_of_service_concept_id",
+        "type": "integer",
+        "description": "Column place_of_service_concept_id in table care_site"
+      },
+      "location_id": {
+        "name": "location_id",
+        "type": "integer",
+        "description": "Column location_id in table care_site"
+      },
+      "care_site_source_value": {
+        "name": "care_site_source_value",
+        "type": "varchar",
+        "description": "Column care_site_source_value in table care_site"
+      },
+      "place_of_service_source_value": {
+        "name": "place_of_service_source_value",
+        "type": "varchar",
+        "description": "Column place_of_service_source_value in table care_site"
+      }
+    }
+  },
+  "omop_provider": {
+    "name": "provider",
+    "description": "Table provider in omop schema",
+    "fields": {
+      "provider_id": {
+        "name": "provider_id",
+        "type": "integer",
+        "description": "Column provider_id in table provider"
+      },
+      "provider_name": {
+        "name": "provider_name",
+        "type": "varchar",
+        "description": "Column provider_name in table provider"
+      },
+      "npi": {
+        "name": "npi",
+        "type": "varchar",
+        "description": "Column npi in table provider"
+      },
+      "dea": {
+        "name": "dea",
+        "type": "varchar",
+        "description": "Column dea in table provider"
+      },
+      "specialty_concept_id": {
+        "name": "specialty_concept_id",
+        "type": "integer",
+        "description": "Column specialty_concept_id in table provider"
+      },
+      "care_site_id": {
+        "name": "care_site_id",
+        "type": "integer",
+        "description": "Column care_site_id in table provider"
+      },
+      "year_of_birth": {
+        "name": "year_of_birth",
+        "type": "integer",
+        "description": "Column year_of_birth in table provider"
+      },
+      "gender_concept_id": {
+        "name": "gender_concept_id",
+        "type": "integer",
+        "description": "Column gender_concept_id in table provider"
+      },
+      "provider_source_value": {
+        "name": "provider_source_value",
+        "type": "varchar",
+        "description": "Column provider_source_value in table provider"
+      },
+      "specialty_source_value": {
+        "name": "specialty_source_value",
+        "type": "varchar",
+        "description": "Column specialty_source_value in table provider"
+      },
+      "specialty_source_concept_id": {
+        "name": "specialty_source_concept_id",
+        "type": "integer",
+        "description": "Column specialty_source_concept_id in table provider"
+      },
+      "gender_source_value": {
+        "name": "gender_source_value",
+        "type": "varchar",
+        "description": "Column gender_source_value in table provider"
+      },
+      "gender_source_concept_id": {
+        "name": "gender_source_concept_id",
+        "type": "integer",
+        "description": "Column gender_source_concept_id in table provider"
+      }
+    }
+  },
+  "omop_payer_plan_period": {
+    "name": "payer_plan_period",
+    "description": "Table payer_plan_period in omop schema",
+    "fields": {
+      "payer_plan_period_id": {
+        "name": "payer_plan_period_id",
+        "type": "integer",
+        "description": "Column payer_plan_period_id in table payer_plan_period"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table payer_plan_period"
+      },
+      "payer_plan_period_start_date": {
+        "name": "payer_plan_period_start_date",
+        "type": "date",
+        "description": "Column payer_plan_period_start_date in table payer_plan_period"
+      },
+      "payer_plan_period_end_date": {
+        "name": "payer_plan_period_end_date",
+        "type": "date",
+        "description": "Column payer_plan_period_end_date in table payer_plan_period"
+      },
+      "payer_concept_id": {
+        "name": "payer_concept_id",
+        "type": "integer",
+        "description": "Column payer_concept_id in table payer_plan_period"
+      },
+      "payer_source_value": {
+        "name": "payer_source_value",
+        "type": "varchar",
+        "description": "Column payer_source_value in table payer_plan_period"
+      },
+      "payer_source_concept_id": {
+        "name": "payer_source_concept_id",
+        "type": "integer",
+        "description": "Column payer_source_concept_id in table payer_plan_period"
+      },
+      "plan_concept_id": {
+        "name": "plan_concept_id",
+        "type": "integer",
+        "description": "Column plan_concept_id in table payer_plan_period"
+      },
+      "plan_source_value": {
+        "name": "plan_source_value",
+        "type": "varchar",
+        "description": "Column plan_source_value in table payer_plan_period"
+      },
+      "plan_source_concept_id": {
+        "name": "plan_source_concept_id",
+        "type": "integer",
+        "description": "Column plan_source_concept_id in table payer_plan_period"
+      },
+      "sponsor_concept_id": {
+        "name": "sponsor_concept_id",
+        "type": "integer",
+        "description": "Column sponsor_concept_id in table payer_plan_period"
+      },
+      "sponsor_source_value": {
+        "name": "sponsor_source_value",
+        "type": "varchar",
+        "description": "Column sponsor_source_value in table payer_plan_period"
+      },
+      "sponsor_source_concept_id": {
+        "name": "sponsor_source_concept_id",
+        "type": "integer",
+        "description": "Column sponsor_source_concept_id in table payer_plan_period"
+      },
+      "family_source_value": {
+        "name": "family_source_value",
+        "type": "varchar",
+        "description": "Column family_source_value in table payer_plan_period"
+      },
+      "stop_reason_concept_id": {
+        "name": "stop_reason_concept_id",
+        "type": "integer",
+        "description": "Column stop_reason_concept_id in table payer_plan_period"
+      },
+      "stop_reason_source_value": {
+        "name": "stop_reason_source_value",
+        "type": "varchar",
+        "description": "Column stop_reason_source_value in table payer_plan_period"
+      },
+      "stop_reason_source_concept_id": {
+        "name": "stop_reason_source_concept_id",
+        "type": "integer",
+        "description": "Column stop_reason_source_concept_id in table payer_plan_period"
+      }
+    }
+  },
+  "omop_cost": {
+    "name": "cost",
+    "description": "Table cost in omop schema",
+    "fields": {
+      "cost_id": {
+        "name": "cost_id",
+        "type": "integer",
+        "description": "Column cost_id in table cost"
+      },
+      "cost_event_id": {
+        "name": "cost_event_id",
+        "type": "integer",
+        "description": "Column cost_event_id in table cost"
+      },
+      "cost_domain_id": {
+        "name": "cost_domain_id",
+        "type": "varchar",
+        "description": "Column cost_domain_id in table cost"
+      },
+      "cost_type_concept_id": {
+        "name": "cost_type_concept_id",
+        "type": "integer",
+        "description": "Column cost_type_concept_id in table cost"
+      },
+      "currency_concept_id": {
+        "name": "currency_concept_id",
+        "type": "integer",
+        "description": "Column currency_concept_id in table cost"
+      },
+      "total_charge": {
+        "name": "total_charge",
+        "type": "numeric",
+        "description": "Column total_charge in table cost"
+      },
+      "total_cost": {
+        "name": "total_cost",
+        "type": "numeric",
+        "description": "Column total_cost in table cost"
+      },
+      "total_paid": {
+        "name": "total_paid",
+        "type": "numeric",
+        "description": "Column total_paid in table cost"
+      },
+      "paid_by_payer": {
+        "name": "paid_by_payer",
+        "type": "numeric",
+        "description": "Column paid_by_payer in table cost"
+      },
+      "paid_by_patient": {
+        "name": "paid_by_patient",
+        "type": "numeric",
+        "description": "Column paid_by_patient in table cost"
+      },
+      "paid_patient_copay": {
+        "name": "paid_patient_copay",
+        "type": "numeric",
+        "description": "Column paid_patient_copay in table cost"
+      },
+      "paid_patient_coinsurance": {
+        "name": "paid_patient_coinsurance",
+        "type": "numeric",
+        "description": "Column paid_patient_coinsurance in table cost"
+      },
+      "paid_patient_deductible": {
+        "name": "paid_patient_deductible",
+        "type": "numeric",
+        "description": "Column paid_patient_deductible in table cost"
+      },
+      "paid_by_primary": {
+        "name": "paid_by_primary",
+        "type": "numeric",
+        "description": "Column paid_by_primary in table cost"
+      },
+      "paid_ingredient_cost": {
+        "name": "paid_ingredient_cost",
+        "type": "numeric",
+        "description": "Column paid_ingredient_cost in table cost"
+      },
+      "paid_dispensing_fee": {
+        "name": "paid_dispensing_fee",
+        "type": "numeric",
+        "description": "Column paid_dispensing_fee in table cost"
+      },
+      "payer_plan_period_id": {
+        "name": "payer_plan_period_id",
+        "type": "integer",
+        "description": "Column payer_plan_period_id in table cost"
+      },
+      "amount_allowed": {
+        "name": "amount_allowed",
+        "type": "numeric",
+        "description": "Column amount_allowed in table cost"
+      },
+      "revenue_code_concept_id": {
+        "name": "revenue_code_concept_id",
+        "type": "integer",
+        "description": "Column revenue_code_concept_id in table cost"
+      },
+      "revenue_code_source_value": {
+        "name": "revenue_code_source_value",
+        "type": "varchar",
+        "description": "Column revenue_code_source_value in table cost"
+      },
+      "drg_concept_id": {
+        "name": "drg_concept_id",
+        "type": "integer",
+        "description": "Column drg_concept_id in table cost"
+      },
+      "drg_source_value": {
+        "name": "drg_source_value",
+        "type": "varchar",
+        "description": "Column drg_source_value in table cost"
+      }
+    }
+  },
+  "omop_drug_era": {
+    "name": "drug_era",
+    "description": "Table drug_era in omop schema",
+    "fields": {
+      "drug_era_id": {
+        "name": "drug_era_id",
+        "type": "integer",
+        "description": "Column drug_era_id in table drug_era"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table drug_era"
+      },
+      "drug_concept_id": {
+        "name": "drug_concept_id",
+        "type": "integer",
+        "description": "Column drug_concept_id in table drug_era"
+      },
+      "drug_era_start_date": {
+        "name": "drug_era_start_date",
+        "type": "date",
+        "description": "Column drug_era_start_date in table drug_era"
+      },
+      "drug_era_end_date": {
+        "name": "drug_era_end_date",
+        "type": "date",
+        "description": "Column drug_era_end_date in table drug_era"
+      },
+      "drug_exposure_count": {
+        "name": "drug_exposure_count",
+        "type": "integer",
+        "description": "Column drug_exposure_count in table drug_era"
+      },
+      "gap_days": {
+        "name": "gap_days",
+        "type": "integer",
+        "description": "Column gap_days in table drug_era"
+      }
+    }
+  },
+  "omop_dose_era": {
+    "name": "dose_era",
+    "description": "Table dose_era in omop schema",
+    "fields": {
+      "dose_era_id": {
+        "name": "dose_era_id",
+        "type": "integer",
+        "description": "Column dose_era_id in table dose_era"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table dose_era"
+      },
+      "drug_concept_id": {
+        "name": "drug_concept_id",
+        "type": "integer",
+        "description": "Column drug_concept_id in table dose_era"
+      },
+      "unit_concept_id": {
+        "name": "unit_concept_id",
+        "type": "integer",
+        "description": "Column unit_concept_id in table dose_era"
+      },
+      "dose_value": {
+        "name": "dose_value",
+        "type": "numeric",
+        "description": "Column dose_value in table dose_era"
+      },
+      "dose_era_start_date": {
+        "name": "dose_era_start_date",
+        "type": "date",
+        "description": "Column dose_era_start_date in table dose_era"
+      },
+      "dose_era_end_date": {
+        "name": "dose_era_end_date",
+        "type": "date",
+        "description": "Column dose_era_end_date in table dose_era"
+      }
+    }
+  },
+  "omop_condition_era": {
+    "name": "condition_era",
+    "description": "Table condition_era in omop schema",
+    "fields": {
+      "condition_era_id": {
+        "name": "condition_era_id",
+        "type": "integer",
+        "description": "Column condition_era_id in table condition_era"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table condition_era"
+      },
+      "condition_concept_id": {
+        "name": "condition_concept_id",
+        "type": "integer",
+        "description": "Column condition_concept_id in table condition_era"
+      },
+      "condition_era_start_date": {
+        "name": "condition_era_start_date",
+        "type": "date",
+        "description": "Column condition_era_start_date in table condition_era"
+      },
+      "condition_era_end_date": {
+        "name": "condition_era_end_date",
+        "type": "date",
+        "description": "Column condition_era_end_date in table condition_era"
+      },
+      "condition_occurrence_count": {
+        "name": "condition_occurrence_count",
+        "type": "integer",
+        "description": "Column condition_occurrence_count in table condition_era"
+      }
+    }
+  },
+  "omop_episode": {
+    "name": "episode",
+    "description": "Table episode in omop schema",
+    "fields": {
+      "episode_id": {
+        "name": "episode_id",
+        "type": "integer",
+        "description": "Column episode_id in table episode"
+      },
+      "person_id": {
+        "name": "person_id",
+        "type": "integer",
+        "description": "Column person_id in table episode"
+      },
+      "episode_concept_id": {
+        "name": "episode_concept_id",
+        "type": "integer",
+        "description": "Column episode_concept_id in table episode"
+      },
+      "episode_start_date": {
+        "name": "episode_start_date",
+        "type": "date",
+        "description": "Column episode_start_date in table episode"
+      },
+      "episode_start_datetime": {
+        "name": "episode_start_datetime",
+        "type": "timestamp",
+        "description": "Column episode_start_datetime in table episode"
+      },
+      "episode_end_date": {
+        "name": "episode_end_date",
+        "type": "date",
+        "description": "Column episode_end_date in table episode"
+      },
+      "episode_end_datetime": {
+        "name": "episode_end_datetime",
+        "type": "timestamp",
+        "description": "Column episode_end_datetime in table episode"
+      },
+      "episode_parent_id": {
+        "name": "episode_parent_id",
+        "type": "integer",
+        "description": "Column episode_parent_id in table episode"
+      },
+      "episode_number": {
+        "name": "episode_number",
+        "type": "integer",
+        "description": "Column episode_number in table episode"
+      },
+      "episode_object_concept_id": {
+        "name": "episode_object_concept_id",
+        "type": "integer",
+        "description": "Column episode_object_concept_id in table episode"
+      },
+      "episode_type_concept_id": {
+        "name": "episode_type_concept_id",
+        "type": "integer",
+        "description": "Column episode_type_concept_id in table episode"
+      },
+      "episode_source_value": {
+        "name": "episode_source_value",
+        "type": "varchar",
+        "description": "Column episode_source_value in table episode"
+      },
+      "episode_source_concept_id": {
+        "name": "episode_source_concept_id",
+        "type": "integer",
+        "description": "Column episode_source_concept_id in table episode"
+      }
+    }
+  },
+  "omop_episode_event": {
+    "name": "episode_event",
+    "description": "Table episode_event in omop schema",
+    "fields": {
+      "episode_id": {
+        "name": "episode_id",
+        "type": "integer",
+        "description": "Column episode_id in table episode_event"
+      },
+      "event_id": {
+        "name": "event_id",
+        "type": "integer",
+        "description": "Column event_id in table episode_event"
+      },
+      "episode_event_field_concept_id": {
+        "name": "episode_event_field_concept_id",
+        "type": "integer",
+        "description": "Column episode_event_field_concept_id in table episode_event"
+      }
+    }
+  },
+  "omop_metadata": {
+    "name": "metadata",
+    "description": "Table metadata in omop schema",
+    "fields": {
+      "metadata_id": {
+        "name": "metadata_id",
+        "type": "integer",
+        "description": "Column metadata_id in table metadata"
+      },
+      "metadata_concept_id": {
+        "name": "metadata_concept_id",
+        "type": "integer",
+        "description": "Column metadata_concept_id in table metadata"
+      },
+      "metadata_type_concept_id": {
+        "name": "metadata_type_concept_id",
+        "type": "integer",
+        "description": "Column metadata_type_concept_id in table metadata"
+      },
+      "name": {
+        "name": "name",
+        "type": "varchar",
+        "description": "Column name in table metadata"
+      },
+      "value_as_string": {
+        "name": "value_as_string",
+        "type": "varchar",
+        "description": "Column value_as_string in table metadata"
+      },
+      "value_as_concept_id": {
+        "name": "value_as_concept_id",
+        "type": "integer",
+        "description": "Column value_as_concept_id in table metadata"
+      },
+      "value_as_number": {
+        "name": "value_as_number",
+        "type": "numeric",
+        "description": "Column value_as_number in table metadata"
+      },
+      "metadata_date": {
+        "name": "metadata_date",
+        "type": "date",
+        "description": "Column metadata_date in table metadata"
+      },
+      "metadata_datetime": {
+        "name": "metadata_datetime",
+        "type": "timestamp",
+        "description": "Column metadata_datetime in table metadata"
+      }
+    }
+  },
+  "omop_cdm_source": {
+    "name": "cdm_source",
+    "description": "Table cdm_source in omop schema",
+    "fields": {
+      "cdm_source_name": {
+        "name": "cdm_source_name",
+        "type": "varchar",
+        "description": "Column cdm_source_name in table cdm_source"
+      },
+      "cdm_source_abbreviation": {
+        "name": "cdm_source_abbreviation",
+        "type": "varchar",
+        "description": "Column cdm_source_abbreviation in table cdm_source"
+      },
+      "cdm_holder": {
+        "name": "cdm_holder",
+        "type": "varchar",
+        "description": "Column cdm_holder in table cdm_source"
+      },
+      "source_description": {
+        "name": "source_description",
+        "type": "text",
+        "description": "Column source_description in table cdm_source"
+      },
+      "source_documentation_reference": {
+        "name": "source_documentation_reference",
+        "type": "varchar",
+        "description": "Column source_documentation_reference in table cdm_source"
+      },
+      "cdm_etl_reference": {
+        "name": "cdm_etl_reference",
+        "type": "varchar",
+        "description": "Column cdm_etl_reference in table cdm_source"
+      },
+      "source_release_date": {
+        "name": "source_release_date",
+        "type": "date",
+        "description": "Column source_release_date in table cdm_source"
+      },
+      "cdm_release_date": {
+        "name": "cdm_release_date",
+        "type": "date",
+        "description": "Column cdm_release_date in table cdm_source"
+      },
+      "cdm_version": {
+        "name": "cdm_version",
+        "type": "varchar",
+        "description": "Column cdm_version in table cdm_source"
+      },
+      "cdm_version_concept_id": {
+        "name": "cdm_version_concept_id",
+        "type": "integer",
+        "description": "Column cdm_version_concept_id in table cdm_source"
+      },
+      "vocabulary_version": {
+        "name": "vocabulary_version",
+        "type": "varchar",
+        "description": "Column vocabulary_version in table cdm_source"
+      }
+    }
+  },
+  "omop_concept": {
+    "name": "concept",
+    "description": "Table concept in omop schema",
+    "fields": {
+      "concept_id": {
+        "name": "concept_id",
+        "type": "integer",
+        "description": "Column concept_id in table concept"
+      },
+      "concept_name": {
+        "name": "concept_name",
+        "type": "varchar",
+        "description": "Column concept_name in table concept"
+      },
+      "domain_id": {
+        "name": "domain_id",
+        "type": "varchar",
+        "description": "Column domain_id in table concept"
+      },
+      "vocabulary_id": {
+        "name": "vocabulary_id",
+        "type": "varchar",
+        "description": "Column vocabulary_id in table concept"
+      },
+      "concept_class_id": {
+        "name": "concept_class_id",
+        "type": "varchar",
+        "description": "Column concept_class_id in table concept"
+      },
+      "standard_concept": {
+        "name": "standard_concept",
+        "type": "varchar",
+        "description": "Column standard_concept in table concept"
+      },
+      "concept_code": {
+        "name": "concept_code",
+        "type": "varchar",
+        "description": "Column concept_code in table concept"
+      },
+      "valid_start_date": {
+        "name": "valid_start_date",
+        "type": "date",
+        "description": "Column valid_start_date in table concept"
+      },
+      "valid_end_date": {
+        "name": "valid_end_date",
+        "type": "date",
+        "description": "Column valid_end_date in table concept"
+      },
+      "invalid_reason": {
+        "name": "invalid_reason",
+        "type": "varchar",
+        "description": "Column invalid_reason in table concept"
+      }
+    }
+  },
+  "omop_vocabulary": {
+    "name": "vocabulary",
+    "description": "Table vocabulary in omop schema",
+    "fields": {
+      "vocabulary_id": {
+        "name": "vocabulary_id",
+        "type": "varchar",
+        "description": "Column vocabulary_id in table vocabulary"
+      },
+      "vocabulary_name": {
+        "name": "vocabulary_name",
+        "type": "varchar",
+        "description": "Column vocabulary_name in table vocabulary"
+      },
+      "vocabulary_reference": {
+        "name": "vocabulary_reference",
+        "type": "varchar",
+        "description": "Column vocabulary_reference in table vocabulary"
+      },
+      "vocabulary_version": {
+        "name": "vocabulary_version",
+        "type": "varchar",
+        "description": "Column vocabulary_version in table vocabulary"
+      },
+      "vocabulary_concept_id": {
+        "name": "vocabulary_concept_id",
+        "type": "integer",
+        "description": "Column vocabulary_concept_id in table vocabulary"
+      }
+    }
+  },
+  "omop_domain": {
+    "name": "domain",
+    "description": "Table domain in omop schema",
+    "fields": {
+      "domain_id": {
+        "name": "domain_id",
+        "type": "varchar",
+        "description": "Column domain_id in table domain"
+      },
+      "domain_name": {
+        "name": "domain_name",
+        "type": "varchar",
+        "description": "Column domain_name in table domain"
+      },
+      "domain_concept_id": {
+        "name": "domain_concept_id",
+        "type": "integer",
+        "description": "Column domain_concept_id in table domain"
+      }
+    }
+  },
+  "omop_concept_class": {
+    "name": "concept_class",
+    "description": "Table concept_class in omop schema",
+    "fields": {
+      "concept_class_id": {
+        "name": "concept_class_id",
+        "type": "varchar",
+        "description": "Column concept_class_id in table concept_class"
+      },
+      "concept_class_name": {
+        "name": "concept_class_name",
+        "type": "varchar",
+        "description": "Column concept_class_name in table concept_class"
+      },
+      "concept_class_concept_id": {
+        "name": "concept_class_concept_id",
+        "type": "integer",
+        "description": "Column concept_class_concept_id in table concept_class"
+      }
+    }
+  },
+  "omop_concept_relationship": {
+    "name": "concept_relationship",
+    "description": "Table concept_relationship in omop schema",
+    "fields": {
+      "concept_id_1": {
+        "name": "concept_id_1",
+        "type": "integer",
+        "description": "Column concept_id_1 in table concept_relationship"
+      },
+      "concept_id_2": {
+        "name": "concept_id_2",
+        "type": "integer",
+        "description": "Column concept_id_2 in table concept_relationship"
+      },
+      "relationship_id": {
+        "name": "relationship_id",
+        "type": "varchar",
+        "description": "Column relationship_id in table concept_relationship"
+      },
+      "valid_start_date": {
+        "name": "valid_start_date",
+        "type": "date",
+        "description": "Column valid_start_date in table concept_relationship"
+      },
+      "valid_end_date": {
+        "name": "valid_end_date",
+        "type": "date",
+        "description": "Column valid_end_date in table concept_relationship"
+      },
+      "invalid_reason": {
+        "name": "invalid_reason",
+        "type": "varchar",
+        "description": "Column invalid_reason in table concept_relationship"
+      }
+    }
+  },
+  "omop_relationship": {
+    "name": "relationship",
+    "description": "Table relationship in omop schema",
+    "fields": {
+      "relationship_id": {
+        "name": "relationship_id",
+        "type": "varchar",
+        "description": "Column relationship_id in table relationship"
+      },
+      "relationship_name": {
+        "name": "relationship_name",
+        "type": "varchar",
+        "description": "Column relationship_name in table relationship"
+      },
+      "is_hierarchical": {
+        "name": "is_hierarchical",
+        "type": "varchar",
+        "description": "Column is_hierarchical in table relationship"
+      },
+      "defines_ancestry": {
+        "name": "defines_ancestry",
+        "type": "varchar",
+        "description": "Column defines_ancestry in table relationship"
+      },
+      "reverse_relationship_id": {
+        "name": "reverse_relationship_id",
+        "type": "varchar",
+        "description": "Column reverse_relationship_id in table relationship"
+      },
+      "relationship_concept_id": {
+        "name": "relationship_concept_id",
+        "type": "integer",
+        "description": "Column relationship_concept_id in table relationship"
+      }
+    }
+  },
+  "omop_concept_synonym": {
+    "name": "concept_synonym",
+    "description": "Table concept_synonym in omop schema",
+    "fields": {
+      "concept_id": {
+        "name": "concept_id",
+        "type": "integer",
+        "description": "Column concept_id in table concept_synonym"
+      },
+      "concept_synonym_name": {
+        "name": "concept_synonym_name",
+        "type": "varchar",
+        "description": "Column concept_synonym_name in table concept_synonym"
+      },
+      "language_concept_id": {
+        "name": "language_concept_id",
+        "type": "integer",
+        "description": "Column language_concept_id in table concept_synonym"
+      }
+    }
+  },
+  "omop_concept_ancestor": {
+    "name": "concept_ancestor",
+    "description": "Table concept_ancestor in omop schema",
+    "fields": {
+      "ancestor_concept_id": {
+        "name": "ancestor_concept_id",
+        "type": "integer",
+        "description": "Column ancestor_concept_id in table concept_ancestor"
+      },
+      "descendant_concept_id": {
+        "name": "descendant_concept_id",
+        "type": "integer",
+        "description": "Column descendant_concept_id in table concept_ancestor"
+      },
+      "min_levels_of_separation": {
+        "name": "min_levels_of_separation",
+        "type": "integer",
+        "description": "Column min_levels_of_separation in table concept_ancestor"
+      },
+      "max_levels_of_separation": {
+        "name": "max_levels_of_separation",
+        "type": "integer",
+        "description": "Column max_levels_of_separation in table concept_ancestor"
+      }
+    }
+  },
+  "omop_source_to_concept_map": {
+    "name": "source_to_concept_map",
+    "description": "Table source_to_concept_map in omop schema",
+    "fields": {
+      "source_code": {
+        "name": "source_code",
+        "type": "varchar",
+        "description": "Column source_code in table source_to_concept_map"
+      },
+      "source_concept_id": {
+        "name": "source_concept_id",
+        "type": "integer",
+        "description": "Column source_concept_id in table source_to_concept_map"
+      },
+      "source_vocabulary_id": {
+        "name": "source_vocabulary_id",
+        "type": "varchar",
+        "description": "Column source_vocabulary_id in table source_to_concept_map"
+      },
+      "source_code_description": {
+        "name": "source_code_description",
+        "type": "varchar",
+        "description": "Column source_code_description in table source_to_concept_map"
+      },
+      "target_concept_id": {
+        "name": "target_concept_id",
+        "type": "integer",
+        "description": "Column target_concept_id in table source_to_concept_map"
+      },
+      "target_vocabulary_id": {
+        "name": "target_vocabulary_id",
+        "type": "varchar",
+        "description": "Column target_vocabulary_id in table source_to_concept_map"
+      },
+      "valid_start_date": {
+        "name": "valid_start_date",
+        "type": "date",
+        "description": "Column valid_start_date in table source_to_concept_map"
+      },
+      "valid_end_date": {
+        "name": "valid_end_date",
+        "type": "date",
+        "description": "Column valid_end_date in table source_to_concept_map"
+      },
+      "invalid_reason": {
+        "name": "invalid_reason",
+        "type": "varchar",
+        "description": "Column invalid_reason in table source_to_concept_map"
+      }
+    }
+  },
+  "omop_drug_strength": {
+    "name": "drug_strength",
+    "description": "Table drug_strength in omop schema",
+    "fields": {
+      "drug_concept_id": {
+        "name": "drug_concept_id",
+        "type": "integer",
+        "description": "Column drug_concept_id in table drug_strength"
+      },
+      "ingredient_concept_id": {
+        "name": "ingredient_concept_id",
+        "type": "integer",
+        "description": "Column ingredient_concept_id in table drug_strength"
+      },
+      "amount_value": {
+        "name": "amount_value",
+        "type": "numeric",
+        "description": "Column amount_value in table drug_strength"
+      },
+      "amount_unit_concept_id": {
+        "name": "amount_unit_concept_id",
+        "type": "integer",
+        "description": "Column amount_unit_concept_id in table drug_strength"
+      },
+      "numerator_value": {
+        "name": "numerator_value",
+        "type": "numeric",
+        "description": "Column numerator_value in table drug_strength"
+      },
+      "numerator_unit_concept_id": {
+        "name": "numerator_unit_concept_id",
+        "type": "integer",
+        "description": "Column numerator_unit_concept_id in table drug_strength"
+      },
+      "denominator_value": {
+        "name": "denominator_value",
+        "type": "numeric",
+        "description": "Column denominator_value in table drug_strength"
+      },
+      "denominator_unit_concept_id": {
+        "name": "denominator_unit_concept_id",
+        "type": "integer",
+        "description": "Column denominator_unit_concept_id in table drug_strength"
+      },
+      "box_size": {
+        "name": "box_size",
+        "type": "integer",
+        "description": "Column box_size in table drug_strength"
+      },
+      "valid_start_date": {
+        "name": "valid_start_date",
+        "type": "date",
+        "description": "Column valid_start_date in table drug_strength"
+      },
+      "valid_end_date": {
+        "name": "valid_end_date",
+        "type": "date",
+        "description": "Column valid_end_date in table drug_strength"
+      },
+      "invalid_reason": {
+        "name": "invalid_reason",
+        "type": "varchar",
+        "description": "Column invalid_reason in table drug_strength"
+      }
+    }
+  },
+  "omop_cohort": {
+    "name": "cohort",
+    "description": "Table cohort in omop schema",
+    "fields": {
+      "cohort_definition_id": {
+        "name": "cohort_definition_id",
+        "type": "integer",
+        "description": "Column cohort_definition_id in table cohort"
+      },
+      "subject_id": {
+        "name": "subject_id",
+        "type": "integer",
+        "description": "Column subject_id in table cohort"
+      },
+      "cohort_start_date": {
+        "name": "cohort_start_date",
+        "type": "date",
+        "description": "Column cohort_start_date in table cohort"
+      },
+      "cohort_end_date": {
+        "name": "cohort_end_date",
+        "type": "date",
+        "description": "Column cohort_end_date in table cohort"
+      }
+    }
+  },
+  "omop_cohort_definition": {
+    "name": "cohort_definition",
+    "description": "Table cohort_definition in omop schema",
+    "fields": {
+      "cohort_definition_id": {
+        "name": "cohort_definition_id",
+        "type": "integer",
+        "description": "Column cohort_definition_id in table cohort_definition"
+      },
+      "cohort_definition_name": {
+        "name": "cohort_definition_name",
+        "type": "varchar",
+        "description": "Column cohort_definition_name in table cohort_definition"
+      },
+      "cohort_definition_description": {
+        "name": "cohort_definition_description",
+        "type": "text",
+        "description": "Column cohort_definition_description in table cohort_definition"
+      },
+      "definition_type_concept_id": {
+        "name": "definition_type_concept_id",
+        "type": "integer",
+        "description": "Column definition_type_concept_id in table cohort_definition"
+      },
+      "cohort_definition_syntax": {
+        "name": "cohort_definition_syntax",
+        "type": "text",
+        "description": "Column cohort_definition_syntax in table cohort_definition"
+      },
+      "subject_concept_id": {
+        "name": "subject_concept_id",
+        "type": "integer",
+        "description": "Column subject_concept_id in table cohort_definition"
+      },
+      "cohort_initiation_date": {
+        "name": "cohort_initiation_date",
+        "type": "date",
+        "description": "Column cohort_initiation_date in table cohort_definition"
+      }
+    }
+  }
+}

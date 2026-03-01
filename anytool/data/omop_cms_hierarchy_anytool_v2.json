@@ -1,0 +1,1873 @@
+{
+  "OMOP": {
+    "PERSON": [
+      {
+        "name": "person_id",
+        "description": "person_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "gender_concept_id",
+        "description": "gender_concept_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "year_of_birth",
+        "description": "year_of_birth field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "month_of_birth",
+        "description": "month_of_birth field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "day_of_birth",
+        "description": "day_of_birth field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "birth_datetime",
+        "description": "birth_datetime field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "death_datetime",
+        "description": "death_datetime field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "race_concept_id",
+        "description": "race_concept_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "ethnicity_concept_id",
+        "description": "ethnicity_concept_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "location_id",
+        "description": "location_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "care_site_id",
+        "description": "care_site_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "person_source_value",
+        "description": "person_source_value field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "gender_source_value",
+        "description": "gender_source_value field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "gender_source_concept_id",
+        "description": "gender_source_concept_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "race_source_value",
+        "description": "race_source_value field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "race_source_concept_id",
+        "description": "race_source_concept_id field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "ethnicity_source_value",
+        "description": "ethnicity_source_value field in PERSON",
+        "type": "STRING"
+      },
+      {
+        "name": "ethnicity_source_concept_id",
+        "description": "ethnicity_source_concept_id field in PERSON",
+        "type": "STRING"
+      }
+    ],
+    "VISIT_OCCURRENCE": [
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_concept_id",
+        "description": "visit_concept_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_start_date",
+        "description": "visit_start_date field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_start_datetime",
+        "description": "visit_start_datetime field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_end_date",
+        "description": "visit_end_date field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_end_datetime",
+        "description": "visit_end_datetime field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_type_concept_id",
+        "description": "visit_type_concept_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "care_site_id",
+        "description": "care_site_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_source_value",
+        "description": "visit_source_value field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_source_concept_id",
+        "description": "visit_source_concept_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "admitted_from_concept_id",
+        "description": "admitted_from_concept_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "admitted_from_source_value",
+        "description": "admitted_from_source_value field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "discharge_to_concept_id",
+        "description": "discharge_to_concept_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "discharge_to_source_value",
+        "description": "discharge_to_source_value field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "preceding_visit_occurrence_id",
+        "description": "preceding_visit_occurrence_id field in VISIT_OCCURRENCE",
+        "type": "STRING"
+      }
+    ],
+    "VISIT_DETAIL": [
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_concept_id",
+        "description": "visit_detail_concept_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_start_date",
+        "description": "visit_detail_start_date field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_start_datetime",
+        "description": "visit_detail_start_datetime field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_end_date",
+        "description": "visit_detail_end_date field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_end_datetime",
+        "description": "visit_detail_end_datetime field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_type_concept_id",
+        "description": "visit_detail_type_concept_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "care_site_id",
+        "description": "care_site_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_source_value",
+        "description": "visit_detail_source_value field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_source_concept_id",
+        "description": "visit_detail_source_concept_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "admitted_from_source_value",
+        "description": "admitted_from_source_value field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "admitted_from_concept_id",
+        "description": "admitted_from_concept_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "discharge_to_source_value",
+        "description": "discharge_to_source_value field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "discharge_to_concept_id",
+        "description": "discharge_to_concept_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "preceding_visit_detail_id",
+        "description": "preceding_visit_detail_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_parent_id",
+        "description": "visit_detail_parent_id field in VISIT_DETAIL",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in VISIT_DETAIL",
+        "type": "STRING"
+      }
+    ],
+    "SPECIMEN": [
+      {
+        "name": "specimen_id",
+        "description": "specimen_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "specimen_concept_id",
+        "description": "specimen_concept_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "specimen_type_concept_id",
+        "description": "specimen_type_concept_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "specimen_date",
+        "description": "specimen_date field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "specimen_datetime",
+        "description": "specimen_datetime field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "quantity",
+        "description": "quantity field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "unit_concept_id",
+        "description": "unit_concept_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "anatomic_site_concept_id",
+        "description": "anatomic_site_concept_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "disease_status_concept_id",
+        "description": "disease_status_concept_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "specimen_source_id",
+        "description": "specimen_source_id field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "specimen_source_value",
+        "description": "specimen_source_value field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "unit_source_value",
+        "description": "unit_source_value field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "anatomic_site_source_value",
+        "description": "anatomic_site_source_value field in SPECIMEN",
+        "type": "STRING"
+      },
+      {
+        "name": "disease_status_source_value",
+        "description": "disease_status_source_value field in SPECIMEN",
+        "type": "STRING"
+      }
+    ],
+    "MEASUREMENT": [
+      {
+        "name": "measurement_id",
+        "description": "measurement_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "measurement_concept_id",
+        "description": "measurement_concept_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "measurement_date",
+        "description": "measurement_date field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "measurement_datetime",
+        "description": "measurement_datetime field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "measurement_time",
+        "description": "measurement_time field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "measurement_type_concept_id",
+        "description": "measurement_type_concept_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "operator_concept_id",
+        "description": "operator_concept_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "value_as_number",
+        "description": "value_as_number field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "value_as_concept_id",
+        "description": "value_as_concept_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "unit_concept_id",
+        "description": "unit_concept_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "range_low",
+        "description": "range_low field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "range_high",
+        "description": "range_high field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "measurement_source_value",
+        "description": "measurement_source_value field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "measurement_source_concept_id",
+        "description": "measurement_source_concept_id field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "unit_source_value",
+        "description": "unit_source_value field in MEASUREMENT",
+        "type": "STRING"
+      },
+      {
+        "name": "value_source_value",
+        "description": "value_source_value field in MEASUREMENT",
+        "type": "STRING"
+      }
+    ],
+    "PROCEDURE_OCCURRENCE": [
+      {
+        "name": "procedure_occurrence_id",
+        "description": "procedure_occurrence_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "procedure_concept_id",
+        "description": "procedure_concept_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "procedure_date",
+        "description": "procedure_date field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "procedure_datetime",
+        "description": "procedure_datetime field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "procedure_type_concept_id",
+        "description": "procedure_type_concept_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "modifier_concept_id",
+        "description": "modifier_concept_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "quantity",
+        "description": "quantity field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "procedure_source_value",
+        "description": "procedure_source_value field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "procedure_source_concept_id",
+        "description": "procedure_source_concept_id field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "modifier_source_value",
+        "description": "modifier_source_value field in PROCEDURE_OCCURRENCE",
+        "type": "STRING"
+      }
+    ],
+    "CONDITION_OCCURRENCE": [
+      {
+        "name": "condition_occurrence_id",
+        "description": "condition_occurrence_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_concept_id",
+        "description": "condition_concept_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_start_date",
+        "description": "condition_start_date field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_start_datetime",
+        "description": "condition_start_datetime field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_end_date",
+        "description": "condition_end_date field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_end_datetime",
+        "description": "condition_end_datetime field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_type_concept_id",
+        "description": "condition_type_concept_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_status_concept_id",
+        "description": "condition_status_concept_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "stop_reason",
+        "description": "stop_reason field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_source_value",
+        "description": "condition_source_value field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_source_concept_id",
+        "description": "condition_source_concept_id field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      },
+      {
+        "name": "condition_status_source_value",
+        "description": "condition_status_source_value field in CONDITION_OCCURRENCE",
+        "type": "STRING"
+      }
+    ],
+    "DEATH": [
+      {
+        "name": "person_id",
+        "description": "person_id field in DEATH",
+        "type": "STRING"
+      },
+      {
+        "name": "death_date",
+        "description": "death_date field in DEATH",
+        "type": "STRING"
+      },
+      {
+        "name": "death_datetime",
+        "description": "death_datetime field in DEATH",
+        "type": "STRING"
+      },
+      {
+        "name": "death_type_concept_id",
+        "description": "death_type_concept_id field in DEATH",
+        "type": "STRING"
+      },
+      {
+        "name": "cause_concept_id",
+        "description": "cause_concept_id field in DEATH",
+        "type": "STRING"
+      },
+      {
+        "name": "cause_source_value",
+        "description": "cause_source_value field in DEATH",
+        "type": "STRING"
+      },
+      {
+        "name": "cause_source_concept_id",
+        "description": "cause_source_concept_id field in DEATH",
+        "type": "STRING"
+      }
+    ],
+    "LOCATION": [
+      {
+        "name": "location_id",
+        "description": "location_id field in LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "address_1",
+        "description": "address_1 field in LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "address_2",
+        "description": "address_2 field in LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "city",
+        "description": "city field in LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "state",
+        "description": "state field in LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "zip",
+        "description": "zip field in LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "county",
+        "description": "county field in LOCATION",
+        "type": "STRING"
+      },
+      {
+        "name": "location_source_value",
+        "description": "location_source_value field in LOCATION",
+        "type": "STRING"
+      }
+    ],
+    "OBSERVATION": [
+      {
+        "name": "observation_id",
+        "description": "observation_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_concept_id",
+        "description": "observation_concept_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_date",
+        "description": "observation_date field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_datetime",
+        "description": "observation_datetime field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_type_concept_id",
+        "description": "observation_type_concept_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "value_as_number",
+        "description": "value_as_number field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "value_as_string",
+        "description": "value_as_string field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "value_as_concept_id",
+        "description": "value_as_concept_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "qualifier_concept_id",
+        "description": "qualifier_concept_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "unit_concept_id",
+        "description": "unit_concept_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_source_value",
+        "description": "observation_source_value field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_source_concept_id",
+        "description": "observation_source_concept_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "unit_source_value",
+        "description": "unit_source_value field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "qualifier_source_value",
+        "description": "qualifier_source_value field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_event_id",
+        "description": "observation_event_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "obs_event_field_concept_id",
+        "description": "obs_event_field_concept_id field in OBSERVATION",
+        "type": "STRING"
+      },
+      {
+        "name": "value_as_datetime",
+        "description": "value_as_datetime field in OBSERVATION",
+        "type": "STRING"
+      }
+    ],
+    "OBSERVATION_PERIOD": [
+      {
+        "name": "observation_period_id",
+        "description": "observation_period_id field in OBSERVATION_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in OBSERVATION_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_period_start_date",
+        "description": "observation_period_start_date field in OBSERVATION_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "observation_period_end_date",
+        "description": "observation_period_end_date field in OBSERVATION_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "period_type_concept_id",
+        "description": "period_type_concept_id field in OBSERVATION_PERIOD",
+        "type": "STRING"
+      }
+    ],
+    "DRUG_EXPOSURE": [
+      {
+        "name": "drug_exposure_id",
+        "description": "drug_exposure_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_concept_id",
+        "description": "drug_concept_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_exposure_start_date",
+        "description": "drug_exposure_start_date field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_exposure_start_datetime",
+        "description": "drug_exposure_start_datetime field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_exposure_end_date",
+        "description": "drug_exposure_end_date field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_exposure_end_datetime",
+        "description": "drug_exposure_end_datetime field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "verbatim_end_date",
+        "description": "verbatim_end_date field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_type_concept_id",
+        "description": "drug_type_concept_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "stop_reason",
+        "description": "stop_reason field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "refills",
+        "description": "refills field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "quantity",
+        "description": "quantity field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "days_supply",
+        "description": "days_supply field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "sig",
+        "description": "sig field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "route_concept_id",
+        "description": "route_concept_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "lot_number",
+        "description": "lot_number field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_source_value",
+        "description": "drug_source_value field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "drug_source_concept_id",
+        "description": "drug_source_concept_id field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "route_source_value",
+        "description": "route_source_value field in DRUG_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "dose_unit_source_value",
+        "description": "dose_unit_source_value field in DRUG_EXPOSURE",
+        "type": "STRING"
+      }
+    ],
+    "DEVICE_EXPOSURE": [
+      {
+        "name": "device_exposure_id",
+        "description": "device_exposure_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_concept_id",
+        "description": "device_concept_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_exposure_start_date",
+        "description": "device_exposure_start_date field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_exposure_start_datetime",
+        "description": "device_exposure_start_datetime field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_exposure_end_date",
+        "description": "device_exposure_end_date field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_exposure_end_datetime",
+        "description": "device_exposure_end_datetime field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_type_concept_id",
+        "description": "device_type_concept_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "unique_device_id",
+        "description": "unique_device_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "quantity",
+        "description": "quantity field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_source_value",
+        "description": "device_source_value field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      },
+      {
+        "name": "device_source_concept_id",
+        "description": "device_source_concept_id field in DEVICE_EXPOSURE",
+        "type": "STRING"
+      }
+    ],
+    "NOTE": [
+      {
+        "name": "note_id",
+        "description": "note_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_event_id",
+        "description": "note_event_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_event_field_concept_id",
+        "description": "note_event_field_concept_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_date",
+        "description": "note_date field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_datetime",
+        "description": "note_datetime field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_type_concept_id",
+        "description": "note_type_concept_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_class_concept_id",
+        "description": "note_class_concept_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_title",
+        "description": "note_title field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_text",
+        "description": "note_text field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "encoding_concept_id",
+        "description": "encoding_concept_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "language_concept_id",
+        "description": "language_concept_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_id",
+        "description": "provider_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_occurrence_id",
+        "description": "visit_occurrence_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "visit_detail_id",
+        "description": "visit_detail_id field in NOTE",
+        "type": "STRING"
+      },
+      {
+        "name": "note_source_value",
+        "description": "note_source_value field in NOTE",
+        "type": "STRING"
+      }
+    ],
+    "FACT_RELATIONSHIP": [
+      {
+        "name": "domain_concept_id_1",
+        "description": "domain_concept_id_1 field in FACT_RELATIONSHIP",
+        "type": "STRING"
+      },
+      {
+        "name": "fact_id_1",
+        "description": "fact_id_1 field in FACT_RELATIONSHIP",
+        "type": "STRING"
+      },
+      {
+        "name": "domain_concept_id_2",
+        "description": "domain_concept_id_2 field in FACT_RELATIONSHIP",
+        "type": "STRING"
+      },
+      {
+        "name": "fact_id_2",
+        "description": "fact_id_2 field in FACT_RELATIONSHIP",
+        "type": "STRING"
+      },
+      {
+        "name": "relationship_concept_id",
+        "description": "relationship_concept_id field in FACT_RELATIONSHIP",
+        "type": "STRING"
+      }
+    ],
+    "PAYER_PLAN_PERIOD": [
+      {
+        "name": "payer_plan_period_id",
+        "description": "payer_plan_period_id field in PAYER_PLAN_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "person_id",
+        "description": "person_id field in PAYER_PLAN_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "payer_plan_period_start_date",
+        "description": "payer_plan_period_start_date field in PAYER_PLAN_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "payer_plan_period_end_date",
+        "description": "payer_plan_period_end_date field in PAYER_PLAN_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "payer_source_value",
+        "description": "payer_source_value field in PAYER_PLAN_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "plan_source_value",
+        "description": "plan_source_value field in PAYER_PLAN_PERIOD",
+        "type": "STRING"
+      },
+      {
+        "name": "family_source_value",
+        "description": "family_source_value field in PAYER_PLAN_PERIOD",
+        "type": "STRING"
+      }
+    ],
+    "CDM_SOURCE": [
+      {
+        "name": "cdm_source_name",
+        "description": "cdm_source_name field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "cdm_source_abbreviation",
+        "description": "cdm_source_abbreviation field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "cdm_holder",
+        "description": "cdm_holder field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "source_description",
+        "description": "source_description field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "source_documentation_reference",
+        "description": "source_documentation_reference field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "cdm_etl_reference",
+        "description": "cdm_etl_reference field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "source_release_date",
+        "description": "source_release_date field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "cdm_release_date",
+        "description": "cdm_release_date field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "cdm_version",
+        "description": "cdm_version field in CDM_SOURCE",
+        "type": "STRING"
+      },
+      {
+        "name": "vocabulary_version",
+        "description": "vocabulary_version field in CDM_SOURCE",
+        "type": "STRING"
+      }
+    ],
+    "CARE_SITE": [
+      {
+        "name": "care_site_id",
+        "description": "care_site_id field in CARE_SITE",
+        "type": "STRING"
+      },
+      {
+        "name": "care_site_name",
+        "description": "care_site_name field in CARE_SITE",
+        "type": "STRING"
+      },
+      {
+        "name": "place_of_service_concept_id",
+        "description": "place_of_service_concept_id field in CARE_SITE",
+        "type": "STRING"
+      },
+      {
+        "name": "location_id",
+        "description": "location_id field in CARE_SITE",
+        "type": "STRING"
+      },
+      {
+        "name": "care_site_source_value",
+        "description": "care_site_source_value field in CARE_SITE",
+        "type": "STRING"
+      },
+      {
+        "name": "place_of_service_source_value",
+        "description": "place_of_service_source_value field in CARE_SITE",
+        "type": "STRING"
+      }
+    ],
+    "COHORT": [
+      {
+        "name": "cohort_definition_id",
+        "description": "cohort_definition_id field in COHORT",
+        "type": "STRING"
+      },
+      {
+        "name": "subject_id",
+        "description": "subject_id field in COHORT",
+        "type": "STRING"
+      },
+      {
+        "name": "cohort_start_date",
+        "description": "cohort_start_date field in COHORT",
+        "type": "STRING"
+      },
+      {
+        "name": "cohort_end_date",
+        "description": "cohort_end_date field in COHORT",
+        "type": "STRING"
+      }
+    ],
+    "COHORT_DEFINITION": [
+      {
+        "name": "cohort_definition_id",
+        "description": "cohort_definition_id field in COHORT_DEFINITION",
+        "type": "STRING"
+      },
+      {
+        "name": "cohort_definition_name",
+        "description": "cohort_definition_name field in COHORT_DEFINITION",
+        "type": "STRING"
+      },
+      {
+        "name": "cohort_definition_description",
+        "description": "cohort_definition_description field in COHORT_DEFINITION",
+        "type": "STRING"
+      },
+      {
+        "name": "definition_type_concept_id",
+        "description": "definition_type_concept_id field in COHORT_DEFINITION",
+        "type": "STRING"
+      },
+      {
+        "name": "cohort_definition_syntax",
+        "description": "cohort_definition_syntax field in COHORT_DEFINITION",
+        "type": "STRING"
+      },
+      {
+        "name": "subject_concept_id",
+        "description": "subject_concept_id field in COHORT_DEFINITION",
+        "type": "STRING"
+      },
+      {
+        "name": "cohort_initiation_date",
+        "description": "cohort_initiation_date field in COHORT_DEFINITION",
+        "type": "STRING"
+      }
+    ],
+    "PROVIDER": [
+      {
+        "name": "provider_id",
+        "description": "provider_id field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_name",
+        "description": "provider_name field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "npi",
+        "description": "npi field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "dea",
+        "description": "dea field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "specialty_concept_id",
+        "description": "specialty_concept_id field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "care_site_id",
+        "description": "care_site_id field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "year_of_birth",
+        "description": "year_of_birth field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "gender_concept_id",
+        "description": "gender_concept_id field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "provider_source_value",
+        "description": "provider_source_value field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "specialty_source_value",
+        "description": "specialty_source_value field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "specialty_source_concept_id",
+        "description": "specialty_source_concept_id field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "gender_source_value",
+        "description": "gender_source_value field in PROVIDER",
+        "type": "STRING"
+      },
+      {
+        "name": "gender_source_concept_id",
+        "description": "gender_source_concept_id field in PROVIDER",
+        "type": "STRING"
+      }
+    ]
+  },
+  "CMS": {
+    "BENEFICIARYSUMMARY": [
+      {
+        "name": "desynpuf_id",
+        "description": "desynpuf_id field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_birth_dt",
+        "description": "bene_birth_dt field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_death_dt",
+        "description": "bene_death_dt field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_sex_ident_cd",
+        "description": "bene_sex_ident_cd field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_race_cd",
+        "description": "bene_race_cd field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_esrd_ind",
+        "description": "bene_esrd_ind field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_state_code",
+        "description": "sp_state_code field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_county_cd",
+        "description": "bene_county_cd field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_hi_cvrage_tot_mons",
+        "description": "bene_hi_cvrage_tot_mons field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_smi_cvrage_tot_mons",
+        "description": "bene_smi_cvrage_tot_mons field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "bene_hmo_cvrage_tot_mons",
+        "description": "bene_hmo_cvrage_tot_mons field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "plan_cvrg_mos_num",
+        "description": "plan_cvrg_mos_num field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_alzhdmta",
+        "description": "sp_alzhdmta field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_chf",
+        "description": "sp_chf field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_chrnkidn",
+        "description": "sp_chrnkidn field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_cncr",
+        "description": "sp_cncr field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_copd",
+        "description": "sp_copd field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_depressn",
+        "description": "sp_depressn field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_diabetes",
+        "description": "sp_diabetes field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_ischmcht",
+        "description": "sp_ischmcht field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_osteoprs",
+        "description": "sp_osteoprs field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_ra_oa",
+        "description": "sp_ra_oa field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "sp_strketia",
+        "description": "sp_strketia field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "medreimb_ip",
+        "description": "medreimb_ip field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "benres_ip",
+        "description": "benres_ip field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "pppymt_ip",
+        "description": "pppymt_ip field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "medreimb_op",
+        "description": "medreimb_op field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "benres_op",
+        "description": "benres_op field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "pppymt_op",
+        "description": "pppymt_op field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "medreimb_car",
+        "description": "medreimb_car field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "benres_car",
+        "description": "benres_car field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      },
+      {
+        "name": "pppymt_car",
+        "description": "pppymt_car field in BENEFICIARYSUMMARY",
+        "type": "STRING"
+      }
+    ],
+    "INPATIENTCLAIMS": [
+      {
+        "name": "desynpuf_id",
+        "description": "desynpuf_id field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_id",
+        "description": "clm_id field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "segment",
+        "description": "segment field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_from_dt",
+        "description": "clm_from_dt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_thru_dt",
+        "description": "clm_thru_dt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "prvdr_num",
+        "description": "prvdr_num field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_pmt_amt",
+        "description": "clm_pmt_amt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_prmry_pyr_clm_pd_amt",
+        "description": "nch_prmry_pyr_clm_pd_amt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "at_physn_npi",
+        "description": "at_physn_npi field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "op_physn_npi",
+        "description": "op_physn_npi field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "ot_physn_npi",
+        "description": "ot_physn_npi field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_admsn_dt",
+        "description": "clm_admsn_dt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "admtng_icd9_dgns_cd",
+        "description": "admtng_icd9_dgns_cd field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_pass_thru_per_diem_amt",
+        "description": "clm_pass_thru_per_diem_amt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_bene_ip_ddctbl_amt",
+        "description": "nch_bene_ip_ddctbl_amt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_bene_pta_coinsrnc_lblty_am",
+        "description": "nch_bene_pta_coinsrnc_lblty_am field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_bene_blood_ddctbl_lblty_am",
+        "description": "nch_bene_blood_ddctbl_lblty_am field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_utlztn_day_cnt",
+        "description": "clm_utlztn_day_cnt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_bene_dschrg_dt",
+        "description": "nch_bene_dschrg_dt field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_drg_cd",
+        "description": "clm_drg_cd field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "icd9_dgns_cd",
+        "description": "icd9_dgns_cd field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "icd9_prcdr_cd",
+        "description": "icd9_prcdr_cd field in INPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "hcpcs_cd",
+        "description": "hcpcs_cd field in INPATIENTCLAIMS",
+        "type": "STRING"
+      }
+    ],
+    "OUTPATIENTCLAIMS": [
+      {
+        "name": "desynpuf_id",
+        "description": "desynpuf_id field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_id",
+        "description": "clm_id field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "segment",
+        "description": "segment field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_from_dt",
+        "description": "clm_from_dt field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_thru_dt",
+        "description": "clm_thru_dt field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "prvdr_num",
+        "description": "prvdr_num field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_pmt_amt",
+        "description": "clm_pmt_amt field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_prmry_pyr_clm_pd_amt",
+        "description": "nch_prmry_pyr_clm_pd_amt field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "at_physn_npi",
+        "description": "at_physn_npi field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "op_physn_npi",
+        "description": "op_physn_npi field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "ot_physn_npi",
+        "description": "ot_physn_npi field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_bene_blood_ddctbl_lblty_am",
+        "description": "nch_bene_blood_ddctbl_lblty_am field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "icd9_dgns_cd",
+        "description": "icd9_dgns_cd field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "icd9_prcdr_cd",
+        "description": "icd9_prcdr_cd field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_bene_ptb_ddctbl_amt",
+        "description": "nch_bene_ptb_ddctbl_amt field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "nch_bene_ptb_coinsrnc_amt",
+        "description": "nch_bene_ptb_coinsrnc_amt field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "admtng_icd9_dgns_cd",
+        "description": "admtng_icd9_dgns_cd field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "hcpcs_cd",
+        "description": "hcpcs_cd field in OUTPATIENTCLAIMS",
+        "type": "STRING"
+      }
+    ],
+    "CARRIERCLAIMS": [
+      {
+        "name": "desynpuf_id",
+        "description": "desynpuf_id field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_id",
+        "description": "clm_id field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_from_dt",
+        "description": "clm_from_dt field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "clm_thru_dt",
+        "description": "clm_thru_dt field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "icd9_dgns_cd",
+        "description": "icd9_dgns_cd field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "prf_physn_npi",
+        "description": "prf_physn_npi field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "tax_num",
+        "description": "tax_num field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "hcpcs_cd",
+        "description": "hcpcs_cd field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "line_nch_pmt_amt",
+        "description": "line_nch_pmt_amt field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "line_bene_ptb_ddctbl_amt",
+        "description": "line_bene_ptb_ddctbl_amt field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "line_bene_prmry_pyr_pd_amt",
+        "description": "line_bene_prmry_pyr_pd_amt field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "line_coinsrnc_amt",
+        "description": "line_coinsrnc_amt field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "line_alowd_chrg_amt",
+        "description": "line_alowd_chrg_amt field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "line_prcsg_ind_cd",
+        "description": "line_prcsg_ind_cd field in CARRIERCLAIMS",
+        "type": "STRING"
+      },
+      {
+        "name": "line_icd9_dgns_cd",
+        "description": "line_icd9_dgns_cd field in CARRIERCLAIMS",
+        "type": "STRING"
+      }
+    ],
+    "PRESCRIPTIONDRUGEVENTS": [
+      {
+        "name": "desynpuf_id",
+        "description": "desynpuf_id field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      },
+      {
+        "name": "pde_id",
+        "description": "pde_id field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      },
+      {
+        "name": "srvc_dt",
+        "description": "srvc_dt field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      },
+      {
+        "name": "prod_srvc_id",
+        "description": "prod_srvc_id field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      },
+      {
+        "name": "qty_dspnsd_num",
+        "description": "qty_dspnsd_num field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      },
+      {
+        "name": "days_suply_num",
+        "description": "days_suply_num field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      },
+      {
+        "name": "ptnt_pay_amt",
+        "description": "ptnt_pay_amt field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      },
+      {
+        "name": "tot_rx_cst_amt",
+        "description": "tot_rx_cst_amt field in PRESCRIPTIONDRUGEVENTS",
+        "type": "STRING"
+      }
+    ]
+  }
+}

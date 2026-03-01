@@ -66,3 +66,10 @@ paper/*.blg
 
 # Backups (sync via rsync)
 backups/
+
+# SchemaNet chroma databases (binary, generate locally)
+data/schemanet/chroma_db*/
+data/cache/
+
+# AnyTool data copies (use data/ originals)
+anytool/data/*_dataset.jsonl
