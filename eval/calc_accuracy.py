@@ -46,6 +46,7 @@ METHODS = {
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
+            ('Mistral', 'mistral'),
         ],
     },
     'GNN': {
@@ -57,6 +58,7 @@ METHODS = {
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
+            ('Mistral', 'mistral'),
         ],
     },
     'AnyTool': {
@@ -64,6 +66,7 @@ METHODS = {
         'models': [
             ('Granite', 'granite'),
             ('Llama', 'llama'),
+            ('Mistral', 'mistral'),
         ],
     },
     'Map-Reflect': {
@@ -78,6 +81,7 @@ METHODS = {
         'models': [
             ('Granite', '(ue_reflect_|mapreflect_|map_reflect_).*granite'),
             ('Llama', '(ue_reflect_|mapreflect_|map_reflect_).*llama'),
+            ('Mistral', '(ue_reflect_|mapreflect_|map_reflect_).*mistral'),
         ],
     },
     'MatchMaker': {
@@ -85,6 +89,7 @@ METHODS = {
         'models': [
             ('Granite', '^(?!dual_context).*granite'),
             ('Llama', '^(?!dual_context).*llama'),
+            ('Mistral', '^(?!dual_context).*mistral'),
         ],
     },
 }
