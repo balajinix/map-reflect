@@ -147,6 +147,160 @@ class GNNEvaluationRunner:
         """Load evaluation utterances for a specific dataset using shared loader."""
         return self.dataset_loader.load_evaluation_utterances(dataset)
     
+    def _resolve_schema_type(self, api_id: str) -> tuple:
+        """Resolve an API identifier into (schema, type) pair.
+
+        Tries multiple strategies:
+        1. Treat entire id as type_name, look up product (NL2GQL: "has_pet" -> "nl2gql", "has_pet")
+        2. Split on first underscore (OMOP: "omop_PERSON" -> "omop", "PERSON")
+        3. Fallback: use id as both schema and type
+        """
+        # Strategy 1: whole id is a type name in api_lookup
+        product = self._find_product_for_type(api_id)
+        if product != api_id:  # found a real product
+            return product, api_id
+
+        # Strategy 2: split on first underscore
+        if "_" in api_id:
+            schema, type_name = api_id.split("_", 1)
+            # Verify this schema exists in api_lookup
+            for meta in self.api_retriever.api_lookup.values():
+                if meta.get("product_name", "").lower() == schema.lower():
+                    return schema, type_name
+            # Schema not found — maybe the whole thing is a type with underscores
+            # Try key-prefix match as last resort
+            prefix = api_id + "."
+            if any(k.startswith(prefix) for k in self.api_retriever.api_lookup):
+                return api_id, api_id
+
+        return api_id, api_id
+
+    def _find_product_for_type(self, type_name: str) -> str:
+        """Find the product_name in api_lookup that contains the given type_name."""
+        for meta in self.api_retriever.api_lookup.values():
+            if meta.get("type_name", "").lower() == type_name.lower():
+                return meta["product_name"]
+        return type_name
+
+    def _find_fields_for_type(self, schema: str, type_name: str) -> List[str]:
+        """Find all field keys in api_lookup matching a (schema, type) pair.
+
+        Handles cases where dataset type has a redundant prefix, e.g.
+        schema='hcp_terraform', type='terraform_HcpTerraformWorkspace'
+        but api_lookup has product_name='hcp_terraform', type_name='HcpTerraformWorkspace'.
+        """
+        # Build candidate type names: exact match first, then stripped variants
+        candidates = [type_name]
+        # If type_name has underscores, try stripping prefix segments
+        # e.g. "terraform_HcpTerraformWorkspace" -> "HcpTerraformWorkspace"
+        if '_' in type_name:
+            parts = type_name.split('_', 1)
+            candidates.append(parts[1])
+
+        for candidate in candidates:
+            fields = []
+            for field_key, meta in self.api_retriever.api_lookup.items():
+                if (meta.get("product_name", "").lower() == schema.lower()
+                        and meta.get("type_name", "").lower() == candidate.lower()):
+                    fields.append(field_key)
+            if fields:
+                return fields
+
+        # Fallback: match by field key prefix (e.g. "Foreca_Weather_Nowcast.")
+        # Handles ToolBench where product_name == type_name == full API name
+        api_name = f"{schema}_{type_name}"
+        prefix = api_name + "."
+        fields = [k for k in self.api_retriever.api_lookup if k.startswith(prefix)]
+        if fields:
+            return fields
+
+        return []
+
+    def run_single_evaluation_oracle(self, sample: Dict[str, Any]) -> Dict[str, Any]:
+        """Run GNN evaluation in oracle mode — source/target types are given."""
+        start_time = time.time()
+        sample_id = sample["sample_id"]
+
+        try:
+            metadata = sample.get("metadata", {})
+
+            # Normalize expected_source/target — may be string or dict (OMOP format)
+            raw_source = sample["expected_source"]
+            raw_target = sample["expected_target"]
+            source_id = raw_source.get("id", "") if isinstance(raw_source, dict) else str(raw_source)
+            target_id = raw_target.get("id", "") if isinstance(raw_target, dict) else str(raw_target)
+
+            if "source_type" in metadata and "target_type" in metadata:
+                # ITOpsGraph style: separate schema and type fields
+                source_schema = source_id
+                target_schema = target_id
+                source_type = metadata["source_type"]
+                target_type = metadata["target_type"]
+            else:
+                # Resolve schema/type by trying strategies in order:
+                source_schema, source_type = self._resolve_schema_type(source_id)
+                target_schema, target_type = self._resolve_schema_type(target_id)
+
+            source_api = f"{source_schema}_{source_type}"
+            target_api = f"{target_schema}_{target_type}"
+
+            logger.info(f"Oracle mode: {sample_id} — {source_api} → {target_api}")
+
+            # Look up fields directly by exact product_name/type_name match
+            # (bypasses _extract_product_name which fails on multi-underscore schemas)
+            source_fields = self._find_fields_for_type(source_schema, source_type)
+            target_fields = self._find_fields_for_type(target_schema, target_type)
+
+            logger.info(f"  Fields: {len(source_fields)} source, {len(target_fields)} target")
+
+            # Score all field pairs using GNN embeddings
+            field_mappings = []
+            for src_field in source_fields:
+                for tgt_field in target_fields:
+                    score = self.api_retriever.get_joinability_score(src_field, tgt_field, quiet=True)
+                    field_mappings.append({
+                        "source_field": src_field,
+                        "target_field": tgt_field,
+                        "joinability_score": score,
+                        "source_api": source_api,
+                        "target_api": target_api
+                    })
+
+            # For each source field, pick highest-scoring target field (1:1)
+            predicted_mapping = {}
+            if field_mappings:
+                best_by_source = {}
+                for m in field_mappings:
+                    src = m["source_field"]
+                    tgt = m["target_field"]
+                    score = m.get("joinability_score", 0.0)
+                    if src not in best_by_source or score > best_by_source[src][1]:
+                        best_by_source[src] = (tgt, score)
+                predicted_mapping = {src: tgt for src, (tgt, _) in best_by_source.items()}
+
+            field_mappings.sort(key=lambda x: x["joinability_score"], reverse=True)
+            execution_time = time.time() - start_time
+            logger.info(f"  Found {len(predicted_mapping)} field mappings in {execution_time:.2f}s")
+
+            return {
+                "sample_id": sample_id,
+                "predicted_mapping": predicted_mapping,
+                "accuracy": 0.0,
+                "source_schema": source_api,
+                "target_schema": target_api,
+                "schema_selection_reasoning": f"Oracle mode: {source_api} → {target_api}",
+                "execution_time": execution_time,
+                "success": True,
+                "error_message": None,
+                "gnn_field_mappings": field_mappings,
+                "api_confidence": 1.0,
+                "num_field_mappings": len(predicted_mapping)
+            }
+
+        except Exception as e:
+            logger.error(f"Oracle GNN failed for {sample_id}: {e}")
+            return self._create_error_result(sample_id, str(e), start_time)
+
     def run_single_evaluation(self, utterance: str, sample_id: str, model: str) -> Dict[str, Any]:
         """Run GNN evaluation on a single utterance."""
         start_time = time.time()
@@ -203,45 +357,44 @@ class GNNEvaluationRunner:
             
             return self._create_error_result(sample_id, str(e), start_time)
     
-    def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
+    def run_evaluation(self, dataset: str, model: str, oracle: bool = False) -> Dict[str, Any]:
         """Run evaluation for a specific dataset and model combination."""
-        logger.info(f"Starting GNN evaluation for {dataset} with {model}")
-        
+        logger.info(f"Starting GNN evaluation for {dataset} with {model} (oracle={oracle})")
+
         # Load evaluation utterances using shared loader
         utterances = self.load_evaluation_utterances(dataset)
         if not utterances:
             logger.error(f"No utterances found for dataset {dataset}")
             return {}
-        
+
         logger.info(f"Loaded {len(utterances)} utterances for {dataset}")
-        
+
         # Run GNN on each utterance
         results = []
         total_start_time = time.time()
-        
+
         for i, utterance_data in enumerate(utterances):
             logger.info(f"Processing utterance {i+1}/{len(utterances)}: {utterance_data['sample_id']}")
-            
-            # Run single evaluation
-            result = self.run_single_evaluation(
-                utterance_data["utterance"],
-                utterance_data["sample_id"],
-                model
-            )
-            
+
+            if oracle:
+                result = self.run_single_evaluation_oracle(utterance_data)
+            else:
+                result = self.run_single_evaluation(
+                    utterance_data["utterance"],
+                    utterance_data["sample_id"],
+                    model
+                )
+
             # Add expected information for analysis
             result["expected_source"] = utterance_data.get("expected_source", "")
             result["expected_target"] = utterance_data.get("expected_target", "")
             result["original_utterance"] = utterance_data["utterance"]
             result["ground_truth_mapping"] = utterance_data.get("ground_truth_mapping", {})
-            
+
             results.append(result)
-            
-            if (i + 1) % 2 == 0:
+
+            if (i + 1) % 50 == 0:
                 logger.info(f"Completed {i+1}/{len(utterances)} utterances")
-            
-            # Small delay between requests
-            time.sleep(0.5)
         
         total_execution_time = time.time() - total_start_time
         
@@ -438,6 +591,8 @@ def main():
                        help="ChromaDB collection")
     parser.add_argument("--api-lookup-file", default=None,
                        help="Path to API lookup file")
+    parser.add_argument("--oracle", action="store_true",
+                       help="Oracle mode: use ground-truth type pairs, evaluate field mapping only")
     parser.add_argument("--quick", action="store_true",
                        help="Quick evaluation with minimal samples")
     parser.add_argument("--verbose", action="store_true",
@@ -483,7 +638,7 @@ def main():
     logger.info(f"{'='*80}")
     
     # Run evaluation
-    results = runner.run_evaluation(args.dataset, args.model)
+    results = runner.run_evaluation(args.dataset, args.model, oracle=args.oracle)
     
     if results:
         # Print summary

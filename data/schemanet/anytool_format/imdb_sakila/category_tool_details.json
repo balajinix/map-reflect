@@ -1,0 +1,52 @@
+{
+  "sakila": {
+    "description": "Schema sakila containing database tables and fields",
+    "tools": {
+      "actor": {
+        "description": "Table actor in sakila schema"
+      },
+      "address": {
+        "description": "Table address in sakila schema"
+      },
+      "category": {
+        "description": "Table category in sakila schema"
+      },
+      "city": {
+        "description": "Table city in sakila schema"
+      },
+      "country": {
+        "description": "Table country in sakila schema"
+      },
+      "customer": {
+        "description": "Table customer in sakila schema"
+      },
+      "film": {
+        "description": "Table film in sakila schema"
+      },
+      "film_actor": {
+        "description": "Table film_actor in sakila schema"
+      },
+      "film_category": {
+        "description": "Table film_category in sakila schema"
+      },
+      "film_text": {
+        "description": "Table film_text in sakila schema"
+      },
+      "language": {
+        "description": "Table language in sakila schema"
+      },
+      "payment": {
+        "description": "Table payment in sakila schema"
+      },
+      "rental": {
+        "description": "Table rental in sakila schema"
+      },
+      "staff": {
+        "description": "Table staff in sakila schema"
+      },
+      "store": {
+        "description": "Table store in sakila schema"
+      }
+    }
+  }
+}

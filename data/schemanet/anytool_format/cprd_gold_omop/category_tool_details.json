@@ -1,0 +1,124 @@
+{
+  "omop": {
+    "description": "Schema omop containing database tables and fields",
+    "tools": {
+      "person": {
+        "description": "Table person in omop schema"
+      },
+      "observation_period": {
+        "description": "Table observation_period in omop schema"
+      },
+      "visit_occurrence": {
+        "description": "Table visit_occurrence in omop schema"
+      },
+      "visit_detail": {
+        "description": "Table visit_detail in omop schema"
+      },
+      "condition_occurrence": {
+        "description": "Table condition_occurrence in omop schema"
+      },
+      "drug_exposure": {
+        "description": "Table drug_exposure in omop schema"
+      },
+      "procedure_occurrence": {
+        "description": "Table procedure_occurrence in omop schema"
+      },
+      "device_exposure": {
+        "description": "Table device_exposure in omop schema"
+      },
+      "measurement": {
+        "description": "Table measurement in omop schema"
+      },
+      "observation": {
+        "description": "Table observation in omop schema"
+      },
+      "death": {
+        "description": "Table death in omop schema"
+      },
+      "note": {
+        "description": "Table note in omop schema"
+      },
+      "note_nlp": {
+        "description": "Table note_nlp in omop schema"
+      },
+      "specimen": {
+        "description": "Table specimen in omop schema"
+      },
+      "fact_relationship": {
+        "description": "Table fact_relationship in omop schema"
+      },
+      "location": {
+        "description": "Table location in omop schema"
+      },
+      "care_site": {
+        "description": "Table care_site in omop schema"
+      },
+      "provider": {
+        "description": "Table provider in omop schema"
+      },
+      "payer_plan_period": {
+        "description": "Table payer_plan_period in omop schema"
+      },
+      "cost": {
+        "description": "Table cost in omop schema"
+      },
+      "drug_era": {
+        "description": "Table drug_era in omop schema"
+      },
+      "dose_era": {
+        "description": "Table dose_era in omop schema"
+      },
+      "condition_era": {
+        "description": "Table condition_era in omop schema"
+      },
+      "episode": {
+        "description": "Table episode in omop schema"
+      },
+      "episode_event": {
+        "description": "Table episode_event in omop schema"
+      },
+      "metadata": {
+        "description": "Table metadata in omop schema"
+      },
+      "cdm_source": {
+        "description": "Table cdm_source in omop schema"
+      },
+      "concept": {
+        "description": "Table concept in omop schema"
+      },
+      "vocabulary": {
+        "description": "Table vocabulary in omop schema"
+      },
+      "domain": {
+        "description": "Table domain in omop schema"
+      },
+      "concept_class": {
+        "description": "Table concept_class in omop schema"
+      },
+      "concept_relationship": {
+        "description": "Table concept_relationship in omop schema"
+      },
+      "relationship": {
+        "description": "Table relationship in omop schema"
+      },
+      "concept_synonym": {
+        "description": "Table concept_synonym in omop schema"
+      },
+      "concept_ancestor": {
+        "description": "Table concept_ancestor in omop schema"
+      },
+      "source_to_concept_map": {
+        "description": "Table source_to_concept_map in omop schema"
+      },
+      "drug_strength": {
+        "description": "Table drug_strength in omop schema"
+      },
+      "cohort": {
+        "description": "Table cohort in omop schema"
+      },
+      "cohort_definition": {
+        "description": "Table cohort_definition in omop schema"
+      }
+    }
+  }
+}

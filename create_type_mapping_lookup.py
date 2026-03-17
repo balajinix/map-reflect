@@ -2,7 +2,7 @@
 """
 Create a lookup file showing which types map to which types across all methods and models.
 
-For ITOps and ITOpsGraph datasets, creates a JSON file where:
+For the ITOpsGraph dataset, creates a JSON file where:
 - Each key is a source type
 - Each value contains target types and which (method, model) combinations produced the mapping
 """
@@ -15,11 +15,11 @@ from typing import Dict, List, Set, Tuple
 
 BASE_DIR = Path(__file__).parent
 
-# Method configurations (same as print_all_results.py)
+# Method configurations (matching print_all_results.py)
 METHODS = {
     'SMT': {
         'dirs': ['smt/results', 'remote_results/smt'],
-        'models': [('Granite', 'granite'), ('Llama', 'llama'), ('Mistral', 'mistral')],
+        'models': [('Granite', 'granite'), ('Llama', 'llama')],
     },
     'GNN': {
         'dirs': ['gnn/results', 'remote_results/gnn'],
@@ -27,31 +27,27 @@ METHODS = {
     },
     'ReAct': {
         'dirs': ['react/results', 'remote_results/react'],
-        'models': [('Granite', 'granite'), ('Llama', 'llama'), ('Mistral', 'mistral')],
+        'models': [('Granite', 'granite'), ('Llama', 'llama')],
     },
     'AnyTool': {
         'dirs': ['anytool/results', 'remote_results/anytool'],
-        'models': [('Granite', 'granite'), ('Llama', 'llama'), ('Mistral', 'mistral')],
+        'models': [('Granite', 'granite'), ('Llama', 'llama')],
     },
     'Map-Reflect': {
         'dirs': ['map_reflect/results', 'remote_results/map_reflect'],
-        'models': [('Granite', 'granite'), ('Llama', 'llama'), ('Mistral', 'mistral')],
+        'models': [('Granite', 'granite-4'), ('Llama', 'llama-3')],
     },
     'MatchMaker': {
         'dirs': ['match_maker/results', 'remote_results/match_maker'],
-        'models': [('Granite', r'^(?!dual_context).*granite'), ('Llama', r'^(?!dual_context).*llama'), ('Mistral', r'^(?!dual_context).*mistral')],
+        'models': [('Granite', r'^(?!dual_context).*granite'), ('Llama', r'^(?!dual_context).*llama')],
     },
     'ReMatch': {
         'dirs': ['rematch/results', 'remote_results/rematch'],
-        'models': [('Granite', 'granite'), ('Llama', 'llama'), ('Mistral', 'mistral')],
-    },
-    'DualContext': {
-        'dirs': ['match_maker/results', 'remote_results/match_maker'],
-        'models': [('Granite', r'dual_context.*granite'), ('Llama', r'dual_context.*llama')],
+        'models': [('Granite', 'granite'), ('Llama', 'llama')],
     },
     'UE-Reflect': {
         'dirs': ['map_reflect/results', 'remote_results/map_reflect'],
-        'models': [('Granite', r'ue_reflect.*granite'), ('Llama', r'ue_reflect.*llama'), ('Mistral', r'ue_reflect.*mistral')],
+        'models': [('Granite', r'ue_reflect.*granite'), ('Llama', r'ue_reflect.*llama')],
     },
 }
 
@@ -131,6 +127,16 @@ def find_result_files(method_dirs: List[str], dataset: str, model_pattern: str) 
             for f in method_dir.glob(pattern):
                 if 'checkpoint' in f.name.lower():
                     continue
+                if 'coverage_eval' in f.name.lower():
+                    continue
+                if 'batch_' in f.name.lower():
+                    continue
+                if 'discovery_valid' in f.name.lower():
+                    continue
+                if 'discovery_' in f.name.lower() and 'discovery_valid' not in f.name.lower():
+                    continue
+                if f.name.lower().startswith('mapreflect_'):
+                    continue
 
                 fname_lower = f.name.lower()
 
@@ -195,12 +201,12 @@ def extract_type_mappings(results: List[Dict]) -> Set[Tuple[str, str]]:
 
 
 def main():
-    print("Creating type mapping lookup for ITOps and ITOpsGraph datasets...\n")
+    print("Creating type mapping lookup for ITOpsGraph dataset...\n")
 
     # Structure: {source_type: {target_type: [(method, model), ...]}}
     type_lookup = defaultdict(lambda: defaultdict(list))
 
-    datasets = ['ITOps', 'ITOpsGraph']
+    datasets = ['ITOpsGraph']
     total_mappings = 0
 
     for dataset in datasets:
@@ -249,7 +255,7 @@ def main():
             output[src_type][tgt_type] = sorted(type_lookup[src_type][tgt_type])
 
     # Write output file
-    output_file = BASE_DIR / 'data' / 'itops_type_mapping_lookup.json'
+    output_file = BASE_DIR / 'data' / 'itopsgraph_type_mapping_lookup.json'
     with open(output_file, 'w') as f:
         json.dump(output, f, indent=2)
 

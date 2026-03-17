@@ -1,0 +1,210 @@
+[
+  {
+    "query_id": "0",
+    "query": "Find the field in sakila schema that corresponds to titleid from title_akas table in imdb schema. The source field is imdb_title_akas.titleid.",
+    "source_field": "imdb_title_akas.titleid",
+    "expected_target_field": "sakila_film.film_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "film_id"
+      }
+    ]
+  },
+  {
+    "query_id": "1",
+    "query": "Find the field in sakila schema that corresponds to title from title_akas table in imdb schema. The source field is imdb_title_akas.title.",
+    "source_field": "imdb_title_akas.title",
+    "expected_target_field": "sakila_film.title",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "title"
+      }
+    ]
+  },
+  {
+    "query_id": "2",
+    "query": "Find the field in sakila schema that corresponds to region from title_akas table in imdb schema. The source field is imdb_title_akas.region.",
+    "source_field": "imdb_title_akas.region",
+    "expected_target_field": "sakila_film.original_language_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "original_language_id"
+      }
+    ]
+  },
+  {
+    "query_id": "3",
+    "query": "Find the field in sakila schema that corresponds to language from title_akas table in imdb schema. The source field is imdb_title_akas.language.",
+    "source_field": "imdb_title_akas.language",
+    "expected_target_field": "sakila_film.language_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "language_id"
+      }
+    ]
+  },
+  {
+    "query_id": "4",
+    "query": "Find the field in sakila schema that corresponds to tconst from title_basics table in imdb schema. The source field is imdb_title_basics.tconst.",
+    "source_field": "imdb_title_basics.tconst",
+    "expected_target_field": "sakila_film.film_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "film_id"
+      }
+    ]
+  },
+  {
+    "query_id": "5",
+    "query": "Find the field in sakila schema that corresponds to genres from title_basics table in imdb schema. The source field is imdb_title_basics.genres.",
+    "source_field": "imdb_title_basics.genres",
+    "expected_target_field": "sakila_category.category_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "category",
+        "api_name": "category_id"
+      }
+    ]
+  },
+  {
+    "query_id": "6",
+    "query": "Find the field in sakila schema that corresponds to primarytitle from title_basics table in imdb schema. The source field is imdb_title_basics.primarytitle.",
+    "source_field": "imdb_title_basics.primarytitle",
+    "expected_target_field": "sakila_film.title",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "title"
+      }
+    ]
+  },
+  {
+    "query_id": "7",
+    "query": "Find the field in sakila schema that corresponds to originaltitle from title_basics table in imdb schema. The source field is imdb_title_basics.originaltitle.",
+    "source_field": "imdb_title_basics.originaltitle",
+    "expected_target_field": "sakila_film.title",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "title"
+      }
+    ]
+  },
+  {
+    "query_id": "8",
+    "query": "Find the field in sakila schema that corresponds to isadult from title_basics table in imdb schema. The source field is imdb_title_basics.isadult.",
+    "source_field": "imdb_title_basics.isadult",
+    "expected_target_field": "sakila_film.rating",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "rating"
+      }
+    ]
+  },
+  {
+    "query_id": "9",
+    "query": "Find the field in sakila schema that corresponds to startyear from title_basics table in imdb schema. The source field is imdb_title_basics.startyear.",
+    "source_field": "imdb_title_basics.startyear",
+    "expected_target_field": "sakila_film.release_year",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "release_year"
+      }
+    ]
+  },
+  {
+    "query_id": "10",
+    "query": "Find the field in sakila schema that corresponds to endyear from title_basics table in imdb schema. The source field is imdb_title_basics.endyear.",
+    "source_field": "imdb_title_basics.endyear",
+    "expected_target_field": "sakila_film.release_year",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "release_year"
+      }
+    ]
+  },
+  {
+    "query_id": "11",
+    "query": "Find the field in sakila schema that corresponds to runtimeminutes from title_basics table in imdb schema. The source field is imdb_title_basics.runtimeminutes.",
+    "source_field": "imdb_title_basics.runtimeminutes",
+    "expected_target_field": "sakila_film.length",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "length"
+      }
+    ]
+  },
+  {
+    "query_id": "12",
+    "query": "Find the field in sakila schema that corresponds to tconst from title_crew table in imdb schema. The source field is imdb_title_crew.tconst.",
+    "source_field": "imdb_title_crew.tconst",
+    "expected_target_field": "sakila_film.film_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "film_id"
+      }
+    ]
+  },
+  {
+    "query_id": "13",
+    "query": "Find the field in sakila schema that corresponds to tconst from title_ratings table in imdb schema. The source field is imdb_title_ratings.tconst.",
+    "source_field": "imdb_title_ratings.tconst",
+    "expected_target_field": "sakila_film.film_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "film",
+        "api_name": "film_id"
+      }
+    ]
+  },
+  {
+    "query_id": "14",
+    "query": "Find the field in sakila schema that corresponds to nconst from name_basics table in imdb schema. The source field is imdb_name_basics.nconst.",
+    "source_field": "imdb_name_basics.nconst",
+    "expected_target_field": "sakila_actor.actor_id",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "actor",
+        "api_name": "actor_id"
+      }
+    ]
+  },
+  {
+    "query_id": "15",
+    "query": "Find the field in sakila schema that corresponds to primaryname from name_basics table in imdb schema. The source field is imdb_name_basics.primaryname.",
+    "source_field": "imdb_name_basics.primaryname",
+    "expected_target_field": "sakila_actor.first_name",
+    "gt_api_list": [
+      {
+        "category_name": "sakila",
+        "tool_name": "actor",
+        "api_name": "first_name"
+      }
+    ]
+  }
+]

@@ -1,0 +1,2264 @@
+[
+  {
+    "query_id": "0",
+    "query": "Find the field in omop schema that corresponds to row_id from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.row_id.",
+    "source_field": "mimic_iii_admissions.row_id",
+    "expected_target_field": "omop_condition_occurrence.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "1",
+    "query": "Find the field in omop schema that corresponds to diagnosis from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.diagnosis.",
+    "source_field": "mimic_iii_admissions.diagnosis",
+    "expected_target_field": "omop_condition_occurrence.condition_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "condition_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "2",
+    "query": "Find the field in omop schema that corresponds to edregtime from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.edregtime.",
+    "source_field": "mimic_iii_admissions.edregtime",
+    "expected_target_field": "omop_condition_occurrence.condition_start_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "condition_start_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "3",
+    "query": "Find the field in omop schema that corresponds to admittime from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.admittime.",
+    "source_field": "mimic_iii_admissions.admittime",
+    "expected_target_field": "omop_condition_occurrence.condition_start_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "condition_start_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "4",
+    "query": "Find the field in omop schema that corresponds to dischtime from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.dischtime.",
+    "source_field": "mimic_iii_admissions.dischtime",
+    "expected_target_field": "omop_condition_occurrence.condition_end_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "condition_end_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "5",
+    "query": "Find the field in omop schema that corresponds to deathtime from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.deathtime.",
+    "source_field": "mimic_iii_admissions.deathtime",
+    "expected_target_field": "omop_death.death_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "death",
+        "api_name": "death_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "6",
+    "query": "Find the field in omop schema that corresponds to admission_location from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.admission_location.",
+    "source_field": "mimic_iii_admissions.admission_location",
+    "expected_target_field": "omop_visit_occurrence.admitted_from_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_occurrence",
+        "api_name": "admitted_from_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "7",
+    "query": "Find the field in omop schema that corresponds to discharge_location from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.discharge_location.",
+    "source_field": "mimic_iii_admissions.discharge_location",
+    "expected_target_field": "omop_visit_occurrence.discharged_to_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_occurrence",
+        "api_name": "discharged_to_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "8",
+    "query": "Find the field in omop schema that corresponds to admission_type from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.admission_type.",
+    "source_field": "mimic_iii_admissions.admission_type",
+    "expected_target_field": "omop_visit_occurrence.visit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_occurrence",
+        "api_name": "visit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "9",
+    "query": "Find the field in omop schema that corresponds to ethnicity from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.ethnicity.",
+    "source_field": "mimic_iii_admissions.ethnicity",
+    "expected_target_field": "omop_person.ethnicity_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "ethnicity_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "10",
+    "query": "Find the field in omop schema that corresponds to subject_id from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.subject_id.",
+    "source_field": "mimic_iii_admissions.subject_id",
+    "expected_target_field": "omop_person.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "11",
+    "query": "Find the field in omop schema that corresponds to edouttime from admissions table in mimic_iii schema. The source field is mimic_iii_admissions.edouttime.",
+    "source_field": "mimic_iii_admissions.edouttime",
+    "expected_target_field": "omop_visit_detail.visit_detail_end_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_end_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "12",
+    "query": "Find the field in omop schema that corresponds to row_id from diagnoses_icd table in mimic_iii schema. The source field is mimic_iii_diagnoses_icd.row_id.",
+    "source_field": "mimic_iii_diagnoses_icd.row_id",
+    "expected_target_field": "omop_condition_occurrence.condition_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "condition_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "13",
+    "query": "Find the field in omop schema that corresponds to subject_id from diagnoses_icd table in mimic_iii schema. The source field is mimic_iii_diagnoses_icd.subject_id.",
+    "source_field": "mimic_iii_diagnoses_icd.subject_id",
+    "expected_target_field": "omop_condition_occurrence.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "14",
+    "query": "Find the field in omop schema that corresponds to hadm_id from diagnoses_icd table in mimic_iii schema. The source field is mimic_iii_diagnoses_icd.hadm_id.",
+    "source_field": "mimic_iii_diagnoses_icd.hadm_id",
+    "expected_target_field": "omop_condition_occurrence.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "15",
+    "query": "Find the field in omop schema that corresponds to icd9_code from diagnoses_icd table in mimic_iii schema. The source field is mimic_iii_diagnoses_icd.icd9_code.",
+    "source_field": "mimic_iii_diagnoses_icd.icd9_code",
+    "expected_target_field": "omop_condition_occurrence.condition_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "condition_occurrence",
+        "api_name": "condition_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "16",
+    "query": "Find the field in omop schema that corresponds to dod from patients table in mimic_iii schema. The source field is mimic_iii_patients.dod.",
+    "source_field": "mimic_iii_patients.dod",
+    "expected_target_field": "omop_death.death_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "death",
+        "api_name": "death_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "17",
+    "query": "Find the field in omop schema that corresponds to dod_hosp from patients table in mimic_iii schema. The source field is mimic_iii_patients.dod_hosp.",
+    "source_field": "mimic_iii_patients.dod_hosp",
+    "expected_target_field": "omop_death.death_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "death",
+        "api_name": "death_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "18",
+    "query": "Find the field in omop schema that corresponds to dod_ssn from patients table in mimic_iii schema. The source field is mimic_iii_patients.dod_ssn.",
+    "source_field": "mimic_iii_patients.dod_ssn",
+    "expected_target_field": "omop_death.death_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "death",
+        "api_name": "death_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "19",
+    "query": "Find the field in omop schema that corresponds to subject_id from patients table in mimic_iii schema. The source field is mimic_iii_patients.subject_id.",
+    "source_field": "mimic_iii_patients.subject_id",
+    "expected_target_field": "omop_death.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "death",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "20",
+    "query": "Find the field in omop schema that corresponds to gender from patients table in mimic_iii schema. The source field is mimic_iii_patients.gender.",
+    "source_field": "mimic_iii_patients.gender",
+    "expected_target_field": "omop_person.gender_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "gender_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "21",
+    "query": "Find the field in omop schema that corresponds to dob from patients table in mimic_iii schema. The source field is mimic_iii_patients.dob.",
+    "source_field": "mimic_iii_patients.dob",
+    "expected_target_field": "omop_person.birth_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "birth_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "22",
+    "query": "Find the field in omop schema that corresponds to row_id from caregivers table in mimic_iii schema. The source field is mimic_iii_caregivers.row_id.",
+    "source_field": "mimic_iii_caregivers.row_id",
+    "expected_target_field": "omop_provider.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "provider",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "23",
+    "query": "Find the field in omop schema that corresponds to cgid from caregivers table in mimic_iii schema. The source field is mimic_iii_caregivers.cgid.",
+    "source_field": "mimic_iii_caregivers.cgid",
+    "expected_target_field": "omop_provider.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "provider",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "24",
+    "query": "Find the field in omop schema that corresponds to label from caregivers table in mimic_iii schema. The source field is mimic_iii_caregivers.label.",
+    "source_field": "mimic_iii_caregivers.label",
+    "expected_target_field": "omop_provider.provider_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "provider",
+        "api_name": "provider_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "25",
+    "query": "Find the field in omop schema that corresponds to description from caregivers table in mimic_iii schema. The source field is mimic_iii_caregivers.description.",
+    "source_field": "mimic_iii_caregivers.description",
+    "expected_target_field": "omop_provider.specialty_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "provider",
+        "api_name": "specialty_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "26",
+    "query": "Find the field in omop schema that corresponds to row_id from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.row_id.",
+    "source_field": "mimic_iii_chartevents.row_id",
+    "expected_target_field": "omop_measurement.measurement_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_id"
+      }
+    ]
+  },
+  {
+    "query_id": "27",
+    "query": "Find the field in omop schema that corresponds to subject_id from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.subject_id.",
+    "source_field": "mimic_iii_chartevents.subject_id",
+    "expected_target_field": "omop_measurement.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "28",
+    "query": "Find the field in omop schema that corresponds to hadm_id from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.hadm_id.",
+    "source_field": "mimic_iii_chartevents.hadm_id",
+    "expected_target_field": "omop_measurement.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "29",
+    "query": "Find the field in omop schema that corresponds to itemid from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.itemid.",
+    "source_field": "mimic_iii_chartevents.itemid",
+    "expected_target_field": "omop_measurement.measurement_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "30",
+    "query": "Find the field in omop schema that corresponds to charttime from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.charttime.",
+    "source_field": "mimic_iii_chartevents.charttime",
+    "expected_target_field": "omop_measurement.measurement_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "31",
+    "query": "Find the field in omop schema that corresponds to storetime from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.storetime.",
+    "source_field": "mimic_iii_chartevents.storetime",
+    "expected_target_field": "omop_measurement.measurement_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "32",
+    "query": "Find the field in omop schema that corresponds to cgid from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.cgid.",
+    "source_field": "mimic_iii_chartevents.cgid",
+    "expected_target_field": "omop_measurement.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "33",
+    "query": "Find the field in omop schema that corresponds to value from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.value.",
+    "source_field": "mimic_iii_chartevents.value",
+    "expected_target_field": "omop_measurement.value_as_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "value_as_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "34",
+    "query": "Find the field in omop schema that corresponds to valuenum from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.valuenum.",
+    "source_field": "mimic_iii_chartevents.valuenum",
+    "expected_target_field": "omop_measurement.value_as_number",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "value_as_number"
+      }
+    ]
+  },
+  {
+    "query_id": "35",
+    "query": "Find the field in omop schema that corresponds to valueuom from chartevents table in mimic_iii schema. The source field is mimic_iii_chartevents.valueuom.",
+    "source_field": "mimic_iii_chartevents.valueuom",
+    "expected_target_field": "omop_measurement.unit_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "unit_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "36",
+    "query": "Find the field in omop schema that corresponds to subject_id from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.subject_id.",
+    "source_field": "mimic_iii_labevents.subject_id",
+    "expected_target_field": "omop_measurement.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "37",
+    "query": "Find the field in omop schema that corresponds to hadm_id from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.hadm_id.",
+    "source_field": "mimic_iii_labevents.hadm_id",
+    "expected_target_field": "omop_measurement.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "38",
+    "query": "Find the field in omop schema that corresponds to itemid from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.itemid.",
+    "source_field": "mimic_iii_labevents.itemid",
+    "expected_target_field": "omop_measurement.measurement_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "39",
+    "query": "Find the field in omop schema that corresponds to value from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.value.",
+    "source_field": "mimic_iii_labevents.value",
+    "expected_target_field": "omop_measurement.value_as_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "value_as_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "40",
+    "query": "Find the field in omop schema that corresponds to valuenum from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.valuenum.",
+    "source_field": "mimic_iii_labevents.valuenum",
+    "expected_target_field": "omop_measurement.value_as_number",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "value_as_number"
+      }
+    ]
+  },
+  {
+    "query_id": "41",
+    "query": "Find the field in omop schema that corresponds to valueuom from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.valueuom.",
+    "source_field": "mimic_iii_labevents.valueuom",
+    "expected_target_field": "omop_measurement.unit_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "unit_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "42",
+    "query": "Find the field in omop schema that corresponds to row_id from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.row_id.",
+    "source_field": "mimic_iii_labevents.row_id",
+    "expected_target_field": "omop_measurement.measurement_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_id"
+      }
+    ]
+  },
+  {
+    "query_id": "43",
+    "query": "Find the field in omop schema that corresponds to charttime from labevents table in mimic_iii schema. The source field is mimic_iii_labevents.charttime.",
+    "source_field": "mimic_iii_labevents.charttime",
+    "expected_target_field": "omop_measurement.measurement_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "44",
+    "query": "Find the field in omop schema that corresponds to itemid from d_labitems table in mimic_iii schema. The source field is mimic_iii_d_labitems.itemid.",
+    "source_field": "mimic_iii_d_labitems.itemid",
+    "expected_target_field": "omop_measurement.measurement_source_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_source_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "45",
+    "query": "Find the field in omop schema that corresponds to label from d_labitems table in mimic_iii schema. The source field is mimic_iii_d_labitems.label.",
+    "source_field": "mimic_iii_d_labitems.label",
+    "expected_target_field": "omop_measurement.measurement_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "46",
+    "query": "Find the field in omop schema that corresponds to category from d_labitems table in mimic_iii schema. The source field is mimic_iii_d_labitems.category.",
+    "source_field": "mimic_iii_d_labitems.category",
+    "expected_target_field": "omop_concept.concept_class_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_class_id"
+      }
+    ]
+  },
+  {
+    "query_id": "47",
+    "query": "Find the field in omop schema that corresponds to row_id from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.row_id.",
+    "source_field": "mimic_iii_outputevents.row_id",
+    "expected_target_field": "omop_measurement.measurement_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_id"
+      }
+    ]
+  },
+  {
+    "query_id": "48",
+    "query": "Find the field in omop schema that corresponds to subject_id from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.subject_id.",
+    "source_field": "mimic_iii_outputevents.subject_id",
+    "expected_target_field": "omop_measurement.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "49",
+    "query": "Find the field in omop schema that corresponds to hadm_id from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.hadm_id.",
+    "source_field": "mimic_iii_outputevents.hadm_id",
+    "expected_target_field": "omop_measurement.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "50",
+    "query": "Find the field in omop schema that corresponds to itemid from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.itemid.",
+    "source_field": "mimic_iii_outputevents.itemid",
+    "expected_target_field": "omop_measurement.measurement_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "51",
+    "query": "Find the field in omop schema that corresponds to cgid from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.cgid.",
+    "source_field": "mimic_iii_outputevents.cgid",
+    "expected_target_field": "omop_measurement.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "52",
+    "query": "Find the field in omop schema that corresponds to valueuom from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.valueuom.",
+    "source_field": "mimic_iii_outputevents.valueuom",
+    "expected_target_field": "omop_measurement.unit_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "unit_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "53",
+    "query": "Find the field in omop schema that corresponds to value from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.value.",
+    "source_field": "mimic_iii_outputevents.value",
+    "expected_target_field": "omop_measurement.value_as_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "value_as_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "54",
+    "query": "Find the field in omop schema that corresponds to charttime from outputevents table in mimic_iii schema. The source field is mimic_iii_outputevents.charttime.",
+    "source_field": "mimic_iii_outputevents.charttime",
+    "expected_target_field": "omop_measurement.measurement_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "measurement",
+        "api_name": "measurement_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "55",
+    "query": "Find the field in omop schema that corresponds to row_id from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.row_id.",
+    "source_field": "mimic_iii_microbiologyevents.row_id",
+    "expected_target_field": "omop_specimen.specimen_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_id"
+      }
+    ]
+  },
+  {
+    "query_id": "56",
+    "query": "Find the field in omop schema that corresponds to subject_id from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.subject_id.",
+    "source_field": "mimic_iii_microbiologyevents.subject_id",
+    "expected_target_field": "omop_specimen.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "57",
+    "query": "Find the field in omop schema that corresponds to chartdate from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.chartdate.",
+    "source_field": "mimic_iii_microbiologyevents.chartdate",
+    "expected_target_field": "omop_specimen.specimen_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_date"
+      }
+    ]
+  },
+  {
+    "query_id": "58",
+    "query": "Find the field in omop schema that corresponds to charttime from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.charttime.",
+    "source_field": "mimic_iii_microbiologyevents.charttime",
+    "expected_target_field": "omop_specimen.specimen_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "59",
+    "query": "Find the field in omop schema that corresponds to spec_itemid from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.spec_itemid.",
+    "source_field": "mimic_iii_microbiologyevents.spec_itemid",
+    "expected_target_field": "omop_specimen.specimen_type_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_type_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "60",
+    "query": "Find the field in omop schema that corresponds to spec_type_desc from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.spec_type_desc.",
+    "source_field": "mimic_iii_microbiologyevents.spec_type_desc",
+    "expected_target_field": "omop_specimen.specimen_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "61",
+    "query": "Find the field in omop schema that corresponds to org_itemid from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.org_itemid.",
+    "source_field": "mimic_iii_microbiologyevents.org_itemid",
+    "expected_target_field": "omop_specimen.specimen_source_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_source_id"
+      }
+    ]
+  },
+  {
+    "query_id": "62",
+    "query": "Find the field in omop schema that corresponds to org_name from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.org_name.",
+    "source_field": "mimic_iii_microbiologyevents.org_name",
+    "expected_target_field": "omop_specimen.specimen_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "63",
+    "query": "Find the field in omop schema that corresponds to ab_name from microbiologyevents table in mimic_iii schema. The source field is mimic_iii_microbiologyevents.ab_name.",
+    "source_field": "mimic_iii_microbiologyevents.ab_name",
+    "expected_target_field": "omop_specimen.specimen_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "specimen",
+        "api_name": "specimen_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "64",
+    "query": "Find the field in omop schema that corresponds to row_id from cptevents table in mimic_iii schema. The source field is mimic_iii_cptevents.row_id.",
+    "source_field": "mimic_iii_cptevents.row_id",
+    "expected_target_field": "omop_procedure_occurrence.procedure_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "65",
+    "query": "Find the field in omop schema that corresponds to subject_id from cptevents table in mimic_iii schema. The source field is mimic_iii_cptevents.subject_id.",
+    "source_field": "mimic_iii_cptevents.subject_id",
+    "expected_target_field": "omop_procedure_occurrence.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "66",
+    "query": "Find the field in omop schema that corresponds to hadm_id from cptevents table in mimic_iii schema. The source field is mimic_iii_cptevents.hadm_id.",
+    "source_field": "mimic_iii_cptevents.hadm_id",
+    "expected_target_field": "omop_procedure_occurrence.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "67",
+    "query": "Find the field in omop schema that corresponds to chartdate from cptevents table in mimic_iii schema. The source field is mimic_iii_cptevents.chartdate.",
+    "source_field": "mimic_iii_cptevents.chartdate",
+    "expected_target_field": "omop_procedure_occurrence.procedure_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_date"
+      }
+    ]
+  },
+  {
+    "query_id": "68",
+    "query": "Find the field in omop schema that corresponds to cpt_cd from cptevents table in mimic_iii schema. The source field is mimic_iii_cptevents.cpt_cd.",
+    "source_field": "mimic_iii_cptevents.cpt_cd",
+    "expected_target_field": "omop_procedure_occurrence.procedure_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "69",
+    "query": "Find the field in omop schema that corresponds to subsectionheader from cptevents table in mimic_iii schema. The source field is mimic_iii_cptevents.subsectionheader.",
+    "source_field": "mimic_iii_cptevents.subsectionheader",
+    "expected_target_field": "omop_procedure_occurrence.procedure_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "70",
+    "query": "Find the field in omop schema that corresponds to row_id from procedures_icd table in mimic_iii schema. The source field is mimic_iii_procedures_icd.row_id.",
+    "source_field": "mimic_iii_procedures_icd.row_id",
+    "expected_target_field": "omop_procedure_occurrence.procedure_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "71",
+    "query": "Find the field in omop schema that corresponds to subject_id from procedures_icd table in mimic_iii schema. The source field is mimic_iii_procedures_icd.subject_id.",
+    "source_field": "mimic_iii_procedures_icd.subject_id",
+    "expected_target_field": "omop_procedure_occurrence.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "72",
+    "query": "Find the field in omop schema that corresponds to hadm_id from procedures_icd table in mimic_iii schema. The source field is mimic_iii_procedures_icd.hadm_id.",
+    "source_field": "mimic_iii_procedures_icd.hadm_id",
+    "expected_target_field": "omop_procedure_occurrence.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "73",
+    "query": "Find the field in omop schema that corresponds to icd9_code from procedures_icd table in mimic_iii schema. The source field is mimic_iii_procedures_icd.icd9_code.",
+    "source_field": "mimic_iii_procedures_icd.icd9_code",
+    "expected_target_field": "omop_procedure_occurrence.procedure_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "74",
+    "query": "Find the field in omop schema that corresponds to row_id from procedureevents_mv table in mimic_iii schema. The source field is mimic_iii_procedureevents_mv.row_id.",
+    "source_field": "mimic_iii_procedureevents_mv.row_id",
+    "expected_target_field": "omop_procedure_occurrence.procedure_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "75",
+    "query": "Find the field in omop schema that corresponds to subject_id from procedureevents_mv table in mimic_iii schema. The source field is mimic_iii_procedureevents_mv.subject_id.",
+    "source_field": "mimic_iii_procedureevents_mv.subject_id",
+    "expected_target_field": "omop_procedure_occurrence.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "76",
+    "query": "Find the field in omop schema that corresponds to hadm_id from procedureevents_mv table in mimic_iii schema. The source field is mimic_iii_procedureevents_mv.hadm_id.",
+    "source_field": "mimic_iii_procedureevents_mv.hadm_id",
+    "expected_target_field": "omop_procedure_occurrence.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "77",
+    "query": "Find the field in omop schema that corresponds to cgid from procedureevents_mv table in mimic_iii schema. The source field is mimic_iii_procedureevents_mv.cgid.",
+    "source_field": "mimic_iii_procedureevents_mv.cgid",
+    "expected_target_field": "omop_procedure_occurrence.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "78",
+    "query": "Find the field in omop schema that corresponds to starttime from procedureevents_mv table in mimic_iii schema. The source field is mimic_iii_procedureevents_mv.starttime.",
+    "source_field": "mimic_iii_procedureevents_mv.starttime",
+    "expected_target_field": "omop_procedure_occurrence.procedure_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "79",
+    "query": "Find the field in omop schema that corresponds to endtime from procedureevents_mv table in mimic_iii schema. The source field is mimic_iii_procedureevents_mv.endtime.",
+    "source_field": "mimic_iii_procedureevents_mv.endtime",
+    "expected_target_field": "omop_procedure_occurrence.procedure_end_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_end_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "80",
+    "query": "Find the field in omop schema that corresponds to label from d_items table in mimic_iii schema. The source field is mimic_iii_d_items.label.",
+    "source_field": "mimic_iii_d_items.label",
+    "expected_target_field": "omop_procedure_occurrence.procedure_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "81",
+    "query": "Find the field in omop schema that corresponds to itemid from d_items table in mimic_iii schema. The source field is mimic_iii_d_items.itemid.",
+    "source_field": "mimic_iii_d_items.itemid",
+    "expected_target_field": "omop_procedure_occurrence.procedure_source_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "procedure_occurrence",
+        "api_name": "procedure_source_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "82",
+    "query": "Find the field in omop schema that corresponds to category from d_items table in mimic_iii schema. The source field is mimic_iii_d_items.category.",
+    "source_field": "mimic_iii_d_items.category",
+    "expected_target_field": "omop_concept.concept_class_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_class_id"
+      }
+    ]
+  },
+  {
+    "query_id": "83",
+    "query": "Find the field in omop schema that corresponds to row_id from d_icd_procedures table in mimic_iii schema. The source field is mimic_iii_d_icd_procedures.row_id.",
+    "source_field": "mimic_iii_d_icd_procedures.row_id",
+    "expected_target_field": "omop_concept.concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "84",
+    "query": "Find the field in omop schema that corresponds to long_title from d_icd_procedures table in mimic_iii schema. The source field is mimic_iii_d_icd_procedures.long_title.",
+    "source_field": "mimic_iii_d_icd_procedures.long_title",
+    "expected_target_field": "omop_concept.concept_name",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_name"
+      }
+    ]
+  },
+  {
+    "query_id": "85",
+    "query": "Find the field in omop schema that corresponds to short_title from d_icd_procedures table in mimic_iii schema. The source field is mimic_iii_d_icd_procedures.short_title.",
+    "source_field": "mimic_iii_d_icd_procedures.short_title",
+    "expected_target_field": "omop_concept.concept_name",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_name"
+      }
+    ]
+  },
+  {
+    "query_id": "86",
+    "query": "Find the field in omop schema that corresponds to icd9_code from d_icd_procedures table in mimic_iii schema. The source field is mimic_iii_d_icd_procedures.icd9_code.",
+    "source_field": "mimic_iii_d_icd_procedures.icd9_code",
+    "expected_target_field": "omop_concept.concept_code",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_code"
+      }
+    ]
+  },
+  {
+    "query_id": "87",
+    "query": "Find the field in omop schema that corresponds to row_id from d_icd_diagnoses table in mimic_iii schema. The source field is mimic_iii_d_icd_diagnoses.row_id.",
+    "source_field": "mimic_iii_d_icd_diagnoses.row_id",
+    "expected_target_field": "omop_concept.concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "88",
+    "query": "Find the field in omop schema that corresponds to long_title from d_icd_diagnoses table in mimic_iii schema. The source field is mimic_iii_d_icd_diagnoses.long_title.",
+    "source_field": "mimic_iii_d_icd_diagnoses.long_title",
+    "expected_target_field": "omop_concept.concept_name",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_name"
+      }
+    ]
+  },
+  {
+    "query_id": "89",
+    "query": "Find the field in omop schema that corresponds to short_title from d_icd_diagnoses table in mimic_iii schema. The source field is mimic_iii_d_icd_diagnoses.short_title.",
+    "source_field": "mimic_iii_d_icd_diagnoses.short_title",
+    "expected_target_field": "omop_concept.concept_name",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_name"
+      }
+    ]
+  },
+  {
+    "query_id": "90",
+    "query": "Find the field in omop schema that corresponds to icd9_code from d_icd_diagnoses table in mimic_iii schema. The source field is mimic_iii_d_icd_diagnoses.icd9_code.",
+    "source_field": "mimic_iii_d_icd_diagnoses.icd9_code",
+    "expected_target_field": "omop_concept.concept_code",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "concept",
+        "api_name": "concept_code"
+      }
+    ]
+  },
+  {
+    "query_id": "91",
+    "query": "Find the field in omop schema that corresponds to row_id from datetimeevents table in mimic_iii schema. The source field is mimic_iii_datetimeevents.row_id.",
+    "source_field": "mimic_iii_datetimeevents.row_id",
+    "expected_target_field": "omop_observation.observation_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "observation_id"
+      }
+    ]
+  },
+  {
+    "query_id": "92",
+    "query": "Find the field in omop schema that corresponds to subject_id from datetimeevents table in mimic_iii schema. The source field is mimic_iii_datetimeevents.subject_id.",
+    "source_field": "mimic_iii_datetimeevents.subject_id",
+    "expected_target_field": "omop_observation.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "93",
+    "query": "Find the field in omop schema that corresponds to hadm_id from datetimeevents table in mimic_iii schema. The source field is mimic_iii_datetimeevents.hadm_id.",
+    "source_field": "mimic_iii_datetimeevents.hadm_id",
+    "expected_target_field": "omop_observation.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "94",
+    "query": "Find the field in omop schema that corresponds to charttime from datetimeevents table in mimic_iii schema. The source field is mimic_iii_datetimeevents.charttime.",
+    "source_field": "mimic_iii_datetimeevents.charttime",
+    "expected_target_field": "omop_observation.observation_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "observation_date"
+      }
+    ]
+  },
+  {
+    "query_id": "95",
+    "query": "Find the field in omop schema that corresponds to cgid from datetimeevents table in mimic_iii schema. The source field is mimic_iii_datetimeevents.cgid.",
+    "source_field": "mimic_iii_datetimeevents.cgid",
+    "expected_target_field": "omop_observation.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "96",
+    "query": "Find the field in omop schema that corresponds to valueuom from datetimeevents table in mimic_iii schema. The source field is mimic_iii_datetimeevents.valueuom.",
+    "source_field": "mimic_iii_datetimeevents.valueuom",
+    "expected_target_field": "omop_observation.unit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "unit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "97",
+    "query": "Find the field in omop schema that corresponds to row_id from drgcodes table in mimic_iii schema. The source field is mimic_iii_drgcodes.row_id.",
+    "source_field": "mimic_iii_drgcodes.row_id",
+    "expected_target_field": "omop_observation.observation_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "observation_id"
+      }
+    ]
+  },
+  {
+    "query_id": "98",
+    "query": "Find the field in omop schema that corresponds to subject_id from drgcodes table in mimic_iii schema. The source field is mimic_iii_drgcodes.subject_id.",
+    "source_field": "mimic_iii_drgcodes.subject_id",
+    "expected_target_field": "omop_observation.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "99",
+    "query": "Find the field in omop schema that corresponds to hadm_id from drgcodes table in mimic_iii schema. The source field is mimic_iii_drgcodes.hadm_id.",
+    "source_field": "mimic_iii_drgcodes.hadm_id",
+    "expected_target_field": "omop_observation.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "100",
+    "query": "Find the field in omop schema that corresponds to description from drgcodes table in mimic_iii schema. The source field is mimic_iii_drgcodes.description.",
+    "source_field": "mimic_iii_drgcodes.description",
+    "expected_target_field": "omop_observation.value_as_string",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation",
+        "api_name": "value_as_string"
+      }
+    ]
+  },
+  {
+    "query_id": "101",
+    "query": "Find the field in omop schema that corresponds to row_id from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.row_id.",
+    "source_field": "mimic_iii_noteevents.row_id",
+    "expected_target_field": "omop_note.note_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "note_id"
+      }
+    ]
+  },
+  {
+    "query_id": "102",
+    "query": "Find the field in omop schema that corresponds to subject_id from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.subject_id.",
+    "source_field": "mimic_iii_noteevents.subject_id",
+    "expected_target_field": "omop_note.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "103",
+    "query": "Find the field in omop schema that corresponds to hadm_id from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.hadm_id.",
+    "source_field": "mimic_iii_noteevents.hadm_id",
+    "expected_target_field": "omop_note.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "104",
+    "query": "Find the field in omop schema that corresponds to chartdate from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.chartdate.",
+    "source_field": "mimic_iii_noteevents.chartdate",
+    "expected_target_field": "omop_note.note_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "note_date"
+      }
+    ]
+  },
+  {
+    "query_id": "105",
+    "query": "Find the field in omop schema that corresponds to charttime from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.charttime.",
+    "source_field": "mimic_iii_noteevents.charttime",
+    "expected_target_field": "omop_note.note_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "note_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "106",
+    "query": "Find the field in omop schema that corresponds to cgid from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.cgid.",
+    "source_field": "mimic_iii_noteevents.cgid",
+    "expected_target_field": "omop_note.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "107",
+    "query": "Find the field in omop schema that corresponds to text from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.text.",
+    "source_field": "mimic_iii_noteevents.text",
+    "expected_target_field": "omop_note.note_text",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "note_text"
+      }
+    ]
+  },
+  {
+    "query_id": "108",
+    "query": "Find the field in omop schema that corresponds to description from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.description.",
+    "source_field": "mimic_iii_noteevents.description",
+    "expected_target_field": "omop_note.note_title",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "note_title"
+      }
+    ]
+  },
+  {
+    "query_id": "109",
+    "query": "Find the field in omop schema that corresponds to category from noteevents table in mimic_iii schema. The source field is mimic_iii_noteevents.category.",
+    "source_field": "mimic_iii_noteevents.category",
+    "expected_target_field": "omop_note.note_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "note",
+        "api_name": "note_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "110",
+    "query": "Find the field in omop schema that corresponds to subject_id from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.subject_id.",
+    "source_field": "mimic_iii_prescriptions.subject_id",
+    "expected_target_field": "omop_drug_exposure.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "111",
+    "query": "Find the field in omop schema that corresponds to hadm_id from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.hadm_id.",
+    "source_field": "mimic_iii_prescriptions.hadm_id",
+    "expected_target_field": "omop_drug_exposure.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "112",
+    "query": "Find the field in omop schema that corresponds to drug_type from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.drug_type.",
+    "source_field": "mimic_iii_prescriptions.drug_type",
+    "expected_target_field": "omop_drug_exposure.drug_type_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_type_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "113",
+    "query": "Find the field in omop schema that corresponds to drug from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.drug.",
+    "source_field": "mimic_iii_prescriptions.drug",
+    "expected_target_field": "omop_drug_exposure.drug_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "114",
+    "query": "Find the field in omop schema that corresponds to row_id from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.row_id.",
+    "source_field": "mimic_iii_prescriptions.row_id",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_id"
+      }
+    ]
+  },
+  {
+    "query_id": "115",
+    "query": "Find the field in omop schema that corresponds to startdate from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.startdate.",
+    "source_field": "mimic_iii_prescriptions.startdate",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_start_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_start_date"
+      }
+    ]
+  },
+  {
+    "query_id": "116",
+    "query": "Find the field in omop schema that corresponds to enddate from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.enddate.",
+    "source_field": "mimic_iii_prescriptions.enddate",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_end_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_end_date"
+      }
+    ]
+  },
+  {
+    "query_id": "117",
+    "query": "Find the field in omop schema that corresponds to dose_val_rx from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.dose_val_rx.",
+    "source_field": "mimic_iii_prescriptions.dose_val_rx",
+    "expected_target_field": "omop_drug_exposure.quantity",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "quantity"
+      }
+    ]
+  },
+  {
+    "query_id": "118",
+    "query": "Find the field in omop schema that corresponds to ndc from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.ndc.",
+    "source_field": "mimic_iii_prescriptions.ndc",
+    "expected_target_field": "omop_drug_exposure.drug_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "119",
+    "query": "Find the field in omop schema that corresponds to route from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.route.",
+    "source_field": "mimic_iii_prescriptions.route",
+    "expected_target_field": "omop_drug_exposure.route_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "route_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "120",
+    "query": "Find the field in omop schema that corresponds to form_unit_disp from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.form_unit_disp.",
+    "source_field": "mimic_iii_prescriptions.form_unit_disp",
+    "expected_target_field": "omop_drug_exposure.dose_unit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "dose_unit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "121",
+    "query": "Find the field in omop schema that corresponds to form_val_disp from prescriptions table in mimic_iii schema. The source field is mimic_iii_prescriptions.form_val_disp.",
+    "source_field": "mimic_iii_prescriptions.form_val_disp",
+    "expected_target_field": "omop_drug_exposure.quantity",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "quantity"
+      }
+    ]
+  },
+  {
+    "query_id": "122",
+    "query": "Find the field in omop schema that corresponds to row_id from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.row_id.",
+    "source_field": "mimic_iii_inputevents_cv.row_id",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_id"
+      }
+    ]
+  },
+  {
+    "query_id": "123",
+    "query": "Find the field in omop schema that corresponds to subject_id from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.subject_id.",
+    "source_field": "mimic_iii_inputevents_cv.subject_id",
+    "expected_target_field": "omop_drug_exposure.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "124",
+    "query": "Find the field in omop schema that corresponds to hadm_id from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.hadm_id.",
+    "source_field": "mimic_iii_inputevents_cv.hadm_id",
+    "expected_target_field": "omop_drug_exposure.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "125",
+    "query": "Find the field in omop schema that corresponds to itemid from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.itemid.",
+    "source_field": "mimic_iii_inputevents_cv.itemid",
+    "expected_target_field": "omop_drug_exposure.drug_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "126",
+    "query": "Find the field in omop schema that corresponds to stopped from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.stopped.",
+    "source_field": "mimic_iii_inputevents_cv.stopped",
+    "expected_target_field": "omop_drug_exposure.stop_reason",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "stop_reason"
+      }
+    ]
+  },
+  {
+    "query_id": "127",
+    "query": "Find the field in omop schema that corresponds to cgid from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.cgid.",
+    "source_field": "mimic_iii_inputevents_cv.cgid",
+    "expected_target_field": "omop_drug_exposure.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "128",
+    "query": "Find the field in omop schema that corresponds to charttime from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.charttime.",
+    "source_field": "mimic_iii_inputevents_cv.charttime",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_start_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_start_date"
+      }
+    ]
+  },
+  {
+    "query_id": "129",
+    "query": "Find the field in omop schema that corresponds to rate from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.rate.",
+    "source_field": "mimic_iii_inputevents_cv.rate",
+    "expected_target_field": "omop_drug_exposure.quantity",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "quantity"
+      }
+    ]
+  },
+  {
+    "query_id": "130",
+    "query": "Find the field in omop schema that corresponds to amount from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.amount.",
+    "source_field": "mimic_iii_inputevents_cv.amount",
+    "expected_target_field": "omop_drug_exposure.quantity",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "quantity"
+      }
+    ]
+  },
+  {
+    "query_id": "131",
+    "query": "Find the field in omop schema that corresponds to rateuom from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.rateuom.",
+    "source_field": "mimic_iii_inputevents_cv.rateuom",
+    "expected_target_field": "omop_drug_exposure.dose_unit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "dose_unit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "132",
+    "query": "Find the field in omop schema that corresponds to amountuom from inputevents_cv table in mimic_iii schema. The source field is mimic_iii_inputevents_cv.amountuom.",
+    "source_field": "mimic_iii_inputevents_cv.amountuom",
+    "expected_target_field": "omop_drug_exposure.dose_unit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "dose_unit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "133",
+    "query": "Find the field in omop schema that corresponds to endtime from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.endtime.",
+    "source_field": "mimic_iii_inputevents_mv.endtime",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_end_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_end_date"
+      }
+    ]
+  },
+  {
+    "query_id": "134",
+    "query": "Find the field in omop schema that corresponds to starttime from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.starttime.",
+    "source_field": "mimic_iii_inputevents_mv.starttime",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_start_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_start_date"
+      }
+    ]
+  },
+  {
+    "query_id": "135",
+    "query": "Find the field in omop schema that corresponds to row_id from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.row_id.",
+    "source_field": "mimic_iii_inputevents_mv.row_id",
+    "expected_target_field": "omop_drug_exposure.drug_exposure_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_exposure_id"
+      }
+    ]
+  },
+  {
+    "query_id": "136",
+    "query": "Find the field in omop schema that corresponds to rate from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.rate.",
+    "source_field": "mimic_iii_inputevents_mv.rate",
+    "expected_target_field": "omop_drug_exposure.quantity",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "quantity"
+      }
+    ]
+  },
+  {
+    "query_id": "137",
+    "query": "Find the field in omop schema that corresponds to amount from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.amount.",
+    "source_field": "mimic_iii_inputevents_mv.amount",
+    "expected_target_field": "omop_drug_exposure.quantity",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "quantity"
+      }
+    ]
+  },
+  {
+    "query_id": "138",
+    "query": "Find the field in omop schema that corresponds to rateuom from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.rateuom.",
+    "source_field": "mimic_iii_inputevents_mv.rateuom",
+    "expected_target_field": "omop_drug_exposure.dose_unit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "dose_unit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "139",
+    "query": "Find the field in omop schema that corresponds to amountuom from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.amountuom.",
+    "source_field": "mimic_iii_inputevents_mv.amountuom",
+    "expected_target_field": "omop_drug_exposure.dose_unit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "dose_unit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "140",
+    "query": "Find the field in omop schema that corresponds to statusdescription from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.statusdescription.",
+    "source_field": "mimic_iii_inputevents_mv.statusdescription",
+    "expected_target_field": "omop_drug_exposure.stop_reason",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "stop_reason"
+      }
+    ]
+  },
+  {
+    "query_id": "141",
+    "query": "Find the field in omop schema that corresponds to cgid from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.cgid.",
+    "source_field": "mimic_iii_inputevents_mv.cgid",
+    "expected_target_field": "omop_drug_exposure.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "142",
+    "query": "Find the field in omop schema that corresponds to itemid from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.itemid.",
+    "source_field": "mimic_iii_inputevents_mv.itemid",
+    "expected_target_field": "omop_drug_exposure.drug_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "drug_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "143",
+    "query": "Find the field in omop schema that corresponds to hadm_id from inputevents_mv table in mimic_iii schema. The source field is mimic_iii_inputevents_mv.hadm_id.",
+    "source_field": "mimic_iii_inputevents_mv.hadm_id",
+    "expected_target_field": "omop_drug_exposure.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "drug_exposure",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "144",
+    "query": "Find the field in omop schema that corresponds to subject_id from services table in mimic_iii schema. The source field is mimic_iii_services.subject_id.",
+    "source_field": "mimic_iii_services.subject_id",
+    "expected_target_field": "omop_visit_detail.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "145",
+    "query": "Find the field in omop schema that corresponds to hadm_id from services table in mimic_iii schema. The source field is mimic_iii_services.hadm_id.",
+    "source_field": "mimic_iii_services.hadm_id",
+    "expected_target_field": "omop_visit_detail.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "146",
+    "query": "Find the field in omop schema that corresponds to transfertime from services table in mimic_iii schema. The source field is mimic_iii_services.transfertime.",
+    "source_field": "mimic_iii_services.transfertime",
+    "expected_target_field": "omop_visit_detail.visit_detail_start_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_start_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "147",
+    "query": "Find the field in omop schema that corresponds to prev_service from services table in mimic_iii schema. The source field is mimic_iii_services.prev_service.",
+    "source_field": "mimic_iii_services.prev_service",
+    "expected_target_field": "omop_visit_detail.admitted_from_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "admitted_from_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "148",
+    "query": "Find the field in omop schema that corresponds to curr_service from services table in mimic_iii schema. The source field is mimic_iii_services.curr_service.",
+    "source_field": "mimic_iii_services.curr_service",
+    "expected_target_field": "omop_visit_detail.discharged_to_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "discharged_to_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "149",
+    "query": "Find the field in omop schema that corresponds to row_id from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.row_id.",
+    "source_field": "mimic_iii_transfers.row_id",
+    "expected_target_field": "omop_visit_detail.visit_detail_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_id"
+      }
+    ]
+  },
+  {
+    "query_id": "150",
+    "query": "Find the field in omop schema that corresponds to subject_id from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.subject_id.",
+    "source_field": "mimic_iii_transfers.subject_id",
+    "expected_target_field": "omop_visit_detail.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "151",
+    "query": "Find the field in omop schema that corresponds to hadm_id from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.hadm_id.",
+    "source_field": "mimic_iii_transfers.hadm_id",
+    "expected_target_field": "omop_visit_detail.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "152",
+    "query": "Find the field in omop schema that corresponds to icustay_id from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.icustay_id.",
+    "source_field": "mimic_iii_transfers.icustay_id",
+    "expected_target_field": "omop_visit_detail.visit_detail_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_id"
+      }
+    ]
+  },
+  {
+    "query_id": "153",
+    "query": "Find the field in omop schema that corresponds to eventtype from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.eventtype.",
+    "source_field": "mimic_iii_transfers.eventtype",
+    "expected_target_field": "omop_visit_detail.admitted_from_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "admitted_from_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "154",
+    "query": "Find the field in omop schema that corresponds to prev_careunit from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.prev_careunit.",
+    "source_field": "mimic_iii_transfers.prev_careunit",
+    "expected_target_field": "omop_visit_detail.admitted_from_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "admitted_from_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "155",
+    "query": "Find the field in omop schema that corresponds to curr_careunit from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.curr_careunit.",
+    "source_field": "mimic_iii_transfers.curr_careunit",
+    "expected_target_field": "omop_visit_detail.discharged_to_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "discharged_to_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "156",
+    "query": "Find the field in omop schema that corresponds to intime from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.intime.",
+    "source_field": "mimic_iii_transfers.intime",
+    "expected_target_field": "omop_visit_detail.visit_detail_start_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_start_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "157",
+    "query": "Find the field in omop schema that corresponds to outtime from transfers table in mimic_iii schema. The source field is mimic_iii_transfers.outtime.",
+    "source_field": "mimic_iii_transfers.outtime",
+    "expected_target_field": "omop_visit_detail.visit_detail_end_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_end_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "158",
+    "query": "Find the field in omop schema that corresponds to row_id from callout table in mimic_iii schema. The source field is mimic_iii_callout.row_id.",
+    "source_field": "mimic_iii_callout.row_id",
+    "expected_target_field": "omop_visit_detail.visit_detail_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_id"
+      }
+    ]
+  },
+  {
+    "query_id": "159",
+    "query": "Find the field in omop schema that corresponds to subject_id from callout table in mimic_iii schema. The source field is mimic_iii_callout.subject_id.",
+    "source_field": "mimic_iii_callout.subject_id",
+    "expected_target_field": "omop_visit_detail.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "160",
+    "query": "Find the field in omop schema that corresponds to hadm_id from callout table in mimic_iii schema. The source field is mimic_iii_callout.hadm_id.",
+    "source_field": "mimic_iii_callout.hadm_id",
+    "expected_target_field": "omop_visit_detail.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "161",
+    "query": "Find the field in omop schema that corresponds to submit_wardid from callout table in mimic_iii schema. The source field is mimic_iii_callout.submit_wardid.",
+    "source_field": "mimic_iii_callout.submit_wardid",
+    "expected_target_field": "omop_visit_detail.care_site_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "care_site_id"
+      }
+    ]
+  },
+  {
+    "query_id": "162",
+    "query": "Find the field in omop schema that corresponds to submit_careunit from callout table in mimic_iii schema. The source field is mimic_iii_callout.submit_careunit.",
+    "source_field": "mimic_iii_callout.submit_careunit",
+    "expected_target_field": "omop_visit_detail.visit_detail_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "163",
+    "query": "Find the field in omop schema that corresponds to curr_wardid from callout table in mimic_iii schema. The source field is mimic_iii_callout.curr_wardid.",
+    "source_field": "mimic_iii_callout.curr_wardid",
+    "expected_target_field": "omop_visit_detail.admitted_from_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "admitted_from_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "164",
+    "query": "Find the field in omop schema that corresponds to discharge_wardid from callout table in mimic_iii schema. The source field is mimic_iii_callout.discharge_wardid.",
+    "source_field": "mimic_iii_callout.discharge_wardid",
+    "expected_target_field": "omop_visit_detail.discharged_to_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "discharged_to_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "165",
+    "query": "Find the field in omop schema that corresponds to outcometime from callout table in mimic_iii schema. The source field is mimic_iii_callout.outcometime.",
+    "source_field": "mimic_iii_callout.outcometime",
+    "expected_target_field": "omop_visit_detail.visit_detail_start_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_start_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "166",
+    "query": "Find the field in omop schema that corresponds to row_id from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.row_id.",
+    "source_field": "mimic_iii_icustays.row_id",
+    "expected_target_field": "omop_visit_detail.visit_detail_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_id"
+      }
+    ]
+  },
+  {
+    "query_id": "167",
+    "query": "Find the field in omop schema that corresponds to subject_id from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.subject_id.",
+    "source_field": "mimic_iii_icustays.subject_id",
+    "expected_target_field": "omop_visit_detail.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "168",
+    "query": "Find the field in omop schema that corresponds to hadm_id from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.hadm_id.",
+    "source_field": "mimic_iii_icustays.hadm_id",
+    "expected_target_field": "omop_visit_detail.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "169",
+    "query": "Find the field in omop schema that corresponds to icustay_id from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.icustay_id.",
+    "source_field": "mimic_iii_icustays.icustay_id",
+    "expected_target_field": "omop_visit_detail.visit_detail_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_id"
+      }
+    ]
+  },
+  {
+    "query_id": "170",
+    "query": "Find the field in omop schema that corresponds to first_careunit from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.first_careunit.",
+    "source_field": "mimic_iii_icustays.first_careunit",
+    "expected_target_field": "omop_visit_detail.admitted_from_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "admitted_from_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "171",
+    "query": "Find the field in omop schema that corresponds to last_careunit from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.last_careunit.",
+    "source_field": "mimic_iii_icustays.last_careunit",
+    "expected_target_field": "omop_visit_detail.discharged_to_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "discharged_to_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "172",
+    "query": "Find the field in omop schema that corresponds to intime from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.intime.",
+    "source_field": "mimic_iii_icustays.intime",
+    "expected_target_field": "omop_visit_detail.visit_detail_start_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_start_datetime"
+      }
+    ]
+  },
+  {
+    "query_id": "173",
+    "query": "Find the field in omop schema that corresponds to outtime from icustays table in mimic_iii schema. The source field is mimic_iii_icustays.outtime.",
+    "source_field": "mimic_iii_icustays.outtime",
+    "expected_target_field": "omop_visit_detail.visit_detail_end_datetime",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_end_datetime"
+      }
+    ]
+  }
+]

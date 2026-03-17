@@ -1,0 +1,223 @@
+[
+  {
+    "query_id": "0",
+    "query": "Find the field in bank2 schema that corresponds to branch_id from branch table in bank1 schema. The source field is bank1_branch.branch_id.",
+    "source_field": "bank1_branch.branch_id",
+    "expected_target_field": "bank2_branch.branch_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "branch",
+        "api_name": "branch_id"
+      }
+    ]
+  },
+  {
+    "query_id": "1",
+    "query": "Find the field in bank2 schema that corresponds to name from branch table in bank1 schema. The source field is bank1_branch.name.",
+    "source_field": "bank1_branch.name",
+    "expected_target_field": "bank2_branch.branch_name",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "branch",
+        "api_name": "branch_name"
+      }
+    ]
+  },
+  {
+    "query_id": "2",
+    "query": "Find the field in bank2 schema that corresponds to address from branch table in bank1 schema. The source field is bank1_branch.address.",
+    "source_field": "bank1_branch.address",
+    "expected_target_field": "bank2_branch.branch_address",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "branch",
+        "api_name": "branch_address"
+      }
+    ]
+  },
+  {
+    "query_id": "3",
+    "query": "Find the field in bank2 schema that corresponds to account_no from account table in bank1 schema. The source field is bank1_account.account_no.",
+    "source_field": "bank1_account.account_no",
+    "expected_target_field": "bank2_account.account_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "account",
+        "api_name": "account_id"
+      }
+    ]
+  },
+  {
+    "query_id": "4",
+    "query": "Find the field in bank2 schema that corresponds to acc_type from account table in bank1 schema. The source field is bank1_account.acc_type.",
+    "source_field": "bank1_account.acc_type",
+    "expected_target_field": "bank2_account.account_type",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "account",
+        "api_name": "account_type"
+      }
+    ]
+  },
+  {
+    "query_id": "5",
+    "query": "Find the field in bank2 schema that corresponds to balance from account table in bank1 schema. The source field is bank1_account.balance.",
+    "source_field": "bank1_account.balance",
+    "expected_target_field": "bank2_account.account_balance",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "account",
+        "api_name": "account_balance"
+      }
+    ]
+  },
+  {
+    "query_id": "6",
+    "query": "Find the field in bank2 schema that corresponds to branch_id from account table in bank1 schema. The source field is bank1_account.branch_id.",
+    "source_field": "bank1_account.branch_id",
+    "expected_target_field": "bank2_account.branch_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "account",
+        "api_name": "branch_id"
+      }
+    ]
+  },
+  {
+    "query_id": "7",
+    "query": "Find the field in bank2 schema that corresponds to custid from customer table in bank1 schema. The source field is bank1_customer.custid.",
+    "source_field": "bank1_customer.custid",
+    "expected_target_field": "bank2_customer.customer_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "customer",
+        "api_name": "customer_id"
+      }
+    ]
+  },
+  {
+    "query_id": "8",
+    "query": "Find the field in bank2 schema that corresponds to name from customer table in bank1 schema. The source field is bank1_customer.name.",
+    "source_field": "bank1_customer.name",
+    "expected_target_field": "bank2_customer.customer_name",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "customer",
+        "api_name": "customer_name"
+      }
+    ]
+  },
+  {
+    "query_id": "9",
+    "query": "Find the field in bank2 schema that corresponds to phone from customer table in bank1 schema. The source field is bank1_customer.phone.",
+    "source_field": "bank1_customer.phone",
+    "expected_target_field": "bank2_customer.mobileno",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "customer",
+        "api_name": "mobileno"
+      }
+    ]
+  },
+  {
+    "query_id": "10",
+    "query": "Find the field in bank2 schema that corresponds to loan_id from loan table in bank1 schema. The source field is bank1_loan.loan_id.",
+    "source_field": "bank1_loan.loan_id",
+    "expected_target_field": "bank2_loan.loan_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "loan",
+        "api_name": "loan_id"
+      }
+    ]
+  },
+  {
+    "query_id": "11",
+    "query": "Find the field in bank2 schema that corresponds to amount from loan table in bank1 schema. The source field is bank1_loan.amount.",
+    "source_field": "bank1_loan.amount",
+    "expected_target_field": "bank2_loan.issued_amount",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "loan",
+        "api_name": "issued_amount"
+      }
+    ]
+  },
+  {
+    "query_id": "12",
+    "query": "Find the field in bank2 schema that corresponds to branch_id from loan table in bank1 schema. The source field is bank1_loan.branch_id.",
+    "source_field": "bank1_loan.branch_id",
+    "expected_target_field": "bank2_loan.branch_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "loan",
+        "api_name": "branch_id"
+      }
+    ]
+  },
+  {
+    "query_id": "13",
+    "query": "Find the field in bank2 schema that corresponds to custid from availed_by table in bank1 schema. The source field is bank1_availed_by.custid.",
+    "source_field": "bank1_availed_by.custid",
+    "expected_target_field": "bank2_borrower.customer_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "borrower",
+        "api_name": "customer_id"
+      }
+    ]
+  },
+  {
+    "query_id": "14",
+    "query": "Find the field in bank2 schema that corresponds to loan_id from availed_by table in bank1 schema. The source field is bank1_availed_by.loan_id.",
+    "source_field": "bank1_availed_by.loan_id",
+    "expected_target_field": "bank2_borrower.loan_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "borrower",
+        "api_name": "loan_id"
+      }
+    ]
+  },
+  {
+    "query_id": "15",
+    "query": "Find the field in bank2 schema that corresponds to custid from hold_by table in bank1 schema. The source field is bank1_hold_by.custid.",
+    "source_field": "bank1_hold_by.custid",
+    "expected_target_field": "bank2_customer.customer_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "customer",
+        "api_name": "customer_id"
+      }
+    ]
+  },
+  {
+    "query_id": "16",
+    "query": "Find the field in bank2 schema that corresponds to account_no from hold_by table in bank1 schema. The source field is bank1_hold_by.account_no.",
+    "source_field": "bank1_hold_by.account_no",
+    "expected_target_field": "bank2_customer.account_id",
+    "gt_api_list": [
+      {
+        "category_name": "bank2",
+        "tool_name": "customer",
+        "api_name": "account_id"
+      }
+    ]
+  }
+]

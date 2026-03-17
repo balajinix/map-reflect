@@ -73,3 +73,6 @@ data/cache/
 
 # AnyTool data copies (use data/ originals)
 anytool/data/*_dataset.jsonl
+
+# External baseline repos (clone separately)
+llmatch/

@@ -1,0 +1,3255 @@
+{
+  "omop": {
+    "person": {
+      "tool_name": "person",
+      "tool_description": "Table person in omop schema",
+      "api_list": [
+        {
+          "name": "person_id",
+          "description": "Column person_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "gender_concept_id",
+          "description": "Column gender_concept_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "year_of_birth",
+          "description": "Column year_of_birth in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "month_of_birth",
+          "description": "Column month_of_birth in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "day_of_birth",
+          "description": "Column day_of_birth in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "birth_datetime",
+          "description": "Column birth_datetime in table person (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "race_concept_id",
+          "description": "Column race_concept_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "ethnicity_concept_id",
+          "description": "Column ethnicity_concept_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "location_id",
+          "description": "Column location_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "care_site_id",
+          "description": "Column care_site_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_source_value",
+          "description": "Column person_source_value in table person (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "gender_source_value",
+          "description": "Column gender_source_value in table person (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "gender_source_concept_id",
+          "description": "Column gender_source_concept_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "race_source_value",
+          "description": "Column race_source_value in table person (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "race_source_concept_id",
+          "description": "Column race_source_concept_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "ethnicity_source_value",
+          "description": "Column ethnicity_source_value in table person (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "ethnicity_source_concept_id",
+          "description": "Column ethnicity_source_concept_id in table person (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "observation_period": {
+      "tool_name": "observation_period",
+      "tool_description": "Table observation_period in omop schema",
+      "api_list": [
+        {
+          "name": "observation_period_id",
+          "description": "Column observation_period_id in table observation_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table observation_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_period_start_date",
+          "description": "Column observation_period_start_date in table observation_period (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_period_end_date",
+          "description": "Column observation_period_end_date in table observation_period (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "period_type_concept_id",
+          "description": "Column period_type_concept_id in table observation_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "visit_occurrence": {
+      "tool_name": "visit_occurrence",
+      "tool_description": "Table visit_occurrence in omop schema",
+      "api_list": [
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_concept_id",
+          "description": "Column visit_concept_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_start_date",
+          "description": "Column visit_start_date in table visit_occurrence (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_start_datetime",
+          "description": "Column visit_start_datetime in table visit_occurrence (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_end_date",
+          "description": "Column visit_end_date in table visit_occurrence (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_end_datetime",
+          "description": "Column visit_end_datetime in table visit_occurrence (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_type_concept_id",
+          "description": "Column visit_type_concept_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "care_site_id",
+          "description": "Column care_site_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_source_value",
+          "description": "Column visit_source_value in table visit_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_source_concept_id",
+          "description": "Column visit_source_concept_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "admitted_from_concept_id",
+          "description": "Column admitted_from_concept_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "admitted_from_source_value",
+          "description": "Column admitted_from_source_value in table visit_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "discharged_to_concept_id",
+          "description": "Column discharged_to_concept_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "discharged_to_source_value",
+          "description": "Column discharged_to_source_value in table visit_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "preceding_visit_occurrence_id",
+          "description": "Column preceding_visit_occurrence_id in table visit_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "visit_detail": {
+      "tool_name": "visit_detail",
+      "tool_description": "Table visit_detail in omop schema",
+      "api_list": [
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_concept_id",
+          "description": "Column visit_detail_concept_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_start_date",
+          "description": "Column visit_detail_start_date in table visit_detail (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_start_datetime",
+          "description": "Column visit_detail_start_datetime in table visit_detail (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_end_date",
+          "description": "Column visit_detail_end_date in table visit_detail (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_end_datetime",
+          "description": "Column visit_detail_end_datetime in table visit_detail (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_type_concept_id",
+          "description": "Column visit_detail_type_concept_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "care_site_id",
+          "description": "Column care_site_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_source_value",
+          "description": "Column visit_detail_source_value in table visit_detail (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_source_concept_id",
+          "description": "Column visit_detail_source_concept_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "admitted_from_concept_id",
+          "description": "Column admitted_from_concept_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "admitted_from_source_value",
+          "description": "Column admitted_from_source_value in table visit_detail (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "discharged_to_source_value",
+          "description": "Column discharged_to_source_value in table visit_detail (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "discharged_to_concept_id",
+          "description": "Column discharged_to_concept_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "preceding_visit_detail_id",
+          "description": "Column preceding_visit_detail_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_parent_id",
+          "description": "Column visit_detail_parent_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table visit_detail (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "condition_occurrence": {
+      "tool_name": "condition_occurrence",
+      "tool_description": "Table condition_occurrence in omop schema",
+      "api_list": [
+        {
+          "name": "condition_occurrence_id",
+          "description": "Column condition_occurrence_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_concept_id",
+          "description": "Column condition_concept_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_start_date",
+          "description": "Column condition_start_date in table condition_occurrence (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_start_datetime",
+          "description": "Column condition_start_datetime in table condition_occurrence (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_end_date",
+          "description": "Column condition_end_date in table condition_occurrence (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_end_datetime",
+          "description": "Column condition_end_datetime in table condition_occurrence (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_type_concept_id",
+          "description": "Column condition_type_concept_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_status_concept_id",
+          "description": "Column condition_status_concept_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "stop_reason",
+          "description": "Column stop_reason in table condition_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_source_value",
+          "description": "Column condition_source_value in table condition_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_source_concept_id",
+          "description": "Column condition_source_concept_id in table condition_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_status_source_value",
+          "description": "Column condition_status_source_value in table condition_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "drug_exposure": {
+      "tool_name": "drug_exposure",
+      "tool_description": "Table drug_exposure in omop schema",
+      "api_list": [
+        {
+          "name": "drug_exposure_id",
+          "description": "Column drug_exposure_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_concept_id",
+          "description": "Column drug_concept_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_exposure_start_date",
+          "description": "Column drug_exposure_start_date in table drug_exposure (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_exposure_start_datetime",
+          "description": "Column drug_exposure_start_datetime in table drug_exposure (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_exposure_end_date",
+          "description": "Column drug_exposure_end_date in table drug_exposure (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_exposure_end_datetime",
+          "description": "Column drug_exposure_end_datetime in table drug_exposure (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "verbatim_end_date",
+          "description": "Column verbatim_end_date in table drug_exposure (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_type_concept_id",
+          "description": "Column drug_type_concept_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "stop_reason",
+          "description": "Column stop_reason in table drug_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "refills",
+          "description": "Column refills in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "quantity",
+          "description": "Column quantity in table drug_exposure (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "days_supply",
+          "description": "Column days_supply in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "sig",
+          "description": "Column sig in table drug_exposure (type: text)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "route_concept_id",
+          "description": "Column route_concept_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "lot_number",
+          "description": "Column lot_number in table drug_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_source_value",
+          "description": "Column drug_source_value in table drug_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_source_concept_id",
+          "description": "Column drug_source_concept_id in table drug_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "route_source_value",
+          "description": "Column route_source_value in table drug_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "dose_unit_source_value",
+          "description": "Column dose_unit_source_value in table drug_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "procedure_occurrence": {
+      "tool_name": "procedure_occurrence",
+      "tool_description": "Table procedure_occurrence in omop schema",
+      "api_list": [
+        {
+          "name": "procedure_occurrence_id",
+          "description": "Column procedure_occurrence_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_concept_id",
+          "description": "Column procedure_concept_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_date",
+          "description": "Column procedure_date in table procedure_occurrence (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_datetime",
+          "description": "Column procedure_datetime in table procedure_occurrence (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_end_date",
+          "description": "Column procedure_end_date in table procedure_occurrence (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_end_datetime",
+          "description": "Column procedure_end_datetime in table procedure_occurrence (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_type_concept_id",
+          "description": "Column procedure_type_concept_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "modifier_concept_id",
+          "description": "Column modifier_concept_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "quantity",
+          "description": "Column quantity in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_source_value",
+          "description": "Column procedure_source_value in table procedure_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "procedure_source_concept_id",
+          "description": "Column procedure_source_concept_id in table procedure_occurrence (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "modifier_source_value",
+          "description": "Column modifier_source_value in table procedure_occurrence (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "device_exposure": {
+      "tool_name": "device_exposure",
+      "tool_description": "Table device_exposure in omop schema",
+      "api_list": [
+        {
+          "name": "device_exposure_id",
+          "description": "Column device_exposure_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_concept_id",
+          "description": "Column device_concept_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_exposure_start_date",
+          "description": "Column device_exposure_start_date in table device_exposure (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_exposure_start_datetime",
+          "description": "Column device_exposure_start_datetime in table device_exposure (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_exposure_end_date",
+          "description": "Column device_exposure_end_date in table device_exposure (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_exposure_end_datetime",
+          "description": "Column device_exposure_end_datetime in table device_exposure (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_type_concept_id",
+          "description": "Column device_type_concept_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "production_id",
+          "description": "Column production_id in table device_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "quantity",
+          "description": "Column quantity in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_source_value",
+          "description": "Column device_source_value in table device_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "device_source_concept_id",
+          "description": "Column device_source_concept_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_concept_id",
+          "description": "Column unit_concept_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_source_value",
+          "description": "Column unit_source_value in table device_exposure (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_source_concept_id",
+          "description": "Column unit_source_concept_id in table device_exposure (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "measurement": {
+      "tool_name": "measurement",
+      "tool_description": "Table measurement in omop schema",
+      "api_list": [
+        {
+          "name": "measurement_id",
+          "description": "Column measurement_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_concept_id",
+          "description": "Column measurement_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_date",
+          "description": "Column measurement_date in table measurement (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_datetime",
+          "description": "Column measurement_datetime in table measurement (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_time",
+          "description": "Column measurement_time in table measurement (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_type_concept_id",
+          "description": "Column measurement_type_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "operator_concept_id",
+          "description": "Column operator_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_number",
+          "description": "Column value_as_number in table measurement (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_concept_id",
+          "description": "Column value_as_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_concept_id",
+          "description": "Column unit_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "range_low",
+          "description": "Column range_low in table measurement (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "range_high",
+          "description": "Column range_high in table measurement (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_source_value",
+          "description": "Column measurement_source_value in table measurement (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_source_concept_id",
+          "description": "Column measurement_source_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_source_value",
+          "description": "Column unit_source_value in table measurement (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_source_concept_id",
+          "description": "Column unit_source_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_source_value",
+          "description": "Column value_source_value in table measurement (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "measurement_event_id",
+          "description": "Column measurement_event_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "meas_event_field_concept_id",
+          "description": "Column meas_event_field_concept_id in table measurement (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "observation": {
+      "tool_name": "observation",
+      "tool_description": "Table observation in omop schema",
+      "api_list": [
+        {
+          "name": "observation_id",
+          "description": "Column observation_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_concept_id",
+          "description": "Column observation_concept_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_date",
+          "description": "Column observation_date in table observation (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_datetime",
+          "description": "Column observation_datetime in table observation (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_type_concept_id",
+          "description": "Column observation_type_concept_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_number",
+          "description": "Column value_as_number in table observation (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_string",
+          "description": "Column value_as_string in table observation (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_concept_id",
+          "description": "Column value_as_concept_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "qualifier_concept_id",
+          "description": "Column qualifier_concept_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_concept_id",
+          "description": "Column unit_concept_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_source_value",
+          "description": "Column observation_source_value in table observation (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_source_concept_id",
+          "description": "Column observation_source_concept_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_source_value",
+          "description": "Column unit_source_value in table observation (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "qualifier_source_value",
+          "description": "Column qualifier_source_value in table observation (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_source_value",
+          "description": "Column value_source_value in table observation (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "observation_event_id",
+          "description": "Column observation_event_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "obs_event_field_concept_id",
+          "description": "Column obs_event_field_concept_id in table observation (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "death": {
+      "tool_name": "death",
+      "tool_description": "Table death in omop schema",
+      "api_list": [
+        {
+          "name": "person_id",
+          "description": "Column person_id in table death (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "death_date",
+          "description": "Column death_date in table death (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "death_datetime",
+          "description": "Column death_datetime in table death (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "death_type_concept_id",
+          "description": "Column death_type_concept_id in table death (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cause_concept_id",
+          "description": "Column cause_concept_id in table death (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cause_source_value",
+          "description": "Column cause_source_value in table death (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cause_source_concept_id",
+          "description": "Column cause_source_concept_id in table death (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "note": {
+      "tool_name": "note",
+      "tool_description": "Table note in omop schema",
+      "api_list": [
+        {
+          "name": "note_id",
+          "description": "Column note_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_date",
+          "description": "Column note_date in table note (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_datetime",
+          "description": "Column note_datetime in table note (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_type_concept_id",
+          "description": "Column note_type_concept_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_class_concept_id",
+          "description": "Column note_class_concept_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_title",
+          "description": "Column note_title in table note (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_text",
+          "description": "Column note_text in table note (type: text)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "encoding_concept_id",
+          "description": "Column encoding_concept_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "language_concept_id",
+          "description": "Column language_concept_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_occurrence_id",
+          "description": "Column visit_occurrence_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "visit_detail_id",
+          "description": "Column visit_detail_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_source_value",
+          "description": "Column note_source_value in table note (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_event_id",
+          "description": "Column note_event_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_event_field_concept_id",
+          "description": "Column note_event_field_concept_id in table note (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "note_nlp": {
+      "tool_name": "note_nlp",
+      "tool_description": "Table note_nlp in omop schema",
+      "api_list": [
+        {
+          "name": "note_nlp_id",
+          "description": "Column note_nlp_id in table note_nlp (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_id",
+          "description": "Column note_id in table note_nlp (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "section_concept_id",
+          "description": "Column section_concept_id in table note_nlp (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "snippet",
+          "description": "Column snippet in table note_nlp (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "offset",
+          "description": "Column offset in table note_nlp (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "lexical_variant",
+          "description": "Column lexical_variant in table note_nlp (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_nlp_concept_id",
+          "description": "Column note_nlp_concept_id in table note_nlp (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "note_nlp_source_concept_id",
+          "description": "Column note_nlp_source_concept_id in table note_nlp (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "nlp_system",
+          "description": "Column nlp_system in table note_nlp (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "nlp_date",
+          "description": "Column nlp_date in table note_nlp (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "nlp_datetime",
+          "description": "Column nlp_datetime in table note_nlp (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "term_exists",
+          "description": "Column term_exists in table note_nlp (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "term_temporal",
+          "description": "Column term_temporal in table note_nlp (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "term_modifiers",
+          "description": "Column term_modifiers in table note_nlp (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "specimen": {
+      "tool_name": "specimen",
+      "tool_description": "Table specimen in omop schema",
+      "api_list": [
+        {
+          "name": "specimen_id",
+          "description": "Column specimen_id in table specimen (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table specimen (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specimen_concept_id",
+          "description": "Column specimen_concept_id in table specimen (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specimen_type_concept_id",
+          "description": "Column specimen_type_concept_id in table specimen (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specimen_date",
+          "description": "Column specimen_date in table specimen (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specimen_datetime",
+          "description": "Column specimen_datetime in table specimen (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "quantity",
+          "description": "Column quantity in table specimen (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_concept_id",
+          "description": "Column unit_concept_id in table specimen (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "anatomic_site_concept_id",
+          "description": "Column anatomic_site_concept_id in table specimen (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "disease_status_concept_id",
+          "description": "Column disease_status_concept_id in table specimen (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specimen_source_id",
+          "description": "Column specimen_source_id in table specimen (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specimen_source_value",
+          "description": "Column specimen_source_value in table specimen (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_source_value",
+          "description": "Column unit_source_value in table specimen (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "anatomic_site_source_value",
+          "description": "Column anatomic_site_source_value in table specimen (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "disease_status_source_value",
+          "description": "Column disease_status_source_value in table specimen (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "fact_relationship": {
+      "tool_name": "fact_relationship",
+      "tool_description": "Table fact_relationship in omop schema",
+      "api_list": [
+        {
+          "name": "domain_concept_id_1",
+          "description": "Column domain_concept_id_1 in table fact_relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "fact_id_1",
+          "description": "Column fact_id_1 in table fact_relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "domain_concept_id_2",
+          "description": "Column domain_concept_id_2 in table fact_relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "fact_id_2",
+          "description": "Column fact_id_2 in table fact_relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "relationship_concept_id",
+          "description": "Column relationship_concept_id in table fact_relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "location": {
+      "tool_name": "location",
+      "tool_description": "Table location in omop schema",
+      "api_list": [
+        {
+          "name": "location_id",
+          "description": "Column location_id in table location (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "address_1",
+          "description": "Column address_1 in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "address_2",
+          "description": "Column address_2 in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "city",
+          "description": "Column city in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "state",
+          "description": "Column state in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "zip",
+          "description": "Column zip in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "county",
+          "description": "Column county in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "location_source_value",
+          "description": "Column location_source_value in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "country_concept_id",
+          "description": "Column country_concept_id in table location (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "country_source_value",
+          "description": "Column country_source_value in table location (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "latitude",
+          "description": "Column latitude in table location (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "longitude",
+          "description": "Column longitude in table location (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "care_site": {
+      "tool_name": "care_site",
+      "tool_description": "Table care_site in omop schema",
+      "api_list": [
+        {
+          "name": "care_site_id",
+          "description": "Column care_site_id in table care_site (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "care_site_name",
+          "description": "Column care_site_name in table care_site (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "place_of_service_concept_id",
+          "description": "Column place_of_service_concept_id in table care_site (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "location_id",
+          "description": "Column location_id in table care_site (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "care_site_source_value",
+          "description": "Column care_site_source_value in table care_site (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "place_of_service_source_value",
+          "description": "Column place_of_service_source_value in table care_site (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "provider": {
+      "tool_name": "provider",
+      "tool_description": "Table provider in omop schema",
+      "api_list": [
+        {
+          "name": "provider_id",
+          "description": "Column provider_id in table provider (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_name",
+          "description": "Column provider_name in table provider (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "npi",
+          "description": "Column npi in table provider (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "dea",
+          "description": "Column dea in table provider (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specialty_concept_id",
+          "description": "Column specialty_concept_id in table provider (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "care_site_id",
+          "description": "Column care_site_id in table provider (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "year_of_birth",
+          "description": "Column year_of_birth in table provider (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "gender_concept_id",
+          "description": "Column gender_concept_id in table provider (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "provider_source_value",
+          "description": "Column provider_source_value in table provider (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specialty_source_value",
+          "description": "Column specialty_source_value in table provider (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "specialty_source_concept_id",
+          "description": "Column specialty_source_concept_id in table provider (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "gender_source_value",
+          "description": "Column gender_source_value in table provider (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "gender_source_concept_id",
+          "description": "Column gender_source_concept_id in table provider (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "payer_plan_period": {
+      "tool_name": "payer_plan_period",
+      "tool_description": "Table payer_plan_period in omop schema",
+      "api_list": [
+        {
+          "name": "payer_plan_period_id",
+          "description": "Column payer_plan_period_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "payer_plan_period_start_date",
+          "description": "Column payer_plan_period_start_date in table payer_plan_period (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "payer_plan_period_end_date",
+          "description": "Column payer_plan_period_end_date in table payer_plan_period (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "payer_concept_id",
+          "description": "Column payer_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "payer_source_value",
+          "description": "Column payer_source_value in table payer_plan_period (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "payer_source_concept_id",
+          "description": "Column payer_source_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "plan_concept_id",
+          "description": "Column plan_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "plan_source_value",
+          "description": "Column plan_source_value in table payer_plan_period (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "plan_source_concept_id",
+          "description": "Column plan_source_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "sponsor_concept_id",
+          "description": "Column sponsor_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "sponsor_source_value",
+          "description": "Column sponsor_source_value in table payer_plan_period (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "sponsor_source_concept_id",
+          "description": "Column sponsor_source_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "family_source_value",
+          "description": "Column family_source_value in table payer_plan_period (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "stop_reason_concept_id",
+          "description": "Column stop_reason_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "stop_reason_source_value",
+          "description": "Column stop_reason_source_value in table payer_plan_period (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "stop_reason_source_concept_id",
+          "description": "Column stop_reason_source_concept_id in table payer_plan_period (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "cost": {
+      "tool_name": "cost",
+      "tool_description": "Table cost in omop schema",
+      "api_list": [
+        {
+          "name": "cost_id",
+          "description": "Column cost_id in table cost (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cost_event_id",
+          "description": "Column cost_event_id in table cost (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cost_domain_id",
+          "description": "Column cost_domain_id in table cost (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cost_type_concept_id",
+          "description": "Column cost_type_concept_id in table cost (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "currency_concept_id",
+          "description": "Column currency_concept_id in table cost (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "total_charge",
+          "description": "Column total_charge in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "total_cost",
+          "description": "Column total_cost in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "total_paid",
+          "description": "Column total_paid in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_by_payer",
+          "description": "Column paid_by_payer in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_by_patient",
+          "description": "Column paid_by_patient in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_patient_copay",
+          "description": "Column paid_patient_copay in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_patient_coinsurance",
+          "description": "Column paid_patient_coinsurance in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_patient_deductible",
+          "description": "Column paid_patient_deductible in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_by_primary",
+          "description": "Column paid_by_primary in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_ingredient_cost",
+          "description": "Column paid_ingredient_cost in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "paid_dispensing_fee",
+          "description": "Column paid_dispensing_fee in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "payer_plan_period_id",
+          "description": "Column payer_plan_period_id in table cost (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "amount_allowed",
+          "description": "Column amount_allowed in table cost (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "revenue_code_concept_id",
+          "description": "Column revenue_code_concept_id in table cost (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "revenue_code_source_value",
+          "description": "Column revenue_code_source_value in table cost (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drg_concept_id",
+          "description": "Column drg_concept_id in table cost (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drg_source_value",
+          "description": "Column drg_source_value in table cost (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "drug_era": {
+      "tool_name": "drug_era",
+      "tool_description": "Table drug_era in omop schema",
+      "api_list": [
+        {
+          "name": "drug_era_id",
+          "description": "Column drug_era_id in table drug_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table drug_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_concept_id",
+          "description": "Column drug_concept_id in table drug_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_era_start_date",
+          "description": "Column drug_era_start_date in table drug_era (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_era_end_date",
+          "description": "Column drug_era_end_date in table drug_era (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_exposure_count",
+          "description": "Column drug_exposure_count in table drug_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "gap_days",
+          "description": "Column gap_days in table drug_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "dose_era": {
+      "tool_name": "dose_era",
+      "tool_description": "Table dose_era in omop schema",
+      "api_list": [
+        {
+          "name": "dose_era_id",
+          "description": "Column dose_era_id in table dose_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table dose_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "drug_concept_id",
+          "description": "Column drug_concept_id in table dose_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "unit_concept_id",
+          "description": "Column unit_concept_id in table dose_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "dose_value",
+          "description": "Column dose_value in table dose_era (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "dose_era_start_date",
+          "description": "Column dose_era_start_date in table dose_era (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "dose_era_end_date",
+          "description": "Column dose_era_end_date in table dose_era (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "condition_era": {
+      "tool_name": "condition_era",
+      "tool_description": "Table condition_era in omop schema",
+      "api_list": [
+        {
+          "name": "condition_era_id",
+          "description": "Column condition_era_id in table condition_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table condition_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_concept_id",
+          "description": "Column condition_concept_id in table condition_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_era_start_date",
+          "description": "Column condition_era_start_date in table condition_era (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_era_end_date",
+          "description": "Column condition_era_end_date in table condition_era (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "condition_occurrence_count",
+          "description": "Column condition_occurrence_count in table condition_era (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "episode": {
+      "tool_name": "episode",
+      "tool_description": "Table episode in omop schema",
+      "api_list": [
+        {
+          "name": "episode_id",
+          "description": "Column episode_id in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "person_id",
+          "description": "Column person_id in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_concept_id",
+          "description": "Column episode_concept_id in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_start_date",
+          "description": "Column episode_start_date in table episode (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_start_datetime",
+          "description": "Column episode_start_datetime in table episode (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_end_date",
+          "description": "Column episode_end_date in table episode (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_end_datetime",
+          "description": "Column episode_end_datetime in table episode (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_parent_id",
+          "description": "Column episode_parent_id in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_number",
+          "description": "Column episode_number in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_object_concept_id",
+          "description": "Column episode_object_concept_id in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_type_concept_id",
+          "description": "Column episode_type_concept_id in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_source_value",
+          "description": "Column episode_source_value in table episode (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_source_concept_id",
+          "description": "Column episode_source_concept_id in table episode (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "episode_event": {
+      "tool_name": "episode_event",
+      "tool_description": "Table episode_event in omop schema",
+      "api_list": [
+        {
+          "name": "episode_id",
+          "description": "Column episode_id in table episode_event (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "event_id",
+          "description": "Column event_id in table episode_event (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "episode_event_field_concept_id",
+          "description": "Column episode_event_field_concept_id in table episode_event (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "metadata": {
+      "tool_name": "metadata",
+      "tool_description": "Table metadata in omop schema",
+      "api_list": [
+        {
+          "name": "metadata_id",
+          "description": "Column metadata_id in table metadata (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "metadata_concept_id",
+          "description": "Column metadata_concept_id in table metadata (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "metadata_type_concept_id",
+          "description": "Column metadata_type_concept_id in table metadata (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "name",
+          "description": "Column name in table metadata (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_string",
+          "description": "Column value_as_string in table metadata (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_concept_id",
+          "description": "Column value_as_concept_id in table metadata (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "value_as_number",
+          "description": "Column value_as_number in table metadata (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "metadata_date",
+          "description": "Column metadata_date in table metadata (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "metadata_datetime",
+          "description": "Column metadata_datetime in table metadata (type: timestamp)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "cdm_source": {
+      "tool_name": "cdm_source",
+      "tool_description": "Table cdm_source in omop schema",
+      "api_list": [
+        {
+          "name": "cdm_source_name",
+          "description": "Column cdm_source_name in table cdm_source (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cdm_source_abbreviation",
+          "description": "Column cdm_source_abbreviation in table cdm_source (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cdm_holder",
+          "description": "Column cdm_holder in table cdm_source (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "source_description",
+          "description": "Column source_description in table cdm_source (type: text)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "source_documentation_reference",
+          "description": "Column source_documentation_reference in table cdm_source (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cdm_etl_reference",
+          "description": "Column cdm_etl_reference in table cdm_source (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "source_release_date",
+          "description": "Column source_release_date in table cdm_source (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cdm_release_date",
+          "description": "Column cdm_release_date in table cdm_source (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cdm_version",
+          "description": "Column cdm_version in table cdm_source (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cdm_version_concept_id",
+          "description": "Column cdm_version_concept_id in table cdm_source (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "vocabulary_version",
+          "description": "Column vocabulary_version in table cdm_source (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "concept": {
+      "tool_name": "concept",
+      "tool_description": "Table concept in omop schema",
+      "api_list": [
+        {
+          "name": "concept_id",
+          "description": "Column concept_id in table concept (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "concept_name",
+          "description": "Column concept_name in table concept (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "domain_id",
+          "description": "Column domain_id in table concept (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "vocabulary_id",
+          "description": "Column vocabulary_id in table concept (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "concept_class_id",
+          "description": "Column concept_class_id in table concept (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "standard_concept",
+          "description": "Column standard_concept in table concept (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "concept_code",
+          "description": "Column concept_code in table concept (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_start_date",
+          "description": "Column valid_start_date in table concept (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_end_date",
+          "description": "Column valid_end_date in table concept (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "invalid_reason",
+          "description": "Column invalid_reason in table concept (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "vocabulary": {
+      "tool_name": "vocabulary",
+      "tool_description": "Table vocabulary in omop schema",
+      "api_list": [
+        {
+          "name": "vocabulary_id",
+          "description": "Column vocabulary_id in table vocabulary (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "vocabulary_name",
+          "description": "Column vocabulary_name in table vocabulary (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "vocabulary_reference",
+          "description": "Column vocabulary_reference in table vocabulary (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "vocabulary_version",
+          "description": "Column vocabulary_version in table vocabulary (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "vocabulary_concept_id",
+          "description": "Column vocabulary_concept_id in table vocabulary (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "domain": {
+      "tool_name": "domain",
+      "tool_description": "Table domain in omop schema",
+      "api_list": [
+        {
+          "name": "domain_id",
+          "description": "Column domain_id in table domain (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "domain_name",
+          "description": "Column domain_name in table domain (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "domain_concept_id",
+          "description": "Column domain_concept_id in table domain (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "concept_class": {
+      "tool_name": "concept_class",
+      "tool_description": "Table concept_class in omop schema",
+      "api_list": [
+        {
+          "name": "concept_class_id",
+          "description": "Column concept_class_id in table concept_class (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "concept_class_name",
+          "description": "Column concept_class_name in table concept_class (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "concept_class_concept_id",
+          "description": "Column concept_class_concept_id in table concept_class (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "concept_relationship": {
+      "tool_name": "concept_relationship",
+      "tool_description": "Table concept_relationship in omop schema",
+      "api_list": [
+        {
+          "name": "concept_id_1",
+          "description": "Column concept_id_1 in table concept_relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "concept_id_2",
+          "description": "Column concept_id_2 in table concept_relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "relationship_id",
+          "description": "Column relationship_id in table concept_relationship (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_start_date",
+          "description": "Column valid_start_date in table concept_relationship (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_end_date",
+          "description": "Column valid_end_date in table concept_relationship (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "invalid_reason",
+          "description": "Column invalid_reason in table concept_relationship (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "relationship": {
+      "tool_name": "relationship",
+      "tool_description": "Table relationship in omop schema",
+      "api_list": [
+        {
+          "name": "relationship_id",
+          "description": "Column relationship_id in table relationship (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "relationship_name",
+          "description": "Column relationship_name in table relationship (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "is_hierarchical",
+          "description": "Column is_hierarchical in table relationship (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "defines_ancestry",
+          "description": "Column defines_ancestry in table relationship (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "reverse_relationship_id",
+          "description": "Column reverse_relationship_id in table relationship (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "relationship_concept_id",
+          "description": "Column relationship_concept_id in table relationship (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "concept_synonym": {
+      "tool_name": "concept_synonym",
+      "tool_description": "Table concept_synonym in omop schema",
+      "api_list": [
+        {
+          "name": "concept_id",
+          "description": "Column concept_id in table concept_synonym (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "concept_synonym_name",
+          "description": "Column concept_synonym_name in table concept_synonym (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "language_concept_id",
+          "description": "Column language_concept_id in table concept_synonym (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "concept_ancestor": {
+      "tool_name": "concept_ancestor",
+      "tool_description": "Table concept_ancestor in omop schema",
+      "api_list": [
+        {
+          "name": "ancestor_concept_id",
+          "description": "Column ancestor_concept_id in table concept_ancestor (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "descendant_concept_id",
+          "description": "Column descendant_concept_id in table concept_ancestor (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "min_levels_of_separation",
+          "description": "Column min_levels_of_separation in table concept_ancestor (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "max_levels_of_separation",
+          "description": "Column max_levels_of_separation in table concept_ancestor (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "source_to_concept_map": {
+      "tool_name": "source_to_concept_map",
+      "tool_description": "Table source_to_concept_map in omop schema",
+      "api_list": [
+        {
+          "name": "source_code",
+          "description": "Column source_code in table source_to_concept_map (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "source_concept_id",
+          "description": "Column source_concept_id in table source_to_concept_map (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "source_vocabulary_id",
+          "description": "Column source_vocabulary_id in table source_to_concept_map (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "source_code_description",
+          "description": "Column source_code_description in table source_to_concept_map (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "target_concept_id",
+          "description": "Column target_concept_id in table source_to_concept_map (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "target_vocabulary_id",
+          "description": "Column target_vocabulary_id in table source_to_concept_map (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_start_date",
+          "description": "Column valid_start_date in table source_to_concept_map (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_end_date",
+          "description": "Column valid_end_date in table source_to_concept_map (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "invalid_reason",
+          "description": "Column invalid_reason in table source_to_concept_map (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "drug_strength": {
+      "tool_name": "drug_strength",
+      "tool_description": "Table drug_strength in omop schema",
+      "api_list": [
+        {
+          "name": "drug_concept_id",
+          "description": "Column drug_concept_id in table drug_strength (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "ingredient_concept_id",
+          "description": "Column ingredient_concept_id in table drug_strength (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "amount_value",
+          "description": "Column amount_value in table drug_strength (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "amount_unit_concept_id",
+          "description": "Column amount_unit_concept_id in table drug_strength (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "numerator_value",
+          "description": "Column numerator_value in table drug_strength (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "numerator_unit_concept_id",
+          "description": "Column numerator_unit_concept_id in table drug_strength (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "denominator_value",
+          "description": "Column denominator_value in table drug_strength (type: numeric)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "denominator_unit_concept_id",
+          "description": "Column denominator_unit_concept_id in table drug_strength (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "box_size",
+          "description": "Column box_size in table drug_strength (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_start_date",
+          "description": "Column valid_start_date in table drug_strength (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "valid_end_date",
+          "description": "Column valid_end_date in table drug_strength (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "invalid_reason",
+          "description": "Column invalid_reason in table drug_strength (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "cohort": {
+      "tool_name": "cohort",
+      "tool_description": "Table cohort in omop schema",
+      "api_list": [
+        {
+          "name": "cohort_definition_id",
+          "description": "Column cohort_definition_id in table cohort (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "subject_id",
+          "description": "Column subject_id in table cohort (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cohort_start_date",
+          "description": "Column cohort_start_date in table cohort (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cohort_end_date",
+          "description": "Column cohort_end_date in table cohort (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    },
+    "cohort_definition": {
+      "tool_name": "cohort_definition",
+      "tool_description": "Table cohort_definition in omop schema",
+      "api_list": [
+        {
+          "name": "cohort_definition_id",
+          "description": "Column cohort_definition_id in table cohort_definition (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cohort_definition_name",
+          "description": "Column cohort_definition_name in table cohort_definition (type: varchar)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cohort_definition_description",
+          "description": "Column cohort_definition_description in table cohort_definition (type: text)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "definition_type_concept_id",
+          "description": "Column definition_type_concept_id in table cohort_definition (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cohort_definition_syntax",
+          "description": "Column cohort_definition_syntax in table cohort_definition (type: text)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "subject_concept_id",
+          "description": "Column subject_concept_id in table cohort_definition (type: integer)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        },
+        {
+          "name": "cohort_initiation_date",
+          "description": "Column cohort_initiation_date in table cohort_definition (type: date)",
+          "method": "GET",
+          "required_parameters": [],
+          "optional_parameters": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,496 @@
+[
+  {
+    "query_id": "0",
+    "query": "Find the field in omop schema that corresponds to patid from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.patid.",
+    "source_field": "cprd_aurum_patient.patid",
+    "expected_target_field": "omop_person.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "1",
+    "query": "Find the field in omop schema that corresponds to gender from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.gender.",
+    "source_field": "cprd_aurum_patient.gender",
+    "expected_target_field": "omop_person.gender_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "gender_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "2",
+    "query": "Find the field in omop schema that corresponds to yob from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.yob.",
+    "source_field": "cprd_aurum_patient.yob",
+    "expected_target_field": "omop_person.year_of_birth",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "year_of_birth"
+      }
+    ]
+  },
+  {
+    "query_id": "3",
+    "query": "Find the field in omop schema that corresponds to mob from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.mob.",
+    "source_field": "cprd_aurum_patient.mob",
+    "expected_target_field": "omop_person.month_of_birth",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "month_of_birth"
+      }
+    ]
+  },
+  {
+    "query_id": "4",
+    "query": "Find the field in omop schema that corresponds to usualgpstaffid from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.usualgpstaffid.",
+    "source_field": "cprd_aurum_patient.usualgpstaffid",
+    "expected_target_field": "omop_person.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "5",
+    "query": "Find the field in omop schema that corresponds to pracid from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.pracid.",
+    "source_field": "cprd_aurum_patient.pracid",
+    "expected_target_field": "omop_person.care_site_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "person",
+        "api_name": "care_site_id"
+      }
+    ]
+  },
+  {
+    "query_id": "6",
+    "query": "Find the field in omop schema that corresponds to regstartdate from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.regstartdate.",
+    "source_field": "cprd_aurum_patient.regstartdate",
+    "expected_target_field": "omop_observation_period.observation_period_start_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation_period",
+        "api_name": "observation_period_start_date"
+      }
+    ]
+  },
+  {
+    "query_id": "7",
+    "query": "Find the field in omop schema that corresponds to regenddate from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.regenddate.",
+    "source_field": "cprd_aurum_patient.regenddate",
+    "expected_target_field": "omop_observation_period.observation_period_end_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation_period",
+        "api_name": "observation_period_end_date"
+      }
+    ]
+  },
+  {
+    "query_id": "8",
+    "query": "Find the field in omop schema that corresponds to cprd_ddate from patient table in cprd_aurum schema. The source field is cprd_aurum_patient.cprd_ddate.",
+    "source_field": "cprd_aurum_patient.cprd_ddate",
+    "expected_target_field": "omop_death.death_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "death",
+        "api_name": "death_date"
+      }
+    ]
+  },
+  {
+    "query_id": "9",
+    "query": "Find the field in omop schema that corresponds to lcd from practice table in cprd_aurum schema. The source field is cprd_aurum_practice.lcd.",
+    "source_field": "cprd_aurum_practice.lcd",
+    "expected_target_field": "omop_observation_period.observation_period_end_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "observation_period",
+        "api_name": "observation_period_end_date"
+      }
+    ]
+  },
+  {
+    "query_id": "10",
+    "query": "Find the field in omop schema that corresponds to pracid from practice table in cprd_aurum schema. The source field is cprd_aurum_practice.pracid.",
+    "source_field": "cprd_aurum_practice.pracid",
+    "expected_target_field": "omop_care_site.care_site_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "care_site",
+        "api_name": "care_site_id"
+      }
+    ]
+  },
+  {
+    "query_id": "11",
+    "query": "Find the field in omop schema that corresponds to region from practice table in cprd_aurum schema. The source field is cprd_aurum_practice.region.",
+    "source_field": "cprd_aurum_practice.region",
+    "expected_target_field": "omop_care_site.location_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "care_site",
+        "api_name": "location_id"
+      }
+    ]
+  },
+  {
+    "query_id": "12",
+    "query": "Find the field in omop schema that corresponds to staffid from staff table in cprd_aurum schema. The source field is cprd_aurum_staff.staffid.",
+    "source_field": "cprd_aurum_staff.staffid",
+    "expected_target_field": "omop_provider.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "provider",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "13",
+    "query": "Find the field in omop schema that corresponds to jobcatid from staff table in cprd_aurum schema. The source field is cprd_aurum_staff.jobcatid.",
+    "source_field": "cprd_aurum_staff.jobcatid",
+    "expected_target_field": "omop_provider.specialty_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "provider",
+        "api_name": "specialty_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "14",
+    "query": "Find the field in omop schema that corresponds to pracid from staff table in cprd_aurum schema. The source field is cprd_aurum_staff.pracid.",
+    "source_field": "cprd_aurum_staff.pracid",
+    "expected_target_field": "omop_provider.care_site_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "provider",
+        "api_name": "care_site_id"
+      }
+    ]
+  },
+  {
+    "query_id": "15",
+    "query": "Find the field in omop schema that corresponds to obsid from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.obsid.",
+    "source_field": "cprd_aurum_observation.obsid",
+    "expected_target_field": "omop_visit_detail.visit_detail_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_id"
+      }
+    ]
+  },
+  {
+    "query_id": "16",
+    "query": "Find the field in omop schema that corresponds to patid from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.patid.",
+    "source_field": "cprd_aurum_observation.patid",
+    "expected_target_field": "omop_visit_detail.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "17",
+    "query": "Find the field in omop schema that corresponds to obsdate from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.obsdate.",
+    "source_field": "cprd_aurum_observation.obsdate",
+    "expected_target_field": "omop_visit_detail.visit_detail_start_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_start_date"
+      }
+    ]
+  },
+  {
+    "query_id": "18",
+    "query": "Find the field in omop schema that corresponds to staffid from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.staffid.",
+    "source_field": "cprd_aurum_observation.staffid",
+    "expected_target_field": "omop_visit_detail.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "19",
+    "query": "Find the field in omop schema that corresponds to pracid from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.pracid.",
+    "source_field": "cprd_aurum_observation.pracid",
+    "expected_target_field": "omop_visit_detail.care_site_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "care_site_id"
+      }
+    ]
+  },
+  {
+    "query_id": "20",
+    "query": "Find the field in omop schema that corresponds to parentobsid from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.parentobsid.",
+    "source_field": "cprd_aurum_observation.parentobsid",
+    "expected_target_field": "omop_visit_detail.visit_detail_parent_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_parent_id"
+      }
+    ]
+  },
+  {
+    "query_id": "21",
+    "query": "Find the field in omop schema that corresponds to numrangehigh from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.numrangehigh.",
+    "source_field": "cprd_aurum_observation.numrangehigh",
+    "expected_target_field": "omop_stem.range_high",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "range_high"
+      }
+    ]
+  },
+  {
+    "query_id": "22",
+    "query": "Find the field in omop schema that corresponds to numrangelow from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.numrangelow.",
+    "source_field": "cprd_aurum_observation.numrangelow",
+    "expected_target_field": "omop_stem.range_low",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "range_low"
+      }
+    ]
+  },
+  {
+    "query_id": "23",
+    "query": "Find the field in omop schema that corresponds to numunitid from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.numunitid.",
+    "source_field": "cprd_aurum_observation.numunitid",
+    "expected_target_field": "omop_stem.unit_concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "unit_concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "24",
+    "query": "Find the field in omop schema that corresponds to value from observation table in cprd_aurum schema. The source field is cprd_aurum_observation.value.",
+    "source_field": "cprd_aurum_observation.value",
+    "expected_target_field": "omop_stem.value_as_number",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "value_as_number"
+      }
+    ]
+  },
+  {
+    "query_id": "25",
+    "query": "Find the field in omop schema that corresponds to consid from consultation table in cprd_aurum schema. The source field is cprd_aurum_consultation.consid.",
+    "source_field": "cprd_aurum_consultation.consid",
+    "expected_target_field": "omop_visit_detail.visit_detail_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_id"
+      }
+    ]
+  },
+  {
+    "query_id": "26",
+    "query": "Find the field in omop schema that corresponds to patid from consultation table in cprd_aurum schema. The source field is cprd_aurum_consultation.patid.",
+    "source_field": "cprd_aurum_consultation.patid",
+    "expected_target_field": "omop_visit_detail.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "27",
+    "query": "Find the field in omop schema that corresponds to consdate from consultation table in cprd_aurum schema. The source field is cprd_aurum_consultation.consdate.",
+    "source_field": "cprd_aurum_consultation.consdate",
+    "expected_target_field": "omop_visit_detail.visit_detail_start_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "visit_detail_start_date"
+      }
+    ]
+  },
+  {
+    "query_id": "28",
+    "query": "Find the field in omop schema that corresponds to staffid from consultation table in cprd_aurum schema. The source field is cprd_aurum_consultation.staffid.",
+    "source_field": "cprd_aurum_consultation.staffid",
+    "expected_target_field": "omop_visit_detail.provider_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "provider_id"
+      }
+    ]
+  },
+  {
+    "query_id": "29",
+    "query": "Find the field in omop schema that corresponds to pracid from consultation table in cprd_aurum schema. The source field is cprd_aurum_consultation.pracid.",
+    "source_field": "cprd_aurum_consultation.pracid",
+    "expected_target_field": "omop_visit_detail.care_site_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "visit_detail",
+        "api_name": "care_site_id"
+      }
+    ]
+  },
+  {
+    "query_id": "30",
+    "query": "Find the field in omop schema that corresponds to issuedate from drugissue table in cprd_aurum schema. The source field is cprd_aurum_drugissue.issuedate.",
+    "source_field": "cprd_aurum_drugissue.issuedate",
+    "expected_target_field": "omop_stem.start_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "start_date"
+      }
+    ]
+  },
+  {
+    "query_id": "31",
+    "query": "Find the field in omop schema that corresponds to duration from drugissue table in cprd_aurum schema. The source field is cprd_aurum_drugissue.duration.",
+    "source_field": "cprd_aurum_drugissue.duration",
+    "expected_target_field": "omop_stem.end_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "end_date"
+      }
+    ]
+  },
+  {
+    "query_id": "32",
+    "query": "Find the field in omop schema that corresponds to prodcodeid from drugissue table in cprd_aurum schema. The source field is cprd_aurum_drugissue.prodcodeid.",
+    "source_field": "cprd_aurum_drugissue.prodcodeid",
+    "expected_target_field": "omop_stem.concept_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "concept_id"
+      }
+    ]
+  },
+  {
+    "query_id": "33",
+    "query": "Find the field in omop schema that corresponds to patid from drugissue table in cprd_aurum schema. The source field is cprd_aurum_drugissue.patid.",
+    "source_field": "cprd_aurum_drugissue.patid",
+    "expected_target_field": "omop_stem.person_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "person_id"
+      }
+    ]
+  },
+  {
+    "query_id": "34",
+    "query": "Find the field in omop schema that corresponds to quantunitid from drugissue table in cprd_aurum schema. The source field is cprd_aurum_drugissue.quantunitid.",
+    "source_field": "cprd_aurum_drugissue.quantunitid",
+    "expected_target_field": "omop_stem.dose_unit_source_value",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "dose_unit_source_value"
+      }
+    ]
+  },
+  {
+    "query_id": "35",
+    "query": "Find the field in omop schema that corresponds to quantity from drugissue table in cprd_aurum schema. The source field is cprd_aurum_drugissue.quantity.",
+    "source_field": "cprd_aurum_drugissue.quantity",
+    "expected_target_field": "omop_stem.quantity",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "quantity"
+      }
+    ]
+  },
+  {
+    "query_id": "36",
+    "query": "Find the field in omop schema that corresponds to obsid from problem table in cprd_aurum schema. The source field is cprd_aurum_problem.obsid.",
+    "source_field": "cprd_aurum_problem.obsid",
+    "expected_target_field": "omop_stem.visit_occurrence_id",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "visit_occurrence_id"
+      }
+    ]
+  },
+  {
+    "query_id": "37",
+    "query": "Find the field in omop schema that corresponds to probenddate from problem table in cprd_aurum schema. The source field is cprd_aurum_problem.probenddate.",
+    "source_field": "cprd_aurum_problem.probenddate",
+    "expected_target_field": "omop_stem.end_date",
+    "gt_api_list": [
+      {
+        "category_name": "omop",
+        "tool_name": "stem",
+        "api_name": "end_date"
+      }
+    ]
+  }
+]

@@ -20998,5 +20998,71 @@
     "type_name": "Written_by",
     "field_name": "wid",
     "description": "Unique identifier for Written_by"
+  },
+  "nl2gql_Has_pet.stuid": {
+    "product_name": "nl2gql",
+    "type_name": "Has_pet",
+    "field_name": "stuid",
+    "description": "Student ID in has_pet junction table"
+  },
+  "nl2gql_Has_pet.petid": {
+    "product_name": "nl2gql",
+    "type_name": "Has_pet",
+    "field_name": "petid",
+    "description": "Pet ID in has_pet junction table"
+  },
+  "nl2gql_Paragraphs.document_id": {
+    "product_name": "nl2gql",
+    "type_name": "Paragraphs",
+    "field_name": "document_id",
+    "description": "Document ID in paragraphs table"
+  },
+  "nl2gql_Paragraphs.paragraph_id": {
+    "product_name": "nl2gql",
+    "type_name": "Paragraphs",
+    "field_name": "paragraph_id",
+    "description": "Paragraph ID in paragraphs table"
+  },
+  "nl2gql_Paragraphs.paragraph_text": {
+    "product_name": "nl2gql",
+    "type_name": "Paragraphs",
+    "field_name": "paragraph_text",
+    "description": "Paragraph text content"
+  },
+  "nl2gql_Templates.template_id": {
+    "product_name": "nl2gql",
+    "type_name": "Templates",
+    "field_name": "template_id",
+    "description": "Template ID"
+  },
+  "nl2gql_Templates.template_type_code": {
+    "product_name": "nl2gql",
+    "type_name": "Templates",
+    "field_name": "template_type_code",
+    "description": "Template type code"
+  },
+  "nl2gql_Ref_template_types.template_type_code": {
+    "product_name": "nl2gql",
+    "type_name": "Ref_template_types",
+    "field_name": "template_type_code",
+    "description": "Template type code reference"
+  },
+  "nl2gql_Ref_template_types.template_type_description": {
+    "product_name": "nl2gql",
+    "type_name": "Ref_template_types",
+    "field_name": "template_type_description",
+    "description": "Template type description"
+  },
+  "nl2gql_Transcript_contents.transcript_id": {
+    "product_name": "nl2gql",
+    "type_name": "Transcript_contents",
+    "field_name": "transcript_id",
+    "description": "Transcript ID"
+  },
+  "nl2gql_Transcript_contents.student_course_id": {
+    "product_name": "nl2gql",
+    "type_name": "Transcript_contents",
+    "field_name": "student_course_id",
+    "description": "Student course ID in transcript"
   }
 }

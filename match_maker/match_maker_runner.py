@@ -21,6 +21,8 @@ import sys
 import json
 import time
 import argparse
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 import logging
@@ -410,7 +412,8 @@ class MatchMakerEvaluationRunner:
         use_optimization: bool = True,
         top_k: int = 5,
         abstention_mode: str = 'lenient',
-        min_confidence_threshold: float = 20.0
+        min_confidence_threshold: float = 20.0,
+        max_workers: int = 1
     ):
         self.property_lookup_file = Path(property_lookup_file)
         self.data_dir = Path(data_dir)
@@ -420,6 +423,7 @@ class MatchMakerEvaluationRunner:
         self.top_k = top_k
         self.abstention_mode = abstention_mode
         self.min_confidence_threshold = min_confidence_threshold
+        self.max_workers = max_workers
 
         script_dir_local = Path(__file__).parent
         self.results_dir = script_dir_local / "results"
@@ -449,18 +453,26 @@ class MatchMakerEvaluationRunner:
             logger.error(f"Failed to import DatasetLoader: {e}")
             raise
 
-    def _get_agent_for_model(self, model: str, dataset: str) -> MatchMakerMappingAgent:
+    def _get_agent_for_model(
+        self, model: str, dataset: str, worker_id: int = 0
+    ) -> MatchMakerMappingAgent:
         """
-        Return the cached agent for (model, dataset), creating it if needed.
+        Return the cached agent for (model, dataset, worker_id), creating it if needed.
 
         Using a cache ensures:
         - The ColBERT/ChromaDB index is built once, not once per sample.
         - The self-improvement optimization runs once per dataset/model run,
           not once per sample.
+
+        When max_workers > 1, each worker thread gets its own agent instance
+        (keyed by worker_id) so that set_source_target_from_utterance() calls
+        don't conflict across threads.
         """
-        cache_key = (model, dataset)
+        cache_key = (model, dataset, worker_id)
         if cache_key not in self._agent_cache:
-            logger.info(f"Creating new MatchMaker agent for ({model}, {dataset})")
+            logger.info(
+                f"Creating new MatchMaker agent for ({model}, {dataset}, worker={worker_id})"
+            )
             self._agent_cache[cache_key] = MatchMakerMappingAgent(
                 property_lookup_file=str(self.property_lookup_file),
                 data_dir=str(self.data_dir),
@@ -499,7 +511,8 @@ class MatchMakerEvaluationRunner:
         ground_truth_mapping: Optional[Dict] = None,
         expected_source: Optional[str] = None,
         expected_target: Optional[str] = None,
-        is_utterance: bool = None
+        is_utterance: bool = None,
+        worker_id: int = 0
     ) -> Dict[str, Any]:
         """Run MatchMaker on a single input (attribute or utterance)."""
         start_time = time.time()
@@ -513,7 +526,7 @@ class MatchMakerEvaluationRunner:
 
         try:
             logger.info(f"Running MatchMaker on sample {sample_id}")
-            agent = self._get_agent_for_model(model, dataset)
+            agent = self._get_agent_for_model(model, dataset, worker_id=worker_id)
             gt_fields = list(ground_truth_mapping.keys()) if ground_truth_mapping else None
 
             result = agent.run_agent(
@@ -622,6 +635,61 @@ class MatchMakerEvaluationRunner:
                     "ground_truth": ground_truth
                 }
 
+    def _extract_sample_fields(self, item: Dict, is_utterance_dataset: bool):
+        """Extract input fields from a sample item."""
+        if is_utterance_dataset:
+            return {
+                'input_data': item.get('utterance', ''),
+                'ground_truth': None,
+                'ground_truth_mapping': item.get('ground_truth_mapping', {}),
+                'expected_source': item.get('expected_source', '') or item.get('source_schema', ''),
+                'expected_target': item.get('expected_target', '') or item.get('target_schema', ''),
+            }
+        else:
+            return {
+                'input_data': item.get('source_attribute', item.get('utterance', '')),
+                'ground_truth': item.get('ground_truth_target', item.get('expected_target')),
+                'ground_truth_mapping': None,
+                'expected_source': None,
+                'expected_target': None,
+            }
+
+    def _process_sample(
+        self, item: Dict, model: str, dataset: str,
+        is_utterance_dataset: bool, worker_id: int = 0
+    ) -> Dict[str, Any]:
+        """Process a single sample. Thread-safe: each worker_id uses its own agent."""
+        sample_id = item['sample_id']
+        fields = self._extract_sample_fields(item, is_utterance_dataset)
+
+        try:
+            result = self.run_single_evaluation(
+                input_data=fields['input_data'],
+                sample_id=sample_id,
+                model=model,
+                dataset=dataset,
+                ground_truth=fields['ground_truth'],
+                ground_truth_mapping=fields['ground_truth_mapping'],
+                expected_source=fields['expected_source'],
+                expected_target=fields['expected_target'],
+                is_utterance=is_utterance_dataset,
+                worker_id=worker_id
+            )
+            return result
+        except Exception as e:
+            logger.error(f"Unexpected error processing {sample_id}: {e}")
+            return {
+                "sample_id": sample_id,
+                "success": False,
+                "error_message": str(e),
+                "abstain": True,
+                "total_mappings": 0,
+                "accuracy_metrics": {},
+                "execution_time": 0,
+                "dataset": dataset,
+                "model": model,
+            }
+
     def run_evaluation(self, dataset: str, model: str) -> Dict[str, Any]:
         """Run evaluation for dataset-model combination."""
         logger.info(f"Starting MatchMaker evaluation: {dataset} with {model}")
@@ -642,77 +710,19 @@ class MatchMakerEvaluationRunner:
         results = []
         total_start = time.time()
         MAX_CONSECUTIVE_FAILURES = 50
-        consecutive_failures = 0
 
         from tqdm import tqdm
 
-        with tqdm(utterances, desc=f"Evaluating {dataset}", unit="sample") as pbar:
-            for item in pbar:
-                sample_id = item['sample_id']
-
-                if is_utterance_dataset:
-                    input_data = item.get('utterance', '')
-                    ground_truth = None
-                    ground_truth_mapping = item.get('ground_truth_mapping', {})
-                    expected_source = item.get('expected_source', '') or item.get('source_schema', '')
-                    expected_target = item.get('expected_target', '') or item.get('target_schema', '')
-                else:
-                    input_data = item.get('source_attribute', item.get('utterance', ''))
-                    ground_truth = item.get('ground_truth_target', item.get('expected_target'))
-                    ground_truth_mapping = None
-                    expected_source = None
-                    expected_target = None
-
-                pbar.set_description(f"Processing {sample_id}")
-
-                try:
-                    result = self.run_single_evaluation(
-                        input_data=input_data,
-                        sample_id=sample_id,
-                        model=model,
-                        dataset=dataset,
-                        ground_truth=ground_truth,
-                        ground_truth_mapping=ground_truth_mapping,
-                        expected_source=expected_source,
-                        expected_target=expected_target,
-                        is_utterance=is_utterance_dataset
-                    )
-
-                    results.append(result)
-
-                    if not result["success"]:
-                        consecutive_failures += 1
-                        error_msg = result.get("error_message", "Unknown error")
-                        critical_patterns = [
-                            "provider not provided", "provider not found",
-                            "invalid api key", "authentication", "critical llm",
-                        ]
-                        if any(p in error_msg.lower() for p in critical_patterns):
-                            raise RuntimeError(f"Critical error - stopping: {error_msg}")
-                        if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
-                            raise RuntimeError(
-                                f"Stopping after {consecutive_failures} consecutive failures. "
-                                f"Last error: {error_msg}"
-                            )
-                    else:
-                        consecutive_failures = 0
-
-                    status = "ok" if result["success"] else "FAIL"
-                    pbar.set_postfix({
-                        "status": status,
-                        "mappings": result.get("total_mappings", 0),
-                        "fails": consecutive_failures
-                    })
-
-                except RuntimeError:
-                    raise
-                except Exception as e:
-                    logger.error(f"Unexpected error processing {sample_id}: {e}")
-                    consecutive_failures += 1
-                    if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
-                        raise RuntimeError(f"Too many failures: {e}") from e
-
-                time.sleep(0.5)
+        if self.max_workers > 1:
+            self._run_evaluation_parallel(
+                utterances, dataset, model, is_utterance_dataset,
+                results, MAX_CONSECUTIVE_FAILURES, tqdm
+            )
+        else:
+            self._run_evaluation_sequential(
+                utterances, dataset, model, is_utterance_dataset,
+                results, MAX_CONSECUTIVE_FAILURES, tqdm
+            )
 
         total_time = time.time() - total_start
         successful = [r for r in results if r["success"]]
@@ -749,10 +759,197 @@ class MatchMakerEvaluationRunner:
                 "property_lookup_file": str(self.property_lookup_file),
                 "rebuild_index": self.rebuild_index,
                 "use_optimization": self.use_optimization,
-                "top_k": self.top_k
+                "top_k": self.top_k,
+                "max_workers": self.max_workers
             },
             "results": results
         }
+
+    def _run_evaluation_sequential(
+        self, utterances, dataset, model, is_utterance_dataset,
+        results, max_consecutive_failures, tqdm
+    ):
+        """Original sequential sample processing loop."""
+        consecutive_failures = 0
+
+        with tqdm(utterances, desc=f"Evaluating {dataset}", unit="sample") as pbar:
+            for item in pbar:
+                sample_id = item['sample_id']
+                pbar.set_description(f"Processing {sample_id}")
+
+                try:
+                    result = self._process_sample(
+                        item, model, dataset, is_utterance_dataset, worker_id=0
+                    )
+                    results.append(result)
+
+                    if not result["success"]:
+                        consecutive_failures += 1
+                        error_msg = result.get("error_message", "Unknown error")
+                        critical_patterns = [
+                            "provider not provided", "provider not found",
+                            "invalid api key", "authentication", "critical llm",
+                        ]
+                        if any(p in error_msg.lower() for p in critical_patterns):
+                            raise RuntimeError(f"Critical error - stopping: {error_msg}")
+                        if consecutive_failures >= max_consecutive_failures:
+                            raise RuntimeError(
+                                f"Stopping after {consecutive_failures} consecutive failures. "
+                                f"Last error: {error_msg}"
+                            )
+                    else:
+                        consecutive_failures = 0
+
+                    status = "ok" if result["success"] else "FAIL"
+                    pbar.set_postfix({
+                        "status": status,
+                        "mappings": result.get("total_mappings", 0),
+                        "fails": consecutive_failures
+                    })
+
+                except RuntimeError:
+                    raise
+                except Exception as e:
+                    logger.error(f"Unexpected error processing {item['sample_id']}: {e}")
+                    consecutive_failures += 1
+                    if consecutive_failures >= max_consecutive_failures:
+                        raise RuntimeError(f"Too many failures: {e}") from e
+
+                time.sleep(0.5)
+
+    def _run_evaluation_parallel(
+        self, utterances, dataset, model, is_utterance_dataset,
+        results, max_consecutive_failures, tqdm
+    ):
+        """Parallel sample processing using ThreadPoolExecutor."""
+        max_workers = self.max_workers
+        print(f"Running parallel evaluation with {max_workers} workers")
+
+        # Process first sample sequentially to trigger optimization
+        first_item = utterances[0]
+        print(f"Processing first sample sequentially (triggers optimization)...")
+        first_result = self._process_sample(
+            first_item, model, dataset, is_utterance_dataset, worker_id=0
+        )
+        results.append(first_result)
+
+        if not first_result["success"]:
+            error_msg = first_result.get("error_message", "Unknown error")
+            critical_patterns = [
+                "provider not provided", "provider not found",
+                "invalid api key", "authentication", "critical llm",
+            ]
+            if any(p in error_msg.lower() for p in critical_patterns):
+                raise RuntimeError(f"Critical error on first sample - stopping: {error_msg}")
+
+        remaining_items = utterances[1:]
+        if not remaining_items:
+            return
+
+        # Pre-create agent pool so all workers share the ChromaDB index build cost
+        # Worker 0's agent already exists from the first sample above
+        print(f"Creating agent pool ({max_workers} agents)...")
+        for worker_id in range(1, max_workers):
+            self._get_agent_for_model(model, dataset, worker_id=worker_id)
+        print(f"Agent pool ready")
+
+        # Thread-safe state for failure tracking and results
+        lock = threading.Lock()
+        consecutive_failures = 0
+        stop_event = threading.Event()
+        critical_error_msg = None
+
+        # Map worker IDs to threads via thread-local storage
+        worker_ids = list(range(max_workers))
+        worker_id_queue = list(worker_ids)
+        worker_id_lock = threading.Lock()
+        thread_worker_map: Dict[int, int] = {}
+
+        def get_worker_id():
+            tid = threading.get_ident()
+            if tid not in thread_worker_map:
+                with worker_id_lock:
+                    if tid not in thread_worker_map:
+                        thread_worker_map[tid] = worker_id_queue.pop(0)
+            return thread_worker_map[tid]
+
+        def process_with_tracking(item):
+            nonlocal consecutive_failures, critical_error_msg
+
+            if stop_event.is_set():
+                return None
+
+            wid = get_worker_id()
+            result = self._process_sample(
+                item, model, dataset, is_utterance_dataset, worker_id=wid
+            )
+
+            with lock:
+                if stop_event.is_set():
+                    return None
+
+                if not result["success"]:
+                    consecutive_failures += 1
+                    error_msg = result.get("error_message", "Unknown error")
+                    critical_patterns = [
+                        "provider not provided", "provider not found",
+                        "invalid api key", "authentication", "critical llm",
+                    ]
+                    if any(p in error_msg.lower() for p in critical_patterns):
+                        critical_error_msg = error_msg
+                        stop_event.set()
+                        return result
+                    if consecutive_failures >= max_consecutive_failures:
+                        critical_error_msg = (
+                            f"Stopping after {consecutive_failures} consecutive failures. "
+                            f"Last error: {error_msg}"
+                        )
+                        stop_event.set()
+                        return result
+                else:
+                    consecutive_failures = 0
+
+            return result
+
+        completed = 0
+        pbar = tqdm(
+            total=len(remaining_items),
+            desc=f"Evaluating {dataset} (parallel x{max_workers})",
+            unit="sample",
+            initial=0
+        )
+
+        try:
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = {
+                    executor.submit(process_with_tracking, item): item
+                    for item in remaining_items
+                }
+
+                for future in as_completed(futures):
+                    result = future.result()
+                    if result is not None:
+                        results.append(result)
+                        completed += 1
+                        pbar.update(1)
+
+                        status = "ok" if result["success"] else "FAIL"
+                        pbar.set_postfix({
+                            "status": status,
+                            "done": completed,
+                            "fails": consecutive_failures
+                        })
+
+                    if stop_event.is_set():
+                        # Cancel pending futures
+                        for f in futures:
+                            f.cancel()
+                        break
+        finally:
+            pbar.close()
+
+        if critical_error_msg:
+            raise RuntimeError(f"Critical error - stopping: {critical_error_msg}")
 
     def save_results(self, results: Dict, filename: str):
         output_file = self.results_dir / filename
@@ -804,6 +1001,10 @@ def main():
         choices=["strict", "lenient", "disabled", "threshold"]
     )
     parser.add_argument("--min-confidence", type=float, default=20.0)
+    parser.add_argument(
+        "--max-workers", type=int, default=1,
+        help="Number of parallel workers for sample processing (default: 1 = sequential)"
+    )
 
     args = parser.parse_args()
 
@@ -823,7 +1024,8 @@ def main():
             use_optimization=not args.no_optimization,
             top_k=args.top_k,
             abstention_mode=args.abstention_mode,
-            min_confidence_threshold=args.min_confidence
+            min_confidence_threshold=args.min_confidence,
+            max_workers=args.max_workers
         )
     except Exception as e:
         logger.error(f"Failed to initialize runner: {e}")

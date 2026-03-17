@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from pathlib import Path
 
-OUTPUT_DIR = Path("/mnt/user-data/outputs")
+OUTPUT_DIR = Path(__file__).parent
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # --- Shared style --------------------------------------------------------------
@@ -34,7 +34,6 @@ COL_WIDTH = 3.33   # VLDB single column in inches
 METHOD_COLORS = {
     "Map-Reflect": "#C0392B",
     "MatchMaker":  "#2980B9",
-    "ReAct":       "#7D3C98",
     "GNN":         "#16A085",
 }
 
@@ -94,10 +93,6 @@ def chart_api_field_gap():
         ("MatchMaker",  "OMOP MIMIC",    95.7,  38.3),
         ("MatchMaker",  "OMOP Synthea", 100.0,  70.3),
         ("MatchMaker",  "NL2GQL",        42.1,  77.2),
-        ("ReAct",       "ITOpsGraph",    87.6,   0.0),
-        ("ReAct",       "OMOP CMS",      94.7,  35.3),
-        ("ReAct",       "OMOP MIMIC",    97.8,  14.3),
-        ("ReAct",       "OMOP Synthea", 100.0,  58.2),
         ("GNN",         "ITOpsGraph",    52.4,   0.0),
         ("GNN",         "OMOP CMS",      97.4,  11.3),
         ("GNN",         "OMOP MIMIC",   100.0,  10.9),
@@ -107,7 +102,7 @@ def chart_api_field_gap():
     df = pd.DataFrame(rows, columns=["method", "dataset", "api", "field"])
     df["gap"] = df["api"] - df["field"]
 
-    methods_order = ["Map-Reflect", "MatchMaker", "ReAct", "GNN"]
+    methods_order = ["Map-Reflect", "MatchMaker", "GNN"]
     ordered = []
     for m in methods_order:
         for _, r in df[df["method"] == m].sort_values("gap", ascending=False).iterrows():
@@ -115,7 +110,7 @@ def chart_api_field_gap():
     df_ord = pd.DataFrame(ordered).reset_index(drop=True)
     df_ord["y"] = range(len(df_ord))
 
-    fig, ax = plt.subplots(figsize=(COL_WIDTH, 6.8))
+    fig, ax = plt.subplots(figsize=(COL_WIDTH, 5.5))
 
     for _, row in df_ord.iterrows():
         color = METHOD_COLORS.get(row["method"], NEUTRAL)
@@ -225,15 +220,11 @@ def chart_method_sensitivity():
         ("MatchMaker",  "OMOP MIMIC",     32.6,  38.3),
         ("MatchMaker",  "OMOP Synthea",   66.3,  70.3),
         ("MatchMaker",  "NL2GQL",         83.2,  77.2),
-        ("ReAct",       "ITOpsGraph",      0.0,   0.0),
-        ("ReAct",       "OMOP CMS",       35.3,  35.3),
-        ("ReAct",       "OMOP MIMIC",     14.3,  14.3),
-        ("ReAct",       "OMOP Synthea",   59.0,  58.2),
     ]
     df = pd.DataFrame(rows, columns=["method", "dataset", "granite", "llama"])
     df["abbr"] = df["dataset"].map(DS_ABBR)
 
-    fig, ax = plt.subplots(figsize=(COL_WIDTH, 5.8))
+    fig, ax = plt.subplots(figsize=(COL_WIDTH, 4.8))
 
     # Deconflict all right-side (Llama) label positions together
     adj = _deconflict(df["llama"].tolist(), min_gap=5.5)
@@ -277,7 +268,7 @@ def chart_method_sensitivity():
 
     legend_handles = [
         mpatches.Patch(color=METHOD_COLORS[m], label=m)
-        for m in ["Map-Reflect", "MatchMaker", "ReAct"]
+        for m in ["Map-Reflect", "MatchMaker"]
     ]
     ax.legend(handles=legend_handles, loc="upper left",
               frameon=True, framealpha=0.92,

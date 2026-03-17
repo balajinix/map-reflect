@@ -149,6 +149,9 @@ class MapReflectConfig:
     max_tokens: int = 4000
     temperature: float = 0.1
 
+    # Field-level prediction (default on for SchemaNet-style datasets)
+    predict_fields: bool = True  # Enable field-level predictions after type prediction
+
 
 class NumpyEncoder(json.JSONEncoder):
     """Custom JSON encoder for numpy types."""
@@ -1389,6 +1392,162 @@ class SemanticEntropyEstimator:
         return results
 
 
+class ArithmeticAggregationEstimator:
+    """
+    Arithmetic aggregation (arith-agg) uncertainty estimation.
+
+    Based on SIMBA framework (Xiao et al., 2025):
+    - Computes arithmetic mean of top-k similarity/confidence scores
+    - High scores = high confidence = low uncertainty
+    - Does not require multiple LLM samples (fast)
+    """
+
+    def __init__(self, top_k: int = 5):
+        self.top_k = top_k
+
+    def estimate_uncertainty(
+        self,
+        response: str,
+        candidates: List[Dict]
+    ) -> Dict[str, Any]:
+        """
+        Estimate uncertainty using arithmetic mean of top-k scores.
+
+        Args:
+            response: The ranking response from LLM
+            candidates: List of candidate fields
+
+        Returns:
+            Dict with uncertainty score (0-1) and metrics
+        """
+        ranking = safe_parse_json_array(response)
+        if not ranking:
+            return {"uncertainty": 0.8, "method": "arith_agg_parse_error"}
+
+        # Extract scores from ranking
+        scores = []
+        for item in ranking[:self.top_k]:
+            if isinstance(item, dict):
+                score = item.get("score", 0.5)
+                try:
+                    scores.append(float(score))
+                except (ValueError, TypeError):
+                    scores.append(0.5)
+
+        if not scores:
+            return {"uncertainty": 0.8, "method": "arith_agg_no_scores"}
+
+        # Compute arithmetic mean
+        arith_mean = np.mean(scores)
+
+        # Convert to uncertainty: high score = low uncertainty
+        # Scores are typically in [0, 1] range where higher = better match
+        # But some models use distance scores where lower = better
+        # We'll assume higher = better confidence, so uncertainty = 1 - score
+
+        # Normalize scores to [0, 1] if needed
+        if max(scores) > 1.0:
+            # Likely distance scores, normalize and invert
+            max_score = max(scores)
+            normalized_scores = [1.0 - (s / max_score) for s in scores]
+            arith_mean = np.mean(normalized_scores)
+
+        # Uncertainty is inverse of confidence
+        uncertainty = float(max(0.0, min(1.0, 1.0 - arith_mean)))
+
+        # Also compute score spread (std) as secondary metric
+        score_std = float(np.std(scores)) if len(scores) > 1 else 0.0
+
+        return {
+            "uncertainty": uncertainty,
+            "arith_mean": float(arith_mean),
+            "score_std": score_std,
+            "n_scores": len(scores),
+            "top_k": self.top_k,
+            "method": "arith_agg"
+        }
+
+
+class HarmonicAggregationEstimator:
+    """
+    Harmonic aggregation (harm-agg) uncertainty estimation.
+
+    Based on SIMBA framework (Xiao et al., 2025):
+    - Computes harmonic mean of top-k similarity/confidence scores
+    - Penalizes low scores more heavily than arithmetic mean
+    - More sensitive to outliers/low-confidence predictions
+    - Does not require multiple LLM samples (fast)
+    """
+
+    def __init__(self, top_k: int = 5):
+        self.top_k = top_k
+
+    def estimate_uncertainty(
+        self,
+        response: str,
+        candidates: List[Dict]
+    ) -> Dict[str, Any]:
+        """
+        Estimate uncertainty using harmonic mean of top-k scores.
+
+        Args:
+            response: The ranking response from LLM
+            candidates: List of candidate fields
+
+        Returns:
+            Dict with uncertainty score (0-1) and metrics
+        """
+        ranking = safe_parse_json_array(response)
+        if not ranking:
+            return {"uncertainty": 0.8, "method": "harm_agg_parse_error"}
+
+        # Extract scores from ranking
+        scores = []
+        for item in ranking[:self.top_k]:
+            if isinstance(item, dict):
+                score = item.get("score", 0.5)
+                try:
+                    scores.append(float(score))
+                except (ValueError, TypeError):
+                    scores.append(0.5)
+
+        if not scores:
+            return {"uncertainty": 0.8, "method": "harm_agg_no_scores"}
+
+        # Normalize scores to [0, 1] if needed
+        if max(scores) > 1.0:
+            # Likely distance scores, normalize and invert
+            max_score = max(scores)
+            scores = [1.0 - (s / max_score) for s in scores]
+
+        # Ensure no zero scores for harmonic mean (add small epsilon)
+        epsilon = 1e-6
+        scores = [max(s, epsilon) for s in scores]
+
+        # Compute harmonic mean: n / sum(1/x_i)
+        harm_mean = len(scores) / sum(1.0 / s for s in scores)
+
+        # Also compute arithmetic mean for comparison
+        arith_mean = np.mean(scores)
+
+        # Uncertainty is inverse of confidence
+        uncertainty = float(max(0.0, min(1.0, 1.0 - harm_mean)))
+
+        # Score spread
+        score_std = float(np.std(scores)) if len(scores) > 1 else 0.0
+
+        return {
+            "uncertainty": uncertainty,
+            "harm_mean": float(harm_mean),
+            "arith_mean": float(arith_mean),
+            "harm_arith_gap": float(arith_mean - harm_mean),  # Larger gap = more variance
+            "score_std": score_std,
+            "n_scores": len(scores),
+            "top_k": self.top_k,
+            "method": "harm_agg"
+        }
+
+
 class UncertaintyEstimator:
     """Sampling-based uncertainty estimation for rankings."""
 
@@ -2099,6 +2258,8 @@ class MapReflectRunner:
         self.perplexity_estimator = None
         self.p_true_estimator = None
         self.semantic_entropy_estimator = None
+        self.arith_agg_estimator = None
+        self.harm_agg_estimator = None
         if self.config.use_uncertainty:
             if self.config.uq_method == "perplexity":
                 self.perplexity_estimator = PerplexityEstimator(self.client)
@@ -2111,6 +2272,12 @@ class MapReflectRunner:
                     self.client, self.config.n_uncertainty_samples
                 )
                 logger.info(f"  UQ Method: semantic_entropy (n={self.config.n_uncertainty_samples} samples)")
+            elif self.config.uq_method == "arith_agg":
+                self.arith_agg_estimator = ArithmeticAggregationEstimator(top_k=self.config.top_k)
+                logger.info(f"  UQ Method: arith_agg (arithmetic aggregation, top_k={self.config.top_k})")
+            elif self.config.uq_method == "harm_agg":
+                self.harm_agg_estimator = HarmonicAggregationEstimator(top_k=self.config.top_k)
+                logger.info(f"  UQ Method: harm_agg (harmonic aggregation, top_k={self.config.top_k})")
             elif self.config.uq_method == "sampling":
                 self.uncertainty_estimator = UncertaintyEstimator(
                     self.client, self.config.n_uncertainty_samples
@@ -2201,6 +2368,130 @@ Return only the JSON array and nothing else."""
             {"role": "user", "content": prompt}
         ]
         return self._format_prompt(messages)
+
+    def _build_field_ranking_prompt(
+        self,
+        source_field: str,
+        source_desc: str,
+        target_type: str,
+        target_fields: List[Dict],
+        source_product: str,
+        target_product: str
+    ) -> str:
+        """Build prompt for ranking fields within a predicted target type."""
+        # Format field candidates
+        field_block = "\n".join([
+            f"{i+1}. field: {f.get('name', '')}\n   type: {f.get('type', 'unknown')}\n   description: {f.get('description', '')}"
+            for i, f in enumerate(target_fields)
+        ])
+
+        prompt = f"""You are given a {source_product} field and a list of candidate fields from the {target_product} table "{target_type}".
+Select the field that best matches the semantic meaning of the source field.
+
+{source_product} field: {source_field}
+Description: {source_desc}
+
+Target table: {target_type}
+Candidate fields:
+{field_block}
+
+Task: Rank the candidate fields by how well they semantically match the source field.
+Produce a JSON array of objects, ordered from best match to worst, where each object has:
+- "field": field name (string, exactly as shown above)
+- "score": a float between 0.0 and 1.0 (higher is better match)
+- "reason": one concise sentence explaining why you assigned that score
+
+Return only the JSON array and nothing else."""
+
+        messages = [
+            {"role": "system", "content": "You are an expert in schema field matching."},
+            {"role": "user", "content": prompt}
+        ]
+        return self._format_prompt(messages)
+
+    def _predict_field_in_type(
+        self,
+        source_field: str,
+        source_desc: str,
+        target_type: str,
+        source_product: str,
+        target_product: str
+    ) -> Optional[Dict]:
+        """Predict the best matching field within a target type.
+
+        Returns:
+            Dict with 'field', 'full_field', 'score', 'reason' or None if no fields found
+        """
+        # Get fields for this type from property lookup
+        type_info = self.property_lookup.get(target_type, {})
+        fields_dict = type_info.get('fields', {})
+
+        if not fields_dict:
+            logger.debug(f"No fields found for type {target_type}")
+            return None
+
+        # Convert to list of field dicts
+        target_fields = [
+            {
+                'name': field_name,
+                'type': field_info.get('type', 'unknown'),
+                'description': field_info.get('description', f'Field {field_name}')
+            }
+            for field_name, field_info in fields_dict.items()
+        ]
+
+        # Build and send prompt
+        prompt = self._build_field_ranking_prompt(
+            source_field, source_desc, target_type, target_fields,
+            source_product, target_product
+        )
+
+        response = self.client.generate_single(prompt)
+
+        # Parse response
+        parsed = safe_parse_json_array(response)
+
+        if parsed and len(parsed) > 0 and isinstance(parsed[0], dict):
+            top_field = parsed[0]
+            field_name = top_field.get('field', '')
+
+            # Handle numeric ID references (e.g., "1" -> first field)
+            if field_name.isdigit():
+                idx = int(field_name) - 1
+                if 0 <= idx < len(target_fields):
+                    field_name = target_fields[idx]['name']
+
+            return {
+                'field': field_name,
+                'full_field': f"{target_type}.{field_name}",
+                'score': top_field.get('score', 1.0),
+                'reason': top_field.get('reason', ''),
+                'ranking': parsed
+            }
+
+        # Fallback: match by name similarity
+        source_field_name = source_field.split('.')[-1] if '.' in source_field else source_field.split('_')[-1]
+        for tf in target_fields:
+            if source_field_name.lower() in tf['name'].lower() or tf['name'].lower() in source_field_name.lower():
+                return {
+                    'field': tf['name'],
+                    'full_field': f"{target_type}.{tf['name']}",
+                    'score': 0.5,
+                    'reason': 'fallback name similarity match',
+                    'ranking': []
+                }
+
+        # Last resort: first field
+        if target_fields:
+            return {
+                'field': target_fields[0]['name'],
+                'full_field': f"{target_type}.{target_fields[0]['name']}",
+                'score': 0.3,
+                'reason': 'fallback first field',
+                'ranking': []
+            }
+
+        return None
 
     def _build_reflection_prompt(
         self,
@@ -2585,6 +2876,16 @@ Return a JSON object:
                     uncertainty_info = self.uncertainty_estimator.estimate_ranking_uncertainty(
                         ranking_prompt, response, candidates
                     )
+                elif self.config.uq_method == "arith_agg" and self.arith_agg_estimator:
+                    # Arithmetic aggregation UQ (SIMBA-style)
+                    uncertainty_info = self.arith_agg_estimator.estimate_uncertainty(
+                        response, candidates
+                    )
+                elif self.config.uq_method == "harm_agg" and self.harm_agg_estimator:
+                    # Harmonic aggregation UQ (SIMBA-style)
+                    uncertainty_info = self.harm_agg_estimator.estimate_uncertainty(
+                        response, candidates
+                    )
                 else:
                     # Heuristic-based UQ from response characteristics
                     uncertainty_score = estimate_uncertainty_from_response(response, candidates)
@@ -2631,17 +2932,36 @@ Return a JSON object:
                     reflection["high_uncertainty"] = high_uncertainty
                     reflection["detected_errors"] = detected_errors
 
+            # Field-level prediction (optional, default on)
+            field_prediction = None
+            if self.config.predict_fields:
+                # Get top-1 type prediction (use reflection if available)
+                if reflection and reflection.get("revised_ranking"):
+                    final_ranking = reflection["revised_ranking"]
+                else:
+                    final_ranking = ranking
+
+                if final_ranking and isinstance(final_ranking[0], dict):
+                    top_type = normalize_field_id(final_ranking[0].get("id", ""))
+                    if top_type:
+                        field_prediction = self._predict_field_in_type(
+                            src_field, src_desc, top_type,
+                            source_product, target_product
+                        )
+
             # Store prediction
             sample_result["predictions"][src_field] = {
                 "initial_ranking": ranking,
                 "reflection": reflection,
+                "field_prediction": field_prediction,
                 "uncertainty": float(uncertainty_score),
                 "uncertainty_info": uncertainty_info,
                 "detected_errors": detected_errors,
             }
 
-        # Evaluate sample
-        correct_count = 0
+        # Evaluate sample (both type-level and field-level)
+        type_correct_count = 0
+        field_correct_count = 0
         total_count = 0
         for src_field, gt_target in ground_truth.items():
             if src_field in sample_result["predictions"]:
@@ -2656,18 +2976,38 @@ Return a JSON object:
                 else:
                     revised = pred.get("initial_ranking", [])
 
+                # Extract ground truth type (e.g., "bank2_branch" from "bank2_branch.branch_id")
+                gt_target_str = gt_target[0] if isinstance(gt_target, list) else gt_target
+                gt_type = gt_target_str.split('.')[0] if '.' in gt_target_str else gt_target_str
+
                 if revised and isinstance(revised[0], dict):
                     top_pred = normalize_field_id(revised[0].get("id", ""))
-                    # gt_target can be a list or string
+                    # Type-level accuracy
                     if isinstance(gt_target, list):
-                        if top_pred in gt_target:
-                            correct_count += 1
-                    elif top_pred == gt_target:
-                        correct_count += 1
+                        gt_types = [t.split('.')[0] for t in gt_target]
+                        if top_pred in gt_types:
+                            type_correct_count += 1
+                    elif top_pred == gt_type:
+                        type_correct_count += 1
+
+                # Field-level accuracy (if field prediction available)
+                field_pred = pred.get("field_prediction")
+                if field_pred:
+                    pred_full_field = field_pred.get("full_field", "")
+                    if isinstance(gt_target, list):
+                        if pred_full_field in gt_target:
+                            field_correct_count += 1
+                    elif pred_full_field == gt_target_str:
+                        field_correct_count += 1
+
                 total_count += 1
 
-        sample_result["accuracy"] = correct_count / total_count if total_count > 0 else 0.0
-        sample_result["correct_count"] = correct_count
+        sample_result["type_accuracy"] = type_correct_count / total_count if total_count > 0 else 0.0
+        sample_result["field_accuracy"] = field_correct_count / total_count if total_count > 0 else 0.0
+        sample_result["accuracy"] = sample_result["type_accuracy"]  # Legacy: type accuracy
+        sample_result["type_correct_count"] = type_correct_count
+        sample_result["field_correct_count"] = field_correct_count
+        sample_result["correct_count"] = type_correct_count  # Legacy
         sample_result["total_count"] = total_count
         sample_result["mean_uncertainty"] = float(np.mean(sample_uncertainties)) if sample_uncertainties else 0.5
 
@@ -3043,47 +3383,101 @@ Return a JSON object:
                 "predictions": {},
             }
 
+            # Determine source/target products for field prediction
+            expected_source = sample.get("expected_source", "")
+            expected_target = sample.get("expected_target", "")
+            if isinstance(expected_source, dict):
+                source_product = expected_source.get("name", "SOURCE").upper()
+            else:
+                source_product = str(expected_source).split("_")[0].upper() if expected_source else "SOURCE"
+            if isinstance(expected_target, dict):
+                target_product = expected_target.get("name", "TARGET").upper()
+            else:
+                target_product = str(expected_target).split("_")[0].upper() if expected_target else "TARGET"
+
             sample_uncertainties = []
             for task in tasks:
                 src_field = task["src_field"]
                 sample_uncertainties.append(task["uncertainty"])
 
+                # Get final ranking (reflection if available)
+                ranking = task["ranking"]
+                reflection = task.get("reflection")
+                any_reflection = (
+                    self.config.use_reflection or self.config.use_self_reflection or
+                    self.config.use_error_reflection or self.config.use_uq_reflection or
+                    self.config.use_neighborhood_reflection
+                )
+                if any_reflection and reflection and reflection.get("revised_ranking"):
+                    final_ranking = reflection["revised_ranking"]
+                else:
+                    final_ranking = ranking
+
+                # Field-level prediction
+                field_prediction = None
+                if self.config.predict_fields and final_ranking and isinstance(final_ranking[0], dict):
+                    top_type = normalize_field_id(final_ranking[0].get("id", ""))
+                    if top_type:
+                        src_info = self.property_lookup.get(src_field, {})
+                        src_desc = src_info.get("description", src_field) if isinstance(src_info, dict) else str(src_info)
+                        field_prediction = self._predict_field_in_type(
+                            src_field, src_desc, top_type,
+                            source_product, target_product
+                        )
+
                 sample_result["predictions"][src_field] = {
-                    "initial_ranking": task["ranking"],
-                    "reflection": task.get("reflection"),
+                    "initial_ranking": ranking,
+                    "reflection": reflection,
+                    "field_prediction": field_prediction,
                     "uncertainty": float(task["uncertainty"]),
                     "uncertainty_info": task["uncertainty_info"],
                     "detected_errors": task.get("detected_errors", []),
                 }
 
-            # Evaluate sample
-            correct_count = 0
+            # Evaluate sample (both type-level and field-level)
+            type_correct_count = 0
+            field_correct_count = 0
             total_count = 0
             for src_field, gt_target in ground_truth.items():
                 if src_field in sample_result["predictions"]:
                     pred = sample_result["predictions"][src_field]
-                    any_reflection = (
-                        self.config.use_reflection or self.config.use_self_reflection or
-                        self.config.use_error_reflection or self.config.use_uq_reflection or
-                        self.config.use_neighborhood_reflection
-                    )
                     if any_reflection and pred.get("reflection"):
                         revised = pred["reflection"].get("revised_ranking", [])
                     else:
                         revised = pred.get("initial_ranking", [])
 
+                    # Extract ground truth type
+                    gt_target_str = gt_target[0] if isinstance(gt_target, list) else gt_target
+                    gt_type = gt_target_str.split('.')[0] if '.' in gt_target_str else gt_target_str
+
                     if revised and isinstance(revised[0], dict):
                         top_pred = normalize_field_id(revised[0].get("id", ""))
-                        # gt_target can be a list or string
+                        # Type-level accuracy
                         if isinstance(gt_target, list):
-                            if top_pred in gt_target:
-                                correct_count += 1
-                        elif top_pred == gt_target:
-                            correct_count += 1
+                            gt_types = [t.split('.')[0] for t in gt_target]
+                            if top_pred in gt_types:
+                                type_correct_count += 1
+                        elif top_pred == gt_type:
+                            type_correct_count += 1
+
+                    # Field-level accuracy
+                    field_pred = pred.get("field_prediction")
+                    if field_pred:
+                        pred_full_field = field_pred.get("full_field", "")
+                        if isinstance(gt_target, list):
+                            if pred_full_field in gt_target:
+                                field_correct_count += 1
+                        elif pred_full_field == gt_target_str:
+                            field_correct_count += 1
+
                     total_count += 1
 
-            sample_result["accuracy"] = correct_count / total_count if total_count > 0 else 0.0
-            sample_result["correct_count"] = correct_count
+            sample_result["type_accuracy"] = type_correct_count / total_count if total_count > 0 else 0.0
+            sample_result["field_accuracy"] = field_correct_count / total_count if total_count > 0 else 0.0
+            sample_result["accuracy"] = sample_result["type_accuracy"]  # Legacy
+            sample_result["type_correct_count"] = type_correct_count
+            sample_result["field_correct_count"] = field_correct_count
+            sample_result["correct_count"] = type_correct_count  # Legacy
             sample_result["total_count"] = total_count
             sample_result["mean_uncertainty"] = float(np.mean(sample_uncertainties)) if sample_uncertainties else 0.5
 
@@ -3105,9 +3499,11 @@ Return a JSON object:
 
     def _build_final_results(self, results: List[Dict], all_uncertainties: List[float], total_time: float) -> Dict:
         """Build the final results dictionary."""
-        total_correct = sum(r["correct_count"] for r in results)
+        total_type_correct = sum(r.get("type_correct_count", r.get("correct_count", 0)) for r in results)
+        total_field_correct = sum(r.get("field_correct_count", 0) for r in results)
         total_fields = sum(r["total_count"] for r in results)
-        overall_accuracy = total_correct / total_fields if total_fields > 0 else 0.0
+        type_accuracy = total_type_correct / total_fields if total_fields > 0 else 0.0
+        field_accuracy = total_field_correct / total_fields if total_fields > 0 else 0.0
 
         cache_stats = self.client.get_cache_stats()
 
@@ -3118,6 +3514,7 @@ Return a JSON object:
             "config": {
                 "batch_size": self.config.batch_size,
                 "neighbor_k": self.config.neighbor_k,
+                "predict_fields": self.config.predict_fields,
                 # Reflection signals
                 "use_self_reflection": self.config.use_self_reflection,
                 "use_error_reflection": self.config.use_error_reflection,
@@ -3131,8 +3528,12 @@ Return a JSON object:
             "metrics": {
                 "total_samples": len(results),
                 "total_fields": total_fields,
-                "correct_predictions": total_correct,
-                "accuracy": overall_accuracy,
+                "type_correct": total_type_correct,
+                "field_correct": total_field_correct,
+                "type_accuracy": type_accuracy,
+                "field_accuracy": field_accuracy,
+                "correct_predictions": total_type_correct,  # Legacy
+                "accuracy": type_accuracy,  # Legacy: type accuracy
                 "mean_uncertainty": float(np.mean(all_uncertainties)) if all_uncertainties else 0.5,
                 "total_time_seconds": total_time,
                 "samples_per_second": len(results) / total_time if total_time > 0 else 0,
@@ -3161,10 +3562,15 @@ def main():
     # Batch processing
     parser.add_argument("--batch-size", type=int, default=50, help="Batch size (default: 50)")
     parser.add_argument("--no-cache", action="store_true", help="Disable response caching")
+    parser.add_argument("--temperature", type=float, default=0.1, help="LLM temperature (default: 0.1, use 0 for deterministic)")
 
     # Candidate retrieval
     parser.add_argument("--top-k", type=int, default=10, help="Top-K candidates (default: 10)")
     parser.add_argument("--neighbor-k", type=int, default=5, help="1-hop neighbors (default: 5, 0 to disable)")
+
+    # Field-level prediction (default on)
+    parser.add_argument("--no-field-prediction", action="store_true",
+                        help="Disable field-level prediction (only predict target type)")
 
     # Reflection signals (use these for clean ablation)
     parser.add_argument("--use-self-reflection", action="store_true",
@@ -3181,8 +3587,8 @@ def main():
     parser.add_argument("--use-reflection", action="store_true", help="Legacy: enable error+uq reflection")
     parser.add_argument("--n-uncertainty-samples", type=int, default=3, help="Samples for UQ (default: 3)")
     parser.add_argument("--uq-method", type=str, default="sampling",
-                        choices=["sampling", "heuristic", "perplexity", "p_true", "semantic_entropy"],
-                        help="UQ method: sampling, heuristic, perplexity, p_true, semantic_entropy")
+                        choices=["sampling", "heuristic", "perplexity", "p_true", "semantic_entropy", "arith_agg", "harm_agg"],
+                        help="UQ method: sampling, heuristic, perplexity, p_true, semantic_entropy, arith_agg (SIMBA arithmetic), harm_agg (SIMBA harmonic)")
 
     # UQ threshold configuration
     parser.add_argument("--uq-threshold", type=float, help="Fixed UQ threshold (overrides adaptive)")
@@ -3212,8 +3618,10 @@ def main():
     config = MapReflectConfig(
         batch_size=args.batch_size,
         use_cache=not args.no_cache,
+        temperature=args.temperature,
         top_k=args.top_k,
         neighbor_k=args.neighbor_k,
+        predict_fields=not args.no_field_prediction,
         # New reflection signal flags
         use_self_reflection=args.use_self_reflection,
         use_error_reflection=args.use_error_reflection,
