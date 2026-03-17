@@ -28,6 +28,13 @@ from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
 
+# Override sqlite3 with pysqlite3 on systems with old sqlite3 (< 3.35.0)
+# Required by ChromaDB; must happen before any chromadb import
+try:
+    import match_maker.sqlite_override  # noqa: F401
+except ImportError:
+    pass
+
 os.environ['LITELLM_LOG'] = 'ERROR'
 os.environ['LITELLM_DROP_PARAMS'] = 'True'
 

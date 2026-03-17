@@ -13,6 +13,13 @@ import time
 import argparse
 from pathlib import Path
 from typing import Dict, List, Any
+
+# Override sqlite3 with pysqlite3 on systems with old sqlite3 (< 3.35.0)
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
 import logging
 from datetime import datetime
 
