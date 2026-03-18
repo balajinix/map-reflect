@@ -266,7 +266,16 @@ def main():
         )
 
         # Save results
-        model_short = 'llama' if 'llama' in args.model.lower() else 'granite'
+        model_lower = args.model.lower()
+        if 'llama' in model_lower:
+            model_short = 'llama'
+        elif 'mistral' in model_lower:
+            model_short = 'mistral'
+        elif 'granite' in model_lower:
+            model_short = 'granite'
+        else:
+            # Extract last segment of model ID as short name
+            model_short = args.model.split('/')[-1].split('-')[0]
         output_file = output_dir / f"matchmaker_{args.dataset}_{model_short}.json"
 
         with open(output_file, 'w') as f:
