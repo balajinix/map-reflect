@@ -73,23 +73,27 @@ get_lookup_file() {
 }
 
 # Check if result already exists with enough samples
+# Prints the filename if found, prints nothing if not found
 result_exists() {
     local ds="$1" model_id="$2"
     local expected=${EXPECTED_SAMPLES[$ds]}
+    local ds_lower=$(echo "$ds" | tr '[:upper:]' '[:lower:]')
     local model_slug="${model_id//\//_}"  # watsonx/ibm/granite-4-h-small -> watsonx_ibm_granite-4-h-small
     model_slug="${model_slug#watsonx_}"   # strip watsonx_ prefix
 
     # Look for mapreflect_<ds>_<model>.json
-    for f in "${RESULTS_DIR}"/mapreflect_${ds,,}_${model_slug}*.json; do
+    local f
+    for f in "${RESULTS_DIR}"/mapreflect_${ds_lower}_${model_slug}*.json; do
         [[ -f "$f" ]] || continue
         [[ "$f" == *checkpoint* ]] && continue
-        local n=$(python3 -c "import json; print(len(json.load(open('$f')).get('results',[])))" 2>/dev/null)
+        local n
+        n=$(python3 -c "import json; print(len(json.load(open('$f')).get('results',[])))" 2>/dev/null || echo 0)
         if [[ "$n" -ge "$expected" ]]; then
             echo "$f ($n samples)"
             return 0
         fi
     done
-    return 1
+    return 0  # Always return 0 to avoid set -e issues; caller checks output
 }
 
 run_experiment() {
@@ -100,8 +104,8 @@ run_experiment() {
     # Check if already done
     if [[ "$FORCE" == "false" ]]; then
         local existing
-        existing=$(result_exists "$ds" "$model_id")
-        if [[ $? -eq 0 ]]; then
+        existing=$(result_exists "$ds" "$model_id" || true)
+        if [[ -n "$existing" ]]; then
             log "SKIP $ds / $model_name — already exists: $existing"
             return 0
         fi
