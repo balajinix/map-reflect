@@ -124,6 +124,10 @@ class MatchMakerAgent:
         with open(property_lookup_file, 'r') as f:
             self.property_data = json.load(f)
 
+        # Normalize property data: ensure product_name/type_name exist
+        # ToolBench uses 'tool'/'category'/'api' instead; derive standard fields
+        self._normalize_property_data()
+
         self.source_properties = {}
         self.target_properties = {}
         self._parse_properties()
@@ -191,6 +195,27 @@ class MatchMakerAgent:
         if not self.use_optimization:
             return
         self._run_self_improvement()
+
+    def _normalize_property_data(self):
+        """Ensure all property entries have product_name and type_name fields.
+
+        Some datasets (e.g., ToolBench) use 'tool'/'api' instead of
+        'product_name'/'type_name'. This normalizes them so downstream
+        code can use a single field name consistently.
+        """
+        sample = next(iter(self.property_data.values()), {})
+        has_product = bool(sample.get('product_name'))
+        if has_product:
+            return  # Already normalized
+
+        for prop_id, prop_data in self.property_data.items():
+            if not prop_data.get('product_name'):
+                # Derive type_name from key prefix: "Foreca_Weather_Nowcast.location" -> "Foreca_Weather_Nowcast"
+                key_prefix = prop_id.split('.')[0] if '.' in prop_id else prop_id
+                prop_data['type_name'] = prop_data.get('api', key_prefix)
+                prop_data['product_name'] = key_prefix
+                if not prop_data.get('field_name'):
+                    prop_data['field_name'] = prop_id.split('.')[-1] if '.' in prop_id else prop_id
 
     def _parse_properties(self):
         """Parse properties into source and target based on dataset."""
