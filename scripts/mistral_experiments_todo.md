@@ -1,27 +1,27 @@
 # Mistral Experiment Tracker
 
-Model: `mistralai/mistral-medium-2505`
+Model: `watsonx/mistralai/mistral-medium-2505`
 
 ## Priority 1 — Core Paper Tables (Tables 3-4)
 
 | # | Method | Dataset | Samples | Status | Notes |
 |---|--------|---------|---------|--------|-------|
-| 1 | MatchMaker | OMOP-CMS | 38 | pending | |
-| 2 | MatchMaker | OMOP-MIMIC | 46 | pending | |
-| 3 | MatchMaker | OMOP-Synthea | 12 | pending | |
-| 4 | MatchMaker | ITOpsGraph | 521 | pending | |
-| 5 | MatchMaker | ToolBench | 3190 | pending | |
-| 6 | AnyTool | ITOpsGraph | 521 | pending | |
+| 1 | MatchMaker | OMOP-CMS | 38 | done | |
+| 2 | MatchMaker | OMOP-MIMIC | 46 | done | |
+| 3 | MatchMaker | OMOP-Synthea | 12 | done | |
+| 4 | MatchMaker | ITOpsGraph | 521 | done | |
+| 5 | MatchMaker | ToolBench | 3190 | skipped | ToolBench lookup uses tool/category not product_name/type_name; all samples fail with "No source attributes". Low priority — ToolBench is 95%+ for all methods. |
+| 6 | AnyTool | ITOpsGraph | 521 | failed | "Too many consecutive failures" — Mistral Medium's weaker reasoning can't handle 12-product hierarchical navigation. |
 
 ## Priority 2 — SchemaNet Tables (Tables 5-6)
 
 | # | Method | Dataset | Samples | Status | Notes |
 |---|--------|---------|---------|--------|-------|
-| 7 | Map-Reflect | SchemaNet (7 pairs) | ~408 | pending | |
-| 8 | AnyTool | SchemaNet (7 pairs) | ~408 | pending | |
-| 9 | MatchMaker | SchemaNet (7 pairs) | ~408 | pending | |
+| 7 | Map-Reflect | SchemaNet (7 pairs) | ~408 | pending | Needs Python >= 3.10 (ibm_watsonx_ai >= 1.0). Run locally via scripts/run_mistral_mapreflect_schemanet.sh |
+| 8 | AnyTool | SchemaNet (7 pairs) | ~408 | done | |
+| 9 | MatchMaker | SchemaNet (7 pairs) | ~408 | done | |
 
-## Already Done (Mistral results exist)
+## Already Done (Mistral results existed before this run)
 
 | Method | Dataset | Result File |
 |--------|---------|-------------|

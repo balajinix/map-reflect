@@ -70,18 +70,12 @@ METHODS = {
         ],
     },
     'Map-Reflect': {
-        # Unified Map-Reflect: includes all outputs from map_reflect_runner.py
-        # (formerly split between Map-Reflect and UE-Reflect)
-        'dirs': ['map_reflect/results', 'results/oracle_mode/map_reflect_results',
-                 'results/signal_ablation/base',
-                 'results/signal_ablation/uq_refl',
-                 'results/reflection_fix_v4/uq_refl',
-                 'results/reflection_fix_v4/uq_refl_granite',
-                 'results/reflection_fix_v4/self_refl'],
+        # Current runner outputs: mapreflect_<dataset>_<model>.json
+        'dirs': ['map_reflect/results'],
         'models': [
-            ('Granite', '(ue_reflect_|mapreflect_|map_reflect_).*granite'),
-            ('Llama', '(ue_reflect_|mapreflect_|map_reflect_).*llama'),
-            ('Mistral', '(ue_reflect_|mapreflect_|map_reflect_).*mistral'),
+            ('Granite', 'mapreflect_.*granite'),
+            ('Llama', 'mapreflect_.*llama'),
+            ('Mistral', 'mapreflect_.*mistral'),
         ],
     },
     'MatchMaker': {
