@@ -3058,7 +3058,9 @@ Return a JSON object:
             sample_id = sample.get("sample_id", f"sample_{i}")
             if sample_id in processed_ids:
                 continue
-            if not sample.get("ground_truth_mapping"):
+            # Skip samples with no utterance (but allow empty ground_truth_mapping
+            # for type-level-only datasets like ITOM_Hashicorp)
+            if not sample.get("utterance") and not sample.get("ground_truth_mapping"):
                 continue
             samples_to_process.append((i, sample))
 
