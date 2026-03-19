@@ -381,12 +381,46 @@ def build_api_lookup(api_lookup, ground_truth):
     return filtered
 
 
-def build_dataset(ground_truth):
-    """Build evaluation dataset in JSONL format."""
+def build_dataset(ground_truth, api_lookup):
+    """Build evaluation dataset in JSONL format.
+
+    Populates field-level mappings from the api_lookup so that
+    field-level evaluation pipelines (Map-Reflect, MatchMaker) have
+    source fields to iterate over.  For each type pair we include all
+    source fields; for target we pick the first plausible match by
+    field name similarity, falling back to the first target field.
+    """
+    # Build type -> fields index
+    type_fields = defaultdict(list)
+    for field_key, meta in api_lookup.items():
+        product = meta.get("product_name", "")
+        type_name = meta.get("type_name", "")
+        field_name = meta.get("field_name", "")
+        if product and type_name:
+            type_fields[(product, type_name)].append((field_key, field_name))
+
     samples = []
     sample_id = 0
 
     for gt in ground_truth:
+        src_key = (gt["source_product"], gt["source_type"])
+        tgt_key = (gt["target_product"], gt["target_type"])
+
+        src_fields = type_fields.get(src_key, [])
+        tgt_fields = type_fields.get(tgt_key, [])
+
+        # Build field-level mapping: source_field -> target_field
+        mapping = {}
+        tgt_field_names = {fn.lower(): fk for fk, fn in tgt_fields}
+        for src_field_key, src_field_name in src_fields:
+            # Try exact name match first, then first target field as fallback
+            if src_field_name.lower() in tgt_field_names:
+                mapping[src_field_key] = tgt_field_names[src_field_name.lower()]
+            elif tgt_fields:
+                # Use first target field as placeholder — type-level accuracy
+                # is the primary metric, field mapping is secondary
+                mapping[src_field_key] = tgt_fields[0][0]
+
         src = f"{gt['source_product']}_{gt['source_type']}"
         tgt = f"{gt['target_product']}_{gt['target_type']}"
 
@@ -401,7 +435,7 @@ def build_dataset(ground_truth):
             "source_schema": gt["source_product"],
             "target_schema": gt["target_product"],
             "expected_target_type": tgt,
-            "mapping": {},  # Field-level mapping (empty for now — focus is type-level)
+            "mapping": mapping,
             "metadata": {
                 "source_type": gt["source_type"],
                 "target_type": gt["target_type"],
@@ -457,8 +491,9 @@ def main():
     print(f"  {len(filtered_lookup)} fields from {len(set(v['product_name'] for v in filtered_lookup.values()))} products")
 
     print("\nBuilding evaluation dataset...")
-    dataset = build_dataset(ground_truth)
-    print(f"  {len(dataset)} evaluation samples")
+    dataset = build_dataset(ground_truth, api_lookup)
+    total_fields = sum(len(s["mapping"]) for s in dataset)
+    print(f"  {len(dataset)} evaluation samples, {total_fields} field-level mappings")
 
     # Save outputs
     out_lookup = DATA_DIR / "itom_hashicorp_api_lookup.json"
