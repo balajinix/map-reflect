@@ -1,0 +1,407 @@
+{
+  "instana.Application": {
+    "description": "Represents a monitored application perspective in Instana, composed of observable services",
+    "matched_types": [
+      {
+        "product": "instana",
+        "type_name": "ApplicationPerspective",
+        "field_count": 6,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "instana.Service": {
+    "description": "A discrete observable service surfaced by Instana, derived from Container Workloads in the core model",
+    "matched_types": [
+      {
+        "product": "instana",
+        "type_name": "ApplicationService",
+        "field_count": 8,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "instana.Latency": {
+    "description": "Latency metric observed for an Instana-monitored application or service",
+    "matched_types": []
+  },
+  "instana.Throughput": {
+    "description": "Throughput metric observed for an Instana-monitored application or service",
+    "matched_types": []
+  },
+  "instana.Synthetics": {
+    "description": "Synthetic monitoring check associated with an Instana Application",
+    "matched_types": []
+  },
+  "instana.Logs": {
+    "description": "Log data emitted by services and workloads monitored by Instana",
+    "matched_types": []
+  },
+  "instana.Metrics": {
+    "description": "General resource and service metrics collected by Instana (covers ResourceMetrics and ServiceMetrics subtypes)",
+    "matched_types": [
+      {
+        "product": "instana",
+        "type_name": "Entity",
+        "field_count": 3,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "instana.Traces": {
+    "description": "Distributed trace data collected by Instana across services",
+    "matched_types": [
+      {
+        "product": "instana",
+        "type_name": "Event",
+        "field_count": 11,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.Application": {
+    "description": "Represents an application managed in Concert, linked to an environment for deployment-scoped governance",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Application",
+        "field_count": 22,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.Environment": {
+    "description": "A Concert-managed deployment environment scoping applications and access points",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Environment",
+        "field_count": 3,
+        "match_method": "manual_override"
+      },
+      {
+        "product": "concert",
+        "type_name": "AppEnvironment",
+        "field_count": 11,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.AccessPoints": {
+    "description": "Network entry points (endpoints/ingress) scoped to a Concert Environment",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Access_points",
+        "field_count": 7,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.SourceCode": {
+    "description": "Source code repository tracked by Concert as input to the software supply chain",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Applications_source_repo",
+        "field_count": 2,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.CodeRepos": {
+    "description": "Code repository entities managed in Concert representing the source origin of artifacts",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Images_repositories",
+        "field_count": 2,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.CICDPipelines": {
+    "description": "CI/CD pipeline definitions that build and deliver software artifacts from source to deployment",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Container_builds",
+        "field_count": 8,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.BuildArtifact": {
+    "description": "Executable, config file, or deployable artifact produced by a CI/CD pipeline and tracked by Concert",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "BuildArtifact",
+        "field_count": 18,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.CVEVulnerability": {
+    "description": "A recorded CVE security vulnerability associated with a Concert image or build artifact",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Vulnerability",
+        "field_count": 37,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.ITSMData": {
+    "description": "ITSM (IT Service Management) records such as change tickets and service requests associated with Concert-managed components",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Recommendations",
+        "field_count": 14,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.IncidentData": {
+    "description": "Incident records tracked by Concert representing operational disruptions affecting applications",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Entity_settings",
+        "field_count": 5,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.Patch": {
+    "description": "A security or maintenance patch tracked by Concert for remediating CVEs in applications",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "VulnerabilityPatchInput",
+        "field_count": 5,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.ResilienceMetrics": {
+    "description": "Computed resilience scores for a Concert application component, aggregated from observability and ITSM data",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Topology_compliance_view",
+        "field_count": 11,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.ResilienceProfile": {
+    "description": "An aggregated resilience profile for a Concert application, summarizing metrics across multiple dimensions",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Profile",
+        "field_count": 8,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.ComplianceApplication": {
+    "description": "A Concert compliance-scoped view of an application, tracking regulatory adherence",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Topology_compliance_view",
+        "field_count": 11,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "concert.ComplianceReports": {
+    "description": "Compliance audit reports generated by Concert for a monitored application or environment",
+    "matched_types": []
+  },
+  "turbonomic.TurboApplication": {
+    "description": "Represents an application entity managed in Turbonomic, composed of services for optimization",
+    "matched_types": [
+      {
+        "product": "turbonomic",
+        "type_name": "Entity",
+        "field_count": 17,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "turbonomic.ResourceUsages": {
+    "description": "Resource utilization data (CPU, memory, storage) collected by Turbonomic for infrastructure optimization",
+    "matched_types": [
+      {
+        "product": "turbonomic",
+        "type_name": "StatsEntry",
+        "field_count": 15,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "turbonomic.ServiceMetrics": {
+    "description": "Service-level performance metrics tracked by Turbonomic as input to optimization decisions",
+    "matched_types": [
+      {
+        "product": "turbonomic",
+        "type_name": "Statistics",
+        "field_count": 4,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "turbonomic.OptimizationPolicy": {
+    "description": "A policy in Turbonomic that governs resource optimization decisions based on usage and service metrics",
+    "matched_types": [
+      {
+        "product": "turbonomic",
+        "type_name": "Template",
+        "field_count": 6,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "turbonomic.OptimizationAction": {
+    "description": "A recommended or executed infrastructure action generated by Turbonomic to optimize resource utilization",
+    "matched_types": [
+      {
+        "product": "turbonomic",
+        "type_name": "Action",
+        "field_count": 40,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "hcp_terraform.TerraformTemplate": {
+    "description": "An Infrastructure-as-Code template (HCL/Terraform configuration) that defines and provisions cloud infrastructure resources",
+    "matched_types": [
+      {
+        "product": "hcp_terraform",
+        "type_name": "HcpTerraformWorkspace",
+        "field_count": 8,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.ContainerImage": {
+    "description": "A container image in the common data layer, instantiated by Container Workloads and carrying CVE metadata from Concert",
+    "matched_types": [
+      {
+        "product": "infragraph",
+        "type_name": "BaseVirtualMachineImage",
+        "field_count": 1,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.ContainerWorkload": {
+    "description": "A running container workload (e.g., a Kubernetes Pod deployment) in the core infrastructure model",
+    "matched_types": [
+      {
+        "product": "infragraph",
+        "type_name": "BaseVirtualMachine",
+        "field_count": 7,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.Service": {
+    "description": "A network-accessible service entity in the core infrastructure model, surfaced by container workloads",
+    "matched_types": [
+      {
+        "product": "infragraph",
+        "type_name": "BaseServerlessFunction",
+        "field_count": 1,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.Cluster": {
+    "description": "A Kubernetes or cloud cluster resource in the core infrastructure model",
+    "matched_types": [
+      {
+        "product": "aws",
+        "type_name": "AwsEcsCluster",
+        "field_count": 2,
+        "match_method": "manual_override"
+      },
+      {
+        "product": "turbonomic",
+        "type_name": "ContainerClusterEntity",
+        "field_count": 3,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.Node": {
+    "description": "A compute node within a cluster, hosting Pods and Container Workloads",
+    "matched_types": [
+      {
+        "product": "infragraph",
+        "type_name": "NodeIdentifier",
+        "field_count": 3,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.Pod": {
+    "description": "A Kubernetes Pod resource, grouping one or more containers scheduled on a node",
+    "matched_types": [
+      {
+        "product": "turbonomic",
+        "type_name": "WorkloadControllerEntity",
+        "field_count": 3,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.Namespace": {
+    "description": "A Kubernetes Namespace providing logical isolation within a Cluster",
+    "matched_types": [
+      {
+        "product": "turbonomic",
+        "type_name": "NamespaceEntity",
+        "field_count": 3,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.Deployment": {
+    "description": "A Kubernetes Deployment resource managing the desired state of Container Workloads",
+    "matched_types": []
+  },
+  "core_infrastructure.Volume": {
+    "description": "A persistent storage volume in the core infrastructure model, provisioned for Container Workloads",
+    "matched_types": [
+      {
+        "product": "infragraph",
+        "type_name": "BaseVolume",
+        "field_count": 6,
+        "match_method": "manual_override"
+      },
+      {
+        "product": "aws",
+        "type_name": "AwsEc2Volume",
+        "field_count": 2,
+        "match_method": "manual_override"
+      }
+    ]
+  },
+  "core_infrastructure.AccessPoint": {
+    "description": "A network access point (load balancer, ingress rule) exposing services in the core infrastructure model",
+    "matched_types": [
+      {
+        "product": "concert",
+        "type_name": "Access_points",
+        "field_count": 7,
+        "match_method": "manual_override"
+      }
+    ]
+  }
+}

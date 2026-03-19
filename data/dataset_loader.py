@@ -19,6 +19,7 @@ class DatasetLoader:
         self.data_dir = Path(data_dir)
         self.datasets = {
             'ITOpsGraph': 'itopsgraph_dataset.jsonl',  # Validated coverage mappings (521 samples)
+            'ITOM_Hashicorp': 'itom_hashicorp_dataset.jsonl',  # ITOM <-> Hashicorp cross-product (61 samples)
             'NL2GQL': 'nl2gql_dataset.jsonl',
             'GraphQLRestBench': 'graphqlrestbench_dataset.jsonl',
             'OMOP_MIMIC': 'omop_mimic_dataset.jsonl',
@@ -150,7 +151,7 @@ class DatasetLoader:
                     return None
 
             # Dataset-specific format detection
-            if dataset.startswith("ITOpsGraph"):
+            if dataset.startswith("ITOpsGraph") or dataset == "ITOM_Hashicorp":
                 # ITOpsGraph format (utterance and attribute variants):
                 # - id: sample identifier
                 # - utterance: natural language or attribute name
@@ -269,6 +270,7 @@ class DatasetLoader:
         """Get expected number of samples for a dataset."""
         expected_counts = {
             'ITOpsGraph': 521,  # Validated coverage mappings
+            'ITOM_Hashicorp': 61,  # ITOM <-> Hashicorp cross-product
             'NL2GQL': 50,
             'GraphQLRestBench': 75,
             'OMOP_MIMIC': 46,

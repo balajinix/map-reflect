@@ -35,7 +35,7 @@ from typing import Dict, List, Tuple, Optional, Set
 
 # Script is in eval/, so parent.parent gets to project root
 BASE_DIR = Path(__file__).parent.parent
-DATASETS = ['ITOpsGraph', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea', 'ToolBench']
+DATASETS = ['ITOpsGraph', 'ITOM_Hashicorp', 'NL2GQL', 'OMOP_CMS', 'OMOP_MIMIC', 'OMOP_Synthea', 'ToolBench']
 
 # Method directories and model patterns
 # Note: Patterns are matched against lowercased filenames

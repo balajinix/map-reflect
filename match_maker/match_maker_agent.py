@@ -162,8 +162,8 @@ class MatchMakerAgent:
         # Utterance-based datasets: source_properties is empty at this point.
         # Optimization will run lazily via run_optimization_once() after the first
         # set_source_target_from_utterance() call.
-        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'omop_cms',
-                               'omop_mimic', 'omop_synthea', 'toolbench']
+        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'itom_hashicorp',
+                               'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench']
         is_utterance_dataset = self.dataset.lower() in utterance_datasets
 
         if self.use_optimization and not is_utterance_dataset:
@@ -441,8 +441,8 @@ class MatchMakerAgent:
                 f"{len(self.target_properties)} target"
             )
 
-        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'omop_cms',
-                               'omop_mimic', 'omop_synthea', 'toolbench']
+        utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'itom_hashicorp',
+                               'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench']
         if self.dataset.lower() in utterance_datasets:
             logger.info("Utterance-based dataset: skipping index rebuild")
         elif self.colbert_available:
