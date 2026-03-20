@@ -35,8 +35,14 @@ PRODUCT_COLORS = {
     "core_infrastructure": "#546E7A",
 }
 
-ITOM_PRODUCTS = {"instana", "concert", "turbonomic", "hcp_terraform"}
-HASHI_PRODUCTS = {"infragraph", "packer", "aws", "azure", "gcp", "hcp", "hcp_terraform"}
+# hcp_terraform appears in both ITOM and Hashicorp; for cross-product
+# classification, a mapping is cross-product only when one side is
+# exclusively ITOM and the other exclusively Hashicorp.
+ITOM_ONLY = {"instana", "concert", "turbonomic"}
+HASHI_ONLY = {"infragraph", "packer", "aws", "azure", "gcp", "hcp"}
+SHARED = {"hcp_terraform"}  # belongs to both
+ITOM_PRODUCTS = ITOM_ONLY | SHARED
+HASHI_PRODUCTS = HASHI_ONLY | SHARED
 
 
 @st.cache_data
@@ -283,11 +289,14 @@ def main():
         if s["target_schema"] not in selected_tgt:
             continue
         if cross_only:
-            src_is_itom = s["source_schema"] in ITOM_PRODUCTS
-            tgt_is_hashi = s["target_schema"] in HASHI_PRODUCTS
-            src_is_hashi = s["source_schema"] in HASHI_PRODUCTS
-            tgt_is_itom = s["target_schema"] in ITOM_PRODUCTS
-            if not ((src_is_itom and tgt_is_hashi) or (src_is_hashi and tgt_is_itom)):
+            src = s["source_schema"]
+            tgt = s["target_schema"]
+            # Cross-product = at least one side is an ITOM-only product
+            # (instana, concert, turbonomic) and the other is different.
+            # This excludes Hashicorp-internal (hcp↔hcp_terraform, infragraph↔aws, packer↔infragraph)
+            # but includes hcp_terraform→infragraph (terraform provisioning infra)
+            has_itom = src in ITOM_ONLY or tgt in ITOM_ONLY
+            if not has_itom:
                 continue
         filtered.append(s)
 
