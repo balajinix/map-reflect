@@ -3325,25 +3325,29 @@ Return a JSON object:
 
                 if tidx in assignments:
                     assigned_id = assignments[tidx]
-                    # Reorder ranking so assigned target is first
-                    new_ranking = []
+                    # Reorder ranking: assigned target first, others after
+                    assigned_cand = None
+                    rest = []
                     for cand in ranking:
                         if isinstance(cand, dict) and cand.get("id") == assigned_id:
-                            # Apply penalty for reassigned fields
+                            assigned_cand = dict(cand)
                             if status == "reassigned":
-                                cand = dict(cand)
-                                cand["score"] = cand.get("score", 0) * task.get("assignment_penalty", 1.0)
-                                cand["reassigned"] = True
-                            new_ranking.insert(0, cand)
+                                assigned_cand["score"] = assigned_cand.get("score", 0) * task.get("assignment_penalty", 1.0)
+                                assigned_cand["reassigned"] = True
                         else:
-                            new_ranking.append(cand)
-                    if new_ranking:
-                        task["ranking"] = new_ranking
+                            rest.append(cand)
+                    if assigned_cand:
+                        task["ranking"] = [assigned_cand] + rest
                     task["assigned_target"] = assigned_id
                 else:
-                    # Unmatched — boost uncertainty to trigger reflection
+                    # Unmatched — no valid assignment exists
+                    # Create a synthetic "no_match" entry as ranking[0]
+                    task["ranking"] = [{"id": "NO_MATCH", "score": 0.0,
+                                        "reason": "All candidate targets assigned to higher-confidence sources"}] + ranking
                     task["uncertainty"] = max(task.get("uncertainty", 0.5), 0.9)
                     task["assigned_target"] = None
+                    if not status:
+                        task["assignment_status"] = "unmatched"
 
         logger.info(f"Phase 3.5: {total_evictions} evictions, {total_unmatched} unmatched across {len(sample_task_groups)} samples")
 
