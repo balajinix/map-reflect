@@ -265,7 +265,7 @@ def main():
         selected_tgt = st.multiselect("Target product", all_tgt, default=all_tgt)
 
         # Cross-product only toggle
-        cross_only = st.checkbox("Cross-product only (ITOM ↔ Hashi)", value=False)
+        cross_only = st.checkbox("Cross-product only (ITOM ↔ Hashi)", value=True)
 
         st.divider()
         st.header("Stats")
