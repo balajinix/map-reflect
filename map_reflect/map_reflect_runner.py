@@ -153,6 +153,9 @@ class MapReflectConfig:
     # Field-level prediction (default on for SchemaNet-style datasets)
     predict_fields: bool = True  # Enable field-level predictions after type prediction
 
+    # Constrained assignment: enforce one-to-one field mapping (Phase 3.5)
+    use_constrained_assignment: bool = True
+
 
 class NumpyEncoder(json.JSONEncoder):
     """Custom JSON encoder for numpy types."""
@@ -2314,6 +2317,113 @@ class MapReflectRunner:
         formatted, _ = format_prompt_for_model(messages, self.model)
         return formatted
 
+    def _run_constrained_assignment(self, prompt_tasks: List[Dict]):
+        """Phase 3.5: Enforce one-to-one field mapping within each sample.
+
+        For each sample, run greedy assignment with preemption so that each
+        target field is claimed by at most one source field.  Evicted and
+        unmatched fields get boosted uncertainty to trigger reflection.
+        """
+        logger.info("Phase 3.5: Constrained assignment...")
+
+        sample_task_groups: Dict[int, List[int]] = defaultdict(list)
+        for tidx, task in enumerate(prompt_tasks):
+            sample_task_groups[task["sample_idx"]].append(tidx)
+
+        total_evictions = 0
+        total_unmatched = 0
+
+        for sample_idx, task_indices in sample_task_groups.items():
+            task_entries = []
+            for tidx in task_indices:
+                ranking = prompt_tasks[tidx].get("ranking", [])
+                top_score = ranking[0].get("score", 0) if (ranking and isinstance(ranking[0], dict)) else 0
+                task_entries.append((tidx, top_score, ranking))
+            task_entries.sort(key=lambda x: -x[1])
+
+            assigned_targets: Dict[str, tuple] = {}
+            assignments: Dict[int, str] = {}
+            eviction_queue = []
+
+            def try_assign(tidx, ranking):
+                for cand in ranking:
+                    if not isinstance(cand, dict):
+                        continue
+                    cand_id = cand.get("id", "")
+                    cand_score = cand.get("score", 0)
+                    if not cand_id:
+                        continue
+                    if cand_id not in assigned_targets:
+                        assigned_targets[cand_id] = (tidx, cand_score)
+                        assignments[tidx] = cand_id
+                        return True
+                    else:
+                        existing_tidx, existing_score = assigned_targets[cand_id]
+                        if cand_score > existing_score:
+                            eviction_queue.append((existing_tidx, prompt_tasks[existing_tidx].get("ranking", [])))
+                            del assignments[existing_tidx]
+                            assigned_targets[cand_id] = (tidx, cand_score)
+                            assignments[tidx] = cand_id
+                            return True
+                return False
+
+            for tidx, top_score, ranking in task_entries:
+                if not try_assign(tidx, ranking):
+                    prompt_tasks[tidx]["assignment_status"] = "unmatched"
+                    total_unmatched += 1
+
+            max_rounds = len(task_indices)
+            round_num = 0
+            while eviction_queue and round_num < max_rounds:
+                round_num += 1
+                current_queue = eviction_queue[:]
+                eviction_queue = []
+                for evicted_tidx, evicted_ranking in current_queue:
+                    available_ranking = [
+                        c for c in evicted_ranking
+                        if isinstance(c, dict) and c.get("id", "") not in assigned_targets
+                    ]
+                    if available_ranking:
+                        cand = available_ranking[0]
+                        assigned_targets[cand["id"]] = (evicted_tidx, cand.get("score", 0))
+                        assignments[evicted_tidx] = cand["id"]
+                        prompt_tasks[evicted_tidx]["assignment_status"] = "reassigned"
+                        prompt_tasks[evicted_tidx]["assignment_penalty"] = 0.8
+                        total_evictions += 1
+                    else:
+                        prompt_tasks[evicted_tidx]["assignment_status"] = "unmatched"
+                        total_unmatched += 1
+
+            for tidx in task_indices:
+                task = prompt_tasks[tidx]
+                status = task.get("assignment_status", "")
+                ranking = task.get("ranking", [])
+
+                if tidx in assignments:
+                    assigned_id = assignments[tidx]
+                    assigned_cand = None
+                    rest = []
+                    for cand in ranking:
+                        if isinstance(cand, dict) and cand.get("id") == assigned_id:
+                            assigned_cand = dict(cand)
+                            if status == "reassigned":
+                                assigned_cand["score"] = assigned_cand.get("score", 0) * task.get("assignment_penalty", 1.0)
+                                assigned_cand["reassigned"] = True
+                        else:
+                            rest.append(cand)
+                    if assigned_cand:
+                        task["ranking"] = [assigned_cand] + rest
+                    task["assigned_target"] = assigned_id
+                else:
+                    task["ranking"] = [{"id": "NO_MATCH", "score": 0.0,
+                                        "reason": "All candidate targets assigned to higher-confidence sources"}] + ranking
+                    task["uncertainty"] = max(task.get("uncertainty", 0.5), 0.9)
+                    task["assigned_target"] = None
+                    if not status:
+                        task["assignment_status"] = "unmatched"
+
+        logger.info(f"Phase 3.5: {total_evictions} evictions, {total_unmatched} unmatched across {len(sample_task_groups)} samples")
+
     def _build_ranking_prompt(
         self,
         source_prop: str,
@@ -3236,120 +3346,10 @@ Return a JSON object:
         # =====================================================================
         # Group tasks by sample, then within each sample enforce that each
         # target field is assigned to at most one source field.
-        logger.info("Phase 3.5: Constrained assignment...")
-
-        sample_task_groups: Dict[int, List[int]] = defaultdict(list)
-        for tidx, task in enumerate(prompt_tasks):
-            sample_task_groups[task["sample_idx"]].append(tidx)
-
-        total_evictions = 0
-        total_unmatched = 0
-
-        for sample_idx, task_indices in sample_task_groups.items():
-            # Build list of (task_index, top_score, ranking) sorted by confidence desc
-            task_entries = []
-            for tidx in task_indices:
-                ranking = prompt_tasks[tidx].get("ranking", [])
-                top_score = ranking[0].get("score", 0) if (ranking and isinstance(ranking[0], dict)) else 0
-                task_entries.append((tidx, top_score, ranking))
-            task_entries.sort(key=lambda x: -x[1])
-
-            # Greedy assignment with preemption
-            assigned_targets: Dict[str, tuple] = {}  # target_id -> (task_idx, score)
-            assignments: Dict[int, str] = {}  # task_idx -> assigned target_id
-            eviction_queue = []
-
-            def try_assign(tidx, ranking):
-                for cand in ranking:
-                    if not isinstance(cand, dict):
-                        continue
-                    cand_id = cand.get("id", "")
-                    cand_score = cand.get("score", 0)
-                    if not cand_id:
-                        continue
-
-                    if cand_id not in assigned_targets:
-                        # Unclaimed — assign
-                        assigned_targets[cand_id] = (tidx, cand_score)
-                        assignments[tidx] = cand_id
-                        return True
-                    else:
-                        existing_tidx, existing_score = assigned_targets[cand_id]
-                        if cand_score > existing_score:
-                            # Preempt — evict weaker claimant
-                            eviction_queue.append((existing_tidx, prompt_tasks[existing_tidx].get("ranking", [])))
-                            del assignments[existing_tidx]
-                            assigned_targets[cand_id] = (tidx, cand_score)
-                            assignments[tidx] = cand_id
-                            return True
-                # All candidates taken by higher-confidence sources
-                return False
-
-            # Initial assignment pass
-            for tidx, top_score, ranking in task_entries:
-                if not try_assign(tidx, ranking):
-                    prompt_tasks[tidx]["assignment_status"] = "unmatched"
-                    total_unmatched += 1
-
-            # Process eviction queue (evicted tasks try again with remaining targets)
-            max_rounds = len(task_indices)
-            round_num = 0
-            while eviction_queue and round_num < max_rounds:
-                round_num += 1
-                current_queue = eviction_queue[:]
-                eviction_queue = []
-                for evicted_tidx, evicted_ranking in current_queue:
-                    # Filter ranking to exclude already-assigned targets
-                    available_ranking = [
-                        c for c in evicted_ranking
-                        if isinstance(c, dict) and c.get("id", "") not in assigned_targets
-                    ]
-                    if available_ranking:
-                        cand = available_ranking[0]
-                        cand_id = cand.get("id", "")
-                        cand_score = cand.get("score", 0)
-                        assigned_targets[cand_id] = (evicted_tidx, cand_score)
-                        assignments[evicted_tidx] = cand_id
-                        prompt_tasks[evicted_tidx]["assignment_status"] = "reassigned"
-                        prompt_tasks[evicted_tidx]["assignment_penalty"] = 0.8
-                        total_evictions += 1
-                    else:
-                        prompt_tasks[evicted_tidx]["assignment_status"] = "unmatched"
-                        total_unmatched += 1
-
-            # Update task rankings to reflect constrained assignment
-            for tidx in task_indices:
-                task = prompt_tasks[tidx]
-                status = task.get("assignment_status", "")
-                ranking = task.get("ranking", [])
-
-                if tidx in assignments:
-                    assigned_id = assignments[tidx]
-                    # Reorder ranking: assigned target first, others after
-                    assigned_cand = None
-                    rest = []
-                    for cand in ranking:
-                        if isinstance(cand, dict) and cand.get("id") == assigned_id:
-                            assigned_cand = dict(cand)
-                            if status == "reassigned":
-                                assigned_cand["score"] = assigned_cand.get("score", 0) * task.get("assignment_penalty", 1.0)
-                                assigned_cand["reassigned"] = True
-                        else:
-                            rest.append(cand)
-                    if assigned_cand:
-                        task["ranking"] = [assigned_cand] + rest
-                    task["assigned_target"] = assigned_id
-                else:
-                    # Unmatched — no valid assignment exists
-                    # Create a synthetic "no_match" entry as ranking[0]
-                    task["ranking"] = [{"id": "NO_MATCH", "score": 0.0,
-                                        "reason": "All candidate targets assigned to higher-confidence sources"}] + ranking
-                    task["uncertainty"] = max(task.get("uncertainty", 0.5), 0.9)
-                    task["assigned_target"] = None
-                    if not status:
-                        task["assignment_status"] = "unmatched"
-
-        logger.info(f"Phase 3.5: {total_evictions} evictions, {total_unmatched} unmatched across {len(sample_task_groups)} samples")
+        if self.config.use_constrained_assignment:
+            self._run_constrained_assignment(prompt_tasks)
+        else:
+            logger.info("Phase 3.5: Skipped (constrained assignment disabled)")
 
         # Second pass: detect errors and reflection triggers
         for task_idx, task in enumerate(prompt_tasks):
@@ -3734,6 +3734,8 @@ def main():
 
     # Limiting
     parser.add_argument("--max-samples", type=int, help="Limit samples for testing")
+    parser.add_argument("--no-constrained-assignment", action="store_true",
+                        help="Disable one-to-one field assignment (Phase 3.5)")
 
     # Custom eval file (for running on subset of samples)
     parser.add_argument("--eval-file", type=str, help="Custom JSONL eval file (overrides default dataset file)")
@@ -3768,6 +3770,7 @@ def main():
         omop_type_hints=not args.no_omop_type_hints,
         checkpoint_interval=args.checkpoint_interval,
         resume=args.resume,
+        use_constrained_assignment=not args.no_constrained_assignment,
     )
 
     for dataset in args.datasets.split(","):
