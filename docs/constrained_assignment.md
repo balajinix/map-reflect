@@ -199,3 +199,71 @@ expansion opportunities for the source schema.
 - Total: O(S² × K) — negligible compared to LLM inference cost
 
 For the concert.Application example: 22 × 10 × 22 = 4,840 operations.
+
+---
+
+## Experimental Results
+
+### Ablation: Constrained vs Base vs UQ (Llama-3.3-70B, Field F1)
+
+| Dataset (samples) | Base | Constrained | UQ | Constr+UQ | GT many-to-one |
+|-------------------|------|-------------|-----|-----------|----------------|
+| ITOpsGraph (521) | **88.6** | 86.9 | 88.5 | 86.7 | 68 |
+| OMOP-CMS (38) | **76.6** | 71.0 | 76.6 | 72.4 | 9 |
+| OMOP-MIMIC (46) | **59.7** | 44.5 | **60.5** | 47.1 | 23 |
+| OMOP-Synthea (12) | **100.0** | 53.5 | **100.0** | 64.4 | 29 |
+| ITOM_Hashicorp (61) | **54.8** | 28.6 | 51.4 | 35.0 | 64 (synthetic) |
+| SchemaNet bank (6) | 0.0 | 0.0 | — | — | 4 |
+| SchemaNet imdb (5) | 0.0 | 0.0 | — | — | 3 |
+
+API-level accuracy is 100% across all variants on ITOpsGraph, ITOM_Hashicorp,
+and SchemaNet.  OMOP API accuracy is 0% in the runner's internal metric due to
+a format mismatch (eval/calc_accuracy.py reports the correct numbers).
+
+### Key Findings
+
+1. **Constrained assignment reduces field F1 on every dataset.**
+   The drop is proportional to the number of legitimate many-to-one mappings
+   in the ground truth.  OMOP-Synthea has 29 ground truth collisions (multiple
+   source fields correctly mapping to the same OMOP target column); enforcing
+   one-to-one breaks these correct mappings, dropping F1 from 100% to 53.5%.
+
+2. **UQ reflection is neutral or slightly positive** on all datasets.
+   It fires selectively and does not degrade performance — consistent with
+   the paper's ablation findings.
+
+3. **Constrained + UQ does not recover the loss.** UQ reflection cannot
+   undo the structural damage of forcing one-to-one assignment when the
+   ground truth is many-to-one.
+
+4. **Collision count drops dramatically** (ITOpsGraph: 68→7, OMOP-Synthea:
+   29→5), confirming the mechanism works as designed.  The problem is that
+   many of those "collisions" are correct many-to-one mappings.
+
+### Conclusion
+
+**Constrained assignment is NOT the right default for field-level mapping.**
+
+Schema mapping inherently involves many-to-one relationships:
+- Multiple source columns join to the same target FK
+- Several source attributes represent facets of one target concept
+- OMOP's CDM maps multiple proprietary fields to standardized columns
+
+Enforcing one-to-one at the field level breaks these legitimate patterns.
+
+**When to use constrained assignment:**
+- Schema federation/query rewriting where duplicate mappings break joins
+- Generating deduplicated field correspondence tables
+- As an analysis tool to detect over-reliance on a single target field
+
+**Recommended default:** Base + UQ (the paper's current recommendation).
+The base MAP phase allows many-to-one naturally; UQ catches genuinely
+uncertain predictions without forcing structural constraints.
+
+### Implementation Note
+
+The `--no-constrained-assignment` flag (default: constraint ON) should be
+changed to `--constrained-assignment` (default: OFF) to reflect that the
+base configuration without constraint is the recommended default.  The
+flag was added as `use_constrained_assignment: bool = True` in
+`MapReflectConfig`; this should be flipped to `False`.

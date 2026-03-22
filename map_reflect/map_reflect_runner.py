@@ -154,7 +154,8 @@ class MapReflectConfig:
     predict_fields: bool = True  # Enable field-level predictions after type prediction
 
     # Constrained assignment: enforce one-to-one field mapping (Phase 3.5)
-    use_constrained_assignment: bool = True
+    # Default OFF — many-to-one is legitimate in schema mapping
+    use_constrained_assignment: bool = False
 
 
 class NumpyEncoder(json.JSONEncoder):
