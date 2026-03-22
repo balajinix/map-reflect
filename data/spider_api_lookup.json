@@ -1,0 +1,5402 @@
+{
+  "airlines_uid": {
+    "product_name": "flight_2",
+    "type_name": "airlines",
+    "field_name": "uid",
+    "description": "uid column in airlines table (primary key)",
+    "type": "number",
+    "database": "flight_2"
+  },
+  "airlines_airline": {
+    "product_name": "flight_2",
+    "type_name": "airlines",
+    "field_name": "airline",
+    "description": "Airline column in airlines table",
+    "type": "text",
+    "database": "flight_2"
+  },
+  "airlines_abbreviation": {
+    "product_name": "flight_2",
+    "type_name": "airlines",
+    "field_name": "abbreviation",
+    "description": "Abbreviation column in airlines table",
+    "type": "text",
+    "database": "flight_2"
+  },
+  "airlines_country": {
+    "product_name": "flight_4",
+    "type_name": "airlines",
+    "field_name": "country",
+    "description": "country column in airlines table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airports_city": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "city",
+    "description": "city column in airports table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airports_airportcode": {
+    "product_name": "flight_2",
+    "type_name": "airports",
+    "field_name": "airportcode",
+    "description": "AirportCode column in airports table (primary key) (foreign key)",
+    "type": "text",
+    "database": "flight_2"
+  },
+  "airports_airportname": {
+    "product_name": "flight_2",
+    "type_name": "airports",
+    "field_name": "airportname",
+    "description": "AirportName column in airports table",
+    "type": "text",
+    "database": "flight_2"
+  },
+  "airports_country": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "country",
+    "description": "country column in airports table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airports_countryabbrev": {
+    "product_name": "flight_2",
+    "type_name": "airports",
+    "field_name": "countryabbrev",
+    "description": "CountryAbbrev column in airports table",
+    "type": "text",
+    "database": "flight_2"
+  },
+  "flights_airline": {
+    "product_name": "flight_2",
+    "type_name": "flights",
+    "field_name": "airline",
+    "description": "Airline column in flights table (primary key)",
+    "type": "number",
+    "database": "flight_2"
+  },
+  "flights_flightno": {
+    "product_name": "flight_2",
+    "type_name": "flights",
+    "field_name": "flightno",
+    "description": "FlightNo column in flights table",
+    "type": "number",
+    "database": "flight_2"
+  },
+  "flights_sourceairport": {
+    "product_name": "flight_2",
+    "type_name": "flights",
+    "field_name": "sourceairport",
+    "description": "SourceAirport column in flights table (foreign key)",
+    "type": "text",
+    "database": "flight_2"
+  },
+  "flights_destairport": {
+    "product_name": "flight_2",
+    "type_name": "flights",
+    "field_name": "destairport",
+    "description": "DestAirport column in flights table (foreign key)",
+    "type": "text",
+    "database": "flight_2"
+  },
+  "state_state_name": {
+    "product_name": "geo",
+    "type_name": "state",
+    "field_name": "state_name",
+    "description": "state_name column in state table (primary key) (foreign key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "state_population": {
+    "product_name": "geo",
+    "type_name": "state",
+    "field_name": "population",
+    "description": "population column in state table",
+    "type": "number",
+    "database": "geo"
+  },
+  "state_area": {
+    "product_name": "geo",
+    "type_name": "state",
+    "field_name": "area",
+    "description": "area column in state table",
+    "type": "number",
+    "database": "geo"
+  },
+  "state_country_name": {
+    "product_name": "geo",
+    "type_name": "state",
+    "field_name": "country_name",
+    "description": "country_name column in state table",
+    "type": "text",
+    "database": "geo"
+  },
+  "state_capital": {
+    "product_name": "geo",
+    "type_name": "state",
+    "field_name": "capital",
+    "description": "capital column in state table",
+    "type": "text",
+    "database": "geo"
+  },
+  "state_density": {
+    "product_name": "geo",
+    "type_name": "state",
+    "field_name": "density",
+    "description": "density column in state table",
+    "type": "number",
+    "database": "geo"
+  },
+  "city_city_name": {
+    "product_name": "geo",
+    "type_name": "city",
+    "field_name": "city_name",
+    "description": "city_name column in city table (primary key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "city_population": {
+    "product_name": "geo",
+    "type_name": "city",
+    "field_name": "population",
+    "description": "population column in city table",
+    "type": "number",
+    "database": "geo"
+  },
+  "city_country_name": {
+    "product_name": "geo",
+    "type_name": "city",
+    "field_name": "country_name",
+    "description": "country_name column in city table",
+    "type": "text",
+    "database": "geo"
+  },
+  "city_state_name": {
+    "product_name": "geo",
+    "type_name": "city",
+    "field_name": "state_name",
+    "description": "state_name column in city table (foreign key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "border_info_state_name": {
+    "product_name": "geo",
+    "type_name": "border_info",
+    "field_name": "state_name",
+    "description": "state_name column in border_info table (foreign key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "border_info_border": {
+    "product_name": "geo",
+    "type_name": "border_info",
+    "field_name": "border",
+    "description": "border column in border_info table (primary key) (foreign key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "highlow_state_name": {
+    "product_name": "geo",
+    "type_name": "highlow",
+    "field_name": "state_name",
+    "description": "state_name column in highlow table (primary key) (foreign key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "highlow_highest_elevation": {
+    "product_name": "geo",
+    "type_name": "highlow",
+    "field_name": "highest_elevation",
+    "description": "highest_elevation column in highlow table",
+    "type": "text",
+    "database": "geo"
+  },
+  "highlow_lowest_point": {
+    "product_name": "geo",
+    "type_name": "highlow",
+    "field_name": "lowest_point",
+    "description": "lowest_point column in highlow table",
+    "type": "text",
+    "database": "geo"
+  },
+  "highlow_highest_point": {
+    "product_name": "geo",
+    "type_name": "highlow",
+    "field_name": "highest_point",
+    "description": "highest_point column in highlow table",
+    "type": "text",
+    "database": "geo"
+  },
+  "highlow_lowest_elevation": {
+    "product_name": "geo",
+    "type_name": "highlow",
+    "field_name": "lowest_elevation",
+    "description": "lowest_elevation column in highlow table",
+    "type": "text",
+    "database": "geo"
+  },
+  "lake_lake_name": {
+    "product_name": "geo",
+    "type_name": "lake",
+    "field_name": "lake_name",
+    "description": "lake_name column in lake table",
+    "type": "text",
+    "database": "geo"
+  },
+  "lake_area": {
+    "product_name": "geo",
+    "type_name": "lake",
+    "field_name": "area",
+    "description": "area column in lake table",
+    "type": "number",
+    "database": "geo"
+  },
+  "lake_country_name": {
+    "product_name": "geo",
+    "type_name": "lake",
+    "field_name": "country_name",
+    "description": "country_name column in lake table",
+    "type": "text",
+    "database": "geo"
+  },
+  "lake_state_name": {
+    "product_name": "geo",
+    "type_name": "lake",
+    "field_name": "state_name",
+    "description": "state_name column in lake table",
+    "type": "text",
+    "database": "geo"
+  },
+  "mountain_mountain_name": {
+    "product_name": "geo",
+    "type_name": "mountain",
+    "field_name": "mountain_name",
+    "description": "mountain_name column in mountain table (primary key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "mountain_mountain_altitude": {
+    "product_name": "geo",
+    "type_name": "mountain",
+    "field_name": "mountain_altitude",
+    "description": "mountain_altitude column in mountain table",
+    "type": "number",
+    "database": "geo"
+  },
+  "mountain_country_name": {
+    "product_name": "geo",
+    "type_name": "mountain",
+    "field_name": "country_name",
+    "description": "country_name column in mountain table",
+    "type": "text",
+    "database": "geo"
+  },
+  "mountain_state_name": {
+    "product_name": "geo",
+    "type_name": "mountain",
+    "field_name": "state_name",
+    "description": "state_name column in mountain table (foreign key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "river_river_name": {
+    "product_name": "geo",
+    "type_name": "river",
+    "field_name": "river_name",
+    "description": "river_name column in river table (primary key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "river_length": {
+    "product_name": "geo",
+    "type_name": "river",
+    "field_name": "length",
+    "description": "length column in river table",
+    "type": "number",
+    "database": "geo"
+  },
+  "river_country_name": {
+    "product_name": "geo",
+    "type_name": "river",
+    "field_name": "country_name",
+    "description": "country_name column in river table",
+    "type": "text",
+    "database": "geo"
+  },
+  "river_traverse": {
+    "product_name": "geo",
+    "type_name": "river",
+    "field_name": "traverse",
+    "description": "traverse column in river table (foreign key)",
+    "type": "text",
+    "database": "geo"
+  },
+  "works_on_essn": {
+    "product_name": "company_1",
+    "type_name": "works_on",
+    "field_name": "essn",
+    "description": "Essn column in works_on table (primary key)",
+    "type": "number",
+    "database": "company_1"
+  },
+  "works_on_pno": {
+    "product_name": "company_1",
+    "type_name": "works_on",
+    "field_name": "pno",
+    "description": "Pno column in works_on table",
+    "type": "number",
+    "database": "company_1"
+  },
+  "works_on_hours": {
+    "product_name": "company_1",
+    "type_name": "works_on",
+    "field_name": "hours",
+    "description": "Hours column in works_on table",
+    "type": "number",
+    "database": "company_1"
+  },
+  "employee_fname": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "fname",
+    "description": "Fname column in employee table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "employee_minit": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "minit",
+    "description": "Minit column in employee table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "employee_lname": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "lname",
+    "description": "Lname column in employee table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "employee_ssn": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "ssn",
+    "description": "Ssn column in employee table (primary key)",
+    "type": "number",
+    "database": "company_1"
+  },
+  "employee_bdate": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "bdate",
+    "description": "Bdate column in employee table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "employee_address": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "address",
+    "description": "Address column in employee table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "employee_sex": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "sex",
+    "description": "Sex column in employee table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "employee_salary": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "salary",
+    "description": "Salary column in employee table",
+    "type": "number",
+    "database": "company_1"
+  },
+  "employee_super_ssn": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "super_ssn",
+    "description": "Super_ssn column in employee table",
+    "type": "number",
+    "database": "company_1"
+  },
+  "employee_dno": {
+    "product_name": "company_1",
+    "type_name": "employee",
+    "field_name": "dno",
+    "description": "Dno column in employee table",
+    "type": "number",
+    "database": "company_1"
+  },
+  "department_dname": {
+    "product_name": "company_1",
+    "type_name": "department",
+    "field_name": "dname",
+    "description": "Dname column in department table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "department_dnumber": {
+    "product_name": "company_1",
+    "type_name": "department",
+    "field_name": "dnumber",
+    "description": "Dnumber column in department table (primary key)",
+    "type": "number",
+    "database": "company_1"
+  },
+  "department_mgr_ssn": {
+    "product_name": "company_1",
+    "type_name": "department",
+    "field_name": "mgr_ssn",
+    "description": "Mgr_ssn column in department table",
+    "type": "number",
+    "database": "company_1"
+  },
+  "department_mgr_start_date": {
+    "product_name": "company_1",
+    "type_name": "department",
+    "field_name": "mgr_start_date",
+    "description": "Mgr_start_date column in department table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "project_pname": {
+    "product_name": "company_1",
+    "type_name": "project",
+    "field_name": "pname",
+    "description": "Pname column in project table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "project_pnumber": {
+    "product_name": "company_1",
+    "type_name": "project",
+    "field_name": "pnumber",
+    "description": "Pnumber column in project table (primary key)",
+    "type": "number",
+    "database": "company_1"
+  },
+  "project_plocation": {
+    "product_name": "company_1",
+    "type_name": "project",
+    "field_name": "plocation",
+    "description": "Plocation column in project table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "project_dnum": {
+    "product_name": "company_1",
+    "type_name": "project",
+    "field_name": "dnum",
+    "description": "Dnum column in project table",
+    "type": "number",
+    "database": "company_1"
+  },
+  "dependent_essn": {
+    "product_name": "company_1",
+    "type_name": "dependent",
+    "field_name": "essn",
+    "description": "Essn column in dependent table (primary key)",
+    "type": "number",
+    "database": "company_1"
+  },
+  "dependent_dependent_name": {
+    "product_name": "company_1",
+    "type_name": "dependent",
+    "field_name": "dependent_name",
+    "description": "Dependent_name column in dependent table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "dependent_sex": {
+    "product_name": "company_1",
+    "type_name": "dependent",
+    "field_name": "sex",
+    "description": "Sex column in dependent table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "dependent_bdate": {
+    "product_name": "company_1",
+    "type_name": "dependent",
+    "field_name": "bdate",
+    "description": "Bdate column in dependent table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "dependent_relationship": {
+    "product_name": "company_1",
+    "type_name": "dependent",
+    "field_name": "relationship",
+    "description": "Relationship column in dependent table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "dept_locations_dnumber": {
+    "product_name": "company_1",
+    "type_name": "dept_locations",
+    "field_name": "dnumber",
+    "description": "Dnumber column in dept_locations table (primary key)",
+    "type": "number",
+    "database": "company_1"
+  },
+  "dept_locations_dlocation": {
+    "product_name": "company_1",
+    "type_name": "dept_locations",
+    "field_name": "dlocation",
+    "description": "Dlocation column in dept_locations table",
+    "type": "text",
+    "database": "company_1"
+  },
+  "ref_feature_types_feature_type_code": {
+    "product_name": "real_estate_properties",
+    "type_name": "ref_feature_types",
+    "field_name": "feature_type_code",
+    "description": "feature_type_code column in ref_feature_types table (primary key) (foreign key)",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "ref_feature_types_feature_type_name": {
+    "product_name": "real_estate_properties",
+    "type_name": "ref_feature_types",
+    "field_name": "feature_type_name",
+    "description": "feature_type_name column in ref_feature_types table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "ref_property_types_property_type_code": {
+    "product_name": "real_estate_properties",
+    "type_name": "ref_property_types",
+    "field_name": "property_type_code",
+    "description": "property_type_code column in ref_property_types table (primary key) (foreign key)",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "ref_property_types_property_type_description": {
+    "product_name": "real_estate_properties",
+    "type_name": "ref_property_types",
+    "field_name": "property_type_description",
+    "description": "property_type_description column in ref_property_types table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "other_available_features_feature_id": {
+    "product_name": "real_estate_properties",
+    "type_name": "other_available_features",
+    "field_name": "feature_id",
+    "description": "feature_id column in other_available_features table (primary key) (foreign key)",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "other_available_features_feature_type_code": {
+    "product_name": "real_estate_properties",
+    "type_name": "other_available_features",
+    "field_name": "feature_type_code",
+    "description": "feature_type_code column in other_available_features table (foreign key)",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "other_available_features_feature_name": {
+    "product_name": "real_estate_properties",
+    "type_name": "other_available_features",
+    "field_name": "feature_name",
+    "description": "feature_name column in other_available_features table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "other_available_features_feature_description": {
+    "product_name": "real_estate_properties",
+    "type_name": "other_available_features",
+    "field_name": "feature_description",
+    "description": "feature_description column in other_available_features table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_property_id": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "property_id",
+    "description": "property_id column in properties table (primary key) (foreign key)",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "properties_property_type_code": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "property_type_code",
+    "description": "property_type_code column in properties table (foreign key)",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_date_on_market": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "date_on_market",
+    "description": "date_on_market column in properties table",
+    "type": "time",
+    "database": "real_estate_properties"
+  },
+  "properties_date_sold": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "date_sold",
+    "description": "date_sold column in properties table",
+    "type": "time",
+    "database": "real_estate_properties"
+  },
+  "properties_property_name": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "property_name",
+    "description": "property_name column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_property_address": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "property_address",
+    "description": "property_address column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_room_count": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "room_count",
+    "description": "room_count column in properties table",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "properties_vendor_requested_price": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "vendor_requested_price",
+    "description": "vendor_requested_price column in properties table",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "properties_buyer_offered_price": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "buyer_offered_price",
+    "description": "buyer_offered_price column in properties table",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "properties_agreed_selling_price": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "agreed_selling_price",
+    "description": "agreed_selling_price column in properties table",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "properties_apt_feature_1": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "apt_feature_1",
+    "description": "apt_feature_1 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_apt_feature_2": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "apt_feature_2",
+    "description": "apt_feature_2 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_apt_feature_3": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "apt_feature_3",
+    "description": "apt_feature_3 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_fld_feature_1": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "fld_feature_1",
+    "description": "fld_feature_1 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_fld_feature_2": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "fld_feature_2",
+    "description": "fld_feature_2 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_fld_feature_3": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "fld_feature_3",
+    "description": "fld_feature_3 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_hse_feature_1": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "hse_feature_1",
+    "description": "hse_feature_1 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_hse_feature_2": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "hse_feature_2",
+    "description": "hse_feature_2 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_hse_feature_3": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "hse_feature_3",
+    "description": "hse_feature_3 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_oth_feature_1": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "oth_feature_1",
+    "description": "oth_feature_1 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_oth_feature_2": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "oth_feature_2",
+    "description": "oth_feature_2 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_oth_feature_3": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "oth_feature_3",
+    "description": "oth_feature_3 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_shp_feature_1": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "shp_feature_1",
+    "description": "shp_feature_1 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_shp_feature_2": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "shp_feature_2",
+    "description": "shp_feature_2 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_shp_feature_3": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "shp_feature_3",
+    "description": "shp_feature_3 column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "properties_other_property_details": {
+    "product_name": "real_estate_properties",
+    "type_name": "properties",
+    "field_name": "other_property_details",
+    "description": "other_property_details column in properties table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "other_property_features_property_id": {
+    "product_name": "real_estate_properties",
+    "type_name": "other_property_features",
+    "field_name": "property_id",
+    "description": "property_id column in other_property_features table (foreign key)",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "other_property_features_feature_id": {
+    "product_name": "real_estate_properties",
+    "type_name": "other_property_features",
+    "field_name": "feature_id",
+    "description": "feature_id column in other_property_features table (foreign key)",
+    "type": "number",
+    "database": "real_estate_properties"
+  },
+  "other_property_features_property_feature_description": {
+    "product_name": "real_estate_properties",
+    "type_name": "other_property_features",
+    "field_name": "property_feature_description",
+    "description": "property_feature_description column in other_property_features table",
+    "type": "text",
+    "database": "real_estate_properties"
+  },
+  "mission_mission_id": {
+    "product_name": "ship_mission",
+    "type_name": "mission",
+    "field_name": "mission_id",
+    "description": "Mission_ID column in mission table (primary key)",
+    "type": "number",
+    "database": "ship_mission"
+  },
+  "mission_ship_id": {
+    "product_name": "ship_mission",
+    "type_name": "mission",
+    "field_name": "ship_id",
+    "description": "Ship_ID column in mission table (foreign key)",
+    "type": "number",
+    "database": "ship_mission"
+  },
+  "mission_code": {
+    "product_name": "ship_mission",
+    "type_name": "mission",
+    "field_name": "code",
+    "description": "Code column in mission table",
+    "type": "text",
+    "database": "ship_mission"
+  },
+  "mission_launched_year": {
+    "product_name": "ship_mission",
+    "type_name": "mission",
+    "field_name": "launched_year",
+    "description": "Launched_Year column in mission table",
+    "type": "number",
+    "database": "ship_mission"
+  },
+  "mission_location": {
+    "product_name": "ship_mission",
+    "type_name": "mission",
+    "field_name": "location",
+    "description": "Location column in mission table",
+    "type": "text",
+    "database": "ship_mission"
+  },
+  "mission_speed_knots": {
+    "product_name": "ship_mission",
+    "type_name": "mission",
+    "field_name": "speed_knots",
+    "description": "Speed_knots column in mission table",
+    "type": "number",
+    "database": "ship_mission"
+  },
+  "mission_fate": {
+    "product_name": "ship_mission",
+    "type_name": "mission",
+    "field_name": "fate",
+    "description": "Fate column in mission table",
+    "type": "text",
+    "database": "ship_mission"
+  },
+  "ship_ship_id": {
+    "product_name": "ship_mission",
+    "type_name": "ship",
+    "field_name": "ship_id",
+    "description": "Ship_ID column in ship table (primary key) (foreign key)",
+    "type": "number",
+    "database": "ship_mission"
+  },
+  "ship_name": {
+    "product_name": "battle_death",
+    "type_name": "ship",
+    "field_name": "name",
+    "description": "name column in ship table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "ship_type": {
+    "product_name": "ship_mission",
+    "type_name": "ship",
+    "field_name": "type",
+    "description": "Type column in ship table",
+    "type": "text",
+    "database": "ship_mission"
+  },
+  "ship_nationality": {
+    "product_name": "ship_mission",
+    "type_name": "ship",
+    "field_name": "nationality",
+    "description": "Nationality column in ship table",
+    "type": "text",
+    "database": "ship_mission"
+  },
+  "ship_tonnage": {
+    "product_name": "battle_death",
+    "type_name": "ship",
+    "field_name": "tonnage",
+    "description": "tonnage column in ship table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "country_country_id": {
+    "product_name": "match_season",
+    "type_name": "country",
+    "field_name": "country_id",
+    "description": "Country_id column in country table (primary key) (foreign key)",
+    "type": "number",
+    "database": "match_season"
+  },
+  "country_country_name": {
+    "product_name": "match_season",
+    "type_name": "country",
+    "field_name": "country_name",
+    "description": "Country_name column in country table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "country_capital": {
+    "product_name": "match_season",
+    "type_name": "country",
+    "field_name": "capital",
+    "description": "Capital column in country table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "country_official_native_language": {
+    "product_name": "match_season",
+    "type_name": "country",
+    "field_name": "official_native_language",
+    "description": "Official_native_language column in country table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "team_team_id": {
+    "product_name": "match_season",
+    "type_name": "team",
+    "field_name": "team_id",
+    "description": "Team_id column in team table (primary key) (foreign key)",
+    "type": "number",
+    "database": "match_season"
+  },
+  "team_name": {
+    "product_name": "match_season",
+    "type_name": "team",
+    "field_name": "name",
+    "description": "Name column in team table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "match_season_season": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "season",
+    "description": "Season column in match_season table (primary key)",
+    "type": "number",
+    "database": "match_season"
+  },
+  "match_season_player": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "player",
+    "description": "Player column in match_season table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "match_season_position": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "position",
+    "description": "Position column in match_season table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "match_season_country": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "country",
+    "description": "Country column in match_season table (foreign key)",
+    "type": "number",
+    "database": "match_season"
+  },
+  "match_season_team": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "team",
+    "description": "Team column in match_season table (foreign key)",
+    "type": "number",
+    "database": "match_season"
+  },
+  "match_season_draft_pick_number": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "draft_pick_number",
+    "description": "Draft_Pick_Number column in match_season table",
+    "type": "number",
+    "database": "match_season"
+  },
+  "match_season_draft_class": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "draft_class",
+    "description": "Draft_Class column in match_season table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "match_season_college": {
+    "product_name": "match_season",
+    "type_name": "match_season",
+    "field_name": "college",
+    "description": "College column in match_season table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "player_player_id": {
+    "product_name": "match_season",
+    "type_name": "player",
+    "field_name": "player_id",
+    "description": "Player_ID column in player table (primary key)",
+    "type": "number",
+    "database": "match_season"
+  },
+  "player_player": {
+    "product_name": "match_season",
+    "type_name": "player",
+    "field_name": "player",
+    "description": "Player column in player table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "player_years_played": {
+    "product_name": "match_season",
+    "type_name": "player",
+    "field_name": "years_played",
+    "description": "Years_Played column in player table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "player_total_wl": {
+    "product_name": "match_season",
+    "type_name": "player",
+    "field_name": "total_wl",
+    "description": "Total_WL column in player table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "player_singles_wl": {
+    "product_name": "match_season",
+    "type_name": "player",
+    "field_name": "singles_wl",
+    "description": "Singles_WL column in player table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "player_doubles_wl": {
+    "product_name": "match_season",
+    "type_name": "player",
+    "field_name": "doubles_wl",
+    "description": "Doubles_WL column in player table",
+    "type": "text",
+    "database": "match_season"
+  },
+  "player_team": {
+    "product_name": "match_season",
+    "type_name": "player",
+    "field_name": "team",
+    "description": "Team column in player table (foreign key)",
+    "type": "number",
+    "database": "match_season"
+  },
+  "ref_template_types_template_type_code": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "ref_template_types",
+    "field_name": "template_type_code",
+    "description": "Template_Type_Code column in ref_template_types table (primary key) (foreign key)",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "ref_template_types_template_type_description": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "ref_template_types",
+    "field_name": "template_type_description",
+    "description": "Template_Type_Description column in ref_template_types table",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "templates_template_id": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "templates",
+    "field_name": "template_id",
+    "description": "Template_ID column in templates table (primary key) (foreign key)",
+    "type": "number",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "templates_version_number": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "templates",
+    "field_name": "version_number",
+    "description": "Version_Number column in templates table",
+    "type": "number",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "templates_template_type_code": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "templates",
+    "field_name": "template_type_code",
+    "description": "Template_Type_Code column in templates table (foreign key)",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "templates_date_effective_from": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "templates",
+    "field_name": "date_effective_from",
+    "description": "Date_Effective_From column in templates table",
+    "type": "time",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "templates_date_effective_to": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "templates",
+    "field_name": "date_effective_to",
+    "description": "Date_Effective_To column in templates table",
+    "type": "time",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "templates_template_details": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "templates",
+    "field_name": "template_details",
+    "description": "Template_Details column in templates table",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "documents_document_id": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "documents",
+    "field_name": "document_id",
+    "description": "Document_ID column in documents table (primary key) (foreign key)",
+    "type": "number",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "documents_template_id": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "documents",
+    "field_name": "template_id",
+    "description": "Template_ID column in documents table (foreign key)",
+    "type": "number",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "documents_document_name": {
+    "product_name": "document_management",
+    "type_name": "documents",
+    "field_name": "document_name",
+    "description": "document_name column in documents table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "documents_document_description": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "documents",
+    "field_name": "document_description",
+    "description": "Document_Description column in documents table",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "documents_other_details": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "documents",
+    "field_name": "other_details",
+    "description": "Other_Details column in documents table",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "paragraphs_paragraph_id": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "paragraphs",
+    "field_name": "paragraph_id",
+    "description": "Paragraph_ID column in paragraphs table (primary key)",
+    "type": "number",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "paragraphs_document_id": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "paragraphs",
+    "field_name": "document_id",
+    "description": "Document_ID column in paragraphs table (foreign key)",
+    "type": "number",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "paragraphs_paragraph_text": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "paragraphs",
+    "field_name": "paragraph_text",
+    "description": "Paragraph_Text column in paragraphs table",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "paragraphs_other_details": {
+    "product_name": "cre_Doc_Template_Mgt",
+    "type_name": "paragraphs",
+    "field_name": "other_details",
+    "description": "Other_Details column in paragraphs table",
+    "type": "text",
+    "database": "cre_Doc_Template_Mgt"
+  },
+  "roles_role_code": {
+    "product_name": "document_management",
+    "type_name": "roles",
+    "field_name": "role_code",
+    "description": "role_code column in roles table (primary key) (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "roles_role_description": {
+    "product_name": "document_management",
+    "type_name": "roles",
+    "field_name": "role_description",
+    "description": "role_description column in roles table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "users_user_id": {
+    "product_name": "document_management",
+    "type_name": "users",
+    "field_name": "user_id",
+    "description": "user_id column in users table (primary key)",
+    "type": "number",
+    "database": "document_management"
+  },
+  "users_role_code": {
+    "product_name": "document_management",
+    "type_name": "users",
+    "field_name": "role_code",
+    "description": "role_code column in users table (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "users_user_name": {
+    "product_name": "document_management",
+    "type_name": "users",
+    "field_name": "user_name",
+    "description": "user_name column in users table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "users_user_login": {
+    "product_name": "document_management",
+    "type_name": "users",
+    "field_name": "user_login",
+    "description": "user_login column in users table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "users_password": {
+    "product_name": "document_management",
+    "type_name": "users",
+    "field_name": "password",
+    "description": "password column in users table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_structures_document_structure_code": {
+    "product_name": "document_management",
+    "type_name": "document_structures",
+    "field_name": "document_structure_code",
+    "description": "document_structure_code column in document_structures table (primary key) (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_structures_parent_document_structure_code": {
+    "product_name": "document_management",
+    "type_name": "document_structures",
+    "field_name": "parent_document_structure_code",
+    "description": "parent_document_structure_code column in document_structures table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_structures_document_structure_description": {
+    "product_name": "document_management",
+    "type_name": "document_structures",
+    "field_name": "document_structure_description",
+    "description": "document_structure_description column in document_structures table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "functional_areas_functional_area_code": {
+    "product_name": "document_management",
+    "type_name": "functional_areas",
+    "field_name": "functional_area_code",
+    "description": "functional_area_code column in functional_areas table (primary key) (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "functional_areas_parent_functional_area_code": {
+    "product_name": "document_management",
+    "type_name": "functional_areas",
+    "field_name": "parent_functional_area_code",
+    "description": "parent_functional_area_code column in functional_areas table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "functional_areas_functional_area_description": {
+    "product_name": "document_management",
+    "type_name": "functional_areas",
+    "field_name": "functional_area_description",
+    "description": "functional_area_description column in functional_areas table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "images_image_id": {
+    "product_name": "document_management",
+    "type_name": "images",
+    "field_name": "image_id",
+    "description": "image_id column in images table (primary key) (foreign key)",
+    "type": "number",
+    "database": "document_management"
+  },
+  "images_image_alt_text": {
+    "product_name": "document_management",
+    "type_name": "images",
+    "field_name": "image_alt_text",
+    "description": "image_alt_text column in images table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "images_image_name": {
+    "product_name": "document_management",
+    "type_name": "images",
+    "field_name": "image_name",
+    "description": "image_name column in images table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "images_image_url": {
+    "product_name": "document_management",
+    "type_name": "images",
+    "field_name": "image_url",
+    "description": "image_url column in images table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "documents_document_code": {
+    "product_name": "document_management",
+    "type_name": "documents",
+    "field_name": "document_code",
+    "description": "document_code column in documents table (primary key) (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "documents_document_structure_code": {
+    "product_name": "document_management",
+    "type_name": "documents",
+    "field_name": "document_structure_code",
+    "description": "document_structure_code column in documents table (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "documents_document_type_code": {
+    "product_name": "document_management",
+    "type_name": "documents",
+    "field_name": "document_type_code",
+    "description": "document_type_code column in documents table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "documents_access_count": {
+    "product_name": "document_management",
+    "type_name": "documents",
+    "field_name": "access_count",
+    "description": "access_count column in documents table",
+    "type": "number",
+    "database": "document_management"
+  },
+  "document_functional_areas_document_code": {
+    "product_name": "document_management",
+    "type_name": "document_functional_areas",
+    "field_name": "document_code",
+    "description": "document_code column in document_functional_areas table (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_functional_areas_functional_area_code": {
+    "product_name": "document_management",
+    "type_name": "document_functional_areas",
+    "field_name": "functional_area_code",
+    "description": "functional_area_code column in document_functional_areas table (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_sections_section_id": {
+    "product_name": "document_management",
+    "type_name": "document_sections",
+    "field_name": "section_id",
+    "description": "section_id column in document_sections table (primary key) (foreign key)",
+    "type": "number",
+    "database": "document_management"
+  },
+  "document_sections_document_code": {
+    "product_name": "document_management",
+    "type_name": "document_sections",
+    "field_name": "document_code",
+    "description": "document_code column in document_sections table (foreign key)",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_sections_section_sequence": {
+    "product_name": "document_management",
+    "type_name": "document_sections",
+    "field_name": "section_sequence",
+    "description": "section_sequence column in document_sections table",
+    "type": "number",
+    "database": "document_management"
+  },
+  "document_sections_section_code": {
+    "product_name": "document_management",
+    "type_name": "document_sections",
+    "field_name": "section_code",
+    "description": "section_code column in document_sections table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_sections_section_title": {
+    "product_name": "document_management",
+    "type_name": "document_sections",
+    "field_name": "section_title",
+    "description": "section_title column in document_sections table",
+    "type": "text",
+    "database": "document_management"
+  },
+  "document_sections_images_section_id": {
+    "product_name": "document_management",
+    "type_name": "document_sections_images",
+    "field_name": "section_id",
+    "description": "section_id column in document_sections_images table (primary key) (foreign key)",
+    "type": "number",
+    "database": "document_management"
+  },
+  "document_sections_images_image_id": {
+    "product_name": "document_management",
+    "type_name": "document_sections_images",
+    "field_name": "image_id",
+    "description": "image_id column in document_sections_images table (foreign key)",
+    "type": "number",
+    "database": "document_management"
+  },
+  "regions_region_id": {
+    "product_name": "hr_1",
+    "type_name": "regions",
+    "field_name": "region_id",
+    "description": "REGION_ID column in regions table (primary key) (foreign key)",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "regions_region_name": {
+    "product_name": "hr_1",
+    "type_name": "regions",
+    "field_name": "region_name",
+    "description": "REGION_NAME column in regions table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "countries_country_id": {
+    "product_name": "hr_1",
+    "type_name": "countries",
+    "field_name": "country_id",
+    "description": "COUNTRY_ID column in countries table (primary key) (foreign key)",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "countries_country_name": {
+    "product_name": "hr_1",
+    "type_name": "countries",
+    "field_name": "country_name",
+    "description": "COUNTRY_NAME column in countries table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "countries_region_id": {
+    "product_name": "hr_1",
+    "type_name": "countries",
+    "field_name": "region_id",
+    "description": "REGION_ID column in countries table (foreign key)",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "departments_department_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "departments",
+    "field_name": "department_id",
+    "description": "department_id column in departments table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "departments_department_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "departments",
+    "field_name": "department_name",
+    "description": "department_name column in departments table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "departments_manager_id": {
+    "product_name": "hr_1",
+    "type_name": "departments",
+    "field_name": "manager_id",
+    "description": "MANAGER_ID column in departments table",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "departments_location_id": {
+    "product_name": "hr_1",
+    "type_name": "departments",
+    "field_name": "location_id",
+    "description": "LOCATION_ID column in departments table",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "jobs_job_id": {
+    "product_name": "hr_1",
+    "type_name": "jobs",
+    "field_name": "job_id",
+    "description": "JOB_ID column in jobs table (primary key) (foreign key)",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "jobs_job_title": {
+    "product_name": "hr_1",
+    "type_name": "jobs",
+    "field_name": "job_title",
+    "description": "JOB_TITLE column in jobs table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "jobs_min_salary": {
+    "product_name": "hr_1",
+    "type_name": "jobs",
+    "field_name": "min_salary",
+    "description": "MIN_SALARY column in jobs table",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "jobs_max_salary": {
+    "product_name": "hr_1",
+    "type_name": "jobs",
+    "field_name": "max_salary",
+    "description": "MAX_SALARY column in jobs table",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "employees_employee_id": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "employee_id",
+    "description": "EMPLOYEE_ID column in employees table (primary key) (foreign key)",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "employees_first_name": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "first_name",
+    "description": "FIRST_NAME column in employees table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "employees_last_name": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "last_name",
+    "description": "LAST_NAME column in employees table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "employees_email": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "email",
+    "description": "EMAIL column in employees table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "employees_phone_number": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "phone_number",
+    "description": "PHONE_NUMBER column in employees table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "employees_hire_date": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "hire_date",
+    "description": "HIRE_DATE column in employees table",
+    "type": "time",
+    "database": "hr_1"
+  },
+  "employees_job_id": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "job_id",
+    "description": "JOB_ID column in employees table (foreign key)",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "employees_salary": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "salary",
+    "description": "SALARY column in employees table",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "employees_commission_pct": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "commission_pct",
+    "description": "COMMISSION_PCT column in employees table",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "employees_manager_id": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "manager_id",
+    "description": "MANAGER_ID column in employees table",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "employees_department_id": {
+    "product_name": "hr_1",
+    "type_name": "employees",
+    "field_name": "department_id",
+    "description": "DEPARTMENT_ID column in employees table (foreign key)",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "job_history_employee_id": {
+    "product_name": "hr_1",
+    "type_name": "job_history",
+    "field_name": "employee_id",
+    "description": "EMPLOYEE_ID column in job_history table (primary key) (foreign key)",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "job_history_start_date": {
+    "product_name": "hr_1",
+    "type_name": "job_history",
+    "field_name": "start_date",
+    "description": "START_DATE column in job_history table",
+    "type": "time",
+    "database": "hr_1"
+  },
+  "job_history_end_date": {
+    "product_name": "hr_1",
+    "type_name": "job_history",
+    "field_name": "end_date",
+    "description": "END_DATE column in job_history table",
+    "type": "time",
+    "database": "hr_1"
+  },
+  "job_history_job_id": {
+    "product_name": "hr_1",
+    "type_name": "job_history",
+    "field_name": "job_id",
+    "description": "JOB_ID column in job_history table (foreign key)",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "job_history_department_id": {
+    "product_name": "hr_1",
+    "type_name": "job_history",
+    "field_name": "department_id",
+    "description": "DEPARTMENT_ID column in job_history table (foreign key)",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "locations_location_id": {
+    "product_name": "hr_1",
+    "type_name": "locations",
+    "field_name": "location_id",
+    "description": "LOCATION_ID column in locations table (primary key)",
+    "type": "number",
+    "database": "hr_1"
+  },
+  "locations_street_address": {
+    "product_name": "hr_1",
+    "type_name": "locations",
+    "field_name": "street_address",
+    "description": "STREET_ADDRESS column in locations table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "locations_postal_code": {
+    "product_name": "hr_1",
+    "type_name": "locations",
+    "field_name": "postal_code",
+    "description": "POSTAL_CODE column in locations table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "locations_city": {
+    "product_name": "hr_1",
+    "type_name": "locations",
+    "field_name": "city",
+    "description": "CITY column in locations table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "locations_state_province": {
+    "product_name": "hr_1",
+    "type_name": "locations",
+    "field_name": "state_province",
+    "description": "STATE_PROVINCE column in locations table",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "locations_country_id": {
+    "product_name": "hr_1",
+    "type_name": "locations",
+    "field_name": "country_id",
+    "description": "COUNTRY_ID column in locations table (foreign key)",
+    "type": "text",
+    "database": "hr_1"
+  },
+  "routes_rid": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "rid",
+    "description": "rid column in routes table (primary key)",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "routes_dst_apid": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "dst_apid",
+    "description": "dst_apid column in routes table (foreign key)",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "routes_dst_ap": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "dst_ap",
+    "description": "dst_ap column in routes table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "routes_src_apid": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "src_apid",
+    "description": "src_apid column in routes table (foreign key)",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "routes_src_ap": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "src_ap",
+    "description": "src_ap column in routes table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "routes_alid": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "alid",
+    "description": "alid column in routes table (foreign key)",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "routes_airline": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "airline",
+    "description": "airline column in routes table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "routes_codeshare": {
+    "product_name": "flight_4",
+    "type_name": "routes",
+    "field_name": "codeshare",
+    "description": "codeshare column in routes table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airports_apid": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "apid",
+    "description": "apid column in airports table (primary key) (foreign key)",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "airports_name": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "name",
+    "description": "name column in airports table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airports_x": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "x",
+    "description": "x column in airports table",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "airports_y": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "y",
+    "description": "y column in airports table",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "airports_elevation": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "elevation",
+    "description": "elevation column in airports table",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "airports_iata": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "iata",
+    "description": "iata column in airports table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airports_icao": {
+    "product_name": "flight_4",
+    "type_name": "airports",
+    "field_name": "icao",
+    "description": "icao column in airports table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airlines_alid": {
+    "product_name": "flight_4",
+    "type_name": "airlines",
+    "field_name": "alid",
+    "description": "alid column in airlines table (primary key) (foreign key)",
+    "type": "number",
+    "database": "flight_4"
+  },
+  "airlines_name": {
+    "product_name": "flight_4",
+    "type_name": "airlines",
+    "field_name": "name",
+    "description": "name column in airlines table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airlines_iata": {
+    "product_name": "flight_4",
+    "type_name": "airlines",
+    "field_name": "iata",
+    "description": "iata column in airlines table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airlines_icao": {
+    "product_name": "flight_4",
+    "type_name": "airlines",
+    "field_name": "icao",
+    "description": "icao column in airlines table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airlines_callsign": {
+    "product_name": "flight_4",
+    "type_name": "airlines",
+    "field_name": "callsign",
+    "description": "callsign column in airlines table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "airlines_active": {
+    "product_name": "flight_4",
+    "type_name": "airlines",
+    "field_name": "active",
+    "description": "active column in airlines table",
+    "type": "text",
+    "database": "flight_4"
+  },
+  "student_stuid": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "stuid",
+    "description": "StuID column in student table (primary key) (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "student_lname": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "lname",
+    "description": "LName column in student table",
+    "type": "text",
+    "database": "voter_2"
+  },
+  "student_fname": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "fname",
+    "description": "Fname column in student table",
+    "type": "text",
+    "database": "voter_2"
+  },
+  "student_age": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "age",
+    "description": "Age column in student table",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "student_sex": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "sex",
+    "description": "Sex column in student table",
+    "type": "text",
+    "database": "voter_2"
+  },
+  "student_major": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "major",
+    "description": "Major column in student table",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "student_advisor": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "advisor",
+    "description": "Advisor column in student table",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "student_city_code": {
+    "product_name": "voter_2",
+    "type_name": "student",
+    "field_name": "city_code",
+    "description": "city_code column in student table",
+    "type": "text",
+    "database": "voter_2"
+  },
+  "has_pet_stuid": {
+    "product_name": "pets_1",
+    "type_name": "has_pet",
+    "field_name": "stuid",
+    "description": "StuID column in has_pet table (foreign key)",
+    "type": "number",
+    "database": "pets_1"
+  },
+  "has_pet_petid": {
+    "product_name": "pets_1",
+    "type_name": "has_pet",
+    "field_name": "petid",
+    "description": "PetID column in has_pet table (foreign key)",
+    "type": "number",
+    "database": "pets_1"
+  },
+  "pets_petid": {
+    "product_name": "pets_1",
+    "type_name": "pets",
+    "field_name": "petid",
+    "description": "PetID column in pets table (primary key) (foreign key)",
+    "type": "number",
+    "database": "pets_1"
+  },
+  "pets_pettype": {
+    "product_name": "pets_1",
+    "type_name": "pets",
+    "field_name": "pettype",
+    "description": "PetType column in pets table",
+    "type": "text",
+    "database": "pets_1"
+  },
+  "pets_pet_age": {
+    "product_name": "pets_1",
+    "type_name": "pets",
+    "field_name": "pet_age",
+    "description": "pet_age column in pets table",
+    "type": "number",
+    "database": "pets_1"
+  },
+  "pets_weight": {
+    "product_name": "pets_1",
+    "type_name": "pets",
+    "field_name": "weight",
+    "description": "weight column in pets table",
+    "type": "number",
+    "database": "pets_1"
+  },
+  "museum_museum_id": {
+    "product_name": "museum_visit",
+    "type_name": "museum",
+    "field_name": "museum_id",
+    "description": "Museum_ID column in museum table (primary key) (foreign key)",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "museum_name": {
+    "product_name": "museum_visit",
+    "type_name": "museum",
+    "field_name": "name",
+    "description": "Name column in museum table",
+    "type": "text",
+    "database": "museum_visit"
+  },
+  "museum_num_of_staff": {
+    "product_name": "museum_visit",
+    "type_name": "museum",
+    "field_name": "num_of_staff",
+    "description": "Num_of_Staff column in museum table",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "museum_open_year": {
+    "product_name": "museum_visit",
+    "type_name": "museum",
+    "field_name": "open_year",
+    "description": "Open_Year column in museum table",
+    "type": "text",
+    "database": "museum_visit"
+  },
+  "visitor_id": {
+    "product_name": "museum_visit",
+    "type_name": "visitor",
+    "field_name": "id",
+    "description": "ID column in visitor table (primary key) (foreign key)",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "visitor_name": {
+    "product_name": "museum_visit",
+    "type_name": "visitor",
+    "field_name": "name",
+    "description": "Name column in visitor table",
+    "type": "text",
+    "database": "museum_visit"
+  },
+  "visitor_level_of_membership": {
+    "product_name": "museum_visit",
+    "type_name": "visitor",
+    "field_name": "level_of_membership",
+    "description": "Level_of_membership column in visitor table",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "visitor_age": {
+    "product_name": "museum_visit",
+    "type_name": "visitor",
+    "field_name": "age",
+    "description": "Age column in visitor table",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "visit_museum_id": {
+    "product_name": "museum_visit",
+    "type_name": "visit",
+    "field_name": "museum_id",
+    "description": "Museum_ID column in visit table (primary key) (foreign key)",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "visit_visitor_id": {
+    "product_name": "museum_visit",
+    "type_name": "visit",
+    "field_name": "visitor_id",
+    "description": "visitor_ID column in visit table (foreign key)",
+    "type": "text",
+    "database": "museum_visit"
+  },
+  "visit_num_of_ticket": {
+    "product_name": "museum_visit",
+    "type_name": "visit",
+    "field_name": "num_of_ticket",
+    "description": "Num_of_Ticket column in visit table",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "visit_total_spent": {
+    "product_name": "museum_visit",
+    "type_name": "visit",
+    "field_name": "total_spent",
+    "description": "Total_spent column in visit table",
+    "type": "number",
+    "database": "museum_visit"
+  },
+  "area_code_state_area_code": {
+    "product_name": "voter_1",
+    "type_name": "area_code_state",
+    "field_name": "area_code",
+    "description": "area_code column in area_code_state table (primary key)",
+    "type": "number",
+    "database": "voter_1"
+  },
+  "area_code_state_state": {
+    "product_name": "voter_1",
+    "type_name": "area_code_state",
+    "field_name": "state",
+    "description": "state column in area_code_state table (foreign key)",
+    "type": "text",
+    "database": "voter_1"
+  },
+  "contestants_contestant_number": {
+    "product_name": "voter_1",
+    "type_name": "contestants",
+    "field_name": "contestant_number",
+    "description": "contestant_number column in contestants table (primary key) (foreign key)",
+    "type": "number",
+    "database": "voter_1"
+  },
+  "contestants_contestant_name": {
+    "product_name": "voter_1",
+    "type_name": "contestants",
+    "field_name": "contestant_name",
+    "description": "contestant_name column in contestants table",
+    "type": "text",
+    "database": "voter_1"
+  },
+  "votes_vote_id": {
+    "product_name": "voter_1",
+    "type_name": "votes",
+    "field_name": "vote_id",
+    "description": "vote_id column in votes table (primary key)",
+    "type": "number",
+    "database": "voter_1"
+  },
+  "votes_phone_number": {
+    "product_name": "voter_1",
+    "type_name": "votes",
+    "field_name": "phone_number",
+    "description": "phone_number column in votes table",
+    "type": "number",
+    "database": "voter_1"
+  },
+  "votes_state": {
+    "product_name": "voter_1",
+    "type_name": "votes",
+    "field_name": "state",
+    "description": "state column in votes table (foreign key)",
+    "type": "text",
+    "database": "voter_1"
+  },
+  "votes_contestant_number": {
+    "product_name": "voter_1",
+    "type_name": "votes",
+    "field_name": "contestant_number",
+    "description": "contestant_number column in votes table (foreign key)",
+    "type": "number",
+    "database": "voter_1"
+  },
+  "votes_created": {
+    "product_name": "voter_1",
+    "type_name": "votes",
+    "field_name": "created",
+    "description": "created column in votes table",
+    "type": "time",
+    "database": "voter_1"
+  },
+  "ref_address_types_address_type_code": {
+    "product_name": "behavior_monitoring",
+    "type_name": "ref_address_types",
+    "field_name": "address_type_code",
+    "description": "address_type_code column in ref_address_types table (primary key)",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "ref_address_types_address_type_description": {
+    "product_name": "behavior_monitoring",
+    "type_name": "ref_address_types",
+    "field_name": "address_type_description",
+    "description": "address_type_description column in ref_address_types table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "ref_detention_type_detention_type_code": {
+    "product_name": "behavior_monitoring",
+    "type_name": "ref_detention_type",
+    "field_name": "detention_type_code",
+    "description": "detention_type_code column in ref_detention_type table (primary key) (foreign key)",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "ref_detention_type_detention_type_description": {
+    "product_name": "behavior_monitoring",
+    "type_name": "ref_detention_type",
+    "field_name": "detention_type_description",
+    "description": "detention_type_description column in ref_detention_type table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "ref_incident_type_incident_type_code": {
+    "product_name": "behavior_monitoring",
+    "type_name": "ref_incident_type",
+    "field_name": "incident_type_code",
+    "description": "incident_type_code column in ref_incident_type table (primary key) (foreign key)",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "ref_incident_type_incident_type_description": {
+    "product_name": "behavior_monitoring",
+    "type_name": "ref_incident_type",
+    "field_name": "incident_type_description",
+    "description": "incident_type_description column in ref_incident_type table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "addresses_address_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "addresses",
+    "field_name": "address_id",
+    "description": "address_id column in addresses table (primary key) (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "addresses_line_1": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "addresses",
+    "field_name": "line_1",
+    "description": "line_1 column in addresses table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "addresses_line_2": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "addresses",
+    "field_name": "line_2",
+    "description": "line_2 column in addresses table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "addresses_line_3": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "addresses",
+    "field_name": "line_3",
+    "description": "line_3 column in addresses table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "addresses_city": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "addresses",
+    "field_name": "city",
+    "description": "city column in addresses table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "addresses_zip_postcode": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "addresses",
+    "field_name": "zip_postcode",
+    "description": "zip_postcode column in addresses table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "addresses_state_province_county": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "addresses",
+    "field_name": "state_province_county",
+    "description": "state_province_county column in addresses table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "addresses_country": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "addresses",
+    "field_name": "country",
+    "description": "country column in addresses table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "addresses_other_address_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "addresses",
+    "field_name": "other_address_details",
+    "description": "other_address_details column in addresses table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_student_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "student_id",
+    "description": "student_id column in students table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "students_address_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "students",
+    "field_name": "address_id",
+    "description": "address_id column in students table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "students_first_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "first_name",
+    "description": "first_name column in students table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_middle_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "middle_name",
+    "description": "middle_name column in students table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_last_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "last_name",
+    "description": "last_name column in students table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_cell_mobile_number": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "cell_mobile_number",
+    "description": "cell_mobile_number column in students table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_email_address": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "email_address",
+    "description": "email_address column in students table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_date_first_rental": {
+    "product_name": "behavior_monitoring",
+    "type_name": "students",
+    "field_name": "date_first_rental",
+    "description": "date_first_rental column in students table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "students_date_left_university": {
+    "product_name": "behavior_monitoring",
+    "type_name": "students",
+    "field_name": "date_left_university",
+    "description": "date_left_university column in students table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "students_other_student_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "other_student_details",
+    "description": "other_student_details column in students table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "teachers_teacher_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "teacher_id",
+    "description": "teacher_id column in teachers table (primary key) (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "teachers_address_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "address_id",
+    "description": "address_id column in teachers table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "teachers_first_name": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "first_name",
+    "description": "first_name column in teachers table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "teachers_middle_name": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "middle_name",
+    "description": "middle_name column in teachers table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "teachers_last_name": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "last_name",
+    "description": "last_name column in teachers table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "teachers_gender": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "gender",
+    "description": "gender column in teachers table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "teachers_cell_mobile_number": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "cell_mobile_number",
+    "description": "cell_mobile_number column in teachers table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "teachers_email_address": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "email_address",
+    "description": "email_address column in teachers table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "teachers_other_details": {
+    "product_name": "behavior_monitoring",
+    "type_name": "teachers",
+    "field_name": "other_details",
+    "description": "other_details column in teachers table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "assessment_notes_notes_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "assessment_notes",
+    "field_name": "notes_id",
+    "description": "notes_id column in assessment_notes table",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "assessment_notes_student_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "assessment_notes",
+    "field_name": "student_id",
+    "description": "student_id column in assessment_notes table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "assessment_notes_teacher_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "assessment_notes",
+    "field_name": "teacher_id",
+    "description": "teacher_id column in assessment_notes table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "assessment_notes_date_of_notes": {
+    "product_name": "behavior_monitoring",
+    "type_name": "assessment_notes",
+    "field_name": "date_of_notes",
+    "description": "date_of_notes column in assessment_notes table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "assessment_notes_text_of_notes": {
+    "product_name": "behavior_monitoring",
+    "type_name": "assessment_notes",
+    "field_name": "text_of_notes",
+    "description": "text_of_notes column in assessment_notes table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "assessment_notes_other_details": {
+    "product_name": "behavior_monitoring",
+    "type_name": "assessment_notes",
+    "field_name": "other_details",
+    "description": "other_details column in assessment_notes table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_incident_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "incident_id",
+    "description": "incident_id column in behavior_incident table (primary key) (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_incident_type_code": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "incident_type_code",
+    "description": "incident_type_code column in behavior_incident table (foreign key)",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_student_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "student_id",
+    "description": "student_id column in behavior_incident table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_date_incident_start": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "date_incident_start",
+    "description": "date_incident_start column in behavior_incident table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_date_incident_end": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "date_incident_end",
+    "description": "date_incident_end column in behavior_incident table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_incident_summary": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "incident_summary",
+    "description": "incident_summary column in behavior_incident table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_recommendations": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "recommendations",
+    "description": "recommendations column in behavior_incident table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "behavior_incident_other_details": {
+    "product_name": "behavior_monitoring",
+    "type_name": "behavior_incident",
+    "field_name": "other_details",
+    "description": "other_details column in behavior_incident table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "detention_detention_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "detention",
+    "field_name": "detention_id",
+    "description": "detention_id column in detention table (primary key) (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "detention_detention_type_code": {
+    "product_name": "behavior_monitoring",
+    "type_name": "detention",
+    "field_name": "detention_type_code",
+    "description": "detention_type_code column in detention table (foreign key)",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "detention_teacher_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "detention",
+    "field_name": "teacher_id",
+    "description": "teacher_id column in detention table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "detention_datetime_detention_start": {
+    "product_name": "behavior_monitoring",
+    "type_name": "detention",
+    "field_name": "datetime_detention_start",
+    "description": "datetime_detention_start column in detention table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "detention_datetime_detention_end": {
+    "product_name": "behavior_monitoring",
+    "type_name": "detention",
+    "field_name": "datetime_detention_end",
+    "description": "datetime_detention_end column in detention table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "detention_detention_summary": {
+    "product_name": "behavior_monitoring",
+    "type_name": "detention",
+    "field_name": "detention_summary",
+    "description": "detention_summary column in detention table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "detention_other_details": {
+    "product_name": "behavior_monitoring",
+    "type_name": "detention",
+    "field_name": "other_details",
+    "description": "other_details column in detention table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "student_addresses_student_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "student_addresses",
+    "field_name": "student_id",
+    "description": "student_id column in student_addresses table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "student_addresses_address_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "student_addresses",
+    "field_name": "address_id",
+    "description": "address_id column in student_addresses table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "student_addresses_date_address_from": {
+    "product_name": "behavior_monitoring",
+    "type_name": "student_addresses",
+    "field_name": "date_address_from",
+    "description": "date_address_from column in student_addresses table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "student_addresses_date_address_to": {
+    "product_name": "behavior_monitoring",
+    "type_name": "student_addresses",
+    "field_name": "date_address_to",
+    "description": "date_address_to column in student_addresses table",
+    "type": "time",
+    "database": "behavior_monitoring"
+  },
+  "student_addresses_monthly_rental": {
+    "product_name": "behavior_monitoring",
+    "type_name": "student_addresses",
+    "field_name": "monthly_rental",
+    "description": "monthly_rental column in student_addresses table",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "student_addresses_other_details": {
+    "product_name": "behavior_monitoring",
+    "type_name": "student_addresses",
+    "field_name": "other_details",
+    "description": "other_details column in student_addresses table",
+    "type": "text",
+    "database": "behavior_monitoring"
+  },
+  "students_in_detention_student_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "students_in_detention",
+    "field_name": "student_id",
+    "description": "student_id column in students_in_detention table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "students_in_detention_detention_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "students_in_detention",
+    "field_name": "detention_id",
+    "description": "detention_id column in students_in_detention table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "students_in_detention_incident_id": {
+    "product_name": "behavior_monitoring",
+    "type_name": "students_in_detention",
+    "field_name": "incident_id",
+    "description": "incident_id column in students_in_detention table (foreign key)",
+    "type": "number",
+    "database": "behavior_monitoring"
+  },
+  "breeds_breed_code": {
+    "product_name": "dog_kennels",
+    "type_name": "breeds",
+    "field_name": "breed_code",
+    "description": "breed_code column in breeds table (primary key) (foreign key)",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "breeds_breed_name": {
+    "product_name": "dog_kennels",
+    "type_name": "breeds",
+    "field_name": "breed_name",
+    "description": "breed_name column in breeds table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "charges_charge_id": {
+    "product_name": "dog_kennels",
+    "type_name": "charges",
+    "field_name": "charge_id",
+    "description": "charge_id column in charges table (primary key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "charges_charge_type": {
+    "product_name": "dog_kennels",
+    "type_name": "charges",
+    "field_name": "charge_type",
+    "description": "charge_type column in charges table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "charges_charge_amount": {
+    "product_name": "dog_kennels",
+    "type_name": "charges",
+    "field_name": "charge_amount",
+    "description": "charge_amount column in charges table",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "sizes_size_code": {
+    "product_name": "dog_kennels",
+    "type_name": "sizes",
+    "field_name": "size_code",
+    "description": "size_code column in sizes table (primary key) (foreign key)",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "sizes_size_description": {
+    "product_name": "dog_kennels",
+    "type_name": "sizes",
+    "field_name": "size_description",
+    "description": "size_description column in sizes table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "treatment_types_treatment_type_code": {
+    "product_name": "dog_kennels",
+    "type_name": "treatment_types",
+    "field_name": "treatment_type_code",
+    "description": "treatment_type_code column in treatment_types table (primary key) (foreign key)",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "treatment_types_treatment_type_description": {
+    "product_name": "dog_kennels",
+    "type_name": "treatment_types",
+    "field_name": "treatment_type_description",
+    "description": "treatment_type_description column in treatment_types table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_owner_id": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "owner_id",
+    "description": "owner_id column in owners table (primary key) (foreign key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "owners_first_name": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "first_name",
+    "description": "first_name column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_last_name": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "last_name",
+    "description": "last_name column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_street": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "street",
+    "description": "street column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_city": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "city",
+    "description": "city column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_state": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "state",
+    "description": "state column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_zip_code": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "zip_code",
+    "description": "zip_code column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_email_address": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "email_address",
+    "description": "email_address column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_home_phone": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "home_phone",
+    "description": "home_phone column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "owners_cell_number": {
+    "product_name": "dog_kennels",
+    "type_name": "owners",
+    "field_name": "cell_number",
+    "description": "cell_number column in owners table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_dog_id": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "dog_id",
+    "description": "dog_id column in dogs table (primary key) (foreign key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "dogs_owner_id": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "owner_id",
+    "description": "owner_id column in dogs table (foreign key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "dogs_abandoned_yn": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "abandoned_yn",
+    "description": "abandoned_yn column in dogs table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_breed_code": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "breed_code",
+    "description": "breed_code column in dogs table (foreign key)",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_size_code": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "size_code",
+    "description": "size_code column in dogs table (foreign key)",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_name": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "name",
+    "description": "name column in dogs table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_age": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "age",
+    "description": "age column in dogs table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_date_of_birth": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "date_of_birth",
+    "description": "date_of_birth column in dogs table",
+    "type": "time",
+    "database": "dog_kennels"
+  },
+  "dogs_gender": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "gender",
+    "description": "gender column in dogs table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_weight": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "weight",
+    "description": "weight column in dogs table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "dogs_date_arrived": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "date_arrived",
+    "description": "date_arrived column in dogs table",
+    "type": "time",
+    "database": "dog_kennels"
+  },
+  "dogs_date_adopted": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "date_adopted",
+    "description": "date_adopted column in dogs table",
+    "type": "time",
+    "database": "dog_kennels"
+  },
+  "dogs_date_departed": {
+    "product_name": "dog_kennels",
+    "type_name": "dogs",
+    "field_name": "date_departed",
+    "description": "date_departed column in dogs table",
+    "type": "time",
+    "database": "dog_kennels"
+  },
+  "professionals_professional_id": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "professional_id",
+    "description": "professional_id column in professionals table (primary key) (foreign key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "professionals_role_code": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "role_code",
+    "description": "role_code column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_first_name": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "first_name",
+    "description": "first_name column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_street": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "street",
+    "description": "street column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_city": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "city",
+    "description": "city column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_state": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "state",
+    "description": "state column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_zip_code": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "zip_code",
+    "description": "zip_code column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_last_name": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "last_name",
+    "description": "last_name column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_email_address": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "email_address",
+    "description": "email_address column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_home_phone": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "home_phone",
+    "description": "home_phone column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "professionals_cell_number": {
+    "product_name": "dog_kennels",
+    "type_name": "professionals",
+    "field_name": "cell_number",
+    "description": "cell_number column in professionals table",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "treatments_treatment_id": {
+    "product_name": "dog_kennels",
+    "type_name": "treatments",
+    "field_name": "treatment_id",
+    "description": "treatment_id column in treatments table (primary key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "treatments_dog_id": {
+    "product_name": "dog_kennels",
+    "type_name": "treatments",
+    "field_name": "dog_id",
+    "description": "dog_id column in treatments table (foreign key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "treatments_professional_id": {
+    "product_name": "dog_kennels",
+    "type_name": "treatments",
+    "field_name": "professional_id",
+    "description": "professional_id column in treatments table (foreign key)",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "treatments_treatment_type_code": {
+    "product_name": "dog_kennels",
+    "type_name": "treatments",
+    "field_name": "treatment_type_code",
+    "description": "treatment_type_code column in treatments table (foreign key)",
+    "type": "text",
+    "database": "dog_kennels"
+  },
+  "treatments_date_of_treatment": {
+    "product_name": "dog_kennels",
+    "type_name": "treatments",
+    "field_name": "date_of_treatment",
+    "description": "date_of_treatment column in treatments table",
+    "type": "time",
+    "database": "dog_kennels"
+  },
+  "treatments_cost_of_treatment": {
+    "product_name": "dog_kennels",
+    "type_name": "treatments",
+    "field_name": "cost_of_treatment",
+    "description": "cost_of_treatment column in treatments table",
+    "type": "number",
+    "database": "dog_kennels"
+  },
+  "tv_channel_id": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "id",
+    "description": "id column in tv_channel table (primary key) (foreign key)",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_series_name": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "series_name",
+    "description": "series_name column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_country": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "country",
+    "description": "Country column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_language": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "language",
+    "description": "Language column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_content": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "content",
+    "description": "Content column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_pixel_aspect_ratio_par": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "pixel_aspect_ratio_par",
+    "description": "Pixel_aspect_ratio_PAR column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_hight_definition_tv": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "hight_definition_tv",
+    "description": "Hight_definition_TV column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_pay_per_view_ppv": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "pay_per_view_ppv",
+    "description": "Pay_per_view_PPV column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_channel_package_option": {
+    "product_name": "tvshow",
+    "type_name": "tv_channel",
+    "field_name": "package_option",
+    "description": "Package_Option column in tv_channel table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_series_id": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "id",
+    "description": "id column in tv_series table (primary key)",
+    "type": "number",
+    "database": "tvshow"
+  },
+  "tv_series_episode": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "episode",
+    "description": "Episode column in tv_series table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_series_air_date": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "air_date",
+    "description": "Air_Date column in tv_series table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_series_rating": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "rating",
+    "description": "Rating column in tv_series table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_series_share": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "share",
+    "description": "Share column in tv_series table",
+    "type": "number",
+    "database": "tvshow"
+  },
+  "tv_series_18_49_rating_share": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "18_49_rating_share",
+    "description": "18_49_Rating_Share column in tv_series table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_series_viewers_m": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "viewers_m",
+    "description": "Viewers_m column in tv_series table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "tv_series_weekly_rank": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "weekly_rank",
+    "description": "Weekly_Rank column in tv_series table",
+    "type": "number",
+    "database": "tvshow"
+  },
+  "tv_series_channel": {
+    "product_name": "tvshow",
+    "type_name": "tv_series",
+    "field_name": "channel",
+    "description": "Channel column in tv_series table (foreign key)",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "cartoon_id": {
+    "product_name": "tvshow",
+    "type_name": "cartoon",
+    "field_name": "id",
+    "description": "id column in cartoon table (primary key)",
+    "type": "number",
+    "database": "tvshow"
+  },
+  "cartoon_title": {
+    "product_name": "tvshow",
+    "type_name": "cartoon",
+    "field_name": "title",
+    "description": "Title column in cartoon table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "cartoon_directed_by": {
+    "product_name": "tvshow",
+    "type_name": "cartoon",
+    "field_name": "directed_by",
+    "description": "Directed_by column in cartoon table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "cartoon_written_by": {
+    "product_name": "tvshow",
+    "type_name": "cartoon",
+    "field_name": "written_by",
+    "description": "Written_by column in cartoon table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "cartoon_original_air_date": {
+    "product_name": "tvshow",
+    "type_name": "cartoon",
+    "field_name": "original_air_date",
+    "description": "Original_air_date column in cartoon table",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "cartoon_production_code": {
+    "product_name": "tvshow",
+    "type_name": "cartoon",
+    "field_name": "production_code",
+    "description": "Production_code column in cartoon table",
+    "type": "number",
+    "database": "tvshow"
+  },
+  "cartoon_channel": {
+    "product_name": "tvshow",
+    "type_name": "cartoon",
+    "field_name": "channel",
+    "description": "Channel column in cartoon table (foreign key)",
+    "type": "text",
+    "database": "tvshow"
+  },
+  "stadium_stadium_id": {
+    "product_name": "concert_singer",
+    "type_name": "stadium",
+    "field_name": "stadium_id",
+    "description": "Stadium_ID column in stadium table (primary key) (foreign key)",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "stadium_location": {
+    "product_name": "concert_singer",
+    "type_name": "stadium",
+    "field_name": "location",
+    "description": "Location column in stadium table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "stadium_name": {
+    "product_name": "concert_singer",
+    "type_name": "stadium",
+    "field_name": "name",
+    "description": "Name column in stadium table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "stadium_capacity": {
+    "product_name": "concert_singer",
+    "type_name": "stadium",
+    "field_name": "capacity",
+    "description": "Capacity column in stadium table",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "stadium_highest": {
+    "product_name": "concert_singer",
+    "type_name": "stadium",
+    "field_name": "highest",
+    "description": "Highest column in stadium table",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "stadium_lowest": {
+    "product_name": "concert_singer",
+    "type_name": "stadium",
+    "field_name": "lowest",
+    "description": "Lowest column in stadium table",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "stadium_average": {
+    "product_name": "concert_singer",
+    "type_name": "stadium",
+    "field_name": "average",
+    "description": "Average column in stadium table",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "singer_singer_id": {
+    "product_name": "singer",
+    "type_name": "singer",
+    "field_name": "singer_id",
+    "description": "Singer_ID column in singer table (primary key) (foreign key)",
+    "type": "number",
+    "database": "singer"
+  },
+  "singer_name": {
+    "product_name": "singer",
+    "type_name": "singer",
+    "field_name": "name",
+    "description": "Name column in singer table",
+    "type": "text",
+    "database": "singer"
+  },
+  "singer_country": {
+    "product_name": "concert_singer",
+    "type_name": "singer",
+    "field_name": "country",
+    "description": "Country column in singer table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "singer_song_name": {
+    "product_name": "concert_singer",
+    "type_name": "singer",
+    "field_name": "song_name",
+    "description": "Song_Name column in singer table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "singer_song_release_year": {
+    "product_name": "concert_singer",
+    "type_name": "singer",
+    "field_name": "song_release_year",
+    "description": "Song_release_year column in singer table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "singer_age": {
+    "product_name": "concert_singer",
+    "type_name": "singer",
+    "field_name": "age",
+    "description": "Age column in singer table",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "singer_is_male": {
+    "product_name": "concert_singer",
+    "type_name": "singer",
+    "field_name": "is_male",
+    "description": "Is_male column in singer table",
+    "type": "others",
+    "database": "concert_singer"
+  },
+  "concert_concert_id": {
+    "product_name": "concert_singer",
+    "type_name": "concert",
+    "field_name": "concert_id",
+    "description": "concert_ID column in concert table (primary key) (foreign key)",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "concert_concert_name": {
+    "product_name": "concert_singer",
+    "type_name": "concert",
+    "field_name": "concert_name",
+    "description": "concert_Name column in concert table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "concert_theme": {
+    "product_name": "concert_singer",
+    "type_name": "concert",
+    "field_name": "theme",
+    "description": "Theme column in concert table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "concert_stadium_id": {
+    "product_name": "concert_singer",
+    "type_name": "concert",
+    "field_name": "stadium_id",
+    "description": "Stadium_ID column in concert table (foreign key)",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "concert_year": {
+    "product_name": "concert_singer",
+    "type_name": "concert",
+    "field_name": "year",
+    "description": "Year column in concert table",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "singer_in_concert_concert_id": {
+    "product_name": "concert_singer",
+    "type_name": "singer_in_concert",
+    "field_name": "concert_id",
+    "description": "concert_ID column in singer_in_concert table (primary key) (foreign key)",
+    "type": "number",
+    "database": "concert_singer"
+  },
+  "singer_in_concert_singer_id": {
+    "product_name": "concert_singer",
+    "type_name": "singer_in_concert",
+    "field_name": "singer_id",
+    "description": "Singer_ID column in singer_in_concert table (foreign key)",
+    "type": "text",
+    "database": "concert_singer"
+  },
+  "voting_record_stuid": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "stuid",
+    "description": "StuID column in voting_record table (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "voting_record_registration_date": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "registration_date",
+    "description": "Registration_Date column in voting_record table",
+    "type": "text",
+    "database": "voter_2"
+  },
+  "voting_record_election_cycle": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "election_cycle",
+    "description": "Election_Cycle column in voting_record table",
+    "type": "text",
+    "database": "voter_2"
+  },
+  "voting_record_president_vote": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "president_vote",
+    "description": "President_Vote column in voting_record table (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "voting_record_vice_president_vote": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "vice_president_vote",
+    "description": "Vice_President_Vote column in voting_record table (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "voting_record_secretary_vote": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "secretary_vote",
+    "description": "Secretary_Vote column in voting_record table (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "voting_record_treasurer_vote": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "treasurer_vote",
+    "description": "Treasurer_Vote column in voting_record table (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "voting_record_class_president_vote": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "class_president_vote",
+    "description": "Class_President_Vote column in voting_record table (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "voting_record_class_senator_vote": {
+    "product_name": "voter_2",
+    "type_name": "voting_record",
+    "field_name": "class_senator_vote",
+    "description": "Class_Senator_Vote column in voting_record table (foreign key)",
+    "type": "number",
+    "database": "voter_2"
+  },
+  "players_player_id": {
+    "product_name": "wta_1",
+    "type_name": "players",
+    "field_name": "player_id",
+    "description": "player_id column in players table (primary key) (foreign key)",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "players_first_name": {
+    "product_name": "wta_1",
+    "type_name": "players",
+    "field_name": "first_name",
+    "description": "first_name column in players table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "players_last_name": {
+    "product_name": "wta_1",
+    "type_name": "players",
+    "field_name": "last_name",
+    "description": "last_name column in players table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "players_hand": {
+    "product_name": "wta_1",
+    "type_name": "players",
+    "field_name": "hand",
+    "description": "hand column in players table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "players_birth_date": {
+    "product_name": "wta_1",
+    "type_name": "players",
+    "field_name": "birth_date",
+    "description": "birth_date column in players table",
+    "type": "time",
+    "database": "wta_1"
+  },
+  "players_country_code": {
+    "product_name": "wta_1",
+    "type_name": "players",
+    "field_name": "country_code",
+    "description": "country_code column in players table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_best_of": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "best_of",
+    "description": "best_of column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_draw_size": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "draw_size",
+    "description": "draw_size column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_loser_age": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_age",
+    "description": "loser_age column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_loser_entry": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_entry",
+    "description": "loser_entry column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_loser_hand": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_hand",
+    "description": "loser_hand column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_loser_ht": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_ht",
+    "description": "loser_ht column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_loser_id": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_id",
+    "description": "loser_id column in matches table (foreign key)",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_loser_ioc": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_ioc",
+    "description": "loser_ioc column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_loser_name": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_name",
+    "description": "loser_name column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_loser_rank": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_rank",
+    "description": "loser_rank column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_loser_rank_points": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_rank_points",
+    "description": "loser_rank_points column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_loser_seed": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "loser_seed",
+    "description": "loser_seed column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_match_num": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "match_num",
+    "description": "match_num column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_minutes": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "minutes",
+    "description": "minutes column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_round": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "round",
+    "description": "round column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_score": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "score",
+    "description": "score column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_surface": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "surface",
+    "description": "surface column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_tourney_date": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "tourney_date",
+    "description": "tourney_date column in matches table",
+    "type": "time",
+    "database": "wta_1"
+  },
+  "matches_tourney_id": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "tourney_id",
+    "description": "tourney_id column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_tourney_level": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "tourney_level",
+    "description": "tourney_level column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_tourney_name": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "tourney_name",
+    "description": "tourney_name column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_winner_age": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_age",
+    "description": "winner_age column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_winner_entry": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_entry",
+    "description": "winner_entry column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_winner_hand": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_hand",
+    "description": "winner_hand column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_winner_ht": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_ht",
+    "description": "winner_ht column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_winner_id": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_id",
+    "description": "winner_id column in matches table (foreign key)",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_winner_ioc": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_ioc",
+    "description": "winner_ioc column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_winner_name": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_name",
+    "description": "winner_name column in matches table",
+    "type": "text",
+    "database": "wta_1"
+  },
+  "matches_winner_rank": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_rank",
+    "description": "winner_rank column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_winner_rank_points": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_rank_points",
+    "description": "winner_rank_points column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_winner_seed": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "winner_seed",
+    "description": "winner_seed column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "matches_year": {
+    "product_name": "wta_1",
+    "type_name": "matches",
+    "field_name": "year",
+    "description": "year column in matches table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "rankings_ranking_date": {
+    "product_name": "wta_1",
+    "type_name": "rankings",
+    "field_name": "ranking_date",
+    "description": "ranking_date column in rankings table",
+    "type": "time",
+    "database": "wta_1"
+  },
+  "rankings_ranking": {
+    "product_name": "wta_1",
+    "type_name": "rankings",
+    "field_name": "ranking",
+    "description": "ranking column in rankings table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "rankings_player_id": {
+    "product_name": "wta_1",
+    "type_name": "rankings",
+    "field_name": "player_id",
+    "description": "player_id column in rankings table (foreign key)",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "rankings_ranking_points": {
+    "product_name": "wta_1",
+    "type_name": "rankings",
+    "field_name": "ranking_points",
+    "description": "ranking_points column in rankings table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "rankings_tours": {
+    "product_name": "wta_1",
+    "type_name": "rankings",
+    "field_name": "tours",
+    "description": "tours column in rankings table",
+    "type": "number",
+    "database": "wta_1"
+  },
+  "battle_id": {
+    "product_name": "battle_death",
+    "type_name": "battle",
+    "field_name": "id",
+    "description": "id column in battle table (primary key) (foreign key)",
+    "type": "number",
+    "database": "battle_death"
+  },
+  "battle_name": {
+    "product_name": "battle_death",
+    "type_name": "battle",
+    "field_name": "name",
+    "description": "name column in battle table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "battle_date": {
+    "product_name": "battle_death",
+    "type_name": "battle",
+    "field_name": "date",
+    "description": "date column in battle table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "battle_bulgarian_commander": {
+    "product_name": "battle_death",
+    "type_name": "battle",
+    "field_name": "bulgarian_commander",
+    "description": "bulgarian_commander column in battle table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "battle_latin_commander": {
+    "product_name": "battle_death",
+    "type_name": "battle",
+    "field_name": "latin_commander",
+    "description": "latin_commander column in battle table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "battle_result": {
+    "product_name": "battle_death",
+    "type_name": "battle",
+    "field_name": "result",
+    "description": "result column in battle table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "ship_lost_in_battle": {
+    "product_name": "battle_death",
+    "type_name": "ship",
+    "field_name": "lost_in_battle",
+    "description": "lost_in_battle column in ship table (foreign key)",
+    "type": "number",
+    "database": "battle_death"
+  },
+  "ship_id": {
+    "product_name": "battle_death",
+    "type_name": "ship",
+    "field_name": "id",
+    "description": "id column in ship table (primary key) (foreign key)",
+    "type": "number",
+    "database": "battle_death"
+  },
+  "ship_ship_type": {
+    "product_name": "battle_death",
+    "type_name": "ship",
+    "field_name": "ship_type",
+    "description": "ship_type column in ship table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "ship_location": {
+    "product_name": "battle_death",
+    "type_name": "ship",
+    "field_name": "location",
+    "description": "location column in ship table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "ship_disposition_of_ship": {
+    "product_name": "battle_death",
+    "type_name": "ship",
+    "field_name": "disposition_of_ship",
+    "description": "disposition_of_ship column in ship table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "death_caused_by_ship_id": {
+    "product_name": "battle_death",
+    "type_name": "death",
+    "field_name": "caused_by_ship_id",
+    "description": "caused_by_ship_id column in death table (foreign key)",
+    "type": "number",
+    "database": "battle_death"
+  },
+  "death_id": {
+    "product_name": "battle_death",
+    "type_name": "death",
+    "field_name": "id",
+    "description": "id column in death table (primary key)",
+    "type": "number",
+    "database": "battle_death"
+  },
+  "death_note": {
+    "product_name": "battle_death",
+    "type_name": "death",
+    "field_name": "note",
+    "description": "note column in death table",
+    "type": "text",
+    "database": "battle_death"
+  },
+  "death_killed": {
+    "product_name": "battle_death",
+    "type_name": "death",
+    "field_name": "killed",
+    "description": "killed column in death table",
+    "type": "number",
+    "database": "battle_death"
+  },
+  "death_injured": {
+    "product_name": "battle_death",
+    "type_name": "death",
+    "field_name": "injured",
+    "description": "injured column in death table",
+    "type": "number",
+    "database": "battle_death"
+  },
+  "employee_employee_id": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "employee",
+    "field_name": "employee_id",
+    "description": "Employee_ID column in employee table (primary key) (foreign key)",
+    "type": "number",
+    "database": "employee_hire_evaluation"
+  },
+  "employee_name": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "employee",
+    "field_name": "name",
+    "description": "Name column in employee table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "employee_age": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "employee",
+    "field_name": "age",
+    "description": "Age column in employee table",
+    "type": "number",
+    "database": "employee_hire_evaluation"
+  },
+  "employee_city": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "employee",
+    "field_name": "city",
+    "description": "City column in employee table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "shop_shop_id": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "shop",
+    "field_name": "shop_id",
+    "description": "Shop_ID column in shop table (primary key) (foreign key)",
+    "type": "number",
+    "database": "employee_hire_evaluation"
+  },
+  "shop_name": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "shop",
+    "field_name": "name",
+    "description": "Name column in shop table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "shop_location": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "shop",
+    "field_name": "location",
+    "description": "Location column in shop table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "shop_district": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "shop",
+    "field_name": "district",
+    "description": "District column in shop table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "shop_number_products": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "shop",
+    "field_name": "number_products",
+    "description": "Number_products column in shop table",
+    "type": "number",
+    "database": "employee_hire_evaluation"
+  },
+  "shop_manager_name": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "shop",
+    "field_name": "manager_name",
+    "description": "Manager_name column in shop table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "hiring_shop_id": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "hiring",
+    "field_name": "shop_id",
+    "description": "Shop_ID column in hiring table (foreign key)",
+    "type": "number",
+    "database": "employee_hire_evaluation"
+  },
+  "hiring_employee_id": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "hiring",
+    "field_name": "employee_id",
+    "description": "Employee_ID column in hiring table (primary key) (foreign key)",
+    "type": "number",
+    "database": "employee_hire_evaluation"
+  },
+  "hiring_start_from": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "hiring",
+    "field_name": "start_from",
+    "description": "Start_from column in hiring table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "hiring_is_full_time": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "hiring",
+    "field_name": "is_full_time",
+    "description": "Is_full_time column in hiring table",
+    "type": "others",
+    "database": "employee_hire_evaluation"
+  },
+  "evaluation_employee_id": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "evaluation",
+    "field_name": "employee_id",
+    "description": "Employee_ID column in evaluation table (primary key) (foreign key)",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "evaluation_year_awarded": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "evaluation",
+    "field_name": "year_awarded",
+    "description": "Year_awarded column in evaluation table",
+    "type": "text",
+    "database": "employee_hire_evaluation"
+  },
+  "evaluation_bonus": {
+    "product_name": "employee_hire_evaluation",
+    "type_name": "evaluation",
+    "field_name": "bonus",
+    "description": "Bonus column in evaluation table",
+    "type": "number",
+    "database": "employee_hire_evaluation"
+  },
+  "highschooler_id": {
+    "product_name": "network_1",
+    "type_name": "highschooler",
+    "field_name": "id",
+    "description": "ID column in highschooler table (primary key) (foreign key)",
+    "type": "number",
+    "database": "network_1"
+  },
+  "highschooler_name": {
+    "product_name": "network_1",
+    "type_name": "highschooler",
+    "field_name": "name",
+    "description": "name column in highschooler table",
+    "type": "text",
+    "database": "network_1"
+  },
+  "highschooler_grade": {
+    "product_name": "network_1",
+    "type_name": "highschooler",
+    "field_name": "grade",
+    "description": "grade column in highschooler table",
+    "type": "number",
+    "database": "network_1"
+  },
+  "friend_student_id": {
+    "product_name": "network_1",
+    "type_name": "friend",
+    "field_name": "student_id",
+    "description": "student_id column in friend table (primary key) (foreign key)",
+    "type": "number",
+    "database": "network_1"
+  },
+  "friend_friend_id": {
+    "product_name": "network_1",
+    "type_name": "friend",
+    "field_name": "friend_id",
+    "description": "friend_id column in friend table (foreign key)",
+    "type": "number",
+    "database": "network_1"
+  },
+  "likes_student_id": {
+    "product_name": "network_1",
+    "type_name": "likes",
+    "field_name": "student_id",
+    "description": "student_id column in likes table (primary key) (foreign key)",
+    "type": "number",
+    "database": "network_1"
+  },
+  "likes_liked_id": {
+    "product_name": "network_1",
+    "type_name": "likes",
+    "field_name": "liked_id",
+    "description": "liked_id column in likes table (foreign key)",
+    "type": "number",
+    "database": "network_1"
+  },
+  "singer_birth_year": {
+    "product_name": "singer",
+    "type_name": "singer",
+    "field_name": "birth_year",
+    "description": "Birth_Year column in singer table",
+    "type": "number",
+    "database": "singer"
+  },
+  "singer_net_worth_millions": {
+    "product_name": "singer",
+    "type_name": "singer",
+    "field_name": "net_worth_millions",
+    "description": "Net_Worth_Millions column in singer table",
+    "type": "number",
+    "database": "singer"
+  },
+  "singer_citizenship": {
+    "product_name": "singer",
+    "type_name": "singer",
+    "field_name": "citizenship",
+    "description": "Citizenship column in singer table",
+    "type": "text",
+    "database": "singer"
+  },
+  "song_song_id": {
+    "product_name": "singer",
+    "type_name": "song",
+    "field_name": "song_id",
+    "description": "Song_ID column in song table (primary key)",
+    "type": "number",
+    "database": "singer"
+  },
+  "song_title": {
+    "product_name": "singer",
+    "type_name": "song",
+    "field_name": "title",
+    "description": "Title column in song table",
+    "type": "text",
+    "database": "singer"
+  },
+  "song_singer_id": {
+    "product_name": "singer",
+    "type_name": "song",
+    "field_name": "singer_id",
+    "description": "Singer_ID column in song table (foreign key)",
+    "type": "number",
+    "database": "singer"
+  },
+  "song_sales": {
+    "product_name": "singer",
+    "type_name": "song",
+    "field_name": "sales",
+    "description": "Sales column in song table",
+    "type": "number",
+    "database": "singer"
+  },
+  "song_highest_position": {
+    "product_name": "singer",
+    "type_name": "song",
+    "field_name": "highest_position",
+    "description": "Highest_Position column in song table",
+    "type": "number",
+    "database": "singer"
+  },
+  "courses_course_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "courses",
+    "field_name": "course_id",
+    "description": "course_id column in courses table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "courses_course_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "courses",
+    "field_name": "course_name",
+    "description": "course_name column in courses table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "courses_course_description": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "courses",
+    "field_name": "course_description",
+    "description": "course_description column in courses table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "courses_other_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "courses",
+    "field_name": "other_details",
+    "description": "other_details column in courses table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "departments_department_description": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "departments",
+    "field_name": "department_description",
+    "description": "department_description column in departments table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "departments_other_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "departments",
+    "field_name": "other_details",
+    "description": "other_details column in departments table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "degree_programs_degree_program_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "degree_programs",
+    "field_name": "degree_program_id",
+    "description": "degree_program_id column in degree_programs table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "degree_programs_department_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "degree_programs",
+    "field_name": "department_id",
+    "description": "department_id column in degree_programs table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "degree_programs_degree_summary_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "degree_programs",
+    "field_name": "degree_summary_name",
+    "description": "degree_summary_name column in degree_programs table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "degree_programs_degree_summary_description": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "degree_programs",
+    "field_name": "degree_summary_description",
+    "description": "degree_summary_description column in degree_programs table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "degree_programs_other_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "degree_programs",
+    "field_name": "other_details",
+    "description": "other_details column in degree_programs table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "sections_section_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "sections",
+    "field_name": "section_id",
+    "description": "section_id column in sections table (primary key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "sections_course_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "sections",
+    "field_name": "course_id",
+    "description": "course_id column in sections table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "sections_section_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "sections",
+    "field_name": "section_name",
+    "description": "section_name column in sections table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "sections_section_description": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "sections",
+    "field_name": "section_description",
+    "description": "section_description column in sections table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "sections_other_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "sections",
+    "field_name": "other_details",
+    "description": "other_details column in sections table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "semesters_semester_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "semesters",
+    "field_name": "semester_id",
+    "description": "semester_id column in semesters table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "semesters_semester_name": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "semesters",
+    "field_name": "semester_name",
+    "description": "semester_name column in semesters table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "semesters_semester_description": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "semesters",
+    "field_name": "semester_description",
+    "description": "semester_description column in semesters table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "semesters_other_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "semesters",
+    "field_name": "other_details",
+    "description": "other_details column in semesters table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_current_address_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "current_address_id",
+    "description": "current_address_id column in students table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "students_permanent_address_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "permanent_address_id",
+    "description": "permanent_address_id column in students table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "students_ssn": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "ssn",
+    "description": "ssn column in students table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "students_date_first_registered": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "date_first_registered",
+    "description": "date_first_registered column in students table",
+    "type": "time",
+    "database": "student_transcripts_tracking"
+  },
+  "students_date_left": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "students",
+    "field_name": "date_left",
+    "description": "date_left column in students table",
+    "type": "time",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_student_enrolment_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment",
+    "field_name": "student_enrolment_id",
+    "description": "student_enrolment_id column in student_enrolment table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_degree_program_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment",
+    "field_name": "degree_program_id",
+    "description": "degree_program_id column in student_enrolment table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_semester_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment",
+    "field_name": "semester_id",
+    "description": "semester_id column in student_enrolment table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_student_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment",
+    "field_name": "student_id",
+    "description": "student_id column in student_enrolment table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_other_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment",
+    "field_name": "other_details",
+    "description": "other_details column in student_enrolment table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_courses_student_course_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment_courses",
+    "field_name": "student_course_id",
+    "description": "student_course_id column in student_enrolment_courses table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_courses_course_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment_courses",
+    "field_name": "course_id",
+    "description": "course_id column in student_enrolment_courses table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "student_enrolment_courses_student_enrolment_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "student_enrolment_courses",
+    "field_name": "student_enrolment_id",
+    "description": "student_enrolment_id column in student_enrolment_courses table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "transcripts_transcript_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "transcripts",
+    "field_name": "transcript_id",
+    "description": "transcript_id column in transcripts table (primary key) (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "transcripts_transcript_date": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "transcripts",
+    "field_name": "transcript_date",
+    "description": "transcript_date column in transcripts table",
+    "type": "time",
+    "database": "student_transcripts_tracking"
+  },
+  "transcripts_other_details": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "transcripts",
+    "field_name": "other_details",
+    "description": "other_details column in transcripts table",
+    "type": "text",
+    "database": "student_transcripts_tracking"
+  },
+  "transcript_contents_student_course_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "transcript_contents",
+    "field_name": "student_course_id",
+    "description": "student_course_id column in transcript_contents table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "transcript_contents_transcript_id": {
+    "product_name": "student_transcripts_tracking",
+    "type_name": "transcript_contents",
+    "field_name": "transcript_id",
+    "description": "transcript_id column in transcript_contents table (foreign key)",
+    "type": "number",
+    "database": "student_transcripts_tracking"
+  },
+  "continents_contid": {
+    "product_name": "car_1",
+    "type_name": "continents",
+    "field_name": "contid",
+    "description": "ContId column in continents table (primary key) (foreign key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "continents_continent": {
+    "product_name": "car_1",
+    "type_name": "continents",
+    "field_name": "continent",
+    "description": "Continent column in continents table",
+    "type": "text",
+    "database": "car_1"
+  },
+  "countries_countryid": {
+    "product_name": "car_1",
+    "type_name": "countries",
+    "field_name": "countryid",
+    "description": "CountryId column in countries table (primary key) (foreign key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "countries_countryname": {
+    "product_name": "car_1",
+    "type_name": "countries",
+    "field_name": "countryname",
+    "description": "CountryName column in countries table",
+    "type": "text",
+    "database": "car_1"
+  },
+  "countries_continent": {
+    "product_name": "car_1",
+    "type_name": "countries",
+    "field_name": "continent",
+    "description": "Continent column in countries table (foreign key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "car_makers_id": {
+    "product_name": "car_1",
+    "type_name": "car_makers",
+    "field_name": "id",
+    "description": "Id column in car_makers table (primary key) (foreign key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "car_makers_maker": {
+    "product_name": "car_1",
+    "type_name": "car_makers",
+    "field_name": "maker",
+    "description": "Maker column in car_makers table",
+    "type": "text",
+    "database": "car_1"
+  },
+  "car_makers_fullname": {
+    "product_name": "car_1",
+    "type_name": "car_makers",
+    "field_name": "fullname",
+    "description": "FullName column in car_makers table",
+    "type": "text",
+    "database": "car_1"
+  },
+  "car_makers_country": {
+    "product_name": "car_1",
+    "type_name": "car_makers",
+    "field_name": "country",
+    "description": "Country column in car_makers table (foreign key)",
+    "type": "text",
+    "database": "car_1"
+  },
+  "model_list_modelid": {
+    "product_name": "car_1",
+    "type_name": "model_list",
+    "field_name": "modelid",
+    "description": "ModelId column in model_list table (primary key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "model_list_maker": {
+    "product_name": "car_1",
+    "type_name": "model_list",
+    "field_name": "maker",
+    "description": "Maker column in model_list table (foreign key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "model_list_model": {
+    "product_name": "car_1",
+    "type_name": "model_list",
+    "field_name": "model",
+    "description": "Model column in model_list table (foreign key)",
+    "type": "text",
+    "database": "car_1"
+  },
+  "car_names_makeid": {
+    "product_name": "car_1",
+    "type_name": "car_names",
+    "field_name": "makeid",
+    "description": "MakeId column in car_names table (primary key) (foreign key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "car_names_model": {
+    "product_name": "car_1",
+    "type_name": "car_names",
+    "field_name": "model",
+    "description": "Model column in car_names table (foreign key)",
+    "type": "text",
+    "database": "car_1"
+  },
+  "car_names_make": {
+    "product_name": "car_1",
+    "type_name": "car_names",
+    "field_name": "make",
+    "description": "Make column in car_names table",
+    "type": "text",
+    "database": "car_1"
+  },
+  "cars_data_id": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "id",
+    "description": "Id column in cars_data table (primary key) (foreign key)",
+    "type": "number",
+    "database": "car_1"
+  },
+  "cars_data_mpg": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "mpg",
+    "description": "MPG column in cars_data table",
+    "type": "text",
+    "database": "car_1"
+  },
+  "cars_data_cylinders": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "cylinders",
+    "description": "Cylinders column in cars_data table",
+    "type": "number",
+    "database": "car_1"
+  },
+  "cars_data_edispl": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "edispl",
+    "description": "Edispl column in cars_data table",
+    "type": "number",
+    "database": "car_1"
+  },
+  "cars_data_horsepower": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "horsepower",
+    "description": "Horsepower column in cars_data table",
+    "type": "text",
+    "database": "car_1"
+  },
+  "cars_data_weight": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "weight",
+    "description": "Weight column in cars_data table",
+    "type": "number",
+    "database": "car_1"
+  },
+  "cars_data_accelerate": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "accelerate",
+    "description": "Accelerate column in cars_data table",
+    "type": "number",
+    "database": "car_1"
+  },
+  "cars_data_year": {
+    "product_name": "car_1",
+    "type_name": "cars_data",
+    "field_name": "year",
+    "description": "Year column in cars_data table",
+    "type": "number",
+    "database": "car_1"
+  },
+  "addresses_line_1_number_building": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "addresses",
+    "field_name": "line_1_number_building",
+    "description": "line_1_number_building column in addresses table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "products_product_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "products",
+    "field_name": "product_id",
+    "description": "product_id column in products table (primary key) (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "products_product_type_code": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "products",
+    "field_name": "product_type_code",
+    "description": "product_type_code column in products table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "products_product_name": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "products",
+    "field_name": "product_name",
+    "description": "product_name column in products table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "products_product_price": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "products",
+    "field_name": "product_price",
+    "description": "product_price column in products table",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "customers_customer_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customers",
+    "field_name": "customer_id",
+    "description": "customer_id column in customers table (primary key) (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "customers_payment_method_code": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customers",
+    "field_name": "payment_method_code",
+    "description": "payment_method_code column in customers table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "customers_customer_number": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customers",
+    "field_name": "customer_number",
+    "description": "customer_number column in customers table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "customers_customer_name": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customers",
+    "field_name": "customer_name",
+    "description": "customer_name column in customers table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "customers_customer_address": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customers",
+    "field_name": "customer_address",
+    "description": "customer_address column in customers table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "customers_customer_phone": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customers",
+    "field_name": "customer_phone",
+    "description": "customer_phone column in customers table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "customers_customer_email": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customers",
+    "field_name": "customer_email",
+    "description": "customer_email column in customers table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "contacts_contact_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "contacts",
+    "field_name": "contact_id",
+    "description": "contact_id column in contacts table (primary key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "contacts_customer_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "contacts",
+    "field_name": "customer_id",
+    "description": "customer_id column in contacts table",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "contacts_gender": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "contacts",
+    "field_name": "gender",
+    "description": "gender column in contacts table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "contacts_first_name": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "contacts",
+    "field_name": "first_name",
+    "description": "first_name column in contacts table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "contacts_last_name": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "contacts",
+    "field_name": "last_name",
+    "description": "last_name column in contacts table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "contacts_contact_phone": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "contacts",
+    "field_name": "contact_phone",
+    "description": "contact_phone column in contacts table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_address_history_customer_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_address_history",
+    "field_name": "customer_id",
+    "description": "customer_id column in customer_address_history table (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_address_history_address_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_address_history",
+    "field_name": "address_id",
+    "description": "address_id column in customer_address_history table (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_address_history_date_from": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_address_history",
+    "field_name": "date_from",
+    "description": "date_from column in customer_address_history table",
+    "type": "time",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_address_history_date_to": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_address_history",
+    "field_name": "date_to",
+    "description": "date_to column in customer_address_history table",
+    "type": "time",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_orders_order_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_orders",
+    "field_name": "order_id",
+    "description": "order_id column in customer_orders table (primary key) (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_orders_customer_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_orders",
+    "field_name": "customer_id",
+    "description": "customer_id column in customer_orders table (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_orders_order_date": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_orders",
+    "field_name": "order_date",
+    "description": "order_date column in customer_orders table",
+    "type": "time",
+    "database": "customers_and_products_contacts"
+  },
+  "customer_orders_order_status_code": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "customer_orders",
+    "field_name": "order_status_code",
+    "description": "order_status_code column in customer_orders table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "order_items_order_item_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "order_items",
+    "field_name": "order_item_id",
+    "description": "order_item_id column in order_items table",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "order_items_order_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "order_items",
+    "field_name": "order_id",
+    "description": "order_id column in order_items table (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "order_items_product_id": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "order_items",
+    "field_name": "product_id",
+    "description": "product_id column in order_items table (foreign key)",
+    "type": "number",
+    "database": "customers_and_products_contacts"
+  },
+  "order_items_order_quantity": {
+    "product_name": "customers_and_products_contacts",
+    "type_name": "order_items",
+    "field_name": "order_quantity",
+    "description": "order_quantity column in order_items table",
+    "type": "text",
+    "database": "customers_and_products_contacts"
+  },
+  "course_course_id": {
+    "product_name": "course_teach",
+    "type_name": "course",
+    "field_name": "course_id",
+    "description": "Course_ID column in course table (primary key) (foreign key)",
+    "type": "number",
+    "database": "course_teach"
+  },
+  "course_staring_date": {
+    "product_name": "course_teach",
+    "type_name": "course",
+    "field_name": "staring_date",
+    "description": "Staring_Date column in course table",
+    "type": "text",
+    "database": "course_teach"
+  },
+  "course_course": {
+    "product_name": "course_teach",
+    "type_name": "course",
+    "field_name": "course",
+    "description": "Course column in course table",
+    "type": "text",
+    "database": "course_teach"
+  },
+  "teacher_teacher_id": {
+    "product_name": "course_teach",
+    "type_name": "teacher",
+    "field_name": "teacher_id",
+    "description": "Teacher_ID column in teacher table (primary key) (foreign key)",
+    "type": "number",
+    "database": "course_teach"
+  },
+  "teacher_name": {
+    "product_name": "course_teach",
+    "type_name": "teacher",
+    "field_name": "name",
+    "description": "Name column in teacher table",
+    "type": "text",
+    "database": "course_teach"
+  },
+  "teacher_age": {
+    "product_name": "course_teach",
+    "type_name": "teacher",
+    "field_name": "age",
+    "description": "Age column in teacher table",
+    "type": "text",
+    "database": "course_teach"
+  },
+  "teacher_hometown": {
+    "product_name": "course_teach",
+    "type_name": "teacher",
+    "field_name": "hometown",
+    "description": "Hometown column in teacher table",
+    "type": "text",
+    "database": "course_teach"
+  },
+  "course_arrange_course_id": {
+    "product_name": "course_teach",
+    "type_name": "course_arrange",
+    "field_name": "course_id",
+    "description": "Course_ID column in course_arrange table (primary key) (foreign key)",
+    "type": "number",
+    "database": "course_teach"
+  },
+  "course_arrange_teacher_id": {
+    "product_name": "course_teach",
+    "type_name": "course_arrange",
+    "field_name": "teacher_id",
+    "description": "Teacher_ID column in course_arrange table (foreign key)",
+    "type": "number",
+    "database": "course_teach"
+  },
+  "course_arrange_grade": {
+    "product_name": "course_teach",
+    "type_name": "course_arrange",
+    "field_name": "grade",
+    "description": "Grade column in course_arrange table",
+    "type": "number",
+    "database": "course_teach"
+  },
+  "conductor_conductor_id": {
+    "product_name": "orchestra",
+    "type_name": "conductor",
+    "field_name": "conductor_id",
+    "description": "Conductor_ID column in conductor table (primary key) (foreign key)",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "conductor_name": {
+    "product_name": "orchestra",
+    "type_name": "conductor",
+    "field_name": "name",
+    "description": "Name column in conductor table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "conductor_age": {
+    "product_name": "orchestra",
+    "type_name": "conductor",
+    "field_name": "age",
+    "description": "Age column in conductor table",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "conductor_nationality": {
+    "product_name": "orchestra",
+    "type_name": "conductor",
+    "field_name": "nationality",
+    "description": "Nationality column in conductor table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "conductor_year_of_work": {
+    "product_name": "orchestra",
+    "type_name": "conductor",
+    "field_name": "year_of_work",
+    "description": "Year_of_Work column in conductor table",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "orchestra_orchestra_id": {
+    "product_name": "orchestra",
+    "type_name": "orchestra",
+    "field_name": "orchestra_id",
+    "description": "Orchestra_ID column in orchestra table (primary key) (foreign key)",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "orchestra_orchestra": {
+    "product_name": "orchestra",
+    "type_name": "orchestra",
+    "field_name": "orchestra",
+    "description": "Orchestra column in orchestra table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "orchestra_conductor_id": {
+    "product_name": "orchestra",
+    "type_name": "orchestra",
+    "field_name": "conductor_id",
+    "description": "Conductor_ID column in orchestra table (foreign key)",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "orchestra_record_company": {
+    "product_name": "orchestra",
+    "type_name": "orchestra",
+    "field_name": "record_company",
+    "description": "Record_Company column in orchestra table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "orchestra_year_of_founded": {
+    "product_name": "orchestra",
+    "type_name": "orchestra",
+    "field_name": "year_of_founded",
+    "description": "Year_of_Founded column in orchestra table",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "orchestra_major_record_format": {
+    "product_name": "orchestra",
+    "type_name": "orchestra",
+    "field_name": "major_record_format",
+    "description": "Major_Record_Format column in orchestra table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "performance_performance_id": {
+    "product_name": "orchestra",
+    "type_name": "performance",
+    "field_name": "performance_id",
+    "description": "Performance_ID column in performance table (primary key) (foreign key)",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "performance_orchestra_id": {
+    "product_name": "orchestra",
+    "type_name": "performance",
+    "field_name": "orchestra_id",
+    "description": "Orchestra_ID column in performance table (foreign key)",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "performance_type": {
+    "product_name": "orchestra",
+    "type_name": "performance",
+    "field_name": "type",
+    "description": "Type column in performance table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "performance_date": {
+    "product_name": "orchestra",
+    "type_name": "performance",
+    "field_name": "date",
+    "description": "Date column in performance table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "performance_official_ratings_(millions)": {
+    "product_name": "orchestra",
+    "type_name": "performance",
+    "field_name": "official_ratings_(millions)",
+    "description": "Official_ratings_(millions) column in performance table",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "performance_weekly_rank": {
+    "product_name": "orchestra",
+    "type_name": "performance",
+    "field_name": "weekly_rank",
+    "description": "Weekly_rank column in performance table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "performance_share": {
+    "product_name": "orchestra",
+    "type_name": "performance",
+    "field_name": "share",
+    "description": "Share column in performance table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "show_show_id": {
+    "product_name": "orchestra",
+    "type_name": "show",
+    "field_name": "show_id",
+    "description": "Show_ID column in show table",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "show_performance_id": {
+    "product_name": "orchestra",
+    "type_name": "show",
+    "field_name": "performance_id",
+    "description": "Performance_ID column in show table (foreign key)",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "show_if_first_show": {
+    "product_name": "orchestra",
+    "type_name": "show",
+    "field_name": "if_first_show",
+    "description": "If_first_show column in show table",
+    "type": "others",
+    "database": "orchestra"
+  },
+  "show_result": {
+    "product_name": "orchestra",
+    "type_name": "show",
+    "field_name": "result",
+    "description": "Result column in show table",
+    "type": "text",
+    "database": "orchestra"
+  },
+  "show_attendance": {
+    "product_name": "orchestra",
+    "type_name": "show",
+    "field_name": "attendance",
+    "description": "Attendance column in show table",
+    "type": "number",
+    "database": "orchestra"
+  },
+  "people_people_id": {
+    "product_name": "wedding",
+    "type_name": "people",
+    "field_name": "people_id",
+    "description": "People_ID column in people table (primary key) (foreign key)",
+    "type": "number",
+    "database": "wedding"
+  },
+  "people_name": {
+    "product_name": "wedding",
+    "type_name": "people",
+    "field_name": "name",
+    "description": "Name column in people table",
+    "type": "text",
+    "database": "wedding"
+  },
+  "people_country": {
+    "product_name": "wedding",
+    "type_name": "people",
+    "field_name": "country",
+    "description": "Country column in people table",
+    "type": "text",
+    "database": "wedding"
+  },
+  "people_is_male": {
+    "product_name": "wedding",
+    "type_name": "people",
+    "field_name": "is_male",
+    "description": "Is_Male column in people table",
+    "type": "text",
+    "database": "wedding"
+  },
+  "people_age": {
+    "product_name": "wedding",
+    "type_name": "people",
+    "field_name": "age",
+    "description": "Age column in people table",
+    "type": "number",
+    "database": "wedding"
+  },
+  "church_church_id": {
+    "product_name": "wedding",
+    "type_name": "church",
+    "field_name": "church_id",
+    "description": "Church_ID column in church table (primary key) (foreign key)",
+    "type": "number",
+    "database": "wedding"
+  },
+  "church_name": {
+    "product_name": "wedding",
+    "type_name": "church",
+    "field_name": "name",
+    "description": "Name column in church table",
+    "type": "text",
+    "database": "wedding"
+  },
+  "church_organized_by": {
+    "product_name": "wedding",
+    "type_name": "church",
+    "field_name": "organized_by",
+    "description": "Organized_by column in church table",
+    "type": "text",
+    "database": "wedding"
+  },
+  "church_open_date": {
+    "product_name": "wedding",
+    "type_name": "church",
+    "field_name": "open_date",
+    "description": "Open_Date column in church table",
+    "type": "number",
+    "database": "wedding"
+  },
+  "church_continuation_of": {
+    "product_name": "wedding",
+    "type_name": "church",
+    "field_name": "continuation_of",
+    "description": "Continuation_of column in church table",
+    "type": "text",
+    "database": "wedding"
+  },
+  "wedding_church_id": {
+    "product_name": "wedding",
+    "type_name": "wedding",
+    "field_name": "church_id",
+    "description": "Church_ID column in wedding table (primary key) (foreign key)",
+    "type": "number",
+    "database": "wedding"
+  },
+  "wedding_male_id": {
+    "product_name": "wedding",
+    "type_name": "wedding",
+    "field_name": "male_id",
+    "description": "Male_ID column in wedding table (foreign key)",
+    "type": "number",
+    "database": "wedding"
+  },
+  "wedding_female_id": {
+    "product_name": "wedding",
+    "type_name": "wedding",
+    "field_name": "female_id",
+    "description": "Female_ID column in wedding table (foreign key)",
+    "type": "number",
+    "database": "wedding"
+  },
+  "wedding_year": {
+    "product_name": "wedding",
+    "type_name": "wedding",
+    "field_name": "year",
+    "description": "Year column in wedding table",
+    "type": "number",
+    "database": "wedding"
+  }
+}
