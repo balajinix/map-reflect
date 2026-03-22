@@ -108,18 +108,91 @@ def build_api_lookup(schema_index, relevant_dbs):
     return lookup
 
 
-def build_dataset(ground_truth_samples, schema_index):
-    """Build deduplicated dataset in NL2GQL format.
+def build_dataset_from_fks(schema_index):
+    """Build dataset from ALL foreign key relationships in Spider.
 
-    Deduplicates by (source_table, target_table) pair, keeping
-    the sample with the most natural question. Aggregates all
-    field mappings for each pair.
+    Each FK defines a field-level mapping between two tables.
+    Multiple FKs between the same table pair are aggregated.
+    This gives 745 table pairs vs 68 from JOIN queries alone.
     """
-    # Group by table pair, aggregate field mappings
+    # Collect all FK-based mappings
+    pair_data = defaultdict(lambda: {"field_mappings": {}, "db_id": None})
+
+    for db_id, schema in schema_index.items():
+        tables = schema["tables"]
+        columns = schema["columns"]
+        foreign_keys = schema["foreign_keys"]
+
+        for fk_col_idx, pk_col_idx in foreign_keys:
+            fk_table_idx = columns[fk_col_idx][0]
+            pk_table_idx = columns[pk_col_idx][0]
+            if fk_table_idx < 0 or pk_table_idx < 0:
+                continue
+
+            fk_table = tables[fk_table_idx].lower()
+            pk_table = tables[pk_table_idx].lower()
+            fk_col = columns[fk_col_idx][1].lower()
+            pk_col = columns[pk_col_idx][1].lower()
+
+            # Use (db_id, fk_table, pk_table) as key to keep per-database
+            pair_key = (db_id, fk_table, pk_table)
+            pair_data[pair_key]["db_id"] = db_id
+
+            src_field = f"{fk_table}_{fk_col}"
+            tgt_mapping = {"mapTable": pk_table, "mapProperty": f"{pk_table}_{pk_col}"}
+
+            if src_field not in pair_data[pair_key]["field_mappings"]:
+                pair_data[pair_key]["field_mappings"][src_field] = []
+            # Avoid duplicates
+            existing = [m for m in pair_data[pair_key]["field_mappings"][src_field]
+                        if m["mapProperty"] == tgt_mapping["mapProperty"]]
+            if not existing:
+                pair_data[pair_key]["field_mappings"][src_field].append(tgt_mapping)
+
+    # Also load JOIN-based ground truth for natural language questions
+    gt_questions = {}  # (src_table, tgt_table) -> best question
+    if GROUND_TRUTH.exists():
+        gt_samples = load_ground_truth(GROUND_TRUTH)
+        for s in gt_samples:
+            src = s["result"]["name"]
+            for maps in s["result"]["properties"].values():
+                for m in maps:
+                    tgt = m["mapTable"]
+                    key = (src, tgt)
+                    q = s["question"]
+                    if key not in gt_questions or len(q) > len(gt_questions[key]):
+                        gt_questions[key] = q
+
+    # Build samples
+    samples = []
+    for (db_id, fk_table, pk_table), data in sorted(pair_data.items()):
+        question = gt_questions.get((fk_table, pk_table), "")
+
+        result = {
+            "name": fk_table,
+            "properties": data["field_mappings"],
+        }
+
+        sample = {
+            "id": f"spider_{len(samples):04d}",
+            "question": question,
+            "mapping_utterance": f"map {fk_table} data to {pk_table} data",
+            "result": result,
+            "database": db_id,
+        }
+        samples.append(sample)
+
+    return samples
+
+
+def build_dataset(ground_truth_samples, schema_index):
+    """Legacy: Build dataset from JOIN queries only (68 samples).
+    Use build_dataset_from_fks() for the full FK-based dataset (745 samples).
+    """
     pair_data = defaultdict(lambda: {
         "questions": [],
         "queries": [],
-        "field_mappings": {},  # src_field -> [{mapTable, mapProperty}]
+        "field_mappings": {},
         "db_id": None,
     })
 
@@ -136,7 +209,6 @@ def build_dataset(ground_truth_samples, schema_index):
 
                 if src_field not in pair_data[pair_key]["field_mappings"]:
                     pair_data[pair_key]["field_mappings"][src_field] = []
-                # Avoid duplicate mappings
                 existing = [
                     em for em in pair_data[pair_key]["field_mappings"][src_field]
                     if em["mapProperty"] == m["mapProperty"]
@@ -144,22 +216,17 @@ def build_dataset(ground_truth_samples, schema_index):
                 if not existing:
                     pair_data[pair_key]["field_mappings"][src_field].append(m)
 
-    # Find db_id for each table pair from schema_index
     table_to_db = {}
     for db_id, schema in schema_index.items():
         for table in schema["tables"]:
             table_to_db[table.lower()] = db_id
 
-    # Build samples
     samples = []
     for (src_table, tgt_table), data in sorted(pair_data.items()):
-        # Pick the longest/most descriptive question
         questions = list(set(data["questions"]))
         best_question = max(questions, key=len) if questions else ""
-
         db_id = table_to_db.get(src_table, table_to_db.get(tgt_table, "unknown"))
 
-        # Build result in NL2GQL format
         result = {
             "name": src_table,
             "properties": data["field_mappings"],
@@ -243,9 +310,9 @@ def main():
     gt_samples = load_ground_truth(GROUND_TRUTH)
     print(f"  {len(gt_samples)} raw samples")
 
-    print("Building dataset...")
-    dataset = build_dataset(gt_samples, schema_index)
-    print(f"  {len(dataset)} unique table-pair samples")
+    print("Building dataset from ALL foreign keys...")
+    dataset = build_dataset_from_fks(schema_index)
+    print(f"  {len(dataset)} table-pair samples (from FK relationships)")
 
     # Find relevant databases
     relevant_dbs = set()
@@ -254,8 +321,9 @@ def main():
     print(f"  {len(relevant_dbs)} databases")
 
     print("Building API lookup...")
+    # Include ALL databases that have foreign keys (relevant to the FK-based dataset)
     api_lookup = build_api_lookup(schema_index, relevant_dbs)
-    print(f"  {len(api_lookup)} fields")
+    print(f"  {len(api_lookup)} fields from {len(relevant_dbs)} databases")
 
     # Save dataset
     out_dataset = DATA_DIR / "spider_dataset.jsonl"

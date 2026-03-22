@@ -272,7 +272,7 @@ class DatasetLoader:
         expected_counts = {
             'ITOpsGraph': 521,  # Validated coverage mappings
             'ITOM_Hashicorp': 61,  # ITOM <-> Hashicorp cross-product
-            'Spider': 68,  # Spider SQL join mappings
+            'Spider': 745,  # Spider SQL FK mappings (166 databases)
             'NL2GQL': 50,
             'GraphQLRestBench': 75,
             'OMOP_MIMIC': 46,
