@@ -78,11 +78,20 @@ def load_data():
                 data = json.load(f)
             for r in data.get("results", []):
                 sid = r["sample_id"]
-                # Llama overwrites Granite (loaded second)
                 results[sid] = r
                 results[sid]["_model"] = model_tag
 
-    return entity_model, entity_mapping, samples, api_lookup, results
+    # Also load constrained result if available (for comparison)
+    constrained_results = {}
+    for suffix in ["llama_WITH_CONSTRAINT"]:
+        fpath = mr_results_dir / f"mapreflect_itom_hashicorp_{suffix}.json"
+        if fpath.exists():
+            with open(fpath) as f:
+                data = json.load(f)
+            for r in data.get("results", []):
+                constrained_results[r["sample_id"]] = r
+
+    return entity_model, entity_mapping, samples, api_lookup, results, constrained_results
 
 
 def product_badge(product):
@@ -90,8 +99,26 @@ def product_badge(product):
     return f'<span style="background:{color};color:white;padding:2px 8px;border-radius:4px;font-size:0.85em;font-weight:bold">{product}</span>'
 
 
-def render_field_table(predictions, ground_truth, api_lookup):
-    """Render field-level mapping table inside an expander."""
+def render_field_table(predictions, ground_truth, api_lookup, constrained_preds=None):
+    """Render field-level mapping table inside an expander.
+
+    Shows collisions (multiple source fields → same target) and optionally
+    compares with constrained assignment results.
+    """
+    # Detect collisions: count how many source fields map to each target
+    target_claims = defaultdict(list)
+    for src_field in ground_truth:
+        pred_data = predictions.get(src_field, {})
+        ranking = pred_data.get("initial_ranking", [])
+        if ranking and isinstance(ranking[0], dict):
+            top = ranking[0].get("id", "")
+            if top:
+                target_claims[top].append(src_field)
+
+    collision_targets = {t for t, srcs in target_claims.items() if len(srcs) > 1}
+    if collision_targets:
+        st.caption(f"⚠️ **{len(collision_targets)} collision(s)**: multiple source fields claim the same target")
+
     rows = []
     for src_field, gt_target in ground_truth.items():
         pred_data = predictions.get(src_field, {})
@@ -101,24 +128,34 @@ def render_field_table(predictions, ground_truth, api_lookup):
         score = top_pred.get("score", 0)
         reason = top_pred.get("reason", "")
 
-        # Check correctness
         correct = pred_target.lower() == gt_target.lower() if gt_target else False
-        icon = "✅" if correct else "❌"
+        collision = pred_target in collision_targets
+        icon = "✅" if correct else ("⚠️" if collision else "❌")
 
-        # Get descriptions
-        src_desc = api_lookup.get(src_field, {}).get("description", "")
-        tgt_desc = api_lookup.get(pred_target, {}).get("description", "")
-
-        src_short = src_field.split(".")[-1] if "." in src_field else src_field
+        src_short = src_field.split("_", 1)[-1] if "_" in src_field else src_field
         tgt_short = pred_target.split(".")[-1] if "." in pred_target else pred_target
 
-        rows.append({
+        row = {
             "": icon,
-            "Source Field": src_short,
+            "Source": src_short,
             "Predicted Target": tgt_short,
             "Score": f"{score:.2f}",
-            "Reason": reason[:80],
-        })
+            "Reason": reason[:60],
+        }
+
+        # Add constrained comparison if available
+        if constrained_preds:
+            c_pred = constrained_preds.get(src_field, {})
+            c_ranking = c_pred.get("initial_ranking", [])
+            if c_ranking and isinstance(c_ranking[0], dict):
+                c_target = c_ranking[0].get("id", "—")
+                c_short = c_target.split(".")[-1] if "." in c_target else c_target
+                changed = c_target != pred_target
+                row["Constrained"] = f"{'→ ' if changed else ''}{c_short}"
+            else:
+                row["Constrained"] = "—"
+
+        rows.append(row)
 
     if rows:
         st.dataframe(rows, use_container_width=True, hide_index=True)
@@ -126,7 +163,7 @@ def render_field_table(predictions, ground_truth, api_lookup):
         st.info("No field predictions available")
 
 
-def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup):
+def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup, constrained_result=None):
     """Render a single mapping card with 3-column layout."""
     meta = sample["metadata"]
     src_product = sample["source_schema"]
@@ -239,13 +276,14 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
         # Expandable field mappings
         if predictions and gt:
             with st.expander(f"Field mappings ({len(gt)} fields)", expanded=False):
-                render_field_table(predictions, gt, api_lookup)
+                constrained_preds = constrained_result.get("predictions", {}) if constrained_result else None
+                render_field_table(predictions, gt, api_lookup, constrained_preds=constrained_preds)
 
         st.divider()
 
 
 def main():
-    entity_model, entity_mapping, samples, api_lookup, results = load_data()
+    entity_model, entity_mapping, samples, api_lookup, results, constrained_results = load_data()
 
     st.title("ITOM – Hashicorp Schema Mapping")
     st.markdown(
@@ -304,7 +342,8 @@ def main():
 
     for s in filtered:
         result = results.get(s["id"])
-        render_mapping_card(s, result, entity_model, entity_mapping, api_lookup)
+        c_result = constrained_results.get(s["id"])
+        render_mapping_card(s, result, entity_model, entity_mapping, api_lookup, constrained_result=c_result)
 
 
 if __name__ == "__main__":
