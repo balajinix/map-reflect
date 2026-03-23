@@ -329,12 +329,13 @@ def main():
         if cross_only:
             src = s["source_schema"]
             tgt = s["target_schema"]
-            # Cross-product = at least one side is an ITOM-only product
-            # (instana, concert, turbonomic) and the other is different.
-            # This excludes Hashicorp-internal (hcp↔hcp_terraform, infragraph↔aws, packer↔infragraph)
-            # but includes hcp_terraform→infragraph (terraform provisioning infra)
-            has_itom = src in ITOM_ONLY or tgt in ITOM_ONLY
-            if not has_itom:
+            # Cross-product = one side ITOM-only, the other side Hashicorp
+            # Excludes ITOM↔ITOM (concert→instana) and Hashi↔Hashi (hcp→hcp_terraform)
+            is_cross = (
+                (src in ITOM_ONLY and tgt not in ITOM_ONLY) or
+                (tgt in ITOM_ONLY and src not in ITOM_ONLY)
+            )
+            if not is_cross:
                 continue
         filtered.append(s)
 
