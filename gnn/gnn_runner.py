@@ -14,6 +14,13 @@ from typing import Dict, List, Any, Optional
 import logging
 from datetime import datetime
 
+# Override sqlite3 with pysqlite3 on systems with old sqlite3 (< 3.35.0)
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 # Configure logging
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
