@@ -163,7 +163,8 @@ class MatchMakerAgent:
         # Optimization will run lazily via run_optimization_once() after the first
         # set_source_target_from_utterance() call.
         utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'itom_hashicorp',
-                               'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench']
+                               'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench',
+                               'spider']
         is_utterance_dataset = self.dataset.lower() in utterance_datasets
 
         if self.use_optimization and not is_utterance_dataset:
@@ -240,6 +241,29 @@ class MatchMakerAgent:
         ))
 
         use_type_name = len(available_products) <= 1
+
+        # If hints are table names that exist as type_name but not product_name,
+        # switch to type-level matching (e.g., Spider: utterance says "map cite
+        # data to publication data" but product_name is the database name)
+        if not use_type_name and source_hint and target_hint:
+            available_products_lower = [p.lower() for p in available_products]
+            hints_are_products = (
+                source_hint.lower() in available_products_lower and
+                target_hint.lower() in available_products_lower
+            )
+            if not hints_are_products:
+                available_types = set(
+                    p.get('type_name', '').lower()
+                    for p in self.property_data.values()
+                    if p.get('type_name')
+                )
+                hints_are_types = (
+                    source_hint.lower() in available_types and
+                    target_hint.lower() in available_types
+                )
+                if hints_are_types:
+                    use_type_name = True
+                    logger.info(f"Hints match type_name not product_name, switching to type-level matching")
 
         if use_type_name:
             available_tables = list(set(
@@ -442,7 +466,8 @@ class MatchMakerAgent:
             )
 
         utterance_datasets = ['itops', 'nl2gql', 'itopsgraph', 'itom_hashicorp',
-                               'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench']
+                               'omop_cms', 'omop_mimic', 'omop_synthea', 'toolbench',
+                               'spider']
         if self.dataset.lower() in utterance_datasets:
             logger.info("Utterance-based dataset: skipping index rebuild")
         elif self.colbert_available:
