@@ -527,7 +527,8 @@ class MatchMakerEvaluationRunner:
         if is_utterance is None:
             is_utterance = (
                 dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic',
-                                     'omop_synthea', 'toolbench']
+                                     'omop_synthea', 'toolbench', 'spider',
+                                     'itom_hashicorp']
                 or dataset.lower().startswith('itopsgraph')
             )
 
@@ -710,7 +711,8 @@ class MatchMakerEvaluationRunner:
 
         is_utterance_dataset = (
             dataset.lower() in ['itops', 'nl2gql', 'omop_cms', 'omop_mimic',
-                                  'omop_synthea', 'toolbench']
+                                  'omop_synthea', 'toolbench', 'spider',
+                                  'itom_hashicorp']
             or dataset.lower().startswith('itopsgraph')
         )
 
