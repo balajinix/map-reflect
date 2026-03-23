@@ -1825,8 +1825,8 @@ def load_dataset(data_dir: Path, dataset: str, max_samples: Optional[int] = None
 
         # Try different file patterns
         patterns = [
-            f"{dataset_lower}_dataset.jsonl",
             f"{dataset_lower}_eval_dataset.jsonl",
+            f"{dataset_lower}_dataset.jsonl",
             f"{dataset_lower}_coverage_eval_dataset.jsonl",
             f"{dataset}_dataset.jsonl",
         ]
