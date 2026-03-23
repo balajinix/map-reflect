@@ -205,22 +205,27 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
         with cols[0]:
             st.markdown(f"{product_badge(src_product)} **{src_type}**", unsafe_allow_html=True)
         with cols[1]:
-            rel_color = {
-                "semantic_equivalent": "#4CAF50",
-                "projection": "#2196F3",
-                "governs": "#FF9800",
-                "acts_on": "#F44336",
-                "supply_chain": "#9C27B0",
-                "composed_of": "#00BCD4",
-                "derived_from": "#795548",
-                "references": "#607D8B",
-                "schema_mapping": "#3F51B5",
-                "produces": "#8BC34A",
-            }.get(relationship, "#999")
+            rel_labels = {
+                "semantic_equivalent": ("same concept", "#4CAF50"),
+                "monitors": ("monitors", "#1E88E5"),
+                "optimizes": ("optimizes", "#7B1FA2"),
+                "governs": ("governs", "#FF9800"),
+                "maps_to": ("maps to", "#3F51B5"),
+                "triggers": ("triggers", "#F44336"),
+                "produces": ("produces", "#8BC34A"),
+                "projection": ("maps to", "#3F51B5"),
+                "supply_chain": ("produces", "#8BC34A"),
+                "composed_of": ("maps to", "#3F51B5"),
+                "derived_from": ("monitors", "#1E88E5"),
+                "references": ("maps to", "#3F51B5"),
+                "acts_on": ("optimizes", "#7B1FA2"),
+                "schema_mapping": ("maps to", "#3F51B5"),
+            }
+            label, rel_color = rel_labels.get(relationship, (relationship.replace("_", " "), "#999"))
             st.markdown(
                 f'<div style="text-align:center">'
                 f'<span style="background:{rel_color};color:white;padding:2px 8px;border-radius:12px;font-size:0.8em">'
-                f'{relationship.replace("_"," ")}</span>'
+                f'{label}</span>'
                 f'</div>',
                 unsafe_allow_html=True,
             )
