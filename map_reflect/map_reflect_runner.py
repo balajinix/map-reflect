@@ -1871,13 +1871,18 @@ def extract_sample_data(data: Dict[str, Any], dataset: str, index: int) -> Optio
                 ground_truth_mapping[src_field] = mappings[0]["mapProperty"]
                 expected_target = mappings[0].get("mapTable", "")
 
-        return {
+        sample = {
             "sample_id": data.get("id", f"{dataset.lower()}_{index:03d}"),
             "utterance": data.get("mapping_utterance", data.get("question", "")),
             "expected_source": source_schema,
             "expected_target": expected_target,
             "ground_truth_mapping": ground_truth_mapping,
         }
+        # Carry through database field for multi-database datasets (Spider)
+        if "database" in data:
+            sample["database"] = data["database"]
+            sample.setdefault("metadata", {})["database"] = data["database"]
+        return sample
 
     # Handle ToolBench and similar formats
     if "ground_truth_mapping" in data and "expected_target" in data:
@@ -2840,9 +2845,24 @@ Return a JSON object:
                     target_prefix = f"{target_product}_"
 
                 # Filter candidates from lookup by target prefix
+                # For multi-database datasets (Spider), also filter by database
+                # to avoid cross-database contamination
+                source_db = (sample.get("metadata", {}).get("database", "") or
+                             sample.get("database", ""))
+                if not source_db:
+                    # Infer database from source field's product_name
+                    src_info_db = self.property_lookup.get(src_field, {})
+                    source_db = src_info_db.get("product_name", "") if isinstance(src_info_db, dict) else ""
+
                 candidates = []
                 for prop_name, prop_info in self.property_lookup.items():
                     if prop_name.lower().startswith(target_prefix.lower()):
+                        # Database-scoped filtering: if we know the source database,
+                        # only include candidates from the same database
+                        if source_db and isinstance(prop_info, dict):
+                            cand_db = prop_info.get("product_name", "")
+                            if cand_db and cand_db != source_db:
+                                continue
                         prop_desc = prop_info.get("description", prop_name) if isinstance(prop_info, dict) else str(prop_info)
                         candidates.append({
                             "id": prop_name,
