@@ -516,6 +516,27 @@ The distinction is important because retrieval mode is strictly harder, as error
 
 We present results for both oracle mode (target schema given, enabling comparison with prior work) and retrieval mode (target discovery required).
 
+\begin{table}[htbp]
+\centering
+\small
+\caption{Retrieval mode: API accuracy / field F1 (\%). The target schema is not specified; the method must discover it from the catalogue. Map-Reflect achieves 100\% API accuracy with Llama on both datasets. MatchMaker results are from oracle hints (it does not support catalogue-free retrieval).}
+\label{tab:retrieval}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{ll rr rr}
+\toprule
+& & \multicolumn{2}{c}{\textbf{ITOpsGraph}} & \multicolumn{2}{c}{\textbf{NL2GQL}} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
+\textbf{Method} & \textbf{Model} & \textbf{API} & \textbf{F1} & \textbf{API} & \textbf{F1} \\
+\midrule
+Map-Reflect & Llama   & \textbf{100.0} & \textbf{86.6} & \textbf{100.0} & \textbf{90.5} \\
+Map-Reflect & Mistral & 96.4  & 85.4  & 100.0 & 90.5 \\
+Map-Reflect & Granite & 72.7  & 54.6  & 97.6  & 78.3 \\
+MatchMaker  & Llama   & 95.2  & 72.2  & 42.1  & 87.0 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
 \subsubsection{Analysis}
 
 \begin{figure}[htbp]
@@ -529,7 +550,7 @@ Map-Reflect achieves the highest field F1 on ITOpsGraph and perfect API accuracy
 
 On OMOP, Map-Reflect outperforms MatchMaker on field F1 across all three datasets under matched model conditions (Figure~\ref{fig:method_sensitivity}).\footnote{OMOP-Synthea has only 12 evaluation samples; the CMS and MIMIC results are stronger evidence.} MatchMaker abstention rates are substantial across all OMOP datasets; abstentions count as incorrect in all field F1 figures. Backbone choice matters: Llama-3.3-70B outperforms Granite-4 consistently on field F1, though Granite remains competitive on type-level accuracy.
 
-\textbf{Oracle vs Retrieval Mode.} Oracle mode enables fair comparison with prior work by fixing the target schema. Retrieval mode evaluates end-to-end capability including target discovery. Map-Reflect maintains perfect API accuracy in retrieval mode on all non-SchemaNet datasets; field F1 is slightly lower than oracle on most datasets, as retrieval errors propagate downstream. The exception is NL2GQL, where retrieval slightly exceeds oracle due to selection bias, because retrieval succeeds on the most semantically similar pairs, which are also easier to map.
+\textbf{Oracle vs Retrieval Mode.} Oracle mode enables fair comparison with prior work by fixing the target schema. Retrieval mode (Table~\ref{tab:retrieval}) evaluates end-to-end capability including target discovery. Map-Reflect achieves 100\% API accuracy with Llama in retrieval mode on both ITOpsGraph and NL2GQL, and maintains high field F1 (86.6\% and 90.5\% respectively). Even Mistral achieves 96.4\% API accuracy on ITOpsGraph. MatchMaker's oracle-mode numbers are shown for comparison; it does not support catalogue-free target discovery because its ColBERT retrieval requires the target schema to be specified for index construction.
 
 \textbf{SchemaNet Results.} Tables~\ref{tab:schemanet_type}--\ref{tab:schemanet} report per-dataset results on SchemaNet using Llama-3.3-70B only; Granite-4 produced near-zero scores across all schema pairs and is omitted because SchemaNet's multi-table relational reasoning exceeds the capacity of the smaller model. Map-Reflect (Llama) is essentially tied with AnyTool on type-level F1 and trails it narrowly on field-level F1, while substantially outperforming MatchMaker and GNN on both metrics. Retrieval mode incurs a large drop on the OMOP-target pairs because all five share the same target type pool, making retrieval ambiguous; schema pairs with unique targets (bank1\_bank2, imdb\_sakila) show no degradation. The GNN's high type accuracy on cprd\_gold\_omop reflects unusually regular naming in that pair rather than generalizable reasoning.
 
