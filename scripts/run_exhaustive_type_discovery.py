@@ -263,7 +263,7 @@ def extract_discoveries_from_results(result_dir, api_lookup):
 
             # Handle predictions format (Map-Reflect)
             predictions = result.get("predictions", {})
-            if predictions and not predicted:
+            if predictions and not predicted and isinstance(predictions, dict):
                 for src_field, pred_data in predictions.items():
                     if not isinstance(pred_data, dict):
                         continue
