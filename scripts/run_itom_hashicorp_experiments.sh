@@ -2,19 +2,22 @@
 # =============================================================================
 # ITOM-Hashicorp Experiments — All Methods x All Models (Sequential)
 # =============================================================================
-# Runs Map-Reflect, MatchMaker, and AnyTool on the ITOM-Hashicorp dataset
-# (61 samples) with Llama, Granite, and Mistral models.
+# Runs all schema mapping methods on the ITOM-Hashicorp dataset with
+# Llama, Granite, and Mistral models.
+#
+# Methods: Map-Reflect, MatchMaker, AnyTool, ReAct, ReMatch, SMT
+# (GNN requires pre-trained models — run setup_gnn.sh first)
 #
 # All experiments run sequentially to avoid WatsonX API contention.
 # Each runner has checkpoint/resume and tqdm progress.
-#
-# MatchMaker has known issues with multi-product utterance parsing on
-# this dataset — it may fail. AnyTool needs a hierarchy file.
 #
 # Usage:
 #   ./scripts/run_itom_hashicorp_experiments.sh              # run all
 #   ./scripts/run_itom_hashicorp_experiments.sh --method mr   # map-reflect only
 #   ./scripts/run_itom_hashicorp_experiments.sh --method mm   # matchmaker only
+#   ./scripts/run_itom_hashicorp_experiments.sh --method react # react only
+#   ./scripts/run_itom_hashicorp_experiments.sh --method rematch # rematch only
+#   ./scripts/run_itom_hashicorp_experiments.sh --method smt  # smt only
 #   ./scripts/run_itom_hashicorp_experiments.sh --model llama  # llama only
 # =============================================================================
 
@@ -136,21 +139,77 @@ run_anytool() {
 }
 
 # ============================================================================
+# ReAct
+# ============================================================================
+
+run_react() {
+    local model_id="$1" model_name="$2"
+    should_run "react" "$model_name" || return 0
+
+    log "ReAct / $model_name ($DATASET)"
+    python -m react.react_runner \
+        --datasets "$DATASET" \
+        --models "$model_id" \
+        --property-lookup-file "$LOOKUP" \
+        --data-dir "$DATA_DIR" \
+        2>&1 | tail -5
+    echo
+}
+
+# ============================================================================
+# ReMatch
+# ============================================================================
+
+run_rematch() {
+    local model_id="$1" model_name="$2"
+    should_run "rematch" "$model_name" || return 0
+
+    log "ReMatch / $model_name ($DATASET)"
+    python -m rematch.rematch_runner \
+        --datasets "$DATASET" \
+        --models "$model_id" \
+        --property-lookup-file "$LOOKUP" \
+        --data-dir "$DATA_DIR" \
+        --top-j 2 \
+        --top-k 5 \
+        2>&1 | tail -5
+    echo
+}
+
+# ============================================================================
+# SMT
+# ============================================================================
+
+run_smt() {
+    local model_id="$1" model_name="$2"
+    should_run "smt" "$model_name" || return 0
+
+    log "SMT / $model_name ($DATASET)"
+    python -m smt.smt_runner \
+        --datasets "$DATASET" \
+        --models "$model_id" \
+        --property-lookup-file "$LOOKUP" \
+        --data-dir "$DATA_DIR" \
+        2>&1 | tail -5
+    echo
+}
+
+# ============================================================================
 # Main
 # ============================================================================
 
 log "=========================================="
 log "ITOM-Hashicorp Experiments"
-log "Dataset: $DATASET (61 samples)"
+log "Dataset: $DATASET (95 samples)"
 log "Method filter: ${METHOD_FILTER:-all}"
 log "Model filter: ${MODEL_FILTER:-all}"
 log "=========================================="
 echo
 
-# Run in order: Llama first (best), then Granite, then Mistral
-# Within each model: Map-Reflect, MatchMaker, AnyTool
+# Run in order: Llama first (best), then Granite
+# Within each model: all methods
 
-for MODEL_ID in "$LLAMA" "$GRANITE" "$MISTRAL"; do
+for MODEL_ID in "$LLAMA" "$GRANITE"; do
     case "$MODEL_ID" in
         *llama*)   MODEL_NAME="llama" ;;
         *granite*) MODEL_NAME="granite" ;;
@@ -161,6 +220,9 @@ for MODEL_ID in "$LLAMA" "$GRANITE" "$MISTRAL"; do
     run_map_reflect "$MODEL_ID" "$MODEL_NAME"
     run_matchmaker "$MODEL_ID" "$MODEL_NAME"
     run_anytool "$MODEL_ID" "$MODEL_NAME"
+    run_react "$MODEL_ID" "$MODEL_NAME"
+    run_rematch "$MODEL_ID" "$MODEL_NAME"
+    run_smt "$MODEL_ID" "$MODEL_NAME"
 done
 
 log "=========================================="

@@ -135,8 +135,9 @@ def find_result_files(method_dirs: List[str], dataset: str, model_pattern: str) 
                     continue
                 if 'discovery_' in f.name.lower() and 'discovery_valid' not in f.name.lower():
                     continue
-                if f.name.lower().startswith('mapreflect_'):
-                    continue
+                # Allow mapreflect_ files (they use predictions format)
+                # if f.name.lower().startswith('mapreflect_'):
+                #     continue
 
                 fname_lower = f.name.lower()
 
@@ -200,13 +201,34 @@ def extract_type_mappings(results: List[Dict]) -> Set[Tuple[str, str]]:
     return mappings
 
 
+def extract_type_mappings_mapreflect(results: List[Dict]) -> Set[Tuple[str, str]]:
+    """Extract type mappings from Map-Reflect format (uses 'predictions' key)."""
+    mappings = set()
+    for result in results:
+        predictions = result.get('predictions', {})
+        if not predictions:
+            continue
+        for src_field, pred_data in predictions.items():
+            if not isinstance(pred_data, dict):
+                continue
+            ranking = pred_data.get('initial_ranking', [])
+            if ranking and isinstance(ranking[0], dict):
+                tgt_field = ranking[0].get('id', '')
+                if tgt_field and tgt_field != 'NO_MATCH':
+                    src_type = extract_type_from_field(src_field)
+                    tgt_type = extract_type_from_field(tgt_field)
+                    if src_type and tgt_type:
+                        mappings.add((src_type, tgt_type))
+    return mappings
+
+
 def main():
-    print("Creating type mapping lookup for ITOpsGraph dataset...\n")
+    print("Creating type mapping lookup...\n")
 
     # Structure: {source_type: {target_type: [(method, model), ...]}}
     type_lookup = defaultdict(lambda: defaultdict(list))
 
-    datasets = ['ITOpsGraph']
+    datasets = ['ITOpsGraph', 'ITOM_Hashicorp']
     total_mappings = 0
 
     for dataset in datasets:
@@ -236,6 +258,9 @@ def main():
                         try:
                             results = load_results(best_file)
                             mappings = extract_type_mappings(results)
+                            # Also try Map-Reflect format (predictions key)
+                            if not mappings:
+                                mappings = extract_type_mappings_mapreflect(results)
 
                             for src_type, tgt_type in mappings:
                                 method_model = f"{method_name} ({model_short})"
