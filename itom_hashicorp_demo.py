@@ -310,13 +310,23 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
     src_entity = meta.get("source_entity", src_type)
     tgt_entity = meta.get("target_entity", tgt_type)
 
-    # Look up concept descriptions from entity mapping
+    # Look up concept descriptions and match methods from entity mapping
     src_entity_key = f"{src_product}.{src_entity}"
     tgt_entity_key = f"{tgt_product}.{tgt_entity}"
     src_em_info = entity_mapping.get(src_entity_key, {})
     tgt_em_info = entity_mapping.get(tgt_entity_key, {})
     src_entity_desc = src_em_info.get("description", "")
     tgt_entity_desc = tgt_em_info.get("description", "")
+
+    # Find match method for concept -> API mapping
+    def get_match_method(em_info, api_type):
+        for t in em_info.get("matched_types", []):
+            if t.get("type_name") == api_type:
+                return t.get("match_method", "")
+        return ""
+
+    src_match_method = get_match_method(src_em_info, src_type)
+    tgt_match_method = get_match_method(tgt_em_info, tgt_type)
 
     # Check if concept name differs from API type name
     src_concept_differs = src_entity != src_type
@@ -387,17 +397,19 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
         # Concept row: show the data model concepts that motivated this API pairing
         concept_cols = st.columns([1, 1, 1])
         with concept_cols[0]:
-            concept_label = f"**Concept:** `{src_product}.{src_entity}`"
+            st.markdown(f"**Concept:** `{src_entity}`")
             if src_concept_differs:
-                concept_label += f" -> API: `{src_type}`"
-            st.markdown(concept_label)
+                method_tag = f' <span style="background:#78909C;color:white;padding:1px 5px;border-radius:4px;font-size:0.7em">{src_match_method}</span>' if src_match_method else ""
+                st.markdown(
+                    f'<span style="font-size:0.85em">Mapped to API: <code>{src_type}</code>{method_tag}</span>',
+                    unsafe_allow_html=True,
+                )
             if src_entity_desc:
                 st.caption(src_entity_desc[:120])
 
         with concept_cols[1]:
             # Show concept-level relationship context
             if entity_rels:
-                # Find relationships to the target entity
                 relevant_rels = [
                     r for r in entity_rels
                     if tgt_entity in r.get("target", "")
@@ -422,10 +434,13 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
                 st.caption("No concept relationships defined")
 
         with concept_cols[2]:
-            concept_label = f"**Concept:** `{tgt_product}.{tgt_entity}`"
+            st.markdown(f"**Concept:** `{tgt_entity}`")
             if tgt_concept_differs:
-                concept_label += f" -> API: `{tgt_type}`"
-            st.markdown(concept_label)
+                method_tag = f' <span style="background:#78909C;color:white;padding:1px 5px;border-radius:4px;font-size:0.7em">{tgt_match_method}</span>' if tgt_match_method else ""
+                st.markdown(
+                    f'<span style="font-size:0.85em">Mapped to API: <code>{tgt_type}</code>{method_tag}</span>',
+                    unsafe_allow_html=True,
+                )
             if tgt_entity_desc:
                 st.caption(tgt_entity_desc[:120])
 
