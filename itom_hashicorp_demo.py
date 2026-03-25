@@ -101,6 +101,72 @@ def load_data():
         with open(tml_path) as f:
             type_mapping_lookup = json.load(f)
 
+    # Build type_name -> product mapping from api_lookup
+    type_to_product = {}
+    for key, meta in api_lookup.items():
+        p = meta.get("product_name", "")
+        t = meta.get("type_name", "")
+        if p and t and t not in type_to_product:
+            type_to_product[t] = p
+
+    # Generate additional samples from ITOpsGraph type mapping lookup
+    existing_pairs = set()
+    for s in samples:
+        existing_pairs.add((s["metadata"]["source_type"], s["metadata"]["target_type"]))
+
+    tml_sample_id = 1000
+    for src_type, targets in type_mapping_lookup.items():
+        if src_type not in type_to_product:
+            continue
+        src_product = type_to_product[src_type]
+
+        for tgt_type, methods in targets.items():
+            if tgt_type not in type_to_product:
+                continue
+            if src_type == tgt_type:
+                continue
+            if (src_type, tgt_type) in existing_pairs:
+                continue
+
+            tgt_product = type_to_product[tgt_type]
+            existing_pairs.add((src_type, tgt_type))
+
+            # Build field-level mapping from api_lookup
+            src_prefix = f"{src_product}_{src_type}."
+            tgt_prefix = f"{tgt_product}_{tgt_type}."
+            src_fields = [k for k in api_lookup if k.startswith(src_prefix)]
+            tgt_fields = [k for k in api_lookup if k.startswith(tgt_prefix)]
+
+            mapping = {}
+            if tgt_fields:
+                tgt_field_names = {k.split(".")[-1].lower(): k for k in tgt_fields}
+                for sf in src_fields:
+                    sf_name = sf.split(".")[-1].lower()
+                    if sf_name in tgt_field_names:
+                        mapping[sf] = tgt_field_names[sf_name]
+                    else:
+                        mapping[sf] = tgt_fields[0]  # placeholder
+
+            sample = {
+                "id": f"itom_hashi_{tml_sample_id:04d}",
+                "utterance": f"Map {src_product} {src_type} to {tgt_product} schema",
+                "source_schema": src_product,
+                "target_schema": tgt_product,
+                "expected_target_type": f"{tgt_product}_{tgt_type}",
+                "mapping": mapping,
+                "metadata": {
+                    "source_type": src_type,
+                    "target_type": tgt_type,
+                    "relationship": "maps_to",
+                    "description": f"Mapping suggested by {', '.join(methods)}",
+                    "source_entity": src_type,
+                    "target_entity": tgt_type,
+                    "itopsgraph_methods": methods,
+                },
+            }
+            samples.append(sample)
+            tml_sample_id += 1
+
     return entity_model, entity_mapping, samples, api_lookup, results, candidates, type_mapping_lookup
 
 
@@ -484,10 +550,13 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
             )
 
         # ITOpsGraph type mapping: which methods suggested this type pair
-        if type_mapping_lookup:
+        if type_mapping_lookup or meta.get("itopsgraph_methods"):
             # Look up src_type -> tgt_type (the lookup uses bare type names)
             src_mappings = type_mapping_lookup.get(src_type, {})
             methods_for_pair = src_mappings.get(tgt_type, [])
+            # Also check sample metadata (for ITOpsGraph-sourced samples)
+            if not methods_for_pair and meta.get("itopsgraph_methods"):
+                methods_for_pair = meta["itopsgraph_methods"]
 
             # Also check reverse direction
             tgt_mappings = type_mapping_lookup.get(tgt_type, {})
