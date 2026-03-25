@@ -306,12 +306,25 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
     relationship = meta["relationship"]
     description = meta["description"]
 
-    entity_key = f"{src_product}.{meta.get('source_entity', src_type)}"
-    em_info = entity_mapping.get(entity_key, {})
-    entity_desc = em_info.get("description", "")
+    # Concept layer: source and target entities from the data model
+    src_entity = meta.get("source_entity", src_type)
+    tgt_entity = meta.get("target_entity", tgt_type)
 
+    # Look up concept descriptions from entity mapping
+    src_entity_key = f"{src_product}.{src_entity}"
+    tgt_entity_key = f"{tgt_product}.{tgt_entity}"
+    src_em_info = entity_mapping.get(src_entity_key, {})
+    tgt_em_info = entity_mapping.get(tgt_entity_key, {})
+    src_entity_desc = src_em_info.get("description", "")
+    tgt_entity_desc = tgt_em_info.get("description", "")
+
+    # Check if concept name differs from API type name
+    src_concept_differs = src_entity != src_type
+    tgt_concept_differs = tgt_entity != tgt_type
+
+    # Entity model relationships
     em_product = entity_model.get(src_product, {}).get("entities", {})
-    entity_data = em_product.get(meta.get("source_entity", src_type), {})
+    entity_data = em_product.get(src_entity, {})
     entity_rels = entity_data.get("relationships", [])
 
     predictions = result.get("predictions", {}) if result else {}
@@ -333,7 +346,7 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
     is_annotated = saved.get("annotated", False)
 
     with st.container():
-        # Header
+        # Header row: Source API  --relationship-->  Target API
         cols = st.columns([1, 1, 1])
         with cols[0]:
             st.markdown(f"{product_badge(src_product)} **{src_type}**", unsafe_allow_html=True)
@@ -371,10 +384,54 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
 
         st.caption(f"_{description}_")
 
-        # 3-column detail
+        # Concept row: show the data model concepts that motivated this API pairing
+        concept_cols = st.columns([1, 1, 1])
+        with concept_cols[0]:
+            concept_label = f"**Concept:** `{src_product}.{src_entity}`"
+            if src_concept_differs:
+                concept_label += f" -> API: `{src_type}`"
+            st.markdown(concept_label)
+            if src_entity_desc:
+                st.caption(src_entity_desc[:120])
+
+        with concept_cols[1]:
+            # Show concept-level relationship context
+            if entity_rels:
+                # Find relationships to the target entity
+                relevant_rels = [
+                    r for r in entity_rels
+                    if tgt_entity in r.get("target", "")
+                ]
+                other_rels = [
+                    r for r in entity_rels
+                    if tgt_entity not in r.get("target", "")
+                ]
+                if relevant_rels:
+                    for r in relevant_rels[:2]:
+                        st.markdown(
+                            f'<span style="color:#666;font-size:0.85em">'
+                            f'{r["type"]} -> {r["target"]}</span>',
+                            unsafe_allow_html=True,
+                        )
+                        if r.get("description"):
+                            st.caption(r["description"][:100])
+                if other_rels:
+                    other_strs = [f'{r["target"]}' for r in other_rels[:4]]
+                    st.caption(f"Other relations: {', '.join(other_strs)}")
+            else:
+                st.caption("No concept relationships defined")
+
+        with concept_cols[2]:
+            concept_label = f"**Concept:** `{tgt_product}.{tgt_entity}`"
+            if tgt_concept_differs:
+                concept_label += f" -> API: `{tgt_type}`"
+            st.markdown(concept_label)
+            if tgt_entity_desc:
+                st.caption(tgt_entity_desc[:120])
+
+        # API detail row
         detail_cols = st.columns([1, 1, 1])
         with detail_cols[0]:
-            st.markdown("**Source API Type**")
             src_fields = [
                 (k, v)
                 for k, v in api_lookup.items()
@@ -383,15 +440,9 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
             st.markdown(f"`{src_product}.{src_type}` — {len(src_fields)} fields")
 
         with detail_cols[1]:
-            st.markdown("**Entity Model**")
-            if entity_desc:
-                st.markdown(f"_{entity_desc[:100]}_")
-            if entity_rels:
-                rel_strs = [f"-> {r['target']}" for r in entity_rels[:4]]
-                st.markdown("Relationships: " + ", ".join(rel_strs))
+            pass
 
         with detail_cols[2]:
-            st.markdown("**Target API Type**")
             tgt_fields = [
                 (k, v)
                 for k, v in api_lookup.items()
