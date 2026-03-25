@@ -34,8 +34,8 @@ METHODS = {
         'models': [('Granite', 'granite'), ('Llama', 'llama')],
     },
     'Map-Reflect': {
-        'dirs': ['map_reflect/results', 'remote_results/map_reflect'],
-        'models': [('Granite', 'granite-4'), ('Llama', 'llama-3')],
+        'dirs': ['map_reflect/results', 'remote_results/map_reflect', 'results'],
+        'models': [('Granite', 'granite'), ('Llama', 'llama')],
     },
     'MatchMaker': {
         'dirs': ['match_maker/results', 'remote_results/match_maker'],
