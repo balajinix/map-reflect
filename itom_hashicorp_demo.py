@@ -94,7 +94,14 @@ def load_data():
         with open(cand_path) as f:
             candidates = json.load(f)
 
-    return entity_model, entity_mapping, samples, api_lookup, results, candidates
+    # ITOpsGraph type mapping lookup (which methods suggested each type mapping)
+    type_mapping_lookup = {}
+    tml_path = base / "itopsgraph_type_mapping_lookup.json"
+    if tml_path.exists():
+        with open(tml_path) as f:
+            type_mapping_lookup = json.load(f)
+
+    return entity_model, entity_mapping, samples, api_lookup, results, candidates, type_mapping_lookup
 
 
 def load_annotations():
@@ -296,7 +303,7 @@ def render_annotation_ui(sample, candidates_data, api_lookup):
                 st.warning(f"Note: {len(violations)} bipartite violation(s) remain")
 
 
-def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup, candidates_data):
+def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup, candidates_data, type_mapping_lookup=None):
     """Render a single mapping card with annotation controls."""
     meta = sample["metadata"]
     src_product = sample["source_schema"]
@@ -476,6 +483,76 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
                 unsafe_allow_html=True,
             )
 
+        # ITOpsGraph type mapping: which methods suggested this type pair
+        if type_mapping_lookup:
+            # Look up src_type -> tgt_type (the lookup uses bare type names)
+            src_mappings = type_mapping_lookup.get(src_type, {})
+            methods_for_pair = src_mappings.get(tgt_type, [])
+
+            # Also check reverse direction
+            tgt_mappings = type_mapping_lookup.get(tgt_type, {})
+            reverse_methods = tgt_mappings.get(src_type, [])
+
+            # Collect all other targets that src_type was mapped to by any method
+            other_targets = {
+                t: m for t, m in src_mappings.items()
+                if t != tgt_type
+            }
+
+            # Method color coding
+            METHOD_COLORS = {
+                "Map-Reflect": "#1565C0",
+                "ReAct": "#6A1B9A",
+                "UE-Reflect": "#00838F",
+                "MatchMaker": "#2E7D32",
+                "ReMatch": "#E65100",
+                "AnyTool": "#4527A0",
+                "SMT": "#AD1457",
+                "GNN": "#37474F",
+            }
+
+            def method_badge(method_name):
+                # Extract method family (before the parenthesized model)
+                family = method_name.split("(")[0].strip()
+                color = METHOD_COLORS.get(family, "#757575")
+                return (
+                    f'<span style="background:{color};color:white;padding:1px 6px;'
+                    f'border-radius:4px;font-size:0.75em;margin-right:3px">'
+                    f'{method_name}</span>'
+                )
+
+            if methods_for_pair:
+                badges = " ".join(method_badge(m) for m in methods_for_pair)
+                st.markdown(
+                    f'<div style="margin:4px 0">'
+                    f'<span style="font-size:0.85em;color:#555">Methods that suggested this mapping:</span> '
+                    f'{badges}</div>',
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(
+                    '<span style="font-size:0.85em;color:#999">No ITOpsGraph methods suggested this type mapping</span>',
+                    unsafe_allow_html=True,
+                )
+
+            if reverse_methods:
+                rev_badges = " ".join(method_badge(m) for m in reverse_methods)
+                st.markdown(
+                    f'<div style="margin:2px 0">'
+                    f'<span style="font-size:0.85em;color:#555">Reverse ({tgt_type} -> {src_type}):</span> '
+                    f'{rev_badges}</div>',
+                    unsafe_allow_html=True,
+                )
+
+            # Show other targets this source was mapped to (top 5 by method count)
+            if other_targets:
+                top_others = sorted(other_targets.items(), key=lambda x: -len(x[1]))[:5]
+                other_strs = [
+                    f"`{t}` ({len(m)} methods)"
+                    for t, m in top_others
+                ]
+                st.caption(f"Other targets for {src_type}: {', '.join(other_strs)}")
+
         # Annotation UI (replaces old read-only field table)
         render_annotation_ui(sample, candidates_data, api_lookup)
 
@@ -530,7 +607,7 @@ def export_annotations(annotations, samples, api_lookup):
 
 
 def main():
-    entity_model, entity_mapping, samples, api_lookup, results, candidates_data = load_data()
+    entity_model, entity_mapping, samples, api_lookup, results, candidates_data, type_mapping_lookup = load_data()
 
     # Init session state
     if "annotations" not in st.session_state:
@@ -645,7 +722,7 @@ def main():
 
     for s in filtered:
         result = results.get(s["id"])
-        render_mapping_card(s, result, entity_model, entity_mapping, api_lookup, candidates_data)
+        render_mapping_card(s, result, entity_model, entity_mapping, api_lookup, candidates_data, type_mapping_lookup)
 
 
 if __name__ == "__main__":
