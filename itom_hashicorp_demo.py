@@ -1,18 +1,24 @@
 """
-ITOM-Hashicorp Schema Mapping Demo
+ITOM-Hashicorp Schema Mapping Demo + Annotation Tool
 
 Streamlit app showing schema mappings between ITOM products (Instana,
 Concert, Turbonomic, HCP Terraform) and Hashicorp products (Infragraph,
 Packer, AWS, Azure, GCP, HCP).
 
-Layout: ITOM API (left) | Entity Model (center) | Hashicorp API (right)
-Field-level mappings are shown in expandable sections.
+Features:
+  - Type pair cards with 3-column layout
+  - Pre-computed candidate field mappings (Map-Reflect + embedding + name match)
+  - Interactive annotation: accept/reject/correct each field mapping
+  - Bipartite validation (each target field used at most once)
+  - Save/load annotations to JSON
+  - Export annotated dataset
 """
 
 import streamlit as st
 import json
 from pathlib import Path
 from collections import defaultdict
+from datetime import datetime
 
 # Page config
 st.set_page_config(
@@ -35,38 +41,38 @@ PRODUCT_COLORS = {
     "core_infrastructure": "#546E7A",
 }
 
-# hcp_terraform appears in both ITOM and Hashicorp; for cross-product
-# classification, a mapping is cross-product only when one side is
-# exclusively ITOM and the other exclusively Hashicorp.
 ITOM_ONLY = {"instana", "concert", "turbonomic"}
 HASHI_ONLY = {"infragraph", "packer", "aws", "azure", "gcp", "hcp"}
-SHARED = {"hcp_terraform"}  # belongs to both
+SHARED = {"hcp_terraform"}
 ITOM_PRODUCTS = ITOM_ONLY | SHARED
 HASHI_PRODUCTS = HASHI_ONLY | SHARED
+
+DATA_DIR = Path(__file__).parent / "data"
+ANNOTATIONS_PATH = DATA_DIR / "itom_hashicorp_annotations.json"
 
 
 @st.cache_data
 def load_data():
-    base = Path(__file__).parent / "data"
+    base = DATA_DIR
     mr_results_dir = Path(__file__).parent / "map_reflect" / "results"
 
-    # Entity model (conceptual)
     with open(base / "itom_hashicorp_entity_model.json") as f:
         entity_model = json.load(f)
 
-    # Entity mapping (conceptual -> actual types)
     with open(base / "itom_hashicorp_entity_mapping.json") as f:
         entity_mapping = json.load(f)
 
-    # Dataset (ground truth)
     samples = []
     with open(base / "itom_hashicorp_dataset.jsonl") as f:
         for line in f:
             if line.strip():
                 samples.append(json.loads(line))
 
-    # API lookup
-    with open(base / "itom_hashicorp_api_lookup.json") as f:
+    # Prefer v2 lookup
+    lookup_path = base / "itom_hashicorp_api_lookup_v2.json"
+    if not lookup_path.exists():
+        lookup_path = base / "itom_hashicorp_api_lookup.json"
+    with open(lookup_path) as f:
         api_lookup = json.load(f)
 
     # Map-Reflect results (prefer Llama, backfill with Granite)
@@ -81,17 +87,28 @@ def load_data():
                 results[sid] = r
                 results[sid]["_model"] = model_tag
 
-    # Also load constrained result if available (for comparison)
-    constrained_results = {}
-    for suffix in ["llama_WITH_CONSTRAINT"]:
-        fpath = mr_results_dir / f"mapreflect_itom_hashicorp_{suffix}.json"
-        if fpath.exists():
-            with open(fpath) as f:
-                data = json.load(f)
-            for r in data.get("results", []):
-                constrained_results[r["sample_id"]] = r
+    # Pre-computed annotation candidates
+    candidates = {}
+    cand_path = base / "itom_hashicorp_annotation_candidates.json"
+    if cand_path.exists():
+        with open(cand_path) as f:
+            candidates = json.load(f)
 
-    return entity_model, entity_mapping, samples, api_lookup, results, constrained_results
+    return entity_model, entity_mapping, samples, api_lookup, results, candidates
+
+
+def load_annotations():
+    """Load saved annotations from disk."""
+    if ANNOTATIONS_PATH.exists():
+        with open(ANNOTATIONS_PATH) as f:
+            return json.load(f)
+    return {}
+
+
+def save_annotations(annotations):
+    """Save annotations to disk."""
+    with open(ANNOTATIONS_PATH, "w") as f:
+        json.dump(annotations, f, indent=2)
 
 
 def product_badge(product):
@@ -99,72 +116,188 @@ def product_badge(product):
     return f'<span style="background:{color};color:white;padding:2px 8px;border-radius:4px;font-size:0.85em;font-weight:bold">{product}</span>'
 
 
-def render_field_table(predictions, ground_truth, api_lookup, constrained_preds=None):
-    """Render field-level mapping table inside an expander.
+def get_target_fields(api_lookup, product, type_name):
+    """Get all target field names for a type (excluding embedded refs)."""
+    EMBEDDED_REFS = {
+        "base", "virtual_machine", "aws_resource", "azure_resource",
+        "gcp_resource", "hcp_resource", "hcp_terraform_resource",
+    }
+    prefix = f"{product}_{type_name}."
+    fields = []
+    for key in api_lookup:
+        if key.startswith(prefix):
+            field_name = key[len(prefix):]
+            if field_name not in EMBEDDED_REFS:
+                fields.append(field_name)
+    return sorted(fields)
 
-    Shows collisions (multiple source fields → same target) and optionally
-    compares with constrained assignment results.
+
+def render_annotation_ui(sample, candidates_data, api_lookup):
+    """Render interactive annotation controls for a type pair.
+
+    Returns dict of {src_field_short: chosen_target_short_or_None} if user
+    clicks Save, else None.
     """
-    # Detect collisions: count how many source fields map to each target
-    target_claims = defaultdict(list)
-    for src_field in ground_truth:
-        pred_data = predictions.get(src_field, {})
-        ranking = pred_data.get("initial_ranking", [])
-        if ranking and isinstance(ranking[0], dict):
-            top = ranking[0].get("id", "")
-            if top:
-                target_claims[top].append(src_field)
+    sid = sample["id"]
+    meta = sample["metadata"]
+    src_product = sample["source_schema"]
+    tgt_product = sample["target_schema"]
+    src_type = meta["source_type"]
+    tgt_type = meta["target_type"]
 
-    collision_targets = {t for t, srcs in target_claims.items() if len(srcs) > 1}
-    if collision_targets:
-        st.caption(f"⚠️ **{len(collision_targets)} collision(s)**: multiple source fields claim the same target")
+    # Get candidate data for this sample
+    cand_info = candidates_data.get(sid, {})
+    field_candidates = cand_info.get("mappings", {})
 
-    rows = []
-    for src_field, gt_target in ground_truth.items():
-        pred_data = predictions.get(src_field, {})
-        ranking = pred_data.get("initial_ranking", [])
-        top_pred = ranking[0] if ranking else {}
-        pred_target = top_pred.get("id", "—")
-        score = top_pred.get("score", 0)
-        reason = top_pred.get("reason", "")
+    # Get all target fields for the dropdown
+    all_target_fields = get_target_fields(api_lookup, tgt_product, tgt_type)
 
-        correct = pred_target.lower() == gt_target.lower() if gt_target else False
-        collision = pred_target in collision_targets
-        icon = "✅" if correct else ("⚠️" if collision else "❌")
+    # Load existing annotations
+    if "annotations" not in st.session_state:
+        st.session_state.annotations = load_annotations()
+    saved = st.session_state.annotations.get(sid, {})
+    saved_mappings = saved.get("mappings", {})
 
-        src_short = src_field.split("_", 1)[-1] if "_" in src_field else src_field
-        tgt_short = pred_target.split(".")[-1] if "." in pred_target else pred_target
+    # Count annotations
+    annotated_count = sum(
+        1 for v in saved_mappings.values() if v.get("target") is not None or v.get("no_match")
+    )
+    total_fields = len(field_candidates)
 
-        row = {
-            "": icon,
-            "Source": src_short,
-            "Predicted Target": tgt_short,
-            "Score": f"{score:.2f}",
-            "Reason": reason[:60],
-        }
+    # Expander with progress
+    progress_label = f"{annotated_count}/{total_fields}" if total_fields > 0 else "0/0"
+    is_complete = annotated_count == total_fields and total_fields > 0
 
-        # Add constrained comparison if available
-        if constrained_preds:
-            c_pred = constrained_preds.get(src_field, {})
-            c_ranking = c_pred.get("initial_ranking", [])
-            if c_ranking and isinstance(c_ranking[0], dict):
-                c_target = c_ranking[0].get("id", "—")
-                c_short = c_target.split(".")[-1] if "." in c_target else c_target
-                changed = c_target != pred_target
-                row["Constrained"] = f"{'→ ' if changed else ''}{c_short}"
+    expander_label = f"Field Annotations ({total_fields} fields) — {progress_label} annotated"
+    if is_complete:
+        expander_label += " ✓"
+
+    with st.expander(expander_label, expanded=False):
+        if not field_candidates:
+            st.info("No candidates available. Run `scripts/generate_annotation_candidates.py` first.")
+            return
+
+        # Bipartite tracking: which targets are claimed
+        claimed_targets = defaultdict(list)
+        # Store per-field options for use in save handler
+        field_options = {}  # src_short -> options list
+
+        for src_key, cand_data in field_candidates.items():
+            src_short = src_key.split(".")[-1] if "." in src_key else src_key
+            src_field_meta = api_lookup.get(src_key, {})
+            src_desc = src_field_meta.get("description", "")
+            src_ftype = src_field_meta.get("field_type", "")
+
+            candidates = cand_data.get("candidates", [])
+
+            # Build options for selectbox
+            options = []
+            option_labels = []
+
+            # Add candidates
+            for c in candidates[:5]:
+                cid = c["id"]
+                c_short = cid.split(".")[-1] if "." in cid else cid
+                score = c.get("score", 0)
+                source = c.get("source", "?")
+                tag = source[:2].upper()
+                options.append(c_short)
+                option_labels.append(f"{c_short} ({score:.2f}, {tag})")
+
+            # Add remaining target fields not in candidates
+            candidate_shorts = {(c["id"].split(".")[-1] if "." in c["id"] else c["id"]) for c in candidates[:5]}
+            for tf in all_target_fields:
+                if tf not in candidate_shorts:
+                    options.append(tf)
+                    option_labels.append(tf)
+
+            # Add special options
+            options.append("__NO_MATCH__")
+            option_labels.append("No Match")
+
+            # Store for save handler
+            field_options[src_short] = options
+
+            # Determine default selection
+            saved_field = saved_mappings.get(src_short, {})
+            if saved_field:
+                if saved_field.get("no_match"):
+                    default_idx = len(options) - 1  # No Match
+                elif saved_field.get("target"):
+                    tgt = saved_field["target"]
+                    try:
+                        default_idx = options.index(tgt)
+                    except ValueError:
+                        default_idx = 0
+                else:
+                    default_idx = 0
             else:
-                row["Constrained"] = "—"
+                default_idx = 0  # First candidate
 
-        rows.append(row)
+            # Render row
+            cols = st.columns([2, 1, 4])
+            with cols[0]:
+                type_tag = f" `{src_ftype}`" if src_ftype else ""
+                st.markdown(f"**{src_short}**{type_tag}")
+                if src_desc:
+                    st.caption(src_desc[:100])
+            with cols[1]:
+                pass  # spacer
+            with cols[2]:
+                choice = st.selectbox(
+                    f"Target for {src_short}",
+                    options=range(len(options)),
+                    format_func=lambda i, labels=option_labels: labels[i],
+                    index=default_idx,
+                    key=f"ann_{sid}_{src_short}",
+                    label_visibility="collapsed",
+                )
+                chosen = options[choice]
+                if chosen != "__NO_MATCH__":
+                    claimed_targets[chosen].append(src_short)
 
-    if rows:
-        st.dataframe(rows, use_container_width=True, hide_index=True)
-    else:
-        st.info("No field predictions available")
+        # Bipartite violations
+        violations = {t: srcs for t, srcs in claimed_targets.items() if len(srcs) > 1}
+        if violations:
+            violation_strs = [
+                f"**{t}** claimed by: {', '.join(srcs)}"
+                for t, srcs in violations.items()
+            ]
+            st.warning(
+                f"Bipartite violation: {len(violations)} target field(s) used more than once:\n\n"
+                + "\n".join(f"- {v}" for v in violation_strs)
+            )
+
+        # Save button
+        if st.button(f"Save annotations for {sid}", key=f"save_{sid}"):
+            mappings = {}
+            for src_key in field_candidates:
+                src_short = src_key.split(".")[-1] if "." in src_key else src_key
+                widget_key = f"ann_{sid}_{src_short}"
+                choice_idx = st.session_state.get(widget_key, 0)
+                opts = field_options.get(src_short, ["__NO_MATCH__"])
+                chosen = opts[choice_idx] if choice_idx < len(opts) else "__NO_MATCH__"
+
+                if chosen == "__NO_MATCH__":
+                    mappings[src_short] = {"target": None, "no_match": True}
+                else:
+                    mappings[src_short] = {"target": chosen, "no_match": False}
+
+            st.session_state.annotations[sid] = {
+                "source": f"{src_product}.{src_type}",
+                "target": f"{tgt_product}.{tgt_type}",
+                "annotated": True,
+                "timestamp": datetime.now().isoformat(),
+                "mappings": mappings,
+            }
+            save_annotations(st.session_state.annotations)
+            st.success(f"Saved {len(mappings)} field annotations for {sid}")
+            if violations:
+                st.warning(f"Note: {len(violations)} bipartite violation(s) remain")
 
 
-def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup, constrained_result=None):
-    """Render a single mapping card with 3-column layout."""
+def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup, candidates_data):
+    """Render a single mapping card with annotation controls."""
     meta = sample["metadata"]
     src_product = sample["source_schema"]
     tgt_product = sample["target_schema"]
@@ -173,17 +306,14 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
     relationship = meta["relationship"]
     description = meta["description"]
 
-    # Get entity info
     entity_key = f"{src_product}.{meta.get('source_entity', src_type)}"
     em_info = entity_mapping.get(entity_key, {})
     entity_desc = em_info.get("description", "")
 
-    # Get entity relationships from model
     em_product = entity_model.get(src_product, {}).get("entities", {})
     entity_data = em_product.get(meta.get("source_entity", src_type), {})
     entity_rels = entity_data.get("relationships", [])
 
-    # Determine accuracy from result
     predictions = result.get("predictions", {}) if result else {}
     gt = sample.get("mapping", {})
     model_tag = result.get("_model", "unknown") if result else "no result"
@@ -198,7 +328,10 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
         if ranking and ranking[0].get("id", "").lower() == gt_t.lower():
             correct += 1
 
-    # Card container
+    # Check annotation status
+    saved = st.session_state.get("annotations", {}).get(sample["id"], {})
+    is_annotated = saved.get("annotated", False)
+
     with st.container():
         # Header
         cols = st.columns([1, 1, 1])
@@ -222,10 +355,11 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
                 "schema_mapping": ("maps to", "#3F51B5"),
             }
             label, rel_color = rel_labels.get(relationship, (relationship.replace("_", " "), "#999"))
+            ann_badge = ' <span style="background:#4CAF50;color:white;padding:1px 6px;border-radius:8px;font-size:0.7em">annotated</span>' if is_annotated else ""
             st.markdown(
                 f'<div style="text-align:center">'
                 f'<span style="background:{rel_color};color:white;padding:2px 8px;border-radius:12px;font-size:0.8em">'
-                f'{label}</span>'
+                f'{label}</span>{ann_badge}'
                 f'</div>',
                 unsafe_allow_html=True,
             )
@@ -235,14 +369,12 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
                 unsafe_allow_html=True,
             )
 
-        # Description row
         st.caption(f"_{description}_")
 
         # 3-column detail
         detail_cols = st.columns([1, 1, 1])
-
         with detail_cols[0]:
-            st.markdown("**ITOM API Type**")
+            st.markdown("**Source API Type**")
             src_fields = [
                 (k, v)
                 for k, v in api_lookup.items()
@@ -255,11 +387,11 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
             if entity_desc:
                 st.markdown(f"_{entity_desc[:100]}_")
             if entity_rels:
-                rel_strs = [f"→ {r['target']}" for r in entity_rels[:4]]
+                rel_strs = [f"-> {r['target']}" for r in entity_rels[:4]]
                 st.markdown("Relationships: " + ", ".join(rel_strs))
 
         with detail_cols[2]:
-            st.markdown("**Hashicorp/Target API Type**")
+            st.markdown("**Target API Type**")
             tgt_fields = [
                 (k, v)
                 for k, v in api_lookup.items()
@@ -267,60 +399,156 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
             ]
             st.markdown(f"`{tgt_product}.{tgt_type}` — {len(tgt_fields)} fields")
 
-        # Accuracy badge
+        # Accuracy badge (from MR predictions vs synthetic GT)
         if total > 0:
             pct = correct / total * 100
             badge_color = "#4CAF50" if pct >= 70 else "#FF9800" if pct >= 40 else "#F44336"
             st.markdown(
                 f'<span style="background:{badge_color};color:white;padding:2px 10px;border-radius:12px;font-size:0.85em">'
-                f'Field accuracy: {correct}/{total} ({pct:.0f}%)</span>'
+                f'MR accuracy: {correct}/{total} ({pct:.0f}%)</span>'
                 f' &nbsp; <span style="color:#888;font-size:0.8em">Model: {model_short}</span>',
                 unsafe_allow_html=True,
             )
 
-        # Expandable field mappings
-        if predictions and gt:
-            with st.expander(f"Field mappings ({len(gt)} fields)", expanded=False):
-                constrained_preds = constrained_result.get("predictions", {}) if constrained_result else None
-                render_field_table(predictions, gt, api_lookup, constrained_preds=constrained_preds)
+        # Annotation UI (replaces old read-only field table)
+        render_annotation_ui(sample, candidates_data, api_lookup)
 
         st.divider()
 
 
+def export_annotations(annotations, samples, api_lookup):
+    """Export annotations as a dataset JSONL."""
+    sample_lookup = {s["id"]: s for s in samples}
+    new_samples = []
+    stats = {"annotated": 0, "matched": 0, "unmatched": 0}
+
+    for sample in samples:
+        sid = sample["id"]
+        ann = annotations.get(sid)
+        if not ann or not ann.get("annotated"):
+            new_samples.append(sample)
+            continue
+
+        stats["annotated"] += 1
+        src_product = sample["source_schema"]
+        tgt_product = sample["target_schema"]
+        src_type = sample["metadata"]["source_type"]
+        tgt_type = sample["metadata"]["target_type"]
+
+        clean_mapping = {}
+        unmatched = []
+        for src_short, mapping_info in ann.get("mappings", {}).items():
+            src_key = f"{src_product}_{src_type}.{src_short}"
+            if mapping_info.get("no_match") or not mapping_info.get("target"):
+                unmatched.append(src_key)
+                stats["unmatched"] += 1
+            else:
+                tgt_key = f"{tgt_product}_{tgt_type}.{mapping_info['target']}"
+                clean_mapping[src_key] = tgt_key
+                stats["matched"] += 1
+
+        new_sample = dict(sample)
+        new_sample["mapping"] = clean_mapping
+        new_sample["metadata"] = dict(sample["metadata"])
+        new_sample["metadata"]["annotation_source"] = "human_v2"
+        new_sample["metadata"]["annotation_timestamp"] = ann.get("timestamp", "")
+        new_sample["metadata"]["unmatched_fields"] = unmatched
+        new_samples.append(new_sample)
+
+    out_path = DATA_DIR / "itom_hashicorp_dataset_annotated.jsonl"
+    with open(out_path, "w") as f:
+        for s in new_samples:
+            f.write(json.dumps(s) + "\n")
+
+    return out_path, stats
+
+
 def main():
-    entity_model, entity_mapping, samples, api_lookup, results, constrained_results = load_data()
+    entity_model, entity_mapping, samples, api_lookup, results, candidates_data = load_data()
+
+    # Init session state
+    if "annotations" not in st.session_state:
+        st.session_state.annotations = load_annotations()
 
     st.title("ITOM – Hashicorp Schema Mapping")
     st.markdown(
-        "Mappings between **ITOM** (Instana, Concert, Turbonomic, Terraform) "
-        "and **Hashicorp** (Infragraph, Packer, AWS, Azure, GCP, HCP) schema types. "
-        "Predictions from Map-Reflect (Llama-3.3-70B, backfilled with Granite-4)."
+        "Mappings between **ITOM** and **Hashicorp** schema types. "
+        "Use the annotation controls to accept/reject/correct field mappings."
     )
 
-    # Sidebar filters
+    # Sidebar
     with st.sidebar:
         st.header("Filters")
 
-        # Relationship type filter
         all_rels = sorted(set(s["metadata"]["relationship"] for s in samples))
         selected_rels = st.multiselect("Relationship type", all_rels, default=all_rels)
 
-        # Source product filter
         all_src = sorted(set(s["source_schema"] for s in samples))
         selected_src = st.multiselect("Source product", all_src, default=all_src)
 
-        # Target product filter
         all_tgt = sorted(set(s["target_schema"] for s in samples))
         selected_tgt = st.multiselect("Target product", all_tgt, default=all_tgt)
 
-        # Cross-product only toggle
-        cross_only = st.checkbox("Cross-product only (ITOM ↔ Hashi)", value=True)
+        cross_only = st.checkbox("Cross-product only (ITOM <-> Hashi)", value=True)
+
+        # Annotation filter
+        ann_filter = st.radio(
+            "Annotation status",
+            ["All", "Annotated only", "Unannotated only"],
+            index=0,
+        )
+
+        st.divider()
+
+        # Annotation progress
+        st.header("Annotation Progress")
+        annotations = st.session_state.annotations
+        annotated_ids = {sid for sid, a in annotations.items() if a.get("annotated")}
+
+        # Count cross-product samples
+        cross_ids = set()
+        for s in samples:
+            src = s["source_schema"]
+            tgt = s["target_schema"]
+            is_cross = (
+                (src in ITOM_ONLY and tgt not in ITOM_ONLY) or
+                (tgt in ITOM_ONLY and src not in ITOM_ONLY)
+            )
+            if is_cross:
+                cross_ids.add(s["id"])
+
+        annotated_cross = len(annotated_ids & cross_ids)
+        total_cross = len(cross_ids)
+        st.metric("Annotated (cross-product)", f"{annotated_cross}/{total_cross}")
+        if total_cross > 0:
+            st.progress(annotated_cross / total_cross)
+
+        st.divider()
+
+        # Save All
+        st.header("Actions")
+        if st.button("Save All Annotations"):
+            save_annotations(st.session_state.annotations)
+            st.success("All annotations saved to disk")
+
+        # Export
+        if st.button("Export Annotated Dataset"):
+            out_path, stats = export_annotations(
+                st.session_state.annotations, samples, api_lookup
+            )
+            st.success(
+                f"Exported to `{out_path.name}`\n\n"
+                f"- Annotated: {stats['annotated']} type pairs\n"
+                f"- Matched fields: {stats['matched']}\n"
+                f"- Unmatched fields: {stats['unmatched']}"
+            )
 
         st.divider()
         st.header("Stats")
         st.metric("Total mappings", len(samples))
         with_results = sum(1 for s in samples if s["id"] in results)
-        st.metric("With predictions", with_results)
+        st.metric("With MR predictions", with_results)
+        st.metric("With candidates", len(candidates_data))
 
     # Filter samples
     filtered = []
@@ -334,22 +562,24 @@ def main():
         if cross_only:
             src = s["source_schema"]
             tgt = s["target_schema"]
-            # Cross-product = one side ITOM-only, the other side Hashicorp
-            # Excludes ITOM↔ITOM (concert→instana) and Hashi↔Hashi (hcp→hcp_terraform)
             is_cross = (
                 (src in ITOM_ONLY and tgt not in ITOM_ONLY) or
                 (tgt in ITOM_ONLY and src not in ITOM_ONLY)
             )
             if not is_cross:
                 continue
+        # Annotation filter
+        if ann_filter == "Annotated only" and s["id"] not in annotated_ids:
+            continue
+        if ann_filter == "Unannotated only" and s["id"] in annotated_ids:
+            continue
         filtered.append(s)
 
     st.markdown(f"**Showing {len(filtered)} of {len(samples)} mappings**")
 
     for s in filtered:
         result = results.get(s["id"])
-        c_result = constrained_results.get(s["id"])
-        render_mapping_card(s, result, entity_model, entity_mapping, api_lookup, constrained_result=c_result)
+        render_mapping_card(s, result, entity_model, entity_mapping, api_lookup, candidates_data)
 
 
 if __name__ == "__main__":
