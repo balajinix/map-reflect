@@ -551,21 +551,41 @@ def render_mapping_card(sample, result, entity_model, entity_mapping, api_lookup
 
         # ITOpsGraph type mapping: which methods suggested this type pair
         if type_mapping_lookup or meta.get("itopsgraph_methods"):
-            # Look up src_type -> tgt_type (the lookup uses bare type names)
-            src_mappings = type_mapping_lookup.get(src_type, {})
-            methods_for_pair = src_mappings.get(tgt_type, [])
+            # Look up src_type -> tgt_type
+            # The lookup may use bare names (Action) or prefixed (turbonomic_Action)
+            src_key_bare = src_type
+            src_key_prefixed = f"{src_product}_{src_type}"
+            tgt_key_bare = tgt_type
+            tgt_key_prefixed = f"{tgt_product}_{tgt_type}"
+
+            src_mappings = type_mapping_lookup.get(src_key_bare, {})
+            src_mappings_prefixed = type_mapping_lookup.get(src_key_prefixed, {})
+
+            methods_for_pair = (
+                src_mappings.get(tgt_key_bare, [])
+                or src_mappings.get(tgt_key_prefixed, [])
+                or src_mappings_prefixed.get(tgt_key_bare, [])
+                or src_mappings_prefixed.get(tgt_key_prefixed, [])
+            )
             # Also check sample metadata (for ITOpsGraph-sourced samples)
             if not methods_for_pair and meta.get("itopsgraph_methods"):
                 methods_for_pair = meta["itopsgraph_methods"]
 
             # Also check reverse direction
-            tgt_mappings = type_mapping_lookup.get(tgt_type, {})
-            reverse_methods = tgt_mappings.get(src_type, [])
+            tgt_mappings = type_mapping_lookup.get(tgt_key_bare, {})
+            tgt_mappings_prefixed = type_mapping_lookup.get(tgt_key_prefixed, {})
+            reverse_methods = (
+                tgt_mappings.get(src_key_bare, [])
+                or tgt_mappings.get(src_key_prefixed, [])
+                or tgt_mappings_prefixed.get(src_key_bare, [])
+                or tgt_mappings_prefixed.get(src_key_prefixed, [])
+            )
 
             # Collect all other targets that src_type was mapped to by any method
+            merged_src_mappings = {**src_mappings, **src_mappings_prefixed}
             other_targets = {
-                t: m for t, m in src_mappings.items()
-                if t != tgt_type
+                t: m for t, m in merged_src_mappings.items()
+                if t != tgt_key_bare and t != tgt_key_prefixed
             }
 
             # Method color coding
