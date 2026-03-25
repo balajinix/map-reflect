@@ -6,9 +6,7 @@ Last updated: 2026-03-25
 
 | Experiment | Status | ETA | Log |
 |-----------|--------|-----|-----|
-| Spider Map-Reflect Llama (db-scoped) | 🔄 Running | ~1hr | logs/spider_dbscoped.log |
-| Spider Map-Reflect Granite (db-scoped) | 🔄 Queued | ~1hr after Llama | logs/spider_dbscoped.log |
-| Spider Map-Reflect Mistral (db-scoped) | 🔄 Queued | ~1hr after Granite | logs/spider_dbscoped.log |
+| Spider Map-Reflect (reverted, all 3 models) | 🔄 Running | ~3hr | logs/spider_reverted.log |
 
 ## Paper Tables — Current Numbers
 
@@ -22,7 +20,7 @@ Last updated: 2026-03-25
 | OMOP-CMS | 100.0 | 63.2 | 97.4 | 78.9 | **100.0** | 100.0 | 100.0 |
 | OMOP-MIMIC | 100.0 | 56.5 | 91.3 | 52.2 | **100.0** | 100.0 | 100.0 |
 | OMOP-Synthea | 100.0 | 100.0 | 100.0 | 100.0 | **100.0** | 100.0 | 100.0 |
-| Spider | -- | 85.8 | 79.7 | 63.0 | 🔄 | 🔄 | 🔄 |
+| Spider | -- | 85.8 | 79.7 | 63.0 | 81.5 | 95.0 | **96.9** |
 | SchemaNet avg | 32.2 | 40.9 | 32.9 | 40.9 | 37.7 | **48.8** | 43.5 |
 
 ### Table 3: Field-Level F1 (%)
@@ -35,7 +33,7 @@ Last updated: 2026-03-25
 | OMOP-CMS | 13.8 | 42.0 | 70.7 | 44.6 | 66.9 | 76.6 | **77.2** |
 | OMOP-MIMIC | 10.9 | 51.0 | 58.3 | 25.0 | 54.6 | 59.7 | **64.7** |
 | OMOP-Synthea | 24.6 | 66.3 | 74.6 | 62.6 | 96.0 | **100.0** | 97.0 |
-| Spider | -- | **85.8** | 84.4 | 82.8 | 🔄 | 🔄 | 🔄 |
+| Spider | -- | **85.8** | 84.4 | 82.8 | 68.0 | 78.8 | 82.2 |
 | SchemaNet avg | 10.5 | 13.0 | 12.7 | 12.7 | 24.7 | 29.7 | **31.6** |
 
 ### Table 5: Retrieval Mode
