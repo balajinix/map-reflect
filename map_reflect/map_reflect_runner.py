@@ -157,6 +157,11 @@ class MapReflectConfig:
     # Default OFF — many-to-one is legitimate in schema mapping
     use_constrained_assignment: bool = False
 
+    # Documentation context: inject product doc chunks into MAP prompts
+    doc_context_chromadb: Optional[str] = None  # Path to ChromaDB with doc chunks
+    doc_context_collection: str = "itopsgraph_docs"  # Collection name
+    doc_context_top_k: int = 3  # Number of doc chunks to retrieve per field
+
 
 class NumpyEncoder(json.JSONEncoder):
     """Custom JSON encoder for numpy types."""
@@ -2228,6 +2233,113 @@ def retrieve_candidates(query_text: str, collection_name: str, chroma_dir: str, 
 
 
 # =============================================================================
+# Documentation Context Retriever
+# =============================================================================
+
+class DocContextRetriever:
+    """Retrieves relevant product documentation chunks from ChromaDB.
+
+    Used to enrich MAP phase prompts with documentation context so the LLM
+    has more information about what each field/type represents beyond just
+    the field name and sparse description.
+    """
+
+    def __init__(self, chromadb_path: str, collection_name: str = "itopsgraph_docs",
+                 top_k: int = 3):
+        self.top_k = top_k
+        self._collection = None
+        try:
+            client = chromadb.PersistentClient(path=chromadb_path)
+            self._collection = client.get_collection(name=collection_name)
+            logger.info(f"DocContext: loaded collection '{collection_name}' "
+                        f"({self._collection.count()} chunks) from {chromadb_path}")
+        except Exception as e:
+            logger.warning(f"DocContext: failed to load collection '{collection_name}': {e}")
+
+    @property
+    def available(self) -> bool:
+        return self._collection is not None
+
+    def retrieve(self, query: str, product: str = None) -> List[str]:
+        """Retrieve top-K doc chunks relevant to a query.
+
+        Args:
+            query: field name, description, or type name to search for
+            product: optional product name to filter results
+
+        Returns:
+            List of document chunk strings
+        """
+        if not self.available:
+            return []
+
+        try:
+            where_filter = {"product": product} if product else None
+            results = self._collection.query(
+                query_texts=[query],
+                n_results=self.top_k,
+                where=where_filter,
+                include=["documents", "metadatas"],
+            )
+            chunks = []
+            for doc, meta in zip(results["documents"][0], results["metadatas"][0]):
+                source = meta.get("source_file", "")
+                section = meta.get("section_title", "")
+                header = f"[{source} / {section}]" if section else f"[{source}]"
+                # Truncate long chunks
+                text = doc[:500] if len(doc) > 500 else doc
+                chunks.append(f"{header}\n{text}")
+            return chunks
+        except Exception as e:
+            logger.debug(f"DocContext retrieval failed for '{query[:50]}': {e}")
+            return []
+
+    def get_field_context(self, field_key: str, product: str = None) -> str:
+        """Get documentation context for a specific field.
+
+        Args:
+            field_key: e.g., 'concert_Application.id' or 'Application.id'
+            product: product name for filtering
+
+        Returns:
+            Formatted doc context string (empty if nothing found)
+        """
+        # Build a meaningful query from the field key
+        parts = field_key.replace("_", " ").split(".")
+        if len(parts) >= 2:
+            query = f"{parts[0]} {parts[1]} field"
+        else:
+            query = field_key.replace("_", " ")
+
+        chunks = self.retrieve(query, product=product)
+        if not chunks:
+            return ""
+
+        return "\n".join(chunks)
+
+    def get_type_context(self, type_name: str, product: str = None) -> str:
+        """Get documentation context for a type/table.
+
+        Args:
+            type_name: e.g., 'ApplicationPerspective' or 'AwsEc2Instance'
+            product: product name for filtering
+
+        Returns:
+            Formatted doc context string
+        """
+        # Convert CamelCase to readable query
+        import re
+        readable = re.sub(r'([A-Z])', r' \1', type_name).strip()
+        query = f"{readable} type schema"
+
+        chunks = self.retrieve(query, product=product)
+        if not chunks:
+            return ""
+
+        return "\n".join(chunks)
+
+
+# =============================================================================
 # Main Pipeline
 # =============================================================================
 
@@ -2257,6 +2369,15 @@ class MapReflectRunner:
         # Load property lookup
         with open(self.property_lookup_file) as f:
             self.property_lookup = json.load(f)
+
+        # Initialize documentation context retriever
+        self.doc_retriever = None
+        if self.config.doc_context_chromadb:
+            self.doc_retriever = DocContextRetriever(
+                chromadb_path=self.config.doc_context_chromadb,
+                collection_name=self.config.doc_context_collection,
+                top_k=self.config.doc_context_top_k,
+            )
 
         # Build property graph for neighbor expansion
         self.property_graph = None
@@ -2464,11 +2585,25 @@ IMPORTANT: This is a healthcare schema mapping task. Follow these rules:
 6. Concept/code fields should map to code fields (*_cd, *_code, *_type)
 7. DO NOT confuse patient identifiers with provider identifiers (NPIs)"""
 
+        # Documentation context (from product docs ChromaDB)
+        doc_context_block = ""
+        if self.doc_retriever and self.doc_retriever.available:
+            # Retrieve docs for source field
+            src_context = self.doc_retriever.get_field_context(source_prop, product=source_product)
+            if src_context:
+                doc_context_block += f"\n\nSOURCE DOCUMENTATION CONTEXT ({source_product}):\n{src_context}"
+            # Retrieve docs for target product (using top candidate as query hint)
+            if candidates:
+                top_cand_id = candidates[0].get('id', candidates[0].get('name', ''))
+                tgt_context = self.doc_retriever.get_field_context(top_cand_id, product=target_product)
+                if tgt_context:
+                    doc_context_block += f"\n\nTARGET DOCUMENTATION CONTEXT ({target_product}):\n{tgt_context}"
+
         prompt = f"""You are given a {source_product} property and a list of candidate {target_product} properties.
 Rank the candidates by how well they semantically match the {source_product} property.
 
 {source_product} property: {source_prop}
-Description: {source_desc}{type_hints_block}{omop_instructions}
+Description: {source_desc}{type_hints_block}{omop_instructions}{doc_context_block}
 
 Candidates:
 {cand_block}
@@ -2502,11 +2637,21 @@ Return only the JSON array and nothing else."""
             for i, f in enumerate(target_fields)
         ])
 
+        # Documentation context
+        doc_context_block = ""
+        if self.doc_retriever and self.doc_retriever.available:
+            src_context = self.doc_retriever.get_field_context(source_field, product=source_product)
+            if src_context:
+                doc_context_block += f"\n\nSOURCE DOCUMENTATION ({source_product}):\n{src_context}"
+            tgt_context = self.doc_retriever.get_type_context(target_type, product=target_product)
+            if tgt_context:
+                doc_context_block += f"\n\nTARGET TYPE DOCUMENTATION ({target_product} {target_type}):\n{tgt_context}"
+
         prompt = f"""You are given a {source_product} field and a list of candidate fields from the {target_product} table "{target_type}".
 Select the field that best matches the semantic meaning of the source field.
 
 {source_product} field: {source_field}
-Description: {source_desc}
+Description: {source_desc}{doc_context_block}
 
 Target table: {target_type}
 Candidate fields:
@@ -3746,6 +3891,14 @@ def main():
     # Custom eval file (for running on subset of samples)
     parser.add_argument("--eval-file", type=str, help="Custom JSONL eval file (overrides default dataset file)")
 
+    # Documentation context (RAG from product docs)
+    parser.add_argument("--doc-context", type=str,
+                        help="Path to ChromaDB with product doc chunks (e.g., /path/to/ITOpsGraph/wiki/docs/chromadb)")
+    parser.add_argument("--doc-context-collection", type=str, default="itopsgraph_docs",
+                        help="ChromaDB collection name (default: itopsgraph_docs)")
+    parser.add_argument("--doc-context-top-k", type=int, default=3,
+                        help="Number of doc chunks to retrieve per field (default: 3)")
+
     # Output
     parser.add_argument("--output-dir", type=str, default="map_reflect/results", help="Output directory")
 
@@ -3777,6 +3930,9 @@ def main():
         checkpoint_interval=args.checkpoint_interval,
         resume=args.resume,
         use_constrained_assignment=not args.no_constrained_assignment,
+        doc_context_chromadb=args.doc_context,
+        doc_context_collection=args.doc_context_collection,
+        doc_context_top_k=args.doc_context_top_k,
     )
 
     for dataset in args.datasets.split(","):
