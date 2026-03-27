@@ -72,7 +72,10 @@ class MatchMakerMappingAgent:
         use_optimization: bool = True,
         top_k: int = 5,
         abstention_mode: str = 'lenient',
-        min_confidence_threshold: float = 20.0
+        min_confidence_threshold: float = 20.0,
+        doc_context_chromadb: str = None,
+        doc_context_collection: str = "itopsgraph_docs",
+        doc_context_top_k: int = 2,
     ):
         self.model = model
         self.dataset = dataset
@@ -83,6 +86,9 @@ class MatchMakerMappingAgent:
         self.top_k = top_k
         self.abstention_mode = abstention_mode
         self.min_confidence_threshold = min_confidence_threshold
+        self.doc_context_chromadb = doc_context_chromadb
+        self.doc_context_collection = doc_context_collection
+        self.doc_context_top_k = doc_context_top_k
         self.available = False
 
         # Flag: optimization runs once after first set_source_target call
@@ -137,7 +143,10 @@ class MatchMakerMappingAgent:
             rebuild_index=self.rebuild_index,
             use_optimization=self.use_optimization,
             abstention_mode=self.abstention_mode,
-            min_confidence_threshold=self.min_confidence_threshold
+            min_confidence_threshold=self.min_confidence_threshold,
+            doc_context_chromadb=self.doc_context_chromadb,
+            doc_context_collection=self.doc_context_collection,
+            doc_context_top_k=self.doc_context_top_k,
         )
 
         logger.info(
@@ -420,7 +429,10 @@ class MatchMakerEvaluationRunner:
         top_k: int = 5,
         abstention_mode: str = 'lenient',
         min_confidence_threshold: float = 20.0,
-        max_workers: int = 1
+        max_workers: int = 1,
+        doc_context_chromadb: str = None,
+        doc_context_collection: str = "itopsgraph_docs",
+        doc_context_top_k: int = 2,
     ):
         self.property_lookup_file = Path(property_lookup_file)
         self.data_dir = Path(data_dir)
@@ -431,6 +443,9 @@ class MatchMakerEvaluationRunner:
         self.abstention_mode = abstention_mode
         self.min_confidence_threshold = min_confidence_threshold
         self.max_workers = max_workers
+        self.doc_context_chromadb = doc_context_chromadb
+        self.doc_context_collection = doc_context_collection
+        self.doc_context_top_k = doc_context_top_k
 
         script_dir_local = Path(__file__).parent
         self.results_dir = script_dir_local / "results"
@@ -489,7 +504,10 @@ class MatchMakerEvaluationRunner:
                 use_optimization=self.use_optimization,
                 top_k=self.top_k,
                 abstention_mode=self.abstention_mode,
-                min_confidence_threshold=self.min_confidence_threshold
+                min_confidence_threshold=self.min_confidence_threshold,
+                doc_context_chromadb=self.doc_context_chromadb,
+                doc_context_collection=self.doc_context_collection,
+                doc_context_top_k=self.doc_context_top_k,
             )
         return self._agent_cache[cache_key]
 
@@ -1014,6 +1032,10 @@ def main():
         "--max-workers", type=int, default=1,
         help="Number of parallel workers for sample processing (default: 1 = sequential)"
     )
+    parser.add_argument("--doc-context", type=str, default=None,
+                        help="Path to ChromaDB with product doc chunks")
+    parser.add_argument("--doc-context-collection", type=str, default="itopsgraph_docs")
+    parser.add_argument("--doc-context-top-k", type=int, default=2)
 
     args = parser.parse_args()
 
@@ -1034,7 +1056,10 @@ def main():
             top_k=args.top_k,
             abstention_mode=args.abstention_mode,
             min_confidence_threshold=args.min_confidence,
-            max_workers=args.max_workers
+            max_workers=args.max_workers,
+            doc_context_chromadb=args.doc_context,
+            doc_context_collection=args.doc_context_collection,
+            doc_context_top_k=args.doc_context_top_k,
         )
     except Exception as e:
         logger.error(f"Failed to initialize runner: {e}")

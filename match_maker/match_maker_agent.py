@@ -104,7 +104,10 @@ class MatchMakerAgent:
         n_incontext_examples: int = 4,
         eval_set_size: int = 20,
         abstention_mode: str = 'lenient',
-        min_confidence_threshold: float = 20.0
+        min_confidence_threshold: float = 20.0,
+        doc_context_chromadb: Optional[str] = None,
+        doc_context_collection: str = "itopsgraph_docs",
+        doc_context_top_k: int = 2,
     ):
         self.model = model
         self.dataset = dataset
@@ -153,8 +156,24 @@ class MatchMakerAgent:
             'confidence_scoring': []
         }
 
+        # Documentation context retriever (enrich index with product docs)
+        self._doc_retriever = None
+        if doc_context_chromadb:
+            try:
+                import chromadb as _chromadb
+                _doc_client = _chromadb.PersistentClient(path=doc_context_chromadb)
+                self._doc_collection = _doc_client.get_collection(name=doc_context_collection)
+                self._doc_context_top_k = doc_context_top_k
+                self._doc_retriever = True
+                logger.info(f"DocContext: loaded {self._doc_collection.count()} chunks from {doc_context_chromadb}")
+            except Exception as e:
+                logger.warning(f"DocContext: failed to load: {e}")
+
         self.index_path = f"{chroma_dir}/{self.collection_name}"
-        if self.rebuild_index:
+        if doc_context_chromadb:
+            # Force rebuild when doc context is added
+            self._build_multi_vector_index()
+        elif self.rebuild_index:
             self._build_multi_vector_index()
         else:
             self._load_index()
@@ -554,14 +573,40 @@ class MatchMakerAgent:
                 self._build_multi_vector_index()
 
     def _create_document(self, prop_id: str, prop_data: Dict) -> str:
-        """Create document from property for indexing."""
+        """Create document from property for indexing.
+
+        When doc context is available, enriches the document with
+        relevant chunks from product documentation.
+        """
         parts = [
             prop_data.get('product_name', ''),
             prop_data.get('type_name', ''),
             prop_data.get('field_name', ''),
             prop_data.get('description', '')
         ]
-        return ' '.join(filter(None, parts))
+        base_doc = ' '.join(filter(None, parts))
+
+        # Enrich with documentation context
+        if self._doc_retriever and hasattr(self, '_doc_collection'):
+            try:
+                product = prop_data.get('product_name', '')
+                query = f"{prop_data.get('type_name', '')} {prop_data.get('field_name', '')}"
+                where_filter = {"product": product} if product else None
+                results = self._doc_collection.query(
+                    query_texts=[query],
+                    n_results=self._doc_context_top_k,
+                    where=where_filter,
+                    include=["documents"],
+                )
+                if results and results["documents"] and results["documents"][0]:
+                    doc_text = " ".join(
+                        d[:200] for d in results["documents"][0]
+                    )
+                    base_doc = f"{base_doc} {doc_text}"
+            except Exception:
+                pass  # Fall back to base document
+
+        return base_doc
 
     # ========== Step 2: Candidate Generation ==========
 
