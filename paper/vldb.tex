@@ -839,6 +839,8 @@ MatchMaker     & 27.4  & 33.2  & 28.6  \\
 Tables~\ref{tab:itgraph_type} and~\ref{tab:itgraph_field} show that Map-Reflect maintains high type-level accuracy (97.6\% with Llama) but the bipartite field constraint makes field mapping substantially harder: the best field accuracy is 52.1\% with Mistral, compared to 87.7\% on the one-to-one ITOpsGraph evaluation.
 The gap arises because cross-product field names diverge more than within-product names (e.g., \texttt{boundaryScope} in Instana has no lexical overlap with any Concert field), and the bipartite constraint prevents the model from assigning multiple source fields to the same high-confidence target.
 MatchMaker achieves comparable field accuracy (27--33\%) but fails to identify the correct target API type in 73\% of cases, indicating that its ColBERT-based retrieval struggles with heterogeneous cross-product schemas.
+Notably, the ITGraph dataset includes RAG-enriched field descriptions generated from 239\,MB of product documentation via docling~\cite{auer2024docling} and ChromaDB.
+Map-Reflect's prompt-based architecture can directly leverage this documentation context at inference time, whereas MatchMaker's ColBERT-v2 retrieval pipeline indexes only field names and short descriptions, leaving the richer documentation unused.
 
 \section{Conclusion}
 
