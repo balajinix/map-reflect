@@ -261,71 +261,98 @@ class ITGraphBuilder:
         print(f"  Bipartite violations: {violations}")
 
     def save(self, output_path):
-        """Save graph and prepare PyG data."""
+        """Save graph and prepare PyG data.
+
+        Saves in the format expected by train_gnn.py:
+          saved_data['data'] = PyG Data object with x, edge_index
+          saved_data['node_list'] = list of node IDs
+          saved_data['type_to_idx'] = mapping of type names to indices
+          saved_data['graph'] = NetworkX graph
+        """
         print(f"\nSaving graph to {output_path}...")
 
-        # Convert to PyG format
+        nodes = list(self.graph.nodes())
+        node_to_idx = {n: i for i, n in enumerate(nodes)}
+
+        # Feature matrix from embeddings
+        features = []
+        for n in nodes:
+            emb = self.graph.nodes[n].get("embedding", [0.0] * 384)
+            features.append(emb)
+        x = torch.tensor(features, dtype=torch.float)
+
+        # All edges for the graph structure (used for message passing)
+        all_src = []
+        all_tgt = []
+        for u, v, d in self.graph.edges(data=True):
+            if u in node_to_idx and v in node_to_idx:
+                all_src.append(node_to_idx[u])
+                all_tgt.append(node_to_idx[v])
+
+        edge_index = torch.tensor([all_src, all_tgt], dtype=torch.long)
+
+        # Build type_to_idx for type nodes
+        type_to_idx = {}
+        for n, attrs in self.graph.nodes(data=True):
+            if attrs.get("node_type") == "type":
+                type_to_idx[n] = node_to_idx[n]
+
+        # Create PyG-compatible Data object
         if TORCH_GEOMETRIC_AVAILABLE:
-            # Get feature matrix from embeddings
-            nodes = list(self.graph.nodes())
-            node_to_idx = {n: i for i, n in enumerate(nodes)}
+            from torch_geometric.data import Data
+            from torch_geometric.transforms import RandomLinkSplit
 
-            # Feature matrix
-            features = []
-            for n in nodes:
-                emb = self.graph.nodes[n].get("embedding", [0.0] * 384)
-                features.append(emb)
-            x = torch.tensor(features, dtype=torch.float)
+            data = Data(x=x, edge_index=edge_index)
 
-            # Edge index (only field_mapping edges for training)
-            src_indices = []
-            tgt_indices = []
-            for u, v, d in self.graph.edges(data=True):
-                if d.get("relationship") == "field_mapping":
-                    if u in node_to_idx and v in node_to_idx:
-                        src_indices.append(node_to_idx[u])
-                        tgt_indices.append(node_to_idx[v])
+            # Split edges for training/val/test
+            try:
+                transform = RandomLinkSplit(
+                    num_val=0.1,
+                    num_test=0.2,
+                    is_undirected=False,
+                    add_negative_train_samples=True,
+                    neg_sampling_ratio=5.0,
+                )
+                train_data, val_data, test_data = transform(data)
 
-            edge_index = torch.tensor([src_indices, tgt_indices], dtype=torch.long)
+                # Use the split data — train_gnn.py expects these attributes
+                data = train_data
+                data.test_pos_edge_index = test_data.pos_edge_label_index if hasattr(test_data, 'pos_edge_label_index') else test_data.edge_index
+                data.test_neg_edge_index = test_data.neg_edge_label_index if hasattr(test_data, 'neg_edge_label_index') else torch.zeros(2, 0, dtype=torch.long)
+                data.train_pos_edge_index = train_data.pos_edge_label_index if hasattr(train_data, 'pos_edge_label_index') else train_data.edge_index
 
-            # Also include structural edges (has_type, has_field, maps_to)
-            struct_src = []
-            struct_tgt = []
-            for u, v, d in self.graph.edges(data=True):
-                rel = d.get("relationship", "")
-                if rel in ("has_type", "has_field", "maps_to"):
-                    if u in node_to_idx and v in node_to_idx:
-                        struct_src.append(node_to_idx[u])
-                        struct_tgt.append(node_to_idx[v])
-
-            struct_edge_index = torch.tensor([struct_src, struct_tgt], dtype=torch.long)
-
-            # Combine all edges for training
-            all_edge_index = torch.cat([edge_index, struct_edge_index], dim=1)
-
-            save_data = {
-                "graph": self.graph,
-                "x": x,
-                "edge_index": edge_index,  # field mapping edges only
-                "all_edge_index": all_edge_index,  # all edges
-                "struct_edge_index": struct_edge_index,
-                "node_to_idx": node_to_idx,
-                "idx_to_node": {i: n for n, i in node_to_idx.items()},
-                "num_nodes": len(nodes),
-                "num_field_mapping_edges": edge_index.size(1),
-                "num_struct_edges": struct_edge_index.size(1),
-            }
+                print(f"  Train edges: {data.train_pos_edge_index.size(1)}")
+                print(f"  Test edges: {data.test_pos_edge_index.size(1)}")
+            except Exception as e:
+                print(f"  Warning: RandomLinkSplit failed ({e}), using all edges for training")
+                data.train_pos_edge_index = edge_index
+                data.test_pos_edge_index = edge_index[:, :edge_index.size(1)//5]
+                data.test_neg_edge_index = torch.zeros(2, 0, dtype=torch.long)
         else:
-            save_data = {"graph": self.graph}
+            # Fallback: simple dict
+            data = type("Data", (), {
+                "x": x,
+                "edge_index": edge_index,
+                "train_pos_edge_index": edge_index,
+                "test_pos_edge_index": edge_index[:, :edge_index.size(1)//5],
+                "test_neg_edge_index": torch.zeros(2, 0, dtype=torch.long),
+            })()
+
+        save_data = {
+            "data": data,
+            "node_list": nodes,
+            "type_to_idx": type_to_idx,
+            "graph": self.graph,
+            "node_to_idx": node_to_idx,
+            "idx_to_node": {i: n for n, i in node_to_idx.items()},
+        }
 
         with open(output_path, "wb") as f:
             pickle.dump(save_data, f)
 
         print(f"  Saved: {output_path}")
-        if TORCH_GEOMETRIC_AVAILABLE:
-            print(f"  Feature dim: {x.size(1)}")
-            print(f"  Field mapping edges: {edge_index.size(1)}")
-            print(f"  Structural edges: {struct_edge_index.size(1)}")
+        print(f"  Nodes: {len(nodes)}, Features: {x.size(1)}, Edges: {edge_index.size(1)}")
+        print(f"  Type nodes: {len(type_to_idx)}")
 
 
 def main():
