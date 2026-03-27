@@ -26,6 +26,7 @@ DATA_DIR = BASE_DIR / "data"
 ALL_PRODUCTS = {
     "instana", "concert", "turbonomic", "hcp_terraform",
     "infragraph", "packer", "aws", "azure", "gcp", "hcp",
+    "cloudability", "ns1", "watsonx-orchestrate",
 }
 
 
@@ -71,18 +72,47 @@ def load_all_predictions():
         ("AnyTool", [
             BASE_DIR / "anytool" / "results",
         ]),
+        ("GNN", [
+            BASE_DIR / "gnn" / "results",
+        ]),
+        ("ReAct", [
+            BASE_DIR / "react" / "results",
+        ]),
+        ("ReMatch", [
+            BASE_DIR / "rematch" / "results",
+        ]),
+        ("SMT", [
+            BASE_DIR / "smt" / "results",
+        ]),
+    ]
+
+    # Skip patterns
+    SKIP_PATTERNS = [
+        "checkpoint", "coverage_eval", "batch_", "discovery_valid",
+        "ablation", "test_", "heuristic", "p_true", "perplexity",
+        "sampling_test", "semantic_entropy", "signal_ablation",
+        "reflection_fix", "reflection_sampling", "uq_method",
+        "uq_threshold", "oracle_mode", "constraint_ablation",
+        "retrieval_mode",
     ]
 
     for method_name, dirs in result_sources:
         for result_dir in dirs:
             if not result_dir.exists():
                 continue
-            for result_file in sorted(result_dir.glob("*.json")):
+            for result_file in sorted(
+                list(result_dir.glob("*.json")) + list(result_dir.glob("*.jsonl"))
+            ):
                 fname = result_file.name.lower()
-                if "checkpoint" in fname:
+                rel_path = str(result_file.relative_to(BASE_DIR)).lower()
+
+                # Skip non-primary results
+                if any(p in fname or p in rel_path for p in SKIP_PATTERNS):
                     continue
-                # Must be ITOM_Hashicorp
-                if "itom" not in fname and "ITOM" not in result_file.name:
+
+                # Must be ITOpsGraph or ITOM_Hashicorp
+                if not any(ds in fname or ds in rel_path for ds in
+                           ["itopsgraph", "itops_", "itom_hashicorp", "itom_hashi"]):
                     continue
 
                 # Determine model
@@ -97,11 +127,14 @@ def load_all_predictions():
 
                 try:
                     with open(result_file) as f:
-                        data = json.load(f)
+                        if str(result_file).endswith(".jsonl"):
+                            data = [json.loads(l) for l in f if l.strip()]
+                        else:
+                            data = json.load(f)
                 except Exception:
                     continue
 
-                results = data.get("results", []) if isinstance(data, dict) else data
+                results = data if isinstance(data, list) else data.get("results", [])
                 if not isinstance(results, list):
                     continue
 
