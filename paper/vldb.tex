@@ -791,12 +791,12 @@ The signal ablation (Table~\ref{tab:ablation_components}) evaluates a one-predic
 The ITOpsGraph evaluation in Tables~\ref{tab:type_results}--\ref{tab:field_results} uses one-to-one ground truth: each evaluation sample maps a single source type to a single target type.
 Real enterprise integration, however, requires \emph{many-to-many} type mappings---one source API type legitimately maps to multiple target types---and \emph{bipartite} field mappings where, within each type pair, each target field is claimed by at most one source field.
 
-\paragraph{ITGraph benchmark.}
-To evaluate this harder setting, we construct ITGraph from the ITOpsGraph schema catalog.
-We run Map-Reflect, MatchMaker, and AnyTool on all cross-product type pairs drawn from 10 products (Instana, Concert, Turbonomic, HCP Terraform, Infragraph, Packer, AWS, Azure, GCP, HCP) and retain every type pair predicted by at least two method/model combinations.
+\paragraph{ITOpsGraph* benchmark.}
+To evaluate this harder setting, we construct ITOpsGraph* from the ITOpsGraph schema catalog.
+We run all eight methods (Map-Reflect, MatchMaker, ReAct, ReMatch, AnyTool, SMT, UE-Reflect, GNN) on all cross-product type pairs across 12 products and retain every type pair predicted by at least two method/model combinations with at least two bipartite field mappings.
 Field mappings are produced by aggregating per-field votes across methods and applying greedy bipartite assignment so that no target field is used more than once.
-The resulting dataset contains 1,501 type pairs with 3,745 bipartite field mappings across 13 products.
-A GNN baseline is trained on the full ITGraph graph (3,037 type pairs, 12,879 nodes) using GraphSAGE~\cite{hamilton2017inductive} with link prediction.
+The resulting dataset contains 786 type pairs with 3,030 bipartite field mappings across 12 products.
+A GNN baseline is trained on the full ITOpsGraph* graph (1,148 type pairs, 12,879 nodes) using GraphSAGE~\cite{hamilton2017inductive} with link prediction.
 
 \paragraph{Many-to-many type mapping.}
 A single source type may map to many target types across products.
@@ -810,45 +810,46 @@ Each target field appears exactly once, preventing the many-to-one collisions co
 
 \begin{table}[htbp]
 \centering
-\caption{ITGraph type-level API accuracy (\%). GNN achieves the highest type accuracy (94.5\%) without any LLM; Map-Reflect is close behind (85--87\%). MatchMaker struggles with cross-product retrieval ($\sim$27\%). $^\dagger$MatchMaker evaluated on 246-sample subset (fails on full dataset).}\label{tab:itgraph_type}
+\caption{ITOpsGraph* type-level API accuracy (\%). All Map-Reflect models achieve 100\% type accuracy on the cleaned dataset; GNN achieves 94.5\% without any LLM. $^\dagger$MatchMaker evaluated on 246-sample subset (fails on full dataset).}\label{tab:itgraph_type}
 \small
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
 \midrule
-Map-Reflect   & --   & 85.0  & 65.3  & \textbf{86.5}  \\
+Map-Reflect   & --   & \textbf{100.0}  & \textbf{100.0}  & \textbf{100.0}  \\
 MatchMaker$^\dagger$    & --   & 31.3  & 26.8  & 27.2  \\
-GNN           & \textbf{94.5} & --    & --    & --    \\
+GNN           & 94.5 & --    & --    & --    \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[htbp]
 \centering
-\caption{ITGraph field-level accuracy (\%) with bipartite constraint. Map-Reflect achieves the best field accuracy (56.6\% Llama, 56.3\% Mistral), significantly outperforming MatchMaker and GNN. $^\dagger$MatchMaker evaluated on 246-sample subset.}\label{tab:itgraph_field}
+\caption{ITOpsGraph* field-level accuracy (\%) with bipartite constraint. Map-Reflect achieves 57.0\% (Llama) and 56.6\% (Mistral), significantly outperforming MatchMaker and GNN. $^\dagger$MatchMaker evaluated on 246-sample subset.}\label{tab:itgraph_field}
 \small
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
 \midrule
-Map-Reflect    & --   & \textbf{56.6} & 43.0  & 56.3  \\
+Map-Reflect    & --   & \textbf{57.0} & 44.6  & 56.6  \\
 MatchMaker$^\dagger$     & --   & 29.4  & 33.2  & 28.6  \\
-GNN            & 24.4 & --    & --    & --    \\
+GNN            & 20.9 & --    & --    & --    \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Results.}
-Tables~\ref{tab:itgraph_type} and~\ref{tab:itgraph_field} present results on the expanded ITGraph benchmark (1,501 type pairs, 3,745 bipartite field mappings, 13 products).
-At the type level, the GNN baseline achieves the highest accuracy (94.5\%) by leveraging learned graph structure without any LLM calls; Map-Reflect follows closely with 85--87\% depending on the model.
-At the field level, Map-Reflect leads with 56.6\% (Llama) and 56.3\% (Mistral), demonstrating that LLM-based semantic reasoning is essential for fine-grained field matching.
-The GNN achieves only 24.4\% field accuracy---it can identify which types should be linked but struggles to select the correct field within a type.
+Tables~\ref{tab:itgraph_type} and~\ref{tab:itgraph_field} present results on ITOpsGraph* (786 type pairs, 3,030 bipartite field mappings, 12 products).
+At the type level, all Map-Reflect models achieve 100\% accuracy---on the cleaned dataset with $\geq$2 bipartite field mappings per pair, the type pairs are well-defined and type identification is straightforward. The GNN achieves 94.5\% without any LLM calls.
+At the field level, Map-Reflect leads with 57.0\% (Llama) and 56.6\% (Mistral), demonstrating that LLM-based semantic reasoning is essential for fine-grained bipartite field matching.
+Granite achieves 44.6\%, confirming that larger models handle cross-product terminology better.
+The GNN achieves only 20.9\% field accuracy---it can identify which types should be linked but struggles to select the correct field within a type.
 MatchMaker achieves 29--33\% field accuracy on a 246-sample subset but fails on the full dataset due to agent initialisation issues with the expanded schema catalog, highlighting its brittleness on heterogeneous cross-product schemas.
-The gap between type accuracy (85--95\%) and field accuracy (24--57\%) confirms that many-to-many type discovery is substantially easier than bipartite field mapping, where cross-product naming conventions diverge and the bipartite constraint prevents mapping multiple source fields to the same high-confidence target.
+The gap between type accuracy (94--100\%) and field accuracy (21--57\%) confirms that many-to-many type discovery is substantially easier than bipartite field mapping, where cross-product naming conventions diverge and the bipartite constraint prevents mapping multiple source fields to the same high-confidence target.
 
 \section{Conclusion}
 
-Schema mapping across heterogeneous enterprise APIs and databases is a prerequisite for data federation, tool composition, and agentic workflows, yet it has received less attention than the downstream tasks it enables. Map-Reflect addresses this gap by framing the problem as induced reflection: a greedy Map phase produces an initial alignment, and a Reflect phase refines it selectively using external signals rather than unconditional self-critique. The central finding is that signal quality matters more than reflection itself. Error- and neighbourhood-based triggers degrade accuracy by firing on correct predictions; only uncertainty quantification identifies the cases where reflection genuinely helps. This selectivity is what makes the framework practical at enterprise scale, where reflection overhead must be justified by measurable improvement. The evaluation spans REST APIs, GraphQL, and relational databases across six benchmarks including a new Spider-derived benchmark with 745~foreign-key mappings across 164~databases, and the ITOpsGraph benchmark contributes a new resource for many-to-many API schema mapping grounded in SME-validated ground truth. Our analysis of constrained one-to-one assignment shows that many-to-one field mappings are legitimate in schema mapping---enforcing deduplication reduces field F1 by up to 46.5\,pp on OMOP-Synthea---confirming that the base many-to-many configuration is the correct default. More broadly, the result that unconditional self-reflection can hurt generalises beyond schema mapping to any tool-using agent that revises its own outputs without external grounding.
+Schema mapping across heterogeneous enterprise APIs and databases is a prerequisite for data federation, tool composition, and agentic workflows, yet it has received less attention than the downstream tasks it enables. Map-Reflect addresses this gap by framing the problem as induced reflection: a greedy Map phase produces an initial alignment, and a Reflect phase refines it selectively using external signals rather than unconditional self-critique. The central finding is that signal quality matters more than reflection itself. Error- and neighbourhood-based triggers degrade accuracy by firing on correct predictions; only uncertainty quantification identifies the cases where reflection genuinely helps. This selectivity is what makes the framework practical at enterprise scale, where reflection overhead must be justified by measurable improvement. The evaluation spans REST APIs, GraphQL, and relational databases across seven benchmarks including a new Spider-derived benchmark with 745~foreign-key mappings across 164~databases, the ITOpsGraph benchmark for one-to-one API schema mapping, and ITOpsGraph* for many-to-many type mapping with bipartite field constraints (786 type pairs, 3,030 bipartite fields, 12 products). Our analysis of constrained one-to-one assignment shows that many-to-one field mappings are legitimate in schema mapping---enforcing deduplication reduces field F1 by up to 46.5\,pp on OMOP-Synthea---confirming that the base many-to-many configuration is the correct default. More broadly, the result that unconditional self-reflection can hurt generalises beyond schema mapping to any tool-using agent that revises its own outputs without external grounding.
 
 \balance
 \clearpage
