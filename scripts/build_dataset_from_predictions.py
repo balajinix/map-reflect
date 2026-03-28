@@ -291,12 +291,13 @@ def discover_type_pairs(predictions, api_lookup):
     return type_pairs
 
 
-def build_dataset(predictions, api_lookup, min_methods=1, min_consensus=0.3):
+def build_dataset(predictions, api_lookup, min_methods=1, min_consensus=0.3, min_fields=2):
     """Build the full dataset with bipartite field mappings.
 
     Args:
         min_methods: minimum number of methods that must predict a type pair
         min_consensus: minimum consensus score for a field mapping
+        min_fields: minimum number of bipartite field mappings per type pair
     """
     # Discover type pairs
     type_pairs = discover_type_pairs(predictions, api_lookup)
@@ -357,7 +358,7 @@ def build_dataset(predictions, api_lookup, min_methods=1, min_consensus=0.3):
         aggregated = aggregate_field_votes(field_preds)
         assigned, unmatched = bipartite_assign(aggregated, min_consensus)
 
-        if not assigned:
+        if not assigned or len(assigned) < min_fields:
             continue
 
         stats["total_pairs"] += 1
@@ -443,8 +444,8 @@ def main():
     )
     print(f"  {len(predictions)} samples, {total_preds} total field predictions")
 
-    print("\nBuilding dataset (min_methods=1, min_consensus=0.3)...")
-    samples, stats = build_dataset(predictions, api_lookup, min_methods=1, min_consensus=0.3)
+    print("\nBuilding dataset (min_methods=1, min_fields=2, min_consensus=0.3)...")
+    samples, stats = build_dataset(predictions, api_lookup, min_methods=1, min_consensus=0.3, min_fields=2)
 
     # Save dataset
     out_path = DATA_DIR / "itgraph_dataset.jsonl"
@@ -453,9 +454,9 @@ def main():
             f.write(json.dumps(s) + "\n")
     print(f"\nSaved: {out_path}")
 
-    # Also build a higher-confidence dataset (>=2 methods)
-    print("\nBuilding high-confidence dataset (min_methods=2)...")
-    samples_hc, stats_hc = build_dataset(predictions, api_lookup, min_methods=2, min_consensus=0.4)
+    # Also build a higher-confidence dataset (>=2 methods, >=2 fields)
+    print("\nBuilding high-confidence dataset (min_methods=2, min_fields=2)...")
+    samples_hc, stats_hc = build_dataset(predictions, api_lookup, min_methods=2, min_consensus=0.4, min_fields=2)
 
     out_path_hc = DATA_DIR / "itgraph_dataset_high_confidence.jsonl"
     with open(out_path_hc, "w") as f:
