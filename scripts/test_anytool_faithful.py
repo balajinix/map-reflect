@@ -7,7 +7,7 @@ import json
 os.environ["LITELLM_LOG"] = "ERROR"
 os.environ["LITELLM_DROP_PARAMS"] = "True"
 
-sys.path.insert(0, str(os.path.join(os.path.dirname(__file__), "..", "anytool")))
+sys.path.insert(0, str(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "anytool")))
 
 from anytool_faithful import *
 import logging
