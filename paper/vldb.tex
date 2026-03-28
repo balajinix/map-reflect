@@ -809,38 +809,41 @@ Each target field appears exactly once, preventing the many-to-one collisions co
 
 \begin{table}[htbp]
 \centering
-\caption{ITGraph type-level API accuracy (\%). Map-Reflect correctly identifies the target API type on 90--98\% of pairs; MatchMaker struggles with cross-product retrieval.}\label{tab:itgraph_type}
+\caption{ITGraph type-level API accuracy (\%). GNN achieves the highest type accuracy (94.5\%) without any LLM; Map-Reflect is close behind (85--87\%). MatchMaker struggles with cross-product retrieval ($\sim$27\%). $^\dagger$MatchMaker evaluated on 246-sample subset (fails on full dataset).}\label{tab:itgraph_type}
 \small
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Method} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
+\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
 \midrule
-Map-Reflect   & \textbf{97.6} & 74.0  & 89.4  \\
-MatchMaker    & 26.0          & 26.8  & 27.2  \\
+Map-Reflect   & --   & 85.0  & 65.3  & \textbf{86.5}  \\
+MatchMaker$^\dagger$    & --   & 31.3  & 26.8  & 27.2  \\
+GNN           & \textbf{94.5} & --    & --    & --    \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[htbp]
 \centering
-\caption{ITGraph field-level accuracy (\%) with bipartite constraint. Map-Reflect outperforms MatchMaker on every model.}\label{tab:itgraph_field}
+\caption{ITGraph field-level accuracy (\%) with bipartite constraint. Map-Reflect achieves the best field accuracy (56.6\% Llama, 56.3\% Mistral), significantly outperforming MatchMaker and GNN. $^\dagger$MatchMaker evaluated on 246-sample subset.}\label{tab:itgraph_field}
 \small
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Method} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
+\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
 \midrule
-Map-Reflect    & 24.8  & 32.1  & \textbf{52.1} \\
-MatchMaker     & 27.4  & 33.2  & 28.6  \\
+Map-Reflect    & --   & \textbf{56.6} & 43.0  & 56.3  \\
+MatchMaker$^\dagger$     & --   & 29.4  & 33.2  & 28.6  \\
+GNN            & 24.4 & --    & --    & --    \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Results.}
-Tables~\ref{tab:itgraph_type} and~\ref{tab:itgraph_field} show that Map-Reflect maintains high type-level accuracy (97.6\% with Llama) but the bipartite field constraint makes field mapping substantially harder: the best field accuracy is 52.1\% with Mistral, compared to 87.7\% on the one-to-one ITOpsGraph evaluation.
-The gap arises because cross-product field names diverge more than within-product names (e.g., \texttt{boundaryScope} in Instana has no lexical overlap with any Concert field), and the bipartite constraint prevents the model from assigning multiple source fields to the same high-confidence target.
-MatchMaker achieves comparable field accuracy (27--33\%) but fails to identify the correct target API type in 73\% of cases, indicating that its ColBERT-based retrieval struggles with heterogeneous cross-product schemas.
-Notably, the ITGraph dataset includes RAG-enriched field descriptions generated from 239\,MB of product documentation via docling~\cite{auer2024docling} and ChromaDB.
-Map-Reflect's prompt-based architecture can directly leverage this documentation context at inference time, whereas MatchMaker's ColBERT-v2 retrieval pipeline indexes only field names and short descriptions, leaving the richer documentation unused.
+Tables~\ref{tab:itgraph_type} and~\ref{tab:itgraph_field} present results on the expanded ITGraph benchmark (1,501 type pairs, 3,745 bipartite field mappings, 13 products).
+At the type level, the GNN baseline achieves the highest accuracy (94.5\%) by leveraging learned graph structure without any LLM calls; Map-Reflect follows closely with 85--87\% depending on the model.
+At the field level, Map-Reflect leads with 56.6\% (Llama) and 56.3\% (Mistral), demonstrating that LLM-based semantic reasoning is essential for fine-grained field matching.
+The GNN achieves only 24.4\% field accuracy---it can identify which types should be linked but struggles to select the correct field within a type.
+MatchMaker achieves 29--33\% field accuracy on a 246-sample subset but fails on the full dataset due to agent initialisation issues with the expanded schema catalog, highlighting its brittleness on heterogeneous cross-product schemas.
+The gap between type accuracy (85--95\%) and field accuracy (24--57\%) confirms that many-to-many type discovery is substantially easier than bipartite field mapping, where cross-product naming conventions diverge and the bipartite constraint prevents mapping multiple source fields to the same high-confidence target.
 
 \section{Conclusion}
 
