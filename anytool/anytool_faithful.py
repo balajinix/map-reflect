@@ -77,17 +77,39 @@ def get_tool_descriptions(tool_list: list) -> dict:
     return result
 
 
+def find_product_category(product_name: str) -> str:
+    """Find which category a product belongs to."""
+    for category, tools in TOOL_DATA.items():
+        if product_name in tools:
+            return category
+    return ""
+
+
 def get_apis_in_tool(category_name: str, tool_name: str) -> list:
-    """Get all API names in a specific tool."""
+    """Get all API names in a specific tool, grouped by type."""
     if category_name not in TOOL_DATA:
         return f"Category '{category_name}' not found"
     if tool_name not in TOOL_DATA[category_name]:
         return f"Tool '{tool_name}' not found in '{category_name}'"
     apis = TOOL_DATA[category_name][tool_name]["api_list_names"]
-    # Return first 50 to avoid context overflow
-    if len(apis) > 50:
-        return apis[:50] + [f"... and {len(apis) - 50} more"]
-    return apis
+    # Group by type for readability
+    types = {}
+    for api in apis:
+        parts = api.split(".", 1)
+        type_name = parts[0] if len(parts) == 2 else "other"
+        if type_name not in types:
+            types[type_name] = []
+        types[type_name].append(api)
+    # Return type summary (avoids context overflow)
+    summary = []
+    for type_name, fields in sorted(types.items()):
+        if len(fields) <= 5:
+            summary.append(f"{type_name}: {fields}")
+        else:
+            summary.append(f"{type_name}: {fields[:5]} ... ({len(fields)} total)")
+    if len(summary) > 30:
+        return summary[:30] + [f"... and {len(summary) - 30} more types"]
+    return summary
 
 
 def get_api_details(category_name: str, tool_name: str, api_name: str) -> dict:
@@ -492,6 +514,25 @@ Return ONLY the JSON array."""
 # Main AnyTool pipeline
 # ============================================================================
 
+def extract_products_from_query(query):
+    """Extract source and target product names from a mapping query."""
+    all_products = set()
+    for cat_tools in TOOL_DATA.values():
+        all_products.update(cat_tools.keys())
+
+    found = []
+    query_lower = query.lower()
+    for prod in sorted(all_products, key=len, reverse=True):
+        if prod.lower() in query_lower:
+            found.append(prod)
+
+    if len(found) >= 2:
+        return found[0], found[1]
+    elif len(found) == 1:
+        return found[0], None
+    return None, None
+
+
 def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-instruct",
                 max_reflection=2):
     """Run the full AnyTool pipeline on a schema mapping query.
@@ -506,25 +547,49 @@ def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-in
         dict of {source_field: {target_property, justification}}
     """
     load_database()
-    categories = list(TOOL_DATA.keys())
+
+    # Extract source/target products from query
+    src_prod, tgt_prod = extract_products_from_query(query)
 
     for reflection_round in range(max_reflection + 1):
-        # Phase 1: Meta-agent selects categories
-        meta = MetaAgent(query, model, categories)
-        selected = meta.run()
+        # Phase 1: Determine categories to explore
+        categories_to_explore = set()
 
-        if not selected:
-            # Fallback: use all categories
-            selected = categories[:5]
+        if src_prod:
+            cat = find_product_category(src_prod)
+            if cat:
+                categories_to_explore.add(cat)
+        if tgt_prod:
+            cat = find_product_category(tgt_prod)
+            if cat:
+                categories_to_explore.add(cat)
 
-        # Phase 2: Tool agents explore each category
+        if not categories_to_explore:
+            # Fallback: use meta-agent
+            meta = MetaAgent(query, model, list(TOOL_DATA.keys()))
+            selected = meta.run()
+            categories_to_explore = set(selected) if selected else set(list(TOOL_DATA.keys())[:3])
+
+        # Phase 2: Tool agents explore target product(s)
         api_pool = []
-        for category in selected:
+        for category in categories_to_explore:
             if category not in TOOL_DATA:
                 continue
+            # Only explore target product tools, not source
             tools = list(TOOL_DATA[category].keys())
+            if tgt_prod and tgt_prod in tools:
+                tools = [tgt_prod]  # Focus on target product
             agent = ToolAgent(query, model, category, tools, api_pool)
             agent.run()
+
+        if not api_pool:
+            # Reflection: broaden search
+            logger.info(f"Reflection {reflection_round + 1}: empty pool, broadening")
+            categories_to_explore = set(TOOL_DATA.keys()) - categories_to_explore
+            for category in list(categories_to_explore)[:3]:
+                tools = list(TOOL_DATA[category].keys())
+                agent = ToolAgent(query, model, category, tools, api_pool)
+                agent.run()
 
         if not api_pool:
             continue
@@ -535,25 +600,107 @@ def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-in
         if mappings:
             return mappings
 
-        # Self-reflection: if solver failed, try again with different categories
-        logger.info(f"Reflection round {reflection_round + 1}: solver produced no mappings")
+        logger.info(f"Reflection {reflection_round + 1}: solver produced no mappings")
 
     return {}
 
 
+# ============================================================================
+# Batch runner for evaluation
+# ============================================================================
+
+def run_anytool_on_dataset(dataset_path, output_path, model="watsonx/meta-llama/llama-3-3-70b-instruct",
+                           max_samples=None):
+    """Run AnyTool on an evaluation dataset and save results."""
+    load_database()
+
+    with open(dataset_path) as f:
+        samples = [json.loads(l) for l in f if l.strip()]
+
+    if max_samples:
+        samples = samples[:max_samples]
+
+    print(f"Running AnyTool on {len(samples)} samples with {model}")
+    results = []
+
+    for i, sample in enumerate(samples):
+        sid = sample.get("id", f"sample_{i}")
+        utterance = sample.get("utterance", sample.get("mapping_utterance", ""))
+        gt = sample.get("mapping", sample.get("ground_truth", {}))
+        source_fields = list(gt.keys()) if gt else []
+
+        if not utterance:
+            # Build utterance from metadata
+            meta = sample.get("metadata", {})
+            src_schema = sample.get("source_schema", "")
+            tgt_schema = sample.get("target_schema", "")
+            src_type = meta.get("source_type", "")
+            utterance = f"Map {src_schema} {src_type} to {tgt_schema} schema"
+
+        print(f"  [{i+1}/{len(samples)}] {sid}: {utterance[:60]}...", end=" ", flush=True)
+
+        try:
+            mappings = run_anytool(utterance, source_fields, model=model, max_reflection=1)
+        except Exception as e:
+            logger.error(f"Error on {sid}: {e}")
+            mappings = {}
+
+        print(f"→ {len(mappings)} mappings")
+
+        result = {
+            "sample_id": sid,
+            "utterance": utterance,
+            "predicted_mapping": mappings,
+            "ground_truth_mapping": gt,
+        }
+        results.append(result)
+
+    # Save
+    with open(output_path, "w") as f:
+        json.dump(results, f, indent=2)
+    print(f"\nSaved {len(results)} results to {output_path}")
+
+    # Quick accuracy
+    correct = total = 0
+    for r in results:
+        pm = r["predicted_mapping"]
+        gt = r["ground_truth_mapping"]
+        for src, pred_info in pm.items():
+            tgt = pred_info.get("target_property", "") if isinstance(pred_info, dict) else str(pred_info)
+            if tgt:
+                total += 1
+                gt_t = gt.get(src, "")
+                if gt_t and tgt.lower() == gt_t.lower():
+                    correct += 1
+    acc = correct / total * 100 if total else 0
+    print(f"Accuracy: {correct}/{total} ({acc:.1f}%)")
+
+
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dataset", type=str, help="Dataset JSONL file")
+    parser.add_argument("--output", type=str, help="Output JSON file")
+    parser.add_argument("--model", type=str, default="watsonx/meta-llama/llama-3-3-70b-instruct")
+    parser.add_argument("--max-samples", type=int, default=None)
+    parser.add_argument("--test", action="store_true", help="Run single test query")
+    args = parser.parse_args()
+
     load_database()
     print(f"Database: {len(TOOL_DATA)} categories, "
           f"{sum(len(v) for v in TOOL_DATA.values())} tools, "
           f"{sum(len(TOOL_DATA[c][t]['api_list_names']) for c in TOOL_DATA for t in TOOL_DATA[c])} APIs")
 
-    # Test with a sample query
-    query = "Map concert Application to instana schema"
-    source_fields = ["concert_Application.id", "concert_Application.name",
-                     "concert_Application.status", "concert_Application.tags"]
-
-    print(f"\nQuery: {query}")
-    print(f"Source fields: {source_fields}")
-
-    result = run_anytool(query, source_fields)
-    print(f"\nMappings: {json.dumps(result, indent=2)}")
+    if args.test:
+        query = "Map concert Application to instana schema"
+        source_fields = ["concert_Application.id", "concert_Application.name",
+                         "concert_Application.status", "concert_Application.tags"]
+        print(f"\nQuery: {query}")
+        result = run_anytool(query, source_fields, model=args.model)
+        print(f"Mappings: {json.dumps(result, indent=2)}")
+    elif args.dataset:
+        output = args.output or "anytool/results/anytool_faithful_results.json"
+        run_anytool_on_dataset(args.dataset, output, model=args.model,
+                               max_samples=args.max_samples)
+    else:
+        print("Use --test for single query or --dataset <file> for batch evaluation")
