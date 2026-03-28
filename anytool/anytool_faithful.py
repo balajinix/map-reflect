@@ -304,10 +304,13 @@ class MetaAgent(AnyToolAgent):
     def __init__(self, query, model, categories):
         system_prompt = (
             f"You are a schema mapping assistant. Given a mapping query, you need to find "
-            f"the relevant API categories to search. The database has these categories: {categories}. "
-            f"Use get_tools_in_category to explore what each category contains. "
-            f"Use select_category to choose categories that might contain relevant APIs. "
-            f"Explore broadly — the mapping target may be in an unexpected category. "
+            f"ALL relevant API categories. The database has these categories: {categories}. "
+            f"The query asks to map from one product to another. You MUST select the categories "
+            f"for BOTH the source AND target products. For example, if the query says "
+            f"'Map concert Application to instana schema', select BOTH the category containing "
+            f"concert AND the category containing instana. "
+            f"Use get_tools_in_category to see which products are in each category. "
+            f"Use select_category to choose categories. Select at least 2 categories. "
             f"Call finish_search when done."
         )
         super().__init__(model, system_prompt, META_AGENT_FUNCTIONS)
@@ -355,12 +358,13 @@ class ToolAgent(AnyToolAgent):
     def __init__(self, query, model, category, tools, api_pool):
         system_prompt = (
             f"You are a schema mapping assistant exploring the '{category}' category. "
-            f"Available tools: {tools}. "
-            f"Use get_apis_in_tool to see what fields each tool has. "
-            f"Use get_api_details for more info on specific fields. "
-            f"Use add_api_to_pool to add relevant fields to the candidate pool for mapping. "
-            f"Focus on fields that could map to the source fields in the query. "
-            f"Call finish_search when done."
+            f"Available tools (products): {tools}. "
+            f"Step 1: Use get_apis_in_tool to list fields for each tool. "
+            f"Step 2: Identify fields that could be mapping targets (e.g., id, name, status, "
+            f"tags, description, type, label, uuid — common schema fields). "
+            f"Step 3: Use add_api_to_pool to add each relevant field. Add at least 5-10 fields. "
+            f"Step 4: Call finish_search when done. "
+            f"Be thorough — add any field that might semantically match a source field."
         )
         super().__init__(model, system_prompt, TOOL_AGENT_FUNCTIONS)
         self.messages.append({"role": "user", "content": query})
