@@ -795,7 +795,8 @@ Real enterprise integration, however, requires \emph{many-to-many} type mappings
 To evaluate this harder setting, we construct ITGraph from the ITOpsGraph schema catalog.
 We run Map-Reflect, MatchMaker, and AnyTool on all cross-product type pairs drawn from 10 products (Instana, Concert, Turbonomic, HCP Terraform, Infragraph, Packer, AWS, Azure, GCP, HCP) and retain every type pair predicted by at least two method/model combinations.
 Field mappings are produced by aggregating per-field votes across methods and applying greedy bipartite assignment so that no target field is used more than once.
-The resulting dataset contains 246 type pairs with 561 bipartite field mappings.
+The resulting dataset contains 1,501 type pairs with 3,745 bipartite field mappings across 13 products.
+A GNN baseline is trained on the full ITGraph graph (3,037 type pairs, 12,879 nodes) using GraphSAGE~\cite{hamilton2017inductive} with link prediction.
 
 \paragraph{Many-to-many type mapping.}
 A single source type may map to many target types across products.
