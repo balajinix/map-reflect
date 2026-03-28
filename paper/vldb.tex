@@ -395,7 +395,7 @@ API-level identification straightforward.
 $^\S$GNN achieves 100\% API accuracy on oracle-mode datasets (ToolBench and all OMOP
 datasets) because source and target schema names appear verbatim in the evaluation
 utterance; API identification reduces to string parsing rather than schema retrieval.
-GNN results are omitted (--) for Spider, where the utterance does not name a target schema.
+For Spider, a separate GNN is trained on the Spider FK graph with type-level \texttt{maps\_to} edges.
 AnyTool is evaluated only on SchemaNet
 (Tables~\ref{tab:schemanet_type}--\ref{tab:schemanet}); see Section~\ref{sec:mapreflect}
 for rationale.}
@@ -413,7 +413,7 @@ ToolBench         & 100.0 & 83.9  & 80.8  & 69.2  & \textbf{98.8}$^\P$ & 98.8  &
 OMOP-CMS          & 100.0 & 63.2  & 97.4  & 78.9  & \textbf{100.0} & 100.0 & 100.0 \\
 OMOP-MIMIC        & 100.0 & 56.5  & 91.3  & 52.2  & \textbf{100.0} & 100.0 & 100.0 \\
 OMOP-Synthea      & 100.0 & 100.0 & 100.0 & 100.0 & \textbf{100.0} & 100.0 & 100.0 \\
-Spider            & --    & 85.8  & 79.7  & 63.0  & 79.5  & 95.0  & \textbf{97.4} \\
+Spider            & 39.6  & 85.8  & 79.7  & 63.0  & 79.5  & 95.0  & \textbf{97.4} \\
 SchemaNet avg     & 32.2  & 40.9  & 32.9  & 40.9  & 37.7  & \textbf{48.8} & 43.5 \\
 \bottomrule
 \end{tabular}
@@ -439,7 +439,7 @@ ToolBench         & 51.7 & 92.9  & 96.8  & 89.7  & 95.4  & 96.7  & \textbf{98.4}
 OMOP-CMS          & 13.8 & 42.0  & 70.7  & 44.6  & 66.9  & 76.6  & \textbf{77.2} \\
 OMOP-MIMIC        & 10.9 & 51.0  & 58.3  & 25.0  & 54.6  & 59.7  & \textbf{64.7} \\
 OMOP-Synthea      & 24.6 & 66.3  & 74.6  & 62.6  & 96.0  & \textbf{100.0} & 97.0 \\
-Spider            & --   & \textbf{85.8} & 84.4  & 82.8  & 67.0  & 79.2  & 81.9 \\
+Spider            & 77.6 & \textbf{85.8} & 84.4  & 82.8  & 67.0  & 79.2  & 81.9 \\
 SchemaNet avg     & 10.5 & 13.0  & 12.7  & 12.7  & 24.7  & 29.7  & \textbf{31.6} \\
 \bottomrule
 \end{tabular}
