@@ -167,9 +167,41 @@ class SpiderGraphBuilder:
                         self.graph.add_edge(tgt_field_id, src_field_id, **edge_attrs)
                         mapping_count += 1
 
+        print(f"  Added {mapping_count} FK mapping edges")
+
+        # Step 3: Add type-level maps_to edges between tables with FK relationships
+        print("Step 3: Adding type-level maps_to edges...")
+        type_mapping_count = 0
+        type_pairs_seen = set()
+
+        for sample in self.samples:
+            result = sample.get('result', {})
+            src_table = result.get('name', '')
+            db = sample.get('database', '')
+            src_type = f"{db}_{src_table}"
+
+            for src_field, mappings in result.get('properties', {}).items():
+                for m in mappings:
+                    tgt_table = m['mapTable']
+                    tgt_type = f"{db}_{tgt_table}"
+
+                    pair = (src_type, tgt_type)
+                    if pair not in type_pairs_seen and src_type in self.graph and tgt_type in self.graph:
+                        type_pairs_seen.add(pair)
+                        self.graph.add_edge(src_type, tgt_type,
+                                            **self._standardize_edge_attrs({
+                                                'relationship': 'maps_to'
+                                            }))
+                        self.graph.add_edge(tgt_type, src_type,
+                                            **self._standardize_edge_attrs({
+                                                'relationship': 'maps_to'
+                                            }))
+                        type_mapping_count += 1
+
+        print(f"  Added {type_mapping_count} type-level maps_to edges")
+
         total_nodes = self.graph.number_of_nodes()
         total_edges = self.graph.number_of_edges()
-        print(f"  Added {mapping_count} FK mapping edges")
         print(f"Graph built: {total_nodes} nodes, {total_edges} edges")
 
         return self.graph
