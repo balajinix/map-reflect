@@ -9,12 +9,19 @@ os.environ["LITELLM_DROP_PARAMS"] = "True"
 
 sys.path.insert(0, str(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "anytool")))
 
-from anytool_faithful import *
+import anytool_faithful as at
 import logging
 logging.basicConfig(level=logging.INFO)
 
-load_database()
-categories = list(TOOL_DATA.keys())
+td, ad, ctd = at.load_database()
+categories = list(td.keys())
+# Re-export for convenience
+TOOL_DATA = at.TOOL_DATA
+load_database = at.load_database
+MetaAgent = at.MetaAgent
+ToolAgent = at.ToolAgent
+solve_mapping = at.solve_mapping
+get_tools_in_category = at.get_tools_in_category
 print("Categories:", categories)
 
 query = "Map concert Application to instana schema"
