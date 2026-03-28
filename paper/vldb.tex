@@ -581,6 +581,67 @@ On OMOP, Map-Reflect outperforms MatchMaker on field F1 across all three dataset
 
 
 
+\subsection{Many-to-Many API and Bipartite Field Mapping}\label{sec:m2m}
+
+The ITOpsGraph evaluation in Tables~\ref{tab:type_results}--\ref{tab:field_results} uses one-to-one ground truth: each evaluation sample maps a single source type to a single target type.
+Real enterprise integration, however, requires \emph{many-to-many} type mappings---one source API type legitimately maps to multiple target types---and \emph{bipartite} field mappings where, within each type pair, each target field is claimed by at most one source field.
+
+\paragraph{ITOpsGraph* benchmark.}
+To evaluate this harder setting, we construct ITOpsGraph* from the ITOpsGraph schema catalog.
+We run all eight methods (Map-Reflect, MatchMaker, ReAct, ReMatch, AnyTool, SMT, UE-Reflect, GNN) on all cross-product type pairs across 12 products and retain every type pair predicted by at least two method/model combinations with at least two bipartite field mappings.
+Field mappings are produced by aggregating per-field votes across methods and applying greedy bipartite assignment so that no target field is used more than once.
+The resulting dataset contains 786 type pairs with 3,030 bipartite field mappings across 12 products.
+A GNN baseline is trained on the full ITOpsGraph* graph (1,148 type pairs, 12,879 nodes) using GraphSAGE~\cite{hamilton2017inductive} with link prediction.
+
+\paragraph{Many-to-many type mapping.}
+A single source type may map to many target types across products.
+For example, \texttt{infragraph.BaseVirtualMachine} maps to \texttt{aws.AwsEc2Instance}, \texttt{azure.AzureVirtualMachine}, and \texttt{gcp.GcpComputeInstance}---the same infrastructure abstraction realised in three cloud providers.
+Conversely, \texttt{infragraph.Base} is the target of 26 source types across all products, since it provides the universal \texttt{id}, \texttt{name}, \texttt{tags}, and \texttt{description} fields that every type inherits.
+
+\paragraph{Bipartite field mapping.}
+Within each type pair, fields are mapped one-to-one.
+For example, mapping \texttt{concert.BuildArtifact} to \texttt{infragraph.Base} yields the bipartite assignment \texttt{id}$\to$\texttt{id}, \texttt{name}$\to$\texttt{name}, \texttt{tags}$\to$\texttt{tags}, \texttt{last\_updated\_on}$\to$\texttt{updated\_at}, and \texttt{type}$\to$\texttt{description}.
+Each target field appears exactly once, preventing the many-to-one collisions common in unconstrained mapping.
+
+\begin{table}[htbp]
+\centering
+\caption{ITOpsGraph* type-level API accuracy (\%). All Map-Reflect models achieve 100\% type accuracy on the cleaned dataset; GNN achieves 94.5\% without any LLM. $^\dagger$MatchMaker evaluated on 246-sample subset (fails on full dataset).}\label{tab:itgraph_type}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
+\midrule
+Map-Reflect   & --   & \textbf{100.0}  & \textbf{100.0}  & \textbf{100.0}  \\
+MatchMaker$^\dagger$    & --   & 31.3  & 26.8  & 27.2  \\
+GNN           & 94.5 & --    & --    & --    \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{ITOpsGraph* field-level accuracy (\%) with bipartite constraint. Map-Reflect achieves 57.0\% (Llama) and 56.6\% (Mistral), significantly outperforming MatchMaker and GNN. $^\dagger$MatchMaker evaluated on 246-sample subset.}\label{tab:itgraph_field}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
+\midrule
+Map-Reflect    & --   & \textbf{57.0} & 44.6  & 56.6  \\
+MatchMaker$^\dagger$     & --   & 29.4  & 33.2  & 28.6  \\
+GNN            & 20.9 & --    & --    & --    \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Results.}
+Tables~\ref{tab:itgraph_type} and~\ref{tab:itgraph_field} present results on ITOpsGraph* (786 type pairs, 3,030 bipartite field mappings, 12 products).
+At the type level, all Map-Reflect models achieve 100\% accuracy---on the cleaned dataset with $\geq$2 bipartite field mappings per pair, the type pairs are well-defined and type identification is straightforward. The GNN achieves 94.5\% without any LLM calls.
+At the field level, Map-Reflect leads with 57.0\% (Llama) and 56.6\% (Mistral), demonstrating that LLM-based semantic reasoning is essential for fine-grained bipartite field matching.
+Granite achieves 44.6\%, confirming that larger models handle cross-product terminology better.
+The GNN achieves only 20.9\% field accuracy---it can identify which types should be linked but struggles to select the correct field within a type.
+MatchMaker achieves 29--33\% field accuracy on a 246-sample subset but fails on the full dataset due to agent initialisation issues with the expanded schema catalog, highlighting its brittleness on heterogeneous cross-product schemas.
+The gap between type accuracy (94--100\%) and field accuracy (21--57\%) confirms that many-to-many type discovery is substantially easier than bipartite field mapping, where cross-product naming conventions diverge and the bipartite constraint prevents mapping multiple source fields to the same high-confidence target.
+
 \section{Discussion}
 \label{sec:discussion}
 
@@ -785,67 +846,6 @@ Since much of the literature focuses on API sequencing or schema matching, we ha
 
 \textbf{Many-to-many scoring in ablations.}
 The signal ablation (Table~\ref{tab:ablation_components}) evaluates a one-prediction-per-field variant with precision held constant at 86.2\%, so that recall variation directly measures each signal's effect without F1 confounding. The full Map-Reflect system uses score-threshold pruning ($\tau_p = 0.5$) to produce many-to-many mappings, and main results in Tables~\ref{tab:type_results}--\ref{tab:field_results} use this configuration. However, we do not report a separate set-based precision/recall breakdown that isolates how well the system identifies the complete set of valid targets for genuinely many-to-many fields. Such an evaluation would require richer per-field ground truth annotations specifying which targets are \emph{all} valid, beyond what the current SME-validated wiki provides.
-
-\subsection{Many-to-Many API and Bipartite Field Mapping}\label{sec:m2m}
-
-The ITOpsGraph evaluation in Tables~\ref{tab:type_results}--\ref{tab:field_results} uses one-to-one ground truth: each evaluation sample maps a single source type to a single target type.
-Real enterprise integration, however, requires \emph{many-to-many} type mappings---one source API type legitimately maps to multiple target types---and \emph{bipartite} field mappings where, within each type pair, each target field is claimed by at most one source field.
-
-\paragraph{ITOpsGraph* benchmark.}
-To evaluate this harder setting, we construct ITOpsGraph* from the ITOpsGraph schema catalog.
-We run all eight methods (Map-Reflect, MatchMaker, ReAct, ReMatch, AnyTool, SMT, UE-Reflect, GNN) on all cross-product type pairs across 12 products and retain every type pair predicted by at least two method/model combinations with at least two bipartite field mappings.
-Field mappings are produced by aggregating per-field votes across methods and applying greedy bipartite assignment so that no target field is used more than once.
-The resulting dataset contains 786 type pairs with 3,030 bipartite field mappings across 12 products.
-A GNN baseline is trained on the full ITOpsGraph* graph (1,148 type pairs, 12,879 nodes) using GraphSAGE~\cite{hamilton2017inductive} with link prediction.
-
-\paragraph{Many-to-many type mapping.}
-A single source type may map to many target types across products.
-For example, \texttt{infragraph.BaseVirtualMachine} maps to \texttt{aws.AwsEc2Instance}, \texttt{azure.AzureVirtualMachine}, and \texttt{gcp.GcpComputeInstance}---the same infrastructure abstraction realised in three cloud providers.
-Conversely, \texttt{infragraph.Base} is the target of 26 source types across all products, since it provides the universal \texttt{id}, \texttt{name}, \texttt{tags}, and \texttt{description} fields that every type inherits.
-
-\paragraph{Bipartite field mapping.}
-Within each type pair, fields are mapped one-to-one.
-For example, mapping \texttt{concert.BuildArtifact} to \texttt{infragraph.Base} yields the bipartite assignment \texttt{id}$\to$\texttt{id}, \texttt{name}$\to$\texttt{name}, \texttt{tags}$\to$\texttt{tags}, \texttt{last\_updated\_on}$\to$\texttt{updated\_at}, and \texttt{type}$\to$\texttt{description}.
-Each target field appears exactly once, preventing the many-to-one collisions common in unconstrained mapping.
-
-\begin{table}[htbp]
-\centering
-\caption{ITOpsGraph* type-level API accuracy (\%). All Map-Reflect models achieve 100\% type accuracy on the cleaned dataset; GNN achieves 94.5\% without any LLM. $^\dagger$MatchMaker evaluated on 246-sample subset (fails on full dataset).}\label{tab:itgraph_type}
-\small
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
-\midrule
-Map-Reflect   & --   & \textbf{100.0}  & \textbf{100.0}  & \textbf{100.0}  \\
-MatchMaker$^\dagger$    & --   & 31.3  & 26.8  & 27.2  \\
-GNN           & 94.5 & --    & --    & --    \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[htbp]
-\centering
-\caption{ITOpsGraph* field-level accuracy (\%) with bipartite constraint. Map-Reflect achieves 57.0\% (Llama) and 56.6\% (Mistral), significantly outperforming MatchMaker and GNN. $^\dagger$MatchMaker evaluated on 246-sample subset.}\label{tab:itgraph_field}
-\small
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
-\midrule
-Map-Reflect    & --   & \textbf{57.0} & 44.6  & 56.6  \\
-MatchMaker$^\dagger$     & --   & 29.4  & 33.2  & 28.6  \\
-GNN            & 20.9 & --    & --    & --    \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph{Results.}
-Tables~\ref{tab:itgraph_type} and~\ref{tab:itgraph_field} present results on ITOpsGraph* (786 type pairs, 3,030 bipartite field mappings, 12 products).
-At the type level, all Map-Reflect models achieve 100\% accuracy---on the cleaned dataset with $\geq$2 bipartite field mappings per pair, the type pairs are well-defined and type identification is straightforward. The GNN achieves 94.5\% without any LLM calls.
-At the field level, Map-Reflect leads with 57.0\% (Llama) and 56.6\% (Mistral), demonstrating that LLM-based semantic reasoning is essential for fine-grained bipartite field matching.
-Granite achieves 44.6\%, confirming that larger models handle cross-product terminology better.
-The GNN achieves only 20.9\% field accuracy---it can identify which types should be linked but struggles to select the correct field within a type.
-MatchMaker achieves 29--33\% field accuracy on a 246-sample subset but fails on the full dataset due to agent initialisation issues with the expanded schema catalog, highlighting its brittleness on heterogeneous cross-product schemas.
-The gap between type accuracy (94--100\%) and field accuracy (21--57\%) confirms that many-to-many type discovery is substantially easier than bipartite field mapping, where cross-product naming conventions diverge and the bipartite constraint prevents mapping multiple source fields to the same high-confidence target.
 
 \section{Conclusion}
 
