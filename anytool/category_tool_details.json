@@ -1,0 +1,74 @@
+{
+  "AI_Orchestration": {
+    "description": "AI workflow orchestration, skill management, and automation",
+    "tools": {
+      "watsonx-orchestrate": "watsonx-orchestrate product with 218 API fields"
+    }
+  },
+  "Networking": {
+    "description": "DNS management, traffic steering, and network monitoring",
+    "tools": {
+      "ns1": "ns1 product with 59 API fields"
+    }
+  },
+  "Optimization": {
+    "description": "Resource optimization, cost management, and performance tuning",
+    "tools": {
+      "turbonomic": "turbonomic product with 390 API fields"
+    }
+  },
+  "Governance": {
+    "description": "Application lifecycle governance, compliance, and vulnerability management",
+    "tools": {
+      "concert": "concert product with 2014 API fields"
+    }
+  },
+  "FinOps": {
+    "description": "Cloud financial operations, cost reporting, and utilization analytics",
+    "tools": {
+      "cloudability": "cloudability product with 1042 API fields"
+    }
+  },
+  "Observability": {
+    "description": "Monitoring, tracing, and alerting for application and infrastructure health",
+    "tools": {
+      "instana": "instana product with 6842 API fields"
+    }
+  },
+  "Cloud_Infrastructure": {
+    "description": "Cloud provider resources (compute, storage, networking, IAM)",
+    "tools": {
+      "gcp": "gcp product with 1 API fields",
+      "azure": "azure product with 6 API fields",
+      "aws": "aws product with 65 API fields"
+    }
+  },
+  "Infrastructure_Graph": {
+    "description": "Unified infrastructure graph model and resource relationships",
+    "tools": {
+      "infragraph": "infragraph product with 208 API fields",
+      "resource": "resource product with 2 API fields",
+      "model": "model product with 39 API fields",
+      "edge": "edge product with 22 API fields",
+      "base": "base product with 88 API fields"
+    }
+  },
+  "Cloud_Platform": {
+    "description": "HashiCorp Cloud Platform services and management",
+    "tools": {
+      "hcp": "hcp product with 31 API fields"
+    }
+  },
+  "Image_Management": {
+    "description": "Machine image building, versioning, and artifact management",
+    "tools": {
+      "packer": "packer product with 56 API fields"
+    }
+  },
+  "Infrastructure_as_Code": {
+    "description": "Terraform workspaces, runs, and infrastructure provisioning",
+    "tools": {
+      "hcp_terraform": "hcp_terraform product with 27 API fields"
+    }
+  }
+}
