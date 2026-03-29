@@ -620,8 +620,22 @@ def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-in
                 tools = [tgt_prod]  # Focus on target product
             if not tools:
                 continue
-            agent = ToolAgent(query, model, category, tools, api_pool)
-            agent.run()
+
+            # For small hierarchies (<=2 tools), skip agent and add all fields directly
+            total_fields = sum(
+                len(TOOL_DATA[category][t]["api_list_names"]) for t in tools
+            )
+            if total_fields <= 200:
+                for t in tools:
+                    for api_name in TOOL_DATA[category][t]["api_list_names"]:
+                        api_pool.append({
+                            "category_name": category,
+                            "tool_name": t,
+                            "api_name": api_name,
+                        })
+            else:
+                agent = ToolAgent(query, model, category, tools, api_pool)
+                agent.run()
 
         if not api_pool:
             # Reflection: broaden search
