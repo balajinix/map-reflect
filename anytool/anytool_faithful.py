@@ -625,7 +625,7 @@ def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-in
             total_fields = sum(
                 len(TOOL_DATA[category][t]["api_list_names"]) for t in tools
             )
-            if total_fields <= 500:
+            if total_fields <= 10000:
                 for t in tools:
                     for api_name in TOOL_DATA[category][t]["api_list_names"]:
                         api_pool.append({
