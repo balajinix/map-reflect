@@ -16,9 +16,11 @@ def build_hierarchy(lookup_path, output_prefix):
     api_details = {}
 
     for field_key, meta in api_lookup.items():
-        product = meta.get("product_name", "")
-        type_name = meta.get("type_name", "")
-        field_name = meta.get("field_name", "")
+        # Handle both ITOpsGraph format (product_name/type_name/field_name)
+        # and ToolBench format (category/tool/api + name)
+        product = meta.get("product_name", meta.get("category", ""))
+        type_name = meta.get("type_name", meta.get("tool", ""))
+        field_name = meta.get("field_name", meta.get("api", field_key.split(".")[-1] if "." in field_key else field_key))
         description = meta.get("description", "")
 
         if not product or not type_name:
