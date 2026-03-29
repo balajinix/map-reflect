@@ -55,10 +55,63 @@ def run_spider_sample(sample, model):
     if not api_pool:
         return {}
 
-    # Use solver directly (skip agent hierarchy — we already know the target tables)
-    utterance = sample.get("mapping_utterance", "map " + src_table + " to " + " ".join(tgt_tables))
-    mappings = at.solve_mapping(utterance, source_fields, api_pool, model)
-    return mappings
+    # Use a Spider-specific solver that emphasizes FK/PK relationships
+    import litellm, re
+
+    # Build candidate list with descriptions
+    candidates = []
+    for api in api_pool:
+        details = at.get_api_details(api["category_name"], api["tool_name"], api["api_name"])
+        desc = details.get("description", "") if isinstance(details, dict) else ""
+        candidates.append(api["tool_name"] + "." + api["api_name"].split(".")[-1] + ": " + desc)
+
+    pool_text = "\n".join("- " + c for c in candidates)
+
+    prompt = (
+        "You are a database schema mapping expert. Map each source column to the "
+        "best matching target column based on FOREIGN KEY relationships.\n\n"
+        "IMPORTANT: Foreign key columns in the source table should map to the "
+        "PRIMARY KEY column they reference in the target table. Look for "
+        "'(foreign key)' and '(primary key)' annotations in the descriptions.\n\n"
+        "Source columns:\n" + json.dumps(source_fields) + "\n\n"
+        "Target columns:\n" + pool_text + "\n\n"
+        "For each source column, produce a JSON object with:\n"
+        '- "source": source column name\n'
+        '- "target": target column name (format: table.column)\n'
+        '- "reason": explanation\n\n'
+        "Return ONLY a JSON array."
+    )
+
+    try:
+        response = litellm.completion(
+            model=model,
+            messages=[
+                {"role": "system", "content": "Return only valid JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            max_tokens=2000,
+            temperature=0.0,
+        )
+        content = response.choices[0].message.content or ""
+        match = re.search(r'\[.*\]', content, re.DOTALL)
+        if match:
+            mappings_list = json.loads(match.group())
+            result = {}
+            for m in mappings_list:
+                if isinstance(m, dict) and m.get("target"):
+                    # Normalize target to table_field format for GT comparison
+                    tgt = m["target"]
+                    # Convert table.field to table_field
+                    tgt_normalized = tgt.replace(".", "_")
+                    result[m["source"]] = {
+                        "target_property": tgt_normalized,
+                        "justification": m.get("reason", ""),
+                    }
+            return result
+    except Exception as e:
+        logging.error(f"Solver error: {e}")
+
+    return {}
 
 
 def main():
