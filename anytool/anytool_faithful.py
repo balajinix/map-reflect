@@ -34,16 +34,28 @@ API_DETAILS = None
 CATEGORY_TOOL_DETAILS = None
 
 
-def load_database():
-    """Load the 3-tier hierarchy."""
+def load_database(hierarchy_prefix=None):
+    """Load the 3-tier hierarchy.
+
+    Args:
+        hierarchy_prefix: if set, load tool_data_{prefix}.json etc.
+                          Otherwise load tool_data.json (default ITOpsGraph).
+    """
     global TOOL_DATA, API_DETAILS, CATEGORY_TOOL_DETAILS
-    if TOOL_DATA is None:
-        with open(BASE / "tool_data.json") as f:
+    if TOOL_DATA is None or hierarchy_prefix is not None:
+        suffix = "_" + hierarchy_prefix if hierarchy_prefix else ""
+        td_path = BASE / ("tool_data" + suffix + ".json")
+        ad_path = BASE / ("api_details" + suffix + ".json")
+        ctd_path = BASE / ("category_tool_details" + suffix + ".json")
+        with open(td_path) as f:
             TOOL_DATA = json.load(f)
-        with open(BASE / "api_details.json") as f:
+        with open(ad_path) as f:
             API_DETAILS = json.load(f)
-        with open(BASE / "category_tool_details.json") as f:
-            CATEGORY_TOOL_DETAILS = json.load(f)
+        if ctd_path.exists():
+            with open(ctd_path) as f:
+                CATEGORY_TOOL_DETAILS = json.load(f)
+        else:
+            CATEGORY_TOOL_DETAILS = {}
     return TOOL_DATA, API_DETAILS, CATEGORY_TOOL_DETAILS
 
 
@@ -713,9 +725,11 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, default="watsonx/meta-llama/llama-3-3-70b-instruct")
     parser.add_argument("--max-samples", type=int, default=None)
     parser.add_argument("--test", action="store_true", help="Run single test query")
+    parser.add_argument("--hierarchy", type=str, default=None,
+                        help="Hierarchy prefix (e.g., 'omop_cms' loads tool_data_omop_cms.json)")
     args = parser.parse_args()
 
-    load_database()
+    load_database(hierarchy_prefix=args.hierarchy)
     print(f"Database: {len(TOOL_DATA)} categories, "
           f"{sum(len(v) for v in TOOL_DATA.values())} tools, "
           f"{sum(len(TOOL_DATA[c][t]['api_list_names']) for c in TOOL_DATA for t in TOOL_DATA[c])} APIs")
