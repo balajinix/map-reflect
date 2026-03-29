@@ -443,37 +443,52 @@ class ToolAgent(AnyToolAgent):
 # ============================================================================
 
 def solve_mapping(query, source_fields, api_pool, model):
-    """Given source fields and an API candidate pool, produce field mappings."""
+    """Given source fields and an API candidate pool, produce field mappings.
+
+    Uses the API pool to identify target products, then queries the full
+    database for candidate fields within those products.
+    """
     if not api_pool:
         return {}
 
-    # Build candidate description
-    pool_desc = []
+    # Identify target products from the pool
+    target_products = set()
     for api in api_pool:
-        details = get_api_details(api["category_name"], api["tool_name"], api["api_name"])
-        if isinstance(details, dict):
-            pool_desc.append(f"- {api['tool_name']}.{api['api_name']}: {details.get('description', '')}")
-        else:
-            pool_desc.append(f"- {api['tool_name']}.{api['api_name']}")
+        target_products.add(api["tool_name"])
 
-    pool_text = "\n".join(pool_desc[:50])  # Limit for context
+    # Build comprehensive candidate list from target products
+    candidates = []
+    for category in TOOL_DATA:
+        for tool_name in TOOL_DATA[category]:
+            if tool_name not in target_products:
+                continue
+            if tool_name in API_DETAILS.get(category, {}):
+                for api in API_DETAILS[category][tool_name].get("api_list", []):
+                    desc = api.get("description", "")
+                    candidates.append(f"{tool_name}_{api['name']}: {desc[:80]}")
 
-    prompt = f"""You are a schema mapping expert. Map each source field to the best matching target field from the candidate pool.
+    # Limit candidates for context
+    if len(candidates) > 100:
+        candidates = candidates[:100]
+
+    pool_text = "\n".join(f"- {c}" for c in candidates)
+
+    prompt = f"""You are a schema mapping expert. Map each source field to the best matching target field.
 
 Query: {query}
 
-Source fields to map:
+Source fields:
 {json.dumps(source_fields[:30], indent=2)}
 
-Candidate target fields:
+Available target fields (format: product_TypeName.fieldName):
 {pool_text}
 
 For each source field, produce a JSON object with:
-- "source": source field name
-- "target": best matching target field (format: "tool_name.TypeName.fieldName")
+- "source": source field name (exact as shown above)
+- "target": target field name (exact format: product_TypeName.fieldName as shown above)
 - "reason": one sentence explanation
 
-Return a JSON array. If no good match exists for a field, set target to null.
+Return a JSON array. If no good match, set target to null.
 Return ONLY the JSON array."""
 
     messages = [
@@ -489,7 +504,6 @@ Return ONLY the JSON array."""
 
     # Parse JSON from response
     try:
-        # Try to extract JSON array
         import re
         match = re.search(r'\[.*\]', content, re.DOTALL)
         if match:
