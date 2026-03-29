@@ -246,24 +246,29 @@ TOOL_AGENT_FUNCTIONS = [
 # ============================================================================
 
 def call_llm(messages, tools=None, model="watsonx/meta-llama/llama-3-3-70b-instruct",
-             max_tokens=2048, temperature=0.0):
-    """Call LLM with optional function calling."""
-    try:
-        kwargs = {
-            "model": model,
-            "messages": messages,
-            "max_tokens": max_tokens,
-            "temperature": temperature,
-        }
-        if tools:
-            kwargs["tools"] = tools
-            kwargs["tool_choice"] = "auto"
+             max_tokens=2048, temperature=0.0, max_retries=3):
+    """Call LLM with optional function calling and retry logic."""
+    for attempt in range(max_retries):
+        try:
+            kwargs = {
+                "model": model,
+                "messages": messages,
+                "max_tokens": max_tokens,
+                "temperature": temperature,
+            }
+            if tools:
+                kwargs["tools"] = tools
+                kwargs["tool_choice"] = "auto"
 
-        response = litellm.completion(**kwargs)
-        return response
-    except Exception as e:
-        logger.error(f"LLM call failed: {e}")
-        return None
+            response = litellm.completion(**kwargs)
+            return response
+        except Exception as e:
+            if attempt < max_retries - 1:
+                import time
+                time.sleep(2 * (attempt + 1))  # backoff
+            else:
+                logger.error(f"LLM call failed after {max_retries} retries: {e}")
+                return None
 
 
 # ============================================================================
@@ -273,7 +278,7 @@ def call_llm(messages, tools=None, model="watsonx/meta-llama/llama-3-3-70b-instr
 class AnyToolAgent:
     """Base agent with function-calling loop."""
 
-    def __init__(self, model, system_prompt, tools_schema, max_steps=15):
+    def __init__(self, model, system_prompt, tools_schema, max_steps=8):
         self.model = model
         self.messages = [{"role": "system", "content": system_prompt}]
         self.tools_schema = tools_schema
@@ -548,7 +553,7 @@ def extract_products_from_query(query):
 
 
 def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-instruct",
-                max_reflection=2):
+                max_reflection=1):
     """Run the full AnyTool pipeline on a schema mapping query.
 
     Args:
