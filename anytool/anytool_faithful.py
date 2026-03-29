@@ -564,21 +564,31 @@ def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-in
             if cat:
                 categories_to_explore.add(cat)
 
-        if not categories_to_explore:
-            # Fallback: use meta-agent
+        # If we only found one product, use meta-agent to find target categories
+        if len(categories_to_explore) <= 1:
             meta = MetaAgent(query, model, list(TOOL_DATA.keys()))
             selected = meta.run()
-            categories_to_explore = set(selected) if selected else set(list(TOOL_DATA.keys())[:3])
+            if selected:
+                categories_to_explore.update(selected)
 
-        # Phase 2: Tool agents explore target product(s)
+        # If still insufficient, add all categories
+        if len(categories_to_explore) <= 1:
+            categories_to_explore = set(TOOL_DATA.keys())
+
+        # Phase 2: Tool agents explore target products (NOT source)
         api_pool = []
+        src_category = find_product_category(src_prod) if src_prod else ""
         for category in categories_to_explore:
             if category not in TOOL_DATA:
                 continue
-            # Only explore target product tools, not source
             tools = list(TOOL_DATA[category].keys())
+            # Exclude source product from target search
+            if src_prod:
+                tools = [t for t in tools if t != src_prod]
             if tgt_prod and tgt_prod in tools:
                 tools = [tgt_prod]  # Focus on target product
+            if not tools:
+                continue
             agent = ToolAgent(query, model, category, tools, api_pool)
             agent.run()
 
