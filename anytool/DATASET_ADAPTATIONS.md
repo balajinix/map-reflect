@@ -50,10 +50,17 @@ across different evaluation datasets.
 - The hierarchy needs to include CMS/MIMIC/Synthea product schemas
 - These are in the API lookup under their respective product names
 
-### Status
-- [ ] Run AnyTool on OMOP-CMS
-- [ ] Run AnyTool on OMOP-MIMIC
-- [ ] Run AnyTool on OMOP-Synthea
+### Results
+- OMOP-CMS: **0%** (38 samples, all 0 mappings)
+- OMOP-MIMIC: **0%** (28/46 samples run, all 0 mappings, killed)
+- OMOP-Synthea: not run (expected same result)
+
+### Root Cause
+Hierarchy correctly loaded (2 categories: OMOP + CMS/MIMIC, 363 fields).
+Tool agent finds CMS fields but solver cannot match OMOP fields to CMS fields
+because the terminology is completely different (person_id vs desynpuf_id,
+gender_concept_id vs bene_sex_ident_cd). AnyTool's name-based matching
+fundamentally cannot bridge this semantic gap.
 
 ---
 
