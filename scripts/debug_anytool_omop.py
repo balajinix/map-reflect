@@ -63,11 +63,31 @@ for cat in cats:
         tools = [t for t in tools if t != src]
     print(f"  {cat}: search tools = {tools}")
 
-# Run the full pipeline on this one sample
+# Run step by step
 print("\n" + "=" * 50)
-print("Running AnyTool on this sample...")
+print("PHASE 2: Tool Agent on CMS")
 print("=" * 50)
-result = at.run_anytool(query, source_fields, max_reflection=0)
+api_pool = []
+tools_to_search = ["CMS"]
+agent = at.ToolAgent(query, "watsonx/meta-llama/llama-3-3-70b-instruct",
+                     "CMS", tools_to_search, api_pool)
+agent.run()
+print(f"\nAPI pool after tool agent: {len(api_pool)} items")
+for api in api_pool[:10]:
+    print(f"  {api}")
+
+print("\n" + "=" * 50)
+print("PHASE 3: Solver")
+print("=" * 50)
+
+if not api_pool:
+    # Force add some CMS fields to test the solver
+    print("Pool empty! Forcing CMS fields into pool...")
+    for field in at.TOOL_DATA["CMS"]["CMS"]["api_list_names"][:20]:
+        api_pool.append({"category_name": "CMS", "tool_name": "CMS", "api_name": field})
+    print(f"Forced pool size: {len(api_pool)}")
+
+result = at.solve_mapping(query, source_fields, api_pool, "watsonx/meta-llama/llama-3-3-70b-instruct")
 print(f"\nMappings: {json.dumps(result, indent=2)}")
 print(f"\nGT (first 3):")
 for k, v in list(gt.items())[:3]:
