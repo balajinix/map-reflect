@@ -1,5 +1,5 @@
 #!/bin/bash
-# OMOP Signal Ablation (CMS + MIMIC, Llama-3.3-70B)
+# OMOP Signal Ablation (CMS + MIMIC + Synthea, Llama-3.3-70B)
 # Same 9 configs as ITOpsGraph ablation (Table 7)
 set -e
 
@@ -10,7 +10,7 @@ source .env 2>/dev/null || true
 MODEL="watsonx/meta-llama/llama-3-3-70b-instruct"
 DATA_DIR="data"
 
-for DATASET in OMOP_CMS OMOP_MIMIC; do
+for DATASET in OMOP_CMS OMOP_MIMIC OMOP_Synthea; do
     LOOKUP="data/itopsgraph_api_lookup.json"
     OUTPUT_BASE="results/omop_ablation/${DATASET}"
     mkdir -p "$OUTPUT_BASE"
