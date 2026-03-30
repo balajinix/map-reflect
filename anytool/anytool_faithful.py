@@ -474,7 +474,10 @@ def solve_mapping(query, source_fields, api_pool, model):
         target_products.add(api["tool_name"])
 
     # Build comprehensive candidate list from target products
-    candidates = []
+    # Prioritize tables/types mentioned in the query
+    query_words = set(w.lower() for w in query.replace(".", " ").replace("_", " ").split())
+    priority_candidates = []
+    other_candidates = []
     for category in TOOL_DATA:
         for tool_name in TOOL_DATA[category]:
             if tool_name not in target_products:
@@ -482,9 +485,16 @@ def solve_mapping(query, source_fields, api_pool, model):
             if tool_name in API_DETAILS.get(category, {}):
                 for api in API_DETAILS[category][tool_name].get("api_list", []):
                     desc = api.get("description", "")
-                    candidates.append(f"{tool_name}_{api['name']}: {desc[:80]}")
+                    entry = f"{tool_name}_{api['name']}: {desc[:80]}"
+                    # Check if this field's table/type is mentioned in the query
+                    api_table = api["name"].split(".")[0].lower() if "." in api["name"] else ""
+                    if api_table and api_table in query_words:
+                        priority_candidates.append(entry)
+                    else:
+                        other_candidates.append(entry)
 
-    # Limit candidates for context
+    # Prioritize query-mentioned tables, then fill with others up to limit
+    candidates = priority_candidates + other_candidates
     if len(candidates) > 100:
         candidates = candidates[:100]
 
@@ -546,21 +556,38 @@ Return ONLY the JSON array."""
 # ============================================================================
 
 def extract_products_from_query(query):
-    """Extract source and target product names from a mapping query."""
+    """Extract source and target product names from a mapping query.
+
+    Returns (source_product, target_product) based on position in the query.
+    The first product mentioned is the source, the second is the target.
+    """
     all_products = set()
     for cat_tools in TOOL_DATA.values():
         all_products.update(cat_tools.keys())
 
+    # Find all products and their position in the query
     found = []
     query_lower = query.lower()
     for prod in sorted(all_products, key=len, reverse=True):
-        if prod.lower() in query_lower:
-            found.append(prod)
+        pos = query_lower.find(prod.lower())
+        if pos >= 0:
+            # Avoid substring matches (e.g., "OMOP" inside "OMOP_CMS")
+            found.append((pos, prod))
 
-    if len(found) >= 2:
-        return found[0], found[1]
-    elif len(found) == 1:
-        return found[0], None
+    # Sort by position in query: first mentioned = source, second = target
+    found.sort(key=lambda x: x[0])
+    # Deduplicate overlapping matches
+    unique = []
+    last_end = -1
+    for pos, prod in found:
+        if pos >= last_end:
+            unique.append(prod)
+            last_end = pos + len(prod)
+
+    if len(unique) >= 2:
+        return unique[0], unique[1]
+    elif len(unique) == 1:
+        return unique[0], None
     return None, None
 
 
@@ -665,7 +692,7 @@ def run_anytool(query, source_fields, model="watsonx/meta-llama/llama-3-3-70b-in
 # ============================================================================
 
 def run_anytool_on_dataset(dataset_path, output_path, model="watsonx/meta-llama/llama-3-3-70b-instruct",
-                           max_samples=None):
+                           max_samples=None, oracle=False, retrieval=False):
     """Run AnyTool on an evaluation dataset and save results."""
     load_database()
 
@@ -682,15 +709,81 @@ def run_anytool_on_dataset(dataset_path, output_path, model="watsonx/meta-llama/
         sid = sample.get("id", f"sample_{i}")
         utterance = sample.get("utterance", sample.get("mapping_utterance", ""))
         gt = sample.get("mapping", sample.get("ground_truth", {}))
+
+        # Handle NL2GQL format: ground truth in result.properties
+        if not gt and "result" in sample:
+            result_obj = sample["result"]
+            for src_field, targets in result_obj.get("properties", {}).items():
+                for t in targets:
+                    gt[src_field] = t.get("mapProperty", "")
+
+        # Handle ToolBench format: ground_truth_mappings + source_api/target_api
+        if not gt and "ground_truth_mappings" in sample:
+            gt = sample["ground_truth_mappings"]
+
         source_fields = list(gt.keys()) if gt else []
 
-        if not utterance:
-            # Build utterance from metadata
+        # Handle ToolBench: extract source fields from parameters if gt is flat
+        if not source_fields and "source_api" in sample:
+            source_fields = [p["name"] for p in sample["source_api"].get("parameters", [])]
+
+        # Oracle mode: always build utterance with both source and target named
+        if oracle:
             meta = sample.get("metadata", {})
             src_schema = sample.get("source_schema", "")
             tgt_schema = sample.get("target_schema", "")
+            if isinstance(src_schema, dict):
+                src_schema = src_schema.get("name", str(src_schema))
+            if isinstance(tgt_schema, dict):
+                tgt_schema = tgt_schema.get("name", str(tgt_schema))
             src_type = meta.get("source_type", "")
-            utterance = f"Map {src_schema} {src_type} to {tgt_schema} schema"
+            tgt_type = meta.get("target_type", "")
+            if src_type and tgt_type:
+                utterance = f"Map {src_schema} {src_type} to {tgt_schema} {tgt_type}"
+            elif src_schema and tgt_schema:
+                utterance = f"Map {src_schema} to {tgt_schema}"
+
+        # Retrieval mode: build utterance with source only, target must be discovered
+        if retrieval:
+            meta = sample.get("metadata", {})
+            src_schema = sample.get("source_schema", "")
+            if isinstance(src_schema, dict):
+                src_schema = src_schema.get("name", str(src_schema))
+            src_type = meta.get("source_type", "")
+            # ITOpsGraph: use source_schema + source_type
+            if src_type:
+                utterance = f"Find target schema fields that map to {src_schema} {src_type}"
+            # OMOP: use source_schema name (e.g. "OMOP PERSON")
+            elif src_schema:
+                utterance = f"Find target schema fields that map to {src_schema}"
+            # ToolBench: use source API info
+            elif "source_api" in sample:
+                src_api = sample["source_api"]
+                utterance = f"Find target schema fields that map to {src_api['tool_name']} {src_api['api_name']}"
+            # NL2GQL: use result.name as source table
+            elif "result" in sample:
+                src_table = sample["result"].get("name", "")
+                utterance = f"Find target schema fields that map to {src_table} data"
+            # Spider: extract source from "map X data to Y data"
+            elif utterance and "map " in utterance.lower():
+                parts = utterance.lower().split(" to ")
+                if parts:
+                    src_part = parts[0].replace("map ", "").strip()
+                    utterance = f"Find target schema fields that map to {src_part}"
+
+        if not utterance:
+            # ToolBench format: build from API names
+            if "source_api" in sample and "target_api" in sample:
+                src_api = sample["source_api"]
+                tgt_api = sample["target_api"]
+                utterance = f"Map {src_api['tool_name']} {src_api['api_name']} to {tgt_api['tool_name']} {tgt_api['api_name']}"
+            else:
+                # Build utterance from metadata
+                meta = sample.get("metadata", {})
+                src_schema = sample.get("source_schema", "")
+                tgt_schema = sample.get("target_schema", "")
+                src_type = meta.get("source_type", "")
+                utterance = f"Map {src_schema} {src_type} to {tgt_schema} schema"
 
         print(f"  [{i+1}/{len(samples)}] {sid}: {utterance[:60]}...", end=" ", flush=True)
 
@@ -741,6 +834,10 @@ if __name__ == "__main__":
     parser.add_argument("--test", action="store_true", help="Run single test query")
     parser.add_argument("--hierarchy", type=str, default=None,
                         help="Hierarchy prefix (e.g., 'omop_cms' loads tool_data_omop_cms.json)")
+    parser.add_argument("--oracle", action="store_true",
+                        help="Oracle mode: build utterance with both source and target named")
+    parser.add_argument("--retrieval", action="store_true",
+                        help="Retrieval mode: build utterance with source only, target discovered")
     args = parser.parse_args()
 
     load_database(hierarchy_prefix=args.hierarchy)
@@ -758,6 +855,7 @@ if __name__ == "__main__":
     elif args.dataset:
         output = args.output or "anytool/results/anytool_faithful_results.json"
         run_anytool_on_dataset(args.dataset, output, model=args.model,
-                               max_samples=args.max_samples)
+                               max_samples=args.max_samples, oracle=args.oracle,
+                               retrieval=args.retrieval)
     else:
         print("Use --test for single query or --dataset <file> for batch evaluation")

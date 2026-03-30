@@ -1,0 +1,288 @@
+{
+  "Weather": {
+    "description": "Weather",
+    "tools": {
+      "Foreca Weather": "Foreca Weather",
+      "Cloud Cast": "Cloud Cast",
+      "WeatherAPI.com": "WeatherAPI.com",
+      "Ski Resort Forecast": "Ski Resort Forecast",
+      "Air Quality API": "Air Quality API",
+      "APJOY-Weather Forecast": "APJOY-Weather Forecast",
+      "OpenWeather": "OpenWeather",
+      "The Weather API": "The Weather API",
+      "climate data": "climate data",
+      "RapidWeather": "RapidWeather",
+      "Stormglass Complete": "Stormglass Complete",
+      "Air Quality": "Air Quality",
+      "Ouranos": "Ouranos",
+      "Easy Weather": "Easy Weather",
+      "Wavebase": "Wavebase",
+      "OikoWeather": "OikoWeather",
+      "Aviation Weather Center": "Aviation Weather Center",
+      "Test": "Test",
+      "weather_v14": "weather_v14"
+    }
+  },
+  "Finance": {
+    "description": "Finance",
+    "tools": {
+      "Binance Smart Chain": "Binance Smart Chain",
+      "Pancakeswap API Freemium": "Pancakeswap API Freemium",
+      "spacHero - SPAC Database": "spacHero - SPAC Database",
+      "Finshorts": "Finshorts",
+      "YH Finance Complete": "YH Finance Complete",
+      "Holistic Finance - Stock Data": "Holistic Finance - Stock Data",
+      "Finance Data": "Finance Data",
+      "vatlayer": "vatlayer",
+      "Inflation by API-Ninjas": "Inflation by API-Ninjas",
+      "Realtime Crypto Prices": "Realtime Crypto Prices",
+      "Stoxx": "Stoxx",
+      "Real-Time Quotes": "Real-Time Quotes",
+      "Cryptocurrency Data": "Cryptocurrency Data",
+      "Crowdsense": "Crowdsense",
+      "Defi Data": "Defi Data",
+      "Date Calculator": "Date Calculator",
+      "Forecast crypto and fiat currency exchange rates": "Forecast crypto and fiat currency exchange rates",
+      "Exchange rates live": "Exchange rates live"
+    }
+  },
+  "Financial": {
+    "description": "Financial",
+    "tools": {
+      "MarketCI Analytics": "MarketCI Analytics",
+      "FmpCloud": "FmpCloud",
+      "Mutual fund Nav": "Mutual fund Nav",
+      "Consulta de boleto": "Consulta de boleto",
+      "Number2Words": "Number2Words",
+      "CalcX - Investment API": "CalcX - Investment API",
+      "Luhn algorithm": "Luhn algorithm",
+      "Open DeFi": "Open DeFi",
+      "\ud83d\udcc5 Economic Events Calendar \ud83d\ude80": "\ud83d\udcc5 Economic Events Calendar \ud83d\ude80",
+      "Currency Converter_v2": "Currency Converter_v2"
+    }
+  },
+  "Travel": {
+    "description": "Travel",
+    "tools": {
+      "Flixbus": "Flixbus",
+      "Flight Fare Search": "Flight Fare Search",
+      "Airbnb Search": "Airbnb Search",
+      "Skyscanner_v2": "Skyscanner_v2",
+      "Flight Data_v2": "Flight Data_v2",
+      "Zumata": "Zumata",
+      "Airports Finder": "Airports Finder",
+      "World Scuba Diving Sites Api": "World Scuba Diving Sites Api",
+      "webcams.travel": "webcams.travel",
+      "Airbnb listings": "Airbnb listings",
+      "Ranked Crime Cities": "Ranked Crime Cities",
+      "Biggest Cities": "Biggest Cities",
+      "BiggestCities": "BiggestCities",
+      "Nomad List Cities": "Nomad List Cities"
+    }
+  },
+  "Location": {
+    "description": "Location",
+    "tools": {
+      "Location": "Location",
+      "Uganda API": "Uganda API",
+      "Egypt API": "Egypt API",
+      "UK Postcode": "UK Postcode",
+      "Local Search": "Local Search",
+      "World Cities and Countries": "World Cities and Countries",
+      "IP Geolocation_v3": "IP Geolocation_v3",
+      "World Time": "World Time",
+      "Get IP Info_v2": "Get IP Info_v2",
+      "Location_v2": "Location_v2",
+      "GoApis Geocoding API": "GoApis Geocoding API",
+      "World Time by API-Ninjas": "World Time by API-Ninjas"
+    }
+  },
+  "Sports": {
+    "description": "Sports",
+    "tools": {
+      "Live Golf Data": "Live Golf Data",
+      "RugbyAPI2": "RugbyAPI2",
+      "TransferMarkt DB": "TransferMarkt DB",
+      "Zeus API": "Zeus API",
+      "Tank01 NFL Live In-Game Real Time Statistics NFL": "Tank01 NFL Live In-Game Real Time Statistics NFL",
+      "WNBA API": "WNBA API",
+      "CricketAPI2": "CricketAPI2",
+      "Tank01 Fantasy Stats": "Tank01 Fantasy Stats",
+      "Cricbuzz Cricket": "Cricbuzz Cricket",
+      "F1 drivers quotes": "F1 drivers quotes",
+      "Free NBA": "Free NBA",
+      "BetsAPI": "BetsAPI",
+      "BaseballApi": "BaseballApi",
+      "Pinnacle Odds": "Pinnacle Odds",
+      "SheScoresAPI": "SheScoresAPI",
+      "Football Data": "Football Data",
+      "ViperScore": "ViperScore",
+      "Baseball": "Baseball",
+      "AllScores": "AllScores",
+      "Major League Soccer Standings": "Major League Soccer Standings",
+      "IPL API": "IPL API"
+    }
+  },
+  "Music": {
+    "description": "Music",
+    "tools": {
+      "MusicData API": "MusicData API",
+      "Youtube Music API (Detailed)": "Youtube Music API (Detailed)",
+      "50K Radio Stations": "50K Radio Stations",
+      "Spotify Web": "Spotify Web",
+      "kotak7": "kotak7",
+      "Indie Songs : DistroKid & Unsigned": "Indie Songs : DistroKid & Unsigned",
+      "Spotify": "Spotify",
+      "Genius - Song Lyrics": "Genius - Song Lyrics",
+      "SoundCloud Charts API": "SoundCloud Charts API",
+      "xmusic": "xmusic",
+      "Shazam API": "Shazam API",
+      "Spotify Data API": "Spotify Data API"
+    }
+  },
+  "eCommerce": {
+    "description": "eCommerce",
+    "tools": {
+      "Magic AliExpress": "Magic AliExpress",
+      "Get Promo Codes": "Get Promo Codes",
+      "AG Amazon Data Web Scraper": "AG Amazon Data Web Scraper",
+      "Amazon Scrapper_v4": "Amazon Scrapper_v4",
+      "Shopify Store Scraper": "Shopify Store Scraper",
+      "Walmart_v2": "Walmart_v2",
+      "Ecommerce Product API": "Ecommerce Product API",
+      "Amazon Data_v3": "Amazon Data_v3",
+      "EcartAPI": "EcartAPI",
+      "Facebook Marketplace": "Facebook Marketplace",
+      "Amazon Product Reviews": "Amazon Product Reviews",
+      "Wayfair": "Wayfair",
+      "\u00c7i\u00e7eksepeti Data": "\u00c7i\u00e7eksepeti Data",
+      "BestBuy Product Data API": "BestBuy Product Data API",
+      "Real-Time Product Search": "Real-Time Product Search",
+      "Weee grocery API (sayweee.com) - browsing/searching/details": "Weee grocery API (sayweee.com) - browsing/searching/details",
+      "Target": "Target",
+      "Ebay de Product Details Page Scraper": "Ebay de Product Details Page Scraper",
+      "Amazon India Scraper_v3": "Amazon India Scraper_v3",
+      "Price Comparison": "Price Comparison",
+      "Amazon Product Price Data": "Amazon Product Price Data",
+      "Pricer": "Pricer"
+    }
+  },
+  "Social": {
+    "description": "Social",
+    "tools": {
+      "Social Media Data TT": "Social Media Data TT",
+      "Twitter Hashtags": "Twitter Hashtags",
+      " Quotes API": " Quotes API",
+      "Twitter_v5": "Twitter_v5",
+      "TikTok_Solutions": "TikTok_Solutions",
+      "Hashtag": "Hashtag",
+      "TikTok Bulletproof": "TikTok Bulletproof",
+      "Instagram API": "Instagram API",
+      "TwttrAPI": "TwttrAPI",
+      "Instagram Cheapest": "Instagram Cheapest",
+      "Reddit": "Reddit",
+      "TikTok Hashtag Generator": "TikTok Hashtag Generator",
+      "Instagram #1": "Instagram #1",
+      "TokApi - mobile version": "TokApi - mobile version",
+      "ZodiacAPI": "ZodiacAPI",
+      "Instagram Pro": "Instagram Pro",
+      "Reddit Fast Search": "Reddit Fast Search",
+      "gwyo-twitch": "gwyo-twitch",
+      "Instagram API 2023": "Instagram API 2023",
+      "Twitter RSS": "Twitter RSS",
+      "Instagram Looter": "Instagram Looter"
+    }
+  },
+  "News_Media": {
+    "description": "News_Media",
+    "tools": {
+      "Instant Cameroon News": "Instant Cameroon News",
+      "Indonesia News": "Indonesia News",
+      "Kubric: The Comprehensive Movie News API": "Kubric: The Comprehensive Movie News API",
+      "Movies details": "Movies details",
+      "News Sentiment": "News Sentiment",
+      "article-api": "article-api",
+      "Google News API": "Google News API",
+      "Climate Change Live_v27": "Climate Change Live_v27",
+      "German Police and Crime News Live": "German Police and Crime News Live",
+      "Climate News API_v2": "Climate News API_v2",
+      "AI News_v2": "AI News_v2",
+      "Live world futbol news": "Live world futbol news"
+    }
+  },
+  "Food": {
+    "description": "Food",
+    "tools": {
+      "Viva City Documentation": "Viva City Documentation",
+      "pizzaallapala": "pizzaallapala",
+      "The Mexican Food DB": "The Mexican Food DB",
+      "The Birthday Cake DB": "The Birthday Cake DB",
+      "DietaGram": "DietaGram",
+      "Keto Diet": "Keto Diet",
+      "Nutrition by API-Ninjas": "Nutrition by API-Ninjas",
+      "Recipe by API-Ninjas": "Recipe by API-Ninjas",
+      "Recipe_v4": "Recipe_v4",
+      "Recipe Search and Diet": "Recipe Search and Diet",
+      "Cocktails": "Cocktails",
+      "Cocktail by API-Ninjas": "Cocktail by API-Ninjas",
+      "Generate a recipe based on an ingredient": "Generate a recipe based on an ingredient"
+    }
+  },
+  "Health_and_Fitness": {
+    "description": "Health_and_Fitness",
+    "tools": {
+      "Horostory": "Horostory",
+      "Appointment System API": "Appointment System API",
+      "Pregnancy Calculator API": "Pregnancy Calculator API",
+      "Health Calculator API": "Health Calculator API",
+      "BMI Calculator_v2": "BMI Calculator_v2",
+      "AirVisual": "AirVisual",
+      "fastingcenters": "fastingcenters",
+      "Exercises by API-Ninjas": "Exercises by API-Ninjas",
+      "ExerciseDB": "ExerciseDB",
+      "US Hospitals": "US Hospitals",
+      "Calories Burned by API-Ninjas": "Calories Burned by API-Ninjas"
+    }
+  },
+  "Entertainment": {
+    "description": "Entertainment",
+    "tools": {
+      "Dad Jokes_v2": "Dad Jokes_v2",
+      "SimSimi Conversation": "SimSimi Conversation",
+      "Fancy text": "Fancy text",
+      "Memeados": "Memeados",
+      "Anime Jokes": "Anime Jokes",
+      "Riddlie ": "Riddlie ",
+      "Movie Showtimes": "Movie Showtimes",
+      "Deezer": "Deezer",
+      "Argentina movie theatres": "Argentina movie theatres",
+      "HeyWatch Video Encoding": "HeyWatch Video Encoding",
+      "Watchmode": "Watchmode",
+      "60K Radio Stations": "60K Radio Stations",
+      "World of Jokes": "World of Jokes",
+      "Anime Quotes_v4": "Anime Quotes_v4",
+      "Guinness-World-Records-Api": "Guinness-World-Records-Api",
+      "rapid-porn": "rapid-porn",
+      "Jokes by API-Ninjas": "Jokes by API-Ninjas",
+      "Outking": "Outking",
+      "Drinking": "Drinking",
+      "SimAPI Movies": "SimAPI Movies",
+      "4D Results": "4D Results"
+    }
+  },
+  "Media": {
+    "description": "Media",
+    "tools": {
+      "Shazam": "Shazam",
+      "\ud83d\udc4b Demo Project": "\ud83d\udc4b Demo Project",
+      "Vimeo": "Vimeo",
+      "Bing Image Search": "Bing Image Search",
+      "StreamlineWatch - Streaming Guide": "StreamlineWatch - Streaming Guide",
+      "Giphy": "Giphy",
+      "\ud83d\ude80 Cheap YouTube API \ud83d\udd25": "\ud83d\ude80 Cheap YouTube API \ud83d\udd25",
+      "Online Video Downloader": "Online Video Downloader",
+      "Rijksmuseum": "Rijksmuseum",
+      "YTS.am Torrent": "YTS.am Torrent"
+    }
+  }
+}

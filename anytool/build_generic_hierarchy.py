@@ -20,24 +20,30 @@ def build_hierarchy(lookup_path, output_prefix):
         # and ToolBench format (category/tool/api + name)
         product = meta.get("product_name", meta.get("category", ""))
         type_name = meta.get("type_name", meta.get("tool", ""))
-        field_name = meta.get("field_name", meta.get("api", field_key.split(".")[-1] if "." in field_key else field_key))
+        # For ToolBench, field_name is the parameter name (from key), not the API name
+        # key format: Tool_API.parameter -> extract parameter after last dot
+        field_name = meta.get("field_name")
+        if not field_name:
+            field_name = field_key.split(".")[-1] if "." in field_key else field_key
         description = meta.get("description", "")
 
         if not product or not type_name:
             continue
 
         category = product
+        # Use the actual tool/type as the tool within the category
+        tool_key = type_name
         if category not in tool_data:
             tool_data[category] = {}
             api_details[category] = {}
 
-        if product not in tool_data[category]:
-            tool_data[category][product] = {"api_list_names": [], "tool_description": product + " schema"}
-            api_details[category][product] = {"tool_name": product, "tool_description": product, "api_list": []}
+        if tool_key not in tool_data[category]:
+            tool_data[category][tool_key] = {"api_list_names": [], "tool_description": tool_key + " schema"}
+            api_details[category][tool_key] = {"tool_name": tool_key, "tool_description": tool_key, "api_list": []}
 
         api_name = type_name + "." + field_name
-        tool_data[category][product]["api_list_names"].append(api_name)
-        api_details[category][product]["api_list"].append({
+        tool_data[category][tool_key]["api_list_names"].append(api_name)
+        api_details[category][tool_key]["api_list"].append({
             "name": api_name,
             "description": description[:100] if description else field_name + " in " + type_name,
         })

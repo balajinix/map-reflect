@@ -91,6 +91,7 @@ def match_predicted_to_gt(predicted_mapping, ground_truth_mapping):
         _, tgt_fname = extract_type_and_field(tgt_field)
 
         # Check if src_fname -> tgt_fname appears anywhere in GT
+        matched = False
         for gt_src, gt_tgt in gt_pairs:
             _, gt_src_f = extract_type_and_field(gt_src)
             _, gt_tgt_f = extract_type_and_field(gt_tgt)
@@ -98,13 +99,41 @@ def match_predicted_to_gt(predicted_mapping, ground_truth_mapping):
                 normalize_field(tgt_fname) == normalize_field(gt_tgt_f)):
                 correct += 1
                 details.append(("field_match", src_field, tgt_field))
+                matched = True
                 break
             if (normalize_field(src_fname) == normalize_field(gt_tgt_f) and
                 normalize_field(tgt_fname) == normalize_field(gt_src_f)):
                 correct += 1
                 details.append(("field_reverse", src_field, tgt_field))
+                matched = True
                 break
-        else:
+
+        # Try suffix match: GT like "table_field" should match pred field "field"
+        # Require word boundary (preceded by _ or start of string)
+        if not matched:
+            tgt_fname_norm = normalize_field(tgt_fname)
+            for gt_src, gt_tgt in gt_pairs:
+                gt_src_f = normalize_field(gt_src.rsplit(".", 1)[-1])
+                gt_tgt_norm = normalize_field(gt_tgt)
+                src_fname_norm = normalize_field(src_fname)
+                # Forward: src field matches GT src, pred target is suffix of GT target
+                if (src_fname_norm == gt_src_f and
+                    (gt_tgt_norm == tgt_fname_norm or
+                     gt_tgt_norm.endswith("_" + tgt_fname_norm))):
+                    correct += 1
+                    details.append(("suffix_match", src_field, tgt_field))
+                    matched = True
+                    break
+                # Reverse: src field matches GT src, GT target is suffix of pred target
+                if (src_fname_norm == gt_src_f and
+                    (tgt_fname_norm.endswith("_" + gt_tgt_norm) or
+                     tgt_fname_norm.endswith("." + gt_tgt_norm))):
+                    correct += 1
+                    details.append(("suffix_reverse", src_field, tgt_field))
+                    matched = True
+                    break
+
+        if not matched:
             details.append(("miss", src_field, tgt_field))
 
     return correct, total, details

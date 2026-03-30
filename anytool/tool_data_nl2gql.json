@@ -1,0 +1,6310 @@
+{
+  "nl2gql": {
+    "Accelerator_compatible_browser": {
+      "api_list_names": [
+        "Accelerator_compatible_browser.accelerator_id",
+        "Accelerator_compatible_browser.browser_id",
+        "Accelerator_compatible_browser.compatible_since_year"
+      ],
+      "tool_description": "Accelerator_compatible_browser schema"
+    },
+    "Acceptance": {
+      "api_list_names": [
+        "Acceptance.result",
+        "Acceptance.submission_id",
+        "Acceptance.workshop_id"
+      ],
+      "tool_description": "Acceptance schema"
+    },
+    "Accounts": {
+      "api_list_names": [
+        "Accounts.account_id",
+        "Accounts.account_name",
+        "Accounts.custid",
+        "Accounts.customer_id",
+        "Accounts.date_account_opened",
+        "Accounts.name",
+        "Accounts.other_account_details"
+      ],
+      "tool_description": "Accounts schema"
+    },
+    "Activity": {
+      "api_list_names": [
+        "Activity.actid",
+        "Activity.activity_name"
+      ],
+      "tool_description": "Activity schema"
+    },
+    "Actor": {
+      "api_list_names": [
+        "Actor.actor_id",
+        "Actor.age",
+        "Actor.aid",
+        "Actor.birth_city",
+        "Actor.birth_year",
+        "Actor.character",
+        "Actor.duration",
+        "Actor.gender",
+        "Actor.musical_id",
+        "Actor.name",
+        "Actor.nationality"
+      ],
+      "tool_description": "Actor schema"
+    },
+    "Actual_orders": {
+      "api_list_names": [
+        "Actual_orders.actual_order_date",
+        "Actual_orders.actual_order_id",
+        "Actual_orders.order_status_code",
+        "Actual_orders.regular_order_id"
+      ],
+      "tool_description": "Actual_orders schema"
+    },
+    "Addresses": {
+      "api_list_names": [
+        "Addresses.address_content",
+        "Addresses.address_details",
+        "Addresses.address_id",
+        "Addresses.city",
+        "Addresses.country",
+        "Addresses.line_1",
+        "Addresses.line_1_number_building",
+        "Addresses.line_2",
+        "Addresses.line_3",
+        "Addresses.other_address_details",
+        "Addresses.state_province_county",
+        "Addresses.town_city",
+        "Addresses.zip_postcode"
+      ],
+      "tool_description": "Addresses schema"
+    },
+    "Advisor": {
+      "api_list_names": [
+        "Advisor.i_id",
+        "Advisor.s_id"
+      ],
+      "tool_description": "Advisor schema"
+    },
+    "Affected_region": {
+      "api_list_names": [
+        "Affected_region.number_city_affected",
+        "Affected_region.region_id",
+        "Affected_region.storm_id"
+      ],
+      "tool_description": "Affected_region schema"
+    },
+    "Affiliated_with": {
+      "api_list_names": [
+        "Affiliated_with.department",
+        "Affiliated_with.physician",
+        "Affiliated_with.primaryaffiliation"
+      ],
+      "tool_description": "Affiliated_with schema"
+    },
+    "Agreements": {
+      "api_list_names": [
+        "Agreements.document_id",
+        "Agreements.event_id"
+      ],
+      "tool_description": "Agreements schema"
+    },
+    "Aircraft": {
+      "api_list_names": [
+        "Aircraft.aircraft_id",
+        "Aircraft.fleet_series",
+        "Aircraft.fuel_propulsion",
+        "Aircraft.manufacturer",
+        "Aircraft.model",
+        "Aircraft.order_year",
+        "Aircraft.powertrain"
+      ],
+      "tool_description": "Aircraft schema"
+    },
+    "Airlines": {
+      "api_list_names": [
+        "Airlines.abbreviation",
+        "Airlines.airline",
+        "Airlines.country",
+        "Airlines.uid"
+      ],
+      "tool_description": "Airlines schema"
+    },
+    "Airport": {
+      "api_list_names": [
+        "Airport.city",
+        "Airport.country",
+        "Airport.iata",
+        "Airport.icao",
+        "Airport.id",
+        "Airport.name"
+      ],
+      "tool_description": "Airport schema"
+    },
+    "Airports": {
+      "api_list_names": [
+        "Airports.airportcode",
+        "Airports.airportname",
+        "Airports.city",
+        "Airports.country",
+        "Airports.countryabbrev"
+      ],
+      "tool_description": "Airports schema"
+    },
+    "Album": {
+      "api_list_names": [
+        "Album.albumid",
+        "Album.artistid",
+        "Album.title"
+      ],
+      "tool_description": "Album schema"
+    },
+    "Albums": {
+      "api_list_names": [
+        "Albums.aid",
+        "Albums.artist_id",
+        "Albums.id",
+        "Albums.label",
+        "Albums.title",
+        "Albums.type",
+        "Albums.year"
+      ],
+      "tool_description": "Albums schema"
+    },
+    "All_star": {
+      "api_list_names": [
+        "All_star.game_id",
+        "All_star.game_num",
+        "All_star.gp",
+        "All_star.league_id",
+        "All_star.player_id",
+        "All_star.starting_pos",
+        "All_star.team_id",
+        "All_star.year"
+      ],
+      "tool_description": "All_star schema"
+    },
+    "Allergy_type": {
+      "api_list_names": [
+        "Allergy_type.allergy",
+        "Allergy_type.allergytype"
+      ],
+      "tool_description": "Allergy_type schema"
+    },
+    "Apartment_bookings": {
+      "api_list_names": [
+        "Apartment_bookings.apt_booking_id",
+        "Apartment_bookings.apt_id",
+        "Apartment_bookings.booking_end_date",
+        "Apartment_bookings.booking_start_date",
+        "Apartment_bookings.booking_status_code",
+        "Apartment_bookings.guest_id"
+      ],
+      "tool_description": "Apartment_bookings schema"
+    },
+    "Apartment_buildings": {
+      "api_list_names": [
+        "Apartment_buildings.building_address",
+        "Apartment_buildings.building_description",
+        "Apartment_buildings.building_full_name",
+        "Apartment_buildings.building_id",
+        "Apartment_buildings.building_manager",
+        "Apartment_buildings.building_phone",
+        "Apartment_buildings.building_short_name"
+      ],
+      "tool_description": "Apartment_buildings schema"
+    },
+    "Apartment_facilities": {
+      "api_list_names": [
+        "Apartment_facilities.apt_id",
+        "Apartment_facilities.facility_code"
+      ],
+      "tool_description": "Apartment_facilities schema"
+    },
+    "Apartments": {
+      "api_list_names": [
+        "Apartments.apt_id",
+        "Apartments.apt_number",
+        "Apartments.apt_type_code",
+        "Apartments.bathroom_count",
+        "Apartments.bedroom_count",
+        "Apartments.building_id",
+        "Apartments.room_count"
+      ],
+      "tool_description": "Apartments schema"
+    },
+    "Appearances": {
+      "api_list_names": [
+        "Appearances.g_1b",
+        "Appearances.g_2b",
+        "Appearances.g_3b",
+        "Appearances.g_all",
+        "Appearances.g_batting",
+        "Appearances.g_c",
+        "Appearances.g_cf",
+        "Appearances.g_defense",
+        "Appearances.g_dh",
+        "Appearances.g_lf",
+        "Appearances.g_of",
+        "Appearances.g_p",
+        "Appearances.g_ph",
+        "Appearances.g_pr",
+        "Appearances.g_rf",
+        "Appearances.g_ss",
+        "Appearances.gs",
+        "Appearances.league_id",
+        "Appearances.player_id",
+        "Appearances.team_id",
+        "Appearances.year"
+      ],
+      "tool_description": "Appearances schema"
+    },
+    "Appellations": {
+      "api_list_names": [
+        "Appellations.appelation",
+        "Appellations.area",
+        "Appellations.county",
+        "Appellations.isava",
+        "Appellations.no",
+        "Appellations.state"
+      ],
+      "tool_description": "Appellations schema"
+    },
+    "Appointment": {
+      "api_list_names": [
+        "Appointment.appointmentid",
+        "Appointment.end",
+        "Appointment.examinationroom",
+        "Appointment.patient",
+        "Appointment.physician",
+        "Appointment.prepnurse",
+        "Appointment.start"
+      ],
+      "tool_description": "Appointment schema"
+    },
+    "Architect": {
+      "api_list_names": [
+        "Architect.gender",
+        "Architect.id",
+        "Architect.name",
+        "Architect.nationality"
+      ],
+      "tool_description": "Architect schema"
+    },
+    "Area_code_state": {
+      "api_list_names": [
+        "Area_code_state.area_code",
+        "Area_code_state.state"
+      ],
+      "tool_description": "Area_code_state schema"
+    },
+    "Artist": {
+      "api_list_names": [
+        "Artist.age",
+        "Artist.artist",
+        "Artist.artist_id",
+        "Artist.artistid",
+        "Artist.country",
+        "Artist.famous_release_date",
+        "Artist.famous_title",
+        "Artist.name",
+        "Artist.year_join"
+      ],
+      "tool_description": "Artist schema"
+    },
+    "Artists": {
+      "api_list_names": [
+        "Artists.id",
+        "Artists.name"
+      ],
+      "tool_description": "Artists schema"
+    },
+    "Artwork": {
+      "api_list_names": [
+        "Artwork.artwork_id",
+        "Artwork.name",
+        "Artwork.type"
+      ],
+      "tool_description": "Artwork schema"
+    },
+    "Assessment_notes": {
+      "api_list_names": [
+        "Assessment_notes.date_of_notes",
+        "Assessment_notes.notes_id",
+        "Assessment_notes.other_details",
+        "Assessment_notes.student_id",
+        "Assessment_notes.teacher_id",
+        "Assessment_notes.text_of_notes"
+      ],
+      "tool_description": "Assessment_notes schema"
+    },
+    "Assets": {
+      "api_list_names": [
+        "Assets.asset_acquired_date",
+        "Assets.asset_details",
+        "Assets.asset_disposed_date",
+        "Assets.asset_id",
+        "Assets.asset_make",
+        "Assets.asset_model",
+        "Assets.maintenance_contract_id",
+        "Assets.other_asset_details",
+        "Assets.other_details",
+        "Assets.supplier_company_id"
+      ],
+      "tool_description": "Assets schema"
+    },
+    "Assets_in_events": {
+      "api_list_names": [
+        "Assets_in_events.asset_id",
+        "Assets_in_events.event_id"
+      ],
+      "tool_description": "Assets_in_events schema"
+    },
+    "Assignedto": {
+      "api_list_names": [
+        "Assignedto.project",
+        "Assignedto.scientist"
+      ],
+      "tool_description": "Assignedto schema"
+    },
+    "Attribute_definitions": {
+      "api_list_names": [
+        "Attribute_definitions.attribute_data_type",
+        "Attribute_definitions.attribute_id",
+        "Attribute_definitions.attribute_name"
+      ],
+      "tool_description": "Attribute_definitions schema"
+    },
+    "Author": {
+      "api_list_names": [
+        "Author.aid",
+        "Author.authorid",
+        "Author.authorname",
+        "Author.homepage",
+        "Author.name",
+        "Author.oid"
+      ],
+      "tool_description": "Author schema"
+    },
+    "Authors": {
+      "api_list_names": [
+        "Authors.authid",
+        "Authors.fname",
+        "Authors.lname"
+      ],
+      "tool_description": "Authors schema"
+    },
+    "Authorship": {
+      "api_list_names": [
+        "Authorship.authid",
+        "Authorship.authorder",
+        "Authorship.instid",
+        "Authorship.paperid"
+      ],
+      "tool_description": "Authorship schema"
+    },
+    "Available_policies": {
+      "api_list_names": [
+        "Available_policies.customer_phone",
+        "Available_policies.policy_id",
+        "Available_policies.policy_type_code"
+      ],
+      "tool_description": "Available_policies schema"
+    },
+    "Band": {
+      "api_list_names": [
+        "Band.firstname",
+        "Band.id",
+        "Band.lastname"
+      ],
+      "tool_description": "Band schema"
+    },
+    "Bank": {
+      "api_list_names": [
+        "Bank.bname",
+        "Bank.branch_id",
+        "Bank.city",
+        "Bank.no_of_customers",
+        "Bank.state"
+      ],
+      "tool_description": "Bank schema"
+    },
+    "Basketball_match": {
+      "api_list_names": [
+        "Basketball_match.acc_home",
+        "Basketball_match.acc_percent",
+        "Basketball_match.acc_regular_season",
+        "Basketball_match.acc_road",
+        "Basketball_match.all_games",
+        "Basketball_match.all_games_percent",
+        "Basketball_match.all_home",
+        "Basketball_match.all_neutral",
+        "Basketball_match.all_road",
+        "Basketball_match.school_id",
+        "Basketball_match.team_id",
+        "Basketball_match.team_name"
+      ],
+      "tool_description": "Basketball_match schema"
+    },
+    "Batting": {
+      "api_list_names": [
+        "Batting.ab",
+        "Batting.bb",
+        "Batting.cs",
+        "Batting.double",
+        "Batting.g",
+        "Batting.g_idp",
+        "Batting.h",
+        "Batting.hbp",
+        "Batting.hr",
+        "Batting.ibb",
+        "Batting.league_id",
+        "Batting.player_id",
+        "Batting.r",
+        "Batting.rbi",
+        "Batting.sb",
+        "Batting.sf",
+        "Batting.sh",
+        "Batting.so",
+        "Batting.stint",
+        "Batting.team_id",
+        "Batting.triple",
+        "Batting.year"
+      ],
+      "tool_description": "Batting schema"
+    },
+    "Batting_postseason": {
+      "api_list_names": [
+        "Batting_postseason.ab",
+        "Batting_postseason.bb",
+        "Batting_postseason.cs",
+        "Batting_postseason.double",
+        "Batting_postseason.g",
+        "Batting_postseason.g_idp",
+        "Batting_postseason.h",
+        "Batting_postseason.hbp",
+        "Batting_postseason.hr",
+        "Batting_postseason.ibb",
+        "Batting_postseason.league_id",
+        "Batting_postseason.player_id",
+        "Batting_postseason.r",
+        "Batting_postseason.rbi",
+        "Batting_postseason.round",
+        "Batting_postseason.sb",
+        "Batting_postseason.sf",
+        "Batting_postseason.sh",
+        "Batting_postseason.so",
+        "Batting_postseason.team_id",
+        "Batting_postseason.triple",
+        "Batting_postseason.year"
+      ],
+      "tool_description": "Batting_postseason schema"
+    },
+    "Battle": {
+      "api_list_names": [
+        "Battle.bulgarian_commander",
+        "Battle.date",
+        "Battle.id",
+        "Battle.latin_commander",
+        "Battle.name",
+        "Battle.result"
+      ],
+      "tool_description": "Battle schema"
+    },
+    "Behavior_incident": {
+      "api_list_names": [
+        "Behavior_incident.date_incident_end",
+        "Behavior_incident.date_incident_start",
+        "Behavior_incident.incident_id",
+        "Behavior_incident.incident_summary",
+        "Behavior_incident.incident_type_code",
+        "Behavior_incident.other_details",
+        "Behavior_incident.recommendations",
+        "Behavior_incident.student_id"
+      ],
+      "tool_description": "Behavior_incident schema"
+    },
+    "Benefits_overpayments": {
+      "api_list_names": [
+        "Benefits_overpayments.cmi_cross_ref_id",
+        "Benefits_overpayments.council_tax_id"
+      ],
+      "tool_description": "Benefits_overpayments schema"
+    },
+    "Block": {
+      "api_list_names": [
+        "Block.blockcode",
+        "Block.blockfloor"
+      ],
+      "tool_description": "Block schema"
+    },
+    "Body_builder": {
+      "api_list_names": [
+        "Body_builder.body_builder_id",
+        "Body_builder.clean_jerk",
+        "Body_builder.people_id",
+        "Body_builder.snatch",
+        "Body_builder.total"
+      ],
+      "tool_description": "Body_builder schema"
+    },
+    "Book": {
+      "api_list_names": [
+        "Book.book_id",
+        "Book.issues",
+        "Book.title",
+        "Book.writer"
+      ],
+      "tool_description": "Book schema"
+    },
+    "Book_club": {
+      "api_list_names": [
+        "Book_club.author_or_editor",
+        "Book_club.book_club_id",
+        "Book_club.book_title",
+        "Book_club.category",
+        "Book_club.publisher",
+        "Book_club.result",
+        "Book_club.year"
+      ],
+      "tool_description": "Book_club schema"
+    },
+    "Bookings": {
+      "api_list_names": [
+        "Bookings.amount_of_discount",
+        "Bookings.amount_of_refund",
+        "Bookings.amount_outstanding",
+        "Bookings.amount_payable",
+        "Bookings.booking_end_date",
+        "Bookings.booking_id",
+        "Bookings.booking_start_date",
+        "Bookings.booking_status_code",
+        "Bookings.count_hired",
+        "Bookings.customer_id",
+        "Bookings.returned_damaged_yn"
+      ],
+      "tool_description": "Bookings schema"
+    },
+    "Branch": {
+      "api_list_names": [
+        "Branch.address_road",
+        "Branch.branch_id",
+        "Branch.city",
+        "Branch.membership_amount",
+        "Branch.name",
+        "Branch.open_year"
+      ],
+      "tool_description": "Branch schema"
+    },
+    "Breeds": {
+      "api_list_names": [
+        "Breeds.breed_code",
+        "Breeds.breed_name"
+      ],
+      "tool_description": "Breeds schema"
+    },
+    "Bridge": {
+      "api_list_names": [
+        "Bridge.architect_id",
+        "Bridge.id",
+        "Bridge.length_feet",
+        "Bridge.length_meters",
+        "Bridge.location",
+        "Bridge.name"
+      ],
+      "tool_description": "Bridge schema"
+    },
+    "Broadcast": {
+      "api_list_names": [
+        "Broadcast.channel_id",
+        "Broadcast.program_id",
+        "Broadcast.time_of_day"
+      ],
+      "tool_description": "Broadcast schema"
+    },
+    "Broadcast_share": {
+      "api_list_names": [
+        "Broadcast_share.channel_id",
+        "Broadcast_share.date",
+        "Broadcast_share.program_id",
+        "Broadcast_share.share_in_percent"
+      ],
+      "tool_description": "Broadcast_share schema"
+    },
+    "Browser": {
+      "api_list_names": [
+        "Browser.id",
+        "Browser.market_share",
+        "Browser.name"
+      ],
+      "tool_description": "Browser schema"
+    },
+    "Budget": {
+      "api_list_names": [
+        "Budget.budget_invested_percent",
+        "Budget.budgeted",
+        "Budget.invested",
+        "Budget.school_id",
+        "Budget.total_budget_percent_budgeted",
+        "Budget.total_budget_percent_invested",
+        "Budget.year"
+      ],
+      "tool_description": "Budget schema"
+    },
+    "Building": {
+      "api_list_names": [
+        "Building.building_id",
+        "Building.floors",
+        "Building.height_feet",
+        "Building.name",
+        "Building.street_address",
+        "Building.years_as_tallest"
+      ],
+      "tool_description": "Building schema"
+    },
+    "Buildings": {
+      "api_list_names": [
+        "Buildings.city",
+        "Buildings.height",
+        "Buildings.id",
+        "Buildings.name",
+        "Buildings.status",
+        "Buildings.stories"
+      ],
+      "tool_description": "Buildings schema"
+    },
+    "Business": {
+      "api_list_names": [
+        "Business.bid",
+        "Business.business_id",
+        "Business.city",
+        "Business.full_address",
+        "Business.is_open",
+        "Business.latitude",
+        "Business.longitude",
+        "Business.name",
+        "Business.rating",
+        "Business.review_count",
+        "Business.state"
+      ],
+      "tool_description": "Business schema"
+    },
+    "Business_rates": {
+      "api_list_names": [
+        "Business_rates.business_rates_id",
+        "Business_rates.cmi_cross_ref_id"
+      ],
+      "tool_description": "Business_rates schema"
+    },
+    "Camera_lens": {
+      "api_list_names": [
+        "Camera_lens.brand",
+        "Camera_lens.focal_length_mm",
+        "Camera_lens.id",
+        "Camera_lens.max_aperture",
+        "Camera_lens.name"
+      ],
+      "tool_description": "Camera_lens schema"
+    },
+    "Campuses": {
+      "api_list_names": [
+        "Campuses.campus",
+        "Campuses.county",
+        "Campuses.id",
+        "Campuses.location",
+        "Campuses.year"
+      ],
+      "tool_description": "Campuses schema"
+    },
+    "Candidate_assessments": {
+      "api_list_names": [
+        "Candidate_assessments.asessment_outcome_code",
+        "Candidate_assessments.assessment_date",
+        "Candidate_assessments.candidate_id",
+        "Candidate_assessments.qualification"
+      ],
+      "tool_description": "Candidate_assessments schema"
+    },
+    "Candidate": {
+      "api_list_names": [
+        "Candidate.candidate_id",
+        "Candidate.consider_rate",
+        "Candidate.date",
+        "Candidate.oppose_rate",
+        "Candidate.people_id",
+        "Candidate.poll_source",
+        "Candidate.support_rate",
+        "Candidate.unsure_rate"
+      ],
+      "tool_description": "Candidate schema"
+    },
+    "Candidates": {
+      "api_list_names": [
+        "Candidates.candidate_details",
+        "Candidates.candidate_id"
+      ],
+      "tool_description": "Candidates schema"
+    },
+    "Captain": {
+      "api_list_names": [
+        "Captain.age",
+        "Captain.captain_id",
+        "Captain.class",
+        "Captain.name",
+        "Captain.rank",
+        "Captain.ship_id"
+      ],
+      "tool_description": "Captain schema"
+    },
+    "Car_makers": {
+      "api_list_names": [
+        "Car_makers.country",
+        "Car_makers.fullname",
+        "Car_makers.id",
+        "Car_makers.maker"
+      ],
+      "tool_description": "Car_makers schema"
+    },
+    "Car_names": {
+      "api_list_names": [
+        "Car_names.make",
+        "Car_names.makeid",
+        "Car_names.model"
+      ],
+      "tool_description": "Car_names schema"
+    },
+    "Cars_data": {
+      "api_list_names": [
+        "Cars_data.accelerate",
+        "Cars_data.cylinders",
+        "Cars_data.edispl",
+        "Cars_data.horsepower",
+        "Cars_data.id",
+        "Cars_data.mpg",
+        "Cars_data.weight",
+        "Cars_data.year"
+      ],
+      "tool_description": "Cars_data schema"
+    },
+    "Cartoon": {
+      "api_list_names": [
+        "Cartoon.channel",
+        "Cartoon.directed_by",
+        "Cartoon.id",
+        "Cartoon.original_air_date",
+        "Cartoon.production_code",
+        "Cartoon.title",
+        "Cartoon.written_by"
+      ],
+      "tool_description": "Cartoon schema"
+    },
+    "Cast": {
+      "api_list_names": [
+        "Cast.aid",
+        "Cast.id",
+        "Cast.msid",
+        "Cast.role"
+      ],
+      "tool_description": "Cast schema"
+    },
+    "Catalog_contents_additional_attributes": {
+      "api_list_names": [
+        "Catalog_contents_additional_attributes.attribute_id",
+        "Catalog_contents_additional_attributes.attribute_value",
+        "Catalog_contents_additional_attributes.catalog_entry_id",
+        "Catalog_contents_additional_attributes.catalog_level_number"
+      ],
+      "tool_description": "Catalog_contents_additional_attributes schema"
+    },
+    "Catalog_contents": {
+      "api_list_names": [
+        "Catalog_contents.capacity",
+        "Catalog_contents.catalog_entry_id",
+        "Catalog_contents.catalog_entry_name",
+        "Catalog_contents.catalog_level_number",
+        "Catalog_contents.height",
+        "Catalog_contents.length",
+        "Catalog_contents.next_entry_id",
+        "Catalog_contents.parent_entry_id",
+        "Catalog_contents.previous_entry_id",
+        "Catalog_contents.price_in_dollars",
+        "Catalog_contents.price_in_euros",
+        "Catalog_contents.price_in_pounds",
+        "Catalog_contents.product_stock_number",
+        "Catalog_contents.width"
+      ],
+      "tool_description": "Catalog_contents schema"
+    },
+    "Catalog_structure": {
+      "api_list_names": [
+        "Catalog_structure.catalog_id",
+        "Catalog_structure.catalog_level_name",
+        "Catalog_structure.catalog_level_number"
+      ],
+      "tool_description": "Catalog_structure schema"
+    },
+    "Catalogs": {
+      "api_list_names": [
+        "Catalogs.catalog_id",
+        "Catalogs.catalog_name",
+        "Catalogs.catalog_publisher",
+        "Catalogs.date_of_latest_revision",
+        "Catalogs.date_of_publication"
+      ],
+      "tool_description": "Catalogs schema"
+    },
+    "Category": {
+      "api_list_names": [
+        "Category.business_id",
+        "Category.category_name",
+        "Category.id"
+      ],
+      "tool_description": "Category schema"
+    },
+    "Channel": {
+      "api_list_names": [
+        "Channel.channel_id",
+        "Channel.name",
+        "Channel.owner",
+        "Channel.rating_in_percent",
+        "Channel.share_in_percent"
+      ],
+      "tool_description": "Channel schema"
+    },
+    "Channels": {
+      "api_list_names": [
+        "Channels.channel_id",
+        "Channels.other_details"
+      ],
+      "tool_description": "Channels schema"
+    },
+    "Characteristics": {
+      "api_list_names": [
+        "Characteristics.characteristic_data_type",
+        "Characteristics.characteristic_id",
+        "Characteristics.characteristic_name",
+        "Characteristics.characteristic_type_code",
+        "Characteristics.other_characteristic_details"
+      ],
+      "tool_description": "Characteristics schema"
+    },
+    "Charges": {
+      "api_list_names": [
+        "Charges.charge_amount",
+        "Charges.charge_id",
+        "Charges.charge_type"
+      ],
+      "tool_description": "Charges schema"
+    },
+    "Checkin": {
+      "api_list_names": [
+        "Checkin.business_id",
+        "Checkin.cid",
+        "Checkin.count",
+        "Checkin.day"
+      ],
+      "tool_description": "Checkin schema"
+    },
+    "Checking": {
+      "api_list_names": [
+        "Checking.balance",
+        "Checking.custid"
+      ],
+      "tool_description": "Checking schema"
+    },
+    "Chip_model": {
+      "api_list_names": [
+        "Chip_model.bluetooth",
+        "Chip_model.launch_year",
+        "Chip_model.model_name",
+        "Chip_model.ram_mib",
+        "Chip_model.rom_mib",
+        "Chip_model.slots",
+        "Chip_model.wifi"
+      ],
+      "tool_description": "Chip_model schema"
+    },
+    "Church": {
+      "api_list_names": [
+        "Church.church_id",
+        "Church.continuation_of",
+        "Church.name",
+        "Church.open_date",
+        "Church.organized_by"
+      ],
+      "tool_description": "Church schema"
+    },
+    "Cinema": {
+      "api_list_names": [
+        "Cinema.capacity",
+        "Cinema.cinema_id",
+        "Cinema.location",
+        "Cinema.name",
+        "Cinema.openning_year"
+      ],
+      "tool_description": "Cinema schema"
+    },
+    "Circuits": {
+      "api_list_names": [
+        "Circuits.alt",
+        "Circuits.circuitid",
+        "Circuits.circuitref",
+        "Circuits.country",
+        "Circuits.lat",
+        "Circuits.lng",
+        "Circuits.location",
+        "Circuits.name",
+        "Circuits.url"
+      ],
+      "tool_description": "Circuits schema"
+    },
+    "City": {
+      "api_list_names": [
+        "City.amerindian",
+        "City.area_km_2",
+        "City.asian",
+        "City.black",
+        "City.census_ranking",
+        "City.city",
+        "City.city_id",
+        "City.city_name",
+        "City.country_name",
+        "City.countrycode",
+        "City.county_id",
+        "City.district",
+        "City.gdp",
+        "City.hanyu_pinyin",
+        "City.hanzi",
+        "City.hispanic",
+        "City.id",
+        "City.multiracial",
+        "City.name",
+        "City.official_name",
+        "City.population",
+        "City.regional_population",
+        "City.state_name",
+        "City.status",
+        "City.white"
+      ],
+      "tool_description": "City schema"
+    },
+    "Claims": {
+      "api_list_names": [
+        "Claims.amount_claimed",
+        "Claims.amount_settled",
+        "Claims.claim_id",
+        "Claims.fnol_id",
+        "Claims.policy_id"
+      ],
+      "tool_description": "Claims schema"
+    },
+    "Class": {
+      "api_list_names": [
+        "Class.class_code",
+        "Class.class_room",
+        "Class.class_section",
+        "Class.class_time",
+        "Class.crs_code",
+        "Class.prof_num"
+      ],
+      "tool_description": "Class schema"
+    },
+    "Classification": {
+      "api_list_names": [
+        "Classification.gid",
+        "Classification.id",
+        "Classification.msid"
+      ],
+      "tool_description": "Classification schema"
+    },
+    "Classroom": {
+      "api_list_names": [
+        "Classroom.building",
+        "Classroom.capacity",
+        "Classroom.room_number"
+      ],
+      "tool_description": "Classroom schema"
+    },
+    "Climber": {
+      "api_list_names": [
+        "Climber.climber_id",
+        "Climber.country",
+        "Climber.mountain_id",
+        "Climber.name",
+        "Climber.points",
+        "Climber.time"
+      ],
+      "tool_description": "Climber schema"
+    },
+    "Club": {
+      "api_list_names": [
+        "Club.club_id",
+        "Club.club_name",
+        "Club.clubdesc",
+        "Club.clubid",
+        "Club.clublocation",
+        "Club.clubname",
+        "Club.name",
+        "Club.region",
+        "Club.start_year"
+      ],
+      "tool_description": "Club schema"
+    },
+    "Club_rank": {
+      "api_list_names": [
+        "Club_rank.bronze",
+        "Club_rank.club_id",
+        "Club_rank.gold",
+        "Club_rank.rank",
+        "Club_rank.silver",
+        "Club_rank.total"
+      ],
+      "tool_description": "Club_rank schema"
+    },
+    "Cmi_cross_references": {
+      "api_list_names": [
+        "Cmi_cross_references.cmi_cross_ref_id",
+        "Cmi_cross_references.master_customer_id",
+        "Cmi_cross_references.source_system_code"
+      ],
+      "tool_description": "Cmi_cross_references schema"
+    },
+    "Coach": {
+      "api_list_names": [
+        "Coach.club_id",
+        "Coach.coach_id",
+        "Coach.coach_name",
+        "Coach.gender",
+        "Coach.rank"
+      ],
+      "tool_description": "Coach schema"
+    },
+    "College": {
+      "api_list_names": [
+        "College.city",
+        "College.cname",
+        "College.college_id",
+        "College.college_location",
+        "College.country",
+        "College.enr",
+        "College.leader_name",
+        "College.name",
+        "College.name_full",
+        "College.state"
+      ],
+      "tool_description": "College schema"
+    },
+    "Companies": {
+      "api_list_names": [
+        "Companies.assets_billion",
+        "Companies.headquarters",
+        "Companies.id",
+        "Companies.industry",
+        "Companies.market_value_billion",
+        "Companies.name",
+        "Companies.profits_billion",
+        "Companies.sales_billion"
+      ],
+      "tool_description": "Companies schema"
+    },
+    "Company": {
+      "api_list_names": [
+        "Company.assets_billion",
+        "Company.assets_in_billion",
+        "Company.company",
+        "Company.company_id",
+        "Company.country_code",
+        "Company.headquarters",
+        "Company.id",
+        "Company.industry",
+        "Company.main_industry",
+        "Company.market_value",
+        "Company.market_value_in_billion",
+        "Company.name",
+        "Company.profits_billion",
+        "Company.profits_in_billion",
+        "Company.rank",
+        "Company.sales_billion",
+        "Company.sales_in_billion"
+      ],
+      "tool_description": "Company schema"
+    },
+    "Competition": {
+      "api_list_names": [
+        "Competition.competition_id",
+        "Competition.competition_type",
+        "Competition.country",
+        "Competition.year"
+      ],
+      "tool_description": "Competition schema"
+    },
+    "Competition_record": {
+      "api_list_names": [
+        "Competition_record.competition_id",
+        "Competition_record.farm_id",
+        "Competition_record.rank"
+      ],
+      "tool_description": "Competition_record schema"
+    },
+    "Competition_result": {
+      "api_list_names": [
+        "Competition_result.club_id_1",
+        "Competition_result.club_id_2",
+        "Competition_result.competition_id",
+        "Competition_result.score"
+      ],
+      "tool_description": "Competition_result schema"
+    },
+    "Complaints": {
+      "api_list_names": [
+        "Complaints.complaint_id",
+        "Complaints.complaint_outcome_code",
+        "Complaints.complaint_status_code",
+        "Complaints.complaint_type_code",
+        "Complaints.customer_id",
+        "Complaints.date_complaint_closed",
+        "Complaints.date_complaint_raised",
+        "Complaints.product_id",
+        "Complaints.staff_id"
+      ],
+      "tool_description": "Complaints schema"
+    },
+    "Concert": {
+      "api_list_names": [
+        "Concert.concert_id",
+        "Concert.concert_name",
+        "Concert.stadium_id",
+        "Concert.theme",
+        "Concert.year"
+      ],
+      "tool_description": "Concert schema"
+    },
+    "Conductor": {
+      "api_list_names": [
+        "Conductor.age",
+        "Conductor.conductor_id",
+        "Conductor.name",
+        "Conductor.nationality",
+        "Conductor.year_of_work"
+      ],
+      "tool_description": "Conductor schema"
+    },
+    "Conference": {
+      "api_list_names": [
+        "Conference.cid",
+        "Conference.homepage",
+        "Conference.name"
+      ],
+      "tool_description": "Conference schema"
+    },
+    "Constructorresults": {
+      "api_list_names": [
+        "Constructorresults.constructorid",
+        "Constructorresults.constructorresultsid",
+        "Constructorresults.points",
+        "Constructorresults.raceid",
+        "Constructorresults.status"
+      ],
+      "tool_description": "Constructorresults schema"
+    },
+    "Constructors": {
+      "api_list_names": [
+        "Constructors.constructorid",
+        "Constructors.constructorref",
+        "Constructors.name",
+        "Constructors.nationality",
+        "Constructors.url"
+      ],
+      "tool_description": "Constructors schema"
+    },
+    "Constructorstandings": {
+      "api_list_names": [
+        "Constructorstandings.constructorid",
+        "Constructorstandings.constructorstandingsid",
+        "Constructorstandings.points",
+        "Constructorstandings.position",
+        "Constructorstandings.positiontext",
+        "Constructorstandings.raceid",
+        "Constructorstandings.wins"
+      ],
+      "tool_description": "Constructorstandings schema"
+    },
+    "Contacts": {
+      "api_list_names": [
+        "Contacts.contact_id",
+        "Contacts.contact_phone",
+        "Contacts.customer_id",
+        "Contacts.first_name",
+        "Contacts.gender",
+        "Contacts.last_name"
+      ],
+      "tool_description": "Contacts schema"
+    },
+    "Contestants": {
+      "api_list_names": [
+        "Contestants.contestant_name",
+        "Contestants.contestant_number"
+      ],
+      "tool_description": "Contestants schema"
+    },
+    "Continents": {
+      "api_list_names": [
+        "Continents.contid",
+        "Continents.continent"
+      ],
+      "tool_description": "Continents schema"
+    },
+    "Copyright": {
+      "api_list_names": [
+        "Copyright.cid",
+        "Copyright.id",
+        "Copyright.msid"
+      ],
+      "tool_description": "Copyright schema"
+    },
+    "Council_tax": {
+      "api_list_names": [
+        "Council_tax.cmi_cross_ref_id",
+        "Council_tax.council_tax_id"
+      ],
+      "tool_description": "Council_tax schema"
+    },
+    "Countries": {
+      "api_list_names": [
+        "Countries.continent",
+        "Countries.country_id",
+        "Countries.country_name",
+        "Countries.countryid",
+        "Countries.countryname",
+        "Countries.region_id"
+      ],
+      "tool_description": "Countries schema"
+    },
+    "Country": {
+      "api_list_names": [
+        "Country.area",
+        "Country.capital",
+        "Country.code",
+        "Country.code2",
+        "Country.continent",
+        "Country.country_id",
+        "Country.country_name",
+        "Country.gnp",
+        "Country.gnpold",
+        "Country.governmentform",
+        "Country.headofstate",
+        "Country.id",
+        "Country.indepyear",
+        "Country.languages",
+        "Country.lifeexpectancy",
+        "Country.localname",
+        "Country.name",
+        "Country.official_native_language",
+        "Country.population",
+        "Country.region",
+        "Country.surfacearea"
+      ],
+      "tool_description": "Country schema"
+    },
+    "Countrylanguage": {
+      "api_list_names": [
+        "Countrylanguage.countrycode",
+        "Countrylanguage.isofficial",
+        "Countrylanguage.language",
+        "Countrylanguage.percentage"
+      ],
+      "tool_description": "Countrylanguage schema"
+    },
+    "County": {
+      "api_list_names": [
+        "County.county_id",
+        "County.county_name",
+        "County.population",
+        "County.zip_code"
+      ],
+      "tool_description": "County schema"
+    },
+    "County_public_safety": {
+      "api_list_names": [
+        "County_public_safety.case_burden",
+        "County_public_safety.county_id",
+        "County_public_safety.crime_rate",
+        "County_public_safety.location",
+        "County_public_safety.name",
+        "County_public_safety.police_force",
+        "County_public_safety.police_officers",
+        "County_public_safety.population",
+        "County_public_safety.residents_per_officer"
+      ],
+      "tool_description": "County_public_safety schema"
+    },
+    "Course_arrange": {
+      "api_list_names": [
+        "Course_arrange.course_id",
+        "Course_arrange.grade",
+        "Course_arrange.teacher_id"
+      ],
+      "tool_description": "Course_arrange schema"
+    },
+    "Course_authors_and_tutors": {
+      "api_list_names": [
+        "Course_authors_and_tutors.address_line_1",
+        "Course_authors_and_tutors.author_id",
+        "Course_authors_and_tutors.author_tutor_atb",
+        "Course_authors_and_tutors.family_name",
+        "Course_authors_and_tutors.gender_mf",
+        "Course_authors_and_tutors.login_name",
+        "Course_authors_and_tutors.middle_name",
+        "Course_authors_and_tutors.password",
+        "Course_authors_and_tutors.personal_name"
+      ],
+      "tool_description": "Course_authors_and_tutors schema"
+    },
+    "Course": {
+      "api_list_names": [
+        "Course.cid",
+        "Course.cname",
+        "Course.course",
+        "Course.course_id",
+        "Course.credits",
+        "Course.crs_code",
+        "Course.crs_credit",
+        "Course.crs_description",
+        "Course.days",
+        "Course.dept_code",
+        "Course.dept_name",
+        "Course.dno",
+        "Course.hours",
+        "Course.instructor",
+        "Course.staring_date",
+        "Course.title"
+      ],
+      "tool_description": "Course schema"
+    },
+    "Courses": {
+      "api_list_names": [
+        "Courses.author_id",
+        "Courses.course_description",
+        "Courses.course_id",
+        "Courses.course_name",
+        "Courses.other_details",
+        "Courses.subject_id"
+      ],
+      "tool_description": "Courses schema"
+    },
+    "Csu_fees": {
+      "api_list_names": [
+        "Csu_fees.campus",
+        "Csu_fees.campusfee",
+        "Csu_fees.year"
+      ],
+      "tool_description": "Csu_fees schema"
+    },
+    "Culture_company": {
+      "api_list_names": [
+        "Culture_company.book_club_id",
+        "Culture_company.company_name",
+        "Culture_company.group_equity_shareholding",
+        "Culture_company.incorporated_in",
+        "Culture_company.movie_id",
+        "Culture_company.type"
+      ],
+      "tool_description": "Culture_company schema"
+    },
+    "Customer": {
+      "api_list_names": [
+        "Customer.acc_bal",
+        "Customer.acc_type",
+        "Customer.address",
+        "Customer.branch_id",
+        "Customer.city",
+        "Customer.company",
+        "Customer.country",
+        "Customer.credit_score",
+        "Customer.cust_id",
+        "Customer.cust_name",
+        "Customer.customerid",
+        "Customer.email",
+        "Customer.fax",
+        "Customer.firstname",
+        "Customer.lastname",
+        "Customer.no_of_loans",
+        "Customer.phone",
+        "Customer.postalcode",
+        "Customer.state",
+        "Customer.supportrepid"
+      ],
+      "tool_description": "Customer schema"
+    },
+    "Customer_address_history": {
+      "api_list_names": [
+        "Customer_address_history.address_id",
+        "Customer_address_history.customer_id",
+        "Customer_address_history.date_from",
+        "Customer_address_history.date_to"
+      ],
+      "tool_description": "Customer_address_history schema"
+    },
+    "Customer_addresses": {
+      "api_list_names": [
+        "Customer_addresses.address_id",
+        "Customer_addresses.address_type",
+        "Customer_addresses.address_type_code",
+        "Customer_addresses.customer_id",
+        "Customer_addresses.date_address_from",
+        "Customer_addresses.date_address_to",
+        "Customer_addresses.date_from",
+        "Customer_addresses.date_to",
+        "Customer_addresses.premise_id"
+      ],
+      "tool_description": "Customer_addresses schema"
+    },
+    "Customer_contact_channels": {
+      "api_list_names": [
+        "Customer_contact_channels.active_from_date",
+        "Customer_contact_channels.active_to_date",
+        "Customer_contact_channels.channel_code",
+        "Customer_contact_channels.contact_number",
+        "Customer_contact_channels.customer_id"
+      ],
+      "tool_description": "Customer_contact_channels schema"
+    },
+    "Customer_event_notes": {
+      "api_list_names": [
+        "Customer_event_notes.customer_event_id",
+        "Customer_event_notes.customer_event_note_id",
+        "Customer_event_notes.date_moved_in",
+        "Customer_event_notes.property_id",
+        "Customer_event_notes.resident_id",
+        "Customer_event_notes.service_type_code"
+      ],
+      "tool_description": "Customer_event_notes schema"
+    },
+    "Customer_events": {
+      "api_list_names": [
+        "Customer_events.customer_event_id",
+        "Customer_events.customer_id",
+        "Customer_events.date_moved_in",
+        "Customer_events.property_id",
+        "Customer_events.resident_id",
+        "Customer_events.thing_id"
+      ],
+      "tool_description": "Customer_events schema"
+    },
+    "Customer_master_index": {
+      "api_list_names": [
+        "Customer_master_index.cmi_details",
+        "Customer_master_index.master_customer_id"
+      ],
+      "tool_description": "Customer_master_index schema"
+    },
+    "Customer_orders": {
+      "api_list_names": [
+        "Customer_orders.customer_id",
+        "Customer_orders.order_date",
+        "Customer_orders.order_delivered_datetime",
+        "Customer_orders.order_details",
+        "Customer_orders.order_id",
+        "Customer_orders.order_placed_datetime",
+        "Customer_orders.order_shipping_charges",
+        "Customer_orders.order_status",
+        "Customer_orders.order_status_code",
+        "Customer_orders.shipping_method_code"
+      ],
+      "tool_description": "Customer_orders schema"
+    },
+    "Customer_payments": {
+      "api_list_names": [
+        "Customer_payments.amount_payment",
+        "Customer_payments.customer_id",
+        "Customer_payments.datetime_payment",
+        "Customer_payments.payment_method_code"
+      ],
+      "tool_description": "Customer_payments schema"
+    },
+    "Customer_policies": {
+      "api_list_names": [
+        "Customer_policies.customer_id",
+        "Customer_policies.policy_id",
+        "Customer_policies.policy_type_code"
+      ],
+      "tool_description": "Customer_policies schema"
+    },
+    "Customers": {
+      "api_list_names": [
+        "Customers.address",
+        "Customers.address_line_1",
+        "Customers.address_line_2",
+        "Customers.amount_outstanding",
+        "Customers.cell_mobile_phone_number",
+        "Customers.city",
+        "Customers.company",
+        "Customers.country",
+        "Customers.coupon_id",
+        "Customers.customer_address",
+        "Customers.customer_address_id",
+        "Customers.customer_code",
+        "Customers.customer_details",
+        "Customers.customer_email",
+        "Customers.customer_first_name",
+        "Customers.customer_id",
+        "Customers.customer_last_name",
+        "Customers.customer_login",
+        "Customers.customer_middle_initial",
+        "Customers.customer_name",
+        "Customers.customer_number",
+        "Customers.customer_password",
+        "Customers.customer_phone",
+        "Customers.customer_status_code",
+        "Customers.customer_type_code",
+        "Customers.date_became_customer",
+        "Customers.date_last_hire",
+        "Customers.date_of_birth",
+        "Customers.email",
+        "Customers.email_address",
+        "Customers.fax",
+        "Customers.first_name",
+        "Customers.gender",
+        "Customers.gender_mf",
+        "Customers.good_or_bad_customer",
+        "Customers.id",
+        "Customers.last_name",
+        "Customers.login_name",
+        "Customers.login_password",
+        "Customers.other_customer_details",
+        "Customers.payment_method",
+        "Customers.payment_method_code",
+        "Customers.phone",
+        "Customers.phone_number",
+        "Customers.postal_code",
+        "Customers.state",
+        "Customers.state_county_province",
+        "Customers.support_rep_id",
+        "Customers.town_city"
+      ],
+      "tool_description": "Customers schema"
+    },
+    "Customers_cards": {
+      "api_list_names": [
+        "Customers_cards.card_id",
+        "Customers_cards.card_number",
+        "Customers_cards.card_type_code",
+        "Customers_cards.customer_id",
+        "Customers_cards.date_valid_from",
+        "Customers_cards.date_valid_to",
+        "Customers_cards.other_card_details"
+      ],
+      "tool_description": "Customers_cards schema"
+    },
+    "Customers_policies": {
+      "api_list_names": [
+        "Customers_policies.customer_id",
+        "Customers_policies.policy_id"
+      ],
+      "tool_description": "Customers_policies schema"
+    },
+    "Dataset": {
+      "api_list_names": [
+        "Dataset.datasetid",
+        "Dataset.datasetname"
+      ],
+      "tool_description": "Dataset schema"
+    },
+    "Death": {
+      "api_list_names": [
+        "Death.caused_by_ship_id",
+        "Death.id",
+        "Death.injured",
+        "Death.killed",
+        "Death.note"
+      ],
+      "tool_description": "Death schema"
+    },
+    "Debate": {
+      "api_list_names": [
+        "Debate.date",
+        "Debate.debate_id",
+        "Debate.num_of_audience",
+        "Debate.venue"
+      ],
+      "tool_description": "Debate schema"
+    },
+    "Debate_people": {
+      "api_list_names": [
+        "Debate_people.affirmative",
+        "Debate_people.debate_id",
+        "Debate_people.if_affirmative_win",
+        "Debate_people.negative"
+      ],
+      "tool_description": "Debate_people schema"
+    },
+    "Degree_programs": {
+      "api_list_names": [
+        "Degree_programs.degree_program_id",
+        "Degree_programs.degree_summary_description",
+        "Degree_programs.degree_summary_name",
+        "Degree_programs.department_id",
+        "Degree_programs.other_details"
+      ],
+      "tool_description": "Degree_programs schema"
+    },
+    "Degrees": {
+      "api_list_names": [
+        "Degrees.campus",
+        "Degrees.degrees",
+        "Degrees.year"
+      ],
+      "tool_description": "Degrees schema"
+    },
+    "Delivery_route_locations": {
+      "api_list_names": [
+        "Delivery_route_locations.location_address_id",
+        "Delivery_route_locations.location_code",
+        "Delivery_route_locations.location_name",
+        "Delivery_route_locations.route_id"
+      ],
+      "tool_description": "Delivery_route_locations schema"
+    },
+    "Delivery_routes": {
+      "api_list_names": [
+        "Delivery_routes.other_route_details",
+        "Delivery_routes.route_id",
+        "Delivery_routes.route_name"
+      ],
+      "tool_description": "Delivery_routes schema"
+    },
+    "Department": {
+      "api_list_names": [
+        "Department.budget",
+        "Department.budget_in_billions",
+        "Department.building",
+        "Department.creation",
+        "Department.department_id",
+        "Department.departmentid",
+        "Department.dept_address",
+        "Department.dept_code",
+        "Department.dept_extension",
+        "Department.dept_name",
+        "Department.division",
+        "Department.dname",
+        "Department.dno",
+        "Department.dnumber",
+        "Department.dphone",
+        "Department.emp_num",
+        "Department.head",
+        "Department.mgr_ssn",
+        "Department.mgr_start_date",
+        "Department.name",
+        "Department.num_employees",
+        "Department.ranking",
+        "Department.room",
+        "Department.school_code"
+      ],
+      "tool_description": "Department schema"
+    },
+    "Department_store_chain": {
+      "api_list_names": [
+        "Department_store_chain.dept_store_chain_id",
+        "Department_store_chain.dept_store_chain_name"
+      ],
+      "tool_description": "Department_store_chain schema"
+    },
+    "Department_stores": {
+      "api_list_names": [
+        "Department_stores.dept_store_chain_id",
+        "Department_stores.dept_store_id",
+        "Department_stores.store_address",
+        "Department_stores.store_email",
+        "Department_stores.store_name",
+        "Department_stores.store_phone"
+      ],
+      "tool_description": "Department_stores schema"
+    },
+    "Departments": {
+      "api_list_names": [
+        "Departments.department_description",
+        "Departments.department_id",
+        "Departments.department_name",
+        "Departments.dept_store_id",
+        "Departments.location_id",
+        "Departments.manager_id",
+        "Departments.other_details"
+      ],
+      "tool_description": "Departments schema"
+    },
+    "Dependent": {
+      "api_list_names": [
+        "Dependent.bdate",
+        "Dependent.dependent_name",
+        "Dependent.essn",
+        "Dependent.relationship",
+        "Dependent.sex"
+      ],
+      "tool_description": "Dependent schema"
+    },
+    "Dept_locations": {
+      "api_list_names": [
+        "Dept_locations.dlocation",
+        "Dept_locations.dnumber"
+      ],
+      "tool_description": "Dept_locations schema"
+    },
+    "Detention": {
+      "api_list_names": [
+        "Detention.datetime_detention_end",
+        "Detention.datetime_detention_start",
+        "Detention.detention_id",
+        "Detention.detention_summary",
+        "Detention.detention_type_code",
+        "Detention.other_details",
+        "Detention.teacher_id"
+      ],
+      "tool_description": "Detention schema"
+    },
+    "Device": {
+      "api_list_names": [
+        "Device.applications",
+        "Device.carrier",
+        "Device.device",
+        "Device.device_id",
+        "Device.package_version",
+        "Device.software_platform"
+      ],
+      "tool_description": "Device schema"
+    },
+    "Directed_by": {
+      "api_list_names": [
+        "Directed_by.did",
+        "Directed_by.id",
+        "Directed_by.msid"
+      ],
+      "tool_description": "Directed_by schema"
+    },
+    "Director": {
+      "api_list_names": [
+        "Director.birth_city",
+        "Director.birth_year",
+        "Director.did",
+        "Director.gender",
+        "Director.name",
+        "Director.nationality"
+      ],
+      "tool_description": "Director schema"
+    },
+    "Discipline_enrollments": {
+      "api_list_names": [
+        "Discipline_enrollments.campus",
+        "Discipline_enrollments.discipline",
+        "Discipline_enrollments.graduate",
+        "Discipline_enrollments.undergraduate",
+        "Discipline_enrollments.year"
+      ],
+      "tool_description": "Discipline_enrollments schema"
+    },
+    "Discount_coupons": {
+      "api_list_names": [
+        "Discount_coupons.coupon_amount",
+        "Discount_coupons.coupon_id",
+        "Discount_coupons.date_issued"
+      ],
+      "tool_description": "Discount_coupons schema"
+    },
+    "District": {
+      "api_list_names": [
+        "District.city_area",
+        "District.city_population",
+        "District.district_id",
+        "District.district_name",
+        "District.headquartered_city"
+      ],
+      "tool_description": "District schema"
+    },
+    "Document_sections": {
+      "api_list_names": [
+        "Document_sections.document_code",
+        "Document_sections.section_code",
+        "Document_sections.section_id",
+        "Document_sections.section_sequence",
+        "Document_sections.section_title"
+      ],
+      "tool_description": "Document_sections schema"
+    },
+    "Document_structures": {
+      "api_list_names": [
+        "Document_structures.document_structure_code",
+        "Document_structures.document_structure_description",
+        "Document_structures.parent_document_structure_code"
+      ],
+      "tool_description": "Document_structures schema"
+    },
+    "Document_types": {
+      "api_list_names": [
+        "Document_types.document_description",
+        "Document_types.document_type_code"
+      ],
+      "tool_description": "Document_types schema"
+    },
+    "Documents": {
+      "api_list_names": [
+        "Documents.access_count",
+        "Documents.document_code",
+        "Documents.document_id",
+        "Documents.document_name",
+        "Documents.document_structure_code",
+        "Documents.document_type_code",
+        "Documents.grant_id",
+        "Documents.other_details",
+        "Documents.response_received_date",
+        "Documents.sent_date"
+      ],
+      "tool_description": "Documents schema"
+    },
+    "Dogs": {
+      "api_list_names": [
+        "Dogs.abandoned_yn",
+        "Dogs.age",
+        "Dogs.breed_code",
+        "Dogs.date_adopted",
+        "Dogs.date_arrived",
+        "Dogs.date_departed",
+        "Dogs.date_of_birth",
+        "Dogs.dog_id",
+        "Dogs.gender",
+        "Dogs.name",
+        "Dogs.owner_id",
+        "Dogs.size_code",
+        "Dogs.weight"
+      ],
+      "tool_description": "Dogs schema"
+    },
+    "Domain": {
+      "api_list_names": [
+        "Domain.did",
+        "Domain.name"
+      ],
+      "tool_description": "Domain schema"
+    },
+    "Dorm_amenity": {
+      "api_list_names": [
+        "Dorm_amenity.amenid",
+        "Dorm_amenity.amenity_name"
+      ],
+      "tool_description": "Dorm_amenity schema"
+    },
+    "Dorm": {
+      "api_list_names": [
+        "Dorm.dorm_name",
+        "Dorm.dormid",
+        "Dorm.gender",
+        "Dorm.student_capacity"
+      ],
+      "tool_description": "Dorm schema"
+    },
+    "Driver": {
+      "api_list_names": [
+        "Driver.age",
+        "Driver.driver_id",
+        "Driver.home_city",
+        "Driver.name",
+        "Driver.party"
+      ],
+      "tool_description": "Driver schema"
+    },
+    "Drivers": {
+      "api_list_names": [
+        "Drivers.code",
+        "Drivers.dob",
+        "Drivers.driverid",
+        "Drivers.driverref",
+        "Drivers.forename",
+        "Drivers.nationality",
+        "Drivers.number",
+        "Drivers.surname",
+        "Drivers.url"
+      ],
+      "tool_description": "Drivers schema"
+    },
+    "Driverstandings": {
+      "api_list_names": [
+        "Driverstandings.driverid",
+        "Driverstandings.driverstandingsid",
+        "Driverstandings.points",
+        "Driverstandings.position",
+        "Driverstandings.positiontext",
+        "Driverstandings.raceid",
+        "Driverstandings.wins"
+      ],
+      "tool_description": "Driverstandings schema"
+    },
+    "Editor": {
+      "api_list_names": [
+        "Editor.age",
+        "Editor.editor_id",
+        "Editor.name"
+      ],
+      "tool_description": "Editor schema"
+    },
+    "Election": {
+      "api_list_names": [
+        "Election.committee",
+        "Election.counties_represented",
+        "Election.date",
+        "Election.delegate",
+        "Election.district",
+        "Election.election_id",
+        "Election.first_elected",
+        "Election.party",
+        "Election.place",
+        "Election.representative_id",
+        "Election.seats",
+        "Election.vote_percent",
+        "Election.votes"
+      ],
+      "tool_description": "Election schema"
+    },
+    "Electoral_register": {
+      "api_list_names": [
+        "Electoral_register.cmi_cross_ref_id",
+        "Electoral_register.electoral_register_id"
+      ],
+      "tool_description": "Electoral_register schema"
+    },
+    "Elimination": {
+      "api_list_names": [
+        "Elimination.eliminated_by",
+        "Elimination.elimination_id",
+        "Elimination.elimination_move",
+        "Elimination.team",
+        "Elimination.time",
+        "Elimination.wrestler_id"
+      ],
+      "tool_description": "Elimination schema"
+    },
+    "Employee": {
+      "api_list_names": [
+        "Employee.address",
+        "Employee.age",
+        "Employee.bdate",
+        "Employee.birthdate",
+        "Employee.city",
+        "Employee.country",
+        "Employee.dno",
+        "Employee.email",
+        "Employee.emp_dob",
+        "Employee.emp_fname",
+        "Employee.emp_hiredate",
+        "Employee.emp_initial",
+        "Employee.emp_jobcode",
+        "Employee.emp_lname",
+        "Employee.emp_num",
+        "Employee.employee_id",
+        "Employee.employeeid",
+        "Employee.fax",
+        "Employee.firstname",
+        "Employee.fname",
+        "Employee.hiredate",
+        "Employee.lastname",
+        "Employee.lname",
+        "Employee.minit",
+        "Employee.name",
+        "Employee.phone",
+        "Employee.postalcode",
+        "Employee.reportsto",
+        "Employee.salary",
+        "Employee.sex",
+        "Employee.ssn",
+        "Employee.state",
+        "Employee.super_ssn",
+        "Employee.title"
+      ],
+      "tool_description": "Employee schema"
+    },
+    "Employees": {
+      "api_list_names": [
+        "Employees.address",
+        "Employees.birth_date",
+        "Employees.city",
+        "Employees.commission_pct",
+        "Employees.country",
+        "Employees.department_id",
+        "Employees.email",
+        "Employees.employee_address_id",
+        "Employees.employee_id",
+        "Employees.employee_name",
+        "Employees.employee_phone",
+        "Employees.fax",
+        "Employees.first_name",
+        "Employees.hire_date",
+        "Employees.id",
+        "Employees.job_id",
+        "Employees.last_name",
+        "Employees.manager_id",
+        "Employees.phone",
+        "Employees.phone_number",
+        "Employees.postal_code",
+        "Employees.reports_to",
+        "Employees.salary",
+        "Employees.state",
+        "Employees.title"
+      ],
+      "tool_description": "Employees schema"
+    },
+    "Employment": {
+      "api_list_names": [
+        "Employment.company_id",
+        "Employment.people_id",
+        "Employment.year_working"
+      ],
+      "tool_description": "Employment schema"
+    },
+    "Endowment": {
+      "api_list_names": [
+        "Endowment.amount",
+        "Endowment.donator_name",
+        "Endowment.endowment_id",
+        "Endowment.school_id"
+      ],
+      "tool_description": "Endowment schema"
+    },
+    "Engineer_visits": {
+      "api_list_names": [
+        "Engineer_visits.contact_staff_id",
+        "Engineer_visits.engineer_id",
+        "Engineer_visits.engineer_visit_id",
+        "Engineer_visits.fault_log_entry_id",
+        "Engineer_visits.fault_status",
+        "Engineer_visits.other_visit_details",
+        "Engineer_visits.visit_end_datetime",
+        "Engineer_visits.visit_start_datetime"
+      ],
+      "tool_description": "Engineer_visits schema"
+    },
+    "Enroll": {
+      "api_list_names": [
+        "Enroll.class_code",
+        "Enroll.enroll_grade",
+        "Enroll.stu_num"
+      ],
+      "tool_description": "Enroll schema"
+    },
+    "Enrolled_in": {
+      "api_list_names": [
+        "Enrolled_in.cid",
+        "Enrolled_in.grade",
+        "Enrolled_in.stuid"
+      ],
+      "tool_description": "Enrolled_in schema"
+    },
+    "Enrollments": {
+      "api_list_names": [
+        "Enrollments.campus",
+        "Enrollments.fte_ay",
+        "Enrollments.totalenrollment_ay",
+        "Enrollments.year"
+      ],
+      "tool_description": "Enrollments schema"
+    },
+    "Entrepreneur": {
+      "api_list_names": [
+        "Entrepreneur.company",
+        "Entrepreneur.entrepreneur_id",
+        "Entrepreneur.investor",
+        "Entrepreneur.money_requested",
+        "Entrepreneur.people_id"
+      ],
+      "tool_description": "Entrepreneur schema"
+    },
+    "Enzyme": {
+      "api_list_names": [
+        "Enzyme.chromosome",
+        "Enzyme.id",
+        "Enzyme.location",
+        "Enzyme.name",
+        "Enzyme.omim",
+        "Enzyme.porphyria",
+        "Enzyme.product"
+      ],
+      "tool_description": "Enzyme schema"
+    },
+    "Evaluation": {
+      "api_list_names": [
+        "Evaluation.bonus",
+        "Evaluation.employee_id",
+        "Evaluation.year_awarded"
+      ],
+      "tool_description": "Evaluation schema"
+    },
+    "Event": {
+      "api_list_names": [
+        "Event.date",
+        "Event.event_attendance",
+        "Event.event_id",
+        "Event.id",
+        "Event.name",
+        "Event.stadium_id",
+        "Event.venue",
+        "Event.year"
+      ],
+      "tool_description": "Event schema"
+    },
+    "Events": {
+      "api_list_names": [
+        "Events.address_id",
+        "Events.channel_id",
+        "Events.event_details",
+        "Events.event_id",
+        "Events.event_type_code",
+        "Events.finance_id",
+        "Events.location_id",
+        "Events.service_id"
+      ],
+      "tool_description": "Events schema"
+    },
+    "Exhibition": {
+      "api_list_names": [
+        "Exhibition.artist_id",
+        "Exhibition.exhibition_id",
+        "Exhibition.theme",
+        "Exhibition.ticket_price",
+        "Exhibition.year"
+      ],
+      "tool_description": "Exhibition schema"
+    },
+    "Exhibition_record": {
+      "api_list_names": [
+        "Exhibition_record.attendance",
+        "Exhibition_record.date",
+        "Exhibition_record.exhibition_id"
+      ],
+      "tool_description": "Exhibition_record schema"
+    },
+    "Faculty": {
+      "api_list_names": [
+        "Faculty.building",
+        "Faculty.campus",
+        "Faculty.facid",
+        "Faculty.faculty",
+        "Faculty.fname",
+        "Faculty.lname",
+        "Faculty.phone",
+        "Faculty.rank",
+        "Faculty.room",
+        "Faculty.sex",
+        "Faculty.year"
+      ],
+      "tool_description": "Faculty schema"
+    },
+    "Farm": {
+      "api_list_names": [
+        "Farm.bulls",
+        "Farm.cows",
+        "Farm.farm_id",
+        "Farm.oxen",
+        "Farm.pigs",
+        "Farm.sheep_and_goats",
+        "Farm.total_cattle",
+        "Farm.total_horses",
+        "Farm.working_horses",
+        "Farm.year"
+      ],
+      "tool_description": "Farm schema"
+    },
+    "Farm_competition": {
+      "api_list_names": [
+        "Farm_competition.competition_id",
+        "Farm_competition.host_city_id",
+        "Farm_competition.hosts",
+        "Farm_competition.theme",
+        "Farm_competition.year"
+      ],
+      "tool_description": "Farm_competition schema"
+    },
+    "Fault_log": {
+      "api_list_names": [
+        "Fault_log.asset_id",
+        "Fault_log.fault_description",
+        "Fault_log.fault_log_entry_datetime",
+        "Fault_log.fault_log_entry_id",
+        "Fault_log.other_fault_details",
+        "Fault_log.recorded_by_staff_id"
+      ],
+      "tool_description": "Fault_log schema"
+    },
+    "Fault_log_parts": {
+      "api_list_names": [
+        "Fault_log_parts.fault_log_entry_id",
+        "Fault_log_parts.fault_status",
+        "Fault_log_parts.part_fault_id"
+      ],
+      "tool_description": "Fault_log_parts schema"
+    },
+    "Festival_detail": {
+      "api_list_names": [
+        "Festival_detail.chair_name",
+        "Festival_detail.festival_id",
+        "Festival_detail.festival_name",
+        "Festival_detail.location",
+        "Festival_detail.num_of_audience",
+        "Festival_detail.year"
+      ],
+      "tool_description": "Festival_detail schema"
+    },
+    "Fielding": {
+      "api_list_names": [
+        "Fielding.a",
+        "Fielding.cs",
+        "Fielding.dp",
+        "Fielding.e",
+        "Fielding.g",
+        "Fielding.gs",
+        "Fielding.inn_outs",
+        "Fielding.league_id",
+        "Fielding.pb",
+        "Fielding.player_id",
+        "Fielding.po",
+        "Fielding.pos",
+        "Fielding.sb",
+        "Fielding.stint",
+        "Fielding.team_id",
+        "Fielding.wp",
+        "Fielding.year",
+        "Fielding.zr"
+      ],
+      "tool_description": "Fielding schema"
+    },
+    "Fielding_outfield": {
+      "api_list_names": [
+        "Fielding_outfield.gcf",
+        "Fielding_outfield.glf",
+        "Fielding_outfield.grf",
+        "Fielding_outfield.player_id",
+        "Fielding_outfield.stint",
+        "Fielding_outfield.year"
+      ],
+      "tool_description": "Fielding_outfield schema"
+    },
+    "Fielding_postseason": {
+      "api_list_names": [
+        "Fielding_postseason.a",
+        "Fielding_postseason.cs",
+        "Fielding_postseason.dp",
+        "Fielding_postseason.e",
+        "Fielding_postseason.g",
+        "Fielding_postseason.gs",
+        "Fielding_postseason.inn_outs",
+        "Fielding_postseason.league_id",
+        "Fielding_postseason.pb",
+        "Fielding_postseason.player_id",
+        "Fielding_postseason.po",
+        "Fielding_postseason.pos",
+        "Fielding_postseason.round",
+        "Fielding_postseason.sb",
+        "Fielding_postseason.team_id",
+        "Fielding_postseason.tp",
+        "Fielding_postseason.year"
+      ],
+      "tool_description": "Fielding_postseason schema"
+    },
+    "Film": {
+      "api_list_names": [
+        "Film.directed_by",
+        "Film.director",
+        "Film.film_id",
+        "Film.gross_in_dollar",
+        "Film.number_in_season",
+        "Film.original_air_date",
+        "Film.production_code",
+        "Film.rank_in_series",
+        "Film.studio",
+        "Film.title"
+      ],
+      "tool_description": "Film schema"
+    },
+    "Film_market_estimation": {
+      "api_list_names": [
+        "Film_market_estimation.estimation_id",
+        "Film_market_estimation.film_id",
+        "Film_market_estimation.high_estimate",
+        "Film_market_estimation.low_estimate",
+        "Film_market_estimation.market_id",
+        "Film_market_estimation.type",
+        "Film_market_estimation.year"
+      ],
+      "tool_description": "Film_market_estimation schema"
+    },
+    "Finances": {
+      "api_list_names": [
+        "Finances.finance_id",
+        "Finances.other_details"
+      ],
+      "tool_description": "Finances schema"
+    },
+    "Financial_transactions": {
+      "api_list_names": [
+        "Financial_transactions.account_id",
+        "Financial_transactions.card_id",
+        "Financial_transactions.invoice_number",
+        "Financial_transactions.other_transaction_details",
+        "Financial_transactions.previous_transaction_id",
+        "Financial_transactions.transaction_amount",
+        "Financial_transactions.transaction_comment",
+        "Financial_transactions.transaction_date",
+        "Financial_transactions.transaction_id",
+        "Financial_transactions.transaction_type"
+      ],
+      "tool_description": "Financial_transactions schema"
+    },
+    "First_notification_of_loss": {
+      "api_list_names": [
+        "First_notification_of_loss.customer_id",
+        "First_notification_of_loss.fnol_id",
+        "First_notification_of_loss.policy_id",
+        "First_notification_of_loss.service_id"
+      ],
+      "tool_description": "First_notification_of_loss schema"
+    },
+    "Flight": {
+      "api_list_names": [
+        "Flight.airport_id",
+        "Flight.altitude",
+        "Flight.company_id",
+        "Flight.date",
+        "Flight.id",
+        "Flight.pilot",
+        "Flight.vehicle_flight_number",
+        "Flight.velocity"
+      ],
+      "tool_description": "Flight schema"
+    },
+    "Flights": {
+      "api_list_names": [
+        "Flights.airline",
+        "Flights.destairport",
+        "Flights.flightno",
+        "Flights.sourceairport"
+      ],
+      "tool_description": "Flights schema"
+    },
+    "Forms": {
+      "api_list_names": [
+        "Forms.form_description",
+        "Forms.form_id",
+        "Forms.form_name",
+        "Forms.form_number",
+        "Forms.form_type_code",
+        "Forms.service_id"
+      ],
+      "tool_description": "Forms schema"
+    },
+    "Friend": {
+      "api_list_names": [
+        "Friend.friend_id",
+        "Friend.student_id"
+      ],
+      "tool_description": "Friend schema"
+    },
+    "Functional_areas": {
+      "api_list_names": [
+        "Functional_areas.functional_area_code",
+        "Functional_areas.functional_area_description",
+        "Functional_areas.parent_functional_area_code"
+      ],
+      "tool_description": "Functional_areas schema"
+    },
+    "Furniture": {
+      "api_list_names": [
+        "Furniture.furniture_id",
+        "Furniture.market_rate",
+        "Furniture.name",
+        "Furniture.num_of_component"
+      ],
+      "tool_description": "Furniture schema"
+    },
+    "Furniture_manufacte": {
+      "api_list_names": [
+        "Furniture_manufacte.furniture_id",
+        "Furniture_manufacte.manufacturer_id",
+        "Furniture_manufacte.price_in_dollar"
+      ],
+      "tool_description": "Furniture_manufacte schema"
+    },
+    "Game": {
+      "api_list_names": [
+        "Game.away_team",
+        "Game.competition",
+        "Game.date",
+        "Game.home_team",
+        "Game.id",
+        "Game.score",
+        "Game.season",
+        "Game.stadium_id"
+      ],
+      "tool_description": "Game schema"
+    },
+    "Gas_station": {
+      "api_list_names": [
+        "Gas_station.location",
+        "Gas_station.manager_name",
+        "Gas_station.open_year",
+        "Gas_station.representative_name",
+        "Gas_station.station_id",
+        "Gas_station.vice_manager_name"
+      ],
+      "tool_description": "Gas_station schema"
+    },
+    "Genre": {
+      "api_list_names": [
+        "Genre.genre",
+        "Genre.genreid",
+        "Genre.gid",
+        "Genre.name"
+      ],
+      "tool_description": "Genre schema"
+    },
+    "Genres": {
+      "api_list_names": [
+        "Genres.id",
+        "Genres.name"
+      ],
+      "tool_description": "Genres schema"
+    },
+    "Geographic": {
+      "api_list_names": [
+        "Geographic.city_name",
+        "Geographic.county",
+        "Geographic.region"
+      ],
+      "tool_description": "Geographic schema"
+    },
+    "Gradeconversion": {
+      "api_list_names": [
+        "Gradeconversion.gradepoint",
+        "Gradeconversion.lettergrade"
+      ],
+      "tool_description": "Gradeconversion schema"
+    },
+    "Grants": {
+      "api_list_names": [
+        "Grants.grant_amount",
+        "Grants.grant_end_date",
+        "Grants.grant_id",
+        "Grants.grant_start_date",
+        "Grants.organisation_id",
+        "Grants.other_details"
+      ],
+      "tool_description": "Grants schema"
+    },
+    "Grapes": {
+      "api_list_names": [
+        "Grapes.color",
+        "Grapes.grape",
+        "Grapes.id"
+      ],
+      "tool_description": "Grapes schema"
+    },
+    "Guests": {
+      "api_list_names": [
+        "Guests.date_of_birth",
+        "Guests.gender_code",
+        "Guests.guest_first_name",
+        "Guests.guest_id",
+        "Guests.guest_last_name"
+      ],
+      "tool_description": "Guests schema"
+    },
+    "Gymnast": {
+      "api_list_names": [
+        "Gymnast.floor_exercise_points",
+        "Gymnast.gymnast_id",
+        "Gymnast.horizontal_bar_points",
+        "Gymnast.parallel_bars_points",
+        "Gymnast.pommel_horse_points",
+        "Gymnast.rings_points",
+        "Gymnast.total_points",
+        "Gymnast.vault_points"
+      ],
+      "tool_description": "Gymnast schema"
+    },
+    "Hall_of_fame": {
+      "api_list_names": [
+        "Hall_of_fame.ballots",
+        "Hall_of_fame.category",
+        "Hall_of_fame.inducted",
+        "Hall_of_fame.needed",
+        "Hall_of_fame.needed_note",
+        "Hall_of_fame.player_id",
+        "Hall_of_fame.votedby",
+        "Hall_of_fame.votes",
+        "Hall_of_fame.yearid"
+      ],
+      "tool_description": "Hall_of_fame schema"
+    },
+    "Happy_hour": {
+      "api_list_names": [
+        "Happy_hour.hh_id",
+        "Happy_hour.month",
+        "Happy_hour.num_of_shaff_in_charge",
+        "Happy_hour.shop_id"
+      ],
+      "tool_description": "Happy_hour schema"
+    },
+    "Happy_hour_member": {
+      "api_list_names": [
+        "Happy_hour_member.hh_id",
+        "Happy_hour_member.member_id",
+        "Happy_hour_member.total_amount"
+      ],
+      "tool_description": "Happy_hour_member schema"
+    },
+    "Has_allergy": {
+      "api_list_names": [
+        "Has_allergy.allergy",
+        "Has_allergy.stuid"
+      ],
+      "tool_description": "Has_allergy schema"
+    },
+    "Has_amenity": {
+      "api_list_names": [
+        "Has_amenity.amenid",
+        "Has_amenity.dormid"
+      ],
+      "tool_description": "Has_amenity schema"
+    },
+    "Head": {
+      "api_list_names": [
+        "Head.age",
+        "Head.born_state",
+        "Head.head_id",
+        "Head.name"
+      ],
+      "tool_description": "Head schema"
+    },
+    "Highlow": {
+      "api_list_names": [
+        "Highlow.highest_elevation",
+        "Highlow.highest_point",
+        "Highlow.lowest_elevation",
+        "Highlow.lowest_point",
+        "Highlow.state_name"
+      ],
+      "tool_description": "Highlow schema"
+    },
+    "Highschooler": {
+      "api_list_names": [
+        "Highschooler.grade",
+        "Highschooler.id",
+        "Highschooler.name"
+      ],
+      "tool_description": "Highschooler schema"
+    },
+    "Hiring": {
+      "api_list_names": [
+        "Hiring.employee_id",
+        "Hiring.is_full_time",
+        "Hiring.shop_id",
+        "Hiring.start_from"
+      ],
+      "tool_description": "Hiring schema"
+    },
+    "Home_game": {
+      "api_list_names": [
+        "Home_game.attendance",
+        "Home_game.games",
+        "Home_game.league_id",
+        "Home_game.openings",
+        "Home_game.park_id",
+        "Home_game.span_first",
+        "Home_game.span_last",
+        "Home_game.team_id",
+        "Home_game.year"
+      ],
+      "tool_description": "Home_game schema"
+    },
+    "Host": {
+      "api_list_names": [
+        "Host.age",
+        "Host.host_id",
+        "Host.name",
+        "Host.nationality"
+      ],
+      "tool_description": "Host schema"
+    },
+    "Hosting_city": {
+      "api_list_names": [
+        "Hosting_city.host_city",
+        "Hosting_city.match_id",
+        "Hosting_city.year"
+      ],
+      "tool_description": "Hosting_city schema"
+    },
+    "Images": {
+      "api_list_names": [
+        "Images.image_alt_text",
+        "Images.image_id",
+        "Images.image_name",
+        "Images.image_url"
+      ],
+      "tool_description": "Images schema"
+    },
+    "Individuals": {
+      "api_list_names": [
+        "Individuals.individual_address",
+        "Individuals.individual_email",
+        "Individuals.individual_first_name",
+        "Individuals.individual_id",
+        "Individuals.individual_last_name",
+        "Individuals.individual_middle_name",
+        "Individuals.inidividual_phone"
+      ],
+      "tool_description": "Individuals schema"
+    },
+    "Injury_accident": {
+      "api_list_names": [
+        "Injury_accident.game_id",
+        "Injury_accident.id",
+        "Injury_accident.injury",
+        "Injury_accident.number_of_matches",
+        "Injury_accident.player",
+        "Injury_accident.source"
+      ],
+      "tool_description": "Injury_accident schema"
+    },
+    "Inst": {
+      "api_list_names": [
+        "Inst.country",
+        "Inst.instid",
+        "Inst.name"
+      ],
+      "tool_description": "Inst schema"
+    },
+    "Institution": {
+      "api_list_names": [
+        "Institution.building_id",
+        "Institution.enrollment",
+        "Institution.founded",
+        "Institution.institution",
+        "Institution.institution_id",
+        "Institution.location",
+        "Institution.primary_conference",
+        "Institution.team",
+        "Institution.type"
+      ],
+      "tool_description": "Institution schema"
+    },
+    "Instructor": {
+      "api_list_names": [
+        "Instructor.dept_name",
+        "Instructor.id",
+        "Instructor.name",
+        "Instructor.salary"
+      ],
+      "tool_description": "Instructor schema"
+    },
+    "Instruments": {
+      "api_list_names": [
+        "Instruments.bandmateid",
+        "Instruments.instrument",
+        "Instruments.songid"
+      ],
+      "tool_description": "Instruments schema"
+    },
+    "Investors": {
+      "api_list_names": [
+        "Investors.investor_details",
+        "Investors.investor_id"
+      ],
+      "tool_description": "Investors schema"
+    },
+    "Invoice": {
+      "api_list_names": [
+        "Invoice.billingaddress",
+        "Invoice.billingcity",
+        "Invoice.billingcountry",
+        "Invoice.billingpostalcode",
+        "Invoice.billingstate",
+        "Invoice.customerid",
+        "Invoice.invoicedate",
+        "Invoice.invoiceid",
+        "Invoice.total"
+      ],
+      "tool_description": "Invoice schema"
+    },
+    "Invoice_line_items": {
+      "api_list_names": [
+        "Invoice_line_items.derived_product_cost",
+        "Invoice_line_items.derived_total_cost",
+        "Invoice_line_items.derived_vat_payable",
+        "Invoice_line_items.invoice_number",
+        "Invoice_line_items.order_item_id",
+        "Invoice_line_items.product_id",
+        "Invoice_line_items.product_price",
+        "Invoice_line_items.product_quantity",
+        "Invoice_line_items.product_title"
+      ],
+      "tool_description": "Invoice_line_items schema"
+    },
+    "Invoice_lines": {
+      "api_list_names": [
+        "Invoice_lines.id",
+        "Invoice_lines.invoice_id",
+        "Invoice_lines.quantity",
+        "Invoice_lines.track_id",
+        "Invoice_lines.unit_price"
+      ],
+      "tool_description": "Invoice_lines schema"
+    },
+    "Invoiceline": {
+      "api_list_names": [
+        "Invoiceline.invoiceid",
+        "Invoiceline.invoicelineid",
+        "Invoiceline.quantity",
+        "Invoiceline.trackid",
+        "Invoiceline.unitprice"
+      ],
+      "tool_description": "Invoiceline schema"
+    },
+    "Invoices": {
+      "api_list_names": [
+        "Invoices.billing_address",
+        "Invoices.billing_city",
+        "Invoices.billing_country",
+        "Invoices.billing_postal_code",
+        "Invoices.billing_state",
+        "Invoices.customer_id",
+        "Invoices.id",
+        "Invoices.invoice_date",
+        "Invoices.invoice_details",
+        "Invoices.invoice_number",
+        "Invoices.order_id",
+        "Invoices.total"
+      ],
+      "tool_description": "Invoices schema"
+    },
+    "Item": {
+      "api_list_names": [
+        "Item.i_id",
+        "Item.title"
+      ],
+      "tool_description": "Item schema"
+    },
+    "Job_history": {
+      "api_list_names": [
+        "Job_history.department_id",
+        "Job_history.employee_id",
+        "Job_history.job_id"
+      ],
+      "tool_description": "Job_history schema"
+    },
+    "Jobs": {
+      "api_list_names": [
+        "Jobs.job_id",
+        "Jobs.job_title",
+        "Jobs.max_salary",
+        "Jobs.min_salary"
+      ],
+      "tool_description": "Jobs schema"
+    },
+    "Journal_committee": {
+      "api_list_names": [
+        "Journal_committee.editor_id",
+        "Journal_committee.journal_id",
+        "Journal_committee.work_type"
+      ],
+      "tool_description": "Journal_committee schema"
+    },
+    "Journal": {
+      "api_list_names": [
+        "Journal.date",
+        "Journal.homepage",
+        "Journal.jid",
+        "Journal.journal_id",
+        "Journal.journalid",
+        "Journal.journalname",
+        "Journal.name",
+        "Journal.sales",
+        "Journal.theme"
+      ],
+      "tool_description": "Journal schema"
+    },
+    "Journalist": {
+      "api_list_names": [
+        "Journalist.age",
+        "Journalist.journalist_id",
+        "Journalist.name",
+        "Journalist.nationality",
+        "Journalist.years_working"
+      ],
+      "tool_description": "Journalist schema"
+    },
+    "Keyphrase": {
+      "api_list_names": [
+        "Keyphrase.keyphraseid",
+        "Keyphrase.keyphrasename"
+      ],
+      "tool_description": "Keyphrase schema"
+    },
+    "Keyword": {
+      "api_list_names": [
+        "Keyword.id",
+        "Keyword.keyword",
+        "Keyword.kid"
+      ],
+      "tool_description": "Keyword schema"
+    },
+    "Lake": {
+      "api_list_names": [
+        "Lake.area",
+        "Lake.country_name",
+        "Lake.lake_name",
+        "Lake.state_name"
+      ],
+      "tool_description": "Lake schema"
+    },
+    "Laptimes": {
+      "api_list_names": [
+        "Laptimes.driverid",
+        "Laptimes.lap",
+        "Laptimes.milliseconds",
+        "Laptimes.position",
+        "Laptimes.raceid",
+        "Laptimes.time"
+      ],
+      "tool_description": "Laptimes schema"
+    },
+    "League": {
+      "api_list_names": [
+        "League.country_id",
+        "League.id",
+        "League.name"
+      ],
+      "tool_description": "League schema"
+    },
+    "Lessons": {
+      "api_list_names": [
+        "Lessons.customer_id",
+        "Lessons.lesson_date",
+        "Lessons.lesson_id",
+        "Lessons.lesson_status_code",
+        "Lessons.lesson_time",
+        "Lessons.price",
+        "Lessons.staff_id",
+        "Lessons.vehicle_id"
+      ],
+      "tool_description": "Lessons schema"
+    },
+    "Likes": {
+      "api_list_names": [
+        "Likes.liked_id",
+        "Likes.student_id"
+      ],
+      "tool_description": "Likes schema"
+    },
+    "List": {
+      "api_list_names": [
+        "List.classroom",
+        "List.firstname",
+        "List.grade",
+        "List.lastname"
+      ],
+      "tool_description": "List schema"
+    },
+    "Lives_in": {
+      "api_list_names": [
+        "Lives_in.dormid",
+        "Lives_in.room_number",
+        "Lives_in.stuid"
+      ],
+      "tool_description": "Lives_in schema"
+    },
+    "Loan": {
+      "api_list_names": [
+        "Loan.amount",
+        "Loan.branch_id",
+        "Loan.cust_id",
+        "Loan.loan_id",
+        "Loan.loan_type"
+      ],
+      "tool_description": "Loan schema"
+    },
+    "Location": {
+      "api_list_names": [
+        "Location.city_name",
+        "Location.house_number",
+        "Location.restaurant_id",
+        "Location.street_name"
+      ],
+      "tool_description": "Location schema"
+    },
+    "Locations": {
+      "api_list_names": [
+        "Locations.city",
+        "Locations.country_id",
+        "Locations.location_id",
+        "Locations.other_details",
+        "Locations.postal_code",
+        "Locations.state_province",
+        "Locations.street_address"
+      ],
+      "tool_description": "Locations schema"
+    },
+    "Lots": {
+      "api_list_names": [
+        "Lots.investor_id",
+        "Lots.lot_details",
+        "Lots.lot_id"
+      ],
+      "tool_description": "Lots schema"
+    },
+    "Machine": {
+      "api_list_names": [
+        "Machine.class",
+        "Machine.machine_id",
+        "Machine.machine_series",
+        "Machine.making_year",
+        "Machine.quality_rank",
+        "Machine.team",
+        "Machine.value_points"
+      ],
+      "tool_description": "Machine schema"
+    },
+    "Made_by": {
+      "api_list_names": [
+        "Made_by.id",
+        "Made_by.msid",
+        "Made_by.pid"
+      ],
+      "tool_description": "Made_by schema"
+    },
+    "Mailshot_campaigns": {
+      "api_list_names": [
+        "Mailshot_campaigns.mailshot_end_date",
+        "Mailshot_campaigns.mailshot_id",
+        "Mailshot_campaigns.mailshot_name",
+        "Mailshot_campaigns.mailshot_start_date",
+        "Mailshot_campaigns.product_category"
+      ],
+      "tool_description": "Mailshot_campaigns schema"
+    },
+    "Mailshot_customers": {
+      "api_list_names": [
+        "Mailshot_customers.customer_id",
+        "Mailshot_customers.mailshot_customer_date",
+        "Mailshot_customers.mailshot_id",
+        "Mailshot_customers.outcome_code"
+      ],
+      "tool_description": "Mailshot_customers schema"
+    },
+    "Maintenance_contracts": {
+      "api_list_names": [
+        "Maintenance_contracts.contract_end_date",
+        "Maintenance_contracts.contract_start_date",
+        "Maintenance_contracts.maintenance_contract_company_id",
+        "Maintenance_contracts.maintenance_contract_id",
+        "Maintenance_contracts.other_contract_details"
+      ],
+      "tool_description": "Maintenance_contracts schema"
+    },
+    "Maintenance_engineers": {
+      "api_list_names": [
+        "Maintenance_engineers.company_id",
+        "Maintenance_engineers.engineer_id",
+        "Maintenance_engineers.first_name",
+        "Maintenance_engineers.last_name",
+        "Maintenance_engineers.other_details"
+      ],
+      "tool_description": "Maintenance_engineers schema"
+    },
+    "Management": {
+      "api_list_names": [
+        "Management.department_id",
+        "Management.head_id",
+        "Management.temporary_acting"
+      ],
+      "tool_description": "Management schema"
+    },
+    "Manager": {
+      "api_list_names": [
+        "Manager.age",
+        "Manager.country",
+        "Manager.g",
+        "Manager.inseason",
+        "Manager.l",
+        "Manager.league_id",
+        "Manager.level",
+        "Manager.manager_id",
+        "Manager.name",
+        "Manager.player_id",
+        "Manager.plyr_mgr",
+        "Manager.rank",
+        "Manager.team_id",
+        "Manager.w",
+        "Manager.working_year_starts",
+        "Manager.year"
+      ],
+      "tool_description": "Manager schema"
+    },
+    "Manager_award": {
+      "api_list_names": [
+        "Manager_award.award_id",
+        "Manager_award.league_id",
+        "Manager_award.notes",
+        "Manager_award.player_id",
+        "Manager_award.tie",
+        "Manager_award.year"
+      ],
+      "tool_description": "Manager_award schema"
+    },
+    "Manager_award_vote": {
+      "api_list_names": [
+        "Manager_award_vote.award_id",
+        "Manager_award_vote.league_id",
+        "Manager_award_vote.player_id",
+        "Manager_award_vote.points_max",
+        "Manager_award_vote.points_won",
+        "Manager_award_vote.votes_first",
+        "Manager_award_vote.year"
+      ],
+      "tool_description": "Manager_award_vote schema"
+    },
+    "Manager_half": {
+      "api_list_names": [
+        "Manager_half.g",
+        "Manager_half.half",
+        "Manager_half.inseason",
+        "Manager_half.l",
+        "Manager_half.league_id",
+        "Manager_half.player_id",
+        "Manager_half.rank",
+        "Manager_half.team_id",
+        "Manager_half.w",
+        "Manager_half.year"
+      ],
+      "tool_description": "Manager_half schema"
+    },
+    "Manufacturer": {
+      "api_list_names": [
+        "Manufacturer.manufacturer_id",
+        "Manufacturer.name",
+        "Manufacturer.num_of_factories",
+        "Manufacturer.num_of_shops",
+        "Manufacturer.open_year"
+      ],
+      "tool_description": "Manufacturer schema"
+    },
+    "Manufacturers": {
+      "api_list_names": [
+        "Manufacturers.code",
+        "Manufacturers.founder",
+        "Manufacturers.headquarter",
+        "Manufacturers.name",
+        "Manufacturers.revenue"
+      ],
+      "tool_description": "Manufacturers schema"
+    },
+    "Market": {
+      "api_list_names": [
+        "Market.country",
+        "Market.district",
+        "Market.market_id",
+        "Market.num_of_employees",
+        "Market.num_of_shops",
+        "Market.number_cities",
+        "Market.ranking"
+      ],
+      "tool_description": "Market schema"
+    },
+    "Match": {
+      "api_list_names": [
+        "Match.competition",
+        "Match.date",
+        "Match.match_id",
+        "Match.result",
+        "Match.score",
+        "Match.venue"
+      ],
+      "tool_description": "Match schema"
+    },
+    "Match_result": {
+      "api_list_names": [
+        "Match_result.big_silver",
+        "Match_result.bronze",
+        "Match_result.club_id",
+        "Match_result.gold",
+        "Match_result.points",
+        "Match_result.rank",
+        "Match_result.small_silver"
+      ],
+      "tool_description": "Match_result schema"
+    },
+    "Match_season": {
+      "api_list_names": [
+        "Match_season.college",
+        "Match_season.country",
+        "Match_season.draft_class",
+        "Match_season.draft_pick_number",
+        "Match_season.player",
+        "Match_season.position",
+        "Match_season.season",
+        "Match_season.team"
+      ],
+      "tool_description": "Match_season schema"
+    },
+    "Matches": {
+      "api_list_names": [
+        "Matches.best_of",
+        "Matches.draw_size",
+        "Matches.loser_age",
+        "Matches.loser_entry",
+        "Matches.loser_hand",
+        "Matches.loser_ht",
+        "Matches.loser_id",
+        "Matches.loser_ioc",
+        "Matches.loser_name",
+        "Matches.loser_rank",
+        "Matches.loser_rank_points",
+        "Matches.loser_seed",
+        "Matches.match_num",
+        "Matches.minutes",
+        "Matches.round",
+        "Matches.score",
+        "Matches.surface",
+        "Matches.tourney_id",
+        "Matches.tourney_level",
+        "Matches.tourney_name",
+        "Matches.winner_age",
+        "Matches.winner_entry",
+        "Matches.winner_hand",
+        "Matches.winner_ht",
+        "Matches.winner_id",
+        "Matches.winner_ioc",
+        "Matches.winner_name",
+        "Matches.winner_rank",
+        "Matches.winner_rank_points",
+        "Matches.winner_seed",
+        "Matches.year"
+      ],
+      "tool_description": "Matches schema"
+    },
+    "Media_types": {
+      "api_list_names": [
+        "Media_types.id",
+        "Media_types.name"
+      ],
+      "tool_description": "Media_types schema"
+    },
+    "Mediatype": {
+      "api_list_names": [
+        "Mediatype.mediatypeid",
+        "Mediatype.name"
+      ],
+      "tool_description": "Mediatype schema"
+    },
+    "Medication": {
+      "api_list_names": [
+        "Medication.brand",
+        "Medication.code",
+        "Medication.description",
+        "Medication.name"
+      ],
+      "tool_description": "Medication schema"
+    },
+    "Medicine_enzyme_interaction": {
+      "api_list_names": [
+        "Medicine_enzyme_interaction.enzyme_id",
+        "Medicine_enzyme_interaction.interaction_type",
+        "Medicine_enzyme_interaction.medicine_id"
+      ],
+      "tool_description": "Medicine_enzyme_interaction schema"
+    },
+    "Medicine": {
+      "api_list_names": [
+        "Medicine.fda_approved",
+        "Medicine.id",
+        "Medicine.name",
+        "Medicine.trade_name"
+      ],
+      "tool_description": "Medicine schema"
+    },
+    "Member": {
+      "api_list_names": [
+        "Member.address",
+        "Member.age",
+        "Member.card_number",
+        "Member.college_id",
+        "Member.country",
+        "Member.hometown",
+        "Member.in_office",
+        "Member.level",
+        "Member.level_of_membership",
+        "Member.member_id",
+        "Member.member_name",
+        "Member.membership_card",
+        "Member.name",
+        "Member.nationality",
+        "Member.party_id",
+        "Member.role",
+        "Member.time_of_purchase"
+      ],
+      "tool_description": "Member schema"
+    },
+    "Member_attendance": {
+      "api_list_names": [
+        "Member_attendance.member_id",
+        "Member_attendance.num_of_pieces",
+        "Member_attendance.performance_id"
+      ],
+      "tool_description": "Member_attendance schema"
+    },
+    "Member_of": {
+      "api_list_names": [
+        "Member_of.appt_type",
+        "Member_of.dno",
+        "Member_of.facid"
+      ],
+      "tool_description": "Member_of schema"
+    },
+    "Member_of_club": {
+      "api_list_names": [
+        "Member_of_club.clubid",
+        "Member_of_club.position",
+        "Member_of_club.stuid"
+      ],
+      "tool_description": "Member_of_club schema"
+    },
+    "Membership_register_branch": {
+      "api_list_names": [
+        "Membership_register_branch.branch_id",
+        "Membership_register_branch.member_id",
+        "Membership_register_branch.register_year"
+      ],
+      "tool_description": "Membership_register_branch schema"
+    },
+    "Mill": {
+      "api_list_names": [
+        "Mill.architect_id",
+        "Mill.built_year",
+        "Mill.id",
+        "Mill.location",
+        "Mill.name",
+        "Mill.notes",
+        "Mill.type"
+      ],
+      "tool_description": "Mill schema"
+    },
+    "Mission": {
+      "api_list_names": [
+        "Mission.code",
+        "Mission.fate",
+        "Mission.launched_year",
+        "Mission.location",
+        "Mission.mission_id",
+        "Mission.ship_id",
+        "Mission.speed_knots"
+      ],
+      "tool_description": "Mission schema"
+    },
+    "Model_list": {
+      "api_list_names": [
+        "Model_list.maker",
+        "Model_list.model",
+        "Model_list.modelid"
+      ],
+      "tool_description": "Model_list schema"
+    },
+    "Mountain": {
+      "api_list_names": [
+        "Mountain.country",
+        "Mountain.country_name",
+        "Mountain.height",
+        "Mountain.id",
+        "Mountain.mountain_altitude",
+        "Mountain.mountain_id",
+        "Mountain.mountain_name",
+        "Mountain.name",
+        "Mountain.prominence",
+        "Mountain.range",
+        "Mountain.state_name"
+      ],
+      "tool_description": "Mountain schema"
+    },
+    "Movie": {
+      "api_list_names": [
+        "Movie.budget",
+        "Movie.budget_million",
+        "Movie.director",
+        "Movie.gross_worldwide",
+        "Movie.mid",
+        "Movie.movie_id",
+        "Movie.release_year",
+        "Movie.title",
+        "Movie.title_aka",
+        "Movie.year"
+      ],
+      "tool_description": "Movie schema"
+    },
+    "Museum": {
+      "api_list_names": [
+        "Museum.museum_id",
+        "Museum.name",
+        "Museum.num_of_staff",
+        "Museum.open_year"
+      ],
+      "tool_description": "Museum schema"
+    },
+    "Music_festival": {
+      "api_list_names": [
+        "Music_festival.category",
+        "Music_festival.date_of_ceremony",
+        "Music_festival.id",
+        "Music_festival.music_festival",
+        "Music_festival.result",
+        "Music_festival.volume"
+      ],
+      "tool_description": "Music_festival schema"
+    },
+    "Musical": {
+      "api_list_names": [
+        "Musical.award",
+        "Musical.category",
+        "Musical.musical_id",
+        "Musical.name",
+        "Musical.nominee",
+        "Musical.result",
+        "Musical.year"
+      ],
+      "tool_description": "Musical schema"
+    },
+    "Neighbourhood": {
+      "api_list_names": [
+        "Neighbourhood.business_id",
+        "Neighbourhood.id",
+        "Neighbourhood.neighbourhood_name"
+      ],
+      "tool_description": "Neighbourhood schema"
+    },
+    "News_report": {
+      "api_list_names": [
+        "News_report.event_id",
+        "News_report.journalist_id",
+        "News_report.work_type"
+      ],
+      "tool_description": "News_report schema"
+    },
+    "Nomination": {
+      "api_list_names": [
+        "Nomination.artwork_id",
+        "Nomination.festival_id",
+        "Nomination.result"
+      ],
+      "tool_description": "Nomination schema"
+    },
+    "Nurse": {
+      "api_list_names": [
+        "Nurse.employeeid",
+        "Nurse.name",
+        "Nurse.position",
+        "Nurse.registered",
+        "Nurse.ssn"
+      ],
+      "tool_description": "Nurse schema"
+    },
+    "Office_locations": {
+      "api_list_names": [
+        "Office_locations.building_id",
+        "Office_locations.company_id",
+        "Office_locations.move_in_year"
+      ],
+      "tool_description": "Office_locations schema"
+    },
+    "On_call": {
+      "api_list_names": [
+        "On_call.blockcode",
+        "On_call.blockfloor",
+        "On_call.nurse",
+        "On_call.oncallend",
+        "On_call.oncallstart"
+      ],
+      "tool_description": "On_call schema"
+    },
+    "Operate_company": {
+      "api_list_names": [
+        "Operate_company.group_equity_shareholding",
+        "Operate_company.id",
+        "Operate_company.incorporated_in",
+        "Operate_company.name",
+        "Operate_company.principal_activities",
+        "Operate_company.type"
+      ],
+      "tool_description": "Operate_company schema"
+    },
+    "Orchestra": {
+      "api_list_names": [
+        "Orchestra.conductor_id",
+        "Orchestra.major_record_format",
+        "Orchestra.orchestra",
+        "Orchestra.orchestra_id",
+        "Orchestra.record_company",
+        "Orchestra.year_of_founded"
+      ],
+      "tool_description": "Orchestra schema"
+    },
+    "Order_deliveries": {
+      "api_list_names": [
+        "Order_deliveries.actual_order_id",
+        "Order_deliveries.delivery_date",
+        "Order_deliveries.delivery_status_code",
+        "Order_deliveries.driver_employee_id",
+        "Order_deliveries.location_code",
+        "Order_deliveries.truck_id"
+      ],
+      "tool_description": "Order_deliveries schema"
+    },
+    "Order_items": {
+      "api_list_names": [
+        "Order_items.item_delivered_datetime",
+        "Order_items.item_id",
+        "Order_items.item_order_quantity",
+        "Order_items.item_status_code",
+        "Order_items.order_id",
+        "Order_items.order_item_details",
+        "Order_items.order_item_id",
+        "Order_items.order_item_status",
+        "Order_items.order_item_status_code",
+        "Order_items.order_quantity",
+        "Order_items.other_order_item_details",
+        "Order_items.product_id",
+        "Order_items.product_quantity"
+      ],
+      "tool_description": "Order_items schema"
+    },
+    "Orders": {
+      "api_list_names": [
+        "Orders.customer_id",
+        "Orders.date_order_placed",
+        "Orders.order_details",
+        "Orders.order_id",
+        "Orders.order_status"
+      ],
+      "tool_description": "Orders schema"
+    },
+    "Organisation_types": {
+      "api_list_names": [
+        "Organisation_types.organisation_type",
+        "Organisation_types.organisation_type_description"
+      ],
+      "tool_description": "Organisation_types schema"
+    },
+    "Organisations": {
+      "api_list_names": [
+        "Organisations.organisation_details",
+        "Organisations.organisation_id",
+        "Organisations.organisation_type"
+      ],
+      "tool_description": "Organisations schema"
+    },
+    "Organization_contact_individuals": {
+      "api_list_names": [
+        "Organization_contact_individuals.date_contact_from",
+        "Organization_contact_individuals.date_contact_to",
+        "Organization_contact_individuals.individual_id",
+        "Organization_contact_individuals.organization_id"
+      ],
+      "tool_description": "Organization_contact_individuals schema"
+    },
+    "Organization": {
+      "api_list_names": [
+        "Organization.continent",
+        "Organization.homepage",
+        "Organization.name",
+        "Organization.oid"
+      ],
+      "tool_description": "Organization schema"
+    },
+    "Organizations": {
+      "api_list_names": [
+        "Organizations.date_formed",
+        "Organizations.organization_details",
+        "Organizations.organization_id",
+        "Organizations.organization_name",
+        "Organizations.parent_organization_id",
+        "Organizations.uk_vat_number"
+      ],
+      "tool_description": "Organizations schema"
+    },
+    "Other_available_features": {
+      "api_list_names": [
+        "Other_available_features.feature_description",
+        "Other_available_features.feature_id",
+        "Other_available_features.feature_name",
+        "Other_available_features.feature_type_code"
+      ],
+      "tool_description": "Other_available_features schema"
+    },
+    "Other_property_features": {
+      "api_list_names": [
+        "Other_property_features.feature_id",
+        "Other_property_features.property_feature_description",
+        "Other_property_features.property_id"
+      ],
+      "tool_description": "Other_property_features schema"
+    },
+    "Owners": {
+      "api_list_names": [
+        "Owners.cell_number",
+        "Owners.city",
+        "Owners.email_address",
+        "Owners.first_name",
+        "Owners.home_phone",
+        "Owners.last_name",
+        "Owners.owner_id",
+        "Owners.state",
+        "Owners.street",
+        "Owners.zip_code"
+      ],
+      "tool_description": "Owners schema"
+    },
+    "Paper": {
+      "api_list_names": [
+        "Paper.journalid",
+        "Paper.numcitedby",
+        "Paper.numciting",
+        "Paper.paperid",
+        "Paper.title",
+        "Paper.venueid",
+        "Paper.year"
+      ],
+      "tool_description": "Paper schema"
+    },
+    "Paperdataset": {
+      "api_list_names": [
+        "Paperdataset.datasetid",
+        "Paperdataset.paperid"
+      ],
+      "tool_description": "Paperdataset schema"
+    },
+    "Papers": {
+      "api_list_names": [
+        "Papers.paperid",
+        "Papers.title"
+      ],
+      "tool_description": "Papers schema"
+    },
+    "Park": {
+      "api_list_names": [
+        "Park.city",
+        "Park.country",
+        "Park.park_alias",
+        "Park.park_id",
+        "Park.park_name",
+        "Park.state"
+      ],
+      "tool_description": "Park schema"
+    },
+    "Parking_fines": {
+      "api_list_names": [
+        "Parking_fines.cmi_cross_ref_id",
+        "Parking_fines.council_tax_id"
+      ],
+      "tool_description": "Parking_fines schema"
+    },
+    "Part_faults": {
+      "api_list_names": [
+        "Part_faults.fault_description",
+        "Part_faults.fault_short_name",
+        "Part_faults.other_fault_details",
+        "Part_faults.part_fault_id",
+        "Part_faults.part_id"
+      ],
+      "tool_description": "Part_faults schema"
+    },
+    "Participants": {
+      "api_list_names": [
+        "Participants.participant_details",
+        "Participants.participant_id",
+        "Participants.participant_type_code"
+      ],
+      "tool_description": "Participants schema"
+    },
+    "Parties_in_events": {
+      "api_list_names": [
+        "Parties_in_events.event_id",
+        "Parties_in_events.party_id",
+        "Parties_in_events.role_code"
+      ],
+      "tool_description": "Parties_in_events schema"
+    },
+    "Parties": {
+      "api_list_names": [
+        "Parties.party_details",
+        "Parties.party_email",
+        "Parties.party_id",
+        "Parties.party_phone",
+        "Parties.payment_method_code"
+      ],
+      "tool_description": "Parties schema"
+    },
+    "Parts": {
+      "api_list_names": [
+        "Parts.chargeable_amount",
+        "Parts.chargeable_yn",
+        "Parts.other_part_details",
+        "Parts.part_id",
+        "Parts.part_name"
+      ],
+      "tool_description": "Parts schema"
+    },
+    "Party_addresses": {
+      "api_list_names": [
+        "Party_addresses.address_id",
+        "Party_addresses.address_type_code",
+        "Party_addresses.date_address_from",
+        "Party_addresses.date_address_to",
+        "Party_addresses.party_id"
+      ],
+      "tool_description": "Party_addresses schema"
+    },
+    "Party": {
+      "api_list_names": [
+        "Party.attorney_general",
+        "Party.comptroller",
+        "Party.first_year",
+        "Party.governor",
+        "Party.last_year",
+        "Party.left_office",
+        "Party.lieutenant_governor",
+        "Party.location",
+        "Party.minister",
+        "Party.number_of_hosts",
+        "Party.party",
+        "Party.party_id",
+        "Party.party_name",
+        "Party.party_theme",
+        "Party.region_id",
+        "Party.took_office",
+        "Party.us_senate",
+        "Party.year"
+      ],
+      "tool_description": "Party schema"
+    },
+    "Party_events": {
+      "api_list_names": [
+        "Party_events.event_id",
+        "Party_events.event_name",
+        "Party_events.member_in_charge_id",
+        "Party_events.party_id"
+      ],
+      "tool_description": "Party_events schema"
+    },
+    "Party_forms": {
+      "api_list_names": [
+        "Party_forms.date_completion_started",
+        "Party_forms.date_fully_completed",
+        "Party_forms.form_id",
+        "Party_forms.form_status_code",
+        "Party_forms.party_id"
+      ],
+      "tool_description": "Party_forms schema"
+    },
+    "Party_host": {
+      "api_list_names": [
+        "Party_host.host_id",
+        "Party_host.is_main_in_charge",
+        "Party_host.party_id"
+      ],
+      "tool_description": "Party_host schema"
+    },
+    "Party_services": {
+      "api_list_names": [
+        "Party_services.booking_id",
+        "Party_services.booking_made_date",
+        "Party_services.customer_id",
+        "Party_services.service_datetime",
+        "Party_services.service_id"
+      ],
+      "tool_description": "Party_services schema"
+    },
+    "Patient": {
+      "api_list_names": [
+        "Patient.address",
+        "Patient.insuranceid",
+        "Patient.name",
+        "Patient.pcp",
+        "Patient.phone",
+        "Patient.ssn"
+      ],
+      "tool_description": "Patient schema"
+    },
+    "Payments": {
+      "api_list_names": [
+        "Payments.amount_due",
+        "Payments.amount_paid",
+        "Payments.amount_paid_in_full_yn",
+        "Payments.amount_payment",
+        "Payments.booking_id",
+        "Payments.customer_id",
+        "Payments.payment_date",
+        "Payments.payment_id",
+        "Payments.payment_method_code",
+        "Payments.payment_type_code",
+        "Payments.settlement_id"
+      ],
+      "tool_description": "Payments schema"
+    },
+    "People_addresses": {
+      "api_list_names": [
+        "People_addresses.address_id",
+        "People_addresses.date_from",
+        "People_addresses.date_to",
+        "People_addresses.person_address_id",
+        "People_addresses.person_id"
+      ],
+      "tool_description": "People_addresses schema"
+    },
+    "People": {
+      "api_list_names": [
+        "People.age",
+        "People.birth_date",
+        "People.birth_place",
+        "People.cell_mobile_number",
+        "People.country",
+        "People.date_of_birth",
+        "People.district",
+        "People.email_address",
+        "People.first_name",
+        "People.graduation_college",
+        "People.height",
+        "People.home_Town",
+        "People.hometown",
+        "People.is_male",
+        "People.last_name",
+        "People.login_name",
+        "People.middle_name",
+        "People.name",
+        "People.nationality",
+        "People.party",
+        "People.password",
+        "People.people_id",
+        "People.person_id",
+        "People.sex",
+        "People.weight"
+      ],
+      "tool_description": "People schema"
+    },
+    "Performance": {
+      "api_list_names": [
+        "Performance.attendance",
+        "Performance.bandmate",
+        "Performance.date",
+        "Performance.host",
+        "Performance.location",
+        "Performance.official_ratings__millions_",
+        "Performance.orchestra_id",
+        "Performance.performance_id",
+        "Performance.share",
+        "Performance.songid",
+        "Performance.stageposition",
+        "Performance.type",
+        "Performance.weekly_rank"
+      ],
+      "tool_description": "Performance schema"
+    },
+    "Perpetrator": {
+      "api_list_names": [
+        "Perpetrator.country",
+        "Perpetrator.date",
+        "Perpetrator.injured",
+        "Perpetrator.killed",
+        "Perpetrator.location",
+        "Perpetrator.people_id",
+        "Perpetrator.perpetrator_id",
+        "Perpetrator.year"
+      ],
+      "tool_description": "Perpetrator schema"
+    },
+    "Person": {
+      "api_list_names": [
+        "Person.age",
+        "Person.city",
+        "Person.gender",
+        "Person.job",
+        "Person.name"
+      ],
+      "tool_description": "Person schema"
+    },
+    "Personfriend": {
+      "api_list_names": [
+        "Personfriend.friend",
+        "Personfriend.name",
+        "Personfriend.year"
+      ],
+      "tool_description": "Personfriend schema"
+    },
+    "Pets": {
+      "api_list_names": [
+        "Pets.pet_age",
+        "Pets.petid",
+        "Pets.pettype",
+        "Pets.weight"
+      ],
+      "tool_description": "Pets schema"
+    },
+    "Phone": {
+      "api_list_names": [
+        "Phone.accreditation_level",
+        "Phone.accreditation_type",
+        "Phone.carrier",
+        "Phone.chip_model",
+        "Phone.company_name",
+        "Phone.date",
+        "Phone.hardware_model_name",
+        "Phone.memory_in_g",
+        "Phone.name",
+        "Phone.phone_id",
+        "Phone.price",
+        "Phone.screen_mode"
+      ],
+      "tool_description": "Phone schema"
+    },
+    "Phone_market": {
+      "api_list_names": [
+        "Phone_market.market_id",
+        "Phone_market.num_of_stock",
+        "Phone_market.phone_id"
+      ],
+      "tool_description": "Phone_market schema"
+    },
+    "Photos": {
+      "api_list_names": [
+        "Photos.camera_lens_id",
+        "Photos.color",
+        "Photos.id",
+        "Photos.mountain_id",
+        "Photos.name"
+      ],
+      "tool_description": "Photos schema"
+    },
+    "Physician": {
+      "api_list_names": [
+        "Physician.employeeid",
+        "Physician.name",
+        "Physician.position",
+        "Physician.ssn"
+      ],
+      "tool_description": "Physician schema"
+    },
+    "Pilot": {
+      "api_list_names": [
+        "Pilot.age",
+        "Pilot.join_year",
+        "Pilot.nationality",
+        "Pilot.pilot_id",
+        "Pilot.pilot_name",
+        "Pilot.position",
+        "Pilot.rank",
+        "Pilot.team"
+      ],
+      "tool_description": "Pilot schema"
+    },
+    "Pilot_record": {
+      "api_list_names": [
+        "Pilot_record.aircraft_id",
+        "Pilot_record.date",
+        "Pilot_record.pilot_id",
+        "Pilot_record.record_id"
+      ],
+      "tool_description": "Pilot_record schema"
+    },
+    "Pitching": {
+      "api_list_names": [
+        "Pitching.baopp",
+        "Pitching.bb",
+        "Pitching.bfp",
+        "Pitching.bk",
+        "Pitching.cg",
+        "Pitching.er",
+        "Pitching.era",
+        "Pitching.g",
+        "Pitching.g_idp",
+        "Pitching.gf",
+        "Pitching.gs",
+        "Pitching.h",
+        "Pitching.hbp",
+        "Pitching.hr",
+        "Pitching.ibb",
+        "Pitching.ipouts",
+        "Pitching.l",
+        "Pitching.league_id",
+        "Pitching.player_id",
+        "Pitching.r",
+        "Pitching.sf",
+        "Pitching.sh",
+        "Pitching.sho",
+        "Pitching.so",
+        "Pitching.stint",
+        "Pitching.sv",
+        "Pitching.team_id",
+        "Pitching.w",
+        "Pitching.wp",
+        "Pitching.year"
+      ],
+      "tool_description": "Pitching schema"
+    },
+    "Pitching_postseason": {
+      "api_list_names": [
+        "Pitching_postseason.baopp",
+        "Pitching_postseason.bb",
+        "Pitching_postseason.bfp",
+        "Pitching_postseason.bk",
+        "Pitching_postseason.cg",
+        "Pitching_postseason.er",
+        "Pitching_postseason.era",
+        "Pitching_postseason.g",
+        "Pitching_postseason.g_idp",
+        "Pitching_postseason.gf",
+        "Pitching_postseason.gs",
+        "Pitching_postseason.h",
+        "Pitching_postseason.hbp",
+        "Pitching_postseason.hr",
+        "Pitching_postseason.ibb",
+        "Pitching_postseason.ipouts",
+        "Pitching_postseason.l",
+        "Pitching_postseason.league_id",
+        "Pitching_postseason.player_id",
+        "Pitching_postseason.r",
+        "Pitching_postseason.round",
+        "Pitching_postseason.sf",
+        "Pitching_postseason.sh",
+        "Pitching_postseason.sho",
+        "Pitching_postseason.so",
+        "Pitching_postseason.sv",
+        "Pitching_postseason.team_id",
+        "Pitching_postseason.w",
+        "Pitching_postseason.wp",
+        "Pitching_postseason.year"
+      ],
+      "tool_description": "Pitching_postseason schema"
+    },
+    "Pitstops": {
+      "api_list_names": [
+        "Pitstops.driverid",
+        "Pitstops.duration",
+        "Pitstops.lap",
+        "Pitstops.milliseconds",
+        "Pitstops.raceid",
+        "Pitstops.stop",
+        "Pitstops.time"
+      ],
+      "tool_description": "Pitstops schema"
+    },
+    "Player": {
+      "api_list_names": [
+        "Player.age",
+        "Player.apps",
+        "Player.bats",
+        "Player.bbref_id",
+        "Player.birth_city",
+        "Player.birth_country",
+        "Player.birth_day",
+        "Player.birth_month",
+        "Player.birth_state",
+        "Player.birth_year",
+        "Player.birthday",
+        "Player.club_id",
+        "Player.death_city",
+        "Player.death_country",
+        "Player.death_day",
+        "Player.death_month",
+        "Player.death_state",
+        "Player.death_year",
+        "Player.debut",
+        "Player.doubles_wl",
+        "Player.final_game",
+        "Player.gender",
+        "Player.goals",
+        "Player.height",
+        "Player.hs",
+        "Player.id",
+        "Player.name",
+        "Player.name_first",
+        "Player.name_given",
+        "Player.name_last",
+        "Player.occupation",
+        "Player.pid",
+        "Player.player",
+        "Player.player_api_id",
+        "Player.player_fifa_api_id",
+        "Player.player_id",
+        "Player.player_name",
+        "Player.pname",
+        "Player.points",
+        "Player.position",
+        "Player.rank",
+        "Player.residence",
+        "Player.retro_id",
+        "Player.school_id",
+        "Player.singles_wl",
+        "Player.sponsor_name",
+        "Player.team",
+        "Player.throws",
+        "Player.total_wl",
+        "Player.tries",
+        "Player.votes",
+        "Player.weight",
+        "Player.ycard",
+        "Player.years_played"
+      ],
+      "tool_description": "Player schema"
+    },
+    "Player_attributes": {
+      "api_list_names": [
+        "Player_attributes.acceleration",
+        "Player_attributes.aggression",
+        "Player_attributes.agility",
+        "Player_attributes.attacking_work_rate",
+        "Player_attributes.balance",
+        "Player_attributes.ball_control",
+        "Player_attributes.crossing",
+        "Player_attributes.curve",
+        "Player_attributes.date",
+        "Player_attributes.defensive_work_rate",
+        "Player_attributes.dribbling",
+        "Player_attributes.finishing",
+        "Player_attributes.free_kick_accuracy",
+        "Player_attributes.gk_diving",
+        "Player_attributes.gk_handling",
+        "Player_attributes.gk_kicking",
+        "Player_attributes.gk_positioning",
+        "Player_attributes.gk_reflexes",
+        "Player_attributes.heading_accuracy",
+        "Player_attributes.id",
+        "Player_attributes.interceptions",
+        "Player_attributes.jumping",
+        "Player_attributes.long_passing",
+        "Player_attributes.long_shots",
+        "Player_attributes.marking",
+        "Player_attributes.overall_rating",
+        "Player_attributes.penalties",
+        "Player_attributes.player_api_id",
+        "Player_attributes.player_fifa_api_id",
+        "Player_attributes.positioning",
+        "Player_attributes.potential",
+        "Player_attributes.preferred_foot",
+        "Player_attributes.reactions",
+        "Player_attributes.short_passing",
+        "Player_attributes.shot_power",
+        "Player_attributes.sliding_tackle",
+        "Player_attributes.sprint_speed",
+        "Player_attributes.stamina",
+        "Player_attributes.standing_tackle",
+        "Player_attributes.strength",
+        "Player_attributes.vision",
+        "Player_attributes.volleys"
+      ],
+      "tool_description": "Player_attributes schema"
+    },
+    "Player_award": {
+      "api_list_names": [
+        "Player_award.award_id",
+        "Player_award.league_id",
+        "Player_award.notes",
+        "Player_award.player_id",
+        "Player_award.tie",
+        "Player_award.year"
+      ],
+      "tool_description": "Player_award schema"
+    },
+    "Player_award_vote": {
+      "api_list_names": [
+        "Player_award_vote.award_id",
+        "Player_award_vote.league_id",
+        "Player_award_vote.player_id",
+        "Player_award_vote.points_max",
+        "Player_award_vote.points_won",
+        "Player_award_vote.votes_first",
+        "Player_award_vote.year"
+      ],
+      "tool_description": "Player_award_vote schema"
+    },
+    "Player_coach": {
+      "api_list_names": [
+        "Player_coach.coach_id",
+        "Player_coach.player_id",
+        "Player_coach.starting_year"
+      ],
+      "tool_description": "Player_coach schema"
+    },
+    "Player_college": {
+      "api_list_names": [
+        "Player_college.college_id",
+        "Player_college.player_id",
+        "Player_college.year"
+      ],
+      "tool_description": "Player_college schema"
+    },
+    "Players": {
+      "api_list_names": [
+        "Players.country_code",
+        "Players.first_name",
+        "Players.hand",
+        "Players.last_name",
+        "Players.player_id"
+      ],
+      "tool_description": "Players schema"
+    },
+    "Playlist": {
+      "api_list_names": [
+        "Playlist.name",
+        "Playlist.playlistid"
+      ],
+      "tool_description": "Playlist schema"
+    },
+    "Playlists": {
+      "api_list_names": [
+        "Playlists.id",
+        "Playlists.name"
+      ],
+      "tool_description": "Playlists schema"
+    },
+    "Plays_games": {
+      "api_list_names": [
+        "Plays_games.gameid",
+        "Plays_games.hours_played",
+        "Plays_games.stuid"
+      ],
+      "tool_description": "Plays_games schema"
+    },
+    "Poker_player": {
+      "api_list_names": [
+        "Poker_player.best_finish",
+        "Poker_player.earnings",
+        "Poker_player.final_table_made",
+        "Poker_player.money_rank",
+        "Poker_player.people_id",
+        "Poker_player.poker_player_id"
+      ],
+      "tool_description": "Poker_player schema"
+    },
+    "Postseason": {
+      "api_list_names": [
+        "Postseason.league_id_loser",
+        "Postseason.league_id_winner",
+        "Postseason.losses",
+        "Postseason.round",
+        "Postseason.team_id_loser",
+        "Postseason.team_id_winner",
+        "Postseason.ties",
+        "Postseason.wins",
+        "Postseason.year"
+      ],
+      "tool_description": "Postseason schema"
+    },
+    "Premises": {
+      "api_list_names": [
+        "Premises.premise_details",
+        "Premises.premise_id",
+        "Premises.premises_type"
+      ],
+      "tool_description": "Premises schema"
+    },
+    "Prescribes": {
+      "api_list_names": [
+        "Prescribes.appointment",
+        "Prescribes.date",
+        "Prescribes.dose",
+        "Prescribes.medication",
+        "Prescribes.patient",
+        "Prescribes.physician"
+      ],
+      "tool_description": "Prescribes schema"
+    },
+    "Problem_category_codes": {
+      "api_list_names": [
+        "Problem_category_codes.problem_category_code",
+        "Problem_category_codes.problem_category_description"
+      ],
+      "tool_description": "Problem_category_codes schema"
+    },
+    "Problem_log": {
+      "api_list_names": [
+        "Problem_log.assigned_to_staff_id",
+        "Problem_log.log_entry_date",
+        "Problem_log.log_entry_description",
+        "Problem_log.log_entry_fix",
+        "Problem_log.other_log_details",
+        "Problem_log.problem_category_code",
+        "Problem_log.problem_id",
+        "Problem_log.problem_log_id",
+        "Problem_log.problem_status_code"
+      ],
+      "tool_description": "Problem_log schema"
+    },
+    "Problem_status_codes": {
+      "api_list_names": [
+        "Problem_status_codes.problem_status_code",
+        "Problem_status_codes.problem_status_description"
+      ],
+      "tool_description": "Problem_status_codes schema"
+    },
+    "Problems": {
+      "api_list_names": [
+        "Problems.closure_authorised_by_staff_id",
+        "Problems.date_problem_closed",
+        "Problems.date_problem_reported",
+        "Problems.other_problem_details",
+        "Problems.problem_description",
+        "Problems.problem_id",
+        "Problems.product_id",
+        "Problems.reported_by_staff_id"
+      ],
+      "tool_description": "Problems schema"
+    },
+    "Procedures": {
+      "api_list_names": [
+        "Procedures.code",
+        "Procedures.cost",
+        "Procedures.name"
+      ],
+      "tool_description": "Procedures schema"
+    },
+    "Producer": {
+      "api_list_names": [
+        "Producer.birth_city",
+        "Producer.birth_year",
+        "Producer.gender",
+        "Producer.name",
+        "Producer.nationality",
+        "Producer.pid"
+      ],
+      "tool_description": "Producer schema"
+    },
+    "Product_categories": {
+      "api_list_names": [
+        "Product_categories.product_type_description",
+        "Product_categories.production_type_code",
+        "Product_categories.vat_rating"
+      ],
+      "tool_description": "Product_categories schema"
+    },
+    "Product_characteristics": {
+      "api_list_names": [
+        "Product_characteristics.characteristic_id",
+        "Product_characteristics.product_characteristic_value",
+        "Product_characteristics.product_id"
+      ],
+      "tool_description": "Product_characteristics schema"
+    },
+    "Product": {
+      "api_list_names": [
+        "Product.dimensions",
+        "Product.dpi",
+        "Product.interface",
+        "Product.max_page_size",
+        "Product.pages_per_minute_color",
+        "Product.product",
+        "Product.product_details",
+        "Product.product_id",
+        "Product.product_name"
+      ],
+      "tool_description": "Product schema"
+    },
+    "Product_suppliers": {
+      "api_list_names": [
+        "Product_suppliers.date_supplied_from",
+        "Product_suppliers.date_supplied_to",
+        "Product_suppliers.product_id",
+        "Product_suppliers.supplier_id",
+        "Product_suppliers.total_amount_purchased",
+        "Product_suppliers.total_value_purchased"
+      ],
+      "tool_description": "Product_suppliers schema"
+    },
+    "Products_booked": {
+      "api_list_names": [
+        "Products_booked.booked_amount",
+        "Products_booked.booked_count",
+        "Products_booked.booking_id",
+        "Products_booked.product_id",
+        "Products_booked.returned_late_yn",
+        "Products_booked.returned_yn"
+      ],
+      "tool_description": "Products_booked schema"
+    },
+    "Products": {
+      "api_list_names": [
+        "Products.code",
+        "Products.color_code",
+        "Products.date_product_discontinued",
+        "Products.date_product_first_available",
+        "Products.manufacturer",
+        "Products.name",
+        "Products.other_product_details",
+        "Products.parent_product_id",
+        "Products.price",
+        "Products.product_category",
+        "Products.product_category_code",
+        "Products.product_color",
+        "Products.product_description",
+        "Products.product_details",
+        "Products.product_id",
+        "Products.product_name",
+        "Products.product_price",
+        "Products.product_size",
+        "Products.product_type_code",
+        "Products.production_type_code",
+        "Products.typical_buying_price",
+        "Products.typical_selling_price",
+        "Products.unit_price"
+      ],
+      "tool_description": "Products schema"
+    },
+    "Products_for_hire": {
+      "api_list_names": [
+        "Products_for_hire.daily_hire_cost",
+        "Products_for_hire.product_description",
+        "Products_for_hire.product_id",
+        "Products_for_hire.product_name",
+        "Products_for_hire.product_type_code"
+      ],
+      "tool_description": "Products_for_hire schema"
+    },
+    "Products_in_events": {
+      "api_list_names": [
+        "Products_in_events.event_id",
+        "Products_in_events.product_id",
+        "Products_in_events.product_in_event_id"
+      ],
+      "tool_description": "Products_in_events schema"
+    },
+    "Professionals": {
+      "api_list_names": [
+        "Professionals.cell_number",
+        "Professionals.city",
+        "Professionals.email_address",
+        "Professionals.first_name",
+        "Professionals.home_phone",
+        "Professionals.last_name",
+        "Professionals.professional_id",
+        "Professionals.role_code",
+        "Professionals.state",
+        "Professionals.street",
+        "Professionals.zip_code"
+      ],
+      "tool_description": "Professionals schema"
+    },
+    "Professor": {
+      "api_list_names": [
+        "Professor.dept_code",
+        "Professor.emp_num",
+        "Professor.prof_extension",
+        "Professor.prof_high_degree",
+        "Professor.prof_office"
+      ],
+      "tool_description": "Professor schema"
+    },
+    "Program": {
+      "api_list_names": [
+        "Program.launch",
+        "Program.name",
+        "Program.origin",
+        "Program.owner",
+        "Program.program_id"
+      ],
+      "tool_description": "Program schema"
+    },
+    "Project": {
+      "api_list_names": [
+        "Project.dnum",
+        "Project.plocation",
+        "Project.pname",
+        "Project.pnumber"
+      ],
+      "tool_description": "Project schema"
+    },
+    "Project_outcomes": {
+      "api_list_names": [
+        "Project_outcomes.outcome_code",
+        "Project_outcomes.outcome_details",
+        "Project_outcomes.project_id"
+      ],
+      "tool_description": "Project_outcomes schema"
+    },
+    "Project_staff": {
+      "api_list_names": [
+        "Project_staff.date_from",
+        "Project_staff.date_to",
+        "Project_staff.other_details",
+        "Project_staff.project_id",
+        "Project_staff.role_code",
+        "Project_staff.staff_id"
+      ],
+      "tool_description": "Project_staff schema"
+    },
+    "Projects": {
+      "api_list_names": [
+        "Projects.code",
+        "Projects.hours",
+        "Projects.name",
+        "Projects.organisation_id",
+        "Projects.project_details",
+        "Projects.project_id"
+      ],
+      "tool_description": "Projects schema"
+    },
+    "Properties": {
+      "api_list_names": [
+        "Properties.agreed_selling_price",
+        "Properties.apt_feature_1",
+        "Properties.apt_feature_2",
+        "Properties.apt_feature_3",
+        "Properties.buyer_offered_price",
+        "Properties.date_on_market",
+        "Properties.date_sold",
+        "Properties.fld_feature_1",
+        "Properties.fld_feature_2",
+        "Properties.fld_feature_3",
+        "Properties.hse_feature_1",
+        "Properties.hse_feature_2",
+        "Properties.hse_feature_3",
+        "Properties.oth_feature_1",
+        "Properties.oth_feature_2",
+        "Properties.oth_feature_3",
+        "Properties.other_details",
+        "Properties.other_property_details",
+        "Properties.property_address",
+        "Properties.property_id",
+        "Properties.property_name",
+        "Properties.property_type_code",
+        "Properties.room_count",
+        "Properties.shp_feature_1",
+        "Properties.shp_feature_2",
+        "Properties.shp_feature_3",
+        "Properties.vendor_requested_price"
+      ],
+      "tool_description": "Properties schema"
+    },
+    "Protein": {
+      "api_list_names": [
+        "Protein.accession_number",
+        "Protein.common_name",
+        "Protein.divergence_from_human_lineage",
+        "Protein.institution_id",
+        "Protein.protein_name",
+        "Protein.sequence_identity_to_human_protein",
+        "Protein.sequence_length"
+      ],
+      "tool_description": "Protein schema"
+    },
+    "Publication": {
+      "api_list_names": [
+        "Publication.abstract",
+        "Publication.book_id",
+        "Publication.cid",
+        "Publication.citation_num",
+        "Publication.jid",
+        "Publication.pid",
+        "Publication.price",
+        "Publication.publication_date",
+        "Publication.publication_id",
+        "Publication.publisher",
+        "Publication.reference_num",
+        "Publication.title",
+        "Publication.year"
+      ],
+      "tool_description": "Publication schema"
+    },
+    "Purchase": {
+      "api_list_names": [
+        "Purchase.branch_id",
+        "Purchase.member_id",
+        "Purchase.total_pounds",
+        "Purchase.year"
+      ],
+      "tool_description": "Purchase schema"
+    },
+    "Purchases": {
+      "api_list_names": [
+        "Purchases.purchase_details",
+        "Purchases.purchase_transaction_id"
+      ],
+      "tool_description": "Purchases schema"
+    },
+    "Qualifying": {
+      "api_list_names": [
+        "Qualifying.constructorid",
+        "Qualifying.driverid",
+        "Qualifying.number",
+        "Qualifying.position",
+        "Qualifying.q1",
+        "Qualifying.q2",
+        "Qualifying.q3",
+        "Qualifying.qualifyid",
+        "Qualifying.raceid"
+      ],
+      "tool_description": "Qualifying schema"
+    },
+    "Race": {
+      "api_list_names": [
+        "Race.class",
+        "Race.date",
+        "Race.name",
+        "Race.race_id",
+        "Race.track_id"
+      ],
+      "tool_description": "Race schema"
+    },
+    "Races": {
+      "api_list_names": [
+        "Races.circuitid",
+        "Races.date",
+        "Races.name",
+        "Races.raceid",
+        "Races.round",
+        "Races.time",
+        "Races.url",
+        "Races.year"
+      ],
+      "tool_description": "Races schema"
+    },
+    "Railway": {
+      "api_list_names": [
+        "Railway.builder",
+        "Railway.built",
+        "Railway.location",
+        "Railway.objectnumber",
+        "Railway.railway",
+        "Railway.railway_id",
+        "Railway.wheels"
+      ],
+      "tool_description": "Railway schema"
+    },
+    "Railway_manage": {
+      "api_list_names": [
+        "Railway_manage.from_year",
+        "Railway_manage.manager_id",
+        "Railway_manage.railway_id"
+      ],
+      "tool_description": "Railway_manage schema"
+    },
+    "Rankings": {
+      "api_list_names": [
+        "Rankings.player_id",
+        "Rankings.ranking",
+        "Rankings.ranking_points",
+        "Rankings.tours"
+      ],
+      "tool_description": "Rankings schema"
+    },
+    "Rating": {
+      "api_list_names": [
+        "Rating.mid",
+        "Rating.rid",
+        "Rating.stars"
+      ],
+      "tool_description": "Rating schema"
+    },
+    "Record": {
+      "api_list_names": [
+        "Record.event_id",
+        "Record.id",
+        "Record.result",
+        "Record.swimmer_id"
+      ],
+      "tool_description": "Record schema"
+    },
+    "Ref_address_types": {
+      "api_list_names": [
+        "Ref_address_types.address_type_code",
+        "Ref_address_types.address_type_description"
+      ],
+      "tool_description": "Ref_address_types schema"
+    },
+    "Ref_characteristic_types": {
+      "api_list_names": [
+        "Ref_characteristic_types.characteristic_type_code",
+        "Ref_characteristic_types.characteristic_type_description"
+      ],
+      "tool_description": "Ref_characteristic_types schema"
+    },
+    "Ref_colors": {
+      "api_list_names": [
+        "Ref_colors.color_code",
+        "Ref_colors.color_description"
+      ],
+      "tool_description": "Ref_colors schema"
+    },
+    "Ref_detention_type": {
+      "api_list_names": [
+        "Ref_detention_type.detention_type_code",
+        "Ref_detention_type.detention_type_description"
+      ],
+      "tool_description": "Ref_detention_type schema"
+    },
+    "Ref_feature_types": {
+      "api_list_names": [
+        "Ref_feature_types.feature_type_code",
+        "Ref_feature_types.feature_type_name"
+      ],
+      "tool_description": "Ref_feature_types schema"
+    },
+    "Ref_incident_type": {
+      "api_list_names": [
+        "Ref_incident_type.incident_type_code",
+        "Ref_incident_type.incident_type_description"
+      ],
+      "tool_description": "Ref_incident_type schema"
+    },
+    "Ref_product_categories": {
+      "api_list_names": [
+        "Ref_product_categories.product_category_code",
+        "Ref_product_categories.product_category_description",
+        "Ref_product_categories.unit_of_measure"
+      ],
+      "tool_description": "Ref_product_categories schema"
+    },
+    "Ref_property_types": {
+      "api_list_names": [
+        "Ref_property_types.property_type_code",
+        "Ref_property_types.property_type_description"
+      ],
+      "tool_description": "Ref_property_types schema"
+    },
+    "Ref_transaction_types": {
+      "api_list_names": [
+        "Ref_transaction_types.transaction_type_code",
+        "Ref_transaction_types.transaction_type_description"
+      ],
+      "tool_description": "Ref_transaction_types schema"
+    },
+    "Region": {
+      "api_list_names": [
+        "Region.catalogue",
+        "Region.date",
+        "Region.format",
+        "Region.label",
+        "Region.region_code",
+        "Region.region_id",
+        "Region.region_name"
+      ],
+      "tool_description": "Region schema"
+    },
+    "Regions": {
+      "api_list_names": [
+        "Regions.region_id",
+        "Regions.region_name"
+      ],
+      "tool_description": "Regions schema"
+    },
+    "Regular_orders": {
+      "api_list_names": [
+        "Regular_orders.distributer_id",
+        "Regular_orders.regular_order_id"
+      ],
+      "tool_description": "Regular_orders schema"
+    },
+    "Rent_arrears": {
+      "api_list_names": [
+        "Rent_arrears.cmi_cross_ref_id",
+        "Rent_arrears.council_tax_id"
+      ],
+      "tool_description": "Rent_arrears schema"
+    },
+    "Repair_assignment": {
+      "api_list_names": [
+        "Repair_assignment.machine_id",
+        "Repair_assignment.repair_id",
+        "Repair_assignment.technician_id"
+      ],
+      "tool_description": "Repair_assignment schema"
+    },
+    "Repair": {
+      "api_list_names": [
+        "Repair.launch_date",
+        "Repair.name",
+        "Repair.notes",
+        "Repair.repair_id"
+      ],
+      "tool_description": "Repair schema"
+    },
+    "Representative": {
+      "api_list_names": [
+        "Representative.lifespan",
+        "Representative.name",
+        "Representative.party",
+        "Representative.representative_id",
+        "Representative.state"
+      ],
+      "tool_description": "Representative schema"
+    },
+    "Research_outcomes": {
+      "api_list_names": [
+        "Research_outcomes.outcome_code",
+        "Research_outcomes.outcome_description"
+      ],
+      "tool_description": "Research_outcomes schema"
+    },
+    "Research_staff": {
+      "api_list_names": [
+        "Research_staff.employer_organisation_id",
+        "Research_staff.staff_details",
+        "Research_staff.staff_id"
+      ],
+      "tool_description": "Research_staff schema"
+    },
+    "Reservations": {
+      "api_list_names": [
+        "Reservations.adults",
+        "Reservations.checkin",
+        "Reservations.checkout",
+        "Reservations.code",
+        "Reservations.firstname",
+        "Reservations.kids",
+        "Reservations.lastname",
+        "Reservations.rate",
+        "Reservations.room"
+      ],
+      "tool_description": "Reservations schema"
+    },
+    "Residents": {
+      "api_list_names": [
+        "Residents.date_moved_in",
+        "Residents.date_moved_out",
+        "Residents.other_details",
+        "Residents.property_id",
+        "Residents.resident_id"
+      ],
+      "tool_description": "Residents schema"
+    },
+    "Residents_services": {
+      "api_list_names": [
+        "Residents_services.date_moved_in",
+        "Residents_services.date_provided",
+        "Residents_services.date_requested",
+        "Residents_services.other_details",
+        "Residents_services.property_id",
+        "Residents_services.resident_id",
+        "Residents_services.service_id"
+      ],
+      "tool_description": "Residents_services schema"
+    },
+    "Restaurant": {
+      "api_list_names": [
+        "Restaurant.address",
+        "Restaurant.city_name",
+        "Restaurant.food_type",
+        "Restaurant.id",
+        "Restaurant.name",
+        "Restaurant.rating",
+        "Restaurant.resid",
+        "Restaurant.resname"
+      ],
+      "tool_description": "Restaurant schema"
+    },
+    "Restaurant_type": {
+      "api_list_names": [
+        "Restaurant_type.restypedescription",
+        "Restaurant_type.restypeid",
+        "Restaurant_type.restypename"
+      ],
+      "tool_description": "Restaurant_type schema"
+    },
+    "Results": {
+      "api_list_names": [
+        "Results.constructorid",
+        "Results.driverid",
+        "Results.fastestlap",
+        "Results.fastestlapspeed",
+        "Results.fastestlaptime",
+        "Results.grid",
+        "Results.laps",
+        "Results.milliseconds",
+        "Results.number",
+        "Results.points",
+        "Results.position",
+        "Results.positionorder",
+        "Results.positiontext",
+        "Results.raceid",
+        "Results.rank",
+        "Results.resultid",
+        "Results.statusid",
+        "Results.time"
+      ],
+      "tool_description": "Results schema"
+    },
+    "Review": {
+      "api_list_names": [
+        "Review.a_id",
+        "Review.business_id",
+        "Review.i_id",
+        "Review.month",
+        "Review.rank",
+        "Review.rating",
+        "Review.rid",
+        "Review.text",
+        "Review.u_id",
+        "Review.user_id",
+        "Review.year"
+      ],
+      "tool_description": "Review schema"
+    },
+    "Reviewer": {
+      "api_list_names": [
+        "Reviewer.name",
+        "Reviewer.rid"
+      ],
+      "tool_description": "Reviewer schema"
+    },
+    "River": {
+      "api_list_names": [
+        "River.country_name",
+        "River.length",
+        "River.river_name",
+        "River.traverse"
+      ],
+      "tool_description": "River schema"
+    },
+    "Roles": {
+      "api_list_names": [
+        "Roles.role_code",
+        "Roles.role_description"
+      ],
+      "tool_description": "Roles schema"
+    },
+    "Roller_coaster": {
+      "api_list_names": [
+        "Roller_coaster.country_id",
+        "Roller_coaster.height",
+        "Roller_coaster.length",
+        "Roller_coaster.name",
+        "Roller_coaster.opened",
+        "Roller_coaster.park",
+        "Roller_coaster.roller_coaster_id",
+        "Roller_coaster.speed",
+        "Roller_coaster.status"
+      ],
+      "tool_description": "Roller_coaster schema"
+    },
+    "Room": {
+      "api_list_names": [
+        "Room.blockcode",
+        "Room.blockfloor",
+        "Room.roomnumber",
+        "Room.roomtype",
+        "Room.unavailable"
+      ],
+      "tool_description": "Room schema"
+    },
+    "Rooms": {
+      "api_list_names": [
+        "Rooms.baseprice",
+        "Rooms.beds",
+        "Rooms.bedtype",
+        "Rooms.decor",
+        "Rooms.maxoccupancy",
+        "Rooms.roomid",
+        "Rooms.roomname"
+      ],
+      "tool_description": "Rooms schema"
+    },
+    "Round": {
+      "api_list_names": [
+        "Round.decoration_theme",
+        "Round.member_id",
+        "Round.rank_in_round",
+        "Round.round_id"
+      ],
+      "tool_description": "Round schema"
+    },
+    "Salary": {
+      "api_list_names": [
+        "Salary.league_id",
+        "Salary.player_id",
+        "Salary.salary",
+        "Salary.team_id",
+        "Salary.year"
+      ],
+      "tool_description": "Salary schema"
+    },
+    "Sales": {
+      "api_list_names": [
+        "Sales.sales_details",
+        "Sales.sales_transaction_id"
+      ],
+      "tool_description": "Sales schema"
+    },
+    "Savings": {
+      "api_list_names": [
+        "Savings.balance",
+        "Savings.custid"
+      ],
+      "tool_description": "Savings schema"
+    },
+    "Schedule": {
+      "api_list_names": [
+        "Schedule.cinema_id",
+        "Schedule.date",
+        "Schedule.film_id",
+        "Schedule.price",
+        "Schedule.show_times_per_day"
+      ],
+      "tool_description": "Schedule schema"
+    },
+    "School": {
+      "api_list_names": [
+        "School.boys_or_girls",
+        "School.county",
+        "School.day_or_boarding",
+        "School.denomination",
+        "School.enrollment",
+        "School.founded",
+        "School.grade",
+        "School.ihsaa_class",
+        "School.ihsaa_football_class",
+        "School.location",
+        "School.mascot",
+        "School.school",
+        "School.school_colors",
+        "School.school_id",
+        "School.school_name",
+        "School.type",
+        "School.year_entered_competition"
+      ],
+      "tool_description": "School schema"
+    },
+    "School_bus": {
+      "api_list_names": [
+        "School_bus.driver_id",
+        "School_bus.if_full_time",
+        "School_bus.school_id",
+        "School_bus.years_working"
+      ],
+      "tool_description": "School_bus schema"
+    },
+    "School_details": {
+      "api_list_names": [
+        "School_details.class",
+        "School_details.colors",
+        "School_details.division",
+        "School_details.league",
+        "School_details.nickname",
+        "School_details.school_id"
+      ],
+      "tool_description": "School_details schema"
+    },
+    "School_performance": {
+      "api_list_names": [
+        "School_performance.class_a",
+        "School_performance.class_aa",
+        "School_performance.school_id",
+        "School_performance.school_year"
+      ],
+      "tool_description": "School_performance schema"
+    },
+    "Scientists": {
+      "api_list_names": [
+        "Scientists.name",
+        "Scientists.ssn"
+      ],
+      "tool_description": "Scientists schema"
+    },
+    "Screen_mode": {
+      "api_list_names": [
+        "Screen_mode.char_cells",
+        "Screen_mode.graphics_mode",
+        "Screen_mode.hardware_colours",
+        "Screen_mode.map",
+        "Screen_mode.pixels",
+        "Screen_mode.type",
+        "Screen_mode.used_kb"
+      ],
+      "tool_description": "Screen_mode schema"
+    },
+    "Seasons": {
+      "api_list_names": [
+        "Seasons.url",
+        "Seasons.year"
+      ],
+      "tool_description": "Seasons schema"
+    },
+    "Section": {
+      "api_list_names": [
+        "Section.building",
+        "Section.course_id",
+        "Section.room_number",
+        "Section.sec_id",
+        "Section.semester",
+        "Section.time_slot_id",
+        "Section.year"
+      ],
+      "tool_description": "Section schema"
+    },
+    "Sections": {
+      "api_list_names": [
+        "Sections.course_id",
+        "Sections.other_details",
+        "Sections.section_description",
+        "Sections.section_id",
+        "Sections.section_name"
+      ],
+      "tool_description": "Sections schema"
+    },
+    "Semesters": {
+      "api_list_names": [
+        "Semesters.other_details",
+        "Semesters.semester_description",
+        "Semesters.semester_id",
+        "Semesters.semester_name"
+      ],
+      "tool_description": "Semesters schema"
+    },
+    "Services": {
+      "api_list_names": [
+        "Services.organization_id",
+        "Services.service_descriptio",
+        "Services.service_details",
+        "Services.service_id",
+        "Services.service_name",
+        "Services.service_type_code"
+      ],
+      "tool_description": "Services schema"
+    },
+    "Settlements": {
+      "api_list_names": [
+        "Settlements.amount_claimed",
+        "Settlements.amount_settled",
+        "Settlements.claim_id",
+        "Settlements.customer_policy_id",
+        "Settlements.settlement_amount",
+        "Settlements.settlement_id"
+      ],
+      "tool_description": "Settlements schema"
+    },
+    "Ship": {
+      "api_list_names": [
+        "Ship.built_year",
+        "Ship.class",
+        "Ship.disposition_of_ship",
+        "Ship.flag",
+        "Ship.id",
+        "Ship.location",
+        "Ship.lost_in_battle",
+        "Ship.name",
+        "Ship.nationality",
+        "Ship.ship_id",
+        "Ship.ship_type",
+        "Ship.tonnage",
+        "Ship.type"
+      ],
+      "tool_description": "Ship schema"
+    },
+    "Shipments": {
+      "api_list_names": [
+        "Shipments.invoice_number",
+        "Shipments.order_id",
+        "Shipments.other_shipment_details",
+        "Shipments.shipment_date",
+        "Shipments.shipment_id",
+        "Shipments.shipment_tracking_number"
+      ],
+      "tool_description": "Shipments schema"
+    },
+    "Shop": {
+      "api_list_names": [
+        "Shop.address",
+        "Shop.district",
+        "Shop.location",
+        "Shop.manager_name",
+        "Shop.name",
+        "Shop.num_of_staff",
+        "Shop.number_products",
+        "Shop.open_date",
+        "Shop.open_year",
+        "Shop.score",
+        "Shop.shop_id",
+        "Shop.shop_name"
+      ],
+      "tool_description": "Shop schema"
+    },
+    "Show": {
+      "api_list_names": [
+        "Show.attendance",
+        "Show.if_first_show",
+        "Show.performance_id",
+        "Show.result",
+        "Show.show_id"
+      ],
+      "tool_description": "Show schema"
+    },
+    "Singer": {
+      "api_list_names": [
+        "Singer.age",
+        "Singer.birth_year",
+        "Singer.citizenship",
+        "Singer.country",
+        "Singer.is_male",
+        "Singer.name",
+        "Singer.net_worth_millions",
+        "Singer.singer_id",
+        "Singer.song_name",
+        "Singer.song_release_year"
+      ],
+      "tool_description": "Singer schema"
+    },
+    "Singer_in_concert": {
+      "api_list_names": [
+        "Singer_in_concert.concert_id",
+        "Singer_in_concert.singer_id"
+      ],
+      "tool_description": "Singer_in_concert schema"
+    },
+    "Sizes": {
+      "api_list_names": [
+        "Sizes.size_code",
+        "Sizes.size_description"
+      ],
+      "tool_description": "Sizes schema"
+    },
+    "Skills": {
+      "api_list_names": [
+        "Skills.skill_code",
+        "Skills.skill_description",
+        "Skills.skill_id"
+      ],
+      "tool_description": "Skills schema"
+    },
+    "Song": {
+      "api_list_names": [
+        "Song.highest_position",
+        "Song.sales",
+        "Song.singer_id",
+        "Song.song_id",
+        "Song.title"
+      ],
+      "tool_description": "Song schema"
+    },
+    "Songs": {
+      "api_list_names": [
+        "Songs.songid",
+        "Songs.title"
+      ],
+      "tool_description": "Songs schema"
+    },
+    "Sportsinfo": {
+      "api_list_names": [
+        "Sportsinfo.gamesplayed",
+        "Sportsinfo.hoursperweek",
+        "Sportsinfo.onscholarship",
+        "Sportsinfo.sportname",
+        "Sportsinfo.stuid"
+      ],
+      "tool_description": "Sportsinfo schema"
+    },
+    "Stadium": {
+      "api_list_names": [
+        "Stadium.average",
+        "Stadium.average_attendance",
+        "Stadium.capacity",
+        "Stadium.capacity_percentage",
+        "Stadium.city",
+        "Stadium.country",
+        "Stadium.highest",
+        "Stadium.home_games",
+        "Stadium.id",
+        "Stadium.location",
+        "Stadium.lowest",
+        "Stadium.name",
+        "Stadium.opening_year",
+        "Stadium.stadium_id",
+        "Stadium.total_attendance"
+      ],
+      "tool_description": "Stadium schema"
+    },
+    "Staff": {
+      "api_list_names": [
+        "Staff.date_joined_staff",
+        "Staff.date_left_staff",
+        "Staff.date_of_birth",
+        "Staff.email_address",
+        "Staff.first_name",
+        "Staff.gender",
+        "Staff.last_name",
+        "Staff.middle_name",
+        "Staff.nickname",
+        "Staff.other_staff_details",
+        "Staff.phone_number",
+        "Staff.staff_address_id",
+        "Staff.staff_first_name",
+        "Staff.staff_gender",
+        "Staff.staff_id",
+        "Staff.staff_last_name",
+        "Staff.staff_name"
+      ],
+      "tool_description": "Staff schema"
+    },
+    "Staff_department_assignments": {
+      "api_list_names": [
+        "Staff_department_assignments.date_assigned_from",
+        "Staff_department_assignments.date_assigned_to",
+        "Staff_department_assignments.department_id",
+        "Staff_department_assignments.job_title_code",
+        "Staff_department_assignments.staff_id"
+      ],
+      "tool_description": "Staff_department_assignments schema"
+    },
+    "Staff_roles": {
+      "api_list_names": [
+        "Staff_roles.role_code",
+        "Staff_roles.role_description"
+      ],
+      "tool_description": "Staff_roles schema"
+    },
+    "State": {
+      "api_list_names": [
+        "State.area",
+        "State.capital",
+        "State.country_name",
+        "State.density",
+        "State.population",
+        "State.state_name"
+      ],
+      "tool_description": "State schema"
+    },
+    "Station": {
+      "api_list_names": [
+        "Station.annual_entry_exit",
+        "Station.annual_interchanges",
+        "Station.city",
+        "Station.dock_count",
+        "Station.id",
+        "Station.installation_date",
+        "Station.lat",
+        "Station.local_authority",
+        "Station.location",
+        "Station.long",
+        "Station.main_services",
+        "Station.name",
+        "Station.network_name",
+        "Station.number_of_platforms",
+        "Station.services",
+        "Station.station_id",
+        "Station.total_passengers"
+      ],
+      "tool_description": "Station schema"
+    },
+    "Station_company": {
+      "api_list_names": [
+        "Station_company.company_id",
+        "Station_company.rank_of_the_year",
+        "Station_company.station_id"
+      ],
+      "tool_description": "Station_company schema"
+    },
+    "Status": {
+      "api_list_names": [
+        "Status.bikes_available",
+        "Status.docks_available",
+        "Status.station_id",
+        "Status.status",
+        "Status.statusid",
+        "Status.time"
+      ],
+      "tool_description": "Status schema"
+    },
+    "Stay": {
+      "api_list_names": [
+        "Stay.patient",
+        "Stay.room",
+        "Stay.stayend",
+        "Stay.stayid",
+        "Stay.staystart"
+      ],
+      "tool_description": "Stay schema"
+    },
+    "Stock": {
+      "api_list_names": [
+        "Stock.device_id",
+        "Stock.quantity",
+        "Stock.shop_id"
+      ],
+      "tool_description": "Stock schema"
+    },
+    "Store": {
+      "api_list_names": [
+        "Store.area_size",
+        "Store.number_of_product_category",
+        "Store.ranking",
+        "Store.store_id",
+        "Store.store_name",
+        "Store.type"
+      ],
+      "tool_description": "Store schema"
+    },
+    "Store_district": {
+      "api_list_names": [
+        "Store_district.district_id",
+        "Store_district.store_id"
+      ],
+      "tool_description": "Store_district schema"
+    },
+    "Store_product": {
+      "api_list_names": [
+        "Store_product.product_id",
+        "Store_product.store_id"
+      ],
+      "tool_description": "Store_product schema"
+    },
+    "Storm": {
+      "api_list_names": [
+        "Storm.damage_millions_usd",
+        "Storm.dates_active",
+        "Storm.max_speed",
+        "Storm.name",
+        "Storm.number_deaths",
+        "Storm.storm_id"
+      ],
+      "tool_description": "Storm schema"
+    },
+    "Student_addresses": {
+      "api_list_names": [
+        "Student_addresses.address_id",
+        "Student_addresses.date_address_from",
+        "Student_addresses.date_address_to",
+        "Student_addresses.monthly_rental",
+        "Student_addresses.other_details",
+        "Student_addresses.student_id"
+      ],
+      "tool_description": "Student_addresses schema"
+    },
+    "Student": {
+      "api_list_names": [
+        "Student.advisor",
+        "Student.age",
+        "Student.city_code",
+        "Student.dept_code",
+        "Student.dept_name",
+        "Student.fname",
+        "Student.id",
+        "Student.lname",
+        "Student.major",
+        "Student.name",
+        "Student.prof_num",
+        "Student.sex",
+        "Student.stu_class",
+        "Student.stu_dob",
+        "Student.stu_fname",
+        "Student.stu_gpa",
+        "Student.stu_hrs",
+        "Student.stu_init",
+        "Student.stu_lname",
+        "Student.stu_num",
+        "Student.stu_phone",
+        "Student.stu_transfer",
+        "Student.stuid",
+        "Student.tot_cred"
+      ],
+      "tool_description": "Student schema"
+    },
+    "Student_course_attendance": {
+      "api_list_names": [
+        "Student_course_attendance.course_id",
+        "Student_course_attendance.date_of_attendance",
+        "Student_course_attendance.student_id"
+      ],
+      "tool_description": "Student_course_attendance schema"
+    },
+    "Student_course_enrolment": {
+      "api_list_names": [
+        "Student_course_enrolment.course_id",
+        "Student_course_enrolment.date_of_completion",
+        "Student_course_enrolment.date_of_enrolment",
+        "Student_course_enrolment.registration_id",
+        "Student_course_enrolment.student_id"
+      ],
+      "tool_description": "Student_course_enrolment schema"
+    },
+    "Student_course_registrations": {
+      "api_list_names": [
+        "Student_course_registrations.course_id",
+        "Student_course_registrations.registration_date",
+        "Student_course_registrations.student_id"
+      ],
+      "tool_description": "Student_course_registrations schema"
+    },
+    "Student_enrolment_courses": {
+      "api_list_names": [
+        "Student_enrolment_courses.course_id",
+        "Student_enrolment_courses.student_course_id",
+        "Student_enrolment_courses.student_enrolment_id"
+      ],
+      "tool_description": "Student_enrolment_courses schema"
+    },
+    "Student_enrolment": {
+      "api_list_names": [
+        "Student_enrolment.degree_program_id",
+        "Student_enrolment.other_details",
+        "Student_enrolment.semester_id",
+        "Student_enrolment.student_enrolment_id",
+        "Student_enrolment.student_id"
+      ],
+      "tool_description": "Student_enrolment schema"
+    },
+    "Student_tests_taken": {
+      "api_list_names": [
+        "Student_tests_taken.date_test_taken",
+        "Student_tests_taken.registration_id",
+        "Student_tests_taken.test_result"
+      ],
+      "tool_description": "Student_tests_taken schema"
+    },
+    "Students": {
+      "api_list_names": [
+        "Students.address_id",
+        "Students.cell_mobile_number",
+        "Students.current_address_id",
+        "Students.date_first_registered",
+        "Students.date_first_rental",
+        "Students.date_left",
+        "Students.date_left_university",
+        "Students.date_of_latest_logon",
+        "Students.date_of_registration",
+        "Students.email_address",
+        "Students.family_name",
+        "Students.first_name",
+        "Students.last_name",
+        "Students.login_name",
+        "Students.middle_name",
+        "Students.other_student_details",
+        "Students.password",
+        "Students.permanent_address_id",
+        "Students.personal_name",
+        "Students.ssn",
+        "Students.student_details",
+        "Students.student_id"
+      ],
+      "tool_description": "Students schema"
+    },
+    "Students_in_detention": {
+      "api_list_names": [
+        "Students_in_detention.detention_id",
+        "Students_in_detention.incident_id",
+        "Students_in_detention.student_id"
+      ],
+      "tool_description": "Students_in_detention schema"
+    },
+    "Subjects": {
+      "api_list_names": [
+        "Subjects.subject_id",
+        "Subjects.subject_name"
+      ],
+      "tool_description": "Subjects schema"
+    },
+    "Submission": {
+      "api_list_names": [
+        "Submission.author",
+        "Submission.college",
+        "Submission.scores",
+        "Submission.submission_id"
+      ],
+      "tool_description": "Submission schema"
+    },
+    "Supplier_addresses": {
+      "api_list_names": [
+        "Supplier_addresses.address_id",
+        "Supplier_addresses.date_from",
+        "Supplier_addresses.date_to",
+        "Supplier_addresses.supplier_id"
+      ],
+      "tool_description": "Supplier_addresses schema"
+    },
+    "Suppliers": {
+      "api_list_names": [
+        "Suppliers.supplier_id",
+        "Suppliers.supplier_name",
+        "Suppliers.supplier_phone"
+      ],
+      "tool_description": "Suppliers schema"
+    },
+    "Swimmer": {
+      "api_list_names": [
+        "Swimmer.id",
+        "Swimmer.meter_100",
+        "Swimmer.meter_200",
+        "Swimmer.meter_300",
+        "Swimmer.meter_400",
+        "Swimmer.meter_500",
+        "Swimmer.meter_600",
+        "Swimmer.meter_700",
+        "Swimmer.name",
+        "Swimmer.nationality",
+        "Swimmer.time"
+      ],
+      "tool_description": "Swimmer schema"
+    },
+    "Tags": {
+      "api_list_names": [
+        "Tags.id",
+        "Tags.kid",
+        "Tags.msid"
+      ],
+      "tool_description": "Tags schema"
+    },
+    "Takes": {
+      "api_list_names": [
+        "Takes.course_id",
+        "Takes.grade",
+        "Takes.id",
+        "Takes.sec_id",
+        "Takes.semester",
+        "Takes.year"
+      ],
+      "tool_description": "Takes schema"
+    },
+    "Tasks": {
+      "api_list_names": [
+        "Tasks.eg_Agree_Objectives",
+        "Tasks.project_id",
+        "Tasks.task_details",
+        "Tasks.task_id"
+      ],
+      "tool_description": "Tasks schema"
+    },
+    "Teacher": {
+      "api_list_names": [
+        "Teacher.age",
+        "Teacher.hometown",
+        "Teacher.name",
+        "Teacher.teacher_id"
+      ],
+      "tool_description": "Teacher schema"
+    },
+    "Teachers": {
+      "api_list_names": [
+        "Teachers.address_id",
+        "Teachers.cell_mobile_number",
+        "Teachers.classroom",
+        "Teachers.email_address",
+        "Teachers.first_name",
+        "Teachers.firstname",
+        "Teachers.gender",
+        "Teachers.last_name",
+        "Teachers.lastname",
+        "Teachers.middle_name",
+        "Teachers.other_details",
+        "Teachers.teacher_id"
+      ],
+      "tool_description": "Teachers schema"
+    },
+    "Teaches": {
+      "api_list_names": [
+        "Teaches.course_id",
+        "Teaches.id",
+        "Teaches.sec_id",
+        "Teaches.semester",
+        "Teaches.year"
+      ],
+      "tool_description": "Teaches schema"
+    },
+    "Team": {
+      "api_list_names": [
+        "Team.ab",
+        "Team.attendance",
+        "Team.bb",
+        "Team.bba",
+        "Team.bpf",
+        "Team.cg",
+        "Team.cs",
+        "Team.div_id",
+        "Team.div_win",
+        "Team.double",
+        "Team.dp",
+        "Team.e",
+        "Team.er",
+        "Team.era",
+        "Team.fp",
+        "Team.franchise_id",
+        "Team.g",
+        "Team.ghome",
+        "Team.h",
+        "Team.ha",
+        "Team.hbp",
+        "Team.hr",
+        "Team.hra",
+        "Team.id",
+        "Team.ipouts",
+        "Team.l",
+        "Team.league_id",
+        "Team.lg_win",
+        "Team.name",
+        "Team.park",
+        "Team.ppf",
+        "Team.r",
+        "Team.ra",
+        "Team.rank",
+        "Team.sb",
+        "Team.sf",
+        "Team.sho",
+        "Team.so",
+        "Team.soa",
+        "Team.sv",
+        "Team.team_api_id",
+        "Team.team_fifa_api_id",
+        "Team.team_id",
+        "Team.team_id_br",
+        "Team.team_id_lahman45",
+        "Team.team_id_retro",
+        "Team.team_long_name",
+        "Team.team_short_name",
+        "Team.triple",
+        "Team.w",
+        "Team.wc_win",
+        "Team.ws_win",
+        "Team.year"
+      ],
+      "tool_description": "Team schema"
+    },
+    "Team_attributes": {
+      "api_list_names": [
+        "Team_attributes.buildupplaydribbling",
+        "Team_attributes.buildupplaydribblingclass",
+        "Team_attributes.buildupplaypassing",
+        "Team_attributes.buildupplaypassingclass",
+        "Team_attributes.buildupplaypositioningclass",
+        "Team_attributes.buildupplayspeed",
+        "Team_attributes.buildupplayspeedclass",
+        "Team_attributes.chancecreationcrossing",
+        "Team_attributes.chancecreationcrossingclass",
+        "Team_attributes.chancecreationpassing",
+        "Team_attributes.chancecreationpassingclass",
+        "Team_attributes.chancecreationpositioningclass",
+        "Team_attributes.chancecreationshooting",
+        "Team_attributes.chancecreationshootingclass",
+        "Team_attributes.date",
+        "Team_attributes.defenceaggression",
+        "Team_attributes.defenceaggressionclass",
+        "Team_attributes.defencedefenderlineclass",
+        "Team_attributes.defencepressure",
+        "Team_attributes.defencepressureclass",
+        "Team_attributes.defenceteamwidth",
+        "Team_attributes.defenceteamwidthclass",
+        "Team_attributes.id",
+        "Team_attributes.team_api_id",
+        "Team_attributes.team_fifa_api_id"
+      ],
+      "tool_description": "Team_attributes schema"
+    },
+    "Team_franchise": {
+      "api_list_names": [
+        "Team_franchise.active",
+        "Team_franchise.franchise_id",
+        "Team_franchise.franchise_name",
+        "Team_franchise.na_assoc"
+      ],
+      "tool_description": "Team_franchise schema"
+    },
+    "Team_half": {
+      "api_list_names": [
+        "Team_half.div_id",
+        "Team_half.div_win",
+        "Team_half.g",
+        "Team_half.half",
+        "Team_half.l",
+        "Team_half.league_id",
+        "Team_half.rank",
+        "Team_half.team_id",
+        "Team_half.w",
+        "Team_half.year"
+      ],
+      "tool_description": "Team_half schema"
+    },
+    "Technician": {
+      "api_list_names": [
+        "Technician.age",
+        "Technician.name",
+        "Technician.starting_year",
+        "Technician.team",
+        "Technician.technician_id"
+      ],
+      "tool_description": "Technician schema"
+    },
+    "Temperature": {
+      "api_list_names": [
+        "Temperature.apr",
+        "Temperature.aug",
+        "Temperature.city_id",
+        "Temperature.dec",
+        "Temperature.feb",
+        "Temperature.jan",
+        "Temperature.jul",
+        "Temperature.jun",
+        "Temperature.mar",
+        "Temperature.nov",
+        "Temperature.oct",
+        "Temperature.sep"
+      ],
+      "tool_description": "Temperature schema"
+    },
+    "Things": {
+      "api_list_names": [
+        "Things.organization_id",
+        "Things.service_details",
+        "Things.service_type_code",
+        "Things.thing_id",
+        "Things.type_of_thing_code"
+      ],
+      "tool_description": "Things schema"
+    },
+    "Third_party_companies": {
+      "api_list_names": [
+        "Third_party_companies.company_address",
+        "Third_party_companies.company_id",
+        "Third_party_companies.company_name",
+        "Third_party_companies.company_type",
+        "Third_party_companies.other_company_details"
+      ],
+      "tool_description": "Third_party_companies schema"
+    },
+    "Time_slot": {
+      "api_list_names": [
+        "Time_slot.day",
+        "Time_slot.end_hr",
+        "Time_slot.end_min",
+        "Time_slot.start_hr",
+        "Time_slot.start_min",
+        "Time_slot.time_slot_id"
+      ],
+      "tool_description": "Time_slot schema"
+    },
+    "Timed_locations_of_things": {
+      "api_list_names": [
+        "Timed_locations_of_things.date_and_time",
+        "Timed_locations_of_things.location_code",
+        "Timed_locations_of_things.thing_id"
+      ],
+      "tool_description": "Timed_locations_of_things schema"
+    },
+    "Timed_status_of_things": {
+      "api_list_names": [
+        "Timed_status_of_things.date_and_date",
+        "Timed_status_of_things.status_of_thing_code",
+        "Timed_status_of_things.thing_id"
+      ],
+      "tool_description": "Timed_status_of_things schema"
+    },
+    "Tip": {
+      "api_list_names": [
+        "Tip.business_id",
+        "Tip.likes",
+        "Tip.month",
+        "Tip.text",
+        "Tip.tip_id",
+        "Tip.user_id",
+        "Tip.year"
+      ],
+      "tool_description": "Tip schema"
+    },
+    "Track": {
+      "api_list_names": [
+        "Track.albumid",
+        "Track.bytes",
+        "Track.composer",
+        "Track.genreid",
+        "Track.location",
+        "Track.mediatypeid",
+        "Track.milliseconds",
+        "Track.name",
+        "Track.seating",
+        "Track.track_id",
+        "Track.trackid",
+        "Track.unitprice",
+        "Track.year_opened"
+      ],
+      "tool_description": "Track schema"
+    },
+    "Tracklists": {
+      "api_list_names": [
+        "Tracklists.albumid",
+        "Tracklists.position",
+        "Tracklists.songid"
+      ],
+      "tool_description": "Tracklists schema"
+    },
+    "Tracks": {
+      "api_list_names": [
+        "Tracks.album_id",
+        "Tracks.bytes",
+        "Tracks.composer",
+        "Tracks.genre_id",
+        "Tracks.id",
+        "Tracks.media_type_id",
+        "Tracks.milliseconds",
+        "Tracks.name",
+        "Tracks.unit_price"
+      ],
+      "tool_description": "Tracks schema"
+    },
+    "Train": {
+      "api_list_names": [
+        "Train.arrival",
+        "Train.destination",
+        "Train.from",
+        "Train.id",
+        "Train.interval",
+        "Train.name",
+        "Train.origin",
+        "Train.railway_id",
+        "Train.service",
+        "Train.time",
+        "Train.train_id",
+        "Train.train_num",
+        "Train.train_number"
+      ],
+      "tool_description": "Train schema"
+    },
+    "Train_station": {
+      "api_list_names": [
+        "Train_station.station_id",
+        "Train_station.train_id"
+      ],
+      "tool_description": "Train_station schema"
+    },
+    "Trained_in": {
+      "api_list_names": [
+        "Trained_in.certificationdate",
+        "Trained_in.certificationexpires",
+        "Trained_in.physician",
+        "Trained_in.treatment"
+      ],
+      "tool_description": "Trained_in schema"
+    },
+    "Transactions": {
+      "api_list_names": [
+        "Transactions.amount_of_transaction",
+        "Transactions.date_of_transaction",
+        "Transactions.investor_id",
+        "Transactions.other_details",
+        "Transactions.share_count",
+        "Transactions.transaction_id",
+        "Transactions.transaction_type_code"
+      ],
+      "tool_description": "Transactions schema"
+    },
+    "Transcripts": {
+      "api_list_names": [
+        "Transcripts.other_details",
+        "Transcripts.transcript_date",
+        "Transcripts.transcript_id"
+      ],
+      "tool_description": "Transcripts schema"
+    },
+    "Treatment_types": {
+      "api_list_names": [
+        "Treatment_types.treatment_type_code",
+        "Treatment_types.treatment_type_description"
+      ],
+      "tool_description": "Treatment_types schema"
+    },
+    "Treatments": {
+      "api_list_names": [
+        "Treatments.cost_of_treatment",
+        "Treatments.date_of_treatment",
+        "Treatments.dog_id",
+        "Treatments.professional_id",
+        "Treatments.treatment_id",
+        "Treatments.treatment_type_code"
+      ],
+      "tool_description": "Treatments schema"
+    },
+    "Trip": {
+      "api_list_names": [
+        "Trip.bike_id",
+        "Trip.duration",
+        "Trip.end_date",
+        "Trip.end_station_id",
+        "Trip.end_station_name",
+        "Trip.id",
+        "Trip.start_date",
+        "Trip.start_station_id",
+        "Trip.start_station_name",
+        "Trip.subscription_type",
+        "Trip.zip_code"
+      ],
+      "tool_description": "Trip schema"
+    },
+    "Trucks": {
+      "api_list_names": [
+        "Trucks.truck_details",
+        "Trucks.truck_id",
+        "Trucks.truck_licence_number"
+      ],
+      "tool_description": "Trucks schema"
+    },
+    "Trust": {
+      "api_list_names": [
+        "Trust.source_u_id",
+        "Trust.target_u_id",
+        "Trust.trust"
+      ],
+      "tool_description": "Trust schema"
+    },
+    "Tryout": {
+      "api_list_names": [
+        "Tryout.cname",
+        "Tryout.decision",
+        "Tryout.pid",
+        "Tryout.ppos"
+      ],
+      "tool_description": "Tryout schema"
+    },
+    "Tv_channel": {
+      "api_list_names": [
+        "Tv_channel.content",
+        "Tv_channel.country",
+        "Tv_channel.hight_definition_tv",
+        "Tv_channel.id",
+        "Tv_channel.language",
+        "Tv_channel.package_option",
+        "Tv_channel.pay_per_view_ppv",
+        "Tv_channel.pixel_aspect_ratio_par",
+        "Tv_channel.series_name"
+      ],
+      "tool_description": "Tv_channel schema"
+    },
+    "Tv_series": {
+      "api_list_names": [
+        "Tv_series._8_49_Rating_Share",
+        "Tv_series.air_date",
+        "Tv_series.budget",
+        "Tv_series.channel",
+        "Tv_series.episode",
+        "Tv_series.id",
+        "Tv_series.num_of_episodes",
+        "Tv_series.num_of_seasons",
+        "Tv_series.rating",
+        "Tv_series.release_year",
+        "Tv_series.share",
+        "Tv_series.sid",
+        "Tv_series.title",
+        "Tv_series.title_aka",
+        "Tv_series.viewers_m",
+        "Tv_series.weekly_rank"
+      ],
+      "tool_description": "Tv_series schema"
+    },
+    "Undergoes": {
+      "api_list_names": [
+        "Undergoes.assistingnurse",
+        "Undergoes.dateundergoes",
+        "Undergoes.patient",
+        "Undergoes.physician",
+        "Undergoes.procedures",
+        "Undergoes.stay"
+      ],
+      "tool_description": "Undergoes schema"
+    },
+    "University": {
+      "api_list_names": [
+        "University.affiliation",
+        "University.enrollment",
+        "University.founded",
+        "University.location",
+        "University.nickname",
+        "University.primary_conference",
+        "University.school",
+        "University.school_id"
+      ],
+      "tool_description": "University schema"
+    },
+    "User": {
+      "api_list_names": [
+        "User.name",
+        "User.uid",
+        "User.user_id"
+      ],
+      "tool_description": "User schema"
+    },
+    "Useracct": {
+      "api_list_names": [
+        "Useracct.name",
+        "Useracct.u_id"
+      ],
+      "tool_description": "Useracct schema"
+    },
+    "Users": {
+      "api_list_names": [
+        "Users.password",
+        "Users.role_code",
+        "Users.user_id",
+        "Users.user_login",
+        "Users.user_name"
+      ],
+      "tool_description": "Users schema"
+    },
+    "Vehicles": {
+      "api_list_names": [
+        "Vehicles.vehicle_details",
+        "Vehicles.vehicle_id"
+      ],
+      "tool_description": "Vehicles schema"
+    },
+    "Venue": {
+      "api_list_names": [
+        "Venue.venueid",
+        "Venue.venuename"
+      ],
+      "tool_description": "Venue schema"
+    },
+    "Video_games": {
+      "api_list_names": [
+        "Video_games.gameid",
+        "Video_games.gname",
+        "Video_games.gtype"
+      ],
+      "tool_description": "Video_games schema"
+    },
+    "View_product_availability": {
+      "api_list_names": [
+        "View_product_availability.available_yn",
+        "View_product_availability.booking_id",
+        "View_product_availability.product_id",
+        "View_product_availability.status_date"
+      ],
+      "tool_description": "View_product_availability schema"
+    },
+    "View_unit_status": {
+      "api_list_names": [
+        "View_unit_status.apt_booking_id",
+        "View_unit_status.apt_id",
+        "View_unit_status.available_yn",
+        "View_unit_status.status_date"
+      ],
+      "tool_description": "View_unit_status schema"
+    },
+    "Visit": {
+      "api_list_names": [
+        "Visit.museum_id",
+        "Visit.num_of_ticket",
+        "Visit.total_spent",
+        "Visit.visitor_id"
+      ],
+      "tool_description": "Visit schema"
+    },
+    "Visitor": {
+      "api_list_names": [
+        "Visitor.age",
+        "Visitor.id",
+        "Visitor.level_of_membership",
+        "Visitor.name"
+      ],
+      "tool_description": "Visitor schema"
+    },
+    "Visits_restaurant": {
+      "api_list_names": [
+        "Visits_restaurant.resid",
+        "Visits_restaurant.spent",
+        "Visits_restaurant.stuid",
+        "Visits_restaurant.time"
+      ],
+      "tool_description": "Visits_restaurant schema"
+    },
+    "Vocals": {
+      "api_list_names": [
+        "Vocals.bandmate",
+        "Vocals.songid",
+        "Vocals.type"
+      ],
+      "tool_description": "Vocals schema"
+    },
+    "Volume": {
+      "api_list_names": [
+        "Volume.artist_id",
+        "Volume.issue_date",
+        "Volume.song",
+        "Volume.volume_id",
+        "Volume.volume_issue",
+        "Volume.weeks_on_top"
+      ],
+      "tool_description": "Volume schema"
+    },
+    "Votes": {
+      "api_list_names": [
+        "Votes.contestant_number",
+        "Votes.created",
+        "Votes.phone_number",
+        "Votes.state",
+        "Votes.vote_id"
+      ],
+      "tool_description": "Votes schema"
+    },
+    "Voting_record": {
+      "api_list_names": [
+        "Voting_record.class_president_vote",
+        "Voting_record.class_senator_vote",
+        "Voting_record.election_cycle",
+        "Voting_record.president_vote",
+        "Voting_record.registration_date",
+        "Voting_record.secretary_vote",
+        "Voting_record.stuid",
+        "Voting_record.treasurer_vote",
+        "Voting_record.vice_president_vote"
+      ],
+      "tool_description": "Voting_record schema"
+    },
+    "Weather": {
+      "api_list_names": [
+        "Weather.cloud_cover",
+        "Weather.date",
+        "Weather.events",
+        "Weather.max_dew_point_f",
+        "Weather.max_gust_speed_mph",
+        "Weather.max_humidity",
+        "Weather.max_sea_level_pressure_inches",
+        "Weather.max_temperature_f",
+        "Weather.max_visibility_miles",
+        "Weather.max_wind_speed_mph",
+        "Weather.mean_dew_point_f",
+        "Weather.mean_humidity",
+        "Weather.mean_sea_level_pressure_inches",
+        "Weather.mean_temperature_f",
+        "Weather.mean_visibility_miles",
+        "Weather.mean_wind_speed_mph",
+        "Weather.min_dew_point_f",
+        "Weather.min_humidity",
+        "Weather.min_sea_level_pressure_inches",
+        "Weather.min_temperature_f",
+        "Weather.min_visibility_miles",
+        "Weather.precipitation_inches",
+        "Weather.wind_dir_degrees",
+        "Weather.zip_code"
+      ],
+      "tool_description": "Weather schema"
+    },
+    "Web_client_accelerator": {
+      "api_list_names": [
+        "Web_client_accelerator.client",
+        "Web_client_accelerator.connection",
+        "Web_client_accelerator.id",
+        "Web_client_accelerator.name",
+        "Web_client_accelerator.operating_system"
+      ],
+      "tool_description": "Web_client_accelerator schema"
+    },
+    "Wedding": {
+      "api_list_names": [
+        "Wedding.church_id",
+        "Wedding.female_id",
+        "Wedding.male_id",
+        "Wedding.year"
+      ],
+      "tool_description": "Wedding schema"
+    },
+    "Weekly_weather": {
+      "api_list_names": [
+        "Weekly_weather.day_of_week",
+        "Weekly_weather.high_temperature",
+        "Weekly_weather.low_temperature",
+        "Weekly_weather.precipitation",
+        "Weekly_weather.station_id",
+        "Weekly_weather.wind_speed_mph"
+      ],
+      "tool_description": "Weekly_weather schema"
+    },
+    "Wine": {
+      "api_list_names": [
+        "Wine.appelation",
+        "Wine.cases",
+        "Wine.drink",
+        "Wine.grape",
+        "Wine.name",
+        "Wine.no",
+        "Wine.price",
+        "Wine.score",
+        "Wine.state",
+        "Wine.winery",
+        "Wine.year"
+      ],
+      "tool_description": "Wine schema"
+    },
+    "Works_on": {
+      "api_list_names": [
+        "Works_on.essn",
+        "Works_on.hours",
+        "Works_on.pno"
+      ],
+      "tool_description": "Works_on schema"
+    },
+    "Workshop": {
+      "api_list_names": [
+        "Workshop.date",
+        "Workshop.name",
+        "Workshop.venue",
+        "Workshop.workshop_id"
+      ],
+      "tool_description": "Workshop schema"
+    },
+    "Wrestler": {
+      "api_list_names": [
+        "Wrestler.days_held",
+        "Wrestler.event",
+        "Wrestler.location",
+        "Wrestler.name",
+        "Wrestler.reign",
+        "Wrestler.wrestler_id"
+      ],
+      "tool_description": "Wrestler schema"
+    },
+    "Writer": {
+      "api_list_names": [
+        "Writer.birth_city",
+        "Writer.birth_year",
+        "Writer.gender",
+        "Writer.name",
+        "Writer.nationality",
+        "Writer.num_of_episodes",
+        "Writer.wid"
+      ],
+      "tool_description": "Writer schema"
+    },
+    "Written_by": {
+      "api_list_names": [
+        "Written_by.id",
+        "Written_by.msid",
+        "Written_by.wid"
+      ],
+      "tool_description": "Written_by schema"
+    },
+    "Has_pet": {
+      "api_list_names": [
+        "Has_pet.stuid",
+        "Has_pet.petid"
+      ],
+      "tool_description": "Has_pet schema"
+    },
+    "Paragraphs": {
+      "api_list_names": [
+        "Paragraphs.document_id",
+        "Paragraphs.paragraph_id",
+        "Paragraphs.paragraph_text"
+      ],
+      "tool_description": "Paragraphs schema"
+    },
+    "Templates": {
+      "api_list_names": [
+        "Templates.template_id",
+        "Templates.template_type_code"
+      ],
+      "tool_description": "Templates schema"
+    },
+    "Ref_template_types": {
+      "api_list_names": [
+        "Ref_template_types.template_type_code",
+        "Ref_template_types.template_type_description"
+      ],
+      "tool_description": "Ref_template_types schema"
+    },
+    "Transcript_contents": {
+      "api_list_names": [
+        "Transcript_contents.transcript_id",
+        "Transcript_contents.student_course_id"
+      ],
+      "tool_description": "Transcript_contents schema"
+    }
+  }
+}

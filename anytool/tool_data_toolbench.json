@@ -1,0 +1,2654 @@
+{
+  "Weather": {
+    "Foreca Weather": {
+      "api_list_names": [
+        "Foreca Weather.location",
+        "Foreca Weather.dataset",
+        "Foreca Weather.windunit",
+        "Foreca Weather.tz",
+        "Foreca Weather.tempunit",
+        "Foreca Weather.alt",
+        "Foreca Weather.periods",
+        "Foreca Weather.location",
+        "Foreca Weather.history",
+        "Foreca Weather.tz",
+        "Foreca Weather.dataset",
+        "Foreca Weather.tempunit",
+        "Foreca Weather.alt",
+        "Foreca Weather.periods",
+        "Foreca Weather.windunit",
+        "Foreca Weather.location",
+        "Foreca Weather.alt",
+        "Foreca Weather.dataset",
+        "Foreca Weather.tempunit",
+        "Foreca Weather.windunit",
+        "Foreca Weather.periods",
+        "Foreca Weather.location",
+        "Foreca Weather.location",
+        "Foreca Weather.windunit",
+        "Foreca Weather.alt",
+        "Foreca Weather.lang",
+        "Foreca Weather.tz",
+        "Foreca Weather.tempunit",
+        "Foreca Weather.location",
+        "Foreca Weather.lang",
+        "Foreca Weather.location",
+        "Foreca Weather.alt",
+        "Foreca Weather.history",
+        "Foreca Weather.dataset",
+        "Foreca Weather.tz",
+        "Foreca Weather.periods",
+        "Foreca Weather.windunit",
+        "Foreca Weather.tempunit",
+        "Foreca Weather.query",
+        "Foreca Weather.lang",
+        "Foreca Weather.country"
+      ],
+      "tool_description": "Foreca Weather schema"
+    },
+    "Cloud Cast": {
+      "api_list_names": [
+        "Cloud Cast.city",
+        "Cloud Cast.city",
+        "Cloud Cast.city",
+        "Cloud Cast.city",
+        "Cloud Cast.city"
+      ],
+      "tool_description": "Cloud Cast schema"
+    },
+    "WeatherAPI.com": {
+      "api_list_names": [
+        "WeatherAPI.com.dt",
+        "WeatherAPI.com.q",
+        "WeatherAPI.com.lang",
+        "WeatherAPI.com.q",
+        "WeatherAPI.com.dt",
+        "WeatherAPI.com.q"
+      ],
+      "tool_description": "WeatherAPI.com schema"
+    },
+    "Ski Resort Forecast": {
+      "api_list_names": [
+        "Ski Resort Forecast.resort",
+        "Ski Resort Forecast.el",
+        "Ski Resort Forecast.units",
+        "Ski Resort Forecast.c",
+        "Ski Resort Forecast.resort",
+        "Ski Resort Forecast.units",
+        "Ski Resort Forecast.resort",
+        "Ski Resort Forecast.units",
+        "Ski Resort Forecast.el"
+      ],
+      "tool_description": "Ski Resort Forecast schema"
+    },
+    "Air Quality API": {
+      "api_list_names": [
+        "Air Quality API.country",
+        "Air Quality API.city",
+        "Air Quality API.lat",
+        "Air Quality API.lon",
+        "Air Quality API.country",
+        "Air Quality API.city",
+        "Air Quality API.lon",
+        "Air Quality API.lat",
+        "Air Quality API.country",
+        "Air Quality API.city",
+        "Air Quality API.lat",
+        "Air Quality API.lon"
+      ],
+      "tool_description": "Air Quality API schema"
+    },
+    "APJOY-Weather Forecast": {
+      "api_list_names": [
+        "APJOY-Weather Forecast.location",
+        "APJOY-Weather Forecast.days"
+      ],
+      "tool_description": "APJOY-Weather Forecast schema"
+    },
+    "OpenWeather": {
+      "api_list_names": [
+        "OpenWeather.appid",
+        "OpenWeather.q",
+        "OpenWeather.lang",
+        "OpenWeather.units",
+        "OpenWeather.q",
+        "OpenWeather.cnt",
+        "OpenWeather.units",
+        "OpenWeather.lang"
+      ],
+      "tool_description": "OpenWeather schema"
+    },
+    "The Weather API": {
+      "api_list_names": [
+        "The Weather API.cityName"
+      ],
+      "tool_description": "The Weather API schema"
+    },
+    "climate data": {
+      "api_list_names": [
+        "climate data.CITY",
+        "climate data.LANG",
+        "climate data.ZIPCODE",
+        "climate data.LANG",
+        "climate data.LAT",
+        "climate data.LON",
+        "climate data.KEY",
+        "climate data.LANG"
+      ],
+      "tool_description": "climate data schema"
+    },
+    "RapidWeather": {
+      "api_list_names": [
+        "RapidWeather.lon",
+        "RapidWeather.lat",
+        "RapidWeather.lang",
+        "RapidWeather.units",
+        "RapidWeather.exclude",
+        "RapidWeather.start",
+        "RapidWeather.lat",
+        "RapidWeather.end",
+        "RapidWeather.lon",
+        "RapidWeather.lat",
+        "RapidWeather.lon",
+        "RapidWeather.limit"
+      ],
+      "tool_description": "RapidWeather schema"
+    },
+    "Stormglass Complete": {
+      "api_list_names": [
+        "Stormglass Complete.lng",
+        "Stormglass Complete.apiKey",
+        "Stormglass Complete.lat",
+        "Stormglass Complete.endDate",
+        "Stormglass Complete.startDate",
+        "Stormglass Complete.datum",
+        "Stormglass Complete.params",
+        "Stormglass Complete.apiKey",
+        "Stormglass Complete.lat",
+        "Stormglass Complete.lng",
+        "Stormglass Complete.datum",
+        "Stormglass Complete.startDate",
+        "Stormglass Complete.endDate",
+        "Stormglass Complete.lat",
+        "Stormglass Complete.lng",
+        "Stormglass Complete.startDate",
+        "Stormglass Complete.endDate"
+      ],
+      "tool_description": "Stormglass Complete schema"
+    },
+    "Air Quality": {
+      "api_list_names": [
+        "Air Quality.lon",
+        "Air Quality.lat",
+        "Air Quality.lat",
+        "Air Quality.lon",
+        "Air Quality.hours",
+        "Air Quality.lat",
+        "Air Quality.lon"
+      ],
+      "tool_description": "Air Quality schema"
+    },
+    "Ouranos": {
+      "api_list_names": [
+        "Ouranos.lat",
+        "Ouranos.long",
+        "Ouranos.long",
+        "Ouranos.lat",
+        "Ouranos.long",
+        "Ouranos.lat",
+        "Ouranos.lat",
+        "Ouranos.long",
+        "Ouranos.long",
+        "Ouranos.lat"
+      ],
+      "tool_description": "Ouranos schema"
+    },
+    "Easy Weather": {
+      "api_list_names": [
+        "Easy Weather.longitude",
+        "Easy Weather.latitude",
+        "Easy Weather.latitude",
+        "Easy Weather.longitude",
+        "Easy Weather.longitude",
+        "Easy Weather.latitude"
+      ],
+      "tool_description": "Easy Weather schema"
+    },
+    "Wavebase": {
+      "api_list_names": [
+        "Wavebase.latitude",
+        "Wavebase.longitude",
+        "Wavebase.variable",
+        "Wavebase.datetime"
+      ],
+      "tool_description": "Wavebase schema"
+    },
+    "OikoWeather": {
+      "api_list_names": [
+        "OikoWeather.start",
+        "OikoWeather.lat",
+        "OikoWeather.param",
+        "OikoWeather.lon",
+        "OikoWeather.end",
+        "OikoWeather.freq"
+      ],
+      "tool_description": "OikoWeather schema"
+    },
+    "Aviation Weather Center": {
+      "api_list_names": [
+        "Aviation Weather Center.datasource",
+        "Aviation Weather Center.startTime",
+        "Aviation Weather Center.endTime",
+        "Aviation Weather Center.stationString"
+      ],
+      "tool_description": "Aviation Weather Center schema"
+    },
+    "Test": {
+      "api_list_names": [
+        "Test.id"
+      ],
+      "tool_description": "Test schema"
+    },
+    "weather_v14": {
+      "api_list_names": [
+        "weather_v14.id"
+      ],
+      "tool_description": "weather_v14 schema"
+    }
+  },
+  "Finance": {
+    "Binance Smart Chain": {
+      "api_list_names": [
+        "Binance Smart Chain.address",
+        "Binance Smart Chain.network",
+        "Binance Smart Chain.address",
+        "Binance Smart Chain.network",
+        "Binance Smart Chain.address",
+        "Binance Smart Chain.network"
+      ],
+      "tool_description": "Binance Smart Chain schema"
+    },
+    "Pancakeswap API Freemium": {
+      "api_list_names": [
+        "Pancakeswap API Freemium.address",
+        "Pancakeswap API Freemium.token"
+      ],
+      "tool_description": "Pancakeswap API Freemium schema"
+    },
+    "spacHero - SPAC Database": {
+      "api_list_names": [
+        "spacHero - SPAC Database.symbol",
+        "spacHero - SPAC Database.symbol",
+        "spacHero - SPAC Database.symbol",
+        "spacHero - SPAC Database.sortby",
+        "spacHero - SPAC Database.period",
+        "spacHero - SPAC Database.type",
+        "spacHero - SPAC Database.type"
+      ],
+      "tool_description": "spacHero - SPAC Database schema"
+    },
+    "Finshorts": {
+      "api_list_names": [
+        "Finshorts.q",
+        "Finshorts.month",
+        "Finshorts.q",
+        "Finshorts.q",
+        "Finshorts.q",
+        "Finshorts.range_type",
+        "Finshorts.range",
+        "Finshorts.q"
+      ],
+      "tool_description": "Finshorts schema"
+    },
+    "YH Finance Complete": {
+      "api_list_names": [
+        "YH Finance Complete.period",
+        "YH Finance Complete.symbol",
+        "YH Finance Complete.to",
+        "YH Finance Complete.from",
+        "YH Finance Complete.to",
+        "YH Finance Complete.from",
+        "YH Finance Complete.symbol",
+        "YH Finance Complete.period",
+        "YH Finance Complete.to",
+        "YH Finance Complete.from",
+        "YH Finance Complete.symbol",
+        "YH Finance Complete.period",
+        "YH Finance Complete.to",
+        "YH Finance Complete.from",
+        "YH Finance Complete.symbol",
+        "YH Finance Complete.period",
+        "YH Finance Complete.from",
+        "YH Finance Complete.to",
+        "YH Finance Complete.symbol",
+        "YH Finance Complete.period",
+        "YH Finance Complete.conversion",
+        "YH Finance Complete.period",
+        "YH Finance Complete.interval",
+        "YH Finance Complete.edate",
+        "YH Finance Complete.sdate",
+        "YH Finance Complete.ticker",
+        "YH Finance Complete.ticker",
+        "YH Finance Complete.ticker",
+        "YH Finance Complete.to",
+        "YH Finance Complete.amount",
+        "YH Finance Complete.from"
+      ],
+      "tool_description": "YH Finance Complete schema"
+    },
+    "Holistic Finance - Stock Data": {
+      "api_list_names": [
+        "Holistic Finance - Stock Data.symbol",
+        "Holistic Finance - Stock Data.period",
+        "Holistic Finance - Stock Data.symbol",
+        "Holistic Finance - Stock Data.period",
+        "Holistic Finance - Stock Data.symbol",
+        "Holistic Finance - Stock Data.period",
+        "Holistic Finance - Stock Data.symbol",
+        "Holistic Finance - Stock Data.includeCurrentQuarter",
+        "Holistic Finance - Stock Data.symbol",
+        "Holistic Finance - Stock Data.symbol",
+        "Holistic Finance - Stock Data.symbol",
+        "Holistic Finance - Stock Data.symbol"
+      ],
+      "tool_description": "Holistic Finance - Stock Data schema"
+    },
+    "Finance Data": {
+      "api_list_names": [
+        "Finance Data.symbol",
+        "Finance Data.format",
+        "Finance Data.symbol",
+        "Finance Data.format",
+        "Finance Data.symbol",
+        "Finance Data.format",
+        "Finance Data.symbol",
+        "Finance Data.format",
+        "Finance Data.symbol",
+        "Finance Data.symbol",
+        "Finance Data.symbol",
+        "Finance Data.symbol"
+      ],
+      "tool_description": "Finance Data schema"
+    },
+    "vatlayer": {
+      "api_list_names": [
+        "vatlayer.amount",
+        "vatlayer.country_code",
+        "vatlayer.ip_address",
+        "vatlayer.use_client_ip",
+        "vatlayer.incl",
+        "vatlayer.type",
+        "vatlayer.country_code",
+        "vatlayer.ip_address",
+        "vatlayer.use_client_ip"
+      ],
+      "tool_description": "vatlayer schema"
+    },
+    "Inflation by API-Ninjas": {
+      "api_list_names": [
+        "Inflation by API-Ninjas.type"
+      ],
+      "tool_description": "Inflation by API-Ninjas schema"
+    },
+    "Realtime Crypto Prices": {
+      "api_list_names": [
+        "Realtime Crypto Prices.symbol",
+        "Realtime Crypto Prices.symbol",
+        "Realtime Crypto Prices.symbol"
+      ],
+      "tool_description": "Realtime Crypto Prices schema"
+    },
+    "Stoxx": {
+      "api_list_names": [
+        "Stoxx.ticker",
+        "Stoxx.ticker",
+        "Stoxx.months"
+      ],
+      "tool_description": "Stoxx schema"
+    },
+    "Real-Time Quotes": {
+      "api_list_names": [
+        "Real-Time Quotes.interval",
+        "Real-Time Quotes.symbol"
+      ],
+      "tool_description": "Real-Time Quotes schema"
+    },
+    "Cryptocurrency Data": {
+      "api_list_names": [
+        "Cryptocurrency Data.symbol",
+        "Cryptocurrency Data.base",
+        "Cryptocurrency Data.market_venue",
+        "Cryptocurrency Data.data_type"
+      ],
+      "tool_description": "Cryptocurrency Data schema"
+    },
+    "Crowdsense": {
+      "api_list_names": [
+        "Crowdsense.securityName",
+        "Crowdsense.date",
+        "Crowdsense.timeFrame"
+      ],
+      "tool_description": "Crowdsense schema"
+    },
+    "Defi Data": {
+      "api_list_names": [
+        "Defi Data.chain",
+        "Defi Data.timestamp"
+      ],
+      "tool_description": "Defi Data schema"
+    },
+    "Date Calculator": {
+      "api_list_names": [
+        "Date Calculator.start_date",
+        "Date Calculator.weekday",
+        "Date Calculator.hours",
+        "Date Calculator.microseconds",
+        "Date Calculator.seconds",
+        "Date Calculator.minutes",
+        "Date Calculator.days",
+        "Date Calculator.months",
+        "Date Calculator.weeks",
+        "Date Calculator.years",
+        "Date Calculator.months",
+        "Date Calculator.start_date"
+      ],
+      "tool_description": "Date Calculator schema"
+    },
+    "Forecast crypto and fiat currency exchange rates": {
+      "api_list_names": [
+        "Forecast crypto and fiat currency exchange rates.country_code",
+        "Forecast crypto and fiat currency exchange rates.country_code",
+        "Forecast crypto and fiat currency exchange rates.date_yyyy_mm_dd_from",
+        "Forecast crypto and fiat currency exchange rates.bank_id",
+        "Forecast crypto and fiat currency exchange rates.date_yyyy_mm_dd_till",
+        "Forecast crypto and fiat currency exchange rates.tz",
+        "Forecast crypto and fiat currency exchange rates.country_code",
+        "Forecast crypto and fiat currency exchange rates.currency",
+        "Forecast crypto and fiat currency exchange rates.predict_days"
+      ],
+      "tool_description": "Forecast crypto and fiat currency exchange rates schema"
+    },
+    "Exchange rates live": {
+      "api_list_names": [
+        "Exchange rates live.bankId"
+      ],
+      "tool_description": "Exchange rates live schema"
+    }
+  },
+  "Financial": {
+    "MarketCI Analytics": {
+      "api_list_names": [
+        "MarketCI Analytics.symbol",
+        "MarketCI Analytics.symbol",
+        "MarketCI Analytics.symbol",
+        "MarketCI Analytics.symbol",
+        "MarketCI Analytics.symbol",
+        "MarketCI Analytics.symbol"
+      ],
+      "tool_description": "MarketCI Analytics schema"
+    },
+    "FmpCloud": {
+      "api_list_names": [
+        "FmpCloud.stock",
+        "FmpCloud.apikey",
+        "FmpCloud.period",
+        "FmpCloud.stock",
+        "FmpCloud.apikey",
+        "FmpCloud.period"
+      ],
+      "tool_description": "FmpCloud schema"
+    },
+    "Mutual fund Nav": {
+      "api_list_names": [
+        "Mutual fund Nav.ID"
+      ],
+      "tool_description": "Mutual fund Nav schema"
+    },
+    "Consulta de boleto": {
+      "api_list_names": [
+        "Consulta de boleto.id"
+      ],
+      "tool_description": "Consulta de boleto schema"
+    },
+    "Number2Words": {
+      "api_list_names": [
+        "Number2Words.language",
+        "Number2Words.number",
+        "Number2Words.locale",
+        "Number2Words.units",
+        "Number2Words.currency",
+        "Number2Words.output"
+      ],
+      "tool_description": "Number2Words schema"
+    },
+    "CalcX - Investment API": {
+      "api_list_names": [
+        "CalcX - Investment API.rate",
+        "CalcX - Investment API.principal",
+        "CalcX - Investment API.time",
+        "CalcX - Investment API.compounding",
+        "CalcX - Investment API.format",
+        "CalcX - Investment API.to_currency",
+        "CalcX - Investment API.in_currency"
+      ],
+      "tool_description": "CalcX - Investment API schema"
+    },
+    "Luhn algorithm": {
+      "api_list_names": [
+        "Luhn algorithm.number"
+      ],
+      "tool_description": "Luhn algorithm schema"
+    },
+    "Open DeFi": {
+      "api_list_names": [
+        "Open DeFi.pair_id",
+        "Open DeFi.period",
+        "Open DeFi.time_bucket",
+        "Open DeFi.pair_id",
+        "Open DeFi.start",
+        "Open DeFi.end"
+      ],
+      "tool_description": "Open DeFi schema"
+    },
+    "\ud83d\udcc5 Economic Events Calendar \ud83d\ude80": {
+      "api_list_names": [
+        "\ud83d\udcc5 Economic Events Calendar \ud83d\ude80.to",
+        "\ud83d\udcc5 Economic Events Calendar \ud83d\ude80.from",
+        "\ud83d\udcc5 Economic Events Calendar \ud83d\ude80.countries"
+      ],
+      "tool_description": "\ud83d\udcc5 Economic Events Calendar \ud83d\ude80 schema"
+    },
+    "Currency Converter_v2": {
+      "api_list_names": [
+        "Currency Converter_v2.from",
+        "Currency Converter_v2.amount",
+        "Currency Converter_v2.to"
+      ],
+      "tool_description": "Currency Converter_v2 schema"
+    }
+  },
+  "Travel": {
+    "Flixbus": {
+      "api_list_names": [
+        "Flixbus.to_id",
+        "Flixbus.from_id",
+        "Flixbus.currency",
+        "Flixbus.departure_date",
+        "Flixbus.number_adult",
+        "Flixbus.number_bike_slot",
+        "Flixbus.search_by",
+        "Flixbus.number_children"
+      ],
+      "tool_description": "Flixbus schema"
+    },
+    "Flight Fare Search": {
+      "api_list_names": [
+        "Flight Fare Search.date",
+        "Flight Fare Search.from",
+        "Flight Fare Search.adult",
+        "Flight Fare Search.to",
+        "Flight Fare Search.currency",
+        "Flight Fare Search.type",
+        "Flight Fare Search.child",
+        "Flight Fare Search.infant"
+      ],
+      "tool_description": "Flight Fare Search schema"
+    },
+    "Airbnb Search": {
+      "api_list_names": [
+        "Airbnb Search.currency",
+        "Airbnb Search.locale",
+        "Airbnb Search.id",
+        "Airbnb Search.locale",
+        "Airbnb Search.swLat",
+        "Airbnb Search.neLng",
+        "Airbnb Search.neLat",
+        "Airbnb Search.swLng",
+        "Airbnb Search.currency",
+        "Airbnb Search.has_step_free_shower",
+        "Airbnb Search.has_step_free_guest_entrance",
+        "Airbnb Search.children",
+        "Airbnb Search.has_crib",
+        "Airbnb Search.has_self_check_in",
+        "Airbnb Search.has_carbon_monoxide_alarm",
+        "Airbnb Search.has_accessible_parking_spot",
+        "Airbnb Search.has_instant_book",
+        "Airbnb Search.has_step_free_bathroom_access",
+        "Airbnb Search.has_guest_entrance_wider_than_32_inches",
+        "Airbnb Search.has_shower_or_bath_chair",
+        "Airbnb Search.has_hot_tub",
+        "Airbnb Search.has_hair_dryer",
+        "Airbnb Search.has_smoke_alarm",
+        "Airbnb Search.has_indoor_fireplace",
+        "Airbnb Search.has_dryer",
+        "Airbnb Search.has_shower_grab_bar",
+        "Airbnb Search.has_tv",
+        "Airbnb Search.has_bedroom_entrance_wider_than_32_inches",
+        "Airbnb Search.has_iron",
+        "Airbnb Search.has_step_free_path_to_the_guest_entrance",
+        "Airbnb Search.has_breakfast",
+        "Airbnb Search.has_smoking_allowed",
+        "Airbnb Search.has_step_free_bedroom_access",
+        "Airbnb Search.pets",
+        "Airbnb Search.max_price",
+        "Airbnb Search.has_pool",
+        "Airbnb Search.has_free_parking",
+        "Airbnb Search.has_kitchen",
+        "Airbnb Search.has_bbq_grill",
+        "Airbnb Search.has_gym",
+        "Airbnb Search.has_ev_charger",
+        "Airbnb Search.min_bathroom",
+        "Airbnb Search.property_type",
+        "Airbnb Search.adults",
+        "Airbnb Search.has_dedicated_workspace",
+        "Airbnb Search.infants",
+        "Airbnb Search.min_bed",
+        "Airbnb Search.has_private_room",
+        "Airbnb Search.min_bedroom",
+        "Airbnb Search.has_shared_room",
+        "Airbnb Search.has_entire_place",
+        "Airbnb Search.checkin",
+        "Airbnb Search.page",
+        "Airbnb Search.checkout",
+        "Airbnb Search.category",
+        "Airbnb Search.has_bathroom_entrance_wider_than_32_inches",
+        "Airbnb Search.has_toilet_grab_bar",
+        "Airbnb Search.has_superhost",
+        "Airbnb Search.has_wifi",
+        "Airbnb Search.has_air_conditioning",
+        "Airbnb Search.has_washer",
+        "Airbnb Search.min_price",
+        "Airbnb Search.has_heating"
+      ],
+      "tool_description": "Airbnb Search schema"
+    },
+    "Skyscanner_v2": {
+      "api_list_names": [
+        "Skyscanner_v2.legs",
+        "Skyscanner_v2.infants",
+        "Skyscanner_v2.waitTime",
+        "Skyscanner_v2.filter",
+        "Skyscanner_v2.market",
+        "Skyscanner_v2.children",
+        "Skyscanner_v2.cabinClass",
+        "Skyscanner_v2.countryCode",
+        "Skyscanner_v2.adults",
+        "Skyscanner_v2.currency",
+        "Skyscanner_v2.entityId",
+        "Skyscanner_v2.lat",
+        "Skyscanner_v2.lng",
+        "Skyscanner_v2.market",
+        "Skyscanner_v2.currency",
+        "Skyscanner_v2.countryCode",
+        "Skyscanner_v2.adults",
+        "Skyscanner_v2.checkout",
+        "Skyscanner_v2.entityId",
+        "Skyscanner_v2.checkin",
+        "Skyscanner_v2.childrenAges",
+        "Skyscanner_v2.waitTime"
+      ],
+      "tool_description": "Skyscanner_v2 schema"
+    },
+    "Flight Data_v2": {
+      "api_list_names": [
+        "Flight Data_v2.currency",
+        "Flight Data_v2.origin",
+        "Flight Data_v2.airline_code",
+        "Flight Data_v2.limit"
+      ],
+      "tool_description": "Flight Data_v2 schema"
+    },
+    "Zumata": {
+      "api_list_names": [
+        "Zumata.destinationId",
+        "Zumata.checkInDateTime",
+        "Zumata.checkOutDateTime",
+        "Zumata.lang",
+        "Zumata.roomCount",
+        "Zumata.adultCount",
+        "Zumata.sessionId",
+        "Zumata.city",
+        "Zumata.countryCode",
+        "Zumata.stateOrProvinceCode",
+        "Zumata.gzip",
+        "Zumata.production",
+        "Zumata.hotelId",
+        "Zumata.destination_id",
+        "Zumata.checkInDateTime",
+        "Zumata.checkOutDateTime",
+        "Zumata.lang",
+        "Zumata.roomCount",
+        "Zumata.adultCount",
+        "Zumata.sessionId",
+        "Zumata.city",
+        "Zumata.countryCode",
+        "Zumata.stateOrProvinceCode",
+        "Zumata.gzip",
+        "Zumata.production",
+        "Zumata.hotelId[]",
+        "Zumata.max_wait",
+        "Zumata.requested_currency"
+      ],
+      "tool_description": "Zumata schema"
+    },
+    "Airports Finder": {
+      "api_list_names": [
+        "Airports Finder.country",
+        "Airports Finder.city",
+        "Airports Finder.lon",
+        "Airports Finder.lat"
+      ],
+      "tool_description": "Airports Finder schema"
+    },
+    "World Scuba Diving Sites Api": {
+      "api_list_names": [
+        "World Scuba Diving Sites Api.country"
+      ],
+      "tool_description": "World Scuba Diving Sites Api schema"
+    },
+    "webcams.travel": {
+      "api_list_names": [
+        "webcams.travel.continent",
+        "webcams.travel.lang",
+        "webcams.travel.show",
+        "webcams.travel.ne_lat",
+        "webcams.travel.sw_lng",
+        "webcams.travel.sw_lat",
+        "webcams.travel.ne_lng",
+        "webcams.travel.lang",
+        "webcams.travel.show",
+        "webcams.travel.sort",
+        "webcams.travel.order",
+        "webcams.travel.lang",
+        "webcams.travel.show"
+      ],
+      "tool_description": "webcams.travel schema"
+    },
+    "Airbnb listings": {
+      "api_list_names": [
+        "Airbnb listings.lat",
+        "Airbnb listings.lng",
+        "Airbnb listings.offset",
+        "Airbnb listings.range",
+        "Airbnb listings.bedrooms",
+        "Airbnb listings.maxGuestCapacity",
+        "Airbnb listings.id",
+        "Airbnb listings.year",
+        "Airbnb listings.month",
+        "Airbnb listings.id",
+        "Airbnb listings.id"
+      ],
+      "tool_description": "Airbnb listings schema"
+    },
+    "Ranked Crime Cities": {
+      "api_list_names": [
+        "Ranked Crime Cities.id"
+      ],
+      "tool_description": "Ranked Crime Cities schema"
+    },
+    "Biggest Cities": {
+      "api_list_names": [
+        "Biggest Cities.id"
+      ],
+      "tool_description": "Biggest Cities schema"
+    },
+    "BiggestCities": {
+      "api_list_names": [
+        "BiggestCities.id"
+      ],
+      "tool_description": "BiggestCities schema"
+    },
+    "Nomad List Cities": {
+      "api_list_names": [
+        "Nomad List Cities.page",
+        "Nomad List Cities.sort",
+        "Nomad List Cities.sort_by",
+        "Nomad List Cities.size",
+        "Nomad List Cities.sort",
+        "Nomad List Cities.sort_by",
+        "Nomad List Cities.size",
+        "Nomad List Cities.page",
+        "Nomad List Cities.sort",
+        "Nomad List Cities.sort_by",
+        "Nomad List Cities.page",
+        "Nomad List Cities.size"
+      ],
+      "tool_description": "Nomad List Cities schema"
+    }
+  },
+  "Location": {
+    "Location": {
+      "api_list_names": [
+        "Location.latitude",
+        "Location.longitude",
+        "Location.group",
+        "Location.latitude",
+        "Location.longitude",
+        "Location.postalCode",
+        "Location.countryAlpha2",
+        "Location.countryAlpha3",
+        "Location.countryName",
+        "Location.countryId",
+        "Location.stateId",
+        "Location.stateName",
+        "Location.cityId",
+        "Location.stateAbbreviation",
+        "Location.cityName",
+        "Location.page",
+        "Location.name",
+        "Location.name",
+        "Location.page",
+        "Location.name",
+        "Location.alpha3",
+        "Location.alpha2",
+        "Location.page",
+        "Location.name",
+        "Location.page",
+        "Location.abbreviation",
+        "Location.name",
+        "Location.stateName",
+        "Location.stateAbbreviation",
+        "Location.page",
+        "Location.stateId",
+        "Location.ip"
+      ],
+      "tool_description": "Location schema"
+    },
+    "Uganda API": {
+      "api_list_names": [
+        "Uganda API.end_lat",
+        "Uganda API.start_lat",
+        "Uganda API.end_lon",
+        "Uganda API.start_lon",
+        "Uganda API.distance_unit",
+        "Uganda API.lon",
+        "Uganda API.lat",
+        "Uganda API.region",
+        "Uganda API.type",
+        "Uganda API.limit",
+        "Uganda API.city",
+        "Uganda API.address",
+        "Uganda API.lat1",
+        "Uganda API.lat2",
+        "Uganda API.lon2",
+        "Uganda API.lon1",
+        "Uganda API.unit"
+      ],
+      "tool_description": "Uganda API schema"
+    },
+    "Egypt API": {
+      "api_list_names": [
+        "Egypt API.start_lat",
+        "Egypt API.end_lon",
+        "Egypt API.start_lon",
+        "Egypt API.end_lat",
+        "Egypt API.distance_unit",
+        "Egypt API.lon",
+        "Egypt API.lat",
+        "Egypt API.gov",
+        "Egypt API.type",
+        "Egypt API.city",
+        "Egypt API.limit",
+        "Egypt API.address",
+        "Egypt API.lon2",
+        "Egypt API.lat1",
+        "Egypt API.lon1",
+        "Egypt API.lat2",
+        "Egypt API.unit"
+      ],
+      "tool_description": "Egypt API schema"
+    },
+    "UK Postcode": {
+      "api_list_names": [
+        "UK Postcode.postcode",
+        "UK Postcode.q",
+        "UK Postcode.limit"
+      ],
+      "tool_description": "UK Postcode schema"
+    },
+    "Local Search": {
+      "api_list_names": [
+        "Local Search.Keyword",
+        "Local Search.Name",
+        "Local Search.City",
+        "Local Search.State",
+        "Local Search.PostalCode",
+        "Local Search.Sort",
+        "Local Search.category"
+      ],
+      "tool_description": "Local Search schema"
+    },
+    "World Cities and Countries": {
+      "api_list_names": [
+        "World Cities and Countries.limit",
+        "World Cities and Countries.page",
+        "World Cities and Countries.countryIsoCode",
+        "World Cities and Countries.keyword",
+        "World Cities and Countries.page",
+        "World Cities and Countries.sortBy",
+        "World Cities and Countries.limit",
+        "World Cities and Countries.keyword",
+        "World Cities and Countries.page",
+        "World Cities and Countries.limit",
+        "World Cities and Countries.sortBy"
+      ],
+      "tool_description": "World Cities and Countries schema"
+    },
+    "IP Geolocation_v3": {
+      "api_list_names": [
+        "IP Geolocation_v3.ip"
+      ],
+      "tool_description": "IP Geolocation_v3 schema"
+    },
+    "World Time": {
+      "api_list_names": [
+        "World Time.location",
+        "World Time.area"
+      ],
+      "tool_description": "World Time schema"
+    },
+    "Get IP Info_v2": {
+      "api_list_names": [
+        "Get IP Info_v2.ip",
+        "Get IP Info_v2.key"
+      ],
+      "tool_description": "Get IP Info_v2 schema"
+    },
+    "Location_v2": {
+      "api_list_names": [
+        "Location_v2.q",
+        "Location_v2.latitude",
+        "Location_v2.longitude"
+      ],
+      "tool_description": "Location_v2 schema"
+    },
+    "GoApis Geocoding API": {
+      "api_list_names": [
+        "GoApis Geocoding API.lat",
+        "GoApis Geocoding API.long"
+      ],
+      "tool_description": "GoApis Geocoding API schema"
+    },
+    "World Time by API-Ninjas": {
+      "api_list_names": [
+        "World Time by API-Ninjas.timezone",
+        "World Time by API-Ninjas.lon",
+        "World Time by API-Ninjas.lat",
+        "World Time by API-Ninjas.state",
+        "World Time by API-Ninjas.country",
+        "World Time by API-Ninjas.city"
+      ],
+      "tool_description": "World Time by API-Ninjas schema"
+    }
+  },
+  "Sports": {
+    "Live Golf Data": {
+      "api_list_names": [
+        "Live Golf Data.year",
+        "Live Golf Data.statId",
+        "Live Golf Data.year",
+        "Live Golf Data.tournId",
+        "Live Golf Data.tournId",
+        "Live Golf Data.year",
+        "Live Golf Data.orgId",
+        "Live Golf Data.tournId",
+        "Live Golf Data.year",
+        "Live Golf Data.orgId",
+        "Live Golf Data.year",
+        "Live Golf Data.year",
+        "Live Golf Data.statId",
+        "Live Golf Data.orgId",
+        "Live Golf Data.year",
+        "Live Golf Data.playerId",
+        "Live Golf Data.tournId",
+        "Live Golf Data.roundId",
+        "Live Golf Data.orgId",
+        "Live Golf Data.tournId",
+        "Live Golf Data.year",
+        "Live Golf Data.roundId",
+        "Live Golf Data.lastName",
+        "Live Golf Data.playerId",
+        "Live Golf Data.firstName"
+      ],
+      "tool_description": "Live Golf Data schema"
+    },
+    "RugbyAPI2": {
+      "api_list_names": [
+        "RugbyAPI2.month",
+        "RugbyAPI2.year",
+        "RugbyAPI2.id",
+        "RugbyAPI2.day",
+        "RugbyAPI2.seasonId",
+        "RugbyAPI2.tournamentId",
+        "RugbyAPI2.page",
+        "RugbyAPI2.id",
+        "RugbyAPI2.id",
+        "RugbyAPI2.id",
+        "RugbyAPI2.id",
+        "RugbyAPI2.id",
+        "RugbyAPI2.tournamentId",
+        "RugbyAPI2.tournamentId"
+      ],
+      "tool_description": "RugbyAPI2 schema"
+    },
+    "TransferMarkt DB": {
+      "api_list_names": [
+        "TransferMarkt DB.player_id",
+        "TransferMarkt DB.locale",
+        "TransferMarkt DB.competition_id",
+        "TransferMarkt DB.season_id",
+        "TransferMarkt DB.locale",
+        "TransferMarkt DB.player_id",
+        "TransferMarkt DB.player_id",
+        "TransferMarkt DB.locale",
+        "TransferMarkt DB.referee_id",
+        "TransferMarkt DB.locale",
+        "TransferMarkt DB.season_id",
+        "TransferMarkt DB.standing_type",
+        "TransferMarkt DB.competition_id",
+        "TransferMarkt DB.season_id",
+        "TransferMarkt DB.locale",
+        "TransferMarkt DB.competition_id",
+        "TransferMarkt DB.locale",
+        "TransferMarkt DB.competition_id",
+        "TransferMarkt DB.locale"
+      ],
+      "tool_description": "TransferMarkt DB schema"
+    },
+    "Zeus API": {
+      "api_list_names": [
+        "Zeus API.id",
+        "Zeus API.year",
+        "Zeus API.round",
+        "Zeus API.id",
+        "Zeus API.year",
+        "Zeus API.id",
+        "Zeus API.year",
+        "Zeus API.id",
+        "Zeus API.id"
+      ],
+      "tool_description": "Zeus API schema"
+    },
+    "Tank01 NFL Live In-Game Real Time Statistics NFL": {
+      "api_list_names": [
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.playerID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.gameID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.playerID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.playerName",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.gameDate",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.gameID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.gameID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.gameID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.teamID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.season",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.teamAbv",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.archiveDate",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.teamAbv",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.teamID",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.schedules",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.rosters",
+        "Tank01 NFL Live In-Game Real Time Statistics NFL.gameDate"
+      ],
+      "tool_description": "Tank01 NFL Live In-Game Real Time Statistics NFL schema"
+    },
+    "WNBA API": {
+      "api_list_names": [
+        "WNBA API.year",
+        "WNBA API.group",
+        "WNBA API.month",
+        "WNBA API.day",
+        "WNBA API.year",
+        "WNBA API.limit",
+        "WNBA API.month",
+        "WNBA API.day",
+        "WNBA API.year",
+        "WNBA API.id",
+        "WNBA API.id",
+        "WNBA API.id",
+        "WNBA API.teamid"
+      ],
+      "tool_description": "WNBA API schema"
+    },
+    "CricketAPI2": {
+      "api_list_names": [
+        "CricketAPI2.year",
+        "CricketAPI2.day",
+        "CricketAPI2.month",
+        "CricketAPI2.seasonId",
+        "CricketAPI2.page",
+        "CricketAPI2.tournamentId",
+        "CricketAPI2.page",
+        "CricketAPI2.id",
+        "CricketAPI2.tournamentId",
+        "CricketAPI2.seasonId",
+        "CricketAPI2.tournamentId",
+        "CricketAPI2.seasonId",
+        "CricketAPI2.id",
+        "CricketAPI2.id"
+      ],
+      "tool_description": "CricketAPI2 schema"
+    },
+    "Tank01 Fantasy Stats": {
+      "api_list_names": [
+        "Tank01 Fantasy Stats.year",
+        "Tank01 Fantasy Stats.endInjDate",
+        "Tank01 Fantasy Stats.numberOfDays",
+        "Tank01 Fantasy Stats.beginningInjDate",
+        "Tank01 Fantasy Stats.playerID",
+        "Tank01 Fantasy Stats.injDate",
+        "Tank01 Fantasy Stats.playerID",
+        "Tank01 Fantasy Stats.numberOfGames",
+        "Tank01 Fantasy Stats.season",
+        "Tank01 Fantasy Stats.gameID",
+        "Tank01 Fantasy Stats.statsToGet",
+        "Tank01 Fantasy Stats.playerID",
+        "Tank01 Fantasy Stats.playerName",
+        "Tank01 Fantasy Stats.gameID",
+        "Tank01 Fantasy Stats.gameDate",
+        "Tank01 Fantasy Stats.gameID",
+        "Tank01 Fantasy Stats.teamID",
+        "Tank01 Fantasy Stats.statsToGet",
+        "Tank01 Fantasy Stats.archiveDate",
+        "Tank01 Fantasy Stats.teamAbv",
+        "Tank01 Fantasy Stats.season",
+        "Tank01 Fantasy Stats.teamID",
+        "Tank01 Fantasy Stats.teamAbv",
+        "Tank01 Fantasy Stats.statsToGet",
+        "Tank01 Fantasy Stats.schedules",
+        "Tank01 Fantasy Stats.teamStats",
+        "Tank01 Fantasy Stats.topPerformers",
+        "Tank01 Fantasy Stats.rosters",
+        "Tank01 Fantasy Stats.gameDate"
+      ],
+      "tool_description": "Tank01 Fantasy Stats schema"
+    },
+    "Cricbuzz Cricket": {
+      "api_list_names": [
+        "Cricbuzz Cricket.statsType",
+        "Cricbuzz Cricket.teamId",
+        "Cricbuzz Cricket.opponent",
+        "Cricbuzz Cricket.team",
+        "Cricbuzz Cricket.year",
+        "Cricbuzz Cricket.matchType",
+        "Cricbuzz Cricket.matchId"
+      ],
+      "tool_description": "Cricbuzz Cricket schema"
+    },
+    "F1 drivers quotes": {
+      "api_list_names": [
+        "F1 drivers quotes.driverId",
+        "F1 drivers quotes.page"
+      ],
+      "tool_description": "F1 drivers quotes schema"
+    },
+    "Free NBA": {
+      "api_list_names": [
+        "Free NBA.page",
+        "Free NBA.per_page",
+        "Free NBA.team_ids",
+        "Free NBA.date",
+        "Free NBA.Seasons",
+        "Free NBA.seasons",
+        "Free NBA.page",
+        "Free NBA.per_page",
+        "Free NBA.player_ids",
+        "Free NBA.dates",
+        "Free NBA.game_ids",
+        "Free NBA.page",
+        "Free NBA.per_page",
+        "Free NBA.search",
+        "Free NBA.page",
+        "Free NBA.id",
+        "Free NBA.id",
+        "Free NBA.id"
+      ],
+      "tool_description": "Free NBA schema"
+    },
+    "BetsAPI": {
+      "api_list_names": [
+        "BetsAPI.sport_id",
+        "BetsAPI.day",
+        "BetsAPI.league_id",
+        "BetsAPI.page",
+        "BetsAPI.league_id",
+        "BetsAPI.sport_id",
+        "BetsAPI.skip_esports",
+        "BetsAPI.event_id"
+      ],
+      "tool_description": "BetsAPI schema"
+    },
+    "BaseballApi": {
+      "api_list_names": [
+        "BaseballApi.page",
+        "BaseballApi.id",
+        "BaseballApi.seasonId",
+        "BaseballApi.page",
+        "BaseballApi.tournamentId",
+        "BaseballApi.seasonId",
+        "BaseballApi.tournamentId",
+        "BaseballApi.id",
+        "BaseballApi.id",
+        "BaseballApi.id",
+        "BaseballApi.id",
+        "BaseballApi.id"
+      ],
+      "tool_description": "BaseballApi schema"
+    },
+    "Pinnacle Odds": {
+      "api_list_names": [
+        "Pinnacle Odds.sport_id",
+        "Pinnacle Odds.page_num",
+        "Pinnacle Odds.league_ids",
+        "Pinnacle Odds.sport_id",
+        "Pinnacle Odds.is_have_odds",
+        "Pinnacle Odds.league_ids",
+        "Pinnacle Odds.event_type",
+        "Pinnacle Odds.since",
+        "Pinnacle Odds.event_ids",
+        "Pinnacle Odds.sport_id",
+        "Pinnacle Odds.sport_id",
+        "Pinnacle Odds.league_ids",
+        "Pinnacle Odds.event_type",
+        "Pinnacle Odds.event_ids",
+        "Pinnacle Odds.is_have_odds",
+        "Pinnacle Odds.since",
+        "Pinnacle Odds.sport_id",
+        "Pinnacle Odds.event_id"
+      ],
+      "tool_description": "Pinnacle Odds schema"
+    },
+    "SheScoresAPI": {
+      "api_list_names": [
+        "SheScoresAPI.id",
+        "SheScoresAPI.id"
+      ],
+      "tool_description": "SheScoresAPI schema"
+    },
+    "Football Data": {
+      "api_list_names": [
+        "Football Data.tournamentId",
+        "Football Data.tournamentId",
+        "Football Data.tournamentId",
+        "Football Data.date",
+        "Football Data.date",
+        "Football Data.date",
+        "Football Data.matchId",
+        "Football Data.matchId",
+        "Football Data.matchId"
+      ],
+      "tool_description": "Football Data schema"
+    },
+    "ViperScore": {
+      "api_list_names": [
+        "ViperScore.date",
+        "ViperScore.sport",
+        "ViperScore.gameId",
+        "ViperScore.gameId",
+        "ViperScore.gameId",
+        "ViperScore.gameId",
+        "ViperScore.gameId",
+        "ViperScore.sport",
+        "ViperScore.sport"
+      ],
+      "tool_description": "ViperScore schema"
+    },
+    "Baseball": {
+      "api_list_names": [
+        "Baseball.teamIds",
+        "Baseball.teamIds"
+      ],
+      "tool_description": "Baseball schema"
+    },
+    "AllScores": {
+      "api_list_names": [
+        "AllScores.athleteId",
+        "AllScores.competitionId",
+        "AllScores.timezone",
+        "AllScores.langId",
+        "AllScores.timezone",
+        "AllScores.gameId",
+        "AllScores.langId",
+        "AllScores.lastUpdateId",
+        "AllScores.matchupId",
+        "AllScores.gameId",
+        "AllScores.langId",
+        "AllScores.timezone",
+        "AllScores.lastUpdateId",
+        "AllScores.matchupId",
+        "AllScores.timezone",
+        "AllScores.sport",
+        "AllScores.langId",
+        "AllScores.type",
+        "AllScores.withSeasons"
+      ],
+      "tool_description": "AllScores schema"
+    },
+    "Major League Soccer Standings": {
+      "api_list_names": [
+        "Major League Soccer Standings.season"
+      ],
+      "tool_description": "Major League Soccer Standings schema"
+    },
+    "IPL API": {
+      "api_list_names": [
+        "IPL API.team"
+      ],
+      "tool_description": "IPL API schema"
+    }
+  },
+  "Music": {
+    "MusicData API": {
+      "api_list_names": [
+        "MusicData API.videoID",
+        "MusicData API.countryID",
+        "MusicData API.timeframe",
+        "MusicData API.type"
+      ],
+      "tool_description": "MusicData API schema"
+    },
+    "Youtube Music API (Detailed)": {
+      "api_list_names": [
+        "Youtube Music API (Detailed).video_id",
+        "Youtube Music API (Detailed).video_id",
+        "Youtube Music API (Detailed).country"
+      ],
+      "tool_description": "Youtube Music API (Detailed) schema"
+    },
+    "50K Radio Stations": {
+      "api_list_names": [
+        "50K Radio Stations.country_id",
+        "50K Radio Stations.keyword",
+        "50K Radio Stations.keyword",
+        "50K Radio Stations.genre_id",
+        "50K Radio Stations.city_id",
+        "50K Radio Stations.country_id",
+        "50K Radio Stations.page"
+      ],
+      "tool_description": "50K Radio Stations schema"
+    },
+    "Spotify Web": {
+      "api_list_names": [
+        "Spotify Web.q",
+        "Spotify Web.type",
+        "Spotify Web.limit",
+        "Spotify Web.numberOfTopResults",
+        "Spotify Web.offset",
+        "Spotify Web.id",
+        "Spotify Web.offset",
+        "Spotify Web.limit",
+        "Spotify Web.id"
+      ],
+      "tool_description": "Spotify Web schema"
+    },
+    "kotak7": {
+      "api_list_names": [
+        "kotak7.index",
+        "kotak7.num",
+        "kotak7.lang",
+        "kotak7.country",
+        "kotak7.id",
+        "kotak7.num",
+        "kotak7.lang",
+        "kotak7.index",
+        "kotak7.country",
+        "kotak7.id",
+        "kotak7.index",
+        "kotak7.lang",
+        "kotak7.country",
+        "kotak7.num",
+        "kotak7.id"
+      ],
+      "tool_description": "kotak7 schema"
+    },
+    "Indie Songs : DistroKid & Unsigned": {
+      "api_list_names": [
+        "Indie Songs : DistroKid & Unsigned.offset",
+        "Indie Songs : DistroKid & Unsigned.limit",
+        "Indie Songs : DistroKid & Unsigned.by",
+        "Indie Songs : DistroKid & Unsigned.q"
+      ],
+      "tool_description": "Indie Songs : DistroKid & Unsigned schema"
+    },
+    "Spotify": {
+      "api_list_names": [
+        "Spotify.id",
+        "Spotify.id",
+        "Spotify.id",
+        "Spotify.playlistLimit",
+        "Spotify.artistLimit"
+      ],
+      "tool_description": "Spotify schema"
+    },
+    "Genius - Song Lyrics": {
+      "api_list_names": [
+        "Genius - Song Lyrics.id",
+        "Genius - Song Lyrics.text_format",
+        "Genius - Song Lyrics.id",
+        "Genius - Song Lyrics.next_cursor",
+        "Genius - Song Lyrics.text_format",
+        "Genius - Song Lyrics.per_page",
+        "Genius - Song Lyrics.sort",
+        "Genius - Song Lyrics.id",
+        "Genius - Song Lyrics.per_page",
+        "Genius - Song Lyrics.text_format",
+        "Genius - Song Lyrics.next_cursor"
+      ],
+      "tool_description": "Genius - Song Lyrics schema"
+    },
+    "SoundCloud Charts API": {
+      "api_list_names": [
+        "SoundCloud Charts API.genre",
+        "SoundCloud Charts API.kind",
+        "SoundCloud Charts API.limit",
+        "SoundCloud Charts API.region"
+      ],
+      "tool_description": "SoundCloud Charts API schema"
+    },
+    "xmusic": {
+      "api_list_names": [
+        "xmusic.lang",
+        "xmusic.country",
+        "xmusic.songid",
+        "xmusic.song_preview_kbps",
+        "xmusic.https_only",
+        "xmusic.s",
+        "xmusic.wmid"
+      ],
+      "tool_description": "xmusic schema"
+    },
+    "Shazam API": {
+      "api_list_names": [
+        "Shazam API.city_name",
+        "Shazam API.country_code",
+        "Shazam API.genre"
+      ],
+      "tool_description": "Shazam API schema"
+    },
+    "Spotify Data API": {
+      "api_list_names": [
+        "Spotify Data API.id",
+        "Spotify Data API.id",
+        "Spotify Data API.offset",
+        "Spotify Data API.limit",
+        "Spotify Data API.id"
+      ],
+      "tool_description": "Spotify Data API schema"
+    }
+  },
+  "eCommerce": {
+    "Magic AliExpress": {
+      "api_list_names": [
+        "Magic AliExpress.productID",
+        "Magic AliExpress.page",
+        "Magic AliExpress.categoryId",
+        "Magic AliExpress.brand",
+        "Magic AliExpress.shipToCountry",
+        "Magic AliExpress.attr",
+        "Magic AliExpress.maxSalePrice",
+        "Magic AliExpress.getShopInformation",
+        "Magic AliExpress.targetCurrency",
+        "Magic AliExpress.lg",
+        "Magic AliExpress.shipFromCountry",
+        "Magic AliExpress.minSalePrice",
+        "Magic AliExpress.sort",
+        "Magic AliExpress.productID",
+        "Magic AliExpress.toCountry",
+        "Magic AliExpress.productId",
+        "Magic AliExpress.maxDate",
+        "Magic AliExpress.minDate",
+        "Magic AliExpress.productId",
+        "Magic AliExpress.minDate",
+        "Magic AliExpress.maxDate",
+        "Magic AliExpress.productID",
+        "Magic AliExpress.minDate",
+        "Magic AliExpress.maxDate",
+        "Magic AliExpress.limit"
+      ],
+      "tool_description": "Magic AliExpress schema"
+    },
+    "Get Promo Codes": {
+      "api_list_names": [
+        "Get Promo Codes.page",
+        "Get Promo Codes.sort",
+        "Get Promo Codes.page",
+        "Get Promo Codes.store_id"
+      ],
+      "tool_description": "Get Promo Codes schema"
+    },
+    "AG Amazon Data Web Scraper": {
+      "api_list_names": [
+        "AG Amazon Data Web Scraper.productId",
+        "AG Amazon Data Web Scraper.api_key",
+        "AG Amazon Data Web Scraper.searchQuery"
+      ],
+      "tool_description": "AG Amazon Data Web Scraper schema"
+    },
+    "Amazon Scrapper_v4": {
+      "api_list_names": [
+        "Amazon Scrapper_v4.productId",
+        "Amazon Scrapper_v4.productId",
+        "Amazon Scrapper_v4.productId",
+        "Amazon Scrapper_v4.searchQuery"
+      ],
+      "tool_description": "Amazon Scrapper_v4 schema"
+    },
+    "Shopify Store Scraper": {
+      "api_list_names": [
+        "Shopify Store Scraper.page",
+        "Shopify Store Scraper.url",
+        "Shopify Store Scraper.url",
+        "Shopify Store Scraper.handle"
+      ],
+      "tool_description": "Shopify Store Scraper schema"
+    },
+    "Walmart_v2": {
+      "api_list_names": [
+        "Walmart_v2.page",
+        "Walmart_v2.url",
+        "Walmart_v2.usItemId",
+        "Walmart_v2.zip_code"
+      ],
+      "tool_description": "Walmart_v2 schema"
+    },
+    "Ecommerce Product API": {
+      "api_list_names": [
+        "Ecommerce Product API.product",
+        "Ecommerce Product API.page"
+      ],
+      "tool_description": "Ecommerce Product API schema"
+    },
+    "Amazon Data_v3": {
+      "api_list_names": [
+        "Amazon Data_v3.product_id"
+      ],
+      "tool_description": "Amazon Data_v3 schema"
+    },
+    "EcartAPI": {
+      "api_list_names": [
+        "EcartAPI.search",
+        "EcartAPI.sinceId",
+        "EcartAPI.page",
+        "EcartAPI.status[financial]",
+        "EcartAPI.status[status]",
+        "EcartAPI.draft",
+        "EcartAPI.status[ecartapi]",
+        "EcartAPI.createdAt[to]",
+        "EcartAPI.ids",
+        "EcartAPI.recent",
+        "EcartAPI.fulfillmentStatus",
+        "EcartAPI.offset",
+        "EcartAPI.createdAt[from]",
+        "EcartAPI.updatedAt[to]",
+        "EcartAPI.limit",
+        "EcartAPI.status[id]",
+        "EcartAPI.allStores",
+        "EcartAPI.sort",
+        "EcartAPI.updatedAt[from]"
+      ],
+      "tool_description": "EcartAPI schema"
+    },
+    "Facebook Marketplace": {
+      "api_list_names": [
+        "Facebook Marketplace.no_of_save",
+        "Facebook Marketplace.min_sales",
+        "Facebook Marketplace.min_price",
+        "Facebook Marketplace.category",
+        "Facebook Marketplace.city",
+        "Facebook Marketplace.page"
+      ],
+      "tool_description": "Facebook Marketplace schema"
+    },
+    "Amazon Product Reviews": {
+      "api_list_names": [
+        "Amazon Product Reviews.pageNum",
+        "Amazon Product Reviews.domain",
+        "Amazon Product Reviews.asin"
+      ],
+      "tool_description": "Amazon Product Reviews schema"
+    },
+    "Wayfair": {
+      "api_list_names": [
+        "Wayfair.categoryId",
+        "Wayfair.currentZipCode",
+        "Wayfair.page",
+        "Wayfair.itemsPerPage",
+        "Wayfair.sortId",
+        "Wayfair.filterStringUnencoded",
+        "Wayfair.sku",
+        "Wayfair.page",
+        "Wayfair.star",
+        "Wayfair.sort_order"
+      ],
+      "tool_description": "Wayfair schema"
+    },
+    "\u00c7i\u00e7eksepeti Data": {
+      "api_list_names": [
+        "\u00c7i\u00e7eksepeti Data.product_id"
+      ],
+      "tool_description": "\u00c7i\u00e7eksepeti Data schema"
+    },
+    "BestBuy Product Data API": {
+      "api_list_names": [
+        "BestBuy Product Data API.page",
+        "BestBuy Product Data API.keyword"
+      ],
+      "tool_description": "BestBuy Product Data API schema"
+    },
+    "Real-Time Product Search": {
+      "api_list_names": [
+        "Real-Time Product Search.product_id",
+        "Real-Time Product Search.country",
+        "Real-Time Product Search.language",
+        "Real-Time Product Search.product_id",
+        "Real-Time Product Search.country",
+        "Real-Time Product Search.language",
+        "Real-Time Product Search.offset",
+        "Real-Time Product Search.rating",
+        "Real-Time Product Search.limit",
+        "Real-Time Product Search.q",
+        "Real-Time Product Search.store_id",
+        "Real-Time Product Search.sort_by",
+        "Real-Time Product Search.max_shipping_days",
+        "Real-Time Product Search.page",
+        "Real-Time Product Search.on_sale",
+        "Real-Time Product Search.product_condition",
+        "Real-Time Product Search.free_shipping",
+        "Real-Time Product Search.language",
+        "Real-Time Product Search.country",
+        "Real-Time Product Search.free_returns",
+        "Real-Time Product Search.max_price",
+        "Real-Time Product Search.min_price"
+      ],
+      "tool_description": "Real-Time Product Search schema"
+    },
+    "Weee grocery API (sayweee.com) - browsing/searching/details": {
+      "api_list_names": [
+        "Weee grocery API (sayweee.com) - browsing/searching/details.zipcode",
+        "Weee grocery API (sayweee.com) - browsing/searching/details.product_id",
+        "Weee grocery API (sayweee.com) - browsing/searching/details.keyword",
+        "Weee grocery API (sayweee.com) - browsing/searching/details.zipcode",
+        "Weee grocery API (sayweee.com) - browsing/searching/details.limit",
+        "Weee grocery API (sayweee.com) - browsing/searching/details.offset"
+      ],
+      "tool_description": "Weee grocery API (sayweee.com) - browsing/searching/details schema"
+    },
+    "Target": {
+      "api_list_names": [
+        "Target.store_id",
+        "Target.tcins",
+        "Target.store_id",
+        "Target.tcin",
+        "Target.zipcode",
+        "Target.city",
+        "Target.latlng"
+      ],
+      "tool_description": "Target schema"
+    },
+    "Ebay de Product Details Page Scraper": {
+      "api_list_names": [
+        "Ebay de Product Details Page Scraper.id"
+      ],
+      "tool_description": "Ebay de Product Details Page Scraper schema"
+    },
+    "Amazon India Scraper_v3": {
+      "api_list_names": [
+        "Amazon India Scraper_v3.id",
+        "Amazon India Scraper_v3.id"
+      ],
+      "tool_description": "Amazon India Scraper_v3 schema"
+    },
+    "Price Comparison": {
+      "api_list_names": [
+        "Price Comparison.id",
+        "Price Comparison.country",
+        "Price Comparison.longitude",
+        "Price Comparison.latitude",
+        "Price Comparison.id",
+        "Price Comparison.latitude",
+        "Price Comparison.longitude",
+        "Price Comparison.country"
+      ],
+      "tool_description": "Price Comparison schema"
+    },
+    "Amazon Product Price Data": {
+      "api_list_names": [
+        "Amazon Product Price Data.locale",
+        "Amazon Product Price Data.asins"
+      ],
+      "tool_description": "Amazon Product Price Data schema"
+    },
+    "Pricer": {
+      "api_list_names": [
+        "Pricer.q"
+      ],
+      "tool_description": "Pricer schema"
+    }
+  },
+  "Social": {
+    "Social Media Data TT": {
+      "api_list_names": [
+        "Social Media Data TT.username",
+        "Social Media Data TT.limit",
+        "Social Media Data TT.max_cursor",
+        "Social Media Data TT.sec_uid",
+        "Social Media Data TT.country",
+        "Social Media Data TT.keyword",
+        "Social Media Data TT.limit",
+        "Social Media Data TT.max_cursor",
+        "Social Media Data TT.username",
+        "Social Media Data TT.sec_uid",
+        "Social Media Data TT.limit",
+        "Social Media Data TT.hashtag_id",
+        "Social Media Data TT.max_cursor",
+        "Social Media Data TT.name",
+        "Social Media Data TT.limit",
+        "Social Media Data TT.name",
+        "Social Media Data TT.limit",
+        "Social Media Data TT.max_cursor",
+        "Social Media Data TT.hashtag",
+        "Social Media Data TT.hashtag"
+      ],
+      "tool_description": "Social Media Data TT schema"
+    },
+    "Twitter Hashtags": {
+      "api_list_names": [
+        "Twitter Hashtags.country"
+      ],
+      "tool_description": "Twitter Hashtags schema"
+    },
+    " Quotes API": {
+      "api_list_names": [
+        " Quotes API.keyword"
+      ],
+      "tool_description": " Quotes API schema"
+    },
+    "Twitter_v5": {
+      "api_list_names": [
+        "Twitter_v5.user",
+        "Twitter_v5.count",
+        "Twitter_v5.cursor",
+        "Twitter_v5.count",
+        "Twitter_v5.user",
+        "Twitter_v5.cursor",
+        "Twitter_v5.type",
+        "Twitter_v5.count",
+        "Twitter_v5.query",
+        "Twitter_v5.cursor",
+        "Twitter_v5.count",
+        "Twitter_v5.pid",
+        "Twitter_v5.cursor",
+        "Twitter_v5.count",
+        "Twitter_v5.pid",
+        "Twitter_v5.cursor",
+        "Twitter_v5.pid",
+        "Twitter_v5.count",
+        "Twitter_v5.cursor",
+        "Twitter_v5.count",
+        "Twitter_v5.pid",
+        "Twitter_v5.cursor",
+        "Twitter_v5.count",
+        "Twitter_v5.user",
+        "Twitter_v5.cursor",
+        "Twitter_v5.user",
+        "Twitter_v5.count",
+        "Twitter_v5.cursor"
+      ],
+      "tool_description": "Twitter_v5 schema"
+    },
+    "TikTok_Solutions": {
+      "api_list_names": [
+        "TikTok_Solutions.username",
+        "TikTok_Solutions.username",
+        "TikTok_Solutions.keyword",
+        "TikTok_Solutions.max_cursor",
+        "TikTok_Solutions.user_id",
+        "TikTok_Solutions.url"
+      ],
+      "tool_description": "TikTok_Solutions schema"
+    },
+    "Hashtag": {
+      "api_list_names": [
+        "Hashtag.country_name",
+        "Hashtag.keyword",
+        "Hashtag.id",
+        "Hashtag.id"
+      ],
+      "tool_description": "Hashtag schema"
+    },
+    "TikTok Bulletproof": {
+      "api_list_names": [
+        "TikTok Bulletproof.username",
+        "TikTok Bulletproof.username"
+      ],
+      "tool_description": "TikTok Bulletproof schema"
+    },
+    "Instagram API": {
+      "api_list_names": [
+        "Instagram API.username",
+        "Instagram API.name",
+        "Instagram API.url",
+        "Instagram API.url",
+        "Instagram API.id",
+        "Instagram API.id",
+        "Instagram API.id",
+        "Instagram API.id"
+      ],
+      "tool_description": "Instagram API schema"
+    },
+    "TwttrAPI": {
+      "api_list_names": [
+        "TwttrAPI.user_id",
+        "TwttrAPI.max_id",
+        "TwttrAPI.username"
+      ],
+      "tool_description": "TwttrAPI schema"
+    },
+    "Instagram Cheapest": {
+      "api_list_names": [
+        "Instagram Cheapest.username",
+        "Instagram Cheapest.user_id",
+        "Instagram Cheapest.next_max_id"
+      ],
+      "tool_description": "Instagram Cheapest schema"
+    },
+    "Reddit": {
+      "api_list_names": [
+        "Reddit.username",
+        "Reddit.time",
+        "Reddit.cursor",
+        "Reddit.time",
+        "Reddit.cursor",
+        "Reddit.cursor"
+      ],
+      "tool_description": "Reddit schema"
+    },
+    "TikTok Hashtag Generator": {
+      "api_list_names": [
+        "TikTok Hashtag Generator.keyword"
+      ],
+      "tool_description": "TikTok Hashtag Generator schema"
+    },
+    "Instagram #1": {
+      "api_list_names": [
+        "Instagram #1.username",
+        "Instagram #1.raw",
+        "Instagram #1.hashtag",
+        "Instagram #1.raw"
+      ],
+      "tool_description": "Instagram #1 schema"
+    },
+    "TokApi - mobile version": {
+      "api_list_names": [
+        "TokApi - mobile version.keyword",
+        "TokApi - mobile version.count",
+        "TokApi - mobile version.offset",
+        "TokApi - mobile version.filter_by",
+        "TokApi - mobile version.sort_type",
+        "TokApi - mobile version.user_id",
+        "TokApi - mobile version.count",
+        "TokApi - mobile version.offset"
+      ],
+      "tool_description": "TokApi - mobile version schema"
+    },
+    "ZodiacAPI": {
+      "api_list_names": [
+        "ZodiacAPI.name"
+      ],
+      "tool_description": "ZodiacAPI schema"
+    },
+    "Instagram Pro": {
+      "api_list_names": [
+        "Instagram Pro.username",
+        "Instagram Pro.nextMaxId",
+        "Instagram Pro.corsEnabled",
+        "Instagram Pro.ig",
+        "Instagram Pro.response_type",
+        "Instagram Pro.corsEnabled",
+        "Instagram Pro.pk",
+        "Instagram Pro.corsEnabled",
+        "Instagram Pro.nextMaxId"
+      ],
+      "tool_description": "Instagram Pro schema"
+    },
+    "Reddit Fast Search": {
+      "api_list_names": [
+        "Reddit Fast Search.shadowban",
+        "Reddit Fast Search.proxy",
+        "Reddit Fast Search.timeout",
+        "Reddit Fast Search.username",
+        "Reddit Fast Search.full",
+        "Reddit Fast Search.get_subreddit_posts",
+        "Reddit Fast Search.subreddit",
+        "Reddit Fast Search.nsfw",
+        "Reddit Fast Search.time",
+        "Reddit Fast Search.full_data",
+        "Reddit Fast Search.proxy",
+        "Reddit Fast Search.sort",
+        "Reddit Fast Search.limit",
+        "Reddit Fast Search.search_posts",
+        "Reddit Fast Search.nsfw",
+        "Reddit Fast Search.full_data",
+        "Reddit Fast Search.time",
+        "Reddit Fast Search.sort",
+        "Reddit Fast Search.keyword",
+        "Reddit Fast Search.proxy",
+        "Reddit Fast Search.restrict_sr",
+        "Reddit Fast Search.limit"
+      ],
+      "tool_description": "Reddit Fast Search schema"
+    },
+    "gwyo-twitch": {
+      "api_list_names": [
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId",
+        "gwyo-twitch.userId"
+      ],
+      "tool_description": "gwyo-twitch schema"
+    },
+    "Instagram API 2023": {
+      "api_list_names": [
+        "Instagram API 2023.user_id",
+        "Instagram API 2023.max_id"
+      ],
+      "tool_description": "Instagram API 2023 schema"
+    },
+    "Twitter RSS": {
+      "api_list_names": [
+        "Twitter RSS.id"
+      ],
+      "tool_description": "Twitter RSS schema"
+    },
+    "Instagram Looter": {
+      "api_list_names": [
+        "Instagram Looter.id",
+        "Instagram Looter.id"
+      ],
+      "tool_description": "Instagram Looter schema"
+    }
+  },
+  "News_Media": {
+    "Instant Cameroon News": {
+      "api_list_names": [
+        "Instant Cameroon News.rank",
+        "Instant Cameroon News.page",
+        "Instant Cameroon News.search"
+      ],
+      "tool_description": "Instant Cameroon News schema"
+    },
+    "Indonesia News": {
+      "api_list_names": [
+        "Indonesia News.page",
+        "Indonesia News.keyword",
+        "Indonesia News.limit",
+        "Indonesia News.page",
+        "Indonesia News.command",
+        "Indonesia News.page",
+        "Indonesia News.limit",
+        "Indonesia News.keyword",
+        "Indonesia News.limit",
+        "Indonesia News.q",
+        "Indonesia News.page",
+        "Indonesia News.url"
+      ],
+      "tool_description": "Indonesia News schema"
+    },
+    "Kubric: The Comprehensive Movie News API": {
+      "api_list_names": [
+        "Kubric: The Comprehensive Movie News API.q",
+        "Kubric: The Comprehensive Movie News API.sentiment",
+        "Kubric: The Comprehensive Movie News API.maxDate",
+        "Kubric: The Comprehensive Movie News API.minDate",
+        "Kubric: The Comprehensive Movie News API.type",
+        "Kubric: The Comprehensive Movie News API.offset",
+        "Kubric: The Comprehensive Movie News API.limit",
+        "Kubric: The Comprehensive Movie News API.q",
+        "Kubric: The Comprehensive Movie News API.limit",
+        "Kubric: The Comprehensive Movie News API.offset",
+        "Kubric: The Comprehensive Movie News API.source",
+        "Kubric: The Comprehensive Movie News API.type",
+        "Kubric: The Comprehensive Movie News API.offset",
+        "Kubric: The Comprehensive Movie News API.sentiment",
+        "Kubric: The Comprehensive Movie News API.limit"
+      ],
+      "tool_description": "Kubric: The Comprehensive Movie News API schema"
+    },
+    "Movies details": {
+      "api_list_names": [
+        "Movies details.q"
+      ],
+      "tool_description": "Movies details schema"
+    },
+    "News Sentiment": {
+      "api_list_names": [
+        "News Sentiment.url"
+      ],
+      "tool_description": "News Sentiment schema"
+    },
+    "article-api": {
+      "api_list_names": [
+        "article-api.url"
+      ],
+      "tool_description": "article-api schema"
+    },
+    "Google News API": {
+      "api_list_names": [
+        "Google News API.language",
+        "Google News API.sort",
+        "Google News API.required_props",
+        "Google News API.cursor",
+        "Google News API.to",
+        "Google News API.limit",
+        "Google News API.from",
+        "Google News API.q"
+      ],
+      "tool_description": "Google News API schema"
+    },
+    "Climate Change Live_v27": {
+      "api_list_names": [
+        "Climate Change Live_v27.newspaperId"
+      ],
+      "tool_description": "Climate Change Live_v27 schema"
+    },
+    "German Police and Crime News Live": {
+      "api_list_names": [
+        "German Police and Crime News Live.newspaperId"
+      ],
+      "tool_description": "German Police and Crime News Live schema"
+    },
+    "Climate News API_v2": {
+      "api_list_names": [
+        "Climate News API_v2.newspaperId"
+      ],
+      "tool_description": "Climate News API_v2 schema"
+    },
+    "AI News_v2": {
+      "api_list_names": [
+        "AI News_v2.newspaperId"
+      ],
+      "tool_description": "AI News_v2 schema"
+    },
+    "Live world futbol news": {
+      "api_list_names": [
+        "Live world futbol news.newspaperId"
+      ],
+      "tool_description": "Live world futbol news schema"
+    }
+  },
+  "Food": {
+    "Viva City Documentation": {
+      "api_list_names": [
+        "Viva City Documentation.id",
+        "Viva City Documentation.lang",
+        "Viva City Documentation.id",
+        "Viva City Documentation.lang"
+      ],
+      "tool_description": "Viva City Documentation schema"
+    },
+    "pizzaallapala": {
+      "api_list_names": [
+        "pizzaallapala.id"
+      ],
+      "tool_description": "pizzaallapala schema"
+    },
+    "The Mexican Food DB": {
+      "api_list_names": [
+        "The Mexican Food DB.id"
+      ],
+      "tool_description": "The Mexican Food DB schema"
+    },
+    "The Birthday Cake DB": {
+      "api_list_names": [
+        "The Birthday Cake DB.id"
+      ],
+      "tool_description": "The Birthday Cake DB schema"
+    },
+    "DietaGram": {
+      "api_list_names": [
+        "DietaGram.name",
+        "DietaGram.lang",
+        "DietaGram.name"
+      ],
+      "tool_description": "DietaGram schema"
+    },
+    "Keto Diet": {
+      "api_list_names": [
+        "Keto Diet.id"
+      ],
+      "tool_description": "Keto Diet schema"
+    },
+    "Nutrition by API-Ninjas": {
+      "api_list_names": [
+        "Nutrition by API-Ninjas.query"
+      ],
+      "tool_description": "Nutrition by API-Ninjas schema"
+    },
+    "Recipe by API-Ninjas": {
+      "api_list_names": [
+        "Recipe by API-Ninjas.query",
+        "Recipe by API-Ninjas.offset"
+      ],
+      "tool_description": "Recipe by API-Ninjas schema"
+    },
+    "Recipe_v4": {
+      "api_list_names": [
+        "Recipe_v4.q"
+      ],
+      "tool_description": "Recipe_v4 schema"
+    },
+    "Recipe Search and Diet": {
+      "api_list_names": [
+        "Recipe Search and Diet.q",
+        "Recipe Search and Diet.r"
+      ],
+      "tool_description": "Recipe Search and Diet schema"
+    },
+    "Cocktails": {
+      "api_list_names": [
+        "Cocktails.name",
+        "Cocktails.ingredient"
+      ],
+      "tool_description": "Cocktails schema"
+    },
+    "Cocktail by API-Ninjas": {
+      "api_list_names": [
+        "Cocktail by API-Ninjas.name",
+        "Cocktail by API-Ninjas.ingredients"
+      ],
+      "tool_description": "Cocktail by API-Ninjas schema"
+    },
+    "Generate a recipe based on an ingredient": {
+      "api_list_names": [
+        "Generate a recipe based on an ingredient.ingredient"
+      ],
+      "tool_description": "Generate a recipe based on an ingredient schema"
+    }
+  },
+  "Health_and_Fitness": {
+    "Horostory": {
+      "api_list_names": [
+        "Horostory.date",
+        "Horostory.sign"
+      ],
+      "tool_description": "Horostory schema"
+    },
+    "Appointment System API": {
+      "api_list_names": [
+        "Appointment System API.date",
+        "Appointment System API.clinicName",
+        "Appointment System API.date",
+        "Appointment System API.clinicName"
+      ],
+      "tool_description": "Appointment System API schema"
+    },
+    "Pregnancy Calculator API": {
+      "api_list_names": [
+        "Pregnancy Calculator API.pre_pregnancy_weight",
+        "Pregnancy Calculator API.gestational_age",
+        "Pregnancy Calculator API.height"
+      ],
+      "tool_description": "Pregnancy Calculator API schema"
+    },
+    "Health Calculator API": {
+      "api_list_names": [
+        "Health Calculator API.age",
+        "Health Calculator API.weight",
+        "Health Calculator API.gender",
+        "Health Calculator API.height",
+        "Health Calculator API.climate",
+        "Health Calculator API.activity_level",
+        "Health Calculator API.weight",
+        "Health Calculator API.unit"
+      ],
+      "tool_description": "Health Calculator API schema"
+    },
+    "BMI Calculator_v2": {
+      "api_list_names": [
+        "BMI Calculator_v2.weight",
+        "BMI Calculator_v2.height",
+        "BMI Calculator_v2.system"
+      ],
+      "tool_description": "BMI Calculator_v2 schema"
+    },
+    "AirVisual": {
+      "api_list_names": [
+        "AirVisual.id",
+        "AirVisual.x-user-timezone",
+        "AirVisual.x-units-distance",
+        "AirVisual.x-units-pressure",
+        "AirVisual.x-user-lang",
+        "AirVisual.x-units-temperature",
+        "AirVisual.x-aqi-index",
+        "AirVisual.id",
+        "AirVisual.timezone",
+        "AirVisual.lang",
+        "AirVisual.aqiIndex",
+        "AirVisual.id",
+        "AirVisual.x-units-temperature",
+        "AirVisual.x-aqi-index",
+        "AirVisual.x-user-timezone",
+        "AirVisual.x-user-lang",
+        "AirVisual.x-units-pressure",
+        "AirVisual.x-units-distance",
+        "AirVisual.id",
+        "AirVisual.lang",
+        "AirVisual.aqiIndex",
+        "AirVisual.timezone"
+      ],
+      "tool_description": "AirVisual schema"
+    },
+    "fastingcenters": {
+      "api_list_names": [
+        "fastingcenters.id"
+      ],
+      "tool_description": "fastingcenters schema"
+    },
+    "Exercises by API-Ninjas": {
+      "api_list_names": [
+        "Exercises by API-Ninjas.offset",
+        "Exercises by API-Ninjas.muscle",
+        "Exercises by API-Ninjas.type",
+        "Exercises by API-Ninjas.difficulty",
+        "Exercises by API-Ninjas.name"
+      ],
+      "tool_description": "Exercises by API-Ninjas schema"
+    },
+    "ExerciseDB": {
+      "api_list_names": [
+        "ExerciseDB.type"
+      ],
+      "tool_description": "ExerciseDB schema"
+    },
+    "US Hospitals": {
+      "api_list_names": [
+        "US Hospitals.name"
+      ],
+      "tool_description": "US Hospitals schema"
+    },
+    "Calories Burned by API-Ninjas": {
+      "api_list_names": [
+        "Calories Burned by API-Ninjas.activity",
+        "Calories Burned by API-Ninjas.weight",
+        "Calories Burned by API-Ninjas.duration"
+      ],
+      "tool_description": "Calories Burned by API-Ninjas schema"
+    }
+  },
+  "Entertainment": {
+    "Dad Jokes_v2": {
+      "api_list_names": [
+        "Dad Jokes_v2.text"
+      ],
+      "tool_description": "Dad Jokes_v2 schema"
+    },
+    "SimSimi Conversation": {
+      "api_list_names": [
+        "SimSimi Conversation.text",
+        "SimSimi Conversation.lc",
+        "SimSimi Conversation.ft"
+      ],
+      "tool_description": "SimSimi Conversation schema"
+    },
+    "Fancy text": {
+      "api_list_names": [
+        "Fancy text.text"
+      ],
+      "tool_description": "Fancy text schema"
+    },
+    "Memeados": {
+      "api_list_names": [
+        "Memeados.text"
+      ],
+      "tool_description": "Memeados schema"
+    },
+    "Anime Jokes": {
+      "api_list_names": [
+        "Anime Jokes.id",
+        "Anime Jokes.id"
+      ],
+      "tool_description": "Anime Jokes schema"
+    },
+    "Riddlie ": {
+      "api_list_names": [
+        "Riddlie .id",
+        "Riddlie .flag",
+        "Riddlie .id",
+        "Riddlie .level",
+        "Riddlie .id",
+        "Riddlie .id",
+        "Riddlie .keyword"
+      ],
+      "tool_description": "Riddlie  schema"
+    },
+    "Movie Showtimes": {
+      "api_list_names": [
+        "Movie Showtimes.id"
+      ],
+      "tool_description": "Movie Showtimes schema"
+    },
+    "Deezer": {
+      "api_list_names": [
+        "Deezer.id",
+        "Deezer.id",
+        "Deezer.id"
+      ],
+      "tool_description": "Deezer schema"
+    },
+    "Argentina movie theatres": {
+      "api_list_names": [
+        "Argentina movie theatres.id"
+      ],
+      "tool_description": "Argentina movie theatres schema"
+    },
+    "HeyWatch Video Encoding": {
+      "api_list_names": [
+        "HeyWatch Video Encoding.id",
+        "HeyWatch Video Encoding.start",
+        "HeyWatch Video Encoding.width",
+        "HeyWatch Video Encoding.height"
+      ],
+      "tool_description": "HeyWatch Video Encoding schema"
+    },
+    "Watchmode": {
+      "api_list_names": [
+        "Watchmode.id",
+        "Watchmode.id",
+        "Watchmode.id",
+        "Watchmode.id",
+        "Watchmode.id",
+        "Watchmode.id",
+        "Watchmode.language",
+        "Watchmode.start_date",
+        "Watchmode.limit",
+        "Watchmode.end_date",
+        "Watchmode.regions",
+        "Watchmode.types",
+        "Watchmode.page",
+        "Watchmode.start_date",
+        "Watchmode.limit",
+        "Watchmode.end_date",
+        "Watchmode.page",
+        "Watchmode.types",
+        "Watchmode.limit",
+        "Watchmode.end_date",
+        "Watchmode.start_date",
+        "Watchmode.genres",
+        "Watchmode.limit",
+        "Watchmode.source_ids",
+        "Watchmode.source_types",
+        "Watchmode.types",
+        "Watchmode.regions",
+        "Watchmode.sort_by",
+        "Watchmode.page",
+        "Watchmode.network_ids",
+        "Watchmode.release_date_start",
+        "Watchmode.release_date_end",
+        "Watchmode.page",
+        "Watchmode.start_date",
+        "Watchmode.limit",
+        "Watchmode.end_date",
+        "Watchmode.end_date",
+        "Watchmode.start_date",
+        "Watchmode.page",
+        "Watchmode.limit"
+      ],
+      "tool_description": "Watchmode schema"
+    },
+    "60K Radio Stations": {
+      "api_list_names": [
+        "60K Radio Stations.keyword",
+        "60K Radio Stations.country_id",
+        "60K Radio Stations.keyword",
+        "60K Radio Stations.keyword"
+      ],
+      "tool_description": "60K Radio Stations schema"
+    },
+    "World of Jokes": {
+      "api_list_names": [
+        "World of Jokes.limit",
+        "World of Jokes.page",
+        "World of Jokes.sortBy",
+        "World of Jokes.limit",
+        "World of Jokes.page",
+        "World of Jokes.category",
+        "World of Jokes.sortBy",
+        "World of Jokes.category",
+        "World of Jokes.category"
+      ],
+      "tool_description": "World of Jokes schema"
+    },
+    "Anime Quotes_v4": {
+      "api_list_names": [
+        "Anime Quotes_v4.title",
+        "Anime Quotes_v4.page",
+        "Anime Quotes_v4.name",
+        "Anime Quotes_v4.page"
+      ],
+      "tool_description": "Anime Quotes_v4 schema"
+    },
+    "Guinness-World-Records-Api": {
+      "api_list_names": [
+        "Guinness-World-Records-Api.term",
+        "Guinness-World-Records-Api.pageNum",
+        "Guinness-World-Records-Api.maxResults"
+      ],
+      "tool_description": "Guinness-World-Records-Api schema"
+    },
+    "rapid-porn": {
+      "api_list_names": [
+        "rapid-porn.category"
+      ],
+      "tool_description": "rapid-porn schema"
+    },
+    "Jokes by API-Ninjas": {
+      "api_list_names": [
+        "Jokes by API-Ninjas.limit"
+      ],
+      "tool_description": "Jokes by API-Ninjas schema"
+    },
+    "Outking": {
+      "api_list_names": [
+        "Outking.title",
+        "Outking.year"
+      ],
+      "tool_description": "Outking schema"
+    },
+    "Drinking": {
+      "api_list_names": [
+        "Drinking.type",
+        "Drinking.type"
+      ],
+      "tool_description": "Drinking schema"
+    },
+    "SimAPI Movies": {
+      "api_list_names": [
+        "SimAPI Movies.t",
+        "SimAPI Movies.r",
+        "SimAPI Movies.type",
+        "SimAPI Movies.y"
+      ],
+      "tool_description": "SimAPI Movies schema"
+    },
+    "4D Results": {
+      "api_list_names": [
+        "4D Results.start",
+        "4D Results.end"
+      ],
+      "tool_description": "4D Results schema"
+    }
+  },
+  "Media": {
+    "Shazam": {
+      "api_list_names": [
+        "Shazam.limit",
+        "Shazam.artist_id",
+        "Shazam.city_name",
+        "Shazam.country_code",
+        "Shazam.limit",
+        "Shazam.limit",
+        "Shazam.country_code",
+        "Shazam.track_id",
+        "Shazam.limit",
+        "Shazam.limit",
+        "Shazam.track",
+        "Shazam.limit",
+        "Shazam.artist"
+      ],
+      "tool_description": "Shazam schema"
+    },
+    "\ud83d\udc4b Demo Project": {
+      "api_list_names": [
+        "\ud83d\udc4b Demo Project.skip",
+        "\ud83d\udc4b Demo Project.limit",
+        "\ud83d\udc4b Demo Project.skip",
+        "\ud83d\udc4b Demo Project.category",
+        "\ud83d\udc4b Demo Project.limit",
+        "\ud83d\udc4b Demo Project.id",
+        "\ud83d\udc4b Demo Project.id"
+      ],
+      "tool_description": "\ud83d\udc4b Demo Project schema"
+    },
+    "Vimeo": {
+      "api_list_names": [
+        "Vimeo.category",
+        "Vimeo.format",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.format",
+        "Vimeo.user_id",
+        "Vimeo.sort",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.summary_response",
+        "Vimeo.full_response",
+        "Vimeo.format",
+        "Vimeo.tag",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.summary_response",
+        "Vimeo.full_response",
+        "Vimeo.sort",
+        "Vimeo.format",
+        "Vimeo.per_page",
+        "Vimeo.sort",
+        "Vimeo.page",
+        "Vimeo.format",
+        "Vimeo.channel_id",
+        "Vimeo.full_response",
+        "Vimeo.user_id",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.summary_response",
+        "Vimeo.category",
+        "Vimeo.format",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.format",
+        "Vimeo.query",
+        "Vimeo.user_id",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.summary_response",
+        "Vimeo.full_response",
+        "Vimeo.sort",
+        "Vimeo.category",
+        "Vimeo.format",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.format",
+        "Vimeo.video_id",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.category",
+        "Vimeo.format",
+        "Vimeo.page",
+        "Vimeo.per_page",
+        "Vimeo.summary_response",
+        "Vimeo.full_response",
+        "Vimeo.category",
+        "Vimeo.format",
+        "Vimeo.format",
+        "Vimeo.channel_id",
+        "Vimeo.format"
+      ],
+      "tool_description": "Vimeo schema"
+    },
+    "Bing Image Search": {
+      "api_list_names": [
+        "Bing Image Search.q",
+        "Bing Image Search.count",
+        "Bing Image Search.safeSearch",
+        "Bing Image Search.offset",
+        "Bing Image Search.mkt"
+      ],
+      "tool_description": "Bing Image Search schema"
+    },
+    "StreamlineWatch - Streaming Guide": {
+      "api_list_names": [
+        "StreamlineWatch - Streaming Guide.platform",
+        "StreamlineWatch - Streaming Guide.id",
+        "StreamlineWatch - Streaming Guide.offset",
+        "StreamlineWatch - Streaming Guide.region",
+        "StreamlineWatch - Streaming Guide.limit",
+        "StreamlineWatch - Streaming Guide.sort",
+        "StreamlineWatch - Streaming Guide.season",
+        "StreamlineWatch - Streaming Guide.platform",
+        "StreamlineWatch - Streaming Guide.id",
+        "StreamlineWatch - Streaming Guide.region"
+      ],
+      "tool_description": "StreamlineWatch - Streaming Guide schema"
+    },
+    "Giphy": {
+      "api_list_names": [
+        "Giphy.limit",
+        "Giphy.rating",
+        "Giphy.s",
+        "Giphy.limit",
+        "Giphy.offset",
+        "Giphy.fmt",
+        "Giphy.rating"
+      ],
+      "tool_description": "Giphy schema"
+    },
+    "\ud83d\ude80 Cheap YouTube API \ud83d\udd25": {
+      "api_list_names": [
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.id",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.id",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.id",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.id",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.sort_by",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.type",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.region",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.q",
+        "\ud83d\ude80 Cheap YouTube API \ud83d\udd25.q"
+      ],
+      "tool_description": "\ud83d\ude80 Cheap YouTube API \ud83d\udd25 schema"
+    },
+    "Online Video Downloader": {
+      "api_list_names": [
+        "Online Video Downloader.id"
+      ],
+      "tool_description": "Online Video Downloader schema"
+    },
+    "Rijksmuseum": {
+      "api_list_names": [
+        "Rijksmuseum.q",
+        "Rijksmuseum.culture"
+      ],
+      "tool_description": "Rijksmuseum schema"
+    },
+    "YTS.am Torrent": {
+      "api_list_names": [
+        "YTS.am Torrent.user_id",
+        "YTS.am Torrent.with_recently_downloaded"
+      ],
+      "tool_description": "YTS.am Torrent schema"
+    }
+  }
+}
