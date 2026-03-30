@@ -1,0 +1,308 @@
+{
+  "dataset": "ToolBench",
+  "model_id": "ibm/granite-4-h-small",
+  "timestamp": "2026-01-30T13:55:32.594950",
+  "config": {
+    "top_k": 10,
+    "max_samples": 5
+  },
+  "metrics": {
+    "total_samples": 5,
+    "total_fields": 5,
+    "correct_predictions": 5,
+    "accuracy": 1.0,
+    "mean_uncertainty": 0.016000000000000014
+  },
+  "results": [
+    {
+      "sample_id": "toolbench_0000",
+      "utterance": "Map parameters from Foreca Weather Nowcast to Cloud Cast Get humidty",
+      "expected_source": "Foreca_Weather_Nowcast",
+      "expected_target": {
+        "id": "Cloud_Cast_Get_humidty",
+        "name": "Cloud_Cast_Get_humidty",
+        "description": "Get the humidity for the current city",
+        "properties": [
+          {
+            "name": "Cloud_Cast_Get_humidty.city",
+            "description": "Parameter city"
+          }
+        ]
+      },
+      "ground_truth_mapping": {
+        "Foreca_Weather_Nowcast.location": "Cloud_Cast_Get_humidty.city"
+      },
+      "predictions": {
+        "Foreca_Weather_Nowcast.location": {
+          "initial_ranking": [
+            {
+              "id": "Cloud_Cast_Get_humidty.city",
+              "score": 0.6,
+              "reason": "The candidate mentions 'city', which is related to location, but focuses on humidity rather than the general location parameter."
+            }
+          ],
+          "reflection": {
+            "analysis": "The initial ranking incorrectly prioritizes Cloud_Cast_Get_humidty.city as the best match for the FORECA property Foreca_Weather_Nowcast.location. The candidate focuses on humidity rather than the general location parameter, which is a mismatch.",
+            "revised_ranking": [
+              {
+                "id": "Cloud_Cast_Get_humidty.city",
+                "score": 0.6,
+                "reason": "Mentions 'city', which is related to location but focuses on humidity."
+              }
+            ],
+            "uncertainty_metrics": {
+              "initial_uncertainty": 0.08000000000000007,
+              "reflection_uncertainty": 0.255,
+              "high_uncertainty": false
+            }
+          },
+          "uncertainty": 0.08000000000000007,
+          "uncertainty_info": {
+            "uncertainty": 0.08000000000000007,
+            "top1_agreement": 1.0,
+            "score_variance": 0.10000000000000003,
+            "n_samples": 3,
+            "method": "sampling_consistency"
+          },
+          "high_uncertainty": false
+        }
+      },
+      "accuracy": 1.0,
+      "correct_count": 1,
+      "total_count": 1,
+      "mean_uncertainty": 0.08000000000000007
+    },
+    {
+      "sample_id": "toolbench_0001",
+      "utterance": "Map parameters from Foreca Weather Nowcast to Cloud Cast Get wind speed",
+      "expected_source": "Foreca_Weather_Nowcast",
+      "expected_target": {
+        "id": "Cloud_Cast_Get_wind_speed",
+        "name": "Cloud_Cast_Get_wind_speed",
+        "description": "Get the current wind speed",
+        "properties": [
+          {
+            "name": "Cloud_Cast_Get_wind_speed.city",
+            "description": "Parameter city"
+          }
+        ]
+      },
+      "ground_truth_mapping": {
+        "Foreca_Weather_Nowcast.location": "Cloud_Cast_Get_wind_speed.city"
+      },
+      "predictions": {
+        "Foreca_Weather_Nowcast.location": {
+          "initial_ranking": [
+            {
+              "id": "Cloud_Cast_Get_wind_speed.city",
+              "score": 0.6,
+              "reason": "The candidate mentions 'city', which is related to location, but does not directly reference 'wind speed' or 'Nowcast'."
+            }
+          ],
+          "reflection": {
+            "analysis": "The initial ranking incorrectly associates 'city' with 'wind speed' and 'Nowcast', which is not a direct or accurate match. The candidate should be re-evaluated for relevance to the 'location' parameter of the Nowcast.",
+            "revised_ranking": [
+              {
+                "id": "Cloud_Cast_Get_wind_speed.city",
+                "score": 0.3,
+                "reason": "Mentions 'city' which is related to location but not directly to wind speed or Nowcast."
+              }
+            ],
+            "uncertainty_metrics": {
+              "initial_uncertainty": 0.0,
+              "reflection_uncertainty": 0.345,
+              "high_uncertainty": false
+            }
+          },
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "top1_agreement": 1.0,
+            "score_variance": 0.0,
+            "n_samples": 3,
+            "method": "sampling_consistency"
+          },
+          "high_uncertainty": false
+        }
+      },
+      "accuracy": 1.0,
+      "correct_count": 1,
+      "total_count": 1,
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "toolbench_0002",
+      "utterance": "Map parameters from Foreca Weather Nowcast to Cloud Cast Get hourly forecast",
+      "expected_source": "Foreca_Weather_Nowcast",
+      "expected_target": {
+        "id": "Cloud_Cast_Get_hourly_forecast",
+        "name": "Cloud_Cast_Get_hourly_forecast",
+        "description": "Get the hourly forecast",
+        "properties": [
+          {
+            "name": "Cloud_Cast_Get_hourly_forecast.city",
+            "description": "Parameter city"
+          }
+        ]
+      },
+      "ground_truth_mapping": {
+        "Foreca_Weather_Nowcast.location": "Cloud_Cast_Get_hourly_forecast.city"
+      },
+      "predictions": {
+        "Foreca_Weather_Nowcast.location": {
+          "initial_ranking": [
+            {
+              "id": "Cloud_Cast_Get_hourly_forecast.city",
+              "score": 0.8,
+              "reason": "The 'city' parameter directly relates to the location aspect of the FORECA property."
+            }
+          ],
+          "reflection": {
+            "analysis": "The initial ranking seems appropriate as the 'city' parameter directly relates to the location aspect of the FORECA property. No obvious errors are identified.",
+            "revised_ranking": [
+              {
+                "id": "Cloud_Cast_Get_hourly_forecast.city",
+                "score": 0.8,
+                "reason": "The 'city' parameter directly relates to the location aspect of the FORECA property."
+              }
+            ],
+            "uncertainty_metrics": {
+              "initial_uncertainty": 0.0,
+              "reflection_uncertainty": 0.19499999999999998,
+              "high_uncertainty": false
+            }
+          },
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "top1_agreement": 1.0,
+            "score_variance": 0.0,
+            "n_samples": 3,
+            "method": "sampling_consistency"
+          },
+          "high_uncertainty": false
+        }
+      },
+      "accuracy": 1.0,
+      "correct_count": 1,
+      "total_count": 1,
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "toolbench_0003",
+      "utterance": "Map parameters from Foreca Weather Nowcast to Cloud Cast Get the forecast",
+      "expected_source": "Foreca_Weather_Nowcast",
+      "expected_target": {
+        "id": "Cloud_Cast_Get_the_forecast",
+        "name": "Cloud_Cast_Get_the_forecast",
+        "description": "Get the forecast for the current city",
+        "properties": [
+          {
+            "name": "Cloud_Cast_Get_the_forecast.city",
+            "description": "Parameter city"
+          }
+        ]
+      },
+      "ground_truth_mapping": {
+        "Foreca_Weather_Nowcast.location": "Cloud_Cast_Get_the_forecast.city"
+      },
+      "predictions": {
+        "Foreca_Weather_Nowcast.location": {
+          "initial_ranking": [
+            {
+              "id": "Cloud_Cast_Get_the_forecast.city",
+              "score": 0.8,
+              "reason": "The 'city' parameter directly relates to the location aspect of the Nowcast parameter."
+            }
+          ],
+          "reflection": {
+            "analysis": "The initial ranking seems appropriate as the 'city' parameter directly relates to the location aspect of the Nowcast parameter. No obvious errors are identified.",
+            "revised_ranking": [
+              {
+                "id": "Cloud_Cast_Get_the_forecast.city",
+                "score": 0.8,
+                "reason": "Directly relates to the location aspect of the Nowcast parameter"
+              }
+            ],
+            "uncertainty_metrics": {
+              "initial_uncertainty": 0.0,
+              "reflection_uncertainty": 0.19499999999999998,
+              "high_uncertainty": false
+            }
+          },
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "top1_agreement": 1.0,
+            "score_variance": 0.0,
+            "n_samples": 3,
+            "method": "sampling_consistency"
+          },
+          "high_uncertainty": false
+        }
+      },
+      "accuracy": 1.0,
+      "correct_count": 1,
+      "total_count": 1,
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "toolbench_0004",
+      "utterance": "Map parameters from Foreca Weather Nowcast to Cloud Cast Get current weather",
+      "expected_source": "Foreca_Weather_Nowcast",
+      "expected_target": {
+        "id": "Cloud_Cast_Get_current_weather",
+        "name": "Cloud_Cast_Get_current_weather",
+        "description": "Gets the current weather for the inputted city name",
+        "properties": [
+          {
+            "name": "Cloud_Cast_Get_current_weather.city",
+            "description": "Parameter city"
+          }
+        ]
+      },
+      "ground_truth_mapping": {
+        "Foreca_Weather_Nowcast.location": "Cloud_Cast_Get_current_weather.city"
+      },
+      "predictions": {
+        "Foreca_Weather_Nowcast.location": {
+          "initial_ranking": [
+            {
+              "id": "Cloud_Cast_Get_current_weather.city",
+              "score": 0.8,
+              "reason": "The 'city' parameter directly relates to the location aspect of the Nowcast parameter."
+            }
+          ],
+          "reflection": {
+            "analysis": "The initial ranking seems appropriate as the 'city' parameter directly relates to the location aspect of the Nowcast parameter. No obvious errors are identified.",
+            "revised_ranking": [
+              {
+                "id": "Cloud_Cast_Get_current_weather.city",
+                "score": 0.8,
+                "reason": "Directly relates to the location aspect of the Nowcast parameter"
+              }
+            ],
+            "uncertainty_metrics": {
+              "initial_uncertainty": 0.0,
+              "reflection_uncertainty": 0.19499999999999998,
+              "high_uncertainty": false
+            }
+          },
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "top1_agreement": 1.0,
+            "score_variance": 0.0,
+            "n_samples": 3,
+            "method": "sampling_consistency"
+          },
+          "high_uncertainty": false
+        }
+      },
+      "accuracy": 1.0,
+      "correct_count": 1,
+      "total_count": 1,
+      "mean_uncertainty": 0.0
+    }
+  ]
+}

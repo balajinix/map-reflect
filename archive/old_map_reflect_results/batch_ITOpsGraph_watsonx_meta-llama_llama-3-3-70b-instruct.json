@@ -1,0 +1,252 @@
+{
+  "dataset": "ITOpsGraph",
+  "model": "watsonx/meta-llama/llama-3-3-70b-instruct",
+  "timestamp": "2026-02-15T12:43:43.693047",
+  "config": {
+    "batch_size": 20,
+    "use_cache": true
+  },
+  "metrics": {
+    "total_samples": 20,
+    "successful": 5,
+    "avg_accuracy": 0.0,
+    "total_time_seconds": 480.68283700942993,
+    "samples_per_second": 0.041607476822825784
+  },
+  "cache_stats": {
+    "hits": 0,
+    "misses": 60,
+    "size": 60
+  },
+  "results": [
+    {
+      "sample_id": "sample_0",
+      "utterance": "map cloudability StringFilterInput to turbonomic FilterInput",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"cloudability StringFilterInput\",\n  \"destination_context\": \"turbonomic FilterInput\",\n  \"source_product\": \"cloudability\",\n  \"target_product\": \"turbonomic\",\n  \"source_types",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_1",
+      "utterance": "map cloudability StringFilterInput to turbonomic TagValueFilterInput",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"cloudability StringFilterInput\",\n  \"destination_context\": \"turbonomic TagValueFilterInput\",\n  \"source_product\": \"cloudability\",\n  \"target_product\": \"turbonomic\",\n  \"sour",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_2",
+      "utterance": "map cloudability StringFilterInput to concert FilterValueType",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"cloudability StringFilterInput\",\n  \"destination_context\": \"concert FilterValueType\",\n  \"source_product\": \"cloudability\",\n  \"target_product\": \"concert\",\n  \"source_types\":",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_3",
+      "utterance": "map cloudability StringFilterInput to instana mutationInput_getMobileAppBeacons_input_tagFilters_items_operator",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"Cloudability StringFilterInput\",\n  \"destination_context\": \"Instana mutationInput_getMobileAppBeacons_input_tagFilters_items_operator\",\n  \"source_product\": \"Cloudability\"",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_4",
+      "utterance": "map instana getTagCatalog_200_response to cloudability TagMappingsEntry",
+      "predicted_mapping": {
+        "instana_Event.entityName": "cloudability_ReportDimension.account_name",
+        "instana_Event.entityType": "cloudability_ReportDimension.category1",
+        "instana_Event.eventId": "cloudability_ReportDimension.Transaction",
+        "instana_Event.detail": "cloudability_ReportDimension.Filter"
+      },
+      "ground_truth_mapping": {},
+      "success": true,
+      "context_response": "```json\n{\n  \"source_context\": \"instana getTagCatalog_200_response\",\n  \"destination_context\": \"cloudability TagMappingsEntry\",\n  \"source_product\": \"instana\",\n  \"target_product\": \"cloudability\",\n  \"sour",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_5",
+      "utterance": "map watsonx-orchestrate AssistantRunConnection to instana ApplicationConnection",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"watsonx-orchestrate AssistantRunConnection\",\n  \"destination_context\": \"instana ApplicationConnection\",\n  \"source_product\": \"watsonx-orchestrate\",\n  \"target_product\": \"in",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_6",
+      "utterance": "map base BaseVolume to infragraph BaseVolume",
+      "predicted_mapping": {
+        "watsonx-orchestrate_BaseLlm.model_name": "infragraph_Base.name",
+        "watsonx-orchestrate_ModelSettings.base_llm": "infragraph_Base.id",
+        "instana_queryInput_getMobileAppTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "infragraph_Base.tags",
+        "instana_queryInput_getApplicationTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "infragraph_Base.tags",
+        "instana_queryInput_getWebsiteTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "infragraph_Base.tags",
+        "instana_queryInput_getSyntheticTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "infragraph_Base.tags",
+        "instana_query_getApplicationConfigs_items_scope.INCLUDE_IMMEDIATE_DOWNSTREAM_DATABASE_AND_MESSAGING": "infragraph_BaseNetworkInterface.subnet_id",
+        "instana_mutationInput_addApplicationConfig_input_scope.INCLUDE_IMMEDIATE_DOWNSTREAM_DATABASE_AND_MESSAGING": "infragraph_BaseNetworkInterface.subnet_id",
+        "instana_query_getTrace_rootSpan_destination_endpoint_type.DATABASE": "infragraph_BaseNetworkInterface.base",
+        "instana_query_getTrace_rootSpan_destination_service_types_items.DATABASE": "infragraph_BaseNetworkInterface.base",
+        "instana_mutationInput_getApplicationMetrics_input_endpointTypes_items.DATABASE": "infragraph_BaseNetworkInterface.base"
+      },
+      "ground_truth_mapping": {},
+      "success": true,
+      "context_response": "```json\n{\n  \"source_context\": \"BaseVolume\",\n  \"destination_context\": \"infragraph BaseVolume\",\n  \"source_product\": \"base\",\n  \"target_product\": \"infragraph\",\n  \"source_types\": [\"BaseVolume\"],\n  \"target_",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_7",
+      "utterance": "map base BaseVolume to turbonomic VirtualDisksEntry",
+      "predicted_mapping": {
+        "instana_query_getSloConfigById_oneOf_0_indicator_serviceLevelsMeasurement.eventBased": "turbonomic_ExpType.EQ",
+        "instana_query_getSloConfigById_oneOf_0_indicator_serviceLevelsMeasurement.timeBased": "turbonomic_ExpType.NEQ",
+        "instana_query_getTrace_rootSpan_destination_endpoint_type.DATABASE": "turbonomic_SearchOrderBy.UTILIZATION",
+        "instana_query_getTrace_rootSpan_destination_service_types_items.DATABASE": "turbonomic_SearchOrderBy.UTILIZATION",
+        "instana_mutation_getAvailableMetrics_metrics_items_infraTagCategory.COUCHBASE": "turbonomic_ExpType.EX",
+        "instana_queryInput_getApplicationTags_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "turbonomic_ActionMode.AUTOMATIC",
+        "instana_queryInput_getSyntheticTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "turbonomic_ActionMode.AUTOMATIC",
+        "instana_queryInput_getWebsiteTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "turbonomic_ActionMode.AUTOMATIC",
+        "instana_queryInput_getMobileAppTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "turbonomic_ActionMode.AUTOMATIC",
+        "instana_queryInput_getApplicationTagCatalog_useCase.SMART_ALERTS_ADAPTIVE_BASELINE": "turbonomic_ActionMode.AUTOMATIC"
+      },
+      "ground_truth_mapping": {},
+      "success": true,
+      "context_response": "```json\n{\n  \"source_context\": \"BaseVolume\",\n  \"destination_context\": \"turbonomic VirtualDisksEntry\",\n  \"source_product\": \"Base\",\n  \"target_product\": \"turbonomic\",\n  \"source_types\": [\"BaseVolume\"],\n  \"",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_8",
+      "utterance": "map instana query_getWebsiteCatalogMetrics_items_defaultAggregation to ns1 Aggregation",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"instana query_getWebsiteCatalogMetrics_items_defaultAggregation\",\n  \"destination_context\": \"ns1 Aggregation\",\n  \"source_product\": \"instana\",\n  \"target_product\": \"ns1\",\n ",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_9",
+      "utterance": "map cloudability _Backend_CostReportArguments to instana getEntities_request_Input",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"Cloudability Backend CostReportArguments\",\n  \"destination_context\": \"Instana getEntities request Input\",\n  \"source_product\": \"Cloudability\",\n  \"target_product\": \"Instana",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_10",
+      "utterance": "map cloudability _Backend_CostReportArguments to instana getBeaconMetrics_request_Input",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"Cloudability Backend CostReportArguments\",\n  \"destination_context\": \"Instana getBeaconMetrics_request Input\",\n  \"source_product\": \"Cloudability\",\n  \"target_product\": \"In",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_11",
+      "utterance": "map instana addActionInstance_200_response to turbonomic Action",
+      "predicted_mapping": {
+        "instana_EventType.issue": "turbonomic_ExpType.EQ",
+        "instana_EventType.change": "turbonomic_ExpType.NEQ",
+        "instana_EventState.open": "turbonomic_ActionMode.AUTOMATIC",
+        "instana_EventState.closed": "turbonomic_ActionMode.DISABLED",
+        "instana_EntityType.APPLICATION": "turbonomic_SearchOrderBy.UTILIZATION",
+        "instana_EntityType.ENDPOINT": "turbonomic_SearchOrderBy.NAME",
+        "instana_EntityType.INFRASTRUCTURE": "turbonomic_SearchOrderBy.COST",
+        "instana_Event.detail": "turbonomic_ExpType.EX",
+        "instana_Event.end": "turbonomic_ExpType.NEX",
+        "instana_Event.entityLabel": "turbonomic_ExpType.RXEQ",
+        "instana_Event.entityName": "turbonomic_ExpType.RXNEQ",
+        "instana_Event.entityType": "turbonomic_ExpType.GT",
+        "instana_Event.eventId": "turbonomic_ExpType.LT",
+        "instana_Event.problem": "turbonomic_ExpType.GTE"
+      },
+      "ground_truth_mapping": {},
+      "success": true,
+      "context_response": "```json\n{\n  \"source_context\": \"instana addActionInstance_200_response\",\n  \"destination_context\": \"turbonomic Action\",\n  \"source_product\": \"instana\",\n  \"target_product\": \"turbonomic\",\n  \"source_types\":",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_12",
+      "utterance": "map instana addActionInstance_200_response to concert Package_business_impact_view",
+      "predicted_mapping": {
+        "instana_Event.entityName": "concert_Access_control_view.entity_name",
+        "instana_Event.entityType": "concert_Access_control_view.entity_type",
+        "instana_Event.entityLabel": "concert_Access_control_view.entity_id",
+        "instana_Event.eventId": "concert_Access_control_view.id",
+        "instana_Event.detail": "concert_About_categories.description"
+      },
+      "ground_truth_mapping": {},
+      "success": true,
+      "context_response": "```json\n{\n  \"source_context\": \"instana addActionInstance_200_response\",\n  \"destination_context\": \"concert Package_business_impact_view\",\n  \"source_product\": \"instana\",\n  \"target_product\": \"concert\",\n ",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_13",
+      "utterance": "map instana queryInput_getCallGroup_input_group_Input to cloudability Group",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"instana queryInput_getCallGroup_input_group_Input\",\n  \"destination_context\": \"cloudability Group\",\n  \"source_product\": \"instana\",\n  \"target_product\": \"cloudability\",\n  \"",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_14",
+      "utterance": "map instana mutationInput_getServicesMetrics_input_order_Input to cloudability ReportSortInput",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"instana mutationInput_getServicesMetrics_input_order_Input\",\n  \"destination_context\": \"cloudability ReportSortInput\",\n  \"source_product\": \"instana\",\n  \"target_product\": ",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_15",
+      "utterance": "map cloudability ReportSortInput to instana queryInput_getCallGroup_input_order_Input",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"Cloudability ReportSortInput\",\n  \"destination_context\": \"Instana queryInput_getCallGroup_input_order_Input\",\n  \"source_product\": \"Cloudability\",\n  \"target_product\": \"Ins",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_16",
+      "utterance": "map cloudability ReportSortInput to instana mutationInput_getLocationSummaryList_input_order_Input",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"cloudability ReportSortInput\",\n  \"destination_context\": \"instana mutationInput_getLocationSummaryList_input_order_Input\",\n  \"source_product\": \"cloudability\",\n  \"target_p",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_17",
+      "utterance": "map cloudability ReportSortInput to instana mutationInput_getServicesMetrics_input_order_Input",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"Cloudability ReportSortInput\",\n  \"destination_context\": \"Instana mutationInput_getServicesMetrics_input_order_Input\",\n  \"source_product\": \"Cloudability\",\n  \"target_produ",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_18",
+      "utterance": "map cloudability ReportSortInput to instana mutationInput_getTestSummaryList_input_order_Input",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"cloudability ReportSortInput\",\n  \"destination_context\": \"instana mutationInput_getTestSummaryList_input_order_Input\",\n  \"source_product\": \"cloudability\",\n  \"target_produ",
+      "accuracy": 0.0
+    },
+    {
+      "sample_id": "sample_19",
+      "utterance": "map cloudability ReportSortInput to instana mutationInput_getEndpointsMetrics_input_order_Input",
+      "predicted_mapping": {},
+      "ground_truth_mapping": {},
+      "success": false,
+      "context_response": "```json\n{\n  \"source_context\": \"Cloudability ReportSortInput\",\n  \"destination_context\": \"Instana mutationInput_getEndpointsMetrics_input_order_Input\",\n  \"source_product\": \"Cloudability\",\n  \"target_prod",
+      "accuracy": 0.0
+    }
+  ]
+}

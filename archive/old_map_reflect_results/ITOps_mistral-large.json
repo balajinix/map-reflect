@@ -1,0 +1,523 @@
+{
+  "metadata": {
+    "dataset": "ITOps",
+    "method": "MapReflect",
+    "model": "watsonx/mistralai/mistral-large-2",
+    "execution_time": 58.96215081214905,
+    "timestamp": "2026-01-16T23:06:46.553890",
+    "total_samples": 3,
+    "successful_samples": 0,
+    "total_mappings": 0,
+    "overall_accuracy": 0.0,
+    "checkpoint": true
+  },
+  "results": [
+    {
+      "sample_id": "itops_002",
+      "predicted_mapping": {},
+      "accuracy": 0.0,
+      "source_schema": "",
+      "target_schema": "",
+      "schema_selection_reasoning": "MapReflect failed to find relevant mappings",
+      "execution_time": 23.656504154205322,
+      "success": false,
+      "error_message": "No valid mappings generated",
+      "map_reflect_raw_result": {},
+      "map_reflect_state": {
+        "mappings": {},
+        "source_properties": [
+          "concert_ApiKeyDate.created_on",
+          "concert_AppComponentCount.environments",
+          "concert_AppComponentCount.images",
+          "concert_AppComponentCount.libraries",
+          "concert_AppComponentCount.source_repos",
+          "concert_AppEnvironment.tags.name",
+          "concert_Application.associations.build_artifacts.id",
+          "concert_Application.associations.environments.auth_user_role",
+          "concert_Application.associations.environments.id",
+          "concert_Application.associations.releases.id",
+          "concert_Application.associations.releases.version",
+          "concert_Application.associations.source_repos.id",
+          "concert_Application.tags.description",
+          "concert_Application.version",
+          "concert_ApplicationAssociationsInfo.build_artifacts.file_name",
+          "concert_ApplicationAssociationsInfo.environments.id",
+          "concert_ApplicationAssociationsInfo.environments.name",
+          "concert_ApplicationAssociationsInfo.releases.version",
+          "concert_ApplicationCollection.applications.associations.environments.description",
+          "concert_ApplicationCollection.applications.version"
+        ],
+        "destination_properties": [
+          "concert_ConcertDefSbom.tags",
+          "concert_PackageDetailsSummary.tags",
+          "concert_VulnerabilityApplication.tags",
+          "instana_ApplicationConnection.edges.cursor",
+          "instana_ApplicationConnection.edges.node.ascending",
+          "instana_ApplicationEdge.node.ascending",
+          "instana_ApplicationEdge.node.limit",
+          "instana_ApplicationPerspective.input",
+          "instana_ApplicationService.endpoints.entityType",
+          "instana__entities_200_response.canLoadMore",
+          "instana__entities_200_response.items.entityHealthInfo.maxSeverity",
+          "instana__entities_200_response.items.entityHealthInfo.openIssues.endpointServiceId",
+          "instana__entities_200_response.items.entityHealthInfo.openIssues.problem.id",
+          "instana__entities_200_response.items.entityHealthInfo.openIssues.problem.severity",
+          "instana__entities_200_response.items.entityHealthInfo.openIssues.state",
+          "instana__entities_200_response.items.label",
+          "instana_callGroup_200_response.adjustedTimeframe.windowSize",
+          "instana_mutation_entities_items_items.tags",
+          "instana_mutation_entities_items_items_entityHealthInfo.openIssues.entityType",
+          "instana_mutation_entities_items_items_entityHealthInfo.openIssues.rca"
+        ],
+        "reflection_feedback": ""
+      },
+      "agent_available": true,
+      "dataset": "ITOps",
+      "model": "watsonx/mistralai/mistral-large-2",
+      "hierarchy_used": "ITOps",
+      "expected_source": {
+        "id": "concert",
+        "name": "concert",
+        "description": "Schema for concert",
+        "metadata": {},
+        "properties": [
+          {
+            "name": "concert_TagsPrototype.color",
+            "description": "Field concert_TagsPrototype.color of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_TagsPrototype.name",
+            "description": "Field concert_TagsPrototype.name of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_TagsPrototype.description",
+            "description": "Field concert_TagsPrototype.description of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Application.id",
+            "description": "Field concert_Application.id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Application.name",
+            "description": "Field concert_Application.name of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_ApplicationCollection.applications.id",
+            "description": "Field concert_ApplicationCollection.applications.id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_ApplicationCollection.applications.business_id",
+            "description": "Field concert_ApplicationCollection.applications.business_id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Application.description",
+            "description": "Field concert_Application.description of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Application.criticality",
+            "description": "Field concert_Application.criticality of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Application.business_id",
+            "description": "Field concert_Application.business_id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Application.resilience_status",
+            "description": "Field concert_Application.resilience_status of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_BuildArtifact.name",
+            "description": "Field concert_BuildArtifact.name of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_BuildArtifact.last_updated_on",
+            "description": "Field concert_BuildArtifact.last_updated_on of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_BuildArtifact.data_impact_risk",
+            "description": "Field concert_BuildArtifact.data_impact_risk of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_BuildArtifact.digest",
+            "description": "Field concert_BuildArtifact.digest of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_BuildArtifact.id",
+            "description": "Field concert_BuildArtifact.id of concert",
+            "metadata": {}
+          }
+        ]
+      },
+      "expected_target": {
+        "id": "instana_applications",
+        "name": "instana_applications",
+        "description": "Schema for instana_applications",
+        "metadata": {},
+        "properties": [
+          {
+            "name": "turbo_Action.importance",
+            "description": "Field turbo_Action.importance of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Entity.template.price",
+            "description": "Field turbo_Entity.template.price of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "instana_ApplicationPerspective.label",
+            "description": "Field instana_ApplicationPerspective.label of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Action.relatedSettingsPolicies",
+            "description": "Field turbo_Action.relatedSettingsPolicies of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "instana_ApplicationPerspective.id",
+            "description": "Field instana_ApplicationPerspective.id of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Action.details",
+            "description": "Field turbo_Action.details of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Entity.tags",
+            "description": "Field turbo_Entity.tags of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Entity.template.displayName",
+            "description": "Field turbo_Entity.template.displayName of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Action.actionID",
+            "description": "Field turbo_Action.actionID of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Entity.template.uuid",
+            "description": "Field turbo_Entity.template.uuid of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Action.marketID",
+            "description": "Field turbo_Action.marketID of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Action.actionImpactID",
+            "description": "Field turbo_Action.actionImpactID of instana_applications",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_Entity.template.discovered",
+            "description": "Field turbo_Entity.template.discovered of instana_applications",
+            "metadata": {}
+          }
+        ]
+      },
+      "original_utterance": "map concert convert application name with instana applications",
+      "ground_truth_mapping": {
+        "concert_TagsPrototype.color": "turbo_Entity.tags",
+        "concert_TagsPrototype.name": "turbo_Entity.tags",
+        "concert_TagsPrototype.description": "turbo_Entity.tags",
+        "concert_Application.id": "instana_ApplicationPerspective.id",
+        "concert_Application.name": "instana_ApplicationPerspective.label",
+        "concert_ApplicationCollection.applications.id": "turbo_Action.actionID",
+        "concert_ApplicationCollection.applications.business_id": "turbo_Action.actionImpactID",
+        "concert_Application.description": "turbo_Action.details",
+        "concert_Application.criticality": "turbo_Action.importance",
+        "concert_Application.business_id": "turbo_Action.marketID",
+        "concert_Application.resilience_status": "turbo_Action.relatedSettingsPolicies",
+        "concert_BuildArtifact.name": "turbo_Entity.template.displayName",
+        "concert_BuildArtifact.last_updated_on": "turbo_Entity.template.discovered",
+        "concert_BuildArtifact.data_impact_risk": "turbo_Entity.template.price",
+        "concert_BuildArtifact.digest": "turbo_Entity.template.uuid",
+        "concert_BuildArtifact.id": "turbo_Entity.template.uuid"
+      }
+    },
+    {
+      "sample_id": "itops_003",
+      "predicted_mapping": {},
+      "accuracy": 0.0,
+      "source_schema": "",
+      "target_schema": "",
+      "schema_selection_reasoning": "MapReflect failed to find relevant mappings",
+      "execution_time": 17.411814212799072,
+      "success": false,
+      "error_message": "No valid mappings generated",
+      "map_reflect_raw_result": {},
+      "map_reflect_state": {
+        "mappings": {},
+        "source_properties": [
+          "concert_ApiKeyDate.created_on",
+          "concert_AppComponentCount.environments",
+          "concert_AppComponentCount.images",
+          "concert_AppComponentCount.libraries",
+          "concert_AppComponentCount.source_repos",
+          "concert_AppEnvironment.tags.name",
+          "concert_Application.associations.build_artifacts.id",
+          "concert_Application.associations.environments.auth_user_role",
+          "concert_Application.associations.environments.id",
+          "concert_Application.associations.releases.id",
+          "concert_Application.associations.releases.version",
+          "concert_Application.associations.source_repos.id",
+          "concert_Application.tags.description",
+          "concert_Application.version",
+          "concert_ApplicationAssociationsInfo.build_artifacts.file_name",
+          "concert_ApplicationAssociationsInfo.environments.id",
+          "concert_ApplicationAssociationsInfo.environments.name",
+          "concert_ApplicationAssociationsInfo.releases.version",
+          "concert_ApplicationCollection.applications.associations.environments.description",
+          "concert_ApplicationCollection.applications.version"
+        ],
+        "destination_properties": [
+          "concert_ConcertDefSbom.tags",
+          "concert_PackageDetailsSummary.tags",
+          "concert_VulnerabilityApplication.tags",
+          "instana_mutation_entities_items_items.tags",
+          "turbo_Action.actionID",
+          "turbo_CompoundActionsEntry.newEntity.state",
+          "turbo_CurrentEntity.aspects",
+          "turbo_CurrentEntity.tags",
+          "turbo_Entity.displayName",
+          "turbo_Entity.stats.statistics.capacity.totalMax",
+          "turbo_Entity.stats.statistics.capacity.totalMin",
+          "turbo_Entity.stats.statistics.name",
+          "turbo_Entity.stats.statistics.relatedEntity.uuid",
+          "turbo_Entity.uuid",
+          "turbo_NewEntity.tags",
+          "turbo_Provider.className",
+          "turbo_ProvidersEntry.className",
+          "turbo_ProvidersEntry.displayName",
+          "turbo_StatsEntry.relatedEntityType",
+          "turbo_Target.vendorIds"
+        ],
+        "reflection_feedback": ""
+      },
+      "agent_available": true,
+      "dataset": "ITOps",
+      "model": "watsonx/mistralai/mistral-large-2",
+      "hierarchy_used": "ITOps",
+      "expected_source": {
+        "id": "concert",
+        "name": "concert",
+        "description": "Schema for concert",
+        "metadata": {},
+        "properties": [
+          {
+            "name": "concert_ApplicationCollection.applications.associations.source_repos.tags.name",
+            "description": "Field concert_ApplicationCollection.applications.associations.source_repos.tags.name of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_ApplicationCollection.applications.tags.name",
+            "description": "Field concert_ApplicationCollection.applications.tags.name of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_ApplicationCollection.applications.associations.environments.tags.name",
+            "description": "Field concert_ApplicationCollection.applications.associations.environments.tags.name of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_ApplicationCollection.applications.associations.build_artifacts.tags.name",
+            "description": "Field concert_ApplicationCollection.applications.associations.build_artifacts.tags.name of concert",
+            "metadata": {}
+          }
+        ]
+      },
+      "expected_target": {
+        "id": "turbo_entity",
+        "name": "turbo_entity",
+        "description": "Schema for turbo_entity",
+        "metadata": {},
+        "properties": [
+          {
+            "name": "turbo_Entity.tags",
+            "description": "Field turbo_Entity.tags of turbo_entity",
+            "metadata": {}
+          }
+        ]
+      },
+      "original_utterance": "map concert convert application name with turbo entity",
+      "ground_truth_mapping": {
+        "concert_ApplicationCollection.applications.associations.source_repos.tags.name": "turbo_Entity.tags",
+        "concert_ApplicationCollection.applications.tags.name": "turbo_Entity.tags",
+        "concert_ApplicationCollection.applications.associations.environments.tags.name": "turbo_Entity.tags",
+        "concert_ApplicationCollection.applications.associations.build_artifacts.tags.name": "turbo_Entity.tags"
+      }
+    },
+    {
+      "sample_id": "itops_004",
+      "predicted_mapping": {},
+      "accuracy": 0.0,
+      "source_schema": "",
+      "target_schema": "",
+      "schema_selection_reasoning": "MapReflect failed to find relevant mappings",
+      "execution_time": 16.853736877441406,
+      "success": false,
+      "error_message": "No valid mappings generated",
+      "map_reflect_raw_result": {},
+      "map_reflect_state": {
+        "mappings": {},
+        "source_properties": [
+          "concert_ApiKeyDate.created_on",
+          "concert_AppComponentCount.environments",
+          "concert_AppComponentCount.images",
+          "concert_AppComponentCount.libraries",
+          "concert_AppComponentCount.source_repos",
+          "concert_AppEnvironment.tags.name",
+          "concert_Application.associations.build_artifacts.id",
+          "concert_Application.associations.environments.auth_user_role",
+          "concert_Application.associations.environments.id",
+          "concert_Application.associations.releases.id",
+          "concert_Application.associations.releases.version",
+          "concert_Application.associations.source_repos.id",
+          "concert_Application.tags.description",
+          "concert_Application.version",
+          "concert_ApplicationAssociationsInfo.build_artifacts.file_name",
+          "concert_ApplicationAssociationsInfo.environments.id",
+          "concert_ApplicationAssociationsInfo.environments.name",
+          "concert_ApplicationAssociationsInfo.releases.version",
+          "concert_ApplicationCollection.applications.associations.environments.description",
+          "concert_ApplicationCollection.applications.version"
+        ],
+        "destination_properties": [
+          "instana__query_topology_edges_items.source",
+          "turbo_Action.actionID",
+          "turbo_Action.actionImpactID",
+          "turbo_Action.actionMode",
+          "turbo_Action.actionSchedule.acceptedByUserForMaintenanceWindow",
+          "turbo_Action.compoundActions.currentLocation.discoveredBy.isProbeRegistered",
+          "turbo_Action.compoundActions.currentLocation.discoveredBy.subType",
+          "turbo_Action.compoundActions.newEntity.className",
+          "turbo_Action.compoundActions.target.state",
+          "turbo_Action.currentEntity.aspects",
+          "turbo_Action.externalActionName",
+          "turbo_Action.newEntity.state",
+          "turbo_Action.source",
+          "turbo_Action.target.connectedEntities.state",
+          "turbo_Action.target.connectedEntities.tags",
+          "turbo_CompoundActionsEntry.newEntity.state",
+          "turbo_CompoundActionsEntry.target.connectedEntities.discoveredBy.isProbeRegistered",
+          "turbo_CompoundActionsEntry.target.state",
+          "turbo_Entity.stats.statistics.relatedEntity.uuid",
+          "turbo_Entity.uuid"
+        ],
+        "reflection_feedback": ""
+      },
+      "agent_available": true,
+      "dataset": "ITOps",
+      "model": "watsonx/mistralai/mistral-large-2",
+      "hierarchy_used": "ITOps",
+      "expected_source": {
+        "id": "concert",
+        "name": "concert",
+        "description": "Schema for concert",
+        "metadata": {},
+        "properties": [
+          {
+            "name": "concert_Application.associations.releases.id",
+            "description": "Field concert_Application.associations.releases.id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Release.id",
+            "description": "Field concert_Release.id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Application.associations.releases.version",
+            "description": "Field concert_Application.associations.releases.version of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_Release.version",
+            "description": "Field concert_Release.version of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_ApplicationCollection.applications.associations.releases.version",
+            "description": "Field concert_ApplicationCollection.applications.associations.releases.version of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_ApplicationCollection.applications.associations.releases.id",
+            "description": "Field concert_ApplicationCollection.applications.associations.releases.id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_BuildArtifactAssociations.applications.id",
+            "description": "Field concert_BuildArtifactAssociations.applications.id of concert",
+            "metadata": {}
+          },
+          {
+            "name": "concert_BuildArtifactAssociations.applications.version",
+            "description": "Field concert_BuildArtifactAssociations.applications.version of concert",
+            "metadata": {}
+          }
+        ]
+      },
+      "expected_target": {
+        "id": "turbo_entityActionStats",
+        "name": "turbo_entityActionStats",
+        "description": "Schema for turbo_entityActionStats",
+        "metadata": {},
+        "properties": [
+          {
+            "name": "turbo_StatsEntry.numRelatedEntities",
+            "description": "Field turbo_StatsEntry.numRelatedEntities of turbo_entityActionStats",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_StatsEntry.displayName",
+            "description": "Field turbo_StatsEntry.displayName of turbo_entityActionStats",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_StatsEntry.name",
+            "description": "Field turbo_StatsEntry.name of turbo_entityActionStats",
+            "metadata": {}
+          },
+          {
+            "name": "turbo_StatsEntry.className",
+            "description": "Field turbo_StatsEntry.className of turbo_entityActionStats",
+            "metadata": {}
+          }
+        ]
+      },
+      "original_utterance": "map concert convert application name with turbo entity action stats",
+      "ground_truth_mapping": {
+        "concert_Application.associations.releases.id": "turbo_StatsEntry.className",
+        "concert_Release.id": "turbo_StatsEntry.className",
+        "concert_Application.associations.releases.version": "turbo_StatsEntry.displayName",
+        "concert_Release.version": "turbo_StatsEntry.displayName",
+        "concert_ApplicationCollection.applications.associations.releases.version": "turbo_StatsEntry.name",
+        "concert_ApplicationCollection.applications.associations.releases.id": "turbo_StatsEntry.name",
+        "concert_BuildArtifactAssociations.applications.id": "turbo_StatsEntry.numRelatedEntities",
+        "concert_BuildArtifactAssociations.applications.version": "turbo_StatsEntry.numRelatedEntities"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1223 @@
+{
+  "metadata": {
+    "dataset": "ITOpsGraph_Discovery",
+    "model": "watsonx/meta-llama/llama-3-3-70b-instruct",
+    "top_k": 10,
+    "use_sampling": true,
+    "n_uncertainty_samples": 3,
+    "timestamp": "2026-02-07T23:49:42.488302",
+    "version": "v2"
+  },
+  "results": [
+    {
+      "sample_id": "itopsgraph_disc_0100_1",
+      "utterance": "Map hcp packer_PackerRegistry.updated_at to hcp",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpTerraformAgentPool",
+      "selected_target_type": "HcpTerraformProject",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (hcp_HcpTerraformAgentPool.base, hcp_HcpTerraformAgentPool.agent_count, hcp_HcpTerraformAgentPool.organization_scoped) and target fields (hcp_HcpTerraformProject.account, hcp_HcpTerraformProject.is_legacy_organization_project, hcp_HcpTerraformProject.is_unified) do not exhibit semantic similarity or functional equivalence. The source fields relate to agent pool configuration, while the target fields relate to project settings, with no apparent overlap in meaning or purpose.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerRegistry.updated_at": "hcp_terraform_HcpTerraformAgentPool.updated_at"
+      },
+      "predictions": {
+        "hcp_packer_PackerRegistry.updated_at": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformProject.is_unified",
+              "score": 0.7,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            },
+            {
+              "id": "hcp_HcpTerraformProject.account",
+              "score": 0.6,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            },
+            {
+              "id": "hcp_HcpTerraformProject.is_legacy_organization_project",
+              "score": 0.49999999999999994,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformProject.is_unified",
+                "score": 0.7,
+                "reason": "Embedding fallback (LLM parsing failed)"
+              },
+              {
+                "id": "hcp_HcpTerraformProject.account",
+                "score": 0.6,
+                "reason": "Embedding fallback (LLM parsing failed)"
+              },
+              {
+                "id": "hcp_HcpTerraformProject.is_legacy_organization_project",
+                "score": 0.49999999999999994,
+                "reason": "Embedding fallback (LLM parsing failed)"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0064_1",
+      "utterance": "What maps to concert applications?",
+      "expected_source": "concert",
+      "expected_target": "turbonomic",
+      "selected_source_product": "concert",
+      "selected_target_product": "turbonomic",
+      "selected_source_type": "control",
+      "selected_target_type": "ActionSchedule",
+      "type_mapping_valid": true,
+      "type_validation_reason": "Field overlap found: ID fields present",
+      "ground_truth_mapping": {
+        "concert_ApplicationCollection.applications.tags.name": "turbonomic_Entity.tags"
+      },
+      "predictions": {
+        "concert_ApplicationCollection.applications.tags.name": {
+          "initial_ranking": [
+            {
+              "id": "turbonomic_ActionSchedule.displayName",
+              "score": 0.9,
+              "reason": "Candidate 1 is the best match because \"displayName\" is the most semantically similar to \"name\", indicating a field that holds a human-readable identifier or label."
+            },
+            {
+              "id": "turbonomic_ActionSchedule.uuid",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "turbonomic_ActionSchedule.nextOccurrence",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "turbonomic_ActionSchedule.displayName",
+                "score": 0.9,
+                "reason": "Candidate 1 is the best match because \"displayName\" is the most semantically similar to \"name\", indicating a field that holds a human-readable identifier or label."
+              },
+              {
+                "id": "turbonomic_ActionSchedule.uuid",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "turbonomic_ActionSchedule.nextOccurrence",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0004_0",
+      "utterance": "Discover equivalent field for turbonomic Action actionType",
+      "expected_source": "turbonomic",
+      "expected_target": "concert",
+      "selected_source_product": "ns1",
+      "selected_target_product": "turbonomic",
+      "selected_source_type": "JobTypeID",
+      "selected_target_type": "Action",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (ns1_JobTypeID.responseTime, ns1_JobTypeID.latency, ns1_JobTypeID.custom) do not have any semantic similarity or functional equivalence with the target fields (turbonomic_ActionMode and turbonomic_ActionState). The source fields appear to be related to job performance metrics, while the target fields are related to action modes and states, which are unrelated concepts.",
+      "ground_truth_mapping": {
+        "turbonomic_Action.actionType": "concert_PackageDetailsCollection.packages.recommendation.action"
+      },
+      "predictions": {
+        "turbonomic_Action.actionType": {
+          "initial_ranking": [
+            {
+              "id": "turbonomic_Action.actionType",
+              "score": 0.9,
+              "reason": "Candidate 1 is the best match because it has an identical field name \"actionType\" to the source field \"turbonomic_Action.actionType\", indicating a strong semantic similarity."
+            },
+            {
+              "id": "turbonomic_ActionType.START",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "turbonomic_ActionType.MOVE",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "turbonomic_Action.actionType",
+                "score": 0.9,
+                "reason": "Candidate 1 is the best match because it has an identical field name \"actionType\" to the source field \"turbonomic_Action.actionType\", indicating a strong semantic similarity."
+              },
+              {
+                "id": "turbonomic_ActionType.START",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "turbonomic_ActionType.MOVE",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0012_1",
+      "utterance": "What maps to turbonomic details?",
+      "expected_source": "turbonomic",
+      "expected_target": "concert",
+      "selected_source_product": "turbonomic",
+      "selected_target_product": "concert",
+      "selected_source_type": "Action",
+      "selected_target_type": "checks",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields appear to be related to action modes and states, whereas the target fields are related to checks with attributes like name, reason, score, and category. There is no clear semantic similarity or functional equivalence between the source and target fields. For example, \"turbonomic_ActionMode.DISABLED\" does not have a clear equivalent in the target fields, and \"concert_Checks.ckname\" does not have a clear equivalent in the source fields.",
+      "ground_truth_mapping": {
+        "turbonomic_Action.details": "concert_PackageRecommendation.description"
+      },
+      "predictions": {
+        "turbonomic_Action.details": {
+          "initial_ranking": [
+            {
+              "id": "concert_Checks.reason",
+              "score": 0.9,
+              "reason": "Candidate 1 matches because both fields serve to provide a descriptive reason or explanation, aligning in semantic purpose as descriptive fields."
+            },
+            {
+              "id": "concert_Checks.ckname",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "concert_Checks.category",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "concert_Checks.reason",
+                "score": 0.9,
+                "reason": "Candidate 1 matches because both fields serve to provide a descriptive reason or explanation, aligning in semantic purpose as descriptive fields."
+              },
+              {
+                "id": "concert_Checks.ckname",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "concert_Checks.category",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0098_1",
+      "utterance": "Link hcp packer_PackerRegistry.updated_at to appropriate hcp field",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpTerraformAgentPool",
+      "selected_target_type": "HcpResource",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (hcp_HcpTerraformAgentPool.base, hcp_HcpTerraformAgentPool.agent_count, hcp_HcpTerraformAgentPool.organization_scoped) do not have any semantic similarity or functional equivalence with the target fields (hcp_HcpResource.organization_id, hcp_HcpResource.project_id). The source fields seem to be related to Terraform agent pool configuration, while the target fields are related to resource identification. There is no clear mapping between these fields.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerRegistry.updated_at": "hcp_terraform_HcpTerraformWorkspace.updated_at"
+      },
+      "predictions": {
+        "hcp_packer_PackerRegistry.updated_at": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpResource.project_id",
+              "score": 0.7,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            },
+            {
+              "id": "hcp_HcpResource.organization_id",
+              "score": 0.6,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpResource.project_id",
+                "score": 0.7,
+                "reason": "Embedding fallback (LLM parsing failed)"
+              },
+              {
+                "id": "hcp_HcpResource.organization_id",
+                "score": 0.6,
+                "reason": "Embedding fallback (LLM parsing failed)"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0070_1",
+      "utterance": "What in instana matches concert environments?",
+      "expected_source": "concert",
+      "expected_target": "instana",
+      "selected_source_product": "concert",
+      "selected_target_product": "instana",
+      "selected_source_type": "control",
+      "selected_target_type": "ApplicationService",
+      "type_mapping_valid": true,
+      "type_validation_reason": "Field overlap found: ID fields present",
+      "ground_truth_mapping": {
+        "concert_BuildArtifactAssociations.environments.id": "instana_Entity__Mock.id"
+      },
+      "predictions": {
+        "concert_BuildArtifactAssociations.environments.id": {
+          "initial_ranking": [
+            {
+              "id": "instana_ApplicationService.id",
+              "score": 0.9,
+              "reason": "Candidate 1 matches because it represents a unique identifier, similar to the source field \"id\", and has a descriptive name that implies a strong semantic connection."
+            },
+            {
+              "id": "instana_ApplicationService._appid",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "instana_ApplicationService.label",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "instana_ApplicationService.id",
+                "score": 0.9,
+                "reason": "Candidate 1 matches because it represents a unique identifier, similar to the source field \"id\", and has a descriptive name that implies a strong semantic connection."
+              },
+              {
+                "id": "instana_ApplicationService._appid",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "instana_ApplicationService.label",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0115_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerBucket.account_id",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpTerraformAgentPool",
+      "selected_target_type": "HcpProject",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (hcp_HcpTerraformAgentPool.base, hcp_HcpTerraformAgentPool.agent_count, hcp_HcpTerraformAgentPool.organization_scoped) do not have any semantic similarity or functional equivalence with the target field (hcp_HcpProject.account). The source fields are related to Terraform agent pool configuration, while the target field is related to a project's account, which is a different concept.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerBucket.account_id": "hcp_terraform_HcpTerraformStateVersion.account_id"
+      },
+      "predictions": {
+        "hcp_packer_PackerBucket.account_id": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpProject.account",
+              "score": 0.9,
+              "reason": "Candidate 1 matches because the field name \"account\" is semantically similar to \"account_id\", suggesting a strong relationship between the two fields in representing account information."
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpProject.account",
+                "score": 0.9,
+                "reason": "Candidate 1 matches because the field name \"account\" is semantically similar to \"account_id\", suggesting a strong relationship between the two fields in representing account information."
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0352_0",
+      "utterance": "What in hcp matches hcp zone_ids?",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpResource",
+      "selected_target_type": "HcpTerraformOrganization",
+      "type_mapping_valid": true,
+      "type_validation_reason": "Field overlap found: ID fields present",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerArtifact.zone_ids": "hcp_terraform_HcpTerraformAgentPool.zone_ids"
+      },
+      "predictions": {
+        "hcp_packer_PackerArtifact.zone_ids": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+              "score": 0.9,
+              "reason": "Candidate 1 is the best match because it has an \"id\" suffix similar to \"zone_ids\", suggesting both fields deal with identifier values."
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.organization",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.is_unified",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+                "score": 0.9,
+                "reason": "Candidate 1 is the best match because it has an \"id\" suffix similar to \"zone_ids\", suggesting both fields deal with identifier values."
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.organization",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.is_unified",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0228_0",
+      "utterance": "What's the hcp counterpart of hcp updated_at?",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpResource",
+      "selected_target_type": "HcpTerraformProject",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (hcp_HcpResource.organization_id, hcp_HcpResource.project_id) and target fields (hcp_HcpTerraformProject.account, hcp_HcpTerraformProject.is_legacy_organization_project, hcp_HcpTerraformProject.is_unified) do not exhibit semantic similarity or functional equivalence. The source fields appear to be identifiers, while the target fields seem to represent different concepts (an account and two boolean flags). None of the source fields can be meaningfully mapped to any of the target fields.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerBuild.updated_at": "hcp_terraform_HcpTerraformAgentPool.updated_at"
+      },
+      "predictions": {
+        "hcp_packer_PackerBuild.updated_at": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformProject.is_unified",
+              "score": 0.7,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            },
+            {
+              "id": "hcp_HcpTerraformProject.is_legacy_organization_project",
+              "score": 0.6,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            },
+            {
+              "id": "hcp_HcpTerraformProject.account",
+              "score": 0.49999999999999994,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            }
+          ],
+          "uncertainty": 0.33333333333333337,
+          "uncertainty_info": {
+            "uncertainty": 0.33333333333333337,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": true,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformProject.account",
+                "score": 0.9,
+                "reason": "The source field \"hcp_packer_PackerBuild.updated_at\" represents a timestamp, and none of the target fields directly match this semantic meaning, but \"hcp_HcpTerraformProject.account\" seems the most pl"
+              },
+              {
+                "id": "hcp_HcpTerraformProject.is_unified",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "hcp_HcpTerraformProject.is_legacy_organization_project",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "High uncertainty triggered reflection - ranking changed"
+          }
+        }
+      },
+      "mean_uncertainty": 0.33333333333333337
+    },
+    {
+      "sample_id": "itopsgraph_disc_0347_1",
+      "utterance": "Map hcp packer_PackerArtifact.region_id to hcp",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpTerraformAgentPool",
+      "selected_target_type": "HcpOrganization",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (hcp_HcpTerraformAgentPool.base, hcp_HcpTerraformAgentPool.agent_count, hcp_HcpTerraformAgentPool.organization_scoped) do not have any semantic similarity or functional equivalence with the target field (hcp_HcpOrganization.organization). The source fields seem to be related to Terraform agent pool configuration, while the target field is related to an organization, which are unrelated concepts.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerArtifact.region_id": "hcp_terraform_HcpTerraformStateVersion.region_id"
+      },
+      "predictions": {
+        "hcp_packer_PackerArtifact.region_id": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpOrganization.organization",
+              "score": 0.9,
+              "reason": "Candidate 1 is the only option and although it doesn't perfectly match, \"organization\" could be related to \"region\" in some contexts, such as organizational regions."
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpOrganization.organization",
+                "score": 0.9,
+                "reason": "Candidate 1 is the only option and although it doesn't perfectly match, \"organization\" could be related to \"region\" in some contexts, such as organizational regions."
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0349_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerArtifact.region_id",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpTerraformAgentPool",
+      "selected_target_type": "HcpTerraformOrganization",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (hcp_HcpTerraformAgentPool.base, hcp_HcpTerraformAgentPool.agent_count, hcp_HcpTerraformAgentPool.organization_scoped) do not have any semantic similarity or functional equivalence with the target fields (hcp_HcpTerraformOrganization.organization, hcp_HcpTerraformOrganization.is_unified, hcp_HcpTerraformOrganization.agent_pool_id). The source fields are related to an agent pool, while the target fields are related to an organization, and there is no clear mapping between them.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerArtifact.region_id": "hcp_terraform_HcpTerraformRun.region_id"
+      },
+      "predictions": {
+        "hcp_packer_PackerArtifact.region_id": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+              "score": 0.9,
+              "reason": "Candidate 1 is the best match because it represents an identifier field, similar to the source field \"region_id\", which suggests a semantic purpose of referencing a specific location or entity."
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.organization",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.is_unified",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+                "score": 0.9,
+                "reason": "Candidate 1 is the best match because it represents an identifier field, similar to the source field \"region_id\", which suggests a semantic purpose of referencing a specific location or entity."
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.organization",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.is_unified",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0208_0",
+      "utterance": "What hcp field corresponds to hcp packer_PackerBuild.name?",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpTerraformAgentPool",
+      "selected_target_type": "HcpTerraformProject",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields (hcp_HcpTerraformAgentPool.base, hcp_HcpTerraformAgentPool.agent_count, hcp_HcpTerraformAgentPool.organization_scoped) and target fields (hcp_HcpTerraformProject.account, hcp_HcpTerraformProject.is_legacy_organization_project, hcp_HcpTerraformProject.is_unified) do not exhibit semantic similarity or functional equivalence. The source fields relate to agent pool configuration, while the target fields relate to project settings, and there is no clear mapping between them.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerBuild.name": "hcp_terraform_HcpTerraformAgentPool.name"
+      },
+      "predictions": {
+        "hcp_packer_PackerBuild.name": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformProject.account",
+              "score": 0.9,
+              "reason": "Candidate 2 is the best match because the field name \"account\" has some semantic similarity with \"name\", as both could potentially represent a identifier or label, although it's not a perfect match."
+            },
+            {
+              "id": "hcp_HcpTerraformProject.is_unified",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "hcp_HcpTerraformProject.is_legacy_organization_project",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformProject.account",
+                "score": 0.9,
+                "reason": "Candidate 2 is the best match because the field name \"account\" has some semantic similarity with \"name\", as both could potentially represent a identifier or label, although it's not a perfect match."
+              },
+              {
+                "id": "hcp_HcpTerraformProject.is_unified",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "hcp_HcpTerraformProject.is_legacy_organization_project",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0268_1",
+      "utterance": "Discover equivalent field for hcp packer_PackerVersion id",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "turbonomic",
+      "selected_target_product": "hcp",
+      "selected_source_type": "Action",
+      "selected_target_type": "HcpTerraformAgentPool",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields from turbonomic.Action appear to be related to action modes and states, which do not have a clear semantic similarity or functional equivalence to the target fields in hcp.HcpTerraformAgentPool, which are related to Terraform agent pool configuration. The source fields seem to be focused on the status and type of actions, whereas the target fields are focused on infrastructure configuration.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerVersion.id": "hcp_terraform_HcpTerraformWorkspace.id"
+      },
+      "predictions": {
+        "hcp_packer_PackerVersion.id": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformAgentPool.base",
+              "score": 0.9,
+              "reason": "Candidate 1 is the best match because the field name \"base\" has a slight semantic similarity to \"id\" in the sense that both could refer to a foundational or unique identifier in their respective conte"
+            },
+            {
+              "id": "hcp_HcpTerraformAgentPool.organization_scoped",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "hcp_HcpTerraformAgentPool.agent_count",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformAgentPool.base",
+                "score": 0.9,
+                "reason": "Candidate 1 is the best match because the field name \"base\" has a slight semantic similarity to \"id\" in the sense that both could refer to a foundational or unique identifier in their respective conte"
+              },
+              {
+                "id": "hcp_HcpTerraformAgentPool.organization_scoped",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "hcp_HcpTerraformAgentPool.agent_count",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0015_1",
+      "utterance": "Find concert field equivalent to turbonomic Action.details",
+      "expected_source": "turbonomic",
+      "expected_target": "concert",
+      "selected_source_product": "turbonomic",
+      "selected_target_product": "concert",
+      "selected_source_type": "Action",
+      "selected_target_type": "control",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields from turbonomic.Action appear to be related to action modes and states, whereas the target fields from concert.control seem to be related to control relationships and control details. There is no clear semantic similarity or functional equivalence between the source and target fields. The source fields are primarily enumerations (e.g., turbonomic_ActionMode, turbonomic_ActionState), while the target fields are mostly identifiers, descriptors, or relational fields. Without more context or a more specific mapping request, it's challenging to establish a meaningful connection between these fields.",
+      "ground_truth_mapping": {
+        "turbonomic_Action.details": "concert_PackageRecommendation.action"
+      },
+      "predictions": {
+        "turbonomic_Action.details": {
+          "initial_ranking": [
+            {
+              "id": "concert_Controls.description",
+              "score": 0.9,
+              "reason": "Candidate 1 matches because both fields are named \"description\" and are likely to hold descriptive text about an action or control, indicating a strong semantic similarity."
+            },
+            {
+              "id": "concert_Controls.title",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "concert_Controls.code",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "concert_Controls.description",
+                "score": 0.9,
+                "reason": "Candidate 1 matches because both fields are named \"description\" and are likely to hold descriptive text about an action or control, indicating a strong semantic similarity."
+              },
+              {
+                "id": "concert_Controls.title",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "concert_Controls.code",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0275_0",
+      "utterance": "How does hcp name translate to hcp?",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpOrganization",
+      "selected_target_type": "HcpTerraformOrganization",
+      "type_mapping_valid": true,
+      "type_validation_reason": "Field overlap found: {'organization'}",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerVersion.name": "hcp_terraform_HcpTerraformRun.name"
+      },
+      "predictions": {
+        "hcp_packer_PackerVersion.name": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformOrganization.organization",
+              "score": 0.9,
+              "reason": "Candidate 3 matches because the field \"organization\" has a closer semantic meaning to \"name\" as both could represent a form of identifier or label, although not an exact match."
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.is_unified",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformOrganization.organization",
+                "score": 0.9,
+                "reason": "Candidate 3 matches because the field \"organization\" has a closer semantic meaning to \"name\" as both could represent a form of identifier or label, although not an exact match."
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.is_unified",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0009_0",
+      "utterance": "Find the concert equivalent of turbonomic importance",
+      "expected_source": "turbonomic",
+      "expected_target": "concert",
+      "selected_source_product": "turbonomic",
+      "selected_target_product": "concert",
+      "selected_source_type": "Action",
+      "selected_target_type": "checks",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields from turbonomic.Action appear to be related to action modes and states, whereas the target fields from concert.checks seem to be related to check names, reasons, scores, and categories. There is no clear semantic similarity or functional equivalence between the source and target fields. The original request mentions \"turbonomic importance\", but none of the provided source fields directly relate to importance, and none of the target fields seem to match the concept of importance or action modes/states.",
+      "ground_truth_mapping": {
+        "turbonomic_Action.importance": "concert_PackageDetailsSummary.recommendation.risk_type"
+      },
+      "predictions": {
+        "turbonomic_Action.importance": {
+          "initial_ranking": [
+            {
+              "id": "concert_Checks.score",
+              "score": 0.9,
+              "reason": "Candidate 2 matches because the concept of \"importance\" can be related to a \"score\" which implies a level of priority or significance, similar to how importance is often measured."
+            },
+            {
+              "id": "concert_Checks.reason",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "concert_Checks.category",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "concert_Checks.score",
+                "score": 0.9,
+                "reason": "Candidate 2 matches because the concept of \"importance\" can be related to a \"score\" which implies a level of priority or significance, similar to how importance is often measured."
+              },
+              {
+                "id": "concert_Checks.reason",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "concert_Checks.category",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0030_1",
+      "utterance": "What concert field corresponds to turbonomic Action.policy?",
+      "expected_source": "turbonomic",
+      "expected_target": "concert",
+      "selected_source_product": "turbonomic",
+      "selected_target_product": "concert",
+      "selected_source_type": "Action",
+      "selected_target_type": "control",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields from turbonomic.Action appear to be related to action modes and states, whereas the target fields from concert.control seem to be related to control relationships, catalogs, and control attributes. There is no clear semantic similarity or functional equivalence between the source and target fields. The original request mentions \"turbonomic Action.policy\", but none of the provided source fields match this description, and none of the target fields seem to relate to policies or actions in a meaningful way.",
+      "ground_truth_mapping": {
+        "turbonomic_Action.policy": "concert_PackageRecommendation.recommendation"
+      },
+      "predictions": {
+        "turbonomic_Action.policy": {
+          "initial_ranking": [
+            {
+              "id": "concert_Controls.description",
+              "score": 0.9,
+              "reason": "Candidate 5 matches because the source field \"policy\" is closely related to the concept of a \"description\", which is what the target field \"description\" represents."
+            },
+            {
+              "id": "concert_Controls.title",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "concert_Controls.code",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "concert_Controls.description",
+                "score": 0.9,
+                "reason": "Candidate 5 matches because the source field \"policy\" is closely related to the concept of a \"description\", which is what the target field \"description\" represents."
+              },
+              {
+                "id": "concert_Controls.title",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "concert_Controls.code",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0326_0",
+      "utterance": "What in hcp matches hcp updated_at?",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpResource",
+      "selected_target_type": "HcpTerraformOrganization",
+      "type_mapping_valid": true,
+      "type_validation_reason": "Field overlap found: ID fields present",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerChannel.updated_at": "hcp_terraform_HcpTerraformWorkspace.updated_at"
+      },
+      "predictions": {
+        "hcp_packer_PackerChannel.updated_at": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+              "score": 0.9,
+              "reason": "Candidate 2 is the best match because \"updated_at\" implies a timestamp, and \"agent_pool_id\" could be related to an update event, although none of the options directly match the concept of an update ti"
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.organization",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "hcp_HcpTerraformOrganization.is_unified",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpTerraformOrganization.agent_pool_id",
+                "score": 0.9,
+                "reason": "Candidate 2 is the best match because \"updated_at\" implies a timestamp, and \"agent_pool_id\" could be related to an update event, although none of the options directly match the concept of an update ti"
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.organization",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "hcp_HcpTerraformOrganization.is_unified",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0029_2",
+      "utterance": "What maps to turbonomic externalActionName?",
+      "expected_source": "turbonomic",
+      "expected_target": "concert",
+      "selected_source_product": "turbonomic",
+      "selected_target_product": "concert",
+      "selected_source_type": "Action",
+      "selected_target_type": "control",
+      "type_mapping_valid": false,
+      "type_validation_reason": "The source fields from turbonomic.Action appear to be related to action modes and states, whereas the target fields from concert.control seem to be related to control relationships and control metadata. There is no clear semantic similarity or functional equivalence between the source and target fields. The source fields are focused on action modes and states, while the target fields are focused on control identifiers, descriptions, and relationships. Without more context or a more specific target type, it's challenging to establish a meaningful mapping.",
+      "ground_truth_mapping": {
+        "turbonomic_Action.externalActionName": "concert_PackageDetailsCollection.packages.recommendation.recommendation"
+      },
+      "predictions": {
+        "turbonomic_Action.externalActionName": {
+          "initial_ranking": [
+            {
+              "id": "concert_Controls.title",
+              "score": 0.9,
+              "reason": "Candidate 2 is the best match because the field name \"title\" is semantically closest to \"externalActionName\", implying a descriptive name or label for an action."
+            },
+            {
+              "id": "concert_Controls.description",
+              "score": 0.8,
+              "reason": "LLM ranked"
+            },
+            {
+              "id": "concert_Controls.code",
+              "score": 0.7,
+              "reason": "LLM ranked"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "concert_Controls.title",
+                "score": 0.9,
+                "reason": "Candidate 2 is the best match because the field name \"title\" is semantically closest to \"externalActionName\", implying a descriptive name or label for an action."
+              },
+              {
+                "id": "concert_Controls.description",
+                "score": 0.8,
+                "reason": "LLM ranked"
+              },
+              {
+                "id": "concert_Controls.code",
+                "score": 0.7,
+                "reason": "LLM ranked"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    },
+    {
+      "sample_id": "itopsgraph_disc_0230_2",
+      "utterance": "What in hcp matches hcp description?",
+      "expected_source": "hcp",
+      "expected_target": "hcp",
+      "selected_source_product": "hcp",
+      "selected_target_product": "hcp",
+      "selected_source_type": "HcpResource",
+      "selected_target_type": "HcpOrganization",
+      "type_mapping_valid": true,
+      "type_validation_reason": "The source field \"hcp_HcpResource.organization_id\" can be semantically mapped to the target field \"hcp_HcpOrganization.organization\" because both fields appear to be related to organization identifiers. The term \"organization_id\" in the source field suggests a unique identifier for an organization, which could be functionally equivalent to the \"organization\" field in the target type, potentially representing a reference to an organization.",
+      "ground_truth_mapping": {
+        "hcp_packer_PackerBuild.description": "hcp_terraform_HcpTerraformWorkspace.description"
+      },
+      "predictions": {
+        "hcp_packer_PackerBuild.description": {
+          "initial_ranking": [
+            {
+              "id": "hcp_HcpOrganization.organization",
+              "score": 0.7,
+              "reason": "Embedding fallback (LLM parsing failed)"
+            }
+          ],
+          "uncertainty": 0.0,
+          "uncertainty_info": {
+            "uncertainty": 0.0,
+            "method": "sampling",
+            "n_samples": 3
+          },
+          "reflection": {
+            "reflected": false,
+            "revised_ranking": [
+              {
+                "id": "hcp_HcpOrganization.organization",
+                "score": 0.7,
+                "reason": "Embedding fallback (LLM parsing failed)"
+              }
+            ],
+            "reflection_reason": "Low uncertainty - initial ranking retained"
+          }
+        }
+      },
+      "mean_uncertainty": 0.0
+    }
+  ]
+}

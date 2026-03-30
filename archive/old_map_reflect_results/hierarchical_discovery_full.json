@@ -1,0 +1,3278 @@
+{
+  "summary": {
+    "total_samples": 63,
+    "correct": 9,
+    "accuracy": 0.14285714285714285,
+    "top_k_types": 5
+  },
+  "results": [
+    {
+      "sample_id": "itopsgraph_disc_0012_1",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.description",
+      "prediction": "concert_PackageRecommendation.description",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.39117562770843506
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37293264269828796
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.31052491068840027
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.29258665442466736
+        },
+        {
+          "full_type": "concert_Activity_history",
+          "type_name": "Activity_history",
+          "property_count": 6,
+          "score": 0.29092296957969666
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.details",
+          "mapped_property": "concert_PackageRecommendation.description",
+          "score": 0.8,
+          "justification": "The source field 'details' is semantically equivalent to the target property 'description' as both convey the idea of providing additional information or context, in this case, about the action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0015_1",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_PackageRecommendation.description",
+      "correct": false,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.39117562770843506
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37293264269828796
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.31052491068840027
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.29258665442466736
+        },
+        {
+          "full_type": "concert_Activity_history",
+          "type_name": "Activity_history",
+          "property_count": 6,
+          "score": 0.29092296957969666
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.details",
+          "mapped_property": "concert_PackageRecommendation.description",
+          "score": 0.8,
+          "justification": "The source field 'details' is semantically equivalent to the target property 'description' as both convey the idea of providing additional information or context, in this case, about the action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0030_1",
+      "source_field": "turbonomic_Action.policy",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_Recommendations.recommendation",
+      "correct": false,
+      "selected_type": "concert_Recommendations",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4252718389034271
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3448709547519684
+        },
+        {
+          "full_type": "concert_AssessmentState",
+          "type_name": "AssessmentState",
+          "property_count": 7,
+          "score": 0.29116231203079224
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.2905268669128418
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.28965112566947937
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.policy",
+          "mapped_property": "concert_Recommendations.recommendation",
+          "score": 0.8,
+          "justification": "The source field 'policy' is likely to drive the recommendation, hence it is semantically equivalent to the 'recommendation' property in the target schema."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0049_2",
+      "source_field": "concert_PackageRecommendation.recommendation",
+      "expected_target": "turbonomic_Action.policy",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.46261560916900635
+        },
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.2597492039203644
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.24399994313716888
+        },
+        {
+          "full_type": "turbonomic_SearchOrderBy",
+          "type_name": "SearchOrderBy",
+          "property_count": 4,
+          "score": 0.19509610533714294
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.1945592314004898
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.9,
+          "justification": "The source field 'recommendation' has the same conceptual meaning as the target property 'RECOMMEND', both implying a suggested course of action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0051_0",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.createTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' also represents a date, making them semantically equivalent in terms of data type and conceptual meaning."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0052_1",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.updateTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' is the most semantically equivalent property in the target schema, as both convey a date or timestamp concept."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0054_2",
+      "source_field": "concert_PackageRecommendation.recommendation_id",
+      "expected_target": "turbonomic_Action.actionID",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.40170106291770935
+        },
+        {
+          "full_type": "turbonomic_StatsEntry",
+          "type_name": "StatsEntry",
+          "property_count": 15,
+          "score": 0.26045703887939453
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.23329342901706696
+        },
+        {
+          "full_type": "turbonomic_ConnectedEntitiesEntry",
+          "type_name": "ConnectedEntitiesEntry",
+          "property_count": 8,
+          "score": 0.22788572311401367
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.22756615281105042
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation_id",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.8,
+          "justification": "The source field 'recommendation_id' implies a connection to a recommendation, which semantically aligns with the 'RECOMMEND' property in the target schema. Although 'recommendation_id' is an ID and 'RECOMMEND' is an action mode, the conceptual meaning of driving or being associated with recommendations makes this mapping plausible."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0049_1",
+      "source_field": "concert_PackageRecommendation.recommendation",
+      "expected_target": "turbonomic_Action.policy",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.46261560916900635
+        },
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.2597492039203644
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.24399994313716888
+        },
+        {
+          "full_type": "turbonomic_SearchOrderBy",
+          "type_name": "SearchOrderBy",
+          "property_count": 4,
+          "score": 0.19509610533714294
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.1945592314004898
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.9,
+          "justification": "The source field 'recommendation' has the same conceptual meaning as the target property 'RECOMMEND', both implying a suggested course of action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0027_0",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_PackageRecommendation.action",
+      "correct": false,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3995104730129242
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.34874820709228516
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3392370343208313
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3317251205444336
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.31858640909194946
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.externalActionName",
+          "mapped_property": "concert_PackageRecommendation.action",
+          "score": 0.8,
+          "justification": "The source field 'externalActionName' refers to the name of an action in external systems, which is semantically equivalent to the 'action' property in the target schema, as both represent the action to be performed."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0018_2",
+      "source_field": "turbonomic_Action.createTime",
+      "expected_target": "concert_PackageRecommendation.created_date",
+      "prediction": "concert_Remediation_insights.create_date",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.33254435658454895
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3186608850955963
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.3138853907585144
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.2881639003753662
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.27872174978256226
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.createTime",
+          "mapped_property": "concert_Remediation_insights.create_date",
+          "score": 0.9,
+          "justification": "The source field 'createTime' and the target property 'create_date' both represent the timestamp when an action or entity was created, making them semantically equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0024_1",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_PackageRecommendation.action",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3995104730129242
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.34874820709228516
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3392370343208313
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3317251205444336
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.31858640909194946
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.externalActionName",
+          "mapped_property": "concert_PackageRecommendation.action",
+          "score": 0.8,
+          "justification": "The source field 'externalActionName' refers to the name of an action in external systems, which is semantically equivalent to the 'action' property in the target schema, as both represent the action to be performed."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0053_1",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.clearTime",
+      "prediction": null,
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [],
+      "uncertainty_info": {
+        "error": "litellm.InternalServerError: WatsonxException - litellm.Timeout: Connection timed out after None seconds."
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0048_1",
+      "source_field": "concert_PackageRecommendation.action",
+      "expected_target": "turbonomic_Action.externalActionName",
+      "prediction": "turbonomic_ActionType.START",
+      "correct": false,
+      "selected_type": "turbonomic_ActionType",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.4127965569496155
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.38488340377807617
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.3548293113708496
+        },
+        {
+          "full_type": "turbonomic_ActionType",
+          "type_name": "ActionType",
+          "property_count": 11,
+          "score": 0.28449252247810364
+        },
+        {
+          "full_type": "turbonomic_ActionState",
+          "type_name": "ActionState",
+          "property_count": 15,
+          "score": 0.280165433883667
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.action",
+          "mapped_property": "turbonomic_ActionType.START",
+          "score": 0.6,
+          "justification": "The source field 'action' implies an action to be taken, which could be semantically equivalent to 'START' in the target schema, as both imply initiating an operation. However, without more context, the confidence is moderate."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0051_2",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.createTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' also represents a date, making them semantically equivalent in terms of data type and conceptual meaning."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0010_0",
+      "source_field": "turbonomic_Action.importance",
+      "expected_target": "concert_PackageRecommendation.risk_type",
+      "prediction": "concert_PackageRecommendation.risk_type",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3592073619365692
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.2543124556541443
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.2520533502101898
+        },
+        {
+          "full_type": "concert_VulnerabilitiesExposureHighlightSummary",
+          "type_name": "VulnerabilitiesExposureHighlightSummary",
+          "property_count": 2,
+          "score": 0.2179718166589737
+        },
+        {
+          "full_type": "concert_AssessmentCustomDetails",
+          "type_name": "AssessmentCustomDetails",
+          "property_count": 4,
+          "score": 0.21687720715999603
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.importance",
+          "mapped_property": "concert_PackageRecommendation.risk_type",
+          "score": 0.6,
+          "justification": "The source field 'importance' could be related to the level of risk, and 'risk_type' is the closest conceptual match in the target schema."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0048_0",
+      "source_field": "concert_PackageRecommendation.action",
+      "expected_target": "turbonomic_Action.externalActionName",
+      "prediction": "turbonomic_ActionType.START",
+      "correct": false,
+      "selected_type": "turbonomic_ActionType",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.4127965569496155
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.38488340377807617
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.3548293113708496
+        },
+        {
+          "full_type": "turbonomic_ActionType",
+          "type_name": "ActionType",
+          "property_count": 11,
+          "score": 0.28449252247810364
+        },
+        {
+          "full_type": "turbonomic_ActionState",
+          "type_name": "ActionState",
+          "property_count": 15,
+          "score": 0.280165433883667
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.action",
+          "mapped_property": "turbonomic_ActionType.START",
+          "score": 0.6,
+          "justification": "The source field 'action' implies an action to be taken, which could be semantically equivalent to 'START' in the target schema, as both imply initiating an operation. However, without more context, the confidence is moderate."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0049_0",
+      "source_field": "concert_PackageRecommendation.recommendation",
+      "expected_target": "turbonomic_Action.policy",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.46261560916900635
+        },
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.2597492039203644
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.24399994313716888
+        },
+        {
+          "full_type": "turbonomic_SearchOrderBy",
+          "type_name": "SearchOrderBy",
+          "property_count": 4,
+          "score": 0.19509610533714294
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.1945592314004898
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.9,
+          "justification": "The source field 'recommendation' has the same conceptual meaning as the target property 'RECOMMEND', both implying a suggested course of action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0006_0",
+      "source_field": "turbonomic_Action.displayName",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_ApiKey.key",
+      "correct": false,
+      "selected_type": "concert_ApiKey",
+      "candidate_types": [
+        {
+          "full_type": "concert_ApiKey",
+          "type_name": "ApiKey",
+          "property_count": 1,
+          "score": 0.3459029793739319
+        },
+        {
+          "full_type": "concert_SuccessResponse",
+          "type_name": "SuccessResponse",
+          "property_count": 2,
+          "score": 0.3234000504016876
+        },
+        {
+          "full_type": "concert_ErrorCode",
+          "type_name": "ErrorCode",
+          "property_count": 13,
+          "score": 0.3110016882419586
+        },
+        {
+          "full_type": "concert_Userkey",
+          "type_name": "Userkey",
+          "property_count": 6,
+          "score": 0.31005948781967163
+        },
+        {
+          "full_type": "concert_FiltersValues",
+          "type_name": "FiltersValues",
+          "property_count": 4,
+          "score": 0.30523473024368286
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.displayName",
+          "mapped_property": "concert_ApiKey.key",
+          "score": 0.2,
+          "justification": "The source field is a user-readable name, but the target property is an API key. Although they are not directly equivalent, they both serve as identifiers, which is the closest conceptual match available in the target schema."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.2,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0030_2",
+      "source_field": "turbonomic_Action.policy",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_Recommendations.recommendation",
+      "correct": false,
+      "selected_type": "concert_Recommendations",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4252718389034271
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3448709547519684
+        },
+        {
+          "full_type": "concert_AssessmentState",
+          "type_name": "AssessmentState",
+          "property_count": 7,
+          "score": 0.29116231203079224
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.2905268669128418
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.28965112566947937
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.policy",
+          "mapped_property": "concert_Recommendations.recommendation",
+          "score": 0.8,
+          "justification": "The source field 'policy' is likely to drive the 'recommendation' in the target schema, as policies often inform or determine recommended actions."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0030_0",
+      "source_field": "turbonomic_Action.policy",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_Recommendations.recommendation",
+      "correct": false,
+      "selected_type": "concert_Recommendations",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4252718389034271
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3448709547519684
+        },
+        {
+          "full_type": "concert_AssessmentState",
+          "type_name": "AssessmentState",
+          "property_count": 7,
+          "score": 0.29116231203079224
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.2905268669128418
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.28965112566947937
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.policy",
+          "mapped_property": "concert_Recommendations.recommendation",
+          "score": 0.8,
+          "justification": "The source field 'policy' is likely to drive the 'recommendation' in the target schema, as policies often inform or determine recommended actions."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0051_1",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.createTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' also represents a date, making them semantically equivalent in terms of data type and conceptual meaning."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0012_2",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.description",
+      "prediction": "concert_PackageRecommendation.description",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.39117562770843506
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37293264269828796
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.31052491068840027
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.29258665442466736
+        },
+        {
+          "full_type": "concert_Activity_history",
+          "type_name": "Activity_history",
+          "property_count": 6,
+          "score": 0.29092296957969666
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.details",
+          "mapped_property": "concert_PackageRecommendation.description",
+          "score": 0.8,
+          "justification": "The source field 'details' is semantically equivalent to the target property 'description' as both convey the idea of providing additional information or context, in this case, about the action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0033_2",
+      "source_field": "turbonomic_Action.updateTime",
+      "expected_target": "concert_PackageRecommendation.created_date",
+      "prediction": "concert_Package_business_impact_view.updated_date",
+      "correct": false,
+      "selected_type": "concert_Package_business_impact_view",
+      "candidate_types": [
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.37214723229408264
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3487495481967926
+        },
+        {
+          "full_type": "concert_ApplicationState",
+          "type_name": "ApplicationState",
+          "property_count": 2,
+          "score": 0.3485296070575714
+        },
+        {
+          "full_type": "concert_Issue",
+          "type_name": "Issue",
+          "property_count": 9,
+          "score": 0.3265637755393982
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3239244818687439
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.updateTime",
+          "mapped_property": "concert_Package_business_impact_view.updated_date",
+          "score": 0.9,
+          "justification": "The source field 'updateTime' and the target property 'updated_date' both represent a timestamp indicating when an action or object was last updated, making them semantically equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0006_2",
+      "source_field": "turbonomic_Action.displayName",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_ApiKey.key",
+      "correct": false,
+      "selected_type": "concert_ApiKey",
+      "candidate_types": [
+        {
+          "full_type": "concert_ApiKey",
+          "type_name": "ApiKey",
+          "property_count": 1,
+          "score": 0.3459029793739319
+        },
+        {
+          "full_type": "concert_SuccessResponse",
+          "type_name": "SuccessResponse",
+          "property_count": 2,
+          "score": 0.3234000504016876
+        },
+        {
+          "full_type": "concert_ErrorCode",
+          "type_name": "ErrorCode",
+          "property_count": 13,
+          "score": 0.3110016882419586
+        },
+        {
+          "full_type": "concert_Userkey",
+          "type_name": "Userkey",
+          "property_count": 6,
+          "score": 0.31005948781967163
+        },
+        {
+          "full_type": "concert_FiltersValues",
+          "type_name": "FiltersValues",
+          "property_count": 4,
+          "score": 0.30523473024368286
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.displayName",
+          "mapped_property": "concert_ApiKey.key",
+          "score": 0.2,
+          "justification": "The source field is a user-readable name, but the target property is an API key. Although they are not directly equivalent, they both serve as identifiers, which is the closest conceptual match available in the target schema."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.2,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0055_2",
+      "source_field": "concert_PackageRecommendation.recommendation_id",
+      "expected_target": "turbonomic_Action.actionImpactID",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.40170106291770935
+        },
+        {
+          "full_type": "turbonomic_StatsEntry",
+          "type_name": "StatsEntry",
+          "property_count": 15,
+          "score": 0.26045703887939453
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.23329342901706696
+        },
+        {
+          "full_type": "turbonomic_ConnectedEntitiesEntry",
+          "type_name": "ConnectedEntitiesEntry",
+          "property_count": 8,
+          "score": 0.22788572311401367
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.22756615281105042
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation_id",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.8,
+          "justification": "The source field 'recommendation_id' implies a connection to a recommendation, which semantically aligns with the 'RECOMMEND' property in the target schema. Although 'recommendation_id' is an ID and 'RECOMMEND' is an action mode, the conceptual meaning of driving or being associated with recommendations makes this mapping plausible."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0003_1",
+      "source_field": "turbonomic_Action.actionType",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_Remediation_insights.action_type",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4568285346031189
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37442415952682495
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3641233444213867
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.3635450005531311
+        },
+        {
+          "full_type": "concert_Control_relation",
+          "type_name": "Control_relation",
+          "property_count": 3,
+          "score": 0.24263541400432587
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.actionType",
+          "mapped_property": "concert_Remediation_insights.action_type",
+          "score": 1.0,
+          "justification": "The source field 'actionType' has the same conceptual meaning as the target property 'action_type', indicating a direct semantic equivalence."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 1.0,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0010_1",
+      "source_field": "turbonomic_Action.importance",
+      "expected_target": "concert_PackageRecommendation.risk_type",
+      "prediction": "concert_PackageRecommendation.risk_type",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3592073619365692
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.2543124556541443
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.2520533502101898
+        },
+        {
+          "full_type": "concert_VulnerabilitiesExposureHighlightSummary",
+          "type_name": "VulnerabilitiesExposureHighlightSummary",
+          "property_count": 2,
+          "score": 0.2179718166589737
+        },
+        {
+          "full_type": "concert_AssessmentCustomDetails",
+          "type_name": "AssessmentCustomDetails",
+          "property_count": 4,
+          "score": 0.21687720715999603
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.importance",
+          "mapped_property": "concert_PackageRecommendation.risk_type",
+          "score": 0.6,
+          "justification": "The source field 'importance' could be related to the level of risk, and 'risk_type' is the closest conceptual match in the target schema."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0054_0",
+      "source_field": "concert_PackageRecommendation.recommendation_id",
+      "expected_target": "turbonomic_Action.actionID",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.40170106291770935
+        },
+        {
+          "full_type": "turbonomic_StatsEntry",
+          "type_name": "StatsEntry",
+          "property_count": 15,
+          "score": 0.26045703887939453
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.23329342901706696
+        },
+        {
+          "full_type": "turbonomic_ConnectedEntitiesEntry",
+          "type_name": "ConnectedEntitiesEntry",
+          "property_count": 8,
+          "score": 0.22788572311401367
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.22756615281105042
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation_id",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.8,
+          "justification": "The source field 'recommendation_id' implies a connection to a recommendation, which semantically aligns with the 'RECOMMEND' property in the target schema. Although 'recommendation_id' is an ID and 'RECOMMEND' is an action mode, the conceptual meaning of driving or being associated with recommendations makes this mapping plausible."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0015_2",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_PackageRecommendation.description",
+      "correct": false,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.39117562770843506
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37293264269828796
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.31052491068840027
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.29258665442466736
+        },
+        {
+          "full_type": "concert_Activity_history",
+          "type_name": "Activity_history",
+          "property_count": 6,
+          "score": 0.29092296957969666
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.details",
+          "mapped_property": "concert_PackageRecommendation.description",
+          "score": 0.8,
+          "justification": "The source field 'details' is semantically equivalent to the target property 'description' as both convey the idea of providing additional information or context, in this case, about the action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0050_0",
+      "source_field": "concert_PackageRecommendation.description",
+      "expected_target": "turbonomic_Action.details",
+      "prediction": "turbonomic_Target.displayName",
+      "correct": false,
+      "selected_type": "turbonomic_Target",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.3615081310272217
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.30844646692276
+        },
+        {
+          "full_type": "turbonomic_DetailLevel",
+          "type_name": "DetailLevel",
+          "property_count": 2,
+          "score": 0.2175772339105606
+        },
+        {
+          "full_type": "turbonomic_CommoditySource",
+          "type_name": "CommoditySource",
+          "property_count": 2,
+          "score": 0.2060452252626419
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.19777053594589233
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.description",
+          "mapped_property": "turbonomic_Target.displayName",
+          "score": 0.8,
+          "justification": "The source field 'description' is semantically equivalent to 'displayName' as both convey a brief summary or title, serving the same conceptual meaning of providing a descriptive name or label."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0000_1",
+      "source_field": "turbonomic_Action.actionID",
+      "expected_target": "concert_PackageRecommendation.recommendation_id",
+      "prediction": "concert_Package_business_impact_view.action",
+      "correct": false,
+      "selected_type": "concert_Package_business_impact_view",
+      "candidate_types": [
+        {
+          "full_type": "concert_AssociationID",
+          "type_name": "AssociationID",
+          "property_count": 1,
+          "score": 0.4552994668483734
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.4290805459022522
+        },
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4028545320034027
+        },
+        {
+          "full_type": "concert_Component_definition_controls",
+          "type_name": "Component_definition_controls",
+          "property_count": 2,
+          "score": 0.3555297255516052
+        },
+        {
+          "full_type": "concert_Assessment_plan_controls",
+          "type_name": "Assessment_plan_controls",
+          "property_count": 2,
+          "score": 0.3537972867488861
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.actionID",
+          "mapped_property": "concert_Package_business_impact_view.action",
+          "score": 0.8,
+          "justification": "The source field 'actionID' seems to be an identifier for an action, and the target property 'action' appears to be related to actions as well, suggesting a semantic equivalence."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0023_2",
+      "source_field": "turbonomic_Action.entityCharacteristics",
+      "expected_target": "concert_PackageRecommendation.risk_type",
+      "prediction": "concert_Remediation_insights.action_details",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.31007519364356995
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.2801051437854767
+        },
+        {
+          "full_type": "concert_StateType",
+          "type_name": "StateType",
+          "property_count": 7,
+          "score": 0.2658046782016754
+        },
+        {
+          "full_type": "concert_VulnerabilitiesAssessmentSummary",
+          "type_name": "VulnerabilitiesAssessmentSummary",
+          "property_count": 7,
+          "score": 0.25798097252845764
+        },
+        {
+          "full_type": "concert_VulnerabilitiesExposureHighlightSummary",
+          "type_name": "VulnerabilitiesExposureHighlightSummary",
+          "property_count": 2,
+          "score": 0.24919986724853516
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.entityCharacteristics",
+          "mapped_property": "concert_Remediation_insights.action_details",
+          "score": 0.8,
+          "justification": "The source field 'entityCharacteristics' describes the characteristics of the action's execution, which aligns with the concept of 'action_details' in the target schema. Although the exact terminology differs, the semantic meaning of providing additional information about the action is equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0055_1",
+      "source_field": "concert_PackageRecommendation.recommendation_id",
+      "expected_target": "turbonomic_Action.actionImpactID",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.40170106291770935
+        },
+        {
+          "full_type": "turbonomic_StatsEntry",
+          "type_name": "StatsEntry",
+          "property_count": 15,
+          "score": 0.26045703887939453
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.23329342901706696
+        },
+        {
+          "full_type": "turbonomic_ConnectedEntitiesEntry",
+          "type_name": "ConnectedEntitiesEntry",
+          "property_count": 8,
+          "score": 0.22788572311401367
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.22756615281105042
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation_id",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.8,
+          "justification": "The source field 'recommendation_id' implies a connection to a recommendation, which semantically aligns with the 'RECOMMEND' property in the target schema. Although 'recommendation_id' is an ID and 'RECOMMEND' is an action mode, the conceptual meaning of driving or being associated with recommendations makes this mapping plausible."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0050_1",
+      "source_field": "concert_PackageRecommendation.description",
+      "expected_target": "turbonomic_Action.details",
+      "prediction": "turbonomic_Target.displayName",
+      "correct": false,
+      "selected_type": "turbonomic_Target",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.3615081310272217
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.30844646692276
+        },
+        {
+          "full_type": "turbonomic_DetailLevel",
+          "type_name": "DetailLevel",
+          "property_count": 2,
+          "score": 0.2175772339105606
+        },
+        {
+          "full_type": "turbonomic_CommoditySource",
+          "type_name": "CommoditySource",
+          "property_count": 2,
+          "score": 0.2060452252626419
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.19777053594589233
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.description",
+          "mapped_property": "turbonomic_Target.displayName",
+          "score": 0.8,
+          "justification": "The source field 'description' is semantically equivalent to 'displayName' as both convey a brief summary or title, serving the same conceptual meaning of providing a descriptive name or label."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0012_0",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.description",
+      "prediction": "concert_PackageRecommendation.description",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.39117562770843506
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37293264269828796
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.31052491068840027
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.29258665442466736
+        },
+        {
+          "full_type": "concert_Activity_history",
+          "type_name": "Activity_history",
+          "property_count": 6,
+          "score": 0.29092296957969666
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.details",
+          "mapped_property": "concert_PackageRecommendation.description",
+          "score": 0.8,
+          "justification": "The source field 'details' is semantically equivalent to the target property 'description' as both convey the idea of providing additional information or context, in this case, about the action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0050_2",
+      "source_field": "concert_PackageRecommendation.description",
+      "expected_target": "turbonomic_Action.details",
+      "prediction": "turbonomic_Target.displayName",
+      "correct": false,
+      "selected_type": "turbonomic_Target",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.3615081310272217
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.30844646692276
+        },
+        {
+          "full_type": "turbonomic_DetailLevel",
+          "type_name": "DetailLevel",
+          "property_count": 2,
+          "score": 0.2175772339105606
+        },
+        {
+          "full_type": "turbonomic_CommoditySource",
+          "type_name": "CommoditySource",
+          "property_count": 2,
+          "score": 0.2060452252626419
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.19777053594589233
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.description",
+          "mapped_property": "turbonomic_Target.displayName",
+          "score": 0.8,
+          "justification": "The source field 'description' is semantically equivalent to 'displayName' as both convey a brief summary or title, serving the same conceptual meaning of providing a descriptive name or label."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0015_0",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_PackageRecommendation.description",
+      "correct": false,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.39117562770843506
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37293264269828796
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.31052491068840027
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.29258665442466736
+        },
+        {
+          "full_type": "concert_Activity_history",
+          "type_name": "Activity_history",
+          "property_count": 6,
+          "score": 0.29092296957969666
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.details",
+          "mapped_property": "concert_PackageRecommendation.description",
+          "score": 0.8,
+          "justification": "The source field 'details' is semantically equivalent to the target property 'description' as both convey the idea of providing additional information or context, in this case, about the action."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0053_0",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.clearTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' also represents a date, making them semantically equivalent in terms of data type and conceptual meaning."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0003_0",
+      "source_field": "turbonomic_Action.actionType",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_Remediation_insights.action_type",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4568285346031189
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37442415952682495
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3641233444213867
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.3635450005531311
+        },
+        {
+          "full_type": "concert_Control_relation",
+          "type_name": "Control_relation",
+          "property_count": 3,
+          "score": 0.24263541400432587
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.actionType",
+          "mapped_property": "concert_Remediation_insights.action_type",
+          "score": 1.0,
+          "justification": "The source field 'actionType' has the same conceptual meaning as the target property 'action_type', indicating a direct semantic equivalence."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 1.0,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0024_2",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_PackageRecommendation.action",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3995104730129242
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.34874820709228516
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3392370343208313
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3317251205444336
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.31858640909194946
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.externalActionName",
+          "mapped_property": "concert_PackageRecommendation.action",
+          "score": 0.8,
+          "justification": "The source field 'externalActionName' refers to the name of an action in external systems, which is semantically equivalent to the 'action' property in the target schema, as both represent the action to be performed."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0027_2",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_PackageRecommendation.action",
+      "correct": false,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3995104730129242
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.34874820709228516
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3392370343208313
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3317251205444336
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.31858640909194946
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.externalActionName",
+          "mapped_property": "concert_PackageRecommendation.action",
+          "score": 0.8,
+          "justification": "The source field 'externalActionName' refers to the name of an action in external systems, which is semantically equivalent to the 'action' property in the target schema, as both represent the action to be performed."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0027_1",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_PackageRecommendation.action",
+      "correct": false,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3995104730129242
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.34874820709228516
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3392370343208313
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3317251205444336
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.31858640909194946
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.externalActionName",
+          "mapped_property": "concert_PackageRecommendation.action",
+          "score": 0.8,
+          "justification": "The source field 'externalActionName' refers to the name of an action in external systems, which is semantically equivalent to the 'action' property in the target schema, as both represent the action to be performed."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0052_2",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.updateTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' also represents a date, making them semantically equivalent in terms of data type and conceptual meaning."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0000_2",
+      "source_field": "turbonomic_Action.actionID",
+      "expected_target": "concert_PackageRecommendation.recommendation_id",
+      "prediction": "concert_Package_business_impact_view.action",
+      "correct": false,
+      "selected_type": "concert_Package_business_impact_view",
+      "candidate_types": [
+        {
+          "full_type": "concert_AssociationID",
+          "type_name": "AssociationID",
+          "property_count": 1,
+          "score": 0.4552994668483734
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.4290805459022522
+        },
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4028545320034027
+        },
+        {
+          "full_type": "concert_Component_definition_controls",
+          "type_name": "Component_definition_controls",
+          "property_count": 2,
+          "score": 0.3555297255516052
+        },
+        {
+          "full_type": "concert_Assessment_plan_controls",
+          "type_name": "Assessment_plan_controls",
+          "property_count": 2,
+          "score": 0.3537972867488861
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.actionID",
+          "mapped_property": "concert_Package_business_impact_view.action",
+          "score": 0.8,
+          "justification": "The source field 'actionID' seems to be an identifier for an action, and the target property 'action' appears to be related to actions as well, suggesting a semantic equivalence."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0047_2",
+      "source_field": "concert_PackageRecommendation.action",
+      "expected_target": "turbonomic_Action.actionType",
+      "prediction": "turbonomic_ActionType.START",
+      "correct": false,
+      "selected_type": "turbonomic_ActionType",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.4127965569496155
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.38488340377807617
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.3548293113708496
+        },
+        {
+          "full_type": "turbonomic_ActionType",
+          "type_name": "ActionType",
+          "property_count": 11,
+          "score": 0.28449252247810364
+        },
+        {
+          "full_type": "turbonomic_ActionState",
+          "type_name": "ActionState",
+          "property_count": 15,
+          "score": 0.280165433883667
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.action",
+          "mapped_property": "turbonomic_ActionType.START",
+          "score": 0.6,
+          "justification": "The source field 'action' implies an action to be taken, which could be semantically equivalent to 'START' in the target schema, as both imply initiating an operation. However, without more context, the confidence is moderate."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0033_1",
+      "source_field": "turbonomic_Action.updateTime",
+      "expected_target": "concert_PackageRecommendation.created_date",
+      "prediction": "concert_Package_business_impact_view.updated_date",
+      "correct": false,
+      "selected_type": "concert_Package_business_impact_view",
+      "candidate_types": [
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.37214723229408264
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3487495481967926
+        },
+        {
+          "full_type": "concert_ApplicationState",
+          "type_name": "ApplicationState",
+          "property_count": 2,
+          "score": 0.3485296070575714
+        },
+        {
+          "full_type": "concert_Issue",
+          "type_name": "Issue",
+          "property_count": 9,
+          "score": 0.3265637755393982
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3239244818687439
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.updateTime",
+          "mapped_property": "concert_Package_business_impact_view.updated_date",
+          "score": 0.9,
+          "justification": "The source field 'updateTime' and the target property 'updated_date' both represent a timestamp indicating when an action or object was last updated, making them semantically equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0018_1",
+      "source_field": "turbonomic_Action.createTime",
+      "expected_target": "concert_PackageRecommendation.created_date",
+      "prediction": "concert_Remediation_insights.create_date",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.33254435658454895
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3186608850955963
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.3138853907585144
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.2881639003753662
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.27872174978256226
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.createTime",
+          "mapped_property": "concert_Remediation_insights.create_date",
+          "score": 0.9,
+          "justification": "The source field 'createTime' and the target property 'create_date' both represent the timestamp when an action or entity was created, making them semantically equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0033_0",
+      "source_field": "turbonomic_Action.updateTime",
+      "expected_target": "concert_PackageRecommendation.created_date",
+      "prediction": "concert_Package_business_impact_view.updated_date",
+      "correct": false,
+      "selected_type": "concert_Package_business_impact_view",
+      "candidate_types": [
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.37214723229408264
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3487495481967926
+        },
+        {
+          "full_type": "concert_ApplicationState",
+          "type_name": "ApplicationState",
+          "property_count": 2,
+          "score": 0.3485296070575714
+        },
+        {
+          "full_type": "concert_Issue",
+          "type_name": "Issue",
+          "property_count": 9,
+          "score": 0.3265637755393982
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3239244818687439
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.updateTime",
+          "mapped_property": "concert_Package_business_impact_view.updated_date",
+          "score": 0.9,
+          "justification": "The source field 'updateTime' and the target property 'updated_date' both represent a timestamp indicating when an action or object was last updated, making them semantically equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0010_2",
+      "source_field": "turbonomic_Action.importance",
+      "expected_target": "concert_PackageRecommendation.risk_type",
+      "prediction": "concert_PackageRecommendation.risk_type",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3592073619365692
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.2543124556541443
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.2520533502101898
+        },
+        {
+          "full_type": "concert_VulnerabilitiesExposureHighlightSummary",
+          "type_name": "VulnerabilitiesExposureHighlightSummary",
+          "property_count": 2,
+          "score": 0.2179718166589737
+        },
+        {
+          "full_type": "concert_AssessmentCustomDetails",
+          "type_name": "AssessmentCustomDetails",
+          "property_count": 4,
+          "score": 0.21687720715999603
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.importance",
+          "mapped_property": "concert_PackageRecommendation.risk_type",
+          "score": 0.6,
+          "justification": "The source field 'importance' could be related to the level of risk, and 'risk_type' is the closest conceptual match in the target schema."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0023_0",
+      "source_field": "turbonomic_Action.entityCharacteristics",
+      "expected_target": "concert_PackageRecommendation.risk_type",
+      "prediction": "concert_Remediation_insights.action_details",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.31007519364356995
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.2801051437854767
+        },
+        {
+          "full_type": "concert_StateType",
+          "type_name": "StateType",
+          "property_count": 7,
+          "score": 0.2658046782016754
+        },
+        {
+          "full_type": "concert_VulnerabilitiesAssessmentSummary",
+          "type_name": "VulnerabilitiesAssessmentSummary",
+          "property_count": 7,
+          "score": 0.25798097252845764
+        },
+        {
+          "full_type": "concert_VulnerabilitiesExposureHighlightSummary",
+          "type_name": "VulnerabilitiesExposureHighlightSummary",
+          "property_count": 2,
+          "score": 0.24919986724853516
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.entityCharacteristics",
+          "mapped_property": "concert_Remediation_insights.action_details",
+          "score": 0.8,
+          "justification": "The source field 'entityCharacteristics' describes the characteristics of the action's execution, which aligns with the concept of 'action_details' in the target schema. Although the exact terminology differs, the semantic meaning of providing additional information about the action is equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0024_0",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_PackageRecommendation.action",
+      "correct": true,
+      "selected_type": "concert_PackageRecommendation",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.3995104730129242
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.34874820709228516
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3392370343208313
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.3317251205444336
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.31858640909194946
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.externalActionName",
+          "mapped_property": "concert_PackageRecommendation.action",
+          "score": 0.8,
+          "justification": "The source field 'externalActionName' refers to the name of an action in external systems, which is semantically equivalent to the 'action' property in the target schema, as both represent the action to be performed."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0023_1",
+      "source_field": "turbonomic_Action.entityCharacteristics",
+      "expected_target": "concert_PackageRecommendation.risk_type",
+      "prediction": "concert_Remediation_insights.action_details",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.31007519364356995
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.2801051437854767
+        },
+        {
+          "full_type": "concert_StateType",
+          "type_name": "StateType",
+          "property_count": 7,
+          "score": 0.2658046782016754
+        },
+        {
+          "full_type": "concert_VulnerabilitiesAssessmentSummary",
+          "type_name": "VulnerabilitiesAssessmentSummary",
+          "property_count": 7,
+          "score": 0.25798097252845764
+        },
+        {
+          "full_type": "concert_VulnerabilitiesExposureHighlightSummary",
+          "type_name": "VulnerabilitiesExposureHighlightSummary",
+          "property_count": 2,
+          "score": 0.24919986724853516
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.entityCharacteristics",
+          "mapped_property": "concert_Remediation_insights.action_details",
+          "score": 0.8,
+          "justification": "The source field 'entityCharacteristics' describes the characteristics of the action's execution, which aligns with the concept of 'action_details' in the target schema. Although the exact terminology differs, the semantic meaning of providing additional information about the action is equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0006_1",
+      "source_field": "turbonomic_Action.displayName",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "prediction": "concert_ApiKey.key",
+      "correct": false,
+      "selected_type": "concert_ApiKey",
+      "candidate_types": [
+        {
+          "full_type": "concert_ApiKey",
+          "type_name": "ApiKey",
+          "property_count": 1,
+          "score": 0.3459029793739319
+        },
+        {
+          "full_type": "concert_SuccessResponse",
+          "type_name": "SuccessResponse",
+          "property_count": 2,
+          "score": 0.3234000504016876
+        },
+        {
+          "full_type": "concert_ErrorCode",
+          "type_name": "ErrorCode",
+          "property_count": 13,
+          "score": 0.3110016882419586
+        },
+        {
+          "full_type": "concert_Userkey",
+          "type_name": "Userkey",
+          "property_count": 6,
+          "score": 0.31005948781967163
+        },
+        {
+          "full_type": "concert_FiltersValues",
+          "type_name": "FiltersValues",
+          "property_count": 4,
+          "score": 0.30523473024368286
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.displayName",
+          "mapped_property": "concert_ApiKey.key",
+          "score": 0.2,
+          "justification": "The source field is a user-readable name, but the target property is an API key. Although they are not directly equivalent, they both serve as identifiers, which is the closest conceptual match available in the target schema."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.2,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0000_0",
+      "source_field": "turbonomic_Action.actionID",
+      "expected_target": "concert_PackageRecommendation.recommendation_id",
+      "prediction": "concert_Package_business_impact_view.action",
+      "correct": false,
+      "selected_type": "concert_Package_business_impact_view",
+      "candidate_types": [
+        {
+          "full_type": "concert_AssociationID",
+          "type_name": "AssociationID",
+          "property_count": 1,
+          "score": 0.4552994668483734
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.4290805459022522
+        },
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4028545320034027
+        },
+        {
+          "full_type": "concert_Component_definition_controls",
+          "type_name": "Component_definition_controls",
+          "property_count": 2,
+          "score": 0.3555297255516052
+        },
+        {
+          "full_type": "concert_Assessment_plan_controls",
+          "type_name": "Assessment_plan_controls",
+          "property_count": 2,
+          "score": 0.3537972867488861
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.actionID",
+          "mapped_property": "concert_Package_business_impact_view.action",
+          "score": 0.8,
+          "justification": "The source field 'actionID' seems to be an identifier for an action, and the target property 'action' appears to be related to actions as well, suggesting a semantic equivalence."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0055_0",
+      "source_field": "concert_PackageRecommendation.recommendation_id",
+      "expected_target": "turbonomic_Action.actionImpactID",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.40170106291770935
+        },
+        {
+          "full_type": "turbonomic_StatsEntry",
+          "type_name": "StatsEntry",
+          "property_count": 15,
+          "score": 0.26045703887939453
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.23329342901706696
+        },
+        {
+          "full_type": "turbonomic_ConnectedEntitiesEntry",
+          "type_name": "ConnectedEntitiesEntry",
+          "property_count": 8,
+          "score": 0.22788572311401367
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.22756615281105042
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation_id",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.8,
+          "justification": "The source field 'recommendation_id' implies a connection to a recommendation, which semantically aligns with the 'RECOMMEND' property in the target schema. Although 'recommendation_id' is an ID and 'RECOMMEND' is an action mode, the conceptual meaning of driving or being associated with recommendations makes this mapping plausible."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0003_2",
+      "source_field": "turbonomic_Action.actionType",
+      "expected_target": "concert_PackageRecommendation.action",
+      "prediction": "concert_Remediation_insights.action_type",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.4568285346031189
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.37442415952682495
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3641233444213867
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.3635450005531311
+        },
+        {
+          "full_type": "concert_Control_relation",
+          "type_name": "Control_relation",
+          "property_count": 3,
+          "score": 0.24263541400432587
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.actionType",
+          "mapped_property": "concert_Remediation_insights.action_type",
+          "score": 1.0,
+          "justification": "The source field 'actionType' has the same conceptual meaning as the target property 'action_type', indicating a direct semantic equivalence."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 1.0,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0052_0",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.updateTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' also represents a date, making them semantically equivalent in terms of data type and conceptual meaning."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0047_0",
+      "source_field": "concert_PackageRecommendation.action",
+      "expected_target": "turbonomic_Action.actionType",
+      "prediction": "turbonomic_ActionType.START",
+      "correct": false,
+      "selected_type": "turbonomic_ActionType",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.4127965569496155
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.38488340377807617
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.3548293113708496
+        },
+        {
+          "full_type": "turbonomic_ActionType",
+          "type_name": "ActionType",
+          "property_count": 11,
+          "score": 0.28449252247810364
+        },
+        {
+          "full_type": "turbonomic_ActionState",
+          "type_name": "ActionState",
+          "property_count": 15,
+          "score": 0.280165433883667
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.action",
+          "mapped_property": "turbonomic_ActionType.START",
+          "score": 0.6,
+          "justification": "The source field 'action' implies an action to be taken, which could be semantically equivalent to 'START' in the target schema, as both imply initiating an operation. However, without more context, the confidence is moderate."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0048_2",
+      "source_field": "concert_PackageRecommendation.action",
+      "expected_target": "turbonomic_Action.externalActionName",
+      "prediction": "turbonomic_ActionType.START",
+      "correct": false,
+      "selected_type": "turbonomic_ActionType",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.4127965569496155
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.38488340377807617
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.3548293113708496
+        },
+        {
+          "full_type": "turbonomic_ActionType",
+          "type_name": "ActionType",
+          "property_count": 11,
+          "score": 0.28449252247810364
+        },
+        {
+          "full_type": "turbonomic_ActionState",
+          "type_name": "ActionState",
+          "property_count": 15,
+          "score": 0.280165433883667
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.action",
+          "mapped_property": "turbonomic_ActionType.START",
+          "score": 0.6,
+          "justification": "The source field 'action' implies an action to be taken, which could be semantically equivalent to 'START' in the target schema, as both imply initiating an operation. However, without more context, the confidence is moderate."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0054_1",
+      "source_field": "concert_PackageRecommendation.recommendation_id",
+      "expected_target": "turbonomic_Action.actionID",
+      "prediction": "turbonomic_ActionMode.RECOMMEND",
+      "correct": false,
+      "selected_type": "turbonomic_ActionMode",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.40170106291770935
+        },
+        {
+          "full_type": "turbonomic_StatsEntry",
+          "type_name": "StatsEntry",
+          "property_count": 15,
+          "score": 0.26045703887939453
+        },
+        {
+          "full_type": "turbonomic_Target",
+          "type_name": "Target",
+          "property_count": 10,
+          "score": 0.23329342901706696
+        },
+        {
+          "full_type": "turbonomic_ConnectedEntitiesEntry",
+          "type_name": "ConnectedEntitiesEntry",
+          "property_count": 8,
+          "score": 0.22788572311401367
+        },
+        {
+          "full_type": "turbonomic_Risk",
+          "type_name": "Risk",
+          "property_count": 5,
+          "score": 0.22756615281105042
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.recommendation_id",
+          "mapped_property": "turbonomic_ActionMode.RECOMMEND",
+          "score": 0.8,
+          "justification": "The source field 'recommendation_id' implies a connection to a recommendation, which semantically aligns with the 'RECOMMEND' property in the target schema. Although 'recommendation_id' is an ID and 'RECOMMEND' is an action mode, the conceptual meaning of driving or being associated with recommendations makes this mapping plausible."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.8,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0047_1",
+      "source_field": "concert_PackageRecommendation.action",
+      "expected_target": "turbonomic_Action.actionType",
+      "prediction": "turbonomic_ActionType.START",
+      "correct": false,
+      "selected_type": "turbonomic_ActionType",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_Action",
+          "type_name": "Action",
+          "property_count": 40,
+          "score": 0.4127965569496155
+        },
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.38488340377807617
+        },
+        {
+          "full_type": "turbonomic_CompoundActionsEntry",
+          "type_name": "CompoundActionsEntry",
+          "property_count": 15,
+          "score": 0.3548293113708496
+        },
+        {
+          "full_type": "turbonomic_ActionType",
+          "type_name": "ActionType",
+          "property_count": 11,
+          "score": 0.28449252247810364
+        },
+        {
+          "full_type": "turbonomic_ActionState",
+          "type_name": "ActionState",
+          "property_count": 15,
+          "score": 0.280165433883667
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.action",
+          "mapped_property": "turbonomic_ActionType.START",
+          "score": 0.6,
+          "justification": "The source field 'action' implies an action to be taken, which could be semantically equivalent to 'START' in the target schema, as both imply initiating an operation. However, without more context, the confidence is moderate."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.6,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0053_2",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.clearTime",
+      "prediction": "turbonomic_Statistics.date",
+      "correct": false,
+      "selected_type": "turbonomic_Statistics",
+      "candidate_types": [
+        {
+          "full_type": "turbonomic_ActionMode",
+          "type_name": "ActionMode",
+          "property_count": 6,
+          "score": 0.3678115904331207
+        },
+        {
+          "full_type": "turbonomic_Statistics",
+          "type_name": "Statistics",
+          "property_count": 4,
+          "score": 0.2679080069065094
+        },
+        {
+          "full_type": "turbonomic_OrderBy",
+          "type_name": "OrderBy",
+          "property_count": 13,
+          "score": 0.23881298303604126
+        },
+        {
+          "full_type": "turbonomic_AccessToken",
+          "type_name": "AccessToken",
+          "property_count": 4,
+          "score": 0.1502230018377304
+        },
+        {
+          "full_type": "turbonomic_ActionSchedule",
+          "type_name": "ActionSchedule",
+          "property_count": 7,
+          "score": 0.1429634392261505
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "concert_PackageRecommendation.created_date",
+          "mapped_property": "turbonomic_Statistics.date",
+          "score": 0.9,
+          "justification": "The source field 'created_date' represents a timestamp, and 'turbonomic_Statistics.date' also represents a date, making them semantically equivalent in terms of data type and conceptual meaning."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    },
+    {
+      "sample_id": "itopsgraph_disc_0018_0",
+      "source_field": "turbonomic_Action.createTime",
+      "expected_target": "concert_PackageRecommendation.created_date",
+      "prediction": "concert_Remediation_insights.create_date",
+      "correct": false,
+      "selected_type": "concert_Remediation_insights",
+      "candidate_types": [
+        {
+          "full_type": "concert_PackageRecommendation",
+          "type_name": "PackageRecommendation",
+          "property_count": 6,
+          "score": 0.33254435658454895
+        },
+        {
+          "full_type": "concert_Recommendations",
+          "type_name": "Recommendations",
+          "property_count": 14,
+          "score": 0.3186608850955963
+        },
+        {
+          "full_type": "concert_Automation_rules",
+          "type_name": "Automation_rules",
+          "property_count": 13,
+          "score": 0.3138853907585144
+        },
+        {
+          "full_type": "concert_Remediation_insights",
+          "type_name": "Remediation_insights",
+          "property_count": 17,
+          "score": 0.2881639003753662
+        },
+        {
+          "full_type": "concert_Package_business_impact_view",
+          "type_name": "Package_business_impact_view",
+          "property_count": 21,
+          "score": 0.27872174978256226
+        }
+      ],
+      "mapping_result": [
+        {
+          "source_field": "turbonomic_Action.createTime",
+          "mapped_property": "concert_Remediation_insights.create_date",
+          "score": 0.9,
+          "justification": "The source field 'createTime' and the target property 'create_date' both represent the timestamp when an action or entity was created, making them semantically equivalent."
+        }
+      ],
+      "uncertainty_info": {
+        "score": 0.9,
+        "method": "llm_confidence"
+      }
+    }
+  ]
+}

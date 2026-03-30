@@ -1,0 +1,3111 @@
+{
+  "summary": {
+    "total_samples": 100,
+    "top1_accuracy": 0.01,
+    "top5_accuracy": 0.05,
+    "type_accuracy": 0.08,
+    "top_k": 5
+  },
+  "results": [
+    {
+      "id": "itopsgraph_disc_0100_1",
+      "utterance": "Map hcp packer_PackerRegistry.updated_at to hcp",
+      "source_field": "hcp_packer_PackerRegistry.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0064_1",
+      "utterance": "What maps to concert applications?",
+      "source_field": "concert_ApplicationCollection.applications.tags.name",
+      "expected_target": "turbonomic_Entity.tags",
+      "predictions": [
+        [
+          "turbonomic_OrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_StatsEntry.name",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_SearchOrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_VirtualDisksEntry.displayName",
+          0.5498511791229248
+        ],
+        [
+          "turbonomic_NamespaceEntity.displayName",
+          0.54985111951828
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0004_0",
+      "utterance": "Discover equivalent field for turbonomic Action actionType",
+      "source_field": "turbonomic_Action.actionType",
+      "expected_target": "concert_PackageDetailsCollection.packages.recommendation.action",
+      "predictions": [
+        [
+          "concert_Remediation_insights.action_type",
+          0.8282334208488464
+        ],
+        [
+          "concert_Remediation_insights.action_subtype",
+          0.7544744610786438
+        ],
+        [
+          "concert_Automation_rules.action",
+          0.6871273517608643
+        ],
+        [
+          "concert_Recommendations.action",
+          0.6871273517608643
+        ],
+        [
+          "concert_Package_business_impact_view.action",
+          0.6871273517608643
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0012_1",
+      "utterance": "What maps to turbonomic details?",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.description",
+      "predictions": [
+        [
+          "concert_PackageRecommendation.action",
+          0.7453246712684631
+        ],
+        [
+          "concert_Automation_rules.action",
+          0.7364480495452881
+        ],
+        [
+          "concert_Package_business_impact_view.action",
+          0.7364480495452881
+        ],
+        [
+          "concert_Recommendations.action",
+          0.7364480495452881
+        ],
+        [
+          "concert_Remediation_insights.action_details",
+          0.6036127805709839
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0098_1",
+      "utterance": "Link hcp packer_PackerRegistry.updated_at to appropriate hcp field",
+      "source_field": "hcp_packer_PackerRegistry.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0070_1",
+      "utterance": "What in instana matches concert environments?",
+      "source_field": "concert_BuildArtifactAssociations.environments.id",
+      "expected_target": "instana_Entity__Mock.id",
+      "predictions": [
+        [
+          "instana_findLogAlertConfig_200_response.id",
+          1.0
+        ],
+        [
+          "instana_query_getGroupMappings_items.id",
+          1.0
+        ],
+        [
+          "instana_getBusinessPerspectives_200_response.id",
+          1.0
+        ],
+        [
+          "instana_mutationInput_putMaintenanceConfig_input_windows_items_Input.id",
+          1.0
+        ],
+        [
+          "instana_createGroup_200_response.id",
+          1.0
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0115_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerBucket.account_id",
+      "source_field": "hcp_packer_PackerBucket.account_id",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.account_id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.47265705466270447
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0352_0",
+      "utterance": "What in hcp matches hcp zone_ids?",
+      "source_field": "hcp_packer_PackerArtifact.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0228_0",
+      "utterance": "What's the hcp counterpart of hcp updated_at?",
+      "source_field": "hcp_packer_PackerBuild.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0347_1",
+      "utterance": "Map hcp packer_PackerArtifact.region_id to hcp",
+      "source_field": "hcp_packer_PackerArtifact.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0349_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerArtifact.region_id",
+      "source_field": "hcp_packer_PackerArtifact.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0208_0",
+      "utterance": "What hcp field corresponds to hcp packer_PackerBuild.name?",
+      "source_field": "hcp_packer_PackerBuild.name",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0268_1",
+      "utterance": "Discover equivalent field for hcp packer_PackerVersion id",
+      "source_field": "hcp_packer_PackerVersion.id",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.44377902150154114
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.4358454942703247
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.4358454942703247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0015_1",
+      "utterance": "Find concert field equivalent to turbonomic Action.details",
+      "source_field": "turbonomic_Action.details",
+      "expected_target": "concert_PackageRecommendation.action",
+      "predictions": [
+        [
+          "concert_PackageRecommendation.action",
+          0.7453246712684631
+        ],
+        [
+          "concert_Automation_rules.action",
+          0.7364480495452881
+        ],
+        [
+          "concert_Package_business_impact_view.action",
+          0.7364480495452881
+        ],
+        [
+          "concert_Recommendations.action",
+          0.7364480495452881
+        ],
+        [
+          "concert_Remediation_insights.action_details",
+          0.6036127805709839
+        ]
+      ],
+      "top1_correct": true,
+      "top5_correct": true,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0275_0",
+      "utterance": "How does hcp name translate to hcp?",
+      "source_field": "hcp_packer_PackerVersion.name",
+      "expected_target": "hcp_terraform_HcpTerraformRun.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0009_0",
+      "utterance": "Find the concert equivalent of turbonomic importance",
+      "source_field": "turbonomic_Action.importance",
+      "expected_target": "concert_PackageDetailsSummary.recommendation.risk_type",
+      "predictions": [
+        [
+          "concert_Vulnerability_assessment.priority",
+          0.6233956813812256
+        ],
+        [
+          "concert_Exposure_assessment.priority",
+          0.6233956813812256
+        ],
+        [
+          "concert_VulnerabilityAssociationComponent.priority",
+          0.5281199216842651
+        ],
+        [
+          "concert_MostCommonExposureRule.priority",
+          0.5281199216842651
+        ],
+        [
+          "concert_Environments.purpose",
+          0.5042496919631958
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0030_1",
+      "utterance": "What concert field corresponds to turbonomic Action.policy?",
+      "source_field": "turbonomic_Action.policy",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "predictions": [
+        [
+          "concert_Recommendations.action",
+          0.4796126186847687
+        ],
+        [
+          "concert_Package_business_impact_view.action",
+          0.4796126186847687
+        ],
+        [
+          "concert_Automation_rules.action",
+          0.4796125888824463
+        ],
+        [
+          "concert_PackageRecommendation.action",
+          0.47084513306617737
+        ],
+        [
+          "concert_PackageRecommendation.recommendation",
+          0.4510381817817688
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": true,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0326_0",
+      "utterance": "What in hcp matches hcp updated_at?",
+      "source_field": "hcp_packer_PackerChannel.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0029_2",
+      "utterance": "What maps to turbonomic externalActionName?",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageDetailsCollection.packages.recommendation.recommendation",
+      "predictions": [
+        [
+          "concert_ApplicationPatchInput.name",
+          0.502779483795166
+        ],
+        [
+          "concert_ApplicationPrototypeInput.name",
+          0.502779483795166
+        ],
+        [
+          "concert_Application.name",
+          0.502779483795166
+        ],
+        [
+          "concert_MostVulnerableApplication.name",
+          0.44478505849838257
+        ],
+        [
+          "concert_VulnerabilityApplication.name",
+          0.44478505849838257
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0230_2",
+      "utterance": "What in hcp matches hcp description?",
+      "source_field": "hcp_packer_PackerBuild.description",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0161_0",
+      "utterance": "Map hcp packer_PackerInheritedRevocation.created_at to hcp",
+      "source_field": "hcp_packer_PackerInheritedRevocation.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformRun.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0049_2",
+      "utterance": "How does concert recommendation translate to turbonomic?",
+      "source_field": "concert_PackageRecommendation.recommendation",
+      "expected_target": "turbonomic_Action.policy",
+      "predictions": [
+        [
+          "turbonomic_ActionMode.RECOMMEND",
+          0.47630932927131653
+        ],
+        [
+          "turbonomic_Action.policy",
+          0.45103830099105835
+        ],
+        [
+          "turbonomic_CompoundActionsEntry.actionType",
+          0.4235764443874359
+        ],
+        [
+          "turbonomic_Action.actionType",
+          0.4235764443874359
+        ],
+        [
+          "turbonomic_Action.details",
+          0.4225408136844635
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": true,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0265_1",
+      "utterance": "What in hcp matches hcp description?",
+      "source_field": "hcp_packer_PackerAncestry.description",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0131_2",
+      "utterance": "I need to map updated_at from hcp packer_PackerBucket to hcp",
+      "source_field": "hcp_packer_PackerBucket.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0118_0",
+      "utterance": "What in hcp matches hcp region_id?",
+      "source_field": "hcp_packer_PackerBucket.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0195_2",
+      "utterance": "Map hcp packer_PackerSbom.updated_at to hcp",
+      "source_field": "hcp_packer_PackerSbom.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0168_0",
+      "utterance": "Find schema mapping for hcp packer_PackerInheritedRevocation.description",
+      "source_field": "hcp_packer_PackerInheritedRevocation.description",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0026_1",
+      "utterance": "Find the concert equivalent of turbonomic externalActionName",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageDetailsSummary.recommendation.action",
+      "predictions": [
+        [
+          "concert_ApplicationPatchInput.name",
+          0.502779483795166
+        ],
+        [
+          "concert_ApplicationPrototypeInput.name",
+          0.502779483795166
+        ],
+        [
+          "concert_Application.name",
+          0.502779483795166
+        ],
+        [
+          "concert_MostVulnerableApplication.name",
+          0.44478505849838257
+        ],
+        [
+          "concert_VulnerabilityApplication.name",
+          0.44478505849838257
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0085_1",
+      "utterance": "Link hcp packer_PackerRegistry.account_id to appropriate hcp field",
+      "source_field": "hcp_packer_PackerRegistry.account_id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.account_id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.47265705466270447
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0306_2",
+      "utterance": "Find schema mapping for hcp packer_PackerChannel.name",
+      "source_field": "hcp_packer_PackerChannel.name",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0065_0",
+      "utterance": "What turbonomic field corresponds to concert ApplicationAssociationsInfo.environments?",
+      "source_field": "concert_ApplicationAssociationsInfo.environments.tags.name",
+      "expected_target": "turbonomic_Entity.tags",
+      "predictions": [
+        [
+          "turbonomic_OrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_StatsEntry.name",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_SearchOrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_VirtualDisksEntry.displayName",
+          0.5498511791229248
+        ],
+        [
+          "turbonomic_NamespaceEntity.displayName",
+          0.54985111951828
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0051_0",
+      "utterance": "Find schema mapping for concert PackageRecommendation.created_date",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.createTime",
+      "predictions": [
+        [
+          "turbonomic_OrderBy.CREATION_DATE",
+          0.7205721735954285
+        ],
+        [
+          "turbonomic_OrderBy.DATE_EXECUTED",
+          0.4651238024234772
+        ],
+        [
+          "turbonomic_VirtualDisksEntry.creationTimeStamp",
+          0.4604921340942383
+        ],
+        [
+          "turbonomic_Action.createTime",
+          0.4556080996990204
+        ],
+        [
+          "turbonomic_Statistics.date",
+          0.41781550645828247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": true,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0153_2",
+      "utterance": "How does hcp region_id translate to hcp?",
+      "source_field": "hcp_packer_PackerInheritedRevocation.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0206_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerBuild.name",
+      "source_field": "hcp_packer_PackerBuild.name",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0258_2",
+      "utterance": "Link hcp packer_PackerAncestry.created_at to appropriate hcp field",
+      "source_field": "hcp_packer_PackerAncestry.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0264_0",
+      "utterance": "Discover equivalent field for hcp packer_PackerAncestry description",
+      "source_field": "hcp_packer_PackerAncestry.description",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0271_1",
+      "utterance": "What's the hcp counterpart of hcp id?",
+      "source_field": "hcp_packer_PackerVersion.id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.44377902150154114
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.4358454942703247
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.4358454942703247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0335_0",
+      "utterance": "Discover hcp mapping for hcp packer_PackerArtifact id",
+      "source_field": "hcp_packer_PackerArtifact.id",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.44377902150154114
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.4358454942703247
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.4358454942703247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0251_2",
+      "utterance": "Find the hcp equivalent of hcp region_id",
+      "source_field": "hcp_packer_PackerAncestry.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0321_0",
+      "utterance": "Find the hcp equivalent of hcp zone_ids",
+      "source_field": "hcp_packer_PackerChannel.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformRun.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0365_2",
+      "utterance": "I need to map description from hcp packer_PackerArtifact to hcp",
+      "source_field": "hcp_packer_PackerArtifact.description",
+      "expected_target": "hcp_terraform_HcpTerraformRun.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0166_1",
+      "utterance": "I need to map description from hcp packer_PackerInheritedRevocation to hcp",
+      "source_field": "hcp_packer_PackerInheritedRevocation.description",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0298_1",
+      "utterance": "What maps to hcp description?",
+      "source_field": "hcp_packer_PackerVersion.description",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0323_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerChannel.created_at",
+      "source_field": "hcp_packer_PackerChannel.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0262_0",
+      "utterance": "How does hcp updated_at translate to hcp?",
+      "source_field": "hcp_packer_PackerAncestry.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0294_0",
+      "utterance": "What maps to hcp updated_at?",
+      "source_field": "hcp_packer_PackerVersion.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0219_1",
+      "utterance": "What's the hcp counterpart of hcp zone_ids?",
+      "source_field": "hcp_packer_PackerBuild.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0357_2",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerArtifact.created_at",
+      "source_field": "hcp_packer_PackerArtifact.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformRun.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0099_0",
+      "utterance": "What maps to hcp updated_at?",
+      "source_field": "hcp_packer_PackerRegistry.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0192_1",
+      "utterance": "I need to map created_at from hcp packer_PackerSbom to hcp",
+      "source_field": "hcp_packer_PackerSbom.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0052_1",
+      "utterance": "Find the turbonomic equivalent of concert created_date",
+      "source_field": "concert_PackageRecommendation.created_date",
+      "expected_target": "turbonomic_Action.updateTime",
+      "predictions": [
+        [
+          "turbonomic_OrderBy.CREATION_DATE",
+          0.7205721735954285
+        ],
+        [
+          "turbonomic_OrderBy.DATE_EXECUTED",
+          0.4651238024234772
+        ],
+        [
+          "turbonomic_VirtualDisksEntry.creationTimeStamp",
+          0.4604921340942383
+        ],
+        [
+          "turbonomic_Action.createTime",
+          0.4556080996990204
+        ],
+        [
+          "turbonomic_Statistics.date",
+          0.41781550645828247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0095_2",
+      "utterance": "Find the hcp equivalent of hcp created_at",
+      "source_field": "hcp_packer_PackerRegistry.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0005_2",
+      "utterance": "Discover concert mapping for turbonomic Action actionType",
+      "source_field": "turbonomic_Action.actionType",
+      "expected_target": "concert_PackageDetailsSummary.recommendation.action",
+      "predictions": [
+        [
+          "concert_Remediation_insights.action_type",
+          0.8282334208488464
+        ],
+        [
+          "concert_Remediation_insights.action_subtype",
+          0.7544744610786438
+        ],
+        [
+          "concert_Automation_rules.action",
+          0.6871273517608643
+        ],
+        [
+          "concert_Recommendations.action",
+          0.6871273517608643
+        ],
+        [
+          "concert_Package_business_impact_view.action",
+          0.6871273517608643
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0142_2",
+      "utterance": "Discover equivalent field for hcp packer_PackerInheritedRevocation name",
+      "source_field": "hcp_packer_PackerInheritedRevocation.name",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0087_1",
+      "utterance": "Map hcp packer_PackerRegistry.region_id to hcp",
+      "source_field": "hcp_packer_PackerRegistry.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0284_1",
+      "utterance": "What's the hcp counterpart of hcp zone_ids?",
+      "source_field": "hcp_packer_PackerVersion.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0314_1",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerChannel.region_id",
+      "source_field": "hcp_packer_PackerChannel.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0332_1",
+      "utterance": "Link hcp packer_PackerChannel.description to appropriate hcp field",
+      "source_field": "hcp_packer_PackerChannel.description",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.description",
+      "predictions": [
+        [
+          "hcp_HcpTerraformWorkspace.environment",
+          0.4036417305469513
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.376120924949646
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.3612310588359833
+        ],
+        [
+          "hcp_HcpOrganization.organization",
+          0.3259710669517517
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0293_1",
+      "utterance": "Link hcp packer_PackerVersion.updated_at to appropriate hcp field",
+      "source_field": "hcp_packer_PackerVersion.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0336_1",
+      "utterance": "What's the hcp counterpart of hcp id?",
+      "source_field": "hcp_packer_PackerArtifact.id",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.44377902150154114
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.4358454942703247
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.4358454942703247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0343_0",
+      "utterance": "Map hcp packer_PackerArtifact.account_id to hcp",
+      "source_field": "hcp_packer_PackerArtifact.account_id",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.account_id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.47265705466270447
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0242_2",
+      "utterance": "What hcp field corresponds to hcp packer_PackerAncestry.name?",
+      "source_field": "hcp_packer_PackerAncestry.name",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0011_0",
+      "utterance": "Find concert field equivalent to turbonomic Action.importance",
+      "source_field": "turbonomic_Action.importance",
+      "expected_target": "concert_PackageDetailsCollection.packages.recommendation.risk_type",
+      "predictions": [
+        [
+          "concert_Vulnerability_assessment.priority",
+          0.6233956813812256
+        ],
+        [
+          "concert_Exposure_assessment.priority",
+          0.6233956813812256
+        ],
+        [
+          "concert_VulnerabilityAssociationComponent.priority",
+          0.5281199216842651
+        ],
+        [
+          "concert_MostCommonExposureRule.priority",
+          0.5281199216842651
+        ],
+        [
+          "concert_Environments.purpose",
+          0.5042496919631958
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0208_1",
+      "utterance": "Find the hcp equivalent of hcp name",
+      "source_field": "hcp_packer_PackerBuild.name",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0193_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerSbom.created_at",
+      "source_field": "hcp_packer_PackerSbom.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformRun.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0132_0",
+      "utterance": "How does hcp updated_at translate to hcp?",
+      "source_field": "hcp_packer_PackerBucket.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0253_1",
+      "utterance": "How does hcp zone_ids translate to hcp?",
+      "source_field": "hcp_packer_PackerAncestry.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0075_1",
+      "utterance": "I need to map id from hcp packer_PackerRegistry to hcp",
+      "source_field": "hcp_packer_PackerRegistry.id",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.44377902150154114
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.4358454942703247
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.4358454942703247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0156_2",
+      "utterance": "Map hcp packer_PackerInheritedRevocation.zone_ids to hcp",
+      "source_field": "hcp_packer_PackerInheritedRevocation.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0170_1",
+      "utterance": "Discover hcp mapping for hcp packer_PackerSbom id",
+      "source_field": "hcp_packer_PackerSbom.id",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.44377902150154114
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.4358454942703247
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.4358454942703247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0101_1",
+      "utterance": "I need to map updated_at from hcp packer_PackerRegistry to hcp",
+      "source_field": "hcp_packer_PackerRegistry.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformRun.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0122_2",
+      "utterance": "Discover hcp mapping for hcp packer_PackerBucket zone_ids",
+      "source_field": "hcp_packer_PackerBucket.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0284_0",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerVersion.zone_ids",
+      "source_field": "hcp_packer_PackerVersion.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0054_2",
+      "utterance": "What's the turbonomic counterpart of concert recommendation_id?",
+      "source_field": "concert_PackageRecommendation.recommendation_id",
+      "expected_target": "turbonomic_Action.actionID",
+      "predictions": [
+        [
+          "turbonomic_Action.marketID",
+          0.3676207661628723
+        ],
+        [
+          "turbonomic_ActionMode.RECOMMEND",
+          0.34491991996765137
+        ],
+        [
+          "turbonomic_RelatedActionsCountByType.BLOCKED_BY",
+          0.2750878930091858
+        ],
+        [
+          "turbonomic_DiscoveredBy.type",
+          0.2346412092447281
+        ],
+        [
+          "turbonomic_StatFilterEntry.type",
+          0.2346412092447281
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0194_0",
+      "utterance": "Find schema mapping for hcp packer_PackerSbom.updated_at",
+      "source_field": "hcp_packer_PackerSbom.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0080_1",
+      "utterance": "Find hcp field equivalent to hcp packer_PackerRegistry.name",
+      "source_field": "hcp_packer_PackerRegistry.name",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0001_1",
+      "utterance": "Discover concert mapping for turbonomic Action actionID",
+      "source_field": "turbonomic_Action.actionID",
+      "expected_target": "concert_PackageDetailsSummary.recommendation.recommendation_id",
+      "predictions": [
+        [
+          "concert_Remediation_insights.actions_identifier",
+          0.7292702794075012
+        ],
+        [
+          "concert_PackageRecommendation.action",
+          0.6232585310935974
+        ],
+        [
+          "concert_Remediation_insights.action_type",
+          0.6027409434318542
+        ],
+        [
+          "concert_Remediation_insights.action_details",
+          0.5829604268074036
+        ],
+        [
+          "concert_Package_business_impact_view.action",
+          0.5804689526557922
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0209_0",
+      "utterance": "What in hcp matches hcp name?",
+      "source_field": "hcp_packer_PackerBuild.name",
+      "expected_target": "hcp_terraform_HcpTerraformRun.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0175_0",
+      "utterance": "I need to map name from hcp packer_PackerSbom to hcp",
+      "source_field": "hcp_packer_PackerSbom.name",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0325_1",
+      "utterance": "Find the hcp equivalent of hcp created_at",
+      "source_field": "hcp_packer_PackerChannel.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformRun.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0238_2",
+      "utterance": "Find the hcp equivalent of hcp id",
+      "source_field": "hcp_packer_PackerAncestry.id",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.45458248257637024
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.44377902150154114
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.4358454942703247
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.4358454942703247
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0129_0",
+      "utterance": "Find schema mapping for hcp packer_PackerBucket.created_at",
+      "source_field": "hcp_packer_PackerBucket.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformRun.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0049_1",
+      "utterance": "I need to map recommendation from concert PackageRecommendation to turbonomic",
+      "source_field": "concert_PackageRecommendation.recommendation",
+      "expected_target": "turbonomic_Action.policy",
+      "predictions": [
+        [
+          "turbonomic_ActionMode.RECOMMEND",
+          0.47630932927131653
+        ],
+        [
+          "turbonomic_Action.policy",
+          0.45103830099105835
+        ],
+        [
+          "turbonomic_CompoundActionsEntry.actionType",
+          0.4235764443874359
+        ],
+        [
+          "turbonomic_Action.actionType",
+          0.4235764443874359
+        ],
+        [
+          "turbonomic_Action.details",
+          0.4225408136844635
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": true,
+      "type_correct": true
+    },
+    {
+      "id": "itopsgraph_disc_0287_2",
+      "utterance": "I need to map zone_ids from hcp packer_PackerVersion to hcp",
+      "source_field": "hcp_packer_PackerVersion.zone_ids",
+      "expected_target": "hcp_terraform_HcpTerraformRun.zone_ids",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.38661032915115356
+        ],
+        [
+          "hcp_HcpResource.organization_id",
+          0.3607311248779297
+        ],
+        [
+          "hcp_HcpTerraformRun.workspace_id",
+          0.3400437831878662
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.31713390350341797
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0067_1",
+      "utterance": "Find turbonomic field equivalent to concert ApplicationAssociationsInfo.environments",
+      "source_field": "concert_ApplicationAssociationsInfo.environments.tags.name",
+      "expected_target": "turbonomic_Entity.environmentType",
+      "predictions": [
+        [
+          "turbonomic_OrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_StatsEntry.name",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_SearchOrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_VirtualDisksEntry.displayName",
+          0.5498511791229248
+        ],
+        [
+          "turbonomic_NamespaceEntity.displayName",
+          0.54985111951828
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0040_1",
+      "utterance": "Discover turbonomic mapping for concert Application associations",
+      "source_field": "concert_Application.associations.environments.tags.name",
+      "expected_target": "turbonomic_Entity.tags",
+      "predictions": [
+        [
+          "turbonomic_OrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_StatsEntry.name",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_SearchOrderBy.NAME",
+          1.0000001192092896
+        ],
+        [
+          "turbonomic_VirtualDisksEntry.displayName",
+          0.5498511791229248
+        ],
+        [
+          "turbonomic_NamespaceEntity.displayName",
+          0.54985111951828
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0073_1",
+      "utterance": "Discover equivalent field for concert AssociationID id",
+      "source_field": "concert_AssociationID.id",
+      "expected_target": "instana_Entity__Mock.label",
+      "predictions": [
+        [
+          "instana_Entity.id",
+          0.614905595779419
+        ],
+        [
+          "instana_query_getCustomEventSpecifications_items_actions_items.id",
+          0.5436405539512634
+        ],
+        [
+          "instana_query_getPolicies_items_typeConfigurations_items_runnable_Input.id",
+          0.5436405539512634
+        ],
+        [
+          "instana_query_getPolicies_items_typeConfigurations_items_runnable_runConfiguration_actions_items_action_Input.id",
+          0.5436405539512634
+        ],
+        [
+          "instana_getActionByID_200_response.id",
+          0.5436405539512634
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0116_1",
+      "utterance": "What maps to hcp account_id?",
+      "source_field": "hcp_packer_PackerBucket.account_id",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.account_id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.47265705466270447
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0247_1",
+      "utterance": "Find the hcp equivalent of hcp account_id",
+      "source_field": "hcp_packer_PackerAncestry.account_id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.account_id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.47265705466270447
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0273_1",
+      "utterance": "Find the hcp equivalent of hcp name",
+      "source_field": "hcp_packer_PackerVersion.name",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.name",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpProject.account",
+          0.455452561378479
+        ],
+        [
+          "hcp_HcpTerraformRun.message",
+          0.38948044180870056
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.36572736501693726
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.status",
+          0.36572736501693726
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0328_2",
+      "utterance": "What maps to hcp updated_at?",
+      "source_field": "hcp_packer_PackerChannel.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformAgentPool.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0261_0",
+      "utterance": "What in hcp matches hcp updated_at?",
+      "source_field": "hcp_packer_PackerAncestry.updated_at",
+      "expected_target": "hcp_terraform_HcpTerraformStateVersion.updated_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.37468457221984863
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.36411774158477783
+        ],
+        [
+          "hcp_HcpTerraformRun.status",
+          0.35181954503059387
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0027_0",
+      "utterance": "What in concert matches turbonomic externalActionName?",
+      "source_field": "turbonomic_Action.externalActionName",
+      "expected_target": "concert_PackageRecommendation.recommendation",
+      "predictions": [
+        [
+          "concert_ApplicationPatchInput.name",
+          0.502779483795166
+        ],
+        [
+          "concert_ApplicationPrototypeInput.name",
+          0.502779483795166
+        ],
+        [
+          "concert_Application.name",
+          0.502779483795166
+        ],
+        [
+          "concert_MostVulnerableApplication.name",
+          0.44478505849838257
+        ],
+        [
+          "concert_VulnerabilityApplication.name",
+          0.44478505849838257
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0193_2",
+      "utterance": "Link hcp packer_PackerSbom.created_at to appropriate hcp field",
+      "source_field": "hcp_packer_PackerSbom.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformRun.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0322_1",
+      "utterance": "I need to map created_at from hcp packer_PackerChannel to hcp",
+      "source_field": "hcp_packer_PackerChannel.created_at",
+      "expected_target": "hcp_terraform_HcpTerraformWorkspace.created_at",
+      "predictions": [
+        [
+          "hcp_HcpTerraformRun.is_destroyed",
+          0.4286051392555237
+        ],
+        [
+          "hcp_HcpTerraformProject.is_unified",
+          0.319627046585083
+        ],
+        [
+          "hcp_HcpTerraformOrganization.is_unified",
+          0.3196270167827606
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.30373674631118774
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.30373674631118774
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0007_2",
+      "utterance": "Find schema mapping for turbonomic Action.displayName",
+      "source_field": "turbonomic_Action.displayName",
+      "expected_target": "concert_PackageDetailsSummary.recommendation.recommendation",
+      "predictions": [
+        [
+          "concert_Certificates_view.api_server",
+          0.43257617950439453
+        ],
+        [
+          "concert_Resources.api_server",
+          0.43257617950439453
+        ],
+        [
+          "concert_ApiKeyDate.apiKey",
+          0.40318307280540466
+        ],
+        [
+          "concert_CredentialsInput.username",
+          0.39900270104408264
+        ],
+        [
+          "concert_Userkey.user_details",
+          0.38089850544929504
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0213_2",
+      "utterance": "Discover hcp mapping for hcp packer_PackerBuild account_id",
+      "source_field": "hcp_packer_PackerBuild.account_id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.account_id",
+      "predictions": [
+        [
+          "hcp_HcpProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformProject.account",
+          0.68388831615448
+        ],
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.49695855379104614
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.47265705466270447
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0018_2",
+      "utterance": "Discover concert mapping for turbonomic Action createTime",
+      "source_field": "turbonomic_Action.createTime",
+      "expected_target": "concert_PackageRecommendation.created_date",
+      "predictions": [
+        [
+          "concert_Application.created_on",
+          0.6679974794387817
+        ],
+        [
+          "concert_Resources.creation_timestamp",
+          0.6609917283058167
+        ],
+        [
+          "concert_Remediation_insights.create_date",
+          0.595431923866272
+        ],
+        [
+          "concert_Scan.created_on",
+          0.5869988799095154
+        ],
+        [
+          "concert_Exposures.created_on",
+          0.5869988203048706
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0121_1",
+      "utterance": "What hcp field corresponds to hcp packer_PackerBucket.region_id?",
+      "source_field": "hcp_packer_PackerBucket.region_id",
+      "expected_target": "hcp_terraform_HcpTerraformRun.region_id",
+      "predictions": [
+        [
+          "hcp_HcpTerraformStateVersion.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.current_run_id",
+          0.409514844417572
+        ],
+        [
+          "hcp_HcpResource.project_id",
+          0.3595176041126251
+        ],
+        [
+          "hcp_HcpTerraformWorkspace.agent_pool_id",
+          0.34741324186325073
+        ],
+        [
+          "hcp_HcpTerraformOrganization.agent_pool_id",
+          0.34741318225860596
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    },
+    {
+      "id": "itopsgraph_disc_0022_0",
+      "utterance": "Find the concert equivalent of turbonomic entityCharacteristics",
+      "source_field": "turbonomic_Action.entityCharacteristics",
+      "expected_target": "concert_PackageDetailsCollection.packages.recommendation.risk_type",
+      "predictions": [
+        [
+          "concert_PackageRecommendation.action",
+          0.41294461488723755
+        ],
+        [
+          "concert_Automation_rules.action",
+          0.39761868119239807
+        ],
+        [
+          "concert_Recommendations.action",
+          0.3976186513900757
+        ],
+        [
+          "concert_Package_business_impact_view.action",
+          0.3976186513900757
+        ],
+        [
+          "concert_Cyclonedx_sbom_view.entity_digest",
+          0.30478301644325256
+        ]
+      ],
+      "top1_correct": false,
+      "top5_correct": false,
+      "type_correct": false
+    }
+  ]
+}
