@@ -1,0 +1,352 @@
+{
+  "dataset": "schemanet_cprd_aurum_omop",
+  "total": 38,
+  "field_correct": 10,
+  "type_correct": 11,
+  "field_accuracy": 0.2631578947368421,
+  "type_accuracy": 0.2894736842105263,
+  "results": [
+    {
+      "query_id": "0",
+      "source_field": "cprd_aurum_patient.patid",
+      "expected": "omop_person.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "1",
+      "source_field": "cprd_aurum_patient.gender",
+      "expected": "omop_person.gender_concept_id",
+      "predicted": "omop_person.gender_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"gender_concept_id\"}"
+    },
+    {
+      "query_id": "2",
+      "source_field": "cprd_aurum_patient.yob",
+      "expected": "omop_person.year_of_birth",
+      "predicted": "omop_person.year_of_birth",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"year_of_birth\"}"
+    },
+    {
+      "query_id": "3",
+      "source_field": "cprd_aurum_patient.mob",
+      "expected": "omop_person.month_of_birth",
+      "predicted": "omop_person.month_of_birth",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"month_of_birth\"}"
+    },
+    {
+      "query_id": "4",
+      "source_field": "cprd_aurum_patient.usualgpstaffid",
+      "expected": "omop_person.provider_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "5",
+      "source_field": "cprd_aurum_patient.pracid",
+      "expected": "omop_person.care_site_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "6",
+      "source_field": "cprd_aurum_patient.regstartdate",
+      "expected": "omop_observation_period.observation_period_start_date",
+      "predicted": "omop_observation_period.observation_period_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation_period\", \"field\": \"observation_period_start_date\"}"
+    },
+    {
+      "query_id": "7",
+      "source_field": "cprd_aurum_patient.regenddate",
+      "expected": "omop_observation_period.observation_period_end_date",
+      "predicted": "omop_observation_period.observation_period_end_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation_period\", \"field\": \"observation_period_end_date\"}"
+    },
+    {
+      "query_id": "8",
+      "source_field": "cprd_aurum_patient.cprd_ddate",
+      "expected": "omop_death.death_date",
+      "predicted": "omop_death.death_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"death\", \"field\": \"death_date\"}"
+    },
+    {
+      "query_id": "9",
+      "source_field": "cprd_aurum_practice.lcd",
+      "expected": "omop_observation_period.observation_period_end_date",
+      "predicted": "omop_care_site.care_site_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_source_value\"}"
+    },
+    {
+      "query_id": "10",
+      "source_field": "cprd_aurum_practice.pracid",
+      "expected": "omop_care_site.care_site_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "11",
+      "source_field": "cprd_aurum_practice.region",
+      "expected": "omop_care_site.location_id",
+      "predicted": "omop_location.state",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"location\", \"field\": \"state\"}"
+    },
+    {
+      "query_id": "12",
+      "source_field": "cprd_aurum_staff.staffid",
+      "expected": "omop_provider.provider_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "13",
+      "source_field": "cprd_aurum_staff.jobcatid",
+      "expected": "omop_provider.specialty_concept_id",
+      "predicted": "omop_provider.specialty_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"specialty_concept_id\"}"
+    },
+    {
+      "query_id": "14",
+      "source_field": "cprd_aurum_staff.pracid",
+      "expected": "omop_provider.care_site_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "15",
+      "source_field": "cprd_aurum_observation.obsid",
+      "expected": "omop_visit_detail.visit_detail_id",
+      "predicted": "omop_observation.observation_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"observation_id\"}"
+    },
+    {
+      "query_id": "16",
+      "source_field": "cprd_aurum_observation.patid",
+      "expected": "omop_visit_detail.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "17",
+      "source_field": "cprd_aurum_observation.obsdate",
+      "expected": "omop_visit_detail.visit_detail_start_date",
+      "predicted": "omop_observation.observation_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"observation_date\"}"
+    },
+    {
+      "query_id": "18",
+      "source_field": "cprd_aurum_observation.staffid",
+      "expected": "omop_visit_detail.provider_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "19",
+      "source_field": "cprd_aurum_observation.pracid",
+      "expected": "omop_visit_detail.care_site_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "20",
+      "source_field": "cprd_aurum_observation.parentobsid",
+      "expected": "omop_visit_detail.visit_detail_parent_id",
+      "predicted": "omop_observation.observation_event_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"observation_event_id\"}"
+    },
+    {
+      "query_id": "21",
+      "source_field": "cprd_aurum_observation.numrangehigh",
+      "expected": "omop_stem.range_high",
+      "predicted": "omop_observation.value_as_number",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "22",
+      "source_field": "cprd_aurum_observation.numrangelow",
+      "expected": "omop_stem.range_low",
+      "predicted": "omop_measurement.range_low",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"range_low\"}"
+    },
+    {
+      "query_id": "23",
+      "source_field": "cprd_aurum_observation.numunitid",
+      "expected": "omop_stem.unit_concept_id",
+      "predicted": "omop_observation.unit_concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"unit_concept_id\"}"
+    },
+    {
+      "query_id": "24",
+      "source_field": "cprd_aurum_observation.value",
+      "expected": "omop_stem.value_as_number",
+      "predicted": "omop_observation.value_as_string",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"value_as_string\"}"
+    },
+    {
+      "query_id": "25",
+      "source_field": "cprd_aurum_consultation.consid",
+      "expected": "omop_visit_detail.visit_detail_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "26",
+      "source_field": "cprd_aurum_consultation.patid",
+      "expected": "omop_visit_detail.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "27",
+      "source_field": "cprd_aurum_consultation.consdate",
+      "expected": "omop_visit_detail.visit_detail_start_date",
+      "predicted": "omop_visit_occurrence.visit_start_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_date\"}"
+    },
+    {
+      "query_id": "28",
+      "source_field": "cprd_aurum_consultation.staffid",
+      "expected": "omop_visit_detail.provider_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "29",
+      "source_field": "cprd_aurum_consultation.pracid",
+      "expected": "omop_visit_detail.care_site_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "30",
+      "source_field": "cprd_aurum_drugissue.issuedate",
+      "expected": "omop_stem.start_date",
+      "predicted": "omop_drug_exposure.drug_exposure_start_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_start_date\"}"
+    },
+    {
+      "query_id": "31",
+      "source_field": "cprd_aurum_drugissue.duration",
+      "expected": "omop_stem.end_date",
+      "predicted": "omop_drug_exposure.days_supply",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"days_supply\"}"
+    },
+    {
+      "query_id": "32",
+      "source_field": "cprd_aurum_drugissue.prodcodeid",
+      "expected": "omop_stem.concept_id",
+      "predicted": "omop_drug_exposure.drug_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_source_value\"}"
+    },
+    {
+      "query_id": "33",
+      "source_field": "cprd_aurum_drugissue.patid",
+      "expected": "omop_stem.person_id",
+      "predicted": "omop_drug_exposure.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "34",
+      "source_field": "cprd_aurum_drugissue.quantunitid",
+      "expected": "omop_stem.dose_unit_source_value",
+      "predicted": "omop_drug_exposure.unit_concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"unit_concept_id\"}"
+    },
+    {
+      "query_id": "35",
+      "source_field": "cprd_aurum_drugissue.quantity",
+      "expected": "omop_stem.quantity",
+      "predicted": "omop_drug_exposure.quantity",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"quantity\"}"
+    },
+    {
+      "query_id": "36",
+      "source_field": "cprd_aurum_problem.obsid",
+      "expected": "omop_stem.visit_occurrence_id",
+      "predicted": "omop_condition_occurrence.condition_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_occurrence_id\"}"
+    },
+    {
+      "query_id": "37",
+      "source_field": "cprd_aurum_problem.probenddate",
+      "expected": "omop_stem.end_date",
+      "predicted": "omop_condition_occurrence.condition_end_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_end_date\"}"
+    }
+  ]
+}

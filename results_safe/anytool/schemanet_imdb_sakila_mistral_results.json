@@ -1,0 +1,154 @@
+{
+  "dataset": "schemanet_imdb_sakila",
+  "total": 16,
+  "field_correct": 13,
+  "type_correct": 14,
+  "field_accuracy": 0.8125,
+  "type_accuracy": 0.875,
+  "results": [
+    {
+      "query_id": "0",
+      "source_field": "imdb_title_akas.titleid",
+      "expected": "sakila_film.film_id",
+      "predicted": "sakila_film.film_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"film_id\"}"
+    },
+    {
+      "query_id": "1",
+      "source_field": "imdb_title_akas.title",
+      "expected": "sakila_film.title",
+      "predicted": "sakila_film.title",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"title\"}"
+    },
+    {
+      "query_id": "2",
+      "source_field": "imdb_title_akas.region",
+      "expected": "sakila_film.original_language_id",
+      "predicted": "sakila_country.country",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"country\", \"field\": \"country\"}"
+    },
+    {
+      "query_id": "3",
+      "source_field": "imdb_title_akas.language",
+      "expected": "sakila_film.language_id",
+      "predicted": "sakila_language.name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"language\", \"field\": \"name\"}"
+    },
+    {
+      "query_id": "4",
+      "source_field": "imdb_title_basics.tconst",
+      "expected": "sakila_film.film_id",
+      "predicted": "sakila_film.film_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"film_id\"}"
+    },
+    {
+      "query_id": "5",
+      "source_field": "imdb_title_basics.genres",
+      "expected": "sakila_category.category_id",
+      "predicted": "sakila_category.name",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"category\", \"field\": \"name\"}"
+    },
+    {
+      "query_id": "6",
+      "source_field": "imdb_title_basics.primarytitle",
+      "expected": "sakila_film.title",
+      "predicted": "sakila_film.title",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"title\"}"
+    },
+    {
+      "query_id": "7",
+      "source_field": "imdb_title_basics.originaltitle",
+      "expected": "sakila_film.title",
+      "predicted": "sakila_film.title",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"title\"}"
+    },
+    {
+      "query_id": "8",
+      "source_field": "imdb_title_basics.isadult",
+      "expected": "sakila_film.rating",
+      "predicted": "sakila_film.rating",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"rating\"}"
+    },
+    {
+      "query_id": "9",
+      "source_field": "imdb_title_basics.startyear",
+      "expected": "sakila_film.release_year",
+      "predicted": "sakila_film.release_year",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"release_year\"}"
+    },
+    {
+      "query_id": "10",
+      "source_field": "imdb_title_basics.endyear",
+      "expected": "sakila_film.release_year",
+      "predicted": "sakila_film.release_year",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"release_year\"}"
+    },
+    {
+      "query_id": "11",
+      "source_field": "imdb_title_basics.runtimeminutes",
+      "expected": "sakila_film.length",
+      "predicted": "sakila_film.length",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"length\"}"
+    },
+    {
+      "query_id": "12",
+      "source_field": "imdb_title_crew.tconst",
+      "expected": "sakila_film.film_id",
+      "predicted": "sakila_film.film_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"film_id\"}"
+    },
+    {
+      "query_id": "13",
+      "source_field": "imdb_title_ratings.tconst",
+      "expected": "sakila_film.film_id",
+      "predicted": "sakila_film.film_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"film\", \"field\": \"film_id\"}"
+    },
+    {
+      "query_id": "14",
+      "source_field": "imdb_name_basics.nconst",
+      "expected": "sakila_actor.actor_id",
+      "predicted": "sakila_actor.actor_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"actor\", \"field\": \"actor_id\"}"
+    },
+    {
+      "query_id": "15",
+      "source_field": "imdb_name_basics.primaryname",
+      "expected": "sakila_actor.first_name",
+      "predicted": "sakila_actor.first_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"sakila\", \"table\": \"actor\", \"field\": \"first_name\"}"
+    }
+  ]
+}

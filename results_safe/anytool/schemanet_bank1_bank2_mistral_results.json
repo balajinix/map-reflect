@@ -1,0 +1,163 @@
+{
+  "dataset": "schemanet_bank1_bank2",
+  "total": 17,
+  "field_correct": 14,
+  "type_correct": 14,
+  "field_accuracy": 0.8235294117647058,
+  "type_accuracy": 0.8235294117647058,
+  "results": [
+    {
+      "query_id": "0",
+      "source_field": "bank1_branch.branch_id",
+      "expected": "bank2_branch.branch_id",
+      "predicted": "bank2_branch.branch_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"branch\", \"field\": \"branch_id\"}"
+    },
+    {
+      "query_id": "1",
+      "source_field": "bank1_branch.name",
+      "expected": "bank2_branch.branch_name",
+      "predicted": "bank2_branch.branch_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"branch\", \"field\": \"branch_name\"}"
+    },
+    {
+      "query_id": "2",
+      "source_field": "bank1_branch.address",
+      "expected": "bank2_branch.branch_address",
+      "predicted": "bank2_branch.branch_address",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"branch\", \"field\": \"branch_address\"}"
+    },
+    {
+      "query_id": "3",
+      "source_field": "bank1_account.account_no",
+      "expected": "bank2_account.account_id",
+      "predicted": "bank2_account.account_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"account\", \"field\": \"account_id\"}"
+    },
+    {
+      "query_id": "4",
+      "source_field": "bank1_account.acc_type",
+      "expected": "bank2_account.account_type",
+      "predicted": "bank2_account.account_type",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"account\", \"field\": \"account_type\"}"
+    },
+    {
+      "query_id": "5",
+      "source_field": "bank1_account.balance",
+      "expected": "bank2_account.account_balance",
+      "predicted": "bank2_account.account_balance",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"account\", \"field\": \"account_balance\"}"
+    },
+    {
+      "query_id": "6",
+      "source_field": "bank1_account.branch_id",
+      "expected": "bank2_account.branch_id",
+      "predicted": "bank2_account.branch_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"account\", \"field\": \"branch_id\"}"
+    },
+    {
+      "query_id": "7",
+      "source_field": "bank1_customer.custid",
+      "expected": "bank2_customer.customer_id",
+      "predicted": "bank2_customer.customer_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"customer\", \"field\": \"customer_id\"}"
+    },
+    {
+      "query_id": "8",
+      "source_field": "bank1_customer.name",
+      "expected": "bank2_customer.customer_name",
+      "predicted": "bank2_customer.customer_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"customer\", \"field\": \"customer_name\"}"
+    },
+    {
+      "query_id": "9",
+      "source_field": "bank1_customer.phone",
+      "expected": "bank2_customer.mobileno",
+      "predicted": "bank2_customer.mobileno",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"customer\", \"field\": \"mobileno\"}"
+    },
+    {
+      "query_id": "10",
+      "source_field": "bank1_loan.loan_id",
+      "expected": "bank2_loan.loan_id",
+      "predicted": "bank2_loan.loan_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"loan\", \"field\": \"loan_id\"}"
+    },
+    {
+      "query_id": "11",
+      "source_field": "bank1_loan.amount",
+      "expected": "bank2_loan.issued_amount",
+      "predicted": "bank2_loan.issued_amount",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"loan\", \"field\": \"issued_amount\"}"
+    },
+    {
+      "query_id": "12",
+      "source_field": "bank1_loan.branch_id",
+      "expected": "bank2_loan.branch_id",
+      "predicted": "bank2_loan.branch_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"loan\", \"field\": \"branch_id\"}"
+    },
+    {
+      "query_id": "13",
+      "source_field": "bank1_availed_by.custid",
+      "expected": "bank2_borrower.customer_id",
+      "predicted": "bank2_customer.customer_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"customer\", \"field\": \"customer_id\"}"
+    },
+    {
+      "query_id": "14",
+      "source_field": "bank1_availed_by.loan_id",
+      "expected": "bank2_borrower.loan_id",
+      "predicted": "bank2_loan.loan_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"loan\", \"field\": \"loan_id\"}"
+    },
+    {
+      "query_id": "15",
+      "source_field": "bank1_hold_by.custid",
+      "expected": "bank2_customer.customer_id",
+      "predicted": "bank2_customer.customer_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"customer\", \"field\": \"customer_id\"}"
+    },
+    {
+      "query_id": "16",
+      "source_field": "bank1_hold_by.account_no",
+      "expected": "bank2_customer.account_id",
+      "predicted": "bank2_account.account_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"bank2\", \"table\": \"account\", \"field\": \"account_id\"}"
+    }
+  ]
+}

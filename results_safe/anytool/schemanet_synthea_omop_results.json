@@ -1,0 +1,451 @@
+{
+  "dataset": "schemanet_synthea_omop",
+  "total": 49,
+  "field_correct": 15,
+  "type_correct": 26,
+  "field_accuracy": 0.30612244897959184,
+  "type_accuracy": 0.5306122448979592,
+  "results": [
+    {
+      "query_id": "0",
+      "source_field": "synthea_patients.gender",
+      "expected": "omop_person.gender_concept_id",
+      "predicted": "omop_person.gender_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"gender_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "1",
+      "source_field": "synthea_patients.birthdate",
+      "expected": "omop_person.year_of_birth",
+      "predicted": "omop_person.birth_datetime",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"birth_datetime\"}<|eom_id|>"
+    },
+    {
+      "query_id": "2",
+      "source_field": "synthea_patients.deathdate",
+      "expected": "omop_death.death_datetime",
+      "predicted": "omop_death.death_date",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"death\", \"field\": \"death_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "3",
+      "source_field": "synthea_patients.ethnicity",
+      "expected": "omop_person.ethnicity_concept_id",
+      "predicted": "omop_person.ethnicity_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"ethnicity_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "4",
+      "source_field": "synthea_patients.id",
+      "expected": "omop_person.person_source_value",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "5",
+      "source_field": "synthea_patients.race",
+      "expected": "omop_person.race_source_value",
+      "predicted": "omop_person.race_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"race_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "6",
+      "source_field": "synthea_patients.city",
+      "expected": "omop_location.city",
+      "predicted": "omop_location.city",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"location\", \"field\": \"city\"}<|eom_id|>"
+    },
+    {
+      "query_id": "7",
+      "source_field": "synthea_patients.state",
+      "expected": "omop_location.state",
+      "predicted": "omop_location.state",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"location\", \"field\": \"state\"}<|eom_id|>"
+    },
+    {
+      "query_id": "8",
+      "source_field": "synthea_patients.zip",
+      "expected": "omop_location.zip",
+      "predicted": "omop_location.zip",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"location\", \"field\": \"zip\"}<|eom_id|>"
+    },
+    {
+      "query_id": "9",
+      "source_field": "synthea_patients.birthplace",
+      "expected": "omop_location.city",
+      "predicted": "omop_person.location_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"location_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "10",
+      "source_field": "synthea_encounters.provider",
+      "expected": "omop_provider.provider_id",
+      "predicted": "omop_visit_occurrence.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"provider_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "11",
+      "source_field": "synthea_encounters.patient",
+      "expected": "omop_visit_occurrence.person_id",
+      "predicted": "omop_visit_occurrence.person_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "12",
+      "source_field": "synthea_encounters.encounterclass",
+      "expected": "omop_visit_occurrence.visit_concept_id",
+      "predicted": "omop_visit_occurrence.visit_type_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_type_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "13",
+      "source_field": "synthea_encounters.start",
+      "expected": "omop_visit_occurrence.visit_start_date",
+      "predicted": "omop_visit_occurrence.visit_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "14",
+      "source_field": "synthea_encounters.stop",
+      "expected": "omop_visit_occurrence.visit_end_date",
+      "predicted": "omop_visit_occurrence.visit_end_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_date\"}```json\n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_date\"}\n``````json\n{\"schema\": \"omop\", \"table\": \"v"
+    },
+    {
+      "query_id": "15",
+      "source_field": "synthea_observations.patient",
+      "expected": "omop_measurement.person_id",
+      "predicted": "omop_observation.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "16",
+      "source_field": "synthea_observations.code",
+      "expected": "omop_measurement.measurement_concept_id",
+      "predicted": "omop_observation.observation_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"observation_source_value\"}```json\n{\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"observation_source_value\"}\n``````json\n{\"schema\": \"omop\", \""
+    },
+    {
+      "query_id": "17",
+      "source_field": "synthea_observations.date",
+      "expected": "omop_measurement.measurement_date",
+      "predicted": "omop_observation.observation_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"observation_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "18",
+      "source_field": "synthea_observations.value",
+      "expected": "omop_measurement.value_as_number",
+      "predicted": "omop_observation.value_as_number",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"value_as_number\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "19",
+      "source_field": "synthea_observations.encounter",
+      "expected": "omop_measurement.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "20",
+      "source_field": "synthea_observations.units",
+      "expected": "omop_measurement.unit_source_value",
+      "predicted": "omop_observation.unit_concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"unit_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "21",
+      "source_field": "synthea_procedures.patient",
+      "expected": "omop_measurement.person_id",
+      "predicted": "omop_procedure_occurrence.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "22",
+      "source_field": "synthea_procedures.code",
+      "expected": "omop_measurement.measurement_concept_id",
+      "predicted": "omop_procedure_occurrence.procedure_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_source_value\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "23",
+      "source_field": "synthea_procedures.date",
+      "expected": "omop_measurement.measurement_date",
+      "predicted": "omop_procedure_occurrence.procedure_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "24",
+      "source_field": "synthea_procedures.encounter",
+      "expected": "omop_measurement.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "25",
+      "source_field": "synthea_conditions.patient",
+      "expected": "omop_condition_occurrence.person_id",
+      "predicted": "omop_condition_occurrence.person_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "26",
+      "source_field": "synthea_conditions.code",
+      "expected": "omop_condition_occurrence.condition_concept_id",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "27",
+      "source_field": "synthea_conditions.start",
+      "expected": "omop_condition_occurrence.condition_start_date",
+      "predicted": "omop_condition_occurrence.condition_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "28",
+      "source_field": "synthea_conditions.stop",
+      "expected": "omop_condition_occurrence.condition_end_date",
+      "predicted": "omop_condition_occurrence.stop_reason",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"stop_reason\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "29",
+      "source_field": "synthea_conditions.encounter",
+      "expected": "omop_condition_occurrence.visit_occurrence_id",
+      "predicted": "omop_condition_occurrence.visit_occurrence_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"visit_occurrence_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "30",
+      "source_field": "synthea_allergies.patient",
+      "expected": "omop_observation.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "31",
+      "source_field": "synthea_allergies.code",
+      "expected": "omop_observation.observation_concept_id",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "32",
+      "source_field": "synthea_allergies.start",
+      "expected": "omop_observation.observation_date",
+      "predicted": "omop_condition_occurrence.condition_start_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "33",
+      "source_field": "synthea_allergies.encounter",
+      "expected": "omop_observation.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "34",
+      "source_field": "synthea_immunizations.patient",
+      "expected": "omop_drug_exposure.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "35",
+      "source_field": "synthea_immunizations.code",
+      "expected": "omop_drug_exposure.drug_concept_id",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "36",
+      "source_field": "synthea_immunizations.date",
+      "expected": "omop_drug_exposure.drug_exposure_start_date",
+      "predicted": "omop_observation.observation_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"observation_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "37",
+      "source_field": "synthea_immunizations.encounter",
+      "expected": "omop_drug_exposure.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "38",
+      "source_field": "synthea_medications.patient",
+      "expected": "omop_drug_exposure.person_id",
+      "predicted": "omop_drug_exposure.person_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "39",
+      "source_field": "synthea_medications.code",
+      "expected": "omop_drug_exposure.drug_concept_id",
+      "predicted": "omop_drug_exposure.drug_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_source_value\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "40",
+      "source_field": "synthea_medications.start",
+      "expected": "omop_drug_exposure.drug_exposure_start_date",
+      "predicted": "omop_drug_exposure.drug_exposure_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "41",
+      "source_field": "synthea_medications.stop",
+      "expected": "omop_drug_exposure.drug_exposure_end_date",
+      "predicted": "omop_drug_exposure.stop_reason",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"stop_reason\"}```json\n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"stop_reason\"}\n``````json\n{\"schema\": \"omop\", \"table\": \"drug_exposure"
+    },
+    {
+      "query_id": "42",
+      "source_field": "synthea_medications.encounter",
+      "expected": "omop_drug_exposure.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "43",
+      "source_field": "synthea_organizations.name",
+      "expected": "omop_care_site.care_site_name",
+      "predicted": "omop_provider.provider_name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_name\"}<|eom_id|>"
+    },
+    {
+      "query_id": "44",
+      "source_field": "synthea_organizations.id",
+      "expected": "omop_care_site.care_site_source_value",
+      "predicted": "omop_location.location_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"location\", \"field\": \"location_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "45",
+      "source_field": "synthea_providers.name",
+      "expected": "omop_provider.provider_name",
+      "predicted": "omop_provider.provider_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_name\"}<|eom_id|>"
+    },
+    {
+      "query_id": "46",
+      "source_field": "synthea_providers.id",
+      "expected": "omop_provider.provider_source_value",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "47",
+      "source_field": "synthea_providers.gender",
+      "expected": "omop_provider.gender_concept_id",
+      "predicted": "omop_provider.gender_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"gender_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "48",
+      "source_field": "synthea_providers.specialty",
+      "expected": "omop_provider.specialty_source_value",
+      "predicted": "omop_provider.specialty_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"specialty_concept_id\"}<|eom_id|>"
+    }
+  ]
+}

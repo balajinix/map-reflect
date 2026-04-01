@@ -1,0 +1,2917 @@
+[
+  {
+    "sample_id": "sample_0",
+    "utterance": "Map Foreca Weather Nowcast to Cloud Cast Get humidty",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' is likely referring to a city or geographical location, which matches the target field 'Cloud Cast_Cloud Cast.city' that represents the city parameter for various weather-related endpoints."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_1",
+    "utterance": "Map Foreca Weather Nowcast to Cloud Cast Get wind speed",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' is likely referring to a city or geographical location, which matches the target field 'Cloud Cast_Cloud Cast.city' that is used as a parameter for getting wind speed."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_2",
+    "utterance": "Map Foreca Weather Nowcast to Cloud Cast Get hourly forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city: Parameter city of Get hourly forecast",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city: Parameter city of Get hourly forecast' because it is related to geographical location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_3",
+    "utterance": "Map Foreca Weather Nowcast to Cloud Cast Get the forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as both relate to a geographical location or city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_4",
+    "utterance": "Map Foreca Weather Nowcast to Cloud Cast Get current weather",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city for which the weather is being retrieved."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_5",
+    "utterance": "Map Foreca Weather Three-hourly to Cloud Cast Get humidty",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to a geographical location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_6",
+    "utterance": "Map Foreca Weather Three-hourly to Cloud Cast Get wind speed",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' matches with the target field 'Cloud Cast_Cloud Cast.city' as both seem to be related to geographical locations."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_7",
+    "utterance": "Map Foreca Weather Three-hourly to Cloud Cast Get hourly forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city: Parameter city of Get hourly forecast",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city: Parameter city of Get hourly forecast' because both are related to geographical locations."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_8",
+    "utterance": "Map Foreca Weather Three-hourly to Cloud Cast Get the forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city for getting the forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_9",
+    "utterance": "Map Foreca Weather Three-hourly to Cloud Cast Get current weather",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city where the weather is being retrieved."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_10",
+    "utterance": "Map Foreca Weather Daily to Cloud Cast Get humidty",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' is likely referring to a city or geographical location, which matches the target field 'Cloud Cast_Cloud Cast.city' that represents the city parameter for various weather-related endpoints."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_11",
+    "utterance": "Map Foreca Weather Daily to Cloud Cast Get wind speed",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' is likely referring to a city or geographical location, which matches the target field 'Cloud Cast_Cloud Cast.city' that is used as a parameter for getting wind speed."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_12",
+    "utterance": "Map Foreca Weather Daily to Cloud Cast Get hourly forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city for which the forecast is required."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_13",
+    "utterance": "Map Foreca Weather Daily to Cloud Cast Get the forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city where the forecast is required."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_14",
+    "utterance": "Map Foreca Weather Daily to Cloud Cast Get current weather",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city where the weather is being retrieved."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_15",
+    "utterance": "Map Foreca Weather Location info to Cloud Cast Get humidty",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field location best matches the target field Cloud Cast_Cloud Cast.city as it is related to the location of the weather forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_16",
+    "utterance": "Map Foreca Weather Location info to Cloud Cast Get wind speed",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field location is best matched with the target field Cloud Cast_Cloud Cast.city as it is a parameter for getting wind speed."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_17",
+    "utterance": "Map Foreca Weather Location info to Cloud Cast Get hourly forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field location is best matched with the target field Cloud Cast_Cloud Cast.city as it is a parameter for getting hourly forecast which typically requires a location or city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_18",
+    "utterance": "Map Foreca Weather Location info to Cloud Cast Get the forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field location best matches the target field Cloud Cast_Cloud Cast.city as it is a parameter for getting the forecast which typically requires a location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_19",
+    "utterance": "Map Foreca Weather Location info to Cloud Cast Get current weather",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' is likely referring to a city or geographical location, which matches the target field 'Cloud Cast_Cloud Cast.city' that represents the city parameter for getting current weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_20",
+    "utterance": "Map Foreca Weather Current to Cloud Cast Get humidty",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as both seem to represent a geographical location or city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_21",
+    "utterance": "Map Foreca Weather Current to Cloud Cast Get wind speed",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' is likely referring to a city or geographical location, which matches the target field 'Cloud Cast_Cloud Cast.city' that is used as a parameter for getting wind speed."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_22",
+    "utterance": "Map Foreca Weather Current to Cloud Cast Get hourly forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city for getting the hourly forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_23",
+    "utterance": "Map Foreca Weather Current to Cloud Cast Get the forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city for getting the forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_24",
+    "utterance": "Map Foreca Weather Current to Cloud Cast Get current weather",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city: Parameter city of Get current weather",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city: Parameter city of Get current weather' because both are related to geographical locations."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_25",
+    "utterance": "Map Foreca Weather Latest observations to Cloud Cast Get humidty",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' is likely referring to a city or geographical location, which matches the target field 'Cloud Cast_Cloud Cast.city' that represents the city parameter for getting humidity."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_26",
+    "utterance": "Map Foreca Weather Latest observations to Cloud Cast Get wind speed",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city: Parameter city of Get wind speed",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city: Parameter city of Get wind speed' because both are related to geographical locations."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_27",
+    "utterance": "Map Foreca Weather Latest observations to Cloud Cast Get hourly forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city: Parameter city of Get hourly forecast",
+        "justification": "The source field 'location' is most closely related to the target field 'city' in the context of getting hourly forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_28",
+    "utterance": "Map Foreca Weather Latest observations to Cloud Cast Get the forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city for which the forecast is required."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_29",
+    "utterance": "Map Foreca Weather Latest observations to Cloud Cast Get current weather",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city where the weather is being observed."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_30",
+    "utterance": "Map Foreca Weather Hourly to Cloud Cast Get humidty",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' matches with the target field 'Cloud Cast_Cloud Cast.city' as both seem to represent a geographical location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_31",
+    "utterance": "Map Foreca Weather Hourly to Cloud Cast Get wind speed",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as both relate to a geographical location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_32",
+    "utterance": "Map Foreca Weather Hourly to Cloud Cast Get hourly forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city: Parameter city of Get hourly forecast",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city: Parameter city of Get hourly forecast' because both are related to geographical locations."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_33",
+    "utterance": "Map Foreca Weather Hourly to Cloud Cast Get the forecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city' as it is related to the city for which the forecast is required."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_34",
+    "utterance": "Map Foreca Weather Hourly to Cloud Cast Get current weather",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Cloud Cast_Cloud Cast.city: Parameter city of Get current weather",
+        "justification": "The source field 'location' best matches the target field 'Cloud Cast_Cloud Cast.city: Parameter city of Get current weather' because both are related to geographical locations."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_35",
+    "utterance": "Map Foreca Weather Current to WeatherAPI.com Future Weather API",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "WeatherAPI.com_WeatherAPI.com.lang",
+        "justification": "The source field 'lang' matches the target field 'WeatherAPI.com_WeatherAPI.com.lang' which is used to return 'condition:text' field in the desired language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_36",
+    "utterance": "Map Foreca Weather Latest observations to WeatherAPI.com Future Weather API",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "WeatherAPI.com_WeatherAPI.com.lang",
+        "justification": "The source field 'lang' matches the target field 'WeatherAPI.com_WeatherAPI.com.lang' which is used to return 'condition:text' field in the desired language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_37",
+    "utterance": "Map Foreca Weather Location search to WeatherAPI.com Future Weather API",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "WeatherAPI.com_WeatherAPI.com.lang",
+        "justification": "The source field 'lang' matches the target field 'WeatherAPI.com_WeatherAPI.com.lang' as both are related to language settings."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_38",
+    "utterance": "Map Foreca Weather Nowcast to Ski Resort Forecast Hourly Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches the target field Foreca Weather_Foreca Weather.tempunit as both represent temperature units."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_39",
+    "utterance": "Map Foreca Weather Nowcast to Ski Resort Forecast Current Snow Conditions",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches the target field Foreca Weather_Foreca Weather.tempunit as both represent temperature units."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_40",
+    "utterance": "Map Foreca Weather Nowcast to Ski Resort Forecast 5 Day Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_41",
+    "utterance": "Map Foreca Weather Three-hourly to Ski Resort Forecast Hourly Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_42",
+    "utterance": "Map Foreca Weather Three-hourly to Ski Resort Forecast Current Snow Conditions",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_43",
+    "utterance": "Map Foreca Weather Three-hourly to Ski Resort Forecast 5 Day Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_44",
+    "utterance": "Map Foreca Weather Daily to Ski Resort Forecast Hourly Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_45",
+    "utterance": "Map Foreca Weather Daily to Ski Resort Forecast Current Snow Conditions",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_46",
+    "utterance": "Map Foreca Weather Daily to Ski Resort Forecast 5 Day Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_47",
+    "utterance": "Map Foreca Weather Current to Ski Resort Forecast Hourly Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_48",
+    "utterance": "Map Foreca Weather Current to Ski Resort Forecast Current Snow Conditions",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_49",
+    "utterance": "Map Foreca Weather Current to Ski Resort Forecast 5 Day Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_50",
+    "utterance": "Map Foreca Weather Hourly to Ski Resort Forecast Hourly Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches the target field Foreca Weather_Foreca Weather.tempunit as both represent temperature units."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_51",
+    "utterance": "Map Foreca Weather Hourly to Ski Resort Forecast Current Snow Conditions",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_52",
+    "utterance": "Map Foreca Weather Hourly to Ski Resort Forecast 5 Day Forecast",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "Foreca Weather_Foreca Weather.tempunit",
+        "justification": "The source field tempunit matches exactly with the target field Foreca Weather_Foreca Weather.tempunit, which represents the temperature unit in response."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_53",
+    "utterance": "Map Foreca Weather Nowcast to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location of Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_54",
+    "utterance": "Map Foreca Weather Nowcast to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location of Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_55",
+    "utterance": "Map Foreca Weather Nowcast to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a parameter for location in the Foreca Weather API."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_56",
+    "utterance": "Map Foreca Weather Three-hourly to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field location in Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_57",
+    "utterance": "Map Foreca Weather Three-hourly to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field location in Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_58",
+    "utterance": "Map Foreca Weather Three-hourly to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location in Foreca Weather product."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_59",
+    "utterance": "Map Foreca Weather Daily to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches with the target field 'Foreca Weather_Foreca Weather.location' as it is the most relevant field related to location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_60",
+    "utterance": "Map Foreca Weather Daily to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct match for a location parameter."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_61",
+    "utterance": "Map Foreca Weather Daily to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location in Foreca Weather product."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_62",
+    "utterance": "Map Foreca Weather Location info to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is the parameter location of Location info."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_63",
+    "utterance": "Map Foreca Weather Location info to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field Foreca Weather_Foreca Weather.location as it is a parameter for location info."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_64",
+    "utterance": "Map Foreca Weather Location info to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field Foreca Weather_Foreca Weather.location as it is a parameter for location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_65",
+    "utterance": "Map Foreca Weather Current to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field Foreca Weather_Foreca Weather.location which is a parameter for location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_66",
+    "utterance": "Map Foreca Weather Current to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct parameter for location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_67",
+    "utterance": "Map Foreca Weather Current to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location in Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_68",
+    "utterance": "Map Foreca Weather Latest observations to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field Foreca Weather_Foreca Weather.location which is a parameter for location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_69",
+    "utterance": "Map Foreca Weather Latest observations to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct match for location information."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_70",
+    "utterance": "Map Foreca Weather Latest observations to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location in Foreca Weather product."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_71",
+    "utterance": "Map Foreca Weather Location search to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "country": {
+        "target_property": "Foreca Weather_Foreca Weather.country",
+        "justification": "The source field country matches the target field Foreca Weather_Foreca Weather.country which is also for country information."
+      }
+    },
+    "ground_truth_mapping": {
+      "country": "country"
+    }
+  },
+  {
+    "sample_id": "sample_72",
+    "utterance": "Map Foreca Weather Location search to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "country": {
+        "target_property": "Foreca Weather_Foreca Weather.country",
+        "justification": "The source field country matches the target field Foreca Weather_Foreca Weather.country which is also for country information."
+      }
+    },
+    "ground_truth_mapping": {
+      "country": "country"
+    }
+  },
+  {
+    "sample_id": "sample_73",
+    "utterance": "Map Foreca Weather Location search to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "country": {
+        "target_property": "Foreca Weather_Foreca Weather.country",
+        "justification": "The source field country matches the target field Foreca Weather_Foreca Weather.country which is also a country parameter."
+      }
+    },
+    "ground_truth_mapping": {
+      "country": "country"
+    }
+  },
+  {
+    "sample_id": "sample_74",
+    "utterance": "Map Foreca Weather Hourly to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location in Foreca Weather product."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_75",
+    "utterance": "Map Foreca Weather Hourly to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct parameter for location in the Foreca Weather API."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_76",
+    "utterance": "Map Foreca Weather Hourly to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location in Foreca Weather product."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "city"
+    }
+  },
+  {
+    "sample_id": "sample_77",
+    "utterance": "Map Foreca Weather Nowcast to APJOY-Weather Forecast GetWeatherForecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location in Foreca Weather product."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "location"
+    }
+  },
+  {
+    "sample_id": "sample_78",
+    "utterance": "Map Foreca Weather Three-hourly to APJOY-Weather Forecast GetWeatherForecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field location in Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "location"
+    }
+  },
+  {
+    "sample_id": "sample_79",
+    "utterance": "Map Foreca Weather Daily to APJOY-Weather Forecast GetWeatherForecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct match for a location parameter."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "location"
+    }
+  },
+  {
+    "sample_id": "sample_80",
+    "utterance": "Map Foreca Weather Location info to APJOY-Weather Forecast GetWeatherForecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field Foreca Weather_Foreca Weather.location which is a parameter for location."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "location"
+    }
+  },
+  {
+    "sample_id": "sample_81",
+    "utterance": "Map Foreca Weather Current to APJOY-Weather Forecast GetWeatherForecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field location in Foreca Weather_Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "location"
+    }
+  },
+  {
+    "sample_id": "sample_82",
+    "utterance": "Map Foreca Weather Latest observations to APJOY-Weather Forecast GetWeatherForecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field location in Foreca Weather_Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "location"
+    }
+  },
+  {
+    "sample_id": "sample_83",
+    "utterance": "Map Foreca Weather Hourly to APJOY-Weather Forecast GetWeatherForecast",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field location in Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "location"
+    }
+  },
+  {
+    "sample_id": "sample_84",
+    "utterance": "Map Foreca Weather Nowcast to OpenWeather getCurrentWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit matches the target field units which is used to specify the units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_85",
+    "utterance": "Map Foreca Weather Nowcast to OpenWeather getForecastWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit is matched with the target field OpenWeather_OpenWeather.units because both are related to units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_86",
+    "utterance": "Map Foreca Weather Three-hourly to OpenWeather getCurrentWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit is likely referring to the unit of temperature, which matches the target field OpenWeather_OpenWeather.units that determines the units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_87",
+    "utterance": "Map Foreca Weather Three-hourly to OpenWeather getForecastWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit matches with the target field units which is used to specify the units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_88",
+    "utterance": "Map Foreca Weather Daily to OpenWeather getCurrentWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit matches the target field units which determines the unit of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_89",
+    "utterance": "Map Foreca Weather Daily to OpenWeather getForecastWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit is matched with the target field OpenWeather_OpenWeather.units because both are related to units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_90",
+    "utterance": "Map Foreca Weather Current to OpenWeather getCurrentWeather",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "OpenWeather_OpenWeather.lang",
+        "justification": "The source field 'lang' matches the target field 'OpenWeather_OpenWeather.lang' which is used to get the output in a specific language."
+      },
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field 'tempunit' matches the target field 'OpenWeather_OpenWeather.units' which is used to specify the units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang",
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_91",
+    "utterance": "Map Foreca Weather Current to OpenWeather getForecastWeather",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "OpenWeather_OpenWeather.lang",
+        "justification": "The source field lang matches the target field OpenWeather_OpenWeather.lang, which is used to get the output in a specific language."
+      },
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit matches the target field OpenWeather_OpenWeather.units, which is used to specify the units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang",
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_92",
+    "utterance": "Map Foreca Weather Latest observations to OpenWeather getCurrentWeather",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "OpenWeather_OpenWeather.lang",
+        "justification": "The source field 'lang' matches the target field 'OpenWeather_OpenWeather.lang' which is used to get the output in the desired language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_93",
+    "utterance": "Map Foreca Weather Latest observations to OpenWeather getForecastWeather",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "OpenWeather_OpenWeather.lang",
+        "justification": "The source field 'lang' matches the target field 'OpenWeather_OpenWeather.lang' which is used to get the output in a specific language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_94",
+    "utterance": "Map Foreca Weather Location search to OpenWeather getCurrentWeather",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "OpenWeather_OpenWeather.lang",
+        "justification": "The source field lang matches the target field OpenWeather_OpenWeather.lang, which is used to get the output in the specified language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_95",
+    "utterance": "Map Foreca Weather Location search to OpenWeather getForecastWeather",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "OpenWeather_OpenWeather.lang",
+        "justification": "The source field lang matches the target field OpenWeather_OpenWeather.lang, which is used to get the output in the specified language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_96",
+    "utterance": "Map Foreca Weather Hourly to OpenWeather getCurrentWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit is likely referring to the unit of temperature, which matches the target field OpenWeather_OpenWeather.units that determines the units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_97",
+    "utterance": "Map Foreca Weather Hourly to OpenWeather getForecastWeather",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "OpenWeather_OpenWeather.units",
+        "justification": "The source field tempunit matches the target field OpenWeather_OpenWeather.units as both are related to units of measurement for temperature."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_98",
+    "utterance": "Map Foreca Weather Nowcast to The Weather API weather report",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches with the target field location of Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "cityName"
+    }
+  },
+  {
+    "sample_id": "sample_99",
+    "utterance": "Map Foreca Weather Three-hourly to The Weather API weather report",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct match for the location parameter."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "cityName"
+    }
+  },
+  {
+    "sample_id": "sample_100",
+    "utterance": "Map Foreca Weather Daily to The Weather API weather report",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct parameter for location in the Foreca Weather API."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "cityName"
+    }
+  },
+  {
+    "sample_id": "sample_101",
+    "utterance": "Map Foreca Weather Location info to The Weather API weather report",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' as it is a direct parameter for location information."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "cityName"
+    }
+  },
+  {
+    "sample_id": "sample_102",
+    "utterance": "Map Foreca Weather Current to The Weather API weather report",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' which is a parameter for location in the Foreca Weather API."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "cityName"
+    }
+  },
+  {
+    "sample_id": "sample_103",
+    "utterance": "Map Foreca Weather Latest observations to The Weather API weather report",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field 'location' matches the target field 'Foreca Weather_Foreca Weather.location' which is a parameter for location in various Foreca Weather APIs."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "cityName"
+    }
+  },
+  {
+    "sample_id": "sample_104",
+    "utterance": "Map Foreca Weather Hourly to The Weather API weather report",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "Foreca Weather_Foreca Weather.location",
+        "justification": "The source field location matches the target field location in Foreca Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "cityName"
+    }
+  },
+  {
+    "sample_id": "sample_105",
+    "utterance": "Map Foreca Weather Nowcast to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "climate data_climate data.CITY",
+        "justification": "The source field location can be matched with the target field CITY as it represents the name of a city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "CITY"
+    }
+  },
+  {
+    "sample_id": "sample_106",
+    "utterance": "Map Foreca Weather Three-hourly to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "climate data_climate data.CITY",
+        "justification": "The source field location can be matched with the target field CITY as it represents the name of a city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "CITY"
+    }
+  },
+  {
+    "sample_id": "sample_107",
+    "utterance": "Map Foreca Weather Daily to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "climate data_climate data.CITY",
+        "justification": "The source field location can be matched with the target field CITY as it represents the name of a city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "CITY"
+    }
+  },
+  {
+    "sample_id": "sample_108",
+    "utterance": "Map Foreca Weather Location info to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "climate data_climate data.CITY",
+        "justification": "The source field 'location' can be matched to 'climate data_climate data.CITY' as it is likely to contain the name of a city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "CITY"
+    }
+  },
+  {
+    "sample_id": "sample_109",
+    "utterance": "Map Foreca Weather Current to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "climate data_climate data.CITY",
+        "justification": "The source field location is likely to contain a city name, which matches the target field climate data_climate data.CITY."
+      },
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field lang is likely to contain a language code, which matches the target field climate data_climate data.LANG."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "CITY",
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_110",
+    "utterance": "Map Foreca Weather Current to climate data List of all Countries",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field 'lang' matches the target field 'climate data_climate data.LANG' as both represent language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_111",
+    "utterance": "Map Foreca Weather Current to climate data Get climate data by lat/lon or Key",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field 'lang' matches the target field 'climate data_climate data.LANG' as both represent language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_112",
+    "utterance": "Map Foreca Weather Latest observations to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "climate data_climate data.CITY",
+        "justification": "The source field 'location' can be matched with the target field 'climate data_climate data.CITY' as it represents the name of a city."
+      },
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field 'lang' can be matched with the target field 'climate data_climate data.LANG' as it represents the language."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "CITY",
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_113",
+    "utterance": "Map Foreca Weather Latest observations to climate data List of all Countries",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field lang matches the target field climate data_climate data.LANG as both represent language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_114",
+    "utterance": "Map Foreca Weather Latest observations to climate data Get climate data by lat/lon or Key",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field 'lang' matches the target field 'climate data_climate data.LANG' as both represent language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_115",
+    "utterance": "Map Foreca Weather Location search to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field 'lang' matches the target field 'climate data_climate data.LANG' as both represent language codes."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_116",
+    "utterance": "Map Foreca Weather Location search to climate data List of all Countries",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field 'lang' matches the target field 'climate data_climate data.LANG' as both represent language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_117",
+    "utterance": "Map Foreca Weather Location search to climate data Get climate data by lat/lon or Key",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "climate data_climate data.LANG",
+        "justification": "The source field 'lang' matches the target field 'climate data_climate data.LANG' as both represent language."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "LANG"
+    }
+  },
+  {
+    "sample_id": "sample_118",
+    "utterance": "Map Foreca Weather Hourly to climate data Search location by Name or zip code",
+    "predicted_mapping": {
+      "location": {
+        "target_property": "climate data_climate data.CITY",
+        "justification": "The source field location can be matched with the target field CITY as it represents the name of a city."
+      }
+    },
+    "ground_truth_mapping": {
+      "location": "CITY"
+    }
+  },
+  {
+    "sample_id": "sample_119",
+    "utterance": "Map Foreca Weather Nowcast to RapidWeather One Call API",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "RapidWeather_RapidWeather.units",
+        "justification": "The source field tempunit is likely referring to the unit of temperature, which matches the target field units in RapidWeather_RapidWeather."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_120",
+    "utterance": "Map Foreca Weather Three-hourly to RapidWeather One Call API",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "RapidWeather_RapidWeather.units",
+        "justification": "The source field tempunit is likely referring to the unit of temperature, which matches the target field RapidWeather_RapidWeather.units that specifies the units of measurement."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_121",
+    "utterance": "Map Foreca Weather Daily to RapidWeather One Call API",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "RapidWeather_RapidWeather.units",
+        "justification": "The source field tempunit matches with the target field units as both are related to units of measurement."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_122",
+    "utterance": "Map Foreca Weather Current to RapidWeather One Call API",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "RapidWeather_RapidWeather.lang",
+        "justification": "The source field 'lang' matches the target field 'RapidWeather_RapidWeather.lang' which is also a language parameter."
+      },
+      "tempunit": {
+        "target_property": "RapidWeather_RapidWeather.units",
+        "justification": "The source field 'tempunit' is related to units of measurement, which matches the target field 'RapidWeather_RapidWeather.units' that also deals with units of measurement."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang",
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_123",
+    "utterance": "Map Foreca Weather Latest observations to RapidWeather One Call API",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "RapidWeather_RapidWeather.lang",
+        "justification": "The source field 'lang' matches the target field 'RapidWeather_RapidWeather.lang' which is also a language parameter."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_124",
+    "utterance": "Map Foreca Weather Location search to RapidWeather One Call API",
+    "predicted_mapping": {
+      "lang": {
+        "target_property": "RapidWeather_RapidWeather.lang",
+        "justification": "The source field 'lang' matches the target field 'RapidWeather_RapidWeather.lang' which is a parameter for the language in the One Call API."
+      }
+    },
+    "ground_truth_mapping": {
+      "lang": "lang"
+    }
+  },
+  {
+    "sample_id": "sample_125",
+    "utterance": "Map Foreca Weather Hourly to RapidWeather One Call API",
+    "predicted_mapping": {
+      "tempunit": {
+        "target_property": "RapidWeather_RapidWeather.units",
+        "justification": "The source field tempunit is likely referring to the unit of temperature, which matches the target field units in RapidWeather_RapidWeather."
+      }
+    },
+    "ground_truth_mapping": {
+      "tempunit": "units"
+    }
+  },
+  {
+    "sample_id": "sample_126",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Air Quality Current Air Quality",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "lng is an abbreviation for longitude, which matches the target field Air Quality_Air Quality.lon."
+      },
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "lat is an abbreviation for latitude, which matches the target field Air Quality_Air Quality.lat."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_127",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Air Quality Air Quality Forecast",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "lng is likely an abbreviation for longitude, which matches the Air Quality_Air Quality.lon field."
+      },
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "lat is an abbreviation for latitude, which matches the Air Quality_Air Quality.lat field."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_128",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Air Quality Air Quality History",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "lng is likely an abbreviation for longitude, which matches the target field Air Quality_Air Quality.lon."
+      },
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "lat is likely an abbreviation for latitude, which matches the target field Air Quality_Air Quality.lat."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_129",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Air Quality Current Air Quality",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality_Air Quality.lat' as both represent latitude."
+      },
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality_Air Quality.lon' as both represent longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_130",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Air Quality Air Quality Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality_Air Quality.lat' as both represent latitude."
+      },
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality_Air Quality.lon' as both represent longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_131",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Air Quality Air Quality History",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality_Air Quality.lat' as both represent latitude."
+      },
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality_Air Quality.lon' as both represent longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_132",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Air Quality Current Air Quality",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality_Air Quality.lat' which represents Latitude."
+      },
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality_Air Quality.lon' which represents Longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_133",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Air Quality Air Quality Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality_Air Quality.lat' as both represent latitude."
+      },
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality_Air Quality.lon' as both represent longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_134",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Air Quality Air Quality History",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality_Air Quality.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality_Air Quality.lat' which represents Latitude."
+      },
+      "lng": {
+        "target_property": "Air Quality_Air Quality.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality_Air Quality.lon' which represents Longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_135",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Ouranos Predict Feature Forecast 1 Day",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field lng matches with the target field long as both represent longitude."
+      },
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field lat matches with the target field lat as both represent latitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "long",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_136",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Ouranos 48 Hour Forecast",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "lng is likely an abbreviation for longitude, which matches the Ouranos_Ouranos.long field."
+      },
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "lat is likely an abbreviation for latitude, which matches the Ouranos_Ouranos.lat field."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "long",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_137",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Ouranos 3 Day Forecast",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "lng is likely an abbreviation for longitude, which matches the target field Ouranos_Ouranos.long."
+      },
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "lat is an abbreviation for latitude, which matches the target field Ouranos_Ouranos.lat."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "long",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_138",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Ouranos 7 Day Forecast",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field lng is likely an abbreviation for longitude, which matches the target field Ouranos_Ouranos.long."
+      },
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field lat is likely an abbreviation for latitude, which matches the target field Ouranos_Ouranos.lat."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "long",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_139",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Ouranos Planet currently visible",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "lng is likely an abbreviation for longitude, which matches the target field Ouranos_Ouranos.long."
+      },
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "lat is an abbreviation for latitude, which matches the target field Ouranos_Ouranos.lat."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "long",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_140",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Ouranos Predict Feature Forecast 1 Day",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which represents the latitude parameter."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which represents the longitude parameter."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_141",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Ouranos 48 Hour Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field lat matches the target field Ouranos_Ouranos.lat, which is a parameter for latitude in the 48 Hour Forecast."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field lng matches the target field Ouranos_Ouranos.long, which is a parameter for longitude in the 48 Hour Forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_142",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Ouranos 3 Day Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which is a parameter for latitude in the 3 Day Forecast."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which is a parameter for longitude in the 3 Day Forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_143",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Ouranos 7 Day Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which represents the latitude parameter in the 7 Day Forecast."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which represents the longitude parameter in the 7 Day Forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_144",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Ouranos Planet currently visible",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which represents the latitude parameter."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which represents the longitude parameter."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_145",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Ouranos Predict Feature Forecast 1 Day",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which is a parameter for latitude in Predict Feature Forecast 1 Day."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which is a parameter for longitude in Predict Feature Forecast 1 Day."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_146",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Ouranos 48 Hour Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which is a parameter for latitude in the 48 Hour Forecast."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which is a parameter for longitude in the 48 Hour Forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_147",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Ouranos 3 Day Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which is a parameter for latitude in the 3 Day Forecast."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which is a parameter for longitude in the 3 Day Forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_148",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Ouranos 7 Day Forecast",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which is a parameter for latitude in the 7 Day Forecast."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which is a parameter for longitude in the 7 Day Forecast."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_149",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Ouranos Planet currently visible",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Ouranos_Ouranos.lat",
+        "justification": "The source field 'lat' matches the target field 'Ouranos_Ouranos.lat' which is a parameter for the latitude in the Planet currently visible feature."
+      },
+      "lng": {
+        "target_property": "Ouranos_Ouranos.long",
+        "justification": "The source field 'lng' matches the target field 'Ouranos_Ouranos.long' which is a parameter for the longitude in the Planet currently visible feature."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "long"
+    }
+  },
+  {
+    "sample_id": "sample_150",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Easy Weather Current conditions (basic)",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field lng matches with the target field longitude in Easy Weather."
+      },
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field lat matches with the target field latitude in Easy Weather."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "longitude",
+      "lat": "latitude"
+    }
+  },
+  {
+    "sample_id": "sample_151",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Easy Weather Hourly forecast (48 hours)",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' is likely an abbreviation for longitude, which matches the target field 'Easy Weather_Easy Weather.longitude'."
+      },
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' is likely an abbreviation for latitude, which matches the target field 'Easy Weather_Easy Weather.latitude'."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "longitude",
+      "lat": "latitude"
+    }
+  },
+  {
+    "sample_id": "sample_152",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Easy Weather Current conditions (detailed)",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' is likely an abbreviation for longitude, which matches the target field 'Easy Weather_Easy Weather.longitude'."
+      },
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' is likely an abbreviation for latitude, which matches the target field 'Easy Weather_Easy Weather.latitude'."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "longitude",
+      "lat": "latitude"
+    }
+  },
+  {
+    "sample_id": "sample_153",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Easy Weather Current conditions (basic)",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' matches the target field 'Easy Weather_Easy Weather.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' matches the target field 'Easy Weather_Easy Weather.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_154",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Easy Weather Hourly forecast (48 hours)",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' matches the target field 'Easy Weather_Easy Weather.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' matches the target field 'Easy Weather_Easy Weather.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_155",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Easy Weather Current conditions (detailed)",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' matches the target field 'Easy Weather_Easy Weather.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' matches the target field 'Easy Weather_Easy Weather.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_156",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Easy Weather Current conditions (basic)",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' matches the target field 'Easy Weather_Easy Weather.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' matches the target field 'Easy Weather_Easy Weather.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_157",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Easy Weather Hourly forecast (48 hours)",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' matches the target field 'Easy Weather_Easy Weather.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' matches the target field 'Easy Weather_Easy Weather.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_158",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Easy Weather Current conditions (detailed)",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Easy Weather_Easy Weather.latitude",
+        "justification": "The source field 'lat' matches the target field 'Easy Weather_Easy Weather.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Easy Weather_Easy Weather.longitude",
+        "justification": "The source field 'lng' matches the target field 'Easy Weather_Easy Weather.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_159",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "lng is likely an abbreviation for longitude, which matches the lon field in the Air Quality API."
+      },
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "lat is an abbreviation for latitude, which directly matches the lat field in the Air Quality API."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_160",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "lng is likely an abbreviation for longitude, which matches the Air Quality API's lon field."
+      },
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "lat is an abbreviation for latitude, which directly matches the Air Quality API's lat field."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_161",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "lng is likely an abbreviation for longitude, which matches the lon field in the Air Quality API."
+      },
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "lat is an abbreviation for latitude, which matches the lat field in the Air Quality API."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_162",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality API_Air Quality API.lat' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality API_Air Quality API.lon' as 'lng' is a common abbreviation for longitude, which 'lon' represents."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_163",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "The source field 'lat' matches the target field 'lat' in Air Quality API, which represents the latitude of the location."
+      },
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "The source field 'lng' matches the target field 'lon' in Air Quality API, which represents the longitude of the location."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_164",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "The source field 'lat' matches the target field 'lat' in Air Quality API, which represents the latitude of the location."
+      },
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "The source field 'lng' matches the target field 'lon' in Air Quality API, which represents the longitude of the location."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_165",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Air Quality API Current Air Quality",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality API_Air Quality API.lat' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality API_Air Quality API.lon' as 'lng' is a common abbreviation for longitude, which 'lon' represents."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_166",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "The source field 'lat' matches the target field 'lat' in Air Quality API, which represents the latitude of the location."
+      },
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "The source field 'lng' matches the target field 'lon' in Air Quality API, which represents the longitude of the location."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_167",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Air Quality API_Air Quality API.lat",
+        "justification": "The source field 'lat' matches the target field 'Air Quality API_Air Quality API.lat' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Air Quality API_Air Quality API.lon",
+        "justification": "The source field 'lng' matches the target field 'Air Quality API_Air Quality API.lon' as 'lng' is a common abbreviation for longitude, which 'lon' represents."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_168",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Wavebase Ocean Conditions Closest to Latitude / Longitude",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "Wavebase_Wavebase.longitude",
+        "justification": "The source field 'lng' matches the target field 'Wavebase_Wavebase.longitude' as both represent longitude coordinates."
+      },
+      "lat": {
+        "target_property": "Wavebase_Wavebase.latitude",
+        "justification": "The source field 'lat' matches the target field 'Wavebase_Wavebase.latitude' as both represent latitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "longitude",
+      "lat": "latitude"
+    }
+  },
+  {
+    "sample_id": "sample_169",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Wavebase Ocean Conditions Closest to Latitude / Longitude",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Wavebase_Wavebase.latitude",
+        "justification": "The source field 'lat' matches the target field 'Wavebase_Wavebase.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Wavebase_Wavebase.longitude",
+        "justification": "The source field 'lng' matches the target field 'Wavebase_Wavebase.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_170",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Wavebase Ocean Conditions Closest to Latitude / Longitude",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "Wavebase_Wavebase.latitude",
+        "justification": "The source field 'lat' matches the target field 'Wavebase_Wavebase.latitude' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "Wavebase_Wavebase.longitude",
+        "justification": "The source field 'lng' matches the target field 'Wavebase_Wavebase.longitude' as both represent longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "latitude",
+      "lng": "longitude"
+    }
+  },
+  {
+    "sample_id": "sample_171",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to OikoWeather Weather Data",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "OikoWeather_OikoWeather.lon",
+        "justification": "lng is likely an abbreviation for longitude, which matches the OikoWeather_OikoWeather.lon field."
+      },
+      "lat": {
+        "target_property": "OikoWeather_OikoWeather.lat",
+        "justification": "lat is an exact match for the OikoWeather_OikoWeather.lat field, which represents latitude."
+      },
+      "endDate": {
+        "target_property": "OikoWeather_OikoWeather.end",
+        "justification": "endDate is likely the end date of a time period, which matches the OikoWeather_OikoWeather.end field."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat",
+      "endDate": "end"
+    }
+  },
+  {
+    "sample_id": "sample_172",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to OikoWeather Weather Data",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "OikoWeather_OikoWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'OikoWeather_OikoWeather.lat' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "OikoWeather_OikoWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'OikoWeather_OikoWeather.lon' as both represent longitude coordinates."
+      },
+      "endDate": {
+        "target_property": "OikoWeather_OikoWeather.end",
+        "justification": "The source field 'endDate' matches the target field 'OikoWeather_OikoWeather.end' as both represent the end date of a time period."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon",
+      "endDate": "end"
+    }
+  },
+  {
+    "sample_id": "sample_173",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to OikoWeather Weather Data",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "OikoWeather_OikoWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'OikoWeather_OikoWeather.lat' as both represent latitude coordinates."
+      },
+      "lng": {
+        "target_property": "OikoWeather_OikoWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'OikoWeather_OikoWeather.lon' as 'lng' is a common abbreviation for longitude."
+      },
+      "endDate": {
+        "target_property": "OikoWeather_OikoWeather.end",
+        "justification": "The source field 'endDate' matches the target field 'OikoWeather_OikoWeather.end' as both represent the end date of a time period."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon",
+      "endDate": "end"
+    }
+  },
+  {
+    "sample_id": "sample_174",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to climate data Get climate data by lat/lon or Key",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "climate data_climate data.LON",
+        "justification": "lng is likely an abbreviation for longitude, which matches the climate data_climate data.LON field."
+      },
+      "lat": {
+        "target_property": "climate data_climate data.LAT",
+        "justification": "lat is an abbreviation for latitude, which matches the climate data_climate data.LAT field."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "LON",
+      "lat": "LAT"
+    }
+  },
+  {
+    "sample_id": "sample_175",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to climate data Get climate data by lat/lon or Key",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "climate data_climate data.LAT",
+        "justification": "The source field 'lat' matches the target field 'climate data_climate data.LAT' as both represent latitude."
+      },
+      "lng": {
+        "target_property": "climate data_climate data.LON",
+        "justification": "The source field 'lng' matches the target field 'climate data_climate data.LON' as both represent longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "LAT",
+      "lng": "LON"
+    }
+  },
+  {
+    "sample_id": "sample_176",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to climate data Get climate data by lat/lon or Key",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "climate data_climate data.LAT",
+        "justification": "The source field 'lat' matches the target field 'climate data_climate data.LAT' as both represent latitude."
+      },
+      "lng": {
+        "target_property": "climate data_climate data.LON",
+        "justification": "The source field 'lng' matches the target field 'climate data_climate data.LON' as both represent longitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "LAT",
+      "lng": "LON"
+    }
+  },
+  {
+    "sample_id": "sample_177",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to Aviation Weather Center METARs in Time Range",
+    "predicted_mapping": {
+      "endDate": {
+        "target_property": "YH Finance Complete_YH Finance Complete.edate",
+        "justification": "The source field 'endDate' matches with the target field 'edate' in YH Finance Complete which represents the end date."
+      },
+      "startDate": {
+        "target_property": "YH Finance Complete_YH Finance Complete.sdate",
+        "justification": "The source field 'startDate' matches with the target field 'sdate' in YH Finance Complete which represents the start date."
+      }
+    },
+    "ground_truth_mapping": {
+      "endDate": "endTime",
+      "startDate": "startTime"
+    }
+  },
+  {
+    "sample_id": "sample_178",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to Aviation Weather Center METARs in Time Range",
+    "predicted_mapping": {
+      "startDate": {
+        "target_property": "Stormglass Complete_Stormglass Complete.startDate",
+        "justification": "The source field startDate matches the target field Stormglass Complete_Stormglass Complete.startDate which is a parameter for getting tide sea-level data."
+      },
+      "endDate": {
+        "target_property": "Stormglass Complete_Stormglass Complete.endDate",
+        "justification": "The source field endDate matches the target field Stormglass Complete_Stormglass Complete.endDate which is a parameter for getting tide sea-level data."
+      }
+    },
+    "ground_truth_mapping": {
+      "startDate": "startTime",
+      "endDate": "endTime"
+    }
+  },
+  {
+    "sample_id": "sample_179",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to Aviation Weather Center METARs in Time Range",
+    "predicted_mapping": {
+      "startDate": {
+        "target_property": "YH Finance Complete_YH Finance Complete.sdate",
+        "justification": "The source field startDate matches the target field sdate in YH Finance Complete, which represents a start date."
+      },
+      "endDate": {
+        "target_property": "YH Finance Complete_YH Finance Complete.edate",
+        "justification": "The source field endDate matches the target field edate in YH Finance Complete, which represents an end date."
+      }
+    },
+    "ground_truth_mapping": {
+      "startDate": "startTime",
+      "endDate": "endTime"
+    }
+  },
+  {
+    "sample_id": "sample_180",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to RapidWeather Historical air pollution data",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "lng is likely an abbreviation for longitude, which matches the RapidWeather_RapidWeather.lon field."
+      },
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "lat is an abbreviation for latitude, which matches the RapidWeather_RapidWeather.lat field."
+      },
+      "endDate": {
+        "target_property": "RapidWeather_RapidWeather.end",
+        "justification": "endDate matches the concept of the end date in RapidWeather_RapidWeather.end field."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat",
+      "endDate": "end"
+    }
+  },
+  {
+    "sample_id": "sample_181",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to RapidWeather Reverse geocoding",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "lng is a geographical coordinate and matches with the lon field in RapidWeather_RapidWeather."
+      },
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "lat is a geographical coordinate and matches with the lat field in RapidWeather_RapidWeather."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_182",
+    "utterance": "Map Stormglass Complete Get Tide Extreme Data to RapidWeather One Call API",
+    "predicted_mapping": {
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "lng is an abbreviation for longitude, which matches the description of RapidWeather_RapidWeather.lon as geographical coordinates longitude."
+      },
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "lat is an abbreviation for latitude, which matches the description of RapidWeather_RapidWeather.lat as geographical coordinates latitude."
+      }
+    },
+    "ground_truth_mapping": {
+      "lng": "lon",
+      "lat": "lat"
+    }
+  },
+  {
+    "sample_id": "sample_183",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to RapidWeather Historical air pollution data",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'RapidWeather_RapidWeather.lat' as both represent geographical latitude coordinates."
+      },
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'RapidWeather_RapidWeather.lon' as both represent geographical longitude coordinates."
+      },
+      "endDate": {
+        "target_property": "RapidWeather_RapidWeather.end",
+        "justification": "The source field 'endDate' matches the target field 'RapidWeather_RapidWeather.end' as both represent the end date of a time period."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon",
+      "endDate": "end"
+    }
+  },
+  {
+    "sample_id": "sample_184",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to RapidWeather Reverse geocoding",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'RapidWeather_RapidWeather.lat' as both represent geographical latitude coordinates."
+      },
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'RapidWeather_RapidWeather.lon' as both represent geographical longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_185",
+    "utterance": "Map Stormglass Complete Get Tide Sea-level Data to RapidWeather One Call API",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'RapidWeather_RapidWeather.lat' as both represent geographical latitude coordinates."
+      },
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'RapidWeather_RapidWeather.lon' as both represent geographical longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_186",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to RapidWeather Historical air pollution data",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'RapidWeather_RapidWeather.lat' as both represent geographical latitude coordinates."
+      },
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'RapidWeather_RapidWeather.lon' as both represent geographical longitude coordinates."
+      },
+      "endDate": {
+        "target_property": "RapidWeather_RapidWeather.end",
+        "justification": "The source field 'endDate' matches the target field 'RapidWeather_RapidWeather.end' as both represent the end date of a time period."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon",
+      "endDate": "end"
+    }
+  },
+  {
+    "sample_id": "sample_187",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to RapidWeather Reverse geocoding",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'RapidWeather_RapidWeather.lat' as both represent geographical latitude coordinates."
+      },
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'RapidWeather_RapidWeather.lon' as both represent geographical longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_188",
+    "utterance": "Map Stormglass Complete GET Astronomy Data to RapidWeather One Call API",
+    "predicted_mapping": {
+      "lat": {
+        "target_property": "RapidWeather_RapidWeather.lat",
+        "justification": "The source field 'lat' matches the target field 'RapidWeather_RapidWeather.lat' as both represent geographical latitude coordinates."
+      },
+      "lng": {
+        "target_property": "RapidWeather_RapidWeather.lon",
+        "justification": "The source field 'lng' matches the target field 'RapidWeather_RapidWeather.lon' as both represent geographical longitude coordinates."
+      }
+    },
+    "ground_truth_mapping": {
+      "lat": "lat",
+      "lng": "lon"
+    }
+  },
+  {
+    "sample_id": "sample_189",
+    "utterance": "Map Cloud Cast Get humidty to Air Quality API Current Air Quality",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_190",
+    "utterance": "Map Cloud Cast Get humidty to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_191",
+    "utterance": "Map Cloud Cast Get humidty to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_192",
+    "utterance": "Map Cloud Cast Get wind speed to Air Quality API Current Air Quality",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_193",
+    "utterance": "Map Cloud Cast Get wind speed to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_194",
+    "utterance": "Map Cloud Cast Get wind speed to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_195",
+    "utterance": "Map Cloud Cast Get hourly forecast to Air Quality API Current Air Quality",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_196",
+    "utterance": "Map Cloud Cast Get hourly forecast to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_197",
+    "utterance": "Map Cloud Cast Get hourly forecast to Air Quality API Air Quality Forecasts",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_198",
+    "utterance": "Map Cloud Cast Get the forecast to Air Quality API Current Air Quality",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  },
+  {
+    "sample_id": "sample_199",
+    "utterance": "Map Cloud Cast Get the forecast to Air Quality API Air Quality Measurements",
+    "predicted_mapping": {},
+    "ground_truth_mapping": {
+      "city": "city"
+    }
+  }
+]

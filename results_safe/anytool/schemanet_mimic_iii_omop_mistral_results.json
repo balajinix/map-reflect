@@ -1,0 +1,1576 @@
+{
+  "dataset": "schemanet_mimic_iii_omop",
+  "total": 174,
+  "field_correct": 57,
+  "type_correct": 85,
+  "field_accuracy": 0.3275862068965517,
+  "type_accuracy": 0.4885057471264368,
+  "results": [
+    {
+      "query_id": "0",
+      "source_field": "mimic_iii_admissions.row_id",
+      "expected": "omop_condition_occurrence.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "1",
+      "source_field": "mimic_iii_admissions.diagnosis",
+      "expected": "omop_condition_occurrence.condition_source_value",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}"
+    },
+    {
+      "query_id": "2",
+      "source_field": "mimic_iii_admissions.edregtime",
+      "expected": "omop_condition_occurrence.condition_start_datetime",
+      "predicted": "omop_visit_occurrence.visit_start_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_datetime\"}"
+    },
+    {
+      "query_id": "3",
+      "source_field": "mimic_iii_admissions.admittime",
+      "expected": "omop_condition_occurrence.condition_start_datetime",
+      "predicted": "omop_visit_occurrence.visit_start_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_datetime\"}"
+    },
+    {
+      "query_id": "4",
+      "source_field": "mimic_iii_admissions.dischtime",
+      "expected": "omop_condition_occurrence.condition_end_datetime",
+      "predicted": "omop_visit_occurrence.visit_end_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_datetime\"}"
+    },
+    {
+      "query_id": "5",
+      "source_field": "mimic_iii_admissions.deathtime",
+      "expected": "omop_death.death_datetime",
+      "predicted": "omop_death.death_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"death\", \"field\": \"death_datetime\"}"
+    },
+    {
+      "query_id": "6",
+      "source_field": "mimic_iii_admissions.admission_location",
+      "expected": "omop_visit_occurrence.admitted_from_source_value",
+      "predicted": "omop_visit_occurrence.admitted_from_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"admitted_from_concept_id\"}"
+    },
+    {
+      "query_id": "7",
+      "source_field": "mimic_iii_admissions.discharge_location",
+      "expected": "omop_visit_occurrence.discharged_to_source_value",
+      "predicted": "omop_visit_occurrence.discharged_to_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"discharged_to_source_value\"}"
+    },
+    {
+      "query_id": "8",
+      "source_field": "mimic_iii_admissions.admission_type",
+      "expected": "omop_visit_occurrence.visit_source_value",
+      "predicted": "omop_visit_occurrence.visit_type_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_type_concept_id\"}"
+    },
+    {
+      "query_id": "9",
+      "source_field": "mimic_iii_admissions.ethnicity",
+      "expected": "omop_person.ethnicity_source_value",
+      "predicted": "omop_person.ethnicity_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"ethnicity_concept_id\"}"
+    },
+    {
+      "query_id": "10",
+      "source_field": "mimic_iii_admissions.subject_id",
+      "expected": "omop_person.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "11",
+      "source_field": "mimic_iii_admissions.edouttime",
+      "expected": "omop_visit_detail.visit_detail_end_datetime",
+      "predicted": "omop_visit_occurrence.visit_end_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_datetime\"}"
+    },
+    {
+      "query_id": "12",
+      "source_field": "mimic_iii_diagnoses_icd.row_id",
+      "expected": "omop_condition_occurrence.condition_occurrence_id",
+      "predicted": "omop_condition_occurrence.condition_occurrence_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_occurrence_id\"}"
+    },
+    {
+      "query_id": "13",
+      "source_field": "mimic_iii_diagnoses_icd.subject_id",
+      "expected": "omop_condition_occurrence.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "14",
+      "source_field": "mimic_iii_diagnoses_icd.hadm_id",
+      "expected": "omop_condition_occurrence.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "15",
+      "source_field": "mimic_iii_diagnoses_icd.icd9_code",
+      "expected": "omop_condition_occurrence.condition_source_value",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}"
+    },
+    {
+      "query_id": "16",
+      "source_field": "mimic_iii_patients.dod",
+      "expected": "omop_death.death_datetime",
+      "predicted": "omop_death.death_date",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"death\", \"field\": \"death_date\"}"
+    },
+    {
+      "query_id": "17",
+      "source_field": "mimic_iii_patients.dod_hosp",
+      "expected": "omop_death.death_datetime",
+      "predicted": "omop_death.death_date",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"death\", \"field\": \"death_date\"}"
+    },
+    {
+      "query_id": "18",
+      "source_field": "mimic_iii_patients.dod_ssn",
+      "expected": "omop_death.death_datetime",
+      "predicted": "omop_death.death_date",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"death\", \"field\": \"death_date\"}"
+    },
+    {
+      "query_id": "19",
+      "source_field": "mimic_iii_patients.subject_id",
+      "expected": "omop_death.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "20",
+      "source_field": "mimic_iii_patients.gender",
+      "expected": "omop_person.gender_source_value",
+      "predicted": "omop_person.gender_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"gender_concept_id\"}"
+    },
+    {
+      "query_id": "21",
+      "source_field": "mimic_iii_patients.dob",
+      "expected": "omop_person.birth_datetime",
+      "predicted": "omop_person.birth_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"birth_datetime\"}"
+    },
+    {
+      "query_id": "22",
+      "source_field": "mimic_iii_caregivers.row_id",
+      "expected": "omop_provider.provider_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "23",
+      "source_field": "mimic_iii_caregivers.cgid",
+      "expected": "omop_provider.provider_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}"
+    },
+    {
+      "query_id": "24",
+      "source_field": "mimic_iii_caregivers.label",
+      "expected": "omop_provider.provider_source_value",
+      "predicted": "omop_provider.provider_name",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_name\"}"
+    },
+    {
+      "query_id": "25",
+      "source_field": "mimic_iii_caregivers.description",
+      "expected": "omop_provider.specialty_source_value",
+      "predicted": "omop_provider.provider_name",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_name\"}"
+    },
+    {
+      "query_id": "26",
+      "source_field": "mimic_iii_chartevents.row_id",
+      "expected": "omop_measurement.measurement_id",
+      "predicted": "omop_measurement.measurement_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_id\"}"
+    },
+    {
+      "query_id": "27",
+      "source_field": "mimic_iii_chartevents.subject_id",
+      "expected": "omop_measurement.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "28",
+      "source_field": "mimic_iii_chartevents.hadm_id",
+      "expected": "omop_measurement.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "29",
+      "source_field": "mimic_iii_chartevents.itemid",
+      "expected": "omop_measurement.measurement_concept_id",
+      "predicted": "omop_measurement.measurement_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_concept_id\"}"
+    },
+    {
+      "query_id": "30",
+      "source_field": "mimic_iii_chartevents.charttime",
+      "expected": "omop_measurement.measurement_datetime",
+      "predicted": "omop_measurement.measurement_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_datetime\"}"
+    },
+    {
+      "query_id": "31",
+      "source_field": "mimic_iii_chartevents.storetime",
+      "expected": "omop_measurement.measurement_datetime",
+      "predicted": "omop_measurement.measurement_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_datetime\"}"
+    },
+    {
+      "query_id": "32",
+      "source_field": "mimic_iii_chartevents.cgid",
+      "expected": "omop_measurement.provider_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "33",
+      "source_field": "mimic_iii_chartevents.value",
+      "expected": "omop_measurement.value_as_concept_id",
+      "predicted": "omop_measurement.value_as_number",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "34",
+      "source_field": "mimic_iii_chartevents.valuenum",
+      "expected": "omop_measurement.value_as_number",
+      "predicted": "omop_measurement.value_as_number",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "35",
+      "source_field": "mimic_iii_chartevents.valueuom",
+      "expected": "omop_measurement.unit_concept_id",
+      "predicted": "omop_measurement.unit_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"unit_source_value\"}"
+    },
+    {
+      "query_id": "36",
+      "source_field": "mimic_iii_labevents.subject_id",
+      "expected": "omop_measurement.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "37",
+      "source_field": "mimic_iii_labevents.hadm_id",
+      "expected": "omop_measurement.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "38",
+      "source_field": "mimic_iii_labevents.itemid",
+      "expected": "omop_measurement.measurement_concept_id",
+      "predicted": "omop_measurement.measurement_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_concept_id\"}"
+    },
+    {
+      "query_id": "39",
+      "source_field": "mimic_iii_labevents.value",
+      "expected": "omop_measurement.value_as_concept_id",
+      "predicted": "omop_measurement.value_as_number",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "40",
+      "source_field": "mimic_iii_labevents.valuenum",
+      "expected": "omop_measurement.value_as_number",
+      "predicted": "omop_measurement.value_as_number",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "41",
+      "source_field": "mimic_iii_labevents.valueuom",
+      "expected": "omop_measurement.unit_concept_id",
+      "predicted": "omop_measurement.unit_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"unit_source_value\"}"
+    },
+    {
+      "query_id": "42",
+      "source_field": "mimic_iii_labevents.row_id",
+      "expected": "omop_measurement.measurement_id",
+      "predicted": "omop_measurement.measurement_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_id\"}"
+    },
+    {
+      "query_id": "43",
+      "source_field": "mimic_iii_labevents.charttime",
+      "expected": "omop_measurement.measurement_datetime",
+      "predicted": "omop_measurement.measurement_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_datetime\"}"
+    },
+    {
+      "query_id": "44",
+      "source_field": "mimic_iii_d_labitems.itemid",
+      "expected": "omop_measurement.measurement_source_concept_id",
+      "predicted": "omop_measurement.measurement_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_concept_id\"}"
+    },
+    {
+      "query_id": "45",
+      "source_field": "mimic_iii_d_labitems.label",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_measurement.measurement_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_source_value\"}"
+    },
+    {
+      "query_id": "46",
+      "source_field": "mimic_iii_d_labitems.category",
+      "expected": "omop_concept.concept_class_id",
+      "predicted": "omop_measurement.measurement_type_concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_type_concept_id\"}"
+    },
+    {
+      "query_id": "47",
+      "source_field": "mimic_iii_outputevents.row_id",
+      "expected": "omop_measurement.measurement_id",
+      "predicted": "omop_measurement.measurement_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_id\"}"
+    },
+    {
+      "query_id": "48",
+      "source_field": "mimic_iii_outputevents.subject_id",
+      "expected": "omop_measurement.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "49",
+      "source_field": "mimic_iii_outputevents.hadm_id",
+      "expected": "omop_measurement.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "50",
+      "source_field": "mimic_iii_outputevents.itemid",
+      "expected": "omop_measurement.measurement_concept_id",
+      "predicted": "omop_measurement.measurement_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_concept_id\"}"
+    },
+    {
+      "query_id": "51",
+      "source_field": "mimic_iii_outputevents.cgid",
+      "expected": "omop_measurement.provider_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "52",
+      "source_field": "mimic_iii_outputevents.valueuom",
+      "expected": "omop_measurement.unit_concept_id",
+      "predicted": "omop_measurement.unit_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"unit_source_value\"}"
+    },
+    {
+      "query_id": "53",
+      "source_field": "mimic_iii_outputevents.value",
+      "expected": "omop_measurement.value_as_concept_id",
+      "predicted": "omop_measurement.value_as_number",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "54",
+      "source_field": "mimic_iii_outputevents.charttime",
+      "expected": "omop_measurement.measurement_datetime",
+      "predicted": "omop_measurement.measurement_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_datetime\"}"
+    },
+    {
+      "query_id": "55",
+      "source_field": "mimic_iii_microbiologyevents.row_id",
+      "expected": "omop_specimen.specimen_id",
+      "predicted": "omop_measurement.measurement_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_id\"}"
+    },
+    {
+      "query_id": "56",
+      "source_field": "mimic_iii_microbiologyevents.subject_id",
+      "expected": "omop_specimen.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "57",
+      "source_field": "mimic_iii_microbiologyevents.chartdate",
+      "expected": "omop_specimen.specimen_date",
+      "predicted": "omop_measurement.measurement_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_date\"}"
+    },
+    {
+      "query_id": "58",
+      "source_field": "mimic_iii_microbiologyevents.charttime",
+      "expected": "omop_specimen.specimen_datetime",
+      "predicted": "omop_measurement.measurement_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_datetime\"}"
+    },
+    {
+      "query_id": "59",
+      "source_field": "mimic_iii_microbiologyevents.spec_itemid",
+      "expected": "omop_specimen.specimen_type_concept_id",
+      "predicted": "omop_specimen.specimen_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"specimen\", \"field\": \"specimen_source_value\"}"
+    },
+    {
+      "query_id": "60",
+      "source_field": "mimic_iii_microbiologyevents.spec_type_desc",
+      "expected": "omop_specimen.specimen_source_value",
+      "predicted": "omop_specimen.specimen_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"specimen\", \"field\": \"specimen_source_value\"}"
+    },
+    {
+      "query_id": "61",
+      "source_field": "mimic_iii_microbiologyevents.org_itemid",
+      "expected": "omop_specimen.specimen_source_id",
+      "predicted": "omop_specimen.specimen_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"specimen\", \"field\": \"specimen_source_value\"}"
+    },
+    {
+      "query_id": "62",
+      "source_field": "mimic_iii_microbiologyevents.org_name",
+      "expected": "omop_specimen.specimen_source_value",
+      "predicted": "omop_care_site.care_site_name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_name\"}"
+    },
+    {
+      "query_id": "63",
+      "source_field": "mimic_iii_microbiologyevents.ab_name",
+      "expected": "omop_specimen.specimen_source_value",
+      "predicted": "omop_drug_exposure.drug_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_source_value\"}"
+    },
+    {
+      "query_id": "64",
+      "source_field": "mimic_iii_cptevents.row_id",
+      "expected": "omop_procedure_occurrence.procedure_occurrence_id",
+      "predicted": "omop_procedure_occurrence.procedure_occurrence_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_occurrence_id\"}"
+    },
+    {
+      "query_id": "65",
+      "source_field": "mimic_iii_cptevents.subject_id",
+      "expected": "omop_procedure_occurrence.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "66",
+      "source_field": "mimic_iii_cptevents.hadm_id",
+      "expected": "omop_procedure_occurrence.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "67",
+      "source_field": "mimic_iii_cptevents.chartdate",
+      "expected": "omop_procedure_occurrence.procedure_date",
+      "predicted": "omop_procedure_occurrence.procedure_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_date\"}"
+    },
+    {
+      "query_id": "68",
+      "source_field": "mimic_iii_cptevents.cpt_cd",
+      "expected": "omop_procedure_occurrence.procedure_source_value",
+      "predicted": "omop_procedure_occurrence.procedure_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_source_value\"}"
+    },
+    {
+      "query_id": "69",
+      "source_field": "mimic_iii_cptevents.subsectionheader",
+      "expected": "omop_procedure_occurrence.procedure_source_value",
+      "predicted": "omop_note.note_title",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_title\"}"
+    },
+    {
+      "query_id": "70",
+      "source_field": "mimic_iii_procedures_icd.row_id",
+      "expected": "omop_procedure_occurrence.procedure_occurrence_id",
+      "predicted": "omop_procedure_occurrence.procedure_occurrence_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_occurrence_id\"}"
+    },
+    {
+      "query_id": "71",
+      "source_field": "mimic_iii_procedures_icd.subject_id",
+      "expected": "omop_procedure_occurrence.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "72",
+      "source_field": "mimic_iii_procedures_icd.hadm_id",
+      "expected": "omop_procedure_occurrence.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "73",
+      "source_field": "mimic_iii_procedures_icd.icd9_code",
+      "expected": "omop_procedure_occurrence.procedure_source_value",
+      "predicted": "omop_procedure_occurrence.procedure_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_source_value\"}"
+    },
+    {
+      "query_id": "74",
+      "source_field": "mimic_iii_procedureevents_mv.row_id",
+      "expected": "omop_procedure_occurrence.procedure_occurrence_id",
+      "predicted": "omop_procedure_occurrence.procedure_occurrence_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_occurrence_id\"}"
+    },
+    {
+      "query_id": "75",
+      "source_field": "mimic_iii_procedureevents_mv.subject_id",
+      "expected": "omop_procedure_occurrence.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "76",
+      "source_field": "mimic_iii_procedureevents_mv.hadm_id",
+      "expected": "omop_procedure_occurrence.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "77",
+      "source_field": "mimic_iii_procedureevents_mv.cgid",
+      "expected": "omop_procedure_occurrence.provider_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "78",
+      "source_field": "mimic_iii_procedureevents_mv.starttime",
+      "expected": "omop_procedure_occurrence.procedure_datetime",
+      "predicted": "omop_procedure_occurrence.procedure_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_datetime\"}"
+    },
+    {
+      "query_id": "79",
+      "source_field": "mimic_iii_procedureevents_mv.endtime",
+      "expected": "omop_procedure_occurrence.procedure_end_datetime",
+      "predicted": "omop_procedure_occurrence.procedure_end_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_end_datetime\"}"
+    },
+    {
+      "query_id": "80",
+      "source_field": "mimic_iii_d_items.label",
+      "expected": "omop_procedure_occurrence.procedure_source_value",
+      "predicted": "omop_concept.concept_name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"concept\", \"field\": \"concept_name\"}"
+    },
+    {
+      "query_id": "81",
+      "source_field": "mimic_iii_d_items.itemid",
+      "expected": "omop_procedure_occurrence.procedure_source_concept_id",
+      "predicted": "omop_concept.concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"concept\", \"field\": \"concept_id\"}"
+    },
+    {
+      "query_id": "82",
+      "source_field": "mimic_iii_d_items.category",
+      "expected": "omop_concept.concept_class_id",
+      "predicted": "omop_concept.concept_class_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"concept\", \"field\": \"concept_class_id\"}"
+    },
+    {
+      "query_id": "83",
+      "source_field": "mimic_iii_d_icd_procedures.row_id",
+      "expected": "omop_concept.concept_id",
+      "predicted": "omop_procedure_occurrence.procedure_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_occurrence_id\"}"
+    },
+    {
+      "query_id": "84",
+      "source_field": "mimic_iii_d_icd_procedures.long_title",
+      "expected": "omop_concept.concept_name",
+      "predicted": "omop_concept.concept_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"concept\", \"field\": \"concept_name\"}"
+    },
+    {
+      "query_id": "85",
+      "source_field": "mimic_iii_d_icd_procedures.short_title",
+      "expected": "omop_concept.concept_name",
+      "predicted": "omop_concept.concept_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"concept\", \"field\": \"concept_name\"}"
+    },
+    {
+      "query_id": "86",
+      "source_field": "mimic_iii_d_icd_procedures.icd9_code",
+      "expected": "omop_concept.concept_code",
+      "predicted": "omop_procedure_occurrence.procedure_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_source_value\"}"
+    },
+    {
+      "query_id": "87",
+      "source_field": "mimic_iii_d_icd_diagnoses.row_id",
+      "expected": "omop_concept.concept_id",
+      "predicted": "omop_condition_occurrence.condition_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_occurrence_id\"}"
+    },
+    {
+      "query_id": "88",
+      "source_field": "mimic_iii_d_icd_diagnoses.long_title",
+      "expected": "omop_concept.concept_name",
+      "predicted": "omop_concept.concept_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"concept\", \"field\": \"concept_name\"}"
+    },
+    {
+      "query_id": "89",
+      "source_field": "mimic_iii_d_icd_diagnoses.short_title",
+      "expected": "omop_concept.concept_name",
+      "predicted": "omop_concept.concept_name",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"concept\", \"field\": \"concept_name\"}"
+    },
+    {
+      "query_id": "90",
+      "source_field": "mimic_iii_d_icd_diagnoses.icd9_code",
+      "expected": "omop_concept.concept_code",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}"
+    },
+    {
+      "query_id": "91",
+      "source_field": "mimic_iii_datetimeevents.row_id",
+      "expected": "omop_observation.observation_id",
+      "predicted": "omop_measurement.measurement_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_id\"}"
+    },
+    {
+      "query_id": "92",
+      "source_field": "mimic_iii_datetimeevents.subject_id",
+      "expected": "omop_observation.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "93",
+      "source_field": "mimic_iii_datetimeevents.hadm_id",
+      "expected": "omop_observation.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "94",
+      "source_field": "mimic_iii_datetimeevents.charttime",
+      "expected": "omop_observation.observation_date",
+      "predicted": "omop_measurement.measurement_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_datetime\"}"
+    },
+    {
+      "query_id": "95",
+      "source_field": "mimic_iii_datetimeevents.cgid",
+      "expected": "omop_observation.provider_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "96",
+      "source_field": "mimic_iii_datetimeevents.valueuom",
+      "expected": "omop_observation.unit_source_value",
+      "predicted": "omop_measurement.unit_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"unit_source_value\"}"
+    },
+    {
+      "query_id": "97",
+      "source_field": "mimic_iii_drgcodes.row_id",
+      "expected": "omop_observation.observation_id",
+      "predicted": "omop_cost.cost_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"cost\", \"field\": \"cost_id\"}"
+    },
+    {
+      "query_id": "98",
+      "source_field": "mimic_iii_drgcodes.subject_id",
+      "expected": "omop_observation.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "99",
+      "source_field": "mimic_iii_drgcodes.hadm_id",
+      "expected": "omop_observation.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "100",
+      "source_field": "mimic_iii_drgcodes.description",
+      "expected": "omop_observation.value_as_string",
+      "predicted": "omop_cost.drg_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"cost\", \"field\": \"drg_source_value\"}"
+    },
+    {
+      "query_id": "101",
+      "source_field": "mimic_iii_noteevents.row_id",
+      "expected": "omop_note.note_id",
+      "predicted": "omop_note.note_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_id\"}"
+    },
+    {
+      "query_id": "102",
+      "source_field": "mimic_iii_noteevents.subject_id",
+      "expected": "omop_note.person_id",
+      "predicted": "omop_note.person_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "103",
+      "source_field": "mimic_iii_noteevents.hadm_id",
+      "expected": "omop_note.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "104",
+      "source_field": "mimic_iii_noteevents.chartdate",
+      "expected": "omop_note.note_date",
+      "predicted": "omop_note.note_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_date\"}"
+    },
+    {
+      "query_id": "105",
+      "source_field": "mimic_iii_noteevents.charttime",
+      "expected": "omop_note.note_datetime",
+      "predicted": "omop_note.note_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_datetime\"}"
+    },
+    {
+      "query_id": "106",
+      "source_field": "mimic_iii_noteevents.cgid",
+      "expected": "omop_note.provider_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "107",
+      "source_field": "mimic_iii_noteevents.text",
+      "expected": "omop_note.note_text",
+      "predicted": "omop_note.note_text",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_text\"}"
+    },
+    {
+      "query_id": "108",
+      "source_field": "mimic_iii_noteevents.description",
+      "expected": "omop_note.note_title",
+      "predicted": "omop_note.note_text",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_text\"}"
+    },
+    {
+      "query_id": "109",
+      "source_field": "mimic_iii_noteevents.category",
+      "expected": "omop_note.note_source_value",
+      "predicted": "omop_note.note_class_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_class_concept_id\"}"
+    },
+    {
+      "query_id": "110",
+      "source_field": "mimic_iii_prescriptions.subject_id",
+      "expected": "omop_drug_exposure.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "111",
+      "source_field": "mimic_iii_prescriptions.hadm_id",
+      "expected": "omop_drug_exposure.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "112",
+      "source_field": "mimic_iii_prescriptions.drug_type",
+      "expected": "omop_drug_exposure.drug_type_concept_id",
+      "predicted": "omop_drug_exposure.drug_type_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_type_concept_id\"}"
+    },
+    {
+      "query_id": "113",
+      "source_field": "mimic_iii_prescriptions.drug",
+      "expected": "omop_drug_exposure.drug_source_value",
+      "predicted": "omop_drug_exposure.drug_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_source_value\"}"
+    },
+    {
+      "query_id": "114",
+      "source_field": "mimic_iii_prescriptions.row_id",
+      "expected": "omop_drug_exposure.drug_exposure_id",
+      "predicted": "omop_drug_exposure.drug_exposure_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_id\"}"
+    },
+    {
+      "query_id": "115",
+      "source_field": "mimic_iii_prescriptions.startdate",
+      "expected": "omop_drug_exposure.drug_exposure_start_date",
+      "predicted": "omop_drug_exposure.drug_exposure_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_start_date\"}"
+    },
+    {
+      "query_id": "116",
+      "source_field": "mimic_iii_prescriptions.enddate",
+      "expected": "omop_drug_exposure.drug_exposure_end_date",
+      "predicted": "omop_drug_exposure.drug_exposure_end_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_end_date\"}"
+    },
+    {
+      "query_id": "117",
+      "source_field": "mimic_iii_prescriptions.dose_val_rx",
+      "expected": "omop_drug_exposure.quantity",
+      "predicted": "omop_drug_exposure.dose_unit_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"dose_unit_source_value\"}"
+    },
+    {
+      "query_id": "118",
+      "source_field": "mimic_iii_prescriptions.ndc",
+      "expected": "omop_drug_exposure.drug_source_value",
+      "predicted": "omop_drug_exposure.drug_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_source_value\"}"
+    },
+    {
+      "query_id": "119",
+      "source_field": "mimic_iii_prescriptions.route",
+      "expected": "omop_drug_exposure.route_source_value",
+      "predicted": "omop_drug_exposure.route_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"route_concept_id\"}"
+    },
+    {
+      "query_id": "120",
+      "source_field": "mimic_iii_prescriptions.form_unit_disp",
+      "expected": "omop_drug_exposure.dose_unit_source_value",
+      "predicted": "omop_drug_exposure.dose_unit_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"dose_unit_source_value\"}"
+    },
+    {
+      "query_id": "121",
+      "source_field": "mimic_iii_prescriptions.form_val_disp",
+      "expected": "omop_drug_exposure.quantity",
+      "predicted": "omop_drug_exposure.days_supply",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"days_supply\"}"
+    },
+    {
+      "query_id": "122",
+      "source_field": "mimic_iii_inputevents_cv.row_id",
+      "expected": "omop_drug_exposure.drug_exposure_id",
+      "predicted": "omop_measurement.measurement_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_id\"}"
+    },
+    {
+      "query_id": "123",
+      "source_field": "mimic_iii_inputevents_cv.subject_id",
+      "expected": "omop_drug_exposure.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "124",
+      "source_field": "mimic_iii_inputevents_cv.hadm_id",
+      "expected": "omop_drug_exposure.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "125",
+      "source_field": "mimic_iii_inputevents_cv.itemid",
+      "expected": "omop_drug_exposure.drug_concept_id",
+      "predicted": "omop_drug_exposure.drug_source_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_source_concept_id\"}"
+    },
+    {
+      "query_id": "126",
+      "source_field": "mimic_iii_inputevents_cv.stopped",
+      "expected": "omop_drug_exposure.stop_reason",
+      "predicted": "omop_drug_exposure.stop_reason",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"stop_reason\"}"
+    },
+    {
+      "query_id": "127",
+      "source_field": "mimic_iii_inputevents_cv.cgid",
+      "expected": "omop_drug_exposure.provider_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "128",
+      "source_field": "mimic_iii_inputevents_cv.charttime",
+      "expected": "omop_drug_exposure.drug_exposure_start_date",
+      "predicted": "omop_measurement.measurement_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_datetime\"}"
+    },
+    {
+      "query_id": "129",
+      "source_field": "mimic_iii_inputevents_cv.rate",
+      "expected": "omop_drug_exposure.quantity",
+      "predicted": "omop_measurement.value_as_number",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "130",
+      "source_field": "mimic_iii_inputevents_cv.amount",
+      "expected": "omop_drug_exposure.quantity",
+      "predicted": "omop_drug_exposure.quantity",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"quantity\"}"
+    },
+    {
+      "query_id": "131",
+      "source_field": "mimic_iii_inputevents_cv.rateuom",
+      "expected": "omop_drug_exposure.dose_unit_source_value",
+      "predicted": "omop_drug_exposure.dose_unit_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"dose_unit_source_value\"}"
+    },
+    {
+      "query_id": "132",
+      "source_field": "mimic_iii_inputevents_cv.amountuom",
+      "expected": "omop_drug_exposure.dose_unit_source_value",
+      "predicted": "omop_drug_exposure.dose_unit_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"dose_unit_source_value\"}"
+    },
+    {
+      "query_id": "133",
+      "source_field": "mimic_iii_inputevents_mv.endtime",
+      "expected": "omop_drug_exposure.drug_exposure_end_date",
+      "predicted": "omop_drug_exposure.drug_exposure_end_datetime",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_end_datetime\"}"
+    },
+    {
+      "query_id": "134",
+      "source_field": "mimic_iii_inputevents_mv.starttime",
+      "expected": "omop_drug_exposure.drug_exposure_start_date",
+      "predicted": "omop_drug_exposure.drug_exposure_start_datetime",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_start_datetime\"}"
+    },
+    {
+      "query_id": "135",
+      "source_field": "mimic_iii_inputevents_mv.row_id",
+      "expected": "omop_drug_exposure.drug_exposure_id",
+      "predicted": "omop_measurement.measurement_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"measurement_id\"}"
+    },
+    {
+      "query_id": "136",
+      "source_field": "mimic_iii_inputevents_mv.rate",
+      "expected": "omop_drug_exposure.quantity",
+      "predicted": "omop_measurement.value_as_number",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"measurement\", \"field\": \"value_as_number\"}"
+    },
+    {
+      "query_id": "137",
+      "source_field": "mimic_iii_inputevents_mv.amount",
+      "expected": "omop_drug_exposure.quantity",
+      "predicted": "omop_drug_exposure.quantity",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"quantity\"}"
+    },
+    {
+      "query_id": "138",
+      "source_field": "mimic_iii_inputevents_mv.rateuom",
+      "expected": "omop_drug_exposure.dose_unit_source_value",
+      "predicted": "omop_drug_exposure.dose_unit_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"dose_unit_source_value\"}"
+    },
+    {
+      "query_id": "139",
+      "source_field": "mimic_iii_inputevents_mv.amountuom",
+      "expected": "omop_drug_exposure.dose_unit_source_value",
+      "predicted": "omop_drug_exposure.dose_unit_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"dose_unit_source_value\"}"
+    },
+    {
+      "query_id": "140",
+      "source_field": "mimic_iii_inputevents_mv.statusdescription",
+      "expected": "omop_drug_exposure.stop_reason",
+      "predicted": "omop_observation.value_as_string",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"observation\", \"field\": \"value_as_string\"}"
+    },
+    {
+      "query_id": "141",
+      "source_field": "mimic_iii_inputevents_mv.cgid",
+      "expected": "omop_drug_exposure.provider_id",
+      "predicted": "omop_care_site.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "142",
+      "source_field": "mimic_iii_inputevents_mv.itemid",
+      "expected": "omop_drug_exposure.drug_concept_id",
+      "predicted": "omop_drug_exposure.drug_source_concept_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_source_concept_id\"}"
+    },
+    {
+      "query_id": "143",
+      "source_field": "mimic_iii_inputevents_mv.hadm_id",
+      "expected": "omop_drug_exposure.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "144",
+      "source_field": "mimic_iii_services.subject_id",
+      "expected": "omop_visit_detail.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "145",
+      "source_field": "mimic_iii_services.hadm_id",
+      "expected": "omop_visit_detail.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "146",
+      "source_field": "mimic_iii_services.transfertime",
+      "expected": "omop_visit_detail.visit_detail_start_datetime",
+      "predicted": "omop_visit_occurrence.visit_start_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_datetime\"}"
+    },
+    {
+      "query_id": "147",
+      "source_field": "mimic_iii_services.prev_service",
+      "expected": "omop_visit_detail.admitted_from_source_value",
+      "predicted": "omop_visit_occurrence.preceding_visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"preceding_visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "148",
+      "source_field": "mimic_iii_services.curr_service",
+      "expected": "omop_visit_detail.discharged_to_source_value",
+      "predicted": "omop_care_site.care_site_name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_name\"}"
+    },
+    {
+      "query_id": "149",
+      "source_field": "mimic_iii_transfers.row_id",
+      "expected": "omop_visit_detail.visit_detail_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "150",
+      "source_field": "mimic_iii_transfers.subject_id",
+      "expected": "omop_visit_detail.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "151",
+      "source_field": "mimic_iii_transfers.hadm_id",
+      "expected": "omop_visit_detail.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "152",
+      "source_field": "mimic_iii_transfers.icustay_id",
+      "expected": "omop_visit_detail.visit_detail_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "153",
+      "source_field": "mimic_iii_transfers.eventtype",
+      "expected": "omop_visit_detail.admitted_from_source_value",
+      "predicted": "omop_visit_occurrence.visit_type_concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_type_concept_id\"}"
+    },
+    {
+      "query_id": "154",
+      "source_field": "mimic_iii_transfers.prev_careunit",
+      "expected": "omop_visit_detail.admitted_from_source_value",
+      "predicted": "omop_visit_detail.admitted_from_source_value",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_detail\", \"field\": \"admitted_from_source_value\"}"
+    },
+    {
+      "query_id": "155",
+      "source_field": "mimic_iii_transfers.curr_careunit",
+      "expected": "omop_visit_detail.discharged_to_source_value",
+      "predicted": "omop_care_site.care_site_name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_name\"}"
+    },
+    {
+      "query_id": "156",
+      "source_field": "mimic_iii_transfers.intime",
+      "expected": "omop_visit_detail.visit_detail_start_datetime",
+      "predicted": "omop_visit_occurrence.visit_start_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_datetime\"}"
+    },
+    {
+      "query_id": "157",
+      "source_field": "mimic_iii_transfers.outtime",
+      "expected": "omop_visit_detail.visit_detail_end_datetime",
+      "predicted": "omop_visit_occurrence.visit_end_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_datetime\"}"
+    },
+    {
+      "query_id": "158",
+      "source_field": "mimic_iii_callout.row_id",
+      "expected": "omop_visit_detail.visit_detail_id",
+      "predicted": "omop_note.note_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"note\", \"field\": \"note_id\"}"
+    },
+    {
+      "query_id": "159",
+      "source_field": "mimic_iii_callout.subject_id",
+      "expected": "omop_visit_detail.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "160",
+      "source_field": "mimic_iii_callout.hadm_id",
+      "expected": "omop_visit_detail.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "161",
+      "source_field": "mimic_iii_callout.submit_wardid",
+      "expected": "omop_visit_detail.care_site_id",
+      "predicted": "omop_location.location_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"location\", \"field\": \"location_id\"}"
+    },
+    {
+      "query_id": "162",
+      "source_field": "mimic_iii_callout.submit_careunit",
+      "expected": "omop_visit_detail.visit_detail_concept_id",
+      "predicted": "omop_care_site.care_site_name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_name\"}"
+    },
+    {
+      "query_id": "163",
+      "source_field": "mimic_iii_callout.curr_wardid",
+      "expected": "omop_visit_detail.admitted_from_source_value",
+      "predicted": "omop_visit_occurrence.care_site_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "164",
+      "source_field": "mimic_iii_callout.discharge_wardid",
+      "expected": "omop_visit_detail.discharged_to_source_value",
+      "predicted": "omop_visit_occurrence.discharged_to_concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"discharged_to_concept_id\"}"
+    },
+    {
+      "query_id": "165",
+      "source_field": "mimic_iii_callout.outcometime",
+      "expected": "omop_visit_detail.visit_detail_start_datetime",
+      "predicted": "omop_condition_occurrence.condition_end_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_end_datetime\"}"
+    },
+    {
+      "query_id": "166",
+      "source_field": "mimic_iii_icustays.row_id",
+      "expected": "omop_visit_detail.visit_detail_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "167",
+      "source_field": "mimic_iii_icustays.subject_id",
+      "expected": "omop_visit_detail.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}"
+    },
+    {
+      "query_id": "168",
+      "source_field": "mimic_iii_icustays.hadm_id",
+      "expected": "omop_visit_detail.visit_occurrence_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "169",
+      "source_field": "mimic_iii_icustays.icustay_id",
+      "expected": "omop_visit_detail.visit_detail_id",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}"
+    },
+    {
+      "query_id": "170",
+      "source_field": "mimic_iii_icustays.first_careunit",
+      "expected": "omop_visit_detail.admitted_from_source_value",
+      "predicted": "omop_visit_detail.care_site_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_detail\", \"field\": \"care_site_id\"}"
+    },
+    {
+      "query_id": "171",
+      "source_field": "mimic_iii_icustays.last_careunit",
+      "expected": "omop_visit_detail.discharged_to_source_value",
+      "predicted": "omop_care_site.care_site_name",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"care_site\", \"field\": \"care_site_name\"}"
+    },
+    {
+      "query_id": "172",
+      "source_field": "mimic_iii_icustays.intime",
+      "expected": "omop_visit_detail.visit_detail_start_datetime",
+      "predicted": "omop_visit_occurrence.visit_start_datetime",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_datetime\"}"
+    },
+    {
+      "query_id": "173",
+      "source_field": "mimic_iii_icustays.outtime",
+      "expected": "omop_visit_detail.visit_detail_end_datetime",
+      "predicted": "omop_visit_detail.visit_detail_end_datetime",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " {\"schema\": \"omop\", \"table\": \"visit_detail\", \"field\": \"visit_detail_end_datetime\"}"
+    }
+  ]
+}

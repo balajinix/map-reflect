@@ -1,0 +1,459 @@
+[
+  {
+    "sample_id": "omop_synthea_001",
+    "utterance": "Map OMOP PERSON to SYNTHEA PATIENTS",
+    "predicted_mapping": {
+      "omop_PERSON.birth_datetime": {
+        "target_property": "SYNTHEA_PATIENTS.birthdate",
+        "justification": "The birth_datetime field in the source can be mapped to the birthdate field in the target, although the target field may not include time information."
+      },
+      "omop_PERSON.death_datetime": {
+        "target_property": "SYNTHEA_PATIENTS.deathdate",
+        "justification": "The death_datetime field in the source can be mapped to the deathdate field in the target, although the target field may not include time information."
+      },
+      "omop_PERSON.gender_source_value": {
+        "target_property": "SYNTHEA_PATIENTS.gender",
+        "justification": "The gender_source_value field in the source can be mapped to the gender field in the target, as both fields describe the patient's gender."
+      },
+      "omop_PERSON.race_source_value": {
+        "target_property": "SYNTHEA_PATIENTS.race",
+        "justification": "The race_source_value field in the source can be mapped to the race field in the target, as both fields describe the patient's race."
+      },
+      "omop_PERSON.ethnicity_source_value": {
+        "target_property": "SYNTHEA_PATIENTS.ethnicity",
+        "justification": "The ethnicity_source_value field in the source can be mapped to the ethnicity field in the target, as both fields describe the patient's ethnicity."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_PERSON.gender_concept_id": "synthea_PATIENTS.gender",
+      "omop_PERSON.year_of_birth": "synthea_PATIENTS.birthdate",
+      "omop_PERSON.month_of_birth": "synthea_PATIENTS.birthdate",
+      "omop_PERSON.day_of_birth": "synthea_PATIENTS.birthdate",
+      "omop_PERSON.birth_datetime": "synthea_PATIENTS.birthdate",
+      "omop_PERSON.death_datetime": "synthea_PATIENTS.deathdate",
+      "omop_PERSON.race_concept_id": "synthea_PATIENTS.race",
+      "omop_PERSON.ethnicity_concept_id": "synthea_PATIENTS.ethnicity",
+      "omop_PERSON.person_source_value": "synthea_PATIENTS.id",
+      "omop_PERSON.gender_source_value": "synthea_PATIENTS.gender",
+      "omop_PERSON.race_source_value": "synthea_PATIENTS.race",
+      "omop_PERSON.ethnicity_source_value": "synthea_PATIENTS.ethnicity"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_002",
+    "utterance": "Map OMOP VISIT_OCCURRENCE to SYNTHEA ENCOUNTERS",
+    "predicted_mapping": {
+      "omop_VISIT_OCCURRENCE.person_id": {
+        "target_property": "SYNTHEA_ENCOUNTERS.patient",
+        "justification": "Both fields represent a unique identifier for the patient in the encounter."
+      },
+      "omop_VISIT_OCCURRENCE.visit_concept_id": {
+        "target_property": "SYNTHEA_ENCOUNTERS.encounterclass",
+        "justification": "Both fields describe the type or class of the visit or encounter."
+      },
+      "omop_VISIT_OCCURRENCE.visit_start_date": {
+        "target_property": "SYNTHEA_ENCOUNTERS.start",
+        "justification": "Both fields represent the start date of the encounter, with the target field also including time."
+      },
+      "omop_VISIT_OCCURRENCE.visit_start_datetime": {
+        "target_property": "SYNTHEA_ENCOUNTERS.start",
+        "justification": "Both fields represent the start date and time of the encounter."
+      },
+      "omop_VISIT_OCCURRENCE.visit_end_date": {
+        "target_property": "SYNTHEA_ENCOUNTERS.stop",
+        "justification": "Both fields represent the end date of the encounter, with the target field also including time."
+      },
+      "omop_VISIT_OCCURRENCE.visit_end_datetime": {
+        "target_property": "SYNTHEA_ENCOUNTERS.stop",
+        "justification": "Both fields represent the end date and time of the encounter."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_VISIT_OCCURRENCE.person_id": "synthea_ENCOUNTERS.patient",
+      "omop_VISIT_OCCURRENCE.visit_concept_id": "synthea_ENCOUNTERS.encounterclass",
+      "omop_VISIT_OCCURRENCE.visit_start_date": "synthea_ENCOUNTERS.start",
+      "omop_VISIT_OCCURRENCE.visit_start_datetime": "synthea_ENCOUNTERS.start",
+      "omop_VISIT_OCCURRENCE.visit_end_date": "synthea_ENCOUNTERS.stop",
+      "omop_VISIT_OCCURRENCE.visit_end_datetime": "synthea_ENCOUNTERS.stop",
+      "omop_VISIT_OCCURRENCE.visit_source_value": "synthea_ENCOUNTERS.encounterclass"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_003",
+    "utterance": "Map OMOP MEASUREMENT to SYNTHEA OBSERVATIONS",
+    "predicted_mapping": {
+      "omop_MEASUREMENT.person_id": {
+        "target_property": "SYNTHEA_OBSERVATIONS.patient",
+        "justification": "Both fields represent a foreign key to the patient."
+      },
+      "omop_MEASUREMENT.measurement_concept_id": {
+        "target_property": "SYNTHEA_OBSERVATIONS.code",
+        "justification": "Both fields represent a concept or code related to the measurement or observation."
+      },
+      "omop_MEASUREMENT.measurement_date": {
+        "target_property": "SYNTHEA_OBSERVATIONS.date",
+        "justification": "Both fields represent the date of the measurement or observation."
+      },
+      "omop_MEASUREMENT.measurement_datetime": {
+        "target_property": "SYNTHEA_OBSERVATIONS.date",
+        "justification": "Both fields represent the date and time of the measurement or observation, with date being the closest match."
+      },
+      "omop_MEASUREMENT.value_as_number": {
+        "target_property": "SYNTHEA_OBSERVATIONS.value",
+        "justification": "Both fields represent the recorded value of the measurement or observation."
+      },
+      "omop_MEASUREMENT.visit_occurrence_id": {
+        "target_property": "SYNTHEA_OBSERVATIONS.encounter",
+        "justification": "Both fields represent a foreign key to the encounter or visit where the measurement was taken."
+      },
+      "omop_MEASUREMENT.unit_source_value": {
+        "target_property": "SYNTHEA_OBSERVATIONS.units",
+        "justification": "Both fields represent the units of measurement."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_MEASUREMENT.person_id": "synthea_OBSERVATIONS.patient",
+      "omop_MEASUREMENT.measurement_concept_id": "synthea_OBSERVATIONS.code",
+      "omop_MEASUREMENT.measurement_date": "synthea_OBSERVATIONS.date",
+      "omop_MEASUREMENT.measurement_datetime": "synthea_OBSERVATIONS.date",
+      "omop_MEASUREMENT.value_as_number": "synthea_OBSERVATIONS.value",
+      "omop_MEASUREMENT.visit_occurrence_id": "synthea_OBSERVATIONS.encounter",
+      "omop_MEASUREMENT.measurement_source_value": "synthea_OBSERVATIONS.code",
+      "omop_MEASUREMENT.measurement_source_concept_id": "synthea_OBSERVATIONS.code",
+      "omop_MEASUREMENT.unit_source_value": "synthea_OBSERVATIONS.units",
+      "omop_MEASUREMENT.value_source_value": "synthea_OBSERVATIONS.value"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_004",
+    "utterance": "Map OMOP MEASUREMENT to SYNTHEA PROCEDURES",
+    "predicted_mapping": {
+      "omop_MEASUREMENT.person_id": {
+        "target_property": "SYNTHEA_PROCEDURES.patient",
+        "justification": "The person_id in the OMOP MEASUREMENT table corresponds to the patient foreign key in the SYNTHEA_PROCEDURES table."
+      },
+      "omop_MEASUREMENT.measurement_concept_id": {
+        "target_property": "SYNTHEA_PROCEDURES.code",
+        "justification": "The measurement_concept_id in the OMOP MEASUREMENT table corresponds to the procedure code from snomed-ct in the SYNTHEA_PROCEDURES table."
+      },
+      "omop_MEASUREMENT.measurement_date": {
+        "target_property": "SYNTHEA_PROCEDURES.date",
+        "justification": "The measurement_date in the OMOP MEASUREMENT table corresponds to the date the procedure was performed in the SYNTHEA_PROCEDURES table."
+      },
+      "omop_MEASUREMENT.visit_occurrence_id": {
+        "target_property": "SYNTHEA_PROCEDURES.encounter",
+        "justification": "The visit_occurrence_id in the OMOP MEASUREMENT table corresponds to the encounter foreign key in the SYNTHEA_PROCEDURES table."
+      },
+      "omop_MEASUREMENT.measurement_source_value": {
+        "target_property": "SYNTHEA_PROCEDURES.description",
+        "justification": "The measurement_source_value in the OMOP MEASUREMENT table corresponds to the description of the procedure in the SYNTHEA_PROCEDURES table."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_MEASUREMENT.person_id": "synthea_PROCEDURES.patient",
+      "omop_MEASUREMENT.measurement_concept_id": "synthea_PROCEDURES.code",
+      "omop_MEASUREMENT.measurement_date": "synthea_PROCEDURES.date",
+      "omop_MEASUREMENT.measurement_datetime": "synthea_PROCEDURES.date",
+      "omop_MEASUREMENT.measurement_time": "synthea_PROCEDURES.date",
+      "omop_MEASUREMENT.visit_occurrence_id": "synthea_PROCEDURES.encounter",
+      "omop_MEASUREMENT.measurement_source_value": "synthea_PROCEDURES.code",
+      "omop_MEASUREMENT.measurement_source_concept_id": "synthea_PROCEDURES.code"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_005",
+    "utterance": "Map OMOP PROCEDURE_OCCURRENCE to SYNTHEA PROCEDURES",
+    "predicted_mapping": {
+      "omop_PROCEDURE_OCCURRENCE.person_id": {
+        "target_property": "SYNTHEA_PROCEDURES.patient",
+        "justification": "The person_id in the source field corresponds to the patient foreign key in the target field."
+      },
+      "omop_PROCEDURE_OCCURRENCE.procedure_concept_id": {
+        "target_property": "SYNTHEA_PROCEDURES.code",
+        "justification": "The procedure_concept_id in the source field corresponds to the procedure code from snomed-ct in the target field."
+      },
+      "omop_PROCEDURE_OCCURRENCE.procedure_date": {
+        "target_property": "SYNTHEA_PROCEDURES.date",
+        "justification": "The procedure_date in the source field corresponds to the date the procedure was performed in the target field."
+      },
+      "omop_PROCEDURE_OCCURRENCE.visit_occurrence_id": {
+        "target_property": "SYNTHEA_PROCEDURES.encounter",
+        "justification": "The visit_occurrence_id in the source field corresponds to the foreign key to the encounter in the target field."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_PROCEDURE_OCCURRENCE.person_id": "synthea_PROCEDURES.patient",
+      "omop_PROCEDURE_OCCURRENCE.procedure_concept_id": "synthea_PROCEDURES.code",
+      "omop_PROCEDURE_OCCURRENCE.procedure_date": "synthea_PROCEDURES.date",
+      "omop_PROCEDURE_OCCURRENCE.procedure_datetime": "synthea_PROCEDURES.date",
+      "omop_PROCEDURE_OCCURRENCE.visit_occurrence_id": "synthea_PROCEDURES.encounter",
+      "omop_PROCEDURE_OCCURRENCE.procedure_source_value": "synthea_PROCEDURES.code",
+      "omop_PROCEDURE_OCCURRENCE.procedure_source_concept_id": "synthea_PROCEDURES.code"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_006",
+    "utterance": "Map OMOP CONDITION_OCCURRENCE to SYNTHEA CONDITIONS",
+    "predicted_mapping": {
+      "omop_CONDITION_OCCURRENCE.person_id": {
+        "target_property": "SYNTHEA_CONDITIONS.patient",
+        "justification": "Both fields represent a foreign key to the patient."
+      },
+      "omop_CONDITION_OCCURRENCE.condition_concept_id": {
+        "target_property": "SYNTHEA_CONDITIONS.code",
+        "justification": "Both fields represent a concept or code related to the condition."
+      },
+      "omop_CONDITION_OCCURRENCE.condition_start_date": {
+        "target_property": "SYNTHEA_CONDITIONS.start",
+        "justification": "Both fields represent the date the condition was diagnosed."
+      },
+      "omop_CONDITION_OCCURRENCE.condition_start_datetime": {
+        "target_property": "SYNTHEA_CONDITIONS.start",
+        "justification": "Both fields represent the date and time the condition was diagnosed."
+      },
+      "omop_CONDITION_OCCURRENCE.condition_end_date": {
+        "target_property": "SYNTHEA_CONDITIONS.stop",
+        "justification": "Both fields represent the date the condition resolved."
+      },
+      "omop_CONDITION_OCCURRENCE.condition_end_datetime": {
+        "target_property": "SYNTHEA_CONDITIONS.stop",
+        "justification": "Both fields represent the date and time the condition resolved."
+      },
+      "omop_CONDITION_OCCURRENCE.visit_occurrence_id": {
+        "target_property": "SYNTHEA_CONDITIONS.encounter",
+        "justification": "Both fields represent a foreign key to the encounter when the condition was diagnosed."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_CONDITION_OCCURRENCE.person_id": "synthea_CONDITIONS.patient",
+      "omop_CONDITION_OCCURRENCE.condition_concept_id": "synthea_CONDITIONS.code",
+      "omop_CONDITION_OCCURRENCE.condition_start_date": "synthea_CONDITIONS.start",
+      "omop_CONDITION_OCCURRENCE.condition_start_datetime": "synthea_CONDITIONS.start",
+      "omop_CONDITION_OCCURRENCE.condition_end_date": "synthea_CONDITIONS.stop",
+      "omop_CONDITION_OCCURRENCE.condition_end_datetime": "synthea_CONDITIONS.stop",
+      "omop_CONDITION_OCCURRENCE.visit_occurrence_id": "synthea_CONDITIONS.encounter",
+      "omop_CONDITION_OCCURRENCE.condition_source_value": "synthea_CONDITIONS.code",
+      "omop_CONDITION_OCCURRENCE.condition_source_concept_id": "synthea_CONDITIONS.code"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_007",
+    "utterance": "Map OMOP OBSERVATION to SYNTHEA ALLERGIES",
+    "predicted_mapping": {
+      "omop_OBSERVATION.person_id": {
+        "target_property": "SYNTHEA_ALLERGIES.patient",
+        "justification": "Both fields represent a foreign key to the patient."
+      },
+      "omop_OBSERVATION.observation_concept_id": {
+        "target_property": "SYNTHEA_ALLERGIES.code",
+        "justification": "Both fields represent a concept or code related to the observation or allergy."
+      },
+      "omop_OBSERVATION.observation_date": {
+        "target_property": "SYNTHEA_ALLERGIES.start",
+        "justification": "Both fields represent the date of the observation or allergy diagnosis."
+      },
+      "omop_OBSERVATION.visit_occurrence_id": {
+        "target_property": "SYNTHEA_ALLERGIES.encounter",
+        "justification": "Both fields represent a foreign key to the encounter or visit where the observation or allergy was diagnosed."
+      },
+      "omop_OBSERVATION.observation_source_value": {
+        "target_property": "SYNTHEA_ALLERGIES.description",
+        "justification": "Both fields represent a description or value related to the observation or allergy."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_OBSERVATION.person_id": "synthea_ALLERGIES.patient",
+      "omop_OBSERVATION.observation_concept_id": "synthea_ALLERGIES.code",
+      "omop_OBSERVATION.observation_date": "synthea_ALLERGIES.start",
+      "omop_OBSERVATION.observation_datetime": "synthea_ALLERGIES.start",
+      "omop_OBSERVATION.visit_occurrence_id": "synthea_ALLERGIES.encounter",
+      "omop_OBSERVATION.observation_source_value": "synthea_ALLERGIES.code",
+      "omop_OBSERVATION.observation_source_concept_id": "synthea_ALLERGIES.code"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_008",
+    "utterance": "Map OMOP OBSERVATION to SYNTHEA CONDITIONS",
+    "predicted_mapping": {
+      "omop_OBSERVATION.person_id": {
+        "target_property": "SYNTHEA_CONDITIONS.patient",
+        "justification": "The person_id in the OMOP OBSERVATION table corresponds to the patient foreign key in the SYNTHEA_CONDITIONS table."
+      },
+      "omop_OBSERVATION.observation_concept_id": {
+        "target_property": "SYNTHEA_CONDITIONS.code",
+        "justification": "The observation_concept_id in the OMOP OBSERVATION table corresponds to the diagnosis code from snomed-ct in the SYNTHEA_CONDITIONS table."
+      },
+      "omop_OBSERVATION.observation_date": {
+        "target_property": "SYNTHEA_CONDITIONS.start",
+        "justification": "The observation_date in the OMOP OBSERVATION table corresponds to the start date of the condition in the SYNTHEA_CONDITIONS table."
+      },
+      "omop_OBSERVATION.visit_occurrence_id": {
+        "target_property": "SYNTHEA_CONDITIONS.encounter",
+        "justification": "The visit_occurrence_id in the OMOP OBSERVATION table corresponds to the encounter foreign key in the SYNTHEA_CONDITIONS table."
+      },
+      "omop_OBSERVATION.observation_source_value": {
+        "target_property": "SYNTHEA_CONDITIONS.description",
+        "justification": "The observation_source_value in the OMOP OBSERVATION table corresponds to the description of the condition in the SYNTHEA_CONDITIONS table."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_OBSERVATION.person_id": "synthea_CONDITIONS.patient",
+      "omop_OBSERVATION.observation_concept_id": "synthea_CONDITIONS.code",
+      "omop_OBSERVATION.observation_date": "synthea_CONDITIONS.start",
+      "omop_OBSERVATION.observation_datetime": "synthea_CONDITIONS.start",
+      "omop_OBSERVATION.visit_occurrence_id": "synthea_CONDITIONS.encounter",
+      "omop_OBSERVATION.observation_source_value": "synthea_CONDITIONS.code",
+      "omop_OBSERVATION.observation_source_concept_id": "synthea_CONDITIONS.code"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_009",
+    "utterance": "Map OMOP OBSERVATION_PERIOD to SYNTHEA ENCOUNTERS",
+    "predicted_mapping": {
+      "omop_OBSERVATION_PERIOD.person_id": {
+        "target_property": "SYNTHEA_ENCOUNTERS.patient",
+        "justification": "The person_id in OMOP OBSERVATION_PERIOD corresponds to the patient foreign key in SYNTHEA_ENCOUNTERS."
+      },
+      "omop_OBSERVATION_PERIOD.observation_period_start_date": {
+        "target_property": "SYNTHEA_ENCOUNTERS.start",
+        "justification": "The observation_period_start_date in OMOP OBSERVATION_PERIOD matches the start date of an encounter in SYNTHEA_ENCOUNTERS."
+      },
+      "omop_OBSERVATION_PERIOD.observation_period_end_date": {
+        "target_property": "SYNTHEA_ENCOUNTERS.stop",
+        "justification": "The observation_period_end_date in OMOP OBSERVATION_PERIOD corresponds to the stop date of an encounter in SYNTHEA_ENCOUNTERS."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_OBSERVATION_PERIOD.person_id": "synthea_ENCOUNTERS.patient",
+      "omop_OBSERVATION_PERIOD.observation_period_start_date": "synthea_ENCOUNTERS.start",
+      "omop_OBSERVATION_PERIOD.observation_period_end_date": "synthea_ENCOUNTERS.stop"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_010",
+    "utterance": "Map OMOP DRUG_EXPOSURE to SYNTHEA CONDITIONS",
+    "predicted_mapping": {
+      "omop_DRUG_EXPOSURE.person_id": {
+        "target_property": "SYNTHEA_CONDITIONS.patient",
+        "justification": "The person_id in the source field corresponds to the patient foreign key in the target field."
+      },
+      "omop_DRUG_EXPOSURE.drug_concept_id": {
+        "target_property": "SYNTHEA_CONDITIONS.code",
+        "justification": "The drug_concept_id in the source field corresponds to the diagnosis code from snomed-ct in the target field."
+      },
+      "omop_DRUG_EXPOSURE.drug_exposure_start_date": {
+        "target_property": "SYNTHEA_CONDITIONS.start",
+        "justification": "The drug_exposure_start_date in the source field corresponds to the date the condition was diagnosed in the target field."
+      },
+      "omop_DRUG_EXPOSURE.drug_exposure_end_date": {
+        "target_property": "SYNTHEA_CONDITIONS.stop",
+        "justification": "The drug_exposure_end_date in the source field corresponds to the date the condition resolved in the target field."
+      },
+      "omop_DRUG_EXPOSURE.visit_occurrence_id": {
+        "target_property": "SYNTHEA_CONDITIONS.encounter",
+        "justification": "The visit_occurrence_id in the source field corresponds to the foreign key to the encounter in the target field."
+      },
+      "omop_DRUG_EXPOSURE.drug_source_value": {
+        "target_property": "SYNTHEA_CONDITIONS.description",
+        "justification": "The drug_source_value in the source field corresponds to the description of the condition in the target field."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_DRUG_EXPOSURE.person_id": "synthea_CONDITIONS.patient",
+      "omop_DRUG_EXPOSURE.drug_concept_id": "synthea_CONDITIONS.code",
+      "omop_DRUG_EXPOSURE.drug_exposure_start_date": "synthea_CONDITIONS.start",
+      "omop_DRUG_EXPOSURE.drug_exposure_start_datetime": "synthea_CONDITIONS.start",
+      "omop_DRUG_EXPOSURE.drug_exposure_end_date": "synthea_CONDITIONS.stop",
+      "omop_DRUG_EXPOSURE.drug_exposure_end_datetime": "synthea_CONDITIONS.stop",
+      "omop_DRUG_EXPOSURE.verbatim_end_date": "synthea_CONDITIONS.stop",
+      "omop_DRUG_EXPOSURE.visit_occurrence_id": "synthea_CONDITIONS.encounter",
+      "omop_DRUG_EXPOSURE.drug_source_value": "synthea_CONDITIONS.code",
+      "omop_DRUG_EXPOSURE.drug_source_concept_id": "synthea_CONDITIONS.code"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_011",
+    "utterance": "Map OMOP DRUG_EXPOSURE to SYNTHEA IMMUNIZATIONS",
+    "predicted_mapping": {
+      "omop_DRUG_EXPOSURE.person_id": {
+        "target_property": "SYNTHEA_IMMUNIZATIONS.patient",
+        "justification": "The person_id in the source field corresponds to the patient identifier in the target field."
+      },
+      "omop_DRUG_EXPOSURE.drug_concept_id": {
+        "target_property": "SYNTHEA_IMMUNIZATIONS.code",
+        "justification": "The drug_concept_id in the source field corresponds to the immunization code in the target field."
+      },
+      "omop_DRUG_EXPOSURE.drug_exposure_start_date": {
+        "target_property": "SYNTHEA_IMMUNIZATIONS.date",
+        "justification": "The drug_exposure_start_date in the source field corresponds to the date of immunization in the target field."
+      },
+      "omop_DRUG_EXPOSURE.visit_occurrence_id": {
+        "target_property": "SYNTHEA_IMMUNIZATIONS.encounter",
+        "justification": "The visit_occurrence_id in the source field corresponds to the encounter identifier in the target field."
+      },
+      "omop_DRUG_EXPOSURE.drug_source_value": {
+        "target_property": "SYNTHEA_IMMUNIZATIONS.description",
+        "justification": "The drug_source_value in the source field corresponds to the description of the immunization in the target field."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_DRUG_EXPOSURE.person_id": "synthea_IMMUNIZATIONS.patient",
+      "omop_DRUG_EXPOSURE.drug_concept_id": "synthea_IMMUNIZATIONS.code",
+      "omop_DRUG_EXPOSURE.drug_exposure_start_date": "synthea_IMMUNIZATIONS.date",
+      "omop_DRUG_EXPOSURE.drug_exposure_start_datetime": "synthea_IMMUNIZATIONS.date",
+      "omop_DRUG_EXPOSURE.drug_exposure_end_date": "synthea_IMMUNIZATIONS.date",
+      "omop_DRUG_EXPOSURE.drug_exposure_end_datetime": "synthea_IMMUNIZATIONS.date",
+      "omop_DRUG_EXPOSURE.verbatim_end_date": "synthea_IMMUNIZATIONS.date",
+      "omop_DRUG_EXPOSURE.visit_occurrence_id": "synthea_IMMUNIZATIONS.encounter",
+      "omop_DRUG_EXPOSURE.drug_source_value": "synthea_IMMUNIZATIONS.code",
+      "omop_DRUG_EXPOSURE.drug_source_concept_id": "synthea_IMMUNIZATIONS.code"
+    }
+  },
+  {
+    "sample_id": "omop_synthea_012",
+    "utterance": "Map OMOP DRUG_EXPOSURE to SYNTHEA MEDICATIONS",
+    "predicted_mapping": {
+      "omop_DRUG_EXPOSURE.person_id": {
+        "target_property": "SYNTHEA_MEDICATIONS.patient",
+        "justification": "Both fields represent a foreign key to the patient."
+      },
+      "omop_DRUG_EXPOSURE.drug_concept_id": {
+        "target_property": "SYNTHEA_MEDICATIONS.code",
+        "justification": "Both fields represent a unique identifier for the medication, with drug_concept_id being a concept ID and code being a medication code from rxnorm."
+      },
+      "omop_DRUG_EXPOSURE.drug_exposure_start_date": {
+        "target_property": "SYNTHEA_MEDICATIONS.start",
+        "justification": "Both fields represent the date the medication was prescribed or started."
+      },
+      "omop_DRUG_EXPOSURE.drug_exposure_start_datetime": {
+        "target_property": "SYNTHEA_MEDICATIONS.start",
+        "justification": "Both fields represent the date and time the medication was prescribed or started, with start being a date field and drug_exposure_start_datetime being a datetime field."
+      },
+      "omop_DRUG_EXPOSURE.drug_exposure_end_date": {
+        "target_property": "SYNTHEA_MEDICATIONS.stop",
+        "justification": "Both fields represent the date the medication was stopped or ended."
+      },
+      "omop_DRUG_EXPOSURE.drug_exposure_end_datetime": {
+        "target_property": "SYNTHEA_MEDICATIONS.stop",
+        "justification": "Both fields represent the date and time the medication was stopped or ended, with stop being a date field and drug_exposure_end_datetime being a datetime field."
+      },
+      "omop_DRUG_EXPOSURE.visit_occurrence_id": {
+        "target_property": "SYNTHEA_MEDICATIONS.encounter",
+        "justification": "Both fields represent a foreign key to the encounter where the medication was prescribed or administered."
+      }
+    },
+    "ground_truth_mapping": {
+      "omop_DRUG_EXPOSURE.person_id": "synthea_MEDICATIONS.patient",
+      "omop_DRUG_EXPOSURE.drug_concept_id": "synthea_MEDICATIONS.code",
+      "omop_DRUG_EXPOSURE.drug_exposure_start_date": "synthea_MEDICATIONS.start",
+      "omop_DRUG_EXPOSURE.drug_exposure_start_datetime": "synthea_MEDICATIONS.start",
+      "omop_DRUG_EXPOSURE.drug_exposure_end_date": "synthea_MEDICATIONS.stop",
+      "omop_DRUG_EXPOSURE.drug_exposure_end_datetime": "synthea_MEDICATIONS.stop",
+      "omop_DRUG_EXPOSURE.verbatim_end_date": "synthea_MEDICATIONS.stop",
+      "omop_DRUG_EXPOSURE.days_supply": "synthea_MEDICATIONS.stop",
+      "omop_DRUG_EXPOSURE.visit_occurrence_id": "synthea_MEDICATIONS.encounter",
+      "omop_DRUG_EXPOSURE.drug_source_value": "synthea_MEDICATIONS.code",
+      "omop_DRUG_EXPOSURE.drug_source_concept_id": "synthea_MEDICATIONS.code"
+    }
+  }
+]

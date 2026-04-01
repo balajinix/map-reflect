@@ -1,0 +1,424 @@
+{
+  "dataset": "schemanet_cms_omop",
+  "total": 46,
+  "field_correct": 17,
+  "type_correct": 22,
+  "field_accuracy": 0.3695652173913043,
+  "type_accuracy": 0.4782608695652174,
+  "results": [
+    {
+      "query_id": "0",
+      "source_field": "cms_beneficiarysummary.desynpuf_id",
+      "expected": "omop_person.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "1",
+      "source_field": "cms_beneficiarysummary.bene_sex_ident_cd",
+      "expected": "omop_person.gender_concept_id",
+      "predicted": "omop_person.gender_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"gender_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "2",
+      "source_field": "cms_beneficiarysummary.bene_birth_dt",
+      "expected": "omop_person.year_of_birth",
+      "predicted": "omop_person.birth_datetime",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"birth_datetime\"}<|eom_id|>"
+    },
+    {
+      "query_id": "3",
+      "source_field": "cms_beneficiarysummary.bene_race_cd",
+      "expected": "omop_person.race_concept_id",
+      "predicted": "omop_person.race_concept_id",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"race_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "4",
+      "source_field": "cms_beneficiarysummary.bene_death_dt",
+      "expected": "omop_death.death_date",
+      "predicted": "omop_death.death_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"death\", \"field\": \"death_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "5",
+      "source_field": "cms_beneficiarysummary.sp_state_code",
+      "expected": "omop_location.state",
+      "predicted": "omop_location.state",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"location\", \"field\": \"state\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "6",
+      "source_field": "cms_beneficiarysummary.bene_county_cd",
+      "expected": "omop_location.county",
+      "predicted": "omop_location.county",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"location\", \"field\": \"county\"}<|eom_id|>"
+    },
+    {
+      "query_id": "7",
+      "source_field": "cms_inpatientclaims.desynpuf_id",
+      "expected": "omop_visit_occurrence.person_id",
+      "predicted": "omop_person.person_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "8",
+      "source_field": "cms_inpatientclaims.clm_admsn_dt",
+      "expected": "omop_visit_occurrence.visit_start_date",
+      "predicted": "omop_visit_occurrence.visit_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "9",
+      "source_field": "cms_inpatientclaims.nch_bene_dschrg_dt",
+      "expected": "omop_visit_occurrence.visit_end_date",
+      "predicted": "omop_visit_occurrence.visit_end_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "10",
+      "source_field": "cms_inpatientclaims.at_physn_npi",
+      "expected": "omop_visit_occurrence.provider_id",
+      "predicted": "omop_provider.npi",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}<|eom_id|>"
+    },
+    {
+      "query_id": "11",
+      "source_field": "cms_inpatientclaims.prvdr_num",
+      "expected": "omop_visit_occurrence.care_site_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "12",
+      "source_field": "cms_inpatientclaims.clm_id",
+      "expected": "omop_visit_occurrence.visit_source_value",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "13",
+      "source_field": "cms_inpatientclaims.clm_from_dt",
+      "expected": "omop_measurement.measurement_date",
+      "predicted": "omop_visit_occurrence.visit_start_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_date\"}```python\n```# Define the function to find the matching field in omop schema\ndef find_matching_field(source_field):\n    # "
+    },
+    {
+      "query_id": "14",
+      "source_field": "cms_inpatientclaims.admtng_icd9_dgns_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "15",
+      "source_field": "cms_inpatientclaims.icd9_dgns_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "16",
+      "source_field": "cms_inpatientclaims.icd9_prcdr_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_procedure_occurrence.procedure_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "17",
+      "source_field": "cms_inpatientclaims.clm_thru_dt",
+      "expected": "omop_condition_occurrence.condition_end_date",
+      "predicted": "omop_visit_occurrence.visit_end_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_date\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "18",
+      "source_field": "cms_inpatientclaims.clm_drg_cd",
+      "expected": "omop_observation.observation_source_value",
+      "predicted": "omop_cost.drg_concept_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"cost\", \"field\": \"drg_concept_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "19",
+      "source_field": "cms_inpatientclaims.op_physn_npi",
+      "expected": "omop_provider.npi",
+      "predicted": "omop_provider.npi",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}<|eom_id|>"
+    },
+    {
+      "query_id": "20",
+      "source_field": "cms_inpatientclaims.ot_physn_npi",
+      "expected": "omop_provider.npi",
+      "predicted": "omop_provider.npi",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}<|eom_id|>"
+    },
+    {
+      "query_id": "21",
+      "source_field": "cms_outpatientclaims.desynpuf_id",
+      "expected": "omop_visit_occurrence.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "22",
+      "source_field": "cms_outpatientclaims.clm_from_dt",
+      "expected": "omop_visit_occurrence.visit_start_date",
+      "predicted": "omop_visit_occurrence.visit_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "23",
+      "source_field": "cms_outpatientclaims.clm_thru_dt",
+      "expected": "omop_visit_occurrence.visit_end_date",
+      "predicted": "omop_visit_occurrence.visit_end_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_end_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "24",
+      "source_field": "cms_outpatientclaims.at_physn_npi",
+      "expected": "omop_visit_occurrence.provider_id",
+      "predicted": "omop_provider.npi",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}<|eom_id|>"
+    },
+    {
+      "query_id": "25",
+      "source_field": "cms_outpatientclaims.prvdr_num",
+      "expected": "omop_visit_occurrence.care_site_id",
+      "predicted": "omop_provider.provider_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"provider_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "26",
+      "source_field": "cms_outpatientclaims.clm_id",
+      "expected": "omop_visit_occurrence.visit_source_value",
+      "predicted": "omop_visit_occurrence.visit_occurrence_id",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_occurrence_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "27",
+      "source_field": "cms_outpatientclaims.icd9_dgns_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "28",
+      "source_field": "cms_outpatientclaims.hcpcs_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_procedure_occurrence.procedure_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "29",
+      "source_field": "cms_outpatientclaims.admtng_icd9_dgns_cd",
+      "expected": "omop_death.cause_source_concept_id",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "30",
+      "source_field": "cms_outpatientclaims.op_physn_npi",
+      "expected": "omop_provider.npi",
+      "predicted": "omop_provider.npi",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}<|eom_id|>"
+    },
+    {
+      "query_id": "31",
+      "source_field": "cms_outpatientclaims.ot_physn_npi",
+      "expected": "omop_provider.npi",
+      "predicted": "omop_provider.npi",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}<|eom_id|>"
+    },
+    {
+      "query_id": "32",
+      "source_field": "cms_carrierclaims.desynpuf_id",
+      "expected": "omop_visit_occurrence.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "33",
+      "source_field": "cms_carrierclaims.clm_from_dt",
+      "expected": "omop_visit_occurrence.visit_start_date",
+      "predicted": "omop_visit_occurrence.visit_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"visit_occurrence\", \"field\": \"visit_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "34",
+      "source_field": "cms_carrierclaims.clm_thru_dt",
+      "expected": "omop_visit_occurrence.visit_end_date",
+      "predicted": "omop_payer_plan_period.payer_plan_period_end_date",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"payer_plan_period\", \"field\": \"payer_plan_period_end_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "35",
+      "source_field": "cms_carrierclaims.prf_physn_npi",
+      "expected": "omop_visit_occurrence.provider_id",
+      "predicted": "omop_provider.npi",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}<|eom_id|>"
+    },
+    {
+      "query_id": "36",
+      "source_field": "cms_carrierclaims.clm_id",
+      "expected": "omop_visit_occurrence.visit_source_value",
+      "predicted": "omop_payer_plan_period.payer_plan_period_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"payer_plan_period\", \"field\": \"payer_plan_period_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "37",
+      "source_field": "cms_carrierclaims.icd9_dgns_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "38",
+      "source_field": "cms_carrierclaims.hcpcs_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_procedure_occurrence.procedure_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"procedure_occurrence\", \"field\": \"procedure_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "39",
+      "source_field": "cms_carrierclaims.line_icd9_dgns_cd",
+      "expected": "omop_measurement.measurement_source_value",
+      "predicted": "omop_condition_occurrence.condition_source_value",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"condition_occurrence\", \"field\": \"condition_source_value\"}<|eom_id|>"
+    },
+    {
+      "query_id": "40",
+      "source_field": "cms_carrierclaims.tax_num",
+      "expected": "omop_care_site.care_site_source_value",
+      "predicted": "omop_provider.npi",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"provider\", \"field\": \"npi\"}```python\n```<|eom_id|>"
+    },
+    {
+      "query_id": "41",
+      "source_field": "cms_prescriptiondrugevents.desynpuf_id",
+      "expected": "omop_drug_exposure.person_id",
+      "predicted": "omop_person.person_id",
+      "field_correct": false,
+      "type_correct": false,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"person\", \"field\": \"person_id\"}<|eom_id|>"
+    },
+    {
+      "query_id": "42",
+      "source_field": "cms_prescriptiondrugevents.srvc_dt",
+      "expected": "omop_drug_exposure.drug_exposure_start_date",
+      "predicted": "omop_drug_exposure.drug_exposure_start_date",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"drug_exposure_start_date\"}<|eom_id|>"
+    },
+    {
+      "query_id": "43",
+      "source_field": "cms_prescriptiondrugevents.qty_dspnsd_num",
+      "expected": "omop_drug_exposure.quantity",
+      "predicted": "omop_drug_exposure.days_supply",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"days_supply\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "44",
+      "source_field": "cms_prescriptiondrugevents.days_suply_num",
+      "expected": "omop_drug_exposure.days_supply",
+      "predicted": "omop_drug_exposure.days_supply",
+      "field_correct": true,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"days_supply\"}```<|eom_id|>"
+    },
+    {
+      "query_id": "45",
+      "source_field": "cms_prescriptiondrugevents.prod_srvc_id",
+      "expected": "omop_drug_exposure.drug_source_value",
+      "predicted": "omop_drug_exposure.procedure_source_value",
+      "field_correct": false,
+      "type_correct": true,
+      "raw_response": " \n{\"schema\": \"omop\", \"table\": \"drug_exposure\", \"field\": \"procedure_source_value\"} is incorrect because procedure_source_value is not the best match for prod_srvc_id.\n\nLet's analyze the source field na"
+    }
+  ]
+}
