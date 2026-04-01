@@ -115,14 +115,42 @@ class ITGraphBuilder:
         return field_key
 
     def build_from_samples(self):
-        """Build graph from ITGraph dataset samples."""
+        """Build graph from ITGraph dataset samples.
+
+        Handles human annotations:
+        - Samples with human_judgment='incorrect' are skipped for positive edges
+          but their type nodes are still added (used for negative edges).
+        - Samples with human_judgment='correct'/'plausible' are treated as
+          high-confidence ground truth.
+        """
         print("\nStep 1: Adding nodes from dataset samples...")
 
         type_pair_count = 0
         field_mapping_count = 0
         type_pairs_seen = set()
+        self.negative_type_pairs = set()  # For GNN negative sampling
 
         for s in tqdm(self.samples, desc="Processing samples"):
+            meta = s.get("metadata", {})
+            judgment = meta.get("human_judgment", "")
+            src_product = s.get("source_schema", "")
+            tgt_product = s.get("target_schema", "")
+            src_type = meta.get("source_type", "")
+            tgt_type = meta.get("target_type", "")
+
+            # Always add type nodes (even for incorrect mappings)
+            if src_product and src_type:
+                self._add_type(src_product, src_type)
+            if tgt_product and tgt_type:
+                self._add_type(tgt_product, tgt_type)
+
+            # If human marked incorrect, record as negative and skip positive edges
+            if judgment == "incorrect":
+                src_full = f"{src_product}_{src_type}"
+                tgt_full = f"{tgt_product}_{tgt_type}"
+                self.negative_type_pairs.add((src_full, tgt_full))
+                continue
+
             mapping = s.get("mapping", {})
             if not mapping:
                 continue
@@ -135,19 +163,17 @@ class ITGraphBuilder:
                 src_node = self._add_field(src_field)
                 tgt_node = self._add_field(tgt_field)
 
-                src_product = get_product(src_field)
-                tgt_product = get_product(tgt_field)
+                src_f_product = get_product(src_field)
+                tgt_f_product = get_product(tgt_field)
                 src_type_prefix = src_field.split(".")[0]
                 tgt_type_prefix = tgt_field.split(".")[0]
-                src_type_name = src_type_prefix[len(src_product) + 1:]
-                tgt_type_name = tgt_type_prefix[len(tgt_product) + 1:]
+                src_type_name = src_type_prefix[len(src_f_product) + 1:]
+                tgt_type_name = tgt_type_prefix[len(tgt_f_product) + 1:]
 
-                src_types.add((src_product, src_type_name))
-                tgt_types.add((tgt_product, tgt_type_name))
+                src_types.add((src_f_product, src_type_name))
+                tgt_types.add((tgt_f_product, tgt_type_name))
 
                 # Add bipartite field mapping edge (unidirectional src -> tgt)
-                # Bipartite: each target field gets at most one incoming mapping edge
-                # Check if target already has a mapping edge
                 existing_mappers = [
                     u for u, v, d in self.graph.in_edges(tgt_node, data=True)
                     if d.get("relationship") == "field_mapping"
@@ -155,7 +181,6 @@ class ITGraphBuilder:
                 if not existing_mappers:
                     self.graph.add_edge(src_node, tgt_node,
                                         relationship="field_mapping")
-                    # Also add reverse for GNN (but mark as reverse)
                     self.graph.add_edge(tgt_node, src_node,
                                         relationship="field_mapping_reverse")
                     field_mapping_count += 1
@@ -168,14 +193,17 @@ class ITGraphBuilder:
                     pair = (src_full, tgt_full)
                     if pair not in type_pairs_seen:
                         type_pairs_seen.add(pair)
-                        n_methods = s.get("metadata", {}).get("n_methods", 1)
+                        n_methods = meta.get("n_methods", 1)
+                        is_human = meta.get("annotation_source") == "human"
                         self.graph.add_edge(src_full, tgt_full,
                                             relationship="maps_to",
-                                            n_methods=n_methods)
+                                            n_methods=n_methods,
+                                            human_verified=is_human)
                         type_pair_count += 1
 
         print(f"  Type-level edges (many-to-many): {type_pair_count}")
         print(f"  Field-level edges (bipartite): {field_mapping_count}")
+        print(f"  Negative type pairs (human-rejected): {len(self.negative_type_pairs)}")
 
     def add_all_fields_from_lookup(self):
         """Add all fields from API lookup to ensure full coverage."""
@@ -338,6 +366,18 @@ class ITGraphBuilder:
                 "test_neg_edge_index": torch.zeros(2, 0, dtype=torch.long),
             })()
 
+        # Build explicit negative type edges from human annotations
+        neg_type_src = []
+        neg_type_tgt = []
+        for src_full, tgt_full in getattr(self, "negative_type_pairs", set()):
+            if src_full in node_to_idx and tgt_full in node_to_idx:
+                neg_type_src.append(node_to_idx[src_full])
+                neg_type_tgt.append(node_to_idx[tgt_full])
+        human_neg_edge_index = torch.tensor(
+            [neg_type_src, neg_type_tgt], dtype=torch.long
+        ) if neg_type_src else torch.zeros(2, 0, dtype=torch.long)
+        print(f"  Human-annotated negative type edges: {human_neg_edge_index.size(1)}")
+
         save_data = {
             "data": data,
             "node_list": nodes,
@@ -345,6 +385,7 @@ class ITGraphBuilder:
             "graph": self.graph,
             "node_to_idx": node_to_idx,
             "idx_to_node": {i: n for n, i in node_to_idx.items()},
+            "human_neg_edge_index": human_neg_edge_index,
         }
 
         with open(output_path, "wb") as f:
