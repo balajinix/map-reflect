@@ -1,0 +1,17 @@
+query InternetWeatherJobs($appid: ID = "1xy4sn3") {
+  appJobs(appid: $appid) {
+    jobid
+    name
+    shared
+    typeid
+    active
+    appid
+    community
+    config {
+      host
+      http
+      https
+      url_path
+    }
+  }
+}

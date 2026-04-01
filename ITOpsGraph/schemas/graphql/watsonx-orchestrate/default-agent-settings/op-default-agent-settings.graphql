@@ -1,0 +1,99 @@
+query GetDefaultAgentSettings {
+  defaultAgentSettings {
+    model_settings {
+      is_base_llm_enabled
+      base_llm {
+        model_name
+        system_prompt
+        guardrails {
+          hap {
+            input {
+              enabled
+              threshold
+            }
+            output {
+              enabled
+              threshold
+            }
+          }
+          pii {
+            input {
+              enabled
+              threshold
+            }
+            output {
+              enabled
+              threshold
+            }
+            mask {
+              remove_entity_value
+            }
+          }
+        }
+        model_params {
+          decoding_method
+          max_new_tokens
+          min_new_tokens
+          random_seed
+          temperature
+        }
+      }
+      embeddings {
+        model_name
+      }
+    }
+    router_settings {
+      router_type
+      model_name
+      routing_prompt
+      router_config {
+        confidence_method
+        confidence_threshold
+        continue_journey_on_none
+      }
+      model_params {
+        decoding_method
+        max_new_tokens
+        min_new_tokens
+        random_seed
+        repetition_penalty
+        temperature
+        top_k
+        top_p
+        return_options {
+          input_text
+          input_tokens
+          generated_tokens
+          token_logprobs
+          token_ranks
+          top_n_tokens
+        }
+      }
+    }
+    slot_filling_settings {
+      slot_filler_type
+      model_name
+      model_params {
+        decoding_method
+        max_new_tokens
+        min_new_tokens
+        random_seed
+        repetition_penalty
+        temperature
+        top_k
+        top_p
+        return_options {
+          input_text
+          input_tokens
+          generated_tokens
+          token_logprobs
+          token_ranks
+          top_n_tokens
+        }
+      }
+    }
+    user_settings {
+      confirm_routing
+    }
+  }
+}

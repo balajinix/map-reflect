@@ -1,0 +1,254 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"""
+Root Query type that provides read operations for the IBM Concert Environment Definitions API.
+"""
+type Query {
+  """
+  Returns a detailed list of all environment definitions to which you have view access.
+  """
+  environments(
+    """Page size for pagination."""
+    pageSize: Int
+    """Page number for pagination."""
+    pageNumber: Int
+    """Field name to sort by."""
+    sortBy: String
+    """Sort direction - ascending (asc) or descending (desc)."""
+    sortDirection: SortDirection
+    """
+    Filter can consist of multiple values for the same field separated by comma (treated as OR).
+    It can also be a combination of multiple fields using & (treated as AND).
+    """
+    filter: String
+    """Search environment ID."""
+    search: String
+  ): EnvironmentCollection
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/environments"
+      method: GET
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      arguments: [
+        { name: "page_size", argument: "pageSize" },
+        { name: "page_number", argument: "pageNumber" },
+        { name: "sort_by", argument: "sortBy" },
+        { name: "sort_direction", argument: "sortDirection" }
+      ]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Returns details about the environment definition specified by its unique environment definition ID or name.
+  """
+  environment(
+    """Environment ID or name."""
+    environmentId: String!
+  ): Environment
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/environments/$environmentId"
+      method: GET
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Returns all environment runtime components, such as cluster ID, name, region, etc.
+  """
+  runtimes(
+    """Page size for pagination."""
+    pageSize: Int
+    """Page number for pagination."""
+    pageNumber: Int
+    """Field name to sort by."""
+    sortBy: RuntimeSortField
+    """Sort direction - ascending (asc) or descending (desc)."""
+    sortDirection: SortDirection
+    """
+    Filter can consist of multiple values for the same field separated by comma (treated as OR).
+    It can also be a combination of multiple fields using & (treated as AND).
+    """
+    filter: String
+    """Search environment ID."""
+    search: String
+  ): RuntimeCollection
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/runtimes"
+      method: GET
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      arguments: [
+        { name: "page_size", argument: "pageSize" },
+        { name: "page_number", argument: "pageNumber" },
+        { name: "sort_by", argument: "sortBy" },
+        { name: "sort_direction", argument: "sortDirection" }
+      ]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Returns details for the environment runtime specified by its unique resource ID.
+  """
+  runtime(
+    """Runtime ID."""
+    runtimeId: String!
+  ): Runtime
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/runtimes/$runtimeId"
+      method: GET
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      configuration: "ibmConcert"
+    )
+}
+
+"""
+Root Mutation type that provides write operations for the IBM Concert Environment Definitions API.
+"""
+type Mutation {
+  """
+  Creates a new environment definition from the specified ingested components.
+  """
+  createEnvironment(
+    """Name of the environment."""
+    name: String!
+    """Configuration for the environment."""
+    config: JSON
+  ): Environment
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/environments"
+      method: POST
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      contenttype: "application/json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Modifies the configuration of the environment definition specified by its unique environment definition ID or name.
+  """
+  updateEnvironment(
+    """Environment ID or name."""
+    environmentId: String!
+    """Updated configuration for the environment."""
+    config: JSON
+  ): Environment
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/environments/$environmentId"
+      method: PATCH
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      contenttype: "application/json-patch+json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Deletes the environment definition specified by its unique environment definition ID or name.
+  """
+  deleteEnvironment(
+    """Environment ID or name."""
+    environmentId: String!
+  ): Boolean
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/environments/$environmentId"
+      method: DELETE
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      configuration: "ibmConcert"
+    )
+}
+
+"""
+Sort direction for query results
+"""
+enum SortDirection {
+  """Sort in ascending order"""
+  asc
+  """Sort in descending order"""
+  desc
+}
+
+"""
+Field to sort runtime results by
+"""
+enum RuntimeSortField {
+  """Sort by name"""
+  name
+  """Sort by type"""
+  type
+  """Sort by provider"""
+  provider
+  """Sort by reference ID"""
+  reference_id
+  """Sort by namespace"""
+  namespace
+}
+
+"""
+Collection of environment definitions
+"""
+type EnvironmentCollection {
+  """List of environment definitions"""
+  environments: [Environment]
+}
+
+"""
+Environment definition details
+"""
+type Environment {
+  """Unique identifier of the environment"""
+  id: String
+  
+  """Name of the environment"""
+  name: String
+  
+  """Configuration of the environment"""
+  config: JSON
+}
+
+"""
+Collection of runtime components
+"""
+type RuntimeCollection {
+  """List of runtime components"""
+  runtimes: [Runtime]
+}
+
+"""
+Runtime component details
+"""
+type Runtime {
+  """Unique identifier of the runtime"""
+  id: String
+  
+  """Name of the runtime"""
+  name: String
+  
+  """Type of the runtime"""
+  type: String
+}
+
+"""
+Error response object
+"""
+type ErrorResponse {
+  """Error message"""
+  error: String
+}
+
+# Suggested configuration file (config.yaml):
+# configurationset:
+#   - configuration:
+#       name: ibmConcert
+#       instanceId: YOUR_INSTANCE_ID

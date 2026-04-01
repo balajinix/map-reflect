@@ -1,0 +1,45 @@
+query InternetWeather(
+  $agg: Aggregation = p50
+  $appid: ID = "1xy4sn3"
+  # CDN Latency - Cloudflare [1xtvhvx] CDN Latency - Akamai [1b1o94j] CDN Latency - Cloudfront [1xtsor1]
+  # AWS US East 1 - Latency [1uxw9ir]  CDN Latency - Fastly [10jp2ew]
+  $filter: PerformanceFilter = {
+    jobs: ["1xtvhvx", "1b1o94j", "1xtsor1", "1uxw9ir", "10jp2ew"]
+    regionParentPrefix: "R_"
+    # demo/debug
+    #startTime: {ge: "2025-11-15"}
+    #endTime: {le: "2025-11-16"}
+  }
+) {
+  rumPerformanceArea(agg: $agg, filter: $filter) {
+    minResponseTime
+    maxResponseTime
+    data {
+      regionName
+      jobsResponseTimes {
+        jobid
+        responseTime
+        job(appid: $appid) {
+          name
+        }
+      }
+      parent
+      responseTime
+    }
+    iwjobs(appid: $appid) {
+      jobid
+      name
+      shared
+      typeid
+      active
+      appid
+      community
+      config {
+        host
+        http
+        https
+        url_path
+      }
+    }
+  }
+}

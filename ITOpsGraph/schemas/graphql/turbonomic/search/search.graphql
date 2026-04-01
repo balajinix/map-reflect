@@ -1,0 +1,315 @@
+# Copyright IBM Corp. 2025
+# /api/v3/search
+
+type Query {
+  """
+  entity search
+  """
+  entitySearch(
+    """
+    query to apply
+    """
+    q: String
+    """
+    Object types such as VirtualMachine, BusinessApplications, etc.
+    """
+    types: [String]
+    """
+    scopes
+    """
+    scopes: [String]
+    """
+    state
+    """
+    state: String
+
+    """
+    GroupType is one of: Group, Resource, Cluster, VMCluster, StorageCluster,
+     BusinessAccountFolder, BillingFamily, NodePool
+    """
+    group_type: String
+
+    """
+    Environment type
+    Available values : HYBRID, CLOUD, ONPREM, UNKNOWN
+    """
+    environment_type: EnvironmentType
+
+    """
+    one of:  compact, entity, aspects
+    """
+    detail_type: String
+
+    """
+    The probe types used to filter results, server will only return entities discovered by targets in the provided probe types, valid inputs can be obtained through endpoint /targets/specs. NB: Cloud targets have additional infrastructure type, like 'AWS Infrastructure', 'Azure Infrastructure' and 'GCP Infrastructure'
+    """
+    probe_types: [String]
+
+    """
+    When making subsequent calls to retrieve additional results, this is the cursor to include in the next request for pagination.
+    """
+    cursor: String
+
+    """
+    The maximum number of items to return. Must be a positive integer. If not set, the server will provide a service-specific maximum limit
+    """
+    limit: Int
+
+    """
+     The field to order the results by.
+    Available values : NAME, UTILIZATION, SEVERITY, COST
+    Default value : NAME
+    """
+    order_by: SearchOrderBy
+
+    """
+    Whether to arrange in ascending (true) or descending (false) order.
+    Default value : true
+    """
+    ascending: Boolean
+
+    """
+    The query type can be exact, regex or contains
+    Available values : EXACT, REGEX, CONTAINS
+    """
+    query_type: QueryType
+
+    """
+    Filter by group origin. DISCOVERED groups are groups discovered by managed targets.USER groups are groups created within the product, and SYSTEM groups are those created internally
+    Available values : DISCOVERED, USER, SYSTEM
+    """
+    group_origin: GroupOrigin
+  ): [Entity]
+    @sequence(
+      steps: [
+        { query: "_accessTokenTurbonomics" }
+        {
+          query: "_entitySearch"
+          arguments: [
+            # needed because this doesn't inherit arguments
+            { name: "q", argument: "q" }
+            { name: "types", argument: "types" }
+            { name: "scopes", argument: "scopes" }
+            { name: "state", argument: "state" }
+            { name: "group_type", argument: "group_type" }
+            { name: "environment_type", argument: "environment_type" }
+            { name: "detail_type", argument: "detail_type" }
+            { name: "probe_types", argument: "probe_types" }
+            { name: "cursor", argument: "cursor" }
+            { name: "limit", argument: "limit" }
+            { name: "order_by", argument: "order_by" }
+            { name: "ascending", argument: "ascending" }
+            { name: "query_type", argument: "query_type" }
+            { name: "group_origin", argument: "group_origin" }
+          ]
+        }
+      ]
+    )
+
+  _entitySearch(
+    q: String
+    types: [String]
+    scopes: [String]
+    state: String
+    group_type: String
+    environment_type: EnvironmentType
+    detail_type: String
+    probe_types: [String]
+    cursor: String
+    limit: Int
+    order_by: SearchOrderBy
+    ascending: Boolean
+    query_type: QueryType
+    group_origin: GroupOrigin
+
+    access_token: Secret!
+  ): [Entity]
+    @rest(
+      endpoint: "https://$hostname;/api/v3/search"
+      configuration: "turbonomics"
+      headers: [{ name: "authorization", value: "bearer $access_token" }]
+    )
+
+  """
+  filtered entitySearch
+  Note: seems to require classname; not clear how the filters work
+  """
+  entitySearchFiltered(
+    """
+    query to apply
+    """
+    q: String
+
+    """
+    The query type can be exact, regex or contains
+    Available values : EXACT, REGEX, CONTAINS
+    """
+    query_type: QueryType
+
+    """
+    When making subsequent calls to retrieve additional results, this is the cursor to include in the next request for pagination.
+    """
+    cursor: Int
+
+    """
+    The maximum number of items to return. Must be a positive integer. If not set, the server will provide a service-specific maximum limit
+    """
+    limit: Int
+
+    """
+    The field to order the results by.
+    Available values : NAME, UTILIZATION, SEVERITY, COST
+    Default value : NAME
+    """
+    order_by: SearchOrderBy
+
+    """
+    Filter the entity aspects by names
+    """
+    aspect_names: [String]
+
+    """
+    Whether to arrange in ascending (true) or descending (false) order.
+    Default value : true
+    """
+    ascending: Boolean
+
+    # Partial filters
+    uuid: ID
+    displayName: String
+    className: String # required?
+    membersCount: Int
+    entitiesCount: Int
+    costPrice: Float
+    groupType: String
+    severity: Severity
+    """
+    State: UNKOWN or ACTIVE only
+    """
+    state: State
+    environmentType: EnvironmentType
+    scope: [String]
+    isStatic: Boolean
+
+    """
+    Logical operator to be applied across all the criteria used to create dynamic group.  It can take values 'AND', 'OR', 'XOR'
+    """
+    logicalOperator: LogicalOperator
+    criteriaList: FilterInput
+    memberUuidList: [ID]
+    #    realtimeMarketReference: BaseApiDTO
+    #    stats: StatSnapshot
+    temporary: Boolean
+    activeEntitiesCount: Int
+    cloudType: CloudType
+    #    source: Target
+    #    memberTypes: [String]
+    #    entityTypes: [String]
+    aspects: JSON
+    vendorIds: JSON # map
+    groupOrigin: GroupOrigin
+    """
+    Target type of group entities.  TargetType UNKNOWN if multiple target types
+    """
+    targetType: String
+    groupClassName: String
+  ): [Entity]
+    @sequence(
+      steps: [
+        { query: "_accessTokenTurbonomics" }
+        {
+          query: "_entitySearchFiltered"
+          arguments: [
+            # needed because this doesn't inherit arguments
+            { name: "q", argument: "q" }
+            { name: "query_type", argument: "query_type" }
+            { name: "cursor", argument: "cursor" }
+            { name: "limit", argument: "limit" }
+            { name: "order_by", argument: "order_by" }
+            { name: "aspect_names", argument: "aspect_names" }
+            { name: "ascending", argument: "ascending" }
+            { name: "uuid", argument: "uuid" }
+            { name: "displayName", argument: "displayName" }
+            { name: "className", argument: "className" }
+            { name: "membersCount", argument: "membersCount" }
+            { name: "entitiesCount", argument: "entitiesCount" }
+            { name: "costPrice", argument: "costPrice" }
+            { name: "groupType", argument: "groupType" }
+            { name: "severity", argument: "severity" }
+            { name: "state", argument: "state" }
+            { name: "environmentType", argument: "environmentType" }
+            { name: "scope", argument: "scope" }
+            { name: "isStatic", argument: "isStatic" }
+            { name: "logicalOperator", argument: "logicalOperator" }
+            { name: "criteriaList", argument: "criteriaList" }
+            { name: "memberUuidList", argument: "memberUuidList" }
+            #  { name: "realtimeMarketReference", argument: "realtimeMarketReference" }
+            #  { name: "stats", argument: "stats" }
+            { name: "temporary", argument: "temporary" }
+            { name: "activeEntitiesCount", argument: "activeEntitiesCount" }
+            { name: "cloudType", argument: "cloudType" }
+            # { name: "source", argument: "source" }
+            # { name: "memberTypes", argument: "memberTypes" }
+            # { name: "entityTypes", argument: "entityTypes" }
+            { name: "aspects", argument: "aspects" }
+            { name: "vendorIds", argument: "vendorIds" }
+            { name: "groupOrigin", argument: "groupOrigin" }
+            { name: "targetType", argument: "targetType" }
+            { name: "groupClassName", argument: "groupClassName" }
+          ]
+        }
+      ]
+    )
+
+  _entitySearchFiltered(
+    q: String = ""
+    query_type: QueryType = CONTAINS
+    cursor: Int = 0
+    limit: Int = 1000
+    order_by: SearchOrderBy = SEVERITY
+    aspect_names: [String] = []
+    ascending: Boolean = true
+
+    uuid: ID
+    displayName: String
+    className: String # required?
+    membersCount: Int
+    entitiesCount: Int
+    costPrice: Float
+    groupType: String
+    severity: Severity
+    state: State
+    environmentType: EnvironmentType
+    scope: [String]
+    isStatic: Boolean
+    logicalOperator: LogicalOperator
+    criteriaList: FilterInput
+    memberUuidList: [ID]
+    #    realtimeMarketReference: BaseApiDTO
+    #    stats: StatSnapshot
+    temporary: Boolean
+    activeEntitiesCount: Int
+    cloudType: CloudType
+    #    source: Target
+    #    memberTypes: [String]
+    #    entityTypes: [String]
+    aspects: JSON # map
+    vendorIds: JSON # map
+    groupOrigin: GroupOrigin
+    targetType: String
+    groupClassName: String
+
+    access_token: Secret!
+  ): [Entity]
+    @rest(
+      method: POST
+      # these query parameters end up in body for now, but turbonomics seems to ignore so leave for now (use bodyPOST to remove if need)
+      endpoint: "https://$hostname;/api/v3/search?q=$q&query_type=$query_type;&cursor=$cursor;&limit=$limit;&order_by=$order_by&ascending=$ascending&aspect_names=$aspect_names"
+
+      configuration: "turbonomics"
+      headers: [
+        { name: "authorization", value: "bearer $access_token" }
+        { name: "Content-Type", value: "application/json" }
+      ]
+    )
+}

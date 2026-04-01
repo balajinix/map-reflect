@@ -1,0 +1,55 @@
+type LookupResult {
+  entity_type: String!
+  entity_value: String!
+}
+
+extend type Query {
+  lookupValue(
+    textToMatch: String!
+    entity: String
+    count: Int = 20
+    minimumScore: Float = 0.75
+  ): [LookupResult]
+}
+
+
+extend type Query {
+    lookupServiceName(
+        textToMatch: String!
+        entity: String = "service_name"
+        count: Int = 20
+        minimumScore: Float = 0.75
+    ): [LookupResult]
+    @supplies(query: "lookupValue" if: { src: "entity == 'service_name'" })
+    @materializer(query: "_lookupServiceName" arguments: [{name: "textToMatch" argument: "textToMatch"}])
+
+
+    _lookupServiceName(textToMatch: String!): [LookupResult]
+    @rest(
+        endpoint: "https://$hostname/v3/reporting/cost/run?dimensions=service_name&metrics=unblended_cost&start_date=60+days+ago+at+00%3A00%3A00&end_date=00%3A00%3A00&filters=service_name%3D%40$textToMatch;"
+        configuration: "apptio"
+        headers: [{ name: "Authorization", value: "Basic $apitoken" }]
+        transforms: [{editor: """jsonata:
+         $map($.results.service_name, function($i) { {"entity_type":"service_name", "entity_value": $i} })
+        """}]
+    )
+
+    lookupVendor(
+        textToMatch: String!
+        entity: String = "vendor"
+        count: Int = 20
+        minimumScore: Float = 0.75
+    ): [LookupResult]
+    @supplies(query: "lookupValue" if: { src: "entity == 'vendor'" })
+    @materializer(query: "_lookupVendor" arguments: [{name: "textToMatch" argument: "textToMatch"}])
+
+    _lookupVendor(textToMatch: String!): [LookupResult]
+    @rest(
+        endpoint: "https://$hostname/v3/reporting/cost/run?dimensions=vendor&metrics=unblended_cost&start_date=60+days+ago+at+00%3A00%3A00&end_date=00%3A00%3A00&filters=vendor%3D%40$textToMatch;"
+        configuration: "apptio"
+        headers: [{ name: "Authorization", value: "Basic $apitoken" }]
+        transforms: [{editor: """jsonata:
+         $map($.results.vendor, function($i) { {"entity_type":"vendor", "entity_value": $i} })
+        """}])
+}
+

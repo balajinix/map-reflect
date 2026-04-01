@@ -1,0 +1,534 @@
+type AdditionalProperties {
+  wxa_message: WxaMessage
+}
+
+type Assistant {
+  is_default: Boolean
+}
+
+type ContentEntry {
+  response_type: String
+  text: String
+}
+
+type Data {
+  message: Message
+  message_id: ID
+
+  last_error: String
+  # event
+  assistant: Assistant
+
+  delta: String
+  run_id: String
+  thread_id: String
+}
+
+type GenericEntry {
+  response_type: String
+  text: String
+}
+
+type Message {
+  id: String
+  role: String
+  content: [ContentEntry]
+  context: JSON
+  mentions: JSON
+  assistant: Assistant
+  tenant_id: ID
+  thread_id: ID
+  created_by: String
+  created_on: DateTime
+  updated_at: DateTime
+
+  document_ids: JSON
+  step_history: JSON
+  parent_message_id: ID
+
+  additional_properties: AdditionalProperties
+  created_by_username: String
+}
+
+type WXAOutput {
+  generic: [GenericEntry]
+}
+
+type Result {
+  data: Data
+  next_run_id: String
+  """
+  - route_complete
+  - route_confirm
+  - nba_selection
+  - message_created
+  - form_submission
+  - route_error
+  - nba_selection_error
+  """
+  type: String
+}
+
+type AssistantRun {
+  id: ID
+  tenant_id: ID
+  assistant_id: ID
+
+  thread_id: ID!
+
+  status: String
+
+  created_at: DateTime
+  started_at: DateTime
+  completed_at: DateTime
+  failed_at: DateTime
+  cancelled_at: DateTime
+  llm_params: JSON # later
+  usage: Usage
+  last_error: String
+  result: Result
+  guardrails: JSON # later
+}
+
+type TokenUsage {
+  completion_tokens: Int
+  prompt_tokens: Int
+  total_tokens: Int
+}
+
+type Usage {
+  model_name: String
+  token_usage: TokenUsage
+}
+
+type WxaMessage {
+  output: WXAOutput
+}
+
+type AssistantRunRoot {
+  message_id: String
+  run_id: String
+  task_id: String
+  thread_id: String
+}
+
+type RunEvent {
+  data: Data
+  event: String
+  id: ID
+}
+
+input ReturnOptionsInput {
+  # TextGenerationReturnOptions
+  generated_tokens: Boolean
+  input_parameters: Boolean
+  input_text: Boolean
+  input_tokens: Boolean
+  token_logprobs: Boolean
+  token_ranks: Boolean
+  """
+  Include top N candidate tokens at the position of each returned token. The maximum value that is permitted is 5, but more might be returned if there is a tie for nth place.
+  """
+  top_n_tokens: Int
+}
+
+input LengthPenaltyInput {
+  """
+  Represents the factor of exponential decay. Larger values correspond to more aggressive decay.
+  """
+  decay_factor: Float
+  """
+  A number of generated tokens after which this should take effect.
+  """
+  start_index: Int
+}
+
+input LLMParamsInput {
+  """
+  Specifies the number of beams that are used in beam search decoding. A higher value allows for a more exhaustive search, potentially improving the quality of the output at the cost of computational complexity.
+  """
+  beam_width: Int
+
+  """
+  Represents the strategy that is used for picking the tokens during generation of the output text. Possible values include 'greedy' for deterministic generation and 'sample' for stochastic generation.
+  """
+  decoding_method: String
+
+  """
+  Pass `false` to omit matched stop sequences from the end of the output text. The default is `true`, meaning that the output ends with the stop sequence text when matched.
+  """
+  include_stop_sequence: Boolean
+
+  """
+  It can be used to exponentially increase the likelihood of the text generation terminating once a specified number of tokens have been generated.
+  """
+  length_penalty: LengthPenaltyInput
+
+  """
+  The maximum number of new tokens to be generated. It limits the length of the generated output, preventing it from exceeding a specified size.
+  """
+  max_new_tokens: Int
+
+  """
+  If stop sequences are given, they are ignored until minimum tokens are generated.
+    The minimum number of new tokens to be generated.
+  """
+  min_new_tokens: Int
+
+  """
+  Random number generator seed to use in sampling mode for experimental repeatability.
+  """
+  random_seed: Int
+
+  """
+  Represents the penalty for penalizing tokens that have already been generated or belong to the context. The value 1.0 means that there is no penalty.
+  """
+  repetition_penalty: Float
+
+  return_options: ReturnOptionsInput
+
+  """
+  Stop sequences are one or more strings which will cause the text generation to stop if/when they are produced as part of the output.
+  """
+  stop_sequences: [String]
+
+  """
+  A value used to modify the next-token probabilities in sampling mode. Values less than 1.0 sharpen the probability distribution, resulting in \"less random\" output. Values greater than 1.0 flatten the probability distribution, resulting in \"more random\" output. A value of 1.0 has no effect.
+  """
+  temperature: Float
+
+  """
+  Time limit in milliseconds - if not completed within this time, generation stops. The text generated so far is returned along with the TIME_LIMIT stop reason.
+  """
+  time_limit: Int
+
+  """
+  The number of highest probability vocabulary tokens to keep for top-k-filtering. Only applies for sampling mode. When decoding_strategy is set to sample, only the top_k most likely tokens are considered as candidates for the next generated token.
+  """
+  top_k: Int
+
+  """
+  Similar to top_k except the candidates to generate the next token are the most likely tokens with probabilities that add up to at least top_p. Also known as nucleus sampling. A value of 1.0 is equivalent to disabled.
+  """
+  top_p: Float
+  """
+  Truncates the input to a specified number of tokens to prevent exceeding token limits, which may cause request failures.
+  """
+  truncate_input_tokens: Int
+  """
+  Measures typicality to control how predictable the next token is compared to the expected randomness. Lower values lead to more diverse outputs.
+  """
+  typical_p: Float
+}
+
+input ChatMessageTextInput {
+  """
+  search, text, user_defined
+  """
+  response_type: String
+  text: String
+  "An array of objects that specify channels for which the response is intended. If **channels** are present, the response is intended for a built-in integration and should not be handled by an API client."
+  channels: [String]
+
+  # for search
+  header: String
+  primary_results: JSON
+  additional_results: JSON
+  # user defined
+  user_defined: JSON
+}
+
+input ChatMessageInput {
+  role: String
+
+  # drop simple form
+  # content: String
+
+  content: [ChatMessageTextInput] # [ RuntimeResponseGenericCreate ]
+  # mentions: MentionInput # Mention
+  # parent_message_id: ID
+  # additional_properties: AdditionalPropertiesInput # AdditionalProperties
+  # assistant_id: ID
+}
+
+input GuardrailConfigInput {
+  enabled: Boolean
+  threshold: Float
+}
+
+input GuardrailMaskInput {
+  remove_entity_value: Boolean
+}
+
+input GuardrailInput {
+  input: GuardrailConfigInput
+  output: GuardrailConfigInput
+  mask: GuardrailMaskInput
+}
+
+input GuardrailsInput {
+  hap: GuardrailInput
+  social_bias: GuardrailInput
+  pii: GuardrailInput
+}
+
+"""
+AccessToken generation
+
+two ways to auth that require slightly different URLs
+api.dl.watson-orchestrate.ibm.com - uses bearer tokens derived from the IAM-API-KEY [ in config ]
+api.us-south.watson-orchestrate.cloud.ibm.com - old style, uses IAM-API-KEY directly
+Note: for now we pass in both the Authorization and IAM-API_KEY to calls; this means non-ibm cloud calls
+have IAM-API-TOKEN showing.  Fix later.
+"""
+type AccessToken {
+  token: String
+  token_type: String
+  expired_in: Int
+}
+
+# for sequence
+type _CloudIBM {
+  is_cloud_ibm: Boolean
+}
+
+# slightly convoluted pathway to allow for both ibm cloud (IAM API_KEY) and non-ibm cloud services (Bearer)
+type Query {
+  """
+  return access token if !is_ibm_cloud_hostname
+  """
+  _accessToken: AccessToken
+    @sequence(
+      steps: [
+        { query: "_is_ibm_cloud_hostname" }
+        { query: "_get_access_token" }
+      ]
+    )
+
+  """
+  will get an access token from IAM if is_cloud_ibm else it will not return a value
+  """
+  _get_access_token(is_cloud_ibm: Boolean, apikey: Secret): AccessToken
+
+  """
+  true if hostname is in IBM cloud .cloud.ibm.com
+  """
+  _is_ibm_cloud_hostname: _CloudIBM
+    @rest(
+      endpoint: "stepzen:empty"
+      configuration: "wxo"
+      ecmascript: """
+      function transformREST(s) {
+        return JSON.stringify({ "is_cloud_ibm": get("hostname")?.endsWith(".cloud.ibm.com")});
+      }
+      """
+    )
+
+  """
+  supplies an IAM access token if not is_cloud_ibm to _get_access_token
+  """
+  _iam_accessToken(is_cloud_ibm: Boolean, apikey: Secret): AccessToken!
+    @supplies(query: "_get_access_token", if: { src: "!is_cloud_ibm" })
+    @rest(
+      endpoint: "https://iam.platform.saas.ibm.com/siusermgr/api/1.0/apikeys/token"
+      method: POST
+      configuration: "wxo-guard"
+      contenttype: "application/json"
+      ecmascript: """
+      function bodyPOST(s) {
+         return JSON.stringify({ apikey: get("apikey") })
+      }
+      function transformREST(body) {
+        if (status == 200) {
+           return body
+        }
+        //
+        let resp = JSON.parse(body);
+        throw new Error(`IAM: ${JSON.stringify(resp)}`);
+      }
+      """
+    )
+}
+
+"""
+AssistantRun Connection with edges
+"""
+type AssistantRunConnection {
+  edges: [AssistantRunEdge]
+  pageInfo: PageInfo!
+}
+
+"""
+AssistantRun Edge with node
+"""
+type AssistantRunEdge {
+  node: AssistantRun
+  cursor: String
+}
+
+type Query {
+  """
+  Get an AI agent run events
+  If stream_timeout is encountered, partial results will be returned.
+  """
+  chatRunEvents(
+    run_id: ID!
+    """
+    The maximum time in milliseconds to wait for event stream.  Default: 1000
+    """
+    stream_timeout: Int
+  ): [RunEvent]
+    @sequence(
+      steps: [
+        { query: "_accessToken" }
+        {
+          query: "_chatRunEvents"
+          arguments: [
+            # needed because non-zero step doesn't inherit arguments
+            { name: "run_id", argument: "run_id" }
+            { name: "stream_timeout", argument: "stream_timeout" }
+          ]
+        }
+      ]
+    )
+
+  _chatRunEvents(
+    run_id: ID!
+    token: Secret
+    stream_timeout: Int
+    iam_api_key: Secret
+  ): [RunEvent]
+    @rest(
+      endpoint: "https://$hostname;/instances/$tenantid;/v1/orchestrate/runs/$run_id;/events"
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "Content-Type", value: "application/json" }
+        { name: "Authorization", value: "Bearer $token" }
+        { name: "IAM-API_KEY", value: "$apikey" }
+      ]
+      configuration: "wxo"
+    )
+
+  """
+  Get an AI agent run
+  """
+  chatRun(run_id: ID): AssistantRun
+    @sequence(
+      steps: [
+        { query: "_accessToken" }
+        {
+          query: "_chatRun"
+          arguments: [
+            # needed because non-zero step doesn't inherit arguments
+            { name: "run_id", argument: "run_id" }
+          ]
+        }
+      ]
+    )
+
+  _chatRun(run_id: ID, token: Secret): AssistantRun
+    @rest(
+      endpoint: "https://$hostname;/instances/$tenantid;/v1/orchestrate/runs/$run_id;"
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "Content-Type", value: "application/json" }
+        { name: "Authorization", value: "Bearer $token" }
+        { name: "IAM-API_KEY", value: "$apikey" }
+      ]
+      configuration: "wxo"
+    )
+
+  """
+  Lists an AI agent runs
+  """
+  chatRuns(first: Int = 10, after: String = ""): AssistantRunConnection
+    @sequence(
+      steps: [
+        { query: "_accessToken" }
+        {
+          query: "_chatRuns"
+          arguments: [
+            { name: "first", argument: "first" }
+            { name: "after", argument: "after" }
+          ]
+        }
+      ]
+    )
+
+  _chatRuns(
+    first: Int = 10
+    after: String = ""
+    token: Secret
+  ): AssistantRunConnection
+    @rest(
+      endpoint: "https://$hostname;/instances/$tenantid;/v1/orchestrate/runs?limit=$first&offset=$after"
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "Content-Type", value: "application/json" }
+        { name: "Authorization", value: "Bearer $token" }
+        { name: "IAM-API_KEY", value: "$apikey" }
+      ]
+      configuration: "wxo-guard"
+      resultroot: "data[]"
+      # pagination will do needful, but total is number of items
+      # instead of pages.  Okay for now, but eventually
+      # figure out how to translate this to number of pages.
+      pagination: { type: OFFSET, setters: [{ field: "total", path: "total" }] }
+    )
+}
+
+type Mutation {
+  """
+  Chat with an AI agent
+  """
+  createChatRun(
+    llmvars: LLMParamsInput
+    message: ChatMessageInput
+    thread_id: ID
+    guardrails: GuardrailsInput
+  ): AssistantRunRoot
+    @sequence(
+      steps: [
+        { query: "_accessToken" }
+        {
+          mutation: "_createChatRun"
+          arguments: [
+            # needed because non-zero step doesn't inherit arguments
+            { name: "llmvars", argument: "llmvars" }
+            { name: "message", argument: "message" }
+            { name: "thread_id", argument: "thread_id" }
+            { name: "guardrails", argument: "guardrails" }
+          ]
+        }
+      ]
+    )
+
+  _createChatRun(
+    llmvars: LLMParamsInput
+    message: ChatMessageInput
+    thread_id: ID
+    guardrails: GuardrailsInput
+    token: Secret
+  ): AssistantRunRoot
+    @rest(
+      method: POST
+      endpoint: "https://$hostname;/instances/$tenantid;/v1/orchestrate/runs"
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "Content-Type", value: "application/json" }
+        { name: "Authorization", value: "Bearer $token" }
+        { name: "IAM-API_KEY", value: "$apikey" }
+      ]
+      configuration: "wxo"
+    )
+}
+
+type Subscription {
+  """
+  subscribe to run.  chatRunEvents will wait until stream_timeout before returning.   Shorten steamtime_out to get early results.
+
+  note: last entry will have an error upon timeout
+  """
+  chatEvents(run_id: ID!, stream_timeout: Int): [RunEvent]
+    @materializer(query: "chatRunEvents")
+}

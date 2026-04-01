@@ -1,0 +1,17 @@
+deployment:
+  identity:
+    keys:
+      - algorithm: HS256
+        key: STEPZEN_JWT_SECRET
+configurationset:
+  - configuration:
+      name: wxo
+      apikey: STEPZEN_WXO_APIKEY
+      hostname: STEPZEN_WXO_HOSTNAME
+      tenantid: STEPZEN_WXO_TENANTID
+  - configuration:
+      name: wxo-guard
+      apikey: STEPZEN_WXO_APIKEY
+      hostname: STEPZEN_WXO_HOSTNAME
+      tenantid: STEPZEN_WXO_TENANTID
+      stepzen.queryextensionguard: "true"

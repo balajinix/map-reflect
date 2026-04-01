@@ -1,0 +1,19 @@
+schema
+  @sdl(
+    files: [
+      "recommendations/index.graphql"
+      "budgets/index.graphql"
+      "clusters/index.graphql"
+      "reporting/atom.graphql"
+    ]
+  )
+  @tool(
+    name: "cost-report-tool"
+    description: "Generate Cost Reports"
+    graphql: [
+      { expose: true, types: "Query", fields: "llmFriendlyCostReport|lookupValue" }
+    ]
+  )
+{
+  query: Query
+}

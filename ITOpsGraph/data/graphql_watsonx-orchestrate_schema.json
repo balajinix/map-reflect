@@ -1,0 +1,2861 @@
+{
+  "product": "watsonx-orchestrate",
+  "source_file": "schemas/graphql/watsonx-orchestrate",
+  "source_type": "graphql",
+  "types": [
+    {
+      "name": "SkillSetByID",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "skills",
+          "type": "JSON",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "BaseLlm",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "guardrails",
+          "type": "Guardrails",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "model_name",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "model_params",
+          "type": "ModelParams",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "system_prompt",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "DefaultAgentSettings",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "model_settings",
+          "type": "ModelSettings",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "router_settings",
+          "type": "RouterSettings",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "slot_filling_settings",
+          "type": "SlotFillingSettings",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "user_settings",
+          "type": "UserSettings",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Embeddings",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "model_name",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Guardrails",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "hap",
+          "type": "Hap",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "pii",
+          "type": "Pii",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Hap",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "input",
+          "type": "Input",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "output",
+          "type": "Output",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Input",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "threshold",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Input1",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "threshold",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Mask",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "remove_entity_value",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ModelParams",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "decoding_method",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "max_new_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "min_new_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "random_seed",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "temperature",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ModelParams1",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "decoding_method",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "max_new_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "min_new_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "random_seed",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "repetition_penalty",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "return_options",
+          "type": "ReturnOptions",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "temperature",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_k",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_p",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ModelParams2",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "decoding_method",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "max_new_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "min_new_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "random_seed",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "repetition_penalty",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "return_options",
+          "type": "ReturnOptions1",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "temperature",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_k",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_p",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ModelSettings",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "base_llm",
+          "type": "BaseLlm",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "embeddings",
+          "type": "Embeddings",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "is_base_llm_enabled",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Output",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "threshold",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Output1",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "threshold",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Pii",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "input",
+          "type": "Input1",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "mask",
+          "type": "Mask",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "output",
+          "type": "Output1",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ReturnOptions",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "generated_tokens",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "input_text",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "input_tokens",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_logprobs",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_ranks",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_n_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ReturnOptions1",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "generated_tokens",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "input_text",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "input_tokens",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_logprobs",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_ranks",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_n_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "RouterConfig",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "confidence_method",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "confidence_threshold",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "continue_journey_on_none",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "RouterSettings",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "model_name",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "model_params",
+          "type": "ModelParams1",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "router_config",
+          "type": "RouterConfig",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "router_type",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "routing_prompt",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "SlotFillingSettings",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "model_name",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "model_params",
+          "type": "ModelParams2",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "slot_filler_type",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "UserSettings",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "confirm_routing",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "SkillSets",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "skillsets",
+          "type": "SkillsetsEntry",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "SkillsetsEntry",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "assistant_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "skillset_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "url",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ThreadConnection",
+      "kind": "OBJECT",
+      "description": "Thread Connection with edges",
+      "fields": [
+        {
+          "name": "edges",
+          "type": "ThreadEdge",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "pageInfo",
+          "type": "PageInfo",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ThreadEdge",
+      "kind": "OBJECT",
+      "description": "Thread Edge with node",
+      "fields": [
+        {
+          "name": "node",
+          "type": "Thread",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "cursor",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "OkResponse",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "not_ok",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Thread",
+      "kind": "OBJECT",
+      "description": "message threads",
+      "fields": [
+        {
+          "name": "id",
+          "type": "ID",
+          "description": "The unique identifier of the message.",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "tenant_id",
+          "type": "ID",
+          "description": "The tenant unique identifier associated with the message.",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "created_by",
+          "type": "String",
+          "description": "The unique identifier of the user who created the message.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "created_by_username",
+          "type": "String",
+          "description": "The username of the user who created the message.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "created_on",
+          "type": "DateTime",
+          "description": "The timestamp when the message was created.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "updated_at",
+          "type": "DateTime",
+          "description": "The timestamp when the message was last updated.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "thread_id",
+          "type": "ID",
+          "description": "The unique identifier of the thread the message belongs to.",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "assistant",
+          "type": "AssistantInfo",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "parent_message_id",
+          "type": "ID",
+          "description": "The unique identifier of the parent message, if any.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "role",
+          "type": "String",
+          "description": "The role of the sender (Example: user and assistant).",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "content",
+          "type": "JSON",
+          "description": "The message content, either as a list content objects or string.",
+          "is_list": true,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "mentions",
+          "type": "Mention",
+          "description": "List of mentions included in the message.",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "additional_properties",
+          "type": "AdditionalProperties",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Mention",
+      "kind": "OBJECT",
+      "description": "mention will specify a assistant",
+      "fields": [
+        {
+          "name": "assistant_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "assistant_name",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AssistantInfo",
+      "kind": "OBJECT",
+      "description": "Basic information about an assistant.",
+      "fields": [
+        {
+          "name": "assistant_id",
+          "type": "ID",
+          "description": "The unique identifier of the AI assistant.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "assistant_name",
+          "type": "String",
+          "description": "The name of the assistant.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "is_default",
+          "type": "Boolean",
+          "description": "Indicates whether this is the default assistant.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AdditionalProperties",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "wxa_message",
+          "type": "WxaMessage",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Assistant",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "is_default",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ContentEntry",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "response_type",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "text",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Data",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "message",
+          "type": "Message",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "message_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "last_error",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "assistant",
+          "type": "Assistant",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "delta",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "run_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "thread_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "GenericEntry",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "response_type",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "text",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Message",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "role",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "content",
+          "type": "ContentEntry",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "context",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "mentions",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "assistant",
+          "type": "Assistant",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "tenant_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "thread_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "created_by",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "created_on",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "updated_at",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "document_ids",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "step_history",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "parent_message_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "additional_properties",
+          "type": "AdditionalProperties",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "created_by_username",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "WXAOutput",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "generic",
+          "type": "GenericEntry",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Result",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "data",
+          "type": "Data",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "next_run_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "type",
+          "type": "String",
+          "description": "- route_complete - route_confirm - nba_selection - message_created - form_submission - route_error - nba_selection_error",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AssistantRun",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "tenant_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "assistant_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "thread_id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "status",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "created_at",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "started_at",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "completed_at",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "failed_at",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "cancelled_at",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "llm_params",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "usage",
+          "type": "Usage",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "last_error",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "result",
+          "type": "Result",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "guardrails",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "TokenUsage",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "completion_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "prompt_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "total_tokens",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "Usage",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "model_name",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_usage",
+          "type": "TokenUsage",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "WxaMessage",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "output",
+          "type": "WXAOutput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AssistantRunRoot",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "message_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "run_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "task_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "thread_id",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "RunEvent",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "data",
+          "type": "Data",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "event",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "id",
+          "type": "ID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ReturnOptionsInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "generated_tokens",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "input_parameters",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "input_text",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "input_tokens",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_logprobs",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_ranks",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_n_tokens",
+          "type": "Int",
+          "description": "Include top N candidate tokens at the position of each returned token. The maximum value that is permitted is 5, but more might be returned if there is a tie for nth place.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "LengthPenaltyInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "decay_factor",
+          "type": "Float",
+          "description": "Represents the factor of exponential decay. Larger values correspond to more aggressive decay.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "start_index",
+          "type": "Int",
+          "description": "A number of generated tokens after which this should take effect.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "LLMParamsInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "beam_width",
+          "type": "Int",
+          "description": "Specifies the number of beams that are used in beam search decoding. A higher value allows for a more exhaustive search, potentially improving the quality of the output at the cost of computational complexity.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "decoding_method",
+          "type": "String",
+          "description": "Represents the strategy that is used for picking the tokens during generation of the output text. Possible values include 'greedy' for deterministic generation and 'sample' for stochastic generation.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "include_stop_sequence",
+          "type": "Boolean",
+          "description": "Pass `false` to omit matched stop sequences from the end of the output text. The default is `true`, meaning that the output ends with the stop sequence text when matched.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "length_penalty",
+          "type": "LengthPenaltyInput",
+          "description": "It can be used to exponentially increase the likelihood of the text generation terminating once a specified number of tokens have been generated.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "max_new_tokens",
+          "type": "Int",
+          "description": "The maximum number of new tokens to be generated. It limits the length of the generated output, preventing it from exceeding a specified size.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "min_new_tokens",
+          "type": "Int",
+          "description": "If stop sequences are given, they are ignored until minimum tokens are generated. The minimum number of new tokens to be generated.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "random_seed",
+          "type": "Int",
+          "description": "Random number generator seed to use in sampling mode for experimental repeatability.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "repetition_penalty",
+          "type": "Float",
+          "description": "Represents the penalty for penalizing tokens that have already been generated or belong to the context. The value 1.0 means that there is no penalty.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "return_options",
+          "type": "ReturnOptionsInput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "stop_sequences",
+          "type": "String",
+          "description": "Stop sequences are one or more strings which will cause the text generation to stop if/when they are produced as part of the output.",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "temperature",
+          "type": "Float",
+          "description": "A value used to modify the next-token probabilities in sampling mode. Values less than 1.0 sharpen the probability distribution, resulting in \\\"less random\\\" output. Values greater than 1.0 flatten the probability distribution, resulting in \\\"more random\\\" output. A value of 1.0 has no effect.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "time_limit",
+          "type": "Int",
+          "description": "Time limit in milliseconds - if not completed within this time, generation stops. The text generated so far is returned along with the TIME_LIMIT stop reason.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_k",
+          "type": "Int",
+          "description": "The number of highest probability vocabulary tokens to keep for top-k-filtering. Only applies for sampling mode. When decoding_strategy is set to sample, only the top_k most likely tokens are considered as candidates for the next generated token.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "top_p",
+          "type": "Float",
+          "description": "Similar to top_k except the candidates to generate the next token are the most likely tokens with probabilities that add up to at least top_p. Also known as nucleus sampling. A value of 1.0 is equivalent to disabled.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "truncate_input_tokens",
+          "type": "Int",
+          "description": "Truncates the input to a specified number of tokens to prevent exceeding token limits, which may cause request failures.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "typical_p",
+          "type": "Float",
+          "description": "Measures typicality to control how predictable the next token is compared to the expected randomness. Lower values lead to more diverse outputs.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ChatMessageTextInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "response_type",
+          "type": "String",
+          "description": "search, text, user_defined",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "text",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "channels",
+          "type": "String",
+          "description": "An array of objects that specify channels for which the response is intended. If **channels** are present, the response is intended for a built-in integration and should not be handled by an API client.",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "header",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "primary_results",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "additional_results",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "user_defined",
+          "type": "JSON",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "ChatMessageInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "role",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "content",
+          "type": "ChatMessageTextInput",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "GuardrailConfigInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "threshold",
+          "type": "Float",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "GuardrailMaskInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "remove_entity_value",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "GuardrailInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "input",
+          "type": "GuardrailConfigInput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "output",
+          "type": "GuardrailConfigInput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "mask",
+          "type": "GuardrailMaskInput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "GuardrailsInput",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "hap",
+          "type": "GuardrailInput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "social_bias",
+          "type": "GuardrailInput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "pii",
+          "type": "GuardrailInput",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AccessToken",
+      "kind": "OBJECT",
+      "description": "AccessToken generation  two ways to auth that require slightly different URLs api.dl.watson-orchestrate.ibm.com - uses bearer tokens derived from the IAM-API-KEY [ in config ] api.us-south.watson-orchestrate.cloud.ibm.com - old style, uses IAM-API-KEY directly Note: for now we pass in both the Authorization and IAM-API_KEY to calls; this means non-ibm cloud calls have IAM-API-TOKEN showing.  Fix later.",
+      "fields": [
+        {
+          "name": "token",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "token_type",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "expired_in",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "_CloudIBM",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "is_cloud_ibm",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AssistantRunConnection",
+      "kind": "OBJECT",
+      "description": "AssistantRun Connection with edges",
+      "fields": [
+        {
+          "name": "edges",
+          "type": "AssistantRunEdge",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "pageInfo",
+          "type": "PageInfo",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AssistantRunEdge",
+      "kind": "OBJECT",
+      "description": "AssistantRun Edge with node",
+      "fields": [
+        {
+          "name": "node",
+          "type": "AssistantRun",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "cursor",
+          "type": "String",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    }
+  ]
+}

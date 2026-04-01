@@ -1,0 +1,15 @@
+query Category24Analysis {
+  llmFriendlyCostReport(
+    dateRange: { start: "2024-01-01", end: "2024-01-31" }
+    dimensions: [category24]
+    metrics: [unblended_cost]
+    sort: [{ field: "unblended_cost", direction: DESC }]
+    limit: 50
+  ) {
+    total_results
+    results {
+      category24
+      unblended_cost
+    }
+  }
+}

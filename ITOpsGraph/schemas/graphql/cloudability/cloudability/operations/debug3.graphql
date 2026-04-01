@@ -1,0 +1,13 @@
+query {
+  llmFriendlyCostReport(
+    dateRange: { start: "2025-06-01", end: "2025-06-30" }
+    dimensions: [account_identifier, account_name]
+    metrics: [unblended_cost]
+  ) {
+    results {
+      account_identifier
+      account_name
+      unblended_cost
+    }
+  }
+}

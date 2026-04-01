@@ -1,0 +1,760 @@
+{
+  "product": "ns1",
+  "source_file": "schemas/graphql/ns1",
+  "source_type": "graphql",
+  "types": [
+    {
+      "name": "Aggregation",
+      "kind": "ENUM",
+      "description": "",
+      "fields": [
+        {
+          "name": "avg",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "max",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "min",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "p50",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "p75",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "p90",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "p95",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "p99",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "JobsResponseTimes",
+      "kind": "OBJECT",
+      "description": "NSOne Connect - Internet Weather API for Solis-DAL.  pulsar performance apis  *Experimental - subject to change*",
+      "fields": [
+        {
+          "name": "jobid",
+          "type": "ID",
+          "description": "id for job within application",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "responseTime",
+          "type": "Float",
+          "description": "response time",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "job",
+          "type": "AppJob",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "arguments",
+          "type": "",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "RealUserMeasurementPerformance",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "regionName",
+          "type": "String",
+          "description": "name of region",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "jobsResponseTimes",
+          "type": "JobsResponseTimes",
+          "description": "individual job response times",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "parent",
+          "type": "String",
+          "description": "name of parent, GLOBAL for top level",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "responseTime",
+          "type": "Float",
+          "description": "aggregate responseTime for selected jobs",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "RUMData",
+      "kind": "OBJECT",
+      "description": "",
+      "fields": [
+        {
+          "name": "data",
+          "type": "RealUserMeasurementPerformance",
+          "description": "real user measurement data by region",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "minResponseTime",
+          "type": "Float",
+          "description": "min response time (agg)",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "maxResponseTime",
+          "type": "Float",
+          "description": "max response time (agg)",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "iwjobs",
+          "type": "AppJob",
+          "description": "list of jobs",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "arguments",
+          "type": "",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "StartTimeFrame",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "ge",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "EndTimeFrame",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "le",
+          "type": "DateTime",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "PerformanceFilter",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "jobs",
+          "type": "String",
+          "description": "Filter the result by the given Pulsar Job(s)",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "period",
+          "type": "String",
+          "description": "Time period expressed as a difference from the current timestamp. Period can be used alone, without specifying start or end; i.e. period=1h means \"the last one hour\". It also can be used with either start or end, but not both. I.e. period=1h&start=1707591600 means \"calculate end time by adding one hour to start\". In the current implementation, if you specify something like period=1h&end=1707591600, the end date is ignored and the time range is treated as only period=1h.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "startTime",
+          "type": "StartTimeFrame",
+          "description": "(absolute or relative) for the beginning of the time range (ISO8601)",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "endTime",
+          "type": "EndTimeFrame",
+          "description": "(absolute or relative) for the end of the time range (ISO8601)",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "area",
+          "type": "String",
+          "description": "Geographic region. It can be specified as a country code or country with subdivision. Also, 6 major regions can be used: NA (North America), SA (South Africa), AF (Africa), EU (Europe) and OC (Oceania). To differentiate between Country/Subdivision and Region, the Region must have a R_ prefix.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "asn",
+          "type": "Int",
+          "description": "Autonomous System Number (ASN) by which to filter results.",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "regionParentPrefix",
+          "type": "String",
+          "description": "filter by prefix like \"R_\"",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "_StartEndTimeFrame",
+      "kind": "OBJECT",
+      "description": "jsonata:{\"data\": $, \"minResponseTime\": $min($.responseTime), \"maxResponseTime\": $max($.responseTime)}",
+      "fields": [
+        {
+          "name": "start",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "end",
+          "type": "Int",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "JobTypeID",
+      "kind": "ENUM",
+      "description": "",
+      "fields": [
+        {
+          "name": "responseTime",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "latency",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "custom",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "AppJob",
+      "kind": "OBJECT",
+      "description": "Pulsar job metadata",
+      "fields": [
+        {
+          "name": "customer",
+          "type": "Int",
+          "description": "customer id of the job owner",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "appid",
+          "type": "ID",
+          "description": "job appid",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "jobid",
+          "type": "ID",
+          "description": "app job id",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "description": "descriptive name",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "typeid",
+          "type": "JobTypeID",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": true,
+          "is_scalar": false
+        },
+        {
+          "name": "active",
+          "type": "Boolean",
+          "description": "job is active and usable for routing",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "community",
+          "type": "Boolean",
+          "description": "measurements and data publically available",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "shared",
+          "type": "Boolean",
+          "description": "visible and usuable by to other customers",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "config",
+          "type": "JobConfig",
+          "description": "details about the job configuration",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "JobConfig",
+      "kind": "OBJECT",
+      "description": "Pulsar job details",
+      "fields": [
+        {
+          "name": "host",
+          "type": "String",
+          "description": "Hostname where the resource to be measured is located",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "url_path",
+          "type": "String",
+          "description": "URL path to be appended to the host",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "http",
+          "type": "Boolean",
+          "description": "use HTTP in measurements",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "https",
+          "type": "Boolean",
+          "description": "use HTTPS in measurements",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "request_timeout_millis",
+          "type": "Int",
+          "description": "Maximum timeout per request",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "job_timeout_millis",
+          "type": "Int",
+          "description": "Maximum timeout per job",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "use_xhr",
+          "type": "Boolean",
+          "description": "Whether to use XHR when taking measurements",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "static_values",
+          "type": "Boolean",
+          "description": "Whether to skip aggregation for this job's measurements",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "blend_metric_weights",
+          "type": "JSON",
+          "description": "metrics weights",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "BoolFilter",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "eq",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "ne",
+          "type": "Boolean",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        }
+      ],
+      "implements": null
+    },
+    {
+      "name": "JobsFilter",
+      "kind": "INPUT",
+      "description": "",
+      "fields": [
+        {
+          "name": "jobid",
+          "type": "ID",
+          "description": "equal filter on jobid will filter to 0 or 1 entries",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": true
+        },
+        {
+          "name": "community",
+          "type": "BoolFilter",
+          "description": "community only",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "shared",
+          "type": "BoolFilter",
+          "description": "shared only",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        },
+        {
+          "name": "active",
+          "type": "BoolFilter",
+          "description": "active only",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "graphql_type": null,
+          "is_enum": false,
+          "is_scalar": false
+        }
+      ],
+      "implements": null
+    }
+  ]
+}

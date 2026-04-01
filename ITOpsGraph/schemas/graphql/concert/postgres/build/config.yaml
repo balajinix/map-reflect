@@ -1,0 +1,4 @@
+configurationset:
+  - configuration:
+      name: appdb_config
+      uri: CONCERT_POSTGRES_URI 

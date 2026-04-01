@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package hashicorp.cloud.internal.infragraph.domain.v1;
+
+import "hashicorp/cloud/internal/infragraph/domain/v1/base.proto";
+import "hashicorp/cloud/internal/infragraph/domain/v1/edge.proto";
+import "hashicorp/cloud/internal/infragraph/options/v1/options.proto";
+
+option go_package = "github.com/hashicorp/cloud-infragraph/proto-internal/go;hashicorp_cloud_infragraph_internal";
+
+// HcpTerraformOrganization is a type containing HCP TF Organization specific fields.
+message HcpTerraformOrganization {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP_TERRAFORM";
+
+  BaseOrganization organization = 1;
+  optional bool is_unified = 2;
+  optional string agent_pool_id = 3 [
+    (options.v1.edge_label) = "OWNS",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "HCP_TERRAFORM_AGENT_POOL"
+  ];
+}
+
+// HcpTerraformProject is a type containing HCP TF Project specific fields.
+message HcpTerraformProject {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP_TERRAFORM";
+
+  BaseAccount account = 1;
+  optional bool is_legacy_organization_project = 2;
+  optional bool is_unified = 3;
+}
+
+// Workspace is a type containing Terraform Workspace specific fields.
+message HcpTerraformWorkspace {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP_TERRAFORM";
+  option (options.v1.message_kind) = "HCP_TERRAFORM_WORKSPACE";
+
+  Base base = 1;
+
+  optional string current_run_id = 2;
+  optional int32 resource_count = 3;
+
+  // the current state version id of the workspace
+  optional string current_state_version_id = 4 [
+    (options.v1.edge_label) = "HAS_CURRENT",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "HCP_TERRAFORM_STATE_VERSION"
+  ];
+
+  optional string environment = 5;
+  optional string execution_mode = 6;
+  repeated string tag_names = 7;
+  optional string agent_pool_id = 8 [
+    (options.v1.edge_label) = "RUNS_ON",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "HCP_TERRAFORM_AGENT_POOL"
+  ];
+}
+
+// StateVersion is a type containing HCP State Version specific fields.
+message HcpTerraformStateVersion {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP_TERRAFORM";
+  option (options.v1.message_kind) = "HCP_TERRAFORM_STATE_VERSION";
+
+  Base base = 1;
+
+  optional string status = 2;
+  optional string hosted_state_download_url = 3;
+  repeated Edge edge = 4;
+  optional string current_run_id = 5 [
+    (options.v1.edge_label) = "PRODUCES",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "HCP_TERRAFORM_RUN"
+  ];
+}
+
+message HcpTerraformAgentPool {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP_TERRAFORM";
+  option (options.v1.message_kind) = "HCP_TERRAFORM_AGENT_POOL";
+
+  Base base = 1;
+  optional int32 agent_count = 2;
+  optional bool organization_scoped = 3;
+}
+
+message HcpTerraformRun {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP_TERRAFORM";
+  option (options.v1.message_kind) = "HCP_TERRAFORM_RUN";
+
+  Base base = 1;
+  optional bool is_destroyed = 2;
+  optional string message = 3;
+  optional string status = 4;
+  optional string workspace_id = 5 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "HCP_TERRAFORM_WORKSPACE"
+  ];
+}

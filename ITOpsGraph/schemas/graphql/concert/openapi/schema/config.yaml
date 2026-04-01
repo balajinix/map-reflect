@@ -1,0 +1,6 @@
+configurationset:
+  - configuration:
+      name: ibmConcert
+      hostname: STEPZEN_CONCERT_HOST
+      instanceId: STEPZEN_CONCERT_INSTANCE_ID
+      token: STEPZEN_CONCERT_API_TOKEN

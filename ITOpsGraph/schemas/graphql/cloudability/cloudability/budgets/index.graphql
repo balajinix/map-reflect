@@ -1,0 +1,30 @@
+type Budgets {
+  result: [BudgetResultEntry]
+}
+
+type MonthsEntry {
+  month: String
+  threshold: Float
+}
+
+type BudgetResultEntry {
+  basis: String
+  id: String
+  months: [MonthsEntry]
+  name: String
+  ownerId: Int
+  viewId: Int
+}
+
+type Query {
+  budgets: Budgets
+    @rest(
+      endpoint: "https://$hostname;/v3/budgets"
+      method: GET
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "authorization", value: "Basic $apitoken;"}
+      ]
+      configuration: "apptio-guard"
+    )
+}

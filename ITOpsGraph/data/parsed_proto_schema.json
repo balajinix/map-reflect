@@ -1,0 +1,4049 @@
+{
+  "product": "infragraph",
+  "source_file": "schemas/proto",
+  "source_type": "mixed",
+  "types": [
+    {
+      "name": "GcpComputeInstance",
+      "kind": "MESSAGE",
+      "description": "GcpComputeInstance domain model message.",
+      "message_kind": null,
+      "message_source": "GCP",
+      "fields": [
+        {
+          "name": "virtual_machine",
+          "type": "BaseVirtualMachine",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AzureResource",
+      "kind": "MESSAGE",
+      "description": "AzureResource is a type containing Azure specific fields for all resources.",
+      "message_kind": null,
+      "message_source": "AZURE",
+      "fields": [
+        {
+          "name": "etag",
+          "type": "string",
+          "description": "type specific fields",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "provisioning_state",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AzureVirtualMachine",
+      "kind": "MESSAGE",
+      "description": "AzureVirtualMachine domain model message.",
+      "message_kind": null,
+      "message_source": "AZURE",
+      "fields": [
+        {
+          "name": "virtual_machine",
+          "type": "BaseVirtualMachine",
+          "description": "inherited types",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "azure_resource",
+          "type": "AzureResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "priority",
+          "type": "string",
+          "description": "type specific fields",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "extensions_time_budget",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "Base",
+      "kind": "MESSAGE",
+      "description": "Base is a base all domain models are expected to embed.",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "the unique identifier in the source system",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "the name of the model in the source system",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "tags",
+          "type": "string>",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "account_id",
+          "type": "string",
+          "description": "unique identifier of the container holding the type in the source system",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "ACCOUNT"
+        },
+        {
+          "name": "region_id",
+          "type": "string",
+          "description": "unique identifier of the region holding the type in the source system",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "REGION"
+        },
+        {
+          "name": "zone_ids",
+          "type": "string",
+          "description": "unique identifier of the zone holding the type in the source system",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "ZONE"
+        },
+        {
+          "name": "created_at",
+          "type": "google.protobuf.Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "updated_at",
+          "type": "google.protobuf.Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseNetworkInterface",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "NETWORK_INTERFACE",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "subnet_id",
+          "type": "string",
+          "description": "the subnet the network interface is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "SUBNET"
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the VPC the network interface is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "VIRTUAL_NETWORK"
+        },
+        {
+          "name": "security_group_ids",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "APPLIES_TO",
+          "edge_direction": "INCOMING",
+          "node_label": "SECURITY_GROUP"
+        }
+      ]
+    },
+    {
+      "name": "BasePolicy",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "POLICY",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseRole",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "ROLE",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseRegion",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "REGION",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseSecurityGroup",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "SECURITY_GROUP",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the VPC the security group is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "APPLIES_TO",
+          "edge_direction": "OUTGOING",
+          "node_label": "VIRTUAL_NETWORK"
+        }
+      ]
+    },
+    {
+      "name": "BaseSecurityRule",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "SECURITY_RULE",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "security_group_id",
+          "type": "string",
+          "description": "the security group this rule applies to",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "APPLIES_TO",
+          "edge_direction": "OUTGOING",
+          "node_label": "SECURITY_GROUP"
+        }
+      ]
+    },
+    {
+      "name": "BaseSubnet",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "SUBNET",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the VPC the subnet is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "VIRTUAL_NETWORK"
+        }
+      ]
+    },
+    {
+      "name": "BaseUser",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "USER",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVpc",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "VIRTUAL_NETWORK",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseZone",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "ZONE",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVirtualMachine",
+      "kind": "MESSAGE",
+      "description": "BaseVirtualMachine is a base type all virtual machines are expected to embed.",
+      "message_kind": "VIRTUAL_MACHINE",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "state",
+          "type": "string",
+          "description": "the state of the virtual machine",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the vpc the virtual machine is contained in",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "VIRTUAL_NETWORK"
+        },
+        {
+          "name": "subnet_id",
+          "type": "string",
+          "description": "the subnet the virtual machine is contained in",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "SUBNET"
+        },
+        {
+          "name": "network_interface_ids",
+          "type": "string",
+          "description": "the network interfaces the virtual machine is connected to",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "ATTACHES_TO",
+          "edge_direction": "INCOMING",
+          "node_label": "NETWORK_INTERFACE"
+        },
+        {
+          "name": "virtual_machine_image_id",
+          "type": "string",
+          "description": "the virtual machine image that the virtual machine runs",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "RUNS",
+          "edge_direction": "OUTGOING",
+          "node_label": "VIRTUAL_MACHINE_IMAGE"
+        },
+        {
+          "name": "virtual_machine_instance_type",
+          "type": "string",
+          "description": "the virtual machine type that the virtual machine is an instance of",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "INSTANCE_OF",
+          "edge_direction": "OUTGOING",
+          "node_label": "VIRTUAL_MACHINE_TYPE"
+        }
+      ]
+    },
+    {
+      "name": "BaseVirtualMachineImage",
+      "kind": "MESSAGE",
+      "description": "BaseVirtualMachineImage is a base type all virtual machine images are expected to embed.",
+      "message_kind": "VIRTUAL_MACHINE_IMAGE",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseStorageBucket",
+      "kind": "MESSAGE",
+      "description": "BaseStorageBucket is a base type all storage buckets are expected to embed.",
+      "message_kind": "STORAGE_BUCKET",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVolume",
+      "kind": "MESSAGE",
+      "description": "BaseVolume is a base type all volumes are expected to embed.",
+      "message_kind": "VOLUME",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "attached_virtual_machine_ids",
+          "type": "string",
+          "description": "the virtual machines this volume is attached to",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "ATTACHES_TO",
+          "edge_direction": "OUTGOING",
+          "node_label": "VIRTUAL_MACHINE"
+        },
+        {
+          "name": "size",
+          "type": "int32",
+          "description": "size of the volume in GiB",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "iops",
+          "type": "int32",
+          "description": "input/output operations per second",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "throughput",
+          "type": "int32",
+          "description": "throghput in MB/s",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "is_encrypted",
+          "type": "bool",
+          "description": "flag indicating if the volume is encrypted",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseServerlessFunction",
+      "kind": "MESSAGE",
+      "description": "BaseServerlessFunction is a base type all serverless functions are expected to embed.",
+      "message_kind": "SERVERLESS_FUNCTION",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseOrganization",
+      "kind": "MESSAGE",
+      "description": "BaseOrganization is a base type all organizations are expected to embed.",
+      "message_kind": "ORGANIZATION",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "BaseAccount",
+      "kind": "MESSAGE",
+      "description": "examples: AWS account, GCP project, HCP project.",
+      "message_kind": "ACCOUNT",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "organization_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "ORGANIZATION"
+        }
+      ]
+    },
+    {
+      "name": "BaseVirtualMachineType",
+      "kind": "MESSAGE",
+      "description": "BaseVirtualMachineType is a base type all virtual machine types are expected to embed.",
+      "message_kind": "VIRTUAL_MACHINE_TYPE",
+      "message_source": null,
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "Source",
+      "kind": "ENUM",
+      "description": "",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "SOURCE_UNSPECIFIED",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "SOURCE_AWS",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "SOURCE_AZURE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "SOURCE_GCP",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "SOURCE_HCP_PACKER",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "SOURCE_HCP_TERRAFORM",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "SOURCE_HCP",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "Kind",
+      "kind": "ENUM",
+      "description": "",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "KIND_UNSPECIFIED",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_VIRTUAL_MACHINE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_ACCOUNT",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_REGION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_ZONE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_VIRTUAL_NETWORK",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_SUBNET",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_NETWORK_INTERFACE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_VIRTUAL_MACHINE_IMAGE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_ECS_CLUSTER",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_ECS_SERVICE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_BUCKET",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_REGISTRY",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_POLICY",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_USER",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_STORAGE_BUCKET",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_VOLUME",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_SECURITY_GROUP",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_SECURITY_RULE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_BUILD",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_SBOM",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_VERSION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_SOURCE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_SERVERLESS_FUNCTION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_INHERITED_REVOCATION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_ANCESTRY",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_CHANNEL",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_PACKER_ARTIFACT",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_ORGANIZATION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_STATE_VERSION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_VIRTUAL_MACHINE_TYPE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_WORKSPACE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_ORGANIZATION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_AGENT_POOL",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_RUN",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_ROLE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "KIND_ROLE_POLICY_ATTACHMENT",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "PackerRegistry",
+      "kind": "MESSAGE",
+      "description": "PackerRegistry domain model message.",
+      "message_kind": "PACKER_REGISTRY",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "feature_tier",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "activated",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "billing_deprovision_reason",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "billing_deprovision_message",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "PackerBucket",
+      "kind": "MESSAGE",
+      "description": "PackerBucket domain model message.",
+      "message_kind": "PACKER_BUCKET",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "registry_id",
+          "type": "string",
+          "description": "id of the parent registry",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_REGISTRY"
+        },
+        {
+          "name": "platforms",
+          "type": "string",
+          "description": "TODO: string array currently unsupported by codegen",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "PackerInheritedRevocation",
+      "kind": "MESSAGE",
+      "description": "PackerInheritedRevocation domain model message.",
+      "message_kind": "PACKER_INHERITED_REVOCATION",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "descendant_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_VERSION"
+        },
+        {
+          "name": "ancestor_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_VERSION"
+        }
+      ]
+    },
+    {
+      "name": "PackerSbom",
+      "kind": "MESSAGE",
+      "description": "PackerSBOM domain model message.",
+      "message_kind": "PACKER_SBOM",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "build_id",
+          "type": "string",
+          "description": "id of the parent build",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_BUILD"
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "sbom format type",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "PackerBuild",
+      "kind": "MESSAGE",
+      "description": "PackerBuild domain model message.",
+      "message_kind": "PACKER_BUILD",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "version_id",
+          "type": "string",
+          "description": "id of the parent version",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "PRODUCES",
+          "edge_direction": "OUTGOING",
+          "node_label": "PACKER_VERSION"
+        },
+        {
+          "name": "source_external_identifier",
+          "type": "string",
+          "description": "id of the source",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_SOURCE"
+        },
+        {
+          "name": "component_type",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_run_uuid",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "PackerAncestry",
+      "kind": "MESSAGE",
+      "description": "PackerAncestry domain model message.",
+      "message_kind": "PACKER_ANCESTRY",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "parent_bucket_id",
+          "type": "string",
+          "description": "id of the parent bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_BUCKET"
+        },
+        {
+          "name": "child_bucket_id",
+          "type": "string",
+          "description": "id of the child bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_BUCKET"
+        },
+        {
+          "name": "parent_version_id",
+          "type": "string",
+          "description": "id of the child bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_BUCKET"
+        },
+        {
+          "name": "child_version_id",
+          "type": "string",
+          "description": "id of the child bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_BUCKET"
+        },
+        {
+          "name": "channel_name",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "channel_id",
+          "type": "string",
+          "description": "id of the channel",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_CHANNEL"
+        }
+      ]
+    },
+    {
+      "name": "PackerVersion",
+      "kind": "MESSAGE",
+      "description": "PackerVersion domain model message",
+      "message_kind": "PACKER_VERSION",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "bucket_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "STORES",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_BUCKET"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "author_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "revocation_type",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "revocation_message",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "revocation_author",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "revoked_at",
+          "type": "google.protobuf.Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "template_type",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "PackerChannel",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "PACKER_CHANNEL",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "bucket_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "OUTGOING",
+          "node_label": "PACKER_BUCKET"
+        },
+        {
+          "name": "version_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_VERSION"
+        },
+        {
+          "name": "author_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "managed",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "restricted",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "PackerArtifact",
+      "kind": "MESSAGE",
+      "description": "PackerArtifact domain model message",
+      "message_kind": "PACKER_ARTIFACT",
+      "message_source": "HCP_PACKER",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "build_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "PRODUCES",
+          "edge_direction": "INCOMING",
+          "node_label": "PACKER_BUILD"
+        },
+        {
+          "name": "external_identifier",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "PRODUCES",
+          "edge_direction": "OUTGOING",
+          "node_label": "VIRTUAL_MACHINE_IMAGE"
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "HcpResource",
+      "kind": "MESSAGE",
+      "description": "HcpResource is a type containing HCP specific fields.",
+      "message_kind": null,
+      "message_source": "HCP",
+      "fields": [
+        {
+          "name": "organization_id",
+          "type": "string",
+          "description": "organization_id that owns the resource",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "project_id",
+          "type": "string",
+          "description": "project_id the resource belongs to",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "HcpOrganization",
+      "kind": "MESSAGE",
+      "description": "HcpOrganization is a type containing HCP Organization specific fields.",
+      "message_kind": null,
+      "message_source": "HCP",
+      "fields": [
+        {
+          "name": "organization",
+          "type": "BaseOrganization",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "HcpProject",
+      "kind": "MESSAGE",
+      "description": "HcpProject is a type containing HCP Project specific fields.",
+      "message_kind": null,
+      "message_source": "HCP",
+      "fields": [
+        {
+          "name": "account",
+          "type": "BaseAccount",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformOrganization",
+      "kind": "MESSAGE",
+      "description": "HcpTerraformOrganization is a type containing HCP TF Organization specific fields.",
+      "message_kind": null,
+      "message_source": "HCP_TERRAFORM",
+      "fields": [
+        {
+          "name": "organization",
+          "type": "BaseOrganization",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "is_unified",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "agent_pool_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "OWNS",
+          "edge_direction": "OUTGOING",
+          "node_label": "HCP_TERRAFORM_AGENT_POOL"
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformProject",
+      "kind": "MESSAGE",
+      "description": "HcpTerraformProject is a type containing HCP TF Project specific fields.",
+      "message_kind": null,
+      "message_source": "HCP_TERRAFORM",
+      "fields": [
+        {
+          "name": "account",
+          "type": "BaseAccount",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "is_legacy_organization_project",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "is_unified",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformWorkspace",
+      "kind": "MESSAGE",
+      "description": "Workspace is a type containing Terraform Workspace specific fields.",
+      "message_kind": "HCP_TERRAFORM_WORKSPACE",
+      "message_source": "HCP_TERRAFORM",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "current_run_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "resource_count",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "current_state_version_id",
+          "type": "string",
+          "description": "the current state version id of the workspace",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "HAS_CURRENT",
+          "edge_direction": "OUTGOING",
+          "node_label": "HCP_TERRAFORM_STATE_VERSION"
+        },
+        {
+          "name": "environment",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "execution_mode",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "tag_names",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "agent_pool_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "RUNS_ON",
+          "edge_direction": "OUTGOING",
+          "node_label": "HCP_TERRAFORM_AGENT_POOL"
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformStateVersion",
+      "kind": "MESSAGE",
+      "description": "StateVersion is a type containing HCP State Version specific fields.",
+      "message_kind": "HCP_TERRAFORM_STATE_VERSION",
+      "message_source": "HCP_TERRAFORM",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hosted_state_download_url",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "edge",
+          "type": "Edge",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "current_run_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "PRODUCES",
+          "edge_direction": "INCOMING",
+          "node_label": "HCP_TERRAFORM_RUN"
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformAgentPool",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "HCP_TERRAFORM_AGENT_POOL",
+      "message_source": "HCP_TERRAFORM",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "agent_count",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "organization_scoped",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformRun",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "HCP_TERRAFORM_RUN",
+      "message_source": "HCP_TERRAFORM",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "is_destroyed",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "workspace_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "HCP_TERRAFORM_WORKSPACE"
+        }
+      ]
+    },
+    {
+      "name": "NodeIdentifier",
+      "kind": "MESSAGE",
+      "description": "NodeIdentifier encompasses values that uniquely identify a node in the graph.",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "source",
+          "type": "Source",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "kind",
+          "type": "Kind",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "Edge",
+      "kind": "MESSAGE",
+      "description": "Edge is a representation of a directed edge out or into a node in the graph.",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "label",
+          "type": "EdgeLabel",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "direction",
+          "type": "EdgeDirection",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "node_id",
+          "type": "NodeIdentifier",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "EdgeLabel",
+      "kind": "ENUM",
+      "description": "EdgeLabel is a label that describes the relationship between nodes in the graph.",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "EDGE_LABEL_UNSPECIFIED",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_CONTAINS",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_RUNS",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_ATTACHES_TO",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_APPLIES_TO",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_PRODUCES",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_CONNECTS_TO",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_STORES",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_HAS_CURRENT",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_INSTANCE_OF",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_MANAGES",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_RUNS_ON",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_LABEL_OWNS",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "EdgeDirection",
+      "kind": "ENUM",
+      "description": "EdgeDirection indicates the direction of the edge in the graph.",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "EDGE_DIRECTION_UNSPECIFIED",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_DIRECTION_INCOMING",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "EDGE_DIRECTION_OUTGOING",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "Model",
+      "kind": "MESSAGE",
+      "description": "Model is an envelope that contains all the domain models that Infragraph supports.",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "aws_ec2_instance",
+          "type": "AwsEc2Instance",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "azure_virtual_machine",
+          "type": "AzureVirtualMachine",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "gcp_compute_instance",
+          "type": "GcpComputeInstance",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_bucket",
+          "type": "PackerBucket",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_subnet",
+          "type": "AwsSubnet",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_vpc",
+          "type": "AwsVpc",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_ecs_cluster",
+          "type": "AwsEcsCluster",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_ecs_service",
+          "type": "AwsEcsService",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_registry",
+          "type": "PackerRegistry",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_availability_zone",
+          "type": "AwsAvailabilityZone",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_region",
+          "type": "AwsRegion",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_iam_policy",
+          "type": "AwsIamPolicy",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_iam_user",
+          "type": "AwsIamUser",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_ami",
+          "type": "AwsAmi",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_version",
+          "type": "PackerVersion",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_security_group",
+          "type": "AwsSecurityGroup",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_security_group_rule",
+          "type": "AwsSecurityGroupRule",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_sbom",
+          "type": "PackerSbom",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_build",
+          "type": "PackerBuild",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_channel",
+          "type": "PackerChannel",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_artifact",
+          "type": "PackerArtifact",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_s3_bucket",
+          "type": "AwsS3Bucket",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_ec2_volume",
+          "type": "AwsEc2Volume",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_lambda_function",
+          "type": "AwsLambdaFunction",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_inherited_revocation",
+          "type": "PackerInheritedRevocation",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "packer_ancestry",
+          "type": "PackerAncestry",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_account",
+          "type": "AwsAccount",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_network_interface",
+          "type": "AwsNetworkInterface",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_ec2_instance_type",
+          "type": "AwsEc2InstanceType",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_organization",
+          "type": "HcpOrganization",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_project",
+          "type": "HcpProject",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_terraform_workspace",
+          "type": "HcpTerraformWorkspace",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_terraform_state_version",
+          "type": "HcpTerraformStateVersion",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_terraform_organization",
+          "type": "HcpTerraformOrganization",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_terraform_project",
+          "type": "HcpTerraformProject",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_terraform_agent_pool",
+          "type": "HcpTerraformAgentPool",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "hcp_terraform_run",
+          "type": "HcpTerraformRun",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_iam_role",
+          "type": "AwsIamRole",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_iam_role_policy_attachment",
+          "type": "AwsIamRolePolicyAttachment",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsResource",
+      "kind": "MESSAGE",
+      "description": "AwsResource is a type containing AWS specific fields.",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "arn",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsIamPolicy",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "policy",
+          "type": "BasePolicy",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "attachment_count",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsIamUser",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "user",
+          "type": "BaseUser",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsIamRole",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "role",
+          "type": "BaseRole",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "assume_role_policy_document",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "max_session_duration",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "last_used_date",
+          "type": "google.protobuf.Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "last_used_region",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "permissions_boundary_arn",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "permissions_boundary_type",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsIamRolePolicyAttachment",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "ROLE_POLICY_ATTACHMENT",
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "policy_arn",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "ATTACHES_TO",
+          "edge_direction": "INCOMING",
+          "node_label": "POLICY"
+        },
+        {
+          "name": "role_name",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "role_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "ATTACHES_TO",
+          "edge_direction": "INCOMING",
+          "node_label": "ROLE"
+        }
+      ]
+    },
+    {
+      "name": "AwsNetworkInterface",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "network_interface",
+          "type": "BaseNetworkInterface",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsRegion",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "region",
+          "type": "BaseRegion",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsSecurityGroup",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "security_group",
+          "type": "BaseSecurityGroup",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsSecurityGroupRule",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "security_rule",
+          "type": "BaseSecurityRule",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsAvailabilityZone",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "zone",
+          "type": "BaseZone",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsEc2Instance",
+      "kind": "MESSAGE",
+      "description": "AwsEc2Instance domain model message.",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "virtual_machine",
+          "type": "BaseVirtualMachine",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "tenancy",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "private_ip",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "monitoring",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsEc2Volume",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "volume",
+          "type": "BaseVolume",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsAmi",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "virtual_machine_image",
+          "type": "BaseVirtualMachineImage",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsEcsCluster",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "ECS_CLUSTER",
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsEcsService",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": "ECS_SERVICE",
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "cluster_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "ECS_CLUSTER"
+        },
+        {
+          "name": "subnet_ids",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONTAINS",
+          "edge_direction": "INCOMING",
+          "node_label": "SUBNET"
+        }
+      ]
+    },
+    {
+      "name": "AwsSubnet",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "subnet",
+          "type": "BaseSubnet",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsVpc",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "vpc",
+          "type": "BaseVpc",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsS3Bucket",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "storage_bucket",
+          "type": "BaseStorageBucket",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsLambdaFunction",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "serverless_function",
+          "type": "BaseServerlessFunction",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "memory_size",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "run_time",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "architectures",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "subnet_ids",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "CONNECTS_TO",
+          "edge_direction": "OUTGOING",
+          "node_label": "SUBNET"
+        },
+        {
+          "name": "security_group_ids",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null,
+          "edge_label": "APPLIES_TO",
+          "edge_direction": "INCOMING",
+          "node_label": "SECURITY_GROUP"
+        }
+      ]
+    },
+    {
+      "name": "AwsAccount",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "account",
+          "type": "BaseAccount",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "AwsEc2InstanceType",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": "AWS",
+      "fields": [
+        {
+          "name": "virtual_machine_type",
+          "type": "BaseVirtualMachineType",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "aws_resource",
+          "type": "AwsResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    },
+    {
+      "name": "Resource",
+      "kind": "MESSAGE",
+      "description": "",
+      "message_kind": null,
+      "message_source": null,
+      "fields": [
+        {
+          "name": "witnessed_time",
+          "type": "google.protobuf.Timestamp",
+          "description": "The same clock should be used universally within the scope of a single connector.",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        },
+        {
+          "name": "model",
+          "type": "Model",
+          "description": "model is the domain model that represents this resource.",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null,
+          "edge_label": null,
+          "edge_direction": null,
+          "node_label": null
+        }
+      ]
+    }
+  ]
+}

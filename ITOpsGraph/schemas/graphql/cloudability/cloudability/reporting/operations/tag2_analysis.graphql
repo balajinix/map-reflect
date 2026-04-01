@@ -1,0 +1,16 @@
+query Tag2Analysis {
+  llmFriendlyCostReport(
+    dateRange: { start: "2024-01-01", end: "2024-01-31" }
+    dimensions: [tagkey2, tag2]
+    metrics: [unblended_cost]
+    sort: [{ field: "unblended_cost", direction: DESC }]
+    limit: 50
+  ) {
+    total_results
+    results {
+      tagkey2
+      tag2
+      unblended_cost
+    }
+  }
+}

@@ -1,0 +1,14 @@
+schema
+  @sdl(
+    files: [
+      "markets/markets.graphql"
+      "entities/entities.graphql"
+      "search/search.graphql"
+      "types.graphql"
+      "extendTypes.graphql"
+      "common.graphql"
+    ]
+    visibility: { expose: true, types: "Query|Mutation", fields: "[^_].*" }
+  ) {
+  query: Query
+}

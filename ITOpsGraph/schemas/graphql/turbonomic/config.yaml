@@ -1,0 +1,7 @@
+configurationset:
+  - configuration:
+      name: turbonomics
+      hostname: STEPZEN_TURBO_HOSTNAME
+      client_id: STEPZEN_TURBO_CLIENT_ID
+      client_secret: STEPZEN_TURBO_CLIENT_SECRET
+      role: OBSERVER

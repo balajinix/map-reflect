@@ -1,0 +1,299 @@
+extend type Query {
+  """
+  Returns details for the current API key.
+  """
+  apiKey: ApiKeyDate
+    @rest(
+      endpoint: "https://$hostname/core/api/v1/apikey"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Generate an authentication token to login to a Concert instance deployed on a virtual machine.
+  """
+  login(
+    """
+    Login username (required only for dev edition)
+    """
+    username: String
+    """
+    Login password (required only for dev edition)
+    """
+    password: String
+  ): TokenDetails
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/login"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      contenttype: "application/json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Concert Logout (sw_dev or saas only)
+  """
+  logout: SuccessResponse
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/logout"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Authenticate Concert User
+  """
+  authenticate: TokenDetails
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/authenticate"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Authorize Concert User
+  """
+  authorize(
+    """
+    Login username (required only for dev edition)
+    """
+    username: String
+    """
+    Login password (required only for dev edition)
+    """
+    password: String
+  ): TokenDetails
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/authorize"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      contenttype: "application/json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Refresh Authentication Token for user (sw_dev or saas only)
+  """
+  refreshToken: TokenDetails
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/refresh_token"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      configuration: "ibmConcert"
+    )
+
+  """
+  SAAS Login API (saas only) - Retrieve authentication endpoint
+  """
+  ssoEndpoint(
+    """
+    Unique ID of your Concert instance
+    """
+    instance_id: String!
+    """
+    Scope collection type
+    """
+    scope_collection_type: String
+    """
+    Scope ID
+    """
+    scope_id: String
+    """
+    Domain
+    """
+    domain: String
+  ): SuccessResponse
+    @rest(
+      endpoint: "https://$hostname/core/api/v1/sso?instance_id=$instance_id&scope_collection_type=$scope_collection_type&scope_id=$scope_id&domain=$domain"
+      configuration: "ibmConcert"
+    )
+
+  """
+  SAAS Login exchange token (saas only)
+  """
+  exchangeToken(
+    """
+    Unique ID of your Concert instance
+    """
+    instance_id: String!
+    """
+    Authorization code
+    """
+    code: String
+    """
+    Scope collection type
+    """
+    scope_collection_type: String
+    """
+    Scope ID
+    """
+    scope_id: String
+    """
+    Grant ID
+    """
+    grant_id: String
+    """
+    Domain
+    """
+    domain: String
+  ): SuccessResponse
+    @rest(
+      endpoint: "https://$hostname/core/api/v1/exchange?instance_id=$instance_id&code=$code&scope_collection_type=$scope_collection_type&scope_id=$scope_id&grant_id=$grant_id&domain=$domain"
+      configuration: "ibmConcert"
+    )
+}
+
+type Mutation {
+  """
+  Generates a new Concert API key.
+  """
+  generateApiKey: ApiKey
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/apikey"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Deletes the current API key. You must generate a new key to continue using the API.
+  """
+  deleteApiKey: Boolean
+    @rest(
+      method: DELETE
+      endpoint: "https://$hostname/core/api/v1/apikey"
+      headers: [{ name: "InstanceId", value: "$instanceId" }]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Generates a new API key for internal use.
+  """
+  generateInternalApiKey(
+    """
+    Username for which to generate the API key
+    """
+    username: String!
+  ): ApiKey
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/internal_apikey"
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+        { name: "Username", value: "$username" }
+      ]
+      configuration: "ibmConcert"
+    )
+
+  """
+  Generates a new JWT token for internal use.
+  """
+  generateInternalJwt(
+    """
+    Username for which to generate the JWT token
+    """
+    username: String!
+  ): TokenDetails
+    @rest(
+      method: POST
+      endpoint: "https://$hostname/core/api/v1/internal_jwt"
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+        { name: "Username", value: "$username" }
+      ]
+      configuration: "ibmConcert"
+    )
+}
+
+"""
+JWT details
+"""
+type TokenDetails {
+  """
+  Return true if user is authenticated
+  """
+  is_authenticated: Boolean!
+  """
+  JWT token
+  """
+  token: String
+  """
+  Unique ID of your Concert instance
+  """
+  instance_id: String
+  """
+  Username
+  """
+  username: String
+  """
+  Display name
+  """
+  display_name: String
+  """
+  Token expiry time
+  """
+  expiry: Int
+  """
+  User roles
+  """
+  roles: [String]!
+  """
+  Quickstart value
+  """
+  quickstart: Boolean!
+}
+
+"""
+Error code enum
+"""
+enum ErrorCode {
+  bad_request
+  not_authorized
+  no_need_to_know
+  required_field
+  invalid_content
+  invalid_file
+  internal_error
+  invalid_data
+  invalid_enum
+  invalid_pattern
+  invalid_format
+  missing_unique
+  invalid_field
+}
+
+"""
+API key date information
+"""
+type ApiKeyDate {
+  """
+  Date when the API key was created
+  """
+  created_on: Int
+}
+
+"""
+API key
+"""
+type ApiKey {
+  """
+  API key value
+  """
+  apikey: String
+}
+
+"""
+Success response
+"""
+type SuccessResponse {
+  """
+  Message code
+  """
+  message_code: String
+  """
+  Message
+  """
+  message: String
+}

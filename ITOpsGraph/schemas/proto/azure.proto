@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package hashicorp.cloud.internal.infragraph.domain.v1;
+
+import "hashicorp/cloud/internal/infragraph/domain/v1/base.proto";
+import "hashicorp/cloud/internal/infragraph/options/v1/options.proto";
+
+option go_package = "github.com/hashicorp/cloud-infragraph/proto-internal/go;hashicorp_cloud_infragraph_internal";
+
+// AzureResource is a type containing Azure specific fields for all resources.
+message AzureResource {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_properties_only) = true;
+  option (options.v1.message_source) = "AZURE";
+
+  // type specific fields
+  string etag = 1;
+  string provisioning_state = 2;
+}
+
+// AzureVirtualMachine domain model message.
+message AzureVirtualMachine {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "AZURE";
+
+  // inherited types
+  BaseVirtualMachine virtual_machine = 1;
+  AzureResource azure_resource = 2;
+
+  // type specific fields
+  optional string priority = 3;
+  optional string extensions_time_budget = 4;
+}

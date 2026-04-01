@@ -1,0 +1,130 @@
+# llm_report_query.graphql
+
+extend type Query {
+  """
+  Retrieves a cost report with structured inputs and outputs.
+
+  IMPORTANT:
+  1. The 'dimensions' and 'metrics' arguments below accept enum values from
+     'ReportDimension' and 'ReportMetric' respectively. These enums list all
+     available fields you can request. The description of each enum value explains its meaning.
+  2. These 'dimensions' and 'metrics' arguments are REQUIRED and determine which data columns are fetched.
+  3. The fields you select within the 'results { ... }' block (of type ReportRow) MUST correspond
+     to the dimensions/metrics you requested. If a ReportRow field is selected but its corresponding dimension/metric was not
+     included in the 'dimensions'/'metrics' arguments, its value will be null.
+  4. For filtering, use the 'filter' argument. 
+  5. Any fields used for sorting must be included in the 'dimensions'/'metrics' arguments.
+  """
+  llmFriendlyCostReport(
+    """
+    Defines the date range for the report. Required.
+    """
+    dateRange: DateRangeInput!
+    """
+    (REQUIRED) Select the DIMENSIONS to include in the report.
+    """
+    dimensions: [ReportDimension!]!
+    """
+    (REQUIRED) Select the METRICS to include in the report.
+    """
+    metrics: [ReportMetric!]!
+    """
+    (Optional) Structured filter to apply. 
+    """
+    match: ReportFilter
+    """
+    (Optional) List of sorting criteria. You can only sort on fields included in the 'dimensions'/'metrics' arguments.
+    """
+    sort: [ReportSortInput!]
+    """
+    (Optional) The maximum number of rows to return.
+    """
+    limit: Int
+
+  ): LLMCostReport
+    @sequence(
+      steps: [
+        {
+          query: "_convertDimensionListToCsv"
+          arguments: [{ name: "list", argument: "dimensions" }]
+        }
+        {
+          query: "_convertMetricListToCsv"
+          arguments: [{ name: "list", argument: "metrics" }]
+        }
+        {
+          query: "_convertFilter"
+          arguments: [{ name: "filter", argument: "match" }]
+        }
+        {
+          query: "_convertSortListToCsv"
+          arguments: [{ name: "list", argument: "sort" }]
+        }
+        {
+          query: "_prepare_backendArguments"
+          arguments: [
+            { name: "dimensions", field: "dimensions" }
+            { name: "metrics", field: "metrics" }
+            { name: "filters", field: "filters" }
+            { name: "sort", field: "sort" }
+          ]
+        }
+        {
+          query: "_backend_costReport"
+          arguments: [
+            { name: "start_date", argument: "dateRange.start" }
+            { name: "end_date", argument: "dateRange.end" }
+            { name: "dimensions", field: "§4.dimensions" }
+            { name: "metrics", field: "§4.metrics" }
+            { name: "filters", field: "§4.filters" }
+            { name: "sort", field: "§4.sort" }
+            { name: "limit", argument: "limit" }
+          ]
+        }
+      ]
+    )
+
+  _prepare_backendArguments(
+    dimensions: String
+    metrics: String
+    filters: [String]
+    sort: String
+  ): _Backend_CostReportArguments
+    @value(
+      script: {
+        language: JSONATA
+        src: """
+          $ ~> $each(function($v, $k) {
+          $v != "" ? {$k: $v}
+        }) ~> $merge()
+        """
+
+        # $v != "" and $v != [] ? {$k: $v}
+      }
+    )
+
+  _backend_costReport(
+    dimensions: String!
+    end_date: String!
+    filters: [String]
+    metrics: String!
+    start_date: String!
+    sort: String
+    limit: Int
+  ): LLMCostReport
+    @rest(
+      endpoint: "https://$hostname/v3/reporting/cost/run"
+      configuration: "apptio"
+      headers: [{ name: "Authorization", value: "Basic $apitoken" }]
+      ecmascript: """
+        function transformREST(body) {
+          if (status != 200) {
+            let b = JSON.parse(body);
+            let messages = b.error.messages.join("\n");
+            throw new Error(`Tool request problem: ${messages}`);
+          } 
+          return body;
+        }
+        """
+    )
+}

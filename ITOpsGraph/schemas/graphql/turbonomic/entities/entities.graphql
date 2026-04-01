@@ -1,0 +1,192 @@
+# Copyright IBM Corp. 2025
+# /api/v3/entities
+
+type Query {
+  entity(
+    """
+    UUID of the entity
+    """
+    entity_uuid: ID
+    """
+    Include the entity aspects in the response
+    """
+    include_aspects: Boolean
+  ): Entity
+    @sequence(
+      steps: [
+        { query: "_accessTokenTurbonomics" }
+        {
+          query: "_entity"
+          arguments: [
+            # needed because this doesn't inherit arguments
+            { name: "entity_uuid", argument: "entity_uuid" }
+            { name: "include_aspects", argument: "include_aspects" }
+          ]
+        }
+      ]
+    )
+
+  _entity(
+    entity_uuid: ID!
+    include_aspects: Boolean
+    access_token: Secret!
+  ): Entity
+    @rest(
+      endpoint: "https://$hostname;/api/v3/entities/$entity_uuid"
+      configuration: "turbonomics"
+      headers: [{ name: "authorization", value: "bearer $access_token" }]
+    )
+
+  entityActions(
+    """
+    UUID of the entity
+    """
+    entity_uuid: ID!
+
+    """
+    Level of details returned in the Actions
+    Available values : STANDARD, EXECUTION
+    """
+    detail_level: DetailLevel
+
+    """
+    When making subsequent calls to retrieve additional results,this is the cursor returned by the last call to this method.
+    """
+    cursor: String
+
+    """
+    The maximum number of items to return. Must be a positive integer. If not set, the server will provide a default.
+    """
+    limit: Int
+
+    """
+     The field to order the results by.
+    Available values : NAME, SEVERITY, RISK_CATEGORY, SAVINGS, CREATION_DATE, DISRUPTIVENESS, REVERSIBILITY, IDLE_TIME, FILE_SIZE, RISK, DATE_EXECUTED, EXECUTION_ERROR, IMPORTANCE
+    """
+    order_by: OrderBy
+
+    """
+    Whether to arrange in ascending or descending order.
+    Default value : true
+    """
+    ascending: Boolean
+
+    """
+        This parameter controls how the entity will be expanded when searching for related entities. When true, composite entities (like datacenters) within the scope will be expanded to their contained entities (like physical machines) before traversing the supply chain looking for related entities of a given type. When false, the supply chain of the composite entity (e.g. datacenter) itself will be traversed. Defaults to false.
+    Default value : false
+    """
+    forceExpansionOfAggregatedEntities: Boolean
+  ): [Action]
+    @sequence(
+      steps: [
+        { query: "_accessTokenTurbonomics" }
+        {
+          query: "_entityActions"
+          arguments: [
+            # needed because this doesn't inherit arguments
+            { name: "entity_uuid", argument: "entity_uuid" }
+            { name: "detail_level", argument: "detail_level" }
+            { name: "cursor", argument: "cursor" }
+            { name: "limit", argument: "limit" }
+            { name: "order_by", argument: "order_by" }
+            { name: "ascending", argument: "ascending" }
+            {
+              name: "forceExpansionOfAggregatedEntities"
+              argument: "forceExpansionOfAggregatedEntities"
+            }
+          ]
+        }
+      ]
+    )
+
+  _entityActions(
+    entity_uuid: ID!
+    detail_level: DetailLevel
+    cursor: String
+    limit: Int
+    order_by: OrderBy
+    ascending: Boolean
+    forceExpansionOfAggregatedEntities: Boolean
+
+    access_token: Secret!
+  ): [Action]
+    @rest(
+      endpoint: "https://$hostname;/api/v3/entities/$entity_uuid/actions"
+      configuration: "turbonomics"
+      headers: [{ name: "authorization", value: "bearer $access_token" }]
+    )
+
+  entityStats(
+    entity_uuid: ID!
+    startDate: DateTime
+    endDate: DateTime
+    statistics: StatInput
+  ): [Statistics]
+    @sequence(
+      steps: [
+        { query: "_accessTokenTurbonomics" }
+        {
+          query: "_entityStats"
+          arguments: [
+            # needed because this doesn't inherit arguments
+            { name: "entity_uuid", argument: "entity_uuid" }
+            { name: "startDate", argument: "startDate" }
+            { name: "endDate", argument: "endDate" }
+            { name: "statistics", argument: "statistics" }
+          ]
+        }
+      ]
+    )
+
+  _entityStats(
+    entity_uuid: ID
+    startDate: DateTime
+    endDate: DateTime
+    statistics: StatInput
+    access_token: Secret!
+  ): [Statistics]
+    @rest(
+      method: POST
+      # these query parameters end up in body for now, but turbonomics seems to ignore so leave for now (use bodyPOST to remove if need)
+      endpoint: "https://$hostname;/api/v3/entities/$entity_uuid/stats"
+
+      configuration: "turbonomics"
+      headers: [
+        { name: "authorization", value: "bearer $access_token" }
+        { name: "Content-Type", value: "application/json" }
+      ]
+    )
+
+  entityActionStats(entity_uuid: ID!): # Add action filters at some point
+  # May be better to do a data loader using POST /action/stats
+  [Statistics]
+    @sequence(
+      steps: [
+        { query: "_accessTokenTurbonomics" }
+        {
+          query: "_entityActionStats"
+          arguments: [
+            # needed because this doesn't inherit arguments
+            { name: "entity_uuid", argument: "entity_uuid" }
+          ]
+        }
+      ]
+    )
+
+  _entityActionStats(
+    entity_uuid: ID
+
+    access_token: Secret!
+  ): [Statistics]
+    @rest(
+      method: POST
+      # these query parameters end up in body for now, but turbonomics seems to ignore so leave for now (use bodyPOST to remove if need)
+      endpoint: "https://$hostname;/api/v3/entities/$entity_uuid/stats"
+
+      configuration: "turbonomics"
+      headers: [
+        { name: "authorization", value: "bearer $access_token" }
+        { name: "Content-Type", value: "application/json" }
+      ]
+    )
+}

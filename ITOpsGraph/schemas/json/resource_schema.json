@@ -1,0 +1,30 @@
+{
+  "product": "resource",
+  "source_file": "/Users/balaji/code/infragraph-nl2q/src/nl2q/schema/protobuf-domain-v1/resource.proto",
+  "source_type": "proto",
+  "types": [
+    {
+      "name": "Resource",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "witnessed_time",
+          "type": "Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "model",
+          "type": "Model",
+          "description": "model is the domain model that represents this resource.",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    }
+  ]
+}

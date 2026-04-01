@@ -1,0 +1,22 @@
+{
+  "product": "gcp",
+  "source_file": "/Users/balaji/code/infragraph-nl2q/src/nl2q/schema/protobuf-domain-v1/gcp.proto",
+  "source_type": "proto",
+  "types": [
+    {
+      "name": "GcpComputeInstance",
+      "kind": "MESSAGE",
+      "description": "GcpComputeInstance domain model message.",
+      "fields": [
+        {
+          "name": "virtual_machine",
+          "type": "BaseVirtualMachine",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    }
+  ]
+}

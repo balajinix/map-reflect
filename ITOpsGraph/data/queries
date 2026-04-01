@@ -1,0 +1,133 @@
+// ============================================
+// EXPLORATORY QUERIES FOR ITOpsGraph Neo4j
+// ============================================
+
+// 1. Count products, types, and fields
+MATCH (p:Product)
+OPTIONAL MATCH (p)-[:HAS_TYPE]->(t:Type)
+OPTIONAL MATCH (t)-[:HAS_FIELD]->(f:Field)
+RETURN p.name as product,
+       count(DISTINCT t) as type_count,
+       count(DISTINCT f) as field_count
+ORDER BY p.name;
+
+// 2. Sample types per product (first 10)
+MATCH (p:Product)-[:HAS_TYPE]->(t:Type)
+RETURN p.name as product, 
+       collect(t.name)[0..10] as sample_types
+ORDER BY p.name;
+
+// 3. Count FIELD_MAPPING edges between products
+MATCH (f1:Field)-[r:FIELD_MAPPING]->(f2:Field)
+WHERE f1.product <> f2.product
+RETURN f1.product as source_product,
+       f2.product as target_product,
+       count(r) as mapping_count
+ORDER BY source_product, target_product;
+
+// 4. Count TYPE_MAPPING edges between products
+MATCH (t1:Type)-[r:TYPE_MAPPING]->(t2:Type)
+WHERE t1.product <> t2.product
+RETURN t1.product as source_product,
+       t2.product as target_product,
+       count(r) as mapping_count
+ORDER BY source_product, target_product;
+
+// 5. Sample FIELD_MAPPING edges (first 5 per product pair)
+MATCH (f1:Field)-[r:FIELD_MAPPING]->(f2:Field)
+WHERE f1.product <> f2.product
+WITH f1.product as src, f2.product as tgt, 
+     collect({
+       source: f1.full_name,
+       target: f2.full_name,
+       justification: r.justification
+     })[0..5] as samples
+RETURN src as source_product, 
+       tgt as target_product, 
+       samples
+ORDER BY src, tgt;
+
+// 6. Find types with most fields
+MATCH (t:Type)-[:HAS_FIELD]->(f:Field)
+RETURN t.product as product,
+       t.name as type_name,
+       count(f) as field_count
+ORDER BY field_count DESC
+LIMIT 10;
+
+// 7. Find fields that map to multiple targets (hub fields)
+MATCH (f1:Field)-[:FIELD_MAPPING]->(f2:Field)
+WITH f1, count(f2) as target_count
+WHERE target_count > 1
+RETURN f1.product as product,
+       f1.full_name as field,
+       target_count
+ORDER BY target_count DESC
+LIMIT 10;
+
+// 8. Check if any fields have descriptions/documentation
+MATCH (f:Field)
+WHERE f.description IS NOT NULL
+RETURN f.product as product,
+       f.full_name as field,
+       substring(f.description, 0, 100) as description_preview
+LIMIT 5;
+
+// 9. Check if any types have descriptions
+MATCH (t:Type)
+WHERE t.description IS NOT NULL
+RETURN t.product as product,
+       t.name as type,
+       substring(t.description, 0, 100) as description_preview
+LIMIT 5;
+
+// 10. Find all relationship types in the graph
+CALL db.relationshipTypes() YIELD relationshipType
+RETURN relationshipType;
+
+// 11. Find all node labels in the graph
+CALL db.labels() YIELD label
+RETURN label;
+
+// 12. Sample the full structure (1 product deep dive)
+MATCH (p:Product {name: "instana"})-[:HAS_TYPE]->(t:Type)
+WITH p, t LIMIT 3
+OPTIONAL MATCH (t)-[:HAS_FIELD]->(f:Field)
+RETURN p.name as product,
+       t.name as type,
+       collect(f.name) as fields;
+
+// 13. Check for bidirectional mappings
+MATCH (f1:Field)-[:FIELD_MAPPING]->(f2:Field),
+      (f2)-[:FIELD_MAPPING]->(f1)
+RETURN f1.product as product1,
+       f1.full_name as field1,
+       f2.product as product2,
+       f2.full_name as field2
+LIMIT 10;
+
+// 14. Find unmapped fields (fields with no FIELD_MAPPING edges)
+MATCH (f:Field)
+WHERE NOT (f)-[:FIELD_MAPPING]-()
+RETURN f.product as product,
+       count(f) as unmapped_count
+ORDER BY unmapped_count DESC;
+
+// 15. Get statistics summary
+MATCH (p:Product)
+OPTIONAL MATCH (p)-[:HAS_TYPE]->(t:Type)
+OPTIONAL MATCH (t)-[:HAS_FIELD]->(f:Field)
+OPTIONAL MATCH (f)-[:FIELD_MAPPING]-(mapped:Field)
+WITH p, 
+     count(DISTINCT t) as types,
+     count(DISTINCT f) as fields,
+     count(DISTINCT mapped) as mapped_fields
+RETURN p.name as product,
+       types,
+       fields,
+       mapped_fields,
+       CASE WHEN fields > 0 
+            THEN round(100.0 * mapped_fields / fields, 2) 
+            ELSE 0 
+       END as mapping_coverage_pct
+ORDER BY p.name;

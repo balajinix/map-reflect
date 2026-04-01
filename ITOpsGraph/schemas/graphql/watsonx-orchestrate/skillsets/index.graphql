@@ -1,0 +1,25 @@
+type SkillSets {
+  skillsets: [SkillsetsEntry]
+}
+
+type SkillsetsEntry {
+  assistant_id: String
+  description: String
+  name: String
+  skillset_id: String
+  type: String
+  url: String
+}
+
+type Query {
+  skillSets: SkillSets
+    @rest(
+      endpoint: "https://$hostname;/instances/$tenantid;/v1/skillsets"
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "Content-Type", value: "application/json" }
+        { name: "IAM-API_KEY", value: "$apikey" }
+      ]
+      configuration: "wxo"
+    )
+}

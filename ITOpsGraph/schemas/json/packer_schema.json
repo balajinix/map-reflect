@@ -1,0 +1,518 @@
+{
+  "product": "packer",
+  "source_file": "/Users/balaji/code/infragraph-nl2q/src/nl2q/schema/protobuf-domain-v1/packer.proto",
+  "source_type": "proto",
+  "types": [
+    {
+      "name": "PackerRegistry",
+      "kind": "MESSAGE",
+      "description": "PackerRegistry domain model message.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "feature_tier",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "activated",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "billing_deprovision_reason",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "billing_deprovision_message",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerBucket",
+      "kind": "MESSAGE",
+      "description": "PackerBucket domain model message.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "registry_id",
+          "type": "string",
+          "description": "id of the parent registry",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "platforms",
+          "type": "string",
+          "description": "TODO: string array currently unsupported by codegen",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerInheritedRevocation",
+      "kind": "MESSAGE",
+      "description": "PackerInheritedRevocation domain model message.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "descendant_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "ancestor_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerSbom",
+      "kind": "MESSAGE",
+      "description": "PackerSBOM domain model message.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "build_id",
+          "type": "string",
+          "description": "id of the parent build",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "format",
+          "type": "string",
+          "description": "sbom format type",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerBuild",
+      "kind": "MESSAGE",
+      "description": "PackerBuild domain model message.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "version_id",
+          "type": "string",
+          "description": "id of the parent version",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "source_external_identifier",
+          "type": "string",
+          "description": "id of the source",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "component_type",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "packer_run_uuid",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerAncestry",
+      "kind": "MESSAGE",
+      "description": "PackerAncestry domain model message.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "parent_bucket_id",
+          "type": "string",
+          "description": "id of the parent bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "child_bucket_id",
+          "type": "string",
+          "description": "id of the child bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "parent_version_id",
+          "type": "string",
+          "description": "id of the child bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "child_version_id",
+          "type": "string",
+          "description": "id of the child bucket",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "channel_name",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "channel_id",
+          "type": "string",
+          "description": "id of the channel",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerVersion",
+      "kind": "MESSAGE",
+      "description": "PackerVersion domain model message",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "bucket_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "author_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "revocation_type",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "revocation_message",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "revocation_author",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "revoked_at",
+          "type": "Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "template_type",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerChannel",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "bucket_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "version_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "author_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "managed",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "restricted",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "PackerArtifact",
+      "kind": "MESSAGE",
+      "description": "PackerArtifact domain model message",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "hcp_resource",
+          "type": "HcpResource",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "build_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "external_identifier",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "region",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    }
+  ]
+}

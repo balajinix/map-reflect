@@ -1,0 +1,858 @@
+{
+  "product": "base",
+  "source_file": "/Users/balaji/code/infragraph-nl2q/src/nl2q/schema/protobuf-domain-v1/base.proto",
+  "source_type": "proto",
+  "types": [
+    {
+      "name": "Base",
+      "kind": "MESSAGE",
+      "description": "Base is a base all domain models are expected to embed.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "the unique identifier in the source system",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "the name of the model in the source system",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "account_id",
+          "type": "string",
+          "description": "unique identifier of the container holding the type in the source system",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "region_id",
+          "type": "string",
+          "description": "unique identifier of the region holding the type in the source system",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "zone_ids",
+          "type": "string",
+          "description": "unique identifier of the zone holding the type in the source system",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "created_at",
+          "type": "Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "updated_at",
+          "type": "Timestamp",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseNetworkInterface",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "subnet_id",
+          "type": "string",
+          "description": "the subnet the network interface is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the VPC the network interface is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "security_group_ids",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BasePolicy",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseRole",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseRegion",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseSecurityGroup",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the VPC the security group is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseSecurityRule",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "security_group_id",
+          "type": "string",
+          "description": "the security group this rule applies to",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseSubnet",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the VPC the subnet is contained in",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseUser",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVpc",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseZone",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVirtualMachine",
+      "kind": "MESSAGE",
+      "description": "BaseVirtualMachine is a base type all virtual machines are expected to embed.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "state",
+          "type": "string",
+          "description": "the state of the virtual machine",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "vpc_id",
+          "type": "string",
+          "description": "the vpc the virtual machine is contained in",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "subnet_id",
+          "type": "string",
+          "description": "the subnet the virtual machine is contained in",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "network_interface_ids",
+          "type": "string",
+          "description": "the network interfaces the virtual machine is connected to",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "virtual_machine_image_id",
+          "type": "string",
+          "description": "the virtual machine image that the virtual machine runs",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "virtual_machine_instance_type",
+          "type": "string",
+          "description": "the virtual machine type that the virtual machine is an instance of",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVirtualMachineImage",
+      "kind": "MESSAGE",
+      "description": "BaseVirtualMachineImage is a base type all virtual machine images are expected to embed.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseStorageBucket",
+      "kind": "MESSAGE",
+      "description": "BaseStorageBucket is a base type all storage buckets are expected to embed.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVolume",
+      "kind": "MESSAGE",
+      "description": "BaseVolume is a base type all volumes are expected to embed.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "attached_virtual_machine_ids",
+          "type": "string",
+          "description": "the virtual machines this volume is attached to",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "size",
+          "type": "int32",
+          "description": "size of the volume in GiB",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "iops",
+          "type": "int32",
+          "description": "input/output operations per second",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "throughput",
+          "type": "int32",
+          "description": "throghput in MB/s",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "is_encrypted",
+          "type": "bool",
+          "description": "flag indicating if the volume is encrypted",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseServerlessFunction",
+      "kind": "MESSAGE",
+      "description": "BaseServerlessFunction is a base type all serverless functions are expected to embed.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseOrganization",
+      "kind": "MESSAGE",
+      "description": "BaseOrganization is a base type all organizations are expected to embed.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseAccount",
+      "kind": "MESSAGE",
+      "description": "BaseAccount is a base type all accounts are expected to embed.\n// examples: AWS account, GCP project, HCP project.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "organization_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "BaseVirtualMachineType",
+      "kind": "MESSAGE",
+      "description": "BaseVirtualMachineType is a base type all virtual machine types are expected to embed.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "Source",
+      "kind": "ENUM",
+      "description": "",
+      "fields": [
+        {
+          "name": "SOURCE_UNSPECIFIED",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "SOURCE_AWS",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "SOURCE_AZURE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "SOURCE_GCP",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "SOURCE_HCP_PACKER",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "SOURCE_HCP_TERRAFORM",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "SOURCE_HCP",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "Kind",
+      "kind": "ENUM",
+      "description": "",
+      "fields": [
+        {
+          "name": "KIND_UNSPECIFIED",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_VIRTUAL_MACHINE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_ACCOUNT",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_REGION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_ZONE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_VIRTUAL_NETWORK",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_SUBNET",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_NETWORK_INTERFACE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_VIRTUAL_MACHINE_IMAGE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_ECS_CLUSTER",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_ECS_SERVICE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_BUCKET",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_REGISTRY",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_POLICY",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_USER",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_STORAGE_BUCKET",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_VOLUME",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_SECURITY_GROUP",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_SECURITY_RULE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_BUILD",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_SBOM",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_VERSION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_SOURCE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_SERVERLESS_FUNCTION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_INHERITED_REVOCATION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_ANCESTRY",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_CHANNEL",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_PACKER_ARTIFACT",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_ORGANIZATION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_STATE_VERSION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_VIRTUAL_MACHINE_TYPE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_WORKSPACE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_ORGANIZATION",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_AGENT_POOL",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_HCP_TERRAFORM_RUN",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_ROLE",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "KIND_ROLE_POLICY_ATTACHMENT",
+          "type": "ENUM_VALUE",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    }
+  ]
+}

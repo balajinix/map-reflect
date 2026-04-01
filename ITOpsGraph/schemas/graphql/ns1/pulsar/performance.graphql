@@ -1,0 +1,297 @@
+"""
+NSOne Connect - Internet Weather API for Solis-DAL.
+
+pulsar performance apis
+
+*Experimental - subject to change*
+"""
+enum Aggregation {
+  avg
+  max
+  min
+  p50
+  p75
+  p90
+  p95
+  p99
+}
+
+type JobsResponseTimes {
+  """
+  id for job within application
+  """
+  jobid: ID!
+
+  """
+  response time
+  """
+  responseTime: Float!
+
+  # consider populating JobsResponseTimes with appId so the user doesn't
+  # have to pass it in; for current usage, not an issue.
+  job(appid: ID!): [AppJob]
+    @materializer(
+      query: "appJobs"
+      arguments: [
+        { name: "filter.jobid", field: "jobid" }
+        { name: "appid", argument: "appid" }
+      ]
+    )
+}
+
+type RealUserMeasurementPerformance {
+  """
+  name of region
+  """
+  regionName: String!
+
+  """
+  individual job response times
+  """
+  jobsResponseTimes: [JobsResponseTimes]
+
+  """
+  name of parent, GLOBAL for top level
+  """
+  parent: String
+
+  """
+  aggregate responseTime for selected jobs
+  """
+  responseTime: Float
+}
+
+type RUMData {
+  # TODO: see if we can set the appid
+
+  """
+  real user measurement data by region
+  """
+  data: [RealUserMeasurementPerformance]
+  """
+  min response time (agg)
+  """
+  minResponseTime: Float
+  """
+  max response time (agg)
+  """
+  maxResponseTime: Float
+
+  # TODO: this should be seperated out.
+  """
+  list of jobs
+  """
+  iwjobs(appid: ID!, filter: JobsFilter): [AppJob]
+    @materializer(
+      query: "appJobs"
+      arguments: [{ name: "appid", argument: "appid" }]
+    )
+}
+
+input StartTimeFrame {
+  ge: DateTime!
+}
+
+input EndTimeFrame {
+  le: DateTime!
+}
+
+input PerformanceFilter {
+  """
+  Filter the result by the given Pulsar Job(s)
+  """
+  jobs: [String]
+  """
+  Time period expressed as a difference from the current
+  timestamp. Period can be used alone, without specifying start or end;
+  i.e. period=1h means "the last one hour". It also can be used with
+  either start or end, but not both. I.e. period=1h&start=1707591600
+  means "calculate end time by adding one hour to start". In the current
+  implementation, if you specify something like
+  period=1h&end=1707591600, the end date is ignored and the time range
+  is treated as only period=1h.
+  """
+  period: String
+  """
+  (absolute or relative) for the beginning of the time range (ISO8601)
+  """
+  startTime: StartTimeFrame
+  """
+  (absolute or relative) for the end of the time range (ISO8601)
+  """
+  endTime: EndTimeFrame
+
+  """
+  Geographic region. It can be specified as a country code or
+  country with subdivision. Also, 6 major regions can be used: NA (North
+  America), SA (South Africa), AF (Africa), EU (Europe) and OC
+  (Oceania). To differentiate between Country/Subdivision and Region,
+  the Region must have a R_ prefix.
+  """
+  area: String
+  """
+  Autonomous System Number (ASN) by which to filter results.
+  """
+  asn: Int
+
+  """
+  filter by prefix like "R_"
+  """
+  regionParentPrefix: String
+}
+
+extend type Query {
+  """
+  real user measure of performance
+  """
+  rumPerformanceArea(
+    """
+    aggregation to be calculated
+    """
+    agg: Aggregation
+
+    """
+    filter implemented by the pulsar query
+    regionPrefix filters are computed on the fly
+    """
+    filter: PerformanceFilter
+  ): RUMData
+    @sequence(
+      steps: [
+        {
+          query: "_startendtimeframe"
+          arguments: [
+            { name: "startTimeFrame", argument: "filter.startTime" }
+            { name: "endTimeFrame", argument: "filter.endTime" }
+          ]
+        }
+        {
+          query: "_rumPerformanceArea"
+          arguments: [
+            { name: "jobs", argument: "filter.jobs" }
+            { name: "period", argument: "filter.period" }
+            { name: "area", argument: "filter.area" }
+            { name: "asn", argument: "filter.asn" }
+            {
+              name: "regionParentPrefix"
+              argument: "filter.regionParentPrefix"
+            }
+          ]
+        }
+      ]
+    )
+
+  _rumPerformanceArea(
+    """
+    aggregation to be calculated
+    """
+    agg: Aggregation
+
+    """
+    Filter the result by the given Pulsar Job(s)
+    """
+    jobs: [String]
+    """
+    Time period expressed as a difference from the current
+    timestamp. Period can be used alone, without specifying start or end;
+    i.e. period=1h means "the last one hour". It also can be used with
+    either start or end, but not both. I.e. period=1h&start=1707591600
+    means "calculate end time by adding one hour to start". In the current
+    implementation, if you specify something like
+    period=1h&end=1707591600, the end date is ignored and the time range
+    is treated as only period=1h.
+    """
+    period: String
+    """
+    (absolute or relative) for the beginning of the time range.
+    """
+    start: Int
+    """
+    (absolute or relative) for the end of the time range.
+    """
+    end: Int
+
+    """
+    Geographic region. It can be specified as a country code or
+    country with subdivision. Also, 6 major regions can be used: NA (North
+    America), SA (South Africa), AF (Africa), EU (Europe) and OC
+    (Oceania). To differentiate between Country/Subdivision and Region,
+    the Region must have a R_ prefix.
+    """
+    area: String
+    """
+    Autonomous System Number (ASN) by which to filter results.
+    """
+    asn: Int
+
+    """
+    filter by the region parent prefix (R_)
+    """
+    regionParentPrefix: String
+  ): RUMData
+    @rest(
+      use: "internet_weather"
+      path: "/v1/pulsar/query/performance/area"
+      transforms: [
+        # Note: this can be simplified to a smaller number of transforms.  Left for later.
+        # apply filter for region against parent prefix
+        {
+          editor: """
+          jsonata:( $prefix := $get("regionParentPrefix");
+          $prefix and $prefix != "" ? $ ~> $sift(function($v, $k) { $substring($v.parent, 0, $length($prefix)) = $prefix }) : $)
+          """
+        }
+        # data must be reshapped for "objectToArray" region names
+        { pathpattern: ["<>*", "jobsResponseTimes"], editor: "objectToArray" }
+        # data must be reshapped for "objectToArray" job names
+        { pathpattern: ["<>*"], editor: "objectToArray" }
+        {
+          editor: """
+          jsonata:$map($, function($region) {
+            {
+              "regionName": $region.name,
+              "parent": $region.value.parent,
+              "responseTime": $region.value.responseTime,
+              "jobsResponseTimes": $append([], $map($region.value.jobsResponseTimes, function($job) {
+                {
+                  "jobid": $job.name,
+                  "responseTime": $job.value
+                }
+              }))
+            }
+          })
+          """
+        }
+        {
+          #jsonata:{"data": $, "summary": { "minResponseTime": $min($.responseTime),"maxResponseTime": $max($.responseTime)}}
+          editor: """
+          jsonata:{"data": $, "minResponseTime": $min($.responseTime), "maxResponseTime": $max($.responseTime)}
+          """
+        }
+      ]
+    )
+}
+
+# internal code to manage conversion between DateTime and unix time.
+type _StartEndTimeFrame {
+  start: Int
+  end: Int
+}
+
+extend type Query {
+  _startendtimeframe(
+    startTimeFrame: StartTimeFrame
+    endTimeFrame: EndTimeFrame
+  ): _StartEndTimeFrame
+    @value(
+      script: {
+        language: JSONATA
+        src: """
+        {
+          "start": $string($floor($toMillis(startTimeFrame.ge)/1000)),
+          "end": $string($floor($toMillis(endTimeFrame.le)/1000))
+        }
+        """
+      }
+    )
+}

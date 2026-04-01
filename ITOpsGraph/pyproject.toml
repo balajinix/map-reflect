@@ -1,0 +1,10 @@
+[project]
+name = "solis-dal-dataset"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "neo4j>=6.0.3",
+    "pyyaml>=6.0.3",
+]

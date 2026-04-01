@@ -1,0 +1,171 @@
+"""
+Error details
+"""
+type Error {
+  """
+  Error code
+  """
+  code: String
+  """
+  Error message
+  """
+  message: String
+  """
+  Additional info about the error
+  """
+  more_info: String
+}
+
+"""
+Error response details
+"""
+type ErrorResponse {
+  """
+  Trace ID
+  """
+  trace: String
+  """
+  Error message
+  """
+  message: String
+  """
+  Exception information
+  """
+  exception: String
+  """
+  Message code
+  """
+  message_code: String
+  """
+  More information URL
+  """
+  more_info: String
+  """
+  HTTP status code
+  """
+  status_code: Int
+  """
+  Array of errors
+  """
+  errors: [Error]
+}
+
+type TagsPrototype {
+  """
+  Name of the tag (used as primary key)
+  """
+  name: String!
+  """
+  Color of the tag in hexadecimal format
+  """
+  color: String!
+  """
+  Description of the tag
+  """
+  description: String
+}
+
+type IssueLink {
+  """
+  Issue ID
+  """
+  issue_id: String!
+  """
+  System
+  """
+  system: String!
+  """
+  URL
+  """
+  url: String!
+  """
+  Array of labels
+  """
+  labels: [String!]!
+  """
+  System Status
+  """
+  system_status: String!
+  """
+  Array of Assignees
+  """
+  assignees: [String!]!
+  """
+  Represents if the issue is updated
+  """
+  has_issue_updated: Boolean
+}
+
+"""
+Sort direction for query results
+"""
+enum SortDirection {
+  """
+  Sort in ascending order
+  """
+  asc
+  """
+  Sort in descending order
+  """
+  desc
+}
+
+enum StateType {
+  unassessed
+  assessment_in_progress
+  false_positive
+  exception_requested
+  exception_approved
+  mitigation_in_progress
+  mitigated
+}
+
+enum ArtifactType {
+  image
+  library
+}
+
+enum FilterValueType {
+  boolean
+  string
+  object
+}
+
+"""
+Status of a vulnerability assessment
+"""
+enum AssessmentState {
+  unassessed
+  assessment_in_progress
+  false_positive
+  exception_requested
+  exception_approved
+  mitigation_in_progress
+  mitigated
+}
+
+"""
+Component type
+"""
+enum ComponentType {
+  image
+  source_repo
+}
+
+"""
+Type of entity
+"""
+enum SourceEntityType {
+  image
+  library
+  repository
+  resource
+}
+
+"""
+Application state
+"""
+enum ApplicationState {
+  active
+  idle
+}

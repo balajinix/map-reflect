@@ -1,0 +1,175 @@
+"""
+Thread Connection with edges
+"""
+type ThreadConnection {
+  edges: [ThreadEdge]
+  pageInfo: PageInfo!
+}
+
+"""
+Thread Edge with node
+"""
+type ThreadEdge {
+  node: Thread
+  cursor: String
+}
+
+type OkResponse {
+  not_ok: Boolean
+}
+
+type Query {
+  """
+  Retrieve the list of all message threads
+  """
+  threads(first: Int = 10, after: String = ""): ThreadConnection
+    @sequence(
+      steps: [
+        { query: "_accessToken" }
+        {
+          query: "_threads"
+          arguments: [
+            { name: "first", argument: "first" }
+            { name: "after", argument: "after" }
+          ]
+        }
+      ]
+    )
+
+  _threads(
+    first: Int = 10
+    after: String = ""
+    token: Secret
+  ): ThreadConnection
+    @rest(
+      # threads without limit or offset does not return pageinfo!
+      endpoint: "https://$hostname;/instances/$tenantid;/v1/orchestrate/threads?limit=$first&offset=$after"
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "Content-Type", value: "application/json" }
+        { name: "Authorization", value: "Bearer $token" }
+        { name: "IAM-API_KEY", value: "$apikey" }
+      ]
+      configuration: "wxo-guard"
+      resultroot: "data[]"
+      pagination: { type: OFFSET, setters: [{ field: "total", path: "total" }] }
+    )
+}
+
+type Mutation {
+  """
+  Delete an existing message thread. It also remove all associated messages
+  """
+  deleteThread(thread_id: ID!): OkResponse
+    @sequence(
+      steps: [
+        { query: "_accessToken" }
+        {
+          mutation: "_deleteThread"
+          arguments: [{ name: "thread_id", argument: "thread_id" }]
+        }
+      ]
+    )
+
+  _deleteThread(thread_id: ID!, token: Secret): OkResponse
+    @rest(
+      method: DELETE
+      endpoint: "https://$hostname;/instances/$tenantid;/v1/orchestrate/threads/$thread_id"
+      headers: [
+        { name: "accept", value: "application/json" }
+        { name: "Content-Type", value: "application/json" }
+        { name: "Authorization", value: "Bearer $token" }
+        { name: "IAM-API_KEY", value: "$apikey" }
+      ]
+      configuration: "wxo"
+    )
+}
+
+"""
+message threads
+"""
+type Thread {
+  """
+  The unique identifier of the message.
+  """
+  id: ID!
+
+  """
+  The tenant unique identifier associated with the message.
+  """
+  tenant_id: ID!
+
+  """
+  The unique identifier of the user who created the message.
+  """
+  created_by: String
+
+  """
+  The username of the user who created the message.
+  """
+  created_by_username: String
+
+  """
+  The timestamp when the message was created.
+  """
+  created_on: DateTime
+
+  """
+  The timestamp when the message was last updated.
+  """
+  updated_at: DateTime
+
+  """
+  The unique identifier of the thread the message belongs to.
+  """
+  thread_id: ID!
+  assistant: AssistantInfo!
+
+  """
+  The unique identifier of the parent message, if any.
+  """
+  parent_message_id: ID
+
+  """
+  The role of the sender (Example: user and assistant).
+  """
+  role: String!
+
+  """
+  The message content, either as a list content objects or string.
+  """
+  content: [JSON]! # FIX
+  """
+  List of mentions included in the message.
+  """
+  mentions: [Mention]
+  additional_properties: AdditionalProperties
+}
+
+"""
+mention will specify a assistant
+"""
+type Mention {
+  assistant_id: ID!
+  assistant_name: String!
+}
+
+"""
+Basic information about an assistant.
+"""
+type AssistantInfo {
+  """
+  The unique identifier of the AI assistant.
+  """
+  assistant_id: ID
+
+  """
+  The name of the assistant.
+  """
+  assistant_name: String
+
+  """
+  Indicates whether this is the default assistant.
+  """
+  is_default: Boolean
+}

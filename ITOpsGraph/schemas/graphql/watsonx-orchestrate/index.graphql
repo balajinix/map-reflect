@@ -1,0 +1,14 @@
+schema
+  @sdl(
+    files: [
+      "default-agent-settings/index.graphql"
+      "skillsets/index.graphql"
+      "skillset-by-id/index.graphql"
+      "chats/index.graphql"
+      "threads/index.graphql"
+    ]
+  ) {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

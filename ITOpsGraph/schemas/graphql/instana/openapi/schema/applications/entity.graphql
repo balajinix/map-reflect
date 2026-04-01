@@ -1,0 +1,22 @@
+"""
+Entity type.
+"""
+enum EntityType {
+  APPLICATION
+  SERVICE
+  ENDPOINT
+}
+
+interface Entity {
+  entityType: EntityType
+
+  """
+  Unique ID of the entity.
+  """
+  id: ID!
+
+  """
+  Name of the entity.
+  """
+  label: String!
+}

@@ -1,0 +1,15 @@
+deployment:
+  identity:
+    keys:
+      - algorithm: HS256
+        key: STEPZEN_JWT_SECRET
+configurationset:
+  - configuration:
+      name: apptio
+      apitoken: STEPZEN_APPTIO_APITOKEN
+      hostname: STEPZEN_APPTIO_HOSTNAME
+  - configuration:
+      name: apptio-guard
+      apitoken: STEPZEN_APPTIO_APITOKEN
+      hostname: STEPZEN_APPTIO_HOSTNAME # api.cloudability.com
+      stepzen.queryextensionguard: "true"

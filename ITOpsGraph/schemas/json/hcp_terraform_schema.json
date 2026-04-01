@@ -1,0 +1,265 @@
+{
+  "product": "hcp_terraform",
+  "source_file": "/Users/balaji/code/infragraph-nl2q/src/nl2q/schema/protobuf-domain-v1/hcp_terraform.proto",
+  "source_type": "proto",
+  "types": [
+    {
+      "name": "HcpTerraformOrganization",
+      "kind": "MESSAGE",
+      "description": "HcpTerraformOrganization is a type containing HCP TF Organization specific fields.",
+      "fields": [
+        {
+          "name": "organization",
+          "type": "BaseOrganization",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "is_unified",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "agent_pool_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformProject",
+      "kind": "MESSAGE",
+      "description": "HcpTerraformProject is a type containing HCP TF Project specific fields.",
+      "fields": [
+        {
+          "name": "account",
+          "type": "BaseAccount",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "is_legacy_organization_project",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "is_unified",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformWorkspace",
+      "kind": "MESSAGE",
+      "description": "Workspace is a type containing Terraform Workspace specific fields.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "current_run_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "resource_count",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "current_state_version_id",
+          "type": "string",
+          "description": "the current state version id of the workspace",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "environment",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "execution_mode",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "tag_names",
+          "type": "string",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "agent_pool_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformStateVersion",
+      "kind": "MESSAGE",
+      "description": "StateVersion is a type containing HCP State Version specific fields.",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "hosted_state_download_url",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "edge",
+          "type": "Edge",
+          "description": "",
+          "is_list": true,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "current_run_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformAgentPool",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "agent_count",
+          "type": "int32",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "organization_scoped",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "HcpTerraformRun",
+      "kind": "MESSAGE",
+      "description": "",
+      "fields": [
+        {
+          "name": "base",
+          "type": "Base",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "is_destroyed",
+          "type": "bool",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        },
+        {
+          "name": "workspace_id",
+          "type": "string",
+          "description": "",
+          "is_list": false,
+          "is_required": false,
+          "default_value": null
+        }
+      ]
+    }
+  ]
+}

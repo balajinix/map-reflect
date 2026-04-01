@@ -1,0 +1,60 @@
+{
+  "product": "hcp",
+  "source_file": "/Users/balaji/code/infragraph-nl2q/src/nl2q/schema/protobuf-domain-v1/hcp.proto",
+  "source_type": "proto",
+  "types": [
+    {
+      "name": "HcpResource",
+      "kind": "MESSAGE",
+      "description": "HcpResource is a type containing HCP specific fields.",
+      "fields": [
+        {
+          "name": "organization_id",
+          "type": "string",
+          "description": "organization_id that owns the resource",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        },
+        {
+          "name": "project_id",
+          "type": "string",
+          "description": "project_id the resource belongs to",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "HcpOrganization",
+      "kind": "MESSAGE",
+      "description": "HcpOrganization is a type containing HCP Organization specific fields.",
+      "fields": [
+        {
+          "name": "organization",
+          "type": "BaseOrganization",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    },
+    {
+      "name": "HcpProject",
+      "kind": "MESSAGE",
+      "description": "HcpProject is a type containing HCP Project specific fields.",
+      "fields": [
+        {
+          "name": "account",
+          "type": "BaseAccount",
+          "description": "",
+          "is_list": false,
+          "is_required": true,
+          "default_value": null
+        }
+      ]
+    }
+  ]
+}

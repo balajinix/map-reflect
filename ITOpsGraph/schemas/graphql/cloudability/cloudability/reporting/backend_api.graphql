@@ -1,0 +1,146 @@
+# backend_api.graphql
+
+# --- Original Scalar & Input Types (if any specific to backend calls) ---
+
+# --- Original Output Types (as returned by backend or used in its structure) ---
+
+type Aggregate {
+  data_type: String
+  description: String
+  label: String
+  name: String
+  type: String
+  value: Int # As per original schema, might need to be JSON or String if value varies more
+}
+
+type Dates {
+  end: DateTime
+  start: DateTime
+}
+
+type Group {
+  ID: Int
+  Key: String
+  Name: String
+}
+
+type Dimension_MeasureInfo {
+  data_type: String
+  description: String
+  group: Group
+  label: String
+  name: String
+  sub_group: Group
+  type: String
+}
+
+type Measure_MeasureInfo {
+  data_type: String
+  description: String
+  group: Group
+  label: String
+  name: String
+  sub_group: Group
+  type: String
+}
+
+type Metric_MetaInfo {
+  data_type: String
+  description: String
+  group: Group
+  label: String
+  name: String
+  sub_group: Group
+  type: String
+}
+
+type Filter_MetaInfo {
+  comparator: String
+  measure_field_name: String
+  measure_label: String # Assuming this is part of the meta info
+  value: String
+}
+
+type Meta {
+  aggregates: [Aggregate]
+  dates: Dates
+  dimensions: [Dimension_MeasureInfo]
+  filters: [Filter_MetaInfo]
+  metrics: [Metric_MetaInfo]
+}
+
+type CostReport {
+  limit: Int
+  meta: Meta
+  offset: Int
+  pagination: JSON
+  results: [JSON]
+  total_results: Int
+}
+
+# --- Core Queries to Backend ---
+
+extend type Query {
+  """
+  (Backend) Retrieve a cost report. This is the raw API.
+  """
+  costReport(
+    dimensions: String!
+    end_date: String!
+    filters: [String]
+    metrics: String!
+    start_date: String!
+    sort: String
+    limit: Int
+  ): CostReport
+    @rest(
+      endpoint: "https://$hostname/v3/reporting/cost/run"
+      configuration: "apptio"
+      headers: [{ name: "Authorization", value: "Basic $apitoken" }]
+    )
+
+  """
+  (Backend) Lists available cost reporting measures (dimensions and metrics).
+  """
+  measures: [Measure_MeasureInfo]
+    @rest(
+      endpoint: "https://$hostname/v3/reporting/cost/measures"
+      configuration: "apptio"
+      headers: [{ name: "Authorization", value: "Basic $apitoken" }]
+    )
+
+  """
+  (Backend) Returns the list of operators that can be used in comparison filters.
+  """
+  operators: [String]
+    @rest(
+      endpoint: "https://$hostname/v3/reporting/cost/filters"
+      configuration: "apptio"
+      headers: [{ name: "Authorization", value: "Basic $apitoken" }]
+    )
+
+  """
+  (Backend) Pre-configured report showing unblended cost.
+  """
+  unblendedCost_Report(
+    end_date: String!
+    start_date: String!
+    sort: String
+    limit: Int
+  ): CostReport
+    @materializer(
+      query: "costReport"
+      arguments: [
+        {
+          name: "dimensions"
+          const: "year_month,service_name,usage_family,category24,transaction_type"
+        }
+        { name: "filters", const: "transaction_type==Usage" }
+        { name: "metrics", const: "unblended_cost" }
+        { name: "start_date", argument: "start_date" }
+        { name: "end_date", argument: "end_date" }
+        { name: "sort", argument: "sort" }
+        { name: "limit", argument: "limit" }
+      ]
+    )
+}

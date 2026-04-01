@@ -1,0 +1,97 @@
+#
+# https://instana.github.io/openapi/#operation/getEvents
+
+enum EventState {
+  open
+  closed
+}
+
+enum EntityType {
+  APPLICATION
+  ENDPOINT
+  INFRASTRUCTURE
+  LOG
+  MOBILE_APP
+  SERVICE
+  SYNTHETICS
+  WEBSITE
+}
+
+enum EventType {
+  issue
+  instrastructure
+  change
+}
+
+type Event {
+  """
+  Details of the event.
+  """
+  detail: String
+
+  """
+  A Unix timestamp representing the end time of the Event.
+  """
+  end: DateTime
+
+  """
+  The label of the affected entity of the event.
+  """
+  entityLabel: String
+
+  """
+  The name or type of the affected entity of the event.
+  """
+  entityName: String
+
+  """
+  The category of the affected entity.
+  """
+  entityType: EntityType
+
+  """
+  ID of this Event.
+  """
+  eventId: ID
+
+  """
+  Main problem title of the Event.
+  """
+  problem: String
+
+  """
+  The severity of the Event when triggered.
+  """
+  severity: Int
+
+  """
+  A Unix timestamp representing the start time of the Event.
+  """
+  start: DateTime
+
+  """
+  The state of the Event, "open" or "closed".
+  """
+  state: EventState
+
+  """
+  The type of Event.
+  """
+  type: EventType
+}
+
+extend type Query {
+  events(to: String, from: String, eventTypeFilters: EventType): [Event]
+    @rest(
+      endpoint: "https://$hostname;/api/events"
+      headers: { name: "Authorization", value: "apitoken $apitoken;" }
+      configuration: "instana"
+      transforms: [
+        {
+          pathpattern: ["[]", "start"]
+          editor: "jsonata:$fromMillis($number())"
+        }
+        { pathpattern: ["[]", "end"], editor: "jsonata:$fromMillis($number())" }
+      ]
+    )
+}

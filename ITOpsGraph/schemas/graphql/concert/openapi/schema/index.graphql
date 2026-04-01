@@ -1,0 +1,11 @@
+schema
+  @sdl(
+    files: [
+      "access_management/index.graphql"
+      "vulnerabilities/index.graphql"
+      "applications/index.graphql"
+      "common.graphql"
+    ]
+  ) {
+  query: Query
+}

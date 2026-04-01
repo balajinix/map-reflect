@@ -1,0 +1,128 @@
+"""
+Universal input type for TagFilter or TagFilterExpression. 
+We have one type that includes:
+ - The 'type' discriminator
+ - All fields from TagFilter (entity, name, operator, key, value)
+ - All fields from TagFilterExpression (elements, logicalOperator)
+We rely on the 'type' to figure out which subset of fields should be valid.
+"""
+input tagFilterExpressionElement_Input {
+  """
+  The discriminator used to decide whether this object 
+  represents a TAG_FILTER or EXPRESSION.
+  """
+  type: tagFilterElementType_Input!
+
+  """
+  -- Fields for if type=TAG_FILTER case --
+  Required by JSON schema if type=TAG_FILTER,
+  but optional overall in GraphQL because we can't 
+  conditionally require them in the schema itself.
+  """
+  entity: groupbyTagEntity # required
+  name: String                   # required
+  operator: tagOperator_Input    # required
+  key: String                    # optional
+  value: JSON                    # optional - can be string, number or boolean
+
+  """
+  -- Fields for if type=EXPRESSION case --
+  Array of nested tagFilterExpressionElement_Input for recursion.
+  """
+  elements: [tagFilterExpressionElement_Input!]         # required
+  logicalOperator: LogicalOperator                      # required
+}
+
+"""
+Boolean expression of tag filters to define the scope of relevant calls.
+Discriminator for TagFilterExpressionElement; "type" must be "EXPRESSION" or "TAG_FILTER"
+"""
+enum tagFilterElementType_Input {
+  EXPRESSION
+  TAG_FILTER
+}
+
+"""
+The entity by which the data should be grouped.
+This field supports three possible values: `NOT_APPLICABLE`, `DESTINATION`, and `SOURCE`.
+`SOURCE`: the tag filter should apply to the source entity.
+`DESTINATION`: the tag filter should apply to the destination entity.
+`NOT_APPLICABLE`: some tags are independent of source or destination, such as tags on the call itself, log tags or trace tags (only destination makes sense because the source is unknown for the root call).
+"""
+enum groupbyTagEntity {
+  NOT_APPLICABLE
+  DESTINATION
+  SOURCE
+}
+
+enum tagOperator_Input {
+  EQUALS
+  CONTAINS
+  LESS_THAN
+  LESS_OR_EQUAL_THAN
+  GREATER_THAN
+  GREATER_OR_EQUAL_THAN
+  NOT_EMPTY
+  NOT_EQUAL
+  NOT_CONTAIN
+  IS_EMPTY
+  NOT_BLANK
+  IS_BLANK
+  STARTS_WITH
+  ENDS_WITH
+  NOT_STARTS_WITH
+  NOT_ENDS_WITH
+}
+
+enum LogicalOperator {
+  AND
+  OR
+}
+
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar BigInt
+
+"""Floats that will have a value of 0 or more."""
+scalar NonNegativeFloat
+
+scalar mutation_manuallyCloseEvent_endpointServiceId
+
+scalar mutation_manuallyCloseEvent_entityId
+
+
+enum mutation_manuallyCloseEvent_entityType {
+  Entity10
+  App20
+  Service20
+  Endpoint20
+  Website
+  Synthetic
+  MobileApp
+  Log
+}
+# TODO these should just use ID, would be a curation step. https://github.ibm.com/solis-dal/solis-graphql-schemas/pull/31#discussion_r10432614
+scalar mutation_manuallyCloseEvent_id
+
+scalar mutation_manuallyCloseEvent_metricAccessId
+
+scalar mutation_manuallyCloseEvent_plugin
+
+
+type mutation_manuallyCloseEvent_problem {
+  fixSuggestion: mutation_manuallyCloseEvent_problem_fixSuggestion
+  id: mutation_manuallyCloseEvent_problem_id!
+  problemText: mutation_manuallyCloseEvent_problem_problemText
+  severity: Int
+}
+
+scalar mutation_manuallyCloseEvent_problem_fixSuggestion
+
+scalar mutation_manuallyCloseEvent_problem_id
+
+scalar mutation_manuallyCloseEvent_problem_problemText
+# TODO  Potentially an enum - curation step. https://github.ibm.com/solis-dal/solis-graphql-schemas/pull/31#discussion_r10432617
+scalar mutation_manuallyCloseEvent_state
+
+scalar mutation_manuallyCloseEvent_type

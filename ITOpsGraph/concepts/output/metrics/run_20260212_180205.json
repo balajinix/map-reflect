@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-02-12T18:02:05.173260",
+  "input_dir": "docs/product_docs/raw/html",
+  "output_dir": "concepts/output",
+  "stages": [
+    "convert"
+  ],
+  "elapsed_seconds": 1.37,
+  "files": {
+    "chunks": "concepts/output/entities/chunks.json",
+    "entities": null,
+    "resolved": null,
+    "relations": null
+  }
+}

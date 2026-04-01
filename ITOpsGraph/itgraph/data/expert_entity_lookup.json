@@ -1,0 +1,1758 @@
+{
+  "api_type_to_entity": {
+    "concert.Resources_images": [
+      {
+        "entity_id": "container_image",
+        "entity_label": "Container Image",
+        "domain": "core_infrastructure",
+        "description": "Container image artifact; entry point linking build artifacts to running workloads"
+      }
+    ],
+    "infragraph.BaseVirtualMachineImage": [
+      {
+        "entity_id": "container_image",
+        "entity_label": "Container Image",
+        "domain": "core_infrastructure",
+        "description": "Container image artifact; entry point linking build artifacts to running workloads"
+      },
+      {
+        "entity_id": "deployable_artifacts",
+        "entity_label": "Deployable Artifacts",
+        "domain": "code_and_build",
+        "description": "Packaged artifacts ready for deployment: images, specs, configs, certs"
+      }
+    ],
+    "turbonomic.Entity": [
+      {
+        "entity_id": "container_workload",
+        "entity_label": "Container Workload",
+        "domain": "core_infrastructure",
+        "description": "Running container instance instantiated from an image"
+      },
+      {
+        "entity_id": "service",
+        "entity_label": "Service",
+        "domain": "core_infrastructure",
+        "description": "Kubernetes/cloud service surfaced by container workloads; cross-product linking point"
+      },
+      {
+        "entity_id": "turbo_application",
+        "entity_label": "Turbo Application",
+        "domain": "turbonomic",
+        "description": "Turbonomic application entity composed from services"
+      }
+    ],
+    "infragraph.BaseVirtualMachine": [
+      {
+        "entity_id": "container_workload",
+        "entity_label": "Container Workload",
+        "domain": "core_infrastructure",
+        "description": "Running container instance instantiated from an image"
+      }
+    ],
+    "aws.AwsEcsService": [
+      {
+        "entity_id": "service",
+        "entity_label": "Service",
+        "domain": "core_infrastructure",
+        "description": "Kubernetes/cloud service surfaced by container workloads; cross-product linking point"
+      }
+    ],
+    "instana.ApplicationPerspective": [
+      {
+        "entity_id": "service",
+        "entity_label": "Service",
+        "domain": "core_infrastructure",
+        "description": "Kubernetes/cloud service surfaced by container workloads; cross-product linking point"
+      },
+      {
+        "entity_id": "instana_application",
+        "entity_label": "Instana Application",
+        "domain": "instana",
+        "description": "Instana-defined application grouping services"
+      }
+    ],
+    "aws.AwsEcsCluster": [
+      {
+        "entity_id": "cluster",
+        "entity_label": "Cluster",
+        "domain": "core_infrastructure",
+        "description": "Kubernetes or cloud cluster hosting workloads"
+      }
+    ],
+    "infragraph.BaseAccount": [
+      {
+        "entity_id": "cluster",
+        "entity_label": "Cluster",
+        "domain": "core_infrastructure",
+        "description": "Kubernetes or cloud cluster hosting workloads"
+      }
+    ],
+    "infragraph.NodeIdentifier": [
+      {
+        "entity_id": "node",
+        "entity_label": "Node",
+        "domain": "core_infrastructure",
+        "description": "Compute node within a cluster"
+      }
+    ],
+    "aws.AwsEc2Volume": [
+      {
+        "entity_id": "volume",
+        "entity_label": "Volume",
+        "domain": "core_infrastructure",
+        "description": "Persistent or ephemeral storage volume"
+      }
+    ],
+    "infragraph.BaseVolume": [
+      {
+        "entity_id": "volume",
+        "entity_label": "Volume",
+        "domain": "core_infrastructure",
+        "description": "Persistent or ephemeral storage volume"
+      }
+    ],
+    "infragraph.Source": [
+      {
+        "entity_id": "code_repository",
+        "entity_label": "Code Repository",
+        "domain": "code_and_build",
+        "description": "Source code repository"
+      },
+      {
+        "entity_id": "deployable_artifacts",
+        "entity_label": "Deployable Artifacts",
+        "domain": "code_and_build",
+        "description": "Packaged artifacts ready for deployment: images, specs, configs, certs"
+      }
+    ],
+    "hcp_terraform.terraform_HcpTerraformWorkspace": [
+      {
+        "entity_id": "terraform_template",
+        "entity_label": "Terraform Template",
+        "domain": "code_and_build",
+        "description": "IaC template that governs infrastructure resource provisioning"
+      }
+    ],
+    "hcp_terraform.terraform_HcpTerraformRun": [
+      {
+        "entity_id": "terraform_template",
+        "entity_label": "Terraform Template",
+        "domain": "code_and_build",
+        "description": "IaC template that governs infrastructure resource provisioning"
+      }
+    ],
+    "turbonomic.Action": [
+      {
+        "entity_id": "optimization_action",
+        "entity_label": "Optimization Action",
+        "domain": "turbonomic",
+        "description": "Recommended or executed resource optimization action"
+      }
+    ],
+    "turbonomic.Statistics": [
+      {
+        "entity_id": "resource_usages",
+        "entity_label": "Resource Usages",
+        "domain": "turbonomic",
+        "description": "Resource utilization data (CPU, memory, storage) from infrastructure"
+      },
+      {
+        "entity_id": "service_metrics_turbo",
+        "entity_label": "Service Metrics (Turbo)",
+        "domain": "turbonomic",
+        "description": "Service-level performance metrics consumed by Turbonomic"
+      }
+    ],
+    "turbonomic.StatsEntry": [
+      {
+        "entity_id": "resource_usages",
+        "entity_label": "Resource Usages",
+        "domain": "turbonomic",
+        "description": "Resource utilization data (CPU, memory, storage) from infrastructure"
+      }
+    ],
+    "turbonomic.ActionSchedule": [
+      {
+        "entity_id": "optimization_policy",
+        "entity_label": "Optimization Policy",
+        "domain": "turbonomic",
+        "description": "Policy derived from resource and service metrics to drive optimization actions"
+      }
+    ],
+    "instana.getTraces_request_Input": [
+      {
+        "entity_id": "metrics_and_traces",
+        "entity_label": "Metrics & Traces",
+        "domain": "instana",
+        "description": "Full observability data: logs, metrics, distributed traces emitted by services and workloads"
+      }
+    ],
+    "instana.callGroup_input_metrics_items": [
+      {
+        "entity_id": "metrics_and_traces",
+        "entity_label": "Metrics & Traces",
+        "domain": "instana",
+        "description": "Full observability data: logs, metrics, distributed traces emitted by services and workloads"
+      }
+    ],
+    "concert.Application": [
+      {
+        "entity_id": "concert_application",
+        "entity_label": "Concert Application",
+        "domain": "concert",
+        "description": "Application entity within Concert, linked to environments and images"
+      }
+    ],
+    "concert.Topology_application_view": [
+      {
+        "entity_id": "concert_application",
+        "entity_label": "Concert Application",
+        "domain": "concert",
+        "description": "Application entity within Concert, linked to environments and images"
+      }
+    ],
+    "concert.Environment": [
+      {
+        "entity_id": "concert_environment",
+        "entity_label": "Concert Environment",
+        "domain": "concert",
+        "description": "Deployment environment managed by Concert"
+      }
+    ],
+    "concert.AppEnvironment": [
+      {
+        "entity_id": "concert_environment",
+        "entity_label": "Concert Environment",
+        "domain": "concert",
+        "description": "Deployment environment managed by Concert"
+      }
+    ],
+    "concert.Cves": [
+      {
+        "entity_id": "cve_vulnerability",
+        "entity_label": "CVE Vulnerability",
+        "domain": "concert",
+        "description": "Known vulnerability associated with a container image"
+      }
+    ],
+    "concert.CvesInfo": [
+      {
+        "entity_id": "cve_vulnerability",
+        "entity_label": "CVE Vulnerability",
+        "domain": "concert",
+        "description": "Known vulnerability associated with a container image"
+      }
+    ],
+    "concert.Vulnerability": [
+      {
+        "entity_id": "cve_vulnerability",
+        "entity_label": "CVE Vulnerability",
+        "domain": "concert",
+        "description": "Known vulnerability associated with a container image"
+      }
+    ],
+    "concert.Vulnerability_findings": [
+      {
+        "entity_id": "cve_vulnerability",
+        "entity_label": "CVE Vulnerability",
+        "domain": "concert",
+        "description": "Known vulnerability associated with a container image"
+      }
+    ],
+    "concert.Data_mapper": [
+      {
+        "entity_id": "itsm_incident_change_data",
+        "entity_label": "ITSM / Incident / Change Data",
+        "domain": "concert",
+        "description": "IT service management records: incidents, change tickets"
+      }
+    ],
+    "concert.Resilience": [
+      {
+        "entity_id": "resilience_metrics",
+        "entity_label": "Resilience Metrics",
+        "domain": "concert",
+        "description": "Computed resilience signals aggregated from CVEs, ITSM data, and Instana telemetry"
+      }
+    ],
+    "concert.Profile": [
+      {
+        "entity_id": "resilience_profile",
+        "entity_label": "Resilience Profile",
+        "domain": "concert",
+        "description": "Aggregated resilience posture for a component or environment"
+      }
+    ],
+    "concert.G_fwk_profile": [
+      {
+        "entity_id": "resilience_profile",
+        "entity_label": "Resilience Profile",
+        "domain": "concert",
+        "description": "Aggregated resilience posture for a component or environment"
+      }
+    ],
+    "concert.ApplicationPatchInput": [
+      {
+        "entity_id": "patch",
+        "entity_label": "Patch",
+        "domain": "concert",
+        "description": "Security patch associated with a CVE or compliance finding"
+      }
+    ],
+    "concert.VulnerabilityPatchInput": [
+      {
+        "entity_id": "patch",
+        "entity_label": "Patch",
+        "domain": "concert",
+        "description": "Security patch associated with a CVE or compliance finding"
+      }
+    ]
+  },
+  "type_pair_expert": {
+    "concert.Resources_images -> turbonomic.Entity": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "instantiates",
+        "runs as"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "turbonomic.Entity -> concert.Resources_images": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "instantiates (reverse)",
+        "runs as (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "concert.Resources_images -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "instantiates",
+        "runs as"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "infragraph.BaseVirtualMachine -> concert.Resources_images": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "instantiates (reverse)",
+        "runs as (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "infragraph.BaseVirtualMachineImage -> turbonomic.Entity": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "instantiates",
+        "runs as"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "turbonomic.Entity -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "instantiates (reverse)",
+        "runs as (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "infragraph.BaseVirtualMachineImage -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "instantiates",
+        "runs as"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "infragraph.BaseVirtualMachine -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "instantiates (reverse)",
+        "runs as (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": "A container image is instantiated into a running container workload"
+    },
+    "concert.Resources_images -> concert.Cves": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Cves -> concert.Resources_images": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Resources_images -> concert.CvesInfo": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.CvesInfo -> concert.Resources_images": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Resources_images -> concert.Vulnerability": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Vulnerability -> concert.Resources_images": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Resources_images -> concert.Vulnerability_findings": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Vulnerability_findings -> concert.Resources_images": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "infragraph.BaseVirtualMachineImage -> concert.Cves": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Cves -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "infragraph.BaseVirtualMachineImage -> concert.CvesInfo": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.CvesInfo -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "infragraph.BaseVirtualMachineImage -> concert.Vulnerability": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Vulnerability -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "infragraph.BaseVirtualMachineImage -> concert.Vulnerability_findings": {
+      "src_entity": "Container Image",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "has"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "concert.Vulnerability_findings -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "has (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Concert registers an API to retrieve CVEs for a given image"
+    },
+    "turbonomic.Entity -> aws.AwsEcsService": {
+      "src_entity": "Turbo Application",
+      "tgt_entity": "Service",
+      "relationships": [
+        "composes (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "aws.AwsEcsService -> turbonomic.Entity": {
+      "src_entity": "Service",
+      "tgt_entity": "Turbo Application",
+      "relationships": [
+        "composes"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Entity -> instana.ApplicationPerspective": {
+      "src_entity": "Service",
+      "tgt_entity": "Instana Application",
+      "relationships": [
+        "composes"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.ApplicationPerspective -> turbonomic.Entity": {
+      "src_entity": "Instana Application",
+      "tgt_entity": "Service",
+      "relationships": [
+        "composes (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "turbonomic.Entity -> turbonomic.Entity": {
+      "src_entity": "Turbo Application",
+      "tgt_entity": "Service",
+      "relationships": [
+        "composes (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachine -> aws.AwsEcsService": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Service",
+      "relationships": [
+        "surfaces"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "aws.AwsEcsService -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Service",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "surfaces (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachine -> instana.ApplicationPerspective": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Service",
+      "relationships": [
+        "surfaces"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "instana.ApplicationPerspective -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Service",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "surfaces (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachine -> turbonomic.Entity": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Service",
+      "relationships": [
+        "surfaces"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "turbonomic.Entity -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Service",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "surfaces (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "turbonomic.Entity -> instana.getTraces_request_Input": {
+      "src_entity": "Service",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.getTraces_request_Input -> turbonomic.Entity": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Service",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "turbonomic.Entity -> instana.callGroup_input_metrics_items": {
+      "src_entity": "Service",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.callGroup_input_metrics_items -> turbonomic.Entity": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Service",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachine -> instana.getTraces_request_Input": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.getTraces_request_Input -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachine -> instana.callGroup_input_metrics_items": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.callGroup_input_metrics_items -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "aws.AwsEcsService -> instana.ApplicationPerspective": {
+      "src_entity": "Service",
+      "tgt_entity": "Instana Application",
+      "relationships": [
+        "composes"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.ApplicationPerspective -> aws.AwsEcsService": {
+      "src_entity": "Instana Application",
+      "tgt_entity": "Service",
+      "relationships": [
+        "composes (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.ApplicationPerspective -> instana.ApplicationPerspective": {
+      "src_entity": "Instana Application",
+      "tgt_entity": "Service",
+      "relationships": [
+        "composes (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "aws.AwsEcsService -> instana.getTraces_request_Input": {
+      "src_entity": "Service",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.getTraces_request_Input -> aws.AwsEcsService": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Service",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "aws.AwsEcsService -> instana.callGroup_input_metrics_items": {
+      "src_entity": "Service",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.callGroup_input_metrics_items -> aws.AwsEcsService": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Service",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": ""
+    },
+    "instana.ApplicationPerspective -> instana.getTraces_request_Input": {
+      "src_entity": "Instana Application",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": "Instana Application emits Latency, Throughput, Synthetics, Logs, Metrics, Traces"
+    },
+    "instana.getTraces_request_Input -> instana.ApplicationPerspective": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Instana Application",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": "Instana Application emits Latency, Throughput, Synthetics, Logs, Metrics, Traces"
+    },
+    "instana.ApplicationPerspective -> instana.callGroup_input_metrics_items": {
+      "src_entity": "Instana Application",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "emits"
+      ],
+      "domain": "Instana",
+      "notes": "Instana Application emits Latency, Throughput, Synthetics, Logs, Metrics, Traces"
+    },
+    "instana.callGroup_input_metrics_items -> instana.ApplicationPerspective": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Instana Application",
+      "relationships": [
+        "emits (reverse)"
+      ],
+      "domain": "Instana",
+      "notes": "Instana Application emits Latency, Throughput, Synthetics, Logs, Metrics, Traces"
+    },
+    "aws.AwsEcsCluster -> turbonomic.Entity": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Turbo Application",
+      "relationships": [
+        "composes"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Entity -> aws.AwsEcsCluster": {
+      "src_entity": "Turbo Application",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "composes (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> turbonomic.Entity": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Turbo Application",
+      "relationships": [
+        "composes"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Entity -> infragraph.BaseAccount": {
+      "src_entity": "Turbo Application",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "composes (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "aws.AwsEcsCluster -> turbonomic.Statistics": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Service Metrics (Turbo)",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Statistics -> aws.AwsEcsCluster": {
+      "src_entity": "Service Metrics (Turbo)",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "aws.AwsEcsCluster -> turbonomic.StatsEntry": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Resource Usages",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.StatsEntry -> aws.AwsEcsCluster": {
+      "src_entity": "Resource Usages",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> turbonomic.Statistics": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Service Metrics (Turbo)",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Statistics -> infragraph.BaseAccount": {
+      "src_entity": "Service Metrics (Turbo)",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> turbonomic.StatsEntry": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Resource Usages",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.StatsEntry -> infragraph.BaseAccount": {
+      "src_entity": "Resource Usages",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "aws.AwsEcsCluster -> concert.Data_mapper": {
+      "src_entity": "Cluster",
+      "tgt_entity": "ITSM / Incident / Change Data",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Data_mapper -> aws.AwsEcsCluster": {
+      "src_entity": "ITSM / Incident / Change Data",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> concert.Data_mapper": {
+      "src_entity": "Cluster",
+      "tgt_entity": "ITSM / Incident / Change Data",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Data_mapper -> infragraph.BaseAccount": {
+      "src_entity": "ITSM / Incident / Change Data",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "infragraph.Source -> concert.Resources_images": {
+      "src_entity": "Code Repository",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "produces"
+      ],
+      "domain": "Concert",
+      "notes": "Source code builds into images via CI/CD"
+    },
+    "concert.Resources_images -> infragraph.Source": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Code Repository",
+      "relationships": [
+        "produces (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Source code builds into images via CI/CD"
+    },
+    "infragraph.Source -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "Code Repository",
+      "tgt_entity": "Deployable Artifacts",
+      "relationships": [
+        "packaged into"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachineImage -> infragraph.Source": {
+      "src_entity": "Deployable Artifacts",
+      "tgt_entity": "Code Repository",
+      "relationships": [
+        "packaged into (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.Source -> infragraph.Source": {
+      "src_entity": "Deployable Artifacts",
+      "tgt_entity": "Code Repository",
+      "relationships": [
+        "packaged into (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "hcp_terraform.terraform_HcpTerraformWorkspace -> aws.AwsEcsCluster": {
+      "src_entity": "Terraform Template",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "aws.AwsEcsCluster -> hcp_terraform.terraform_HcpTerraformWorkspace": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Terraform Template",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "hcp_terraform.terraform_HcpTerraformWorkspace -> infragraph.BaseAccount": {
+      "src_entity": "Terraform Template",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> hcp_terraform.terraform_HcpTerraformWorkspace": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Terraform Template",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "hcp_terraform.terraform_HcpTerraformRun -> aws.AwsEcsCluster": {
+      "src_entity": "Terraform Template",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "aws.AwsEcsCluster -> hcp_terraform.terraform_HcpTerraformRun": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Terraform Template",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "hcp_terraform.terraform_HcpTerraformRun -> infragraph.BaseAccount": {
+      "src_entity": "Terraform Template",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> hcp_terraform.terraform_HcpTerraformRun": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Terraform Template",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Infrastructure as Code",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachineImage -> aws.AwsEcsCluster": {
+      "src_entity": "Deployable Artifacts",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "aws.AwsEcsCluster -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Deployable Artifacts",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachineImage -> infragraph.BaseAccount": {
+      "src_entity": "Deployable Artifacts",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Deployable Artifacts",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.Source -> aws.AwsEcsCluster": {
+      "src_entity": "Deployable Artifacts",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "aws.AwsEcsCluster -> infragraph.Source": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Deployable Artifacts",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.Source -> infragraph.BaseAccount": {
+      "src_entity": "Deployable Artifacts",
+      "tgt_entity": "Cluster",
+      "relationships": [
+        "governs"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "infragraph.BaseAccount -> infragraph.Source": {
+      "src_entity": "Cluster",
+      "tgt_entity": "Deployable Artifacts",
+      "relationships": [
+        "governs (reverse)"
+      ],
+      "domain": "Core Infrastructure Model",
+      "notes": ""
+    },
+    "turbonomic.Action -> turbonomic.Entity": {
+      "src_entity": "Optimization Action",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "acts on"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Entity -> turbonomic.Action": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Optimization Action",
+      "relationships": [
+        "acts on (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Action -> infragraph.BaseVirtualMachine": {
+      "src_entity": "Optimization Action",
+      "tgt_entity": "Container Workload",
+      "relationships": [
+        "acts on"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachine -> turbonomic.Action": {
+      "src_entity": "Container Workload",
+      "tgt_entity": "Optimization Action",
+      "relationships": [
+        "acts on (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Statistics -> turbonomic.ActionSchedule": {
+      "src_entity": "Service Metrics (Turbo)",
+      "tgt_entity": "Optimization Policy",
+      "relationships": [
+        "feeds"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.ActionSchedule -> turbonomic.Statistics": {
+      "src_entity": "Optimization Policy",
+      "tgt_entity": "Service Metrics (Turbo)",
+      "relationships": [
+        "feeds (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.StatsEntry -> turbonomic.ActionSchedule": {
+      "src_entity": "Resource Usages",
+      "tgt_entity": "Optimization Policy",
+      "relationships": [
+        "feeds"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.ActionSchedule -> turbonomic.StatsEntry": {
+      "src_entity": "Optimization Policy",
+      "tgt_entity": "Resource Usages",
+      "relationships": [
+        "feeds (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.ActionSchedule -> turbonomic.Action": {
+      "src_entity": "Optimization Policy",
+      "tgt_entity": "Optimization Action",
+      "relationships": [
+        "generates"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "turbonomic.Action -> turbonomic.ActionSchedule": {
+      "src_entity": "Optimization Action",
+      "tgt_entity": "Optimization Policy",
+      "relationships": [
+        "generates (reverse)"
+      ],
+      "domain": "Turbonomic",
+      "notes": ""
+    },
+    "instana.getTraces_request_Input -> concert.Resilience": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": "Instana telemetry feeds Concert resilience computation"
+    },
+    "concert.Resilience -> instana.getTraces_request_Input": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Instana telemetry feeds Concert resilience computation"
+    },
+    "instana.callGroup_input_metrics_items -> concert.Resilience": {
+      "src_entity": "Metrics & Traces",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": "Instana telemetry feeds Concert resilience computation"
+    },
+    "concert.Resilience -> instana.callGroup_input_metrics_items": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "Metrics & Traces",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": "Instana telemetry feeds Concert resilience computation"
+    },
+    "concert.Application -> concert.Environment": {
+      "src_entity": "Concert Application",
+      "tgt_entity": "Concert Environment",
+      "relationships": [
+        "deployed in"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Environment -> concert.Application": {
+      "src_entity": "Concert Environment",
+      "tgt_entity": "Concert Application",
+      "relationships": [
+        "deployed in (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Application -> concert.AppEnvironment": {
+      "src_entity": "Concert Application",
+      "tgt_entity": "Concert Environment",
+      "relationships": [
+        "deployed in"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.AppEnvironment -> concert.Application": {
+      "src_entity": "Concert Environment",
+      "tgt_entity": "Concert Application",
+      "relationships": [
+        "deployed in (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Topology_application_view -> concert.Environment": {
+      "src_entity": "Concert Application",
+      "tgt_entity": "Concert Environment",
+      "relationships": [
+        "deployed in"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Environment -> concert.Topology_application_view": {
+      "src_entity": "Concert Environment",
+      "tgt_entity": "Concert Application",
+      "relationships": [
+        "deployed in (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Topology_application_view -> concert.AppEnvironment": {
+      "src_entity": "Concert Application",
+      "tgt_entity": "Concert Environment",
+      "relationships": [
+        "deployed in"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.AppEnvironment -> concert.Topology_application_view": {
+      "src_entity": "Concert Environment",
+      "tgt_entity": "Concert Application",
+      "relationships": [
+        "deployed in (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Cves -> concert.Resilience": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resilience -> concert.Cves": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.CvesInfo -> concert.Resilience": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resilience -> concert.CvesInfo": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Vulnerability -> concert.Resilience": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resilience -> concert.Vulnerability": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Vulnerability_findings -> concert.Resilience": {
+      "src_entity": "CVE Vulnerability",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resilience -> concert.Vulnerability_findings": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "CVE Vulnerability",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Data_mapper -> concert.Resources_images": {
+      "src_entity": "ITSM / Incident / Change Data",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "references"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resources_images -> concert.Data_mapper": {
+      "src_entity": "Container Image",
+      "tgt_entity": "ITSM / Incident / Change Data",
+      "relationships": [
+        "references (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Data_mapper -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "ITSM / Incident / Change Data",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "references"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachineImage -> concert.Data_mapper": {
+      "src_entity": "Container Image",
+      "tgt_entity": "ITSM / Incident / Change Data",
+      "relationships": [
+        "references (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Data_mapper -> concert.Resilience": {
+      "src_entity": "ITSM / Incident / Change Data",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "provides"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resilience -> concert.Data_mapper": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "ITSM / Incident / Change Data",
+      "relationships": [
+        "provides (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resilience -> concert.Profile": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "Resilience Profile",
+      "relationships": [
+        "aggregated by"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Profile -> concert.Resilience": {
+      "src_entity": "Resilience Profile",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "aggregated by (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resilience -> concert.G_fwk_profile": {
+      "src_entity": "Resilience Metrics",
+      "tgt_entity": "Resilience Profile",
+      "relationships": [
+        "aggregated by"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.G_fwk_profile -> concert.Resilience": {
+      "src_entity": "Resilience Profile",
+      "tgt_entity": "Resilience Metrics",
+      "relationships": [
+        "aggregated by (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.ApplicationPatchInput -> concert.Resources_images": {
+      "src_entity": "Patch",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "remediates"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resources_images -> concert.ApplicationPatchInput": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Patch",
+      "relationships": [
+        "remediates (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.ApplicationPatchInput -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "Patch",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "remediates"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachineImage -> concert.ApplicationPatchInput": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Patch",
+      "relationships": [
+        "remediates (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.VulnerabilityPatchInput -> concert.Resources_images": {
+      "src_entity": "Patch",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "remediates"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.Resources_images -> concert.VulnerabilityPatchInput": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Patch",
+      "relationships": [
+        "remediates (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "concert.VulnerabilityPatchInput -> infragraph.BaseVirtualMachineImage": {
+      "src_entity": "Patch",
+      "tgt_entity": "Container Image",
+      "relationships": [
+        "remediates"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    },
+    "infragraph.BaseVirtualMachineImage -> concert.VulnerabilityPatchInput": {
+      "src_entity": "Container Image",
+      "tgt_entity": "Patch",
+      "relationships": [
+        "remediates (reverse)"
+      ],
+      "domain": "Concert",
+      "notes": ""
+    }
+  },
+  "use_case_paths": [
+    {
+      "title": "Use Case 1A: Application Vulnerabilities",
+      "chain": [
+        "instana_application",
+        "service",
+        "container_workload",
+        "container_image",
+        "cve_vulnerability"
+      ]
+    },
+    {
+      "title": "Use Case 1B: Application Optimization",
+      "chain": [
+        "instana_application",
+        "service",
+        "turbo_application",
+        "optimization_action",
+        "container_workload"
+      ]
+    },
+    {
+      "title": "Use Case 2: Application-Scoped RBAC Across Products",
+      "chain": [
+        "instana_application",
+        "service",
+        "container_workload",
+        "container_image"
+      ]
+    },
+    {
+      "title": "Use Case 3: Observability-Enhanced Resilience",
+      "chain": [
+        "concert_application",
+        "container_image",
+        "container_workload",
+        "service",
+        "metrics_and_traces",
+        "resilience_metrics",
+        "resilience_profile"
+      ]
+    }
+  ],
+  "entity_info": {
+    "container_image": {
+      "label": "Container Image",
+      "domain": "core_infrastructure",
+      "description": "Container image artifact; entry point linking build artifacts to running workloads"
+    },
+    "container_workload": {
+      "label": "Container Workload",
+      "domain": "core_infrastructure",
+      "description": "Running container instance instantiated from an image"
+    },
+    "service": {
+      "label": "Service",
+      "domain": "core_infrastructure",
+      "description": "Kubernetes/cloud service surfaced by container workloads; cross-product linking point"
+    },
+    "cluster": {
+      "label": "Cluster",
+      "domain": "core_infrastructure",
+      "description": "Kubernetes or cloud cluster hosting workloads"
+    },
+    "node": {
+      "label": "Node",
+      "domain": "core_infrastructure",
+      "description": "Compute node within a cluster"
+    },
+    "pod": {
+      "label": "Pod",
+      "domain": "core_infrastructure",
+      "description": "Kubernetes pod grouping containers"
+    },
+    "namespace": {
+      "label": "Namespace",
+      "domain": "core_infrastructure",
+      "description": "Kubernetes namespace scoping workloads"
+    },
+    "volume": {
+      "label": "Volume",
+      "domain": "core_infrastructure",
+      "description": "Persistent or ephemeral storage volume"
+    },
+    "access_point": {
+      "label": "Access Point",
+      "domain": "core_infrastructure",
+      "description": "Network access / ingress point"
+    },
+    "code_repository": {
+      "label": "Code Repository",
+      "domain": "code_and_build",
+      "description": "Source code repository"
+    },
+    "build_artifacts": {
+      "label": "Build Artifacts",
+      "domain": "code_and_build",
+      "description": "Compiled outputs, libraries, packages produced from source"
+    },
+    "cicd_pipelines": {
+      "label": "CI/CD Pipelines",
+      "domain": "code_and_build",
+      "description": "Continuous integration and delivery pipelines"
+    },
+    "terraform_template": {
+      "label": "Terraform Template",
+      "domain": "code_and_build",
+      "description": "IaC template that governs infrastructure resource provisioning"
+    },
+    "deployable_artifacts": {
+      "label": "Deployable Artifacts",
+      "domain": "code_and_build",
+      "description": "Packaged artifacts ready for deployment: images, specs, configs, certs"
+    },
+    "turbo_application": {
+      "label": "Turbo Application",
+      "domain": "turbonomic",
+      "description": "Turbonomic application entity composed from services"
+    },
+    "optimization_action": {
+      "label": "Optimization Action",
+      "domain": "turbonomic",
+      "description": "Recommended or executed resource optimization action"
+    },
+    "resource_usages": {
+      "label": "Resource Usages",
+      "domain": "turbonomic",
+      "description": "Resource utilization data (CPU, memory, storage) from infrastructure"
+    },
+    "service_metrics_turbo": {
+      "label": "Service Metrics (Turbo)",
+      "domain": "turbonomic",
+      "description": "Service-level performance metrics consumed by Turbonomic"
+    },
+    "optimization_policy": {
+      "label": "Optimization Policy",
+      "domain": "turbonomic",
+      "description": "Policy derived from resource and service metrics to drive optimization actions"
+    },
+    "instana_application": {
+      "label": "Instana Application",
+      "domain": "instana",
+      "description": "Instana-defined application grouping services"
+    },
+    "metrics_and_traces": {
+      "label": "Metrics & Traces",
+      "domain": "instana",
+      "description": "Full observability data: logs, metrics, distributed traces emitted by services and workloads"
+    },
+    "concert_application": {
+      "label": "Concert Application",
+      "domain": "concert",
+      "description": "Application entity within Concert, linked to environments and images"
+    },
+    "concert_environment": {
+      "label": "Concert Environment",
+      "domain": "concert",
+      "description": "Deployment environment managed by Concert"
+    },
+    "cve_vulnerability": {
+      "label": "CVE Vulnerability",
+      "domain": "concert",
+      "description": "Known vulnerability associated with a container image"
+    },
+    "itsm_incident_change_data": {
+      "label": "ITSM / Incident / Change Data",
+      "domain": "concert",
+      "description": "IT service management records: incidents, change tickets"
+    },
+    "resilience_metrics": {
+      "label": "Resilience Metrics",
+      "domain": "concert",
+      "description": "Computed resilience signals aggregated from CVEs, ITSM data, and Instana telemetry"
+    },
+    "resilience_profile": {
+      "label": "Resilience Profile",
+      "domain": "concert",
+      "description": "Aggregated resilience posture for a component or environment"
+    },
+    "patch": {
+      "label": "Patch",
+      "domain": "concert",
+      "description": "Security patch associated with a CVE or compliance finding"
+    }
+  }
+}

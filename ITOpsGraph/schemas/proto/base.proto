@@ -1,0 +1,330 @@
+syntax = "proto3";
+
+package hashicorp.cloud.internal.infragraph.domain.v1;
+
+import "google/protobuf/timestamp.proto";
+import "hashicorp/cloud/internal/infragraph/options/v1/options.proto";
+
+option go_package = "github.com/hashicorp/cloud-infragraph/proto-internal/go;hashicorp_cloud_infragraph_internal";
+
+enum Source {
+  SOURCE_UNSPECIFIED = 0;
+  SOURCE_AWS = 1;
+  SOURCE_AZURE = 2;
+  SOURCE_GCP = 3;
+  SOURCE_HCP_PACKER = 4;
+  SOURCE_HCP_TERRAFORM = 5;
+  SOURCE_HCP = 6;
+}
+
+enum Kind {
+  KIND_UNSPECIFIED = 0;
+  KIND_VIRTUAL_MACHINE = 1;
+  KIND_ACCOUNT = 2;
+  KIND_REGION = 3;
+  KIND_ZONE = 4;
+  KIND_VIRTUAL_NETWORK = 5;
+  KIND_SUBNET = 6;
+  KIND_NETWORK_INTERFACE = 7;
+  KIND_VIRTUAL_MACHINE_IMAGE = 8;
+  KIND_ECS_CLUSTER = 9;
+  KIND_ECS_SERVICE = 10;
+  KIND_PACKER_BUCKET = 11;
+  KIND_PACKER_REGISTRY = 12;
+  KIND_POLICY = 13;
+  KIND_USER = 14;
+  KIND_STORAGE_BUCKET = 15;
+  KIND_VOLUME = 16;
+  KIND_SECURITY_GROUP = 17;
+  KIND_SECURITY_RULE = 171;
+  KIND_PACKER_BUILD = 18;
+  KIND_PACKER_SBOM = 19;
+  KIND_PACKER_VERSION = 20;
+  KIND_PACKER_SOURCE = 21;
+  KIND_SERVERLESS_FUNCTION = 22;
+  KIND_PACKER_INHERITED_REVOCATION = 23;
+  KIND_PACKER_ANCESTRY = 233;
+  KIND_PACKER_CHANNEL = 24;
+  KIND_PACKER_ARTIFACT = 26;
+  KIND_ORGANIZATION = 27;
+  KIND_HCP_TERRAFORM_STATE_VERSION = 28;
+  KIND_VIRTUAL_MACHINE_TYPE = 29;
+  KIND_HCP_TERRAFORM_WORKSPACE = 30;
+  KIND_HCP_TERRAFORM_ORGANIZATION = 31;
+  KIND_HCP_TERRAFORM_AGENT_POOL = 32;
+  KIND_HCP_TERRAFORM_RUN = 33;
+  KIND_ROLE = 34;
+  KIND_ROLE_POLICY_ATTACHMENT = 35;
+}
+
+// Base is a base all domain models are expected to embed.
+message Base {
+  option (options.v1.message_include) = true;
+
+  // the unique identifier in the source system
+  string id = 1 [(options.v1.field_property_key) = "source_id"];
+
+  // the name of the model in the source system
+  optional string name = 3;
+
+  // tags are key/value pairs that are used to identify and organize types
+  map<string, string> tags = 5;
+
+  // unique identifier of the container holding the type in the source system
+  optional string account_id = 6 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "ACCOUNT"
+  ];
+  // unique identifier of the region holding the type in the source system
+  optional string region_id = 7 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "REGION"
+  ];
+  // unique identifier of the zone holding the type in the source system
+  repeated string zone_ids = 8 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "ZONE"
+  ];
+
+  optional google.protobuf.Timestamp created_at = 9;
+  optional google.protobuf.Timestamp updated_at = 10;
+  optional string description = 11;
+}
+
+message BaseNetworkInterface {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "NETWORK_INTERFACE";
+
+  Base base = 1;
+
+  // the subnet the network interface is contained in
+  string subnet_id = 3 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "SUBNET"
+  ];
+
+  // the VPC the network interface is contained in
+  string vpc_id = 4 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "VIRTUAL_NETWORK"
+  ];
+
+  repeated string security_group_ids = 5 [
+    (options.v1.edge_label) = "APPLIES_TO",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "SECURITY_GROUP"
+  ];
+}
+
+message BasePolicy {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "POLICY";
+
+  Base base = 1;
+}
+
+message BaseRole {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "ROLE";
+
+  Base base = 1;
+}
+
+message BaseRegion {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "REGION";
+
+  Base base = 1;
+}
+
+message BaseSecurityGroup {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "SECURITY_GROUP";
+
+  Base base = 1;
+
+  // the VPC the security group is contained in
+  string vpc_id = 2 [
+    (options.v1.edge_label) = "APPLIES_TO",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "VIRTUAL_NETWORK"
+  ];
+}
+
+message BaseSecurityRule {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "SECURITY_RULE";
+
+  Base base = 1;
+
+  // the security group this rule applies to
+  string security_group_id = 2 [
+    (options.v1.edge_label) = "APPLIES_TO",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "SECURITY_GROUP"
+  ];
+}
+
+message BaseSubnet {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "SUBNET";
+
+  Base base = 1;
+
+  // the VPC the subnet is contained in
+  string vpc_id = 2 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "VIRTUAL_NETWORK"
+  ];
+}
+
+message BaseUser {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "USER";
+
+  Base base = 1;
+}
+
+message BaseVpc {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "VIRTUAL_NETWORK";
+
+  Base base = 1;
+}
+
+message BaseZone {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "ZONE";
+
+  Base base = 1;
+}
+
+// BaseVirtualMachine is a base type all virtual machines are expected to embed.
+message BaseVirtualMachine {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "VIRTUAL_MACHINE";
+
+  Base base = 1;
+
+  // the state of the virtual machine
+  optional string state = 2;
+
+  // the vpc the virtual machine is contained in
+  optional string vpc_id = 3 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "VIRTUAL_NETWORK"
+  ];
+  // the subnet the virtual machine is contained in
+  optional string subnet_id = 4 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "SUBNET"
+  ];
+  // the network interfaces the virtual machine is connected to
+  repeated string network_interface_ids = 5 [
+    (options.v1.edge_label) = "ATTACHES_TO",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "NETWORK_INTERFACE"
+  ];
+  // the virtual machine image that the virtual machine runs
+  optional string virtual_machine_image_id = 6 [
+    (options.v1.edge_label) = "RUNS",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "VIRTUAL_MACHINE_IMAGE"
+  ];
+  // the virtual machine type that the virtual machine is an instance of
+  optional string virtual_machine_instance_type = 7 [
+    (options.v1.edge_label) = "INSTANCE_OF",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "VIRTUAL_MACHINE_TYPE"
+  ];
+}
+
+// BaseVirtualMachineImage is a base type all virtual machine images are expected to embed.
+message BaseVirtualMachineImage {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "VIRTUAL_MACHINE_IMAGE";
+
+  Base base = 1;
+}
+
+// BaseStorageBucket is a base type all storage buckets are expected to embed.
+message BaseStorageBucket {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "STORAGE_BUCKET";
+
+  Base base = 1;
+}
+
+// BaseVolume is a base type all volumes are expected to embed.
+message BaseVolume {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "VOLUME";
+
+  Base base = 1;
+
+  // the virtual machines this volume is attached to
+  repeated string attached_virtual_machine_ids = 2 [
+    (options.v1.edge_label) = "ATTACHES_TO",
+    (options.v1.edge_direction) = "OUTGOING",
+    (options.v1.node_label) = "VIRTUAL_MACHINE"
+  ];
+
+  // size of the volume in GiB
+  optional int32 size = 3;
+
+  // input/output operations per second
+  optional int32 iops = 4;
+
+  // throghput in MB/s
+  optional int32 throughput = 5;
+
+  // flag indicating if the volume is encrypted
+  optional bool is_encrypted = 6;
+}
+
+// BaseServerlessFunction is a base type all serverless functions are expected to embed.
+message BaseServerlessFunction {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "SERVERLESS_FUNCTION";
+
+  Base base = 1;
+}
+
+// BaseOrganization is a base type all organizations are expected to embed.
+message BaseOrganization {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "ORGANIZATION";
+
+  Base base = 1;
+}
+
+// BaseAccount is a base type all accounts are expected to embed.
+// examples: AWS account, GCP project, HCP project.
+message BaseAccount {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "ACCOUNT";
+
+  Base base = 1;
+
+  string organization_id = 2 [
+    (options.v1.edge_label) = "CONTAINS",
+    (options.v1.edge_direction) = "INCOMING",
+    (options.v1.node_label) = "ORGANIZATION"
+  ];
+}
+
+// BaseVirtualMachineType is a base type all virtual machine types are expected to embed.
+message BaseVirtualMachineType {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_kind) = "VIRTUAL_MACHINE_TYPE";
+
+  Base base = 1;
+}

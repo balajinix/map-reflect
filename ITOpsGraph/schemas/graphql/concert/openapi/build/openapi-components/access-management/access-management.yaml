@@ -1,0 +1,1037 @@
+openapi: 3.0.0
+info:
+  title: API documentation for IBM Concert
+  version: 0.0.1
+servers:
+  - url: '{server}/core/api/v1'
+    variables:
+      server:
+        default: https://exampleHost.com
+tags:
+  - description: Authenticate API
+    name: Access management
+  - description: Operations for applications
+    name: Application definitions
+  - description: Automation rules API
+    name: Automation rules & ticketing
+  - description: Certificates API
+    name: Certificates
+  - description: ConcertDef SBOMs API
+    name: ConcertDef SBOMs
+  - description: credentials API
+    name: Connections
+  - description: Concert Workflows API
+    name: concert_workflows
+  - description: Entity Access users API
+    name: Entity management
+  - description: API operations for accessing environments
+    name: Environment definitions
+  - description: Datastore API
+    name: Evidence store
+  - description: Export and download API
+    name: Export data
+  - description: Handlers API
+    name: Handlers
+  - description: API operations for accessing ingestion jobs
+    name: Ingestion jobs
+  - description: Instance Settings API
+    name: Instance settings
+  - description: Inventory API
+    name: Inventory
+  - description: Software composition API
+    name: Software composition
+  - description: Vulnerabilities API
+    name: Vulnerabilities
+  - description: User Preferences API
+    name: User preferences
+  - description: Tags API
+    name: Tags
+  - description: instance config
+    name: instance_config
+  - description: Instrumentation API
+    name: instrumentation
+  - description: Ready API
+    name: ready
+  - description: Topology API
+    name: topology
+paths:
+  /login:
+    post:
+      description: Generates an authentication token to login to a Concert instance deployed on a virtual machine.
+      operationId: post_login
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDetails'
+          description: successful login
+          headers:
+            Set-Cookie:
+              description: Header cookie
+              schema:
+                description: JWT string
+                maxLength: 1000
+                minLength: 0
+                pattern: ^[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+){2}$
+                type: string
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Generate an auth token (VM only)
+      tags:
+        - Access management
+  /apikey:
+    delete:
+      description: Deletes the current API key. You must generate a new key to continue using the API.
+      operationId: delete_apikey
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Delete API key
+      tags:
+        - Access management
+    get:
+      description: Returns details for the specified API key.
+      operationId: get_apikey
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKeyDate'
+          description: api key exists
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: View API key details
+      tags:
+        - Access management
+    post:
+      description: Generates a new Concert API key.
+      operationId: post_apikey
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+          description: api key genereated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Generate an API key
+      tags:
+        - Access management
+  /logout:
+    post:
+      description: Concert Logout API
+      operationId: post_logout
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: successful logout
+          headers:
+            Set-Cookie:
+              description: Header cookie
+              schema:
+                description: JWT string
+                maxLength: 300
+                minLength: 20
+                pattern: ^[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+){2}$
+                type: string
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Concert Logout (sw_dev or saas only)
+      tags:
+        - Access management
+  /sso:
+    get:
+      description: SAAS login api fetches the authentication endpoint for ISV and redirects to /exchange API for MCSP token exchange
+      operationId: get_s_s_o_endpoint_and_redirect
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: query
+          name: instance_id
+          required: true
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: scope_collection_type
+          in: query
+          name: scope_collection_type
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: scope_id
+          in: query
+          name: scope_id
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: domain
+          in: query
+          name: domain
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '303':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Found
+          headers:
+            Location:
+              description: Redirect location
+              schema:
+                $ref: '#/components/schemas/LocationHeader'
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      summary: SAAS(MCSP) Login API (saas only)
+      tags:
+        - Access management
+      x-ibm-events:
+        description: saas sso API execution event
+        event:
+          - name: coreapi.sso.get
+          - description: Executing GET sso API to get ISV auth endpoint
+      x-ibm-permissions:
+        actions:
+          - name: coreapi.sso.get
+  /exchange:
+    get:
+      description: Login using IBM Secure Verify (ISV), exchange token with MCSP and generate console session token. Redirect to console home page.
+      operationId: get_exchange_token
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: query
+          name: instance_id
+          required: true
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: code
+          in: query
+          name: code
+          required: false
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: scope_collection_type
+          in: query
+          name: scope_collection_type
+          required: false
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: scope_id
+          in: query
+          name: scope_id
+          required: false
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: scope_id
+          in: query
+          name: grant_id
+          required: false
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: domain
+          in: query
+          name: domain
+          required: false
+          schema:
+            maxLength: 128
+            minLength: 1
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '303':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Found
+          headers:
+            Location:
+              description: Redirect location
+              schema:
+                $ref: '#/components/schemas/LocationHeader'
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      summary: SAAS(MCSP) Login exchange token (saas only)
+      tags:
+        - Access management
+      x-ibm-events:
+        description: exchange API execution event
+        event:
+          - name: coreapi.exchange.get
+          - description: Executing GET exchange API to get the session token
+      x-ibm-permissions:
+        actions:
+          - name: coreapi.exchange.get
+  /authenticate:
+    post:
+      description: Authenticate User
+      operationId: post_authenticate
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDetails'
+          description: authentication successful
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Authenticate Concert User
+      tags:
+        - Access management
+  /authorize:
+    post:
+      description: Authorize User
+      operationId: post_authorize
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDetails'
+          description: authorization successful
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Authorize Concert User
+      tags:
+        - Access management
+  /refresh_token:
+    post:
+      description: Refresh Authentication Token
+      operationId: refresh_token
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDetails'
+          description: refresh token successful
+          headers:
+            Set-Cookie:
+              description: Header cookie
+              schema:
+                description: JWT string
+                maxLength: 300
+                minLength: 20
+                pattern: ^[A-Za-z0-9-_]+(?:\.[A-Za-z0-9-_]+){2}$
+                type: string
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Refresh Authentication Token for user (sw_dev or saas only)
+      tags:
+        - Access management
+  /internal_apikey:
+    post:
+      description: Generates a new API key.
+      operationId: post_internal_apikey
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: username
+          in: header
+          name: Username
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+          description: api key genereated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Generate an API key
+      tags:
+        - Access management
+  /internal_jwt:
+    post:
+      description: Generates a new JWT token.
+      operationId: post_internal_jwt
+      parameters:
+        - description: Unique ID of your Concert instance
+          in: header
+          name: InstanceId
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+        - description: username
+          in: header
+          name: Username
+          required: true
+          schema:
+            maxLength: 1000
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-]+$
+            type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDetails'
+          description: JWT genereated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bad request, bad data
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: conflict
+      summary: Generate an JWT token
+      tags:
+        - Access management
+components:
+  schemas:
+    Credentials:
+      description: User credentials
+      example:
+        password: password
+        username: username
+      properties:
+        username:
+          description: login username (required only for dev edition)
+          maxLength: 1000
+          minLength: 0
+          pattern: ^[a-zA-Z0-9\-]+$
+          type: string
+        password:
+          description: login password (required only for dev edition)
+          maxLength: 1000
+          minLength: 0
+          pattern: ^[a-zA-Z0-9\-]+$
+          type: string
+      title: Credentials
+      type: object
+    TokenDetails:
+      description: JWT details
+      example:
+        quickstart: true
+        instance_id: 0000-0000-0000-0000
+        roles:
+          - role1
+        is_authenticated: true
+        expiry: 171976544
+        display_name: ibm_roja_adm
+        token: token
+        username: ibm_roja_adm
+      properties:
+        is_authenticated:
+          description: return true if user is authenticated
+          type: boolean
+        token:
+          description: token
+          maxLength: 1000
+          minLength: 0
+          pattern: ^[a-zA-Z0-9\-]+$
+          type: string
+        instance_id:
+          description: Unique ID of your Concert instance
+          example: 0000-0000-0000-0000
+          maxLength: 36
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-]+$
+          type: string
+        username:
+          description: username
+          example: ibm_roja_adm
+          maxLength: 1000
+          minLength: 0
+          pattern: ^[a-zA-Z0-9\-@_.//:]+$
+          type: string
+        display_name:
+          description: display name
+          example: ibm_roja_adm
+          maxLength: 1000
+          minLength: 0
+          pattern: ^[a-zA-Z0-9\-@_. //:]+$
+          type: string
+        expiry:
+          description: expiry
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        roles:
+          description: roles
+          example:
+            - role1
+          items:
+            description: role name
+            maxLength: 128
+            minLength: 0
+            pattern: ^[a-zA-Z0-9\-_]+$
+            type: string
+          maxItems: 1000
+          minItems: 0
+          type: array
+        quickstart:
+          description: Quickstart value
+          example: true
+          type: boolean
+      required:
+        - is_authenticated
+        - quickstart
+        - roles
+      title: Preauth
+      type: object
+    Error:
+      description: An error response entry
+      properties:
+        code:
+          description: The error code
+          enum:
+            - bad_request
+            - not_authorized
+            - no_need_to_know
+            - required_field
+            - invalid_content
+            - invalid_file
+            - internal_error
+            - invalid_data
+            - invalid_enum
+            - invalid_pattern
+            - invalid_format
+            - missing_unique
+            - invalid_field
+          type: string
+        message:
+          description: The error message.
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_]+$
+          type: string
+        more_info:
+          description: Additional info about the error.
+          maxLength: 246
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_]+$
+          type: string
+      required:
+        - code
+      type: object
+    ErrorResponse:
+      description: Error response
+      example:
+        exception: exception
+        trace: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        status_code: 602
+        message_code: message_code
+        more_info: more_info
+        message: message
+        errors:
+          - code: bad_request
+            more_info: more_info
+            message: message
+      properties:
+        trace:
+          description: The error trace information.
+          format: uuid
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_]+$
+          type: string
+        message:
+          description: Error message
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_ ]+$
+          type: string
+        exception:
+          description: String representation of the error
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_ ]+$
+          type: string
+        message_code:
+          description: Error code
+          maxLength: 246
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_.//]+$
+          type: string
+        more_info:
+          description: publicly-accessible URL where information about the error can be read
+          maxLength: 246
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_]+$
+          type: string
+        status_code:
+          description: Http error code
+          format: int32
+          maximum: 999
+          minimum: 0
+          type: integer
+        errors:
+          description: The array of error entries associated with the error response
+          example:
+            - code: bad_request
+              more_info: more_info
+              message: message
+          items:
+            $ref: '#/components/schemas/Error'
+          maxItems: 1000
+          minItems: 0
+          type: array
+      required:
+        - errors
+      type: object
+    ApiKeyDate:
+      description: Api key date
+      example:
+        created_on: 1718711883
+      properties:
+        created_on:
+          description: created_on date
+          example: 1718711883
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+      type: object
+    ApiKey:
+      description: Api key
+      example:
+        apikey: apikey
+      properties:
+        apikey:
+          description: Api key value
+          maxLength: 128
+          minLength: 0
+          pattern: ^[-A-Za-z0-9+/]*={0,3}$
+          type: string
+      type: object
+    SuccessResponse:
+      description: Response of success
+      example:
+        message_code: success
+        message: Successful message
+        pattern: ^[a-zA-Z0-9\-_.//]+$
+        minLength: 1
+        maxLength: 246
+      properties:
+        message_code:
+          description: Message code
+          maxLength: 246
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_.//]+$
+          type: string
+        message:
+          description: Message
+          maxLength: 246
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-_.// ]+$
+          type: string
+      type: object
+    LocationHeader:
+      description: Location uri
+      example: development
+      maxLength: 128
+      minLength: 1
+      pattern: ^[a-zA-Z0-9\-_ ]+$
+      type: string

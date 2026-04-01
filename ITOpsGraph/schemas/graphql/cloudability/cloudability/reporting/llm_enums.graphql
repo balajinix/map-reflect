@@ -1,0 +1,980 @@
+# generated_llm_enums.graphql
+
+# Auto-generated from live Cloudability API measures data
+# DO NOT EDIT MANUALLY - Use generate_schema.py to regenerate
+
+"""
+Identifies dimensions available for reporting and filtering.
+"""
+enum ReportDimension {
+  """
+  Payer Account ID - The unique identifier related to the AWS management account, Azure EA/MCA agreement, GCP Billing Account or OCI Root Tenancy.
+  """
+  account_identifier
+  """
+  Payer Account Name - The name related to the AWS management account, Azure EA/MCA agreement, GCP Billing Account or OCI Root Tenancy. Depending on your situation this value may fall back to the unique billing ID.
+  """
+  account_name
+  """
+  GCP Ancestry Numbers - This dimension displays the ancestry information of a given GCP project (for example billing account/folder[1..n]). This information is gathered from \"project.ancestry\" column from GCP billing data.
+  """
+  ancestry_numbers
+  """
+  ATUM Service Category - Middle level of the ATUM Service taxonomy (e.g., client computing, communication & collaboration).
+  """
+  atum_service_category
+  """
+  ATUM Service Name - Lowest level of the ATUM Service taxonomy (e.g. Threat & Vulnerability Management).
+  """
+  atum_service_name
+  """
+  ATUM Service Type - Highest level of the ATUM Service taxonomy (e.g., workplace, business, platform, infrastructure).
+  """
+  atum_service_type
+  """
+  ATUM Sub-Tower - Subcategory within the ATUM Tower
+  """
+  atum_subtower
+  """
+  ATUM Tower - High-level IT service category
+  """
+  atum_tower
+  """
+  Azure Reservation Order Name - The name or description of the product or service that was ordered or consumed (Azure specific).
+  """
+  azure_reservation_order_name
+  """
+  Transaction Type(BM)
+  """
+  category1
+  """
+  JLevel2
+  """
+  category10
+  """
+  Filter out Unutilized Reservation Costs
+  """
+  category11
+  """
+  AWS Commitment
+  """
+  category12
+  """
+  Apptio Product
+  """
+  category13
+  """
+  Accounting Cost Type
+  """
+  category14
+  """
+  Vendor (Dont Delete) 
+  """
+  category15
+  """
+  CT Customer
+  """
+  category16
+  """
+  Apptio Project
+  """
+  category17
+  """
+  Level 2
+  """
+  category18
+  """
+  CT Customer Type
+  """
+  category19
+  """
+  Service Charge
+  """
+  category2
+  """
+  Cost Owner
+  """
+  category20
+  """
+  Level 1
+  """
+  category21
+  """
+  Layer 11
+  """
+  category22
+  """
+  Products shared cost (Don't delete)
+  """
+  category23
+  """
+  Apptio Team
+  """
+  category24
+  """
+  Layer 22
+  """
+  category25
+  """
+  Environment List(BM)
+  """
+  category3
+  """
+  Categories wise spend
+  """
+  category4
+  """
+  JLevel1
+  """
+  category5
+  """
+  Container Namespace
+  """
+  category6
+  """
+  Team Name (don't delete)
+  """
+  category7
+  """
+  ATUM - Towers
+  """
+  category8
+  """
+  Layer 1
+  """
+  category9
+  """
+  Compute Usage Type - Handy Cloudability-defined dimension for understanding the type of compute for some AWS services such as EC2 and RDS.
+  """
+  compute_usage_type
+  """
+  Cluster Name - The Kubernetes \"Cluster Name\" that the underlying cost items - such as VM, storage and network costs - belong to. The value matches the name setup by your admin when provisioning the cluster within Cloudability.
+  """
+  container_cluster_name
+  """
+  Namespace - Kubernetes Namespace
+  """
+  container_namespace
+  """
+  Cost Adjustment Description - Description of the cost adjustment rule applied.
+  """
+  cost_adjustment_description
+  """
+  Currency Code - 3 letter ISO currency code.
+  """
+  currency_code
+  """
+  Date - The calendar date - formatted \"Mon DD, YYYY\" (Aug 9, 2022).
+  """
+  date
+  """
+  Day - The numeric calendar day (for example, \"Aug 9, 2022\" => 9).
+  """
+  day
+  """
+  Day of Week - The day of week (for example, Monday).
+  """
+  day_of_week
+  """
+  Engine - The database or cache engine (for example, Oracle, SQL Server, MySQL or Redis).
+  """
+  engine
+  """
+  Service Name - A dimension defined by Cloudability that standardizes product naming conventions for AWS, Azure, GCP and OCI. To surface the original product names, use the Product Name dimension instead.
+  """
+  enhanced_service_name
+  """
+   mock demo 
+  """
+  group_name1
+  """
+  Vendor
+  """
+  group_name10
+  """
+  Change Control Process
+  """
+  group_name11
+  """
+  Testing Limit-1
+  """
+  group_name12
+  """
+  Testing Limit-2
+  """
+  group_name13
+  """
+  Testing Limit-3
+  """
+  group_name14
+  """
+  Testing Limit-4
+  """
+  group_name15
+  """
+  Testing Limit-5
+  """
+  group_name16
+  """
+  Testing Limit-6
+  """
+  group_name17
+  """
+  Testing Limit-7
+  """
+  group_name18
+  """
+  Testing Limit-8
+  """
+  group_name19
+  """
+  Cost Center
+  """
+  group_name2
+  """
+  Testing Limit-9
+  """
+  group_name20
+  """
+  Testing Limit-10
+  """
+  group_name21
+  """
+  Testing Limit-11
+  """
+  group_name22
+  """
+  Testing Limit-12
+  """
+  group_name23
+  """
+  Testing Limit-13
+  """
+  group_name24
+  """
+  Testing Limit-14
+  """
+  group_name25
+  """
+  Availability Zone
+  """
+  group_name3
+  """
+  Application
+  """
+  group_name4
+  """
+  Region
+  """
+  group_name5
+  """
+  Account Owner
+  """
+  group_name6
+  """
+  Environment 
+  """
+  group_name7
+  """
+  product
+  """
+  group_name8
+  """
+  28
+  """
+  group_name9
+  """
+  Instance Category - The category of VM or Database an instance belongs to. Common categories include General Purpose, Compute Optimized and Memory Optimized.
+  """
+  instance_category
+  """
+  Instance Family - The family of VM or Database an instance belongs to. This will typically form the prefix to the full instance type definition.
+  """
+  instance_family
+  """
+  Instance Size - The size of VM or Database. This is correlated to key resource attributes such as the number of CPUs and available memory.
+  """
+  instance_size
+  """
+  Instance Type - The full identifier of the type of VM or Database instance, capturing both the family and size. This value forms one complete component of the product SKU (used alongside location and OS).
+  """
+  instance_type
+  """
+  Invoice Date - The invoice date for any cost item as provided by the cloud vendor. This is reported in \"Mon DD, YYYY\" format. Cloud consumption during the month is usually given an invoice date of the first day of that month.
+  """
+  invoice_date
+  """
+  Invoice ID - The invoice ID that corresponds to any charged cost item, as provided by AWS. Data is not currently available for Azure, GCP and OCI.
+  """
+  invoice_id
+  """
+  Item Description - Description of the type of usage for this line item. This description matches the description on the Bills page, including the average price of any usage that is based on a volume pricing tier.
+  """
+  item_description
+  """
+  Lease Type - The payment mode for the cost items. Valid values are: On-Demand, Savings Plan, Reserved and Spot. This is a reporting dimension defined by Cloudability to support multi-cloud cost categorization.
+  """
+  lease_type
+  """
+  Month (Category) - The month any cost item was incurred, formatted \"Mon\". Examples \"Jun\", \"Jul\", \"Aug\". This is useful for looking at costs by month for any year (such as show costs that occurred in July of any year).
+  """
+  month
+  """
+  Reservation Class - The commitment offering tied to any cost item. Example values include “standard” and “convertible” reserved instances, “EC2InstanceSavingsPlans” and “ComputeSavingsPlans” for savings plans.
+  """
+  offering_class
+  """
+  Operating System - The operating system for VMs as reported by the cloud vendors for billing purposes. Example values: Linux, Windows, Red Hat Enterprise Linux.
+  """
+  operating_system
+  """
+  Operation - The operation data represents the action that was taken on the asset. This often relates to a CLI command.
+  """
+  operation
+  """
+  Part Number - This field is specific to Azure and OCI. It corresponds to the identifier used to get specific meter pricing.
+  """
+  part_number
+  """
+  Region - The region in which a resource exists or a usage charge occurred, for example: us-east-1 for AWS, US East for Azure, us-east1 for GCP and us-ashburn-1 for OCI.
+  """
+  region
+  """
+  Availability Zone - A combination of the region and zone in which a resource exists. For example, us-east-1a.
+  """
+  region_zone
+  """
+  Reservation ID - The unique ID of the commitment (such as reserved instance and savings plan) tied to any cost item as provided by the cloud vendor.
+  """
+  reservation_identifier
+  """
+  Reservation Name - The name of the purchased reservation instance (Azure specific).
+  """
+  reservation_name
+  """
+  Resource ID - The resource is the base entity that users can work with in the cloud. Examples are Instance Ids, Lambda Functions, S3 storage buckets.
+  """
+  resource_identifier
+  """
+  Resource Name - Resources are named entities, and the resource_name is its identifier. Each resource has its own unique resource name. This value is from the CSP billing files.
+  """
+  resource_name
+  """
+  Seller - The official seller of services. Using this dimension allows you to separate marketplace charges from your other cloud costs.
+  """
+  seller
+  """
+  Product Name - The official product name as provided by the vendor (for example, Amazon Elastic Compute Cloud, GCP Cloud Storage, Microsoft.Compute or OCI Compute).
+  """
+  service_name
+  """
+  Business unit (value)
+  """
+  tag1
+  """
+  KubernetesPod (value)
+  """
+  tag10
+  """
+  KubernetesGroup (value)
+  """
+  tag11
+  """
+  Owner (value)
+  """
+  tag12
+  """
+  Finance (value)
+  """
+  tag13
+  """
+  Org ID (value)
+  """
+  tag14
+  """
+  Department (value)
+  """
+  tag15
+  """
+  Service (value)
+  """
+  tag16
+  """
+  Category (value)
+  """
+  tag17
+  """
+  Name (value)
+  """
+  tag18
+  """
+  Production (value)
+  """
+  tag19
+  """
+  Team  (value)
+  """
+  tag2
+  """
+  environment (value)
+  """
+  tag20
+  """
+  Team (value)
+  """
+  tag21
+  """
+  GCP Tags (value)
+  """
+  tag22
+  """
+  Application (value)
+  """
+  tag24
+  """
+  Workload (value)
+  """
+  tag25
+  """
+  org (value)
+  """
+  tag26
+  """
+  account-level-team-dimension (value)
+  """
+  tag27
+  """
+  OCI Compartment (value)
+  """
+  tag28
+  """
+  Project (value)
+  """
+  tag29
+  """
+  Cloud - HCM (value)
+  """
+  tag3
+  """
+  CostCenter (value)
+  """
+  tag30
+  """
+  Owners (value)
+  """
+  tag31
+  """
+  Product (value)
+  """
+  tag32
+  """
+  Project (value)
+  """
+  tag33
+  """
+  testingtt (value)
+  """
+  tag35
+  """
+  RG (value)
+  """
+  tag36
+  """
+  Production (value)
+  """
+  tag37
+  """
+  prod (value)
+  """
+  tag38
+  """
+  Production (value)
+  """
+  tag39
+  """
+  Cost Center (value)
+  """
+  tag4
+  """
+  env (value)
+  """
+  tag40
+  """
+  Prod (value)
+  """
+  tag41
+  """
+  project 100 (value)
+  """
+  tag42
+  """
+  project 1 (value)
+  """
+  tag43
+  """
+  env (value)
+  """
+  tag44
+  """
+  Data (value)
+  """
+  tag45
+  """
+  Env (value)
+  """
+  tag46
+  """
+  Time 2 (value)
+  """
+  tag47
+  """
+  Environment-doNoReuseTagDimensionNames (value)
+  """
+  tag48
+  """
+  testing (value)
+  """
+  tag49
+  """
+  Project (value)
+  """
+  tag5
+  """
+  TEST_MOCK (value)
+  """
+  tag50
+  """
+  Customer_Id (value)
+  """
+  tag6
+  """
+  Region (value)
+  """
+  tag7
+  """
+  azure-subscription-dimension (value)
+  """
+  tag8
+  """
+  Kubernetes service-clustername (value)
+  """
+  tag9
+  """
+  Business unit (key)
+  """
+  tagkey1
+  """
+  KubernetesPod (key)
+  """
+  tagkey10
+  """
+  KubernetesGroup (key)
+  """
+  tagkey11
+  """
+  Owner (key)
+  """
+  tagkey12
+  """
+  Finance (key)
+  """
+  tagkey13
+  """
+  Org ID (key)
+  """
+  tagkey14
+  """
+  Department (key)
+  """
+  tagkey15
+  """
+  Service (key)
+  """
+  tagkey16
+  """
+  Category (key)
+  """
+  tagkey17
+  """
+  Name (key)
+  """
+  tagkey18
+  """
+  Production (key)
+  """
+  tagkey19
+  """
+  Team  (key)
+  """
+  tagkey2
+  """
+  environment (key)
+  """
+  tagkey20
+  """
+  Team (key)
+  """
+  tagkey21
+  """
+  GCP Tags (key)
+  """
+  tagkey22
+  """
+  Application (key)
+  """
+  tagkey24
+  """
+  Workload (key)
+  """
+  tagkey25
+  """
+  org (key)
+  """
+  tagkey26
+  """
+  account-level-team-dimension (key)
+  """
+  tagkey27
+  """
+  OCI Compartment (key)
+  """
+  tagkey28
+  """
+  Project (key)
+  """
+  tagkey29
+  """
+  Cloud - HCM (key)
+  """
+  tagkey3
+  """
+  CostCenter (key)
+  """
+  tagkey30
+  """
+  Owners (key)
+  """
+  tagkey31
+  """
+  Product (key)
+  """
+  tagkey32
+  """
+  Project (key)
+  """
+  tagkey33
+  """
+  testingtt (key)
+  """
+  tagkey35
+  """
+  RG (key)
+  """
+  tagkey36
+  """
+  Production (key)
+  """
+  tagkey37
+  """
+  prod (key)
+  """
+  tagkey38
+  """
+  Production (key)
+  """
+  tagkey39
+  """
+  Cost Center (key)
+  """
+  tagkey4
+  """
+  env (key)
+  """
+  tagkey40
+  """
+  Prod (key)
+  """
+  tagkey41
+  """
+  project 100 (key)
+  """
+  tagkey42
+  """
+  project 1 (key)
+  """
+  tagkey43
+  """
+  env (key)
+  """
+  tagkey44
+  """
+  Data (key)
+  """
+  tagkey45
+  """
+  Env (key)
+  """
+  tagkey46
+  """
+  Time 2 (key)
+  """
+  tagkey47
+  """
+  Environment-doNoReuseTagDimensionNames (key)
+  """
+  tagkey48
+  """
+  testing (key)
+  """
+  tagkey49
+  """
+  Project (key)
+  """
+  tagkey5
+  """
+  TEST_MOCK (key)
+  """
+  tagkey50
+  """
+  Customer_Id (key)
+  """
+  tagkey6
+  """
+  Region (key)
+  """
+  tagkey7
+  """
+  azure-subscription-dimension (key)
+  """
+  tagkey8
+  """
+  Kubernetes service-clustername (key)
+  """
+  tagkey9
+  """
+  Tenancy - AWS specific dimension identifying the tenancy of EC2 instances. Three valid values are shared, host and dedicated. \"shared\" is the default value.
+  """
+  tenancy
+  """
+  Transaction Type - A new dimension created by Cloudability to break costs into Usage, One-Time Charges, Recurring Charges, Amortized Charges, Credits, Taxes, or Rounding.
+  """
+  transaction_type
+  """
+  Usage Family - A standardized dimension created by Cloudability to consolidate similar values of Usage Type into a single high-level family (e.g. Data Transfer, Storage, API Request). To see the original values, add the Usage Type dimension.
+  """
+  usage_family
+  """
+  Usage Type - Specifies operational details of the usage line item. The following example describes Amazon EC2 High-Memory Double ExtraLarge Instance box usage in the US West (Oregon) region. Example: USW1-BoxUsage:m2.2xlarge
+  """
+  usage_type
+  """
+  Vendor - The cloud vendor associated with the cost item. Valid values are Amazon, Azure, GCP and OCI.
+  """
+  vendor
+  """
+  Account ID - The unique identifier related to a AWS Account, Azure Subscription, GCP Project or OCI Tenancy.
+  """
+  vendor_account_identifier
+  """
+  Account Name - The name given by the customer that's attached to each AWS Account, Azure Subscription, GCP Project or OCI Tenancy.
+  """
+  vendor_account_name
+  """
+  Week (Category) - The week any cost item was incurred, formatted \"WW\". Examples \"01\", \"15\", \"52\". This is useful for looking at costs by the week for any year (such as show costs that occurred in week 1 of any year).
+  """
+  week
+  """
+  Year - The calendar year any cost item was occurred, formatted YYYY (for example, 2022).
+  """
+  year
+  """
+  Month (Year) - The month and year of any cost item (formatted Month YYYY) useful for proper chronological sorting. Examples: July 2021, September 2022.
+  """
+  year_month
+  """
+  Week (Year) - The week and year of any cost item (formatted YYYY-WW) useful for proper chronological sorting. Examples: 2021-06, 2022-52.
+  """
+  year_week
+  """
+  Zone - This field is specific to AWS, it corresponds to the letter for a specific zone in which an instance exists or a usage charge occured within an Availability Zone. This field is not used for Azure, GCP or OCI.
+  """
+  zone
+}
+
+"""
+Identifies metrics available for reporting.
+"""
+enum ReportMetric {
+  """
+  Fairshare Cost (Adjusted Amortized) - This is calculated by dividing the sum of the used resources for the container by the total used resources of all containers running on the same hardware, and then multiplying it by the cost of the hardware
+  """
+  adjusted_amortized_fairshare_cost
+  """
+  Idle Cost (Adjusted Amortized) - The idle cost refers to the cost incurred by resources that are not used by any workload for a given time range
+  """
+  adjusted_amortized_idle_cost
+  """
+  Utilized Cost (Adjusted Amortized) - The utilized cost refers to the cost incurred by the resources utilized by a workload for a given time range (can be further broken down or grouped by cluster, namespace, labels)
+  """
+  adjusted_amortized_utilized_cost
+  """
+  Cost (Adjusted) - Built from the cost (total) metric, this metric adjusts the figures to allow for any custom pricing rules. It only appears for Cloudability customers who have turned on the custom pricing module.
+  """
+  adjusted_cost
+  """
+  Fairshare Cost (Adjusted) - This is calculated by dividing the sum of the used resources for the container by the total used resources of all containers running on the same hardware, and then multiplying it by the cost of the hardware
+  """
+  adjusted_fairshare_cost
+  """
+  Idle Cost (Adjusted) - The idle cost refers to the cost incurred by resources that are not used by any workload for a given time range
+  """
+  adjusted_idle_cost
+  """
+  Utilized Cost (Adjusted) - The utilized cost refers to the cost incurred by the resources utilized by a workload for a given time range (can be further broken down or grouped by cluster, namespace, labels)
+  """
+  adjusted_utilized_cost
+  """
+  Rate (Blended) - For Consolidated Billing accounts, the effective rate for the line item calculated as an average of the cost of identical instances operating in that hour in the same Availability Zone.
+  """
+  blended_rate
+  """
+  Cost (Commited)
+  """
+  business_metric1
+  """
+  Someone's Test
+  """
+  business_metric10
+  """
+  Bytes Transferred Passthrough
+  """
+  business_metric11
+  """
+  Cost of East
+  """
+  business_metric13
+  """
+  CBR Savings Plans Savings
+  """
+  business_metric14
+  """
+  test it
+  """
+  business_metric15
+  """
+  Test_UsageFam
+  """
+  business_metric2
+  """
+  test_EC2_COST
+  """
+  business_metric3
+  """
+  test_powerup
+  """
+  business_metric4
+  """
+  GST
+  """
+  business_metric5
+  """
+  test demo
+  """
+  business_metric6
+  """
+  Savings testak
+  """
+  business_metric7
+  """
+  Account Count
+  """
+  business_metric8
+  """
+  Surcharge
+  """
+  business_metric9
+  """
+  GiB Hours - A gigabyte-hour refers to the number of gigabytes stored on a cloud platform in a particular hourly period.
+  """
+  byte_hours
+  """
+  Data Transfer (GiB) - The amount of data transferred in a particular time period.
+  """
+  bytes_transferred
+  """
+  Estimated Carbon Emissions (MTCO2e) - Estimated Carbon emissions by a resource in metric tons of carbon dioxide equivalent - MTCO2e
+  """
+  carbon_emissions
+  """
+  Cost Adjustment - The amount by which the cost was adjusted.
+  """
+  cost_adjusted
+  """
+  GiB Months - References byte-hours, which corresponds to the number of bytes stored on an AWS, Azure, GCP or OCI storage service in a particular hourly period.
+  """
+  gb_months
+  """
+  Cost (Total Blended) - This cost metric is specific to AWS and corresponds to the lineItem/BlendedCost column of the CUR file. This metric “blends” the impact of reserved instances and savings plans.
+  """
+  invoiced_cost
+  """
+  I/O Requests - Describes the number of data requests from a database service.
+  """
+  io_requests
+  """
+  Power Consumed (kWh) - Power consumed by a resource in Kilo Watt Hours - kWh
+  """
+  kwh_consumption
+  """
+  On Demand Hours - The amount of on demand computing hours used during the reporting period.
+  """
+  on_demand_hours
+  """
+  Cost (List) - This metric represents cost items as if they were charged at the public on-demand rate. This means the impact of any commitments, spot instance pricing, and custom pricing are removed.
+  """
+  public_on_demand_cost
+  """
+  Requests - The number of computing resources used in the units specified by each service. For example, your service may determine pricing by the amount of storage, number of requests, or hours of operation.
+  """
+  requests
+  """
+  Reserved Hours - The amount of reserved computing hours used during the reporting period.
+  """
+  reserved_hours
+  """
+  Reserved Coverage Rate - The percentage of total hours used during the period where an RI was applied.
+  """
+  reserved_utilization_rate
+  """
+  Resource Count - The count of ?unique? resource ids in the period specified.
+  """
+  resource_identifier_count
+  """
+  Cost (Adjusted Amortized) - Built from the cost (amortized) metric, this metric adjusts the figures to allow for any custom pricing rules. It only appears for Cloudability customers who have turned on the custom pricing module.
+  """
+  total_adjusted_amortized_cost
+  """
+  Cost (Amortized) - This is an “accrual” cost metric, representing the consumed cost during any period. This metric is handy for ensuring commitments are allocated to the time and place they are consumed.
+  """
+  total_amortized_cost
+  """
+  Cost (Total) - This is the default cost metric throughout Cloudability. It is a “cash” metric and simply represents the invoiced amount associated with any cost item as reported by the cloud vendor.
+  """
+  unblended_cost
+  """
+  Rate (Unblended) - The cost per hour for a line item. This is summarized across the hours of a day.
+  """
+  unblended_rate
+  """
+  Usage Hours - The number of computing resources used in the units specified by each service. For example, your service may determine pricing by the amount of storage, number of requests, or hours of operation.
+  """
+  usage_hours
+  """
+  Usage Quantity - Generic usage quantity. Units will vary on dimensions and filters.
+  """
+  usage_quantity
+  """
+  vCPU Hours - Normalized CPU hours are calculated by multiplying the CPU hours used by the number of vCPUs used.
+  """
+  vcpu_hours
+}

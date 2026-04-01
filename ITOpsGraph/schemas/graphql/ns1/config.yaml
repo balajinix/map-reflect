@@ -1,0 +1,18 @@
+configurationset:
+  - configuration:
+      name: "internet_weather"
+      nsonekey: STEPZEN_NSONE_CONNECT_INTERNET_WEATHER_KEY
+      url: STEPZEN_NSONE_CONNECT_INTERNET_WEATHER_URL
+      # for the internet weather service
+      # we may hardcode the key, appid
+      # and the jobs but this will lock the down API
+      # so it can only be used with that APPID and JOBS
+      # appid: STEPZEN_NSONE_CONNECT_INTERNET_WEATHER_APPID
+      # jobs: STEPZEN_NSONE_CONNECT_INTERNET_WEATHER_JOBS
+deployment:
+  identity:
+    keys:
+      - algorithm: RS256
+        key: STEPZEN_SOLIS_JWT_CERT
+    # accept most SOLIS JWTs for access to endpoint
+    claims: [exp, account_id]

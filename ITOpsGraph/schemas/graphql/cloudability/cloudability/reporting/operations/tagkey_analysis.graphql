@@ -1,0 +1,35 @@
+query TagKeyAnalysis {
+  llmFriendlyCostReport(
+    dateRange: { start: "2024-01-01", end: "2024-01-31" }
+    dimensions: [
+      tagkey1
+      tagkey2
+      tagkey3
+      tagkey4
+      tagkey5
+      tagkey6
+      tagkey7
+      tagkey8
+      tagkey9
+      tagkey10
+    ]
+    metrics: [unblended_cost]
+    sort: [{ field: "unblended_cost", direction: DESC }]
+    limit: 100
+  ) {
+    total_results
+    results {
+      tagkey1
+      tagkey2
+      tagkey3
+      tagkey4
+      tagkey5
+      tagkey6
+      tagkey7
+      tagkey8
+      tagkey9
+      tagkey10
+      unblended_cost
+    }
+  }
+}

@@ -1,0 +1,28 @@
+input TimeFrame {
+  le: DateTime!
+  ge: DateTime!
+}
+
+type _TimeFrame {
+  to: String!
+  windowSize: String!
+}
+
+extend type Query {
+  _timeframe(frame: TimeFrame!): _TimeFrame
+    @value(
+      script: {
+        language: JSONATA
+        src: """
+        {
+          "to": $string($toMillis(frame.le)),
+          "windowSize": $string($toMillis(frame.le) - $toMillis(frame.ge))
+        }
+        """
+      }
+    )
+}
+
+input NameFilter {
+  eq: String!
+}

@@ -1,0 +1,818 @@
+Field Analysis Report
+==================================================
+
+Generated on: 2025-06-20T11:09:39.549984
+
+Total Dimensions: 198
+Total Metrics: 43
+
+DIMENSIONS
+--------------------
+
+• account_identifier (string)
+  Label: Payer Account ID
+  Description: The unique identifier related to the AWS management account, Azure EA/MCA agreement, GCP Billing Acc...
+
+• account_name (string)
+  Label: Payer Account Name
+  Description: The name related to the AWS management account, Azure EA/MCA agreement, GCP Billing Account or OCI R...
+
+• ancestry_numbers (string)
+  Label: GCP Ancestry Numbers
+  Description: This dimension displays the ancestry information of a given GCP project (for example billing account...
+
+• atum_service_category (string)
+  Label: ATUM Service Category
+  Description: Middle level of the ATUM Service taxonomy (e.g., client computing, communication & collaboration)....
+
+• atum_service_name (string)
+  Label: ATUM Service Name
+  Description: Lowest level of the ATUM Service taxonomy (e.g. Threat & Vulnerability Management)....
+
+• atum_service_type (string)
+  Label: ATUM Service Type
+  Description: Highest level of the ATUM Service taxonomy (e.g., workplace, business, platform, infrastructure)....
+
+• atum_subtower (string)
+  Label: ATUM Sub-Tower
+  Description: Subcategory within the ATUM Tower...
+
+• atum_tower (string)
+  Label: ATUM Tower
+  Description: High-level IT service category...
+
+• azure_reservation_order_name (string)
+  Label: Azure Reservation Order Name
+  Description: The name or description of the product or service that was ordered or consumed (Azure specific)....
+
+• category1 (string)
+  Label: Transaction Type(BM)
+
+• category10 (string)
+  Label: JLevel2
+
+• category11 (string)
+  Label: Filter out Unutilized Reservation Costs
+
+• category12 (string)
+  Label: AWS Commitment
+
+• category13 (string)
+  Label: Apptio Product
+
+• category14 (string)
+  Label: Accounting Cost Type
+
+• category15 (string)
+  Label: Vendor (Dont Delete) 
+
+• category16 (string)
+  Label: CT Customer
+
+• category17 (string)
+  Label: Apptio Project
+
+• category18 (string)
+  Label: Level 2
+
+• category19 (string)
+  Label: CT Customer Type
+
+• category2 (string)
+  Label: Service Charge
+
+• category20 (string)
+  Label: Cost Owner
+
+• category21 (string)
+  Label: Level 1
+
+• category22 (string)
+  Label: Layer 11
+
+• category23 (string)
+  Label: Products shared cost (Don't delete)
+
+• category24 (string)
+  Label: Apptio Team
+
+• category25 (string)
+  Label: Layer 22
+
+• category3 (string)
+  Label: Environment List(BM)
+
+• category4 (string)
+  Label: Categories wise spend
+
+• category5 (string)
+  Label: JLevel1
+
+• category6 (string)
+  Label: Container Namespace
+
+• category7 (string)
+  Label: Team Name (don't delete)
+
+• category8 (string)
+  Label: ATUM - Towers
+
+• category9 (string)
+  Label: Layer 1
+
+• compute_usage_type (string)
+  Label: Compute Usage Type
+  Description: Handy Cloudability-defined dimension for understanding the type of compute for some AWS services suc...
+
+• container_cluster_name (string)
+  Label: Cluster Name
+  Description: The Kubernetes "Cluster Name" that the underlying cost items - such as VM, storage and network costs...
+
+• container_namespace (string)
+  Label: Namespace
+  Description: Kubernetes Namespace...
+
+• cost_adjustment_description (string)
+  Label: Cost Adjustment Description
+  Description: Description of the cost adjustment rule applied....
+
+• currency_code (string)
+  Label: Currency Code
+  Description: 3 letter ISO currency code....
+
+• date (date)
+  Label: Date
+  Description: The calendar date - formatted "Mon DD, YYYY" (Aug 9, 2022)....
+
+• day (date)
+  Label: Day
+  Description: The numeric calendar day (for example, "Aug 9, 2022" => 9)....
+
+• day_of_week (string)
+  Label: Day of Week
+  Description: The day of week (for example, Monday)....
+
+• engine (string)
+  Label: Engine
+  Description: The database or cache engine (for example, Oracle, SQL Server, MySQL or Redis)....
+
+• enhanced_service_name (string)
+  Label: Service Name
+  Description: A dimension defined by Cloudability that standardizes product naming conventions for AWS, Azure, GCP...
+
+• group_name1 (string)
+  Label:  mock demo 
+
+• group_name10 (string)
+  Label: Vendor
+
+• group_name11 (string)
+  Label: Change Control Process
+
+• group_name12 (string)
+  Label: Testing Limit-1
+
+• group_name13 (string)
+  Label: Testing Limit-2
+
+• group_name14 (string)
+  Label: Testing Limit-3
+
+• group_name15 (string)
+  Label: Testing Limit-4
+
+• group_name16 (string)
+  Label: Testing Limit-5
+
+• group_name17 (string)
+  Label: Testing Limit-6
+
+• group_name18 (string)
+  Label: Testing Limit-7
+
+• group_name19 (string)
+  Label: Testing Limit-8
+
+• group_name2 (string)
+  Label: Cost Center
+
+• group_name20 (string)
+  Label: Testing Limit-9
+
+• group_name21 (string)
+  Label: Testing Limit-10
+
+• group_name22 (string)
+  Label: Testing Limit-11
+
+• group_name23 (string)
+  Label: Testing Limit-12
+
+• group_name24 (string)
+  Label: Testing Limit-13
+
+• group_name25 (string)
+  Label: Testing Limit-14
+
+• group_name3 (string)
+  Label: Availability Zone
+
+• group_name4 (string)
+  Label: Application
+
+• group_name5 (string)
+  Label: Region
+
+• group_name6 (string)
+  Label: Account Owner
+
+• group_name7 (string)
+  Label: Environment 
+
+• group_name8 (string)
+  Label: product
+
+• group_name9 (string)
+  Label: 28
+
+• instance_category (string)
+  Label: Instance Category
+  Description: The category of VM or Database an instance belongs to. Common categories include General Purpose, Co...
+
+• instance_family (string)
+  Label: Instance Family
+  Description: The family of VM or Database an instance belongs to. This will typically form the prefix to the full...
+
+• instance_size (string)
+  Label: Instance Size
+  Description: The size of VM or Database. This is correlated to key resource attributes such as the number of CPUs...
+
+• instance_type (string)
+  Label: Instance Type
+  Description: The  full identifier of the type of VM or Database instance, capturing both the family and size. Thi...
+
+• invoice_date (date)
+  Label: Invoice Date
+  Description: The invoice date for any cost item as provided by the cloud vendor. This is reported in "Mon DD, YYY...
+
+• invoice_id (string)
+  Label: Invoice ID
+  Description: The invoice ID that corresponds to any charged cost item, as provided by AWS. Data is not currently ...
+
+• item_description (string)
+  Label: Item Description
+  Description: Description of the type of usage for this line item. This description matches the description on the...
+
+• lease_type (string)
+  Label: Lease Type
+  Description: The payment mode for the cost items. Valid values are: On-Demand, Savings Plan, Reserved and Spot. T...
+
+• month (date)
+  Label: Month (Category)
+  Description: The month any cost item was incurred, formatted "Mon". Examples "Jun", "Jul", "Aug". This is useful ...
+
+• offering_class (string)
+  Label: Reservation Class
+  Description: The commitment offering tied to any cost item. Example values include “standard” and “convertible” r...
+
+• operating_system (string)
+  Label: Operating System
+  Description: The operating system for VMs as reported by the cloud vendors for billing purposes. Example values: ...
+
+• operation (string)
+  Label: Operation
+  Description: The operation data represents the action that was taken on the asset.  This often relates to a CLI c...
+
+• part_number (string)
+  Label: Part Number
+  Description: This field is specific to Azure and OCI. It corresponds to the identifier used to get specific meter...
+
+• region (string)
+  Label: Region
+  Description: The region in which a resource exists or a usage charge occurred, for example: us-east-1 for AWS, US...
+
+• region_zone (string)
+  Label: Availability Zone
+  Description: A combination of the region and zone in which a resource exists. For example, us-east-1a....
+
+• reservation_identifier (string)
+  Label: Reservation ID
+  Description: The unique ID of the commitment (such as reserved instance and savings plan) tied to any cost item a...
+
+• reservation_name (string)
+  Label: Reservation Name
+  Description: The name of the purchased reservation instance (Azure specific)....
+
+• resource_identifier (string)
+  Label: Resource ID
+  Description: The resource is the base entity that users can work with in the cloud. Examples are Instance Ids, La...
+
+• resource_name (string)
+  Label: Resource Name
+  Description: Resources are named entities, and the resource_name is its identifier. Each resource has its own uni...
+
+• seller (string)
+  Label: Seller
+  Description: The official seller of services. Using this dimension allows you to separate marketplace charges fro...
+
+• service_name (string)
+  Label: Product Name
+  Description: The official product name as provided by the vendor (for example, Amazon Elastic Compute Cloud, GCP ...
+
+• tag1 (string)
+  Label: Business unit (value)
+
+• tag10 (string)
+  Label: KubernetesPod (value)
+
+• tag11 (string)
+  Label: KubernetesGroup (value)
+
+• tag12 (string)
+  Label: Owner (value)
+
+• tag13 (string)
+  Label: Finance (value)
+
+• tag14 (string)
+  Label: Org ID (value)
+
+• tag15 (string)
+  Label: Department (value)
+
+• tag16 (string)
+  Label: Service (value)
+
+• tag17 (string)
+  Label: Category (value)
+
+• tag18 (string)
+  Label: Name (value)
+
+• tag19 (string)
+  Label: Production (value)
+
+• tag2 (string)
+  Label: Team  (value)
+
+• tag20 (string)
+  Label: environment (value)
+
+• tag21 (string)
+  Label: Team (value)
+
+• tag22 (string)
+  Label: GCP Tags (value)
+
+• tag24 (string)
+  Label: Application (value)
+
+• tag25 (string)
+  Label: Workload (value)
+
+• tag26 (string)
+  Label: org (value)
+
+• tag27 (string)
+  Label: account-level-team-dimension (value)
+
+• tag28 (string)
+  Label: OCI Compartment (value)
+
+• tag29 (string)
+  Label: Project (value)
+
+• tag3 (string)
+  Label: Cloud - HCM (value)
+
+• tag30 (string)
+  Label: CostCenter (value)
+
+• tag31 (string)
+  Label: Owners (value)
+
+• tag32 (string)
+  Label: Product (value)
+
+• tag33 (string)
+  Label: Project (value)
+
+• tag35 (string)
+  Label: testingtt (value)
+
+• tag36 (string)
+  Label: RG (value)
+
+• tag37 (string)
+  Label: Production (value)
+
+• tag38 (string)
+  Label: prod (value)
+
+• tag39 (string)
+  Label: Production (value)
+
+• tag4 (string)
+  Label: Cost Center (value)
+
+• tag40 (string)
+  Label: env (value)
+
+• tag41 (string)
+  Label: Prod (value)
+
+• tag42 (string)
+  Label: project 100 (value)
+
+• tag43 (string)
+  Label: project 1 (value)
+
+• tag44 (string)
+  Label: env (value)
+
+• tag45 (string)
+  Label: Data (value)
+
+• tag46 (string)
+  Label: Env (value)
+
+• tag47 (string)
+  Label: Time 2 (value)
+
+• tag48 (string)
+  Label: Environment-doNoReuseTagDimensionNames (value)
+
+• tag49 (string)
+  Label: testing (value)
+
+• tag5 (string)
+  Label: Project (value)
+
+• tag50 (string)
+  Label: TEST_MOCK (value)
+
+• tag6 (string)
+  Label: Customer_Id (value)
+
+• tag7 (string)
+  Label: Region (value)
+
+• tag8 (string)
+  Label: azure-subscription-dimension (value)
+
+• tag9 (string)
+  Label: Kubernetes service-clustername (value)
+
+• tagkey1 (string)
+  Label: Business unit (key)
+
+• tagkey10 (string)
+  Label: KubernetesPod (key)
+
+• tagkey11 (string)
+  Label: KubernetesGroup (key)
+
+• tagkey12 (string)
+  Label: Owner (key)
+
+• tagkey13 (string)
+  Label: Finance (key)
+
+• tagkey14 (string)
+  Label: Org ID (key)
+
+• tagkey15 (string)
+  Label: Department (key)
+
+• tagkey16 (string)
+  Label: Service (key)
+
+• tagkey17 (string)
+  Label: Category (key)
+
+• tagkey18 (string)
+  Label: Name (key)
+
+• tagkey19 (string)
+  Label: Production (key)
+
+• tagkey2 (string)
+  Label: Team  (key)
+
+• tagkey20 (string)
+  Label: environment (key)
+
+• tagkey21 (string)
+  Label: Team (key)
+
+• tagkey22 (string)
+  Label: GCP Tags (key)
+
+• tagkey24 (string)
+  Label: Application (key)
+
+• tagkey25 (string)
+  Label: Workload (key)
+
+• tagkey26 (string)
+  Label: org (key)
+
+• tagkey27 (string)
+  Label: account-level-team-dimension (key)
+
+• tagkey28 (string)
+  Label: OCI Compartment (key)
+
+• tagkey29 (string)
+  Label: Project (key)
+
+• tagkey3 (string)
+  Label: Cloud - HCM (key)
+
+• tagkey30 (string)
+  Label: CostCenter (key)
+
+• tagkey31 (string)
+  Label: Owners (key)
+
+• tagkey32 (string)
+  Label: Product (key)
+
+• tagkey33 (string)
+  Label: Project (key)
+
+• tagkey35 (string)
+  Label: testingtt (key)
+
+• tagkey36 (string)
+  Label: RG (key)
+
+• tagkey37 (string)
+  Label: Production (key)
+
+• tagkey38 (string)
+  Label: prod (key)
+
+• tagkey39 (string)
+  Label: Production (key)
+
+• tagkey4 (string)
+  Label: Cost Center (key)
+
+• tagkey40 (string)
+  Label: env (key)
+
+• tagkey41 (string)
+  Label: Prod (key)
+
+• tagkey42 (string)
+  Label: project 100 (key)
+
+• tagkey43 (string)
+  Label: project 1 (key)
+
+• tagkey44 (string)
+  Label: env (key)
+
+• tagkey45 (string)
+  Label: Data (key)
+
+• tagkey46 (string)
+  Label: Env (key)
+
+• tagkey47 (string)
+  Label: Time 2 (key)
+
+• tagkey48 (string)
+  Label: Environment-doNoReuseTagDimensionNames (key)
+
+• tagkey49 (string)
+  Label: testing (key)
+
+• tagkey5 (string)
+  Label: Project (key)
+
+• tagkey50 (string)
+  Label: TEST_MOCK (key)
+
+• tagkey6 (string)
+  Label: Customer_Id (key)
+
+• tagkey7 (string)
+  Label: Region (key)
+
+• tagkey8 (string)
+  Label: azure-subscription-dimension (key)
+
+• tagkey9 (string)
+  Label: Kubernetes service-clustername (key)
+
+• tenancy (string)
+  Label: Tenancy
+  Description: AWS specific dimension identifying the tenancy of EC2 instances. Three valid values are shared, host...
+
+• transaction_type (string)
+  Label: Transaction Type
+  Description: A new dimension created by Cloudability to break costs into Usage, One-Time Charges, Recurring Charg...
+
+• usage_family (string)
+  Label: Usage Family
+  Description: A standardized dimension created by Cloudability to consolidate similar values of Usage Type into a ...
+
+• usage_type (string)
+  Label: Usage Type
+  Description: Specifies operational details of the usage line item. The following example describes Amazon EC2 Hig...
+
+• vendor (string)
+  Label: Vendor
+  Description: The cloud vendor associated with the cost item. Valid values are Amazon, Azure, GCP and OCI....
+
+• vendor_account_identifier (string)
+  Label: Account ID
+  Description: The unique identifier related to a AWS Account, Azure Subscription, GCP Project or OCI Tenancy....
+
+• vendor_account_name (string)
+  Label: Account Name
+  Description: The name given by the customer that's attached to each AWS Account, Azure Subscription, GCP Project ...
+
+• week (date)
+  Label: Week (Category)
+  Description: The week any cost item was incurred, formatted "WW". Examples "01", "15", "52". This is useful for l...
+
+• year (date)
+  Label: Year
+  Description: The calendar year any cost item was occurred, formatted YYYY (for example, 2022)....
+
+• year_month (date)
+  Label: Month (Year)
+  Description: The month and year of any cost item (formatted Month YYYY) useful for proper chronological sorting. ...
+
+• year_week (date)
+  Label: Week (Year)
+  Description: The week and year of any cost item (formatted YYYY-WW) useful for proper chronological sorting. Exam...
+
+• zone (string)
+  Label: Zone
+  Description: This field is specific to AWS, it corresponds to the letter for a specific zone in which an instance...
+
+
+METRICS
+--------------------
+
+• adjusted_amortized_fairshare_cost (currency)
+  Label: Fairshare Cost (Adjusted Amortized)
+  Description: This is calculated by dividing the sum of the used resources for the container by the total used res...
+
+• adjusted_amortized_idle_cost (currency)
+  Label: Idle Cost (Adjusted Amortized)
+  Description: The idle cost refers to the cost incurred by resources that are not used by any workload for a given...
+
+• adjusted_amortized_utilized_cost (currency)
+  Label: Utilized Cost (Adjusted Amortized)
+  Description: The utilized cost refers to the cost incurred by the resources utilized by a workload for a given ti...
+
+• adjusted_cost (currency)
+  Label: Cost (Adjusted)
+  Description: Built from the cost (total) metric, this metric adjusts the figures to allow for any custom pricing ...
+
+• adjusted_fairshare_cost (currency)
+  Label: Fairshare Cost (Adjusted)
+  Description: This is calculated by dividing the sum of the used resources for the container by the total used res...
+
+• adjusted_idle_cost (currency)
+  Label: Idle Cost (Adjusted)
+  Description: The idle cost refers to the cost incurred by resources that are not used by any workload for a given...
+
+• adjusted_utilized_cost (currency)
+  Label: Utilized Cost (Adjusted)
+  Description: The utilized cost refers to the cost incurred by the resources utilized by a workload for a given ti...
+
+• blended_rate (currency)
+  Label: Rate (Blended)
+  Description: For Consolidated Billing accounts, the effective rate for the line item calculated as an average of ...
+
+• business_metric1 (currency)
+  Label: Cost (Commited)
+
+• business_metric10 (currency)
+  Label: Someone's Test
+
+• business_metric11 (number)
+  Label: Bytes Transferred Passthrough
+
+• business_metric13 (currency)
+  Label: Cost of East
+
+• business_metric14 (currency)
+  Label: CBR Savings Plans Savings
+
+• business_metric15 (currency)
+  Label: test it
+
+• business_metric2 (currency)
+  Label: Test_UsageFam
+
+• business_metric3 (number)
+  Label: test_EC2_COST
+
+• business_metric4 (currency)
+  Label: test_powerup
+
+• business_metric5 (currency)
+  Label: GST
+
+• business_metric6 (currency)
+  Label: test demo
+
+• business_metric7 (currency)
+  Label: Savings testak
+
+• business_metric8 (number)
+  Label: Account Count
+
+• business_metric9 (number)
+  Label: Surcharge
+
+• byte_hours (float)
+  Label: GiB Hours
+  Description: A gigabyte-hour refers to the number of gigabytes stored on a cloud platform in a particular hourly ...
+
+• bytes_transferred (float)
+  Label: Data Transfer (GiB)
+  Description: The amount of data transferred in a particular time period....
+
+• carbon_emissions (float)
+  Label: Estimated Carbon Emissions (MTCO2e)
+  Description: Estimated Carbon emissions by a resource in metric tons of carbon dioxide equivalent - MTCO2e...
+
+• cost_adjusted (currency)
+  Label: Cost Adjustment
+  Description: The amount by which the cost was adjusted....
+
+• gb_months (float)
+  Label: GiB Months
+  Description: References byte-hours, which corresponds to the number of bytes stored on an AWS, Azure, GCP or OCI ...
+
+• invoiced_cost (currency)
+  Label: Cost (Total Blended)
+  Description: This cost metric is specific to AWS and corresponds to the lineItem/BlendedCost column of the CUR fi...
+
+• io_requests (integer)
+  Label: I/O Requests
+  Description: Describes the number of data requests from a database service....
+
+• kwh_consumption (float)
+  Label: Power Consumed (kWh)
+  Description: Power consumed by a resource in Kilo Watt Hours - kWh...
+
+• on_demand_hours (float)
+  Label: On Demand Hours
+  Description: The amount of on demand computing hours used during the reporting period....
+
+• public_on_demand_cost (currency)
+  Label: Cost (List)
+  Description: This metric represents cost items as if they were charged at the public on-demand rate. This means t...
+
+• requests (integer)
+  Label: Requests
+  Description: The number of computing resources used in the units specified by each service. For example, your ser...
+
+• reserved_hours (float)
+  Label: Reserved Hours
+  Description: The amount of reserved computing hours used during the reporting period....
+
+• reserved_utilization_rate (percentage)
+  Label: Reserved Coverage Rate
+  Description: The percentage of total hours used during the period where an RI was applied....
+
+• resource_identifier_count (integer)
+  Label: Resource Count
+  Description: The count of ?unique? resource ids in the period specified....
+
+• total_adjusted_amortized_cost (currency)
+  Label: Cost (Adjusted Amortized)
+  Description: Built from the cost (amortized) metric, this metric adjusts the figures to allow for any custom pric...
+
+• total_amortized_cost (currency)
+  Label: Cost (Amortized)
+  Description: This is an “accrual” cost metric, representing the consumed cost during any period. This metric is h...
+
+• unblended_cost (currency)
+  Label: Cost (Total)
+  Description: This is the default cost metric throughout Cloudability. It is a “cash” metric and simply represents...
+
+• unblended_rate (currency)
+  Label: Rate (Unblended)
+  Description: The cost per hour for a line item. This is summarized across the hours of a day....
+
+• usage_hours (float)
+  Label: Usage Hours
+  Description: The number of computing resources used in the units specified by each service. For example, your ser...
+
+• usage_quantity (float)
+  Label: Usage Quantity
+  Description: Generic usage quantity. Units will vary on dimensions and filters....
+
+• vcpu_hours (integer)
+  Label: vCPU Hours
+  Description: Normalized CPU hours are calculated by multiplying the CPU hours used by the number of vCPUs used....

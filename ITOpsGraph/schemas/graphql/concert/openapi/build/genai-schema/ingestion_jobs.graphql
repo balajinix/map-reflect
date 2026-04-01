@@ -1,0 +1,137 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"""
+Root Query type that provides read operations for the IBM Concert Ingestion Jobs API.
+"""
+type Query {
+  """
+  Returns a list of all third-party data ingestion jobs. Ingestion jobs pull data into your Concert instance 
+  from your connected external tools and services.
+  """
+  ingestionJobs(
+    """Optional filter by ingestion job name."""
+    name: String
+  ): IngestionJobCollection
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/ingestion_jobs"
+      method: GET
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      configuration: "ibmConcert"
+    )
+
+  """
+  View details of a specific ingestion job by its unique ID.
+  """
+  ingestionJob(
+    """Required ID of the ingestion job to retrieve."""
+    ingestionJobId: String!
+  ): IngestionJob
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/ingestion_jobs/$ingestionJobId"
+      method: GET
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      configuration: "ibmConcert"
+    )
+}
+
+"""
+Root Mutation type that provides write operations for the IBM Concert Ingestion Jobs API.
+"""
+type Mutation {
+  """
+  Creates a new data ingestion job to pull data into your Concert instance from a third-party tool or service.
+  """
+  createIngestionJob(
+    """Name of the ingestion job."""
+    name: String!
+    """Configuration for the ingestion job."""
+    config: JSON
+  ): IngestionJob
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/ingestion_jobs"
+      method: POST
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      contenttype: "application/json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Modifies the configuration of an existing ingestion job specified by its unique ID.
+  """
+  updateIngestionJob(
+    """ID of the ingestion job to update."""
+    ingestionJobId: String!
+    """Updated configuration for the ingestion job."""
+    config: JSON
+  ): IngestionJob
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/ingestion_jobs/$ingestionJobId"
+      method: PATCH
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      contenttype: "application/merge-patch+json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Deletes the ingestion job configuration specified by its unique job ID.
+  """
+  deleteIngestionJob(
+    """ID of the ingestion job to delete."""
+    ingestionJobId: String!
+  ): Boolean
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/ingestion_jobs/$ingestionJobId"
+      method: DELETE
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      configuration: "ibmConcert"
+    )
+}
+
+"""
+Collection of ingestion jobs
+"""
+type IngestionJobCollection {
+  """List of ingestion jobs"""
+  ingestionJobs: [IngestionJob]
+}
+
+"""
+Ingestion job details
+"""
+type IngestionJob {
+  """Unique identifier of the ingestion job"""
+  id: String
+  
+  """Name of the ingestion job"""
+  name: String
+  
+  """Current status of the ingestion job"""
+  status: String
+}
+
+"""
+Error response object
+"""
+type ErrorResponse {
+  """Error message"""
+  error: String
+}
+
+# Suggested configuration file (config.yaml):
+# configurationset:
+#   - configuration:
+#       name: ibmConcert
+#       instanceId: YOUR_INSTANCE_ID

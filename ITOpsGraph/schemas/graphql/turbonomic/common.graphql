@@ -1,0 +1,31 @@
+# Copyright IBM Corp. 2025
+
+type Query {
+  """
+  access token from client_id and secret in config.yaml
+  used as a helper function to generate tokens behind the scenes
+  """
+  _accessTokenTurbonomics: AccessToken!
+    @rest(
+      endpoint: "https://$hostname;/oauth2/token"
+      method: POST
+      configuration: "turbonomics"
+      contenttype: "application/x-www-form-urlencoded"
+      postbody: """
+      grant_type=client_credentials&scope=role:{{ .Get "role"}}&client_id={{ .Get "client_id"}}&client_secret={{ .Get "client_secret"}}
+      """
+      ecmascript: """
+      function transformREST(body) {
+        if (status == 200) {
+           return body
+        }
+        let resp = JSON.parse(body);
+        let err = "unknown error"
+        if ("error" in resp) {
+            err = `${resp?.error} ${resp?.error_description} ${resp?.error_uri}`;
+        }
+        throw new Error(`IAM: ${err}`);
+      }
+      """
+    )
+}

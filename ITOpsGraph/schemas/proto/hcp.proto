@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package hashicorp.cloud.internal.infragraph.domain.v1;
+
+import "hashicorp/cloud/internal/infragraph/domain/v1/base.proto";
+import "hashicorp/cloud/internal/infragraph/options/v1/options.proto";
+
+option go_package = "github.com/hashicorp/cloud-infragraph/proto-internal/go;hashicorp_cloud_infragraph_internal";
+
+// HcpResource is a type containing HCP specific fields.
+message HcpResource {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_properties_only) = true;
+  option (options.v1.message_source) = "HCP";
+
+  // organization_id that owns the resource
+  string organization_id = 1;
+  // project_id the resource belongs to
+  string project_id = 2;
+}
+
+// HcpOrganization is a type containing HCP Organization specific fields.
+message HcpOrganization {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP";
+
+  BaseOrganization organization = 1;
+}
+
+// HcpProject is a type containing HCP Project specific fields.
+message HcpProject {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "HCP";
+
+  BaseAccount account = 1;
+}

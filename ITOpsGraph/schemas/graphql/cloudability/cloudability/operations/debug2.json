@@ -1,0 +1,17 @@
+{
+  "dateRange": {
+    "start": "2025-05-01",
+    "end": "2025-05-31"
+  },
+  "metrics": [
+    "UNBLENDED_COST"
+  ],
+  "dimensions": [
+    "ACCOUNT_IDENTIFIER"
+  ],
+  "match": {
+    "serviceName": {
+      "eq": "Amazon Elastic Compute Cloud"
+    }
+  }
+}

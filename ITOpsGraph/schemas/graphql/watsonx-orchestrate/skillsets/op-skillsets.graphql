@@ -1,0 +1,12 @@
+query GetSkillSets {
+  skillSets {
+    skillsets {
+      skillset_id
+      name
+      description
+      type
+      assistant_id
+      url
+    }
+  }
+}

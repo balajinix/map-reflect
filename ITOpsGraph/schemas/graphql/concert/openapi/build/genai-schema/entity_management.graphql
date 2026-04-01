@@ -1,0 +1,165 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"""
+Root Query type that provides read operations for the IBM Concert Entity Management API.
+"""
+type Query {
+  """
+  Returns a list of all users and user groups that have access to a specific entity.
+  """
+  entityAccessUsers(
+    """Unique ID of the entity."""
+    entityId: String!
+    """Entity type, such as application and environment."""
+    entityType: String!
+    """Page size for pagination."""
+    pageSize: Int
+    """Page number for pagination."""
+    pageNumber: Int
+    """Field name to sort by."""
+    sortBy: String
+    """Sort direction - ascending (asc) or descending (desc)."""
+    sortDirection: SortDirection
+    """
+    Filter can consist of multiple values for the same field separated by comma (treated as OR).
+    It can also be a combination of multiple fields using & (treated as AND).
+    """
+    filter: String
+    """Search by ID."""
+    search: String
+  ): EntityAccessUsersCollection
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/entities/$entityId/access"
+      method: GET
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      arguments: [
+        { name: "entity_type", argument: "entityType" },
+        { name: "page_size", argument: "pageSize" },
+        { name: "page_number", argument: "pageNumber" },
+        { name: "sort_by", argument: "sortBy" },
+        { name: "sort_direction", argument: "sortDirection" }
+      ]
+      configuration: "ibmConcert"
+    )
+}
+
+"""
+Root Mutation type that provides write operations for the IBM Concert Entity Management API.
+"""
+type Mutation {
+  """
+  Grant access to one or more users or user groups for a specific entity (application or environment).
+  """
+  grantEntityAccess(
+    """Unique ID of the entity."""
+    entityId: String!
+    """Entity type, such as application and environment."""
+    entityType: String!
+    """Array of user IDs to grant access to."""
+    users: [String]
+    """Array of group IDs to grant access to."""
+    groups: [String]
+  ): EntityAccessUsersCollection
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/entities/$entityId/access"
+      method: POST
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      arguments: [
+        { name: "entity_type", argument: "entityType" }
+      ]
+      contenttype: "application/json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Update access for users and/or groups for a specific entity (application or environment).
+  """
+  updateEntityAccess(
+    """Unique ID of the entity."""
+    entityId: String!
+    """Entity type, such as application and environment."""
+    entityType: String!
+    """Array of user IDs to update access for."""
+    users: [String]
+    """Array of group IDs to update access for."""
+    groups: [String]
+  ): EntityAccessUsersCollection
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/entities/$entityId/access"
+      method: PATCH
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      arguments: [
+        { name: "entity_type", argument: "entityType" }
+      ]
+      contenttype: "application/json-patch+json"
+      configuration: "ibmConcert"
+    )
+
+  """
+  Revoke access to the specified entity (application or environment) from one or more users or user groups.
+  """
+  revokeEntityAccess(
+    """Unique ID of the entity."""
+    entityId: String!
+    """Entity type, such as application and environment."""
+    entityType: String!
+    """Comma separated list of user IDs to revoke access from."""
+    accessUsers: String
+    """Comma separated list of group IDs to revoke access from."""
+    accessGroups: String
+  ): Boolean
+    @rest(
+      endpoint: "https://exampleHost.com/core/api/v1/entities/$entityId/access"
+      method: DELETE
+      headers: [
+        { name: "InstanceId", value: "$instanceId" }
+      ]
+      arguments: [
+        { name: "entity_type", argument: "entityType" },
+        { name: "access_users", argument: "accessUsers" },
+        { name: "access_groups", argument: "accessGroups" }
+      ]
+      configuration: "ibmConcert"
+    )
+}
+
+"""
+Sort direction for query results
+"""
+enum SortDirection {
+  """Sort in ascending order"""
+  asc
+  """Sort in descending order"""
+  desc
+}
+
+"""
+Collection of users and groups that have access to an entity
+"""
+type EntityAccessUsersCollection {
+  """List of user IDs that have access to the entity"""
+  accessUsers: [String]
+}
+
+"""
+Error response object
+"""
+type ErrorResponse {
+  """Error message"""
+  error: String
+}
+
+# Suggested configuration file (config.yaml):
+# configurationset:
+#   - configuration:
+#       name: ibmConcert
+#       instanceId: YOUR_INSTANCE_ID

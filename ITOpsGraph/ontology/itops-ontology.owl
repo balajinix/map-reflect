@@ -1,0 +1,806 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://ai4graphs.vpc.cloud9.ibm.com/ontology#"
+     xml:base="http://ai4graphs.vpc.cloud9.ibm.com/ontology"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:itops="http://ai4graphs.vpc.cloud9.ibm.com/ontology#">
+
+    <owl:Ontology rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology">
+        <dc:title>ITOps Domain Ontology</dc:title>
+        <dc:description>An ontology for IT Operations domain concepts, derived from IBM AIOps product glossaries including Instana, Turbonomic, Concert, Cloudability, and others.</dc:description>
+        <dc:creator>ITOpsGraph Project</dc:creator>
+        <dc:date>2024</dc:date>
+        <owl:versionInfo>1.0.0</owl:versionInfo>
+    </owl:Ontology>
+
+    <!--
+    ====================================================================
+    ANNOTATION PROPERTIES
+    ====================================================================
+    -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/title"/>
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/date"/>
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#example"/>
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#altLabel"/>
+
+    <owl:AnnotationProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#sourceProduct">
+        <rdfs:comment>The product(s) from which this concept definition originated</rdfs:comment>
+    </owl:AnnotationProperty>
+
+    <!--
+    ====================================================================
+    ROOT CLASS
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity">
+        <rdfs:label>IT Operations Entity</rdfs:label>
+        <rdfs:comment>Root class for all IT Operations domain concepts. Represents any entity that can be managed, monitored, or operated in an IT environment.</rdfs:comment>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    INFRASTRUCTURE LAYER
+    Physical and virtual computing resources
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Infrastructure</rdfs:label>
+        <rdfs:comment>Physical or virtual computing resources that provide the foundation for running workloads.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Host">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Host</rdfs:label>
+        <skos:definition>Either physical, virtual or "as a service". Each host has resources like CPU, memory and IO that can be a bottleneck. Each host runs an operating system and provides functionality to applications.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#VirtualMachine">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Host"/>
+        <rdfs:label>Virtual Machine</rdfs:label>
+        <skos:definition>A software-based emulation of a physical computer that runs an operating system and applications.</skos:definition>
+        <skos:altLabel>VM</skos:altLabel>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Container">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Container</rdfs:label>
+        <skos:definition>A standard unit of software that packages code and dependencies so that applications run quickly and reliably from one computing environment to another.</skos:definition>
+        <itops:sourceProduct>turbonomic</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Pod">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Pod</rdfs:label>
+        <skos:definition>A group of one or more containers with shared storage and network resources, and a specification for how to run the containers.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Cluster">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Cluster</rdfs:label>
+        <skos:definition>A collection of complete systems that work together to provide a single, unified computing capability.</skos:definition>
+        <itops:sourceProduct>turbonomic</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Zone">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Zone</rdfs:label>
+        <skos:definition>Zones can be in different continents and regions. They can fail or have different performance characteristics.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Region">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Region</rdfs:label>
+        <skos:definition>A geographical area containing one or more availability zones for cloud resources.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#DataCenter">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Data Center</rdfs:label>
+        <skos:definition>A facility housing computer systems and associated components for data storage, processing, and distribution.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Network">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Network</rdfs:label>
+        <skos:definition>A collection of interconnected devices and systems that enable communication and data exchange.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Storage">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:label>Storage</rdfs:label>
+        <skos:definition>Systems and devices used for data persistence and retrieval.</skos:definition>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    RESOURCE LAYER
+    Consumable computational resources
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Resource">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Resource</rdfs:label>
+        <skos:definition>A physical or logical component that can be provisioned or reserved for an application or service instance. Examples of resources can include storage, processors, memory, clusters, and VMs.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ComputeResource">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Resource"/>
+        <rdfs:label>Compute Resource</rdfs:label>
+        <skos:definition>Processing capacity including CPU and memory resources.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#StorageResource">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Resource"/>
+        <rdfs:label>Storage Resource</rdfs:label>
+        <skos:definition>Data storage capacity including disk, block, and object storage.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#NetworkResource">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Resource"/>
+        <rdfs:label>Network Resource</rdfs:label>
+        <skos:definition>Network bandwidth and connectivity resources.</skos:definition>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    WORKLOAD LAYER
+    Software that runs on infrastructure
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Workload</rdfs:label>
+        <skos:definition>Software or computational tasks that run on infrastructure and consume resources.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Application">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+        <rdfs:label>Application</rdfs:label>
+        <skos:definition>One or more computer programs or software components that provide a function in direct support of a specific business process or processes.</skos:definition>
+        <itops:sourceProduct>instana, turbonomic</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Service">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+        <rdfs:label>Service</rdfs:label>
+        <skos:definition>A set of capabilities that provide functionality to a product or other services.</skos:definition>
+        <itops:sourceProduct>instana, turbonomic</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Microservice">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Service"/>
+        <rdfs:label>Microservice</rdfs:label>
+        <skos:definition>A set of small, independent architectural components, each with a single purpose, that communicate over well-defined APIs.</skos:definition>
+        <itops:sourceProduct>turbonomic, concert</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Process">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+        <rdfs:label>Process</rdfs:label>
+        <skos:definition>An instance of a program that is being executed by a computer system.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Job">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+        <rdfs:label>Job</rdfs:label>
+        <skos:definition>A unit of work or batch process scheduled for execution.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Function">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+        <rdfs:label>Function</rdfs:label>
+        <skos:definition>A serverless compute unit that executes code in response to events.</skos:definition>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    OBSERVABILITY LAYER
+    Monitoring, metrics, events, and alerting
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Observable</rdfs:label>
+        <skos:definition>Something that can be monitored, measured, or observed in an IT environment.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Metric">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable"/>
+        <rdfs:label>Metric</rdfs:label>
+        <skos:definition>A quantitative measurement collected over time that indicates the health, performance, or behavior of a system.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Trace">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable"/>
+        <rdfs:label>Trace</rdfs:label>
+        <skos:definition>A record of the path a request takes through a distributed system, showing timing and dependencies.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Span">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Trace"/>
+        <rdfs:label>Span</rdfs:label>
+        <skos:definition>A single unit of work within a trace, representing an operation or service call.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Log">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable"/>
+        <rdfs:label>Log</rdfs:label>
+        <skos:definition>A timestamped record of events, errors, or information generated by systems and applications.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Event">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable"/>
+        <rdfs:label>Event</rdfs:label>
+        <skos:definition>A change in state of a service or system that may require attention or action.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Alert">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Event"/>
+        <rdfs:label>Alert</rdfs:label>
+        <skos:definition>A record of an event indicating a fault in the managed environment that requires attention.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Incident">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Event"/>
+        <rdfs:label>Incident</rdfs:label>
+        <skos:definition>An unplanned interruption that causes, might cause, or reduces the quality of an IT service.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Anomaly">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Event"/>
+        <rdfs:label>Anomaly</rdfs:label>
+        <skos:definition>A deviation from the expected baseline behaviors that may indicate a problem.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#SLO">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable"/>
+        <rdfs:label>Service Level Objective</rdfs:label>
+        <skos:definition>A target level of service defined by metrics such as availability, response time, or error rate.</skos:definition>
+        <skos:altLabel>SLO</skos:altLabel>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#SLI">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Metric"/>
+        <rdfs:label>Service Level Indicator</rdfs:label>
+        <skos:definition>A quantitative measure of a specific aspect of service performance.</skos:definition>
+        <skos:altLabel>SLI</skos:altLabel>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    OPERATIONS LAYER
+    Actions, policies, and automation
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Operation">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Operation</rdfs:label>
+        <skos:definition>An operational activity, task, or process in IT management.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Action">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Operation"/>
+        <rdfs:label>Action</rdfs:label>
+        <skos:definition>A task executed to change system state, remediate issues, or optimize performance.</skos:definition>
+        <itops:sourceProduct>turbonomic, watsonx-orchestrate</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#RemediationAction">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Action"/>
+        <rdfs:label>Remediation Action</rdfs:label>
+        <skos:definition>An action taken to fix or resolve an identified problem or incident.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ScalingAction">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Action"/>
+        <rdfs:label>Scaling Action</rdfs:label>
+        <skos:definition>An action to increase or decrease resource allocation based on demand.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Policy">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Operation"/>
+        <rdfs:label>Policy</rdfs:label>
+        <skos:definition>A rule or set of rules governing operational behavior, access control, or resource management.</skos:definition>
+        <itops:sourceProduct>hcp_terraform</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Automation">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Operation"/>
+        <rdfs:label>Automation</rdfs:label>
+        <skos:definition>An automated operational process that executes without human intervention.</skos:definition>
+        <itops:sourceProduct>turbonomic</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Runbook">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Automation"/>
+        <rdfs:label>Runbook</rdfs:label>
+        <skos:definition>A documented set of procedures for handling operational tasks or incidents.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workflow">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Automation"/>
+        <rdfs:label>Workflow</rdfs:label>
+        <skos:definition>A sequence of automated steps that accomplish a specific operational goal.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Schedule">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Operation"/>
+        <rdfs:label>Schedule</rdfs:label>
+        <skos:definition>A defined time window or pattern for executing operations or maintenance.</skos:definition>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    AGENT LAYER
+    Monitoring and management agents
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Agent">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Agent</rdfs:label>
+        <skos:definition>A process that performs an action on behalf of a user or other program without user intervention or on a regular schedule, and reports the results back.</skos:definition>
+        <itops:sourceProduct>turbonomic, hcp_terraform</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#MonitoringAgent">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Agent"/>
+        <rdfs:label>Monitoring Agent</rdfs:label>
+        <skos:definition>An agent that collects metrics, traces, and logs from monitored systems.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Sensor">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Agent"/>
+        <rdfs:label>Sensor</rdfs:label>
+        <skos:definition>A component that detects and collects specific types of telemetry data.</skos:definition>
+        <itops:sourceProduct>instana</itops:sourceProduct>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    ORGANIZATION LAYER
+    Tenancy, teams, and access management
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Organization">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Organization</rdfs:label>
+        <skos:definition>A top-level entity representing a company or business unit that owns IT resources.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Tenant">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Organization"/>
+        <rdfs:label>Tenant</rdfs:label>
+        <skos:definition>An entity that accesses services through a subscription that is associated with an account or namespace.</skos:definition>
+        <itops:sourceProduct>instana, turbonomic, watsonx-orchestrate</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Team">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Organization"/>
+        <rdfs:label>Team</rdfs:label>
+        <skos:definition>A group of users with shared responsibilities and access to specific resources.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#User">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>User</rdfs:label>
+        <skos:definition>An individual who interacts with IT systems and services.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Role">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Role</rdfs:label>
+        <skos:definition>A defined set of permissions and access rights that can be assigned to users or services.</skos:definition>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    INTEGRATION LAYER
+    Connections and targets
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Integration">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Integration</rdfs:label>
+        <skos:definition>A connection to an external source to enable the movement of data to and from an application.</skos:definition>
+        <itops:sourceProduct>instana, concert</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Target">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Integration"/>
+        <rdfs:label>Target</rdfs:label>
+        <skos:definition>A resource or workload management service in a virtual environment that is connected to for monitoring or management.</skos:definition>
+        <itops:sourceProduct>turbonomic</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#API">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Integration"/>
+        <rdfs:label>API</rdfs:label>
+        <skos:definition>Application Programming Interface - an interface designed to allow programmatic interaction with a system or service.</skos:definition>
+        <itops:sourceProduct>turbonomic, hcp_terraform</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Webhook">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Integration"/>
+        <rdfs:label>Webhook</rdfs:label>
+        <skos:definition>An HTTP-based callback function that allows lightweight, event-driven communication between systems.</skos:definition>
+        <itops:sourceProduct>instana, hcp_terraform</itops:sourceProduct>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    COST MANAGEMENT LAYER
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#CostEntity">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Cost Entity</rdfs:label>
+        <skos:definition>An entity related to financial management and cost optimization of IT resources.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Budget">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#CostEntity"/>
+        <rdfs:label>Budget</rdfs:label>
+        <skos:definition>A financial allocation for IT resources and services over a defined period.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#CostAllocation">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#CostEntity"/>
+        <rdfs:label>Cost Allocation</rdfs:label>
+        <skos:definition>The assignment of IT costs to business units, applications, or cost centers.</skos:definition>
+        <itops:sourceProduct>cloudability</itops:sourceProduct>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Reservation">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#CostEntity"/>
+        <rdfs:label>Reservation</rdfs:label>
+        <skos:definition>A commitment to use cloud resources at a discounted rate for a specified term.</skos:definition>
+        <itops:sourceProduct>cloudability</itops:sourceProduct>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    DEPLOYMENT LAYER
+    CI/CD and releases
+    ====================================================================
+    -->
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Deployment">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:label>Deployment</rdfs:label>
+        <skos:definition>The process or result of releasing software to an environment.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Release">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Deployment"/>
+        <rdfs:label>Release</rdfs:label>
+        <skos:definition>A specific version of software that is deployed to an environment.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Build">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Deployment"/>
+        <rdfs:label>Build</rdfs:label>
+        <skos:definition>A compiled or packaged version of software artifacts.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Pipeline">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Deployment"/>
+        <rdfs:label>Pipeline</rdfs:label>
+        <skos:definition>An automated sequence of steps for building, testing, and deploying software.</skos:definition>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Environment">
+        <rdfs:subClassOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Deployment"/>
+        <rdfs:label>Environment</rdfs:label>
+        <skos:definition>A logical grouping of infrastructure and configuration for running applications (e.g., dev, staging, production).</skos:definition>
+    </owl:Class>
+
+    <!--
+    ====================================================================
+    OBJECT PROPERTIES (Relationships)
+    ====================================================================
+    -->
+
+    <!-- Infrastructure relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#runsOn">
+        <rdfs:label>runs on</rdfs:label>
+        <rdfs:comment>Indicates that a workload executes on infrastructure</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#hostsWorkload">
+        <rdfs:label>hosts workload</rdfs:label>
+        <owl:inverseOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#runsOn"/>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#contains">
+        <rdfs:label>contains</rdfs:label>
+        <rdfs:comment>Indicates containment or composition relationship</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#partOf">
+        <rdfs:label>part of</rdfs:label>
+        <owl:inverseOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#contains"/>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#locatedIn">
+        <rdfs:label>located in</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Zone"/>
+    </owl:ObjectProperty>
+
+    <!-- Application relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#composedOf">
+        <rdfs:label>composed of</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#contains"/>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Application"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Service"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#dependsOn">
+        <rdfs:label>depends on</rdfs:label>
+        <rdfs:comment>Indicates a dependency between entities</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#calls">
+        <rdfs:label>calls</rdfs:label>
+        <rdfs:comment>Indicates service-to-service communication</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Service"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Service"/>
+    </owl:ObjectProperty>
+
+    <!-- Resource relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#consumes">
+        <rdfs:label>consumes</rdfs:label>
+        <rdfs:comment>Indicates resource consumption</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Workload"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Resource"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#provides">
+        <rdfs:label>provides</rdfs:label>
+        <rdfs:comment>Indicates resource provision</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Infrastructure"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Resource"/>
+    </owl:ObjectProperty>
+
+    <!-- Monitoring relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#monitors">
+        <rdfs:label>monitors</rdfs:label>
+        <rdfs:comment>Indicates that an agent observes an entity</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Agent"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#monitoredBy">
+        <rdfs:label>monitored by</rdfs:label>
+        <owl:inverseOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#monitors"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#emits">
+        <rdfs:label>emits</rdfs:label>
+        <rdfs:comment>Indicates that an entity produces observables</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#measuredBy">
+        <rdfs:label>measured by</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Metric"/>
+    </owl:ObjectProperty>
+
+    <!-- Alert/Incident relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#triggers">
+        <rdfs:label>triggers</rdfs:label>
+        <rdfs:comment>Indicates that an alert initiates an action</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Alert"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Action"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#affects">
+        <rdfs:label>affects</rdfs:label>
+        <rdfs:comment>Indicates that an event impacts an entity</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Event"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#causedBy">
+        <rdfs:label>caused by</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Incident"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Event"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#resolvedBy">
+        <rdfs:label>resolved by</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Incident"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Action"/>
+    </owl:ObjectProperty>
+
+    <!-- Operations relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#governedBy">
+        <rdfs:label>governed by</rdfs:label>
+        <rdfs:comment>Indicates that an action is controlled by a policy</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Action"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Policy"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#executes">
+        <rdfs:label>executes</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Automation"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Action"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#appliesTo">
+        <rdfs:label>applies to</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Policy"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+    </owl:ObjectProperty>
+
+    <!-- Organization relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#belongsTo">
+        <rdfs:label>belongs to</rdfs:label>
+        <rdfs:comment>Indicates ownership by a tenant or organization</rdfs:comment>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Tenant"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#owns">
+        <rdfs:label>owns</rdfs:label>
+        <owl:inverseOf rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#belongsTo"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#memberOf">
+        <rdfs:label>member of</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#User"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Team"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#hasRole">
+        <rdfs:label>has role</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#User"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Role"/>
+    </owl:ObjectProperty>
+
+    <!-- Deployment relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#deployedTo">
+        <rdfs:label>deployed to</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Release"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Environment"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#produces">
+        <rdfs:label>produces</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Pipeline"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Build"/>
+    </owl:ObjectProperty>
+
+    <!-- Integration relationships -->
+    <owl:ObjectProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#connectsTo">
+        <rdfs:label>connects to</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Integration"/>
+        <rdfs:range rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+    </owl:ObjectProperty>
+
+    <!--
+    ====================================================================
+    DATA PROPERTIES
+    ====================================================================
+    -->
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#name">
+        <rdfs:label>name</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#identifier">
+        <rdfs:label>identifier</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#status">
+        <rdfs:label>status</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#createdAt">
+        <rdfs:label>created at</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#updatedAt">
+        <rdfs:label>updated at</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#severity">
+        <rdfs:label>severity</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#value">
+        <rdfs:label>value</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Metric"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#unit">
+        <rdfs:label>unit</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Metric"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#timestamp">
+        <rdfs:label>timestamp</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#Observable"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#version">
+        <rdfs:label>version</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#isActive">
+        <rdfs:label>is active</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#ITOpsEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#cost">
+        <rdfs:label>cost</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#CostEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://ai4graphs.vpc.cloud9.ibm.com/ontology#currency">
+        <rdfs:label>currency</rdfs:label>
+        <rdfs:domain rdf:resource="http://ai4graphs.vpc.cloud9.ibm.com/ontology#CostEntity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+</rdf:RDF>

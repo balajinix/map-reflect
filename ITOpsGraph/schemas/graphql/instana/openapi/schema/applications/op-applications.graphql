@@ -1,0 +1,28 @@
+query Applications($f: ApplicationFilter!, $n: Int, $a: String) {
+  applications(first: $n, filter: $f, after: $a) {
+    edges {
+      node {
+        id
+        label
+        boundaryScope
+        services {
+          id
+          label
+          technologies
+          types
+          endpoints {
+            id
+            label
+            technologies
+            type
+            syntheticType
+          }
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

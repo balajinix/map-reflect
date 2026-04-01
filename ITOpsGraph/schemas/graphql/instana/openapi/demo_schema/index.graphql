@@ -1,0 +1,3390 @@
+"""
+getCallGroup is a GraphQL endpoint that implements the Instana API /api/application-monitoring/analyze/call-groups
+ for Application answers.  You can use this API to fetch time series metrics such as the highest latency, the top erroneous calls, rates, total
+ number of calls, that are handled by some specific application and then you can group by things like service name, endpoint name, HTTP call path or URL.
+ The primary drivers are timeFrame, group, order, tagFilterExpression, and metrics. You MUST use variables instead of constants in the GraphQL query due
+ to quoting issues. A good call will use variables and fill in values for input based upon the GraphQL schema.
+
+ **Important!! YOU MUST first call the world_time_api to help calculate "timeFrame" input. This tool only gives you the current time so you'll need to calculate
+ for exact timeFrame variables to answer the question correctly which is critical.
+
+  - ** Example usage ** -
+
+  Sample input - DO NOT USE THESE VALUES:
+
+  ```json
+  {
+    "timeFrame": {
+        "to": 1738868023319,
+        "focusedMoment": 1738868023319,
+        "autoRefresh": false,
+        "windowSize": 86400000
+    },
+    "tagFilterExpression": {
+        "type": "EXPRESSION",
+        "logicalOperator": "AND",
+        "elements": [
+            {
+                "type": "TAG_FILTER",
+                "name": "application.name",
+                "operator": "EQUALS",
+                "entity": "DESTINATION",
+                "value": "Robot Shop - EP"
+            },
+            {
+                "type": "TAG_FILTER",
+                "name": "call.erroneous",
+                "operator": "EQUALS",
+                "entity": "NOT_APPLICABLE",
+                "value": true
+            }
+        ]
+    },
+    "metrics": [
+        {
+            "metric": "calls",
+            "aggregation": "SUM"
+        }
+    ],
+    "order": {
+        "by": "calls",
+        "direction": "DESC"
+    },
+    "group": {
+        "groupbyTag": "endpoint.name",
+        "groupbyTagEntity": "DESTINATION"
+    },
+    "pagination": {"retrievalSize":5},
+    "includeInternal": false,
+    "includeSynthetic": false
+  }
+  ```
+
+  - ** Metrics - Map human readable labels to metricId needed for  **
+
+  Available metrics:
+    ```json
+  [
+        {
+          "metricId": "calls",
+          "label": "Call count",
+          "formatter": "NUMBER",
+          "description": "Number of received calls",
+          "aggregations": [
+              "SUM",
+              "PER_SECOND"
+          ],
+          "defaultAggregation": null
+      },
+      {
+          "metricId": "erroneousCalls",
+          "label": "Erroneous calls",
+          "formatter": "NUMBER",
+          "description": "The number of erroneous calls.",
+          "aggregations": [
+              "SUM",
+              "PER_SECOND"
+          ],
+          "defaultAggregation": null
+      },
+      {
+          "metricId": "latency",
+          "label": "Call latency",
+          "formatter": "MILLIS",
+          "description": "Latency of received calls in milliseconds.",
+          "aggregations": [
+              "P98",
+              "P90",
+              "SUM",
+              "P75",
+              "MAX",
+              "P25",
+              "MEAN",
+              "P50",
+              "P95",
+              "P99",
+              "MIN"
+          ],
+          "defaultAggregation": "MEAN"
+      },
+      {
+          "metricId": "errors",
+          "label": "Error rate",
+          "formatter": "PERCENTAGE",
+          "description": "Error rate of received calls. A value between 0 and 1.",
+          "aggregations": [
+              "MEAN"
+          ],
+          "defaultAggregation": "MEAN"
+      },
+      {
+          "metricId": "traces",
+          "label": "Trace count",
+          "formatter": "NUMBER",
+          "description": "Number of traces",
+          "aggregations": [
+              "SUM"
+          ],
+          "defaultAggregation": "SUM"
+      },
+      {
+          "metricId": "applications",
+          "label": "Application count",
+          "formatter": "NUMBER",
+          "description": "The number of applications.",
+          "aggregations": [
+              "DISTINCT_COUNT"
+          ],
+          "defaultAggregation": "DISTINCT_COUNT"
+      },
+      {
+          "metricId": "services",
+          "label": "Service count",
+          "formatter": "NUMBER",
+          "description": "The number of services.",
+          "aggregations": [
+              "DISTINCT_COUNT"
+          ],
+          "defaultAggregation": "DISTINCT_COUNT"
+      },
+      {
+          "metricId": "endpoints",
+          "label": "Endpoint count",
+          "formatter": "NUMBER",
+          "description": "The number of endpoints.",
+          "aggregations": [
+              "DISTINCT_COUNT"
+          ],
+          "defaultAggregation": "DISTINCT_COUNT"
+      },
+      {
+          "metricId": "http.1xx",
+          "label": "HTTP calls with 1XX responses",
+          "formatter": "NUMBER",
+          "description": "Counts the number of occurrences of HTTP status codes where 100 <= status code <= 199",
+          "aggregations": [
+              "SUM",
+              "PER_SECOND"
+          ],
+          "defaultAggregation": null
+      },
+      {
+          "metricId": "http.2xx",
+          "label": "HTTP calls with 2XX responses",
+          "formatter": "NUMBER",
+          "description": "Counts the number of occurrences of HTTP status codes where 200 <= status code <= 299",
+          "aggregations": [
+              "SUM",
+              "PER_SECOND"
+          ],
+          "defaultAggregation": null
+      },
+      {
+          "metricId": "http.3xx",
+          "label": "HTTP calls with 3XX responses",
+          "formatter": "NUMBER",
+          "description": "Counts the number of occurrences of HTTP status codes where 300 <= status code <= 399",
+          "aggregations": [
+              "SUM",
+              "PER_SECOND"
+          ],
+          "defaultAggregation": null
+      },
+      {
+          "metricId": "http.4xx",
+          "label": "HTTP calls with 4XX responses",
+          "formatter": "NUMBER",
+          "description": "Counts the number of occurrences of HTTP status codes where 400 <= status code <= 499",
+          "aggregations": [
+              "SUM",
+              "PER_SECOND"
+          ],
+          "defaultAggregation": null
+      },
+      {
+          "metricId": "http.5xx",
+          "label": "HTTP calls with 5XX responses",
+          "formatter": "NUMBER",
+          "description": "Counts the number of occurrences of HTTP status codes where 500 <= status code <= 599",
+          "aggregations": [
+              "SUM",
+              "PER_SECOND"
+          ],
+          "defaultAggregation": null
+      }
+  ]
+  ```
+
+  - ** tagFilterExpression element names**
+
+  Available Tag Names to map human readable text (labels) to their backend tagName:
+    ```json
+    [
+    {
+    "label": "Commonly Used",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Application Name",
+            "icon": "lib_application",
+            "tagName": "application.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Erroneous",
+            "icon": "lib_application_call",
+            "tagName": "call.erroneous",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Type",
+            "icon": "lib_application_call",
+            "tagName": "call.type",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Endpoint Name",
+            "icon": "lib_application_endpoint",
+            "tagName": "endpoint.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Service Name",
+            "icon": "lib_application_service",
+            "tagName": "service.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Technology Name",
+            "icon": "lib_views_tag",
+            "tagName": "technology",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": 10,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Agent",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Tag",
+            "icon": "lib_views_tag",
+            "tagName": "agent.tag",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Zone",
+            "icon": "lib_views_tag",
+            "tagName": "agent.zone",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Application",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Inbound of Application",
+            "icon": "lib_application_call",
+            "tagName": "call.inbound_of_application",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Name",
+            "icon": "lib_application",
+            "tagName": "application.name",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "BPM",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Activity ID",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.activity.id",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Activity Name",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.activity.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Activity Type",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.activity.type",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Business Key",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.process.business.key",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Process Application Name",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.process.application.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Process Definition ID",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.process.definition.id",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Process Definition Name",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.process.definition.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Process Snapshot Name",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.process.snapshot.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Root Process Instance ID",
+            "icon": "lib_application_call",
+            "tagName": "call.bpm.root.process.instance.id",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Batch",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Batch Job",
+            "icon": "lib_application_call",
+            "tagName": "call.batch.job",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Batch Params",
+            "icon": "lib_application_call",
+            "tagName": "call.batch.params",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Batch Status",
+            "icon": "lib_application_call",
+            "tagName": "call.batch.status",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Camunda Activity ID",
+            "icon": "lib_application_call",
+            "tagName": "call.camunda.activity.id",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Camunda Business Key",
+            "icon": "lib_application_call",
+            "tagName": "call.camunda.process.businesskey",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Camunda Root Process UUID",
+            "icon": "lib_application_call",
+            "tagName": "call.camunda.process.id",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Call",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Name",
+            "icon": "lib_application_call",
+            "tagName": "call.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Erroneous",
+            "icon": "lib_application_call",
+            "tagName": "call.erroneous",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Error Count",
+            "icon": "lib_application_call",
+            "tagName": "call.error.count",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Error Message",
+            "icon": "lib_application_call",
+            "tagName": "call.error.message",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Is Root",
+            "icon": "lib_application_call",
+            "tagName": "call.is_root",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Is Synthetic",
+            "icon": "lib_application_call",
+            "tagName": "call.is_synthetic",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Latency",
+            "icon": "lib_application_call",
+            "tagName": "call.latency",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Tag",
+            "icon": "lib_application_call",
+            "tagName": "call.tag",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Trace ID",
+            "icon": "lib_application_call",
+            "tagName": "trace.id",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Type",
+            "icon": "lib_application_call",
+            "tagName": "call.type",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Cloud",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "AWS",
+            "description": null,
+            "icon": "lib_aws",
+            "children": [
+                {
+                    "label": "AWS ECS Cluster Name",
+                    "icon": "lib_aws_ecs_cluster",
+                    "tagName": "aws.ecs.cluster.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "AWS ECS Task Name",
+                    "icon": "lib_aws_ecs_task",
+                    "tagName": "aws.ecs.task.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Arn",
+                    "icon": "lib_aws",
+                    "tagName": "aws.arn",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "EC2 Tag",
+                    "icon": "lib_infra_ec2",
+                    "tagName": "aws.ec2.tag",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Ec2 Type",
+                    "icon": "lib_infra_ec2",
+                    "tagName": "aws.ec2.type",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Ec2 Zone",
+                    "icon": "lib_infra_ec2",
+                    "tagName": "aws.ec2.zone",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "IP V4",
+                    "icon": "lib_infra_ec2",
+                    "tagName": "aws.ec2.ipv4",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Public Name",
+                    "icon": "lib_infra_ec2",
+                    "tagName": "aws.ec2.publicName",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Service Type",
+                    "icon": "lib_aws",
+                    "tagName": "aws.service.type",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Tag",
+                    "icon": "lib_aws",
+                    "tagName": "aws.tag",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Task Definition Name",
+                    "icon": "lib_aws_ecs_task_definition",
+                    "tagName": "aws.ecs.taskdefinition.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Task Definition Version",
+                    "icon": "lib_aws_ecs_task_definition_version",
+                    "tagName": "aws.ecs.taskdefinition.version",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Azure",
+            "description": null,
+            "icon": "lib_azure",
+            "children": [
+                {
+                    "label": "App Service Name",
+                    "icon": "lib_azure",
+                    "tagName": "azure.appservice.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Tag",
+                    "icon": "lib_azure",
+                    "tagName": "azure.tag",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Zone",
+                    "icon": "lib_azure",
+                    "tagName": "azure.zone",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Function As A Service",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "AWS Request ID",
+                    "icon": "lib_views_tag",
+                    "tagName": "faas.requestid",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Cold Start",
+                    "description": "The AWS Lambda runtime bootstrapped a new instance for this invocation.",
+                    "icon": "lib_views_tag",
+                    "tagName": "faas.coldstart",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Function Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "faas.functionname",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Function Version",
+                    "icon": "lib_views_tag",
+                    "tagName": "faas.functionversion",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Lambda Trigger",
+                    "description": "Which kind of trigger caused the Lambda invocation.",
+                    "icon": "lib_views_tag",
+                    "tagName": "faas.trigger",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Suspected Timeout",
+                    "description": "The serverless tracer heuristically detected that this invocation might have ended in a timeout.",
+                    "icon": "lib_views_tag",
+                    "tagName": "faas.timeout",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Google Cloud Platform",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Cloud Run Instance ID",
+                    "icon": "lib_views_tag",
+                    "tagName": "gcp.cloudrun.instance.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Cloud Run Service",
+                    "icon": "lib_views_tag",
+                    "tagName": "gcp.cloudrun.service.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Cloud Run Service Revision",
+                    "icon": "lib_views_tag",
+                    "tagName": "gcp.cloudrun.service.revision",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Instance Type",
+                    "icon": "lib_infra_gce",
+                    "tagName": "gce.instance.type",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Project ID",
+                    "icon": "lib_views_tag",
+                    "tagName": "gcp.project.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Tag",
+                    "icon": "lib_infra_gce",
+                    "tagName": "gce.tag",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Zone",
+                    "icon": "lib_infra_gce",
+                    "tagName": "gce.zone",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "ID",
+            "icon": "lib_views_cloud",
+            "tagName": "cloud.id",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Provider",
+            "icon": "lib_views_cloud",
+            "tagName": "cloud.provider",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Snapshot ID",
+            "icon": "lib_views_cloud",
+            "tagName": "cloud.snapshotId",
+            "queryable": true,
+            "hidden": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Cluster",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Cassandra Cluster Name",
+            "icon": "lib_infra_cassandraCluster",
+            "tagName": "cassandra.cluster.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Consul Cluster",
+            "icon": "lib_infra_consul",
+            "tagName": "consul.cluster.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Couchbase Cluster Name",
+            "icon": "lib_infra_couchbaseCluster",
+            "tagName": "couchbase.cluster.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "ElasticSearch Cluster",
+            "icon": "lib_infra_elasticsearchCluster",
+            "tagName": "elasticsearch.cluster.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "IBM MQ Cluster",
+            "icon": "lib_infra_ibmMqCluster",
+            "tagName": "ibmmq.cluster.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Snapshot ID",
+            "icon": "lib_views_tag",
+            "tagName": "cluster.snapshotId",
+            "queryable": true,
+            "hidden": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Container",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Compose",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Docker Compose Service",
+                    "icon": "lib_container_docker",
+                    "tagName": "docker.compose.service",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "ContainerD",
+            "description": null,
+            "icon": "lib_container_containerd",
+            "children": [
+                {
+                    "label": "ContainerD Container ID",
+                    "icon": "lib_container_containerd",
+                    "tagName": "containerd.container.id",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "ContainerD Image Name",
+                    "icon": "lib_container_containerd",
+                    "tagName": "containerd.image.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "ContainerD Label",
+                    "icon": "lib_container_containerd",
+                    "tagName": "containerd.label",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Crio",
+            "description": null,
+            "icon": "lib_container_crio",
+            "children": [
+                {
+                    "label": "Crio Container ID",
+                    "icon": "lib_container_crio",
+                    "tagName": "crio.container.id",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Crio Container Name",
+                    "icon": "lib_container_crio",
+                    "tagName": "crio.container.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Crio Image Name",
+                    "icon": "lib_container_crio",
+                    "tagName": "crio.image.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Crio Label",
+                    "icon": "lib_container_crio",
+                    "tagName": "crio.label",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Docker",
+            "description": null,
+            "icon": "lib_container_docker",
+            "children": [
+                {
+                    "label": "Docker Container ID",
+                    "icon": "lib_container_docker",
+                    "tagName": "docker.container.id",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Docker Container Name",
+                    "icon": "lib_container_docker",
+                    "tagName": "docker.container.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Docker Image Name",
+                    "icon": "lib_container_docker",
+                    "tagName": "docker.image.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Docker Label",
+                    "icon": "lib_container_docker",
+                    "tagName": "docker.label",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "ID",
+            "icon": "lib_views_tag",
+            "tagName": "container.id",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Image Name",
+            "icon": "lib_views_tag",
+            "tagName": "container.image.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "LXC",
+            "description": null,
+            "icon": "lib_infra_lxc",
+            "children": [
+                {
+                    "label": "IP Address",
+                    "icon": "lib_infra_lxc",
+                    "tagName": "lxc.ip",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "LXC Container Name",
+                    "icon": "lib_infra_lxc",
+                    "tagName": "lxc.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "State",
+                    "icon": "lib_infra_lxc",
+                    "tagName": "lxc.state",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Label",
+            "icon": "lib_views_tag",
+            "tagName": "container.label",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Marathon",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "App ID",
+                    "icon": "lib_views_tag",
+                    "tagName": "marathon.app.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Label",
+                    "icon": "lib_views_tag",
+                    "tagName": "marathon.label",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Name",
+            "icon": "lib_views_tag",
+            "tagName": "container.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Nomad",
+            "description": null,
+            "icon": "lib_infra_nomadScheduler",
+            "children": [
+                {
+                    "label": "Alloc Name",
+                    "icon": "lib_infra_nomadScheduler",
+                    "tagName": "nomad.alloc.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Job Name",
+                    "icon": "lib_infra_nomadScheduler",
+                    "tagName": "nomad.job.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Task Name",
+                    "icon": "lib_infra_nomadScheduler",
+                    "tagName": "nomad.task.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Podman",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Podman Container ID",
+                    "icon": "lib_views_tag",
+                    "tagName": "podman.container.id",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Podman Container Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "podman.container.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Podman Image Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "podman.image.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Podman Label",
+                    "icon": "lib_views_tag",
+                    "tagName": "podman.label",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Snapshot ID",
+            "icon": "lib_views_tag",
+            "tagName": "container.snapshotId",
+            "queryable": true,
+            "hidden": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Type",
+            "icon": "lib_views_tag",
+            "tagName": "container.type",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Database",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Aerospike",
+            "description": null,
+            "icon": "lib_aerospike_icon",
+            "children": [
+                {
+                    "label": "Namespace",
+                    "icon": "lib_aerospike_icon",
+                    "tagName": "aerospike.namespace",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Operation",
+                    "icon": "lib_aerospike_icon",
+                    "tagName": "aerospike.operation",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Set",
+                    "icon": "lib_aerospike_icon",
+                    "tagName": "aerospike.set",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "User Key",
+                    "icon": "lib_aerospike_icon",
+                    "tagName": "aerospike.user_key",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Call Database Connection",
+            "icon": "lib_application_endpoint_type_database",
+            "tagName": "call.database.connection",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Database Schema",
+            "icon": "lib_application_endpoint_type_database",
+            "tagName": "call.database.schema",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Database Statement",
+            "icon": "lib_application_endpoint_type_database",
+            "tagName": "call.database.statement",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Database Type",
+            "icon": "lib_application_endpoint_type_database",
+            "tagName": "call.database.type",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Database User",
+            "icon": "lib_application_endpoint_type_database",
+            "tagName": "call.database.user",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Command Type",
+            "icon": "lib_application_endpoint_type_database",
+            "tagName": "call.database.commandType",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Db2",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "DB2 name",
+                    "icon": "lib_views_tag",
+                    "tagName": "db2.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "DB2 version",
+                    "icon": "lib_views_tag",
+                    "tagName": "db2.version",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Hazelcast Cluster Name",
+            "icon": "lib_infra_hazelcastCluster",
+            "tagName": "hazelcast.cluster.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "IBMi",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Hostname",
+                    "icon": "lib_views_tag",
+                    "tagName": "ibmi.os.hostname",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "MSSQL",
+            "description": null,
+            "icon": "lib_infra_msSqlDatabase",
+            "children": [
+                {
+                    "label": "Hostname",
+                    "icon": "lib_infra_msSqlDatabase",
+                    "tagName": "mssql.hostname",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Instance",
+                    "icon": "lib_infra_msSqlDatabase",
+                    "tagName": "mssql.instance",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "MongoDB",
+            "description": null,
+            "icon": "lib_infra_mongoDb",
+            "children": [
+                {
+                    "label": "MongoDB Cluster Name",
+                    "icon": "lib_infra_mongoDb",
+                    "tagName": "mongo.clusterName",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "MongoDB Replicaset Name",
+                    "icon": "lib_infra_mongoDb",
+                    "tagName": "mongo.replicaSetName",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "OracleDB",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "ORACLEDB SID",
+                    "icon": "lib_views_tag",
+                    "tagName": "oracle.sid",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "ORACLEDB Service Names",
+                    "icon": "lib_views_tag",
+                    "tagName": "oracle.service.names",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "ORACLEDB version",
+                    "icon": "lib_views_tag",
+                    "tagName": "oracle.version",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "ORACLEDB(RAC) Service Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "oracle.service.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Result Size",
+            "icon": "lib_application_endpoint_type_database",
+            "tagName": "call.database.resultsize",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Solr",
+            "description": null,
+            "icon": "lib_infra_solr",
+            "children": [
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_solr",
+                    "tagName": "solr.version",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Vault",
+            "description": null,
+            "icon": "lib_infra_vault",
+            "children": [
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_vault",
+                    "tagName": "vault.version",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Deployment Server",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Deployment Name",
+            "icon": "lib_application_call",
+            "tagName": "call.deployment.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Context Root",
+            "icon": "lib_application_call",
+            "tagName": "call.deployment.contextRoot",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Endpoint",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "ID",
+            "icon": "lib_application_endpoint",
+            "tagName": "endpoint.id",
+            "queryable": true,
+            "hidden": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Name",
+            "icon": "lib_application_endpoint",
+            "tagName": "endpoint.name",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Event",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Event Description",
+            "icon": "lib_application_call",
+            "tagName": "call.event.description",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Event Trigger",
+            "icon": "lib_application_call",
+            "tagName": "call.event.trigger",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "HTTP",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Http Header",
+            "icon": "lib_application_call",
+            "tagName": "call.http.header",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Http Host",
+            "icon": "lib_application_call",
+            "tagName": "call.http.host",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Http Method",
+            "icon": "lib_application_call",
+            "tagName": "call.http.method",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Http Params",
+            "icon": "lib_application_call",
+            "tagName": "call.http.params",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Http Path",
+            "icon": "lib_application_call",
+            "tagName": "call.http.path",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Http Protocol",
+            "icon": "lib_application_call",
+            "tagName": "call.http.protocol",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Http Status",
+            "icon": "lib_application_call",
+            "tagName": "call.http.status",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Context Root",
+            "icon": "lib_application_call",
+            "tagName": "call.http.contextRoot",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Path Template",
+            "icon": "lib_application_call",
+            "tagName": "call.http.pathTemplate",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Route ID",
+            "icon": "lib_application_call",
+            "tagName": "call.http.routeId",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Status Class",
+            "icon": "lib_application_call",
+            "tagName": "call.http.statusClass",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "URL",
+            "icon": "lib_application_call",
+            "tagName": "call.http.url",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Host",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "CPU Count",
+            "icon": "lib_views_tag",
+            "tagName": "host.cpu.count",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "CPU Model",
+            "icon": "lib_views_tag",
+            "tagName": "host.cpu.model",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "FQDN",
+            "icon": "lib_views_tag",
+            "tagName": "host.fqdn",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "GPU Count",
+            "icon": "lib_views_tag",
+            "tagName": "host.gpu.count",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "GPU Model",
+            "icon": "lib_views_tag",
+            "tagName": "host.gpu.model",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "IP Address",
+            "icon": "lib_views_tag",
+            "tagName": "host.ip",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "MAC",
+            "icon": "lib_views_tag",
+            "tagName": "host.mac",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Memory",
+            "icon": "lib_views_tag",
+            "tagName": "host.memory",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Name",
+            "icon": "lib_views_tag",
+            "tagName": "host.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "OS Arch",
+            "icon": "lib_views_tag",
+            "tagName": "host.os.arch",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "OS Name",
+            "icon": "lib_views_tag",
+            "tagName": "host.os.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "OS Version",
+            "icon": "lib_views_tag",
+            "tagName": "host.os.version",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Snapshot ID",
+            "icon": "lib_views_tag",
+            "tagName": "host.snapshotId",
+            "queryable": true,
+            "hidden": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Zone",
+            "icon": "lib_views_tag",
+            "tagName": "host.zone",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Kubernetes",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Cluster",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Distribution",
+                    "icon": "lib_kubernetes_cluster",
+                    "tagName": "kubernetes.cluster.distribution",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Managed By",
+                    "icon": "lib_kubernetes_cluster",
+                    "tagName": "kubernetes.cluster.managedBy",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_kubernetes_cluster",
+                    "tagName": "kubernetes.cluster.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Version",
+                    "icon": "lib_kubernetes_cluster",
+                    "tagName": "kubernetes.cluster.version",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Container Name",
+            "icon": "lib_kubernetes",
+            "tagName": "kubernetes.container.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Container Restart Count",
+            "icon": "lib_kubernetes",
+            "tagName": "kubernetes.container.restartCount",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "DaemonSet",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_infra_kubernetesDaemonSet",
+                    "tagName": "kubernetes.daemonset.label",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_infra_kubernetesDaemonSet",
+                    "tagName": "kubernetes.daemonset.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Namespace",
+                    "icon": "lib_infra_kubernetesDaemonSet",
+                    "tagName": "kubernetes.daemonset.namespace",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Deployment",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_infra_kubernetesDeployment",
+                    "tagName": "kubernetes.deployment.label",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_infra_kubernetesDeployment",
+                    "tagName": "kubernetes.deployment.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Namespace",
+                    "icon": "lib_infra_kubernetesDeployment",
+                    "tagName": "kubernetes.deployment.namespace",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Label",
+            "icon": "lib_kubernetes_label",
+            "tagName": "kubernetes.label",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Namespace",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_kubernetes_namespace",
+                    "tagName": "kubernetes.namespace.label",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_kubernetes_namespace",
+                    "tagName": "kubernetes.namespace.name",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Node",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_kubernetes_node",
+                    "tagName": "kubernetes.node.label",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_kubernetes_node",
+                    "tagName": "kubernetes.node.name",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Pod",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_kubernetes_pod",
+                    "tagName": "kubernetes.pod.label",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_kubernetes_pod",
+                    "tagName": "kubernetes.pod.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Namespace",
+                    "icon": "lib_kubernetes_pod",
+                    "tagName": "kubernetes.pod.namespace",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "ReplicaSet",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_kubernetes",
+                    "tagName": "kubernetes.replicaset.label",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_kubernetes",
+                    "tagName": "kubernetes.replicaset.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Namespace",
+                    "icon": "lib_kubernetes",
+                    "tagName": "kubernetes.replicaset.namespace",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "ReplicationController",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_kubernetes",
+                    "tagName": "kubernetes.replicationcontroller.label",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_kubernetes",
+                    "tagName": "kubernetes.replicationcontroller.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Namespace",
+                    "icon": "lib_kubernetes",
+                    "tagName": "kubernetes.replicationcontroller.namespace",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Service",
+            "description": null,
+            "icon": "lib_application_service",
+            "children": [
+                {
+                    "label": "Name",
+                    "icon": "lib_infra_kubernetesService",
+                    "tagName": "kubernetes.service.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Namespace",
+                    "icon": "lib_infra_kubernetesService",
+                    "tagName": "kubernetes.service.namespace",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Type",
+                    "icon": "lib_infra_kubernetesService",
+                    "tagName": "kubernetes.service.type",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "UID",
+                    "icon": "lib_infra_kubernetesService",
+                    "tagName": "kubernetes.service.uid",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "StatefulSet",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Label",
+                    "icon": "lib_infra_kubernetesStatefulSet",
+                    "tagName": "kubernetes.statefulset.label",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Name",
+                    "icon": "lib_infra_kubernetesStatefulSet",
+                    "tagName": "kubernetes.statefulset.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Namespace",
+                    "icon": "lib_infra_kubernetesStatefulSet",
+                    "tagName": "kubernetes.statefulset.namespace",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Log",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Log Level",
+            "icon": "lib_views_tag",
+            "tagName": "log.level",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Log Message",
+            "icon": "lib_views_tag",
+            "tagName": "log.message",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Log Parameters",
+            "icon": "lib_views_tag",
+            "tagName": "log.parameters",
+            "queryable": false,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Messaging",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "ACE",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "ACE Integration Node",
+                    "icon": "lib_views_tag",
+                    "tagName": "ace.integrationnode.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "ACE Message Flow",
+                    "icon": "lib_views_tag",
+                    "tagName": "ace.messageflow.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "ACE Server Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "ace.server.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "ActiveMQ",
+            "description": null,
+            "icon": "lib_infra_activeMQ",
+            "children": [
+                {
+                    "label": "ActiveMQ Broker Name",
+                    "icon": "lib_infra_activeMQ",
+                    "tagName": "activemq.broker.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Call Messaging Address",
+            "icon": "lib_application_call",
+            "tagName": "call.messaging.address",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Messaging Params",
+            "icon": "lib_application_call",
+            "tagName": "call.messaging.params",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Messaging Type",
+            "icon": "lib_application_call",
+            "tagName": "call.messaging.type",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Exchange Type",
+            "icon": "lib_application_call",
+            "tagName": "call.messaging.exchangeType",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "IBM MQ",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Queue Manager Unique Name",
+                    "icon": "lib_infra_ibmMqCluster",
+                    "tagName": "ibmmq.queuemanager.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Java JMS Type",
+            "icon": "lib_infra_jvmRuntimePlatform",
+            "tagName": "call.java.jms.type",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Kafka",
+            "description": null,
+            "icon": "lib_infra_kafka",
+            "children": [
+                {
+                    "label": "Cluster Name",
+                    "icon": "lib_infra_kafka",
+                    "tagName": "kafka.cluster.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Connect Cluster Name",
+                    "icon": "lib_infra_kafka",
+                    "tagName": "kafkaconnect.cluster.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Connect Connector ID",
+                    "icon": "lib_infra_kafka",
+                    "tagName": "kafkaconnect.connector.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Task ID",
+                    "icon": "lib_infra_kafka",
+                    "tagName": "kafkaconnect.task.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Worker ID",
+                    "icon": "lib_infra_kafka",
+                    "tagName": "kafkaconnect.worker.id",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "RabbitMQ",
+            "description": null,
+            "icon": "lib_infra_rabbitMq",
+            "children": [
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_rabbitMq",
+                    "tagName": "rabbitmq.version",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Routing Key",
+            "icon": "lib_application_call",
+            "tagName": "call.messaging.routingKey",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "TibcoEMS",
+            "description": null,
+            "icon": "lib_infra_tibcoEMS",
+            "children": [
+                {
+                    "label": "Name",
+                    "icon": "lib_infra_tibcoEMS",
+                    "tagName": "tibcoems.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Platform",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "CloudFoundry",
+            "description": null,
+            "icon": "lib_cloudfoundry",
+            "children": [
+                {
+                    "label": "Application ID",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.application.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Application Instance Index",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.garden.application.instance_index",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Application Name",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.application.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Garden Container ID",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.garden.container.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Organization ID",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.organization.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Organization Name",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.organization.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Space ID",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.space.id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Space Name",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "cloudfoundry.space.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Tanzu Foundation Name",
+                    "icon": "lib_cloudfoundry",
+                    "tagName": "tanzu.foundation.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "IBM OpenStack",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Compute Instance Host Name ",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.computeinstance.host",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Compute Instance Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.computeinstance.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Compute Instance Status",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.computeinstance.status",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Hypervisor Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.hypervisor.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Hypervisor State",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.hypervisor.state",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Hypervisor Status",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.hypervisor.status",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Hypervisor Type",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.hypervisor.type",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Hypervisor Version",
+                    "icon": "lib_views_tag",
+                    "tagName": "openstack.hypervisor.version",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Nova",
+            "description": null,
+            "icon": "lib_infra_nova",
+            "children": [
+                {
+                    "label": "Zone",
+                    "icon": "lib_infra_nova",
+                    "tagName": "nova.zone",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "OpenShift",
+            "description": null,
+            "icon": "lib_openshift",
+            "children": [
+                {
+                    "label": "Deployment Config Label",
+                    "icon": "lib_openshift",
+                    "tagName": "openshift.deploymentconfig.label",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Deployment Config Name",
+                    "icon": "lib_openshift",
+                    "tagName": "openshift.deploymentconfig.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Deployment Config Namespace",
+                    "icon": "lib_openshift",
+                    "tagName": "openshift.deploymentconfig.namespace",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Vsphere Datacenter Name",
+            "icon": "lib_vsphere",
+            "tagName": "vsphere.datacenter.name",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "pHMC",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "LPAR Mode",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.lpar.mode",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "LPAR Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.lpar.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "LPAR State",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.lpar.state",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "System Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.system.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "System Status",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.system.status",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "VIOS Mode",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.vios.mode",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "VIOS Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.vios.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "VIOS State",
+                    "icon": "lib_views_tag",
+                    "tagName": "phmc.vios.state",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "vSphere",
+            "description": null,
+            "icon": "lib_vsphere",
+            "children": [
+                {
+                    "label": "Host Name",
+                    "icon": "lib_vsphere",
+                    "tagName": "vsphere.host.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "VM Name",
+                    "icon": "lib_vsphere",
+                    "tagName": "vsphere.vm.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "VM State",
+                    "icon": "lib_vsphere",
+                    "tagName": "vsphere.vm.state",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "zHMC",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "CPC Api Version",
+                    "icon": "lib_views_tag",
+                    "tagName": "zhmc.cpc.apiVersion",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "CPC Mode",
+                    "icon": "lib_views_tag",
+                    "tagName": "zhmc.cpc.mode",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "CPC Name",
+                    "icon": "lib_views_tag",
+                    "tagName": "zhmc.cpc.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "CPC Status",
+                    "icon": "lib_views_tag",
+                    "tagName": "zhmc.cpc.status",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Process",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Name",
+            "icon": "lib_infra_process",
+            "tagName": "process.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Runs In",
+            "icon": "lib_infra_process",
+            "tagName": "process.runsIn",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Runtime",
+            "icon": "lib_views_tag",
+            "tagName": "runtime",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Snapshot ID",
+            "icon": "lib_infra_process",
+            "tagName": "process.snapshotId",
+            "queryable": true,
+            "hidden": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "RPC",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Rpc Method",
+            "icon": "lib_application_call",
+            "tagName": "call.rpc.method",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Rpc Object",
+            "icon": "lib_application_call",
+            "tagName": "call.rpc.object",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Rpc Params",
+            "icon": "lib_application_call",
+            "tagName": "call.rpc.params",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Rpc Type",
+            "icon": "lib_application_call",
+            "tagName": "call.rpc.type",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "SAP",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Sap Report",
+            "icon": "lib_application_call",
+            "tagName": "call.sap.report",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Call Sap User",
+            "icon": "lib_application_call",
+            "tagName": "call.sap.user",
+            "queryable": false,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "SDK",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Sdk Name",
+            "icon": "lib_application_call",
+            "tagName": "call.sdk.name",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Service",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "ID",
+            "icon": "lib_application_service",
+            "tagName": "service.id",
+            "queryable": true,
+            "hidden": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Name",
+            "icon": "lib_application_service",
+            "tagName": "service.name",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Shell",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Call Shell Command",
+            "icon": "lib_application_call",
+            "tagName": "call.shell.command",
+            "queryable": false,
+            "type": "TAG"
+        },
+        {
+            "label": "Exit Code",
+            "icon": "lib_application_call",
+            "tagName": "call.shell.exitCode",
+            "queryable": false,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Technology",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": ".Net Core",
+            "description": null,
+            "icon": "lib_infra_netCoreRuntimePlatform",
+            "children": [
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_netCoreRuntimePlatform",
+                    "tagName": "netcore.app.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Target-Version",
+                    "icon": "lib_infra_netCoreRuntimePlatform",
+                    "tagName": "netcore.app.target",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Runtime Version",
+                    "icon": "lib_infra_netCoreRuntimePlatform",
+                    "tagName": "netcore.runtime.version",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Crystal",
+            "description": null,
+            "icon": "lib_infra_crystalRuntimePlatform",
+            "children": [
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_crystalRuntimePlatform",
+                    "tagName": "crystal.app.name",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_crystalRuntimePlatform",
+                    "tagName": "crystal.version",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Dropwizard",
+            "description": null,
+            "icon": "lib_infra_dropwizardApplicationContainer",
+            "children": [
+                {
+                    "label": "Name",
+                    "icon": "lib_infra_dropwizardApplicationContainer",
+                    "tagName": "dropwizard.name",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Go",
+            "description": null,
+            "icon": "lib_infra_golangRuntimePlatform",
+            "children": [
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_golangRuntimePlatform",
+                    "tagName": "go.app.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_golangRuntimePlatform",
+                    "tagName": "go.version",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "GraphQL",
+            "description": null,
+            "icon": "lib_views_list",
+            "children": [
+                {
+                    "label": "Call Graphql Arguments",
+                    "icon": "lib_application_call",
+                    "tagName": "call.graphql.arguments",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Call Graphql Fields",
+                    "icon": "lib_application_call",
+                    "tagName": "call.graphql.fields",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Operation Name",
+                    "icon": "lib_application_call",
+                    "tagName": "call.graphql.operationName",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Operation Type",
+                    "icon": "lib_application_call",
+                    "tagName": "call.graphql.operationType",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Haskell",
+            "description": null,
+            "icon": "lib_infra_haskellRuntimePlatform",
+            "children": [
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_haskellRuntimePlatform",
+                    "tagName": "haskell.app.name",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "JBoss",
+            "description": null,
+            "icon": "lib_infra_jBossAsApplicationContainer",
+            "children": [
+                {
+                    "label": "Node Name",
+                    "icon": "lib_infra_jBossAsApplicationContainer",
+                    "tagName": "jboss.node.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Server Name",
+                    "icon": "lib_infra_jBossAsApplicationContainer",
+                    "tagName": "jboss.server.name",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "JVM",
+            "description": null,
+            "icon": "lib_infra_jvmRuntimePlatform",
+            "children": [
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_jvmRuntimePlatform",
+                    "tagName": "jvm.app.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Version",
+                    "icon": "lib_infra_jvmRuntimePlatform",
+                    "tagName": "jvm.app.version",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_jvmRuntimePlatform",
+                    "tagName": "jvm.version",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Name",
+            "icon": "lib_views_tag",
+            "tagName": "technology",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "NodeJS",
+            "description": null,
+            "icon": "lib_infra_nodeJsRuntimePlatform",
+            "children": [
+                {
+                    "label": "App Keyword",
+                    "icon": "lib_infra_nodeJsRuntimePlatform",
+                    "tagName": "nodejs.app.keyword",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_nodeJsRuntimePlatform",
+                    "tagName": "nodejs.app.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Version",
+                    "icon": "lib_infra_nodeJsRuntimePlatform",
+                    "tagName": "nodejs.app.version",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_nodeJsRuntimePlatform",
+                    "tagName": "nodejs.version",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "PHP",
+            "description": null,
+            "icon": "lib_infra_phpRuntimePlatform",
+            "children": [
+                {
+                    "label": "API Platform Collection Operation",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.api_platform.collection_operation",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "API Platform Item Operation",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.api_platform.item_operation",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "API Platform Resource Class",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.api_platform.resource_class",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "API Platform Subresource Operation",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.api_platform.subresource_operation",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Version",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "php.app.version",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Call Php Framework",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.framework",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Compile Time",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.compileTime",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Laminas Action",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.laminas.action",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Laminas Controller",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.laminas.controller",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Laminas Module",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.laminas.module",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Laminas Route",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.laminas.route",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Laravel Action",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.laravel.action",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Laravel Controller",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.laravel.controller",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Laravel Route",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.laravel.route",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "PHP-FM WorkerPool",
+                    "icon": "lib_infra_phpFpmRuntimePlatform",
+                    "tagName": "phpfpm.workerpool",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Peak Memory Usage in KB",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.peakMemoryUsageInKB",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Symfony Action",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.symfony.action",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Symfony Controller",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.symfony.controller",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Symfony Route",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.symfony.route",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Zend Framework Action",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.zf.action",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Zend Framework Controller",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.zf.controller",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Zend Framework Module",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.zf.module",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Zend Framework Route",
+                    "icon": "lib_infra_phpRuntimePlatform",
+                    "tagName": "call.php.zf.route",
+                    "queryable": false,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Python",
+            "description": null,
+            "icon": "lib_infra_pythonRuntimePlatform",
+            "children": [
+                {
+                    "label": "Apache Airflow DAG Execution Date",
+                    "icon": "lib_application_call",
+                    "tagName": "call.python.airflow.execution_date",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Apache Airflow DAG ID",
+                    "icon": "lib_application_call",
+                    "tagName": "call.python.airflow.dag_id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_pythonRuntimePlatform",
+                    "tagName": "python.app.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Version",
+                    "icon": "lib_infra_pythonRuntimePlatform",
+                    "tagName": "python.version",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Ruby",
+            "description": null,
+            "icon": "lib_infra_rubyRuntimePlatform",
+            "children": [
+                {
+                    "label": "Action Mailer Class",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.actionmailer.class",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Action Mailer Method",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.actionmailer.method",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Active Job Job ID",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.activejob.job_id",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Active Job Job Name",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.activejob.job",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Active Job Queue",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.activejob.queue",
+                    "queryable": false,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Name",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "ruby.app.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "App Version",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "ruby.app.version",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Rails Action Controller Action",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.actioncontroller.action",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Rails Action Controller Name",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.actioncontroller.name",
+                    "queryable": true,
+                    "type": "TAG"
+                },
+                {
+                    "label": "Rails Action View Name",
+                    "icon": "lib_infra_rubyRuntimePlatform",
+                    "tagName": "call.ruby.onrails.actionview.name",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        },
+        {
+            "label": "Spring Boot",
+            "description": null,
+            "icon": "lib_infra_springbootApplicationContainer",
+            "children": [
+                {
+                    "label": "Springboot Name",
+                    "icon": "lib_infra_springbootApplicationContainer",
+                    "tagName": "springboot.name",
+                    "queryable": true,
+                    "type": "TAG"
+                }
+            ],
+            "scoreBoost": null,
+            "type": "LEVEL",
+            "queryable": false
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+},
+{
+    "label": "Trace",
+    "description": null,
+    "icon": null,
+    "children": [
+        {
+            "label": "Endpoint Name",
+            "icon": "lib_application_trace",
+            "tagName": "trace.endpoint.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Erroneous",
+            "icon": "lib_application_trace",
+            "tagName": "trace.erroneous",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Latency",
+            "icon": "lib_application_trace",
+            "tagName": "trace.latency",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Name",
+            "icon": "lib_application_trace",
+            "tagName": "trace.name",
+            "queryable": true,
+            "type": "TAG"
+        },
+        {
+            "label": "Service Name",
+            "icon": "lib_application_trace",
+            "tagName": "trace.service.name",
+            "queryable": true,
+            "type": "TAG"
+        }
+    ],
+    "scoreBoost": null,
+    "type": "LEVEL",
+    "queryable": false
+}
+]
+```
+"""
+schema
+  @sdl(
+    files: ["main/index.graphql"]
+    visibility: { expose: true, types: "Query", fields: "getCallGroup" }
+  ) {
+  query: Query
+  mutation: Mutation
+}

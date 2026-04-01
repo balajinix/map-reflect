@@ -1,0 +1,8 @@
+query GetAWS_EC2_Costs($dateRange: DateRangeInput!, $metrics: [ReportMetric!]!, $dimensions: [ReportDimension!]!, $match: ReportFilter) {
+  llmFriendlyCostReport(dateRange: $dateRange, metrics: $metrics, dimensions: $dimensions, match: $match) {
+    results {
+      account_identifier
+      unblended_cost
+    }
+  }
+}

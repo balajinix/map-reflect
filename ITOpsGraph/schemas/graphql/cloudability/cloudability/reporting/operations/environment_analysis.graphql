@@ -1,0 +1,51 @@
+query EnvironmentAnalysis {
+  llmFriendlyCostReport(
+    dateRange: { start: "2024-01-01", end: "2024-01-31" }
+    dimensions: [
+      tagkey20
+      tag20
+      tagkey40
+      tag40
+      tagkey43
+      tag43
+      tagkey45
+      tag45
+      tagkey47
+      tag47
+      group_name6
+      category3
+      tagkey19
+      tag19
+      tagkey37
+      tag37
+      tagkey41
+      tag41
+    ]
+    metrics: [unblended_cost]
+    sort: [{ field: "unblended_cost", direction: DESC }]
+    limit: 50
+  ) {
+    total_results
+    results {
+      tagkey20
+      tag20
+      tagkey40
+      tag40
+      tagkey43
+      tag43
+      tagkey45
+      tag45
+      tagkey47
+      tag47
+      group_name6
+      category3
+      tagkey19
+      tag19
+      tagkey37
+      tag37
+      tagkey41
+      tag41
+      unblended_cost
+    }
+  }
+}

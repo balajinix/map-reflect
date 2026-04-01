@@ -1,0 +1,3 @@
+schema @sdl(files:"test-atoms/events/atom.graphql") {
+query: Query
+}

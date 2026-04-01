@@ -1,0 +1,29 @@
+"""
+NS1 Connect - Internet weather for Solis DAL
+"""
+schema
+  @sdl(
+    files: ["pulsar/index.graphql"]
+    visibility: [
+      { expose: true, types: "Query|Mutation", fields: "[^_].*" }
+      # Hide all internal fields
+      { expose: false, types: ".*", fields: "_.*" }
+    ]
+  )
+  @rest(
+    name: "internet_weather"
+    endpoint: "$url;"
+    configuration: "internet_weather"
+    headers: [{ name: "x-nsone-key", value: "$nsonekey" }]
+  ) {
+  query: Query
+}
+
+# Include operation files to ensure expected requests stay in sync with schema.
+extend schema
+  @sdl(
+    executables: [
+      { document: "pulsar/operations.graphql" }
+      { document: "pulsar/op-jobs.graphql" }
+    ]
+  )

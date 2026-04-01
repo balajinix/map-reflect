@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package hashicorp.cloud.internal.infragraph.domain.v1;
+
+import "hashicorp/cloud/internal/infragraph/domain/v1/base.proto";
+import "hashicorp/cloud/internal/infragraph/options/v1/options.proto";
+
+option go_package = "github.com/hashicorp/cloud-infragraph/proto-internal/go;hashicorp_cloud_infragraph_internal";
+
+// GcpComputeInstance domain model message.
+message GcpComputeInstance {
+  option (options.v1.message_include) = true;
+  option (options.v1.message_source) = "GCP";
+
+  BaseVirtualMachine virtual_machine = 1;
+}

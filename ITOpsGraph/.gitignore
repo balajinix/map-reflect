@@ -1,0 +1,19 @@
+.venv
+
+# Virtual environments
+.venv/
+venv/
+__pycache__/
+
+# ChromaDB database (too large for git)
+wiki/docs/chromadb/
+
+# Large PDF files
+*.pdf
+
+# IDE
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
