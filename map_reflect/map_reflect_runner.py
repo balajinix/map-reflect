@@ -2974,8 +2974,39 @@ Return only the JSON array and nothing else."""
 
 Use these to ensure CONSISTENCY. If a target field is already mapped, prefer a DIFFERENT target field."""
 
+        # Documentation context for high-uncertainty reflection (DocRAG-enriched reflection)
+        doc_reflection_block = ""
+        if high_uncertainty and hasattr(self, 'doc_retriever') and self.doc_retriever and self.doc_retriever.available:
+            # Retrieve documentation for top-2 candidates to give reflection NEW information
+            doc_chunks = []
+            for cand in initial_ranking[:2]:
+                if not isinstance(cand, dict):
+                    continue
+                cand_id = cand.get("id", "")
+                if cand_id and cand_id != "NO_MATCH":
+                    ctx = self.doc_retriever.get_field_context(cand_id, product=target_product)
+                    if ctx:
+                        doc_chunks.append(f"Documentation for {cand_id}:\n{ctx}")
+            # Also get docs for source field
+            src_ctx = self.doc_retriever.get_field_context(source_prop, product=source_product)
+            if src_ctx:
+                doc_chunks.insert(0, f"Documentation for {source_prop}:\n{src_ctx}")
+            if doc_chunks:
+                doc_reflection_block = "\n\n=== DOCUMENTATION CONTEXT (use this to resolve uncertainty) ===\n" + "\n\n".join(doc_chunks)
+
         # Two-tier reflection instruction based on uncertainty (proven approach from ue_reflect.py)
-        if high_uncertainty:
+        if high_uncertainty and doc_reflection_block:
+            # Doc-enriched reflection: use documentation to verify/correct, not blind rejection
+            reflection_instruction = """The initial ranking shows UNCERTAINTY. Use the DOCUMENTATION CONTEXT below to verify or correct your ranking.
+
+INSTRUCTIONS:
+1. Read the documentation for the source field and the top candidates carefully
+2. Based on the documentation, determine which candidate best matches the SOURCE field's semantic purpose
+3. If the documentation confirms the top candidate, keep it. If it suggests a different candidate, change your ranking.
+4. Match by SEMANTIC PURPOSE described in the docs, not by name similarity
+
+Use the documentation as ground truth — it describes what each field actually means."""
+        elif high_uncertainty:
             reflection_instruction = """CRITICAL: The initial ranking shows HIGH UNCERTAINTY, which strongly suggests the top-ranked candidate is WRONG.
 
 SEMANTIC MATCHING RULES - Apply these carefully:
@@ -3007,7 +3038,7 @@ Initial ranking (best first):
 Candidates:
 {cand_block}
 
-Uncertainty Score: {uncertainty_score:.3f} {"(HIGH)" if high_uncertainty else "(LOW)"}{error_block}{sibling_block}
+Uncertainty Score: {uncertainty_score:.3f} {"(HIGH)" if high_uncertainty else "(LOW)"}{error_block}{sibling_block}{doc_reflection_block}
 
 {reflection_instruction}
 

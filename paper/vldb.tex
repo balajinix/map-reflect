@@ -132,11 +132,11 @@ The source code, data, and/or other artifacts have been made available at \url{\
 
 \section{Introduction}
 \label{sec:intro}
-Organizations rely on diverse API ecosystems and databases that must be integrated for effective data access. Schema mapping~\cite{matchmaker, liu2024magneto, sheetrit2024rematch, buss2025scalableschemamappingusing}, is the task of identifying equivalent entity types across different schemas, and is critical for building unified data access layers that allow querying across heterogeneous sources without knowledge of the underlying schema differences. This matters for AI agents and tool-calling scenarios~\cite{wang2024llmagent}, where LLMs must select and invoke APIs across multiple services.
+Organizations rely on diverse API ecosystems and databases that must be integrated for effective data access. Schema mapping~\cite{matchmaker,liu2024magneto,sheetrit2024rematch,buss2025scalableschemamappingusing,lenzerini2002data,halevy2006data,doan2012principles}, is the task of identifying equivalent entity types across different schemas, and is critical for building unified data access layers that allow querying across heterogeneous sources without knowledge of the underlying schema differences. This matters for AI agents and tool-calling scenarios~\cite{wang2024llmagent}, where LLMs must select and invoke APIs across multiple services.
 
 \begin{figure}[!t]
     \centering
-    \includegraphics[width=0.9\columnwidth]{intro_diagram.png}
+    \includegraphics[width=0.7\columnwidth]{intro_diagram.png}
     \caption{Map-Reflect pipeline: greedy MAP followed by signal-driven REFLECT.}
     \Description{Map-Reflect pipeline showing User Utterance flowing through Schema Retrieval, MAP Phase, REFLECT Phase with three signals (Neighbourhood Graph, Error Analysis, Uncertainty Quantification), and outputting Many-to-Many Mapping Set.}
     \label{fig:pipeline}
@@ -159,8 +159,8 @@ We introduce Map-Reflect, an \emph{gated reflection} framework that addresses th
 
 Our contributions are as follows:
 \begin{itemize}[noitemsep,topsep=2pt,leftmargin=*]
+  \item \textbf{Map-Reflect}, a two-phase gated reflection framework for schema-agnostic, GPT-free schema mapping across REST APIs, GraphQL, and relational databases. A greedy Map phase produces an initial alignment; a UQ-gated Reflect phase refines it selectively. The framework supports runtime target discovery from a live catalogue with no offline preprocessing.
   \item \textbf{Empirical study of reflection triggers} for LLM-based schema mapping, showing that structural and heuristic signals degrade accuracy by firing on already-correct predictions, while only uncertainty-guided reflection avoids degradation across all evaluated benchmarks (Section~\ref{sec:ablation}).
-  \item \textbf{Map-Reflect}, a two-phase gated reflection framework that operationalises this finding: a greedy Map phase produces an initial alignment and a UQ-gated Reflect phase refines it selectively. The framework is GPT-free, schema-agnostic across REST APIs, GraphQL, and relational databases, and supports runtime target discovery from a live catalogue with no offline preprocessing.
   \item \textbf{ITOpsGraph benchmark}: the first enterprise API schema mapping benchmark spanning multiple schema paradigms (GraphQL and proto buffer), 12 products, 11,110 RAG-enriched fields, and human-validated ground truth covering many-to-many mappings across heterogeneous naming conventions.
   \item \textbf{ITOpsGraph-MB benchmark}: the first human-annotated many-to-many schema mapping benchmark with bipartite field constraints, covering 786 type pairs and 3,030 field mappings across 12 enterprise products (Section~\ref{sec:itgraph_mb}).
 \end{itemize}
@@ -168,55 +168,48 @@ Our contributions are as follows:
 
 \section{Related Work}
 
-\paragraph{Classical Schema Matching.} Cupid~\cite{madhavan2001generic}, COMA~\cite{10.5555/1287369.1287422}, and iMAP~\cite{dhamankar2004imap} are representative systems from the classical schema matching literature~\cite{rahm2001survey}, combining linguistic, structural, and domain-specific similarity. However, these systems assume flat relational schemas and produce one-to-one correspondences, limiting applicability to nested API schemas with many-to-many relationships. Valentine~\cite{koutras2021valentine} provides a systematic benchmark comparing these techniques. Map-Reflect builds on multi-signal intuition but uses LLM-driven reasoning with externally grounded reflection.
+Table~\ref{tab:method_comparison} positions Map-Reflect against prior methods across six capability dimensions. No existing method covers all six; Map-Reflect is the only system combining LLM reasoning, structural context, runtime reflection, relational schema mapping, API mapping, and many-to-many support.
 
-DynaMap~\cite{mazilu2022schema} and SMUTF~\cite{zhang2025smutf} use dynamic programming and XGBoost classifiers respectively, but struggle with contextual relationships. API retrieval and sequencing have been addressed by embedding-based retrievers~\cite{li2023api,patil2023gorilla}, fine-tuned methods~\cite{toolllm}, graph-based approaches~\cite{mandal2024graph}, and GraphQL-based sequential function calling~\cite{saha-etal-2024-sequential}. Pre-LLM API mapping work includes document-based~\cite{lu2017learning}, knowledge graph~\cite{liu2023recommeding}, and GNN approaches~\cite{shao2022cross}.
+\begin{table}[htbp]
+\centering
+\small
+\caption{Method capability comparison across six dimensions.}
+\label{tab:method_comparison}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l ccccc}
+\toprule
+\textbf{Method} & \textbf{LLM} & \textbf{Structural} & \textbf{Reflection} & \textbf{API} & \textbf{Many-to-} \\
+ & & & & \textbf{Mapping} & \textbf{Many} \\
+\midrule
+COMA~\cite{10.5555/1287369.1287422}        & \texttimes & \checkmark & \texttimes & \texttimes & limited \\
+Magneto~\cite{liu2024magneto}               & \checkmark & \texttimes & \texttimes & \texttimes & \texttimes \\
+ReMatch~\cite{sheetrit2024rematch}          & \checkmark & \texttimes & \texttimes & \texttimes & \texttimes \\
+LLMatch~\cite{wang2025llmatch}              & \checkmark & \texttimes & \texttimes & \texttimes & \checkmark \\
+MatchMaker~\cite{matchmaker}                & \checkmark & \texttimes & \texttimes & \texttimes & \texttimes \\
+AnyTool~\cite{anytool}                      & \checkmark & \texttimes & \checkmark & \checkmark & \texttimes \\
+\midrule
+\textbf{Map-Reflect (ours)}                 & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
 
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=\textwidth]{solution_diagram.png}
-    \caption{Induced reflection example in ITOpsGraph dataset. The MAP phase produces incorrect initial predictions (mapping to source-schema fields). Reflection is triggered by three external signals: neighbourhood gap $>$0.2, source/target confusion error, and high uncertainty (0.285). The REFLECT phase corrects predictions to target-schema fields with improved confidence scores.}
-    \Description{Table showing Map-Reflect correction process: three source fields (Aggregate.name, Aggregate.type, Aggregate.value) with initial wrong predictions from source schema, three reflection signals triggering, and revised correct predictions from target schema.}
-    \label{fig:reflection_example}
-\end{figure*}
+\paragraph{Classical Schema Matching.} Early schema mapping systems include Clio~\cite{miller2001clio,fagin2009clio}, which pioneered automated schema mapping and data exchange, and LSD~\cite{doan2003learning}, which applied machine learning to ontology mapping. Cupid~\cite{madhavan2001generic}, COMA/COMA++~\cite{10.5555/1287369.1287422,ahn2005comapp}, and iMAP~\cite{dhamankar2004imap} combine linguistic, structural, and domain-specific similarity~\cite{rahm2001survey,euzenat2013ontology}. Similarity Flooding~\cite{melnik2002similarity} propagates similarity scores across schema graphs using fixpoint computation. Bernstein et al.~\cite{bernstein2011generic} survey a decade of progress and identify many-to-many mapping and schema heterogeneity as persistent open problems. The Ontology Alignment Evaluation Initiative~\cite{euzenat2011ontology} provides standardised benchmarks; Valentine~\cite{koutras2021valentine} extends these to tabular data. All classical systems assume flat relational schemas with one-to-one correspondences. DynaMap~\cite{mazilu2022schema} and SMUTF~\cite{zhang2025smutf} add dynamic programming and gradient-boosted classifiers but still lack semantic reasoning. API retrieval and sequencing have been addressed by embedding-based retrievers~\cite{li2023api,patil2023gorilla}, fine-tuned methods~\cite{toolllm}, graph-based approaches~\cite{mandal2024graph}, and GraphQL-based sequential function calling~\cite{saha-etal-2024-sequential}.
 
-ToolLLM~\cite{toolllm} introduced the ToolBench dataset with an API Retriever for natural language instructions. Toolformer~\cite{schick2023toolformer} shows that LLMs can learn to invoke tools via self-supervised training, motivating tool-use settings where schema mapping becomes necessary. AnyTool~\cite{anytool} incorporates self-reflection for reliability via a three-tier agent hierarchy (meta-agent $\rightarrow$ category-agents $\rightarrow$ tool-agents) built around RapidAPI's static category taxonomy, and is designed around GPT-4 function calling. The hierarchy cannot be transferred to a new API corpus without rebuilding the taxonomy from scratch. AnyTool's self-reflection has no external validation signals, which can reinforce errors~\cite{huang2024selfcorrect}. These approaches focus on API sequencing, not schema mapping. We evaluate AnyTool on all datasets using oracle-mode utterances that name both source and target schemas explicitly (Section~\ref{sec:results}).
+\paragraph{Learning-Based Matching.} Neural approaches brought deep learning to entity and schema matching. Magellan~\cite{konda2016magellan} provides infrastructure for building entity matching pipelines using feature engineering. DeepMatcher~\cite{mudgal2018deep} systematically explores deep learning architectures for entity matching; Ditto~\cite{li2020ditto} applies pre-trained transformers~\cite{vaswani2017attention,devlin2019bert} to achieve strong pairwise attribute matching. Trabelsi et al.~\cite{trabelsi2019schema} extend BERT to schema matching tasks, and Thirumuruganathan et al.~\cite{thirumuruganathan2020deep} survey the design space. Toolformer~\cite{schick2023toolformer} shows that LLMs can learn to invoke tools via self-supervised training, motivating API-schema mapping as a structured reasoning task. These methods focus on pairwise correspondences and do not exploit structural dependencies across schema graphs.
 
-\paragraph{LLM-Based Schema Mapping.} LSM~\cite{zhang2023schema} uses fine-tuned BERT encoders; Magneto~\cite{liu2024magneto} combines SLMs with LLM reranking; ReMatch~\cite{sheetrit2024rematch} and GraphRAGToolFusion~\cite{lumer2025graphragtoolfusion} add retrieval mechanisms. MatchMaker~\cite{matchmaker} introduced compositional LLM programs with zero-shot self-improvement via synthetic in-context demonstrations, but requires GPT-4 as backbone, targets only flat relational schemas, and relies on offline ColBERT-v2 multi-vector indexing plus DSPy~\cite{khattab2023dspy} bootstrapping before deployment, preprocessing costs that scale with schema size and must be repeated when schemas evolve. For many-to-many matching, LLMatch~\cite{wang2025llmatch} uses Rollup/Drilldown abstraction, while SCHEMORA~\cite{gungor2025schemora} combines BM25 and FAISS~\cite{johnson2019billion} retrieval. Both target relational schemas and require upfront schema restructuring.
+\paragraph{LLM-Based Schema Mapping.} The emergence of large language models~\cite{brown2020language,ouyang2022training} enabled a new generation of schema matching systems that leverage semantic understanding from pre-training. LSM~\cite{zhang2023schema} uses fine-tuned BERT encoders; Magneto~\cite{liu2024magneto} combines SLMs with LLM reranking; ReMatch~\cite{sheetrit2024rematch} and GraphRAGToolFusion~\cite{lumer2025graphragtoolfusion} add retrieval. MatchMaker~\cite{matchmaker} introduced compositional LLM programs with offline DSPy~\cite{khattab2023dspy} bootstrapping, but targets only flat relational schemas and requires ColBERT-v2 indexing before deployment. LLMatch~\cite{wang2025llmatch} adds Rollup/Drilldown for many-to-many relational matching; SCHEMORA~\cite{gungor2025schemora} uses BM25 and FAISS~\cite{johnson2019billion} retrieval but requires upfront column-group normalization that assumes SQL tabular input, inapplicable to nested API schemas. Reflection-based LLM agents including ReAct~\cite{yao2023react}, Reflexion~\cite{shinn2023reflexion}, and chain-of-thought reasoning~\cite{wei2022chain} demonstrate that iterative self-revision improves structured reasoning, but rely on unconditional reflection without external grounding signals — a limitation our ablation quantifies. AnyTool~\cite{anytool} applies GPT-4~\cite{achiam2023gpt4} function calling with a static three-tier API hierarchy — effective for tool sequencing but not schema mapping, and not transferable without rebuilding the taxonomy.
 
 \paragraph{Uncertainty Quantification for LLMs.}
-Uncertainty quantification (UQ) approaches estimate the reliability of LLM outputs
-and are increasingly recognised as essential for trusted AI systems~\cite{simba2025}.
-An important category are \emph{black-box} methods, which rely only on model outputs
-without internal access and are therefore robust to model upgrades and compatible with
-proprietary APIs~\cite{xiao2025consistency,simba2025}.
-A central line of black-box work uses generation \emph{consistency} as a proxy for
-confidence: when a generated response is more different from others it is more likely
-to be incorrect, so responses that are consistently similar are more likely to be
-correct~\cite{lin2024generating,manakul2023selfcheck}.
-Xiao et al.~\cite{xiao2025consistency} formalize this as the
-\emph{consistency hypothesis}, introducing three statistical statements
-(Sim-Correct, Sim-Separate, Sim-Any) and empirically verifying them across 8
-benchmarks spanning QA, summarisation, and text-to-SQL.
-The \emph{text-to-SQL} task, which is the closest analogue to schema field prediction, shows the strongest and most consistent signal across all three hypothesis variants.
-Bhattacharjya et al.~\cite{simba2025} introduce SIMBA, a
-Similarity-Based Aggregation framework that unifies and generalises consistency-based
-UQ by viewing confidence as a learned or hand-designed function of pairwise
-similarities between generations.
-SIMBA demonstrates that classification over pairwise similarities (using random forests)
-yields the best-calibrated confidence estimates, while the harmonic mean of similarities
-outperforms the arithmetic mean for structured-output tasks.
-Map-Reflect's UQ trigger is grounded directly in this framework: we use generation
-consistency to detect when field mapping predictions are genuinely ambiguous and
-selectively invoke reflection only for those fields.
-
-\paragraph{Positioning.} Map-Reflect begins with greedy one-to-one mapping and explores three external signals for gated reflection. Retrieval is intentionally lightweight, using hybrid dense vector search~\cite{karpukhin2020dpr} and BM25~\cite{robertson2009probabilistic} lexical matching merged by Reciprocal Rank Fusion~\cite{cormack2009reciprocal}, because the Reflect phase corrects residual rank errors rather than requiring retrieval to be perfect. Of the three signals, only UQ-triggered reflection avoids degrading accuracy (Section~\ref{sec:ablation}), compared to AnyTool's unconditional self-reflection~\cite{anytool} which has no external validation. Map-Reflect is schema-agnostic across REST APIs, GraphQL, and relational databases, and we evaluate on both API corpora (ITOpsGraph, NL2GQL, ToolBench) and database schema benchmarks (OMOP, SchemaNet). New schemas require only parsing and optional RAG enrichment, with no graph construction, model training, or schema restructuring.
+Black-box UQ methods rely only on model outputs and are compatible with proprietary APIs~\cite{xiao2025consistency,simba2025}. Self-consistency~\cite{wang2023selfconsistency} showed that sampling multiple chain-of-thought paths and taking the majority improves reasoning accuracy — an early demonstration that generation agreement signals correctness. Subsequent work formalised this as a proxy for hallucination detection~\cite{lin2024generating,manakul2023selfcheck}. The consistency hypothesis~\cite{xiao2025consistency} generalises this: correct LLM generations are more similar to each other than incorrect ones, an effect strongest on structured-output tasks including text-to-SQL. SIMBA~\cite{simba2025} generalises this as a family of similarity-based aggregation functions; classification over pairwise similarities yields the best-calibrated estimates for structured outputs. Map-Reflect's UQ gate is grounded in this framework: entropy over MAP-phase candidate confidences identifies genuinely ambiguous predictions and selectively triggers reflection only for those fields.
 
 
 \section{Map-Reflect Framework}
 \label{sec:mapreflect}
 
 Our two-phase architecture is designed for the many-to-many mapping challenge. Map-Reflect is schema-agnostic: it handles REST APIs, GraphQL, and relational databases uniformly, operating at two levels regardless of schema paradigm. \textbf{Type-level mapping} identifies semantically equivalent entities — GraphQL types, REST resources, or database tables (e.g., \texttt{VirtualMachine} in one system maps to \texttt{EC2Instance} in another). \textbf{Field-level mapping} aligns constituent attributes within mapped type pairs — GraphQL fields, REST parameters, or database columns. The first phase (Map) performs greedy one-to-one mapping, which is fast but leaves many elements unmapped and may create spurious mappings. The second phase (Reflect) explores three candidate external signals for gated reflection: neighbourhood graph validation, error analysis, and uncertainty quantification. As the ablation in Section~\ref{sec:ablation} establishes, only UQ-triggered reflection should be used by default. Given API specifications or database schemas, Map-Reflect applies the two-phase mapping process.
+
+New schemas require only parsing and optional RAG enrichment — no graph construction, model training, or offline preprocessing. This makes Map-Reflect practical for the live-catalogue target discovery setting (Section~\ref{sec:retrieval_results}), where new APIs are registered continuously and a static hierarchy would require rebuilding.
 
 Unlike GPT-4-centric tool agents, our components are invoked but never trained. A user utterance $u$ is processed in five stages. First, a context extractor splits $u$ into source and destination phrases by prompting a hosted chat model. Second, each phrase is embedded and queried against a Chroma vector index, yielding neighbourhoods $\mathcal{S}_{\mathrm{src}}$ and $\mathcal{S}_{\mathrm{dst}}$. Third, a reasoning call evaluates every pair in $\mathcal{S}_{\mathrm{src}}\times\mathcal{S}_{\mathrm{dst}}$, assigns a confidence $\gamma_0$, and produces justifications; this is the greedy Map phase. Fourth, the Reflect phase collects three external signals and induces reflection to refine mappings. Finally, mappings with scores below threshold $\tau_p$ are pruned, yielding many-to-many coverage. When the evaluation utterance already names both source and target schemas directly, the context extractor step is bypassed; the full five-stage pipeline applies in the runtime target discovery setting (Section~\ref{sec:retrieval_results}).
 
@@ -228,69 +221,46 @@ Unlike GPT-4-centric tool agents, our components are invoked but never trained. 
 
 \subsection{Gated Reflection Mechanism}
 
-Induced reflection refines mappings using external signals rather than model self-critique alone (Figure~\ref{fig:reflection_example}).
+Induced reflection refines mappings using external signals rather than model self-critique alone (Figure~\ref{fig:reflection_example}). We explore three external signals:
 
-We induce reflection via three external signals:
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\textwidth]{solution_diagram.png}
+    \caption{Gated reflection on ITOpsGraph. MAP phase produces incorrect predictions; three external signals trigger reflection; REFLECT phase corrects to target-schema fields with improved confidence.}
+    \Description{Map-Reflect correction: three source fields, wrong initial predictions, reflection signals, revised correct predictions.}
+    \label{fig:reflection_example}
+\end{figure*}
 
-\textbf{Signal 1: Neighbourhood Graph Validation.} For each candidate mapping $(s, t)$, we retrieve $k$-nearest neighbours from the graph store and validate whether neighbours of the source type also map to neighbours of the target type, whether alternative targets with similar structure exist, and whether any unmapped neighbours should be included. If neighbourhood evidence contradicts the greedy mapping, we add alternative mappings (achieving many-to-many coverage) or remove inconsistent ones.
+\textbf{Signal 1: Neighbourhood Graph Validation.} For each candidate mapping $(s, t)$, we retrieve $k$-nearest neighbours from the graph store and validate whether neighbours of the source type also map to neighbours of the target type, whether alternative targets with similar structure exist, and whether any unmapped neighbours should be included. The neighbourhood consistency gap $g = 1 - |\mathcal{N}_k(s) \cap \mathcal{N}_k(t)| / |\mathcal{N}_k(s)|$ quantifies this; when $g > 0.2$, the signal fires. If neighbourhood evidence contradicts the greedy mapping, we add alternative mappings (achieving many-to-many coverage) or remove inconsistent ones.
 
-\textbf{Signal 2: Error Analysis.} Before reflection, we analyse the greedy mapping's ranking for structural error patterns — product mismatch, foreign key misalignment, low confidence, and ambiguous top-2 predictions — and attempt to generate and deploy a unified schema, surfacing type conflicts and null query results. Detected patterns are passed to the reflection prompt.
+\textbf{Signal 2: Error Analysis.} Before reflection, we analyse the greedy mapping's ranking for structural error patterns: product mismatch (source and target belong to different product namespaces), foreign key misalignment (join keys are incompatible), low confidence (top candidate score $< 0.5$), and ambiguous top-2 predictions (score gap $< 0.1$). We also attempt to deploy a unified schema, surfacing type conflicts and null query results. Detected patterns are passed as structured context to the reflection prompt.
 
 \textbf{Signal 3: Uncertainty Quantification.}
-Selective reflection requires knowing \emph{which} predictions are genuinely uncertain
-rather than firing unconditionally.
-The consistency hypothesis~\cite{xiao2025consistency} provides formal
-justification: correct LLM generations are systematically more similar to other
-generations than incorrect ones, a pattern that holds especially strongly for
-structured-output tasks analogous to schema field prediction.
-SIMBA~\cite{simba2025} operationalises this as a family of aggregation functions over
-pairwise similarities between generations.
-
-\textbf{UQ trigger (entropy-H).}
-Let $\{\gamma_1,\dots,\gamma_n\}$ be the LLM-assigned confidence scores for the top-$n$
-candidate field predictions produced in the MAP phase for a source field $f$.
-We compute Shannon entropy $H = -\sum_j \gamma_j \log \gamma_j$ and trigger reflection
-when $H > \tau_H$, where
+Let the MAP phase return $n \leq 20$ ranked candidates for source field $f$ (top-$k$=10 retrieved; up to 20 sent to the LLM), with LLM-assigned scores $\gamma_j \in [0,1]$ per candidate. These are raw scores assigned independently by the LLM and do not form a probability distribution. We compute a weighted uncertainty score
 \begin{equation*}
-\tau_H = \max\!\bigl(0.25,\; \mu_H + 1.5\,\sigma_H\bigr),
+u(f) = 0.3(1-\gamma_1) + 0.3(1 - \Delta\gamma) + 0.2\,\mathbb{1}[\text{no reasons}] + 0.06,
 \end{equation*}
-with $\mu_H$ and $\sigma_H$ the mean and standard deviation of prediction entropy
-across all MAP-phase candidates, computed adaptively per dataset on a held-out
-validation split (20\% of training pairs, withheld before any hyperparameter search).
-On ITOpsGraph the adaptive formula yields $\mu_H + 1.5\sigma_H = 0.175$, which falls
-below the floor, so $\tau_H = 0.25$.
-High entropy indicates dispersed confidence across candidates. Correct predictions tend to concentrate on one candidate, while uncertain predictions spread across multiple plausible targets. Entropy is a single-pass proxy for the generation-consistency signal in SIMBA~\cite{simba2025}. Empirically, the distribution is heavily right-skewed: across 1,429 fields on ITOpsGraph, 91.7\% have entropy $\le 0.15$ and the gate fires on only 1.0\% of fields (15/1,429), confirming that the threshold is robust and the mechanism imposes negligible overhead (Figure~\ref{fig:entropy_dist}). Empirical calibration further validates the gate: fields above $\tau_H$ have 20\% MAP accuracy versus 84\% for fields below it, and accuracy decreases monotonically across uncertainty quartiles (Q1: 95\%, Q2: 80\%, Q3: 68\%, Q4: 60\%), confirming that high entropy identifies genuinely difficult predictions rather than arbitrary ones.
+where $\gamma_1$ is the top-candidate score, $\Delta\gamma = \max_j \gamma_j - \min_j \gamma_j$ is the score range across all ranked candidates, and $\mathbb{1}[\text{no reasons}]$ is 1 when the LLM returns no supporting reasoning for its top prediction. The three terms capture: (i) low confidence in the top candidate, (ii) low discrimination between candidates (clustered scores indicate ambiguity), and (iii) absence of grounded justification. We trigger reflection when $u(f) > \tau_u = 0.25$.
 
-High-uncertainty mappings trigger reflection to explore alternative mapping
-targets that the greedy MAP phase missed, often because multiple targets are
-semantically valid (many-to-many coverage opportunity).
+This is a single-pass proxy for the generation-consistency signal in SIMBA~\cite{simba2025}, approximating the low-consistency regime where predictions are most likely wrong. We validated the proxy on ITOpsGraph: the heuristic gate fires on 58 fields while the sampling-based SIMBA gate (three stochastic passes at temperature~0.7) fires on 61 fields, confirming near-identical coverage and that the proxy identifies the same uncertain predictions without repeated inference. Empirical calibration further validates the gate: fields above $\tau_u$ have 20\% MAP accuracy versus 84\% for fields below it, and accuracy decreases monotonically across uncertainty quartiles (Q1: 95\%, Q2: 80\%, Q3: 68\%, Q4: 60\%).
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth]{chart_entropy_distribution.png}
-    \caption{MAP-phase entropy distribution on ITOpsGraph (1,429 fields, Llama-3.3-70B). The distribution is right-skewed: 91.7\% of fields have $H \le 0.15$, and the UQ gate fires on only 1.0\% of fields. The wide gap between the bulk of the distribution and $\tau_H = 0.25$ confirms that the threshold is robust to small perturbations.}
+    \caption{MAP-phase UQ score distribution on ITOpsGraph (1,429 fields, Llama-3.3-70B). The gate fires on only 1.0\% of fields (those above $\tau_u = 0.25$); the bulk of the distribution is well below the threshold, confirming robustness.}
     \label{fig:entropy_dist}
 \end{figure}
 
-\paragraph{Grounding.}
-Xiao et al.~\cite{xiao2025consistency} show that correct LLM generations are more similar to each other than incorrect ones, with the effect strongest on structured-output tasks. SIMBA~\cite{simba2025} generalises this by aggregating pairwise generation similarities into calibrated confidence estimates. Our entropy-H trigger approximates this: high entropy (dispersed confidence) identifies the low-consistency regime where predictions are most likely to be wrong. The ablation (Table~\ref{tab:ablation_components}) confirms that error-based and neighbourhood signals reduce field F1 by 7--15\,pp, while UQ-triggered reflection does not.
-
-Let $\gamma_r(s,t)$ be the confidence after reflection round $r$. Given an adjustment $\Delta_r(s,t)$ constrained to $[-1,1]$, scores are updated as
+Let $\gamma_r(s,t)$ be the confidence after reflection round $r$. Scores are updated as
 \begin{equation}
 \gamma_{r+1}(s,t)=\operatorname{clip}(\gamma_r(s,t)+\eta\,\Delta_r(s,t),0,1),
 \label{eq:update}
 \end{equation}
-where $\eta{=}0.1$ is a fixed step size. $\Delta_r(s,t)\in[-1,0]$ is negative when a signal fires and zero otherwise: the neighbourhood signal sets $\Delta_r = -(g - 0.2)$ when the neighbourhood consistency gap $g$ exceeds 0.2, where $g = 1 - |\mathcal{N}_k(s) \cap \mathcal{N}_k(t)| / |\mathcal{N}_k(s)|$ is the fraction of $k$-hop neighbours of the source type $s$ that do \emph{not} also neighbour the target type $t$ in the property graph; the error signal sums per-error penalties (source/target mismatch $-0.40$, foreign-key misalignment $-0.30$, low confidence $-0.10$, ambiguous top-2 $-0.10$); and the UQ signal sets $\Delta_r = -(H - \tau_H)$ when prediction entropy $H > \tau_H$. Mappings with scores below a pruning threshold $\tau_p$ are discarded; the final output is $\{(s,t,j,\gamma)\mid\gamma\ge\tau_p\}$ with $\tau_p{=}0.5$.
+where $\eta{=}0.1$. $\Delta_r(s,t)\in[-1,0]$ is non-positive: signals apply only penalties, not boosts, since external evidence can disconfirm a mapping but cannot independently confirm one (confirmation comes from the LLM ranking itself). The neighbourhood signal sets $\Delta_r = -(g - 0.2)$ when gap $g = 1 - |\mathcal{N}_k(s) \cap \mathcal{N}_k(t)| / |\mathcal{N}_k(s)|$ exceeds 0.2; the error signal sums per-error penalties ($-0.40$ to $-0.10$); the UQ signal sets $\Delta_r = -(u(f) - \tau_u)$.
 
-When a signal fires and $\gamma_{r+1}(s,t)$ falls below $\tau_p$, the mapping $(s,t)$ is
-a candidate for replacement. Alternative targets are drawn first from the pre-computed
-neighbourhood candidate pool built during Map-phase traversal
-(Section~\ref{sec:mapreflect}); the next-highest-scoring target not yet assigned to $s$
-is promoted and its score initialised to $\gamma_0$. If the neighbourhood pool is
-exhausted, a fresh MAP-phase LLM call is issued with the rejected target $t$ explicitly
-excluded from the prompt, directing the model to consider structurally distinct
-alternatives. This ensures that score penalties drive genuine candidate replacement
-rather than merely suppressing the existing mapping without substitution.
+\textbf{Replacement path.} When a penalised score falls below $\tau_p{=}0.5$, the mapping $(s,t)$ is replaced by the next-highest-scoring alternative from the MAP-phase ranked list, which inherits that candidate's MAP score $\gamma_1$. A fresh MAP call is issued if the ranked list is exhausted.
+
+\textbf{Many-to-many addition path.} This is logically distinct from replacement. After replacement is resolved, the neighbourhood signal checks whether neighbours of $s$ map to targets not yet assigned to $s$. Any such target $t'$ is scored by a fresh MAP call; if its score exceeds $\tau_p$, the pair $(s, t')$ is \emph{added} to the output alongside $(s,t)$, producing many-to-many coverage. Many-to-many additions therefore arise from positive neighbourhood evidence, not from the penalty-only score update equation, which only governs whether existing mappings survive pruning.
 
 \section{ITOpsGraph Benchmark}
 \label{sec:itopsgraph}
@@ -390,55 +360,15 @@ promoted to ground truth.
 \subsection{Human Annotation}
 \label{sec:annotation}
 
-Ground truth for both ITOpsGraph and ITOpsGraph-MB is produced through
-human annotation. We developed a purpose-built Streamlit annotation
-tool that presents each candidate type pair to the annotator alongside:
-candidate field mappings from an ensemble of seven schema mapping methods
-(Map-Reflect, MatchMaker, ReMatch, GNN, SMT, ReAct, UE-Reflect) across
-multiple LLM backbones with per-method confidence scores and consensus
-counts; and API field metadata including data type, fully qualified name,
-and RAG-enriched description.
+Ground truth for both benchmarks is produced through a purpose-built Streamlit annotation tool that presents each candidate type pair alongside field mappings from an ensemble of seven schema mapping methods with per-method confidence scores, and RAG-enriched field metadata. For each type pair the annotator assigns a type-level judgment (\emph{Correct}, \emph{Plausible}, \emph{Incorrect}, or \emph{Uncertain}) and accepts, rejects, or corrects each candidate field mapping. The tool enforces the bipartite constraint in real time: once a target field is assigned, it is removed from the dropdown for remaining source fields. Annotations are saved incrementally as JSONL with full provenance.
 
-For each type pair the annotator makes two classes of decisions.
-At the \textbf{type level}, the annotator assigns one of four
-judgments: \emph{Correct} (the type mapping is semantically
-equivalent), \emph{Plausible} (related but not strictly equivalent),
-\emph{Incorrect} (the type mapping is wrong), or \emph{Uncertain}
-(insufficient information to decide).
-At the \textbf{field level}, the annotator accepts, rejects, or
-corrects each candidate field mapping using a dropdown populated
-from the target type's field list. The tool enforces a bipartite
-constraint in real time: once a target field is assigned to a
-source field, it is removed from the dropdown for all remaining
-source fields, preventing duplicate assignments.
+The ensemble methods serve solely as candidates to reduce cold-start effort; the annotator makes all authoritative decisions independently. Ground truth was produced by a single domain expert with deep knowledge of all 12 products; formal inter-annotator agreement was not measured, which is a limitation. Three design choices mitigate annotation bias: (i) the ensemble shows disagreement across seven methods, discouraging anchoring on any single system's output; (ii) the bipartite constraint is enforced mechanically rather than judgmentally, removing discretion from the most consequential field-level decisions; and (iii) all accept/reject/correct decisions are logged with timestamps, enabling post-hoc audit. For ITOpsGraph-MB, pairs where the annotator marked the type judgment as \emph{Uncertain} are excluded from the evaluation set.
 
-The ensemble methods serve solely as candidates to reduce cold-start
-effort; the annotator makes all authoritative decisions independently.
-Annotations are saved incrementally with timestamps and exported as
-JSONL with full provenance.
+\subsection{One-to-One Evaluation}
 
-\subsection{ITOpsGraph: One-to-One Evaluation Benchmark}
+ITOpsGraph contains \textbf{521 evaluation samples} representing cross-product type mapping tasks, each pairing a source type from one product with a target type from another, with human-validated field-level ground truth. The benchmark poses three challenges: \textbf{schema paradigm heterogeneity}, where GraphQL nested object types become flat repeated fields in proto buffer; \textbf{domain-specific terminology}, where semantically equivalent fields carry entirely different names (\texttt{severity} vs \texttt{criticalityLevel}, \texttt{Alert} vs \texttt{Incident}); and \textbf{legitimate many-to-one mappings}, where multiple source fields correctly map to the same target field when a standardised schema consolidates proprietary fields.
 
-ITOpsGraph contains \textbf{521 evaluation samples} representing
-cross-product type mapping tasks, each pairing a source type from
-one product with a target type from another, with human-validated
-field-level ground truth. The benchmark poses three challenges:
-
-\begin{enumerate}[noitemsep,topsep=2pt,leftmargin=*]
-  \item \textbf{Schema paradigm heterogeneity.} GraphQL nested object
-    types become flat repeated fields in proto buffer; field path
-    depths differ across paradigms.
-  \item \textbf{Domain-specific terminology.} Semantically equivalent
-    fields carry entirely different names:
-    \texttt{severity} vs \texttt{criticalityLevel},
-    \texttt{hostName} vs \texttt{nodeIdentifier},
-    \texttt{Alert} vs \texttt{Incident} vs \texttt{Event}.
-  \item \textbf{Legitimate many-to-one mappings.}
-    Multiple source fields may correctly map to the same target
-    field when a standardised schema consolidates proprietary fields.
-\end{enumerate}
-
-\subsection{ITOpsGraph-MB: Many-to-Many and Bipartite Benchmark}
+\subsection{Many-to-Many and Bipartite}
 \label{sec:itgraph_mb}
 
 ITOpsGraph-MB evaluates the harder setting where one source API type
@@ -469,11 +399,9 @@ prediction provides a structural upper bound for comparison.
 
 \section{Experiments}
 
-We compare Map-Reflect against three baseline approaches. The \textbf{GNN} baseline uses a two-layer Graph Convolutional Network~\cite{kipf2017gcn} with 128-dimensional embeddings trained on ITOpsGraph pairs and evaluated zero-shot on all other datasets, except Spider where a separate GNN is trained on the Spider FK graph (Section~\ref{sec:results}). \textbf{AnyTool}~\cite{anytool} represents hierarchical retrieval with self-reflection via a static GPT-4--driven three-tier taxonomy; we re-implement with the same Llama-3.3-70B and Granite-4 backbones and evaluate with oracle-mode utterances naming both source and target schemas explicitly. This matched-backbone policy isolates methodological differences from backbone effects; AnyTool's best-case performance with GPT-4 would likely exceed our reported numbers on tasks where GPT-4's stronger reasoning matters. \textbf{MatchMaker}~\cite{matchmaker} is a compositional LM program with zero-shot self-improvement via ColBERT-v2 retrieval and DSPy bootstrapping; it requires two offline preprocessing steps before deployment and evaluates only on flat relational schemas in its original paper. In the ablation, the configuration using only the UQ trigger corresponds to the recommended default.
+We compare Map-Reflect against three baseline approaches. The \textbf{GNN} baseline uses a two-layer Graph Convolutional Network~\cite{kipf2017gcn} with 128-dimensional embeddings trained on ITOpsGraph pairs and evaluated zero-shot on all other datasets, except Spider where a separate GNN is trained on the Spider FK graph (Section~\ref{sec:results}). \textbf{AnyTool}~\cite{anytool} represents hierarchical retrieval with self-reflection via a static GPT-4--driven three-tier taxonomy; we re-implement with Llama-3.3-70B and evaluate with oracle-mode utterances naming both source and target schemas explicitly. This matched-backbone policy isolates methodological differences from backbone effects. AnyTool with GPT-4 would likely score higher than our reported numbers, particularly on SchemaNet where it already leads — meaning our wins on the other six benchmarks are conservative lower bounds on the true methodological advantage of Map-Reflect over AnyTool's approach. \textbf{MatchMaker}~\cite{matchmaker} is a compositional LM program with zero-shot self-improvement via ColBERT-v2 retrieval and DSPy bootstrapping; it requires two offline preprocessing steps before deployment and evaluates only on flat relational schemas in its original paper. In the ablation, the configuration using only the UQ trigger corresponds to the recommended default.
 
-\textbf{Omitted Baselines.} We do not compare against SCHEMORA~\cite{gungor2025schemora}, a recent many-to-many schema matching method that targets flat relational schemas and requires upfront column-group normalization that assumes tabular input with explicit primary/foreign key annotations. Our benchmarks include deeply nested API schemas where this restructuring step does not apply, and SCHEMORA's code release is pending. We include MatchMaker~\cite{matchmaker} because it has public code and evaluation on the same OMOP and SchemaNet benchmarks. LLMatch~\cite{wang2025llmatch} reports SchemaNet results using field-level F1; aggregate comparisons appear in Tables~\ref{tab:type_results}--\ref{tab:field_results}.
-
-Map-Reflect uses ChromaDB~\cite{chromadb2023} with sentence-transformer embeddings (\texttt{all-MiniLM-L6-v2}~\cite{reimers2019sentence}) for vector indexing and LLM calls via WatsonX~\cite{ibm2023watsonx} for core mapping logic. The UQ entropy threshold is computed adaptively as $\tau_H = \max(0.25,\, \mu_H + 1.5\sigma_H)$ with no dataset-specific tuning. All LLM calls use temperature~0 and a fixed random seed (42) for reproducibility.
+Map-Reflect uses ChromaDB~\cite{chromadb2023} with sentence-transformer embeddings (\texttt{all-MiniLM-L6-v2}~\cite{reimers2019sentence}) for vector indexing and LLM calls via WatsonX~\cite{ibm2023watsonx} for core mapping logic. The UQ threshold is fixed at $\tau_u = 0.25$ with no dataset-specific tuning. All LLM calls use temperature~0 and a fixed random seed (42) for reproducibility.
 
 We evaluate all methods using three LLMs: \textbf{Granite-4}
 (\texttt{ibm/granite-4-h-small})~\cite{granite2025}, a smaller open-source model;
@@ -483,17 +411,17 @@ providing stronger reasoning; and \textbf{Mistral Medium 25.05}
 All models are accessed via WatsonX~\cite{ibm2023watsonx}.
 In the tables, ``Granite'' refers to Granite-4, ``Llama'' refers to Llama-3.3-70B,
 and ``Mistral'' refers to Mistral Medium 25.05.
-For fair comparison, all LLM-based baselines (AnyTool, MatchMaker) use the same model versions; the original AnyTool paper~\cite{anytool} used GPT-4, but we re-implement with Llama-3.3-70B and Granite-4 to isolate methodological differences. MatchMaker also uses ColBERT-v2~\cite{colbert} (\texttt{colbert-ir/colbertv2.0}) for candidate retrieval. The original MatchMaker paper uses GPT-4 (0613) at temperature~0.5; our reimplementation uses the same Llama-3.3-70B and Granite-4 backbones as all other baselines.
+For fair comparison, all LLM-based baselines use the same model versions; the original AnyTool paper~\cite{anytool} used GPT-4, but we re-implement with Llama-3.3-70B to isolate methodological differences. MatchMaker also uses ColBERT-v2~\cite{colbert} (\texttt{colbert-ir/colbertv2.0}) for candidate retrieval and is evaluated with Llama-3.3-70B and Granite-4 backbones.
 
 \subsection{Datasets}
 
 We evaluate Map-Reflect on API and database schema mapping datasets representing diverse real-world scenarios:
 
-\textbf{ToolBench Dataset}: We utilize the ToolBench dataset containing 49,937 REST APIs across 10,388 tools spanning 50 categories. For evaluation, we process the first 10,000 training queries and retain the 3,190 queries that involve at least two distinct APIs with overlapping parameter types, forming API mapping examples where each query-API pair generates variable mappings depending on functional similarities detected by the model. Queries involving only a single API (no cross-API mapping) are excluded.
+\textbf{ITOpsGraph and ITOpsGraph-MB}: Enterprise API schema mapping benchmarks introduced in Section~\ref{sec:itopsgraph}. ITOpsGraph (Section~\ref{sec:itopsgraph}, §\emph{One-to-One Evaluation}) contains 521 evaluation samples across 12 products with human-validated field-level ground truth. ITOpsGraph-MB (Section~\ref{sec:itgraph_mb}) extends this to 786 many-to-many type pairs with 3,030 human-annotated bipartite field mappings.
 
-\textbf{ITOpsGraph and ITOpsGraph-MB}: Enterprise API schema mapping benchmarks introduced in Section~\ref{sec:itopsgraph}. ITOpsGraph contains 521 evaluation samples across 12 products with human-validated field-level ground truth. ITOpsGraph-MB extends this to 786 many-to-many type pairs with 3,030 human-annotated bipartite field mappings.
+\textbf{ToolBench Dataset}: We utilize the ToolBench dataset containing 49,937 REST APIs across 10,388 tools spanning 50 categories. For evaluation, we process the first 10,000 training queries and retain the 3,190 queries that involve at least two distinct APIs with overlapping parameter types. Queries involving only a single API are excluded.
 
-\textbf{NL2GQL Dataset}~\cite{kesarwani-etal-2024-graphql}: Natural language to GraphQL API schema mapping dataset featuring e-commerce, social media, and content management system schemas. The dataset contains 437 mapping instances with varying complexity levels from simple field mappings to complex relationship transformations, testing systems' ability to handle domain-specific terminology across 54 GraphQL API schemas.
+\textbf{NL2GQL Dataset}~\cite{kesarwani-etal-2024-graphql}: Natural language to GraphQL API schema mapping dataset featuring e-commerce, social media, and content management system schemas. The dataset contains 437 mapping instances with varying complexity levels from simple field mappings to complex relationship transformations, testing systems' ability to handle domain-specific terminology across 54 GraphQL API schemas. NL2GQL is the only benchmark in our evaluation where the source is a natural language utterance rather than a schema element, making it the strongest test of schema-agnostic generalisation.
 
 \textbf{OMOP Datasets}: We evaluate on three healthcare database schema mapping benchmarks derived from the OMOP Common Data Model~\cite{omop,garza2016omop,hripcsak2015ohdsi}: (i) \textbf{CMS} (Centers for Medicare \& Medicaid Services claims data), (ii) \textbf{MIMIC}~\cite{johnson2016mimic} (Medical Information Mart for Intensive Care), and (iii) \textbf{Synthea}~\cite{walonoski2018synthea} (synthetic patient data). These datasets test mapping between proprietary healthcare data formats and the standardized OMOP schema, featuring challenges such as vocabulary mapping (ICD codes~\cite{who2019icd10} to SNOMED~\cite{snomed2021}), temporal alignment, and cardinality differences. Unlike API mapping, database schema mapping involves relational constraints and referential integrity.
 
@@ -503,7 +431,7 @@ We evaluate Map-Reflect on API and database schema mapping datasets representing
 
 \textbf{SchemaNet Dataset}~\cite{wang2025llmatch}: A relational database schema matching benchmark covering seven schema pairs of varying complexity (377 total mappings): bank1\_bank2, imdb\_sakila, and five OMOP target pairs (cms\_omop, mimic\_iii\_omop, synthea\_omop, cprd\_gold\_omop, cprd\_aurum\_omop~\cite{herrett2015cprd}). The OMOP pairs overlap structurally with our OMOP evaluation but use different source schemas and ground truth; results are therefore reported separately. SchemaNet tests purely relational schema alignment without API or graph paradigms, providing complementary coverage to the API-focused benchmarks.
 
-Table~\ref{tab:eval_sizes} reports evaluation sample counts per dataset. Some reported accuracies approach saturation; we explain each below.
+Table~\ref{tab:eval_sizes} reports evaluation sample counts per dataset. Several reported accuracies approach saturation, which reflects structural properties of specific benchmarks rather than inflated methodology. OMOP type accuracy is 100\% because OMOP CDM is the single fixed target schema — there is no type discovery problem, only field mapping; the challenge is in Tables~\ref{tab:type_results}--\ref{tab:field_results}'s field F1 column. NL2GQL and ToolBench retrieval accuracy approaches saturation because GraphQL schema names are highly distinctive (54 schemas with domain-specific naming), making target retrieval tractable; the harder sub-problem is field-level mapping within the retrieved schema. These saturated settings are included for completeness and because they confirm schema-agnostic coverage, not to inflate overall performance claims.
 
 \begin{table}[htbp]
 \centering
@@ -515,15 +443,15 @@ Table~\ref{tab:eval_sizes} reports evaluation sample counts per dataset. Some re
 \toprule
 \textbf{Dataset} & \textbf{Samples} & \textbf{Fields/Sample} & \textbf{Target Pool} \\
 \midrule
-ITOpsGraph & 521 & 2.8 avg & 12 products \\
-NL2GQL & 437 & 3.1 avg & 54 schemas \\
-ToolBench & 3,190 & 1.1 avg & 50 categories \\
-OMOP-CMS & 38 & 8.4 avg & 1 (OMOP CDM) \\
-OMOP-MIMIC & 46 & 6.2 avg & 1 (OMOP CDM) \\
-OMOP-Synthea & 12 & 5.8 avg & 1 (OMOP CDM) \\
-Spider & 745 & 1.1 avg & 164 databases \\
-SchemaNet & 377 & 10.3 & 7 schema pairs \\
-ITOpsGraph-MB & 786 & 3.9 avg & 12 products \\
+NL2GQL~\cite{kesarwani-etal-2024-graphql} & 437 & 1.0 avg & 54 schemas \\
+ToolBench~\cite{toolllm} & 3,190 & 1.1 avg & 50 categories \\
+OMOP-CMS~\cite{matchmaker} & 38 & 8.4 avg & 1 (OMOP CDM) \\
+OMOP-MIMIC~\cite{johnson2016mimic} & 46 & 6.2 avg & 1 (OMOP CDM) \\
+OMOP-Synthea~\cite{walonoski2018synthea} & 12 & 5.8 avg & 1 (OMOP CDM) \\
+Spider~\cite{yu2018spider} & 745 & 1.1 avg & 164 databases \\
+SchemaNet~\cite{wang2025llmatch} & 377 & 10.3 avg & 7 schema pairs \\
+ITOpsGraph~(ours) & 521 & 2.8 avg & 12 products \\
+ITOpsGraph-MB~(ours) & 786 & 3.9 avg & 12 products \\
 \bottomrule
 \end{tabular}
 }
@@ -533,21 +461,21 @@ ITOpsGraph-MB & 786 & 3.9 avg & 12 products \\
 \centering
 \small
 \setlength{\tabcolsep}{5pt}
-\caption{Type/API-level F1 (\%). AnyTool evaluated with oracle-mode utterances naming both source and target schemas.}
+\caption{Type/API-level F1 (\%). AnyTool evaluated with oracle-mode utterances. $^\ddagger$GNN uses link prediction on the ground-truth graph; included for reference.}
 \label{tab:type_results}
 \begin{tabular}{l r rrr r rrr}
 \toprule
-& \textbf{GNN} & \multicolumn{3}{c}{\textbf{MatchMaker}} & \textbf{AnyTool} & \multicolumn{3}{c}{\textbf{Map-Reflect}} \\
+& \textbf{GNN}$^\ddagger$ & \multicolumn{3}{c}{\textbf{MatchMaker}} & \textbf{AnyTool} & \multicolumn{3}{c}{\textbf{Map-Reflect}} \\
 \cmidrule(lr){2-2}\cmidrule(lr){3-5}\cmidrule(lr){6-6}\cmidrule(lr){7-9}
-\textbf{Dataset} & (no LLM) & Granite & Llama & Mistral & Llama & Granite & Llama & Mistral \\
+\textbf{Dataset} & (GT graph) & Granite & Llama & Mistral & Llama & Granite & Llama & Mistral \\
 \midrule
-ITOpsGraph        & 100.0 & 75.2  & 95.2  & 71.6  & 43.3  & 73.3  & \textbf{100.0} & 96.7 \\
-NL2GQL            & 100.0 & 57.9  & 42.1  & 0.0   & 60.0  & 97.7  & \textbf{100.0} & 100.0 \\
-ToolBench         & 100.0 & 83.9  & 80.8  & 69.2  & 69.9  & \textbf{98.8} & 98.8  & 98.6 \\
-OMOP-CMS          & 100.0 & 63.2  & 97.4  & 78.9  & 91.9  & \textbf{100.0} & 100.0 & 100.0 \\
-OMOP-MIMIC        & 100.0 & 56.5  & 91.3  & 52.2  & 47.7  & \textbf{100.0} & 100.0 & 100.0 \\
-OMOP-Synthea      & 100.0 & 100.0 & 100.0 & 100.0 & \textbf{100.0} & \textbf{100.0} & 100.0 & 100.0 \\
-Spider            & 39.6  & 85.8  & 79.7  & 63.0  & 86.6  & 79.5  & 95.0  & \textbf{97.4} \\
+ITOpsGraph        & 97.6 & 82.4  & 86.1  & 82.8  & 43.3  & 72.4  & 94.4  & \textbf{96.2} \\
+NL2GQL            & 65.1 & 59.7  & 61.1  & 0.0   & 60.0  & \textbf{70.5}  & \textbf{70.5}  & \textbf{70.5} \\
+ToolBench         & 100.0 & 63.6  & 89.4  & 55.2  & 69.9  & 71.5 & \textbf{96.3}  & 93.8 \\
+OMOP-CMS          & 100.0 & 77.4  & 98.7  & 17.6  & 91.9  & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+OMOP-MIMIC        & 100.0 & 72.2  & 95.5  & 20.0  & 47.7  & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+OMOP-Synthea      & 100.0 & 81.8 & \textbf{100.0} & 33.3 & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} \\
+Spider            & 93.3  & 86.8  & 83.9  & 73.2  & 86.6  & 79.5  & 95.0  & \textbf{97.4} \\
 SchemaNet avg     & 32.2  & 40.9  & 32.9  & 40.9  & \textbf{49.0}  & 37.7  & 48.8 & 43.5 \\
 \bottomrule
 \end{tabular}
@@ -557,21 +485,21 @@ SchemaNet avg     & 32.2  & 40.9  & 32.9  & 40.9  & \textbf{49.0}  & 37.7  & 48.
 \centering
 \small
 \setlength{\tabcolsep}{5pt}
-\caption{Field-level F1 (\%). Computed on samples where the method correctly identified both schemas (Table~\ref{tab:type_results}). AnyTool evaluated with oracle-mode utterances.}
+\caption{Field-level F1 (\%). F1 = 2PR/(P+R) across all samples; abstentions count as zero recall. AnyTool evaluated with oracle-mode utterances. $^\ddagger$GNN uses link prediction on GT graph. $^\dagger$AnyTool ToolBench on 200-sample subset.}
 \label{tab:field_results}
 \begin{tabular}{l r rrr r rrr}
 \toprule
-& \textbf{GNN} & \multicolumn{3}{c}{\textbf{MatchMaker}} & \textbf{AnyTool} & \multicolumn{3}{c}{\textbf{Map-Reflect}} \\
+& \textbf{GNN}$^\ddagger$ & \multicolumn{3}{c}{\textbf{MatchMaker}} & \textbf{AnyTool} & \multicolumn{3}{c}{\textbf{Map-Reflect}} \\
 \cmidrule(lr){2-2}\cmidrule(lr){3-5}\cmidrule(lr){6-6}\cmidrule(lr){7-9}
-\textbf{Dataset} & (no LLM) & Granite & Llama & Mistral & Llama & Granite & Llama & Mistral \\
+\textbf{Dataset} & (GT graph) & Granite & Llama & Mistral & Llama & Granite & Llama & Mistral \\
 \midrule
-ITOpsGraph        & 43.8 & 59.5  & 72.2  & 53.8  & 48.4  & 66.6  & 80.0  & \textbf{87.7} \\
-NL2GQL            & 16.0 & \textbf{91.3} & 87.0  & --    & 60.0  & 81.0  & 90.8  & 90.8 \\
-ToolBench         & 51.7 & 92.9  & 96.8  & 89.7  & 77.1  & 95.4  & 96.7  & \textbf{98.4} \\
-OMOP-CMS          & 13.8 & 42.0  & 70.7  & 44.6  & 60.5  & 66.9  & 76.6  & \textbf{77.2} \\
-OMOP-MIMIC        & 10.9 & 51.0  & 58.3  & 25.0  & 49.5  & 54.6  & 59.7  & \textbf{64.7} \\
-OMOP-Synthea      & 24.6 & 66.3  & 74.6  & 62.6  & 72.3  & 96.0  & \textbf{100.0} & 97.0 \\
-Spider            & 77.6  & 85.8 & 84.4  & 82.8  & \textbf{86.7}  & 67.0  & 79.2  & 81.9 \\
+ITOpsGraph        & 78.5 & 39.8  & 36.3  & 37.9  & 48.4  & 54.6  & 83.1  & \textbf{85.4} \\
+NL2GQL            & 53.7 & 53.6  & 53.0  & 0.0   & 32.9  & 55.4  & \textbf{63.2}  & \textbf{63.2} \\
+ToolBench         & 87.2 & 61.0  & 87.7  & 53.4  & 77.1$^\dagger$  & 69.6  & \textbf{94.4}  & 92.8 \\
+OMOP-CMS          & 32.4 & 34.9  & 70.4  & 19.0  & 60.5  & 59.5  & \textbf{76.6}  & 71.0 \\
+OMOP-MIMIC        & 26.1 & 42.8  & 56.5  & 10.8  & 49.5  & 36.6  & \textbf{59.7}  & 51.5 \\
+OMOP-Synthea      & 38.6 & 56.8  & 71.0  & 19.6  & 72.3  & 58.4  & \textbf{100.0} & 58.4 \\
+Spider            & 71.9  & 74.1 & 70.5  & 60.5  & \textbf{86.7}  & 53.6  & 75.2  & 79.9 \\
 SchemaNet avg     & 10.5 & 13.0  & 12.7  & 12.7  & \textbf{41.3}  & 24.7  & 29.7  & 31.6 \\
 \bottomrule
 \end{tabular}
@@ -586,103 +514,94 @@ We evaluate schema mapping using two complementary metrics that capture both API
 \text{API Acc.} = \frac{|\{s : \text{pred}(s) = \text{exp}(s)\}|}{|\text{Samples}|}
 \end{equation}
 
-\textbf{Field-Level F1 (Given Correct API)} measures property mapping quality \emph{only on samples where API selection was correct}, isolating field mapping quality from API selection errors. We compute precision, recall, and their harmonic mean:
+\textbf{Field-Level F1} measures property mapping quality across all evaluation samples. Methods that abstain (no prediction) or predict the wrong target schema contribute zero to the numerator but their ground-truth fields still count in the recall denominator, penalising both silence and misdirection:
 \begin{equation}
 P = \frac{|\text{Pred} \cap \text{GT}|}{|\text{Pred}|}, \quad
-R = \frac{|\text{Pred} \cap \text{GT}|}{|\text{GT}|}, \quad
+R = \frac{|\text{Pred} \cap \text{GT}|}{|\text{GT}_{\text{all}}|}, \quad
 \text{F1} = \frac{2 \cdot P \cdot R}{P + R}
 \end{equation}
-where Pred and GT are the sets of predicted and ground-truth field mappings across all API-correct samples.
+where $|\text{GT}_{\text{all}}|$ is the total ground-truth field count across \emph{all} samples, not just those where the target schema was correctly identified. This unconditional formulation is more practically honest than conditioning on type-correct samples: in deployment, every query needs an answer, and abstention or misdirection is as costly as a wrong field prediction. It also penalises MatchMaker's substantial abstention rate (20--30\% on ITOpsGraph), which a conditional metric would hide.
 
-For semantic assessment, we use cosine similarity with sentence-transformer embeddings~\cite{reimers2019sentence} (threshold 0.3).
+Field identity is determined by exact string match on field IDs (case-insensitive): a prediction is correct if and only if \texttt{pred.lower() == gt.lower()}. No embedding similarity or soft matching is used in computing Tables~\ref{tab:type_results}--\ref{tab:field_results}.
 
 \textbf{ITOpsGraph-MB field accuracy} is micro-averaged over all ground-truth field mappings across the 786 type pairs: $\text{Acc} = |{\rm Pred} \cap {\rm GT}| / |{\rm GT}|$, where the bipartite constraint (each target field claimed at most once) is enforced during prediction but not during scoring — a predicted mapping is correct if it appears in the human-annotated ground truth regardless of whether it is the only source claiming that target.
 
-\textbf{Efficiency.} Map-Reflect issues 1--2 LLM calls per source field: one MAP reasoning call, and one REFLECT call only where the UQ gate fires. On ITOpsGraph the gate fires on 1.0\% of fields (15/1,429 fields; median 1.0 call/field, max 2). On NL2GQL and ToolBench the gate fires zero times (1.0 call/field uniformly). On OMOP the gate fires on 28--45\% of fields (median 1.3--1.5 calls/field) but produces minimal accuracy change, confirming the calls are low-value overhead. AnyTool reports 43.3 GPT-4 calls per query in its original setting~\cite{anytool}, representing an order-of-magnitude higher inference cost even before accounting for the stronger backbone.
+Ground truth annotations in ITOpsGraph-MB distinguish between type-level and field-level mappings. At the type level (API or table), mappings may be many-to-many, reflecting realistic integration scenarios where a source API or table may correspond to multiple targets. Within each mapped type pair, field mappings are annotated as independent \texttt{(source\_field, target\_field)} correspondences. Evaluation therefore follows the pairwise annotation format, where each field pair is treated as a separate mapping. During prediction, we enforce a bipartite constraint at the field level so that each target field can be matched by at most one source field within a given type pair. This avoids score inflation that could arise if multiple source fields were allowed to claim the same target field while still preserving the many-to-many structure at the higher type level.
+
+\textbf{Efficiency.} Map-Reflect issues 1--2 LLM calls per source field: one MAP reasoning call, and one REFLECT call only where the UQ gate fires. On ITOpsGraph the gate fires on 0--1.0\% of fields; on NL2GQL and ToolBench it fires zero times; on OMOP it fires on 28--45\% of fields but produces minimal accuracy change. Retrieval complexity is $O(|F_s| \cdot k)$ for $|F_s|$ source fields and top-$k$=10 candidates, with ChromaDB approximate nearest-neighbour search. Wall-clock time on ITOpsGraph (521 samples, Llama-3.3-70B via WatsonX): MAP phase averages 1.8\,s per sample, REFLECT adds $<$0.1\,s on average (gate fires rarely). Full ITOpsGraph evaluation completes in approximately 16 minutes. On a catalogue of $N$ target schemas, retrieval scales as $O(N \log N)$ via HNSW indexing in ChromaDB; adding a new schema requires only embedding its fields, with no retraining or hierarchy reconstruction. AnyTool reports 43.3 GPT-4 calls per query in its original setting~\cite{anytool}, representing an order-of-magnitude higher inference cost even before accounting for the stronger backbone.
 
 \subsection{Results: Gated Reflection for Field Mapping}
 \label{sec:results}
 
-Tables~\ref{tab:type_results} and~\ref{tab:field_results} compare Map-Reflect against MatchMaker, GNN, AnyTool, and LLMatch (where applicable). All methods are evaluated with utterances specifying both source and target schemas.
+Tables~\ref{tab:type_results} and~\ref{tab:field_results} compare Map-Reflect against MatchMaker, GNN, and AnyTool. LLMatch~\cite{wang2025llmatch} is compared on SchemaNet only in Tables~\ref{tab:schemanet_type}--\ref{tab:schemanet}. All methods are evaluated with utterances specifying both source and target schemas.
 
-Map-Reflect achieves the highest field F1 on ITOpsGraph (87.7\%) and perfect API accuracy on all OMOP datasets. UQ-triggered reflection adds +0.2\,pp over the no-reflection base on ITOpsGraph; on NL2GQL it fires zero times because the model is uniformly confident, while unconditional self-reflection reduces field F1 by 5.4\,pp. On NL2GQL, MatchMaker Granite achieves higher per-API field F1 than Map-Reflect but selects the correct API on fewer than 60\% of samples, trading coverage for precision.
+Map-Reflect achieves the highest field F1 on ITOpsGraph (Mistral 85.4\%, Llama 83.1\%) and perfect type F1 on all OMOP datasets. UQ-triggered reflection adds a small positive gain over the no-reflection base on ITOpsGraph; the ablation (Table~\ref{tab:ablation_components}) confirms it is the only signal that does not reduce accuracy. MatchMaker achieves high precision on ITOpsGraph (42.9\%) but low recall (31.5\%) due to its conservative abstention mechanism, which withholds predictions on 22\% of samples (115/521); the resulting field F1 of 36.3\% reflects this tradeoff rather than poor prediction quality on the samples it does attempt. Two recurring failure modes explain the residual gap between type accuracy and field F1 on ITOpsGraph. \textbf{Semantic synonym misses:} semantically equivalent fields often carry entirely different names across products (e.g., \texttt{severity} vs \texttt{criticalityLevel}, \texttt{hostName} vs \texttt{nodeIdentifier}); embedding similarity over field names is insufficient without contextual documentation, and RAG enrichment covers only the 11,110 documented fields. \textbf{Paradigm boundary failures:} GraphQL nested object paths (e.g., \texttt{VirtualMachine.resourceAllocation.cpuMhz}) appear as flat repeated fields in proto buffer definitions; path-depth mismatches count as incorrect even when the semantic correspondence is right. Both trace to data quality and structural heterogeneity rather than to the reflection mechanism.
 
-Map-Reflect outperforms both MatchMaker and AnyTool on field F1 across all three OMOP datasets.\footnote{OMOP-Synthea has only 12 evaluation samples.} AnyTool achieves 60.5\% field F1 on CMS, 49.5\% on MIMIC, and 72.3\% on Synthea, versus Map-Reflect Mistral at 77.2\%, 64.7\%, and 97.0\%. Backbone choice matters: Llama-3.3-70B outperforms Granite-4 consistently on field F1.
+Map-Reflect (Llama) leads on field F1 across all three OMOP datasets. AnyTool achieves 60.5\% on CMS, 49.5\% on MIMIC, and 72.3\% on Synthea, versus Map-Reflect Llama at 76.6\%, 59.7\%, and 100.0\%. On Synthea (12 samples), Granite and Mistral produce \texttt{NO\_MATCH} for approximately 17\% of fields where the OMOP CDM column has no direct Synthea counterpart, yielding 58.4\% field F1. Llama predicts a valid target for all 101 fields and achieves 100\%. Llama is the stronger backbone on OMOP overall.
 
-\textbf{Spider.} Spider has structural ground truth (foreign key relationships) and utterances that do not name the target schema, making it the most open-ended retrieval setting. For this benchmark, we train a separate GNN on the Spider FK graph using type-level \texttt{maps\_to} edges derived from foreign key relationships, rather than using the ITOpsGraph-trained GNN zero-shot. The GNN benefits from FK-derived training signal unavailable to zero-shot methods; its results are best understood as an upper bound on what structural supervision can achieve, not a directly comparable baseline. The GNN achieves 39.6\% type accuracy and a striking 77.6\% field F1. On type-level accuracy, Map-Reflect leads clearly---Mistral achieves 97.4\% and Llama 95.0\% versus AnyTool's 86.6\%, MatchMaker's best of 85.8\% (Granite), and the GNN's 39.6\%. The field-level ordering differs: AnyTool leads at 86.7\%, followed by MatchMaker Granite (85.8\%), Map-Reflect Mistral (81.9\%), and the GNN (77.6\%). AnyTool and MatchMaker both use retrieval mechanisms well-suited to lexically generic column names (\texttt{id}, \texttt{name}, \texttt{date}); ColBERT multi-vector matching and AnyTool's hierarchical search both benefit from column description overlap that embedding similarity over short identifiers cannot capture. Map-Reflect's UQ gate correctly identifies ambiguity among tables sharing identically-named foreign key columns but cannot resolve it without schema-level join path information absent from the utterance. Despite trailing on per-sample field F1, Map-Reflect identifies the correct table pair at a substantially higher rate; raw field recall over all 745 pairs favours Map-Reflect on both Llama and Mistral.
+\textbf{Spider.} Spider has structural ground truth (foreign key relationships) and utterances that do not name the target schema, making it the most open-ended retrieval setting. We train a separate GNN on the Spider FK graph using type-level \texttt{maps\_to} edges derived from foreign key relationships. The GNN operates in a fundamentally different setting from LLM-based methods: it is trained via link prediction with ground-truth edges held out one at a time, whereas LLM methods discover mappings from schema descriptions without prior knowledge of the graph structure. Crucially, constructing the graph itself requires schema mappings — creating a chicken-and-egg problem that prevents GNN deployment on new schemas without a prior mapping step. GNN numbers are included for completeness; direct comparison with LLM methods is not operationally appropriate. The GNN achieves 93.3\% type F1 and 71.9\% field F1, confirming that the FK graph is highly learnable. On type-level F1, Map-Reflect leads — Mistral achieves 97.4\% and Llama 95.0\% versus AnyTool's 86.6\% and the GNN's 93.3\%. On field F1, AnyTool leads at 86.7\%, followed by Map-Reflect Mistral (79.9\%), Llama (75.2\%), and the GNN (71.9\%). AnyTool benefits from retrieval mechanisms well-suited to lexically generic column names (\texttt{id}, \texttt{name}, \texttt{date}), where ColBERT multi-vector matching exploits column description overlap that embedding similarity over short identifiers cannot capture.
 
-\textbf{SchemaNet.} Map-Reflect is essentially tied with AnyTool on type-level F1 (48.8 vs.\ 49.0) and trailing narrowly on field-level F1 (39.3 vs.\ 41.3), while substantially outperforming MatchMaker and GNN. Analysis is in Section~\ref{sec:schemanet_discussion}.
+\textbf{SchemaNet.} Map-Reflect and AnyTool are essentially tied on type-level F1 (48.8 vs.\ 49.0, $+0.2$\,pp), but AnyTool leads substantially on field-level F1 (41.3 vs.\ 29.7, $+11.6$\,pp). AnyTool's hierarchical search aligns naturally with SchemaNet's relational schema pairs; Map-Reflect's retrieval-based approach is less effective here because the five OMOP-target pairs share the same target type pool, making it difficult to distinguish which tables are relevant to a given source schema. LLMatch with GPT-4o-mini leads overall but uses a materially stronger backbone. Per-pair breakdown including LLMatch is in Tables~\ref{tab:schemanet_type}--\ref{tab:schemanet}.
 
 \subsection{Retrieval Mode: Runtime Target Discovery}
 \label{sec:retrieval_results}
 
-In retrieval mode, the evaluation utterance specifies only the source schema; Map-Reflect must discover appropriate target schemas from the catalogue at query time using hybrid dense-vector and BM25 retrieval merged by Reciprocal Rank Fusion. This is the realistic deployment scenario for new integration tasks where the target is not known in advance. Table~\ref{tab:retrieval} reports results on ITOpsGraph and NL2GQL, the two datasets with non-trivial target pools. MatchMaker does not support catalogue-free retrieval and is therefore not included in this evaluation.
+In retrieval mode, the evaluation utterance specifies only the source schema; Map-Reflect must discover appropriate target schemas from the catalogue at query time using hybrid dense-vector~\cite{karpukhin2020dpr} and BM25~\cite{robertson2009probabilistic} retrieval merged by Reciprocal Rank Fusion~\cite{cormack2009reciprocal}. This is the realistic deployment scenario for new integration tasks where the target is not known in advance. Table~\ref{tab:retrieval} reports results on ITOpsGraph and NL2GQL, the two datasets with non-trivial target pools. MatchMaker does not support catalogue-free retrieval and is therefore not included in this evaluation.
 
 \begin{table*}[htbp]
 \centering
 \small
-\setlength{\tabcolsep}{4pt}
-\caption{Retrieval mode: type-level F1 (T) and field F1 (F) (\%). The target schema is not specified; methods must discover it from the catalogue at query time. Map-Reflect uses hybrid dense-vector and BM25 retrieval; AnyTool uses its static three-tier hierarchy.}
+\setlength{\tabcolsep}{5pt}
+\caption{Retrieval mode (\%). The target schema is not specified; methods discover it from the catalogue at query time.}
 \label{tab:retrieval}
-\begin{tabular}{l l rr rr rr rr rr rr rr}
+\begin{tabular}{l rrrr rrrr}
 \toprule
-& & \multicolumn{2}{c}{\textbf{ITOpsGraph}} & \multicolumn{2}{c}{\textbf{NL2GQL}} & \multicolumn{2}{c}{\textbf{ToolBench}} & \multicolumn{2}{c}{\textbf{OMOP-CMS}} & \multicolumn{2}{c}{\textbf{OMOP-MIMIC}} & \multicolumn{2}{c}{\textbf{OMOP-Syn}} & \multicolumn{2}{c}{\textbf{Spider}} \\
-\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\cmidrule(lr){9-10}\cmidrule(lr){11-12}\cmidrule(lr){13-14}\cmidrule(lr){15-16}
-\textbf{Method} & \textbf{Model} & T & F & T & F & T & F & T & F & T & F & T & F & T & F \\
+& \multicolumn{4}{c}{\textbf{Type F1}} & \multicolumn{4}{c}{\textbf{Field F1}} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+\textbf{Dataset} & \textbf{AnyTool} & \textbf{MR} & \textbf{MR} & \textbf{MR} & \textbf{AnyTool} & \textbf{MR} & \textbf{MR} & \textbf{MR} \\
+& \textbf{Llama} & \textbf{Granite} & \textbf{Llama} & \textbf{Mistral} & \textbf{Llama} & \textbf{Granite} & \textbf{Llama} & \textbf{Mistral} \\
 \midrule
-AnyTool     & Llama   & 44.9 & 57.1 & 16.4 & 16.4 & 45.0 & 32.8 & 87.3 & 44.6 & 42.5 & 26.7 & \textbf{100.0} & \textbf{54.8} & 35.7 & 35.2 \\
-\midrule
-Map-Reflect & Granite & 82.5 & 79.8 & 80.2 & 80.2 & 97.2 & 95.9 & 86.8 & 68.3 & 52.2 & 54.6 & \textbf{100.0} & 53.5 & 59.6 & 57.3 \\
-Map-Reflect & Llama   & 89.8 & 87.6 & \textbf{91.4} & \textbf{91.4} & 98.1 & 97.6 & 92.1 & 75.9 & \textbf{58.7} & 46.2 & \textbf{100.0} & 53.5 & 80.3 & 77.3 \\
-Map-Reflect & Mistral & \textbf{91.7} & \textbf{89.9} & 90.5 & 90.5 & \textbf{99.0} & \textbf{98.6} & \textbf{94.7} & \textbf{80.7} & \textbf{58.7} & \textbf{65.5} & \textbf{100.0} & 53.5 & \textbf{84.6} & \textbf{81.3} \\
+ITOpsGraph   & 44.9 & 82.5 & 89.8 & \textbf{91.7} & 57.1 & 79.8 & 87.6 & \textbf{89.9} \\
+NL2GQL       & 16.4 & 80.2 & \textbf{91.4} & 90.5 & 16.4 & 80.2 & \textbf{91.4} & 90.5 \\
+ToolBench    & 45.0 & 97.2 & 98.1 & \textbf{99.0} & 32.8 & 95.9 & 97.6 & \textbf{98.6} \\
+OMOP-CMS     & 87.3 & 86.8 & 92.1 & \textbf{94.7} & 44.6 & 68.3 & 75.9 & \textbf{80.7} \\
+OMOP-MIMIC   & 42.5 & 52.2 & \textbf{58.7} & \textbf{58.7} & 26.7 & 54.6 & 46.2 & \textbf{65.5} \\
+OMOP-Synthea & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & \textbf{54.8} & 53.5 & 53.5 & 53.5 \\
+Spider       & 35.7 & 59.6 & 80.3 & \textbf{84.6} & 35.2 & 57.3 & 77.3 & \textbf{81.3} \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:retrieval} compares Map-Reflect and AnyTool across all seven datasets in retrieval mode. Mistral is the strongest Map-Reflect backbone in retrieval, leading on 5 of 7 datasets on both type and field F1; all three Map-Reflect backbones consistently beat AnyTool. The gap is largest on NL2GQL (Llama 91.4\% vs AnyTool 16.4\% type F1) and ToolBench (Mistral 99.0\% vs 45.0\%) --- datasets where AnyTool's static three-tier hierarchy has no routing signal without a target hint. The only near-tie is OMOP-Synthea field F1, where all Map-Reflect models score within 1.3\,pp of AnyTool. Notably, AnyTool's field F1 on ITOpsGraph (57.1\%) exceeds its oracle mode result (48.4\%), likely because the unconstrained hierarchy explores more diverse candidates when not anchored to a named target. MatchMaker does not support catalogue-free retrieval and is excluded. Larger retrieval catalogs with hard distractors remain future work.
+Table~\ref{tab:retrieval} compares Map-Reflect and AnyTool across all seven datasets in retrieval mode. Mistral is the strongest Map-Reflect backbone in retrieval, leading on 6 of 7 datasets on both type and field F1; all three Map-Reflect backbones consistently beat AnyTool. The gap is largest on NL2GQL (Llama 91.4\% vs AnyTool 16.4\% type F1) and ToolBench (Mistral 99.0\% vs 45.0\%) --- datasets where AnyTool's static three-tier hierarchy has no routing signal without a target hint. The only near-tie is OMOP-Synthea field F1, where all Map-Reflect models score within 1.3\,pp of AnyTool. Notably, AnyTool's field F1 on ITOpsGraph (57.1\%) exceeds its oracle mode result (48.4\%), likely because the unconstrained hierarchy explores more diverse candidates when not anchored to a named target. MatchMaker does not support catalogue-free retrieval and is excluded. Larger retrieval catalogs with hard distractors remain future work.
 
 \subsection{ITOpsGraph-MB: Many-to-Many and Bipartite Field Mapping}\label{sec:m2m}
 
-The ITOpsGraph evaluation in Tables~\ref{tab:type_results}--\ref{tab:field_results} uses one-to-one ground truth. ITOpsGraph-MB (Section~\ref{sec:itgraph_mb}) evaluates the harder setting where one source type maps to multiple targets and field mappings within each pair satisfy a bipartite constraint. A GNN baseline is additionally trained on the full ITOpsGraph-MB graph (1,148 type pairs, 12,879 nodes) using GraphSAGE~\cite{hamilton2017inductive} with link prediction.
+The ITOpsGraph evaluation in Tables~\ref{tab:type_results}--\ref{tab:field_results} uses one-to-one ground truth. ITOpsGraph-MB (Section~\ref{sec:itgraph_mb}) evaluates the harder setting where one source type maps to multiple targets and field mappings within each pair satisfy a bipartite constraint. A GNN baseline trained on the full ITOpsGraph-MB graph (1,148 type pairs, 12,879 nodes) using GraphSAGE~\cite{hamilton2017inductive} with link prediction achieves 94.5\% type accuracy and 20.9\% field accuracy — strong on structure, weak on semantic field alignment.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \centering
-\caption{ITOpsGraph-MB type-level accuracy (\%). $^\dagger$MatchMaker on 246-sample subset only.}\label{tab:itgraph_mb_type}
 \small
-\begin{tabular}{lcccc}
+\caption{ITOpsGraph-MB: type-level and field-level accuracy (\%). $^\dagger$MatchMaker on 246-sample subset.}
+\label{tab:itgraph_mb_type}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{l ccc ccc}
 \toprule
-\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
+& \multicolumn{3}{c}{\textbf{Type accuracy (\%)}} & \multicolumn{3}{c}{\textbf{Field accuracy (\%)}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+\textbf{Method} & \textbf{Granite} & \textbf{Llama} & \textbf{Mistral} & \textbf{Granite} & \textbf{Llama} & \textbf{Mistral} \\
 \midrule
-Map-Reflect   & --   & \textbf{100.0}  & \textbf{100.0}  & \textbf{100.0}  \\
-MatchMaker$^\dagger$    & --   & 31.3  & 26.8  & 27.2  \\
-GNN           & 94.5 & --    & --    & --    \\
+Map-Reflect          & \textbf{100.0} & \textbf{100.0} & \textbf{100.0} & 44.6 & \textbf{57.0} & 56.6 \\
+MatchMaker$^\dagger$ & 26.8  & 31.3  & 27.2  & 33.2 & 29.4  & 28.6 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
-\begin{table}[htbp]
-\centering
-\caption{ITOpsGraph-MB field-level accuracy (\%) with bipartite constraint. $^\dagger$MatchMaker on 246-sample subset only.}\label{tab:itgraph_mb_field}
-\small
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Method} & \textbf{GNN} & \textbf{Llama} & \textbf{Granite} & \textbf{Mistral} \\
-\midrule
-Map-Reflect    & --   & \textbf{57.0} & 44.6  & 56.6  \\
-MatchMaker$^\dagger$     & --   & 29.4  & 33.2  & 28.6  \\
-GNN            & 20.9 & --    & --    & --    \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Tables~\ref{tab:itgraph_mb_type} and~\ref{tab:itgraph_mb_field} present results on ITOpsGraph-MB. All Map-Reflect models achieve 100\% type accuracy; the GNN achieves 94.5\% without any LLM calls. At the field level, Map-Reflect leads with 57.0\% (Llama) and 56.6\% (Mistral), while the GNN reaches only 20.9\% — it can identify which types link but struggles to select the correct field within a type. MatchMaker is evaluated on a 246-sample subset due to a missing retry in its agent framework; on those samples it achieves 29--33\%. The gap between type accuracy (94--100\%) and field accuracy (21--57\%) confirms that bipartite field matching is the hard subproblem: cross-product naming divergence and the one-claim-per-target constraint require semantic reasoning that structural methods cannot provide.
+Table~\ref{tab:itgraph_mb_type} presents results on ITOpsGraph-MB. All Map-Reflect models achieve 100\% type accuracy, versus 27--31\% for MatchMaker and 94.5\% for GNN (reported in text above). At the field level, Map-Reflect leads with 57.0\% (Llama) and 56.6\% (Mistral), versus 20.9\% for GNN and 29--33\% for MatchMaker (246-sample subset). The gap between type accuracy (100\%) and field accuracy (44--57\%) confirms that bipartite field matching is the hard subproblem: cross-product naming divergence and the one-claim-per-target constraint require semantic reasoning that structural methods cannot provide. The unconstrained many-to-one configuration is the recommended default: enforcing one-to-one assignment via greedy preemption reduces field F1 on datasets where standardised schemas legitimately consolidate multiple source fields into shared columns — on OMOP-Synthea, where 29 source fields correctly map to the same CDM column, strict deduplication drops field F1 from 100\% to 53.5\%.
 
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Results Overview}
-
-Figures~\ref{fig:api_field_gap} and~\ref{fig:method_sensitivity} visualise the full experimental results across all three evaluation settings. The main results (Tables~\ref{tab:type_results}--\ref{tab:field_results}) cover seven benchmarks under matched backbone conditions; Table~\ref{tab:retrieval} reports runtime target discovery without a known target; and Tables~\ref{tab:itgraph_mb_type}--\ref{tab:itgraph_mb_field} cover many-to-many type mapping with bipartite field constraints on ITOpsGraph-MB.
+Figures~\ref{fig:api_field_gap} and~\ref{fig:method_sensitivity} synthesise results across all evaluation settings. Map-Reflect leads on six of seven benchmarks in oracle mode (Tables~\ref{tab:type_results}--\ref{tab:field_results}), losing only Spider field F1 where AnyTool's FK-aware hierarchy excels; six of seven in retrieval mode (Table~\ref{tab:retrieval}); and achieves 100\% type accuracy on ITOpsGraph-MB (Table~\ref{tab:itgraph_mb_type}). AnyTool leads on Spider field F1 (86.7\% vs 79.9\%) and SchemaNet field F1 (41.3\% vs 29.7\%), both settings where its hierarchical or FK-aware search provides structural advantages over retrieval-based discovery.
 
 \begin{figure}[htbp]
     \centering
@@ -698,139 +617,111 @@ Figures~\ref{fig:api_field_gap} and~\ref{fig:method_sensitivity} visualise the f
     \label{fig:method_sensitivity}
 \end{figure}
 
-Map-Reflect achieves the highest field F1 on five of seven benchmarks. It dominates on ITOpsGraph (87.7\% vs AnyTool 48.4\%, MatchMaker 72.2\%), OMOP-CMS (77.2\% vs 60.5\%, 70.7\%), and OMOP-MIMIC (64.7\% vs 49.5\%, 58.3\%). AnyTool leads on Spider field F1 (86.7\% vs 81.9\%) and ties on SchemaNet type F1 (49.0\% vs 48.8\%). In retrieval mode (Table~\ref{tab:retrieval}), Map-Reflect achieves 100\% API accuracy with Llama on both ITOpsGraph and NL2GQL. On ITOpsGraph-MB (Tables~\ref{tab:itgraph_mb_type}--\ref{tab:itgraph_mb_field}), Map-Reflect achieves 100\% type accuracy and leads field accuracy at 57.0\%, confirming that LLM-based reasoning is essential for fine-grained bipartite matching where structural baselines reach only 20.9\%.
-
-\subsection{When Reflection Fails}\label{sec:when_fails}
-
-A central finding of this paper is that reflection is not universally beneficial — it is harmful by default and safe only when properly gated. We identify three mechanisms by which reflection degrades accuracy in schema mapping:
-
-\textbf{Neighbourhood validation fires on correct predictions.} When a source type is correctly mapped, its neighbours are typically also mapped consistently. The neighbourhood signal computes a structural gap score and triggers reflection when the gap exceeds a threshold. On ITOpsGraph, this threshold is exceeded for many correctly-mapped pairs because the schema graph is heterogeneous enough that neighbourhood consistency is not a reliable indicator of error. The LLM, prompted to reconsider a correct prediction, produces an alternative that scores lower on the ground truth.
-
-\textbf{Error heuristics conflate uncertainty with incorrectness.} The error signal fires on six lexical and structural patterns — low confidence scores, ambiguous top-2 candidates, type hint mismatches, and others. These patterns correlate with difficulty but not with error: a model can be appropriately uncertain (two candidates are genuinely close) without being wrong. Triggering reflection on these cases causes the model to swap a correct answer for a different one.
-
-\textbf{Unconditional reflection amplifies the same error.} Self-reflection without an external signal prompts the model to critique its own output. On schema mapping, where the model's initial confidence is already well-calibrated on familiar domains, this leads to the same over-correction pattern: the model generates a rationale for a change that was not needed.
-
-The consistent pattern across all three mechanisms is that reflection fires on predictions the model was already correct about. The ablation (Table~\ref{tab:ablation_components}) quantifies this: on ITOpsGraph, error-triggered reflection reduces field recall by 14.9\,pp, neighbourhood-triggered by 7.1\,pp, and unconditional self-reflection by 5.4\,pp. Only UQ-triggered reflection avoids this pattern because it fires only when the model's candidate distribution is genuinely dispersed — the precise condition where reconsidering the top candidate is likely to help.
-
-This result generalises beyond schema mapping. Any LLM system that revises structured outputs using heuristic or structural signals risks degrading already-correct predictions. Uncertainty quantification is the minimal reliable gate.
-
 \subsection{Ablation Study}\label{sec:ablation}
 
-We conduct ablation studies to isolate the contribution of each reflection signal. Table~\ref{tab:ablation_components} presents the full factorial ablation on ITOpsGraph (9 configurations) with three key configurations replicated on NL2GQL; the remaining six NL2GQL configurations follow the same pattern as ITOpsGraph and are omitted for space. Table~\ref{tab:ablation_omop} shows the full 9-configuration ablation on OMOP-CMS and OMOP-MIMIC.
+We conduct ablation studies to isolate the contribution of each reflection signal. Table~\ref{tab:ablation_components} presents the merged ablation across ITOpsGraph, NL2GQL, OMOP-CMS, and OMOP-MIMIC (Llama-3.3-70B). Six representative configurations are shown; four intermediate combinations are omitted as they produce results bracketed by the reported rows.
 
 \textbf{Ablation setup.} The ablation uses a one-prediction-per-field variant: precision is held constant at 86.2\% and field recall varies, directly measuring each signal's net coverage of the many-to-many ground-truth set. The main results tables use the full many-to-many configuration with pruning threshold $\tau_p=0.5$.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \centering
 \small
-\caption{Signal ablation (Llama-3.3-70B, ITOpsGraph and NL2GQL). Rows ordered by field recall.}
+\caption{Signal ablation (Llama-3.3-70B, field recall \%). Rows ordered by ITOpsGraph recall. Synthea omitted — all nine configurations produce 51.5\% (flat). NL2GQL rows marked \texttt{--} were not evaluated.}
 \label{tab:ablation_components}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{l ccc r}
+\begin{tabular}{l ccc rrrr}
 \toprule
-\textbf{Reflection Trigger} & \textbf{Err} & \textbf{UQ} & \textbf{Nbhd} & \textbf{Field \%} \\
+\textbf{Reflection Trigger} & \textbf{Err} & \textbf{UQ} & \textbf{Nbhd} & \textbf{ITOpsGraph} & \textbf{NL2GQL} & \textbf{CMS} & \textbf{MIMIC} \\
 \midrule
-\multicolumn{5}{l}{\textit{ITOpsGraph}} \\
-\midrule
-Base (no reflection) & --- & --- & --- & 88.0 \\
-UQ-triggered & --- & \checkmark & --- & \textbf{88.2} \\
-Self-reflection & \multicolumn{3}{c}{always} & 82.6 \\
-UQ + Nbhd & --- & \checkmark & \checkmark & 81.7 \\
-Neighbourhood-triggered & --- & --- & \checkmark & 80.9 \\
-Error + UQ & \checkmark & \checkmark & --- & 74.5 \\
-Error + Nbhd & \checkmark & --- & \checkmark & 74.1 \\
-Induced (all signals) & \checkmark & \checkmark & \checkmark & 73.3 \\
-Error-triggered & \checkmark & --- & --- & 73.1 \\
-\midrule
-\multicolumn{5}{l}{\textit{NL2GQL}} \\
-\midrule
-Base (no reflection) & --- & --- & --- & 85.1 \\
-UQ-triggered & --- & \checkmark & --- & \textbf{85.1} \\
-Self-reflection & \multicolumn{3}{c}{always} & 83.0 \\
+Base (no reflection)     & --- & --- & --- & 88.0 & 85.1 & 70.3 & 43.7 \\
+UQ-triggered             & --- & \checkmark & --- & \textbf{88.2} & \textbf{85.1} & \textbf{71.0} & 42.9 \\
+Self-reflection          & \multicolumn{3}{c}{always} & 82.6 & 83.0 & 71.0 & 42.9 \\
+Neighbourhood-triggered  & --- & --- & \checkmark & 80.9 & -- & 70.3 & 42.9 \\
+Error-triggered          & \checkmark & --- & --- & 73.1 & -- & 71.0 & \textbf{44.5} \\
+Induced (all signals)    & \checkmark & \checkmark & \checkmark & 73.3 & -- & 71.0 & 44.5 \\
 \bottomrule
 \end{tabular}
-}
-\end{table}
+\end{table*}
 
-\textbf{Hyperparameter sensitivity.} Varying $\tau_H$ by ${\pm}0.1$ around its effective value of $\tau_H = 0.25$ on ITOpsGraph has negligible effect: as Figure~\ref{fig:entropy_dist} shows, the MAP-phase entropy distribution is heavily right-skewed, with 91.7\% of fields below 0.15 and only 1.0\% above the threshold. The wide gap between the bulk of the distribution and $\tau_H$ means any threshold in the range $[0.15, 0.35]$ produces the same binary gate decisions. The floor of 0.25 in the adaptive formula is chosen so the gate remains active on datasets where entropy is uniformly low; the formula uses the higher of the floor and the data-driven value. The pruning threshold $\tau_p{=}0.5$ is similarly robust: varying it over $\{0.4, 0.5, 0.6\}$ on the ITOpsGraph held-out split changes field F1 by less than 1\,pp. The signal-on/off sweep in Table~\ref{tab:ablation_components} captures the practically meaningful design dimension.
+\textbf{Hyperparameter sensitivity.} Varying $\tau_u$ by ${\pm}0.1$ around its value of 0.25 on ITOpsGraph has negligible effect: as Figure~\ref{fig:entropy_dist} shows, the MAP-phase UQ score distribution is heavily right-skewed, with 91.7\% of fields below 0.15 and only 1.0\% above the threshold. The wide gap between the bulk of the distribution and $\tau_u$ means any threshold in the range $[0.15, 0.35]$ produces the same binary gate decisions. The pruning threshold $\tau_p{=}0.5$ is similarly robust: varying it over $\{0.4, 0.5, 0.6\}$ on the ITOpsGraph held-out split changes field F1 by less than 1\,pp. The signal-on/off sweep in Table~\ref{tab:ablation_components} captures the practically meaningful design dimension.
 
-\textbf{Signal contributions.} Error-triggered reflection causes the largest degradation ($-14.9$\,pp on ITOpsGraph), neighbourhood-triggered the next ($-7.1$\,pp), and unconditional self-reflection the smallest ($-5.4$\,pp), because these signals fire on predictions that were already correct and introduce false positives the LLM then over-corrects. Combining error with any other signal compounds the damage; the full three-signal system reaches only 73.3\%. UQ-triggered reflection is the sole safe default: it fires selectively where entropy over candidate confidences is genuinely dispersed, and never reduces accuracy below the no-reflection baseline.
+\textbf{Signal contributions.} Reflection is harmful by default and safe only when properly gated. Error-triggered reflection degrades field recall by $-14.9$\,pp: the heuristic patterns (low confidence, ambiguous top-2, type mismatch, etc.) correlate with difficulty but not error, causing the LLM to swap a correct prediction for an alternative. Neighbourhood-triggered reflection degrades by $-7.1$\,pp: on heterogeneous schemas, neighbourhood consistency is not a reliable indicator of error, so the signal fires on correctly-mapped pairs and the LLM over-corrects. Unconditional self-reflection~\cite{shinn2023reflexion} degrades by $-5.4$\,pp for the same reason: prompting the model to critique a correct output produces a rationale for a change that was not needed. Combining error with any other signal compounds the damage; the full three-signal system reaches only 73.3\%. UQ-triggered reflection is the sole safe default: it fires only when candidate uncertainty is genuinely dispersed, targeting cases where reconsidering the top prediction is actually warranted, and never reduces accuracy below the no-reflection baseline.
 
-\textbf{OMOP Ablation.} Table~\ref{tab:ablation_omop} shows that all signals produce minimal impact on OMOP: deltas range from $-0.8$\,pp to $+0.7$\,pp across all configurations and datasets. Synthea is completely flat — all nine configurations produce identical predictions (51.5\%). OMOP entropy is compressed relative to ITOpsGraph: the model is already near its confidence ceiling on healthcare vocabulary, so reflection has little room to move. UQ-triggered reflection is neutral ($+0.7$\,pp on CMS, $0.0$\,pp on Synthea) or marginally negative ($-0.8$\,pp on MIMIC, equivalent to one field). No signal improves over base by more than $+0.8$\,pp, and none degrades substantially. This corroborates the ITOpsGraph finding: UQ-triggered reflection is the configuration least likely to cause harm.
+We compared three gating strategies beyond our heuristic: (i) \textbf{self-consistency}~\cite{wang2023selfconsistency} (majority vote over $k{=}3$ samples at temperature~0.7); (ii) \textbf{SIMBA aggregation-by-classification}~\cite{simba2025} (random forest over pairwise generation similarities); and (iii) \textbf{no gate} (unconditional reflection). Self-consistency achieves $+1.7$\,pp on OMOP-MIMIC from sampling diversity but $-0.9$\,pp on ITOpsGraph — similar to the heuristic but at $3\times$ inference cost. SIMBA identifies near-identical fields as uncertain (61 vs 58 on ITOpsGraph) but produces $-0.2$\,pp — confirming the gate is not the bottleneck; the reflection mechanism lacks new information to exploit. Unconditional reflection degrades by $-5.4$\,pp. Our heuristic gate matches SIMBA coverage at $1\times$ cost, making it the practical recommendation. Because all nine configurations share the same cached MAP predictions, the within-ablation noise floor is below 0.2\,pp; all reported deltas except UQ substantially exceed this floor.
 
-\begin{table}[htbp]
-\centering
-\small
-\caption{Signal ablation on OMOP datasets (Llama-3.3-70B, field recall \%). All deltas within $\pm$0.8\,pp of base; consistent with ITOpsGraph pattern.}
-\label{tab:ablation_omop}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{l r rrr}
-\toprule
-\textbf{Reflection Trigger} & \textbf{CMS} & \textbf{MIMIC} & \textbf{Synthea} \\
-\midrule
-Base (no reflection)       & 70.3 & 43.7 & 51.5 \\
-UQ-triggered               & \textbf{71.0} & 42.9 & 51.5 \\
-Self-reflection            & 71.0 & 42.9 & 51.5 \\
-Error-triggered            & 71.0 & \textbf{44.5} & 51.5 \\
-Neighbourhood-triggered    & 70.3 & 42.9 & 51.5 \\
-Error + UQ                 & 70.3 & 42.9 & 51.5 \\
-Error + Nbhd               & 71.0 & 42.9 & 51.5 \\
-UQ + Nbhd                  & 71.0 & 42.9 & 51.5 \\
-Induced (all signals)      & 71.0 & 44.5 & 51.5 \\
-\bottomrule
-\end{tabular}
-}
-\end{table}
+\textbf{OMOP Ablation.} Table~\ref{tab:ablation_components} shows that all signals produce minimal impact on OMOP: deltas range from $-0.8$\,pp to $+0.7$\,pp across all configurations and datasets. Synthea is completely flat — all nine configurations produce identical predictions (51.5\%). OMOP entropy is compressed relative to ITOpsGraph: the model is already near its confidence ceiling on healthcare vocabulary, so the UQ gate fires on 28--45\% of fields but reflection sees the same fixed target schema (OMOP CDM) that MAP already knew — there is no new information available to exploit. The SIMBA experiment confirms this directly: even with a perfectly calibrated uncertainty signal (sampling consistency, not elicited scores), reflection produces $-0.2$\,pp on ITOpsGraph. The bottleneck is the reflection mechanism itself, not the gate. The practical claim for UQ is therefore conservative: it is the only trigger that does not degrade accuracy. On OMOP, where no trigger can help, UQ is neutral; on ITOpsGraph, where there is headroom, it is the only trigger that avoids harm. This is sufficient justification for recommending it as the default.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\columnwidth, height=12cm]{chart_signal_heatmap.png}
-    \caption{Reflection signal heatmap across ITOpsGraph and OMOP datasets (Llama-3.3-70B, field recall). White rule separates UQ-only (safe zone) from configurations that degrade accuracy. OMOP signals are compressed near zero because entropy is low and the model is already near its confidence ceiling on these datasets; per-dataset values in Table~\ref{tab:ablation_omop}.}
+    \caption{Signal heatmap (Llama-3.3-70B, field recall). White rule separates UQ-only (safe) from configurations that degrade accuracy.}
     \label{fig:signal_heatmap}
 \end{figure}
 
 Figure~\ref{fig:signal_heatmap} summarises the full signal ablation. Map-Reflect outperforms MatchMaker on all three OMOP datasets under matched open-source model conditions; the CMS and MIMIC results are the stronger evidence as Synthea has only 12 samples.
 
 
-\subsection{SchemaNet Analysis}
-\label{sec:schemanet_discussion}
+\subsection{SchemaNet Per-Pair Analysis}
 
-Map-Reflect and AnyTool are effectively tied on average type F1 (48.8 vs.\ 49.0) and field F1 (39.3 vs.\ 41.3), while substantially outperforming MatchMaker and GNN. LLMatch with GPT-4o-mini leads on field F1 but uses a materially stronger backbone. On the five OMOP-target pairs, all methods that use retrieval degrade because the pairs share the same target type pool, making it impossible to distinguish which OMOP tables are relevant to a given source schema. The GNN performs anomalously on cprd\_gold\_omop due to unusually regular naming in that pair.
+Tables~\ref{tab:schemanet_type} and~\ref{tab:schemanet} show the per-pair breakdown for SchemaNet, including LLMatch with GPT-4o-mini. Map-Reflect leads on type-level F1 on four of seven pairs. On field-level F1, LLMatch leads on several pairs but uses a materially stronger backbone. AnyTool leads on the non-OMOP pairs (bank1\_bank2, imdb\_sakila) where its hierarchical search is well suited. On the five OMOP-target pairs, all retrieval-based methods degrade because the pairs share the same target pool.
 
-\subsection{Error Analysis}
-\label{sec:error_analysis}
-Map-Reflect achieves high API accuracy on ITOpsGraph but lower field F1, meaning that even when the correct source--target pair is identified, a fraction of fields is incorrectly mapped. We identify three recurring failure modes from manual inspection of errors.
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{SchemaNet type-level F1, Llama-3.3-70B. $^\ddagger$GNN uses link prediction on the GT graph.}
+\label{tab:schemanet_type}
+\begin{tabular}{l rrrr}
+\toprule
+& \textbf{GNN}$^\ddagger$ & \textbf{AnyTool} & \textbf{MM} & \textbf{MR} \\
+\midrule
+bank1\_bank2      & 29.4 & \textbf{76.5} & 64.7 & 70.6 \\
+imdb\_sakila      & 81.2 & 81.2 & 81.2 & \textbf{81.2} \\
+cms\_omop         & 17.4 & 47.8 & 15.2 & \textbf{52.2} \\
+mimic\_iii\_omop  & 12.1 & 42.0 & 20.1 & \textbf{42.0} \\
+synthea\_omop     & 18.4 & 53.1 & 32.7 & \textbf{53.1} \\
+cprd\_gold\_omop  & 51.4 & 21.6 & 13.5 & \textbf{23.7} \\
+cprd\_aurum\_omop & 15.8 & 21.1 &  2.6 & \textbf{23.7} \\
+\midrule
+\textbf{Avg}      & 32.2 & \textbf{49.0} & 32.9 & 48.8 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\textbf{Semantic synonym misses.} ITOpsGraph contains many cases where semantically equivalent fields carry entirely different names across products. For example, a field named \texttt{severity} in one product corresponds to \texttt{criticalityLevel} in another, or \texttt{hostName} to \texttt{nodeIdentifier}. The greedy Map phase ranks these low because embedding similarity between the field names is insufficient without contextual documentation, and gated reflection's neighbourhood signal does not fire unless a neighbouring type has already been correctly mapped. RAG-enhanced descriptions mitigate this for the 11,110 fields that have been enriched, but the remaining fields in the catalogue have sparse descriptions and account for a disproportionate share of failures.
-
-\textbf{Schema paradigm boundary failures.} ITOpsGraph spans both GraphQL and proto buffer schemas. Fields that are modelled as nested object types in GraphQL (e.g., \texttt{VirtualMachine.resourceAllocation.cpuMhz}) appear as flat repeated fields in proto buffer definitions. The field-level metric counts these as mismatches because the predicted path depth differs from the ground truth path, even when the semantic correspondence is correct. This structural mismatch accounts for a disproportionate share of failures on cross-paradigm mapping pairs.
-
-Both failure modes trace to data quality and structural mismatch, not to the reflection mechanism itself.
-
-\subsection{Many-to-Many Field Mapping}
-\label{sec:many_to_many}
-
-The greedy MAP phase ranks target candidates for each source field independently.
-When a source type has more fields than the target type, multiple source fields
-may claim the same target field---a \emph{collision}. For example, mapping
-\texttt{concert.Application} (22~fields) to \texttt{instana.ApplicationPerspective}
-(6~fields) produces 68~collisions on ITOpsGraph, with 10~source fields all mapping
-to \texttt{label} and 5~to \texttt{id}.
-
-Enforcing one-to-one mapping via greedy preemption reduces these collisions but also reduces field F1 on every dataset with expert-curated ground truth, because many-to-one mappings are legitimate: multiple source fields may join to the same foreign key, represent facets of one target concept, or correspond to a standardised schema like OMOP that consolidates proprietary fields into shared columns. On OMOP-Synthea, where 29 source fields correctly map to the same OMOP CDM column, enforcing one-to-one drops field F1 from 100\% to 53.5\%; on ITOpsGraph the drop is a modest $-1.7$\,pp because most collisions there are genuine ambiguity rather than legitimate many-to-one. The base configuration (unconstrained with UQ-triggered reflection) is therefore the recommended default. A constrained mode (\texttt{-{}-constrained-assignment}) is available for downstream consumers such as schema federation engines or query rewriters where duplicate column bindings break join semantics.
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{SchemaNet field-level F1, Llama-3.3-70B. $^\dagger$LLMatch~\protect\cite{wang2025llmatch} (GPT-4o-mini). $^\ddagger$GNN uses link prediction on GT graph.}
+\label{tab:schemanet}
+\begin{tabular}{l rrrrr}
+\toprule
+& \textbf{LLM}$^\dagger$ & \textbf{GNN}$^\ddagger$ & \textbf{AT} & \textbf{MM} & \textbf{MR} \\
+\midrule
+bank1\_bank2      & 85.0 & 17.6 & \textbf{76.5} & 47.1 & 70.6 \\
+imdb\_sakila      & 73.0 & 12.5 & 81.2 & 37.5 & \textbf{81.2} \\
+cms\_omop         & 37.0 & 15.2 & 37.0 & 15.2 & \textbf{40.0} \\
+mimic\_iii\_omop  & 33.0 &  4.0 & \textbf{29.3} &  7.5 & 26.2 \\
+synthea\_omop     & 37.0 &  8.2 & \textbf{30.6} & 16.3 & 25.0 \\
+cprd\_gold\_omop  & 30.0 & 10.8 & \textbf{18.9} & 10.8 & 13.5 \\
+cprd\_aurum\_omop & 36.0 &  5.3 & 15.8 &  5.3 & \textbf{18.4} \\
+\midrule
+\textbf{Avg (cond.)} & --- & 10.5 & \textbf{41.3} & 20.0 & 39.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Limitations}
 
-The UQ entropy trigger uses prompt-elicited confidence scores rather than the sampling-based aggregation in SIMBA~\cite{simba2025}; this is a single-pass approximation that avoids repeated inference but does not directly implement the theoretical framework we cite. UQ gains are modest (+0.2\,pp on ITOpsGraph, neutral on OMOP); the primary claim is that UQ is the only trigger that does not degrade accuracy. Retrieval-mode evaluation uses small target pools (12 products on ITOpsGraph; single fixed target on OMOP), so 100\% API accuracy there reflects dataset constraints rather than stress-tested discovery. MatchMaker results on ITOpsGraph-MB are limited to a 246-sample subset due to a missing retry mechanism in its agent framework. Larger retrieval catalogs with hard distractors remain future work.
+The UQ gate uses a weighted heuristic score $u(f) = 0.3(1-\gamma_1) + 0.3(1-\Delta\gamma) + 0.2\,\mathbb{1}[\text{no reasons}] + 0.06$ over raw LLM-assigned scores, rather than Shannon entropy over a normalised probability distribution or the sampling-based aggregation in SIMBA~\cite{simba2025}. The heuristic fires on the same fields as SIMBA (58 vs 61 on ITOpsGraph), validating that it identifies the same uncertain predictions; but the theoretical linkage to the consistency hypothesis~\cite{xiao2025consistency} is approximate, not exact. WatsonX temperature=0 inference exhibits approximately 5\,pp run-to-run variance on ITOpsGraph (40.9\% of predictions change between independent runs), arising from non-determinism in the serving infrastructure despite temperature=0. Absolute accuracy figures in Tables~\ref{tab:type_results}--\ref{tab:field_results} should therefore be interpreted with a $\pm$5\,pp margin; differences smaller than this should not be treated as significant. Formal confidence intervals were not computed because each dataset has only one ground-truth run (repeating all 521 ITOpsGraph samples three times would triple inference cost); the variance estimate is derived from two independent ITOpsGraph runs. The ablation is not subject to this limitation: the shared-MAP-cache design gives a within-ablation noise floor below 0.2\,pp (only 2--3 of $\sim$965 predictions differ across configurations), making signal comparisons reliable even though absolute numbers carry the 5\,pp margin. Retrieval-mode evaluation uses small target pools (12 products on ITOpsGraph; single fixed target on OMOP), so results there reflect dataset constraints rather than stress-tested discovery. MatchMaker results on ITOpsGraph-MB are limited to a 246-sample subset due to a missing retry mechanism in its agent framework. The conclusion that neighbourhood and error signals are harmful should be understood as specific to the heuristic validators implemented here — a fixed gap threshold of 0.2 and hand-weighted error penalties. Stronger alternatives such as learned graph constraints, cross-validated neighbourhood embeddings, or white-box execution verifiers (where the schema can be deployed and queried) might produce validators that fire more precisely, potentially making these signals safe. We leave this as future work; the current finding establishes a baseline that naive structural signals are unreliable gates, not that structural information is inherently uninformative. Larger retrieval catalogs with hard distractors also remain future work.
 
 \section{Conclusion}
 
-Schema mapping across heterogeneous enterprise APIs and databases is a prerequisite for data federation, tool composition, and agentic workflows, yet it has received less attention than the downstream tasks it enables. Map-Reflect addresses this gap by framing the problem as gated reflection: a greedy Map phase produces an initial alignment, and a Reflect phase refines it selectively using external signals rather than unconditional self-critique. The central finding is that signal quality matters more than reflection itself. Error- and neighbourhood-based triggers degrade accuracy by firing on correct predictions; only uncertainty quantification identifies the cases where reflection genuinely helps. This selectivity is what makes the framework practical at enterprise scale, where reflection overhead must be justified by measurable improvement. The evaluation spans REST APIs, GraphQL, and relational databases across seven benchmarks including the ITOpsGraph benchmark for enterprise API schema mapping and ITOpsGraph-MB, the first human-annotated many-to-many benchmark with bipartite field constraints (786 type pairs, 3,030 fields, 12 products). Enforcing one-to-one field assignment substantially reduces F1 on healthcare benchmarks where standardised schemas consolidate proprietary fields, confirming that many-to-many is the correct default. More broadly, the finding that unconditional self-reflection degrades accuracy generalises to any tool-using agent that revises outputs without external grounding.
+Schema mapping across heterogeneous enterprise APIs and databases is a prerequisite for data federation, tool composition, and agentic workflows, yet it has received less attention than the downstream tasks it enables. Map-Reflect addresses this gap by framing the problem as gated reflection: a greedy Map phase produces an initial alignment, and a Reflect phase refines it selectively using external signals rather than unconditional self-critique. The central finding is that signal quality matters more than reflection itself: error- and neighbourhood-based triggers degrade accuracy by firing on correct predictions, while only uncertainty quantification identifies the cases where reflection genuinely helps. The evaluation spans REST APIs, GraphQL, and relational databases across seven benchmarks including ITOpsGraph and ITOpsGraph-MB, the first human-annotated many-to-many benchmark with bipartite field constraints (786 type pairs, 3,030 fields, 12 products). More broadly, the finding that unconditional self-reflection degrades accuracy generalises to any tool-using agent that revises outputs without external grounding.
 
 \balance
 \clearpage
 \begin{acks}
-We thank John Walczyk, Dan Debrunner, and Sameep Mehta for their valuable discussions and contributions to early versions of this work.
+We thank John Walczyk, Carlos Eberhardt, Dan Debrunner, Richard Boyer, Phil Renaud, Cesar Araujo, Cheuk Hung Lam, and Sameep Mehta for the discussions and providing the enterprise schemas that have been used in this work.
 \end{acks}
 
 \bibliographystyle{ACM-Reference-Format}

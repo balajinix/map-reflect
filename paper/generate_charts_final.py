@@ -34,6 +34,7 @@ COL_WIDTH = 3.33   # VLDB single column in inches
 METHOD_COLORS = {
     "Map-Reflect": "#C0392B",
     "MatchMaker":  "#2980B9",
+    "AnyTool":     "#8E44AD",
     "GNN":         "#16A085",
 }
 
@@ -46,6 +47,8 @@ DS_ABBR = {
     "OMOP MIMIC":   "MIMIC",
     "OMOP Synthea": "Synthea",
     "NL2GQL":       "NL2GQL",
+    "ToolBench":    "TBench",
+    "Spider":       "Spider",
 }
 
 plt.rcParams.update({
@@ -82,27 +85,35 @@ def chart_api_field_gap():
     DATA -- update when Table 1 / Table 2 (Llama column) change:
     """
     rows = [
-        # method,          dataset,         api,   field_f1
-        ("Map-Reflect", "ITOpsGraph",    98.1,  76.6),
+        # method,          dataset,         api(type F1),  field_f1
+        # Audited numbers from tables_2_3_final_audit.md (Apr 2026)
+        ("Map-Reflect", "ITOpsGraph",    94.4,  83.1),
         ("Map-Reflect", "OMOP CMS",     100.0,  76.6),
-        ("Map-Reflect", "OMOP MIMIC",   100.0,  56.3),
+        ("Map-Reflect", "OMOP MIMIC",   100.0,  59.7),
         ("Map-Reflect", "OMOP Synthea", 100.0, 100.0),
-        ("Map-Reflect", "NL2GQL",        93.1,  76.9),
-        ("MatchMaker",  "ITOpsGraph",    95.2,  72.2),
-        ("MatchMaker",  "OMOP CMS",      89.5,  48.9),
-        ("MatchMaker",  "OMOP MIMIC",    95.7,  38.3),
-        ("MatchMaker",  "OMOP Synthea", 100.0,  70.3),
-        ("MatchMaker",  "NL2GQL",        42.1,  77.2),
-        ("GNN",         "ITOpsGraph",    52.4,   0.0),
-        ("GNN",         "OMOP CMS",      97.4,  11.3),
-        ("GNN",         "OMOP MIMIC",   100.0,  10.9),
-        ("GNN",         "OMOP Synthea", 100.0,  24.6),
+        ("Map-Reflect", "NL2GQL",        70.5,  63.2),
+        ("Map-Reflect", "ToolBench",     96.3,  94.4),
+        ("Map-Reflect", "Spider",        95.0,  75.2),
+        ("MatchMaker",  "ITOpsGraph",    86.1,  36.3),
+        ("MatchMaker",  "OMOP CMS",      98.7,  70.4),
+        ("MatchMaker",  "OMOP MIMIC",    95.5,  56.5),
+        ("MatchMaker",  "OMOP Synthea", 100.0,  71.0),
+        ("MatchMaker",  "NL2GQL",        61.1,  53.0),
+        ("MatchMaker",  "ToolBench",     89.4,  87.7),
+        ("MatchMaker",  "Spider",        83.9,  70.5),
+        ("AnyTool",     "ITOpsGraph",    43.3,  48.4),
+        ("AnyTool",     "OMOP CMS",      91.9,  60.5),
+        ("AnyTool",     "OMOP MIMIC",    47.7,  49.5),
+        ("AnyTool",     "OMOP Synthea", 100.0,  72.3),
+        ("AnyTool",     "NL2GQL",        60.0,  32.9),
+        ("AnyTool",     "ToolBench",     69.9,  77.1),
+        ("AnyTool",     "Spider",        86.6,  86.7),
     ]
 
     df = pd.DataFrame(rows, columns=["method", "dataset", "api", "field"])
     df["gap"] = df["api"] - df["field"]
 
-    methods_order = ["Map-Reflect", "MatchMaker", "GNN"]
+    methods_order = ["Map-Reflect", "MatchMaker", "AnyTool"]
     ordered = []
     for m in methods_order:
         for _, r in df[df["method"] == m].sort_values("gap", ascending=False).iterrows():
@@ -138,7 +149,7 @@ def chart_api_field_gap():
 
     ax.set_xlim(-2, 108)
     ax.set_ylim(-0.6, len(df_ord) - 0.4)
-    ax.set_xlabel("Accuracy / F1 (%)")
+    ax.set_xlabel("F1 (%)")
     ax.axvline(100, color=NEUTRAL, linewidth=0.7, linestyle="--", alpha=0.5)
 
     method_patches = [
@@ -146,7 +157,7 @@ def chart_api_field_gap():
         for m in methods_order
     ]
     dot_handles = [
-        plt.scatter([], [], c="dimgray", s=28, label="API acc. (filled)"),
+        plt.scatter([], [], c="dimgray", s=28, label="Type F1 (filled)"),
         plt.scatter([], [], c="white", edgecolors="dimgray",
                     linewidths=1.6, s=28, label="Field F1 (hollow)"),
     ]
@@ -200,51 +211,58 @@ def _deconflict(positions, min_gap=4.0, iterations=300):
 
 def chart_method_sensitivity():
     """
-    Single slope chart. x-axis: Granite-4 | Llama-3.3. y-axis: Field F1 (%).
+    Slope chart with three models. x-axis: Granite-4 | Llama-3.3 | Mistral.
+    y-axis: Field F1 (%).
     Each line = one (method, dataset) pair; colour = method.
     Right-side labels use abbreviated dataset names, coloured by method,
     deconflicted across all lines together with leader lines.
     Oracle mode.
 
-    DATA -- update when Table 2 (both Granite and Llama columns) change:
+    DATA -- update when Table 3 (all three model columns) change:
     """
     rows = [
-        # method,          dataset,         granite,  llama
-        ("Map-Reflect", "ITOpsGraph",     66.5,  76.6),
-        ("Map-Reflect", "OMOP CMS",       35.2,  76.6),
-        ("Map-Reflect", "OMOP MIMIC",     37.0,  56.3),
-        ("Map-Reflect", "OMOP Synthea",   72.3, 100.0),
-        ("Map-Reflect", "NL2GQL",         51.8,  76.9),
-        ("MatchMaker",  "ITOpsGraph",     59.5,  72.2),
-        ("MatchMaker",  "OMOP CMS",       40.3,  48.9),
-        ("MatchMaker",  "OMOP MIMIC",     32.6,  38.3),
-        ("MatchMaker",  "OMOP Synthea",   66.3,  70.3),
-        ("MatchMaker",  "NL2GQL",         83.2,  77.2),
+        # method,          dataset,         granite,  llama,  mistral
+        # Audited numbers from tables_2_3_final_audit.md (Apr 2026)
+        ("Map-Reflect", "ITOpsGraph",     54.6,  83.1,  85.4),
+        ("Map-Reflect", "OMOP CMS",       59.5,  76.6,  71.0),
+        ("Map-Reflect", "OMOP MIMIC",     36.6,  59.7,  51.5),
+        ("Map-Reflect", "OMOP Synthea",   58.4, 100.0,  58.4),
+        ("Map-Reflect", "NL2GQL",         55.4,  63.2,  63.2),
+        ("Map-Reflect", "ToolBench",      69.6,  94.4,  92.8),
+        ("Map-Reflect", "Spider",         53.6,  75.2,  79.9),
+        ("MatchMaker",  "ITOpsGraph",     39.8,  36.3,  37.9),
+        ("MatchMaker",  "OMOP CMS",       34.9,  70.4,  19.0),
+        ("MatchMaker",  "OMOP MIMIC",     42.8,  56.5,  10.8),
+        ("MatchMaker",  "OMOP Synthea",   56.8,  71.0,  19.6),
+        ("MatchMaker",  "NL2GQL",         53.6,  53.0,   0.0),
+        ("MatchMaker",  "ToolBench",      61.0,  87.7,  53.4),
+        ("MatchMaker",  "Spider",         74.1,  70.5,  60.5),
     ]
-    df = pd.DataFrame(rows, columns=["method", "dataset", "granite", "llama"])
+    df = pd.DataFrame(rows, columns=["method", "dataset", "granite", "llama", "mistral"])
     df["abbr"] = df["dataset"].map(DS_ABBR)
 
-    fig, ax = plt.subplots(figsize=(COL_WIDTH, 4.8))
+    fig, ax = plt.subplots(figsize=(COL_WIDTH, 5.2))
 
     # Deconflict all right-side (Llama) label positions together
-    adj = _deconflict(df["llama"].tolist(), min_gap=5.5)
+    adj = _deconflict(df["llama"].tolist(), min_gap=5.0)
 
     for i, (_, row) in enumerate(df.iterrows()):
         color = METHOD_COLORS.get(row["method"], NEUTRAL)
         adj_y = adj[i]
         nudge = abs(adj_y - row["llama"])
 
-        ax.plot([0, 1], [row["granite"], row["llama"]],
-                color=color, linewidth=1.6, alpha=0.75,
+        ax.plot([0, 1, 2], [row["granite"], row["mistral"], row["llama"]],
+                color=color, linewidth=1.4, alpha=0.75,
                 solid_capstyle="round", zorder=3)
-        ax.scatter(0, row["granite"], color=color, s=22, zorder=5)
-        ax.scatter(1, row["llama"],   color=color, s=22, zorder=5)
+        ax.scatter(0, row["granite"], color=color, s=20, zorder=5)
+        ax.scatter(1, row["mistral"], color=color, s=20, zorder=5)
+        ax.scatter(2, row["llama"],   color=color, s=20, zorder=5)
 
         if nudge > 1.0:
             ax.annotate(
                 "",
-                xy=(1.0, row["llama"]),
-                xytext=(1.04, adj_y),
+                xy=(2.0, row["llama"]),
+                xytext=(2.04, adj_y),
                 arrowprops=dict(
                     arrowstyle="-",
                     color=color,
@@ -254,12 +272,12 @@ def chart_method_sensitivity():
                 zorder=4,
             )
 
-        ax.text(1.05, adj_y, row["abbr"],
-                va="center", fontsize=6.5, color=color)
+        ax.text(2.06, adj_y, row["abbr"],
+                va="center", fontsize=6.0, color=color)
 
-    ax.set_xticks([0, 1])
-    ax.set_xticklabels(["Granite-4", "Llama-3.3"], fontsize=7.5)
-    ax.set_xlim(-0.15, 1.55)
+    ax.set_xticks([0, 1, 2])
+    ax.set_xticklabels(["Granite-4", "Mistral", "Llama-3.3"], fontsize=7.5)
+    ax.set_xlim(-0.15, 2.65)
     ax.set_ylim(-6, 110)
     ax.set_ylabel("Field F1 (%)")
     ax.spines["top"].set_visible(False)
@@ -296,25 +314,23 @@ def chart_signal_heatmap():
     DATA -- update when Table 3 (ITOpsGraph ablation) or OMOP oracle
     Map-Reflect Field F1 (Table 2, Llama column) change:
     """
-    BASE_ITOPS = 88.0
+    BASE_ITOPS = 81.2
 
     # (config_label, ITOpsGraph_field_recall) ordered best to worst
+    # Audited no-cache ablation (Apr 2026, 1429 fields)
     configs = [
-        ("UQ only",              88.2),
-        ("Base (no refl.)",      88.0),
-        ("UQ + Nbr",             81.7),
-        ("Self-reflection",      82.6),
-        ("Nbr only",             80.9),
-        ("Error + UQ",           74.5),
-        ("Error + Nbr",          74.1),
-        ("All signals",          73.3),
-        ("Error only",           73.1),
+        ("UQ only",              81.9),
+        ("Nbr only",             81.5),
+        ("Base (no refl.)",      81.2),
+        ("Self-reflection",      79.7),
+        ("Error + UQ",           72.4),
+        ("Error only",           72.7),
     ]
     config_names = [c for c, _ in configs]
     itops_vals   = {c: v for c, v in configs}
 
     # OMOP oracle Map-Reflect Field F1 (Llama-3.3, oracle mode)
-    omop_base = {"Synthea": 100.0, "CMS": 76.6, "MIMIC": 56.3}
+    omop_base = {"Synthea": 100.0, "CMS": 76.6, "MIMIC": 59.7}
 
     col_labels = ["ITOps", "Synthea", "CMS", "MIMIC"]
     col_keys   = ["ITOpsGraph", "Synthea", "CMS", "MIMIC"]
