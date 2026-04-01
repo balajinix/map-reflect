@@ -1402,6 +1402,170 @@ class SemanticEntropyEstimator:
         return results
 
 
+class SIMBASamplingEstimator:
+    """
+    SIMBA-style sampling consistency UQ for schema mapping.
+
+    Implements the Consistency Hypothesis (Xiao et al., 2025): run the MAP
+    phase k times at temperature > 0, measure how often the top-1 prediction
+    changes across runs. High inconsistency = genuine uncertainty.
+
+    Disagreement rate = 1 - pairwise_consistency, where:
+        consistency = |{(i,j): i<j, pred_i == pred_j}| / C(k,2)
+
+    This differs from the heuristic entropy trigger (single-pass, uncalibrated
+    scores) by actually sampling the model's distribution, detecting cases
+    where the model is confidently wrong at temperature=0 but inconsistent
+    when sampled.
+    """
+
+    def __init__(self, client: 'WatsonXBatchClient', n_samples: int = 3):
+        self.client = client
+        self.n_samples = n_samples
+        self.sampling_temperature = 0.7
+
+    def _generate_samples_batch(self, prompts: List[str]) -> List[str]:
+        """Generate samples with temperature in batch."""
+        if not prompts:
+            return []
+
+        api_key = os.getenv("WATSONX_API_KEY") or os.getenv("WATSONX_APIKEY")
+        project_id = os.getenv("WATSONX_PROJECT_ID")
+        url = os.getenv("WATSONX_URL", "https://us-south.ml.cloud.ibm.com")
+
+        if not api_key or not project_id:
+            raise RuntimeError("WATSONX_API_KEY and WATSONX_PROJECT_ID required")
+
+        _, stop_sequences = format_prompt_for_model([], self.client.model_id)
+
+        model = ModelInference(
+            model_id=self.client.model_id,
+            params={
+                GenParams.MAX_NEW_TOKENS: self.client.config.max_tokens,
+                GenParams.TEMPERATURE: self.sampling_temperature,
+                GenParams.DECODING_METHOD: DecodingMethods.SAMPLE,
+                GenParams.STOP_SEQUENCES: stop_sequences,
+                GenParams.TOP_K: 50,
+                GenParams.TOP_P: 0.95,
+            },
+            credentials=Credentials(url=url, api_key=api_key),
+            project_id=project_id
+        )
+
+        try:
+            responses = model.generate_text(prompt=prompts, concurrency_limit=10)
+            if isinstance(responses, str):
+                responses = [responses]
+            elif not isinstance(responses, list):
+                responses = list(responses)
+            return responses
+        except Exception as e:
+            logger.error(f"SIMBA batch sampling failed: {e}")
+            return [""] * len(prompts)
+
+    def estimate_uncertainty_batch(
+        self,
+        fields: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """
+        Batch estimate uncertainty using SIMBA pairwise consistency.
+
+        Args:
+            fields: List of dicts with keys:
+                - ranking_prompt: The formatted ranking prompt
+                - initial_response: The greedy response
+                - candidates: List of candidate fields
+
+        Returns:
+            List of uncertainty info dicts with disagreement_rate as UQ signal.
+        """
+        if not fields:
+            return []
+
+        n_fields = len(fields)
+        logger.info(f"SIMBA sampling: {n_fields} fields x {self.n_samples} samples...")
+
+        # Parse initial (greedy) responses
+        initial_top1s = []
+        for field in fields:
+            initial_response = field.get("initial_response", "")
+            initial_ranking = safe_parse_json_array(initial_response)
+            if initial_ranking and isinstance(initial_ranking[0], dict):
+                initial_top1s.append(initial_ranking[0].get("id", ""))
+            else:
+                initial_top1s.append("")
+
+        # Build sampling prompts: (n_samples - 1) per field
+        all_prompts = []
+        prompt_to_field_idx = []
+        for field_idx, field in enumerate(fields):
+            prompt = field.get("ranking_prompt", "")
+            for _ in range(self.n_samples - 1):
+                all_prompts.append(prompt)
+                prompt_to_field_idx.append(field_idx)
+
+        # Batch generate
+        if all_prompts:
+            all_responses = self._generate_samples_batch(all_prompts)
+        else:
+            all_responses = []
+
+        # Organize: field_idx -> list of top-1 predictions (including greedy)
+        field_samples = {i: [initial_top1s[i]] for i in range(n_fields)}
+        for resp_idx, response in enumerate(all_responses):
+            field_idx = prompt_to_field_idx[resp_idx]
+            sample_ranking = safe_parse_json_array(response)
+            if sample_ranking and isinstance(sample_ranking[0], dict):
+                field_samples[field_idx].append(sample_ranking[0].get("id", ""))
+            else:
+                field_samples[field_idx].append("")
+
+        # Compute pairwise consistency for each field
+        from itertools import combinations
+        results = []
+        for field_idx in range(n_fields):
+            predictions = field_samples[field_idx]
+            n = len(predictions)
+
+            # Pairwise consistency: fraction of pairs that agree
+            pairs = list(combinations(range(n), 2))
+            if pairs:
+                agreeing = sum(1 for i, j in pairs if predictions[i] == predictions[j])
+                consistency = agreeing / len(pairs)
+            else:
+                consistency = 1.0
+
+            disagreement_rate = 1.0 - consistency
+
+            # Majority vote prediction
+            from collections import Counter
+            vote_counts = Counter(p for p in predictions if p)
+            majority_pred = vote_counts.most_common(1)[0][0] if vote_counts else initial_top1s[field_idx]
+
+            # Distribution for diagnostics
+            distribution = {}
+            for pred in predictions:
+                distribution[pred] = distribution.get(pred, 0) + 1
+            for k in distribution:
+                distribution[k] = distribution[k] / n
+
+            results.append({
+                "uncertainty": disagreement_rate,
+                "consistency": float(consistency),
+                "disagreement_rate": float(disagreement_rate),
+                "n_samples": self.n_samples,
+                "n_unique": len(set(predictions)),
+                "majority_prediction": majority_pred,
+                "greedy_prediction": initial_top1s[field_idx],
+                "greedy_matches_majority": initial_top1s[field_idx] == majority_pred,
+                "distribution": distribution,
+                "predictions": predictions,
+                "method": "simba_sampling"
+            })
+
+        return results
+
+
 class ArithmeticAggregationEstimator:
     """
     Arithmetic aggregation (arith-agg) uncertainty estimation.
@@ -2391,6 +2555,7 @@ class MapReflectRunner:
         self.semantic_entropy_estimator = None
         self.arith_agg_estimator = None
         self.harm_agg_estimator = None
+        self.simba_estimator = None
         if self.config.use_uncertainty:
             if self.config.uq_method == "perplexity":
                 self.perplexity_estimator = PerplexityEstimator(self.client)
@@ -2409,6 +2574,11 @@ class MapReflectRunner:
             elif self.config.uq_method == "harm_agg":
                 self.harm_agg_estimator = HarmonicAggregationEstimator(top_k=self.config.top_k)
                 logger.info(f"  UQ Method: harm_agg (harmonic aggregation, top_k={self.config.top_k})")
+            elif self.config.uq_method == "simba":
+                self.simba_estimator = SIMBASamplingEstimator(
+                    self.client, self.config.n_uncertainty_samples
+                )
+                logger.info(f"  UQ Method: simba (pairwise consistency, n={self.config.n_uncertainty_samples} samples)")
             elif self.config.uq_method == "sampling":
                 self.uncertainty_estimator = UncertaintyEstimator(
                     self.client, self.config.n_uncertainty_samples
@@ -3476,6 +3646,25 @@ Return a JSON object:
                 task["uncertainty"] = batch_results[task_idx]["uncertainty"]
                 all_uncertainties.append(task["uncertainty"])
 
+        elif self.config.use_uncertainty and self.config.uq_method == "simba" and self.simba_estimator:
+            # SIMBA pairwise consistency batch estimation
+            uq_fields = []
+            for task in prompt_tasks:
+                uq_fields.append({
+                    "ranking_prompt": task["prompt"],
+                    "initial_response": task["response"],
+                    "candidates": task["candidates"]
+                })
+
+            batch_results = self.simba_estimator.estimate_uncertainty_batch(uq_fields)
+
+            for task_idx, task in enumerate(prompt_tasks):
+                task["uncertainty_info"] = batch_results[task_idx]
+                task["uncertainty"] = batch_results[task_idx]["uncertainty"]
+                # Store majority vote for potential use in reflection
+                task["simba_majority_prediction"] = batch_results[task_idx].get("majority_prediction", "")
+                all_uncertainties.append(task["uncertainty"])
+
         elif self.config.use_uncertainty and self.config.uq_method == "perplexity" and self.perplexity_estimator:
             # Perplexity-based UQ (still sequential - requires logprobs per call)
             for task in prompt_tasks:
@@ -3803,6 +3992,7 @@ Return a JSON object:
                 "use_uncertainty": self.config.use_uncertainty,
                 "use_reflection": self.config.use_reflection,
                 "n_uncertainty_samples": self.config.n_uncertainty_samples,
+                "uq_method": self.config.uq_method,
             },
             "metrics": {
                 "total_samples": len(results),
@@ -3866,7 +4056,7 @@ def main():
     parser.add_argument("--use-reflection", action="store_true", help="Legacy: enable error+uq reflection")
     parser.add_argument("--n-uncertainty-samples", type=int, default=3, help="Samples for UQ (default: 3)")
     parser.add_argument("--uq-method", type=str, default="sampling",
-                        choices=["sampling", "heuristic", "perplexity", "p_true", "semantic_entropy", "arith_agg", "harm_agg"],
+                        choices=["sampling", "heuristic", "perplexity", "p_true", "semantic_entropy", "arith_agg", "harm_agg", "simba"],
                         help="UQ method: sampling, heuristic, perplexity, p_true, semantic_entropy, arith_agg (SIMBA arithmetic), harm_agg (SIMBA harmonic)")
 
     # UQ threshold configuration
