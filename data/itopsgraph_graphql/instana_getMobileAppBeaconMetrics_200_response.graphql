@@ -1,3 +1,0 @@
-type getMobileAppBeaconMetrics_200_response {
-  empty: Boolean
-}

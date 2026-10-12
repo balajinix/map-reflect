@@ -1,9 +1,0 @@
-"""Runtime component details"""
-type Runtime {
-  """Unique identifier of the runtime"""
-  id: String
-  """Name of the runtime"""
-  name: String
-  """Type of the runtime"""
-  type: String
-}

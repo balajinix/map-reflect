@@ -1,7 +1,0 @@
-enum Severity {
-  UNKNOWN
-  NORMAL
-  MINOR
-  MAJOR
-  CRITICAL
-}

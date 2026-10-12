@@ -1,0 +1,624 @@
+{
+ "generated_by": "scripts/naacl/v6_d3.py --stage score",
+ "date": "2026-10-10",
+ "population": 1219,
+ "status": "exploratory",
+ "split": "dev",
+ "base_method": "v4.1",
+ "runs": "results/naacl/v6/d3/dev",
+ "selection": "docs/naacl/results/v6_d3_selection.json",
+ "B": 2000,
+ "seed": 20261009,
+ "facts": [
+  {
+   "id": "F-DThreeCurRepairs",
+   "claim": "development (exploratory): D3 idea 5, arm cur: repairs on development errors with gold in pool (after the check)",
+   "value": "298.0",
+   "lo": "257.3",
+   "hi": "342.6",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurBreaks",
+   "claim": "development (exploratory): D3 idea 5, arm cur: breaks on the routed correct sample (after the check)",
+   "value": "3.0",
+   "lo": "1.8",
+   "hi": "4.8",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurNet",
+   "claim": "development (exploratory): D3 idea 5, arm cur: net repairs (repairs minus breaks) on the D3 population",
+   "value": "295.0",
+   "lo": "254.1",
+   "hi": "339.3",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurProposedRepairs",
+   "claim": "development (exploratory): D3 idea 5, arm cur: proposals that would repair, before the check",
+   "value": "318.0",
+   "lo": "275.8",
+   "hi": "360.8",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurProposedBreaks",
+   "claim": "development (exploratory): D3 idea 5, arm cur: proposals that would break, before the check",
+   "value": "18.0",
+   "lo": "12.2",
+   "hi": "25.3",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurCalls",
+   "claim": "development (exploratory): D3 idea 5, arm cur: reflection and check calls",
+   "value": "1489.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresRepairs",
+   "claim": "development (exploratory): D3 idea 5, arm symS: repairs on development errors with gold in pool (after the check)",
+   "value": "334.0",
+   "lo": "287.5",
+   "hi": "385.2",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresBreaks",
+   "claim": "development (exploratory): D3 idea 5, arm symS: breaks on the routed correct sample (after the check)",
+   "value": "3.0",
+   "lo": "0.0",
+   "hi": "7.4",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresNet",
+   "claim": "development (exploratory): D3 idea 5, arm symS: net repairs (repairs minus breaks) on the D3 population",
+   "value": "331.0",
+   "lo": "283.6",
+   "hi": "382.8",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresNetVsCur",
+   "claim": "development (exploratory): D3 idea 5, arm symS minus the current reflection: net repairs, paired",
+   "value": "36.0",
+   "lo": "19.2",
+   "hi": "52.0",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresProposedRepairs",
+   "claim": "development (exploratory): D3 idea 5, arm symS: proposals that would repair, before the check",
+   "value": "357.0",
+   "lo": "309.4",
+   "hi": "407.0",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresProposedBreaks",
+   "claim": "development (exploratory): D3 idea 5, arm symS: proposals that would break, before the check",
+   "value": "6.0",
+   "lo": "1.0",
+   "hi": "11.6",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresCalls",
+   "claim": "development (exploratory): D3 idea 5, arm symS: reflection and check calls",
+   "value": "1469.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresRepairs",
+   "claim": "development (exploratory): D3 idea 5, arm symN: repairs on development errors with gold in pool (after the check)",
+   "value": "345.0",
+   "lo": "299.8",
+   "hi": "393.2",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresBreaks",
+   "claim": "development (exploratory): D3 idea 5, arm symN: breaks on the routed correct sample (after the check)",
+   "value": "2.0",
+   "lo": "0.0",
+   "hi": "4.5",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresNet",
+   "claim": "development (exploratory): D3 idea 5, arm symN: net repairs (repairs minus breaks) on the D3 population",
+   "value": "343.0",
+   "lo": "296.7",
+   "hi": "391.3",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresNetVsCur",
+   "claim": "development (exploratory): D3 idea 5, arm symN minus the current reflection: net repairs, paired",
+   "value": "48.0",
+   "lo": "34.3",
+   "hi": "61.4",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresProposedRepairs",
+   "claim": "development (exploratory): D3 idea 5, arm symN: proposals that would repair, before the check",
+   "value": "374.0",
+   "lo": "321.9",
+   "hi": "425.4",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresProposedBreaks",
+   "claim": "development (exploratory): D3 idea 5, arm symN: proposals that would break, before the check",
+   "value": "5.0",
+   "lo": "1.0",
+   "hi": "9.1",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresCalls",
+   "claim": "development (exploratory): D3 idea 5, arm symN: reflection and check calls",
+   "value": "1489.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurNetOmop",
+   "claim": "development (exploratory): D3 idea 5, arm cur: net repairs on OMOP (affected)",
+   "value": "+5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresNetOmop",
+   "claim": "development (exploratory): D3 idea 5, arm symS: net repairs on OMOP (affected)",
+   "value": "+6",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresNetOmop",
+   "claim": "development (exploratory): D3 idea 5, arm symN: net repairs on OMOP (affected)",
+   "value": "+7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeFieldsOmop",
+   "claim": "development (exploratory): D3 population fields on OMOP (affected)",
+   "value": "139",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurNetOther",
+   "claim": "development (exploratory): D3 idea 5, arm cur: net repairs on other datasets",
+   "value": "+290",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresNetOther",
+   "claim": "development (exploratory): D3 idea 5, arm symS: net repairs on other datasets",
+   "value": "+325",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresNetOther",
+   "claim": "development (exploratory): D3 idea 5, arm symN: net repairs on other datasets",
+   "value": "+336",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeFieldsOther",
+   "claim": "development (exploratory): D3 population fields on other datasets",
+   "value": "1080",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeCurNetRoutedWeighted",
+   "claim": "development (exploratory): D3 idea 5, arm cur: net repairs weighted to all routed development fields",
+   "value": "268.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymScoresNetRoutedWeighted",
+   "claim": "development (exploratory): D3 idea 5, arm symS: net repairs weighted to all routed development fields",
+   "value": "312.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeSymNoScoresNetRoutedWeighted",
+   "claim": "development (exploratory): D3 idea 5, arm symN: net repairs weighted to all routed development fields",
+   "value": "322.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerCheckRepairsKept",
+   "claim": "development (exploratory): D3 idea 6, rule check: repairs accepted among cur's judged proposals",
+   "value": "177.0",
+   "lo": "148.0",
+   "hi": "206.8",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerCheckRepairsRejected",
+   "claim": "development (exploratory): D3 idea 6, rule check: repairs rejected",
+   "value": "20.0",
+   "lo": "13.6",
+   "hi": "27.6",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerCheckBreaksLetThrough",
+   "claim": "development (exploratory): D3 idea 6, rule check: breaks accepted",
+   "value": "3.0",
+   "lo": "1.8",
+   "hi": "4.8",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerCheckBreaksPrevented",
+   "claim": "development (exploratory): D3 idea 6, rule check: breaks rejected",
+   "value": "15.0",
+   "lo": "9.5",
+   "hi": "22.0",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerCheckNet",
+   "claim": "development (exploratory): D3 idea 6, rule check: net repairs among judged proposals",
+   "value": "174.0",
+   "lo": "145.3",
+   "hi": "204.4",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindRandomRepairsKept",
+   "claim": "development (exploratory): D3 idea 6, rule blind_random: repairs accepted among cur's judged proposals",
+   "value": "181.0",
+   "lo": "153.2",
+   "hi": "210.9",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindRandomRepairsRejected",
+   "claim": "development (exploratory): D3 idea 6, rule blind_random: repairs rejected",
+   "value": "16.0",
+   "lo": "8.1",
+   "hi": "26.2",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindRandomBreaksLetThrough",
+   "claim": "development (exploratory): D3 idea 6, rule blind_random: breaks accepted",
+   "value": "4.0",
+   "lo": "1.9",
+   "hi": "6.9",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindRandomBreaksPrevented",
+   "claim": "development (exploratory): D3 idea 6, rule blind_random: breaks rejected",
+   "value": "14.0",
+   "lo": "8.8",
+   "hi": "20.3",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindRandomNet",
+   "claim": "development (exploratory): D3 idea 6, rule blind_random: net repairs among judged proposals",
+   "value": "177.0",
+   "lo": "149.1",
+   "hi": "206.9",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindRandomNetVsCheck",
+   "claim": "development (exploratory): D3 idea 6, rule blind_random minus the current check, paired",
+   "value": "3.0",
+   "lo": "-3.3",
+   "hi": "8.6",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindSameOrderRepairsKept",
+   "claim": "development (exploratory): D3 idea 6, rule blind_same_order: repairs accepted among cur's judged proposals",
+   "value": "184.0",
+   "lo": "156.2",
+   "hi": "213.3",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindSameOrderRepairsRejected",
+   "claim": "development (exploratory): D3 idea 6, rule blind_same_order: repairs rejected",
+   "value": "13.0",
+   "lo": "5.5",
+   "hi": "21.8",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindSameOrderBreaksLetThrough",
+   "claim": "development (exploratory): D3 idea 6, rule blind_same_order: breaks accepted",
+   "value": "3.0",
+   "lo": "1.8",
+   "hi": "4.8",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindSameOrderBreaksPrevented",
+   "claim": "development (exploratory): D3 idea 6, rule blind_same_order: breaks rejected",
+   "value": "15.0",
+   "lo": "9.5",
+   "hi": "22.0",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindSameOrderNet",
+   "claim": "development (exploratory): D3 idea 6, rule blind_same_order: net repairs among judged proposals",
+   "value": "181.0",
+   "lo": "152.9",
+   "hi": "210.9",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindSameOrderNetVsCheck",
+   "claim": "development (exploratory): D3 idea 6, rule blind_same_order minus the current check, paired",
+   "value": "7.0",
+   "lo": "2.1",
+   "hi": "11.7",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindBothRepairsKept",
+   "claim": "development (exploratory): D3 idea 6, rule blind_both: repairs accepted among cur's judged proposals",
+   "value": "171.0",
+   "lo": "145.1",
+   "hi": "198.9",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindBothRepairsRejected",
+   "claim": "development (exploratory): D3 idea 6, rule blind_both: repairs rejected",
+   "value": "26.0",
+   "lo": "15.3",
+   "hi": "39.0",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindBothBreaksLetThrough",
+   "claim": "development (exploratory): D3 idea 6, rule blind_both: breaks accepted",
+   "value": "2.0",
+   "lo": "1.7",
+   "hi": "2.3",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindBothBreaksPrevented",
+   "claim": "development (exploratory): D3 idea 6, rule blind_both: breaks rejected",
+   "value": "16.0",
+   "lo": "10.3",
+   "hi": "23.1",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindBothNet",
+   "claim": "development (exploratory): D3 idea 6, rule blind_both: net repairs among judged proposals",
+   "value": "169.0",
+   "lo": "143.1",
+   "hi": "196.7",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindBothNetVsCheck",
+   "claim": "development (exploratory): D3 idea 6, rule blind_both minus the current check, paired",
+   "value": "-5.0",
+   "lo": "-12.8",
+   "hi": "3.1",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindEitherRepairsKept",
+   "claim": "development (exploratory): D3 idea 6, rule blind_either: repairs accepted among cur's judged proposals",
+   "value": "194.0",
+   "lo": "166.0",
+   "hi": "222.6",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindEitherRepairsRejected",
+   "claim": "development (exploratory): D3 idea 6, rule blind_either: repairs rejected",
+   "value": "3.0",
+   "lo": "0.9",
+   "hi": "6.2",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindEitherBreaksLetThrough",
+   "claim": "development (exploratory): D3 idea 6, rule blind_either: breaks accepted",
+   "value": "4.0",
+   "lo": "1.9",
+   "hi": "6.9",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindEitherBreaksPrevented",
+   "claim": "development (exploratory): D3 idea 6, rule blind_either: breaks rejected",
+   "value": "14.0",
+   "lo": "8.8",
+   "hi": "20.3",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindEitherNet",
+   "claim": "development (exploratory): D3 idea 6, rule blind_either: net repairs among judged proposals",
+   "value": "190.0",
+   "lo": "161.6",
+   "hi": "218.6",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindEitherNetVsCheck",
+   "claim": "development (exploratory): D3 idea 6, rule blind_either minus the current check, paired",
+   "value": "16.0",
+   "lo": "8.7",
+   "hi": "24.0",
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DThreeVerBlindCalls",
+   "claim": "development (exploratory): D3 idea 6: blind verifier calls (two orders per judged proposal)",
+   "value": "540",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d3_dev_facts.json",
+   "fn": "v6_d3.score",
+   "status": "exploratory"
+  }
+ ]
+}

@@ -1,0 +1,123 @@
+{
+ "source": "scripts/naacl/v5_cost_diff.py; v5.standalone_costs; no model call",
+ "frozen": "docs/naacl/results/v5_frozen.json",
+ "outcome_field": "v5",
+ "development": {
+  "fields": 8628,
+  "copied_widen": 7318,
+  "copied_widen_routed": 5812,
+  "calls_per_field": {
+   "v5 (benefit router)": [
+    0.172,
+    0.2959
+   ],
+   "margin router (t_m refitted)": [
+    0.2156,
+    0.5746
+   ],
+   "margin router (v4.1 thresholds)": [
+    0.1926,
+    0.4067
+   ],
+   "struct (widen action)": [
+    0.1748,
+    0.1748
+   ],
+   "every field (routed action)": [
+    0.3755,
+    1.0821
+   ]
+  }
+ },
+ "tau": {
+  "frozen": 0.007132643950303531,
+  "refit_collection": 0.007132643950303531,
+  "refit_standalone": 0.007132643950303531,
+  "C_frozen": 0.1,
+  "C_refit": 0.1,
+  "dev_accuracy_collection": 0.9538711172925359,
+  "dev_accuracy_standalone": 0.9538711172925359,
+  "unchanged": true
+ },
+ "core_test": {
+  "fields": 13384,
+  "copied_widen": 1623,
+  "copied_widen_routed": 0,
+  "calls_per_field": {
+   "v5 (benefit router)": [
+    0.4382,
+    0.4382
+   ],
+   "margin router (t_m refitted)": [
+    0.6863,
+    0.6863
+   ],
+   "margin router (v4.1 thresholds)": [
+    0.5433,
+    0.5433
+   ],
+   "struct (widen action)": [
+    0.3693,
+    0.3693
+   ],
+   "every field (routed action)": [
+    1.1285,
+    1.1285
+   ]
+  }
+ },
+ "heldout_test": {
+  "fields": 3652,
+  "copied_widen": 15,
+  "copied_widen_routed": 0,
+  "calls_per_field": {
+   "v5 (benefit router)": [
+    1.0334,
+    1.0334
+   ],
+   "margin router (t_m refitted)": [
+    1.0331,
+    1.0331
+   ],
+   "margin router (v4.1 thresholds)": [
+    0.9463,
+    0.9463
+   ],
+   "struct (widen action)": [
+    0.9209,
+    0.9209
+   ],
+   "every field (routed action)": [
+    1.1517,
+    1.1517
+   ]
+  }
+ },
+ "scored_test_unchanged": {
+  "F-VFiveMainCalls": {
+   "fact": "0.44",
+   "recomputed_collection": 0.4382,
+   "agrees": true
+  },
+  "F-VFiveMarginCalls": {
+   "fact": "0.69",
+   "recomputed_collection": 0.6863,
+   "agrees": true
+  },
+  "F-VFiveMarginOldCalls": {
+   "fact": "0.54",
+   "recomputed_collection": 0.5433,
+   "agrees": true
+  },
+  "F-VFiveStructCalls": {
+   "fact": "0.37",
+   "recomputed_collection": 0.3693,
+   "agrees": true
+  },
+  "F-VFiveEveryCalls": {
+   "fact": "1.13",
+   "recomputed_collection": 1.1285,
+   "agrees": true
+  }
+ }
+}

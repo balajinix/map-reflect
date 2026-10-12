@@ -1,4 +1,0 @@
-type GenericEntry {
-  response_type: String
-  text: String
-}

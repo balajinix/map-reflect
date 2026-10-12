@@ -1,7 +1,0 @@
-type RouterSettings {
-  model_name: String
-  model_params: ModelParams1
-  router_config: RouterConfig
-  router_type: String
-  routing_prompt: String
-}

@@ -1,0 +1,1619 @@
+{
+ "generated_by": "scripts/naacl/v5_strategies.py",
+ "status": "exploratory",
+ "split": "test",
+ "frozen": "docs/naacl/results/v5_frozen.json",
+ "B": 2000,
+ "seed": 20261009,
+ "top_share": 0.3,
+ "arm_sources": {
+  "itopsgraph__gptoss": "v5 inputs (task 1b rerun, 307 fields; the rest byte-identical prompts)",
+  "toolbench__gptoss": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__gptoss": "v5 inputs (task 1b rerun)",
+  "omop_cms__gptoss": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_mimic__gptoss": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_synthea__gptoss": "v5 prompts (R-X1 ff1 rerun)",
+  "valentine_chembl__gptoss": "v5 inputs (task 1b rerun)",
+  "valentine_opendata__gptoss": "v5 inputs (task 1b rerun)",
+  "valentine_tpcdi__gptoss": "v5 inputs (task 1b rerun)",
+  "valentine_wikidata__gptoss": "v5 inputs (task 1b rerun)",
+  "itopsgraph__llama4": "v5 inputs (task 1b rerun, 307 fields; the rest byte-identical prompts)",
+  "toolbench__llama4": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__llama4": "v5 inputs (task 1b rerun)",
+  "omop_cms__llama4": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_mimic__llama4": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_synthea__llama4": "v5 prompts (R-X1 ff1 rerun)",
+  "valentine_chembl__llama4": "v5 inputs (task 1b rerun)",
+  "valentine_opendata__llama4": "v5 inputs (task 1b rerun)",
+  "valentine_tpcdi__llama4": "v5 inputs (task 1b rerun)",
+  "valentine_wikidata__llama4": "v5 inputs (task 1b rerun)",
+  "itopsgraph__granite": "v5 inputs (task 1b rerun, 307 fields; the rest byte-identical prompts)",
+  "toolbench__granite": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__granite": "v5 inputs (task 1b rerun)",
+  "omop_cms__granite": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_mimic__granite": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_synthea__granite": "v5 prompts (R-X1 ff1 rerun)",
+  "valentine_chembl__granite": "v5 inputs (task 1b rerun)",
+  "valentine_opendata__granite": "v5 inputs (task 1b rerun)",
+  "valentine_tpcdi__granite": "v5 inputs (task 1b rerun)",
+  "valentine_wikidata__granite": "v5 inputs (task 1b rerun)",
+  "itopsgraph__qwen35": "v5 inputs (task 1b rerun, 302 fields; the rest byte-identical prompts)",
+  "toolbench__qwen35": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__qwen35": "v5 inputs (task 1b rerun)",
+  "omop_cms__qwen35": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_mimic__qwen35": "v5 prompts (R-X1 ff1 rerun)",
+  "omop_synthea__qwen35": "v5 prompts (R-X1 ff1 rerun)",
+  "valentine_chembl__qwen35": "v5 inputs (task 1b rerun)",
+  "valentine_opendata__qwen35": "v5 inputs (task 1b rerun)",
+  "valentine_tpcdi__qwen35": "v5 inputs (task 1b rerun)",
+  "valentine_wikidata__qwen35": "v5 inputs (task 1b rerun)"
+ },
+ "arm_sources_pre": {
+  "itopsgraph__gptoss": "stored protocol v2 inputs (no ff1 type text)",
+  "toolbench__gptoss": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__gptoss": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "omop_cms__gptoss": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_mimic__gptoss": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_synthea__gptoss": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "valentine_chembl__gptoss": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_opendata__gptoss": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_tpcdi__gptoss": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_wikidata__gptoss": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "itopsgraph__llama4": "stored protocol v2 inputs (no ff1 type text)",
+  "toolbench__llama4": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__llama4": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "omop_cms__llama4": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_mimic__llama4": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_synthea__llama4": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "valentine_chembl__llama4": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_opendata__llama4": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_tpcdi__llama4": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_wikidata__llama4": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "itopsgraph__granite": "stored protocol v2 inputs (no ff1 type text)",
+  "toolbench__granite": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__granite": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "omop_cms__granite": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_mimic__granite": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_synthea__granite": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "valentine_chembl__granite": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_opendata__granite": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_tpcdi__granite": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_wikidata__granite": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "itopsgraph__qwen35": "stored protocol v2 inputs (no ff1 type text)",
+  "toolbench__qwen35": "v5 prompts (stored rows, byte-identical)",
+  "nl2gql__qwen35": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "omop_cms__qwen35": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_mimic__qwen35": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "omop_synthea__qwen35": "stored protocol v2 inputs (the R-X1 ff1 rerun is not in for all four models)",
+  "valentine_chembl__qwen35": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_opendata__qwen35": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_tpcdi__qwen35": "stored protocol v2 inputs (no v4.1 source metadata or target name)",
+  "valentine_wikidata__qwen35": "stored protocol v2 inputs (no v4.1 source metadata or target name)"
+ },
+ "facts": [
+  {
+   "id": "F-VFiveStratFields",
+   "claim": "test (exploratory): v5 test field-model pairs (four models, ten core datasets)",
+   "value": "13,384",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratRateShare",
+   "claim": "test (exploratory): fields selected by v5's frozen benefit model (u above tau), %",
+   "value": "32.0",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratTopShare",
+   "claim": "test (exploratory): fields selected as each cell's top 30% by u(x), %",
+   "value": "30.0",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtEveryGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, selection Every: change over the first pass, points",
+   "value": "-23.36",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-25.90",
+   "hi": "-20.84"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtEveryAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, selection Every: field accuracy, %",
+   "value": "62.13",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtEveryRepairs",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, every field: repairs / breaks",
+   "value": "317 / 3,444",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineEveryGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, selection Every: change over the first pass, points",
+   "value": "-3.10",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-3.77",
+   "hi": "-2.46"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineEveryAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, selection Every: field accuracy, %",
+   "value": "82.39",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineEveryRepairs",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, every field: repairs / breaks",
+   "value": "168 / 583",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEveryGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, selection Every: change over the first pass, points",
+   "value": "+0.10",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.03",
+   "hi": "+0.28"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEveryAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, selection Every: field accuracy, %",
+   "value": "85.59",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEveryRepairs",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, every field: repairs / breaks",
+   "value": "43 / 29",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckEveryGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, selection Every: change over the first pass, points",
+   "value": "+0.16",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.03",
+   "hi": "+0.35"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckEveryAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, selection Every: field accuracy, %",
+   "value": "85.65",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckEveryRepairs",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, every field: repairs / breaks",
+   "value": "33 / 11",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceEveryGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, selection Every: change over the first pass, points",
+   "value": "-1.86",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-2.59",
+   "hi": "-1.26"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceEveryAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, selection Every: field accuracy, %",
+   "value": "83.63",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceEveryRepairs",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, every field: repairs / breaks",
+   "value": "98 / 347",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckEveryGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, selection Every: change over the first pass, points",
+   "value": "+0.24",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.06",
+   "hi": "+0.48"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckEveryAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, selection Every: field accuracy, %",
+   "value": "85.73",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckEveryRepairs",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, every field: repairs / breaks",
+   "value": "63 / 31",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtRateGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, selection Rate: change over the first pass, points",
+   "value": "-7.46",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-9.61",
+   "hi": "-5.66"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtRateAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, selection Rate: field accuracy, %",
+   "value": "78.03",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtRateRandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "-8.52",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-10.60",
+   "hi": "-6.81"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtRateMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt: selection Rate minus the random selection of its share, points",
+   "value": "+1.07",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.28",
+   "hi": "+1.96"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineRateGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, selection Rate: change over the first pass, points",
+   "value": "-0.76",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-1.19",
+   "hi": "-0.37"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineRateAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, selection Rate: field accuracy, %",
+   "value": "84.73",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineRateRandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "-0.84",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-1.17",
+   "hi": "-0.58"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineRateMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine: selection Rate minus the random selection of its share, points",
+   "value": "+0.08",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.14",
+   "hi": "+0.32"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralRateGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, selection Rate: change over the first pass, points",
+   "value": "+0.11",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.01",
+   "hi": "+0.25"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralRateAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, selection Rate: field accuracy, %",
+   "value": "85.60",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralRateRandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+0.03",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.02",
+   "hi": "+0.09"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralRateMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral: selection Rate minus the random selection of its share, points",
+   "value": "+0.08",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.01",
+   "hi": "+0.18"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckRateGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, selection Rate: change over the first pass, points",
+   "value": "+0.13",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.03",
+   "hi": "+0.25"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckRateAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, selection Rate: field accuracy, %",
+   "value": "85.62",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckRateRandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+0.04",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.00",
+   "hi": "+0.10"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckRateMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck: selection Rate minus the random selection of its share, points",
+   "value": "+0.08",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.02",
+   "hi": "+0.18"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceRateGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, selection Rate: change over the first pass, points",
+   "value": "-0.66",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-1.24",
+   "hi": "-0.19"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceRateAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, selection Rate: field accuracy, %",
+   "value": "84.83",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceRateRandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "-0.85",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-1.32",
+   "hi": "-0.48"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceRateMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence: selection Rate minus the random selection of its share, points",
+   "value": "+0.18",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.01",
+   "hi": "+0.39"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckRateGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, selection Rate: change over the first pass, points",
+   "value": "+0.28",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.13",
+   "hi": "+0.46"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckRateAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, selection Rate: field accuracy, %",
+   "value": "85.77",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckRateRandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+0.10",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.04",
+   "hi": "+0.17"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckRateMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck: selection Rate minus the random selection of its share, points",
+   "value": "+0.18",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.08",
+   "hi": "+0.33"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtTopUGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, selection TopU: change over the first pass, points",
+   "value": "-3.86",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-5.07",
+   "hi": "-2.60"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtTopUAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, selection TopU: field accuracy, %",
+   "value": "81.63",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtTopURandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "-7.02",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-7.78",
+   "hi": "-6.26"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveDoubtTopUMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Doubt: selection TopU minus the random selection of its share, points",
+   "value": "+3.16",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+2.20",
+   "hi": "+4.21"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineTopUGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, selection TopU: change over the first pass, points",
+   "value": "-0.65",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-1.02",
+   "hi": "-0.24"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineTopUAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, selection TopU: field accuracy, %",
+   "value": "84.84",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineTopURandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "-0.93",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-1.13",
+   "hi": "-0.74"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveSelfRefineTopUMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy SelfRefine: selection TopU minus the random selection of its share, points",
+   "value": "+0.28",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.01",
+   "hi": "+0.61"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralTopUGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, selection TopU: change over the first pass, points",
+   "value": "+0.09",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.01",
+   "hi": "+0.22"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralTopUAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, selection TopU: field accuracy, %",
+   "value": "85.58",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralTopURandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+0.03",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.01",
+   "hi": "+0.09"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralTopUMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Neutral: selection TopU minus the random selection of its share, points",
+   "value": "+0.06",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.02",
+   "hi": "+0.15"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckTopUGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, selection TopU: change over the first pass, points",
+   "value": "+0.10",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.01",
+   "hi": "+0.24"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckTopUAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, selection TopU: field accuracy, %",
+   "value": "85.59",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckTopURandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+0.05",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.01",
+   "hi": "+0.11"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralCheckTopUMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralCheck: selection TopU minus the random selection of its share, points",
+   "value": "+0.06",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.02",
+   "hi": "+0.14"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceTopUGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, selection TopU: change over the first pass, points",
+   "value": "-0.13",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.29",
+   "hi": "+0.03"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceTopUAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, selection TopU: field accuracy, %",
+   "value": "85.36",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceTopURandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "-0.56",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.78",
+   "hi": "-0.38"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveEvidenceTopUMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy Evidence: selection TopU minus the random selection of its share, points",
+   "value": "+0.43",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.24",
+   "hi": "+0.63"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckTopUGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, selection TopU: change over the first pass, points",
+   "value": "+0.21",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.08",
+   "hi": "+0.39"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckTopUAcc",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, selection TopU: field accuracy, %",
+   "value": "85.70",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckTopURandomGain",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+0.07",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.02",
+   "hi": "+0.14"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveNeutralEvidenceCheckTopUMinusRandom",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): strategy NeutralEvidenceCheck: selection TopU minus the random selection of its share, points",
+   "value": "+0.14",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.04",
+   "hi": "+0.26"
+  },
+  {
+   "id": "F-VFiveStratPreVFiveArmMissing",
+   "claim": "test (exploratory): the existing arms (before the task 1b rerun): arm outcomes missing for a v5 test field (first answer kept), over arms and cells",
+   "value": "0",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratDoubtEveryGain",
+   "claim": "test (exploratory): strategy Doubt, selection Every: change over the first pass, points",
+   "value": "-22.22",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-25.14",
+   "hi": "-19.40"
+  },
+  {
+   "id": "F-VFiveStratDoubtEveryAcc",
+   "claim": "test (exploratory): strategy Doubt, selection Every: field accuracy, %",
+   "value": "63.27",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratDoubtEveryRepairs",
+   "claim": "test (exploratory): strategy Doubt, every field: repairs / breaks",
+   "value": "378 / 3,352",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineEveryGain",
+   "claim": "test (exploratory): strategy SelfRefine, selection Every: change over the first pass, points",
+   "value": "-2.04",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-2.83",
+   "hi": "-1.07"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineEveryAcc",
+   "claim": "test (exploratory): strategy SelfRefine, selection Every: field accuracy, %",
+   "value": "83.45",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineEveryRepairs",
+   "claim": "test (exploratory): strategy SelfRefine, every field: repairs / breaks",
+   "value": "256 / 529",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralEveryGain",
+   "claim": "test (exploratory): strategy Neutral, selection Every: change over the first pass, points",
+   "value": "+0.56",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.29",
+   "hi": "+0.88"
+  },
+  {
+   "id": "F-VFiveStratNeutralEveryAcc",
+   "claim": "test (exploratory): strategy Neutral, selection Every: field accuracy, %",
+   "value": "86.05",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralEveryRepairs",
+   "claim": "test (exploratory): strategy Neutral, every field: repairs / breaks",
+   "value": "99 / 24",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckEveryGain",
+   "claim": "test (exploratory): strategy NeutralCheck, selection Every: change over the first pass, points",
+   "value": "+0.62",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.36",
+   "hi": "+0.93"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckEveryAcc",
+   "claim": "test (exploratory): strategy NeutralCheck, selection Every: field accuracy, %",
+   "value": "86.11",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckEveryRepairs",
+   "claim": "test (exploratory): strategy NeutralCheck, every field: repairs / breaks",
+   "value": "90 / 7",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratEvidenceEveryGain",
+   "claim": "test (exploratory): strategy Evidence, selection Every: change over the first pass, points",
+   "value": "-1.46",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-2.24",
+   "hi": "-0.72"
+  },
+  {
+   "id": "F-VFiveStratEvidenceEveryAcc",
+   "claim": "test (exploratory): strategy Evidence, selection Every: field accuracy, %",
+   "value": "84.03",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratEvidenceEveryRepairs",
+   "claim": "test (exploratory): strategy Evidence, every field: repairs / breaks",
+   "value": "168 / 363",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckEveryGain",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, selection Every: change over the first pass, points",
+   "value": "+0.85",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.47",
+   "hi": "+1.30"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckEveryAcc",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, selection Every: field accuracy, %",
+   "value": "86.34",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckEveryRepairs",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, every field: repairs / breaks",
+   "value": "141 / 27",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratWidenEveryGain",
+   "claim": "test (exploratory): strategy Widen, selection Every: change over the first pass, points",
+   "value": "+7.62",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+4.26",
+   "hi": "+11.93"
+  },
+  {
+   "id": "F-VFiveStratWidenEveryAcc",
+   "claim": "test (exploratory): strategy Widen, selection Every: field accuracy, %",
+   "value": "93.11",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratWidenEveryRepairs",
+   "claim": "test (exploratory): strategy Widen, every field: repairs / breaks",
+   "value": "1,049 / 29",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratRoutedEveryGain",
+   "claim": "test (exploratory): strategy Routed, selection Every: change over the first pass, points",
+   "value": "+7.61",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+4.25",
+   "hi": "+11.92"
+  },
+  {
+   "id": "F-VFiveStratRoutedEveryAcc",
+   "claim": "test (exploratory): strategy Routed, selection Every: field accuracy, %",
+   "value": "93.10",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratRoutedEveryRepairs",
+   "claim": "test (exploratory): strategy Routed, every field: repairs / breaks",
+   "value": "1,048 / 29",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratDoubtRateGain",
+   "claim": "test (exploratory): strategy Doubt, selection Rate: change over the first pass, points",
+   "value": "-6.51",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-8.25",
+   "hi": "-4.92"
+  },
+  {
+   "id": "F-VFiveStratDoubtRateAcc",
+   "claim": "test (exploratory): strategy Doubt, selection Rate: field accuracy, %",
+   "value": "78.98",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratDoubtRateRandomGain",
+   "claim": "test (exploratory): strategy Doubt, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "-7.53",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-9.14",
+   "hi": "-6.18"
+  },
+  {
+   "id": "F-VFiveStratDoubtRateMinusRandom",
+   "claim": "test (exploratory): strategy Doubt: selection Rate minus the random selection of its share, points",
+   "value": "+1.02",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.18",
+   "hi": "+1.93"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineRateGain",
+   "claim": "test (exploratory): strategy SelfRefine, selection Rate: change over the first pass, points",
+   "value": "+0.19",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.20",
+   "hi": "+0.63"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineRateAcc",
+   "claim": "test (exploratory): strategy SelfRefine, selection Rate: field accuracy, %",
+   "value": "85.68",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineRateRandomGain",
+   "claim": "test (exploratory): strategy SelfRefine, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "-0.13",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.37",
+   "hi": "+0.14"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineRateMinusRandom",
+   "claim": "test (exploratory): strategy SelfRefine: selection Rate minus the random selection of its share, points",
+   "value": "+0.32",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.10",
+   "hi": "+0.58"
+  },
+  {
+   "id": "F-VFiveStratNeutralRateGain",
+   "claim": "test (exploratory): strategy Neutral, selection Rate: change over the first pass, points",
+   "value": "+0.44",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.22",
+   "hi": "+0.68"
+  },
+  {
+   "id": "F-VFiveStratNeutralRateAcc",
+   "claim": "test (exploratory): strategy Neutral, selection Rate: field accuracy, %",
+   "value": "85.93",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralRateRandomGain",
+   "claim": "test (exploratory): strategy Neutral, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+0.30",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.15",
+   "hi": "+0.48"
+  },
+  {
+   "id": "F-VFiveStratNeutralRateMinusRandom",
+   "claim": "test (exploratory): strategy Neutral: selection Rate minus the random selection of its share, points",
+   "value": "+0.14",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.05",
+   "hi": "+0.23"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckRateGain",
+   "claim": "test (exploratory): strategy NeutralCheck, selection Rate: change over the first pass, points",
+   "value": "+0.47",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.25",
+   "hi": "+0.70"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckRateAcc",
+   "claim": "test (exploratory): strategy NeutralCheck, selection Rate: field accuracy, %",
+   "value": "85.96",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckRateRandomGain",
+   "claim": "test (exploratory): strategy NeutralCheck, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+0.31",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.16",
+   "hi": "+0.48"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckRateMinusRandom",
+   "claim": "test (exploratory): strategy NeutralCheck: selection Rate minus the random selection of its share, points",
+   "value": "+0.16",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.07",
+   "hi": "+0.26"
+  },
+  {
+   "id": "F-VFiveStratEvidenceRateGain",
+   "claim": "test (exploratory): strategy Evidence, selection Rate: change over the first pass, points",
+   "value": "-0.18",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.80",
+   "hi": "+0.36"
+  },
+  {
+   "id": "F-VFiveStratEvidenceRateAcc",
+   "claim": "test (exploratory): strategy Evidence, selection Rate: field accuracy, %",
+   "value": "85.31",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratEvidenceRateRandomGain",
+   "claim": "test (exploratory): strategy Evidence, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "-0.55",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-1.04",
+   "hi": "-0.13"
+  },
+  {
+   "id": "F-VFiveStratEvidenceRateMinusRandom",
+   "claim": "test (exploratory): strategy Evidence: selection Rate minus the random selection of its share, points",
+   "value": "+0.37",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.16",
+   "hi": "+0.60"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckRateGain",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, selection Rate: change over the first pass, points",
+   "value": "+0.80",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.46",
+   "hi": "+1.18"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckRateAcc",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, selection Rate: field accuracy, %",
+   "value": "86.29",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckRateRandomGain",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+0.50",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.26",
+   "hi": "+0.78"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckRateMinusRandom",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck: selection Rate minus the random selection of its share, points",
+   "value": "+0.30",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.15",
+   "hi": "+0.47"
+  },
+  {
+   "id": "F-VFiveStratWidenRateGain",
+   "claim": "test (exploratory): strategy Widen, selection Rate: change over the first pass, points",
+   "value": "+7.57",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+4.22",
+   "hi": "+11.89"
+  },
+  {
+   "id": "F-VFiveStratWidenRateAcc",
+   "claim": "test (exploratory): strategy Widen, selection Rate: field accuracy, %",
+   "value": "93.06",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratWidenRateRandomGain",
+   "claim": "test (exploratory): strategy Widen, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+5.75",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+2.91",
+   "hi": "+9.57"
+  },
+  {
+   "id": "F-VFiveStratWidenRateMinusRandom",
+   "claim": "test (exploratory): strategy Widen: selection Rate minus the random selection of its share, points",
+   "value": "+1.82",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+1.12",
+   "hi": "+2.61"
+  },
+  {
+   "id": "F-VFiveStratRoutedRateGain",
+   "claim": "test (exploratory): strategy Routed, selection Rate: change over the first pass, points",
+   "value": "+7.56",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+4.22",
+   "hi": "+11.88"
+  },
+  {
+   "id": "F-VFiveStratRoutedRateAcc",
+   "claim": "test (exploratory): strategy Routed, selection Rate: field accuracy, %",
+   "value": "93.05",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratRoutedRateRandomGain",
+   "claim": "test (exploratory): strategy Routed, a random selection of the Rate share in each cell (expected): change over the first pass, points",
+   "value": "+5.75",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+2.92",
+   "hi": "+9.55"
+  },
+  {
+   "id": "F-VFiveStratRoutedRateMinusRandom",
+   "claim": "test (exploratory): strategy Routed: selection Rate minus the random selection of its share, points",
+   "value": "+1.82",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+1.11",
+   "hi": "+2.60"
+  },
+  {
+   "id": "F-VFiveStratDoubtTopUGain",
+   "claim": "test (exploratory): strategy Doubt, selection TopU: change over the first pass, points",
+   "value": "-3.74",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-5.03",
+   "hi": "-2.43"
+  },
+  {
+   "id": "F-VFiveStratDoubtTopUAcc",
+   "claim": "test (exploratory): strategy Doubt, selection TopU: field accuracy, %",
+   "value": "81.75",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratDoubtTopURandomGain",
+   "claim": "test (exploratory): strategy Doubt, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "-6.67",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-7.55",
+   "hi": "-5.83"
+  },
+  {
+   "id": "F-VFiveStratDoubtTopUMinusRandom",
+   "claim": "test (exploratory): strategy Doubt: selection TopU minus the random selection of its share, points",
+   "value": "+2.93",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+2.05",
+   "hi": "+3.89"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineTopUGain",
+   "claim": "test (exploratory): strategy SelfRefine, selection TopU: change over the first pass, points",
+   "value": "-0.29",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.72",
+   "hi": "+0.18"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineTopUAcc",
+   "claim": "test (exploratory): strategy SelfRefine, selection TopU: field accuracy, %",
+   "value": "85.20",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineTopURandomGain",
+   "claim": "test (exploratory): strategy SelfRefine, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "-0.61",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.85",
+   "hi": "-0.32"
+  },
+  {
+   "id": "F-VFiveStratSelfRefineTopUMinusRandom",
+   "claim": "test (exploratory): strategy SelfRefine: selection TopU minus the random selection of its share, points",
+   "value": "+0.32",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.05",
+   "hi": "+0.62"
+  },
+  {
+   "id": "F-VFiveStratNeutralTopUGain",
+   "claim": "test (exploratory): strategy Neutral, selection TopU: change over the first pass, points",
+   "value": "+0.31",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.12",
+   "hi": "+0.55"
+  },
+  {
+   "id": "F-VFiveStratNeutralTopUAcc",
+   "claim": "test (exploratory): strategy Neutral, selection TopU: field accuracy, %",
+   "value": "85.80",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralTopURandomGain",
+   "claim": "test (exploratory): strategy Neutral, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+0.17",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.09",
+   "hi": "+0.27"
+  },
+  {
+   "id": "F-VFiveStratNeutralTopUMinusRandom",
+   "claim": "test (exploratory): strategy Neutral: selection TopU minus the random selection of its share, points",
+   "value": "+0.15",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.00",
+   "hi": "+0.31"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckTopUGain",
+   "claim": "test (exploratory): strategy NeutralCheck, selection TopU: change over the first pass, points",
+   "value": "+0.34",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.14",
+   "hi": "+0.58"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckTopUAcc",
+   "claim": "test (exploratory): strategy NeutralCheck, selection TopU: field accuracy, %",
+   "value": "85.83",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckTopURandomGain",
+   "claim": "test (exploratory): strategy NeutralCheck, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+0.19",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.11",
+   "hi": "+0.28"
+  },
+  {
+   "id": "F-VFiveStratNeutralCheckTopUMinusRandom",
+   "claim": "test (exploratory): strategy NeutralCheck: selection TopU minus the random selection of its share, points",
+   "value": "+0.15",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.00",
+   "hi": "+0.32"
+  },
+  {
+   "id": "F-VFiveStratEvidenceTopUGain",
+   "claim": "test (exploratory): strategy Evidence, selection TopU: change over the first pass, points",
+   "value": "+0.19",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.08",
+   "hi": "+0.47"
+  },
+  {
+   "id": "F-VFiveStratEvidenceTopUAcc",
+   "claim": "test (exploratory): strategy Evidence, selection TopU: field accuracy, %",
+   "value": "85.68",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratEvidenceTopURandomGain",
+   "claim": "test (exploratory): strategy Evidence, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "-0.44",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "-0.68",
+   "hi": "-0.22"
+  },
+  {
+   "id": "F-VFiveStratEvidenceTopUMinusRandom",
+   "claim": "test (exploratory): strategy Evidence: selection TopU minus the random selection of its share, points",
+   "value": "+0.63",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.38",
+   "hi": "+0.90"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckTopUGain",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, selection TopU: change over the first pass, points",
+   "value": "+0.51",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.25",
+   "hi": "+0.83"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckTopUAcc",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, selection TopU: field accuracy, %",
+   "value": "86.00",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckTopURandomGain",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+0.26",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.14",
+   "hi": "+0.39"
+  },
+  {
+   "id": "F-VFiveStratNeutralEvidenceCheckTopUMinusRandom",
+   "claim": "test (exploratory): strategy NeutralEvidenceCheck: selection TopU minus the random selection of its share, points",
+   "value": "+0.25",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+0.06",
+   "hi": "+0.48"
+  },
+  {
+   "id": "F-VFiveStratWidenTopUGain",
+   "claim": "test (exploratory): strategy Widen, selection TopU: change over the first pass, points",
+   "value": "+5.47",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+2.87",
+   "hi": "+8.77"
+  },
+  {
+   "id": "F-VFiveStratWidenTopUAcc",
+   "claim": "test (exploratory): strategy Widen, selection TopU: field accuracy, %",
+   "value": "90.96",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratWidenTopURandomGain",
+   "claim": "test (exploratory): strategy Widen, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+2.29",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+1.28",
+   "hi": "+3.58"
+  },
+  {
+   "id": "F-VFiveStratWidenTopUMinusRandom",
+   "claim": "test (exploratory): strategy Widen: selection TopU minus the random selection of its share, points",
+   "value": "+3.18",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+1.55",
+   "hi": "+5.26"
+  },
+  {
+   "id": "F-VFiveStratRoutedTopUGain",
+   "claim": "test (exploratory): strategy Routed, selection TopU: change over the first pass, points",
+   "value": "+5.47",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+2.87",
+   "hi": "+8.77"
+  },
+  {
+   "id": "F-VFiveStratRoutedTopUAcc",
+   "claim": "test (exploratory): strategy Routed, selection TopU: field accuracy, %",
+   "value": "90.96",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratRoutedTopURandomGain",
+   "claim": "test (exploratory): strategy Routed, a random selection of the TopU share in each cell (expected): change over the first pass, points",
+   "value": "+2.29",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+1.28",
+   "hi": "+3.58"
+  },
+  {
+   "id": "F-VFiveStratRoutedTopUMinusRandom",
+   "claim": "test (exploratory): strategy Routed: selection TopU minus the random selection of its share, points",
+   "value": "+3.18",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory",
+   "lo": "+1.55",
+   "hi": "+5.26"
+  },
+  {
+   "id": "F-VFiveStratArmMissing",
+   "claim": "test (exploratory): arm outcomes missing for a v5 test field (first answer kept), over arms and cells",
+   "value": "0",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratCellsOnVFiveInputs",
+   "claim": "test (exploratory): dataset-model cells whose arms are on v5's inputs",
+   "value": "40 of 40: itopsgraph__gptoss, itopsgraph__granite, itopsgraph__llama4, itopsgraph__qwen35, nl2gql__gptoss, nl2gql__granite, nl2gql__llama4, nl2gql__qwen35, omop_cms__gptoss, omop_cms__granite, omop_cms__llama4, omop_cms__qwen35, omop_mimic__gptoss, omop_mimic__granite, omop_mimic__llama4, omop_mimic__qwen35, omop_synthea__gptoss, omop_synthea__granite, omop_synthea__llama4, omop_synthea__qwen35, toolbench__gptoss, toolbench__granite, toolbench__llama4, toolbench__qwen35, valentine_chembl__gptoss, valentine_chembl__granite, valentine_chembl__llama4, valentine_chembl__qwen35, valentine_opendata__gptoss, valentine_opendata__granite, valentine_opendata__llama4, valentine_opendata__qwen35, valentine_tpcdi__gptoss, valentine_tpcdi__granite, valentine_tpcdi__llama4, valentine_tpcdi__qwen35, valentine_wikidata__gptoss, valentine_wikidata__granite, valentine_wikidata__llama4, valentine_wikidata__qwen35",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratCellsOnStoredArms",
+   "claim": "test (exploratory): dataset-model cells still on stored arms, with their input difference",
+   "value": "none",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratITopsRerunGptOss",
+   "claim": "test (exploratory): ITOpsGraph, gptoss: scored fields rerun on v5's inputs (the rest keep stored rows, their prompts byte-identical)",
+   "value": "274 of 377",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratITopsRerunLlamaFour",
+   "claim": "test (exploratory): ITOpsGraph, llama4: scored fields rerun on v5's inputs (the rest keep stored rows, their prompts byte-identical)",
+   "value": "274 of 377",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratITopsRerunGranite",
+   "claim": "test (exploratory): ITOpsGraph, granite: scored fields rerun on v5's inputs (the rest keep stored rows, their prompts byte-identical)",
+   "value": "274 of 377",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratITopsRerunQwenThreeFive",
+   "claim": "test (exploratory): ITOpsGraph, qwen35: scored fields rerun on v5's inputs (the rest keep stored rows, their prompts byte-identical)",
+   "value": "274 of 377",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStratArmParser",
+   "claim": "test (exploratory): JSON parser of the arm outcomes",
+   "value": "v5's robust parser on the task 1b rerun cells; the protocol v2 parser on every other cell (R-X1 and stored rows; no raw responses to re-read)",
+   "src": "docs/naacl/results/v5_strategies_facts.json",
+   "fn": "v5_strategies",
+   "status": "exploratory"
+  }
+ ]
+}

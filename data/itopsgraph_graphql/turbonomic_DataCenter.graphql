@@ -1,5 +1,0 @@
-type DataCenter {
-  className: String
-  displayName: String
-  uuid: ID
-}

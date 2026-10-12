@@ -1,4 +1,0 @@
-type query_getCorrelatedTraces_items {
-  """The corresponding trace ID. For eg: `07eaf10c1d051234` or `000000000000000007eaf10c1d051234`"""
-  traceId: String!
-}

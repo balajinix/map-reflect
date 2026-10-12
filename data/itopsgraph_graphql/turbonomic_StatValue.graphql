@@ -1,8 +1,0 @@
-type StatValue {
-  avg: Float
-  max: Float
-  min: Float
-  total: Float
-  totalMax: Float
-  totalMin: Float
-}

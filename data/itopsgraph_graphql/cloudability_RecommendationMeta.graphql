@@ -1,5 +1,0 @@
-type RecommendationMeta {
-  aggregates: [AggregatesEntry]
-  info: [JSON]
-  totalCount: Int
-}

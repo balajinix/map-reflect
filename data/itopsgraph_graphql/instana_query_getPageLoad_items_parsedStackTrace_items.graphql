@@ -1,8 +1,0 @@
-type query_getPageLoad_items_parsedStackTrace_items {
-  column: Int
-  file: String!
-  line: Int
-  name: String
-  translationExplanation: String
-  translationStatus: Int
-}

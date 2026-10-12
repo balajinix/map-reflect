@@ -1,4 +1,0 @@
-type Hap {
-  input: Input
-  output: Output
-}

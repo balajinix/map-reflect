@@ -1,8 +1,0 @@
-type getEntityGroups_200_response {
-  adjustedTimeframe: mutation_getEntityGroups_adjustedTimeframe
-  canLoadMore: Boolean
-  items: [mutation_getEntityGroups_items_items]!
-  next: JSON
-  """represents the total number of results"""
-  totalHits: BigInt
-}

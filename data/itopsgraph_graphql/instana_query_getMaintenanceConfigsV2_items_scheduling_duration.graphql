@@ -1,4 +1,0 @@
-type query_getMaintenanceConfigsV2_items_scheduling_duration {
-  amount: BigInt!
-  unit: query_getMaintenanceConfigsV2_items_scheduling_duration_unit!
-}

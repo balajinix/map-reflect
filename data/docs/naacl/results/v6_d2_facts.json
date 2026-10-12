@@ -1,0 +1,3630 @@
+{
+ "generated_by": "scripts/naacl/v6_d2.py --stage score",
+ "frozen": "docs/naacl/results/v6_d2_1_frozen.json",
+ "base_method": "v4.1",
+ "canonical_margin": true,
+ "diff_vs_first_run": [
+  {
+   "id": "F-DTwoDevBenefitCallsVs",
+   "claim": "development, benefit at the structural router's calls: minus struct, points",
+   "v4_float": "+0.08 [-0.02, +0.19]",
+   "v4_1_canonical": "+0.08 [-0.01, +0.18]"
+  },
+  {
+   "id": "F-DTwoDevBenefitTokensVs",
+   "claim": "development, benefit at the structural router's tokens: minus struct, points",
+   "v4_float": "+0.10 [+0.00, +0.21]",
+   "v4_1_canonical": "+0.10 [+0.01, +0.20]"
+  },
+  {
+   "id": "F-DTwoDevExchCallsVs",
+   "claim": "development, struct + benefit at the structural router's calls: minus struct, points",
+   "v4_float": "+0.09 [+0.01, +0.18]",
+   "v4_1_canonical": "+0.09 [+0.01, +0.18]"
+  },
+  {
+   "id": "F-DTwoDevExchTokensVs",
+   "claim": "development, struct + benefit at the structural router's tokens: minus struct, points",
+   "v4_float": "+0.13 [+0.02, +0.24]",
+   "v4_1_canonical": "+0.12 [+0.02, +0.21]"
+  },
+  {
+   "id": "F-DTwoDevMarginCallsVs",
+   "claim": "development, margin at the structural router's calls: minus struct, points",
+   "v4_float": "-0.39 [-0.63, -0.19]",
+   "v4_1_canonical": "-0.35 [-0.62, -0.12]"
+  },
+  {
+   "id": "F-DTwoDevMarginTokensVs",
+   "claim": "development, margin at the structural router's tokens: minus struct, points",
+   "v4_float": "-0.30 [-0.51, -0.13]",
+   "v4_1_canonical": "-0.28 [-0.48, -0.11]"
+  },
+  {
+   "id": "F-DTwoDevTwoDCallsVs",
+   "claim": "development, 2-D rule at the structural router's calls: minus struct, points",
+   "v4_float": "-0.30 [-0.52, -0.10]",
+   "v4_1_canonical": "-0.27 [-0.51, -0.07]"
+  },
+  {
+   "id": "F-DTwoDevTwoDTokensVs",
+   "claim": "development, 2-D rule at the structural router's tokens: minus struct, points",
+   "v4_float": "-0.22 [-0.41, -0.07]",
+   "v4_1_canonical": "-0.20 [-0.37, -0.06]"
+  },
+  {
+   "id": "F-DTwoDevTwoDOwnOwnVs",
+   "claim": "development, 2-D rule, own budget at its own budget: minus struct, points",
+   "v4_float": "-0.48 [-0.74, -0.26]",
+   "v4_1_canonical": "-0.63 [-0.98, -0.34]"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnVs",
+   "claim": "development, Map-Reflect at its own budget: minus struct, points",
+   "v4_float": "-0.03 [-0.20, +0.12]",
+   "v4_1_canonical": "-0.03 [-0.18, +0.10]"
+  },
+  {
+   "id": "F-DTwoDevBenefitMRVs",
+   "claim": "development, benefit at Map-Reflect's calls: minus Map-Reflect, points",
+   "v4_float": "+0.16 [+0.06, +0.28]",
+   "v4_1_canonical": "+0.19 [+0.09, +0.31]"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnGain",
+   "claim": "development, Map-Reflect at its own budget: change over the first pass, points",
+   "v4_float": "+2.69 [+2.09, +3.44]",
+   "v4_1_canonical": "+2.69 [+2.10, +3.44]"
+  },
+  {
+   "id": "F-DTwoDevBenefitCallsGain",
+   "claim": "development, benefit at the structural router's calls: change over the first pass, points",
+   "v4_float": "+2.80 [+2.19, +3.59]",
+   "v4_1_canonical": "+2.80 [+2.19, +3.58]"
+  },
+  {
+   "id": "F-DTwoDevStructCallsGain",
+   "claim": "development, struct at the structural router's calls: change over the first pass, points",
+   "v4_float": "+2.72 [+2.13, +3.50]",
+   "v4_1_canonical": "+2.72 [+2.13, +3.50]"
+  },
+  {
+   "id": "F-DTwoDevStructMissBenefit",
+   "claim": "development: of those, repaired by benefit at the structural router's calls",
+   "v4_float": "13.0",
+   "v4_1_canonical": "13.0"
+  },
+  {
+   "id": "F-DTwoDevStructMiss",
+   "claim": "development: structural fields Map-Reflect keeps that widening repairs",
+   "v4_float": "15",
+   "v4_1_canonical": "14"
+  },
+  {
+   "id": "F-DTwoBenefitCallsVs",
+   "claim": "test, benefit at the structural router's calls: minus struct, points",
+   "v4_float": "+0.19 [+0.08, +0.32]",
+   "v4_1_canonical": "+0.18 [+0.07, +0.31]"
+  },
+  {
+   "id": "F-DTwoBenefitTokensVs",
+   "claim": "test, benefit at the structural router's tokens: minus struct, points",
+   "v4_float": "+0.23 [+0.10, +0.39]",
+   "v4_1_canonical": "+0.22 [+0.09, +0.37]"
+  },
+  {
+   "id": "F-DTwoExchCallsVs",
+   "claim": "test, struct + benefit at the structural router's calls: minus struct, points",
+   "v4_float": "+0.19 [+0.09, +0.31]",
+   "v4_1_canonical": "+0.18 [+0.08, +0.30]"
+  },
+  {
+   "id": "F-DTwoExchTokensVs",
+   "claim": "test, struct + benefit at the structural router's tokens: minus struct, points",
+   "v4_float": "+0.23 [+0.10, +0.39]",
+   "v4_1_canonical": "+0.22 [+0.09, +0.39]"
+  },
+  {
+   "id": "F-DTwoMarginCallsVs",
+   "claim": "test, margin at the structural router's calls: minus struct, points",
+   "v4_float": "-0.14 [-0.37, +0.10]",
+   "v4_1_canonical": "-0.14 [-0.37, +0.09]"
+  },
+  {
+   "id": "F-DTwoMarginTokensVs",
+   "claim": "test, margin at the structural router's tokens: minus struct, points",
+   "v4_float": "+0.20 [+0.03, +0.41]",
+   "v4_1_canonical": "+0.23 [+0.06, +0.45]"
+  },
+  {
+   "id": "F-DTwoTwoDCallsVs",
+   "claim": "test, 2-D rule at the structural router's calls: minus struct, points",
+   "v4_float": "-0.07 [-0.27, +0.14]",
+   "v4_1_canonical": "-0.07 [-0.26, +0.15]"
+  },
+  {
+   "id": "F-DTwoTwoDTokensVs",
+   "claim": "test, 2-D rule at the structural router's tokens: minus struct, points",
+   "v4_float": "+0.20 [+0.04, +0.41]",
+   "v4_1_canonical": "+0.22 [+0.04, +0.43]"
+  },
+  {
+   "id": "F-DTwoTwoDOwnOwnVs",
+   "claim": "test, 2-D rule, own budget at its own budget: minus struct, points",
+   "v4_float": "-0.81 [-1.29, -0.37]",
+   "v4_1_canonical": "-1.20 [-2.08, -0.49]"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnVs",
+   "claim": "test, Map-Reflect at its own budget: minus struct, points",
+   "v4_float": "+0.08 [-0.09, +0.27]",
+   "v4_1_canonical": "+0.10 [-0.06, +0.30]"
+  },
+  {
+   "id": "F-DTwoBenefitMRVs",
+   "claim": "test, benefit at Map-Reflect's calls: minus Map-Reflect, points",
+   "v4_float": "+0.13 [+0.03, +0.23]",
+   "v4_1_canonical": "+0.11 [+0.05, +0.18]"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnGain",
+   "claim": "test, Map-Reflect at its own budget: change over the first pass, points",
+   "v4_float": "+5.39 [+2.97, +8.73]",
+   "v4_1_canonical": "+5.41 [+2.98, +8.75]"
+  },
+  {
+   "id": "F-DTwoBenefitCallsGain",
+   "claim": "test, benefit at the structural router's calls: change over the first pass, points",
+   "v4_float": "+5.49 [+3.05, +8.91]",
+   "v4_1_canonical": "+5.48 [+3.05, +8.88]"
+  },
+  {
+   "id": "F-DTwoStructCallsGain",
+   "claim": "test, struct at the structural router's calls: change over the first pass, points",
+   "v4_float": "+5.30 [+2.89, +8.72]",
+   "v4_1_canonical": "+5.30 [+2.89, +8.72]"
+  },
+  {
+   "id": "F-DTwoStructMissBenefit",
+   "claim": "test: of those, repaired by benefit at the structural router's calls",
+   "v4_float": "22.0",
+   "v4_1_canonical": "19.0"
+  },
+  {
+   "id": "F-DTwoStructMiss",
+   "claim": "test: structural fields Map-Reflect keeps that widening repairs",
+   "v4_float": "23",
+   "v4_1_canonical": "19"
+  }
+ ],
+ "frozen_commit": "55d8d468f1c448277f32e857d0ad31af72ed15a7 2026-10-10T19:56:07+05:30",
+ "status": "exploratory",
+ "facts": [
+  {
+   "id": "F-DTwoFrozenCommit",
+   "claim": "commit and time of docs/naacl/results/v6_d2_1_frozen.json (fitted on development only; base method v4.1)",
+   "value": "55d8d468f1c448277f32e857d0ad31af72ed15a7 2026-10-10T19:56:07+05:30",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitActC",
+   "claim": "benefit model (v4.1 action): L2 inverse strength C chosen by grouped CV on development",
+   "value": "0.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitActDevRepairs",
+   "claim": "benefit model (v4.1 action): development repairs / breaks / fields",
+   "value": "259 / 36 / 8,628",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitWidC",
+   "claim": "benefit model (widen action): L2 inverse strength C chosen by grouped CV on development",
+   "value": "0.1",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitWidDevRepairs",
+   "claim": "benefit model (widen action): development repairs / breaks / fields",
+   "value": "259 / 38 / 8,628",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDThrGptoss",
+   "claim": "gptoss: 2-D rule thresholds a (margin), b (top score), c (single-ranked top score)",
+   "value": "a = 0.100, b = none, c = none",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDThrLlama",
+   "claim": "llama4: 2-D rule thresholds a (margin), b (top score), c (single-ranked top score)",
+   "value": "a = 0.000, b = none, c = none",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDThrGranite",
+   "claim": "granite: 2-D rule thresholds a (margin), b (top score), c (single-ranked top score)",
+   "value": "a = none, b = 0.600, c = 0.100",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDThrQwen",
+   "claim": "qwen35: 2-D rule thresholds a (margin), b (top score), c (single-ranked top score)",
+   "value": "a = 0.150, b = 0.850, c = none",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchShare",
+   "claim": "struct + benefit: share of structural fields dropped (fitted on development)",
+   "value": "0.20",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevFields",
+   "claim": "development field-model pairs",
+   "value": "8,628",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructCallsGain",
+   "claim": "development, struct at the structural router's calls: change over the first pass, points",
+   "value": "+2.72",
+   "lo": "+2.13",
+   "hi": "+3.50",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructCallsCallsPer",
+   "claim": "development, struct at the structural router's calls: second-pass calls per field",
+   "value": "0.154",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructCallsTokensPer",
+   "claim": "development, struct at the structural router's calls: second-pass tokens per field",
+   "value": "953",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructCallsRouted",
+   "claim": "development, struct at the structural router's calls: share of fields routed, %",
+   "value": "12.8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructCallsRepairs",
+   "claim": "development, struct at the structural router's calls: repairs / breaks",
+   "value": "240 / 5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnGain",
+   "claim": "development, Map-Reflect at its own budget: change over the first pass, points",
+   "value": "+2.69",
+   "lo": "+2.10",
+   "hi": "+3.44",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnCallsPer",
+   "claim": "development, Map-Reflect at its own budget: second-pass calls per field",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnTokensPer",
+   "claim": "development, Map-Reflect at its own budget: second-pass tokens per field",
+   "value": "1,482",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnRouted",
+   "claim": "development, Map-Reflect at its own budget: share of fields routed, %",
+   "value": "33.9",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnRepairs",
+   "claim": "development, Map-Reflect at its own budget: repairs / breaks",
+   "value": "243 / 11",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMapReflectOwnVs",
+   "claim": "development, Map-Reflect at its own budget: minus struct, points",
+   "value": "-0.03",
+   "lo": "-0.18",
+   "hi": "+0.10",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDOwnOwnGain",
+   "claim": "development, 2-D rule, own budget at its own budget: change over the first pass, points",
+   "value": "+2.10",
+   "lo": "+1.54",
+   "hi": "+2.78",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDOwnOwnCallsPer",
+   "claim": "development, 2-D rule, own budget at its own budget: second-pass calls per field",
+   "value": "0.095",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDOwnOwnTokensPer",
+   "claim": "development, 2-D rule, own budget at its own budget: second-pass tokens per field",
+   "value": "383",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDOwnOwnRouted",
+   "claim": "development, 2-D rule, own budget at its own budget: share of fields routed, %",
+   "value": "7.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDOwnOwnRepairs",
+   "claim": "development, 2-D rule, own budget at its own budget: repairs / breaks",
+   "value": "186 / 5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDOwnOwnVs",
+   "claim": "development, 2-D rule, own budget at its own budget: minus struct, points",
+   "value": "-0.63",
+   "lo": "-0.98",
+   "hi": "-0.34",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginCallsGain",
+   "claim": "development, margin at the structural router's calls: change over the first pass, points",
+   "value": "+2.37",
+   "lo": "+1.80",
+   "hi": "+3.07",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginCallsCallsPer",
+   "claim": "development, margin at the structural router's calls: second-pass calls per field",
+   "value": "0.154",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginCallsTokensPer",
+   "claim": "development, margin at the structural router's calls: second-pass tokens per field",
+   "value": "691",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginCallsRouted",
+   "claim": "development, margin at the structural router's calls: share of fields routed, %",
+   "value": "13.2",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginCallsRepairs",
+   "claim": "development, margin at the structural router's calls: repairs / breaks",
+   "value": "211 / 6",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginCallsVs",
+   "claim": "development, margin at the structural router's calls: minus struct, points",
+   "value": "-0.35",
+   "lo": "-0.62",
+   "hi": "-0.12",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDCallsGain",
+   "claim": "development, 2-D rule at the structural router's calls: change over the first pass, points",
+   "value": "+2.45",
+   "lo": "+1.86",
+   "hi": "+3.15",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDCallsCallsPer",
+   "claim": "development, 2-D rule at the structural router's calls: second-pass calls per field",
+   "value": "0.154",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDCallsTokensPer",
+   "claim": "development, 2-D rule at the structural router's calls: second-pass tokens per field",
+   "value": "658",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDCallsRouted",
+   "claim": "development, 2-D rule at the structural router's calls: share of fields routed, %",
+   "value": "13.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDCallsRepairs",
+   "claim": "development, 2-D rule at the structural router's calls: repairs / breaks",
+   "value": "218 / 7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDCallsVs",
+   "claim": "development, 2-D rule at the structural router's calls: minus struct, points",
+   "value": "-0.27",
+   "lo": "-0.51",
+   "hi": "-0.07",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitCallsGain",
+   "claim": "development, benefit at the structural router's calls: change over the first pass, points",
+   "value": "+2.80",
+   "lo": "+2.19",
+   "hi": "+3.58",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitCallsCallsPer",
+   "claim": "development, benefit at the structural router's calls: second-pass calls per field",
+   "value": "0.154",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitCallsTokensPer",
+   "claim": "development, benefit at the structural router's calls: second-pass tokens per field",
+   "value": "859",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitCallsRouted",
+   "claim": "development, benefit at the structural router's calls: share of fields routed, %",
+   "value": "12.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitCallsRepairs",
+   "claim": "development, benefit at the structural router's calls: repairs / breaks",
+   "value": "250 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitCallsVs",
+   "claim": "development, benefit at the structural router's calls: minus struct, points",
+   "value": "+0.08",
+   "lo": "-0.01",
+   "hi": "+0.18",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchCallsGain",
+   "claim": "development, struct + benefit at the structural router's calls: change over the first pass, points",
+   "value": "+2.82",
+   "lo": "+2.20",
+   "hi": "+3.61",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchCallsCallsPer",
+   "claim": "development, struct + benefit at the structural router's calls: second-pass calls per field",
+   "value": "0.154",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchCallsTokensPer",
+   "claim": "development, struct + benefit at the structural router's calls: second-pass tokens per field",
+   "value": "872",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchCallsRouted",
+   "claim": "development, struct + benefit at the structural router's calls: share of fields routed, %",
+   "value": "12.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchCallsRepairs",
+   "claim": "development, struct + benefit at the structural router's calls: repairs / breaks",
+   "value": "250 / 7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchCallsVs",
+   "claim": "development, struct + benefit at the structural router's calls: minus struct, points",
+   "value": "+0.09",
+   "lo": "+0.01",
+   "hi": "+0.18",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginTokensGain",
+   "claim": "development, margin at the structural router's tokens: change over the first pass, points",
+   "value": "+2.45",
+   "lo": "+1.89",
+   "hi": "+3.14",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginTokensCallsPer",
+   "claim": "development, margin at the structural router's tokens: second-pass calls per field",
+   "value": "0.246",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginTokensTokensPer",
+   "claim": "development, margin at the structural router's tokens: second-pass tokens per field",
+   "value": "953",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginTokensRouted",
+   "claim": "development, margin at the structural router's tokens: share of fields routed, %",
+   "value": "21.9",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginTokensRepairs",
+   "claim": "development, margin at the structural router's tokens: repairs / breaks",
+   "value": "223 / 12",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginTokensVs",
+   "claim": "development, margin at the structural router's tokens: minus struct, points",
+   "value": "-0.28",
+   "lo": "-0.48",
+   "hi": "-0.11",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDTokensGain",
+   "claim": "development, 2-D rule at the structural router's tokens: change over the first pass, points",
+   "value": "+2.52",
+   "lo": "+1.95",
+   "hi": "+3.22",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDTokensCallsPer",
+   "claim": "development, 2-D rule at the structural router's tokens: second-pass calls per field",
+   "value": "0.287",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDTokensTokensPer",
+   "claim": "development, 2-D rule at the structural router's tokens: second-pass tokens per field",
+   "value": "953",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDTokensRouted",
+   "claim": "development, 2-D rule at the structural router's tokens: share of fields routed, %",
+   "value": "25.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDTokensRepairs",
+   "claim": "development, 2-D rule at the structural router's tokens: repairs / breaks",
+   "value": "231 / 14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevTwoDTokensVs",
+   "claim": "development, 2-D rule at the structural router's tokens: minus struct, points",
+   "value": "-0.20",
+   "lo": "-0.37",
+   "hi": "-0.06",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitTokensGain",
+   "claim": "development, benefit at the structural router's tokens: change over the first pass, points",
+   "value": "+2.83",
+   "lo": "+2.21",
+   "hi": "+3.62",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitTokensCallsPer",
+   "claim": "development, benefit at the structural router's tokens: second-pass calls per field",
+   "value": "0.192",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitTokensTokensPer",
+   "claim": "development, benefit at the structural router's tokens: second-pass tokens per field",
+   "value": "953",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitTokensRouted",
+   "claim": "development, benefit at the structural router's tokens: share of fields routed, %",
+   "value": "16.2",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitTokensRepairs",
+   "claim": "development, benefit at the structural router's tokens: repairs / breaks",
+   "value": "252 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitTokensVs",
+   "claim": "development, benefit at the structural router's tokens: minus struct, points",
+   "value": "+0.10",
+   "lo": "+0.01",
+   "hi": "+0.20",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchTokensGain",
+   "claim": "development, struct + benefit at the structural router's tokens: change over the first pass, points",
+   "value": "+2.84",
+   "lo": "+2.22",
+   "hi": "+3.63",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchTokensCallsPer",
+   "claim": "development, struct + benefit at the structural router's tokens: second-pass calls per field",
+   "value": "0.200",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchTokensTokensPer",
+   "claim": "development, struct + benefit at the structural router's tokens: second-pass tokens per field",
+   "value": "953",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchTokensRouted",
+   "claim": "development, struct + benefit at the structural router's tokens: share of fields routed, %",
+   "value": "17.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchTokensRepairs",
+   "claim": "development, struct + benefit at the structural router's tokens: repairs / breaks",
+   "value": "253 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExchTokensVs",
+   "claim": "development, struct + benefit at the structural router's tokens: minus struct, points",
+   "value": "+0.12",
+   "lo": "+0.02",
+   "hi": "+0.21",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitMRGain",
+   "claim": "development, benefit at Map-Reflect's calls: change over the first pass, points",
+   "value": "+2.87",
+   "lo": "+2.25",
+   "hi": "+3.67",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitMRCallsPer",
+   "claim": "development, benefit at Map-Reflect's calls: second-pass calls per field",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitMRTokensPer",
+   "claim": "development, benefit at Map-Reflect's calls: second-pass tokens per field",
+   "value": "1,627",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitMRRouted",
+   "claim": "development, benefit at Map-Reflect's calls: share of fields routed, %",
+   "value": "33.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitMRRepairs",
+   "claim": "development, benefit at Map-Reflect's calls: repairs / breaks",
+   "value": "256 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitMRVs",
+   "claim": "development, benefit at Map-Reflect's calls: minus Map-Reflect, points",
+   "value": "+0.19",
+   "lo": "+0.09",
+   "hi": "+0.31",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginMRGain",
+   "claim": "development, margin at Map-Reflect's calls: change over the first pass, points",
+   "value": "+2.69",
+   "lo": "+2.10",
+   "hi": "+3.44",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginMRCallsPer",
+   "claim": "development, margin at Map-Reflect's calls: second-pass calls per field",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginMRTokensPer",
+   "claim": "development, margin at Map-Reflect's calls: second-pass tokens per field",
+   "value": "1,482",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginMRRouted",
+   "claim": "development, margin at Map-Reflect's calls: share of fields routed, %",
+   "value": "33.9",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginMRRepairs",
+   "claim": "development, margin at Map-Reflect's calls: repairs / breaks",
+   "value": "243 / 11",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevMarginMRVs",
+   "claim": "development, margin at Map-Reflect's calls: minus Map-Reflect, points",
+   "value": "+0.00",
+   "lo": "+0.00",
+   "hi": "+0.00",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExMarginCallsOnlyR",
+   "claim": "development, margin at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "702 / 14 / 4",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExMarginCallsOnlyS",
+   "claim": "development, margin at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "671 / 44 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExMarginCallsBoth",
+   "claim": "development, margin at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "437 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExTwoDCallsOnlyR",
+   "claim": "development, 2-D rule at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "727 / 17 / 5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExTwoDCallsOnlyS",
+   "claim": "development, 2-D rule at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "714 / 39 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExTwoDCallsBoth",
+   "claim": "development, 2-D rule at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "394 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExBenefitCallsOnlyR",
+   "claim": "development, benefit at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "194 / 11 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExBenefitCallsOnlyS",
+   "claim": "development, benefit at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "223 / 1 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExBenefitCallsBoth",
+   "claim": "development, benefit at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "885 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExExchCallsOnlyR",
+   "claim": "development, struct + benefit at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "193 / 10 / 2",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExExchCallsOnlyS",
+   "claim": "development, struct + benefit at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "222 / 0 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExExchCallsBoth",
+   "claim": "development, struct + benefit at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "886 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExMarginTokensOnlyR",
+   "claim": "development, margin at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "1305 / 16 / 10",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExMarginTokensOnlyS",
+   "claim": "development, margin at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "527 / 33 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExMarginTokensBoth",
+   "claim": "development, margin at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "581 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExTwoDTokensOnlyR",
+   "claim": "development, 2-D rule at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "1675 / 18 / 11",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExTwoDTokensOnlyS",
+   "claim": "development, 2-D rule at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "563 / 27 / 2",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExTwoDTokensBoth",
+   "claim": "development, 2-D rule at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "545 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExBenefitTokensOnlyR",
+   "claim": "development, benefit at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "444 / 12 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExBenefitTokensOnlyS",
+   "claim": "development, benefit at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "157 / 0 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExBenefitTokensBoth",
+   "claim": "development, benefit at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "951 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExExchTokensOnlyR",
+   "claim": "development, struct + benefit at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "581 / 13 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExExchTokensOnlyS",
+   "claim": "development, struct + benefit at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "222 / 0 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevExExchTokensBoth",
+   "claim": "development, struct + benefit at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "886 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructMiss",
+   "claim": "development: structural fields Map-Reflect keeps that widening repairs",
+   "value": "14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructMissTwoD",
+   "claim": "development: of those, repaired by 2-D rule at the structural router's calls",
+   "value": "0.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructMissBenefit",
+   "claim": "development: of those, repaired by benefit at the structural router's calls",
+   "value": "13.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructMissMargin",
+   "claim": "development: of those, repaired by margin at the structural router's calls",
+   "value": "0.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructMissExch",
+   "claim": "development: of those, repaired by struct + benefit at the structural router's calls",
+   "value": "14.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevStructMissTwoDOwn",
+   "claim": "development: of those, repaired by the 2-D rule at its own budget",
+   "value": "0.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoDevBenefitUneg",
+   "claim": "development: share of the benefit router's matched-calls budget on fields with u <= 0, %",
+   "value": "0.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoFields",
+   "claim": "test field-model pairs",
+   "value": "13,384",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructCallsGain",
+   "claim": "test, struct at the structural router's calls: change over the first pass, points",
+   "value": "+5.30",
+   "lo": "+2.89",
+   "hi": "+8.72",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructCallsCallsPer",
+   "claim": "test, struct at the structural router's calls: second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructCallsTokensPer",
+   "claim": "test, struct at the structural router's calls: second-pass tokens per field",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructCallsRouted",
+   "claim": "test, struct at the structural router's calls: share of fields routed, %",
+   "value": "26.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructCallsRepairs",
+   "claim": "test, struct at the structural router's calls: repairs / breaks",
+   "value": "720 / 10",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnGain",
+   "claim": "test, Map-Reflect at its own budget: change over the first pass, points",
+   "value": "+5.41",
+   "lo": "+2.98",
+   "hi": "+8.75",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnCallsPer",
+   "claim": "test, Map-Reflect at its own budget: second-pass calls per field",
+   "value": "0.485",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnTokensPer",
+   "claim": "test, Map-Reflect at its own budget: second-pass tokens per field",
+   "value": "1,691",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnRouted",
+   "claim": "test, Map-Reflect at its own budget: share of fields routed, %",
+   "value": "42.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnRepairs",
+   "claim": "test, Map-Reflect at its own budget: repairs / breaks",
+   "value": "745 / 21",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMapReflectOwnVs",
+   "claim": "test, Map-Reflect at its own budget: minus struct, points",
+   "value": "+0.10",
+   "lo": "-0.06",
+   "hi": "+0.30",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDOwnOwnGain",
+   "claim": "test, 2-D rule, own budget at its own budget: change over the first pass, points",
+   "value": "+4.10",
+   "lo": "+2.27",
+   "hi": "+6.61",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDOwnOwnCallsPer",
+   "claim": "test, 2-D rule, own budget at its own budget: second-pass calls per field",
+   "value": "0.152",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDOwnOwnTokensPer",
+   "claim": "test, 2-D rule, own budget at its own budget: second-pass tokens per field",
+   "value": "574",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDOwnOwnRouted",
+   "claim": "test, 2-D rule, own budget at its own budget: share of fields routed, %",
+   "value": "12.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDOwnOwnRepairs",
+   "claim": "test, 2-D rule, own budget at its own budget: repairs / breaks",
+   "value": "557 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDOwnOwnVs",
+   "claim": "test, 2-D rule, own budget at its own budget: minus struct, points",
+   "value": "-1.20",
+   "lo": "-2.08",
+   "hi": "-0.49",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginCallsGain",
+   "claim": "test, margin at the structural router's calls: change over the first pass, points",
+   "value": "+5.16",
+   "lo": "+2.74",
+   "hi": "+8.56",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginCallsCallsPer",
+   "claim": "test, margin at the structural router's calls: second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginCallsTokensPer",
+   "claim": "test, margin at the structural router's calls: second-pass tokens per field",
+   "value": "1,224",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginCallsRouted",
+   "claim": "test, margin at the structural router's calls: share of fields routed, %",
+   "value": "26.9",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginCallsRepairs",
+   "claim": "test, margin at the structural router's calls: repairs / breaks",
+   "value": "708 / 17",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginCallsVs",
+   "claim": "test, margin at the structural router's calls: minus struct, points",
+   "value": "-0.14",
+   "lo": "-0.37",
+   "hi": "+0.09",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDCallsGain",
+   "claim": "test, 2-D rule at the structural router's calls: change over the first pass, points",
+   "value": "+5.24",
+   "lo": "+2.86",
+   "hi": "+8.53",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDCallsCallsPer",
+   "claim": "test, 2-D rule at the structural router's calls: second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDCallsTokensPer",
+   "claim": "test, 2-D rule at the structural router's calls: second-pass tokens per field",
+   "value": "1,141",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDCallsRouted",
+   "claim": "test, 2-D rule at the structural router's calls: share of fields routed, %",
+   "value": "26.8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDCallsRepairs",
+   "claim": "test, 2-D rule at the structural router's calls: repairs / breaks",
+   "value": "719 / 18",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDCallsVs",
+   "claim": "test, 2-D rule at the structural router's calls: minus struct, points",
+   "value": "-0.07",
+   "lo": "-0.26",
+   "hi": "+0.15",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitCallsGain",
+   "claim": "test, benefit at the structural router's calls: change over the first pass, points",
+   "value": "+5.48",
+   "lo": "+3.05",
+   "hi": "+8.88",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitCallsCallsPer",
+   "claim": "test, benefit at the structural router's calls: second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitCallsTokensPer",
+   "claim": "test, benefit at the structural router's calls: second-pass tokens per field",
+   "value": "1,509",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitCallsRouted",
+   "claim": "test, benefit at the structural router's calls: share of fields routed, %",
+   "value": "26.4",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitCallsRepairs",
+   "claim": "test, benefit at the structural router's calls: repairs / breaks",
+   "value": "747 / 13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitCallsVs",
+   "claim": "test, benefit at the structural router's calls: minus struct, points",
+   "value": "+0.18",
+   "lo": "+0.07",
+   "hi": "+0.31",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchCallsGain",
+   "claim": "test, struct + benefit at the structural router's calls: change over the first pass, points",
+   "value": "+5.48",
+   "lo": "+3.05",
+   "hi": "+8.89",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchCallsCallsPer",
+   "claim": "test, struct + benefit at the structural router's calls: second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchCallsTokensPer",
+   "claim": "test, struct + benefit at the structural router's calls: second-pass tokens per field",
+   "value": "1,552",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchCallsRouted",
+   "claim": "test, struct + benefit at the structural router's calls: share of fields routed, %",
+   "value": "26.4",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchCallsRepairs",
+   "claim": "test, struct + benefit at the structural router's calls: repairs / breaks",
+   "value": "747 / 13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchCallsVs",
+   "claim": "test, struct + benefit at the structural router's calls: minus struct, points",
+   "value": "+0.18",
+   "lo": "+0.08",
+   "hi": "+0.30",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginTokensGain",
+   "claim": "test, margin at the structural router's tokens: change over the first pass, points",
+   "value": "+5.54",
+   "lo": "+3.10",
+   "hi": "+8.87",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginTokensCallsPer",
+   "claim": "test, margin at the structural router's tokens: second-pass calls per field",
+   "value": "0.527",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginTokensTokensPer",
+   "claim": "test, margin at the structural router's tokens: second-pass tokens per field",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginTokensRouted",
+   "claim": "test, margin at the structural router's tokens: share of fields routed, %",
+   "value": "46.2",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginTokensRepairs",
+   "claim": "test, margin at the structural router's tokens: repairs / breaks",
+   "value": "765 / 24",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginTokensVs",
+   "claim": "test, margin at the structural router's tokens: minus struct, points",
+   "value": "+0.23",
+   "lo": "+0.06",
+   "hi": "+0.45",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDTokensGain",
+   "claim": "test, 2-D rule at the structural router's tokens: change over the first pass, points",
+   "value": "+5.52",
+   "lo": "+3.10",
+   "hi": "+8.85",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDTokensCallsPer",
+   "claim": "test, 2-D rule at the structural router's tokens: second-pass calls per field",
+   "value": "0.557",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDTokensTokensPer",
+   "claim": "test, 2-D rule at the structural router's tokens: second-pass tokens per field",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDTokensRouted",
+   "claim": "test, 2-D rule at the structural router's tokens: share of fields routed, %",
+   "value": "49.2",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDTokensRepairs",
+   "claim": "test, 2-D rule at the structural router's tokens: repairs / breaks",
+   "value": "764 / 25",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoTwoDTokensVs",
+   "claim": "test, 2-D rule at the structural router's tokens: minus struct, points",
+   "value": "+0.22",
+   "lo": "+0.04",
+   "hi": "+0.43",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitTokensGain",
+   "claim": "test, benefit at the structural router's tokens: change over the first pass, points",
+   "value": "+5.52",
+   "lo": "+3.10",
+   "hi": "+8.90",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitTokensCallsPer",
+   "claim": "test, benefit at the structural router's tokens: second-pass calls per field",
+   "value": "0.456",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitTokensTokensPer",
+   "claim": "test, benefit at the structural router's tokens: second-pass tokens per field",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitTokensRouted",
+   "claim": "test, benefit at the structural router's tokens: share of fields routed, %",
+   "value": "39.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitTokensRepairs",
+   "claim": "test, benefit at the structural router's tokens: repairs / breaks",
+   "value": "755 / 16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitTokensVs",
+   "claim": "test, benefit at the structural router's tokens: minus struct, points",
+   "value": "+0.22",
+   "lo": "+0.09",
+   "hi": "+0.37",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchTokensGain",
+   "claim": "test, struct + benefit at the structural router's tokens: change over the first pass, points",
+   "value": "+5.53",
+   "lo": "+3.10",
+   "hi": "+8.92",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchTokensCallsPer",
+   "claim": "test, struct + benefit at the structural router's tokens: second-pass calls per field",
+   "value": "0.475",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchTokensTokensPer",
+   "claim": "test, struct + benefit at the structural router's tokens: second-pass tokens per field",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchTokensRouted",
+   "claim": "test, struct + benefit at the structural router's tokens: share of fields routed, %",
+   "value": "41.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchTokensRepairs",
+   "claim": "test, struct + benefit at the structural router's tokens: repairs / breaks",
+   "value": "757 / 17",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExchTokensVs",
+   "claim": "test, struct + benefit at the structural router's tokens: minus struct, points",
+   "value": "+0.22",
+   "lo": "+0.09",
+   "hi": "+0.39",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitMRGain",
+   "claim": "test, benefit at Map-Reflect's calls: change over the first pass, points",
+   "value": "+5.52",
+   "lo": "+3.09",
+   "hi": "+8.91",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitMRCallsPer",
+   "claim": "test, benefit at Map-Reflect's calls: second-pass calls per field",
+   "value": "0.485",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitMRTokensPer",
+   "claim": "test, benefit at Map-Reflect's calls: second-pass tokens per field",
+   "value": "1,854",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitMRRouted",
+   "claim": "test, benefit at Map-Reflect's calls: share of fields routed, %",
+   "value": "42.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitMRRepairs",
+   "claim": "test, benefit at Map-Reflect's calls: repairs / breaks",
+   "value": "756 / 17",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitMRVs",
+   "claim": "test, benefit at Map-Reflect's calls: minus Map-Reflect, points",
+   "value": "+0.11",
+   "lo": "+0.05",
+   "hi": "+0.18",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginMRGain",
+   "claim": "test, margin at Map-Reflect's calls: change over the first pass, points",
+   "value": "+5.41",
+   "lo": "+2.98",
+   "hi": "+8.75",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginMRCallsPer",
+   "claim": "test, margin at Map-Reflect's calls: second-pass calls per field",
+   "value": "0.485",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginMRTokensPer",
+   "claim": "test, margin at Map-Reflect's calls: second-pass tokens per field",
+   "value": "1,691",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginMRRouted",
+   "claim": "test, margin at Map-Reflect's calls: share of fields routed, %",
+   "value": "42.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginMRRepairs",
+   "claim": "test, margin at Map-Reflect's calls: repairs / breaks",
+   "value": "745 / 21",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoMarginMRVs",
+   "claim": "test, margin at Map-Reflect's calls: minus Map-Reflect, points",
+   "value": "+0.00",
+   "lo": "+0.00",
+   "hi": "+0.00",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExMarginCallsOnlyR",
+   "claim": "test, margin at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "1647 / 41 / 10",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExMarginCallsOnlyS",
+   "claim": "test, margin at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "1617 / 52 / 4",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExMarginCallsBoth",
+   "claim": "test, margin at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "1958 / -1",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExTwoDCallsOnlyR",
+   "claim": "test, 2-D rule at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "1867 / 43 / 11",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExTwoDCallsOnlyS",
+   "claim": "test, 2-D rule at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "1850 / 45 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExTwoDCallsBoth",
+   "claim": "test, 2-D rule at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "1725 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExBenefitCallsOnlyR",
+   "claim": "test, benefit at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "718 / 28 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExBenefitCallsOnlyS",
+   "claim": "test, benefit at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "756 / 1 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExBenefitCallsBoth",
+   "claim": "test, benefit at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "2819 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExExchCallsOnlyR",
+   "claim": "test, struct + benefit at the structural router's calls vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "672 / 27 / 3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExExchCallsOnlyS",
+   "claim": "test, struct + benefit at the structural router's calls vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "715 / 0 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExExchCallsBoth",
+   "claim": "test, struct + benefit at the structural router's calls vs struct: fields both route / net correct difference there from the router's action",
+   "value": "2860 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExMarginTokensOnlyR",
+   "claim": "test, margin at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "3522 / 50 / 14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExMarginTokensOnlyS",
+   "claim": "test, margin at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "910 / 4 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExMarginTokensBoth",
+   "claim": "test, margin at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "2665 / -1",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExTwoDTokensOnlyR",
+   "claim": "test, 2-D rule at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "4022 / 51 / 15",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExTwoDTokensOnlyS",
+   "claim": "test, 2-D rule at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "1011 / 7 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExTwoDTokensBoth",
+   "claim": "test, 2-D rule at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "2564 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExBenefitTokensOnlyR",
+   "claim": "test, benefit at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "2119 / 36 / 6",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExBenefitTokensOnlyS",
+   "claim": "test, benefit at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "406 / 0 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExBenefitTokensBoth",
+   "claim": "test, benefit at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "3169 / -1",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExExchTokensOnlyR",
+   "claim": "test, struct + benefit at the structural router's tokens vs struct: fields only the router routes (weighted): fields / repairs / breaks",
+   "value": "2674 / 37 / 7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExExchTokensOnlyS",
+   "claim": "test, struct + benefit at the structural router's tokens vs struct: fields only struct routes (weighted): fields / repairs / breaks",
+   "value": "715 / 0 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoExExchTokensBoth",
+   "claim": "test, struct + benefit at the structural router's tokens vs struct: fields both route / net correct difference there from the router's action",
+   "value": "2860 / +0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructMiss",
+   "claim": "test: structural fields Map-Reflect keeps that widening repairs",
+   "value": "19",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructMissTwoD",
+   "claim": "test: of those, repaired by 2-D rule at the structural router's calls",
+   "value": "0.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructMissBenefit",
+   "claim": "test: of those, repaired by benefit at the structural router's calls",
+   "value": "19.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructMissMargin",
+   "claim": "test: of those, repaired by margin at the structural router's calls",
+   "value": "0.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructMissExch",
+   "claim": "test: of those, repaired by struct + benefit at the structural router's calls",
+   "value": "19.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoStructMissTwoDOwn",
+   "claim": "test: of those, repaired by the 2-D rule at its own budget",
+   "value": "0.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoBenefitUneg",
+   "claim": "test: share of the benefit router's matched-calls budget on fields with u <= 0, %",
+   "value": "0.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostCommit",
+   "claim": "commit and time of docs/naacl/results/v6_d2_cost_frozen.json (development-estimated costs)",
+   "value": "2832fc112c131e4963c2c482850aa2794f59d531 2026-10-10T22:32:35+05:30",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostEstGptoss",
+   "claim": "gptoss: development-estimated P(check) for widen / NT, and expected calls per routed widen field",
+   "value": "0.111 / 0.003 / 1.111",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostEstLlama",
+   "claim": "llama4: development-estimated P(check) for widen / NT, and expected calls per routed widen field",
+   "value": "0.033 / 0.002 / 1.033",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostEstGranite",
+   "claim": "granite: development-estimated P(check) for widen / NT, and expected calls per routed widen field",
+   "value": "0.013 / 0.000 / 1.013",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostEstQwen",
+   "claim": "qwen35: development-estimated P(check) for widen / NT, and expected calls per routed widen field",
+   "value": "0.034 / 0.005 / 1.034",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDefinition",
+   "claim": "D2-cost routing and budget definition",
+   "value": "D2-cost definition: whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (calls: 1 + P(check | model, action); tokens: mean reflect tokens + P(check) x mean check tokens, development logs) fits the budget; observed spend charges the realised calls (one check call only when the action proposed a change) and mean-token estimates per call (token logs per dataset, model and stage); stops at the first field that does not fit. Budget per model: the structural router's spend (calls, or mean-token estimates). No fractional fields.",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginCallsGain",
+   "claim": "D2-cost, development, margin at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.41",
+   "lo": "+1.83",
+   "hi": "+3.12",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginCallsVs",
+   "claim": "D2-cost, development, margin at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "-0.31",
+   "lo": "-0.55",
+   "hi": "-0.11",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginCallsCallsPer",
+   "claim": "D2-cost, development, margin at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.153",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginCallsTokensPer",
+   "claim": "D2-cost, development, margin at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "685",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginCallsMismatch",
+   "claim": "D2-cost, development, margin at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0005 (-0.30%; max 0.37%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginCallsRepairs",
+   "claim": "D2-cost, development, margin at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "213 / 5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDCallsGain",
+   "claim": "D2-cost, development, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.42",
+   "lo": "+1.84",
+   "hi": "+3.12",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDCallsVs",
+   "claim": "D2-cost, development, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "-0.30",
+   "lo": "-0.51",
+   "hi": "-0.12",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDCallsCallsPer",
+   "claim": "D2-cost, development, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.153",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDCallsTokensPer",
+   "claim": "D2-cost, development, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "657",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDCallsMismatch",
+   "claim": "D2-cost, development, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0005 (-0.30%; max 0.37%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDCallsRepairs",
+   "claim": "D2-cost, development, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "216 / 7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitCallsGain",
+   "claim": "D2-cost, development, benefit at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.80",
+   "lo": "+2.19",
+   "hi": "+3.58",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitCallsVs",
+   "claim": "D2-cost, development, benefit at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.08",
+   "lo": "-0.01",
+   "hi": "+0.18",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitCallsCallsPer",
+   "claim": "D2-cost, development, benefit at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.153",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitCallsTokensPer",
+   "claim": "D2-cost, development, benefit at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "856",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitCallsMismatch",
+   "claim": "D2-cost, development, benefit at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0003 (-0.23%; max 0.37%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitCallsRepairs",
+   "claim": "D2-cost, development, benefit at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "250 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchCallsGain",
+   "claim": "D2-cost, development, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.82",
+   "lo": "+2.20",
+   "hi": "+3.61",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchCallsVs",
+   "claim": "D2-cost, development, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.09",
+   "lo": "+0.01",
+   "hi": "+0.18",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchCallsCallsPer",
+   "claim": "D2-cost, development, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.153",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchCallsTokensPer",
+   "claim": "D2-cost, development, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "870",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchCallsMismatch",
+   "claim": "D2-cost, development, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0003 (-0.23%; max 0.37%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchCallsRepairs",
+   "claim": "D2-cost, development, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "250 / 7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginTokensGain",
+   "claim": "D2-cost, development, margin at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.43",
+   "lo": "+1.87",
+   "hi": "+3.12",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginTokensVs",
+   "claim": "D2-cost, development, margin at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "-0.29",
+   "lo": "-0.49",
+   "hi": "-0.12",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginTokensCallsPer",
+   "claim": "D2-cost, development, margin at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.246",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginTokensTokensPer",
+   "claim": "D2-cost, development, margin at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "952",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginTokensMismatch",
+   "claim": "D2-cost, development, margin at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-0.5284 (-0.06%; max 0.26%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevMarginTokensRepairs",
+   "claim": "D2-cost, development, margin at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "222 / 12",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDTokensGain",
+   "claim": "D2-cost, development, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.53",
+   "lo": "+1.95",
+   "hi": "+3.23",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDTokensVs",
+   "claim": "D2-cost, development, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "-0.20",
+   "lo": "-0.38",
+   "hi": "-0.04",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDTokensCallsPer",
+   "claim": "D2-cost, development, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.289",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDTokensTokensPer",
+   "claim": "D2-cost, development, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "952",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDTokensMismatch",
+   "claim": "D2-cost, development, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-0.6646 (-0.07%; max 0.17%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevTwoDTokensRepairs",
+   "claim": "D2-cost, development, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "231 / 13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitTokensGain",
+   "claim": "D2-cost, development, benefit at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.83",
+   "lo": "+2.21",
+   "hi": "+3.62",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitTokensVs",
+   "claim": "D2-cost, development, benefit at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.10",
+   "lo": "+0.01",
+   "hi": "+0.20",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitTokensCallsPer",
+   "claim": "D2-cost, development, benefit at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.191",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitTokensTokensPer",
+   "claim": "D2-cost, development, benefit at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "952",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitTokensMismatch",
+   "claim": "D2-cost, development, benefit at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-1.1003 (-0.12%; max 0.31%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitTokensRepairs",
+   "claim": "D2-cost, development, benefit at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "252 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchTokensGain",
+   "claim": "D2-cost, development, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.84",
+   "lo": "+2.22",
+   "hi": "+3.63",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchTokensVs",
+   "claim": "D2-cost, development, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.12",
+   "lo": "+0.02",
+   "hi": "+0.21",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchTokensCallsPer",
+   "claim": "D2-cost, development, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.200",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchTokensTokensPer",
+   "claim": "D2-cost, development, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "951",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchTokensMismatch",
+   "claim": "D2-cost, development, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-1.6037 (-0.17%; max 0.30%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevExchTokensRepairs",
+   "claim": "D2-cost, development, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "253 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitMRGain",
+   "claim": "D2-cost, development, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+2.87",
+   "lo": "+2.25",
+   "hi": "+3.67",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitMRVs",
+   "claim": "D2-cost, development, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): minus Map-Reflect, points",
+   "value": "+0.19",
+   "lo": "+0.09",
+   "hi": "+0.31",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitMRCallsPer",
+   "claim": "D2-cost, development, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitMRTokensPer",
+   "claim": "D2-cost, development, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,625",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitMRMismatch",
+   "claim": "D2-cost, development, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0003 (-0.09%; max 0.21%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostDevBenefitMRRepairs",
+   "claim": "D2-cost, development, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "256 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginCallsGain",
+   "claim": "D2-cost, test, margin at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.16",
+   "lo": "+2.73",
+   "hi": "+8.53",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginCallsVs",
+   "claim": "D2-cost, test, margin at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "-0.15",
+   "lo": "-0.38",
+   "hi": "+0.07",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginCallsCallsPer",
+   "claim": "D2-cost, test, margin at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginCallsTokensPer",
+   "claim": "D2-cost, test, margin at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,224",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginCallsMismatch",
+   "claim": "D2-cost, test, margin at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0002 (-0.07%; max 0.09%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginCallsRepairs",
+   "claim": "D2-cost, test, margin at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "706 / 16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDCallsGain",
+   "claim": "D2-cost, test, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.25",
+   "lo": "+2.86",
+   "hi": "+8.58",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDCallsVs",
+   "claim": "D2-cost, test, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "-0.05",
+   "lo": "-0.24",
+   "hi": "+0.16",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDCallsCallsPer",
+   "claim": "D2-cost, test, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDCallsTokensPer",
+   "claim": "D2-cost, test, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,136",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDCallsMismatch",
+   "claim": "D2-cost, test, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0003 (-0.09%; max 0.11%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDCallsRepairs",
+   "claim": "D2-cost, test, 2-D rule at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "719 / 16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitCallsGain",
+   "claim": "D2-cost, test, benefit at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.48",
+   "lo": "+3.05",
+   "hi": "+8.88",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitCallsVs",
+   "claim": "D2-cost, test, benefit at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.18",
+   "lo": "+0.07",
+   "hi": "+0.31",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitCallsCallsPer",
+   "claim": "D2-cost, test, benefit at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitCallsTokensPer",
+   "claim": "D2-cost, test, benefit at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,508",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitCallsMismatch",
+   "claim": "D2-cost, test, benefit at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0002 (-0.07%; max 0.09%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitCallsRepairs",
+   "claim": "D2-cost, test, benefit at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "747 / 13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchCallsGain",
+   "claim": "D2-cost, test, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.48",
+   "lo": "+3.05",
+   "hi": "+8.89",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchCallsVs",
+   "claim": "D2-cost, test, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.18",
+   "lo": "+0.08",
+   "hi": "+0.30",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchCallsCallsPer",
+   "claim": "D2-cost, test, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.323",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchCallsTokensPer",
+   "claim": "D2-cost, test, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,552",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchCallsMismatch",
+   "claim": "D2-cost, test, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0003 (-0.09%; max 0.11%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchCallsRepairs",
+   "claim": "D2-cost, test, struct + benefit at the structural router's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "747 / 13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginTokensGain",
+   "claim": "D2-cost, test, margin at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.54",
+   "lo": "+3.11",
+   "hi": "+8.89",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginTokensVs",
+   "claim": "D2-cost, test, margin at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.24",
+   "lo": "+0.07",
+   "hi": "+0.45",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginTokensCallsPer",
+   "claim": "D2-cost, test, margin at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.529",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginTokensTokensPer",
+   "claim": "D2-cost, test, margin at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginTokensMismatch",
+   "claim": "D2-cost, test, margin at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-0.5217 (-0.03%; max 0.13%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostMarginTokensRepairs",
+   "claim": "D2-cost, test, margin at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "766 / 24",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDTokensGain",
+   "claim": "D2-cost, test, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.54",
+   "lo": "+3.10",
+   "hi": "+8.89",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDTokensVs",
+   "claim": "D2-cost, test, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.23",
+   "lo": "+0.06",
+   "hi": "+0.44",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDTokensCallsPer",
+   "claim": "D2-cost, test, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.558",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDTokensTokensPer",
+   "claim": "D2-cost, test, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,783",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDTokensMismatch",
+   "claim": "D2-cost, test, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-0.9910 (-0.06%; max 0.11%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostTwoDTokensRepairs",
+   "claim": "D2-cost, test, 2-D rule at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "767 / 26",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitTokensGain",
+   "claim": "D2-cost, test, benefit at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.52",
+   "lo": "+3.10",
+   "hi": "+8.90",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitTokensVs",
+   "claim": "D2-cost, test, benefit at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.22",
+   "lo": "+0.09",
+   "hi": "+0.37",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitTokensCallsPer",
+   "claim": "D2-cost, test, benefit at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.456",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitTokensTokensPer",
+   "claim": "D2-cost, test, benefit at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitTokensMismatch",
+   "claim": "D2-cost, test, benefit at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-0.5247 (-0.03%; max 0.10%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitTokensRepairs",
+   "claim": "D2-cost, test, benefit at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "755 / 16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchTokensGain",
+   "claim": "D2-cost, test, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.53",
+   "lo": "+3.10",
+   "hi": "+8.92",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchTokensVs",
+   "claim": "D2-cost, test, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): minus struct, points",
+   "value": "+0.22",
+   "lo": "+0.09",
+   "hi": "+0.39",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchTokensCallsPer",
+   "claim": "D2-cost, test, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.475",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchTokensTokensPer",
+   "claim": "D2-cost, test, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,784",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchTokensMismatch",
+   "claim": "D2-cost, test, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %)",
+   "value": "-0.6858 (-0.04%; max 0.11%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostExchTokensRepairs",
+   "claim": "D2-cost, test, struct + benefit at the structural router's tokens (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "757 / 17",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitMRGain",
+   "claim": "D2-cost, test, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): change over the first pass, points",
+   "value": "+5.52",
+   "lo": "+3.09",
+   "hi": "+8.91",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitMRVs",
+   "claim": "D2-cost, test, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): minus Map-Reflect, points",
+   "value": "+0.11",
+   "lo": "+0.05",
+   "hi": "+0.18",
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitMRCallsPer",
+   "claim": "D2-cost, test, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): realised second-pass calls per field",
+   "value": "0.485",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitMRTokensPer",
+   "claim": "D2-cost, test, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): second-pass tokens per field (mean-token estimates)",
+   "value": "1,853",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitMRMismatch",
+   "claim": "D2-cost, test, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %)",
+   "value": "-0.0003 (-0.06%; max 0.08%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-DTwoCostBenefitMRRepairs",
+   "claim": "D2-cost, test, benefit at Map-Reflect's calls (development-estimated costs, sequential stopping): repairs / breaks",
+   "value": "756 / 17",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v6_d2_facts.json",
+   "fn": "v6_d2.costscore",
+   "status": "exploratory"
+  }
+ ],
+ "cost_check": {
+  "stage": "costscore",
+  "frozen": "docs/naacl/results/v6_d2_cost_frozen.json",
+  "frozen_commit": "2832fc112c131e4963c2c482850aa2794f59d531 2026-10-10T22:32:35+05:30",
+  "definition": "D2-cost definition: whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (calls: 1 + P(check | model, action); tokens: mean reflect tokens + P(check) x mean check tokens, development logs) fits the budget; observed spend charges the realised calls (one check call only when the action proposed a change) and mean-token estimates per call (token logs per dataset, model and stage); stops at the first field that does not fit. Budget per model: the structural router's spend (calls, or mean-token estimates). No fractional fields."
+ }
+}

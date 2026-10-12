@@ -1,0 +1,1179 @@
+{
+ "generated_by": "scripts/naacl/v5_controls.py --stage score",
+ "frozen": "docs/naacl/results/v5_controls_frozen.json",
+ "frozen_commit": "6758c9a0c0c3fcbb1a5095b61dd3a7c43a75c439 2026-10-11T13:33:54+05:30",
+ "status": "exploratory",
+ "definition": "Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+ "facts": [
+  {
+   "id": "F-VFiveCtlFrozenCommit",
+   "claim": "commit and time of docs/naacl/results/v5_controls_frozen.json (fitted on v5 development only). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "6758c9a0c0c3fcbb1a5095b61dd3a7c43a75c439 2026-10-11T13:33:54+05:30",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexTau",
+   "claim": "lexical correctness classifier: own threshold on P(error), fitted on development. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.0375",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompTau",
+   "claim": "legacy composite u(f): own threshold fitted on development (the earlier deployed value was 0.25). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.9400",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMainOwnGain",
+   "claim": "development, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+4.18",
+   "lo": "+3.26",
+   "hi": "+5.35",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMainOwnRate",
+   "claim": "development, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "22.8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMainOwnCallsPer",
+   "claim": "development, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.296",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMainOwnTokensPer",
+   "claim": "development, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,023",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexMatchedGain",
+   "claim": "development, lexical correctness classifier, at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+4.06",
+   "lo": "+3.20",
+   "hi": "+5.14",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexMatchedVsMain",
+   "claim": "development, lexical correctness classifier, at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.13",
+   "lo": "-0.32",
+   "hi": "+0.05",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexMatchedRate",
+   "claim": "development, lexical correctness classifier, at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "23.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexMatchedCallsPer",
+   "claim": "development, lexical correctness classifier, at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.295",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexMatchedTokensPer",
+   "claim": "development, lexical correctness classifier, at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "942",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexMatchedMismatch",
+   "claim": "development, lexical correctness classifier, at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompMatchedGain",
+   "claim": "development, legacy composite u(f), at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+2.60",
+   "lo": "+1.87",
+   "hi": "+3.43",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompMatchedVsMain",
+   "claim": "development, legacy composite u(f), at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-1.59",
+   "lo": "-2.19",
+   "hi": "-1.09",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompMatchedRate",
+   "claim": "development, legacy composite u(f), at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "26.1",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompMatchedCallsPer",
+   "claim": "development, legacy composite u(f), at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.295",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompMatchedTokensPer",
+   "claim": "development, legacy composite u(f), at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "523",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompMatchedMismatch",
+   "claim": "development, legacy composite u(f), at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigMatchedGain",
+   "claim": "development, error trigger, at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+1.76",
+   "lo": "+1.18",
+   "hi": "+2.40",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigMatchedVsMain",
+   "claim": "development, error trigger, at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-2.42",
+   "lo": "-3.09",
+   "hi": "-1.91",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigMatchedRate",
+   "claim": "development, error trigger, at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "26.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigMatchedCallsPer",
+   "claim": "development, error trigger, at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.295",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigMatchedTokensPer",
+   "claim": "development, error trigger, at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "805",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigMatchedMismatch",
+   "claim": "development, error trigger, at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginMatchedGain",
+   "claim": "development, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+3.82",
+   "lo": "+3.00",
+   "hi": "+4.86",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginMatchedVsMain",
+   "claim": "development, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.36",
+   "lo": "-0.57",
+   "hi": "-0.18",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginMatchedRate",
+   "claim": "development, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "23.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginMatchedCallsPer",
+   "claim": "development, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.295",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginMatchedTokensPer",
+   "claim": "development, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "804",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginMatchedMismatch",
+   "claim": "development, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevRandomMatchedGain",
+   "claim": "development, random selection at Map-Reflect v5's calls (exact expectation): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+1.10",
+   "lo": "+0.84",
+   "hi": "+1.41",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevRandomMatchedVsMain",
+   "claim": "development, random selection at Map-Reflect v5's calls minus Map-Reflect v5, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-3.09",
+   "lo": "-3.92",
+   "hi": "-2.40",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexOwnGain",
+   "claim": "development, lexical correctness classifier, at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+4.18",
+   "lo": "+3.26",
+   "hi": "+5.33",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexOwnVsMain",
+   "claim": "development, lexical correctness classifier, at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+0.00",
+   "lo": "-0.07",
+   "hi": "+0.08",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexOwnRate",
+   "claim": "development, lexical correctness classifier, at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "36.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexOwnCallsPer",
+   "claim": "development, lexical correctness classifier, at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.434",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevLexOwnTokensPer",
+   "claim": "development, lexical correctness classifier, at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,285",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompOwnGain",
+   "claim": "development, legacy composite u(f), at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+4.02",
+   "lo": "+3.09",
+   "hi": "+5.18",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompOwnVsMain",
+   "claim": "development, legacy composite u(f), at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.16",
+   "lo": "-0.41",
+   "hi": "+0.02",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompOwnRate",
+   "claim": "development, legacy composite u(f), at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "100.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompOwnCallsPer",
+   "claim": "development, legacy composite u(f), at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1.082",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevCompOwnTokensPer",
+   "claim": "development, legacy composite u(f), at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "2,326",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigOwnGain",
+   "claim": "development, error trigger, at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+3.74",
+   "lo": "+2.89",
+   "hi": "+4.77",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigOwnVsMain",
+   "claim": "development, error trigger, at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.44",
+   "lo": "-0.75",
+   "hi": "-0.20",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigOwnRate",
+   "claim": "development, error trigger, at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "53.5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigOwnCallsPer",
+   "claim": "development, error trigger, at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.601",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevTrigOwnTokensPer",
+   "claim": "development, error trigger, at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,655",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginOwnGain",
+   "claim": "development, margin (frozen refitted t_m), at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+4.08",
+   "lo": "+3.19",
+   "hi": "+5.23",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginOwnVsMain",
+   "claim": "development, margin (frozen refitted t_m), at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.10",
+   "lo": "-0.23",
+   "hi": "+0.01",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginOwnRate",
+   "claim": "development, margin (frozen refitted t_m), at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "50.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginOwnCallsPer",
+   "claim": "development, margin (frozen refitted t_m), at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.575",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevMarginOwnTokensPer",
+   "claim": "development, margin (frozen refitted t_m), at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,390",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevStructOwnGain",
+   "claim": "development, schema-size baseline, at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+3.58",
+   "lo": "+2.77",
+   "hi": "+4.59",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevStructOwnVsMain",
+   "claim": "development, schema-size baseline, at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.60",
+   "lo": "-0.93",
+   "hi": "-0.32",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevStructOwnRate",
+   "claim": "development, schema-size baseline, at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "12.8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevStructOwnCallsPer",
+   "claim": "development, schema-size baseline, at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.175",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevStructOwnTokensPer",
+   "claim": "development, schema-size baseline, at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "793",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMainOwnGain",
+   "claim": "test, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.56",
+   "lo": "+4.22",
+   "hi": "+11.88",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMainOwnRate",
+   "claim": "test, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "32.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMainOwnCallsPer",
+   "claim": "test, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMainOwnTokensPer",
+   "claim": "test, Map-Reflect v5 (benefit classifier, frozen tau), at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,835",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexMatchedGain",
+   "claim": "test, lexical correctness classifier, at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.46",
+   "lo": "+4.13",
+   "hi": "+11.72",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexMatchedVsMain",
+   "claim": "test, lexical correctness classifier, at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.10",
+   "lo": "-0.19",
+   "hi": "-0.01",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexMatchedRate",
+   "claim": "test, lexical correctness classifier, at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "32.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexMatchedCallsPer",
+   "claim": "test, lexical correctness classifier, at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexMatchedTokensPer",
+   "claim": "test, lexical correctness classifier, at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,692",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexMatchedMismatch",
+   "claim": "test, lexical correctness classifier, at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.03",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompMatchedGain",
+   "claim": "test, legacy composite u(f), at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+5.34",
+   "lo": "+2.84",
+   "hi": "+8.55",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompMatchedVsMain",
+   "claim": "test, legacy composite u(f), at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-2.22",
+   "lo": "-3.35",
+   "hi": "-1.24",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompMatchedRate",
+   "claim": "test, legacy composite u(f), at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "37.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompMatchedCallsPer",
+   "claim": "test, legacy composite u(f), at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompMatchedTokensPer",
+   "claim": "test, legacy composite u(f), at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,010",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompMatchedMismatch",
+   "claim": "test, legacy composite u(f), at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.07",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigMatchedGain",
+   "claim": "test, error trigger, at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+4.35",
+   "lo": "+2.48",
+   "hi": "+6.83",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigMatchedVsMain",
+   "claim": "test, error trigger, at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-3.21",
+   "lo": "-5.04",
+   "hi": "-1.69",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigMatchedRate",
+   "claim": "test, error trigger, at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "36.9",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigMatchedCallsPer",
+   "claim": "test, error trigger, at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigMatchedTokensPer",
+   "claim": "test, error trigger, at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,526",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigMatchedMismatch",
+   "claim": "test, error trigger, at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.03",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginMatchedGain",
+   "claim": "test, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.24",
+   "lo": "+3.96",
+   "hi": "+11.50",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginMatchedVsMain",
+   "claim": "test, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.32",
+   "lo": "-0.51",
+   "hi": "-0.14",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginMatchedRate",
+   "claim": "test, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "32.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginMatchedCallsPer",
+   "claim": "test, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginMatchedTokensPer",
+   "claim": "test, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,546",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginMatchedMismatch",
+   "claim": "test, margin (frozen refitted t_m), at Map-Reflect v5's calls (matched): residual cost mismatch, observed calls minus Map-Reflect's, % of its calls. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.05",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlRandomMatchedGain",
+   "claim": "test, random selection at Map-Reflect v5's calls (exact expectation): change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+2.96",
+   "lo": "+1.65",
+   "hi": "+4.63",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlRandomMatchedVsMain",
+   "claim": "test, random selection at Map-Reflect v5's calls minus Map-Reflect v5, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-4.60",
+   "lo": "-7.21",
+   "hi": "-2.55",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexOwnGain",
+   "claim": "test, lexical correctness classifier, at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.66",
+   "lo": "+4.29",
+   "hi": "+11.96",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexOwnVsMain",
+   "claim": "test, lexical correctness classifier, at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+0.10",
+   "lo": "-0.01",
+   "hi": "+0.26",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexOwnRate",
+   "claim": "test, lexical correctness classifier, at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "46.1",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexOwnCallsPer",
+   "claim": "test, lexical correctness classifier, at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.582",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlLexOwnTokensPer",
+   "claim": "test, lexical correctness classifier, at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "2,087",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompOwnGain",
+   "claim": "test, legacy composite u(f), at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.61",
+   "lo": "+4.25",
+   "hi": "+11.92",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompOwnVsMain",
+   "claim": "test, legacy composite u(f), at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+0.05",
+   "lo": "-0.10",
+   "hi": "+0.23",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompOwnRate",
+   "claim": "test, legacy composite u(f), at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "100.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompOwnCallsPer",
+   "claim": "test, legacy composite u(f), at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1.129",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlCompOwnTokensPer",
+   "claim": "test, legacy composite u(f), at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "3,060",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigOwnGain",
+   "claim": "test, error trigger, at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.08",
+   "lo": "+3.92",
+   "hi": "+11.13",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigOwnVsMain",
+   "claim": "test, error trigger, at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.48",
+   "lo": "-0.80",
+   "hi": "-0.19",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigOwnRate",
+   "claim": "test, error trigger, at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "59.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigOwnCallsPer",
+   "claim": "test, error trigger, at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.707",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlTrigOwnTokensPer",
+   "claim": "test, error trigger, at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "2,452",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginOwnGain",
+   "claim": "test, margin (frozen refitted t_m), at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.67",
+   "lo": "+4.34",
+   "hi": "+11.94",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginOwnVsMain",
+   "claim": "test, margin (frozen refitted t_m), at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+0.10",
+   "lo": "-0.01",
+   "hi": "+0.27",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginOwnRate",
+   "claim": "test, margin (frozen refitted t_m), at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "56.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginOwnCallsPer",
+   "claim": "test, margin (frozen refitted t_m), at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.686",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlMarginOwnTokensPer",
+   "claim": "test, margin (frozen refitted t_m), at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "2,137",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlStructOwnGain",
+   "claim": "test, schema-size baseline, at its own threshold: change over the first pass, points. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "+7.08",
+   "lo": "+3.70",
+   "hi": "+11.34",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlStructOwnVsMain",
+   "claim": "test, schema-size baseline, at its own threshold: minus Map-Reflect v5 at its own threshold, points (paired). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "-0.48",
+   "lo": "-0.90",
+   "hi": "-0.15",
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlStructOwnRate",
+   "claim": "test, schema-size baseline, at its own threshold: reflection rate (fields reflected on), %. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "26.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlStructOwnCallsPer",
+   "claim": "test, schema-size baseline, at its own threshold: second-pass calls per field. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlStructOwnTokensPer",
+   "claim": "test, schema-size baseline, at its own threshold: second-pass tokens per field (mean-token estimates). Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "1,838",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevRandomMatchedRate",
+   "claim": "development, random selection at Map-Reflect v5's calls (exact expectation): reflection rate (fields reflected on, expected), %; a cost quantity, recomputed from stored costs. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "27.4",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.table_from_facts",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlDevRandomMatchedCallsPer",
+   "claim": "development, random selection at Map-Reflect v5's calls (exact expectation): second-pass calls per field; a cost quantity, recomputed from stored costs. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.296",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.table_from_facts",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlRandomMatchedRate",
+   "claim": "test, random selection at Map-Reflect v5's calls (exact expectation): reflection rate (fields reflected on, expected), %; a cost quantity, recomputed from stored costs. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "38.8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.table_from_facts",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveCtlRandomMatchedCallsPer",
+   "claim": "test, random selection at Map-Reflect v5's calls (exact expectation): second-pass calls per field; a cost quantity, recomputed from stored costs. Cost definition: the same v5 second pass for every selection (the field's NT or widen action, either-order verifier); 'matched' = Map-Reflect v5's realised calls per model, with whole fields in priority order (fixed-seed random order inside ties) selected while observed spend plus the development-estimated expected cost (docs/naacl/results/v5_matched_cost_frozen.json) fits; observed spend = realised calls (one reflection call plus two verifier calls when the action proposes a change); tokens are mean-token estimates per call (test token logs). 'own' = the control's own threshold, fitted on v5 development outcomes",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_controls_facts.json",
+   "fn": "v5_controls.table_from_facts",
+   "status": "exploratory"
+  }
+ ]
+}

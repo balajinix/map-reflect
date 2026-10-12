@@ -1,6 +1,0 @@
-"""AzureResource is a type containing Azure specific fields for all resources."""
-type AzureResource {
-  """type specific fields"""
-  etag: string!
-  provisioning_state: string!
-}

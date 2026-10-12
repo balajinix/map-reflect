@@ -1,7 +1,0 @@
-enum query_getMaintenanceConfigV2_state {
-  UNSCHEDULED
-  SCHEDULED
-  ACTIVE
-  PAUSED
-  EXPIRED
-}

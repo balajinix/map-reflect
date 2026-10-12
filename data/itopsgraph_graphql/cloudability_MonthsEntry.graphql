@@ -1,4 +1,0 @@
-type MonthsEntry {
-  month: String
-  threshold: Float
-}

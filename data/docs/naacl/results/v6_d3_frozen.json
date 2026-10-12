@@ -1,0 +1,34 @@
+{
+ "date": "2026-10-10",
+ "stage": "freeze",
+ "experiment": "D3 (Codex ideas 5 and 6), development only, exploratory",
+ "status": "candidate configuration; whether test runs is the user's and the rewrite session's decision",
+ "code": {
+  "commit": "7db90b4",
+  "v6_d3_run_md5": "80d0d0596608bfd4d22b54afc988447f",
+  "run_d3_md5": "f8ffd9eddc74c5aeaa5abf0a1b9acd37",
+  "env": "MAPREFLECT_V41=1 MAPREFLECT_CANONICAL_MARGIN=1",
+  "base_method": "v4.1 (docs/naacl/results/v4_1_frozen.json)"
+ },
+ "chosen": {
+  "reflection": {
+   "arm": "symN",
+   "prompt": "v6_d3_run.D3Prompts.symmetric(rec, scores=False): symmetric evidence cards for the previous ranking's top 3 and the first 3 candidates the action adds (NT: ranks 4 to 6), alphabetical, no origin marks; the dataset's correspondence rule (v6_d3_run.RULES) instead of the one-to-one conflicts line; the previous ranking with its order and reasons but no scores; then the current pairwise check (reflect_v2.Prompts.verify)",
+   "dev_net_minus_cur": "+48 [+34.3, +61.4]",
+   "dev_breaks": "2 (cur 3)"
+  },
+  "verifier": {
+   "rule": "blind_either",
+   "prompt": "v6_d3_run.D3Prompts.blind with both option orders; accept the proposal when either order picks it",
+   "calls": "two verifier calls per judged proposal (the current check makes one)",
+   "dev_net_minus_check": "+16 [+8.7, +24.0]",
+   "dev_rejected_repairs": "3 (check 20)",
+   "dev_breaks_let_through": "4 (check 3)",
+   "measured_on": "the current reflection's proposals only"
+  }
+ },
+ "not_measured": "symN reflection followed by the blind_either verifier together; a test run would need that combination checked on development first, or one of the two alone",
+ "caveat": "Every D3 arm used reflect_v2.Prompts.desc, which truncates descriptions to 300 characters; the OMOP cells are affected (report separates them). A fixed-prompt version would need its own development check.",
+ "results": "docs/naacl/results/v6_d3_dev.md, docs/naacl/results/v6_d3_dev_facts.json",
+ "selection": "docs/naacl/results/v6_d3_selection.json"
+}

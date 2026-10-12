@@ -1,5 +1,0 @@
-type mutation_putMaintenanceConfigV2_tagFilterExpression {
-  type: String
-  logicalOperator: String
-  elements: [mutation_putMaintenanceConfigV2_tagFilterExpression_elements_items]
-}

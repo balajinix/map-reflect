@@ -1,6 +1,0 @@
-type Resource {
-  """The same clock should be used universally within the scope of a single connector."""
-  witnessed_time: google.protobuf.Timestamp!
-  """model is the domain model that represents this resource."""
-  model: Model!
-}

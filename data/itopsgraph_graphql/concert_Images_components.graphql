@@ -1,4 +1,0 @@
-type Images_components {
-  component_id: ID
-  image_id: ID
-}

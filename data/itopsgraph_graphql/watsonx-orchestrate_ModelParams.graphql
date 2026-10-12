@@ -1,7 +1,0 @@
-type ModelParams {
-  decoding_method: String
-  max_new_tokens: Int
-  min_new_tokens: Int
-  random_seed: Int
-  temperature: Float
-}

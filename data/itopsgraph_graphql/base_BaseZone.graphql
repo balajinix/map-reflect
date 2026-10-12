@@ -1,3 +1,0 @@
-type BaseZone {
-  base: Base!
-}

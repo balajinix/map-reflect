@@ -1,5 +1,0 @@
-type ResourceGroup {
-  className: String
-  displayName: String
-  uuid: ID
-}

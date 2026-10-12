@@ -1,4 +1,0 @@
-enum query_getPolicies_items_typeConfigurations_items_name {
-  automatic
-  manual
-}

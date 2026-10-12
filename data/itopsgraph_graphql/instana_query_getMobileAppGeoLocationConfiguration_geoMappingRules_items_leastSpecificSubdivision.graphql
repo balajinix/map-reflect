@@ -1,4 +1,0 @@
-type query_getMobileAppGeoLocationConfiguration_geoMappingRules_items_leastSpecificSubdivision {
-  code: query_getMobileAppGeoLocationConfiguration_geoMappingRules_items_leastSpecificSubdivision_code
-  name: query_getMobileAppGeoLocationConfiguration_geoMappingRules_items_leastSpecificSubdivision_name!
-}

@@ -1,3 +1,0 @@
-type query_findActiveApplicationAlertConfigs_items_applications_additionalProperties_services {
-  additionalProperties: [query_findActiveApplicationAlertConfigs_items_applications_additionalProperties_services_additionalProperties_entry]
-}

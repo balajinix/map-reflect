@@ -1,4 +1,0 @@
-type AwsSubnet {
-  subnet: BaseSubnet!
-  aws_resource: AwsResource!
-}

@@ -1,0 +1,129 @@
+series,label,calls_per_field,accuracy
+random,,0.0,85.4901
+random,,0.0282128,85.6805
+random,,0.0564256,85.8708
+random,,0.0846384,86.0612
+random,,0.112851,86.2515
+random,,0.141064,86.4418
+random,,0.169277,86.6322
+random,,0.19749,86.8225
+random,,0.225702,87.0129
+random,,0.253915,87.2032
+random,,0.282128,87.3935
+random,,0.310341,87.5839
+random,,0.338553,87.7742
+random,,0.366766,87.9645
+random,,0.394979,88.1549
+random,,0.423192,88.3452
+random,,0.451405,88.5356
+random,,0.479617,88.7259
+random,,0.50783,88.9162
+random,,0.536043,89.1066
+random,,0.564256,89.2969
+random,,0.592469,89.4873
+random,,0.620681,89.6776
+random,,0.648894,89.8679
+random,,0.677107,90.0583
+random,,0.70532,90.2486
+random,,0.733533,90.439
+random,,0.761745,90.6293
+random,,0.789958,90.8196
+random,,0.818171,91.01
+random,,0.846384,91.2003
+random,,0.874597,91.3907
+random,,0.902809,91.581
+random,,0.931022,91.7713
+random,,0.959235,91.9617
+random,,0.987448,92.152
+random,,1.01566,92.3423
+random,,1.04387,92.5327
+random,,1.07209,92.723
+random,,1.1003,92.9134
+random,,1.12851,93.1037
+margin sweep,,0.0,85.4901
+margin sweep,,0.0282427,86.962
+margin sweep,,0.0564854,87.8362
+margin sweep,,0.0848775,88.8673
+margin sweep,,0.112672,89.5921
+margin sweep,,0.140915,90.0329
+margin sweep,,0.169157,90.5335
+margin sweep,,0.1974,90.9743
+margin sweep,,0.225568,91.3479
+margin sweep,,0.253811,91.6318
+margin sweep,,0.282053,91.8709
+margin sweep,,0.310146,92.11
+margin sweep,,0.338314,92.3939
+margin sweep,,0.366707,92.5284
+margin sweep,,0.394725,92.6255
+margin sweep,,0.423042,92.7152
+margin sweep,,0.45121,92.8123
+margin sweep,,0.479453,92.9094
+margin sweep,,0.507546,93.0365
+margin sweep,,0.535864,93.0589
+margin sweep,,0.563957,93.1186
+margin sweep,,0.592349,93.1336
+margin sweep,,0.620442,93.1336
+margin sweep,,0.64876,93.1411
+margin sweep,,0.676853,93.156
+margin sweep,,0.70517,93.156
+margin sweep,,0.733338,93.171
+margin sweep,,0.761581,93.1635
+margin sweep,,0.789749,93.1635
+margin sweep,,0.817992,93.1635
+margin sweep,,0.84616,93.1635
+margin sweep,,0.874402,93.156
+margin sweep,,0.90257,93.1485
+margin sweep,,0.930813,93.1261
+margin sweep,,0.958981,93.1261
+margin sweep,,0.987298,93.1112
+margin sweep,,1.01547,93.1037
+margin sweep,,1.04371,93.1037
+margin sweep,,1.0718,93.1037
+margin sweep,,1.10012,93.1037
+margin sweep,,1.12821,93.1037
+benefit sweep,,0.0,85.4901
+benefit sweep,,0.0283921,87.0592
+benefit sweep,,0.0563359,88.1874
+benefit sweep,,0.0845786,89.0765
+benefit sweep,,0.112747,90.0105
+benefit sweep,,0.140989,90.6978
+benefit sweep,,0.169232,91.2507
+benefit sweep,,0.197624,91.7513
+benefit sweep,,0.225643,92.1922
+benefit sweep,,0.253885,92.4611
+benefit sweep,,0.281978,92.6405
+benefit sweep,,0.310146,92.7974
+benefit sweep,,0.338314,92.9393
+benefit sweep,,0.366557,93.0215
+benefit sweep,,0.394725,93.0365
+benefit sweep,,0.423042,93.0365
+benefit sweep,,0.45121,93.0589
+benefit sweep,,0.479453,93.0962
+benefit sweep,,0.507621,93.1336
+benefit sweep,,0.535864,93.1336
+benefit sweep,,0.563957,93.1411
+benefit sweep,,0.592349,93.1485
+benefit sweep,,0.620442,93.1485
+benefit sweep,,0.64876,93.1485
+benefit sweep,,0.676853,93.1485
+benefit sweep,,0.70517,93.1485
+benefit sweep,,0.733264,93.1261
+benefit sweep,,0.761581,93.1261
+benefit sweep,,0.789749,93.0888
+benefit sweep,,0.817992,93.0888
+benefit sweep,,0.84616,93.0888
+benefit sweep,,0.874402,93.0888
+benefit sweep,,0.90257,93.0813
+benefit sweep,,0.930813,93.1037
+benefit sweep,,0.958981,93.0962
+benefit sweep,,0.987298,93.0962
+benefit sweep,,1.01547,93.0888
+benefit sweep,,1.04371,93.0888
+benefit sweep,,1.0718,93.1037
+benefit sweep,,1.10012,93.0962
+benefit sweep,,1.12821,93.1037
+point,No reflection,0.0,85.4901
+point,Schema size,0.369322,92.5732
+point,Reflect on all,1.1285116557083084,93.10370591751345
+point,Margin,0.686342,93.156
+point,Map-Reflect,0.43821,93.0514

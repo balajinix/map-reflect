@@ -1,8 +1,0 @@
-type PackageReferences {
-  """Total count of images related to a package"""
-  images_count: Int!
-  """Total count of repositories related to a package"""
-  repositories_count: Int!
-  """Total count of libraries related to a package"""
-  libraries_count: Int!
-}

@@ -1,5 +1,0 @@
-type G_fwk_metric_metadata {
-  metadata_id: ID!
-  origin: String
-  posture_id: ID!
-}

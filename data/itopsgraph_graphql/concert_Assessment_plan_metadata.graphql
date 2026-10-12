@@ -1,4 +1,0 @@
-type Assessment_plan_metadata {
-  profile_id: ID!
-  profile_weight: Float
-}

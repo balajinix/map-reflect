@@ -1,3 +1,0 @@
-type UserSettings {
-  confirm_routing: Boolean
-}

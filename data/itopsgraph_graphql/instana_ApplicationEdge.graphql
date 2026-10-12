@@ -1,4 +1,0 @@
-type ApplicationEdge {
-  node: ApplicationPerspective
-  cursor: String
-}

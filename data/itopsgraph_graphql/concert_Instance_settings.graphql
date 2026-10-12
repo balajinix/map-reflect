@@ -1,5 +1,0 @@
-type Instance_settings {
-  id: ID!
-  object_type: String
-  settings: JSON
-}

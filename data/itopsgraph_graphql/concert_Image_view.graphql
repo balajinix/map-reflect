@@ -1,7 +1,0 @@
-type Image_view {
-  digest: String
-  id: ID
-  image_tag: String
-  last_updated_on: ID
-  name: String
-}

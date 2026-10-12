@@ -1,6 +1,0 @@
-enum query_getEndpointConfigs_items_rules_items_pathSegments_items_type {
-  UNSUPPORTED
-  FIXED
-  PARAMETER
-  MATCH_ALL
-}

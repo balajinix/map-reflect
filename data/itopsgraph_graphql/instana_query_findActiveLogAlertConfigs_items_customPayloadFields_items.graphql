@@ -1,8 +1,0 @@
-"""The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."""
-type query_findActiveLogAlertConfigs_items_customPayloadFields_items implements q & u & e & r & y & _ & g & e & t & A & l & e & r & t & s & _ & i & t & e & m & s & _ & c & u & s & t & o & m & P & a & y & l & o & a & d & F & i & e & l & d & s & _ & i & t & e & m & s & _ & a & l & l & O & f & _ & 0 {
-  """A user-specified unique identifier or name for a custom payload entry."""
-  key: String!
-  type: String!
-  """Custom value for static type custom payload"""
-  value: String!
-}

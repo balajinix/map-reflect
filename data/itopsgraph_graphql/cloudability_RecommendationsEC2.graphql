@@ -1,4 +1,0 @@
-type RecommendationsEC2 {
-  meta: RecommendationMeta
-  result: [RecommendationResultEntry]
-}

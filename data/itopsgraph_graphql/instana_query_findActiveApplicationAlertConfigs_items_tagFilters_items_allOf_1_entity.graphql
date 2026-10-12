@@ -1,5 +1,0 @@
-enum query_findActiveApplicationAlertConfigs_items_tagFilters_items_allOf_1_entity {
-  NOT_APPLICABLE
-  DESTINATION
-  SOURCE
-}

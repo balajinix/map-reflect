@@ -1,0 +1,390 @@
+{
+ "date": "2026-10-11",
+ "stage": "fit",
+ "method": "v5",
+ "status": "exploratory after the v4 freeze",
+ "spec": "docs/naacl/v6/PLAN_PHASE2.md, Method v5",
+ "flags": "MAPREFLECT_V41=1 MAPREFLECT_CANONICAL_MARGIN=1; MAPREFLECT_FIELD_FIRST=1 where an ff1 lookup exists",
+ "a_selection": {
+  "population": 1219,
+  "arms": {
+   "cur_chk": {
+    "net": 302.0,
+    "net_ci": [
+     261.4,
+     347.6
+    ],
+    "minus_current": 0.0,
+    "minus_current_ci": [
+     0.0,
+     0.0
+    ],
+    "combination_minus_this": 76.0,
+    "combination_minus_this_ci": [
+     56.8,
+     94.8
+    ],
+    "repairs": 304,
+    "breaks": 2,
+    "net_omop": 8.0,
+    "net_other": 294.0
+   },
+   "cur_either": {
+    "net": 317.0,
+    "net_ci": [
+     275.3,
+     362.5
+    ],
+    "minus_current": 15.0,
+    "minus_current_ci": [
+     8.2,
+     22.9
+    ],
+    "combination_minus_this": 61.0,
+    "combination_minus_this_ci": [
+     44.0,
+     76.7
+    ],
+    "repairs": 320,
+    "breaks": 3,
+    "net_omop": 8.0,
+    "net_other": 309.0
+   },
+   "new_chk": {
+    "net": 355.0,
+    "net_ci": [
+     308.4,
+     401.3
+    ],
+    "minus_current": 53.0,
+    "minus_current_ci": [
+     38.6,
+     66.7
+    ],
+    "combination_minus_this": 23.0,
+    "combination_minus_this_ci": [
+     12.6,
+     34.2
+    ],
+    "repairs": 356,
+    "breaks": 1,
+    "net_omop": 8.0,
+    "net_other": 347.0
+   },
+   "new_either": {
+    "net": 378.0,
+    "net_ci": [
+     329.2,
+     425.1
+    ],
+    "minus_current": 76.0,
+    "minus_current_ci": [
+     56.8,
+     94.8
+    ],
+    "combination_minus_this": 0.0,
+    "combination_minus_this_ci": [
+     0.0,
+     0.0
+    ],
+    "repairs": 381,
+    "breaks": 3,
+    "net_omop": 9.0,
+    "net_other": 369.0
+   }
+  },
+  "selected": "new_either"
+ },
+ "intervention": {
+  "reflection": "v6_d3_run.D3Prompts.symmetric(scores=False)",
+  "verifier": "either-order verifier",
+  "outcome_field": "v5"
+ },
+ "b_dev_outcomes": {
+  "fields": 8628,
+  "digest": "dd0512e0f170e7f9fe016010be00bfbdb80592e0f6acd881222d9d6c83b21c91",
+  "files": "results/naacl/v6/v5/dev/<ds>__<model>.jsonl"
+ },
+ "c_benefit": {
+  "features": [
+   "margin",
+   "s1",
+   "top1",
+   "declined",
+   "single",
+   "lognrank",
+   "nshown",
+   "trunc",
+   "logntype",
+   "agree",
+   "margin_trunc",
+   "ds:itopsgraph",
+   "ds:toolbench",
+   "ds:nl2gql",
+   "ds:omop_cms",
+   "ds:omop_mimic",
+   "ds:omop_synthea",
+   "ds:valentine_chembl",
+   "ds:valentine_opendata",
+   "ds:valentine_tpcdi",
+   "ds:valentine_wikidata",
+   "model:gptoss",
+   "model:llama4",
+   "model:granite",
+   "model:qwen35"
+  ],
+  "standardise": {
+   "mu": [
+    0.5019309225776457,
+    0.8670537783958864,
+    0.30516921650440426,
+    0.01808066759388039,
+    0.13792304126101065,
+    1.7161914544279726,
+    0.35853036624941675,
+    0.11543810848400557,
+    1.8512381303147456,
+    0.6505563282336578,
+    0.03536740843764464
+   ],
+   "sd": [
+    0.2984338719754592,
+    0.21523022655442992,
+    0.46047906119880005,
+    0.13324322516826065,
+    0.34481919312924864,
+    0.7904888682158276,
+    0.3381705404769475,
+    0.31954992034679747,
+    0.9174369275047852,
+    0.4767942869087629,
+    0.13365130807658945
+   ]
+  },
+  "model": {
+   "C": 0.1,
+   "cv_logloss": 0.10224374320191626,
+   "classes": [
+    -1,
+    0,
+    1
+   ],
+   "coef": [
+    [
+     0.08585787088341852,
+     -0.03327119090652747,
+     0.050248796670935805,
+     -0.2402301226053187,
+     -0.3330320824729877,
+     0.009645831534251432,
+     -0.3327391260285272,
+     -0.014053838991813122,
+     -0.12051573763634482,
+     -0.040356039018897394,
+     -0.16411931600497548,
+     0.06976626083120271,
+     0.18938170926463943,
+     -0.16206302821205204,
+     0.059054479394662816,
+     -0.04382668436986498,
+     -0.03587397389895202,
+     -0.12151578777605562,
+     -0.059147300956375784,
+     -0.09170599629796396,
+     0.20381291543102256,
+     0.026720417629581647,
+     -0.02678600529932305,
+     -0.13561961899275887,
+     0.143567800072761
+    ],
+    [
+     0.8388385101021041,
+     0.30668479001935356,
+     0.393055381806631,
+     0.024119136480907993,
+     0.577098576952659,
+     -0.09354184105601343,
+     0.28115204061908694,
+     -0.16821561538582103,
+     -0.2713080942215321,
+     0.3075200834515324,
+     -0.0033134430629761765,
+     -0.13205123205482053,
+     -0.32616500999134235,
+     0.14873135496982176,
+     0.20129382454280695,
+     0.2020659686025157,
+     0.11950648816984821,
+     0.025752032481510655,
+     -0.11505122975162695,
+     0.0717446523986168,
+     -0.17851827441617057,
+     -0.047554702871202024,
+     0.13637874549345116,
+     0.3556472903731745,
+     -0.4271627580442639
+    ],
+    [
+     -0.9246963809855155,
+     -0.2734135991128182,
+     -0.44330417847756964,
+     0.21611098612439605,
+     -0.2440664944796729,
+     0.08389600952175566,
+     0.05158708540942275,
+     0.18226945437764422,
+     0.391823831857888,
+     -0.2671640444326376,
+     0.1674327590679641,
+     0.06228497122361801,
+     0.13678330072670328,
+     0.01333167324223033,
+     -0.2603483039374696,
+     -0.15823928423265055,
+     -0.0836325142708964,
+     0.09576375529454467,
+     0.17419853070800262,
+     0.019961343899347832,
+     -0.02529464101485185,
+     0.020834285241619697,
+     -0.10959274019413048,
+     -0.2200276713804142,
+     0.2835949579715038
+    ]
+   ],
+   "intercept": [
+    -1.987831221669821,
+    4.427392095722909,
+    -2.4395608740531003
+   ],
+   "n_repair": 381,
+   "n_break": 34,
+   "n": 8628
+  },
+  "tau": 0.007132643950303531,
+  "tau_rule": "route when u > tau; tau maximises cross-fitted development accuracy, ties to fewer calls",
+  "dev_crossfit_accuracy": 0.9538711172925359,
+  "dev_routed_share": 0.23006490496059342
+ },
+ "margin_router": {
+  "gptoss": {
+   "t_m": 0.54,
+   "t_s": 1.01,
+   "widen": "WT20",
+   "dev_accuracy": 0.9624478442280946
+  },
+  "llama4": {
+   "t_m": 0.2,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "dev_accuracy": 0.9587389893370422
+  },
+  "granite": {
+   "t_m": 0.6,
+   "t_s": 1.0,
+   "widen": "WT20",
+   "dev_accuracy": 0.9235048678720446
+  },
+  "qwen35": {
+   "t_m": 0.55,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "dev_accuracy": 0.9680111265646731
+  }
+ },
+ "thresholds_v41": {
+  "gptoss": {
+   "t_m": 0.15,
+   "t_s": 1.01,
+   "widen": "WT20",
+   "near": "NT",
+   "accept": "check"
+  },
+  "granite": {
+   "t_m": 0.3,
+   "t_s": 1.0,
+   "widen": "WT20",
+   "near": "NT",
+   "accept": "check"
+  },
+  "llama4": {
+   "t_m": 0.2,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "near": "NT",
+   "accept": "check"
+  },
+  "qwen35": {
+   "t_m": 0.55,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "near": "NT",
+   "accept": "check"
+  }
+ },
+ "per_model": {
+  "gptoss": {
+   "n": 2157,
+   "keep": 0.9313861845155308,
+   "v5_crossfit": 0.9629114510894762,
+   "routed_share": 0.1933240611961057,
+   "every_field": 0.961984237366713
+  },
+  "llama4": {
+   "n": 2157,
+   "keep": 0.9221140472878998,
+   "v5_crossfit": 0.9601298099211868,
+   "routed_share": 0.24478442280945759,
+   "every_field": 0.9587389893370422
+  },
+  "granite": {
+   "n": 2157,
+   "keep": 0.89522484932777,
+   "v5_crossfit": 0.923041261010663,
+   "routed_share": 0.25127491886879927,
+   "every_field": 0.9235048678720446
+  },
+  "qwen35": {
+   "n": 2157,
+   "keep": 0.9007881316643487,
+   "v5_crossfit": 0.9694019471488178,
+   "routed_share": 0.23087621696801114,
+   "every_field": 0.9661566991191469
+  }
+ },
+ "models": [
+  "gptoss",
+  "llama4",
+  "granite",
+  "qwen35"
+ ],
+ "datasets": [
+  "itopsgraph",
+  "toolbench",
+  "nl2gql",
+  "omop_cms",
+  "omop_mimic",
+  "omop_synthea",
+  "valentine_chembl",
+  "valentine_opendata",
+  "valentine_tpcdi",
+  "valentine_wikidata"
+ ],
+ "labels": "ITOpsGraph v2.1",
+ "note": "Fitted on development outcomes only; no test output was read.",
+ "provenance": {
+  "code_commit_at_freeze": "643ba72 (ff1 uncut field and table text) with v5_run.py/run_v5.sh from e781051..ca53c4c and v5.py a2012ed",
+  "dev_runs": "COMPUTE_HOST results/naacl/v6/v5/dev (40 cells) and results/naacl/v6/v5/d3c (16 cells: ITOpsGraph and the OMOP sets, the datasets with an ff1 lookup); the other D3 cells come from results/naacl/v6/d3/dev, whose prompts ff1 does not change",
+  "reruns": "ITOpsGraph dev and d3c rerun under the extended ff1 (058a11d); omop_synthea dev and d3c rerun under 643ba72 (record omop_synthea_002); the earlier cells are kept under results/naacl/v6/v5/set_aside_*",
+  "dev_calls": {
+   "dev": 11374,
+   "d3c": 288,
+   "set_aside": 1272
+  },
+  "dev_tokens": {
+   "dev": 27547900,
+   "d3c": 545093
+  },
+  "test_rule": "test runs v5_run.py --actions test on every core and held-out test field (held-out: this configuration transferred), only after this file is committed"
+ }
+}

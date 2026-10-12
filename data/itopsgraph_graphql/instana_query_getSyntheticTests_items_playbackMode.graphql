@@ -1,4 +1,0 @@
-enum query_getSyntheticTests_items_playbackMode {
-  Simultaneous
-  Staggered
-}

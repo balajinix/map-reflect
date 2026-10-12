@@ -1,5 +1,0 @@
-"""This is the short and long time window setting for the burn rate alerts."""
-type query_findActiveServiceLevelsAlertConfigs_items_burnRateTimeWindows {
-  longTimeWindow: query_findActiveServiceLevelsAlertConfigs_items_burnRateTimeWindows_longTimeWindow
-  shortTimeWindow: query_findActiveServiceLevelsAlertConfigs_items_burnRateTimeWindows_shortTimeWindow
-}

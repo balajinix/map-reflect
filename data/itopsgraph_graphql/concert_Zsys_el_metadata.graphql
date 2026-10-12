@@ -1,6 +1,0 @@
-type Zsys_el_metadata {
-  file_path: String
-  file_type: String
-  id: ID
-  timestamp: DateTime
-}

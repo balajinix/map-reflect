@@ -1,0 +1,17 @@
+split,router,budget,OnlyRFields,OnlyRRepairs,OnlyRBreaks,OnlySFields,OnlySRepairs,OnlySBreaks,BothFields,BothNet
+dev,Margin,calls,701.562,14.1848,3.79321,671.484,43.6141,3,436.516,0
+dev,TwoD,calls,726.926,16.7351,4.84877,714.218,38.594,3,393.782,0
+dev,Benefit,calls,194,11,3,223,1,0,885,0
+dev,Exch,calls,192.7,10,2,221.6,0,0,886.4,0
+dev,Margin,tokens,1304.85,16.0731,9.85401,526.857,32.7022,2.71014,581.143,0
+dev,TwoD,tokens,1674.9,17.5846,10.8962,562.731,26.5045,2.30048,545.269,0
+dev,Benefit,tokens,443.762,12,3,157.416,0,0,950.584,0
+dev,Exch,tokens,581.118,13,3,221.6,0,0,886.4,0
+test,Margin,calls,1646.94,40.9109,10.4075,1616.85,52.0475,3.65464,1958.15,-1
+test,TwoD,calls,1866.92,43.2811,10.5469,1849.81,44.7181,2.84211,1725.19,0
+test,Benefit,calls,718,28,3,756,1,0,2819,0
+test,Exch,calls,672,27,3,715,0,0,2860,0
+test,Margin,tokens,3521.68,50,13.5171,909.997,4.45135,0,2665,-1
+test,TwoD,tokens,4021.65,50.5644,14.6124,1011.36,6.71147,0,2563.64,0
+test,Benefit,tokens,2118.59,36,6,405.678,0,0,3169.32,-1
+test,Exch,tokens,2674.11,37,7,715,0,0,2860,0

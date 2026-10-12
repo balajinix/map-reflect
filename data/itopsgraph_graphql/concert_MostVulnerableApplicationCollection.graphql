@@ -1,9 +1,0 @@
-"""Collection of most vulnerable applications"""
-type MostVulnerableApplicationCollection {
-  """Application with most total findings"""
-  most_total_findings: IDNamePair
-  """Application with most priority 1 findings"""
-  most_priority_1_findings: IDNamePair
-  """List of most vulnerable applications"""
-  applications: [MostVulnerableApplication]
-}

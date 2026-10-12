@@ -1,6 +1,0 @@
-type Tags_entity {
-  assigned_at: ID!
-  entity_id: ID!
-  entity_type: String
-  tag_name: String!
-}

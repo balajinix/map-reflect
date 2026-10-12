@@ -1,8 +1,0 @@
-type TagsPrototype {
-  """Name of the tag (used as primary key)"""
-  name: String!
-  """Color of the tag in hexadecimal format"""
-  color: String!
-  """Description of the tag"""
-  description: String
-}

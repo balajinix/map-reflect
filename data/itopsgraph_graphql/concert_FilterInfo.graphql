@@ -1,6 +1,0 @@
-type FilterInfo {
-  """UUID"""
-  key: String!
-  """Name"""
-  value: String!
-}

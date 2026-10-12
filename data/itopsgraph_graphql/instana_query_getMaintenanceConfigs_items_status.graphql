@@ -1,7 +1,0 @@
-enum query_getMaintenanceConfigs_items_status {
-  UNSCHEDULED
-  SCHEDULED
-  ACTIVE
-  FINISHED
-  PAUSED
-}

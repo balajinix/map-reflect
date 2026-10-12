@@ -1,8 +1,0 @@
-type BaseNetworkInterface {
-  base: Base!
-  """the subnet the network interface is contained in"""
-  subnet_id: string!
-  """the VPC the network interface is contained in"""
-  vpc_id: string!
-  security_group_ids: [string]
-}

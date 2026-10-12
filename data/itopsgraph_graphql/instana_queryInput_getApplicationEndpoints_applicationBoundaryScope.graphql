@@ -1,4 +1,0 @@
-enum queryInput_getApplicationEndpoints_applicationBoundaryScope {
-  ALL
-  INBOUND
-}

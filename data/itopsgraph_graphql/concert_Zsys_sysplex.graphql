@@ -1,4 +1,0 @@
-type Zsys_sysplex {
-  id: ID!
-  name: String
-}

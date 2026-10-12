@@ -1,5 +1,0 @@
-enum mutationInput_getMobileAppBeaconGroups_input_group_groupbyTagEntity {
-  NOT_APPLICABLE
-  DESTINATION
-  SOURCE
-}

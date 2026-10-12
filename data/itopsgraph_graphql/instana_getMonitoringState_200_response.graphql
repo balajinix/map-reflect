@@ -1,8 +1,0 @@
-type getMonitoringState_200_response {
-  """Has entities"""
-  hasEntities: Boolean
-  """Count of hosts"""
-  hostCount: Int
-  """Count of serverless"""
-  serverlessCount: Int
-}

@@ -1,5 +1,0 @@
-type AttachedVirtualMachine {
-  className: String
-  displayName: String
-  uuid: ID
-}

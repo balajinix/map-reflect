@@ -1,5 +1,0 @@
-enum queryInput_getEvents_eventTypeFilters_items {
-  INCIDENT
-  ISSUE
-  CHANGE
-}

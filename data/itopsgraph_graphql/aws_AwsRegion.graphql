@@ -1,4 +1,0 @@
-type AwsRegion {
-  region: BaseRegion!
-  aws_resource: AwsResource!
-}

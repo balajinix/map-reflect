@@ -1,5 +1,0 @@
-type query_getTrace_rootSpan_stackTrace_items {
-  file: String
-  line: String
-  method: String
-}

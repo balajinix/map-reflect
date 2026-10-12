@@ -1,8 +1,0 @@
-type Image_deployments {
-  deployment_number: String
-  id: ID!
-  image_id: ID
-  last_updated_by: String
-  last_updated_on: ID!
-  sbom_id: ID
-}

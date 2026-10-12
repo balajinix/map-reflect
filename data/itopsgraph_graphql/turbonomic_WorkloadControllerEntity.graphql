@@ -1,5 +1,0 @@
-type WorkloadControllerEntity {
-  className: String
-  displayName: String
-  uuid: ID
-}

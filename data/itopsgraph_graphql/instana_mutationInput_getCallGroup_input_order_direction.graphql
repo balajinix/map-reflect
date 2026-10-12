@@ -1,4 +1,0 @@
-enum mutationInput_getCallGroup_input_order_direction {
-  ASC
-  DESC
-}

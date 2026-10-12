@@ -1,4 +1,0 @@
-type AwsAvailabilityZone {
-  zone: BaseZone!
-  aws_resource: AwsResource!
-}

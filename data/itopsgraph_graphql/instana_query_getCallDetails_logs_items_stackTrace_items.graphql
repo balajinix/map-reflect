@@ -1,5 +1,0 @@
-type query_getCallDetails_logs_items_stackTrace_items {
-  file: String
-  line: String
-  method: String
-}

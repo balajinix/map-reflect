@@ -1,4 +1,0 @@
-type Packages_images {
-  image_id: ID
-  package_id: ID
-}

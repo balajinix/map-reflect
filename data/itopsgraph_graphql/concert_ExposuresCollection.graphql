@@ -1,5 +1,0 @@
-"""Collection of exposures"""
-type ExposuresCollection {
-  """List of exposures"""
-  exposures: [Exposures]
-}

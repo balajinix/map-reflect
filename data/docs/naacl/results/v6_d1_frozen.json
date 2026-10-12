@@ -1,0 +1,254 @@
+{
+ "date": "2026-10-11",
+ "stage": "fit",
+ "method": "v5",
+ "status": "exploratory after the v4 freeze",
+ "spec": "docs/naacl/v6/PLAN_PHASE2.md, Method v5",
+ "flags": "MAPREFLECT_V41=1 MAPREFLECT_CANONICAL_MARGIN=1; MAPREFLECT_FIELD_FIRST=1 where an ff1 lookup exists",
+ "a_selection": null,
+ "intervention": {
+  "reflection": "v6_d3_run.D3Prompts.symmetric(scores=False)",
+  "verifier": "either-order verifier",
+  "outcome_field": "v5"
+ },
+ "b_dev_outcomes": {
+  "fields": 4314,
+  "digest": "7e281762b38c162edad3027a653b8fb0cac3f5871c97c951a1ee13e27af5feba",
+  "files": "results/naacl/v6/v5/dev/<ds>__<model>.jsonl"
+ },
+ "c_benefit": {
+  "features": [
+   "margin",
+   "s1",
+   "top1",
+   "declined",
+   "single",
+   "lognrank",
+   "nshown",
+   "trunc",
+   "logntype",
+   "agree",
+   "margin_trunc",
+   "ds:itopsgraph",
+   "ds:toolbench",
+   "ds:nl2gql",
+   "ds:omop_cms",
+   "ds:omop_mimic",
+   "ds:omop_synthea",
+   "ds:valentine_chembl",
+   "ds:valentine_opendata",
+   "ds:valentine_tpcdi",
+   "ds:valentine_wikidata",
+   "model:llama4",
+   "model:qwen35"
+  ],
+  "standardise": {
+   "mu": [
+    0.5343694946685237,
+    0.8728836346777616,
+    0.34399629114510893,
+    0.0296708391284191,
+    0.13351877607788595,
+    1.7202603887923635,
+    0.358530366249421,
+    0.11543810848400557,
+    1.8512381303147958,
+    0.6597125637459434,
+    0.037593880389429755
+   ],
+   "sd": [
+    0.3088387086212773,
+    0.22685312062372207,
+    0.4750398328809083,
+    0.16967757787590915,
+    0.34013455060099224,
+    0.8266856505857901,
+    0.3381705404769273,
+    0.3195499203467844,
+    0.9174369275048014,
+    0.47380575870465264,
+    0.1385202482470305
+   ]
+  },
+  "model": {
+   "C": 0.3,
+   "cv_logloss": 0.08844805974600964,
+   "classes": [
+    -1,
+    0,
+    1
+   ],
+   "coef": [
+    [
+     0.005415265529849405,
+     0.4734970978489548,
+     0.15293462647534384,
+     -0.19240865472938384,
+     -0.2784934585275132,
+     -0.15076144947087197,
+     -0.3732267856548386,
+     -0.30708420860626423,
+     -0.24305314190599916,
+     0.21054932451411457,
+     -0.1416028716397326,
+     0.13076679968718402,
+     0.1517460928341681,
+     -0.3955648286764365,
+     -0.05391950235160159,
+     -0.05714246746929357,
+     -0.07311213917477928,
+     -0.20457476689906667,
+     -0.07505541910847856,
+     0.08419808041366822,
+     0.6178102505074783,
+     -0.1304063082626643,
+     0.2555584080255042
+    ],
+    [
+     0.7458616108102375,
+     0.6538491004564527,
+     0.4796395859340882,
+     -0.25996605946829704,
+     0.716205212945382,
+     -1.1759535996485906,
+     0.4707713935153177,
+     0.3482479331183322,
+     -0.14306734398833182,
+     0.13594042694295333,
+     0.0945143864954703,
+     -0.26622475405878826,
+     -0.24413679412441588,
+     -0.10030669081825719,
+     0.6157384121527465,
+     0.6074897026379648,
+     0.15458162842728704,
+     0.27015353154496874,
+     -0.7153743440141999,
+     0.17069818737571366,
+     -0.5061038635165787,
+     0.35670863471053704,
+     -0.37019361910409354
+    ],
+    [
+     -0.751276876340076,
+     -1.1273461983054287,
+     -0.6325742124094358,
+     0.4523747141976898,
+     -0.4377117544178741,
+     1.326715049119462,
+     -0.09754460786047438,
+     -0.0411637245120442,
+     0.38612048589432396,
+     -0.3464897514570692,
+     0.047088485144265314,
+     0.1354579543716047,
+     0.09239070129024723,
+     0.4958715194946927,
+     -0.5618189098011449,
+     -0.5503472351686723,
+     -0.08146948925250785,
+     -0.06557876464590219,
+     0.7904297631226774,
+     -0.25489626778938157,
+     -0.11170638699090027,
+     -0.22630232644787537,
+     0.11463521107858865
+    ]
+   ],
+   "intercept": [
+    -1.4565170133206238,
+    5.033779449223333,
+    -3.5772624359026888
+   ],
+   "n_repair": 199,
+   "n_break": 18,
+   "n": 4314
+  },
+  "tau": 0.018559594949677148,
+  "tau_rule": "route when u > tau; tau maximises cross-fitted development accuracy, ties to fewer calls",
+  "dev_crossfit_accuracy": 0.9643022716736208,
+  "dev_routed_share": 0.16017617060732497
+ },
+ "margin_router": {
+  "llama4": {
+   "t_m": 0.1,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "dev_accuracy": 0.9605934167825684
+  },
+  "qwen35": {
+   "t_m": 0.55,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "dev_accuracy": 0.9661566991191469
+  }
+ },
+ "thresholds_v41": {
+  "gptoss": {
+   "t_m": 0.15,
+   "t_s": 1.01,
+   "widen": "WT20",
+   "near": "NT",
+   "accept": "check"
+  },
+  "granite": {
+   "t_m": 0.3,
+   "t_s": 1.0,
+   "widen": "WT20",
+   "near": "NT",
+   "accept": "check"
+  },
+  "llama4": {
+   "t_m": 0.2,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "near": "NT",
+   "accept": "check"
+  },
+  "qwen35": {
+   "t_m": 0.55,
+   "t_s": 1.0,
+   "widen": "WT50",
+   "near": "NT",
+   "accept": "check"
+  }
+ },
+ "per_model": {
+  "llama4": {
+   "n": 2157,
+   "keep": 0.9276773296244785,
+   "v5_crossfit": 0.96105702364395,
+   "routed_share": 0.18683356513676402,
+   "every_field": 0.9592025961984237
+  },
+  "qwen35": {
+   "n": 2157,
+   "keep": 0.9114510894761243,
+   "v5_crossfit": 0.9675475197032916,
+   "routed_share": 0.13351877607788595,
+   "every_field": 0.9638386648122392
+  }
+ },
+ "models": [
+  "llama4",
+  "qwen35"
+ ],
+ "datasets": [
+  "itopsgraph",
+  "toolbench",
+  "nl2gql",
+  "omop_cms",
+  "omop_mimic",
+  "omop_synthea",
+  "valentine_chembl",
+  "valentine_opendata",
+  "valentine_tpcdi",
+  "valentine_wikidata"
+ ],
+ "labels": "ITOpsGraph v2.1",
+ "note": "Fitted on development outcomes only; no test output was read.",
+ "experiment": "D1 strong first-pass control on the v5 second pass (exploratory)",
+ "first_pass": "hybrid top-20 shortlist (results/naacl/v6/d1/first, the method v4 hybrid control merged into the protocol v2 first pass; pools data/v6_d1_pools)",
+ "intervention_from": "docs/naacl/results/v5_frozen.json (463f9c4): improved reflection and either-order verifier, ff1 where an ff1 lookup exists; not reselected",
+ "dev_runs": "results/naacl/v6/d1/v5/dev (run_d1.sh v5dev, 2026-10-10 22:07 to 23:38 host time)"
+}

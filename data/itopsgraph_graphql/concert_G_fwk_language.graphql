@@ -1,6 +1,0 @@
-type G_fwk_language {
-  domain_id: ID!
-  id: ID!
-  language_code: String!
-  language_file: JSON
-}

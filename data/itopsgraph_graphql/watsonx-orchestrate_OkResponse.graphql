@@ -1,3 +1,0 @@
-type OkResponse {
-  not_ok: Boolean
-}

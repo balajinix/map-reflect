@@ -1,7 +1,0 @@
-type Risk {
-  description: String
-  importance: Float
-  reasonCommodities: [String]
-  severity: Severity
-  subCategory: String
-}

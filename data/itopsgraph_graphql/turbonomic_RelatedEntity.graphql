@@ -1,5 +1,0 @@
-type RelatedEntity {
-  className: String
-  displayName: String
-  uuid: ID
-}

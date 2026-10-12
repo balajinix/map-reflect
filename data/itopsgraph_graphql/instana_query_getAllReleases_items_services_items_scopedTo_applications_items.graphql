@@ -1,4 +1,0 @@
-type query_getAllReleases_items_services_items_scopedTo_applications_items {
-  id: String!
-  name: String
-}

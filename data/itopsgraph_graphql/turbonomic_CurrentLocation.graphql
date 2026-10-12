@@ -1,8 +1,0 @@
-type CurrentLocation {
-  className: String
-  discoveredBy: DiscoveredBy
-  displayName: String
-  environmentType: String
-  uuid: ID
-  vendorIds: JSON
-}

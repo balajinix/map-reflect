@@ -1,8 +1,0 @@
-"""AwsEc2Instance domain model message."""
-type AwsEc2Instance {
-  virtual_machine: BaseVirtualMachine!
-  aws_resource: AwsResource!
-  tenancy: string
-  private_ip: string
-  monitoring: bool
-}

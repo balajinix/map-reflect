@@ -1,4 +1,0 @@
-type PackageDetailsCollection {
-  """List of packages"""
-  packages: [PackageDetailsSummary]!
-}

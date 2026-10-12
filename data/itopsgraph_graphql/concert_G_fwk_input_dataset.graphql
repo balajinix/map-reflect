@@ -1,6 +1,0 @@
-type G_fwk_input_dataset {
-  assessment_id: ID!
-  dataset: JSON!
-  origin: String!
-  timestamp: DateTime!
-}

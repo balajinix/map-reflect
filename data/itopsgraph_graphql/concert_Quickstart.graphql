@@ -1,4 +1,0 @@
-type Quickstart {
-  quickstart: Boolean
-  username: String!
-}

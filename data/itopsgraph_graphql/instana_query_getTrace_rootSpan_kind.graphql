@@ -1,6 +1,0 @@
-enum query_getTrace_rootSpan_kind {
-  UNKNOWN
-  ENTRY
-  EXIT
-  INTERMEDIATE
-}

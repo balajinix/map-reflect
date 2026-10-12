@@ -1,4 +1,0 @@
-type query_getSyntheticLocations_items_playbackCapabilities {
-  browserType: [query_getSyntheticLocations_items_playbackCapabilities_browserType_items]!
-  syntheticType: [String]!
-}

@@ -1,7 +1,0 @@
-"""Success response"""
-type SuccessResponse {
-  """Message code"""
-  message_code: String
-  """Message"""
-  message: String
-}

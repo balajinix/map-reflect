@@ -1,3 +1,0 @@
-type deleteActionInstance_200_response {
-  deletedDocumentsCount: String
-}

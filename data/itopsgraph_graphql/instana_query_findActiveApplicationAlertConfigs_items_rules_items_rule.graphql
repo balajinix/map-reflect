@@ -1,5 +1,0 @@
-type query_findActiveApplicationAlertConfigs_items_rules_items_rule {
-  aggregation: query_findActiveApplicationAlertConfigs_items_rule_aggregation
-  alertType: String!
-  metricName: String!
-}

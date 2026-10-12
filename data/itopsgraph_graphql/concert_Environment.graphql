@@ -1,9 +1,0 @@
-"""Environment definition details"""
-type Environment {
-  """Unique identifier of the environment"""
-  id: String
-  """Name of the environment"""
-  name: String
-  """Configuration of the environment"""
-  config: JSON
-}

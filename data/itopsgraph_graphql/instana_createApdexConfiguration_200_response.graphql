@@ -1,9 +1,0 @@
-type createApdexConfiguration_200_response {
-  apdexEntity: query_getAllApdexConfigurations_items_apdexEntity!
-  """Name of the Apdex Configuration"""
-  apdexName: query_getAllApdexConfigurations_items_apdexName!
-  """Created Date of Apdex Configuration"""
-  createdAt: BigInt
-  """Apdex Configuration ID"""
-  id: query_getAllApdexConfigurations_items_id!
-}

@@ -1,0 +1,920 @@
+{
+ "generated_by": "scripts/naacl/v5_matched.py --stage score",
+ "cost_frozen": "docs/naacl/results/v5_matched_cost_frozen.json",
+ "cost_frozen_commit": "c105867d80bb17cbab8d3a4e2418bfdbc70e3bc9 2026-10-11T08:53:16+05:30",
+ "base_frozen": "docs/naacl/results/v5_frozen.json",
+ "status": "exploratory",
+ "definition": "Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+ "facts": [
+  {
+   "id": "F-VFiveMatchedCostCommit",
+   "claim": "commit and time of docs/naacl/results/v5_matched_cost_frozen.json (development-estimated costs). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "c105867d80bb17cbab8d3a4e2418bfdbc70e3bc9 2026-10-11T08:53:16+05:30",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedEstGptoss",
+   "claim": "gptoss: development-estimated expected calls per routed field, widen / NT. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1.109 / 1.008",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedEstLlama",
+   "claim": "llama4: development-estimated expected calls per routed field, widen / NT. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1.101 / 1.007",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedEstGranite",
+   "claim": "granite: development-estimated expected calls per routed field, widen / NT. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1.088 / 1.017",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedEstQwen",
+   "claim": "qwen35: development-estimated expected calls per routed field, widen / NT. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1.104 / 1.007",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructCallsGain",
+   "claim": "development, benefit router at struct's calls: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+3.94",
+   "lo": "+3.07",
+   "hi": "+5.05",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructCallsVs",
+   "claim": "development, benefit router at struct's calls: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.36",
+   "lo": "+0.14",
+   "hi": "+0.63",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructCallsCallsPer",
+   "claim": "development, benefit router at struct's calls: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.175",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructCallsTokensPer",
+   "claim": "development, benefit router at struct's calls: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "653",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructCallsMismatch",
+   "claim": "development, benefit router at struct's calls: residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.0002 (-0.13%; max 0.29%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructCallsRepairs",
+   "claim": "development, benefit router at struct's calls: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "348 / 8",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructCallsGain",
+   "claim": "development, margin router at struct's calls: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+3.34",
+   "lo": "+2.55",
+   "hi": "+4.26",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructCallsVs",
+   "claim": "development, margin router at struct's calls: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.24",
+   "lo": "-0.82",
+   "hi": "+0.28",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructCallsCallsPer",
+   "claim": "development, margin router at struct's calls: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.175",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructCallsTokensPer",
+   "claim": "development, margin router at struct's calls: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "479",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructCallsMismatch",
+   "claim": "development, margin router at struct's calls: residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.0002 (-0.13%; max 0.29%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructCallsRepairs",
+   "claim": "development, margin router at struct's calls: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "295 / 7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructTokensGain",
+   "claim": "development, benefit router at struct's tokens: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+4.14",
+   "lo": "+3.24",
+   "hi": "+5.30",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructTokensVs",
+   "claim": "development, benefit router at struct's tokens: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.56",
+   "lo": "+0.28",
+   "hi": "+0.88",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructTokensCallsPer",
+   "claim": "development, benefit router at struct's tokens: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.218",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructTokensTokensPer",
+   "claim": "development, benefit router at struct's tokens: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "792",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructTokensMismatch",
+   "claim": "development, benefit router at struct's tokens: residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.2031 (-0.03%; max 0.14%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtStructTokensRepairs",
+   "claim": "development, benefit router at struct's tokens: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "366 / 9",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructTokensGain",
+   "claim": "development, margin router at struct's tokens: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+3.85",
+   "lo": "+3.02",
+   "hi": "+4.89",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructTokensVs",
+   "claim": "development, margin router at struct's tokens: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.27",
+   "lo": "-0.07",
+   "hi": "+0.62",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructTokensCallsPer",
+   "claim": "development, margin router at struct's tokens: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.293",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructTokensTokensPer",
+   "claim": "development, margin router at struct's tokens: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "793",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructTokensMismatch",
+   "claim": "development, margin router at struct's tokens: residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.1497 (+0.02%; max 0.13%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginAtStructTokensRepairs",
+   "claim": "development, margin router at struct's tokens: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "345 / 13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtMarginCallsGain",
+   "claim": "development, benefit router at the margin router (frozen refitted t_m)'s calls: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+4.18",
+   "lo": "+3.28",
+   "hi": "+5.35",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtMarginCallsVs",
+   "claim": "development, benefit router at the margin router (frozen refitted t_m)'s calls: minus the margin router (frozen refitted t_m), points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.10",
+   "lo": "+0.03",
+   "hi": "+0.19",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtMarginCallsCallsPer",
+   "claim": "development, benefit router at the margin router (frozen refitted t_m)'s calls: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.574",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtMarginCallsTokensPer",
+   "claim": "development, benefit router at the margin router (frozen refitted t_m)'s calls: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,600",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtMarginCallsMismatch",
+   "claim": "development, benefit router at the margin router (frozen refitted t_m)'s calls: residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.0005 (-0.08%; max 0.13%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitAtMarginCallsRepairs",
+   "claim": "development, benefit router at the margin router (frozen refitted t_m)'s calls: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "380 / 19",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevStructGain",
+   "claim": "development, struct (widen action on its fields), own budget: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+3.58",
+   "lo": "+2.77",
+   "hi": "+4.59",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevStructCallsPer",
+   "claim": "development, struct (widen action on its fields): realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.175",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevStructTokensPer",
+   "claim": "development, struct (widen action on its fields): second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "793",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginOwnGain",
+   "claim": "development, the margin router at its frozen refitted t_m, own budget: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+4.08",
+   "lo": "+3.19",
+   "hi": "+5.23",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginOwnCallsPer",
+   "claim": "development, the margin router at its frozen refitted t_m: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.575",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevMarginOwnTokensPer",
+   "claim": "development, the margin router at its frozen refitted t_m: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,390",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitOwnGain",
+   "claim": "development, v5's benefit router at its frozen tau, own budget: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+4.18",
+   "lo": "+3.26",
+   "hi": "+5.35",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitOwnCallsPer",
+   "claim": "development, v5's benefit router at its frozen tau: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.296",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevBenefitOwnTokensPer",
+   "claim": "development, v5's benefit router at its frozen tau: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,023",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevFields",
+   "claim": "development field-model pairs (ten core datasets, four models). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "8,628",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedDevFirstAcc",
+   "claim": "development first-pass accuracy, %. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "91.24",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedOwnCallsAccounting",
+   "claim": "test, v5's own budget: calls per field charged by v5.py (a widen action reusing the NT answer costs nothing) / with that field charged its NT call and verifier calls (this analysis) / v5-routed fields affected. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.438 / 0.438 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedOwnVsStruct",
+   "claim": "test, v5 (benefit router at its frozen tau) minus struct at their own, unmatched budgets (v5 0.44 vs struct 0.37 calls per field), points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.48",
+   "lo": "+0.15",
+   "hi": "+0.90",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructCallsGain",
+   "claim": "test, benefit router at struct's calls: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.52",
+   "lo": "+4.19",
+   "hi": "+11.81",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructCallsVs",
+   "claim": "test, benefit router at struct's calls: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.44",
+   "lo": "+0.15",
+   "hi": "+0.82",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructCallsCallsPer",
+   "claim": "test, benefit router at struct's calls: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructCallsTokensPer",
+   "claim": "test, benefit router at struct's calls: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,610",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructCallsMismatch",
+   "claim": "test, benefit router at struct's calls: residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.0003 (-0.08%; max 0.09%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructCallsRepairs",
+   "claim": "test, benefit router at struct's calls: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1017 / 10",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructCallsGain",
+   "claim": "test, margin router at struct's calls: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.03",
+   "lo": "+3.77",
+   "hi": "+11.29",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructCallsVs",
+   "claim": "test, margin router at struct's calls: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.05",
+   "lo": "-0.43",
+   "hi": "+0.38",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructCallsCallsPer",
+   "claim": "test, margin router at struct's calls: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructCallsTokensPer",
+   "claim": "test, margin router at struct's calls: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,304",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructCallsMismatch",
+   "claim": "test, margin router at struct's calls: residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.0003 (-0.08%; max 0.09%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructCallsRepairs",
+   "claim": "test, margin router at struct's calls: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "952 / 11",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructTokensGain",
+   "claim": "test, benefit router at struct's tokens: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.57",
+   "lo": "+4.22",
+   "hi": "+11.86",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructTokensVs",
+   "claim": "test, benefit router at struct's tokens: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.49",
+   "lo": "+0.16",
+   "hi": "+0.92",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructTokensCallsPer",
+   "claim": "test, benefit router at struct's tokens: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.440",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructTokensTokensPer",
+   "claim": "test, benefit router at struct's tokens: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,838",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructTokensMismatch",
+   "claim": "test, benefit router at struct's tokens: residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.7629 (+0.04%; max 0.08%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtStructTokensRepairs",
+   "claim": "test, benefit router at struct's tokens: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1027 / 14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructTokensGain",
+   "claim": "test, margin router at struct's tokens: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.59",
+   "lo": "+4.25",
+   "hi": "+11.86",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructTokensVs",
+   "claim": "test, margin router at struct's tokens: minus struct, points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+0.51",
+   "lo": "+0.16",
+   "hi": "+0.97",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructTokensCallsPer",
+   "claim": "test, margin router at struct's tokens: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.540",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructTokensTokensPer",
+   "claim": "test, margin router at struct's tokens: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,837",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructTokensMismatch",
+   "claim": "test, margin router at struct's tokens: residual budget mismatch, observed spend minus budget, tokens per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.4962 (-0.03%; max 0.04%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginAtStructTokensRepairs",
+   "claim": "test, margin router at struct's tokens: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1030 / 14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtMarginCallsGain",
+   "claim": "test, benefit router at the margin router (frozen refitted t_m)'s calls: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.64",
+   "lo": "+4.31",
+   "hi": "+11.92",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtMarginCallsVs",
+   "claim": "test, benefit router at the margin router (frozen refitted t_m)'s calls: minus the margin router (frozen refitted t_m), points (paired). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.03",
+   "lo": "-0.11",
+   "hi": "+0.03",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtMarginCallsCallsPer",
+   "claim": "test, benefit router at the margin router (frozen refitted t_m)'s calls: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.686",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtMarginCallsTokensPer",
+   "claim": "test, benefit router at the margin router (frozen refitted t_m)'s calls: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "2,441",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtMarginCallsMismatch",
+   "claim": "test, benefit router at the margin router (frozen refitted t_m)'s calls: residual budget mismatch, observed spend minus budget, calls per field (% of budget; largest per-model absolute %). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.0003 (-0.04%; max 0.06%)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitAtMarginCallsRepairs",
+   "claim": "test, benefit router at the margin router (frozen refitted t_m)'s calls: repairs / breaks. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1040 / 18",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedStructGain",
+   "claim": "test, struct (widen action on its fields), own budget: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.08",
+   "lo": "+3.70",
+   "hi": "+11.34",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedStructCallsPer",
+   "claim": "test, struct (widen action on its fields): realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.369",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedStructTokensPer",
+   "claim": "test, struct (widen action on its fields): second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,838",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginOwnGain",
+   "claim": "test, the margin router at its frozen refitted t_m, own budget: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.67",
+   "lo": "+4.34",
+   "hi": "+11.94",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginOwnCallsPer",
+   "claim": "test, the margin router at its frozen refitted t_m: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.686",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedMarginOwnTokensPer",
+   "claim": "test, the margin router at its frozen refitted t_m: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "2,137",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitOwnGain",
+   "claim": "test, v5's benefit router at its frozen tau, own budget: change over the first pass, points. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "+7.56",
+   "lo": "+4.22",
+   "hi": "+11.88",
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitOwnCallsPer",
+   "claim": "test, v5's benefit router at its frozen tau: realised second-pass calls per field. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedBenefitOwnTokensPer",
+   "claim": "test, v5's benefit router at its frozen tau: second-pass tokens per field (mean-token estimates). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "1,835",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedFields",
+   "claim": "test field-model pairs (ten core datasets, four models). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "13,384",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedFirstAcc",
+   "claim": "test first-pass accuracy, %. Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "85.49",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedResidualBenefitStructCalls",
+   "claim": "test, benefit selection matched to the schema-size baseline's calls: residual cost mismatch, observed calls minus the baseline's, % of its calls (the sequential rule admits a field on its expected cost and then charges its observed cost, so the match is approximate, not a strict cap). Cost definition (v5 matched budgets, as F-DTwoCost): whole fields in priority order (fixed-seed random order inside ties); a field is routed while observed spend plus its development-estimated expected cost (per model and action, mean realised calls and mean-token estimates on v5 development) fits the budget; observed spend charges realised calls (one reflection call, plus two either-order verifier calls when the action proposes a change; a widen action that reuses the NT answer is charged the NT calls, which v5.py does not charge) and mean-token estimates (test token logs); stops at the first field that does not fit; no fractional fields. Budget per model: the comparator's realised spend.",
+   "value": "-0.08%",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.addfacts",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMatchedTokenCostDefinition",
+   "claim": "token cost definition of the v5 matched comparisons",
+   "value": "Tokens per field are mean-token estimates, not exact per-call totals: each realised call is charged the mean prompt plus completion tokens of its stage (reflection or verifier) for that dataset and model in the test token logs (results/naacl/v6/v5/tokens), falling back to the model's mean; expected token costs for selection use the same means from the development logs.",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_matched_facts.json",
+   "fn": "v5_matched.addfacts",
+   "status": "exploratory"
+  }
+ ]
+}

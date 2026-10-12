@@ -1,4 +1,0 @@
-type query_getGroups_items_permissionSet_syntheticTestIds_items {
-  scopeId: query_getGroups_items_permissionSet_actionFilter_scopeId
-  scopeRoleId: query_getGroups_items_permissionSet_actionFilter_scopeRoleId
-}

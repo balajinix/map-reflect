@@ -1,8 +1,0 @@
-type Package_vulnerabilities {
-  package: String
-  ptype: String
-  purl: String!
-  ts: DateTime!
-  version: String
-  vulnerability: String!
-}

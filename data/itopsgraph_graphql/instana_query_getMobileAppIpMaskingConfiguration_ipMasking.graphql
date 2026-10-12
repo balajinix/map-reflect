@@ -1,5 +1,0 @@
-enum query_getMobileAppIpMaskingConfiguration_ipMasking {
-  DEFAULT
-  STRICT
-  REMOVE_ALL_DETAILS
-}

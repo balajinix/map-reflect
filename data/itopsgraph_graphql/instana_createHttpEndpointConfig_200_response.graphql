@@ -1,6 +1,0 @@
-type createHttpEndpointConfig_200_response {
-  endpointNameByCollectedPathTemplateRuleEnabled: Boolean
-  endpointNameByFirstPathSegmentRuleEnabled: Boolean
-  rules: [query_getHttpEndpointConfigs_items_rules_items]!
-  serviceId: String!
-}

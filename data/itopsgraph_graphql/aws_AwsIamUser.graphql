@@ -1,4 +1,0 @@
-type AwsIamUser {
-  user: BaseUser!
-  aws_resource: AwsResource!
-}

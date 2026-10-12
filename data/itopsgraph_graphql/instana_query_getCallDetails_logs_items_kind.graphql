@@ -1,6 +1,0 @@
-enum query_getCallDetails_logs_items_kind {
-  UNKNOWN
-  ENTRY
-  EXIT
-  INTERMEDIATE
-}

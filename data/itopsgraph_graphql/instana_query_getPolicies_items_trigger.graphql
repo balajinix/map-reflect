@@ -1,8 +1,0 @@
-"""The trigger is the Instana event or Smart Alert that defines the initial conditions that must be met for the policy to apply on the actions in `typeConfiguration`."""
-type query_getPolicies_items_trigger {
-  """Trigger (Instana event or Smart Alert) identifier."""
-  id: String!
-  """A name of the trigger (name of Instana event or Smart Alert)."""
-  name: String
-  type: query_getPolicies_items_trigger_type!
-}

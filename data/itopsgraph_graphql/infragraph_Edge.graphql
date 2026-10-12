@@ -1,6 +1,0 @@
-"""Edge is a representation of a directed edge out or into a node in the graph."""
-type Edge {
-  label: EdgeLabel!
-  direction: EdgeDirection!
-  node_id: NodeIdentifier!
-}

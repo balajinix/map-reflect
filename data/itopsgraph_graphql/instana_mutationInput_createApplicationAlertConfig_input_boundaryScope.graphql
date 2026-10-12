@@ -1,4 +1,0 @@
-enum mutationInput_createApplicationAlertConfig_input_boundaryScope {
-  ALL
-  INBOUND
-}

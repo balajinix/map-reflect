@@ -1,6 +1,0 @@
-type Sbom_risk_summary {
-  license_count: ID
-  opensource_count: ID
-  sbom_id: ID
-  vulnerability_count: ID
-}

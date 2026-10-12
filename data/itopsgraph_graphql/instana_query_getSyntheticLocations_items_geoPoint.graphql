@@ -1,6 +1,0 @@
-type query_getSyntheticLocations_items_geoPoint {
-  cityName: String!
-  countryName: String!
-  latitude: Float!
-  longitude: Float!
-}

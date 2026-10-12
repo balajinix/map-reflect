@@ -1,4 +1,0 @@
-type getAccessLogs_200_response {
-  entries: [query_getAccessLogs_entries_items]
-  total: BigInt
-}

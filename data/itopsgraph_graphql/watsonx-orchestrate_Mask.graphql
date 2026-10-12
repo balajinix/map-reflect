@@ -1,3 +1,0 @@
-type Mask {
-  remove_entity_value: Boolean
-}

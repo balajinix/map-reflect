@@ -1,5 +1,0 @@
-enum query_getHealthState_health {
-  RED
-  YELLOW
-  GREEN
-}

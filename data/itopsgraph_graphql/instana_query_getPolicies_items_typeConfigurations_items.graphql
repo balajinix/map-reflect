@@ -1,6 +1,0 @@
-"""List of configurations that contains the list of actions to run and the mode (automatic or manual) in which the policy is run."""
-type query_getPolicies_items_typeConfigurations_items {
-  condition: query_getPolicies_items_typeConfigurations_items_condition
-  name: query_getPolicies_items_typeConfigurations_items_name!
-  runnable: query_getPolicies_items_typeConfigurations_items_runnable!
-}

@@ -1,4 +1,0 @@
-"""Boolean expression of tag filters to define the scope of relevant calls."""
-type query_getSloConfigById_oneOf_0_entity_tagFilterExpression {
-  type: String!
-}

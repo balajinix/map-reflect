@@ -1,8 +1,0 @@
-type BudgetResultEntry {
-  basis: String
-  id: String
-  months: [MonthsEntry]
-  name: String
-  ownerId: Int
-  viewId: Int
-}

@@ -1,6 +1,0 @@
-type Image_to_sbomid {
-  image_id: ID
-  sbom_id: String
-  ts: DateTime
-  version: Int
-}

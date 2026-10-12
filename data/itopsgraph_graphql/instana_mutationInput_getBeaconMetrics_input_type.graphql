@@ -1,8 +1,0 @@
-enum mutationInput_getBeaconMetrics_input_type {
-  PAGELOAD
-  RESOURCELOAD
-  HTTPREQUEST
-  ERROR
-  CUSTOM
-  PAGE_CHANGE
-}

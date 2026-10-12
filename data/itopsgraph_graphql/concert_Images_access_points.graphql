@@ -1,4 +1,0 @@
-type Images_access_points {
-  access_point_id: ID
-  image_id: ID
-}

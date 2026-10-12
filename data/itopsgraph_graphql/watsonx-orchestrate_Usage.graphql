@@ -1,4 +1,0 @@
-type Usage {
-  model_name: String
-  token_usage: TokenUsage
-}

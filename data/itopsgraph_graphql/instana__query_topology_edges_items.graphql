@@ -1,7 +1,0 @@
-type _query_topology_edges_items {
-  """ID of the outgoing GraphEdge."""
-  destination: String
-  relation: _query_topology_edges_items_relation
-  """ID of the incoming GraphEdge."""
-  source: String
-}

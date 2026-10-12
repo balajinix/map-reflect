@@ -1,4 +1,0 @@
-"""Selection of applications, services, and endpoints that this Smart Alert configuration is associated with. This selection is connected to the defined `tagFilterExpression` by the logical `AND` operator."""
-type query_findActiveApplicationAlertConfigs_items_applications {
-  additionalProperties: [query_findActiveApplicationAlertConfigs_items_applications_additionalProperties_entry]
-}

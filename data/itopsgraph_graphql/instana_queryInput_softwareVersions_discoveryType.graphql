@@ -1,6 +1,0 @@
-enum queryInput_softwareVersions_discoveryType {
-  NATIVE_SENSOR
-  REMOTE_SENSOR
-  PACKAGE_MANAGER
-  OTHER
-}

@@ -1,5 +1,0 @@
-configurationset:
-  - configuration:
-      name: instana
-      apitoken: STEPZEN_INSTANA_APITOKEN
-      hostname: ibmdevsandbox-instanaibm.instana.io

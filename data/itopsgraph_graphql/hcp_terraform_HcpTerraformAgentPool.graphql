@@ -1,5 +1,0 @@
-type HcpTerraformAgentPool {
-  base: Base!
-  agent_count: int32
-  organization_scoped: bool
-}

@@ -1,9 +1,0 @@
-"""CVEs affecting public access points"""
-type CvesPublicAccessPoints {
-  """CVE with highest risk"""
-  highest_risk: String
-  """CVE with most impact"""
-  most_impact: String
-  """List of CVEs"""
-  cves: [Cves]
-}

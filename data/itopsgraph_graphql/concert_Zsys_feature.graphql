@@ -1,4 +1,0 @@
-type Zsys_feature {
-  id: ID!
-  name: String
-}

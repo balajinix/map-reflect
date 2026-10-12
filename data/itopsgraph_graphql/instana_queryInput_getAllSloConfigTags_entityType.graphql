@@ -1,5 +1,0 @@
-enum queryInput_getAllSloConfigTags_entityType {
-  application
-  website
-  synthetic
-}

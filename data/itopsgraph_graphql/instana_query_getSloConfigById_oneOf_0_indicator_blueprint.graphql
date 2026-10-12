@@ -1,6 +1,0 @@
-enum query_getSloConfigById_oneOf_0_indicator_blueprint {
-  latency
-  availability
-  traffic
-  custom
-}

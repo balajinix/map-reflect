@@ -1,7 +1,0 @@
-"""PackerInheritedRevocation domain model message."""
-type PackerInheritedRevocation {
-  base: Base!
-  hcp_resource: HcpResource!
-  descendant_id: string
-  ancestor_id: string
-}

@@ -1,7 +1,0 @@
-type Zsys_apar_view {
-  apar_id: String
-  apar_type: String
-  product_affected: ID
-  risk_assessment: String
-  risk_assessment_score: Int
-}

@@ -1,8 +1,0 @@
-type query_getInfrastructureCatalogMetrics_items {
-  custom: Boolean
-  description: String!
-  formatter: query_getInfrastructureCatalogMetrics_items_formatter!
-  label: String!
-  metricId: String!
-  pluginId: String!
-}

@@ -1,8 +1,0 @@
-type mutation_getMetricsResult_metricsResult_items {
-  """A map of custom properties composed of the custom property name and its value.  This information will be included if the custom properties were requested or if the query was grouped and the grouping included one or more custom properties."""
-  customTags: JSON
-  """A map of the requested metrics, composed of the metric name and its value."""
-  metrics: [JSON]!
-  """A description of the Synthetic test associated with the result item.  This information will be included if the request was grouped by synthetic.testId or if includeAggregatedTestId was true on the request."""
-  tests: [mutation_getMetricsResult_metricsResult_items_tests_items]
-}

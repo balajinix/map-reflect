@@ -1,9 +1,0 @@
-type Data {
-  message: Message
-  message_id: ID
-  last_error: String
-  assistant: Assistant
-  delta: String
-  run_id: String
-  thread_id: String
-}

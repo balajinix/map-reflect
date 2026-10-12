@@ -1,4 +1,0 @@
-type Packages_sboms {
-  package_id: ID
-  sbom_id: ID
-}

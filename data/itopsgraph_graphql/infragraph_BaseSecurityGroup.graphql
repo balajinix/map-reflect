@@ -1,5 +1,0 @@
-type BaseSecurityGroup {
-  base: Base!
-  """the VPC the security group is contained in"""
-  vpc_id: string!
-}

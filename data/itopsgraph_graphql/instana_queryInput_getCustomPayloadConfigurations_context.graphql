@@ -1,9 +1,0 @@
-enum queryInput_getCustomPayloadConfigurations_context {
-  ALL
-  APPLICATION
-  WEBSITE
-  SYNTHETIC
-  MOBILE_APP
-  INFRA
-  LOG
-}

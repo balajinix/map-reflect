@@ -1,5 +1,0 @@
-type Zsys_function {
-  description: String
-  feature_id: ID!
-  id: String!
-}

@@ -1,6 +1,0 @@
-"""HcpTerraformProject is a type containing HCP TF Project specific fields."""
-type HcpTerraformProject {
-  account: BaseAccount!
-  is_legacy_organization_project: bool
-  is_unified: bool
-}

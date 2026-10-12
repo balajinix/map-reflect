@@ -1,4 +1,0 @@
-enum query_getSyntheticLocations_items_playbackCapabilities_browserType_items {
-  chrome
-  firefox
-}

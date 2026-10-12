@@ -1,4 +1,0 @@
-enum queryInput_getSliConfigsForEntityTypeAndIdV2_entityType {
-  APPLICATION
-  WEBSITE
-}

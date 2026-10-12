@@ -1,5 +1,0 @@
-"""AssistantRun Connection with edges"""
-type AssistantRunConnection {
-  edges: [AssistantRunEdge]
-  pageInfo: PageInfo!
-}

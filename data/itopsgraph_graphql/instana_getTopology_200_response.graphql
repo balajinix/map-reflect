@@ -1,5 +1,0 @@
-"""Filter on softwareType"""
-type getTopology_200_response {
-  edges: [query_getTopology_edges_items]
-  nodes: [query_getTopology_nodes_items]
-}

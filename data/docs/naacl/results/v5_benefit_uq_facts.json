@@ -1,0 +1,958 @@
+{
+ "generated_by": "scripts/naacl/v5_benefit_uq.py",
+ "status": "exploratory",
+ "definition": "Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+ "first_accuracy": 85.49013747758518,
+ "facts": [
+  {
+   "id": "F-BenUQDevPairs",
+   "claim": "development field-model pairs (the classifier's training set). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "8,628",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQDevRepairs",
+   "claim": "development repairs of the routed action under the selected strategy. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "381",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQDevBreaks",
+   "claim": "development breaks of the routed action under the selected strategy. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "34",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQPairs",
+   "claim": "core test: field-model pairs. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "13,384",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQRepairs",
+   "claim": "core test: repairs when every field is reflected on. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "1,048",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQBreaks",
+   "claim": "core test: breaks when every field is reflected on. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "29",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQLogLoss",
+   "claim": "core test: multiclass log loss of the frozen benefit model (lower is better). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.144",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQLogLossPrior",
+   "claim": "core test: multiclass log loss of a prior that predicts the development outcome frequencies. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.302",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQBrier",
+   "claim": "core test: multiclass Brier score of the frozen benefit model (lower is better). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.081",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQBrierPrior",
+   "claim": "core test: multiclass Brier score of the development outcome frequencies. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.151",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQRepairAUC",
+   "claim": "core test: AUROC of P(repair) for a repair. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.96",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQRepairECE",
+   "claim": "core test: ECE of P(repair) (10 equal-width bins), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "1.24",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQRepairMean",
+   "claim": "core test: mean P(repair), %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "8.31",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQRepairRate",
+   "claim": "core test: observed repair rate, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "7.83",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQBreakAUC",
+   "claim": "core test: AUROC of P(break) for a break, among first-pass correct answers. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.67",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQBreakECE",
+   "claim": "core test: ECE of P(break) (10 equal-width bins), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQBreakMean",
+   "claim": "core test: mean P(break), %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.35",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQBreakRate",
+   "claim": "core test: observed break rate, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.22",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQUAUCRepair",
+   "claim": "core test: AUROC of u(x) for a repair. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.96",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQUAUCError",
+   "claim": "core test: AUROC of u(x) for a first-pass error. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.92",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQUAUCRepairAmongErrors",
+   "claim": "core test: AUROC of u(x) for a repair among first-pass errors (which errors reflection repairs). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.76",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQUCalErr",
+   "claim": "core test: calibration error of u(x) as the expected change in correctness, 10 equal-mass bins of u, points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.61",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQPredSel",
+   "claim": "core test: on the fields Map-Reflect selects, predicted change in accuracy (sum of u over all fields), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+8.00",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQObsSel",
+   "claim": "core test: on the fields Map-Reflect selects, observed change in accuracy (repairs minus breaks over all fields), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+7.56",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQPredAll",
+   "claim": "core test: on all fields, predicted change in accuracy (sum of u), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+7.96",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQObsAll",
+   "claim": "core test: on all fields, observed change in accuracy, points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+7.61",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQSelRate",
+   "claim": "core test: Map-Reflect's reflection rate, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "32.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQUReliability",
+   "claim": "core test: reliability of u(x), 10 equal-mass bins: (mean u, mean observed change, n). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "(-0.004, +0.001, 1339); (-0.002, +0.001, 1339); (-0.001, -0.002, 1339); (-0.001, -0.004, 1339); (-0.000, +0.000, 1338); (+0.001, +0.001, 1338); (+0.005, +0.010, 1338); (+0.023, +0.013, 1338); (+0.152, +0.141, 1338); (+0.624, +0.601, 1338)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOPairs",
+   "claim": "held-out test: field-model pairs. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "3,652",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHORepairs",
+   "claim": "held-out test: repairs when every field is reflected on. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "133",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOBreaks",
+   "claim": "held-out test: breaks when every field is reflected on. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "28",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOLogLoss",
+   "claim": "held-out test: multiclass log loss of the frozen benefit model (lower is better). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.314",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOLogLossPrior",
+   "claim": "held-out test: multiclass log loss of a prior that predicts the development outcome frequencies. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.203",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOBrier",
+   "claim": "held-out test: multiclass Brier score of the frozen benefit model (lower is better). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.166",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOBrierPrior",
+   "claim": "held-out test: multiclass Brier score of the development outcome frequencies. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.085",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHORepairAUC",
+   "claim": "held-out test: AUROC of P(repair) for a repair. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.80",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHORepairECE",
+   "claim": "held-out test: ECE of P(repair) (10 equal-width bins), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "13.92",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHORepairMean",
+   "claim": "held-out test: mean P(repair), %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "17.57",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHORepairRate",
+   "claim": "held-out test: observed repair rate, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "3.64",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOBreakAUC",
+   "claim": "held-out test: AUROC of P(break) for a break, among first-pass correct answers. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.74",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOBreakECE",
+   "claim": "held-out test: ECE of P(break) (10 equal-width bins), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.43",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOBreakMean",
+   "claim": "held-out test: mean P(break), %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.33",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOBreakRate",
+   "claim": "held-out test: observed break rate, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.77",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOUAUCRepair",
+   "claim": "held-out test: AUROC of u(x) for a repair. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.80",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOUAUCError",
+   "claim": "held-out test: AUROC of u(x) for a first-pass error. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.77",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOUAUCRepairAmongErrors",
+   "claim": "held-out test: AUROC of u(x) for a repair among first-pass errors (which errors reflection repairs). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.66",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOUCalErr",
+   "claim": "held-out test: calibration error of u(x) as the expected change in correctness, 10 equal-mass bins of u, points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "14.37",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOPredSel",
+   "claim": "held-out test: on the fields Map-Reflect selects, predicted change in accuracy (sum of u over all fields), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+17.20",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOObsSel",
+   "claim": "held-out test: on the fields Map-Reflect selects, observed change in accuracy (repairs minus breaks over all fields), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+2.90",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOPredAll",
+   "claim": "held-out test: on all fields, predicted change in accuracy (sum of u), points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+17.23",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOObsAll",
+   "claim": "held-out test: on all fields, observed change in accuracy, points. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+2.88",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOSelRate",
+   "claim": "held-out test: Map-Reflect's reflection rate, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "88.4",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQHOUReliability",
+   "claim": "held-out test: reliability of u(x), 10 equal-mass bins: (mean u, mean observed change, n). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "(+0.002, +0.003, 366); (+0.012, -0.014, 366); (+0.023, +0.014, 365); (+0.043, +0.016, 365); (+0.067, +0.008, 365); (+0.105, +0.011, 365); (+0.159, +0.003, 365); (+0.240, +0.030, 365); (+0.393, +0.027, 365); (+0.681, +0.189, 365)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQMainCallsPer",
+   "claim": "core test, Map-Reflect at its frozen tau: second-pass calls per field (standalone accounting). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairMatchedAcc",
+   "claim": "core test, P(repair) alone, at Map-Reflect's calls (matched): accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.05",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairMatchedVsMain",
+   "claim": "core test, P(repair) alone, at Map-Reflect's calls (matched): minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+0.00",
+   "lo": "-0.02",
+   "hi": "+0.02",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairMatchedCalls",
+   "claim": "core test, P(repair) alone, at Map-Reflect's calls (matched): second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairOwnAcc",
+   "claim": "core test, P(repair) alone, at its own development threshold: accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.04",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairOwnVsMain",
+   "claim": "core test, P(repair) alone, at its own development threshold: minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "-0.01",
+   "lo": "-0.05",
+   "hi": "+0.02",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairOwnCalls",
+   "claim": "core test, P(repair) alone, at its own development threshold: second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.437",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairC",
+   "claim": "P(repair) alone: L2 inverse strength C chosen by grouped development CV. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.1",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltRepairTau",
+   "claim": "P(repair) alone: own threshold fitted on cross-fitted development scores. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.0119",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorMatchedAcc",
+   "claim": "core test, P(error), correctness estimate, at Map-Reflect's calls (matched): accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.01",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorMatchedVsMain",
+   "claim": "core test, P(error), correctness estimate, at Map-Reflect's calls (matched): minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "-0.04",
+   "lo": "-0.17",
+   "hi": "+0.13",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorMatchedCalls",
+   "claim": "core test, P(error), correctness estimate, at Map-Reflect's calls (matched): second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorOwnAcc",
+   "claim": "core test, P(error), correctness estimate, at its own development threshold: accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorOwnVsMain",
+   "claim": "core test, P(error), correctness estimate, at its own development threshold: minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+0.10",
+   "lo": "+0.00",
+   "hi": "+0.26",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorOwnCalls",
+   "claim": "core test, P(error), correctness estimate, at its own development threshold: second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.630",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorC",
+   "claim": "P(error), correctness estimate: L2 inverse strength C chosen by grouped development CV. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltErrorTau",
+   "claim": "P(error), correctness estimate: own threshold fitted on cross-fitted development scores. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.0108",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferMatchedAcc",
+   "claim": "core test, u(x) fitted on the other three models, at Map-Reflect's calls (matched): accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.04",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferMatchedVsMain",
+   "claim": "core test, u(x) fitted on the other three models, at Map-Reflect's calls (matched): minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "-0.01",
+   "lo": "-0.02",
+   "hi": "+0.00",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferMatchedCalls",
+   "claim": "core test, u(x) fitted on the other three models, at Map-Reflect's calls (matched): second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferOwnAcc",
+   "claim": "core test, u(x) fitted on the other three models, at its own development threshold: accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.08",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferOwnVsMain",
+   "claim": "core test, u(x) fitted on the other three models, at its own development threshold: minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+0.03",
+   "lo": "-0.01",
+   "hi": "+0.10",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferOwnCalls",
+   "claim": "core test, u(x) fitted on the other three models, at its own development threshold: second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.474",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferC",
+   "claim": "u(x) fitted on the other three models: L2 inverse strength C chosen by grouped development CV. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "{\"gptoss\": 0.1, \"llama4\": 0.1, \"granite\": 0.1, \"qwen35\": 0.1}",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltTransferTau",
+   "claim": "u(x) fitted on the other three models: own threshold fitted on cross-fitted development scores. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "{\"gptoss\": 0.0028, \"llama4\": 0.0037, \"granite\": 0.0087, \"qwen35\": 0.0027}",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltMarginMatchedAcc",
+   "claim": "core test, margin (frozen refitted t_m), at Map-Reflect's calls (matched): accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "92.73",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltMarginMatchedVsMain",
+   "claim": "core test, margin (frozen refitted t_m), at Map-Reflect's calls (matched): minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "-0.32",
+   "lo": "-0.51",
+   "hi": "-0.14",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltMarginMatchedCalls",
+   "claim": "core test, margin (frozen refitted t_m), at Map-Reflect's calls (matched): second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.438",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltMarginOwnAcc",
+   "claim": "core test, margin (frozen refitted t_m), at its own development threshold: accuracy, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltMarginOwnVsMain",
+   "claim": "core test, margin (frozen refitted t_m), at its own development threshold: minus Map-Reflect at its frozen tau, points (paired, unadjusted). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "+0.10",
+   "lo": "-0.01",
+   "hi": "+0.27",
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQAltMarginOwnCalls",
+   "claim": "core test, margin (frozen refitted t_m), at its own development threshold: second-pass calls per field. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.686",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQMarginAUCError",
+   "claim": "core test, all field-model pairs: AUROC of the margin ordering (declined first, then ascending margin) for a first-pass error. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.91",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQErrorAUCError",
+   "claim": "core test: AUROC of the P(error) model for a first-pass error. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.95",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQErrorAUCRepair",
+   "claim": "core test: AUROC of the P(error) model for a repair. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.95",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauGrid",
+   "claim": "frozen u(x) at other thresholds: (tau, cross-fitted development accuracy %, test accuracy %, test calls per field, test reflection rate %). Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "(-0.0200, 95.26, 93.10, 1.129, 100.0); (0.0000, 95.36, 93.15, 0.597, 47.6); (0.0071, 95.39, 93.05, 0.438, 32.0); (0.0200, 95.34, 93.01, 0.365, 24.9); (0.0500, 95.07, 92.89, 0.309, 19.9); (0.1000, 94.78, 92.54, 0.267, 16.5); (0.2000, 94.41, 92.11, 0.220, 12.8)",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauTestMin",
+   "claim": "core test accuracy over tau from -0.02 to 0.2 (frozen u), lowest, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "92.11",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauTestMax",
+   "claim": "core test accuracy over tau from -0.02 to 0.2 (frozen u), highest, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.15",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauZeroAcc",
+   "claim": "core test accuracy with tau = 0 (reflect when the expected change is positive), %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "93.15",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauZeroCalls",
+   "claim": "core test calls per field with tau = 0. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.60",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauHighValue",
+   "claim": "the largest threshold of the tau grid. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.2",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauHighAcc",
+   "claim": "core test accuracy with tau = 0.2, %. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "92.11",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-BenUQTauHighCalls",
+   "claim": "core test calls per field with tau = 0.2. Exploratory, specified after the test results were seen; offline on the stored method v5 outputs (results/naacl/v6/v5), frozen benefit model and tau (docs/naacl/results/v5_frozen.json); nothing refit on test.",
+   "value": "0.22",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_benefit_uq_facts.json",
+   "fn": "v5_benefit_uq",
+   "status": "exploratory"
+  }
+ ]
+}

@@ -1,7 +1,0 @@
-type Entity_settings {
-  entity_id: ID!
-  entity_type: String!
-  id: ID!
-  settings: JSON
-  settings_type: String!
-}

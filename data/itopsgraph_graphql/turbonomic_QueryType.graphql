@@ -1,5 +1,0 @@
-enum QueryType {
-  EXACT
-  CONTAINS
-  REGEX
-}

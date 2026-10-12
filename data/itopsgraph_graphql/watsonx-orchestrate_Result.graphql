@@ -1,6 +1,0 @@
-type Result {
-  data: Data
-  next_run_id: String
-  """- route_complete - route_confirm - nba_selection - message_created - form_submission - route_error - nba_selection_error"""
-  type: String
-}

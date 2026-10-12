@@ -1,4 +1,0 @@
-enum query_getSyntheticLocations_items_configuration_tenantType {
-  Multi
-  Single
-}

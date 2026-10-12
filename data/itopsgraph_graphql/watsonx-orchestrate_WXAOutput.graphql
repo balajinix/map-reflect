@@ -1,3 +1,0 @@
-type WXAOutput {
-  generic: [GenericEntry]
-}

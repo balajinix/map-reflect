@@ -1,4 +1,0 @@
-type Applications_environments {
-  app_release_id: ID
-  environment_id: ID
-}

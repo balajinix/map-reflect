@@ -1,6 +1,0 @@
-type query_getSyntheticCalls_customRules_items {
-  description: query_getSyntheticCalls_customRules_items_description
-  enabled: Boolean
-  matchSpecification: query_getSyntheticCalls_customRules_items_matchSpecification!
-  name: query_getSyntheticCalls_customRules_items_name!
-}

@@ -1,6 +1,0 @@
-type Release {
-  """Association ID"""
-  id: String!
-  """Release version"""
-  version: String
-}

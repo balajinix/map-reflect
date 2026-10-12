@@ -1,5 +1,0 @@
-type NamespaceEntity {
-  className: String
-  displayName: String
-  uuid: ID
-}

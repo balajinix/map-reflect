@@ -1,9 +1,0 @@
-type mutation_uploadSourceMapFile_metadata_items {
-  blobs: [mutation_uploadSourceMapFile_metadata_items_blobs_items]
-  format: String!
-  meta: String
-  size: BigInt
-  sizeOnDisk: BigInt
-  type: mutation_uploadSourceMapFile_metadata_items_type!
-  url: String!
-}

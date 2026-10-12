@@ -1,5 +1,0 @@
-type Provider {
-  className: String
-  displayName: String
-  uuid: ID
-}

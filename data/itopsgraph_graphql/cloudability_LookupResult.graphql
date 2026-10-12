@@ -1,4 +1,0 @@
-type LookupResult {
-  entity_type: String!
-  entity_value: String!
-}

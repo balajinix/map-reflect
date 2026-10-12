@@ -1,4 +1,0 @@
-"""AwsResource is a type containing AWS specific fields."""
-type AwsResource {
-  arn: string!
-}

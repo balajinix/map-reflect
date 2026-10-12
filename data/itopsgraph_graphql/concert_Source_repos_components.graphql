@@ -1,4 +1,0 @@
-type Source_repos_components {
-  component_id: ID
-  source_repo_id: ID
-}

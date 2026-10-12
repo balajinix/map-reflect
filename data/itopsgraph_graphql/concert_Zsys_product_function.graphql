@@ -1,9 +1,0 @@
-type Zsys_product_function {
-  feature_id: ID
-  function_id: String
-  hiper_count: ID
-  pe_count: ID
-  product_id: String
-  release: String
-  secint_count: ID
-}

@@ -1,5 +1,0 @@
-enum mutationInput_getServicesMetrics_input_contextScope {
-  NONE
-  UPSTREAM
-  DOWNSTREAM
-}

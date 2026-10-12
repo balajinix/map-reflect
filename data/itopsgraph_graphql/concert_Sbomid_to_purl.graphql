@@ -1,5 +1,0 @@
-type Sbomid_to_purl {
-  purl: String
-  sbom_id: String
-  version: Int
-}

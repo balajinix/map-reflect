@@ -1,4 +1,0 @@
-type ApplicationSbomsCollection {
-  """ConcertDef sbom"""
-  sboms: [ConcertDefSbom]!
-}

@@ -1,4 +1,0 @@
-type mutation_getServicesMetrics_items_items {
-  metrics: JSON!
-  service: mutation_getServicesMetrics_items_items_service!
-}

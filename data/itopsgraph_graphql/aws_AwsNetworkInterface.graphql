@@ -1,4 +1,0 @@
-type AwsNetworkInterface {
-  network_interface: BaseNetworkInterface!
-  aws_resource: AwsResource!
-}

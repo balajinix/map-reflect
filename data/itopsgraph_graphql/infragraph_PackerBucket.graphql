@@ -1,9 +1,0 @@
-"""PackerBucket domain model message."""
-type PackerBucket {
-  base: Base!
-  hcp_resource: HcpResource!
-  """id of the parent registry"""
-  registry_id: string
-  """TODO: string array currently unsupported by codegen"""
-  platforms: [string]
-}

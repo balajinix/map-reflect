@@ -1,4 +1,0 @@
-type ApplicationFilters {
-  """Filters applicable to applications"""
-  application_filters: [FiltersValues]
-}

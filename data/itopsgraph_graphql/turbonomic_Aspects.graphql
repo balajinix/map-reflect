@@ -1,5 +1,0 @@
-type Aspects {
-  cloudAspect: CloudAspect
-  containerPlatformContextAspect: ContainerPlatformContextAspect
-  virtualDisksAspect: VirtualDisksAspect
-}

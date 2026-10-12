@@ -1,6 +1,0 @@
-type Repository_view {
-  id: ID
-  last_updated_on: ID
-  name: String
-  repo_url: String
-}

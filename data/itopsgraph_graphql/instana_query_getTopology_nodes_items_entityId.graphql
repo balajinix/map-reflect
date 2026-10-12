@@ -1,7 +1,0 @@
-type query_getTopology_nodes_items_entityId {
-  host: String!
-  """Plugin name"""
-  pluginId: String!
-  """Steady identifier for the entity."""
-  steadyId: String!
-}

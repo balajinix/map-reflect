@@ -1,4 +1,0 @@
-type query_getBuiltInEventSpecification_ruleInputs_items {
-  inputKind: query_getBuiltInEventSpecifications_items_ruleInputs_items_inputKind!
-  inputName: query_getBuiltInEventSpecifications_items_ruleInputs_items_inputName!
-}

@@ -1,4 +1,0 @@
-type query_getSystemRules_items {
-  id: String!
-  name: String!
-}

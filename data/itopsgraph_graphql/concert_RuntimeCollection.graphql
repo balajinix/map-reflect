@@ -1,5 +1,0 @@
-"""Collection of runtime components"""
-type RuntimeCollection {
-  """List of runtime components"""
-  runtimes: [Runtime]
-}

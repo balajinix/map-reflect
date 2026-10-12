@@ -1,3 +1,0 @@
-type BaseRole {
-  base: Base!
-}

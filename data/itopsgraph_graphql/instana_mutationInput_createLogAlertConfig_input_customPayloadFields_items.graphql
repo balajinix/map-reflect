@@ -1,7 +1,0 @@
-type mutationInput_createLogAlertConfig_input_customPayloadFields_items implements q & u & e & r & y & _ & g & e & t & A & l & e & r & t & s & _ & i & t & e & m & s & _ & c & u & s & t & o & m & P & a & y & l & o & a & d & F & i & e & l & d & s & _ & i & t & e & m & s & _ & a & l & l & O & f & _ & 0 {
-  """A user-specified unique identifier or name for a custom payload entry."""
-  key: String!
-  type: String!
-  """Custom value for static type custom payload"""
-  value: String!
-}

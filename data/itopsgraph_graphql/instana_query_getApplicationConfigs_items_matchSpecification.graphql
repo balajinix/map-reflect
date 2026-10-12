@@ -1,4 +1,0 @@
-"""This field is deprecated. A binary tree structure of match expression connected with binary operator AND or OR. It is replaced by tagFilterExpression which is also used in Application Analyze API endpoints."""
-type query_getApplicationConfigs_items_matchSpecification {
-  type: String!
-}

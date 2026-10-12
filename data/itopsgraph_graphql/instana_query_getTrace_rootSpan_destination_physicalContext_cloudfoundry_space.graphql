@@ -1,7 +1,0 @@
-type query_getTrace_rootSpan_destination_physicalContext_cloudfoundry_space {
-  data: JSON
-  id: String!
-  label: String
-  plugin: String
-  time: BigInt
-}

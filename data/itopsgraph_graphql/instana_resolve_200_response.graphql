@@ -1,8 +1,0 @@
-type resolve_200_response {
-  """Event identifier"""
-  eventId: String!
-  """List of dynamic parameters"""
-  parameters: [mutation_resolve_parameters_items]!
-  """The start of the timestamp expressed in Unix epoch time in milliseconds."""
-  timestamp: BigInt!
-}

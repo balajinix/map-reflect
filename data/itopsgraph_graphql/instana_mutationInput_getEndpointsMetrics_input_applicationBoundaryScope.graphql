@@ -1,4 +1,0 @@
-enum mutationInput_getEndpointsMetrics_input_applicationBoundaryScope {
-  ALL
-  INBOUND
-}

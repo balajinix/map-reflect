@@ -1,6 +1,0 @@
-type getBusinessPerspective_200_response {
-  description: query_getBusinessPerspectives_description
-  id: query_getBusinessPerspectives_id!
-  name: query_getBusinessPerspectives_name
-  tagFilterExpression: query_getBusinessPerspectives_tagFilterExpression
-}

@@ -1,4 +1,0 @@
-type Environments_deployed_images {
-  environment_id: ID
-  image_id: ID
-}

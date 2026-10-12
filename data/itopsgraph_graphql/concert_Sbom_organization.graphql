@@ -1,5 +1,0 @@
-type Sbom_organization {
-  bom_ref: String
-  id: ID!
-  name: String
-}

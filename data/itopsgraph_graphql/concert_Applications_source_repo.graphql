@@ -1,4 +1,0 @@
-type Applications_source_repo {
-  app_release_id: ID
-  source_repo_id: ID
-}

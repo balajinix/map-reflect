@@ -1,5 +1,0 @@
-"""Collection of environment definitions"""
-type EnvironmentCollection {
-  """List of environment definitions"""
-  environments: [Environment]
-}

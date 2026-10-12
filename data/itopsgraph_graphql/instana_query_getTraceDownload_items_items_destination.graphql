@@ -1,5 +1,0 @@
-type query_getTraceDownload_items_items_destination {
-  endpoint: query_getTraceDownload_items_items_destination_endpoint
-  service: query_getTraceDownload_items_items_destination_service
-  technologies: [String]
-}

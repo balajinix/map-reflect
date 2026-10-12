@@ -1,3 +1,0 @@
-extend schema @sdl(files: ["apps.graphql", "performance.graphql"]) {
-  query: Query
-}

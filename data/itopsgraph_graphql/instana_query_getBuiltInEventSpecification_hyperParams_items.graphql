@@ -1,9 +1,0 @@
-type query_getBuiltInEventSpecification_hyperParams_items {
-  defaultValue: Float
-  description: query_getBuiltInEventSpecifications_items_hyperParams_items_description!
-  id: query_getBuiltInEventSpecifications_items_hyperParams_items_id!
-  maxValue: Float
-  minValue: Float
-  name: query_getBuiltInEventSpecifications_items_hyperParams_items_name!
-  valueFormat: query_getBuiltInEventSpecifications_items_hyperParams_items_valueFormat
-}

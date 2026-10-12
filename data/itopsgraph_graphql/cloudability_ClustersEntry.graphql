@@ -1,8 +1,0 @@
-type ClustersEntry {
-  firstSeen: DateTime
-  id: String
-  lastSeen: DateTime
-  name: String
-  nodes: [NodesEntry]
-  provisionedAt: DateTime
-}

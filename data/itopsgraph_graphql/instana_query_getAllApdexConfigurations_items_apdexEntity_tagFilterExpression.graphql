@@ -1,4 +1,0 @@
-"""Boolean expression of tag filters to define the scope of relevant calls."""
-type query_getAllApdexConfigurations_items_apdexEntity_tagFilterExpression {
-  type: String!
-}

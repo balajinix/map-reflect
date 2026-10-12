@@ -1,5 +1,0 @@
-"""Details of the authentication token"""
-type TokenDetails {
-  """The authentication token"""
-  token: String
-}

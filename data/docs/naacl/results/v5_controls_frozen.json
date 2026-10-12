@@ -1,0 +1,65 @@
+{
+ "date": "2026-10-11",
+ "stage": "fit",
+ "note": "Fitted on v5 development outcomes only; no test output was read.",
+ "dev_digest": "dd0512e0f170e7f9fe016010be00bfbdb80592e0f6acd881222d9d6c83b21c91",
+ "cost_frozen": "docs/naacl/results/v5_matched_cost_frozen.json",
+ "lexical": {
+  "features": [
+   "margin",
+   "g1",
+   "n_cand",
+   "reason_len",
+   "reason_exact",
+   "name_overlap",
+   "emb_cos"
+  ],
+  "mu": [
+   0.5019309225776457,
+   0.8670537783958864,
+   6.651715345387112,
+   114.26692165044042,
+   0.0666434863235976,
+   0.5246533986798244,
+   0.3279179971607719
+  ],
+  "sd": [
+   0.2984338719754592,
+   0.21523022655442992,
+   6.408718604792272,
+   40.35060513948626,
+   0.2494035526095021,
+   0.46082100468269355,
+   0.19611859594370404
+  ],
+  "w": [
+   -1.1210564793483173,
+   -0.5127841948412113,
+   0.4236716238882968,
+   -0.14490487023238532,
+   -0.23756829021868586,
+   -0.8641499513544003,
+   -0.10326883673514617
+  ],
+  "b": -3.7919475766681425,
+  "optimiser": "gradient descent, 3000 steps, rate 0.1, L2 0.01 (scripts/uq_classifier.py)",
+  "embedder": "sentence-transformers all-MiniLM-L6-v2",
+  "target": "first-pass error",
+  "tau": 0.03754024492007635,
+  "tau_rule": "route when cross-fitted P(error) > tau; tau maximises development accuracy, ties to fewer calls",
+  "dev_accuracy": 0.9545665275846082,
+  "dev_rate": 0.36995827538247567
+ },
+ "composite": {
+  "definition": "0.3(1-top score) + 0.3(1-min(1.5 range,1)) + 0.2[no reasons] + 0.06 (stored)",
+  "deployed_tau": 0.25,
+  "tau": -0.94,
+  "dev_accuracy": 0.9525961984237367,
+  "dev_rate": 1.0
+ },
+ "trigger": {
+  "definition": "stored detected_errors non-empty",
+  "dev_rate": 0.5353500231803431,
+  "dev_accuracy": 0.9498145572554474
+ }
+}

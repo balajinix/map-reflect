@@ -1,6 +1,0 @@
-enum SourceEntityType {
-  image
-  library
-  repository
-  resource
-}

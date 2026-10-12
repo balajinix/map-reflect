@@ -1,5 +1,0 @@
-type Zsys_archive_apar {
-  apar_type: String
-  apar_url: String
-  id: String
-}

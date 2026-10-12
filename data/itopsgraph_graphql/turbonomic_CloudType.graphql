@@ -1,7 +1,0 @@
-enum CloudType {
-  AWS
-  AZURE
-  GCP
-  HYBRID
-  UNKNOWN
-}

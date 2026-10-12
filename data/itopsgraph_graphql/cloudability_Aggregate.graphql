@@ -1,8 +1,0 @@
-type Aggregate {
-  data_type: String
-  description: String
-  label: String
-  name: String
-  type: String
-  value: Int
-}

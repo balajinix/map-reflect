@@ -1,4 +1,0 @@
-enum BoundaryScope {
-  ALL
-  INBOUND
-}

@@ -1,8 +1,0 @@
-type SkillsetsEntry {
-  assistant_id: String
-  description: String
-  name: String
-  skillset_id: String
-  type: String
-  url: String
-}

@@ -1,8 +1,0 @@
-type getServicesMetrics_200_response {
-  adjustedTimeframe: mutation_getServicesMetrics_adjustedTimeframe
-  items: [mutation_getServicesMetrics_items_items]!
-  """Page Number"""
-  page: Int
-  pageSize: Int
-  totalHits: BigInt
-}

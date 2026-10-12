@@ -1,9 +1,0 @@
-type Access_points {
-  bomref: String
-  endpoints: JSON
-  id: ID!
-  is_public: Boolean
-  last_updated_by: String
-  last_updated_on: ID!
-  name: String
-}

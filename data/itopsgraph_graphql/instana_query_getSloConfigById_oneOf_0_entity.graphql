@@ -1,5 +1,0 @@
-"""Entity of the Service Levels Objective Configuration, it could be either Application nor Website"""
-type query_getSloConfigById_oneOf_0_entity {
-  tagFilterExpression: query_getSloConfigById_oneOf_0_entity_tagFilterExpression
-  type: String!
-}

@@ -1,5 +1,0 @@
-"""Collection of vulnerable applications"""
-type VulnerableApplicationsCollection {
-  """Top vulnerable applications"""
-  vulnerable_applications: [VulnerableApplications]
-}

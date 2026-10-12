@@ -1,7 +1,0 @@
-type query_getPluginPayload_raw_payload_items {
-  DEFERRED_VALUE: String
-  DEFERRED_VALUE_FLAGS: String
-  VALUE: String
-  NAME: String
-  VALUE_FLAGS: String
-}

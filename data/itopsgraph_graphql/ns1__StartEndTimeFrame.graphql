@@ -1,5 +1,0 @@
-"""jsonata:{"data": $, "minResponseTime": $min($.responseTime), "maxResponseTime": $max($.responseTime)}"""
-type _StartEndTimeFrame {
-  start: Int
-  end: Int
-}

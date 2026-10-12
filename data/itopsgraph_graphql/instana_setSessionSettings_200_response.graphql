@@ -1,4 +1,0 @@
-type setSessionSettings_200_response {
-  idleTimeInMillis: BigInt
-  tokenLifeTimeInMillis: BigInt
-}

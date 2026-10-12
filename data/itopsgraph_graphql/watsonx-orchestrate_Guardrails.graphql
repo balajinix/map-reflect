@@ -1,4 +1,0 @@
-type Guardrails {
-  hap: Hap
-  pii: Pii
-}

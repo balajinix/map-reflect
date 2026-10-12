@@ -1,6 +1,0 @@
-type getSyntheticResultMetadata_200_response {
-  metadata: JSON
-  startTime: BigInt
-  testId: String!
-  testResultId: String
-}

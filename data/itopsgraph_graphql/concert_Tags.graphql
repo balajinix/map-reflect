@@ -1,8 +1,0 @@
-type Tags {
-  color: String
-  created_on: ID!
-  description: String
-  last_updated_on: ID!
-  name: String!
-  updated_by: String
-}

@@ -1,3 +1,0 @@
-type Embeddings {
-  model_name: String
-}

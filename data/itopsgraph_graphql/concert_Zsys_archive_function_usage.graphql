@@ -1,9 +1,0 @@
-type Zsys_archive_function_usage {
-  feature_id: ID
-  function_id: String
-  last_used: String
-  library: String
-  osmf_managed: Boolean
-  sysplex_id: ID
-  system_id: ID
-}

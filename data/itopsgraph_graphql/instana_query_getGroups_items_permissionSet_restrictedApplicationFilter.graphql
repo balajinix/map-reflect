@@ -1,6 +1,0 @@
-type query_getGroups_items_permissionSet_restrictedApplicationFilter {
-  label: String
-  restrictingApplicationId: String
-  scope: query_getGroups_items_permissionSet_restrictedApplicationFilter_scope
-  tagFilterExpression: query_getGroups_items_permissionSet_restrictedApplicationFilter_tagFilterExpression
-}

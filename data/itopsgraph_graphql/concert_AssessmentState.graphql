@@ -1,9 +1,0 @@
-enum AssessmentState {
-  unassessed
-  assessment_in_progress
-  false_positive
-  exception_requested
-  exception_approved
-  mitigation_in_progress
-  mitigated
-}

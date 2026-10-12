@@ -1,0 +1,18 @@
+# Python 3.13 (tested with 3.13.5). Versions are the ones the paper's environment used.
+# Scoring and table regeneration from stored outputs (no model calls):
+numpy==2.4.1
+scipy==1.17.0
+scikit-learn==1.8.0
+matplotlib==3.10.8
+networkx==3.6.1
+tqdm==4.67.1
+python-dotenv==1.0.1
+# Running the method itself (first pass and second pass, model calls):
+openai==2.15.0
+rank-bm25==0.2.2
+chromadb==1.4.0
+sentence-transformers==5.2.0
+# Optional: white-box confidence baselines only
+lm-polygraph==0.7.0
+# ENDPOINT_B uses its provider's Python SDK, imported as `endpoint_b_sdk` in this anonymised copy.
+# Install that provider's SDK and alias it (see README.md, "Running the method").

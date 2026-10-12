@@ -1,5 +1,0 @@
-type Roja_meta_history {
-  description: String!
-  entry_ts: DateTime!
-  release: String!
-}

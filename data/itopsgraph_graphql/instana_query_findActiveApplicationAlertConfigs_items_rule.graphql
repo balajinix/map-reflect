@@ -1,6 +1,0 @@
-"""Name of the application alert configuration. Used as a template for the title of alert/event notifications triggered by this Smart Alert configuration."""
-type query_findActiveApplicationAlertConfigs_items_rule {
-  aggregation: query_findActiveApplicationAlertConfigs_items_rule_aggregation
-  alertType: String!
-  metricName: String!
-}

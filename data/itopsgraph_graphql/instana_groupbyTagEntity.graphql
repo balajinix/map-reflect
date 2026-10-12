@@ -1,5 +1,0 @@
-enum groupbyTagEntity {
-  NOT_APPLICABLE
-  DESTINATION
-  SOURCE
-}

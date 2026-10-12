@@ -1,0 +1,28 @@
+{
+ "dataset": "valentine_wikidata",
+ "eval_file": null,
+ "unit": "scenario and split shape",
+ "seed": "protocol-v2-2026-10-07",
+ "dev": [
+  "valentine_wikidata_musicians_musicians_viewunion_musicians_viewunion"
+ ],
+ "test": [
+  "valentine_wikidata_musicians_musicians_joinable_musicians_joinable",
+  "valentine_wikidata_musicians_musicians_semjoinable_musicians_semjoinable"
+ ],
+ "test_grouped": [
+  "valentine_wikidata_musicians_musicians_joinable_musicians_joinable",
+  "valentine_wikidata_musicians_musicians_semjoinable_musicians_semjoinable",
+  "valentine_wikidata_musicians_musicians_unionable_musicians_unionable"
+ ],
+ "old_dev_excluded": [
+  "valentine_wikidata_musicians_musicians_unionable_musicians_unionable"
+ ],
+ "old_dev_rule": "md5(source|target|sample_id) % 3 == 0",
+ "groups": {
+  "musicians_musicians_joinable_musicians_joinable": "test",
+  "musicians_musicians_semjoinable_musicians_semjoinable": "test",
+  "musicians_musicians_unionable_musicians_unionable": "test",
+  "musicians_musicians_viewunion_musicians_viewunion": "dev"
+ }
+}

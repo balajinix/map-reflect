@@ -1,4 +1,0 @@
-type AssociationID {
-  """ID of associated component"""
-  id: String!
-}

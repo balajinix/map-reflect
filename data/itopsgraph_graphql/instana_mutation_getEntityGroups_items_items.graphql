@@ -1,9 +1,0 @@
-"""group of infrastructure entities"""
-type mutation_getEntityGroups_items_items {
-  """number of entities in this group"""
-  count: BigInt
-  """map of metric keys to array of timestamp,value pairs"""
-  metrics: JSON
-  """tag keys and values for this group"""
-  tags: JSON
-}

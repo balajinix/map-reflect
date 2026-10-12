@@ -1,4 +1,0 @@
-type query_getShareableApiTokens_items {
-  id: String!
-  name: String!
-}

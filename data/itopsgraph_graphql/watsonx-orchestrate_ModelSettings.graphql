@@ -1,5 +1,0 @@
-type ModelSettings {
-  base_llm: BaseLlm
-  embeddings: Embeddings
-  is_base_llm_enabled: Boolean
-}

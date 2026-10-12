@@ -1,7 +1,0 @@
-type Ossrepo_scores {
-  ckname: String!
-  ossrepo: String!
-  reason: String
-  score: Int!
-  ts: DateTime!
-}

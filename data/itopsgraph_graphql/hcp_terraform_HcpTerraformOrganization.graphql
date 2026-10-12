@@ -1,6 +1,0 @@
-"""HcpTerraformOrganization is a type containing HCP TF Organization specific fields."""
-type HcpTerraformOrganization {
-  organization: BaseOrganization!
-  is_unified: bool
-  agent_pool_id: string
-}

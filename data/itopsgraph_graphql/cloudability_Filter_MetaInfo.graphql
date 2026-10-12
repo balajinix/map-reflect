@@ -1,6 +1,0 @@
-type Filter_MetaInfo {
-  comparator: String
-  measure_field_name: String
-  measure_label: String
-  value: String
-}

@@ -1,3 +1,0 @@
-type String_container {
-  String: String
-}

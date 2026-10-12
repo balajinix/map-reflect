@@ -1,4 +1,0 @@
-"""BaseServerlessFunction is a base type all serverless functions are expected to embed."""
-type BaseServerlessFunction {
-  base: Base!
-}

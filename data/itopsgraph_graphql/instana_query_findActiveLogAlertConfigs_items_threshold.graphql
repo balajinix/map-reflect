@@ -1,5 +1,0 @@
-"""Indicates the type of threshold this alert rule is evaluated on."""
-type query_findActiveLogAlertConfigs_items_threshold {
-  operator: query_findActiveApplicationAlertConfigs_items_threshold_operator!
-  type: String!
-}

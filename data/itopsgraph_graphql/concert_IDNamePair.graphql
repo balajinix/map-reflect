@@ -1,7 +1,0 @@
-"""ID and name pair"""
-type IDNamePair {
-  """ID"""
-  id: String
-  """Name"""
-  name: String
-}

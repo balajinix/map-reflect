@@ -1,5 +1,0 @@
-type Pii {
-  input: Input1
-  mask: Mask
-  output: Output1
-}

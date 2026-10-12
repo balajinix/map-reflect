@@ -1,4 +1,0 @@
-"""Entity Type of the SLI Configuration"""
-type query_getAllSliConfigs_items_sliEntity {
-  sliType: String!
-}

@@ -1,7 +1,0 @@
-"""Time Window type of the SLO, it could be Fixed or Rolling"""
-type query_getSloConfigById_oneOf_0_timeWindow {
-  """Duration of the Time Window"""
-  duration: Int!
-  durationUnit: query_getSloConfigById_oneOf_0_timeWindow_durationUnit!
-  type: String!
-}

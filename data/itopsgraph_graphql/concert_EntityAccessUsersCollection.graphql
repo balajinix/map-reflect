@@ -1,5 +1,0 @@
-"""Collection of users and groups that have access to an entity"""
-type EntityAccessUsersCollection {
-  """List of user IDs that have access to the entity"""
-  accessUsers: [String]
-}

@@ -1,7 +1,0 @@
-"""ID of this configuration version."""
-type getCustomPayloadConfigurations_200_response {
-  """Required parameters for custom payload configuration."""
-  fields: [query_getCustomPayloadConfigurations_fields_items]!
-  """Unix timestamp representing the time (in milliseconds) the configuration was last updated."""
-  lastUpdated: BigInt
-}

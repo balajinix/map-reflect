@@ -1,9 +1,0 @@
-type G_fwk_data_dictionary_item {
-  assessment_query: String
-  comments: String
-  data_dictionary_id: ID
-  data_dictionary_item_id: ID!
-  data_type: String!
-  name: String!
-  units: String
-}

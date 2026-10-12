@@ -1,4 +1,0 @@
-type mutation_getEndpointsMetrics_items_items {
-  endpoint: mutation_getEndpointsMetrics_items_items_endpoint!
-  metrics: JSON!
-}

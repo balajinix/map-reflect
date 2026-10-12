@@ -1,4 +1,0 @@
-type Dates {
-  end: DateTime
-  start: DateTime
-}

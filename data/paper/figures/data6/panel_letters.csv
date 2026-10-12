@@ -1,0 +1,21 @@
+figure,letter,chart,file,panel
+fig:selrate,a,c1_budget,figures/fig6_c1_budget.pdf,Free confidence estimates
+fig:selrate,b,c1_budget,figures/fig6_c1_budget.pdf,Paid confidence estimates
+fig:detect,a,c12_detection_vs_routing,figures/fig6_c12_detection_vs_routing.pdf,Detection against selection
+fig:detect,b,c13_heldout,figures/fig6_c13_heldout.pdf,Held-out datasets
+fig:detect,c,c5_reliability,figures/fig6_c5_reliability.pdf,Top score
+fig:detect,d,c5_reliability,figures/fig6_c5_reliability.pdf,"Margin, isotonic"
+fig:mrcharts,a,c14,figures/fig6_c14.pdf,Run 1 against run 2
+fig:mrcharts,b,c10_gold_location,figures/fig6_c10_gold_location.pdf,Gold location
+fig:chartsA,a,c2_interventions,figures/fig6_c2_interventions.pdf,Loses accuracy
+fig:chartsA,b,c2_interventions,figures/fig6_c2_interventions.pdf,Widens the list
+fig:chartsA,c,c2_interventions,figures/fig6_c2_interventions.pdf,Small repairs
+fig:chartsA,d,c3_accuracy_calls,figures/fig6_c3_accuracy_calls.pdf,"Accuracy against calls, per model"
+fig:chartsA,e,c6_margin_hist,figures/fig6_c6_margin_hist.pdf,"Margins of correct and wrong first answers, per model"
+fig:chartsB,a,c11_thresholds,figures/fig6_c11_thresholds.pdf,Development accuracy
+fig:chartsB,b,c11_thresholds,figures/fig6_c11_thresholds.pdf,Refit on less data
+fig:chartsB,c,c7_roc,figures/fig6_c7_roc.pdf,"ROC, core test"
+fig:chartsB,d,c7_roc,figures/fig6_c7_roc.pdf,"ROC, held-out"
+fig:chartsB,e,c8_risk_coverage,figures/fig6_c8_risk_coverage.pdf,"Risk against coverage, core test"
+fig:chartsB,f,c8_risk_coverage,figures/fig6_c8_risk_coverage.pdf,"Risk against coverage, held-out"
+fig:chartsB,g,c4_family,figures/fig6_c4_family.pdf,Change by family

@@ -1,9 +1,0 @@
-type Concert_sbom {
-  el_link: String
-  file_name: String
-  id: ID!
-  last_updated_by: String
-  last_updated_on: ID!
-  timestamp: ID
-  type: String!
-}

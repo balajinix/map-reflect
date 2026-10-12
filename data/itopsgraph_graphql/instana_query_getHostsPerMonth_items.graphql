@@ -1,4 +1,0 @@
-type query_getHostsPerMonth_items {
-  items: [query_getAllUsage_items_items_items]
-  time: BigInt
-}

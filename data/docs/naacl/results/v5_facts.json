@@ -1,0 +1,950 @@
+{
+ "generated_by": "scripts/naacl/v5.py --stage score",
+ "frozen": "docs/naacl/results/v5_frozen.json",
+ "frozen_commit": "463f9c40d6f2d752a4ec5b95bafb57e182feeba1 2026-10-11T01:16:35+05:30",
+ "status": "exploratory",
+ "B": 2000,
+ "seed": 20261009,
+ "facts": [
+  {
+   "id": "F-VFiveFrozenCommit",
+   "claim": "commit and time of docs/naacl/results/v5_frozen.json (fitted on development only)",
+   "value": "463f9c40d6f2d752a4ec5b95bafb57e182feeba1 2026-10-11T01:16:35+05:30",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveTestFields",
+   "claim": "v5 test field-model pairs (four models, ten core datasets, ITOpsGraph v2.1)",
+   "value": "13,384",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveKeepAcc",
+   "claim": "test accuracy, Keep the first answer, %",
+   "value": "85.49",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainAcc",
+   "claim": "test accuracy, Map-Reflect v5 (benefit router), %",
+   "value": "93.05",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainGain",
+   "claim": "test, Map-Reflect v5 (benefit router): change over the first pass, points",
+   "value": "+7.56",
+   "lo": "+4.22",
+   "hi": "+11.88",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainRepairs",
+   "claim": "test, Map-Reflect v5 (benefit router): repairs / breaks",
+   "value": "1,026 / 14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainVsVFourOne",
+   "claim": "test, Map-Reflect v5 (benefit router) minus method v4.1, points (paired)",
+   "value": "+2.15",
+   "lo": "+1.12",
+   "hi": "+3.34",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainCalls",
+   "claim": "test, Map-Reflect v5 (benefit router): second-pass calls per field",
+   "value": "0.44",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainTokens",
+   "claim": "test, Map-Reflect v5 (benefit router): second-pass tokens per field",
+   "value": "1,835",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainRouted",
+   "claim": "test, Map-Reflect v5 (benefit router): routed share, %",
+   "value": "32.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainVsStruct",
+   "claim": "test, Map-Reflect v5 (benefit router) minus struct, points (paired)",
+   "value": "+0.48",
+   "lo": "+0.15",
+   "hi": "+0.90",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginAcc",
+   "claim": "test accuracy, v5 intervention, margin router (t_m refitted), %",
+   "value": "93.16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginGain",
+   "claim": "test, v5 intervention, margin router (t_m refitted): change over the first pass, points",
+   "value": "+7.67",
+   "lo": "+4.34",
+   "hi": "+11.94",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginRepairs",
+   "claim": "test, v5 intervention, margin router (t_m refitted): repairs / breaks",
+   "value": "1,042 / 16",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginVsVFourOne",
+   "claim": "test, v5 intervention, margin router (t_m refitted) minus method v4.1, points (paired)",
+   "value": "+2.26",
+   "lo": "+1.23",
+   "hi": "+3.40",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginCalls",
+   "claim": "test, v5 intervention, margin router (t_m refitted): second-pass calls per field",
+   "value": "0.69",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginTokens",
+   "claim": "test, v5 intervention, margin router (t_m refitted): second-pass tokens per field",
+   "value": "2,137",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginRouted",
+   "claim": "test, v5 intervention, margin router (t_m refitted): routed share, %",
+   "value": "56.3",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginVsStruct",
+   "claim": "test, v5 intervention, margin router (t_m refitted) minus struct, points (paired)",
+   "value": "+0.58",
+   "lo": "+0.20",
+   "hi": "+1.08",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldAcc",
+   "claim": "test accuracy, v5 intervention, margin router at the v4.1 thresholds, %",
+   "value": "92.98",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldGain",
+   "claim": "test, v5 intervention, margin router at the v4.1 thresholds: change over the first pass, points",
+   "value": "+7.49",
+   "lo": "+4.20",
+   "hi": "+11.70",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldRepairs",
+   "claim": "test, v5 intervention, margin router at the v4.1 thresholds: repairs / breaks",
+   "value": "1,017 / 14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldVsVFourOne",
+   "claim": "test, v5 intervention, margin router at the v4.1 thresholds minus method v4.1, points (paired)",
+   "value": "+2.08",
+   "lo": "+1.12",
+   "hi": "+3.20",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldCalls",
+   "claim": "test, v5 intervention, margin router at the v4.1 thresholds: second-pass calls per field",
+   "value": "0.54",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldTokens",
+   "claim": "test, v5 intervention, margin router at the v4.1 thresholds: second-pass tokens per field",
+   "value": "1,836",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldRouted",
+   "claim": "test, v5 intervention, margin router at the v4.1 thresholds: routed share, %",
+   "value": "42.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMarginOldVsStruct",
+   "claim": "test, v5 intervention, margin router at the v4.1 thresholds minus struct, points (paired)",
+   "value": "+0.41",
+   "lo": "+0.05",
+   "hi": "+0.87",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStructAcc",
+   "claim": "test accuracy, v5 intervention, struct router, %",
+   "value": "92.57",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStructGain",
+   "claim": "test, v5 intervention, struct router: change over the first pass, points",
+   "value": "+7.08",
+   "lo": "+3.70",
+   "hi": "+11.34",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStructRepairs",
+   "claim": "test, v5 intervention, struct router: repairs / breaks",
+   "value": "953 / 5",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStructVsVFourOne",
+   "claim": "test, v5 intervention, struct router minus method v4.1, points (paired)",
+   "value": "+1.67",
+   "lo": "+0.60",
+   "hi": "+2.92",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStructCalls",
+   "claim": "test, v5 intervention, struct router: second-pass calls per field",
+   "value": "0.37",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStructTokens",
+   "claim": "test, v5 intervention, struct router: second-pass tokens per field",
+   "value": "1,838",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveStructRouted",
+   "claim": "test, v5 intervention, struct router: routed share, %",
+   "value": "26.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionAcc",
+   "claim": "test accuracy, v5 intervention, benefit router or struct, %",
+   "value": "93.05",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionGain",
+   "claim": "test, v5 intervention, benefit router or struct: change over the first pass, points",
+   "value": "+7.56",
+   "lo": "+4.22",
+   "hi": "+11.88",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionRepairs",
+   "claim": "test, v5 intervention, benefit router or struct: repairs / breaks",
+   "value": "1,026 / 14",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionVsVFourOne",
+   "claim": "test, v5 intervention, benefit router or struct minus method v4.1, points (paired)",
+   "value": "+2.15",
+   "lo": "+1.12",
+   "hi": "+3.34",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionCalls",
+   "claim": "test, v5 intervention, benefit router or struct: second-pass calls per field",
+   "value": "0.49",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionTokens",
+   "claim": "test, v5 intervention, benefit router or struct: second-pass tokens per field",
+   "value": "2,115",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionRouted",
+   "claim": "test, v5 intervention, benefit router or struct: routed share, %",
+   "value": "36.7",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveUnionVsStruct",
+   "claim": "test, v5 intervention, benefit router or struct minus struct, points (paired)",
+   "value": "+0.48",
+   "lo": "+0.15",
+   "hi": "+0.90",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryAcc",
+   "claim": "test accuracy, v5 intervention on every field, %",
+   "value": "93.10",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryGain",
+   "claim": "test, v5 intervention on every field: change over the first pass, points",
+   "value": "+7.61",
+   "lo": "+4.25",
+   "hi": "+11.92",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryRepairs",
+   "claim": "test, v5 intervention on every field: repairs / breaks",
+   "value": "1,048 / 29",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryVsVFourOne",
+   "claim": "test, v5 intervention on every field minus method v4.1, points (paired)",
+   "value": "+2.20",
+   "lo": "+1.18",
+   "hi": "+3.38",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryCalls",
+   "claim": "test, v5 intervention on every field: second-pass calls per field",
+   "value": "1.13",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryTokens",
+   "claim": "test, v5 intervention on every field: second-pass tokens per field",
+   "value": "3,060",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryRouted",
+   "claim": "test, v5 intervention on every field: routed share, %",
+   "value": "100.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveEveryVsStruct",
+   "claim": "test, v5 intervention on every field minus struct, points (paired)",
+   "value": "+0.53",
+   "lo": "+0.15",
+   "hi": "+1.03",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomAcc",
+   "claim": "test accuracy, v5 intervention, random at v5's share, %",
+   "value": "87.95",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomGain",
+   "claim": "test, v5 intervention, random at v5's share: change over the first pass, points",
+   "value": "+2.46",
+   "lo": "+1.37",
+   "hi": "+3.85",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomRepairs",
+   "claim": "test, v5 intervention, random at v5's share: repairs / breaks",
+   "value": "339 / 9",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomVsVFourOne",
+   "claim": "test, v5 intervention, random at v5's share minus method v4.1, points (paired)",
+   "value": "-2.95",
+   "lo": "-4.82",
+   "hi": "-1.55",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomCalls",
+   "claim": "test, v5 intervention, random at v5's share: second-pass calls per field",
+   "value": "0.36",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomTokens",
+   "claim": "test, v5 intervention, random at v5's share: second-pass tokens per field",
+   "value": "982",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomRouted",
+   "claim": "test, v5 intervention, random at v5's share: routed share, %",
+   "value": "32.0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveRandomVsStruct",
+   "claim": "test, v5 intervention, random at v5's share minus struct, points (paired)",
+   "value": "-4.62",
+   "lo": "-7.51",
+   "hi": "-2.32",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveOracleAcc",
+   "claim": "test accuracy, Oracle at v5's share, %",
+   "value": "93.32",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveOracleGain",
+   "claim": "test, Oracle at v5's share: change over the first pass, points",
+   "value": "+7.83",
+   "lo": "+4.50",
+   "hi": "+12.09",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveOracleRepairs",
+   "claim": "test, Oracle at v5's share: repairs / breaks",
+   "value": "1,048 / 0",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveOracleVsVFourOne",
+   "claim": "test, Oracle at v5's share minus method v4.1, points (paired)",
+   "value": "+2.42",
+   "lo": "+1.40",
+   "hi": "+3.55",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveOracleVsStruct",
+   "claim": "test, Oracle at v5's share minus struct, points (paired)",
+   "value": "+0.75",
+   "lo": "+0.37",
+   "hi": "+1.25",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveVFourOneAcc",
+   "claim": "test accuracy, Method v4.1 (stored outcomes, reference), %",
+   "value": "90.90",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveVFourOneGain",
+   "claim": "test, Method v4.1 (stored outcomes, reference): change over the first pass, points",
+   "value": "+5.41",
+   "lo": "+3.00",
+   "hi": "+8.62",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveVFourOneRepairs",
+   "claim": "test, Method v4.1 (stored outcomes, reference): repairs / breaks",
+   "value": "745 / 21",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveVFourOneVsStruct",
+   "claim": "test, Method v4.1 (stored outcomes, reference) minus struct, points (paired)",
+   "value": "-1.67",
+   "lo": "-2.92",
+   "hi": "-0.60",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainGainGptoss",
+   "claim": "test, v5 gain over keep, gptoss, points",
+   "value": "+6.72",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainVsVFourOneGptoss",
+   "claim": "test, v5 minus v4.1, gptoss, points",
+   "value": "+1.91",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainGainLlama",
+   "claim": "test, v5 gain over keep, llama4, points",
+   "value": "+7.86",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainVsVFourOneLlama",
+   "claim": "test, v5 minus v4.1, llama4, points",
+   "value": "+2.69",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainGainGranite",
+   "claim": "test, v5 gain over keep, granite, points",
+   "value": "+4.81",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainVsVFourOneGranite",
+   "claim": "test, v5 minus v4.1, granite, points",
+   "value": "+2.66",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainGainQwen",
+   "claim": "test, v5 gain over keep, qwen35, points",
+   "value": "+10.85",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveMainVsVFourOneQwen",
+   "claim": "test, v5 minus v4.1, qwen35, points",
+   "value": "+1.34",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOKeepAcc",
+   "claim": "held-out test accuracy, Keep the first answer, %",
+   "value": "71.85",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMainAcc",
+   "claim": "held-out test accuracy, Map-Reflect v5 (benefit router), %",
+   "value": "74.75",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMainGain",
+   "claim": "held-out test, Map-Reflect v5 (benefit router): change over the first pass, points",
+   "value": "+2.90",
+   "lo": "+1.95",
+   "hi": "+3.99",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMainVsVFourOne",
+   "claim": "held-out test, Map-Reflect v5 (benefit router) minus method v4.1, points (paired)",
+   "value": "+0.41",
+   "lo": "-0.16",
+   "hi": "+1.04",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMainCalls",
+   "claim": "held-out test, Map-Reflect v5 (benefit router): second-pass calls per field",
+   "value": "1.03",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMarginOldAcc",
+   "claim": "held-out test accuracy, v5 intervention, margin router at the v4.1 thresholds, %",
+   "value": "74.64",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMarginOldGain",
+   "claim": "held-out test, v5 intervention, margin router at the v4.1 thresholds: change over the first pass, points",
+   "value": "+2.79",
+   "lo": "+1.87",
+   "hi": "+3.85",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMarginOldVsVFourOne",
+   "claim": "held-out test, v5 intervention, margin router at the v4.1 thresholds minus method v4.1, points (paired)",
+   "value": "+0.30",
+   "lo": "-0.24",
+   "hi": "+0.91",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOMarginOldCalls",
+   "claim": "held-out test, v5 intervention, margin router at the v4.1 thresholds: second-pass calls per field",
+   "value": "0.95",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOStructAcc",
+   "claim": "held-out test accuracy, v5 intervention, struct router, %",
+   "value": "74.59",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOStructGain",
+   "claim": "held-out test, v5 intervention, struct router: change over the first pass, points",
+   "value": "+2.74",
+   "lo": "+1.79",
+   "hi": "+3.79",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOStructVsVFourOne",
+   "claim": "held-out test, v5 intervention, struct router minus method v4.1, points (paired)",
+   "value": "+0.25",
+   "lo": "-0.33",
+   "hi": "+0.89",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOStructCalls",
+   "claim": "held-out test, v5 intervention, struct router: second-pass calls per field",
+   "value": "0.92",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOEveryAcc",
+   "claim": "held-out test accuracy, v5 intervention on every field, %",
+   "value": "74.73",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOEveryGain",
+   "claim": "held-out test, v5 intervention on every field: change over the first pass, points",
+   "value": "+2.88",
+   "lo": "+1.92",
+   "hi": "+3.98",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOEveryVsVFourOne",
+   "claim": "held-out test, v5 intervention on every field minus method v4.1, points (paired)",
+   "value": "+0.38",
+   "lo": "-0.22",
+   "hi": "+1.03",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOEveryCalls",
+   "claim": "held-out test, v5 intervention on every field: second-pass calls per field",
+   "value": "1.15",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOVFourOneAcc",
+   "claim": "held-out test accuracy, Method v4.1 (stored outcomes, reference), %",
+   "value": "74.34",
+   "lo": null,
+   "hi": null,
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  },
+  {
+   "id": "F-VFiveHOVFourOneGain",
+   "claim": "held-out test, Method v4.1 (stored outcomes, reference): change over the first pass, points",
+   "value": "+2.49",
+   "lo": "+1.78",
+   "hi": "+3.26",
+   "src": "docs/naacl/results/v5_facts.json",
+   "fn": "v5.score",
+   "status": "exploratory"
+  }
+ ]
+}

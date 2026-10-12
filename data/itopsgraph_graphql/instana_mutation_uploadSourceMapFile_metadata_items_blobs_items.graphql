@@ -1,5 +1,0 @@
-type mutation_uploadSourceMapFile_metadata_items_blobs_items {
-  blobIndex: Int
-  size: BigInt
-  sizeOnDisk: BigInt
-}

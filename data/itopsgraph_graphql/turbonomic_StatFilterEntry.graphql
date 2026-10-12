@@ -1,5 +1,0 @@
-type StatFilterEntry {
-  displayName: String
-  type: String
-  value: String
-}

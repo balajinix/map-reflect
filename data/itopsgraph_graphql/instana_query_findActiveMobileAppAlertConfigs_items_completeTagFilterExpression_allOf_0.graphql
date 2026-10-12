@@ -1,4 +1,0 @@
-"""Boolean expression of tag filters to define the scope of relevant calls."""
-interface query_findActiveMobileAppAlertConfigs_items_completeTagFilterExpression_allOf_0 {
-  type: String!
-}

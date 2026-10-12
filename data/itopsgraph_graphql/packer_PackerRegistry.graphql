@@ -1,9 +1,0 @@
-"""PackerRegistry domain model message."""
-type PackerRegistry {
-  base: Base!
-  hcp_resource: HcpResource!
-  feature_tier: string
-  activated: bool
-  billing_deprovision_reason: int32
-  billing_deprovision_message: string
-}

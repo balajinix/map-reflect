@@ -1,4 +1,0 @@
-type Component_definition_controls {
-  component_definition_id: ID
-  control_id: ID
-}

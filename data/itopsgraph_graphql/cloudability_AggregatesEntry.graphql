@@ -1,7 +1,0 @@
-type AggregatesEntry {
-  basis: String
-  cost: Float
-  idleSavings: Float
-  optimizedSavings: Float
-  rightsizeSavings: Float
-}

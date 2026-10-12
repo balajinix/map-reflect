@@ -1,0 +1,45 @@
+{
+ "dataset": "OMOP_Synthea",
+ "eval_file": null,
+ "unit": "source OMOP table",
+ "seed": "protocol-v2-2026-10-07",
+ "dev": [
+  "omop_synthea_002",
+  "omop_synthea_005",
+  "omop_synthea_006",
+  "omop_synthea_009"
+ ],
+ "test": [
+  "omop_synthea_001",
+  "omop_synthea_004",
+  "omop_synthea_007",
+  "omop_synthea_008",
+  "omop_synthea_010",
+  "omop_synthea_011",
+  "omop_synthea_012"
+ ],
+ "test_grouped": [
+  "omop_synthea_001",
+  "omop_synthea_003",
+  "omop_synthea_004",
+  "omop_synthea_007",
+  "omop_synthea_008",
+  "omop_synthea_010",
+  "omop_synthea_011",
+  "omop_synthea_012"
+ ],
+ "old_dev_excluded": [
+  "omop_synthea_003"
+ ],
+ "old_dev_rule": "md5(source|target|sample_id) % 3 == 0",
+ "groups": {
+  "omop_CONDITION_OCCURRENCE": "dev",
+  "omop_DRUG_EXPOSURE": "test",
+  "omop_MEASUREMENT": "test",
+  "omop_OBSERVATION": "test",
+  "omop_OBSERVATION_PERIOD": "dev",
+  "omop_PERSON": "test",
+  "omop_PROCEDURE_OCCURRENCE": "dev",
+  "omop_VISIT_OCCURRENCE": "dev"
+ }
+}

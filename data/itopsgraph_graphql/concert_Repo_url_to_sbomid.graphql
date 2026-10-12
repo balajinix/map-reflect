@@ -1,6 +1,0 @@
-type Repo_url_to_sbomid {
-  repo_url: String
-  sbom_id: String
-  ts: DateTime
-  version: Int
-}

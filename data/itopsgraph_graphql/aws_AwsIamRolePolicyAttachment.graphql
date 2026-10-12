@@ -1,7 +1,0 @@
-type AwsIamRolePolicyAttachment {
-  base: Base!
-  aws_resource: AwsResource!
-  policy_arn: string!
-  role_name: string!
-  role_id: string!
-}

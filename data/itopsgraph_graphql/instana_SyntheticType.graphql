@@ -1,5 +1,0 @@
-enum SyntheticType {
-  NON_SYNTHETIC
-  SYNTHETIC
-  MIXED
-}

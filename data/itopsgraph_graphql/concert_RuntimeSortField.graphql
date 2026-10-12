@@ -1,7 +1,0 @@
-enum RuntimeSortField {
-  name
-  type
-  provider
-  reference_id
-  namespace
-}

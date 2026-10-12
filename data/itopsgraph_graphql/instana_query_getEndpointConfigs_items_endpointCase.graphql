@@ -1,5 +1,0 @@
-enum query_getEndpointConfigs_items_endpointCase {
-  ORIGINAL
-  LOWER
-  UPPER
-}

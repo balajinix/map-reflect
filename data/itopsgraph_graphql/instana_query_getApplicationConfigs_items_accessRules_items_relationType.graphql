@@ -1,7 +1,0 @@
-enum query_getApplicationConfigs_items_accessRules_items_relationType {
-  USER
-  API_TOKEN
-  ROLE
-  TEAM
-  GLOBAL
-}

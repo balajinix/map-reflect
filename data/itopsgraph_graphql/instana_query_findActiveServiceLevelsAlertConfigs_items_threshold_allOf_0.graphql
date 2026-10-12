@@ -1,5 +1,0 @@
-"""Indicates the type of threshold this alert rule is evaluated on."""
-interface query_findActiveServiceLevelsAlertConfigs_items_threshold_allOf_0 {
-  operator: query_findActiveApplicationAlertConfigs_items_threshold_operator!
-  type: String!
-}

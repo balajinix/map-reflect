@@ -1,6 +1,0 @@
-type getServicesMap_200_response {
-  """A list which indicates which services are consumers and which are providers in the communication chain."""
-  connections: [query_getServicesMap_connections_items]!
-  """List of services in the topology."""
-  services: [query_getServicesMap_services_items]!
-}

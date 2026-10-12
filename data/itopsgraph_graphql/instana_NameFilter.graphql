@@ -1,1 +1,0 @@
-"""{ "to": $string($toMillis(frame.le)), "windowSize": $string($toMillis(frame.le) - $toMillis(frame.ge)) }"""

@@ -1,0 +1,54 @@
+{
+ "date": "2026-10-11",
+ "stage": "costfit",
+ "base": "docs/naacl/results/v5_frozen.json",
+ "dev_digest": "dd0512e0f170e7f9fe016010be00bfbdb80592e0f6acd881222d9d6c83b21c91",
+ "seed": 20261011,
+ "note": "Development-estimated expected second-pass cost per model and action on the v5 second pass: mean realised calls and mean-token estimates over the development fields whose routed action it is. Fitted on development only; no test output was read.",
+ "est": {
+  "gptoss": {
+   "n": 2157,
+   "n_nt": 0,
+   "calls_widen": 1.1094112192860455,
+   "tokens_widen": 2498.319664278773,
+   "calls_widen_struct": 1.1094112192860455,
+   "tokens_widen_struct": 2498.319664278773,
+   "calls_nt": 1.0081348053457293,
+   "tokens_nt": 2196.406255459358,
+   "nt_source": "pooled over models (fewer than 20 development NT fields)"
+  },
+  "llama4": {
+   "n": 2157,
+   "n_nt": 598,
+   "calls_widen": 1.101347017318794,
+   "tokens_widen": 2781.5167974930705,
+   "calls_widen_struct": 1.076031525266574,
+   "tokens_widen_struct": 2666.972370845017,
+   "calls_nt": 1.0066889632107023,
+   "tokens_nt": 2364.2116777385822,
+   "nt_source": "model"
+  },
+  "granite": {
+   "n": 2157,
+   "n_nt": 238,
+   "calls_widen": 1.0875455966649297,
+   "tokens_widen": 1785.9856772792964,
+   "calls_widen_struct": 1.0797403801576264,
+   "tokens_widen_struct": 1854.9083306094687,
+   "calls_nt": 1.0168067226890756,
+   "tokens_nt": 2410.633421956534,
+   "nt_source": "model"
+  },
+  "qwen35": {
+   "n": 2157,
+   "n_nt": 885,
+   "calls_widen": 1.1037735849056605,
+   "tokens_widen": 2463.7503824708897,
+   "calls_widen_struct": 1.0639777468706537,
+   "tokens_widen_struct": 2283.9018611197025,
+   "calls_nt": 1.006779661016949,
+   "tokens_nt": 2025.4077151776576,
+   "nt_source": "model"
+  }
+ }
+}

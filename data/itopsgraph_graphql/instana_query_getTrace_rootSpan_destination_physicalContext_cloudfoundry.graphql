@@ -1,6 +1,0 @@
-type query_getTrace_rootSpan_destination_physicalContext_cloudfoundry {
-  application: query_getTrace_rootSpan_destination_physicalContext_cloudfoundry_application
-  cfInstanceIndex: String
-  organization: query_getTrace_rootSpan_destination_physicalContext_cloudfoundry_organization
-  space: query_getTrace_rootSpan_destination_physicalContext_cloudfoundry_space
-}

@@ -1,0 +1,349 @@
+model,series,calls_per_field,accuracy
+gptoss,random,0,87.1189
+gptoss,random,0.0592648,87.4656
+gptoss,random,0.11853,87.8123
+gptoss,random,0.177794,88.159
+gptoss,random,0.237059,88.5057
+gptoss,random,0.296324,88.8524
+gptoss,random,0.355589,89.199
+gptoss,random,0.414854,89.5457
+gptoss,random,0.474118,89.8924
+gptoss,random,0.533383,90.2391
+gptoss,random,0.592648,90.5858
+gptoss,random,0.651913,90.9325
+gptoss,random,0.711178,91.2791
+gptoss,random,0.770442,91.6258
+gptoss,random,0.829707,91.9725
+gptoss,random,0.888972,92.3192
+gptoss,random,0.948237,92.6659
+gptoss,random,1.0075,93.0126
+gptoss,random,1.06677,93.3592
+gptoss,random,1.12603,93.7059
+gptoss,random,1.1853,94.0526
+gptoss,margin sweep,0.147938,90.3766
+gptoss,margin sweep,0.23431,92.0502
+gptoss,margin sweep,0.353258,93.2756
+gptoss,margin sweep,0.429767,93.5744
+gptoss,margin sweep,0.514345,93.8434
+gptoss,margin sweep,0.546025,94.0227
+gptoss,margin sweep,0.613867,94.1423
+gptoss,margin sweep,0.656007,94.1423
+gptoss,margin sweep,0.730723,94.1721
+gptoss,margin sweep,0.749851,94.202
+gptoss,margin sweep,0.799462,94.202
+gptoss,margin sweep,0.833831,94.202
+gptoss,margin sweep,0.890915,94.202
+gptoss,margin sweep,0.907651,94.1721
+gptoss,margin sweep,0.947998,94.1721
+gptoss,margin sweep,0.987747,94.1423
+gptoss,margin sweep,1.06007,94.0526
+gptoss,margin sweep,1.0777,94.0526
+gptoss,margin sweep,1.12791,94.0526
+gptoss,margin sweep,1.15541,94.0526
+gptoss,margin sweep,1.1853,94.0526
+gptoss,benefit sweep,0,87.1189
+gptoss,benefit sweep,0.0627615,88.7029
+gptoss,benefit sweep,0.122534,90.257
+gptoss,benefit sweep,0.178422,91.5421
+gptoss,benefit sweep,0.22116,92.4088
+gptoss,benefit sweep,0.262104,93.0365
+gptoss,benefit sweep,0.292887,93.2756
+gptoss,benefit sweep,0.325762,93.6043
+gptoss,benefit sweep,0.354752,93.7238
+gptoss,benefit sweep,0.381052,93.7537
+gptoss,benefit sweep,0.408548,93.7836
+gptoss,benefit sweep,0.434549,93.8434
+gptoss,benefit sweep,0.461745,93.8434
+gptoss,benefit sweep,0.487448,93.9928
+gptoss,benefit sweep,0.517035,94.1423
+gptoss,benefit sweep,0.543634,94.1423
+gptoss,benefit sweep,0.569038,94.1423
+gptoss,benefit sweep,0.572026,94.1423
+gptoss,benefit sweep,0.61835,94.1423
+gptoss,benefit sweep,0.643156,94.1423
+gptoss,benefit sweep,0.667962,94.1423
+gptoss,benefit sweep,0.689779,94.1423
+gptoss,benefit sweep,0.71847,94.1423
+gptoss,benefit sweep,0.743873,94.1423
+gptoss,benefit sweep,0.767782,94.0526
+gptoss,benefit sweep,0.795577,94.0526
+gptoss,benefit sweep,0.822176,94.0227
+gptoss,benefit sweep,0.848177,93.9928
+gptoss,benefit sweep,0.870891,93.9928
+gptoss,benefit sweep,0.896892,93.9928
+gptoss,benefit sweep,0.923192,93.9928
+gptoss,benefit sweep,0.947101,93.9928
+gptoss,benefit sweep,0.977884,94.0526
+gptoss,benefit sweep,1.00299,94.0526
+gptoss,benefit sweep,1.02989,94.0526
+gptoss,benefit sweep,1.05439,94.0526
+gptoss,benefit sweep,1.0801,94.0526
+gptoss,benefit sweep,1.10849,94.0825
+gptoss,benefit sweep,1.1327,94.0825
+gptoss,benefit sweep,1.15959,94.0526
+gptoss,benefit sweep,1.1844,94.0526
+gptoss,struct,0.39211,93.0663
+gptoss,every,1.1853,94.0526
+gptoss,Map-Reflect,0.454274,93.8434
+gptoss,keep,0,87.1189
+llama4,random,0,86.2224
+llama4,random,0.0576808,86.6184
+llama4,random,0.115362,87.0143
+llama4,random,0.173042,87.4103
+llama4,random,0.230723,87.8063
+llama4,random,0.288404,88.2023
+llama4,random,0.346085,88.5983
+llama4,random,0.403766,88.9943
+llama4,random,0.461447,89.3903
+llama4,random,0.519127,89.7863
+llama4,random,0.576808,90.1823
+llama4,random,0.634489,90.5783
+llama4,random,0.69217,90.9743
+llama4,random,0.749851,91.3703
+llama4,random,0.807531,91.7663
+llama4,random,0.865212,92.1623
+llama4,random,0.922893,92.5583
+llama4,random,0.980574,92.9543
+llama4,random,1.03825,93.3503
+llama4,random,1.09594,93.7463
+llama4,random,1.15362,94.1423
+llama4,margin sweep,0.0364614,87.8661
+llama4,margin sweep,0.0364614,87.8661
+llama4,margin sweep,0.0364614,87.8661
+llama4,margin sweep,0.0364614,87.8661
+llama4,margin sweep,0.0364614,87.8661
+llama4,margin sweep,0.0364614,87.8661
+llama4,margin sweep,0.0364614,87.8661
+llama4,margin sweep,0.0376569,87.896
+llama4,margin sweep,0.36312,93.7238
+llama4,margin sweep,0.365212,93.7836
+llama4,margin sweep,0.603108,94.1423
+llama4,margin sweep,0.604005,94.1423
+llama4,margin sweep,0.673939,94.1423
+llama4,margin sweep,0.673939,94.1423
+llama4,margin sweep,0.737298,94.1124
+llama4,margin sweep,0.737298,94.1124
+llama4,margin sweep,0.835625,94.1124
+llama4,margin sweep,0.835625,94.1124
+llama4,margin sweep,0.87358,94.1124
+llama4,margin sweep,0.87358,94.1124
+llama4,margin sweep,0.886432,94.1124
+llama4,benefit sweep,0,86.2224
+llama4,benefit sweep,0.0274955,87.9259
+llama4,benefit sweep,0.0866707,89.48
+llama4,benefit sweep,0.120143,90.3766
+llama4,benefit sweep,0.202331,92.3192
+llama4,benefit sweep,0.23939,92.9468
+llama4,benefit sweep,0.27376,93.2457
+llama4,benefit sweep,0.301853,93.3951
+llama4,benefit sweep,0.331441,93.6641
+llama4,benefit sweep,0.367902,94.0825
+llama4,benefit sweep,0.391213,94.0825
+llama4,benefit sweep,0.420502,94.0526
+llama4,benefit sweep,0.445009,94.0526
+llama4,benefit sweep,0.471608,94.0825
+llama4,benefit sweep,0.49731,94.0825
+llama4,benefit sweep,0.522116,94.0825
+llama4,benefit sweep,0.545427,94.0825
+llama4,benefit sweep,0.572026,94.1124
+llama4,benefit sweep,0.597131,94.1423
+llama4,benefit sweep,0.624029,94.1423
+llama4,benefit sweep,0.643455,94.1423
+llama4,benefit sweep,0.643455,94.1423
+llama4,benefit sweep,0.682008,94.1423
+llama4,benefit sweep,0.682008,94.1423
+llama4,benefit sweep,0.682008,94.1423
+llama4,benefit sweep,0.774656,94.1423
+llama4,benefit sweep,0.80006,94.1423
+llama4,benefit sweep,0.816497,94.1423
+llama4,benefit sweep,0.850867,94.202
+llama4,benefit sweep,0.867902,94.1423
+llama4,benefit sweep,0.901973,94.1423
+llama4,benefit sweep,0.926479,94.1423
+llama4,benefit sweep,0.950687,94.1423
+llama4,benefit sweep,0.95786,94.1423
+llama4,benefit sweep,0.95786,94.1423
+llama4,benefit sweep,1.02212,94.1124
+llama4,benefit sweep,1.0517,94.1124
+llama4,benefit sweep,1.07233,94.1124
+llama4,benefit sweep,1.10281,94.1124
+llama4,benefit sweep,1.12493,94.1124
+llama4,benefit sweep,1.14674,94.1423
+llama4,struct,0.390616,93.425
+llama4,every,1.15362,94.1423
+llama4,Map-Reflect,0.491632,94.0825
+llama4,keep,0,86.2224
+granite,random,0,84.0108
+granite,random,0.0546922,84.2528
+granite,random,0.109384,84.4949
+granite,random,0.164077,84.737
+granite,random,0.218769,84.9791
+granite,random,0.273461,85.2212
+granite,random,0.328153,85.4632
+granite,random,0.382845,85.7053
+granite,random,0.437537,85.9474
+granite,random,0.49223,86.1895
+granite,random,0.546922,86.4316
+granite,random,0.601614,86.6736
+granite,random,0.656306,86.9157
+granite,random,0.710998,87.1578
+granite,random,0.76569,87.3999
+granite,random,0.820383,87.642
+granite,random,0.875075,87.884
+granite,random,0.929767,88.1261
+granite,random,0.984459,88.3682
+granite,random,1.03915,88.6103
+granite,random,1.09384,88.8524
+granite,margin sweep,0.241184,88.0454
+granite,margin sweep,0.241482,88.0454
+granite,margin sweep,0.495218,88.7926
+granite,margin sweep,0.496414,88.7926
+granite,margin sweep,0.64465,88.8524
+granite,margin sweep,0.64734,88.8524
+granite,margin sweep,0.67633,88.8524
+granite,margin sweep,0.67633,88.8524
+granite,margin sweep,0.736402,88.8524
+granite,margin sweep,0.736701,88.8524
+granite,margin sweep,0.836521,88.8524
+granite,margin sweep,0.837418,88.8524
+granite,margin sweep,0.872086,88.8524
+granite,margin sweep,0.875374,88.8524
+granite,margin sweep,1.00299,88.8524
+granite,margin sweep,1.00389,88.8524
+granite,margin sweep,1.06904,88.8524
+granite,margin sweep,1.06904,88.8524
+granite,margin sweep,1.09384,88.8524
+granite,margin sweep,1.09384,88.8524
+granite,margin sweep,1.09384,88.8524
+granite,benefit sweep,0,84.0108
+granite,benefit sweep,0.0280932,85.266
+granite,benefit sweep,0.072624,86.1327
+granite,benefit sweep,0.117753,86.9396
+granite,benefit sweep,0.161088,87.5971
+granite,benefit sweep,0.196354,88.0454
+granite,benefit sweep,0.227735,88.3443
+granite,benefit sweep,0.258219,88.5535
+granite,benefit sweep,0.286312,88.6432
+granite,benefit sweep,0.312911,88.7029
+granite,benefit sweep,0.340406,88.7627
+granite,benefit sweep,0.365511,88.7926
+granite,benefit sweep,0.393007,88.8225
+granite,benefit sweep,0.41841,88.8225
+granite,benefit sweep,0.442917,88.8225
+granite,benefit sweep,0.468918,88.8524
+granite,benefit sweep,0.493425,88.8524
+granite,benefit sweep,0.518828,88.8524
+granite,benefit sweep,0.54214,88.8524
+granite,benefit sweep,0.557681,88.8524
+granite,benefit sweep,0.592648,88.8524
+granite,benefit sweep,0.61835,88.8524
+granite,benefit sweep,0.61835,88.8524
+granite,benefit sweep,0.61835,88.8524
+granite,benefit sweep,0.683802,88.8524
+granite,benefit sweep,0.683802,88.8524
+granite,benefit sweep,0.732218,88.8524
+granite,benefit sweep,0.757322,88.8524
+granite,benefit sweep,0.793784,88.8524
+granite,benefit sweep,0.803048,88.8524
+granite,benefit sweep,0.843694,88.8524
+granite,benefit sweep,0.868799,88.8524
+granite,benefit sweep,0.874776,88.8524
+granite,benefit sweep,0.874776,88.8524
+granite,benefit sweep,0.943814,88.8524
+granite,benefit sweep,0.967723,88.8524
+granite,benefit sweep,0.987149,88.8524
+granite,benefit sweep,1.01644,88.8524
+granite,benefit sweep,1.03108,88.8524
+granite,benefit sweep,1.06695,88.8524
+granite,benefit sweep,1.09235,88.8524
+granite,struct,0.340406,88.4638
+granite,every,1.09384,88.8524
+granite,Map-Reflect,0.403467,88.8225
+granite,keep,0,84.0108
+qwen35,random,0,84.6085
+qwen35,random,0.0540646,85.1464
+qwen35,random,0.108129,85.6844
+qwen35,random,0.162194,86.2224
+qwen35,random,0.216258,86.7603
+qwen35,random,0.270323,87.2983
+qwen35,random,0.324387,87.8362
+qwen35,random,0.378452,88.3742
+qwen35,random,0.432516,88.9121
+qwen35,random,0.486581,89.4501
+qwen35,random,0.540646,89.988
+qwen35,random,0.59471,90.526
+qwen35,random,0.648775,91.064
+qwen35,random,0.702839,91.6019
+qwen35,random,0.756904,92.1399
+qwen35,random,0.810968,92.6778
+qwen35,random,0.865033,93.2158
+qwen35,random,0.919097,93.7537
+qwen35,random,0.973162,94.2917
+qwen35,random,1.02723,94.8296
+qwen35,random,1.08129,95.3676
+qwen35,margin sweep,0.117454,92.9468
+qwen35,margin sweep,0.220861,94.0825
+qwen35,margin sweep,0.259115,94.0825
+qwen35,margin sweep,0.31829,94.3814
+qwen35,margin sweep,0.325164,94.4411
+qwen35,margin sweep,0.333533,94.4411
+qwen35,margin sweep,0.393903,94.7998
+qwen35,margin sweep,0.414226,95.0687
+qwen35,margin sweep,0.421996,95.0986
+qwen35,margin sweep,0.449193,95.2182
+qwen35,margin sweep,0.506276,95.4274
+qwen35,margin sweep,0.530484,95.4274
+qwen35,margin sweep,0.636282,95.4871
+qwen35,margin sweep,0.7104,95.4871
+qwen35,margin sweep,0.727735,95.4871
+qwen35,margin sweep,0.781231,95.4871
+qwen35,margin sweep,0.8948,95.3975
+qwen35,margin sweep,0.990436,95.3676
+qwen35,margin sweep,1.05439,95.3676
+qwen35,margin sweep,1.08129,95.3676
+qwen35,margin sweep,1.08129,95.3676
+qwen35,benefit sweep,0,84.6085
+qwen35,benefit sweep,0,84.6085
+qwen35,benefit sweep,0.0469217,89.0317
+qwen35,benefit sweep,0.0738195,90.5858
+qwen35,benefit sweep,0.110281,93.0066
+qwen35,benefit sweep,0.163479,94.1721
+qwen35,benefit sweep,0.201435,94.7699
+qwen35,benefit sweep,0.232815,95.0986
+qwen35,benefit sweep,0.262104,95.3078
+qwen35,benefit sweep,0.290496,95.3975
+qwen35,benefit sweep,0.318888,95.3975
+qwen35,benefit sweep,0.343993,95.4274
+qwen35,benefit sweep,0.360729,95.4573
+qwen35,benefit sweep,0.360729,95.4573
+qwen35,benefit sweep,0.419904,95.4573
+qwen35,benefit sweep,0.445308,95.4573
+qwen35,benefit sweep,0.456665,95.4573
+qwen35,benefit sweep,0.490137,95.4573
+qwen35,benefit sweep,0.519127,95.4573
+qwen35,benefit sweep,0.532277,95.4573
+qwen35,benefit sweep,0.532277,95.4573
+qwen35,benefit sweep,0.532277,95.4573
+qwen35,benefit sweep,0.620442,95.4573
+qwen35,benefit sweep,0.642558,95.4573
+qwen35,benefit sweep,0.660191,95.4573
+qwen35,benefit sweep,0.695457,95.4573
+qwen35,benefit sweep,0.719665,95.4573
+qwen35,benefit sweep,0.743873,95.4573
+qwen35,benefit sweep,0.770771,95.3676
+qwen35,benefit sweep,0.78422,95.3676
+qwen35,benefit sweep,0.82098,95.3676
+qwen35,benefit sweep,0.848177,95.3377
+qwen35,benefit sweep,0.872983,95.3676
+qwen35,benefit sweep,0.899582,95.3676
+qwen35,benefit sweep,0.916617,95.3676
+qwen35,benefit sweep,0.937537,95.3676
+qwen35,benefit sweep,0.937537,95.3676
+qwen35,benefit sweep,1.00179,95.3377
+qwen35,benefit sweep,1.02002,95.3676
+qwen35,benefit sweep,1.05499,95.3676
+qwen35,benefit sweep,1.08099,95.3676
+qwen35,struct,0.354154,95.3377
+qwen35,every,1.08129,95.3676
+qwen35,Map-Reflect,0.403467,95.4573
+qwen35,keep,0,84.6085

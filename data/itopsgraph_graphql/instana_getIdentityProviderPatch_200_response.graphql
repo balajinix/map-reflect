@@ -1,3 +1,0 @@
-type getIdentityProviderPatch_200_response {
-  restrictEmptyIdpGroups: Boolean
-}

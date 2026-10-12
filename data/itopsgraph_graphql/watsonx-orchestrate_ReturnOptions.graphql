@@ -1,8 +1,0 @@
-type ReturnOptions {
-  generated_tokens: Boolean
-  input_text: Boolean
-  input_tokens: Boolean
-  token_logprobs: Boolean
-  token_ranks: Boolean
-  top_n_tokens: Int
-}

@@ -1,5 +1,0 @@
-enum mutationInput_getMetricsResult_input_groups_items_groupbyTagEntity {
-  NOT_APPLICABLE
-  DESTINATION
-  SOURCE
-}

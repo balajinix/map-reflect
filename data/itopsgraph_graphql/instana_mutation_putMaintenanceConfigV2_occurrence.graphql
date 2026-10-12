@@ -1,4 +1,0 @@
-type mutation_putMaintenanceConfigV2_occurrence {
-  start: Int
-  end: Int
-}

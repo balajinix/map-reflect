@@ -1,5 +1,0 @@
-type TagMappingsEntry {
-  tag: String
-  tagName: String
-  vendorTagValue: String
-}

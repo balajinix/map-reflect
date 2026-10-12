@@ -1,0 +1,16 @@
+group,label,repairs,breaks
+intervention,Doubt,317,3444
+intervention,Self-Refine,168,583
+intervention,Neutral,43,29
+intervention,Neutral + check,33,11
+intervention,Neutral + evidence,98,347
+intervention,Reflect (neutral + evidence + check),63,31
+intervention,Widen + reflect,774,29
+intervention,Widen + reflect without the check,817,314
+intervention,Reflect or widen + reflect (by top score),773,29
+intervention,Fresh mapping over the widened pool,682,254
+intervention,Escalate (another model's first answer),413,250
+acceptance,no check (accept every proposal),782,125
+acceptance,pairwise check (Margin-Reflect),745,21
+acceptance,reflection's own margin grows,568,45
+acceptance,check and own margin,549,5

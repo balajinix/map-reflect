@@ -1,6 +1,0 @@
-type Sbom_categories_average_score {
-  avg_score: Float
-  category: String
-  sbom_id: String
-  version: Int
-}

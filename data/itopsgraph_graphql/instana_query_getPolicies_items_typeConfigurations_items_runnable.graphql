@@ -1,7 +1,0 @@
-"""Runnable associated with the policy. It can be a `workflow` or `action`. Currently only supports `action`."""
-type query_getPolicies_items_typeConfigurations_items_runnable {
-  """Action identifier."""
-  id: String!
-  runConfiguration: query_getPolicies_items_typeConfigurations_items_runnable_runConfiguration!
-  type: query_getPolicies_items_typeConfigurations_items_runnable_type!
-}

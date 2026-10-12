@@ -1,5 +1,0 @@
-enum ResizeAttribute {
-  CAPACITY
-  LIMIT
-  RESERVATION
-}

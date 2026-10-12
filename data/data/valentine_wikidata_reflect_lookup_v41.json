@@ -1,0 +1,1142 @@
+{
+ "tgt_musicians_musicians_joinable_musicians_joinable__musicianID": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "musicianID",
+  "name": "musicianID",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianID (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__musicianName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "musicianName",
+  "name": "musicianName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianName (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__genderType": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "genderType",
+  "name": "genderType",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genderType (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__birthDate": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "birthDate",
+  "name": "birthDate",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column birthDate (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__city": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "city",
+  "name": "city",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column city (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__familyName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "familyName",
+  "name": "familyName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column familyName (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__forename": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "forename",
+  "name": "forename",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column forename (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__fatherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "fatherName",
+  "name": "fatherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column fatherName (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__motherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "motherName",
+  "name": "motherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column motherName (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__spouse": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "spouse",
+  "name": "spouse",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column spouse (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__NChildren": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "NChildren",
+  "name": "NChildren",
+  "type": "integer",
+  "database": "valentine_wikidata",
+  "description": "Column NChildren (integer) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__kind": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "kind",
+  "name": "kind",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column kind (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_joinable_musicians_joinable__webpage": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "webpage",
+  "name": "webpage",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column webpage (text) in table musicians_musicians_joinable_musicians_joinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__musicianID": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "musicianID",
+  "name": "musicianID",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianID (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__musicianName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "musicianName",
+  "name": "musicianName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianName (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__genderType": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "genderType",
+  "name": "genderType",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genderType (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__birthDate": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "birthDate",
+  "name": "birthDate",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column birthDate (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__city": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "city",
+  "name": "city",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column city (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__familyName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "familyName",
+  "name": "familyName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column familyName (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__forename": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "forename",
+  "name": "forename",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column forename (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__fatherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "fatherName",
+  "name": "fatherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column fatherName (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__motherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "motherName",
+  "name": "motherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column motherName (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__spouse": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "spouse",
+  "name": "spouse",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column spouse (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__NChildren": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "NChildren",
+  "name": "NChildren",
+  "type": "integer",
+  "database": "valentine_wikidata",
+  "description": "Column NChildren (integer) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__kind": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "kind",
+  "name": "kind",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column kind (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__webpage": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "webpage",
+  "name": "webpage",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column webpage (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_semjoinable_musicians_semjoinable__residence": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "residence",
+  "name": "residence",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column residence (text) in table musicians_musicians_semjoinable_musicians_semjoinable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__musicianID": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "musicianID",
+  "name": "musicianID",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianID (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__musicianName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "musicianName",
+  "name": "musicianName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianName (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__genderType": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "genderType",
+  "name": "genderType",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genderType (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__birthDate": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "birthDate",
+  "name": "birthDate",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column birthDate (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__city": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "city",
+  "name": "city",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column city (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__familyName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "familyName",
+  "name": "familyName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column familyName (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__forename": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "forename",
+  "name": "forename",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column forename (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__fatherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "fatherName",
+  "name": "fatherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column fatherName (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__motherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "motherName",
+  "name": "motherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column motherName (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__spouse": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "spouse",
+  "name": "spouse",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column spouse (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__NChildren": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "NChildren",
+  "name": "NChildren",
+  "type": "integer",
+  "database": "valentine_wikidata",
+  "description": "Column NChildren (integer) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__kind": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "kind",
+  "name": "kind",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column kind (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__webpage": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "webpage",
+  "name": "webpage",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column webpage (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__residence": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "residence",
+  "name": "residence",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column residence (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__ethnicity": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "ethnicity",
+  "name": "ethnicity",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column ethnicity (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__religionLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "religionLabel",
+  "name": "religionLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column religionLabel (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__kickoff": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "kickoff",
+  "name": "kickoff",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column kickoff (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__twitterUsername": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "twitterUsername",
+  "name": "twitterUsername",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column twitterUsername (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__geniusNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "geniusNameLabel",
+  "name": "geniusNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column geniusNameLabel (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_unionable_musicians_unionable__recordCompany": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "recordCompany",
+  "name": "recordCompany",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column recordCompany (text) in table musicians_musicians_unionable_musicians_unionable"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__musicianID": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "musicianID",
+  "name": "musicianID",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianID (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__musicianName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "musicianName",
+  "name": "musicianName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianName (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__genderType": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "genderType",
+  "name": "genderType",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genderType (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__birthDate": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "birthDate",
+  "name": "birthDate",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column birthDate (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__city": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "city",
+  "name": "city",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column city (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__familyName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "familyName",
+  "name": "familyName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column familyName (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__forename": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "forename",
+  "name": "forename",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column forename (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__fatherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "fatherName",
+  "name": "fatherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column fatherName (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__motherName": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "motherName",
+  "name": "motherName",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column motherName (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__spouse": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "spouse",
+  "name": "spouse",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column spouse (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__NChildren": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "NChildren",
+  "name": "NChildren",
+  "type": "integer",
+  "database": "valentine_wikidata",
+  "description": "Column NChildren (integer) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__kind": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "kind",
+  "name": "kind",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column kind (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "tgt_musicians_musicians_viewunion_musicians_viewunion__webpage": {
+  "product_name": "valentine_wikidata",
+  "type_name": "tgt_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "webpage",
+  "name": "webpage",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column webpage (text) in table musicians_musicians_viewunion_musicians_viewunion"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__musician": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "musician",
+  "name": "musician",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musician (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__birthDate": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "birthDate",
+  "name": "birthDate",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column birthDate (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__familyNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "familyNameLabel",
+  "name": "familyNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column familyNameLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__givenNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "givenNameLabel",
+  "name": "givenNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column givenNameLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__numberOfChildren": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "numberOfChildren",
+  "name": "numberOfChildren",
+  "type": "integer",
+  "database": "valentine_wikidata",
+  "description": "Column numberOfChildren (integer) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__websiteLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "websiteLabel",
+  "name": "websiteLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column websiteLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__residenceLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "residenceLabel",
+  "name": "residenceLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column residenceLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__ethnicityLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "ethnicityLabel",
+  "name": "ethnicityLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column ethnicityLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__religionLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "religionLabel",
+  "name": "religionLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column religionLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__activityStart": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "activityStart",
+  "name": "activityStart",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column activityStart (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__twitterNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "twitterNameLabel",
+  "name": "twitterNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column twitterNameLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__geniusNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "geniusNameLabel",
+  "name": "geniusNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column geniusNameLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_joinable_musicians_joinable__recordLabelLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_joinable_musicians_joinable",
+  "field_name": "recordLabelLabel",
+  "name": "recordLabelLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column recordLabelLabel (text) in source table musicians_musicians_joinable_musicians_joinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__musician": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "musician",
+  "name": "musician",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musician (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__musicianLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "musicianLabel",
+  "name": "musicianLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__genderLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "genderLabel",
+  "name": "genderLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genderLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__cityLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "cityLabel",
+  "name": "cityLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column cityLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__fatherLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "fatherLabel",
+  "name": "fatherLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column fatherLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__motherLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "motherLabel",
+  "name": "motherLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column motherLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__partner": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "partner",
+  "name": "partner",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column partner (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__genreLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "genreLabel",
+  "name": "genreLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genreLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__ethnicityLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "ethnicityLabel",
+  "name": "ethnicityLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column ethnicityLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__religionLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "religionLabel",
+  "name": "religionLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column religionLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__activityStart": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "activityStart",
+  "name": "activityStart",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column activityStart (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__twitterNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "twitterNameLabel",
+  "name": "twitterNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column twitterNameLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__geniusNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "geniusNameLabel",
+  "name": "geniusNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column geniusNameLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_semjoinable_musicians_semjoinable__recordLabelLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_semjoinable_musicians_semjoinable",
+  "field_name": "recordLabelLabel",
+  "name": "recordLabelLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column recordLabelLabel (text) in source table musicians_musicians_semjoinable_musicians_semjoinable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__musician": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "musician",
+  "name": "musician",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musician (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__musicianLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "musicianLabel",
+  "name": "musicianLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musicianLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__genderLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "genderLabel",
+  "name": "genderLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genderLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__birthDate": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "birthDate",
+  "name": "birthDate",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column birthDate (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__cityLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "cityLabel",
+  "name": "cityLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column cityLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__familyNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "familyNameLabel",
+  "name": "familyNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column familyNameLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__givenNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "givenNameLabel",
+  "name": "givenNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column givenNameLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__fatherLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "fatherLabel",
+  "name": "fatherLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column fatherLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__motherLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "motherLabel",
+  "name": "motherLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column motherLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__partner": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "partner",
+  "name": "partner",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column partner (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__numberOfChildren": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "numberOfChildren",
+  "name": "numberOfChildren",
+  "type": "integer",
+  "database": "valentine_wikidata",
+  "description": "Column numberOfChildren (integer) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__genreLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "genreLabel",
+  "name": "genreLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column genreLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__websiteLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "websiteLabel",
+  "name": "websiteLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column websiteLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__residenceLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "residenceLabel",
+  "name": "residenceLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column residenceLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__ethnicityLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "ethnicityLabel",
+  "name": "ethnicityLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column ethnicityLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__religionLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "religionLabel",
+  "name": "religionLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column religionLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__activityStart": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "activityStart",
+  "name": "activityStart",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column activityStart (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__twitterNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "twitterNameLabel",
+  "name": "twitterNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column twitterNameLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__geniusNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "geniusNameLabel",
+  "name": "geniusNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column geniusNameLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_unionable_musicians_unionable__recordLabelLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_unionable_musicians_unionable",
+  "field_name": "recordLabelLabel",
+  "name": "recordLabelLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column recordLabelLabel (text) in source table musicians_musicians_unionable_musicians_unionable",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__musician": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "musician",
+  "name": "musician",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column musician (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__birthDate": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "birthDate",
+  "name": "birthDate",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column birthDate (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__familyNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "familyNameLabel",
+  "name": "familyNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column familyNameLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__givenNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "givenNameLabel",
+  "name": "givenNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column givenNameLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__numberOfChildren": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "numberOfChildren",
+  "name": "numberOfChildren",
+  "type": "integer",
+  "database": "valentine_wikidata",
+  "description": "Column numberOfChildren (integer) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__websiteLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "websiteLabel",
+  "name": "websiteLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column websiteLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__residenceLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "residenceLabel",
+  "name": "residenceLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column residenceLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__ethnicityLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "ethnicityLabel",
+  "name": "ethnicityLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column ethnicityLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__religionLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "religionLabel",
+  "name": "religionLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column religionLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__activityStart": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "activityStart",
+  "name": "activityStart",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column activityStart (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__twitterNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "twitterNameLabel",
+  "name": "twitterNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column twitterNameLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__geniusNameLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "geniusNameLabel",
+  "name": "geniusNameLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column geniusNameLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ },
+ "src_musicians_musicians_viewunion_musicians_viewunion__recordLabelLabel": {
+  "product_name": "valentine_wikidata",
+  "type_name": "src_musicians_musicians_viewunion_musicians_viewunion",
+  "field_name": "recordLabelLabel",
+  "name": "recordLabelLabel",
+  "type": "text",
+  "database": "valentine_wikidata",
+  "description": "Column recordLabelLabel (text) in source table musicians_musicians_viewunion_musicians_viewunion",
+  "side": "source"
+ }
+}

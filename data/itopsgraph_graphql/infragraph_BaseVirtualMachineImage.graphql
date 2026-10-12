@@ -1,4 +1,0 @@
-"""BaseVirtualMachineImage is a base type all virtual machine images are expected to embed."""
-type BaseVirtualMachineImage {
-  base: Base!
-}

@@ -1,3 +1,0 @@
-type SortCsvOutput {
-  sort: String
-}

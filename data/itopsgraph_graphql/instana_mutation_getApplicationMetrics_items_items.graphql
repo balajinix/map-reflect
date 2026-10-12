@@ -1,4 +1,0 @@
-type mutation_getApplicationMetrics_items_items {
-  application: mutation_getApplicationMetrics_items_items_application!
-  metrics: JSON!
-}

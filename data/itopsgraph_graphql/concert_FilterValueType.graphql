@@ -1,5 +1,0 @@
-enum FilterValueType {
-  boolean
-  string
-  object
-}

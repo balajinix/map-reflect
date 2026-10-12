@@ -1,6 +1,0 @@
-extend schema
-  @sdl(
-    files: ["topology.graphql", "analyze.graphql"]
-    visibility: { expose: true, types: "Query", fields: "[a-z].*" }
-    executables: { document: "op-infrastructure.graphql" }
-  )

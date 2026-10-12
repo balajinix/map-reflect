@@ -1,4 +1,0 @@
-enum mutationInput_postCustomEventSpecification_input_ruleLogicalOperator {
-  AND
-  OR
-}

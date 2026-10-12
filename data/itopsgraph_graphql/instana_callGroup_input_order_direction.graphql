@@ -1,4 +1,0 @@
-enum callGroup_input_order_direction {
-  ASC
-  DESC
-}

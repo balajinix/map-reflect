@@ -1,4 +1,0 @@
-type Input1 {
-  enabled: Boolean
-  threshold: Float
-}

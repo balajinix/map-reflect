@@ -1,0 +1,8 @@
+stratum,gold,pairs,errors,routed_errors,repairs,breaks
+Declined,InShown,218,218,218,125,0
+Declined,Added,230,230,230,204,0
+Declined,Absent,5,5,5,0,0
+Wide,InShown,2273,144,142,16,8
+Wide,Added,786,786,757,355,0
+Wide,Absent,63,63,56,0,0
+Shown,InShown,9809,496,400,45,13

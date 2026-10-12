@@ -1,4 +1,0 @@
-type query_getInfrastructureCatalogPluginsWithCustomMetrics_items {
-  label: String
-  plugin: String
-}

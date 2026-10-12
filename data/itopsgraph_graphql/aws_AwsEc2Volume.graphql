@@ -1,4 +1,0 @@
-type AwsEc2Volume {
-  volume: BaseVolume!
-  aws_resource: AwsResource!
-}

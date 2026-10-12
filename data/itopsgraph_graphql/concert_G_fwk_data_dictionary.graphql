@@ -1,6 +1,0 @@
-type G_fwk_data_dictionary {
-  data_dictionary_id: ID!
-  description: String
-  library_id: ID
-  name: String!
-}

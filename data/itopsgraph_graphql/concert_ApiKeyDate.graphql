@@ -1,5 +1,0 @@
-"""API key object with date information"""
-type ApiKeyDate {
-  """The API key"""
-  apiKey: String
-}

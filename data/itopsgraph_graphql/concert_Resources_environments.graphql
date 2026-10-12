@@ -1,4 +1,0 @@
-type Resources_environments {
-  environment_id: ID
-  resource_id: ID
-}

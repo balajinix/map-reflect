@@ -1,5 +1,0 @@
-type Resource {
-  witnessed_time: Timestamp!
-  """model is the domain model that represents this resource."""
-  model: Model!
-}

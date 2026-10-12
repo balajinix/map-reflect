@@ -1,3 +1,0 @@
-type AdditionalProperties {
-  wxa_message: WxaMessage
-}

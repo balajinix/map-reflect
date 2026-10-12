@@ -1,7 +1,0 @@
-enum mutationInput_getMobileAppBeaconMetrics_input_type {
-  SESSION_START
-  HTTP_REQUEST
-  CRASH
-  CUSTOM
-  VIEW_CHANGE
-}

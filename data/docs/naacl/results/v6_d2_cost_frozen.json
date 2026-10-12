@@ -1,0 +1,59 @@
+{
+ "date": "2026-10-11",
+ "stage": "costfit",
+ "base_method": "v4.1",
+ "canonical_margin": true,
+ "d2_frozen": "docs/naacl/results/v6_d2_1_frozen.json",
+ "seed": 20261011,
+ "note": "Development-estimated second-pass costs for D2-cost: expected calls = 1 + P(check | model, action); expected tokens = mean reflect tokens + P(check) x mean check tokens, per model and action, from the development token logs (widen: results/naacl/v4/tokens/reflect__dev__*; NT: the v2 reflect logs). The widen check rate pools every development field's widen proposal (routed action or not).",
+ "est": {
+  "gptoss": {
+   "widen": "WT20",
+   "p_check_widen": 0.11126564673157163,
+   "p_check_nt": 0.002905287623474724,
+   "nt_source": "pooled over models (fewer than 20 development NT fields)",
+   "n_nt": 0,
+   "n": 2157,
+   "tok_reflect_widen": 2177.6151761517617,
+   "tok_verify_widen": 581.2411067193676,
+   "tok_reflect_nt": 2647.2407862407863,
+   "tok_verify_nt": 641.422480620155
+  },
+  "llama4": {
+   "widen": "WT50",
+   "p_check_widen": 0.03291608715808994,
+   "p_check_nt": 0.0016722408026755853,
+   "nt_source": "model",
+   "n_nt": 598,
+   "n": 2157,
+   "tok_reflect_widen": 8119.990909090909,
+   "tok_verify_widen": 1009.96875,
+   "tok_reflect_nt": 2581.3662597114317,
+   "tok_verify_nt": 952.7337278106509
+  },
+  "granite": {
+   "widen": "WT20",
+   "p_check_widen": 0.013444598980064905,
+   "p_check_nt": 0.0,
+   "nt_source": "model",
+   "n_nt": 238,
+   "n": 2157,
+   "tok_reflect_widen": 1746.8188798554652,
+   "tok_verify_widen": 354.48571428571427,
+   "tok_reflect_nt": 1712.059947643979,
+   "tok_verify_nt": 314.86038961038963
+  },
+  "qwen35": {
+   "widen": "WT50",
+   "p_check_widen": 0.034306907742234584,
+   "p_check_nt": 0.004519774011299435,
+   "nt_source": "model",
+   "n_nt": 885,
+   "n": 2157,
+   "tok_reflect_widen": 8178.818181818182,
+   "tok_verify_widen": 562.1666666666666,
+   "tok_reflect_nt": 2158.4672921553297,
+   "tok_verify_nt": 391.51761517615176
+  }
+ }
+}

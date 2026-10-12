@@ -1,7 +1,0 @@
-"""Floats that will have a value of 0 or more."""
-type mutation_manuallyCloseEvent_problem {
-  fixSuggestion: mutation_manuallyCloseEvent_problem_fixSuggestion
-  id: mutation_manuallyCloseEvent_problem_id!
-  problemText: mutation_manuallyCloseEvent_problem_problemText
-  severity: Int
-}

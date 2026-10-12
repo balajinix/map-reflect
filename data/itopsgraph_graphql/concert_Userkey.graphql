@@ -1,8 +1,0 @@
-type Userkey {
-  creation_ts: ID!
-  hash: String
-  role: String
-  salt: String
-  user_details: JSON!
-  username: String!
-}

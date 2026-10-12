@@ -1,7 +1,0 @@
-"""Entity which holds the information of Apdex Configuration"""
-type query_getAllApdexConfigurations_items_apdexEntity {
-  apdexType: String!
-  entityId: String!
-  tagFilterExpression: query_getAllApdexConfigurations_items_apdexEntity_tagFilterExpression!
-  threshold: Int
-}

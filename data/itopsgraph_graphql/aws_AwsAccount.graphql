@@ -1,4 +1,0 @@
-type AwsAccount {
-  account: BaseAccount!
-  aws_resource: AwsResource!
-}

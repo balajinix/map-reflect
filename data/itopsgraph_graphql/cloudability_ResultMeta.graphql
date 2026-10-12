@@ -1,5 +1,0 @@
-type ResultMeta {
-  firstSeenDate: DateTime
-  orgHasData: Boolean
-  orgHasProvisioned: Boolean
-}

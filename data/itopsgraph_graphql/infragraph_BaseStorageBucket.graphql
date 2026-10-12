@@ -1,4 +1,0 @@
-"""BaseStorageBucket is a base type all storage buckets are expected to embed."""
-type BaseStorageBucket {
-  base: Base!
-}

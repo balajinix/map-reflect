@@ -1,8 +1,0 @@
-"""StateVersion is a type containing HCP State Version specific fields."""
-type HcpTerraformStateVersion {
-  base: Base!
-  status: string
-  hosted_state_download_url: string
-  edge: [Edge]
-  current_run_id: string
-}

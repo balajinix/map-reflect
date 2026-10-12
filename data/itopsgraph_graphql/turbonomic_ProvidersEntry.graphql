@@ -1,5 +1,0 @@
-type ProvidersEntry {
-  className: String
-  displayName: String
-  uuid: ID
-}

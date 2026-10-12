@@ -1,7 +1,0 @@
-enum queryInput_getSyntheticResultDetailDataFile_type {
-  HAR
-  IMAGES
-  LOGS
-  SUBTRANSACTIONS
-  VIDEOS
-}

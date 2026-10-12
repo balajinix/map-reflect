@@ -1,8 +1,0 @@
-type Activity_history {
-  activity_timestamp: DateTime
-  activity_type: String!
-  additional_details: JSON
-  id: Int!
-  new_data: JSON
-  old_data: JSON
-}

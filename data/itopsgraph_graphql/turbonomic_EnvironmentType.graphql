@@ -1,6 +1,0 @@
-enum EnvironmentType {
-  HYBRID
-  CLOUD
-  ONPREM
-  UNKNOWN
-}

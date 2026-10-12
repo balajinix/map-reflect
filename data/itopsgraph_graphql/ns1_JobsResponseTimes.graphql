@@ -1,9 +1,0 @@
-"""NSOne Connect - Internet Weather API for Solis-DAL.  pulsar performance apis  *Experimental - subject to change*"""
-type JobsResponseTimes {
-  """id for job within application"""
-  jobid: ID!
-  """response time"""
-  responseTime: Float!
-  job: [AppJob]
-  arguments: []
-}

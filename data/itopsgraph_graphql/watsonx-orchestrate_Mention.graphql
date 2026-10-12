@@ -1,5 +1,0 @@
-"""mention will specify a assistant"""
-type Mention {
-  assistant_id: ID!
-  assistant_name: String!
-}

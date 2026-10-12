@@ -1,0 +1,9 @@
+group,label,repairs,breaks
+strategy,Doubt,378,3352
+strategy,Self-Refine,256,529
+strategy,Neutral,99,24
+strategy,Neutral + check,90,7
+strategy,Neutral + evidence,168,363
+strategy,Neutral + evidence + check,141,27
+strategy,Widen + reflect,1049,29
+strategy,Reflect or widen + reflect,1048,29

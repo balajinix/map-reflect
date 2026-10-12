@@ -1,9 +1,0 @@
-"""The type of the Endpoint."""
-type query_getTrace_rootSpan_destination_physicalContext {
-  cloudfoundry: query_getTrace_rootSpan_destination_physicalContext_cloudfoundry
-  cluster: query_getTrace_rootSpan_destination_physicalContext_cluster
-  container: query_getTrace_rootSpan_destination_physicalContext_container
-  host: query_getTrace_rootSpan_destination_physicalContext_host
-  kubernetes: query_getTrace_rootSpan_destination_physicalContext_kubernetes
-  process: query_getTrace_rootSpan_destination_physicalContext_process
-}

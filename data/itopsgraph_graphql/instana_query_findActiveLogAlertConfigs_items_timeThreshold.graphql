@@ -1,4 +1,0 @@
-type query_findActiveLogAlertConfigs_items_timeThreshold {
-  timeWindow: BigInt
-  type: String!
-}

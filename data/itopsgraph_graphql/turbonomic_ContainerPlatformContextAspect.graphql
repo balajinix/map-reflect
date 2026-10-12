@@ -1,9 +1,0 @@
-type ContainerPlatformContextAspect {
-  containerClusterEntity: ContainerClusterEntity
-  containerPlatformCluster: String
-  namespace: String
-  namespaceEntity: NamespaceEntity
-  serviceEntity: JSON
-  type: String
-  workloadControllerEntity: WorkloadControllerEntity
-}

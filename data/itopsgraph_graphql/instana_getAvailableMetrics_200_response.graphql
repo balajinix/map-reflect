@@ -1,3 +1,0 @@
-type getAvailableMetrics_200_response {
-  metrics: [mutation_getAvailableMetrics_metrics_items]
-}

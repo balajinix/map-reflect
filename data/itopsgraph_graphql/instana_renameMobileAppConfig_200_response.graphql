@@ -1,4 +1,0 @@
-type renameMobileAppConfig_200_response {
-  id: query_getMobileAppConfig_items_id!
-  name: query_getMobileAppConfig_items_name!
-}

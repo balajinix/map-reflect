@@ -1,3 +1,0 @@
-type SkillSets {
-  skillsets: [SkillsetsEntry]
-}

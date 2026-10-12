@@ -1,6 +1,0 @@
-type CloudAspect {
-  businessAccount: BusinessAccount
-  resourceGroup: ResourceGroup
-  resourceId: ID
-  type: String
-}

@@ -1,6 +1,0 @@
-type postSnapshots_200_response {
-  """Detail information for requested snapshots."""
-  items: [mutation_postSnapshots_items_items]
-  """Snapshot ids for snapshots that could not be retrieved."""
-  notFoundSnapshotsIds: [String]
-}

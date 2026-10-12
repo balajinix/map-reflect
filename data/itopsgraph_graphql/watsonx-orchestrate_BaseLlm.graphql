@@ -1,6 +1,0 @@
-type BaseLlm {
-  guardrails: Guardrails
-  model_name: String
-  model_params: ModelParams
-  system_prompt: String
-}

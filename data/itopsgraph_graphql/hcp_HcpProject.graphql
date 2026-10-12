@@ -1,4 +1,0 @@
-"""HcpProject is a type containing HCP Project specific fields."""
-type HcpProject {
-  account: BaseAccount!
-}

@@ -1,8 +1,0 @@
-enum query_getAccessLogs_entries_items_action {
-  GRANT_TEMP_ACCESS
-  FIRST_LOGIN
-  LOGIN
-  ACCESS
-  FAILED_LOGIN
-  LOGOUT
-}

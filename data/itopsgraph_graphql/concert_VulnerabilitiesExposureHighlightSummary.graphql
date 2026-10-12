@@ -1,7 +1,0 @@
-"""Exposure highlight summary"""
-type VulnerabilitiesExposureHighlightSummary {
-  """Whether attention is required"""
-  attention_required: Boolean
-  """Exposure statistics"""
-  exposures: ExposuresInfo
-}

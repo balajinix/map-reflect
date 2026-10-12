@@ -1,3 +1,0 @@
-type _CloudIBM {
-  is_cloud_ibm: Boolean
-}

@@ -1,5 +1,0 @@
-type Zsys_archive_function {
-  description: String
-  feature_id: ID
-  id: String
-}

@@ -1,5 +1,0 @@
-type getActivities_200_response {
-  businessActivity: mutation_getActivities_businessActivity
-  cursor: JSON!
-  metrics: JSON
-}

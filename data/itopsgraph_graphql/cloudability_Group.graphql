@@ -1,5 +1,0 @@
-type Group {
-  ID: Int
-  Key: String
-  Name: String
-}

@@ -1,7 +1,0 @@
-"""Time frame provided in API request is slightly adjusted in response for faster API response. For example, In request payload, if timeframe is 08:03 - 14:03, which is a 6 hour window size. It is adjusted to 08:05 - 14:00 Another example, In request payload, if timeframe is 08:20 - 08:20 (next day) which is a 24h window size. It is adjusted to 08:30 - 08:00 (next day)"""
-type mutation_getBeacons_adjustedTimeframe {
-  """end of timeframe expressed as the Unix epoch time in milliseconds. Eg: `ISO 8601` standard time `2024-06-27T05:05:55.615Z` can be represented as `1719464755615` in Unix epoch time in milliseconds."""
-  to: BigInt!
-  """windowSize in milliseconds"""
-  windowSize: BigInt
-}

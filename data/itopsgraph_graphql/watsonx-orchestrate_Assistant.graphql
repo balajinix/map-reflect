@@ -1,3 +1,0 @@
-type Assistant {
-  is_default: Boolean
-}

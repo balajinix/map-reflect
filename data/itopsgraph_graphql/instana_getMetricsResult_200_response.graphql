@@ -1,3 +1,0 @@
-type getMetricsResult_200_response {
-  metricsResult: [mutation_getMetricsResult_metricsResult_items]!
-}

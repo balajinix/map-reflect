@@ -1,3 +1,0 @@
-type getInfrastructureMetrics_200_response {
-  items: [mutation_getInfrastructureMetrics_items_items]
-}

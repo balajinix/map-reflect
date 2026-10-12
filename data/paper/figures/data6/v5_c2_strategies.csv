@@ -1,0 +1,169 @@
+intervention,regime,share,change_u,change_random
+Doubt,harmful,0,0,0
+Doubt,harmful,0.05,-0.381052,-1.11103
+Doubt,harmful,0.1,-0.933951,-2.22206
+Doubt,harmful,0.15,-1.65122,-3.33308
+Doubt,harmful,0.2,-2.44322,-4.44411
+Doubt,harmful,0.25,-3.15302,-5.55514
+Doubt,harmful,0.3,-3.74328,-6.66617
+Doubt,harmful,0.35,-4.43813,-7.7772
+Doubt,harmful,0.4,-5.21518,-8.88823
+Doubt,harmful,0.45,-6.03706,-9.99925
+Doubt,harmful,0.5,-7.2101,-11.1103
+Doubt,harmful,0.55,-8.45786,-12.2213
+Doubt,harmful,0.6,-9.95965,-13.3323
+Doubt,harmful,0.65,-11.3419,-14.4434
+Doubt,harmful,0.7,-12.6644,-15.5544
+Doubt,harmful,0.75,-14.0242,-16.6654
+Doubt,harmful,0.8,-15.5185,-17.7764
+Doubt,harmful,0.85,-17.3117,-18.8875
+Doubt,harmful,0.9,-18.8957,-19.9985
+Doubt,harmful,0.95,-20.6814,-21.1095
+Doubt,harmful,1,-22.2206,-22.2206
+SelfRefine,harmful,0,0,0
+SelfRefine,harmful,0.05,0.022415,-0.101987
+SelfRefine,harmful,0.1,-0.082188,-0.203975
+SelfRefine,harmful,0.15,-0.171847,-0.305962
+SelfRefine,harmful,0.2,-0.23162,-0.40795
+SelfRefine,harmful,0.25,-0.246563,-0.509937
+SelfRefine,harmful,0.3,-0.291393,-0.611925
+SelfRefine,harmful,0.35,-0.328751,-0.713912
+SelfRefine,harmful,0.4,-0.381052,-0.8159
+SelfRefine,harmful,0.45,-0.403467,-0.917887
+SelfRefine,harmful,0.5,-0.523013,-1.01987
+SelfRefine,harmful,0.55,-0.657501,-1.12186
+SelfRefine,harmful,0.6,-0.754632,-1.22385
+SelfRefine,harmful,0.65,-0.83682,-1.32584
+SelfRefine,harmful,0.7,-0.889121,-1.42782
+SelfRefine,harmful,0.75,-1.01614,-1.52981
+SelfRefine,harmful,0.8,-1.18051,-1.6318
+SelfRefine,harmful,0.85,-1.32248,-1.73379
+SelfRefine,harmful,0.9,-1.55409,-1.83577
+SelfRefine,harmful,0.95,-1.78571,-1.93776
+SelfRefine,harmful,1,-2.03975,-2.03975
+Neutral,nothing to repair,0,0,0
+Neutral,nothing to repair,0.05,0.104603,0.028019
+Neutral,nothing to repair,0.1,0.127017,0.056037
+Neutral,nothing to repair,0.15,0.156904,0.084056
+Neutral,nothing to repair,0.2,0.179319,0.112074
+Neutral,nothing to repair,0.25,0.261506,0.140093
+Neutral,nothing to repair,0.3,0.313808,0.168111
+Neutral,nothing to repair,0.35,0.328751,0.19613
+Neutral,nothing to repair,0.4,0.37358,0.224148
+Neutral,nothing to repair,0.45,0.433353,0.252167
+Neutral,nothing to repair,0.5,0.448296,0.280185
+Neutral,nothing to repair,0.55,0.485655,0.308204
+Neutral,nothing to repair,0.6,0.515541,0.336222
+Neutral,nothing to repair,0.65,0.508069,0.364241
+Neutral,nothing to repair,0.7,0.515541,0.392259
+Neutral,nothing to repair,0.75,0.523013,0.420278
+Neutral,nothing to repair,0.8,0.515541,0.448296
+Neutral,nothing to repair,0.85,0.515541,0.476315
+Neutral,nothing to repair,0.9,0.530484,0.504334
+Neutral,nothing to repair,0.95,0.552899,0.532352
+Neutral,nothing to repair,1,0.560371,0.560371
+NeutralCheck,nothing to repair,0,0,0
+NeutralCheck,nothing to repair,0.05,0.119546,0.031007
+NeutralCheck,nothing to repair,0.1,0.141961,0.062014
+NeutralCheck,nothing to repair,0.15,0.171847,0.093022
+NeutralCheck,nothing to repair,0.2,0.209205,0.124029
+NeutralCheck,nothing to repair,0.25,0.291393,0.155036
+NeutralCheck,nothing to repair,0.3,0.336222,0.186043
+NeutralCheck,nothing to repair,0.35,0.351166,0.21705
+NeutralCheck,nothing to repair,0.4,0.403467,0.248057
+NeutralCheck,nothing to repair,0.45,0.470711,0.279065
+NeutralCheck,nothing to repair,0.5,0.493126,0.310072
+NeutralCheck,nothing to repair,0.55,0.523013,0.341079
+NeutralCheck,nothing to repair,0.6,0.552899,0.372086
+NeutralCheck,nothing to repair,0.65,0.545427,0.403093
+NeutralCheck,nothing to repair,0.7,0.552899,0.4341
+NeutralCheck,nothing to repair,0.75,0.560371,0.465108
+NeutralCheck,nothing to repair,0.8,0.567842,0.496115
+NeutralCheck,nothing to repair,0.85,0.575314,0.527122
+NeutralCheck,nothing to repair,0.9,0.590257,0.558129
+NeutralCheck,nothing to repair,0.95,0.6052,0.589136
+NeutralCheck,nothing to repair,1,0.620143,0.620143
+Evidence,harmful,0,0,0
+Evidence,harmful,0.05,0.112074,-0.072848
+Evidence,harmful,0.1,0.112074,-0.145696
+Evidence,harmful,0.15,0.074716,-0.218545
+Evidence,harmful,0.2,0.097131,-0.291393
+Evidence,harmful,0.25,0.179319,-0.364241
+Evidence,harmful,0.3,0.194262,-0.437089
+Evidence,harmful,0.35,0.112074,-0.509937
+Evidence,harmful,0.4,0.037358,-0.582785
+Evidence,harmful,0.45,0.037358,-0.655634
+Evidence,harmful,0.5,-0.074716,-0.728482
+Evidence,harmful,0.55,-0.149432,-0.80133
+Evidence,harmful,0.6,-0.343694,-0.874178
+Evidence,harmful,0.65,-0.478183,-0.947026
+Evidence,harmful,0.7,-0.687388,-1.01987
+Evidence,harmful,0.75,-0.83682,-1.09272
+Evidence,harmful,0.8,-0.963837,-1.16557
+Evidence,harmful,0.85,-1.09085,-1.23842
+Evidence,harmful,0.9,-1.24776,-1.31127
+Evidence,harmful,0.95,-1.35983,-1.38411
+Evidence,harmful,1,-1.45696,-1.45696
+NeutralEvidenceCheck,nothing to repair,0,0,0
+NeutralEvidenceCheck,nothing to repair,0.05,0.141961,0.042588
+NeutralEvidenceCheck,nothing to repair,0.1,0.239091,0.085176
+NeutralEvidenceCheck,nothing to repair,0.15,0.268978,0.127764
+NeutralEvidenceCheck,nothing to repair,0.2,0.343694,0.170353
+NeutralEvidenceCheck,nothing to repair,0.25,0.46324,0.212941
+NeutralEvidenceCheck,nothing to repair,0.3,0.508069,0.255529
+NeutralEvidenceCheck,nothing to repair,0.35,0.515541,0.298117
+NeutralEvidenceCheck,nothing to repair,0.4,0.590257,0.340705
+NeutralEvidenceCheck,nothing to repair,0.45,0.664973,0.383293
+NeutralEvidenceCheck,nothing to repair,0.5,0.702331,0.425882
+NeutralEvidenceCheck,nothing to repair,0.55,0.769576,0.46847
+NeutralEvidenceCheck,nothing to repair,0.6,0.799462,0.511058
+NeutralEvidenceCheck,nothing to repair,0.65,0.799462,0.553646
+NeutralEvidenceCheck,nothing to repair,0.7,0.821877,0.596234
+NeutralEvidenceCheck,nothing to repair,0.75,0.821877,0.638822
+NeutralEvidenceCheck,nothing to repair,0.8,0.829348,0.681411
+NeutralEvidenceCheck,nothing to repair,0.85,0.829348,0.723999
+NeutralEvidenceCheck,nothing to repair,0.9,0.83682,0.766587
+NeutralEvidenceCheck,nothing to repair,0.95,0.844292,0.809175
+NeutralEvidenceCheck,nothing to repair,1,0.851763,0.851763
+Widen,repairing,0,0,0
+Widen,repairing,0.05,1.79319,0.381052
+Widen,repairing,0.1,2.77197,0.762104
+Widen,repairing,0.15,3.44441,1.14316
+Widen,repairing,0.2,4.13927,1.52421
+Widen,repairing,0.25,4.8939,1.90526
+Widen,repairing,0.3,5.46922,2.28631
+Widen,repairing,0.35,5.9997,2.66736
+Widen,repairing,0.4,6.46294,3.04842
+Widen,repairing,0.45,6.77675,3.42947
+Widen,repairing,0.5,7.06814,3.81052
+Widen,repairing,0.55,7.3147,4.19157
+Widen,repairing,0.6,7.45667,4.57262
+Widen,repairing,0.65,7.50149,4.95368
+Widen,repairing,0.7,7.54632,5.33473
+Widen,repairing,0.75,7.59115,5.71578
+Widen,repairing,0.8,7.59863,6.09683
+Widen,repairing,0.85,7.59115,6.47788
+Widen,repairing,0.9,7.59863,6.85894
+Widen,repairing,0.95,7.6061,7.23999
+Widen,repairing,1,7.62104,7.62104
+Routed,repairing,0,0,0
+Routed,repairing,0.05,1.79319,0.380678
+Routed,repairing,0.1,2.77197,0.761357
+Routed,repairing,0.15,3.44441,1.14203
+Routed,repairing,0.2,4.13927,1.52271
+Routed,repairing,0.25,4.8939,1.90339
+Routed,repairing,0.3,5.46922,2.28407
+Routed,repairing,0.35,5.9997,2.66475
+Routed,repairing,0.4,6.45547,3.04543
+Routed,repairing,0.45,6.76928,3.42611
+Routed,repairing,0.5,7.06067,3.80678
+Routed,repairing,0.55,7.30723,4.18746
+Routed,repairing,0.6,7.44919,4.56814
+Routed,repairing,0.65,7.49402,4.94882
+Routed,repairing,0.7,7.53885,5.3295
+Routed,repairing,0.75,7.58368,5.71018
+Routed,repairing,0.8,7.59115,6.09086
+Routed,repairing,0.85,7.58368,6.47153
+Routed,repairing,0.9,7.59115,6.85221
+Routed,repairing,0.95,7.59863,7.23289
+Routed,repairing,1,7.61357,7.61357

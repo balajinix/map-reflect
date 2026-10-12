@@ -1,7 +1,0 @@
-type getAllSloConfigs_200_response {
-  items: [JSON]!
-  """Page Number"""
-  page: Int
-  pageSize: Int
-  totalHits: BigInt
-}

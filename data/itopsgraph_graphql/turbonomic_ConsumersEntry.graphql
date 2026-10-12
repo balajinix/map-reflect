@@ -1,5 +1,0 @@
-type ConsumersEntry {
-  className: String
-  displayName: String
-  uuid: ID
-}

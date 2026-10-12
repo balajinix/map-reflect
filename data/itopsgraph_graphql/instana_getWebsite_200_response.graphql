@@ -1,5 +1,0 @@
-type getWebsite_200_response {
-  appName: String
-  id: String!
-  name: String!
-}

@@ -1,9 +1,0 @@
-extend schema @sdl(files: [
-    "backend_api.graphql",
-    "llm_enums.graphql",
-    "llm_inputs.graphql",
-    "llm_outputs.graphql",
-    "llm_helpers.graphql",
-    "llm_report_query.graphql",
-    "llm_lookup.graphql"
-  ])

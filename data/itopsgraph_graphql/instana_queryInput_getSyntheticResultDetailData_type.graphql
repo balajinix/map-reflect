@@ -1,5 +1,0 @@
-enum queryInput_getSyntheticResultDetailData_type {
-  HAR
-  LOGS
-  SUBTRANSACTIONS
-}

@@ -1,1 +1,0 @@
-"""Details for controlling the pagination of the API response. This object allows you to define the starting point for retrieving records, how many records to skip, and the size of the result set."""
