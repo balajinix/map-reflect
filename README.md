@@ -7,6 +7,8 @@ Supplementary software and data for the anonymous submission.
   See `software/README.md`.
 * `data/`: dataset inputs and splits, the frozen configuration fitted on development data, stored model outputs and
   token logs, the facts ledger, and the generated tables. See `data/README.md`.
+* `prompts/`: every prompt the paper uses, shown on one worked example (`prompts.pdf`, with its LaTeX source
+  `prompts.tex`, generated from the code that sends each prompt).
 
 To score from the stored outputs, merge the two folders into one working directory and run the command in
 `data/README.md`:
